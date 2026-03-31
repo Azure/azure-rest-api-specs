@@ -113,3 +113,64 @@ namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
 @@Legacy.clientDefaultValue(ResponseFormatParameters.format, "json");
+
+// Flatten operations onto client instead of having an operation group attribute
+@client({
+  name: "MapsWeatherClient",
+  service: MapsWeather,
+})
+interface MapsWeatherClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getHourlyForecast is Weather.getHourlyForecast;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getMinuteForecast is Weather.getMinuteForecast;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getQuarterDayForecast is Weather.getQuarterDayForecast;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getCurrentConditions is Weather.getCurrentConditions;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getDailyForecast is Weather.getDailyForecast;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getWeatherAlongRoute is Weather.getWeatherAlongRoute;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getSevereWeatherAlerts is Weather.getSevereWeatherAlerts;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getDailyIndices is Weather.getDailyIndices;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getTropicalStormActive is Weather.getTropicalStormActive;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getTropicalStormSearch is Weather.getTropicalStormSearch;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getTropicalStormForecast is Weather.getTropicalStormForecast;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getTropicalStormLocations is Weather.getTropicalStormLocations;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getCurrentAirQuality is Weather.getCurrentAirQuality;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getAirQualityDailyForecasts is Weather.getAirQualityDailyForecasts;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getAirQualityHourlyForecasts is Weather.getAirQualityHourlyForecasts;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getDailyHistoricalActuals is Weather.getDailyHistoricalActuals;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getDailyHistoricalRecords is Weather.getDailyHistoricalRecords;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getDailyHistoricalNormals is Weather.getDailyHistoricalNormals;
+}

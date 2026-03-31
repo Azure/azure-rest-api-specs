@@ -77,7 +77,7 @@
   "paths": {
     "/weather/airQuality/current/{format}": {
       "get": {
-        "operationId": "GetCurrentAirQuality",
+        "operationId": "Weather_GetCurrentAirQuality",
         "summary": "Use to get current air quality information that includes potential risks and\nsuggested precautions.",
         "description": "The `Get Current Air Quality` API is an HTTP `GET` request that returns\ndetailed information about the concentration of pollutants and overall status\nfor current air quality, including pollution levels, air quality index values,\nthe dominant pollutant, and a brief statement summarizing risk level and\nsuggested precautions.",
         "parameters": [
@@ -155,12 +155,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Current Air Quality": {
+            "$ref": "./examples/GetCurrentAirQuality.json"
+          }
         }
       }
     },
     "/weather/airQuality/forecasts/daily/{format}": {
       "get": {
-        "operationId": "GetAirQualityDailyForecasts",
+        "operationId": "Weather_GetAirQualityDailyForecasts",
         "summary": "Use to get daily air quality forecasts for the next one to seven days that\ninclude pollutant levels, potential risks and suggested precautions.",
         "description": "The `Get Air Quality Daily Forecasts` API is an HTTP `GET` request that returns\ndetailed information about the concentration of pollutants and overall status\nof forecasted daily air quality. The service can provide forecasted daily air\nquality information for the upcoming 1 to 7 days, including pollution levels,\nair quality index values, the dominant pollutant, and a brief statement\nsummarizing risk level and suggested precautions.",
         "parameters": [
@@ -287,12 +292,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Daily Air Quality Forecasts": {
+            "$ref": "./examples/GetDailyAirQuality.json"
+          }
         }
       }
     },
     "/weather/airQuality/forecasts/hourly/{format}": {
       "get": {
-        "operationId": "GetAirQualityHourlyForecasts",
+        "operationId": "Weather_GetAirQualityHourlyForecasts",
         "summary": "Use to get hourly air quality forecasts for the next one to 96 hours that\ninclude pollutant levels, potential risks and suggested precautions.",
         "description": "The `Get Air Quality Hourly Forecasts` API is an HTTP `GET` request that\nreturns detailed information about the concentration of pollutants and overall\nstatus for forecasted upcoming hourly air quality. The service can provide\nforecasted hourly air quality information for the upcoming time spans of 1, 12,\n24, 48, 72, and 96 hours, including pollution levels, air quality index values,\nthe dominant pollutant, and a brief statement summarizing risk level and\nsuggested precautions.",
         "parameters": [
@@ -421,12 +431,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Hourly Air Quality Forecasts": {
+            "$ref": "./examples/GetHourlyAirQuality.json"
+          }
         }
       }
     },
     "/weather/currentConditions/{format}": {
       "get": {
-        "operationId": "GetCurrentConditions",
+        "operationId": "Weather_GetCurrentConditions",
         "summary": "Use to get current weather conditions.",
         "description": "The `Get Current Conditions` API is an HTTP `GET` request that returns detailed\ncurrent weather conditions such as precipitation, temperature and wind for a\ngiven coordinate location. Also, observations from the past 6 or 24 hours for a\nparticular location can be retrieved. The basic information returned with The\nresponse includes details such as observation date and time, brief description\nof the weather conditions, weather icon, precipitation indicator flags, and\ntemperature. Additional details such as RealFeel™ Temperature and UV index are\nalso returned. For more information, see [Request real-time weather\ndata](/azure/azure-maps/how-to-request-weather-data#request-real-time-weather-data)",
         "parameters": [
@@ -538,12 +553,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve detailed current weather conditions for a given coordinate location": {
+            "$ref": "./examples/GetCurrentConditions.json"
+          }
         }
       }
     },
     "/weather/forecast/daily/{format}": {
       "get": {
-        "operationId": "GetDailyForecast",
+        "operationId": "Weather_GetDailyForecast",
         "summary": "Use to get a daily detailed weather forecast for the next 1, 5, 10, 15, 25, or\n45 days.",
         "description": "The `Get Daily Forecast` API is an HTTP `GET` request that returns detailed\nweather forecast such as temperature and wind by day for the next 1, 5, 10, 15,\n25, or 45 days for a given coordinate location.  The response includes details\nsuch as temperature, wind, precipitation, air quality, and UV index. For more\ninformation, see [Request daily weather forecast\ndata](/azure/azure-maps/how-to-request-weather-data#request-daily-weather-forecast-data).\n\nIf you are using the Gen1 S0 pricing tier, you can request daily forecast for\nthe next 1, 5, 10, and 15 days. If you are using Gen1 S1 or Gen2 pricing tier,\nyou can also request daily forecast for the next 25 days, and 45 days.",
         "parameters": [
@@ -648,12 +668,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve detailed daily weather forecast for a given coordinate location": {
+            "$ref": "./examples/GetDailyForecast.json"
+          }
         }
       }
     },
     "/weather/forecast/hourly/{format}": {
       "get": {
-        "operationId": "GetHourlyForecast",
+        "operationId": "Weather_GetHourlyForecast",
         "summary": "Use to get a detailed hourly weather forecast for up to 24 hours or a daily\nforecast for up to 10 days.",
         "description": "The `Get Hourly Forecast` API is an HTTP `GET` that Request detailed weather\nforecast by the hour for the next 1, 12, 24 (1 day), 72 (3 days), 120 (5 days),\nand 240 hours (10 days) for the given the given coordinate location.  The API\nreturns details such as temperature, humidity, wind, precipitation, and\nultraviolet (UV) index. For more information, see [Request hourly weather\nforecast\ndata](/azure/azure-maps/how-to-request-weather-data#request-hourly-weather-forecast-data).\n\nIf you are using the Gen1 S0 pricing tier, you can request hourly forecast for\nthe next 1, 12, 24 hours (1 day), and 72 hours (3 days). If you are using Gen1\nS1 or Gen2 pricing tier, you can also request hourly forecast for the next 120\n(5 days) and 240 hours (10 days).",
         "parameters": [
@@ -758,12 +783,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve detailed weather forecast by the hour": {
+            "$ref": "./examples/GetHourlyForecast.json"
+          }
         }
       }
     },
     "/weather/forecast/minute/{format}": {
       "get": {
-        "operationId": "GetMinuteForecast",
+        "operationId": "Weather_GetMinuteForecast",
         "summary": "Use to get a minute-by-minute forecast for the next 120 minutes in intervals of\n1, 5 and 15 minutes.",
         "description": "The `Get Minute Forecast` API is an HTTP `GET` request that returns\nminute-by-minute forecasts for a given location for the next 120 minutes.\nUsers can request weather forecasts in intervals of 1, 5 and 15 minutes.  The\nresponse will include details such as the type of precipitation (including\nrain, snow, or a mixture of both), start time, and precipitation intensity\nvalue (dBZ). For more information, see [Request minute-by-minute weather\nforecast\ndata](/azure/azure-maps/how-to-request-weather-data#request-minute-by-minute-weather-forecast-data).",
         "parameters": [
@@ -841,12 +871,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve minute-by-minute forecasts for a given location": {
+            "$ref": "./examples/GetMinuteForecast.json"
+          }
         }
       }
     },
     "/weather/forecast/quarterDay/{format}": {
       "get": {
-        "operationId": "GetQuarterDayForecast",
+        "operationId": "Weather_GetQuarterDayForecast",
         "summary": "Use to get a Quarter-Day Forecast for the next 1, 5, 10, or 15 days.",
         "description": "The `Get Quarter-Day Forecast` API is an HTTP `GET` request that returns a\ndetailed weather forecast by quarter-day for the next 1, 5, 10, or 15 days for\na given location. Response data is presented by quarters of the day - morning,\nafternoon, evening, and overnight. Details such as temperature, humidity, wind,\nprecipitation, and UV index are returned.",
         "parameters": [
@@ -951,12 +986,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve detailed weather forecast by a given location": {
+            "$ref": "./examples/GetQuarterDayForecast.json"
+          }
         }
       }
     },
     "/weather/historical/actuals/daily/{format}": {
       "get": {
-        "operationId": "GetDailyHistoricalActuals",
+        "operationId": "Weather_GetDailyHistoricalActuals",
         "summary": "Use to get climatology data such as past daily actual observed temperatures,\nprecipitation, snowfall and snow depth.",
         "description": "The `Get Daily Historical Actuals` API is an HTTP `GET` request that returns\nclimatology data such as past daily actual observed temperatures,\nprecipitation, snowfall, snow depth and cooling/heating degree day information,\nfor the day at a given coordinate location. The data is requested for a\nspecified date range, up to 31 days in a single API request. Generally,\nhistorical data may be available as far back as the last 5 to 40+ years,\ndepending on the location.",
         "parameters": [
@@ -1062,12 +1102,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Daily Historical Actuals Request": {
+            "$ref": "./examples/GetDailyHistoricalActuals.json"
+          }
         }
       }
     },
     "/weather/historical/normals/daily/{format}": {
       "get": {
-        "operationId": "GetDailyHistoricalNormals",
+        "operationId": "Weather_GetDailyHistoricalNormals",
         "summary": "Use to get climatology data such as past daily normal temperatures,\nprecipitation and cooling/heating degree day information for a given location.",
         "description": "The `Get Daily Historical Normals` API is an HTTP `GET` request that returns\nclimatology data such as past daily normal temperatures, precipitation and\ncooling/heating degree day information for the day at a given coordinate\nlocation. The historical normals are a 30-year average for temperatures and\nprecipitation for a specific location. As is standard practice in climatology,\nthe 30-year average covers years 1991-2020, this data will be used for one\ndecade and then will reset in the year 2030. Generally, historical data may be\navailable as far back as the last 5 to 40+ years, depending on the location.",
         "parameters": [
@@ -1173,12 +1218,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Daily Historical Normals Request": {
+            "$ref": "./examples/GetDailyHistoricalNormals.json"
+          }
         }
       }
     },
     "/weather/historical/records/daily/{format}": {
       "get": {
-        "operationId": "GetDailyHistoricalRecords",
+        "operationId": "Weather_GetDailyHistoricalRecords",
         "summary": "Use to get climatology data such as past daily record temperatures,\nprecipitation and snowfall at a given location.",
         "description": "The `Get Daily Historical Records` API is an HTTP `GET` request that returns\nclimatology data such as past daily record temperatures, precipitation and\nsnowfall at a given coordinate location. Availability of records data will vary\nby location. Generally, historical data may be available as far back as the\nlast 5 to 40+ years, depending on the location.",
         "parameters": [
@@ -1284,12 +1334,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successful Daily Historical Records Request": {
+            "$ref": "./examples/GetDailyHistoricalRecords.json"
+          }
         }
       }
     },
     "/weather/indices/daily/{format}": {
       "get": {
-        "operationId": "GetDailyIndices",
+        "operationId": "Weather_GetDailyIndices",
         "summary": "Use when you want to know if the weather conditions are optimal for a specific\nactivity such as outdoor sporting activities, construction, or farming (results\nincludes soil moisture information).",
         "description": "The `Get Daily Indices` API is an HTTP `GET` request returns index values that\nprovide guidance to help when planning future activities. For example, a health\nmobile application can notify users that today is good weather for running or\nfor other outdoors activities like playing golf or flying a kite. Retail stores\ncan optimize their digital marketing campaigns based on predicted index values.\nThe service returns in daily indices values for current and next 5, 10 and 15\ndays starting from current day.",
         "parameters": [
@@ -1383,12 +1438,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve daily indices values from current day": {
+            "$ref": "./examples/GetDailyIndices.json"
+          }
         }
       }
     },
     "/weather/route/{format}": {
       "get": {
-        "operationId": "GetWeatherAlongRoute",
+        "operationId": "Weather_GetWeatherAlongRoute",
         "summary": "Use to get a locationally precise, up-to-the-minute forecast that includes\nweather hazard assessments and notifications along a route.",
         "description": "The `Get Weather Along Route` API is an HTTP `GET` request that returns hyper\nlocal (one kilometer or less), up-to-the-minute weather nowcasts, weather\nhazard assessments, and notifications along a route described as a sequence of\nwaypoints.\nThis includes a list of weather hazards affecting the waypoint or route, and\nthe aggregated hazard index for each waypoint might be used to paint each\nportion of a route according to how safe it is for the driver. When submitting\nthe waypoints, it is recommended to stay within, or close to, the distance that\ncan be traveled within 120-mins or shortly after. Data is updated every five\nminutes.\n\nThe service supplements Azure Maps [Route\nService](https://docs.microsoft.com/rest/api/maps/route) that allows you to\nfirst request a route between an origin and a destination and use that as an\ninput for Weather Along Route endpoint.\n\nIn addition, the service supports scenarios to generate weather notifications\nfor waypoints that experience an increase in intensity of a weather hazard. For\nexample, if the vehicle is expected to begin experiencing heavy rain as it\nreaches a waypoint, a weather notification for heavy rain will be generated for\nthat waypoint allowing the end product to display a heavy rain notification\nbefore the driver reaches that waypoint.\nThe trigger for when to display the notification for a waypoint could be\nbased, for example, on a\n[geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps),\nor selectable distance to the waypoint.\n\nThe API covers all regions of the planet except latitudes above Greenland and\nAntarctica.",
         "parameters": [
@@ -1452,12 +1512,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve detailed weather casts along a route described as a sequence of waypoints": {
+            "$ref": "./examples/GetWeatherAlongRoute.json"
+          }
         }
       }
     },
     "/weather/severe/alerts/{format}": {
       "get": {
-        "operationId": "GetSevereWeatherAlerts",
+        "operationId": "Weather_GetSevereWeatherAlerts",
         "summary": "Use to get information about severe weather conditions such as hurricanes,\nthunderstorms, flooding, lightning, heat waves or forest fires for a given\nlocation.",
         "description": "Severe weather phenomenon can significantly impact our everyday life and\nbusiness operations. For example, severe weather conditions such as tropical\nstorms, high winds or flooding can close roads and force logistics companies to\nreroute their fleet causing delays in reaching destinations and breaking the\ncold chain of refrigerated food products.\n\nThe `Get Severe Weather Alerts` API is an HTTP `GET` request that returns the\nsevere weather alerts that are available worldwide from both official\nGovernment Meteorological Agencies and leading global to regional weather alert\nproviders. The service can return details such as alert type, category, level\nand detailed description about the active severe alerts for the requested\nlocation, like hurricanes, thunderstorms, lightning, heat waves or forest\nfires. For more information, see [Request severe weather\nalerts](/azure/azure-maps/how-to-request-weather-data#request-severe-weather-alerts)",
         "parameters": [
@@ -1534,12 +1599,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve severe weather alerts": {
+            "$ref": "./examples/GetSevereWeatherAlerts.json"
+          }
         }
       }
     },
     "/weather/tropical/storms/{format}": {
       "get": {
-        "operationId": "GetTropicalStormSearch",
+        "operationId": "Weather_GetTropicalStormSearch",
         "summary": "Use to get a list of storms issued by national weather forecasting agencies.",
         "description": "The `Get Tropical Storm Search` API is an HTTP `GET` request that returns a\nlist of government-issued tropical storms by year, basin ID, and government ID.\nInformation about the tropical storms includes, government ID, basin ID,\nstatus, year, name and if it is subtropical.",
         "parameters": [
@@ -1663,12 +1733,20 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Tropical Storm Search": {
+            "$ref": "./examples/GetStormSearch.json"
+          },
+          "Get Tropical Storm Search With Three Properties": {
+            "$ref": "./examples/GetFullStormSearch.json"
+          }
         }
       }
     },
     "/weather/tropical/storms/active/{format}": {
       "get": {
-        "operationId": "GetTropicalStormActive",
+        "operationId": "Weather_GetTropicalStormActive",
         "summary": "Use to get a list of the active tropical storms issued by national weather\nforecasting agencies.",
         "description": "The `Get Tropical Storm Active` API is an HTTP `GET` request that returns a\nlist of all government-issued active tropical storms. Information about the\ntropical storms includes, government ID, basin ID, year of origin, name and if\nit is subtropical.",
         "parameters": [
@@ -1718,12 +1796,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Tropical Storm Active": {
+            "$ref": "./examples/GetActiveStorms.json"
+          }
         }
       }
     },
     "/weather/tropical/storms/forecasts/{format}": {
       "get": {
-        "operationId": "GetTropicalStormForecast",
+        "operationId": "Weather_GetTropicalStormForecast",
         "summary": "Use to get a list of tropical storms forecasted by national weather forecasting\nagencies.",
         "description": "The `Get Tropical Storm Forecasts` API is an HTTP `GET` request that returns\nindividual government-issued tropical storm forecasts. Information about the\nforecasted tropical storms includes, location, status, date the forecast was\ncreated, window, wind speed and wind radii.",
         "parameters": [
@@ -1898,12 +1981,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Tropical Storm Forecasts": {
+            "$ref": "./examples/GetStormForecast.json"
+          }
         }
       }
     },
     "/weather/tropical/storms/locations/{format}": {
       "get": {
-        "operationId": "GetTropicalStormLocations",
+        "operationId": "Weather_GetTropicalStormLocations",
         "summary": "Use to get the location of tropical storms from individual national weather\nforecasting agencies.",
         "description": "The `Get Tropical Storm Locations` API is an HTTP `GET` request that returns\nthe location of individual government-issued tropical storms. Information about\nthe tropical storms includes, location coordinates, geometry, basin ID, date,\nwind details and wind radii.",
         "parameters": [
@@ -2077,6 +2165,14 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Tropical Storm Current Location": {
+            "$ref": "./examples/GetStormCurrentLocation.json"
+          },
+          "Get Tropical Storm Locations": {
+            "$ref": "./examples/GetStormLocations.json"
           }
         }
       }
