@@ -1731,8 +1731,6 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
-  @added(Versions.v2026_03_15)
-  @removed(Versions.v2026_04_01_preview)
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
@@ -2502,8 +2500,6 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
-  @added(Versions.v2026_03_15)
-  @removed(Versions.v2026_04_01_preview)
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
@@ -2731,8 +2727,6 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
-  @added(Versions.v2026_03_15)
-  @removed(Versions.v2026_04_01_preview)
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
