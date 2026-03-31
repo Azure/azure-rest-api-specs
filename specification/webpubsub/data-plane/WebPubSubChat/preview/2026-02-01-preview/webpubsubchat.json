@@ -1,0 +1,1488 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Web PubSub Chat REST API",
+    "version": "2026-02-01-preview",
+    "description": "Azure Web PubSub Chat REST API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "HTTP or HTTPS endpoint for the Web PubSub service instance.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://webpubsub.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://webpubsub.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "chat"
+    }
+  ],
+  "paths": {
+    "/api/hubs/{hub}/chat/conversations/{conversationId}": {
+      "get": {
+        "operationId": "Chat_GetConversation",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Get conversation information.",
+        "description": "Get conversation information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "Conversation identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatConversationInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_GetConversation": {
+            "$ref": "./examples/Chat_GetConversation.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/conversations/{conversationId}/messages/{messageId}": {
+      "patch": {
+        "operationId": "Chat_UpdateMessage",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Update a message.",
+        "description": "Update a message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "Conversation identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Message identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Update message request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateChatMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessageInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_UpdateMessage": {
+            "$ref": "./examples/Chat_UpdateMessage.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Chat_DeleteMessage",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Delete a message.",
+        "description": "Delete a message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "Conversation identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Message identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_DeleteMessage": {
+            "$ref": "./examples/Chat_DeleteMessage.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/conversations/{conversationId}/messages/:query": {
+      "post": {
+        "operationId": "Chat_QueryMessages",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Query messages in a conversation.",
+        "description": "Query messages in a conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "Conversation identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "lastMessageId",
+            "in": "query",
+            "description": "Last message ID for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "firstMessageId",
+            "in": "query",
+            "description": "First message ID for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "description": "Maximum number of messages to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryChatMessageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_QueryMessages": {
+            "$ref": "./examples/Chat_QueryMessages.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/roles": {
+      "get": {
+        "operationId": "Chat_QueryRoles",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Query roles in a hub.",
+        "description": "Query roles in a hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "description": "Maximum number of roles to return.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryChatRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_QueryRoles": {
+            "$ref": "./examples/Chat_QueryRoles.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/roles/{role}": {
+      "get": {
+        "operationId": "Chat_GetRole",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Get role information.",
+        "description": "Get role information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "role",
+            "in": "path",
+            "description": "Role name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatRoleInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_GetRole": {
+            "$ref": "./examples/Chat_GetRole.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Chat_CreateOrUpdateRole",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Create or update a role.",
+        "description": "Create or update a role.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "role",
+            "in": "path",
+            "description": "Role name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Create or update role request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateChatRoleInfoRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_CreateOrUpdateRole": {
+            "$ref": "./examples/Chat_CreateOrUpdateRole.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Chat_DeleteRole",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Delete a role.",
+        "description": "Delete a role.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "role",
+            "in": "path",
+            "description": "Role name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_DeleteRole": {
+            "$ref": "./examples/Chat_DeleteRole.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/rooms": {
+      "post": {
+        "operationId": "Chat_CreateRoom",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Create a new room.",
+        "description": "Create a new room.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Create room request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChatRoomRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatRoomInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_CreateRoom": {
+            "$ref": "./examples/Chat_CreateRoom.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/rooms/{roomId}": {
+      "get": {
+        "operationId": "Chat_GetRoom",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Get room information.",
+        "description": "Get room information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "Room identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatRoomInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_GetRoom": {
+            "$ref": "./examples/Chat_GetRoom.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Chat_UpdateRoom",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Update room information.",
+        "description": "Update room information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "Room identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Update room request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateChatRoomRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatRoomInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_UpdateRoom": {
+            "$ref": "./examples/Chat_UpdateRoom.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Chat_DeleteRoom",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Delete a room.",
+        "description": "Delete a room.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "Room identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_DeleteRoom": {
+            "$ref": "./examples/Chat_DeleteRoom.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/rooms/{roomId}/members": {
+      "get": {
+        "operationId": "Chat_GetRoomMembers",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Get room members.",
+        "description": "Get room members.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "Room identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ChatRoomMember"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_GetRoomMembers": {
+            "$ref": "./examples/Chat_GetRoomMembers.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/rooms/{roomId}/members/{userId}": {
+      "put": {
+        "operationId": "Chat_AddOrUpdateRoomMember",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Add or update a room member.",
+        "description": "Add or update a room member.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "Room identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Update room member request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateChatRoomMemberRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_AddOrUpdateRoomMember": {
+            "$ref": "./examples/Chat_AddOrUpdateRoomMember.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Chat_DeleteRoomMember",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Delete a room member.",
+        "description": "Delete a room member.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "roomId",
+            "in": "path",
+            "description": "Room identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_DeleteRoomMember": {
+            "$ref": "./examples/Chat_DeleteRoomMember.json"
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/chat/users/{userId}": {
+      "get": {
+        "operationId": "Chat_GetUser",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Get a user's profile.",
+        "description": "Get a user's profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatUserProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_GetUser": {
+            "$ref": "./examples/Chat_GetUser.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Chat_AddOrUpdateUser",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Add or update a user.",
+        "description": "Add or update a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "profile",
+            "in": "body",
+            "description": "User profile.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatUserProfile"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_AddOrUpdateUser": {
+            "$ref": "./examples/Chat_AddOrUpdateUser.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Chat_DeleteUser",
+        "tags": [
+          "chat"
+        ],
+        "summary": "Delete a user.",
+        "description": "Delete a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "hub",
+            "in": "path",
+            "description": "Target hub name, which should start with alphabetic characters and only contain\nalpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Chat_DeleteUser": {
+            "$ref": "./examples/Chat_DeleteUser.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ChatConversation": {
+      "type": "object",
+      "description": "Chat conversation identifier.",
+      "properties": {
+        "conversationId": {
+          "type": "string",
+          "description": "Conversation identifier.",
+          "pattern": "^c\\.[A-Za-z0-9_-]{1,64}(?:\\.[A-Za-z0-9_-]{1,64})?$"
+        },
+        "roomId": {
+          "type": "string",
+          "description": "Room identifier.",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$"
+        },
+        "topicId": {
+          "type": "string",
+          "description": "Topic identifier.",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$"
+        }
+      }
+    },
+    "ChatConversationInfo": {
+      "type": "object",
+      "description": "Represents conversation information.",
+      "properties": {
+        "conversationId": {
+          "type": "string",
+          "description": "Conversation identifier."
+        },
+        "parentRoom": {
+          "type": "string",
+          "description": "Parent room identifier."
+        }
+      },
+      "required": [
+        "conversationId",
+        "parentRoom"
+      ]
+    },
+    "ChatMessageInfo": {
+      "type": "object",
+      "description": "Chat message information.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Message identifier."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User who created the message."
+        },
+        "content": {
+          "$ref": "#/definitions/ContentBody",
+          "description": "Message content."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the message was created."
+        }
+      }
+    },
+    "ChatRoleInfo": {
+      "type": "object",
+      "description": "Represents role information.\nA role must contain either user permissions or room permissions, but not both.",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Role name."
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Permissions associated with the role. Do not mix user permissions and room permissions in one role.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "role",
+        "permissions"
+      ]
+    },
+    "ChatRoomInfo": {
+      "type": "object",
+      "description": "Represents room information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Room identifier."
+        },
+        "title": {
+          "type": "string",
+          "description": "Room title."
+        },
+        "defaultConversation": {
+          "type": "string",
+          "description": "Default conversation ID for this room."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "defaultConversation"
+      ]
+    },
+    "ChatRoomMember": {
+      "type": "object",
+      "description": "Represents a room member.",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User ID of the member."
+        },
+        "role": {
+          "type": "string",
+          "description": "Room role assigned to the user within this room."
+        }
+      },
+      "required": [
+        "userId",
+        "role"
+      ]
+    },
+    "ChatUserProfile": {
+      "type": "object",
+      "description": "Represents a user profile in the chat system.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User identifier."
+        },
+        "nickname": {
+          "type": "string",
+          "description": "User's display nickname."
+        },
+        "role": {
+          "type": "string",
+          "description": "Global user role assigned to the user."
+        }
+      },
+      "required": [
+        "id",
+        "nickname"
+      ]
+    },
+    "ContentBody": {
+      "type": "object",
+      "description": "Message content body.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text content."
+        },
+        "binary": {
+          "type": "string",
+          "format": "byte",
+          "description": "Binary content (base64 encoded)."
+        }
+      }
+    },
+    "CreateChatRoomRequest": {
+      "type": "object",
+      "description": "Request to create a new room.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Optional room ID. If not provided, one will be generated."
+        },
+        "title": {
+          "type": "string",
+          "description": "Room title."
+        }
+      },
+      "required": [
+        "title"
+      ]
+    },
+    "CreateOrUpdateChatRoleInfoRequest": {
+      "type": "object",
+      "description": "Request to create or update a role.",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "description": "Permissions associated with the role. Do not mix user permissions and room permissions in one role.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "permissions"
+      ]
+    },
+    "QueryChatMessageResponse": {
+      "type": "object",
+      "description": "Response for querying messages.",
+      "properties": {
+        "conversation": {
+          "$ref": "#/definitions/ChatConversation",
+          "description": "Conversation context."
+        },
+        "messages": {
+          "type": "array",
+          "description": "List of messages.",
+          "items": {
+            "$ref": "#/definitions/ChatMessageInfo"
+          }
+        },
+        "nextUrl": {
+          "type": "string",
+          "description": "URL to fetch the next page of messages."
+        }
+      },
+      "required": [
+        "conversation"
+      ]
+    },
+    "QueryChatRolesResponse": {
+      "type": "object",
+      "description": "Response for querying roles.",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "description": "List of roles.",
+          "items": {
+            "$ref": "#/definitions/ChatRoleInfo"
+          }
+        },
+        "nextUrl": {
+          "type": "string",
+          "description": "URL to fetch the next page of roles."
+        }
+      },
+      "required": [
+        "roles"
+      ]
+    },
+    "UpdateChatMessageRequest": {
+      "type": "object",
+      "description": "Request to update a message.\nContains parts of MessageInfo excluding conversation (which is already known from the URL).",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "Optional. The user who created the message."
+        },
+        "content": {
+          "$ref": "#/definitions/ContentBody",
+          "description": "Message content."
+        }
+      }
+    },
+    "UpdateChatRoomMemberRequest": {
+      "type": "object",
+      "description": "Request to update a room member.",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Room role assigned to the user within this room."
+        }
+      },
+      "required": [
+        "role"
+      ]
+    },
+    "UpdateChatRoomRequest": {
+      "type": "object",
+      "description": "Request to update a room.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "New room title."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
