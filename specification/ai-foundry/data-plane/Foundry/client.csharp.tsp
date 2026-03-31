@@ -18,6 +18,7 @@ namespace Azure.AI.Projects;
 // Fix the xref.
 // --------------------------------------------------------------------------------
 @@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
+@@clientNamespace(Azure.Core.Foundations, "Azure.AI.Projects", "csharp");
 
 // --------------------------------------------------------------------------------
 // Root client
@@ -109,13 +110,30 @@ namespace Azure.AI.Projects;
   "operationStatus",
   "csharp"
 );
+@@clientName(OpenAI.Error, "ApiError");
+@@clientName(OpenAI.InputFileContentParam.file_url, "FileUri", "csharp");
 
-// Evaluators
+@@clientName(AttackStrategy.ROT13, "Rot13", "csharp");
+
+@@alternateType(DayOfWeek,
+  {
+    identity: "System.DayOfWeek",
+  },
+  "csharp"
+);
+
+// --------------------------------------------------------------------------------
+// Evaluators sub‐client
+// --------------------------------------------------------------------------------
 @@access(EvaluatorDefinitionType, Access.public);
+
+// Hide classes not currently used
+@@clientName(Target, "EvaluationTarget", "csharp");
+@@access(AzureAIAgentTarget, Access.internal);
+@@access(AzureAIModelTarget, Access.internal);
 
 // --------------------------------------------------------------------------------
 // Schedules sub‐client
 // --------------------------------------------------------------------------------
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
-@@clientName(OpenAI.Error, "ApiError");

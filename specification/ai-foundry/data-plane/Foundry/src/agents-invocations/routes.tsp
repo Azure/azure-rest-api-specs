@@ -20,10 +20,8 @@ interface AgentInvocations {
    * Retrieves the OpenAPI specification for an agent version's invocation contract.
    * Returns 404 if the agent does not expose an OpenAPI specification.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
-  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "404 is required to indicate OpenAPI spec is not provided"
   @get
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/openapi.json")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations/docs/openapi.json")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocationOpenApiSpec is FoundryDataPlaneOperation<
     {
@@ -42,9 +40,8 @@ interface AgentInvocations {
   /**
    * Creates an invocation for the specified agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   createAgentInvocation is FoundryDataPlaneOperation<
     {
@@ -61,7 +58,7 @@ interface AgentInvocations {
       @header contentType: string;
 
       /** The request body. */
-      @body request: bytes;
+      @body request: unknown;
     } & AgentInvocationPreviewHeader,
     {
       /** Unique identifier for this invocation. */
@@ -74,7 +71,7 @@ interface AgentInvocations {
       @header contentType: string;
 
       /** The response body. */
-      @body response: bytes;
+      @body response: unknown;
     }
   >;
 
@@ -82,9 +79,8 @@ interface AgentInvocations {
    * Retrieves the invocation with the given ID.
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @get
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocation is FoundryDataPlaneOperation<
     {
@@ -102,7 +98,7 @@ interface AgentInvocations {
       @header contentType: string;
 
       /** The response body containing invocation status and result. */
-      @body response: bytes;
+      @body response: unknown;
     }
   >;
 
@@ -110,9 +106,8 @@ interface AgentInvocations {
    * Cancels an invocation.
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}/cancel")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   cancelAgentInvocation is FoundryDataPlaneOperation<
     {
@@ -129,14 +124,14 @@ interface AgentInvocations {
       @header contentType?: string;
 
       /** Optional request body. */
-      @body request?: bytes;
+      @body request?: unknown;
     } & AgentInvocationPreviewHeader,
     {
       /** The content type of the response body. */
       @header contentType: string;
 
       /** The response body. */
-      @body response: bytes;
+      @body response: unknown;
     }
   >;
 }

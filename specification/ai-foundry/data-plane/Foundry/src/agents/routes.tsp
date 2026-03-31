@@ -3,6 +3,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -25,12 +26,11 @@ interface Agents {
   /**
    * Creates the agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgent is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
+    AgentDefinitionOptInKeys | FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     CreateAgentRequest,
     AgentObject
   >;
@@ -39,7 +39,6 @@ interface Agents {
    * Updates the agent by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}")
   updateAgent is FoundryDataPlanePreviewOperation<
@@ -56,7 +55,6 @@ interface Agents {
   /**
    * Creates an agent from a manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents:import")
   createAgentFromManifest is FoundryDataPlaneOperation<
@@ -68,7 +66,6 @@ interface Agents {
    * Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/import")
   updateAgentFromManifest is FoundryDataPlaneOperation<
@@ -84,7 +81,6 @@ interface Agents {
   /**
    * Deletes an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}")
   deleteAgent is FoundryDataPlaneOperation<
@@ -110,12 +106,11 @@ interface Agents {
   /**
    * Create a new agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersion is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
+    AgentDefinitionOptInKeys | FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -135,7 +130,6 @@ interface Agents {
   /**
    * Create a new agent version from a manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions:import")
   createAgentVersionFromManifest is FoundryDataPlaneOperation<
@@ -174,7 +168,6 @@ interface Agents {
   /**
    * Deletes a specific version of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
   deleteAgentVersion is FoundryDataPlaneOperation<
@@ -202,5 +195,30 @@ interface Agents {
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
+  >;
+
+  /**
+   * Updates an agent endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @patch(#{ implicitOptionality: true })
+  @route("/agents/{agent_name}")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @removed(Versions.v1)
+  patchAgentObject is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent to retrieve. */
+      @path agent_name: string;
+
+      @header("Content-Type") contentType: "application/merge-patch+json";
+      ...PatchAgentRequest;
+    },
+    AgentObject
   >;
 }

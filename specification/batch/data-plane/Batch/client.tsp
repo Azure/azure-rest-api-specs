@@ -225,6 +225,38 @@ interface BatchClient {
 @@access(Azure.Batch.BatchNodeDeallocationOption, Access.public, "python");
 @@access(Azure.Batch.DisableBatchJobOption, Access.public, "python");
 
+/* JAVASCRIPT OVERRIDES */
+@@clientName(Azure.Batch.CommonListParameters.maxresults,
+  "maxResults",
+  "javascript"
+);
+@@clientName(Azure.Batch.CommonParameters.timeOut,
+  "timeoutInSeconds",
+  "javascript"
+);
+@@clientName(Azure.Batch.CommonParameters.ocpdate, "ocpDate", "javascript");
+@@clientName(Azure.Batch.BatchSupportedImage.batchSupportEndOfLife,
+  "supportEndDate",
+  "javascript"
+);
+@@clientName(Azure.Batch.AuthenticationTokenSettings.access,
+  "scopes",
+  "javascript"
+);
+@@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
+@@clientName(Azure.Batch.BatchNodeDeallocateOptions.nodeDeallocateOption,
+  "nodeDeallocationOption",
+  "javascript"
+);
+@@clientName(Azure.Batch.ExitConditions.default,
+  "defaultOptions",
+  "javascript"
+);
+@@clientName(Azure.Batch.CifsMountConfiguration,
+  "BatchCifsMountConfiguration",
+  "javascript"
+);
+
 /* GO OVERRIDES */
 // don't export API for this operation because it retired before the first Go SDK release
 @@access(Azure.Batch.Pools.listPoolUsageMetrics, Access.internal, "go");

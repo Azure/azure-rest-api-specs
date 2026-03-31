@@ -31,6 +31,8 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.deleteVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.createVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.updateVersion, Evaluators);
+@@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
+@@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
 
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
@@ -66,3 +68,10 @@ interface EvaluationTaxonomies {}
 @@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );
+
+interface Toolsets {}
+@@clientLocation(Azure.AI.Projects.Toolsets.createToolset, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.updateToolset, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.getToolset, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.listToolsets, Toolsets);
+@@clientLocation(Azure.AI.Projects.Toolsets.deleteToolset, Toolsets);

@@ -6,5 +6,6 @@ import "../memory-stores/routes.tsp";
 import "../skills/routes.tsp";
 import "../openai-conversations/routes.tsp";
 import "../openai-responses/routes.tsp";
+import "../toolsets/routes.tsp";
 
 import "./client.tsp";

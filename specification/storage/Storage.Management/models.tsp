@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -350,6 +351,10 @@ union AllowedCopyScope {
   PrivateLink: "PrivateLink",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AAD: "AAD",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_08_01)
+  All: "All",
 }
 
 /**
@@ -959,7 +964,7 @@ enum DefaultAction {
 }
 
 /**
- * Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.
+ * The default access tier for block blobs in the storage account. Required for storage accounts where kind = BlobStorage. See more details in: https://learn.microsoft.com/azure/storage/blobs/access-tiers-overview.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AccessTier {
@@ -967,6 +972,9 @@ enum AccessTier {
   Cool,
   Premium,
   Cold,
+
+  @added(Versions.v2025_08_01)
+  Smart,
 }
 
 /**
@@ -1063,6 +1071,136 @@ union TriggerType {
   RunOnce: "RunOnce",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OnSchedule: "OnSchedule",
+
+  /** Run the task as a mock for testing */
+  @added(Versions.v2025_08_01)
+  MockRun: "MockRun",
+}
+
+/**
+ * The type of the backing data source for storage connector
+ */
+@added(Versions.v2025_08_01)
+union StorageConnectorSourceType {
+  /**
+   * Source type - DataShare
+   */
+  DataShare: "DataShare",
+
+  string,
+}
+
+/**
+ * The state of the storage connector
+ */
+@added(Versions.v2025_08_01)
+union StorageConnectorState {
+  /**
+   * Whether the connector is active
+   */
+  Active: "Active",
+
+  /**
+   * Whether the connector is inactive
+   */
+  Inactive: "Inactive",
+
+  string,
+}
+
+/**
+ * The auth type supported for bucket connection in storage connector.
+ */
+@added(Versions.v2025_08_01)
+union StorageConnectorAuthType {
+  /**
+   * Managed Identity auth type
+   */
+  ManagedIdentity: "ManagedIdentity",
+
+  string,
+}
+
+/**
+ * The connection type for bucket connection in storage connector.
+ */
+@added(Versions.v2025_08_01)
+union StorageConnectorConnectionType {
+  /**
+   * DataShare connection type
+   */
+  DataShare: "DataShare",
+
+  string,
+}
+
+/**
+ * The type of the backing data source for storage connector
+ */
+@added(Versions.v2025_08_01)
+union StorageConnectorDataSourceType {
+  /**
+   * Azure DataShare data source type.
+   */
+  Azure_DataShare: "Azure_DataShare",
+
+  string,
+}
+
+/**
+ * The permissions supported in access policies for storage data share
+ */
+@added(Versions.v2025_08_01)
+union StorageDataShareAccessPolicyPermission {
+  /**
+   * No permission
+   */
+  None: "None",
+
+  /**
+   * Read permission
+   */
+  Read: "Read",
+
+  string,
+}
+
+/**
+ * Provisioning state of the resource at the time the operation was called.
+ */
+@added(Versions.v2025_08_01)
+union NativeDataSharingProvisioningState {
+  string,
+
+  /**
+   * The request has been accepted for processing.
+   */
+  Accepted: "Accepted",
+
+  /**
+   * The resource is being created.
+   */
+  Creating: "Creating",
+
+  /**
+   * The resource has been successfully created.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The resource is being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The request has been canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * The resource creation or deletion has failed.
+   */
+  Failed: "Failed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1097,6 +1235,12 @@ model BlobServicePropertiesProperties {
    * The blob service properties for blob soft delete.
    */
   deleteRetentionPolicy?: DeleteRetentionPolicy;
+
+  /**
+   * The static website properties for blob storage.
+   */
+  @added(Versions.v2025_08_01)
+  staticWebsite?: StaticWebsite;
 
   /**
    * Versioning is enabled if set to true.
@@ -1191,6 +1335,32 @@ model DeleteRetentionPolicy {
    * This property when set to true allows deletion of the soft deleted blob versions and snapshots. This property cannot be used blob restore policy. This property only applies to blob service and does not apply to containers or file share.
    */
   allowPermanentDelete?: boolean;
+}
+
+/**
+ * The static website properties for blob storage.
+ */
+@added(Versions.v2025_08_01)
+model StaticWebsite {
+  /**
+   * Indicates whether static website support is enabled for the specified account.
+   */
+  enabled: boolean;
+
+  /**
+   * The webpage that Azure Storage serves for requests to the root of a website or any subfolder (for example, index.html). The value is case-sensitive.
+   */
+  indexDocument?: string;
+
+  /**
+   * The absolute path where the default index file is present. This absolute path is mutually exclusive to "indexDocument" and it is case-sensitive.
+   */
+  defaultIndexDocumentPath?: string;
+
+  /**
+   * The absolute path to a webpage that Azure Storage serves for requests that don't correspond to an existing file. The contents of the page are returned with HTTP 404 Not Found. Only a single custom 404 page is supported in each static website.
+   */
+  errorDocument404Path?: string;
 }
 
 /**
@@ -2988,6 +3158,18 @@ model StorageAccountPropertiesCreateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * Indicate shared key access properties at service level
+   */
+  @added(Versions.v2025_08_01)
+  allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
+
+  /**
+   * Data Collaboration policy for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
 }
 
 /**
@@ -3401,6 +3583,64 @@ model AccountImmutabilityPolicyProperties {
 }
 
 /**
+ * Defines shared key access settings for an individual storage service.
+ */
+@added(Versions.v2025_08_01)
+model ServiceSharedKeyAccessProperties {
+  /**
+   * Indicates whether shared key access is enabled for the service.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * Defines shared key access properties for a storage account.
+ */
+@added(Versions.v2025_08_01)
+model StorageAccountSharedKeyAccessProperties {
+  /**
+   * Shared key access settings for Blob service.
+   */
+  blob?: ServiceSharedKeyAccessProperties;
+
+  /**
+   * Shared key access settings for File service.
+   */
+  file?: ServiceSharedKeyAccessProperties;
+
+  /**
+   * Shared key access settings for Table service.
+   */
+  table?: ServiceSharedKeyAccessProperties;
+
+  /**
+   * Shared key access settings for Queue service.
+   */
+  queue?: ServiceSharedKeyAccessProperties;
+}
+
+/**
+ * Defines Data Collaboration Policy for a storage account.
+ */
+@added(Versions.v2025_08_01)
+model StorageDataCollaborationPolicyProperties {
+  /**
+   * Indicates whether storage connectors are allowed to created or managed on the storage account.
+   */
+  allowStorageConnectors?: boolean;
+
+  /**
+   * Indicates whether data shares are allowed to be created or managed on the storage account.
+   */
+  allowStorageDataShares?: boolean;
+
+  /**
+   * Indicates whether cross-entra tenant data sharing is allowed on the storage account.
+   */
+  allowCrossTenantDataSharing?: boolean;
+}
+
+/**
  * Properties of the storage account.
  */
 model StorageAccountProperties {
@@ -3643,6 +3883,18 @@ model StorageAccountProperties {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * Indicate shared key access properties at service level
+   */
+  @added(Versions.v2025_08_01)
+  allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
+
+  /**
+   * Data Collaboration policy for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
 }
 
 /**
@@ -4184,6 +4436,18 @@ model StorageAccountPropertiesUpdateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * Indicate shared key access properties at service level
+   */
+  @added(Versions.v2025_08_01)
+  allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
+
+  /**
+   * Data Collaboration policy for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
 }
 
 /**
@@ -5117,6 +5381,12 @@ model ObjectReplicationPolicyProperties {
    * Optional. The object replication policy priority replication feature options.
    */
   priorityReplication?: ObjectReplicationPolicyPropertiesPriorityReplication;
+
+  /**
+   * Optional. The object replication policy tags replication feature options.
+   */
+  @added(Versions.v2025_08_01)
+  tagsReplication?: ObjectReplicationPolicyPropertiesTagsReplication;
 }
 
 /**
@@ -5175,6 +5445,17 @@ model ObjectReplicationPolicyPropertiesMetrics {
 model ObjectReplicationPolicyPropertiesPriorityReplication {
   /**
    * Indicates whether object replication priority replication feature is enabled for the policy.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * Optional. The object replication policy tags replication feature options.
+ */
+@added(Versions.v2025_08_01)
+model ObjectReplicationPolicyPropertiesTagsReplication {
+  /**
+   * Indicates whether object replication tags replication feature is enabled for the policy.
    */
   enabled?: boolean;
 }
@@ -6048,3 +6329,279 @@ alias ETagHeader = {
   @header("ETag")
   eTag: string;
 };
+
+/**
+ * The storage connector properties
+ */
+@added(Versions.v2025_08_01)
+model StorageConnectorProperties {
+  /**
+   * System-generated GUID identifier for the Storage Connector. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  uniqueId?: string;
+
+  /**
+   * State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active)
+   * (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.
+   */
+  state?: StorageConnectorState = StorageConnectorState.Active;
+
+  /**
+   * System-generated creation time of the Storage Connector in ISO 8601 date-time format (YYYY-MM-DDTHH:mm:ssZ).
+   * Not a valid input parameter during creating.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: string;
+
+  /**
+   * Arbitrary description of this Storage Connector. Max 250 characters.
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * Test connection to backing data source before creating the storage connector.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  testConnection?: boolean = false;
+
+  /**
+   * The type of backing data source for this Storage Connector.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  dataSourceType: StorageConnectorDataSourceType;
+
+  /**
+   * Information about how to communicate with and authenticate to the backing data store.
+   */
+  source: StorageConnectorSource;
+
+  /**
+   * Represents the provisioning state of the storage connector.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NativeDataSharingProvisioningState;
+}
+
+/**
+ * The storage connector backing data source information
+ */
+@discriminator("type")
+@added(Versions.v2025_08_01)
+model StorageConnectorSource {
+  /**
+   * Type of the Storage Connector. Not mutable once the Storage Connector is created."
+   */
+  type: StorageConnectorSourceType;
+}
+
+/**
+ * The properties of data share source
+ */
+@added(Versions.v2025_08_01)
+model DataShareSource extends StorageConnectorSource {
+  /**
+   * The type for data share source
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorSourceType.DataShare;
+
+  /**
+   * Details for how to connect to the backing data store.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  connection: StorageConnectorConnection;
+
+  /**
+   * Details for how to authenticate to the backing data store.
+   */
+  authProperties: StorageConnectorAuthProperties;
+}
+
+/**
+ * The connection properties of the backing data source
+ */
+@discriminator("type")
+@added(Versions.v2025_08_01)
+model StorageConnectorConnection {
+  /**
+   * Type of the connection. Controls the type of the connection object. Not mutable once the Storage Connector is created.
+   */
+  type: StorageConnectorConnectionType;
+}
+
+/**
+ * The connection details for Data Share source
+ */
+@added(Versions.v2025_08_01)
+model DataShareConnection extends StorageConnectorConnection {
+  /**
+   * The type for data share connection
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorConnectionType.DataShare;
+
+  /**
+   * The URI of the backing DataShare. Must be in the format: azds://<region>:<DataShareName>:<DataShareIdentifier>
+   */
+  @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareUri: string;
+}
+
+/**
+ * The authentication properties of the backing data source
+ */
+@discriminator("type")
+@added(Versions.v2025_08_01)
+model StorageConnectorAuthProperties {
+  /**
+   * Type of the authentication properties. Controls the type of the authProperties object
+   */
+  type: StorageConnectorAuthType;
+}
+
+/**
+ * The managed identity auth properties for dataShare connection.
+ */
+@added(Versions.v2025_08_01)
+model ManagedIdentityAuthProperties extends StorageConnectorAuthProperties {
+  /**
+   * The type of managed identity auth
+   */
+  @visibility(Lifecycle.Read)
+  type: StorageConnectorAuthType.ManagedIdentity;
+
+  /**
+   * ARM ResourceId of the managed identity that should be used to authenticate to the backing data source.
+   */
+  identityResourceId?: string;
+}
+
+/**
+ * Test existing connection request properties
+ */
+@added(Versions.v2025_08_01)
+model TestExistingConnectionRequest {
+  /**
+   * The uniqueId of the storage connector as returned by the server.
+   */
+  uniqueId: string;
+}
+
+/**
+ * Test connection response properties
+ */
+@added(Versions.v2025_08_01)
+model TestConnectionResponse {
+  /**
+   * Indicates the method used to validate the connection to the backing data store.
+   * Valid values are `GetBlob` and `ListBlobs` for failure, and `TestExistingConnection` for success.
+   */
+  @minLength(1)
+  storageConnectorMethodName: string;
+
+  /**
+   * A string representing the error received from the backing data store.
+   * Format will vary depending on the data store type and will be capped at 1 MB in size.
+   * The error message will be empty if the connection was successful.
+   */
+  storageConnectorErrorMessage?: string;
+
+  /**
+   * The request Id associated with the request sent to the backing data store for validation.
+   */
+  @minLength(1)
+  storageConnectorRequestId: string;
+}
+
+/**
+ * The storage datashare properties
+ */
+@added(Versions.v2025_08_01)
+model StorageDataShareProperties {
+  /**
+   * System-generated GUID identifier for the Storage DataShare. Not a valid input parameter when creating.
+   */
+  @visibility(Lifecycle.Read)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareIdentifier?: string;
+
+  /** Arbitrary description of this Data Share. Max 250 characters.
+   *
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * The DataShare URI to be shared with the consumer.
+   * URI Format - 'azds://<location>:<dataShareName>:<dataShareIdentifier>'.
+   */
+  @visibility(Lifecycle.Read)
+  @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  dataShareUri?: string;
+
+  /**
+   * List of access policies that specify the permission allowed to a managed identity.
+   * For Create - This property is required and cannot be null. If no access policies are provided at creation time, specify an empty array.
+   * For Update - This property is optional. If set to null or not passed, the existing access policies are left unchanged.
+   * If provided with a non-null value, the existing access policies are replaced with the specified list.
+   */
+  @identifiers(#[])
+  accessPolicies: StorageDataShareAccessPolicy[];
+
+  /**
+   * List of assets that specify the properties of the shared resources.
+   * For Create - This property is required and cannot be null. If no assets are provided at creation time, specify an empty array.
+   * For Update - This property is optional. If set to null or not passed, the existing assets are left unchanged.
+   * If provided with a non-null value, the existing assets are replaced with the specified list.
+   */
+  @identifiers(#[])
+  assets: StorageDataShareAsset[];
+
+  /**
+   * Represents the provisioning state of the storage datashare.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NativeDataSharingProvisioningState;
+}
+
+/**
+ * Policy that specify the permission allowed to a managed identity
+ */
+@added(Versions.v2025_08_01)
+model StorageDataShareAccessPolicy {
+  /**
+   * The AAD principal ID of the Managed Identity.
+   */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  principalId: string;
+
+  /**
+   * The AAD tenant ID of the Managed Identity.
+   */
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  tenantId: string;
+
+  /**
+   * Allowed permissions. Currently, only supported value is Read.
+   */
+  permission: StorageDataShareAccessPolicyPermission;
+}
+
+/**
+ * Properties of a shared resource.
+ */
+@added(Versions.v2025_08_01)
+model StorageDataShareAsset {
+  /**
+   * Source Path to be shared. It can be a folder or a blob.
+   * The asset path should contain container name followed by path within the container, e.g. /container1/logs/external.
+   */
+  assetPath: string;
+
+  /**
+   * Consumer visible name of the original path.
+   */
+  displayName: string;
+}

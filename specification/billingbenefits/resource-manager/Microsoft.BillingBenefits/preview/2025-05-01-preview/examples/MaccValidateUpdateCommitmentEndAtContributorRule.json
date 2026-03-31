@@ -6,17 +6,17 @@
         {
           "benefitType": "MACC",
           "properties": {
-            "entityType": "Primary",
+            "allowContributors": true,
             "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/benefits/myBenefit",
-            "systemId": "13810867107109237",
             "commitment": {
-              "grain": "FullTerm",
               "amount": 20000,
-              "currencyCode": "USD"
+              "currencyCode": "USD",
+              "grain": "FullTerm"
             },
             "endAt": "2024-07-31T23:59:59Z",
-            "allowContributors": true
+            "entityType": "Primary",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/benefits/myBenefit",
+            "systemId": "13810867107109237"
           }
         }
       ]
@@ -33,5 +33,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Benefit_Validate",
+  "title": "MaccValidateUpdateCommitmentEndAtContributorRule"
 }

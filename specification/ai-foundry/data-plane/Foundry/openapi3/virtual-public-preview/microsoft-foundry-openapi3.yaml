@@ -21,6 +21,7 @@ tags:
   - name: Responses
   - name: Redteams
   - name: Schedules
+  - name: Toolsets
 paths:
   /agents:
     post:
@@ -32,7 +33,11 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+            anyOf:
+              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+              - type: string
+                enum:
+                  - AgentEndpoints=V1Preview
         - name: api-version
           in: query
           required: true
@@ -269,6 +274,55 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+    patch:
+      operationId: Agents_patchAgentObject
+      description: Updates an agent endpoint.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentEndpoints=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentObject'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
+      requestBody:
+        required: true
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/PatchAgentRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
   /agents/{agent_name}/import:
     post:
       operationId: Agents_updateAgentFromManifest
@@ -473,7 +527,11 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+            anyOf:
+              - $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+              - type: string
+                enum:
+                  - AgentEndpoints=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1252,9 +1310,7 @@ paths:
                 type: string
           content:
             '*/*':
-              schema:
-                type: string
-                format: binary
+              schema: {}
         default:
           description: An unexpected error response.
           content:
@@ -1267,9 +1323,7 @@ paths:
         required: true
         content:
           '*/*':
-            schema:
-              type: string
-              format: binary
+            schema: {}
         description: The request body.
       x-ms-foundry-meta:
         required_previews:
@@ -1372,9 +1426,7 @@ paths:
           description: The request has succeeded.
           content:
             '*/*':
-              schema:
-                type: string
-                format: binary
+              schema: {}
         default:
           description: An unexpected error response.
           content:
@@ -1431,9 +1483,7 @@ paths:
           description: The request has succeeded.
           content:
             '*/*':
-              schema:
-                type: string
-                format: binary
+              schema: {}
         default:
           description: An unexpected error response.
           content:
@@ -1446,9 +1496,7 @@ paths:
         required: false
         content:
           '*/*':
-            schema:
-              type: string
-              format: binary
+            schema: {}
         description: Optional request body.
       x-ms-foundry-meta:
         required_previews:
@@ -3212,10 +3260,9 @@ paths:
       operationId: Insights_generate
       description: Generate Insights
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: Foundry-Features
           in: header
-          required: true
+          required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -3234,6 +3281,13 @@ paths:
           schema:
             type: string
             format: http-date
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
@@ -3243,16 +3297,10 @@ paths:
                 $ref: '#/components/schemas/Insight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
       requestBody:
@@ -3266,7 +3314,14 @@ paths:
       operationId: Insights_list
       description: List all insights in reverse chronological order (newest first).
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Insights=V1Preview
         - name: type
           in: query
           required: false
@@ -3302,14 +3357,13 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: Foundry-Features
-          in: header
+        - name: api-version
+          in: query
           required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          description: The API version to use for this operation.
           schema:
             type: string
-            enum:
-              - Insights=V1Preview
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -3319,16 +3373,10 @@ paths:
                 $ref: '#/components/schemas/PagedInsight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
   /insights/{id}:
@@ -3336,16 +3384,9 @@ paths:
       operationId: Insights_get
       description: Get a specific insight by Id.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: id
-          in: path
-          required: true
-          description: The unique identifier for the insights report.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
-          required: true
+          required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -3358,6 +3399,19 @@ paths:
           schema:
             type: boolean
           explode: false
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier for the insights report.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -3367,18 +3421,192 @@ paths:
                 $ref: '#/components/schemas/Insight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
+  /managedAgentIdentityBlueprints:
+    get:
+      operationId: ManagedAgentIdentityBlueprints_listManagedAgentIdentityBlueprints
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentEndpoints=V1Preview
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedManagedAgentIdentityBlueprint'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+  /managedAgentIdentityBlueprints/{blueprint_name}:
+    put:
+      operationId: ManagedAgentIdentityBlueprints_createOrUpdateManagedAgentIdentityBlueprint
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentEndpoints=V1Preview
+        - name: blueprint_name
+          in: path
+          required: true
+          description: The name of the managed agent identity blueprint to create.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedAgentIdentityBlueprint'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateManagedAgentIdentityBlueprintRequest'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    get:
+      operationId: ManagedAgentIdentityBlueprints_getManagedAgentIdentityBlueprint
+      description: Retrieves a managed agent identity blueprint by name.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentEndpoints=V1Preview
+        - name: blueprint_name
+          in: path
+          required: true
+          description: The name of the managed agent identity blueprint to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedAgentIdentityBlueprint'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    delete:
+      operationId: ManagedAgentIdentityBlueprints_deleteManagedAgentIdentityBlueprint
+      description: Deletes a managed agent identity blueprint by name.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - AgentEndpoints=V1Preview
+        - name: blueprint_name
+          in: path
+          required: true
+          description: The name of the managed agent identity blueprint to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
   /memory_stores:
     post:
       operationId: createMemoryStore
@@ -5353,6 +5581,12 @@ paths:
                       description: |-
                         (Deprecated) Use agent_reference instead.
                         The agent to use for generating the response.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
                     agent_reference:
                       allOf:
                         - $ref: '#/components/schemas/AgentReference'
@@ -5361,12 +5595,6 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
-                    agent_session_id:
-                      type: string
-                      description: |-
-                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
-                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
-                        conversation_id/prev_response_id or a new UUID is generated.
                 - type: object
                   properties:
                     metadata:
@@ -5497,6 +5725,12 @@ paths:
                       description: |-
                         (Deprecated) Use agent_reference instead.
                         The agent to use for generating the response.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
                     agent_reference:
                       allOf:
                         - $ref: '#/components/schemas/AgentReference'
@@ -5505,12 +5739,6 @@ paths:
                       type: object
                       additionalProperties: {}
                       description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
-                    agent_session_id:
-                      type: string
-                      description: |-
-                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
-                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
-                        conversation_id/prev_response_id or a new UUID is generated.
     get:
       operationId: listResponses
       description: Returns the list of all responses.
@@ -6227,7 +6455,323 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Schedules
+  /toolsets:
+    post:
+      operationId: createToolset
+      description: Create a toolset.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolsetObject'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 256
+                  description: The name of the toolset.
+                description:
+                  type: string
+                  maxLength: 512
+                  description: A human-readable description of the toolset.
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Arbitrary key-value metadata to associate with the toolset.
+                tools:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpenAI.Tool'
+                  description: The list of tools to include in the toolset.
+              required:
+                - name
+                - tools
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+    get:
+      operationId: listToolsets
+      description: List all toolsets.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ToolsetObject'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+  /toolsets/{tool_set_name}:
+    post:
+      operationId: updateToolset
+      description: Update a toolset.
+      parameters:
+        - name: tool_set_name
+          in: path
+          required: true
+          description: The name of the toolset to update.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolsetObject'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  maxLength: 512
+                  description: A human-readable description of the toolset.
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Arbitrary key-value metadata to associate with the toolset.
+                tools:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpenAI.Tool'
+                  description: The list of tools to include in the toolset.
+              required:
+                - tools
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+    get:
+      operationId: getToolset
+      description: Retrieve a toolset.
+      parameters:
+        - name: tool_set_name
+          in: path
+          required: true
+          description: The name of the toolset to retrieve.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolsetObject'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+    delete:
+      operationId: deleteToolset
+      description: Delete a toolset.
+      parameters:
+        - name: tool_set_name
+          in: path
+          required: true
+          description: The name of the toolset to delete.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteToolsetResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
 security:
+  - ApiKeyAuth: []
   - OAuth2Auth:
       - https://ai.azure.com/.default
 components:
@@ -6259,6 +6803,12 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `"a2a_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         base_url:
           type: string
           format: uri
@@ -6343,6 +6893,12 @@ components:
         index_name:
           type: string
           description: The name of an index in an IndexResource attached to this agent.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         query_type:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchQueryType'
@@ -6358,6 +6914,122 @@ components:
           type: string
           description: Index asset id for search resource.
       description: A AI Search Index resource.
+    AgentBlueprintReference:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentBlueprintReferenceType'
+      discriminator:
+        propertyName: type
+        mapping:
+          ManagedAgentIdentityBlueprint: '#/components/schemas/ManagedAgentIdentityBlueprintReference'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentBlueprintReferenceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - ManagedAgentIdentityBlueprint
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentCard:
+      type: object
+      required:
+        - version
+        - skills
+      properties:
+        version:
+          type: string
+          minLength: 1
+          maxLength: 32
+          description: The version of the agent card.
+        description:
+          type: string
+          maxLength: 2048
+          description: The description of the agent card.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCardSkill'
+          maxItems: 16
+          description: The set of skills that an agent can perform.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentCardSkill:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: a unique identifier for the skill
+        name:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: The name of the skill
+        description:
+          type: string
+          maxLength: 2048
+          description: A description of the skill
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCardSkillTag'
+          maxItems: 5
+          description: set of tagwords describing classes of capabilities for the skill
+        examples:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCardSkillExample'
+          maxItems: 5
+          description: A list of example scenarios that the skill can perform.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentCardSkillExample:
+      type: string
+      maxLength: 1024
+      description: A skill example string with a maximum length of 1024 characters.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentCardSkillTag:
+      type: string
+      maxLength: 32
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentCardUpdate:
+      type: object
+      properties:
+        version:
+          type: string
+          minLength: 1
+          maxLength: 32
+          description: The version of the agent card.
+        description:
+          type: string
+          maxLength: 2048
+          description: The description of the agent card.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCardSkill'
+          maxItems: 16
+          description: The set of skills that an agent can perform.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     AgentClusterInsightRequest:
       type: object
       required:
@@ -6460,13 +7132,13 @@ components:
       properties:
         code:
           type: string
-          description: The error code of the container operation, if any.
+          description: The error code of the container operation.
         type:
           type: string
-          description: The error type of the container operation, if any.
+          description: The error type of the container operation.
         message:
           type: string
-          description: The error message of the container operation, if any.
+          description: The error message of the container operation.
       description: The error details of the container operation, if any.
       x-ms-foundry-meta:
         required_previews:
@@ -6481,7 +7153,7 @@ components:
       properties:
         id:
           type: string
-          description: The ID of the container operation. This id is unique identifier across the system.
+          description: The ID of the container operation. This id is a globally unique identifier.
         agent_id:
           type: string
           description: The ID of the agent.
@@ -6562,6 +7234,82 @@ components:
         - WorkflowAgents=V1Preview
         - ContainerAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
+    AgentEndpoint:
+      type: object
+      properties:
+        version_selector:
+          allOf:
+            - $ref: '#/components/schemas/VersionSelector'
+          description: The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.
+        protocols:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointProtocol'
+          description: The protocols that the agent supports
+        authorization_schemes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+          description: The authorization schemes supported by the agent endpoint
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentEndpointAuthorizationScheme:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentEndpointAuthorizationSchemeType'
+      discriminator:
+        propertyName: type
+        mapping:
+          Entra: '#/components/schemas/EntraAuthorizationScheme'
+          BotService: '#/components/schemas/BotServiceAuthorizationScheme'
+          BotServiceRbac: '#/components/schemas/BotServiceRbacAuthorizationScheme'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentEndpointAuthorizationSchemeType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Entra
+            - BotService
+            - BotServiceRbac
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    AgentEndpointProtocol:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - activity
+            - responses
+            - a2a
+            - invocations
+    AgentEndpointUpdate:
+      type: object
+      properties:
+        version_selector:
+          allOf:
+            - $ref: '#/components/schemas/VersionSelectorUpdate'
+          description: The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.
+        protocols:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointProtocol'
+          description: The protocols that the agent supports
+        authorization_schemes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+          description: The authorization schemes supported by the agent endpoint
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     AgentEvaluation:
       type: object
       required:
@@ -6700,6 +7448,21 @@ components:
         version:
           type: string
           description: The version identifier of the agent.
+    AgentIdentity:
+      type: object
+      required:
+        - principal_id
+        - client_id
+      properties:
+        principal_id:
+          type: string
+          description: The principal ID of the agent instance
+        client_id:
+          type: string
+          description: The client ID of the agent instance. Also referred to as the instance ID
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     AgentKind:
       anyOf:
         - type: string
@@ -6737,6 +7500,40 @@ components:
           required:
             - latest
           description: The latest version of the agent.
+        endpoint:
+          allOf:
+            - $ref: '#/components/schemas/AgentEndpoint'
+          description: The endpoint configuration for the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+        instance_identity:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The instance identity of the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+        blueprint:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The blueprint for the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint for the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+        agent_card:
+          allOf:
+            - $ref: '#/components/schemas/AgentCard'
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
     AgentProtocol:
       anyOf:
         - type: string
@@ -6865,6 +7662,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Error'
           description: Error details if the agent version provisioning failed.
+        instance_identity:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The instance identity of the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+          readOnly: true
+        blueprint:
+          allOf:
+            - $ref: '#/components/schemas/AgentIdentity'
+          description: The blueprint for the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+          readOnly: true
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint for the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+          readOnly: true
     AgentVersionStatus:
       type: string
       enum:
@@ -7274,6 +8095,12 @@ components:
           enum:
             - azure_ai_search
           description: The object type, which is always 'azure_ai_search'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -7336,6 +8163,12 @@ components:
       required:
         - indexes
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         indexes:
           type: array
           items:
@@ -7525,6 +8358,12 @@ components:
         - project_connection_id
         - instance_name
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing search
@@ -7556,6 +8395,12 @@ components:
           enum:
             - bing_custom_search_preview
           description: The object type, which is always 'bing_custom_search_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         bing_custom_search_preview:
           allOf:
             - $ref: '#/components/schemas/BingCustomSearchToolParameters'
@@ -7618,6 +8463,12 @@ components:
       required:
         - search_configurations
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         search_configurations:
           type: array
           items:
@@ -7632,6 +8483,12 @@ components:
       required:
         - project_connection_id
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing search
@@ -7654,6 +8511,12 @@ components:
       required:
         - search_configurations
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         search_configurations:
           type: array
           items:
@@ -7674,6 +8537,12 @@ components:
           enum:
             - bing_grounding
           description: The object type, which is always 'bing_grounding'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -7750,6 +8619,34 @@ components:
             - $ref: '#/components/schemas/SasCredential'
           description: Credential info to access the storage account.
       description: Blob reference details.
+    BotServiceAuthorizationScheme:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - BotService
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    BotServiceRbacAuthorizationScheme:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - BotServiceRbac
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     BrowserAutomationPreviewTool:
       type: object
       required:
@@ -7761,6 +8658,12 @@ components:
           enum:
             - browser_automation_preview
           description: The object type, which is always 'browser_automation_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         browser_automation_preview:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolParameters'
@@ -7823,6 +8726,12 @@ components:
       required:
         - project_connection_id
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: The ID of the project connection to your Azure Playwright resource.
@@ -7832,6 +8741,12 @@ components:
       required:
         - connection
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         connection:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
@@ -7968,6 +8883,9 @@ components:
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
+        blob_uri:
+          type: string
+          description: The blob URI for the evaluator storage
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
@@ -8271,6 +9189,27 @@ components:
               - HostedAgents=V1Preview
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint reference for the agent.
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+        agent_endpoint:
+          allOf:
+            - $ref: '#/components/schemas/AgentEndpoint'
+          description: An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
+        agent_card:
+          allOf:
+            - $ref: '#/components/schemas/AgentCard'
+          description: Optional agent card for the agent
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
@@ -8335,6 +9274,13 @@ components:
               - HostedAgents=V1Preview
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint reference for the agent.
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=V1Preview
@@ -8409,6 +9355,23 @@ components:
             Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.
                 Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.
       title: CreateEvalRunRequest
+    CreateOrUpdateManagedAgentIdentityBlueprintRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          maxLength: 63
+          description: |-
+            The unique name that identifies the managed agent identity blueprint.
+            Name can be used to retrieve/update/delete the managed agent identity blueprint.
+            - Must start and end with alphanumeric characters,
+            - Can contain hyphens in the middle
+            - Must not exceed 63 characters.
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     CreatedBy:
       type: object
       properties:
@@ -8714,6 +9677,25 @@ components:
             - true
           description: Always return true
       description: The result of a delete response operation.
+    DeleteToolsetResponse:
+      type: object
+      required:
+        - object
+        - name
+        - deleted
+      properties:
+        object:
+          type: string
+          enum:
+            - toolset.deleted
+          description: The object type. Always 'toolset.deleted'.
+        name:
+          type: string
+          description: The name of the toolset.
+        deleted:
+          type: boolean
+          description: Whether the toolset was successfully deleted.
+      description: Response returned when a toolset is deleted.
     Deployment:
       type: object
       required:
@@ -8756,6 +9738,23 @@ components:
       allOf:
         - $ref: '#/components/schemas/Message'
       description: A message authored by a developer to guide the model during evaluation.
+    EntraAuthorizationScheme:
+      type: object
+      required:
+        - type
+        - isolation_key_source
+      properties:
+        type:
+          type: string
+          enum:
+            - Entra
+        isolation_key_source:
+          $ref: '#/components/schemas/IsolationKeySource'
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     EntraIDCredentials:
       type: object
       required:
@@ -8770,6 +9769,20 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
+    EntraIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Entra
+      allOf:
+        - $ref: '#/components/schemas/IsolationKeySource'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     Eval:
       type: object
       required:
@@ -10233,6 +11246,12 @@ components:
     FabricDataAgentToolParameters:
       type: object
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connections:
           type: array
           items:
@@ -10268,6 +11287,27 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FixedRatioVersionSelectionRule:
+      type: object
+      required:
+        - type
+        - traffic_percentage
+      properties:
+        type:
+          type: string
+          enum:
+            - FixedRatio
+        traffic_percentage:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+          description: The percentage of traffic to route to the version. Must be between 0 and 100.
+      allOf:
+        - $ref: '#/components/schemas/VersionSelectionRule'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     FolderDatasetVersion:
       type: object
       required:
@@ -10307,6 +11347,28 @@ components:
           type: string
           description: The arguments to call the function with, as generated by the model in JSON format.
       description: Details of a function tool call.
+    HeaderIsolationKeySource:
+      type: object
+      required:
+        - kind
+        - user_isolation_key
+        - chat_isolation_key
+      properties:
+        kind:
+          type: string
+          enum:
+            - Header
+        user_isolation_key:
+          type: string
+          description: The user isolation key header value
+        chat_isolation_key:
+          type: string
+          description: The chat isolation key header value
+      allOf:
+        - $ref: '#/components/schemas/IsolationKeySource'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -10748,6 +11810,31 @@ components:
           format: date-time
           description: The timestamp when the insights were completed.
       description: Metadata about the insights.
+    IsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          $ref: '#/components/schemas/IsolationKeySourceKind'
+      discriminator:
+        propertyName: kind
+        mapping:
+          Entra: '#/components/schemas/EntraIsolationKeySource'
+          Header: '#/components/schemas/HeaderIsolationKeySource'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    IsolationKeySourceKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Entra
+            - Header
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     ItemGenerationParams:
       type: object
       required:
@@ -10776,6 +11863,32 @@ components:
             - red_team_taxonomy
             - synthetic_data_gen_preview
       description: The types of parameters for red team item generation.
+    ManagedAgentIdentityBlueprint:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          readOnly: true
+    ManagedAgentIdentityBlueprintReference:
+      type: object
+      required:
+        - type
+        - blueprint_id
+      properties:
+        type:
+          type: string
+          enum:
+            - ManagedAgentIdentityBlueprint
+        blueprint_id:
+          type: string
+          description: The ID of the managed blueprint
+      allOf:
+        - $ref: '#/components/schemas/AgentBlueprintReference'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     ManagedAzureAISearchIndex:
       type: object
       required:
@@ -10914,6 +12027,12 @@ components:
           enum:
             - memory_search_preview
           description: The type of the tool. Always `memory_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -10947,6 +12066,12 @@ components:
           enum:
             - memory_search
           description: The type of the tool. Always `memory_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -11317,6 +12442,12 @@ components:
           enum:
             - fabric_dataagent_preview
           description: The object type, which is always 'fabric_dataagent_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         fabric_dataagent_preview:
           allOf:
             - $ref: '#/components/schemas/FabricDataAgentToolParameters'
@@ -11970,6 +13101,12 @@ components:
             - code_interpreter
           description: The type of the code interpreter tool. Always `code_interpreter`.
           x-stainless-const: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         container:
           anyOf:
             - type: string
@@ -15024,6 +16161,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
           nullable: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -16009,6 +17152,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
           nullable: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -16626,6 +17775,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -20801,6 +21956,12 @@ components:
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
           default: local_shell
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -22499,12 +23660,6 @@ components:
           description: |-
             (Deprecated) Use agent_reference instead.
             The agent used for this response
-        agent_reference:
-          type: object
-          allOf:
-            - $ref: '#/components/schemas/AgentReference'
-          nullable: true
-          description: The agent used for this response
         agent_session_id:
           type: string
           description: |-
@@ -22512,6 +23667,12 @@ components:
             Always returned for hosted agents — either the caller-provided value, the auto-derived value,
             or an auto-generated UUID. Use for session-scoped operations and to maintain sandbox
             affinity in follow-up calls.
+        agent_reference:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/AgentReference'
+          nullable: true
+          description: The agent used for this response
       title: The response object
     OpenAI.ResponseAudioDeltaEvent:
       type: object
@@ -25368,6 +26529,7 @@ components:
           azure_function: '#/components/schemas/AzureFunctionTool'
           capture_structured_outputs: '#/components/schemas/CaptureStructuredOutputsTool'
           a2a_preview: '#/components/schemas/A2APreviewTool'
+          work_iq_preview: '#/components/schemas/WorkIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           memory_search: '#/components/schemas/MemorySearchTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
@@ -25648,6 +26810,7 @@ components:
             - fabric_dataagent_preview
             - sharepoint_grounding_preview
             - memory_search_preview
+            - work_iq_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -25963,6 +27126,12 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -26375,6 +27544,21 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of Insight items
+    PagedManagedAgentIdentityBlueprint:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManagedAgentIdentityBlueprint'
+          description: The ManagedAgentIdentityBlueprint items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of ManagedAgentIdentityBlueprint items
     PagedRedTeam:
       type: object
       required:
@@ -26420,6 +27604,36 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of ScheduleRun items
+    PatchAgentRequest:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: |-
+            Set of 16 key-value pairs that can be attached to an object. This can be
+            useful for storing additional information about the object in a structured
+            format, and querying for objects via API or the dashboard.
+
+            Keys are strings with a maximum length of 64 characters. Values are strings
+            with a maximum length of 512 characters.
+          x-oaiTypeLabel: map
+        description:
+          type: string
+          maxLength: 512
+          description: A human-readable description of the agent.
+        agent_endpoint:
+          allOf:
+            - $ref: '#/components/schemas/AgentEndpointUpdate'
+          description: The endpoint configuration for the agent
+        agent_card:
+          allOf:
+            - $ref: '#/components/schemas/AgentCardUpdate'
+          description: Optional agent card for the agent
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     PendingUploadRequest:
       type: object
       required:
@@ -27061,6 +28275,12 @@ components:
     SharepointGroundingToolParameters:
       type: object
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connections:
           type: array
           items:
@@ -27081,6 +28301,12 @@ components:
           enum:
             - sharepoint_grounding_preview
           description: The object type, which is always 'sharepoint_grounding_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         sharepoint_grounding_preview:
           allOf:
             - $ref: '#/components/schemas/SharepointGroundingToolParameters'
@@ -27513,10 +28739,61 @@ components:
       required:
         - project_connection_id
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: A project connection in a ToolProjectConnectionList attached to this tool.
       description: A project connection resource.
+    ToolsetObject:
+      type: object
+      required:
+        - object
+        - id
+        - created_at
+        - updated_at
+        - name
+        - tools
+      properties:
+        object:
+          type: string
+          enum:
+            - toolset
+          description: The object type, which is always 'toolset'.
+        id:
+          type: string
+          description: The unique identifier of the toolset.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (seconds) when the toolset was created.
+        updated_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (seconds) when the toolset was last updated.
+        name:
+          type: string
+          maxLength: 256
+          description: The name of the toolset.
+        description:
+          type: string
+          maxLength: 512
+          description: A human-readable description of the toolset.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Arbitrary key-value metadata to associate with the toolset.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The list of tools contained in this toolset.
+      description: A toolset that stores reusable tool definitions for agents.
     TracesPreviewEvalRunDataSource:
       type: object
       required:
@@ -27657,6 +28934,13 @@ components:
               - HostedAgents=V1Preview
               - ContainerAgents=V1Preview
               - WorkflowAgents=V1Preview
+        blueprint_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentBlueprintReference'
+          description: The blueprint reference for the agent.
+          x-ms-foundry-meta:
+            required_previews:
+              - AgentEndpoints=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -27707,12 +28991,67 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - MemoryStores=V1Preview
+    VersionSelectionRule:
+      type: object
+      required:
+        - type
+        - agentVersion
+      properties:
+        type:
+          $ref: '#/components/schemas/VersionSelectorType'
+        agentVersion:
+          type: string
+          description: The version to rout traffic to
+      discriminator:
+        propertyName: type
+        mapping:
+          FixedRatio: '#/components/schemas/FixedRatioVersionSelectionRule'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    VersionSelector:
+      type: object
+      required:
+        - version_selection_rules
+      properties:
+        version_selection_rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionSelectionRule'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    VersionSelectorType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - FixedRatio
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
+    VersionSelectorUpdate:
+      type: object
+      properties:
+        version_selection_rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/VersionSelectionRule'
+      x-ms-foundry-meta:
+        required_previews:
+          - AgentEndpoints=V1Preview
     WebSearchConfiguration:
       type: object
       required:
         - project_connection_id
         - instance_name
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing custom search
@@ -27739,6 +29078,33 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
+    WorkIQPreviewTool:
+      type: object
+      required:
+        - type
+        - work_iq_preview
+      properties:
+        type:
+          type: string
+          enum:
+            - work_iq_preview
+          description: The object type, which is always 'work_iq_preview'.
+        work_iq_preview:
+          allOf:
+            - $ref: '#/components/schemas/WorkIQPreviewToolParameters'
+          description: The WorkIQ tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A WorkIQ server-side tool.
+    WorkIQPreviewToolParameters:
+      type: object
+      required:
+        - project_connection_id
+      properties:
+        project_connection_id:
+          type: string
+          description: The ID of the WorkIQ project connection.
+      description: The WorkIQ tool parameters.
     WorkflowActionOutputItem:
       type: object
       required:
@@ -27823,6 +29189,10 @@ components:
         - $ref: '#/components/schemas/EvaluationTarget'
       description: Evaluation target for generating responses using a given model and dataset.
   securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
     OAuth2Auth:
       type: oauth2
       flows:
