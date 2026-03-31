@@ -1662,10 +1662,19 @@
       "type": "object",
       "description": "Properties specific to a MongoDB Atlas Project.",
       "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Atlas project id.",
+          "readOnly": true
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Atlas project name.",
+          "readOnly": true
+        },
         "organizationId": {
           "type": "string",
           "description": "Atlas organization id.",
-          "pattern": "^[a-fA-F0-9]{24}$",
           "readOnly": true
         },
         "clusterCount": {
@@ -1689,12 +1698,12 @@
         "organizationId": {
           "type": "string",
           "description": "Atlas organization id.",
-          "pattern": "^[a-fA-F0-9]{24}$"
+          "readOnly": true
         },
         "projectId": {
           "type": "string",
           "description": "Atlas project id.",
-          "pattern": "^[a-fA-F0-9]{24}$"
+          "readOnly": true
         },
         "regionsByTier": {
           "type": "array",
@@ -1702,6 +1711,7 @@
           "items": {
             "$ref": "#/definitions/TierRegions"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "tier"
           ]
@@ -1723,6 +1733,7 @@
           "items": {
             "$ref": "#/definitions/ProjectLimitStatus"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "type"
           ]

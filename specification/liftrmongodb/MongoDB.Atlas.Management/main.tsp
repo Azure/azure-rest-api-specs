@@ -155,9 +155,17 @@ union ClusterTier {
 @doc("Properties specific to a MongoDB Atlas Project.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ProjectProperties {
+  @doc("Atlas project id.")
+  @visibility(Lifecycle.Read)
+  projectId?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "projectName in properties is needed for LIST responses to return the project name alongside projectId"
+  @doc("Atlas project name.")
+  @visibility(Lifecycle.Read)
+  projectName?: string;
+
   @doc("Atlas organization id.")
   @visibility(Lifecycle.Read)
-  @pattern("^[a-fA-F0-9]{24}$")
   organizationId?: string;
 
   @doc("Number of clusters in the project.")
@@ -215,6 +223,7 @@ interface Projects {
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model TierLimitReachedResponse {
   @doc("List of project limit statuses.")
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["type"])
   limits: ProjectLimitStatus[];
 }
@@ -239,14 +248,15 @@ model ProjectLimitStatus {
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model RegionsByTierResponse {
   @doc("Atlas organization id.")
-  @pattern("^[a-fA-F0-9]{24}$")
+  @visibility(Lifecycle.Read)
   organizationId: string;
 
   @doc("Atlas project id.")
-  @pattern("^[a-fA-F0-9]{24}$")
+  @visibility(Lifecycle.Read)
   projectId: string;
 
   @doc("List of cluster tiers and their supported regions.")
+  @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["tier"])
   regionsByTier: TierRegions[];
 }
