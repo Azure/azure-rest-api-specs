@@ -22,7 +22,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DefenderForStorageSettingList.required__added` | added | `["value"]` |
 | `paths['/{resourceId}/providers/microsoft.Security/defenderForStorageSettings'].get.parameters[0].required__added` | added | `true` |
 
 ### Changes for `type`
@@ -68,12 +67,6 @@
 | `definitions.DefenderForStorageSettingProperties.properties.malwareScanning.description__added` | added | `Properties of Malware Scanning.` |
 | `definitions.DefenderForStorageSettingProperties.properties.sensitiveDataDiscovery.description__added` | added | `Properties of Sensitive Data Discovery.` |
 | `definitions.MalwareScanningProperties.properties.onUpload.description__added` | added | `Properties of On Upload malware scanning.` |
-
-### Changes for `readOnly`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.DefenderForStorageSettingList.properties.value.readOnly__deleted` | deleted | `true` |
 
 ### Changes for `format`
 

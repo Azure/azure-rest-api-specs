@@ -548,20 +548,17 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DefenderForStorageSetting items on this page",
+          "description": "List of Defender for Storage settings.",
           "items": {
             "$ref": "#/definitions/DefenderForStorageSetting"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DefenderForStorageSettingProperties": {
       "type": "object",

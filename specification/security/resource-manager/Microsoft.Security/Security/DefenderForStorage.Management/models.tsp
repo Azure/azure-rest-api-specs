@@ -57,8 +57,20 @@ union SettingName {
 /**
  * List of Defender for Storage settings.
  */
-model DefenderForStorageSettingList
-  is Azure.Core.Page<DefenderForStorageSetting>;
+model DefenderForStorageSettingList {
+  /**
+   * List of Defender for Storage settings.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DefenderForStorageSetting[];
+
+  /**
+   * The URI to fetch the next page.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Defender for Storage resource properties.
