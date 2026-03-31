@@ -3370,6 +3370,7 @@ model RaiPolicyProperties {
   /**
    * The list of custom rai topics.
    */
+  @removed(Versions.v2026_01_15_preview)
   @identifiers(#[])
   customTopics?: CustomTopicConfig[];
 
@@ -3445,6 +3446,7 @@ model RaiBlocklistConfig {
  * Gets or sets the source to which filter applies.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'CustomTopicConfig' extends 'RaiTopicConfig' using inheritance to match service-side object hierarchy"
+@removed(Versions.v2026_01_15_preview)
 model CustomTopicConfig extends RaiTopicConfig {
   /**
    * Content source to apply the Content Filters.
@@ -3455,6 +3457,7 @@ model CustomTopicConfig extends RaiTopicConfig {
 /**
  * Azure OpenAI RAI topic config.
  */
+@removed(Versions.v2026_01_15_preview)
 model RaiTopicConfig {
   /**
    * Name of RAI topic.
@@ -5687,3 +5690,512 @@ model RaiPolicyListResult {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+// ============================================================================
+// Foundry Job Models
+// ============================================================================
+
+/**
+ * Enum to determine the type of Foundry job.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryJobType {
+  string,
+
+  /** Command job type. */
+  Command: "Command",
+}
+
+/**
+ * The status of a Foundry job.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryJobStatus {
+  string,
+
+  /** Job has not started. */
+  NotStarted: "NotStarted",
+
+  /** Job is starting. */
+  Starting: "Starting",
+
+  /** Job is provisioning resources. */
+  Provisioning: "Provisioning",
+
+  /** Job is preparing. */
+  Preparing: "Preparing",
+
+  /** Job is queued. */
+  Queued: "Queued",
+
+  /** Job is running. */
+  Running: "Running",
+
+  /** Job is finalizing. */
+  Finalizing: "Finalizing",
+
+  /** Cancel has been requested. */
+  CancelRequested: "CancelRequested",
+
+  /** Job has completed. */
+  Completed: "Completed",
+
+  /** Job has failed. */
+  Failed: "Failed",
+
+  /** Job was canceled. */
+  Canceled: "Canceled",
+
+  /** Job is not responding. */
+  NotResponding: "NotResponding",
+
+  /** Job is paused. */
+  Paused: "Paused",
+
+  /** Job status is unknown. */
+  Unknown: "Unknown",
+}
+
+/**
+ * Enum to determine the Foundry job distribution type.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryDistributionType {
+  string,
+
+  /** PyTorch distribution. */
+  PyTorch: "PyTorch",
+
+  /** TensorFlow distribution. */
+  TensorFlow: "TensorFlow",
+
+  /** MPI distribution. */
+  Mpi: "Mpi",
+}
+
+/**
+ * Enum to determine the Foundry job input type.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryJobInputType {
+  string,
+  literal: "literal",
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+}
+
+/**
+ * Enum to determine the Foundry job output type.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryJobOutputType {
+  string,
+  uri_file: "uri_file",
+  uri_folder: "uri_folder",
+}
+
+/**
+ * Enum to determine the input data delivery mode.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryInputDeliveryMode {
+  string,
+
+  /** Read-only mount delivery mode. */
+  ReadOnlyMount: "ReadOnlyMount",
+
+  /** Read-write mount delivery mode. */
+  ReadWriteMount: "ReadWriteMount",
+
+  /** Download delivery mode. */
+  Download: "Download",
+
+  /** Direct delivery mode. */
+  Direct: "Direct",
+
+  /** Eval mount delivery mode. */
+  EvalMount: "EvalMount",
+
+  /** Eval download delivery mode. */
+  EvalDownload: "EvalDownload",
+}
+
+/**
+ * Enum to determine the output data delivery mode.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryOutputDeliveryMode {
+  string,
+
+  /** Read-write mount delivery mode. */
+  ReadWriteMount: "ReadWriteMount",
+
+  /** Upload delivery mode. */
+  Upload: "Upload",
+
+  /** Direct delivery mode. */
+  Direct: "Direct",
+}
+
+/**
+ * Enum to determine the Foundry job tier.
+ */
+@added(Versions.v2026_01_15_preview)
+union FoundryJobTier {
+  string,
+
+  /** Null tier. */
+  Null: "Null",
+
+  /** Spot tier. */
+  Spot: "Spot",
+
+  /** Basic tier. */
+  Basic: "Basic",
+
+  /** Standard tier. */
+  Standard: "Standard",
+
+  /** Premium tier. */
+  Premium: "Premium",
+}
+
+/**
+ * Base definition for a Foundry job.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FoundryJobBase uses 'status' property for job lifecycle tracking instead of ARM provisioningState"
+@added(Versions.v2026_01_15_preview)
+@discriminator("jobType")
+model FoundryJobBase {
+  /** [Required] Specifies the type of job. */
+  jobType: FoundryJobType;
+
+  /** Display name of job. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'displayName' is nullable in 'FoundryJobBase' for backward compatibility"
+  displayName?: string | null;
+
+  /** Status of the job. */
+  @visibility(Lifecycle.Read)
+  status?: FoundryJobStatus;
+
+  /** List of JobEndpoints. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'services' is nullable in 'FoundryJobBase' for backward compatibility"
+  @visibility(Lifecycle.Read)
+  services?: Record<FoundryJobService> | null;
+
+  /** ARM resource ID of the compute resource. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'computeId' is nullable in 'FoundryJobBase' for backward compatibility"
+  computeId?: string | null;
+
+  /** Is the asset archived? */
+  isArchived?: boolean = false;
+
+  /** The asset description text. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'description' is nullable in 'FoundryJobBase' for backward compatibility"
+  description?: string | null;
+
+  /** Tag dictionary. Tags can be added, removed, and updated. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'tags' is nullable in 'FoundryJobBase' for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for 'tags' to support extensible key-value pairs matching service behavior"
+  tags?: Record<string | null> | null;
+
+  /** The asset property dictionary. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'properties' is nullable in 'FoundryJobBase' for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for 'properties' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "'properties' is intentionally present on 'FoundryJobBase' to match service contract"
+  properties?: Record<string | null> | null;
+}
+
+/**
+ * Command job definition.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryCommandJob extends FoundryJobBase {
+  /** [Required] Specifies the type of job. */
+  jobType: FoundryJobType.Command;
+
+  /** [Required] The command to execute on startup of the job. */
+  command: string;
+
+  /** [Required] The ARM resource ID or image reference of the Environment specification for the job. */
+  environmentImageRef: string;
+
+  /** ARM resource ID of the code asset. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'codeId' is nullable in 'FoundryCommandJob' for backward compatibility"
+  codeId?: string | null;
+
+  /** Compute resource configuration for the job. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'resources' is nullable in 'FoundryCommandJob' for backward compatibility"
+  resources?: FoundryJobResourceConfiguration | null;
+
+  /** Mapping of input data bindings used in the job. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'inputs' is nullable in 'FoundryCommandJob' for backward compatibility"
+  inputs?: Record<FoundryJobInput | null> | null;
+
+  /** Mapping of output data bindings used in the job. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'outputs' is nullable in 'FoundryCommandJob' for backward compatibility"
+  outputs?: Record<FoundryJobOutput | null> | null;
+
+  /** Environment variables included in the job. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'environmentVariables' is nullable in 'FoundryCommandJob' for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for 'environmentVariables' to support extensible key-value pairs matching service behavior"
+  environmentVariables?: Record<string | null> | null;
+
+  /** Command Job limit. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'limits' is nullable in 'FoundryCommandJob' for backward compatibility"
+  limits?: FoundryCommandJobLimits | null;
+
+  /** Input parameters. */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "'parameters' uses unknown type to match service contract for arbitrary parameter values"
+  @visibility(Lifecycle.Read)
+  parameters?: unknown;
+
+  /** Queue settings for the job. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'queueSettings' is nullable in 'FoundryCommandJob' for backward compatibility"
+  queueSettings?: FoundryQueueSettings | null;
+
+  /** Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'distribution' is nullable in 'FoundryCommandJob' for backward compatibility"
+  distribution?: FoundryDistributionConfiguration | null;
+}
+
+/**
+ * Command Job limit class.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryCommandJobLimits {
+  /** The max run duration in ISO 8601 format, after which the job will be cancelled. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'timeout' is nullable in 'FoundryCommandJobLimits' for backward compatibility"
+  timeout?: duration | null;
+}
+
+/**
+ * Compute resource configuration for a Foundry job.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryJobResourceConfiguration {
+  /** Optional number of instances or nodes used by the compute target. */
+  instanceCount?: int32 = 1;
+
+  /** Optional type of VM used as supported by the compute target. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'instanceType' is nullable in 'FoundryJobResourceConfiguration' for backward compatibility"
+  instanceType?: string | null;
+
+  /** Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes). */
+  @pattern("\\d+[bBkKmMgG]")
+  shmSize?: string = "2g";
+}
+
+/**
+ * Base definition for Foundry job distribution configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+@discriminator("distributionType")
+model FoundryDistributionConfiguration {
+  /** [Required] Specifies the type of distribution framework. */
+  distributionType: FoundryDistributionType;
+}
+
+/**
+ * PyTorch distribution configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryPyTorch extends FoundryDistributionConfiguration {
+  /** PyTorch distribution type. */
+  distributionType: FoundryDistributionType.PyTorch;
+
+  /** Number of processes per node. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'processCountPerInstance' is nullable in 'FoundryPyTorch' for backward compatibility"
+  processCountPerInstance?: int32 | null;
+}
+
+/**
+ * MPI distribution configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryMpi extends FoundryDistributionConfiguration {
+  /** MPI distribution type. */
+  distributionType: FoundryDistributionType.Mpi;
+
+  /** Number of processes per MPI node. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'processCountPerInstance' is nullable in 'FoundryMpi' for backward compatibility"
+  processCountPerInstance?: int32 | null;
+}
+
+/**
+ * TensorFlow distribution configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryTensorFlow extends FoundryDistributionConfiguration {
+  /** TensorFlow distribution type. */
+  distributionType: FoundryDistributionType.TensorFlow;
+
+  /** Number of parameter server tasks. */
+  parameterServerCount?: int32 = 0;
+
+  /** Number of workers. If not specified, will default to the instance count. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'workerCount' is nullable in 'FoundryTensorFlow' for backward compatibility"
+  workerCount?: int32 | null;
+}
+
+/**
+ * Foundry job input definition.
+ */
+@added(Versions.v2026_01_15_preview)
+@discriminator("jobInputType")
+model FoundryJobInput {
+  /** Description for the input. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'description' is nullable in 'FoundryJobInput' for backward compatibility"
+  description?: string | null;
+
+  /** [Required] Specifies the type of job input. */
+  jobInputType: FoundryJobInputType;
+}
+
+/**
+ * Literal input type.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryLiteralJobInput extends FoundryJobInput {
+  /** Literal input type. */
+  jobInputType: FoundryJobInputType.literal;
+
+  /** [Required] Literal value for the input. */
+  @minLength(1)
+  @pattern("[a-zA-Z0-9_]")
+  value: string;
+}
+
+/**
+ * URI file input type.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryUriFileJobInput extends FoundryJobInput {
+  /** URI file input type. */
+  jobInputType: FoundryJobInputType.uri_file;
+
+  /** Input Asset Delivery Mode. */
+  mode?: FoundryInputDeliveryMode;
+
+  /** [Required] Input Asset URI. */
+  @minLength(1)
+  @pattern("[a-zA-Z0-9_]")
+  uri: string;
+}
+
+/**
+ * URI folder input type.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryUriFolderJobInput extends FoundryJobInput {
+  /** URI folder input type. */
+  jobInputType: FoundryJobInputType.uri_folder;
+
+  /** Input Asset Delivery Mode. */
+  mode?: FoundryInputDeliveryMode;
+
+  /** [Required] Input Asset URI. */
+  @minLength(1)
+  @pattern("[a-zA-Z0-9_]")
+  uri: string;
+}
+
+/**
+ * Foundry job output definition.
+ */
+@added(Versions.v2026_01_15_preview)
+@discriminator("jobOutputType")
+model FoundryJobOutput {
+  /** Description for the output. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'description' is nullable in 'FoundryJobOutput' for backward compatibility"
+  description?: string | null;
+
+  /** [Required] Specifies the type of job output. */
+  jobOutputType: FoundryJobOutputType;
+}
+
+/**
+ * URI file output type.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryUriFileJobOutput extends FoundryJobOutput {
+  /** URI file output type. */
+  jobOutputType: FoundryJobOutputType.uri_file;
+
+  /** Output Asset Delivery Mode. */
+  mode?: FoundryOutputDeliveryMode;
+
+  /** Output Asset URI. */
+  uri?: string;
+}
+
+/**
+ * URI folder output type.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryUriFolderJobOutput extends FoundryJobOutput {
+  /** URI folder output type. */
+  jobOutputType: FoundryJobOutputType.uri_folder;
+
+  /** Output Asset Delivery Mode. */
+  mode?: FoundryOutputDeliveryMode;
+
+  /** Output Asset URI. */
+  uri?: string;
+}
+
+/**
+ * Foundry job endpoint definition.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryJobService {
+  /** Url for endpoint. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'endpoint' is nullable in 'FoundryJobService' for backward compatibility"
+  endpoint?: string | null;
+
+  /** Any error in the service. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'errorMessage' is nullable in 'FoundryJobService' for backward compatibility"
+  @visibility(Lifecycle.Read)
+  errorMessage?: string | null;
+
+  /** Endpoint type. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'jobServiceType' is nullable in 'FoundryJobService' for backward compatibility"
+  jobServiceType?: string | null;
+
+  /** Port for endpoint. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'port' is nullable in 'FoundryJobService' for backward compatibility"
+  port?: int32 | null;
+
+  /** Additional properties to set on the endpoint. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'properties' is nullable in 'FoundryJobService' for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for 'properties' to support extensible key-value pairs matching service behavior"
+  properties?: Record<string | null> | null;
+
+  /** Status of endpoint. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'status' is nullable in 'FoundryJobService' for backward compatibility"
+  @visibility(Lifecycle.Read)
+  status?: string | null;
+}
+
+/**
+ * Queue settings for a Foundry job.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryQueueSettings {
+  /** Controls the compute job tier. */
+  jobTier?: FoundryJobTier;
+}
+
+/**
+ * A paginated list of Foundry Job resources.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryJobResourceArmPaginatedResult {
+  /** The link to the next page of FoundryJob objects. If null, there are no additional pages. */
+  @nextLink
+  nextLink?: string;
+
+  /** An array of FoundryJob objects. */
+  @pageItems
+  value?: FoundryJobResource[];
+}

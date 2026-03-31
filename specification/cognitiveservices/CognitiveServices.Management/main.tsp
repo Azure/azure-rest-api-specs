@@ -38,6 +38,7 @@ import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
 import "./ComputeOperation.tsp";
+import "./FoundryJob.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

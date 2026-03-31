@@ -124,6 +124,9 @@
       "name": "ComputeOperations"
     },
     {
+      "name": "FoundryJobs"
+    },
+    {
       "name": "Skus"
     },
     {
@@ -7293,6 +7296,356 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/jobs": {
+      "get": {
+        "operationId": "FoundryJobs_List",
+        "tags": [
+          "FoundryJobs"
+        ],
+        "description": "Lists Foundry Jobs in the project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FoundryJobResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/jobs/{jobName}": {
+      "get": {
+        "operationId": "FoundryJobs_Get",
+        "tags": [
+          "FoundryJobs"
+        ],
+        "description": "Gets a Foundry Job by name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the Foundry Job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FoundryJobResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "FoundryJobs_CreateOrUpdate",
+        "tags": [
+          "FoundryJobs"
+        ],
+        "description": "Creates a Foundry Job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the Foundry Job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Foundry Job definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FoundryJobResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FoundryJobResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'FoundryJobResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FoundryJobResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FoundryJobs_Delete",
+        "tags": [
+          "FoundryJobs"
+        ],
+        "description": "Deletes a Foundry Job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the Foundry Job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/jobs/{jobName}/cancel": {
+      "post": {
+        "operationId": "FoundryJobs_Cancel",
+        "tags": [
+          "FoundryJobs"
+        ],
+        "description": "Cancels a Foundry Job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the Foundry Job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists": {
       "get": {
         "operationId": "RaiBlocklists_List",
@@ -12653,21 +13006,6 @@
       ],
       "x-ms-discriminator-value": "CustomKeys"
     },
-    "CustomTopicConfig": {
-      "type": "object",
-      "description": "Gets or sets the source to which filter applies.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/RaiPolicyContentSource",
-          "description": "Content source to apply the Content Filters."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RaiTopicConfig"
-        }
-      ]
-    },
     "DefenderForAISetting": {
       "type": "object",
       "description": "The Defender for AI resource.",
@@ -13461,6 +13799,811 @@
           }
         ]
       }
+    },
+    "FoundryCommandJob": {
+      "type": "object",
+      "description": "Command job definition.",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "[Required] The command to execute on startup of the job."
+        },
+        "environmentImageRef": {
+          "type": "string",
+          "description": "[Required] The ARM resource ID or image reference of the Environment specification for the job."
+        },
+        "codeId": {
+          "type": "string",
+          "description": "ARM resource ID of the code asset.",
+          "x-nullable": true
+        },
+        "resources": {
+          "$ref": "#/definitions/FoundryJobResourceConfiguration",
+          "description": "Compute resource configuration for the job.",
+          "x-nullable": true
+        },
+        "inputs": {
+          "type": "object",
+          "description": "Mapping of input data bindings used in the job.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/FoundryJobInput",
+            "x-nullable": true
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Mapping of output data bindings used in the job.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/FoundryJobOutput",
+            "x-nullable": true
+          }
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment variables included in the job.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
+        },
+        "limits": {
+          "$ref": "#/definitions/FoundryCommandJobLimits",
+          "description": "Command Job limit.",
+          "x-nullable": true
+        },
+        "parameters": {
+          "description": "Input parameters.",
+          "readOnly": true
+        },
+        "queueSettings": {
+          "$ref": "#/definitions/FoundryQueueSettings",
+          "description": "Queue settings for the job.",
+          "x-nullable": true
+        },
+        "distribution": {
+          "$ref": "#/definitions/FoundryDistributionConfiguration",
+          "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "command",
+        "environmentImageRef"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryJobBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Command"
+    },
+    "FoundryCommandJobLimits": {
+      "type": "object",
+      "description": "Command Job limit class.",
+      "properties": {
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "The max run duration in ISO 8601 format, after which the job will be cancelled.",
+          "x-nullable": true
+        }
+      }
+    },
+    "FoundryDistributionConfiguration": {
+      "type": "object",
+      "description": "Base definition for Foundry job distribution configuration.",
+      "properties": {
+        "distributionType": {
+          "$ref": "#/definitions/FoundryDistributionType",
+          "description": "[Required] Specifies the type of distribution framework."
+        }
+      },
+      "discriminator": "distributionType",
+      "required": [
+        "distributionType"
+      ]
+    },
+    "FoundryDistributionType": {
+      "type": "string",
+      "description": "Enum to determine the Foundry job distribution type.",
+      "enum": [
+        "PyTorch",
+        "TensorFlow",
+        "Mpi"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryDistributionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PyTorch",
+            "value": "PyTorch",
+            "description": "PyTorch distribution."
+          },
+          {
+            "name": "TensorFlow",
+            "value": "TensorFlow",
+            "description": "TensorFlow distribution."
+          },
+          {
+            "name": "Mpi",
+            "value": "Mpi",
+            "description": "MPI distribution."
+          }
+        ]
+      }
+    },
+    "FoundryInputDeliveryMode": {
+      "type": "string",
+      "description": "Enum to determine the input data delivery mode.",
+      "enum": [
+        "ReadOnlyMount",
+        "ReadWriteMount",
+        "Download",
+        "Direct",
+        "EvalMount",
+        "EvalDownload"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryInputDeliveryMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadOnlyMount",
+            "value": "ReadOnlyMount",
+            "description": "Read-only mount delivery mode."
+          },
+          {
+            "name": "ReadWriteMount",
+            "value": "ReadWriteMount",
+            "description": "Read-write mount delivery mode."
+          },
+          {
+            "name": "Download",
+            "value": "Download",
+            "description": "Download delivery mode."
+          },
+          {
+            "name": "Direct",
+            "value": "Direct",
+            "description": "Direct delivery mode."
+          },
+          {
+            "name": "EvalMount",
+            "value": "EvalMount",
+            "description": "Eval mount delivery mode."
+          },
+          {
+            "name": "EvalDownload",
+            "value": "EvalDownload",
+            "description": "Eval download delivery mode."
+          }
+        ]
+      }
+    },
+    "FoundryJobBase": {
+      "type": "object",
+      "description": "Base definition for a Foundry job.",
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/FoundryJobType",
+          "description": "[Required] Specifies the type of job."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of job.",
+          "x-nullable": true
+        },
+        "status": {
+          "$ref": "#/definitions/FoundryJobStatus",
+          "description": "Status of the job.",
+          "readOnly": true
+        },
+        "services": {
+          "type": "object",
+          "description": "List of JobEndpoints.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/FoundryJobService"
+          },
+          "readOnly": true
+        },
+        "computeId": {
+          "type": "string",
+          "description": "ARM resource ID of the compute resource.",
+          "x-nullable": true
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Is the asset archived?",
+          "default": false
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-nullable": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "The asset property dictionary.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "FoundryJobInput": {
+      "type": "object",
+      "description": "Foundry job input definition.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description for the input.",
+          "x-nullable": true
+        },
+        "jobInputType": {
+          "$ref": "#/definitions/FoundryJobInputType",
+          "description": "[Required] Specifies the type of job input."
+        }
+      },
+      "discriminator": "jobInputType",
+      "required": [
+        "jobInputType"
+      ]
+    },
+    "FoundryJobInputType": {
+      "type": "string",
+      "description": "Enum to determine the Foundry job input type.",
+      "enum": [
+        "literal",
+        "uri_file",
+        "uri_folder"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryJobInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "literal",
+            "value": "literal"
+          },
+          {
+            "name": "uri_file",
+            "value": "uri_file"
+          },
+          {
+            "name": "uri_folder",
+            "value": "uri_folder"
+          }
+        ]
+      }
+    },
+    "FoundryJobOutput": {
+      "type": "object",
+      "description": "Foundry job output definition.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description for the output.",
+          "x-nullable": true
+        },
+        "jobOutputType": {
+          "$ref": "#/definitions/FoundryJobOutputType",
+          "description": "[Required] Specifies the type of job output."
+        }
+      },
+      "discriminator": "jobOutputType",
+      "required": [
+        "jobOutputType"
+      ]
+    },
+    "FoundryJobOutputType": {
+      "type": "string",
+      "description": "Enum to determine the Foundry job output type.",
+      "enum": [
+        "uri_file",
+        "uri_folder"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryJobOutputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "uri_file",
+            "value": "uri_file"
+          },
+          {
+            "name": "uri_folder",
+            "value": "uri_folder"
+          }
+        ]
+      }
+    },
+    "FoundryJobResource": {
+      "type": "object",
+      "description": "Azure Resource Manager resource envelope for a Foundry Job.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FoundryJobBase",
+          "description": "Foundry Job base definition."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FoundryJobResourceArmPaginatedResult": {
+      "type": "object",
+      "description": "A paginated list of Foundry Job resources.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of FoundryJob objects. If null, there are no additional pages."
+        },
+        "value": {
+          "type": "array",
+          "description": "An array of FoundryJob objects.",
+          "items": {
+            "$ref": "#/definitions/FoundryJobResource"
+          }
+        }
+      }
+    },
+    "FoundryJobResourceConfiguration": {
+      "type": "object",
+      "description": "Compute resource configuration for a Foundry job.",
+      "properties": {
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional number of instances or nodes used by the compute target.",
+          "default": 1
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "Optional type of VM used as supported by the compute target.",
+          "x-nullable": true
+        },
+        "shmSize": {
+          "type": "string",
+          "description": "Size of the docker container's shared memory block. This should be in the format of (number)(unit) where number as to be greater than 0 and the unit can be one of b(bytes), k(kilobytes), m(megabytes), or g(gigabytes).",
+          "default": "2g",
+          "pattern": "\\d+[bBkKmMgG]"
+        }
+      }
+    },
+    "FoundryJobService": {
+      "type": "object",
+      "description": "Foundry job endpoint definition.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Url for endpoint.",
+          "x-nullable": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Any error in the service.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "jobServiceType": {
+          "type": "string",
+          "description": "Endpoint type.",
+          "x-nullable": true
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port for endpoint.",
+          "x-nullable": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties to set on the endpoint.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of endpoint.",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      }
+    },
+    "FoundryJobStatus": {
+      "type": "string",
+      "description": "The status of a Foundry job.",
+      "enum": [
+        "NotStarted",
+        "Starting",
+        "Provisioning",
+        "Preparing",
+        "Queued",
+        "Running",
+        "Finalizing",
+        "CancelRequested",
+        "Completed",
+        "Failed",
+        "Canceled",
+        "NotResponding",
+        "Paused",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryJobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Job has not started."
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "Job is starting."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Job is provisioning resources."
+          },
+          {
+            "name": "Preparing",
+            "value": "Preparing",
+            "description": "Job is preparing."
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "Job is queued."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Job is running."
+          },
+          {
+            "name": "Finalizing",
+            "value": "Finalizing",
+            "description": "Job is finalizing."
+          },
+          {
+            "name": "CancelRequested",
+            "value": "CancelRequested",
+            "description": "Cancel has been requested."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Job has completed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Job has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Job was canceled."
+          },
+          {
+            "name": "NotResponding",
+            "value": "NotResponding",
+            "description": "Job is not responding."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Job is paused."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Job status is unknown."
+          }
+        ]
+      }
+    },
+    "FoundryJobTier": {
+      "type": "string",
+      "description": "Enum to determine the Foundry job tier.",
+      "enum": [
+        "Null",
+        "Spot",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryJobTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Null",
+            "value": "Null",
+            "description": "Null tier."
+          },
+          {
+            "name": "Spot",
+            "value": "Spot",
+            "description": "Spot tier."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium tier."
+          }
+        ]
+      }
+    },
+    "FoundryJobType": {
+      "type": "string",
+      "description": "Enum to determine the type of Foundry job.",
+      "enum": [
+        "Command"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Command",
+            "value": "Command",
+            "description": "Command job type."
+          }
+        ]
+      }
+    },
+    "FoundryLiteralJobInput": {
+      "type": "object",
+      "description": "Literal input type.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "[Required] Literal value for the input.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryJobInput"
+        }
+      ],
+      "x-ms-discriminator-value": "literal"
+    },
+    "FoundryMpi": {
+      "type": "object",
+      "description": "MPI distribution configuration.",
+      "properties": {
+        "processCountPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of processes per MPI node.",
+          "x-nullable": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryDistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Mpi"
+    },
+    "FoundryOutputDeliveryMode": {
+      "type": "string",
+      "description": "Enum to determine the output data delivery mode.",
+      "enum": [
+        "ReadWriteMount",
+        "Upload",
+        "Direct"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryOutputDeliveryMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadWriteMount",
+            "value": "ReadWriteMount",
+            "description": "Read-write mount delivery mode."
+          },
+          {
+            "name": "Upload",
+            "value": "Upload",
+            "description": "Upload delivery mode."
+          },
+          {
+            "name": "Direct",
+            "value": "Direct",
+            "description": "Direct delivery mode."
+          }
+        ]
+      }
+    },
+    "FoundryPyTorch": {
+      "type": "object",
+      "description": "PyTorch distribution configuration.",
+      "properties": {
+        "processCountPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of processes per node.",
+          "x-nullable": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryDistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "PyTorch"
+    },
+    "FoundryQueueSettings": {
+      "type": "object",
+      "description": "Queue settings for a Foundry job.",
+      "properties": {
+        "jobTier": {
+          "$ref": "#/definitions/FoundryJobTier",
+          "description": "Controls the compute job tier."
+        }
+      }
+    },
+    "FoundryTensorFlow": {
+      "type": "object",
+      "description": "TensorFlow distribution configuration.",
+      "properties": {
+        "parameterServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of parameter server tasks.",
+          "default": 0
+        },
+        "workerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of workers. If not specified, will default to the instance count.",
+          "x-nullable": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryDistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "TensorFlow"
+    },
+    "FoundryUriFileJobInput": {
+      "type": "object",
+      "description": "URI file input type.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/FoundryInputDeliveryMode",
+          "description": "Input Asset Delivery Mode."
+        },
+        "uri": {
+          "type": "string",
+          "description": "[Required] Input Asset URI.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]"
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryJobInput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
+    "FoundryUriFileJobOutput": {
+      "type": "object",
+      "description": "URI file output type.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/FoundryOutputDeliveryMode",
+          "description": "Output Asset Delivery Mode."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Output Asset URI."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryJobOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
+    "FoundryUriFolderJobInput": {
+      "type": "object",
+      "description": "URI folder input type.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/FoundryInputDeliveryMode",
+          "description": "Input Asset Delivery Mode."
+        },
+        "uri": {
+          "type": "string",
+          "description": "[Required] Input Asset URI.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]"
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryJobInput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
+    },
+    "FoundryUriFolderJobOutput": {
+      "type": "object",
+      "description": "URI folder output type.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/FoundryOutputDeliveryMode",
+          "description": "Output Asset Delivery Mode."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Output Asset URI."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryJobOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
     },
     "FqdnOutboundRule": {
       "type": "object",
@@ -16103,14 +17246,6 @@
           },
           "x-ms-identifiers": []
         },
-        "customTopics": {
-          "type": "array",
-          "description": "The list of custom rai topics.",
-          "items": {
-            "$ref": "#/definitions/CustomTopicConfig"
-          },
-          "x-ms-identifiers": []
-        },
         "safetyProviders": {
           "type": "array",
           "description": "The list of Safety Providers.",
@@ -16296,20 +17431,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "RaiTopicConfig": {
-      "type": "object",
-      "description": "Azure OpenAI RAI topic config.",
-      "properties": {
-        "topicName": {
-          "type": "string",
-          "description": "Name of RAI topic."
-        },
-        "blocking": {
-          "type": "boolean",
-          "description": "If blocking would occur."
-        }
-      }
     },
     "RaiTopicProperties": {
       "type": "object",
