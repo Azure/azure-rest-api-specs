@@ -26,7 +26,7 @@ import "./SecurityStandards.Management/main.tsp";
 import "./SensitivitySettings.Management/main.tsp";
 import "./ServerVulnerabilityAssessmentsSettings.Management/main.tsp";
 import "./Settings.management/main.tsp";
-// import "./SqlVulnerabilityAssessments.Management/main.tsp";
+import "./SqlVulnerabilityAssessments.Management/main.tsp";
 import "./Standards.Managment/main.tsp";
 import "./SubAssessments.Management/main.tsp";
 import "./Tasks.Management/main.tsp";
