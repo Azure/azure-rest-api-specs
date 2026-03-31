@@ -117,7 +117,6 @@ model ScheduledStartProperties {
   utcOffset: string;
 }
 
-
 @doc("The properties of the Update Run that the Gate is targeting.")
 @added(Versions.v2025_04_01_preview)
 model UpdateRunGateTargetProperties {
