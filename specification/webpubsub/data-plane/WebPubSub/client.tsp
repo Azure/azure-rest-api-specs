@@ -5,6 +5,8 @@ using Azure.ClientGenerator.Core;
 
 namespace Customizations;
 
+@@clientName(WebPubSub, "WebPubSubService");
+
 /** Client options for Azure Web PubSub. */
 model WebPubSubClientOptions {
   /** Target hub name, which should start with alphabetic characters and only contain
