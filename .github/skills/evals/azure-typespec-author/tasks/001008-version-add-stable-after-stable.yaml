@@ -1,0 +1,17 @@
+id: 001008-version-add-stable-after-stable
+name: "Versioning: Add stable after stable"
+description: |
+  Test adding a new stable version with a new property when the last version was stable.
+  Based on benchmark case 001008-version-add-stable-after-stable.
+tags:
+  - versioning
+inputs:
+  prompt: "Add a new stable version `2025-01-01` to my service. In this new version, I want to add a new property `department` of type `string` to `EmployeeProperties`."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"
