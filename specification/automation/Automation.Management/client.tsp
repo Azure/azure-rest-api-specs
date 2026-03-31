@@ -41,9 +41,14 @@ using Microsoft.Automation;
 
 @@clientLocation(AutomationAccounts.convertGraphRunbookContent,
   Microsoft.Automation,
-  "python"
+  "python,javascript"
 );
 @@clientLocation(deletedAutomationAccountsOperationGroup.listBySubscription,
   "DeletedAutomationAccounts",
   "python"
+);
+@@clientName(AutomationAccounts.automation, "listAutomation", "javascript");
+@@clientName(UserAssignedIdentitiesProperties,
+  "ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties",
+  "javascript"
 );
