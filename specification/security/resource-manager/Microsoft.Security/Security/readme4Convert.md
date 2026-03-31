@@ -100,7 +100,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: SqlVulnerabilityAssessments.Management
+tag: DefenderForStorage.Management
 ```
 
 ### Composite packages
@@ -213,7 +213,7 @@ These settings apply only when `--tag=package-2026-01` is specified on the comma
 
 ```yaml $(tag) == 'DefenderForStorage.Management'
 input-file:
-  - stable/2025-06-01/defenderForStorageSettings.json
+  - preview/2025-09-01-preview/defenderForStorageSettings.json
 ```
 
 ### Composite packages

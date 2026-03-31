@@ -1,0 +1,403 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Security;
+
+/**
+ * Optional. Write scan result on BlobIndexTags by default.
+ */
+union BlobScanResultsOptions {
+  string,
+
+  /**
+   * Write scan results on the blobs index tags.
+   */
+  BlobIndexTags: "BlobIndexTags",
+
+  /**
+   * Do not write scan results on the blobs index tags.
+   */
+  None: "None",
+}
+
+/**
+ * Optional. Specifies the automated response action to take when malware is detected.
+ */
+union AutomatedResponseType {
+  string,
+
+  /**
+   * No automated response will be taken when malware is detected.
+   */
+  None: "None",
+
+  /**
+   * The blob will be soft deleted when malware is detected.
+   */
+  BlobSoftDelete: "BlobSoftDelete",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union SettingName {
+  string,
+
+  /**
+   * Name of the Defender for Storage Settings name.
+   */
+  current: "current",
+}
+
+/**
+ * List of Defender for Storage settings.
+ */
+model DefenderForStorageSettingList
+  is Azure.Core.Page<DefenderForStorageSetting>;
+
+/**
+ * Defender for Storage resource properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model DefenderForStorageSettingProperties {
+  /**
+   * Indicates whether Defender for Storage is enabled on this storage account.
+   */
+  isEnabled?: boolean;
+
+  /**
+   * Properties of Malware Scanning.
+   */
+  malwareScanning?: MalwareScanningProperties;
+
+  /**
+   * Properties of Sensitive Data Discovery.
+   */
+  sensitiveDataDiscovery?: SensitiveDataDiscoveryProperties;
+
+  /**
+   * Indicates whether the settings defined for this storage account should override the settings defined for the subscription.
+   */
+  overrideSubscriptionLevelSettings?: boolean;
+}
+
+/**
+ * Properties of Malware Scanning.
+ */
+model MalwareScanningProperties {
+  /**
+   * Properties of On Upload malware scanning.
+   */
+  onUpload?: OnUploadProperties;
+
+  /**
+   * Optional. Resource id of an Event Grid Topic to send scan results to.
+   */
+  scanResultsEventGridTopicResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.EventGrid/topics";
+    }
+  ]>;
+
+  /**
+   * Optional. Write scan result on BlobIndexTags by default.
+   */
+  blobScanResultsOptions?: BlobScanResultsOptions = BlobScanResultsOptions.BlobIndexTags;
+
+  /**
+   * Optional. Specifies the automated response action to take when malware is detected.
+   */
+  automatedResponse?: AutomatedResponseType = AutomatedResponseType.None;
+
+  /**
+   * Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation.
+   */
+  @visibility(Lifecycle.Read)
+  operationStatus?: OperationStatus;
+}
+
+/**
+ * Properties of On Upload malware scanning.
+ */
+model OnUploadProperties {
+  /**
+   * Indicates whether On Upload malware scanning should be enabled.
+   */
+  isEnabled?: boolean;
+
+  /**
+   * Defines the max GB to be scanned per Month. Set to -1 if no capping is needed. If not specified, the default value is -1.
+   */
+  capGBPerMonth?: int32;
+
+  /**
+   * Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.
+   */
+  filters?: OnUploadFilters;
+}
+
+/**
+ * Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.
+ */
+model OnUploadFilters {
+  /**
+   * Optional. A list of prefixes to exclude from on-upload malware scanning.
+   * Format: `container-name/blob-name` (start with the container name; do not include the storage account name).
+   * Exclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.
+   * Exclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes.
+   */
+  excludeBlobsWithPrefix?: string[];
+
+  /**
+   * Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only.
+   */
+  excludeBlobsWithSuffix?: string[];
+
+  /**
+   * Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning.
+   */
+  excludeBlobsLargerThan?: unknown;
+}
+
+/**
+ * A status describing the success/failure of the enablement/disablement operation.
+ */
+model OperationStatus {
+  /**
+   * The operation status code.
+   */
+  code?: string;
+
+  /**
+   * Additional information regarding the success/failure of the operation.
+   */
+  message?: string;
+}
+
+/**
+ * Properties of Sensitive Data Discovery.
+ */
+model SensitiveDataDiscoveryProperties {
+  /**
+   * Indicates whether Sensitive Data Discovery should be enabled.
+   */
+  isEnabled?: boolean;
+
+  /**
+   * Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation.
+   */
+  @visibility(Lifecycle.Read)
+  operationStatus?: OperationStatus;
+}
+
+/**
+ * Describes an Azure resource.
+ */
+model Resource {
+  /**
+   * Resource Id
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+ */
+@error
+model CloudError {
+  /**
+   * The error object.
+   */
+  error?: CloudErrorBody;
+}
+
+/**
+ * The error detail.
+ */
+model CloudErrorBody {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  details?: CloudErrorBody[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  additionalInfo?: ErrorAdditionalInfo[];
+}
+
+/**
+ * The resource management error additional info.
+ */
+model ErrorAdditionalInfo {
+  /**
+   * The additional info type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The additional info.
+   */
+  @visibility(Lifecycle.Read)
+  info?: unknown;
+}
+
+/**
+ * Describes the state of a malware scan operation.
+ */
+model MalwareScan {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  properties?: MalwareScanProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model MalwareScanProperties {
+  /**
+   * The identifier of the scan.
+   */
+  scanId?: string;
+
+  /**
+   * A status code of the scan operation.
+   */
+  scanStatus?: string;
+
+  /**
+   * A description of the status of the scan.
+   */
+  scanStatusMessage?: string;
+
+  /**
+   * The time at which the scan had been initiated.
+   */
+  scanStartTime?: string;
+
+  /**
+   * The time at which the scan has ended. Only available for a scan which has terminated.
+   */
+  scanEndTime?: string;
+
+  /**
+   * A summary of the scan results.
+   */
+  scanSummary?: ScanSummary;
+}
+
+/**
+ * A summary of the scan results.
+ */
+model ScanSummary {
+  /**
+   * A summary of the scan results of the blobs that were scanned.
+   */
+  blobs?: BlobsScanSummary;
+
+  /**
+   * A summary of the scan results of the files that were scanned.
+   */
+  files?: FilesScanSummary;
+
+  /**
+   * The estimated cost of the scan. Only available for a scan which has terminated.
+   */
+  estimatedScanCostUSD?: float64;
+}
+
+/**
+ * A summary of the scan results of the blobs that were scanned.
+ */
+model BlobsScanSummary {
+  /**
+   * The total number of blobs that were scanned.
+   */
+  totalBlobsScanned?: int64;
+
+  /**
+   * The number of malicious blobs that were detected during the scan.
+   */
+  maliciousBlobsCount?: int64;
+
+  /**
+   * The number of blobs that were skipped.
+   */
+  skippedBlobsCount?: int64;
+
+  /**
+   * The number of failed blob scans.
+   */
+  failedBlobsCount?: int64;
+
+  /**
+   * The number of gigabytes of data that were scanned.
+   */
+  scannedBlobsInGB?: float64;
+}
+
+/**
+ * A summary of the scan results of the files that were scanned.
+ */
+model FilesScanSummary {
+  /**
+   * The total number of files that were scanned.
+   */
+  totalFilesScanned?: int64;
+
+  /**
+   * The number of malicious files that were detected during the scan.
+   */
+  maliciousFilesCount?: int64;
+
+  /**
+   * The number of files that were skipped.
+   */
+  skippedFilesCount?: int64;
+
+  /**
+   * The number of failed file scans.
+   */
+  failedFilesCount?: int64;
+
+  /**
+   * The number of gigabytes of data that were scanned.
+   */
+  scannedFilesInGB?: float64;
+}
