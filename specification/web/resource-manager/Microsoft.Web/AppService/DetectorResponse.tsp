@@ -55,7 +55,8 @@ interface DetectorResponseOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorResponses {
   /**
    * Description for Get Hosting Environment Detector Response
@@ -191,7 +192,8 @@ interface DetectorResponseOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorResponseOperationGroup {
   /**
    * Description for Get site detector response
