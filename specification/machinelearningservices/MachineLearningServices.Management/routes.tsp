@@ -79,6 +79,7 @@ interface QuotasOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Interface defined for custom operations"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 interface PTUQuotaOperationGroup {
   /**
    * List available MaaS PTU quota.
