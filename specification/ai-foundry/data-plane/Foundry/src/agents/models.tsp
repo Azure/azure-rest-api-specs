@@ -80,6 +80,26 @@ model CreateAgentRequest {
   name: string;
 
   ...CreateAgentVersionRequest;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
+  agent_endpoint?: AgentEndpoint;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("Optional agent card for the agent")
+  agent_card?: AgentCard;
 }
 
 model UpdateAgentRequest {
@@ -91,8 +111,12 @@ model UpdateAgentRequest {
   "x-ms-foundry-meta",
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
-model UpdateAgentEndpointRequest {
-  ...AgentEndpoint;
+model PatchAgentRequest {
+  @doc("The endpoint configuration for the agent")
+  agent_endpoint?: AgentEndpoint;
+
+  @doc("Optional agent card for the agent")
+  agent_card?: AgentCard;
 }
 
 union AgentObjectType {
@@ -127,7 +151,7 @@ model AgentObject {
     }
   )
   @doc("The endpoint configuration for the agent")
-  endpoint?: AgentEndpoint;
+  agent_endpoint?: AgentEndpoint;
 
   @removed(Versions.v1)
   @extension(
@@ -137,7 +161,6 @@ model AgentObject {
     }
   )
   @doc("The instance identity of the agent")
-  @visibility(Lifecycle.Read)
   instance_identity?: AgentIdentity;
 
   @removed(Versions.v1)
@@ -148,7 +171,6 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
-  @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
 
   @removed(Versions.v1)
@@ -159,8 +181,16 @@ model AgentObject {
     }
   )
   @doc("The blueprint for the agent")
-  @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  agent_card?: AgentCard;
 }
 
 model AgentVersionObject {
@@ -831,10 +861,6 @@ model AgentEndpoint {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
-
-  // TODO: move this out to the agent object. This is under preview so for fast iteration putting it here
-  @doc("The agent card")
-  agent_card?: AgentCard;
 }
 
 @removed(Versions.v1)

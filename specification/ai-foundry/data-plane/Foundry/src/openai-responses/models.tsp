@@ -37,18 +37,18 @@ namespace Azure.AI.Projects {
       @removed(Versions.v1)
       agent_session_id?: string,
 
-      ...AzureCreateResponseOptions;
+      ...AzureCreateResponseOptions,
     }
   );
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
-  /** intermediate model */
+  /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
   model AzureCreateResponseOptions {
-      /** The agent to use for generating the response. */
-      agent_reference?: AgentReference,
+    /** The agent to use for generating the response. */
+    agent_reference?: AgentReference;
 
-      /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
-      structured_inputs?: Record<unknown>,
+    /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
+    structured_inputs?: Record<unknown>;
   }
 
   @@copyProperties(OpenAI.Response,
@@ -69,16 +69,15 @@ namespace Azure.AI.Projects {
       @removed(Versions.v1)
       agent_session_id?: string,
 
-      ...AzureCreateResponseResult,
+      ...AzureCreateResponseDetails,
     }
   );
 
-
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
-  /** intermediate model */
-  model AzureCreateResponseResult {
-          /** The agent used for this response */
-      agent_reference: AgentReference | null,
+  /** Azure specific fields returned in a "Response" object */
+  model AzureCreateResponseDetails {
+    /** The agent used for this response */
+    agent_reference: AgentReference | null;
   }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");

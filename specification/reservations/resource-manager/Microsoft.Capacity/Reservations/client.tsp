@@ -8,6 +8,7 @@ using Reservations;
 @client({
   name: "ReservationsClient",
   service: [Quota, Reservations],
+  autoMergeService: true,
 })
 namespace ReservationsClient;
 

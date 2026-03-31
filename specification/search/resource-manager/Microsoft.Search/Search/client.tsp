@@ -11,6 +11,7 @@ import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
@@ -45,7 +46,7 @@ op servicesCheckNameAvailabilityCustomization(
   body: CheckNameAvailabilityInput,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<CheckNameAvailabilityOutput> | CloudError;
 
 /**
@@ -64,7 +65,7 @@ op usagesListBySubscriptionCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<QuotaUsagesListResult> | CloudError;
 
 /**
@@ -84,7 +85,7 @@ op usageBySubscriptionSkuCustomization(
   skuName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<QuotaUsageResult> | CloudError;
 
 /**
@@ -99,7 +100,7 @@ op searchServicesListBySubscriptionCustomization(
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<SearchServiceListResult> | CloudError;
 
 /**
@@ -113,7 +114,7 @@ op searchServicesListByResourceGroupCustomization(
   ...CommonTypes.ResourceGroupNameParameter,
   ...Azure.ResourceManager.Legacy.Provider,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<SearchServiceListResult> | CloudError;
 
 /**
@@ -137,7 +138,7 @@ op searchGetCustomization(
   searchServiceName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<SearchService> | CloudError;
 
 /**
@@ -167,7 +168,7 @@ op searchCreateOrUpdateCustomization(
   resource: SearchService,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<SearchService> | CloudError;
 
 /**
@@ -198,7 +199,7 @@ op searchUpdateCustomization(
   properties: SearchServiceUpdate,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<SearchService> | CloudError;
 
 /**
@@ -223,7 +224,7 @@ op searchDeleteCustomization(
   searchServiceName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): OkResponse | NoContentResponse | NotFoundResponse | CloudError;
 
 /**
@@ -253,7 +254,7 @@ op queryKeysCreateCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<QueryKey> | CloudError;
 
 /**
@@ -283,7 +284,7 @@ op queryKeysDeleteCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): OkResponse | NoContentResponse | NotFoundResponse | CloudError;
 
 /**
@@ -308,7 +309,7 @@ op adminKeysGetCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<AdminKeyResult> | CloudError;
 
 /**
@@ -334,7 +335,7 @@ op queryKeysListBySearchServiceCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<ListQueryKeysResult> | CloudError;
 
 /**
@@ -358,7 +359,7 @@ op privateEndpointConnectionsListByServiceCustomization(
   searchServiceName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): PrivateEndpointConnectionListResult | CloudError;
 
 /**
@@ -387,7 +388,7 @@ op privateEndpointConnectionsGetCustomization(
   privateEndpointConnectionName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<PrivateEndpointConnection> | CloudError;
 
 /**
@@ -421,7 +422,7 @@ op privateEndpointConnectionsUpdateCustomization(
   resource: Microsoft.Search.PrivateEndpointConnection,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResourceUpdatedResponse<PrivateEndpointConnection> | CloudError;
 
 /**
@@ -450,7 +451,7 @@ op privateEndpointConnectionsDeleteCustomization(
   privateEndpointConnectionName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<PrivateEndpointConnection> | NotFoundResponse | CloudError;
 
 /**
@@ -476,7 +477,7 @@ op privateLinkResourcesListSupportedCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<PrivateLinkResourcesResult> | CloudError;
 
 /**
@@ -506,7 +507,7 @@ op privateLinkResourcesRegenerateCustomization(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   body: void,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<AdminKeyResult> | CloudError;
 
 /**
@@ -531,7 +532,7 @@ op SharedPrivateLinkResourcesListByServiceCustomization(
   searchServiceName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): SharedPrivateLinkResourceListResult | CloudError;
 
 /**
@@ -561,7 +562,7 @@ op SharedPrivateLinkResourcesGetCustomization(
   sharedPrivateLinkResourceName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResponse<SharedPrivateLinkResource> | CloudError;
 
 /**
@@ -597,7 +598,7 @@ op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
   resource: SharedPrivateLinkResource,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ): ArmResourceUpdatedResponse<SharedPrivateLinkResource> | ArmAcceptedLroResponse<
   "Resource operation accepted.",
   ArmAsyncOperationHeader<
@@ -636,7 +637,7 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   sharedPrivateLinkResourceName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  params: `search-management-request-options`,
+  params?: `search-management-request-options`,
 ):
   | ArmAcceptedLroResponse<
       "Resource operation accepted.",
@@ -664,95 +665,95 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
   usagesListBySubscriptionCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(usageBySubscriptionSku,
   usageBySubscriptionSkuCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySubscription,
   searchServicesListBySubscriptionCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listByResourceGroup,
   searchServicesListByResourceGroupCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.get,
   searchGetCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.createOrUpdate,
   searchCreateOrUpdateCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.update,
   searchUpdateCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.delete,
   searchDeleteCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.create,
   queryKeysCreateCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.queryKeysDelete,
   queryKeysDeleteCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.adminKeysGet,
   adminKeysGetCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySearchService,
   queryKeysListBySearchServiceCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.listByService,
   privateEndpointConnectionsListByServiceCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.update,
   privateEndpointConnectionsUpdateCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listSupported,
   privateLinkResourcesListSupportedCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.regenerate,
   privateLinkResourcesRegenerateCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.listByService,
   SharedPrivateLinkResourcesListByServiceCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.get,
   SharedPrivateLinkResourcesGetCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.createOrUpdate,
   SharedPrivateLinkResourcesCreateOrUpdateCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
   SharedPrivateLinkResourcesDeleteCustomization,
-  "!java,!python,!javascript"
+  "go,csharp"
 );
 
 @@clientName(Microsoft.Search,
@@ -762,96 +763,96 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(usagesListBySubscriptionCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(usageBySubscriptionSkuCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(searchServicesListBySubscriptionCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(searchServicesListByResourceGroupCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(searchGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(searchCreateOrUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(searchUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(searchDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(queryKeysCreateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(queryKeysDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 
 @@clientName(adminKeysGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(queryKeysListBySearchServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(privateEndpointConnectionsListByServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(privateEndpointConnectionsGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(privateEndpointConnectionsUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(privateEndpointConnectionsDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(privateLinkResourcesListSupportedCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(privateLinkResourcesRegenerateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(SharedPrivateLinkResourcesListByServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(SharedPrivateLinkResourcesGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientName(SharedPrivateLinkResourcesDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go"
+  "go,csharp"
 );
 @@clientLocation(usageBySubscriptionSku, "ManagementClient", "go");
 /** Network security perimeter configuration */
@@ -865,3 +866,257 @@ model AccessRulePropertiesSubscriptionsItem {
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
+
+// C# settings
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchServiceUpdate.sku,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SearchService.sku,
+  "csharp"
+);
+@@clientName(HostingMode, "SearchServiceHostingMode", "csharp");
+@@clientName(ComputeType, "SearchServiceComputeType", "csharp");
+@@clientName(ProvisioningState, "SearchServiceProvisioningState", "csharp");
+@@clientName(IpRule, "SearchServiceIPRule", "csharp");
+@@clientName(DataPlaneAuthOptions,
+  "SearchAadAuthDataPlaneAuthOptions",
+  "csharp"
+);
+@@clientName(NetworkRuleSet, "SearchServiceNetworkRuleSet", "csharp");
+@@clientName(PublicNetworkAccess,
+  "SearchServicePublicInternetAccess",
+  "csharp"
+);
+@@access(PublicNetworkAccess, Access.public, "csharp");
+@@clientName(SkuName, "SearchServiceSkuName", "csharp");
+@@clientName(AdminKeyKind, "SearchServiceAdminKeyKind", "csharp");
+@@clientName(AdminKeyResult, "SearchServiceAdminKeyResult", "csharp");
+@@clientName(QueryKey, "SearchServiceQueryKey", "csharp");
+@@clientName(CheckNameAvailabilityInput,
+  "SearchServiceNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityOutput,
+  "SearchServiceNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(UpgradeAvailable, "SearchServiceUpgradeAvailable", "csharp");
+@@clientName(SharedPrivateLinkResource,
+  "SharedSearchServicePrivateLinkResource",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceProperties,
+  "SharedSearchServicePrivateLinkResourceProperties",
+  "csharp"
+);
+@@alternateType(SharedPrivateLinkResourceProperties.privateLinkResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SharedPrivateLinkResourceProperties.resourceRegion,
+  azureLocation,
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceProperties.status,
+  "SharedPrivateLinkResourceStatus",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceProperties.provisioningState,
+  "SharedPrivateLinkResourceProvisioningState",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceStatus,
+  "SearchServiceSharedPrivateLinkResourceStatus",
+  "csharp"
+);
+@@clientName(SharedPrivateLinkResourceProvisioningState,
+  "SearchServiceSharedPrivateLinkResourceProvisioningState",
+  "csharp"
+);
+@@clientName(ShareablePrivateLinkResourceProperties,
+  "ShareableSearchServicePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(ShareablePrivateLinkResourceProperties.type,
+  "ShareablePrivateLinkResourcePropertiesType",
+  "csharp"
+);
+@@clientName(ShareablePrivateLinkResourceType,
+  "ShareableSearchServicePrivateLinkResourceType",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProperties,
+  "SearchServicePrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@alternateType(PrivateEndpointConnectionPropertiesPrivateEndpoint.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState,
+  "SearchServicePrivateLinkServiceConnectionState",
+  "csharp"
+);
+@@usage(NetworkSecurityPerimeterConfiguration,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@clientName(NetworkSecurityPerimeterConfiguration,
+  "SearchServiceNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(SearchServiceProperties.disableLocalAuth,
+  "IsLocalAuthDisabled",
+  "csharp"
+);
+@@clientName(SearchServiceProperties.publicNetworkAccess,
+  "PublicInternetAccess",
+  "csharp"
+);
+@@clientName(SearchServiceProperties.upgradeAvailable,
+  "IsUpgradeAvailable",
+  "csharp"
+);
+@@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
+@@clientName(Sku.name, "SearchSkuName", "csharp");
+@@clientName(SearchServices.adminKeysGet, "GetAdminKey", "csharp");
+@@clientName(SearchServices.regenerate, "RegenerateAdminKey", "csharp");
+@@clientName(SearchServices.create, "CreateQueryKey", "csharp");
+@@clientName(SearchServices.listBySearchService,
+  "GetQueryKeysBySearchService",
+  "csharp"
+);
+@@clientName(SearchServices.queryKeysDelete, "DeleteQueryKey", "csharp");
+@@clientName(SearchServices.listSupported,
+  "GetSupportedPrivateLinkResources",
+  "csharp"
+);
+@@alternateType(SearchServiceProperties.eTag, eTag, "csharp");
+@@clientName(AadAuthFailureMode, "SearchAadAuthFailureMode", "csharp");
+@@clientName(SearchEncryptionWithCmk,
+  "SearchEncryptionWithCmkEnforcement",
+  "csharp"
+);
+@@clientName(UnavailableNameReason,
+  "SearchServiceNameUnavailableReason",
+  "csharp"
+);
+@@clientName(PrivateLinkServiceConnectionProvisioningState,
+  "SearchPrivateLinkServiceConnectionProvisioningState",
+  "csharp"
+);
+@@clientName(PrivateLinkServiceConnectionStatus,
+  "SearchServicePrivateLinkServiceConnectionStatus",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "SearchPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(EncryptionWithCmk, "SearchEncryptionWithCmk", "csharp");
+@@clientName(ServicesOperationGroup.checkNameAvailability,
+  "CheckSearchServiceNameAvailability",
+  "csharp"
+);
+@@clientName(UsagesOperationGroup.listBySubscription,
+  "GetUsagesBySubscription",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.LocationParameter.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(SearchService.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(SearchServiceUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(`search-management-request-options`.clientRequestId,
+  uuid,
+  "csharp"
+);
+@@alternateType(QuotaUsageResult.id, armResourceIdentifier, "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+  "SearchServiceNetworkSecurityPerimeterConfigurationProperties",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.AccessRule,
+  "SearchServiceNetworkSecurityPerimeterAccessRule",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleDirection,
+  "SearchServiceNetworkSecurityPerimeterAccessRuleDirection",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+  "SearchServiceNetworkSecurityPerimeterAccessRuleProperties",
+  "csharp"
+);
+/** Subscriptions for inbound rules */
+model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: Azure.Core.armResourceIdentifier;
+}
+@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  SearchServiceNetworkSecurityPerimeterInboundRuleSubscription[],
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+  "SearchServiceNetworkSecurityPerimeter",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  azureLocation,
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+  "SearchServiceNetworkSecurityPerimeterConfigurationProperties",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState,
+  "SearchServiceNetworkSecurityPerimeterConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
+  "SearchNetworkSecurityProfile",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssue,
+  "SearchServiceNetworkSecurityPerimeterProvisioningIssue",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
+  "SearchServiceNetworkSecurityPerimeterProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.IssueType,
+  "SearchServiceNetworkSecurityPerimeterProvisioningIssueType",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociation,
+  "SearchServiceNetworkSecurityPerimeterResourceAssociation",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
+  "SearchServiceNetworkSecurityPerimeterResourceAssociationAccessMode",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.Severity,
+  "SearchServiceNetworkSecurityPerimeterProvisioningIssueSeverity",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SearchServiceUpdate,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);

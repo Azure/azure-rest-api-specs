@@ -12,6 +12,9 @@
       "name": "Agent Containers"
     },
     {
+      "name": "Agent Session Files"
+    },
+    {
       "name": "Agent Invocations"
     },
     {
@@ -431,11 +434,9 @@
         "tags": [
           "Agents"
         ]
-      }
-    },
-    "/agents/{agent_name}/endpoint": {
+      },
       "patch": {
-        "operationId": "Agents_updateAgentEndpointObject",
+        "operationId": "Agents_patchAgentObject",
         "description": "Updates an agent endpoint.",
         "parameters": [
           {
@@ -500,7 +501,7 @@
           "content": {
             "application/merge-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateAgentEndpointRequest"
+                "$ref": "#/components/schemas/PatchAgentRequest"
               }
             }
           }
@@ -1233,6 +1234,370 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "ContainerAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/sessions/{session_id}/files": {
+      "get": {
+        "operationId": "AgentSessionFiles_listSessionFiles",
+        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The directory path to list, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentSessionFiles_deleteSessionFile",
+        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file or directory path to delete, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "recursive",
+            "in": "query",
+            "required": false,
+            "description": "Whether to recursively delete directory contents. Defaults to false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/sessions/{session_id}/files/content": {
+      "put": {
+        "operationId": "AgentSessionFiles_uploadSessionFile",
+        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The destination file path within the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionFileWriteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "AgentSessionFiles_downloadSessionFile",
+        "description": "Download a file from the session sandbox as a binary stream.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file path to download from the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
           ]
         }
       }
@@ -11420,7 +11785,7 @@
           "WorkflowAgents=V1Preview",
           "ContainerAgents=V1Preview"
         ],
-        "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
+        "description": "Opt-in keys for defining preview Hosted or Workflow Agents."
       },
       "AgentEndpoint": {
         "type": "object",
@@ -11446,14 +11811,6 @@
               "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
             },
             "description": "The authorization schemes supported by the agent endpoint"
-          },
-          "agent_card": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentCard"
-              }
-            ],
-            "description": "The agent card"
           }
         },
         "x-ms-foundry-meta": {
@@ -11521,6 +11878,38 @@
             ]
           }
         ]
+      },
+      "AgentEndpointUpdate": {
+        "type": "object",
+        "properties": {
+          "version_selector": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionSelectorUpdate"
+              }
+            ],
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+          },
+          "protocols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointProtocol"
+            },
+            "description": "The protocols that the agent supports"
+          },
+          "authorization_schemes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+            },
+            "description": "The authorization schemes supported by the agent endpoint"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "AgentEvaluation": {
         "type": "object",
@@ -11789,7 +12178,7 @@
             ],
             "description": "The latest version of the agent."
           },
-          "endpoint": {
+          "agent_endpoint": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentEndpoint"
@@ -11813,8 +12202,7 @@
               "required_previews": [
                 "AgentEndpoints=V1Preview"
               ]
-            },
-            "readOnly": true
+            }
           },
           "blueprint": {
             "allOf": [
@@ -11827,8 +12215,7 @@
               "required_previews": [
                 "AgentEndpoints=V1Preview"
               ]
-            },
-            "readOnly": true
+            }
           },
           "blueprint_reference": {
             "allOf": [
@@ -11841,8 +12228,19 @@
               "required_previews": [
                 "AgentEndpoints=V1Preview"
               ]
-            },
-            "readOnly": true
+            }
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCard"
+              }
+            ],
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           }
         }
       },
@@ -14489,6 +14887,32 @@
                 "AgentEndpoints=V1Preview"
               ]
             }
+          },
+          "agent_endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCard"
+              }
+            ],
+            "description": "Optional agent card for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           }
         },
         "x-ms-foundry-meta": {
@@ -15559,6 +15983,7 @@
           },
           "initialization_parameters": {
             "type": "object",
+            "additionalProperties": {},
             "description": "The initialization parameters for the evaluation. Must support structured outputs."
           },
           "data_mapping": {
@@ -39266,6 +39691,32 @@
         },
         "description": "Paged collection of ScheduleRun items"
       },
+      "PatchAgentRequest": {
+        "type": "object",
+        "properties": {
+          "agent_endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpointUpdate"
+              }
+            ],
+            "description": "The endpoint configuration for the agent"
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCardUpdate"
+              }
+            ],
+            "description": "Optional agent card for the agent"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "PendingUploadRequest": {
         "type": "object",
         "required": [
@@ -40129,6 +40580,77 @@
           }
         ],
         "description": "Type of the task."
+      },
+      "SessionDirectoryEntry": {
+        "type": "object",
+        "required": [
+          "name",
+          "size",
+          "is_directory",
+          "modified_time"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "The name of the file or directory."
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The size in bytes (0 for directories)."
+          },
+          "is_directory": {
+            "type": "boolean",
+            "description": "Whether this entry is a directory."
+          },
+          "modified_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The last modification time in UTC (ISO 8601)."
+          }
+        },
+        "description": "A single entry in a directory listing."
+      },
+      "SessionDirectoryListResponse": {
+        "type": "object",
+        "required": [
+          "path",
+          "entries"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path that was listed, relative to the session home directory."
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionDirectoryEntry"
+            },
+            "description": "The directory entries."
+          }
+        },
+        "description": "Response from listing a directory in a session sandbox."
+      },
+      "SessionFileWriteResponse": {
+        "type": "object",
+        "required": [
+          "path",
+          "bytes_written"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path where the file was written, relative to the session home directory."
+          },
+          "bytes_written": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of bytes written."
+          }
+        },
+        "description": "Response from uploading a file to a session sandbox."
       },
       "SessionListResult": {
         "type": "object",
@@ -41136,46 +41658,6 @@
           }
         ],
         "description": "Type of the trigger."
-      },
-      "UpdateAgentEndpointRequest": {
-        "type": "object",
-        "properties": {
-          "version_selector": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/VersionSelectorUpdate"
-              }
-            ],
-            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
-          },
-          "protocols": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEndpointProtocol"
-            },
-            "description": "The protocols that the agent supports"
-          },
-          "authorization_schemes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
-            },
-            "description": "The authorization schemes supported by the agent endpoint"
-          },
-          "agent_card": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentCardUpdate"
-              }
-            ],
-            "description": "The agent card"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
       },
       "UpdateAgentFromManifestRequest": {
         "type": "object",

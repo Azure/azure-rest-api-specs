@@ -393,7 +393,6 @@ alias CommonParameters = {
   @query
   @clientName("timeOutInSeconds", "java")
   @clientName("timeOutInSeconds", "csharp")
-  @clientName("timeOutInSeconds", "javascript")
   @clientName("timeout", "go,python")
   @encode("seconds", int32)
   timeOut?: duration;

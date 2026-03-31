@@ -202,7 +202,7 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @patch(#{ implicitOptionality: true })
-  @route("/agents/{agent_name}/endpoint")
+  @route("/agents/{agent_name}")
   @extension(
     "x-ms-foundry-meta",
     #{
@@ -210,14 +210,14 @@ interface Agents {
     }
   )
   @removed(Versions.v1)
-  updateAgentEndpointObject is FoundryDataPlanePreviewOperation<
+  patchAgentObject is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
 
       @header("Content-Type") contentType: "application/merge-patch+json";
-      ...UpdateAgentEndpointRequest;
+      ...PatchAgentRequest;
     },
     AgentObject
   >;

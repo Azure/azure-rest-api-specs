@@ -168,6 +168,7 @@ using Azure.AI.Projects;
 // Insights sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+@@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
@@ -239,17 +240,17 @@ using Azure.AI.Projects;
 // To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
-// Remove preview opt-in union types from the public PythonSDK surface.
-//
-// TODO: These do not work. Follow up with the Python emitter team.
-// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
-// proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
-// in alias WithConditionalFoundryPreviewHeader.
-//
-//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
-//@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
-//@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+// Remove foundry_features input arguments from public methods, as they are set internally.
+@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
+@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+
+// Force emitting these two, as patched code uses values from these enums to internally set Foundry-Features header.
+@@usage(AgentDefinitionOptInKeys, Usage.input, "python");
+@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+@@clientName(AgentDefinitionOptInKeys, "_AgentDefinitionOptInKeys", "python");
+@@usage(FoundryFeaturesOptInKeys, Usage.input, "python");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+@@clientName(FoundryFeaturesOptInKeys, "_FoundryFeaturesOptInKeys", "python");
 
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
