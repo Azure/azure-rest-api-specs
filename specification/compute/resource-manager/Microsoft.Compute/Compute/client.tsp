@@ -17,9 +17,7 @@ using ComputeSku;
   service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
   autoMergeService: true,
 })
-namespace ComputeCombine {
-
-}
+namespace ComputeCombine;
 
 // VirtualMachineInstanceView needs input usage for premium layer constructor and setters
 @@usage(VirtualMachineInstanceView,
