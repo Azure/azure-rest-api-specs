@@ -1,0 +1,1709 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SecurityCenter",
+    "version": "2026-04-01-preview",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SqlVulnerabilityAssessmentBaselineRules"
+    },
+    {
+      "name": "SqlVulnerabilityAssessmentSettingsOperationGroup"
+    },
+    {
+      "name": "ScanV2s"
+    },
+    {
+      "name": "SqlVulnerabilityAssessmentScanResults"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentSettings_Get",
+        "tags": [
+          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+        ],
+        "description": "Gets the SQL Vulnerability Assessment settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentSettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get SQL Vulnerability Assessment settings on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SqlManagedInstanceSettings_Get.json"
+          },
+          "Get SQL Vulnerability Assessment settings on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SqlServerSettings_Get.json"
+          },
+          "Get SQL Vulnerability Assessment settings on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SynapseSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlVulnerabilityAssessmentSettings_CreateOrUpdate",
+        "tags": [
+          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+        ],
+        "description": "Creates or updates the SQL Vulnerability Assessment settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The SQL Vulnerability Assessment settings.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentSettings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SqlVulnerabilityAssessmentSettings' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentSettings"
+            }
+          },
+          "201": {
+            "description": "Resource 'SqlVulnerabilityAssessmentSettings' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentSettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update SQL Vulnerability Assessment settings on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SqlManagedInstanceSettings_Put.json"
+          },
+          "Create or update SQL Vulnerability Assessment settings on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SqlServerSettings_Put.json"
+          },
+          "Create or update SQL Vulnerability Assessment settings on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SynapseSettings_Put.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SqlVulnerabilityAssessmentSettings_Delete",
+        "tags": [
+          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+        ],
+        "description": "Deletes the SQL Vulnerability Assessment settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete SQL Vulnerability Assessment settings on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SqlManagedInstanceSettings_Delete.json"
+          },
+          "Delete SQL Vulnerability Assessment settings on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SqlServerSettings_Delete.json"
+          },
+          "Delete SQL Vulnerability Assessment settings on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsSettingsOperations/SynapseSettings_Delete.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/{operationId}/{operationId}": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentScans_GetScanOperationResult",
+        "tags": [
+          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+        ],
+        "description": "Gets the result of a scan operation initiated by the InitiateScan action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get scan operation result on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_GetScanOperationResult.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/baselineRules": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentBaselineRules_List",
+        "tags": [
+          "SqlVulnerabilityAssessmentBaselineRules"
+        ],
+        "description": "Gets the results for all rules in the Baseline.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RulesResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List baseline rules on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlManagedInstanceBaselineRules_List.json"
+          },
+          "List baseline rules on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlServerBaselineRules_List.json"
+          },
+          "List baseline rules on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SynapseBaselineRules_List.json"
+          },
+          "List baseline rules on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ArcMachineBaselineRules_List.json"
+          },
+          "List baseline rules on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlManagedInstanceBaselineRules_List.json"
+          },
+          "List baseline rules on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlServerBaselineRules_List.json"
+          },
+          "List baseline rules on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SynapseBaselineRules_List.json"
+          },
+          "List baseline rules on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/VirtualMachineBaselineRules_List.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/baselineRules/{ruleId}": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentBaselineRules_Get",
+        "tags": [
+          "SqlVulnerabilityAssessmentBaselineRules"
+        ],
+        "description": "Gets the results for a given rule in the Baseline.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "The rule Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuleResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a baseline rule on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlManagedInstanceBaselineRules_Get.json"
+          },
+          "Get a baseline rule on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlServerBaselineRules_Get.json"
+          },
+          "Get a baseline rule on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SynapseBaselineRules_Get.json"
+          },
+          "Get a baseline rule on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ArcMachineBaselineRules_Get.json"
+          },
+          "Get a baseline rule on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlManagedInstanceBaselineRules_Get.json"
+          },
+          "Get a baseline rule on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlServerBaselineRules_Get.json"
+          },
+          "Get a baseline rule on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SynapseBaselineRules_Get.json"
+          },
+          "Get a baseline rule on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/VirtualMachineBaselineRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlVulnerabilityAssessmentBaselineRules_CreateOrUpdate",
+        "tags": [
+          "SqlVulnerabilityAssessmentBaselineRules"
+        ],
+        "description": "Creates a Baseline for a rule in a database. Will overwrite any previously existing results.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "The rule Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The baseline results for this rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleResultsInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RuleResults' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RuleResults"
+            }
+          },
+          "201": {
+            "description": "Resource 'RuleResults' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RuleResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a baseline for a rule on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlManagedInstanceBaselineRules_Put.json"
+          },
+          "Create a baseline for a rule on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlServerBaselineRules_Put.json"
+          },
+          "Create a baseline for a rule on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SynapseBaselineRules_Put.json"
+          },
+          "Create a baseline for a rule on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ArcMachineBaselineRules_Put.json"
+          },
+          "Create a baseline for a rule on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlManagedInstanceBaselineRules_Put.json"
+          },
+          "Create a baseline for a rule on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlServerBaselineRules_Put.json"
+          },
+          "Create a baseline for a rule on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SynapseBaselineRules_Put.json"
+          },
+          "Create a baseline for a rule on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/VirtualMachineBaselineRules_Put.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SqlVulnerabilityAssessmentBaselineRules_Delete",
+        "tags": [
+          "SqlVulnerabilityAssessmentBaselineRules"
+        ],
+        "description": "Deletes a rule from the Baseline of a given database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "The rule Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a baseline rule on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlManagedInstanceBaselineRules_Delete.json"
+          },
+          "Delete a baseline rule on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlServerBaselineRules_Delete.json"
+          },
+          "Delete a baseline rule on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SynapseBaselineRules_Delete.json"
+          },
+          "Delete a baseline rule on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ArcMachineBaselineRules_Delete.json"
+          },
+          "Delete a baseline rule on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlManagedInstanceBaselineRules_Delete.json"
+          },
+          "Delete a baseline rule on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlServerBaselineRules_Delete.json"
+          },
+          "Delete a baseline rule on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SynapseBaselineRules_Delete.json"
+          },
+          "Delete a baseline rule on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/VirtualMachineBaselineRules_Delete.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/initiateScan": {
+      "post": {
+        "operationId": "SqlVulnerabilityAssessmentScans_InitiateScan",
+        "tags": [
+          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+        ],
+        "description": "Initiates a vulnerability assessment scan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate scan on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_InitiateScan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CSqlVulnerabilityAssessmentScanOperationResult%3E"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentScans_List",
+        "tags": [
+          "ScanV2s"
+        ],
+        "description": "Gets a list of scan records.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScansV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List scans on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_List.json"
+          },
+          "List scans on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_List.json"
+          },
+          "List scans on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_List.json"
+          },
+          "List scans on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ArcMachineScans_List.json"
+          },
+          "List scans on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_List.json"
+          },
+          "List scans on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_List.json"
+          },
+          "List scans on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_List.json"
+          },
+          "List scans on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/VirtualMachineScans_List.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentScans_Get",
+        "tags": [
+          "ScanV2s"
+        ],
+        "description": "Gets the scan details of a single scan record.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "The scan Id. Type 'latest' to get the scan record for the latest scan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScanV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get scan on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_Get.json"
+          },
+          "Get scan on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_Get.json"
+          },
+          "Get scan on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_Get.json"
+          },
+          "Get scan on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ArcMachineScans_Get.json"
+          },
+          "Get scan on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_Get.json"
+          },
+          "Get scan on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_Get.json"
+          },
+          "Get scan on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_Get.json"
+          },
+          "Get scan on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/VirtualMachineScans_Get.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}/scanResults": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentScanResults_List",
+        "tags": [
+          "SqlVulnerabilityAssessmentScanResults"
+        ],
+        "description": "Gets a list of scan results for a single scan record.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "The scan Id. Type 'latest' to get the scan record for the latest scan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScanResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List scan results on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ServerLevel_SqlManagedInstanceScanResults_List.json"
+          },
+          "List scan results on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ServerLevel_SqlServerScanResults_List.json"
+          },
+          "List scan results on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ServerLevel_SynapseScanResults_List.json"
+          },
+          "List scan results on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ArcMachineScanResults_List.json"
+          },
+          "List scan results on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/SqlManagedInstanceScanResults_List.json"
+          },
+          "List scan results on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/SqlServerScanResults_List.json"
+          },
+          "List scan results on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/SynapseScanResults_List.json"
+          },
+          "List scan results on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/VirtualMachineScanResults_List.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}/scanResults/{scanResultId}": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentScanResults_Get",
+        "tags": [
+          "SqlVulnerabilityAssessmentScanResults"
+        ],
+        "description": "Gets the scan results of a single rule in a scan record.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "The scan Id. Type 'latest' to get the scan record for the latest scan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scanResultId",
+            "in": "path",
+            "description": "The rule Id of the results.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScanResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get scan result on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ServerLevel_SqlManagedInstanceScanResults_Get.json"
+          },
+          "Get scan result on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ServerLevel_SqlServerScanResults_Get.json"
+          },
+          "Get scan result on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ServerLevel_SynapseScanResults_Get.json"
+          },
+          "Get scan result on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/ArcMachineScanResults_Get.json"
+          },
+          "Get scan result on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/SqlManagedInstanceScanResults_Get.json"
+          },
+          "Get scan result on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/SqlServerScanResults_Get.json"
+          },
+          "Get scan result on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/SynapseScanResults_Get.json"
+          },
+          "Get scan result on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/VirtualMachineScanResults_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ArmResponse<SqlVulnerabilityAssessmentScanOperationResult>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Baseline": {
+      "type": "object",
+      "description": "Baseline details.",
+      "properties": {
+        "expectedResults": {
+          "type": "array",
+          "description": "Expected results.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "updatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Baseline update time (UTC)."
+        }
+      }
+    },
+    "BaselineAdjustedResult": {
+      "type": "object",
+      "description": "The rule result adjusted with baseline.",
+      "properties": {
+        "baseline": {
+          "$ref": "#/definitions/Baseline",
+          "description": "Baseline details."
+        },
+        "status": {
+          "$ref": "#/definitions/RuleStatus",
+          "description": "The rule result status."
+        },
+        "resultsNotInBaseline": {
+          "type": "array",
+          "description": "Results that are not in the baseline.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "resultsOnlyInBaseline": {
+          "type": "array",
+          "description": "Results that are in the baseline.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "BenchmarkReference": {
+      "type": "object",
+      "description": "The benchmark references.",
+      "properties": {
+        "benchmark": {
+          "type": "string",
+          "description": "The benchmark name."
+        },
+        "reference": {
+          "type": "string",
+          "description": "The benchmark reference."
+        }
+      }
+    },
+    "QueryCheck": {
+      "type": "object",
+      "description": "The rule query details.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The rule query."
+        },
+        "expectedResult": {
+          "type": "array",
+          "description": "Expected result.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "columnNames": {
+          "type": "array",
+          "description": "Column names of expected result.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Remediation": {
+      "type": "object",
+      "description": "Remediation details.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Remediation description."
+        },
+        "scripts": {
+          "type": "array",
+          "description": "Remediation script.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "automated": {
+          "type": "boolean",
+          "description": "Is remediation automated."
+        },
+        "portalLink": {
+          "type": "string",
+          "description": "Optional link to remediate in Azure Portal."
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Describes an Azure resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        }
+      }
+    },
+    "RuleResults": {
+      "type": "object",
+      "description": "Rule results.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RuleResultsProperties",
+          "description": "Rule results properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RuleResultsInput": {
+      "type": "object",
+      "description": "Rule results input.",
+      "properties": {
+        "latestScan": {
+          "type": "boolean",
+          "description": "Take results from latest scan."
+        },
+        "results": {
+          "type": "array",
+          "description": "Expected results to be inserted into the baseline.\nLeave this field empty if latestScan == true.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "RuleResultsProperties": {
+      "type": "object",
+      "description": "Rule results properties.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "Expected results in the baseline.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "latestScan": {
+          "type": "boolean",
+          "description": "Take results from latest scan."
+        }
+      }
+    },
+    "RuleSeverity": {
+      "type": "string",
+      "description": "The rule severity.",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "Informational",
+        "Obsolete"
+      ],
+      "x-ms-enum": {
+        "name": "RuleSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High severity vulnerability requiring immediate attention."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium severity vulnerability that should be addressed."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low severity vulnerability with minimal risk."
+          },
+          {
+            "name": "Informational",
+            "value": "Informational",
+            "description": "Informational finding that does not indicate a vulnerability."
+          },
+          {
+            "name": "Obsolete",
+            "value": "Obsolete",
+            "description": "The rule is obsolete and no longer applicable."
+          }
+        ]
+      }
+    },
+    "RuleStatus": {
+      "type": "string",
+      "description": "The rule result status.",
+      "enum": [
+        "NonFinding",
+        "Finding",
+        "InternalError",
+        "NotApplicable"
+      ],
+      "x-ms-enum": {
+        "name": "RuleStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonFinding",
+            "value": "NonFinding",
+            "description": "No vulnerability was found for this rule."
+          },
+          {
+            "name": "Finding",
+            "value": "Finding",
+            "description": "A vulnerability was found for this rule."
+          },
+          {
+            "name": "InternalError",
+            "value": "InternalError",
+            "description": "An internal error occurred while evaluating this rule."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The rule is not applicable to the assessed resource."
+          }
+        ]
+      }
+    },
+    "RuleType": {
+      "type": "string",
+      "description": "The rule type.",
+      "enum": [
+        "Binary",
+        "BaselineExpected",
+        "PositiveList",
+        "NegativeList"
+      ],
+      "x-ms-enum": {
+        "name": "RuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Binary",
+            "value": "Binary",
+            "description": "Binary"
+          },
+          {
+            "name": "BaselineExpected",
+            "value": "BaselineExpected",
+            "description": "BaselineExpected"
+          },
+          {
+            "name": "PositiveList",
+            "value": "PositiveList",
+            "description": "PositiveList"
+          },
+          {
+            "name": "NegativeList",
+            "value": "NegativeList",
+            "description": "NegativeList"
+          }
+        ]
+      }
+    },
+    "RulesResults": {
+      "type": "object",
+      "description": "A list of rules results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of rule results.",
+          "items": {
+            "$ref": "#/definitions/RuleResults"
+          }
+        }
+      }
+    },
+    "ScanOperationStatus": {
+      "type": "string",
+      "description": "The scan operation status.",
+      "enum": [
+        "Passed",
+        "Failed",
+        "FailedToRun",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ScanOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "The scan completed successfully with no vulnerabilities found."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The scan completed but found vulnerabilities."
+          },
+          {
+            "name": "FailedToRun",
+            "value": "FailedToRun",
+            "description": "The scan failed to execute."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The scan is currently running."
+          }
+        ]
+      }
+    },
+    "ScanPropertiesV2": {
+      "type": "object",
+      "description": "A vulnerability assessment scan record properties.",
+      "properties": {
+        "triggerType": {
+          "$ref": "#/definitions/ScanTriggerType",
+          "description": "The scan trigger type."
+        },
+        "state": {
+          "$ref": "#/definitions/ScanState",
+          "description": "The scan status."
+        },
+        "server": {
+          "type": "string",
+          "description": "The server name."
+        },
+        "database": {
+          "type": "string",
+          "description": "The database name."
+        },
+        "sqlVersion": {
+          "type": "string",
+          "description": "The SQL version."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scan start time (UTC)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Scan results are valid until end time (UTC)."
+        },
+        "highSeverityFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failed rules with high severity."
+        },
+        "mediumSeverityFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failed rules with medium severity."
+        },
+        "lowSeverityFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of failed rules with low severity."
+        },
+        "totalPassedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total passed rules."
+        },
+        "totalFailedRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total failed rules."
+        },
+        "totalRulesCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of total rules assessed."
+        },
+        "isBaselineApplied": {
+          "type": "boolean",
+          "description": "Baseline created for this database, and has one or more rules."
+        },
+        "lastScanTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last scan time."
+        }
+      }
+    },
+    "ScanResult": {
+      "type": "object",
+      "description": "A vulnerability assessment scan result for a single rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScanResultProperties",
+          "description": "A vulnerability assessment scan result properties for a single rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScanResultProperties": {
+      "type": "object",
+      "description": "A vulnerability assessment scan result properties for a single rule.",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "The rule Id."
+        },
+        "status": {
+          "$ref": "#/definitions/RuleStatus",
+          "description": "The rule result status."
+        },
+        "isTrimmed": {
+          "type": "boolean",
+          "description": "Indicates whether the results specified here are trimmed."
+        },
+        "queryResults": {
+          "type": "array",
+          "description": "The results of the query that was run.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "remediation": {
+          "$ref": "#/definitions/Remediation",
+          "description": "Remediation details."
+        },
+        "baselineAdjustedResult": {
+          "$ref": "#/definitions/BaselineAdjustedResult",
+          "description": "The rule result adjusted with baseline."
+        },
+        "ruleMetadata": {
+          "$ref": "#/definitions/VaRule",
+          "description": "vulnerability assessment rule metadata details."
+        }
+      }
+    },
+    "ScanResults": {
+      "type": "object",
+      "description": "A list of vulnerability assessment scan results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of vulnerability assessment scan results.",
+          "items": {
+            "$ref": "#/definitions/ScanResult"
+          }
+        }
+      }
+    },
+    "ScanState": {
+      "type": "string",
+      "description": "The scan status.",
+      "enum": [
+        "Failed",
+        "FailedToRun",
+        "InProgress",
+        "Passed"
+      ],
+      "x-ms-enum": {
+        "name": "ScanState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "FailedToRun",
+            "value": "FailedToRun",
+            "description": "FailedToRun"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress"
+          },
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "Passed"
+          }
+        ]
+      }
+    },
+    "ScanTriggerType": {
+      "type": "string",
+      "description": "The scan trigger type.",
+      "enum": [
+        "OnDemand",
+        "Recurring"
+      ],
+      "x-ms-enum": {
+        "name": "ScanTriggerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OnDemand",
+            "value": "OnDemand",
+            "description": "OnDemand"
+          },
+          {
+            "name": "Recurring",
+            "value": "Recurring",
+            "description": "Recurring"
+          }
+        ]
+      }
+    },
+    "ScanV2": {
+      "type": "object",
+      "description": "A vulnerability assessment scan record.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScanPropertiesV2",
+          "description": "A vulnerability assessment scan record properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScansV2": {
+      "type": "object",
+      "description": "A list of vulnerability assessment scan records.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of vulnerability assessment scan records.",
+          "items": {
+            "$ref": "#/definitions/ScanV2"
+          }
+        }
+      }
+    },
+    "SqlVulnerabilityAssessmentScanOperationResult": {
+      "type": "object",
+      "description": "Represents the result of a SQL Vulnerability Assessment scan operation, wrapped in the ARM resource envelope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResultProperties",
+          "description": "Represents the properties of a SQL Vulnerability Assessment scan operation result."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SqlVulnerabilityAssessmentScanOperationResultProperties": {
+      "type": "object",
+      "description": "Represents the properties of a SQL Vulnerability Assessment scan operation result.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Gets or sets the operation id."
+        },
+        "scanStatus": {
+          "$ref": "#/definitions/ScanOperationStatus",
+          "description": "The scan operation status."
+        }
+      }
+    },
+    "SqlVulnerabilityAssessmentSettings": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment settings resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentSettingsProperties",
+          "description": "SQL Vulnerability Assessment settings properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SqlVulnerabilityAssessmentSettingsProperties": {
+      "type": "object",
+      "description": "SQL Vulnerability Assessment settings properties.",
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the SQL Vulnerability Assessment settings.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/SqlVulnerabilityAssessmentState",
+          "description": "Represents the state of a SQL Vulnerability Assessment."
+        }
+      }
+    },
+    "SqlVulnerabilityAssessmentState": {
+      "type": "string",
+      "description": "Represents the state of a SQL Vulnerability Assessment.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "SqlVulnerabilityAssessmentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "VaRule": {
+      "type": "object",
+      "description": "vulnerability assessment rule metadata details.",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "The rule Id."
+        },
+        "severity": {
+          "$ref": "#/definitions/RuleSeverity",
+          "description": "The rule severity."
+        },
+        "category": {
+          "type": "string",
+          "description": "The rule category."
+        },
+        "ruleType": {
+          "$ref": "#/definitions/RuleType",
+          "description": "The rule type."
+        },
+        "title": {
+          "type": "string",
+          "description": "The rule title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The rule description."
+        },
+        "rationale": {
+          "type": "string",
+          "description": "The rule rationale."
+        },
+        "queryCheck": {
+          "$ref": "#/definitions/QueryCheck",
+          "description": "The rule query details."
+        },
+        "benchmarkReferences": {
+          "type": "array",
+          "description": "The benchmark references.",
+          "items": {
+            "$ref": "#/definitions/BenchmarkReference"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
