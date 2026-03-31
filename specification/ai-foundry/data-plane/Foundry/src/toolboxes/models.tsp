@@ -108,8 +108,9 @@ model DeleteToolboxVersionResponse {
 
 alias CreateToolboxRequest = {
   @doc("The name of the toolbox.")
+  @path
   @maxLength(256)
-  name: string;
+  toolbox_name: string;
 
   @doc("A human-readable description of the toolbox.")
   @maxLength(512)
@@ -170,6 +171,19 @@ alias ListToolboxVersionsRequest = {
   toolbox_name: string;
 
   ...CommonPageQueryParameters;
+};
+
+alias UpdateToolboxRequest = {
+  @doc("The name of the toolbox to update.")
+  @path
+  toolbox_name: string;
+
+  @doc("A human-readable description of the toolbox.")
+  @maxLength(512)
+  description?: string;
+
+  @doc("Arbitrary key-value metadata to associate with the toolbox.")
+  metadata?: Record<string>;
 };
 
 alias DeleteToolboxRequest = {

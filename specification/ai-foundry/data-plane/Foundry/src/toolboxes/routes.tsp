@@ -13,8 +13,8 @@ interface Toolboxes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Create a toolbox.")
   @operationId("createToolbox")
-  @post
-  @route("/toolboxes")
+  @put
+  @route("/toolboxes/{toolbox_name}")
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   createToolbox is FoundryDataPlaneOperation<
     CreateToolboxRequest & ToolboxesPreviewHeader,
@@ -76,6 +76,17 @@ interface Toolboxes {
   getToolboxVersion is FoundryDataPlaneOperation<
     GetToolboxVersionRequest & ToolboxesPreviewHeader,
     ToolboxVersionObject
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Update a toolbox's properties, such as its description or metadata.")
+  @operationId("updateToolbox")
+  @patch
+  @route("/toolboxes/{toolbox_name}")
+  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
+  updateToolbox is FoundryDataPlaneOperation<
+    UpdateToolboxRequest & ToolboxesPreviewHeader,
+    ToolboxObject
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"

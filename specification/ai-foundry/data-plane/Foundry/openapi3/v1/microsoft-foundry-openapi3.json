@@ -69,17 +69,7 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "AgentEndpoints=V1Preview"
-                  ]
-                }
-              ]
+              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
             }
           },
           {
@@ -500,17 +490,7 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "AgentEndpoints=V1Preview"
-                  ]
-                }
-              ]
+              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
             }
           },
           {
@@ -2831,178 +2811,6 @@
             }
           },
           "description": "Evaluator resource"
-        }
-      }
-    },
-    "/evaluators/{name}/versions/{version}/credentials": {
-      "post": {
-        "operationId": "Evaluators_getCredentials",
-        "description": "Get the SAS credential to access the storage account associated with an Evaluator version.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the resource",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The specific version id of the EvaluatorVersion to operate on.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AssetCredentialResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EvaluatorCredentialRequest"
-              }
-            }
-          },
-          "description": "The credential request parameters"
-        }
-      }
-    },
-    "/evaluators/{name}/versions/{version}/startPendingUpload": {
-      "post": {
-        "operationId": "Evaluators_startPendingUpload",
-        "description": "Start a new or get an existing pending upload of an evaluator for a specific version.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the resource",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The specific version id of the EvaluatorVersion to operate on.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PendingUploadResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PendingUploadRequest"
-              }
-            }
-          },
-          "description": "The pending upload request parameters"
         }
       }
     },
@@ -7811,112 +7619,6 @@
       }
     },
     "/toolboxes": {
-      "post": {
-        "operationId": "createToolbox",
-        "description": "Create a toolbox.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ToolboxObject"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Toolboxes"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "maxLength": 256,
-                    "description": "The name of the toolbox."
-                  },
-                  "description": {
-                    "type": "string",
-                    "maxLength": 512,
-                    "description": "A human-readable description of the toolbox."
-                  },
-                  "metadata": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "type": "string"
-                    },
-                    "description": "Arbitrary key-value metadata to associate with the toolbox."
-                  },
-                  "tools": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/OpenAI.Tool"
-                    },
-                    "description": "The list of tools to include in the toolbox."
-                  },
-                  "policies": {
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/ToolboxPolicies"
-                      }
-                    ],
-                    "description": "Policy configuration for the toolbox."
-                  }
-                },
-                "required": [
-                  "name",
-                  "tools"
-                ]
-              }
-            }
-          }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
-      },
       "get": {
         "operationId": "listToolboxes",
         "description": "List all toolboxes.",
@@ -8045,6 +7747,116 @@
       }
     },
     "/toolboxes/{toolbox_name}": {
+      "put": {
+        "operationId": "createToolbox",
+        "description": "Create a toolbox.",
+        "parameters": [
+          {
+            "name": "toolbox_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolbox.",
+            "schema": {
+              "type": "string",
+              "maxLength": 256
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolboxes=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolboxObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolboxes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "A human-readable description of the toolbox."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Arbitrary key-value metadata to associate with the toolbox."
+                  },
+                  "tools": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OpenAI.Tool"
+                    },
+                    "description": "The list of tools to include in the toolbox."
+                  },
+                  "policies": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ToolboxPolicies"
+                      }
+                    ],
+                    "description": "Policy configuration for the toolbox."
+                  }
+                },
+                "required": [
+                  "tools"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolboxes=V1Preview"
+          ]
+        }
+      },
       "get": {
         "operationId": "getToolbox",
         "description": "Retrieve a toolbox.",
@@ -8106,6 +7918,97 @@
         "tags": [
           "Toolboxes"
         ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolboxes=V1Preview"
+          ]
+        }
+      },
+      "patch": {
+        "operationId": "updateToolbox",
+        "description": "Update a toolbox's properties, such as its description or metadata.",
+        "parameters": [
+          {
+            "name": "toolbox_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolbox to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolboxes=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolboxObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolboxes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "A human-readable description of the toolbox."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Arbitrary key-value metadata to associate with the toolbox."
+                  }
+                }
+              }
+            }
+          }
+        },
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Toolboxes=V1Preview"
@@ -8583,9 +8486,6 @@
   },
   "security": [
     {
-      "ApiKeyAuth": []
-    },
-    {
       "OAuth2Auth": [
         "https://ai.azure.com/.default"
       ]
@@ -8627,14 +8527,6 @@
               "a2a_preview"
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "base_url": {
             "type": "string",
@@ -8758,14 +8650,6 @@
           "index_name": {
             "type": "string",
             "description": "The name of an index in an IndexResource attached to this agent."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "query_type": {
             "allOf": [
@@ -9690,14 +9574,6 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -9801,14 +9677,6 @@
           "indexes"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "indexes": {
             "type": "array",
             "items": {
@@ -10095,14 +9963,6 @@
           "instance_name"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -10144,14 +10004,6 @@
               "bing_custom_search_preview"
             ],
             "description": "The object type, which is always 'bing_custom_search_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_custom_search_preview": {
             "allOf": [
@@ -10256,14 +10108,6 @@
           "search_configurations"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -10281,14 +10125,6 @@
           "project_connection_id"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -10319,14 +10155,6 @@
           "search_configurations"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -10351,14 +10179,6 @@
               "bing_grounding"
             ],
             "description": "The object type, which is always 'bing_grounding'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_grounding": {
             "allOf": [
@@ -10499,14 +10319,6 @@
             ],
             "description": "The object type, which is always 'browser_automation_preview'."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "browser_automation_preview": {
             "allOf": [
               {
@@ -10610,14 +10422,6 @@
           "project_connection_id"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "The ID of the project connection to your Azure Playwright resource."
@@ -10631,14 +10435,6 @@
           "connection"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "connection": {
             "allOf": [
               {
@@ -10793,7 +10589,8 @@
       "CodeBasedEvaluatorDefinition": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "code_text"
         ],
         "properties": {
           "type": {
@@ -10805,18 +10602,6 @@
           "code_text": {
             "type": "string",
             "description": "Inline code text for the evaluator"
-          },
-          "entry_point": {
-            "type": "string",
-            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')"
-          },
-          "image_tag": {
-            "type": "string",
-            "description": "The container image tag to use for evaluator code execution"
-          },
-          "blob_uri": {
-            "type": "string",
-            "description": "The blob URI for the evaluator storage"
           }
         },
         "allOf": [
@@ -13084,20 +12869,6 @@
         ],
         "description": "The category of the evaluator"
       },
-      "EvaluatorCredentialRequest": {
-        "type": "object",
-        "required": [
-          "blobUri"
-        ],
-        "properties": {
-          "blobUri": {
-            "type": "string",
-            "format": "uri",
-            "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
-          }
-        },
-        "description": "Request body for getting evaluator credentials"
-      },
       "EvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -13495,14 +13266,6 @@
       "FabricDataAgentToolParameters": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -14414,14 +14177,6 @@
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "memory_store_name": {
             "type": "string",
             "description": "The name of the memory store to use."
@@ -14916,13 +14671,20 @@
         }
       },
       "MemoryStoreUpdateStatus": {
-        "type": "string",
-        "enum": [
-          "queued",
-          "in_progress",
-          "completed",
-          "failed",
-          "superseded"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "queued",
+              "in_progress",
+              "completed",
+              "failed",
+              "superseded"
+            ]
+          }
         ],
         "description": "Status of a memory store update operation.",
         "x-ms-foundry-meta": {
@@ -14944,14 +14706,6 @@
               "fabric_dataagent_preview"
             ],
             "description": "The object type, which is always 'fabric_dataagent_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -15863,14 +15617,6 @@
             ],
             "description": "The type of the code interpreter tool. Always `code_interpreter`.",
             "x-stainless-const": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "container": {
             "anyOf": [
@@ -20180,14 +19926,6 @@
               }
             ],
             "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -21614,14 +21352,6 @@
               }
             ],
             "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -22306,14 +22036,6 @@
               }
             ],
             "description": "Whether to generate a new image or edit an existing image. Default: `auto`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -28055,14 +27777,6 @@
             "description": "The type of the local shell tool. Always `local_shell`.",
             "x-stainless-const": true,
             "default": "local_shell"
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -33745,7 +33459,6 @@
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
-            "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
@@ -34101,7 +33814,6 @@
               "fabric_dataagent_preview",
               "sharepoint_grounding_preview",
               "memory_search_preview",
-              "work_iq_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -34523,14 +34235,6 @@
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "custom_search_configuration": {
             "allOf": [
@@ -36090,14 +35794,6 @@
       "SharepointGroundingToolParameters": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -36122,14 +35818,6 @@
               "sharepoint_grounding_preview"
             ],
             "description": "The object type, which is always 'sharepoint_grounding_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "sharepoint_grounding_preview": {
             "allOf": [
@@ -36591,14 +36279,6 @@
           "project_connection_id"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "A project connection in a ToolProjectConnectionList attached to this tool."
@@ -36981,14 +36661,6 @@
           "instance_name"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing custom search"
@@ -37028,49 +36700,6 @@
           }
         ],
         "description": "Weekly recurrence schedule."
-      },
-      "WorkIQPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "work_iq_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "work_iq_preview"
-            ],
-            "description": "The object type, which is always 'work_iq_preview'."
-          },
-          "work_iq_preview": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WorkIQPreviewToolParameters"
-              }
-            ],
-            "description": "The WorkIQ tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A WorkIQ server-side tool."
-      },
-      "WorkIQPreviewToolParameters": {
-        "type": "object",
-        "required": [
-          "project_connection_id"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the WorkIQ project connection."
-          }
-        },
-        "description": "The WorkIQ tool parameters."
       },
       "WorkflowActionOutputItem": {
         "type": "object",
@@ -37155,11 +36784,6 @@
       }
     },
     "securitySchemes": {
-      "ApiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "api-key"
-      },
       "OAuth2Auth": {
         "type": "oauth2",
         "flows": {
