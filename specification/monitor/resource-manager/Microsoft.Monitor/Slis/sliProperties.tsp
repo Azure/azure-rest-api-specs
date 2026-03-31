@@ -86,16 +86,16 @@ model Condition {
 @doc("Defines scalar functions used in filtering.")
 union ScalarFunction {
   @doc("Maximum value.")
-  "max",
+  Max: "max",
 
   @doc("Minimum value.")
-  "min",
+  Min: "min",
 
   @doc("Average value.")
-  "avg",
+  Avg: "avg",
 
   @doc("Summation.")
-  "sum",
+  Sum: "sum",
 
   string,
 }
@@ -103,16 +103,16 @@ union ScalarFunction {
 @doc("Defines the available sampling types.")
 union SamplingType {
   @doc("Maximum value.")
-  "max",
+  Max: "max",
 
   @doc("Minimum value.")
-  "min",
+  Min: "min",
 
   @doc("Average value.")
-  "avg",
+  Avg: "avg",
 
   @doc("Summation.")
-  "sum",
+  Sum: "sum",
 
   string,
 }
