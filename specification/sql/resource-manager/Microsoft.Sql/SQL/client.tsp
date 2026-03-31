@@ -19,3 +19,16 @@ using Microsoft.Sql;
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
+
+@@clientName(SqlVulnerabilityAssessmentScanRecord,
+  "VulnerabilityAssessmentScanRecordForSql",
+  "go"
+);
+@@clientName(SqlVulnerabilityAssessmentScanRecordProperties,
+  "VulnerabilityAssessmentScanRecordForSqlProperties",
+  "go"
+);
+@@clientName(SqlVulnerabilityAssessmentScanError,
+  "VulnerabilityAssessmentScanForSqlError",
+  "go"
+);
