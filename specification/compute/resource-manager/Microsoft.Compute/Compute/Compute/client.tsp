@@ -1,4 +1,6 @@
 import "./main.tsp";
+import "../ComputeGallery/main.tsp";
+import "../ComputeSku/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -191,3 +193,16 @@ using Compute;
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "java"
 );
+
+// TODO: maximumDuration type changed from String to Duration, revert to String to avoid breaking change
+@@alternateType(VirtualMachineInstallPatchesParameters.maximumDuration,
+  string,
+  "java"
+);
+
+// Property name changes: retain old Java names for ComputeGallery and ComputeSku models
+@@clientName(ComputeGallery.AccessControlRulesIdentity.userName,
+  "username",
+  "java"
+);
+@@clientName(ComputeSku.ResourceSkuCosts.meterID, "meterId", "java");
