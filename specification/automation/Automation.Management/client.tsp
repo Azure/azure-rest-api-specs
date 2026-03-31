@@ -31,8 +31,6 @@ using Microsoft.Automation;
   "java"
 );
 
-@@alternateType(ReplaceContentRequest.runbookContent, string, "javascript,go");
-
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
   "go"
