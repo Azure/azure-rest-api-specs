@@ -518,6 +518,17 @@ model AzureSemanticVad extends TurnDetection {
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EouDetection;
   speech_duration_ms?: int32;
+
+  /** Duration in milliseconds for speech detection when assistant is speaking. */
+  @added(Versions.v2026_04_10)
+  speech_duration_assistant_speaking_ms?: int32;
+
+  /** Optional threshold for speech start detection when assistant is speaking to reduce false positives caused by TTS audio. */
+  @added(Versions.v2026_04_10)
+  @minValue(0)
+  @maxValue(1)
+  threshold_assistant_speaking?: float32;
+
   remove_filler_words?: boolean = false;
   languages?: string[];
   auto_truncate?: boolean = false;
@@ -539,6 +550,17 @@ model AzureSemanticVadEn extends TurnDetection {
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EouDetection;
   speech_duration_ms?: int32;
+
+  /** Duration in milliseconds for speech detection when assistant is speaking. */
+  @added(Versions.v2026_04_10)
+  speech_duration_assistant_speaking_ms?: int32;
+
+  /** Optional threshold for speech start detection when assistant is speaking to reduce false positives caused by TTS audio. */
+  @added(Versions.v2026_04_10)
+  @minValue(0)
+  @maxValue(1)
+  threshold_assistant_speaking?: float32;
+
   remove_filler_words?: boolean = false;
   auto_truncate?: boolean = false;
   create_response?: boolean = false;
@@ -559,6 +581,17 @@ model AzureSemanticVadMultilingual extends TurnDetection {
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EouDetection;
   speech_duration_ms?: int32;
+
+  /** Duration in milliseconds for speech detection when assistant is speaking. */
+  @added(Versions.v2026_04_10)
+  speech_duration_assistant_speaking_ms?: int32;
+
+  /** Optional threshold for speech start detection when assistant is speaking to reduce false positives caused by TTS audio. */
+  @added(Versions.v2026_04_10)
+  @minValue(0)
+  @maxValue(1)
+  threshold_assistant_speaking?: float32;
+
   remove_filler_words?: boolean = false;
   languages?: string[];
   auto_truncate?: boolean = false;
