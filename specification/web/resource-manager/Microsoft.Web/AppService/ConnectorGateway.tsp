@@ -17,9 +17,9 @@ namespace Microsoft.Web;
 @added(Versions.v2026_05_01_preview)
 @doc("The properties of a connector gateway.")
 model ConnectorGatewayProperties {
-  @doc("The description of the resource.")
+  @doc("The ID of the connector gateway resource.")
   @visibility(Lifecycle.Read)
-  connectorGatewayId?: string;
+  connectorGatewayId?: Azure.Core.uuid;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -30,7 +30,7 @@ model ConnectorGateway
   @segment("connectorgateways")
   @doc("The name of the connector gateway")
   @path
-  @pattern("[a-zA-Z0-9_.()-]{0,79}$")
+  @pattern("^[a-zA-Z0-9_.()-]{1,79}$")
   name: string;
 }
 
@@ -41,7 +41,7 @@ interface ConnectorGateways {
   get is ArmResourceRead<ConnectorGateway>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<ConnectorGateway>;
   patch is ArmTagsPatchSync<ConnectorGateway>;
-  delete is ArmResourceDeleteSync<ConnectorGateway>;
+  delete is ArmResourceDeleteWithoutOkAsync<ConnectorGateway>;
   listBySubscription is ArmListBySubscription<ConnectorGateway>;
   listByResourceGroup is ArmResourceListByParent<
     ConnectorGateway,
