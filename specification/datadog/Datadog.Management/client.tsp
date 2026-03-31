@@ -171,7 +171,7 @@ using Microsoft.Datadog;
 @@alternateType(PartnerBillingEntity.partnerEntityUri, url, "csharp");
 @@alternateType(DatadogSingleSignOnProperties.singleSignOnUrl, url, "csharp");
 @@alternateType(DatadogOrganizationProperties.redirectUri, url, "csharp");
-@@alternateType(ActivateSaaSParameterRequest.saaSGuid,
+@@alternateType(ActivateSaaSParameterRequest.saaSResourceId,
   Azure.Core.uuid,
   "csharp"
 );
