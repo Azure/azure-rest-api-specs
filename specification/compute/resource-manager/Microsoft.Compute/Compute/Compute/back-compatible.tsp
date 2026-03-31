@@ -349,7 +349,6 @@ using Common;
 @@clientName(VirtualMachineScaleSetVMS.update::parameters.resource,
   "parameters"
 );
-@@clientName(AvailabilitySetSkuTypes, "AvailabilitySetSkuType", "java");
 @@clientName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
 );

@@ -178,3 +178,9 @@ using Compute;
   "publicIpAllocationMethod",
   "java"
 );
+
+// VirtualMachineInstanceView needs input usage for premium layer constructor and setters
+@@usage(VirtualMachineInstanceView,
+  Azure.ClientGenerator.Core.Usage.input,
+  "java"
+);
