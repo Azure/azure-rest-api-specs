@@ -64,6 +64,9 @@ directive:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/tierLimitReached"]
     reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: RepeatedPathInfo
+    from: openapi.json
+    reason: The projectName in ProjectProperties is needed for LIST responses to return the project name alongside the server-assigned projectId.
   - suppress: AvoidAnonymousTypes
     from: openapi.json
     reason: Typespec generated definitions contain anonymous types.
