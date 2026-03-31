@@ -3,24 +3,7 @@
     "api-version": "2024-04-01-preview",
     "parameters": {
       "properties": {
-        "monitorConfig": {
-          "path": "/testpath.aspx",
-          "customHeaders": [
-            {
-              "name": "header-1",
-              "value": "value-1"
-            },
-            {
-              "name": "header-2",
-              "value": "value-2"
-            }
-          ],
-          "intervalInSeconds": 30,
-          "port": 80,
-          "timeoutInSeconds": 6,
-          "toleratedNumberOfFailures": 4,
-          "protocol": "HTTP"
-        }
+        "recordType": "CNAME"
       }
     },
     "profileName": "azuresdkfornetautoresttrafficmanager6192",
@@ -57,30 +40,21 @@
           ],
           "monitorConfig": {
             "path": "/testpath.aspx",
-            "customHeaders": [
-              {
-                "name": "header-1",
-                "value": "value-1"
-              },
-              {
-                "name": "header-2",
-                "value": "value-2"
-              }
-            ],
             "intervalInSeconds": 30,
             "port": 80,
             "profileMonitorStatus": "CheckingEndpoints",
-            "timeoutInSeconds": 6,
-            "toleratedNumberOfFailures": 4,
+            "timeoutInSeconds": 10,
+            "toleratedNumberOfFailures": 3,
             "protocol": "HTTP"
           },
           "profileStatus": "Enabled",
-          "trafficRoutingMethod": "Performance"
+          "trafficRoutingMethod": "Performance",
+          "recordType": "CNAME"
         },
         "tags": {}
       }
     }
   },
   "operationId": "Profiles_Update",
-  "title": "Profile-PATCH-MonitorConfig"
+  "title": "Profile-PATCH-RecordType"
 }
