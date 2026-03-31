@@ -2696,7 +2696,9 @@ interface WebApps {
 @@doc(Sites.deployWorkflowArtifacts::parameters.body,
   "Application settings and files of the workflow."
 );
-@@doc(SiteWorkflows.regenerateAccessKey::parameters.body, "The access key type.");
+@@doc(SiteWorkflows.regenerateAccessKey::parameters.body,
+  "The access key type."
+);
 @@doc(SiteWorkflows.validate::parameters.body, "The workflow.");
 @@doc(WebApps.createOrUpdateSlot::parameters.resource,
   "A JSON representation of the app properties. See example."

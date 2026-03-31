@@ -439,7 +439,9 @@ using Microsoft.Web;
 @@clientLocation(Sites.delete, WebApps);
 @@clientLocation(Sites.list, WebApps);
 @@clientLocation(SiteRecommendations.listHistoryForWebApp, Recommendations);
-@@clientLocation(SiteRecommendations.listRecommendedRulesForWebApp, Recommendations);
+@@clientLocation(SiteRecommendations.listRecommendedRulesForWebApp,
+  Recommendations
+);
 @@clientLocation(SiteRecommendations.disableAllForWebApp, Recommendations);
 @@clientLocation(SiteRecommendations.resetAllFiltersForWebApp, Recommendations);
 @@clientLocation(Sites.analyzeCustomHostname, WebApps);
