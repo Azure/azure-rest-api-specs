@@ -75,7 +75,14 @@ interface Jobs {
   getOutput is ArmResourceActionSync<
     Job,
     void,
-    ArmResponse<stringTextPlain>,
+    {
+      @header("Content-Type")
+      contentType: "text/plain";
+
+      @doc("The job output.")
+      @bodyRoot
+      body: string;
+    },
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -96,7 +103,14 @@ interface Jobs {
   getRunbookContent is ArmResourceActionSync<
     Job,
     void,
-    ArmResponse<stringTextPowershell>,
+    {
+      @header("Content-Type")
+      contentType: "text/powershell";
+
+      @doc("The runbook content.")
+      @bodyRoot
+      body: string;
+    },
     Parameters = {
       /**
        * Identifies this specific client request.

@@ -97,12 +97,6 @@ model OperationListResult {
   nextLink?: string;
 }
 
-@mediaTypeHint("text/powershell")
-scalar stringTextPowershell extends string;
-
-@mediaTypeHint("text/plain")
-scalar stringTextPlain extends string;
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CountType {
   string,
