@@ -106,10 +106,10 @@ union BenchmarkName {
   string,
 
   /** GPQA Diamond — graduate-level science reasoning. */
-  builtinGpqaDiamond: "builtin.gpqa_diamond",
+  builtinGPQADiamond: "builtin.gpqa_diamond",
 
   /** BBEH — BIG-Bench Extra Hard. */
-  builtinBbeh: "builtin.bbeh",
+  builtinBBEH: "builtin.bbeh",
 
   /** BIG-Bench Hard — challenging BIG-Bench tasks. */
   builtinBigBenchHard: "builtin.bigbenchhard",
@@ -118,22 +118,22 @@ union BenchmarkName {
   builtinFrontierScience: "builtin.frontierscience",
 
   /** MuSR — multi-step reasoning. */
-  builtinMusr: "builtin.musr",
+  builtinMuSR: "builtin.musr",
 
   /** TruthfulQA — truthfulness evaluation. */
-  builtinTruthfulQa: "builtin.truthful_qa",
+  builtinTruthfulQA: "builtin.truthful_qa",
 
   /** GPQA Diamond via inspect_ai framework. */
-  builtinInspectAIGpqaDiamond: "builtin.inspect_ai.gpqa_diamond",
+  builtinInspectAIGPQADiamond: "builtin.inspect_ai.gpqa_diamond",
 
   /** ChemBench via inspect_ai framework. */
-  builtinInspectAIChembench: "builtin.inspect_ai.chembench",
+  builtinInspectAIChemBench: "builtin.inspect_ai.chembench",
 
   /** AIME 2025 via inspect_ai framework. */
-  builtinInspectAIAime2025: "builtin.inspect_ai.aime_2025",
+  builtinInspectAIAIME2025: "builtin.inspect_ai.aime_2025",
 
   /** MuSR via inspect_ai framework. */
-  builtinInspectAIMusr: "builtin.inspect_ai.musr",
+  builtinInspectAIMuSR: "builtin.inspect_ai.musr",
 }
 
 /** Data source configuration for benchmark evaluations. */
