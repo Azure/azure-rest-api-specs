@@ -1,13 +1,13 @@
 {
-  "operationId": "Agents_createAgentVersionFromCode",
-  "title": "Agents_CreateAgentVersionFromCode",
+  "operationId": "Agents_createAgentFromCode",
+  "title": "Agents_CreateAgentFromCode",
   "parameters": {
     "api-version": "2025-11-15-preview",
-    "agent_name": "my-code-agent",
     "Content-Type": "multipart/form-data",
     "Foundry-Features": "CodeAgents=V1Preview",
     "body": {
       "metadata": {
+        "name": "my-code-agent",
         "description": "A code-based hosted agent",
         "definition": {
           "kind": "hosted",
@@ -36,7 +36,7 @@
     "200": {
       "body": {
         "name": "my-code-agent",
-        "object": "agent.version",
+        "object": "agent",
         "version": "1",
         "created_at": "2025-01-15T10:30:00Z",
         "description": "A code-based hosted agent",

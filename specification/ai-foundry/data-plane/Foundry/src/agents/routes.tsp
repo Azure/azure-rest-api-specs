@@ -27,10 +27,30 @@ interface Agents {
    */
   @post
   @route("/agents")
+  @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
+    AgentObject
+  >;
+
+  /**
+   * Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.
+   * The request is multipart/form-data with a JSON metadata part (including agent name) and a binary code part.
+   * Maximum upload size is 250 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
+  @post
+  @route("/agents")
+  @sharedRoute
+  @extension("x-ms-foundry-meta", #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] })
+  createAgentFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      @header contentType: "multipart/form-data";
+      @multipartBody body: CreateAgentFromCodeContent;
+    },
     AgentObject
   >;
 
@@ -40,6 +60,7 @@ interface Agents {
    */
   @post
   @route("/agents/{agent_name}")
+  @sharedRoute
   updateAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -47,6 +68,36 @@ interface Agents {
       @path agent_name: string;
 
       ...UpdateAgentRequest;
+    },
+    AgentObject
+  >;
+
+  /**
+   * Updates a code-based agent by uploading new code and creating a new version.
+   * If the code and definition are unchanged (matched by content_hash), returns the existing version.
+   * The request is multipart/form-data with a JSON metadata part and a binary code part.
+   * Maximum upload size is 250 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent update, not BYOS."
+  @post
+  @route("/agents/{agent_name}")
+  @sharedRoute
+  @extension("x-ms-foundry-meta", #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] })
+  updateAgentFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      /**
+       * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+       * - Must start and end with alphanumeric characters,
+       * - Can contain hyphens in the middle
+       * - Must not exceed 63 characters.
+       */
+      @maxLength(63)
+      @path
+      agent_name: string;
+
+      @header contentType: "multipart/form-data";
+      @multipartBody body: CreateAgentVersionFromCodeContent;
     },
     AgentObject
   >;
@@ -251,7 +302,7 @@ interface Agents {
       agent_name: string;
 
       @header contentType: "multipart/form-data";
-      @multipartBody body: CreateAgentFromCodeContent;
+      @multipartBody body: CreateAgentVersionFromCodeContent;
     },
     AgentVersionObject
   >;
