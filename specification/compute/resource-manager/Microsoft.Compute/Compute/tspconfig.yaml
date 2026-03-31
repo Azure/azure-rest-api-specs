@@ -48,8 +48,10 @@ options:
     rename-model:
       UserAssignedIdentitiesValue: VirtualMachineIdentityUserAssignedIdentities
       VirtualMachineScaleSetIdentityUserAssignedIdentitiesValue: VirtualMachineScaleSetIdentityUserAssignedIdentities
-    preserve-model: AvailabilitySetSkuTypes
-    remove-inner: StorageProfile
+    preserve-model:
+      - AvailabilitySetSkuTypes
+    remove-inner:
+      - StorageProfile
 
 linter:
   extends:
