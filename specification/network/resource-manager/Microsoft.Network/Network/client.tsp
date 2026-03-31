@@ -66,11 +66,11 @@ namespace CombineClient;
 // Mitigate ProvisioningState split: create unified union with all values
 @@clientName(Microsoft.Network.ProvisioningState,
   "CommonProvisioningState",
-  "java,javascript"
+  "java"
 );
 
 // Fix definition error on required property. Only "matchVariable" property is required.
-@@alternateType(Microsoft.Network.ApplicationGatewayWebApplicationFirewallConfiguration.exclusions,
+@@alternateType(ApplicationGatewayFirewallExclusion,
   ApplicationGatewayFirewallExclusionRequireMatchVariable,
   "java"
 );
