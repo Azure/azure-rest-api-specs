@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
 
-namespace WebPubSub;
+namespace WebPubSubService;
 
 /**
  * Details about the client.

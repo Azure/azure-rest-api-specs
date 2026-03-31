@@ -4,7 +4,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 
-namespace WebPubSub {
+namespace WebPubSubService {
   /**
    * Get service health status.
    */
