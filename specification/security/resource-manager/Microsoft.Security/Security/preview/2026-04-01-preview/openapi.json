@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "SecurityCenter",
+    "title": "Security Center",
     "version": "2026-04-01-preview",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
     "x-typespec-generated": [
@@ -40,32 +40,33 @@
   },
   "tags": [
     {
-      "name": "SqlVulnerabilityAssessmentBaselineRules"
+      "name": "Sql Vulnerability Assessment Baseline Rules"
     },
     {
-      "name": "SqlVulnerabilityAssessmentSettingsOperationGroup"
+      "name": "Sql Vulnerability Assessment Settings"
     },
     {
-      "name": "ScanV2s"
+      "name": "Sql Vulnerability Assessment Scans"
     },
     {
-      "name": "SqlVulnerabilityAssessmentScanResults"
+      "name": "Sql Vulnerability Assessment Scan Results"
     }
   ],
   "paths": {
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default": {
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default": {
       "get": {
         "operationId": "SqlVulnerabilityAssessmentSettings_Get",
         "tags": [
-          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+          "Sql Vulnerability Assessment Settings"
         ],
+        "summary": "Gets the SQL Vulnerability Assessment settings.",
         "description": "Gets the SQL Vulnerability Assessment settings.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -83,7 +84,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -102,15 +103,16 @@
       "put": {
         "operationId": "SqlVulnerabilityAssessmentSettings_CreateOrUpdate",
         "tags": [
-          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+          "Sql Vulnerability Assessment Settings"
         ],
+        "summary": "Creates or updates the SQL Vulnerability Assessment settings.",
         "description": "Creates or updates the SQL Vulnerability Assessment settings.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -121,7 +123,7 @@
             "name": "body",
             "in": "body",
             "description": "The SQL Vulnerability Assessment settings.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SqlVulnerabilityAssessmentSettings"
             }
@@ -143,7 +145,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -162,15 +164,16 @@
       "delete": {
         "operationId": "SqlVulnerabilityAssessmentSettings_Delete",
         "tags": [
-          "SqlVulnerabilityAssessmentSettingsOperationGroup"
+          "Sql Vulnerability Assessment Settings"
         ],
+        "summary": "Deletes the SQL Vulnerability Assessment settings.",
         "description": "Deletes the SQL Vulnerability Assessment settings.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -188,7 +191,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -205,89 +208,20 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/{operationId}/{operationId}": {
-      "get": {
-        "operationId": "SqlVulnerabilityAssessmentScans_GetScanOperationResult",
-        "tags": [
-          "SqlVulnerabilityAssessmentSettingsOperationGroup"
-        ],
-        "description": "Gets the result of a scan operation initiated by the InitiateScan action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseName",
-            "in": "query",
-            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get scan operation result on a resource (server-level) - Sql Managed Instance": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_GetScanOperationResult.json"
-          },
-          "Get scan operation result on a resource (server-level) - Sql Server": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_GetScanOperationResult.json"
-          },
-          "Get scan operation result on a resource (server-level) - Synapse": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_GetScanOperationResult.json"
-          },
-          "Get scan operation result on a resource - Sql Managed Instance": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_GetScanOperationResult.json"
-          },
-          "Get scan operation result on a resource - Sql Server": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_GetScanOperationResult.json"
-          },
-          "Get scan operation result on a resource - Synapse": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_GetScanOperationResult.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/baselineRules": {
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/baselineRules": {
       "get": {
         "operationId": "SqlVulnerabilityAssessmentBaselineRules_List",
         "tags": [
-          "SqlVulnerabilityAssessmentBaselineRules"
+          "Sql Vulnerability Assessment Baseline Rules"
         ],
+        "summary": "Gets the results for all rules in the Baseline.",
         "description": "Gets the results for all rules in the Baseline.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -312,7 +246,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -341,22 +275,103 @@
           "List baseline rules on a resource - Virtual Machine": {
             "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/VirtualMachineBaselineRules_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "SqlVulnerabilityAssessmentBaselineRules_Add",
+        "tags": [
+          "Sql Vulnerability Assessment Baseline Rules"
+        ],
+        "summary": "Set a list of baseline rules. Will overwrite any previously existing results (for all rules).",
+        "description": "Set a list of baseline rules. Will overwrite any previously existing results (for all rules).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RulesResultsInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RulesResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Set baseline rules on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlManagedInstanceBaselineRules_Add.json"
+          },
+          "Set baseline rules on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SqlServerBaselineRules_Add.json"
+          },
+          "Set baseline rules on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ServerLevel_SynapseBaselineRules_Add.json"
+          },
+          "Set baseline rules on a resource - Arc Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/ArcMachineBaselineRules_Add.json"
+          },
+          "Set baseline rules on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlManagedInstanceBaselineRules_Add.json"
+          },
+          "Set baseline rules on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SqlServerBaselineRules_Add.json"
+          },
+          "Set baseline rules on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/SynapseBaselineRules_Add.json"
+          },
+          "Set baseline rules on a resource - Virtual Machine": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsBaselineRuleOperations/VirtualMachineBaselineRules_Add.json"
+          }
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/baselineRules/{ruleId}": {
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/baselineRules/{ruleId}": {
       "get": {
         "operationId": "SqlVulnerabilityAssessmentBaselineRules_Get",
         "tags": [
-          "SqlVulnerabilityAssessmentBaselineRules"
+          "Sql Vulnerability Assessment Baseline Rules"
         ],
+        "summary": "Gets the results for a given rule in the Baseline.",
         "description": "Gets the results for a given rule in the Baseline.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -388,7 +403,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -422,15 +437,16 @@
       "put": {
         "operationId": "SqlVulnerabilityAssessmentBaselineRules_CreateOrUpdate",
         "tags": [
-          "SqlVulnerabilityAssessmentBaselineRules"
+          "Sql Vulnerability Assessment Baseline Rules"
         ],
+        "summary": "Creates a Baseline for a rule in a database. Will overwrite any previously existing results.",
         "description": "Creates a Baseline for a rule in a database. Will overwrite any previously existing results.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -455,7 +471,7 @@
             "name": "body",
             "in": "body",
             "description": "The baseline results for this rule.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/RuleResultsInput"
             }
@@ -477,7 +493,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -511,15 +527,16 @@
       "delete": {
         "operationId": "SqlVulnerabilityAssessmentBaselineRules_Delete",
         "tags": [
-          "SqlVulnerabilityAssessmentBaselineRules"
+          "Sql Vulnerability Assessment Baseline Rules"
         ],
+        "summary": "Deletes a rule from the Baseline of a given database.",
         "description": "Deletes a rule from the Baseline of a given database.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -551,7 +568,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -583,101 +600,20 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/initiateScan": {
-      "post": {
-        "operationId": "SqlVulnerabilityAssessmentScans_InitiateScan",
-        "tags": [
-          "SqlVulnerabilityAssessmentSettingsOperationGroup"
-        ],
-        "description": "Initiates a vulnerability assessment scan.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "scope",
-            "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "databaseName",
-            "in": "query",
-            "description": "The name of the database to assess. Required when the API is called on the parent resource (e.g., server level) rather than on a specific database resource, since the database name is not part of the resource URI. This is the only way to assess system databases (e.g., master), which cannot be referenced directly in the resource URI.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Initiate scan on a resource (server-level) - Sql Managed Instance": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_InitiateScan.json"
-          },
-          "Initiate scan on a resource (server-level) - Sql Server": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_InitiateScan.json"
-          },
-          "Initiate scan on a resource (server-level) - Synapse": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_InitiateScan.json"
-          },
-          "Initiate scan on a resource - Sql Managed Instance": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_InitiateScan.json"
-          },
-          "Initiate scan on a resource - Sql Server": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_InitiateScan.json"
-          },
-          "Initiate scan on a resource - Synapse": {
-            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_InitiateScan.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CSqlVulnerabilityAssessmentScanOperationResult%3E"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans": {
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans": {
       "get": {
         "operationId": "SqlVulnerabilityAssessmentScans_List",
         "tags": [
-          "ScanV2s"
+          "Sql Vulnerability Assessment Scans"
         ],
+        "summary": "Gets a list of scan records.",
         "description": "Gets a list of scan records.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -702,7 +638,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -731,22 +667,26 @@
           "List scans on a resource - Virtual Machine": {
             "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/VirtualMachineScans_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}": {
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}": {
       "get": {
         "operationId": "SqlVulnerabilityAssessmentScans_Get",
         "tags": [
-          "ScanV2s"
+          "Sql Vulnerability Assessment Scans"
         ],
+        "summary": "Gets the scan details of a single scan record.",
         "description": "Gets the scan details of a single scan record.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -778,7 +718,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -810,19 +750,20 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}/scanResults": {
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}/scanResults": {
       "get": {
         "operationId": "SqlVulnerabilityAssessmentScanResults_List",
         "tags": [
-          "SqlVulnerabilityAssessmentScanResults"
+          "Sql Vulnerability Assessment Scan Results"
         ],
+        "summary": "Gets a list of scan results for a single scan record.",
         "description": "Gets a list of scan results for a single scan record.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -854,7 +795,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -883,22 +824,26 @@
           "List scan results on a resource - Virtual Machine": {
             "$ref": "./examples/sqlVulnerabilityAssessmentsScanResultsOperations/VirtualMachineScanResults_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}/scanResults/{scanResultId}": {
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/{scanId}/scanResults/{scanResultId}": {
       "get": {
         "operationId": "SqlVulnerabilityAssessmentScanResults_Get",
         "tags": [
-          "SqlVulnerabilityAssessmentScanResults"
+          "Sql Vulnerability Assessment Scan Results"
         ],
+        "summary": "Gets the scan results of a single rule in a scan record.",
         "description": "Gets the scan results of a single rule in a scan record.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "scope",
+            "name": "resourceId",
             "in": "path",
             "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
@@ -937,7 +882,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -968,22 +913,158 @@
           }
         }
       }
+    },
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/initiateScan": {
+      "post": {
+        "operationId": "SqlVulnerabilityAssessmentScans_InitiateScan",
+        "tags": [
+          "Sql Vulnerability Assessment Scans"
+        ],
+        "summary": "Initiates a vulnerability assessment scan.",
+        "description": "Initiates a vulnerability assessment scan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiate scan on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_InitiateScan.json"
+          },
+          "Initiate scan on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_InitiateScan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/sqlVulnerabilityAssessments/default/scans/scanOperationResults/{operationId}": {
+      "get": {
+        "operationId": "SqlVulnerabilityAssessmentScans_GetScanOperationResult",
+        "tags": [
+          "Sql Vulnerability Assessment Scans"
+        ],
+        "summary": "Gets the result of a scan operation initiated by the InitiateScan action.",
+        "description": "Gets the result of a scan operation initiated by the InitiateScan action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get scan operation result on a resource (server-level) - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlManagedInstanceScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource (server-level) - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SqlServerScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource (server-level) - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/ServerLevel_SynapseScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource - Sql Managed Instance": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlManagedInstanceScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource - Sql Server": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SqlServerScans_GetScanOperationResult.json"
+          },
+          "Get scan operation result on a resource - Synapse": {
+            "$ref": "./examples/sqlVulnerabilityAssessmentsScanOperations/SynapseScans_GetScanOperationResult.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "Azure.ResourceManager.ArmResponse<SqlVulnerabilityAssessmentScanOperationResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SqlVulnerabilityAssessmentScanOperationResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "Baseline": {
       "type": "object",
       "description": "Baseline details.",
@@ -1050,6 +1131,71 @@
         "reference": {
           "type": "string",
           "description": "The benchmark reference."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error object.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
         }
       }
     },
@@ -1305,6 +1451,32 @@
           "items": {
             "$ref": "#/definitions/RuleResults"
           }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "RulesResultsInput": {
+      "type": "object",
+      "description": "Rules results input.",
+      "properties": {
+        "latestScan": {
+          "type": "boolean",
+          "description": "Take results from latest scan."
+        },
+        "results": {
+          "type": "object",
+          "description": "Expected results to be inserted into the baseline.\nLeave this field empty if latestScan == true.",
+          "additionalProperties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "type": "array"
+          }
         }
       }
     },
@@ -1484,6 +1656,9 @@
           "items": {
             "$ref": "#/definitions/ScanResult"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -1572,6 +1747,9 @@
           "items": {
             "$ref": "#/definitions/ScanV2"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
