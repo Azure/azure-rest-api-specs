@@ -1783,46 +1783,39 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(SkuName.EP2_256_GPU2_Mx1, "EP2_256Gpu2Mx1", "csharp");
 @@clientName(SkuName.EdgeMR_TCP, "EdgeMRTcp", "csharp");
 
-// Round 1: EncryptionAlgorithm member casing
 @@clientName(EncryptionAlgorithm.AES256, "Aes256", "csharp");
 #suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
 @@clientName(EncryptionAlgorithm.RSAES_PKCS1_v_1_5, "RsaesPkcs1V1_5", "csharp");
 
-// Round 2: @@usage — output-only models → input+output (fixes CannotSealType, CannotMakeMemberNonVirtual, missing ctors + setters)
-@@usage(Alert, Usage.input | Usage.output);
-@@usage(DiagnosticRemoteSupportSettings, Usage.input | Usage.output);
-@@usage(DataBoxEdgeDeviceExtendedInfo, Usage.input | Usage.output);
-@@usage(Node, Usage.input | Usage.output);
-@@usage(VmMemory, Usage.input | Usage.output);
-@@usage(ClusterCapacityViewData, Usage.input | Usage.output);
-@@usage(ClusterGpuCapacity, Usage.input | Usage.output);
-@@usage(ClusterMemoryCapacity, Usage.input | Usage.output);
-@@usage(ClusterStorageViewData, Usage.input | Usage.output);
-@@usage(HostCapacity, Usage.input | Usage.output);
-@@usage(NumaNodeData, Usage.input | Usage.output);
-@@usage(TriggerSupportPackageRequest, Usage.input | Usage.output);
+@@usage(Alert, Usage.input | Usage.output, "csharp");
+@@usage(DiagnosticRemoteSupportSettings, Usage.input | Usage.output, "csharp");
+@@usage(DataBoxEdgeDeviceExtendedInfo, Usage.input | Usage.output, "csharp");
+@@usage(Node, Usage.input | Usage.output, "csharp");
+@@usage(VmMemory, Usage.input | Usage.output, "csharp");
+@@usage(ClusterCapacityViewData, Usage.input | Usage.output, "csharp");
+@@usage(ClusterGpuCapacity, Usage.input | Usage.output, "csharp");
+@@usage(ClusterMemoryCapacity, Usage.input | Usage.output, "csharp");
+@@usage(ClusterStorageViewData, Usage.input | Usage.output, "csharp");
+@@usage(HostCapacity, Usage.input | Usage.output, "csharp");
+@@usage(NumaNodeData, Usage.input | Usage.output, "csharp");
+@@usage(TriggerSupportPackageRequest, Usage.input | Usage.output, "csharp");
 @@usage(UploadCertificateRequest, Usage.input | Usage.output, "csharp");
+@@usage(SecuritySettings, Usage.input | Usage.output, "csharp");
 
-// Round 3: string → System.Uri (@@alternateType with url scalar)
+@@access(RoleSinkInfo, Access.public, "csharp");
+@@access(FileSourceInfo, Access.public, "csharp");
+
 @@alternateType(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl, url, "csharp");
 @@alternateType(DataBoxEdgeDeviceExtendedInfoPatch.clientSecretStoreUrl, url, "csharp");
 @@alternateType(TrackingInfo.trackingUrl, url, "csharp");
 @@alternateType(ImageRepositoryCredential.imageRepositoryUrl, url, "csharp");
-
-// Round 3: string → System.Net.IPAddress
 @@alternateType(Ipv4Config.ipAddress, Azure.Core.ipV4Address, "csharp");
-
-// Round 3: string → AzureLocation
 @@alternateType(SkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(DataBoxEdgeSku.locations, Azure.Core.azureLocation[], "csharp");
-
-// Round 3: string → DateTimeOffset
 @@alternateType(GenerateCertResponse.expiryTimeInUTC, utcDateTime, "csharp");
-
-// Round 3: ResourceIdentity → ManagedServiceIdentity
 @@alternateType(DataBoxEdgeDevicePatch.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
-
-// Round 3: IoT casing (IoT → Iot in property names)
+@@clientName(DataBoxEdgeDevicePropertiesPatch.edgeProfile, "Profile", "csharp");
+@@clientName(IoTDeviceInfo.authentication, "Profile", "csharp");
 @@clientName(IoTDeviceInfo.ioTHostHub, "IotHostHub", "csharp");
 @@clientName(IoTDeviceInfo.ioTHostHubId, "IotHostHubId", "csharp");
 @@clientName(IoTRoleProperties.ioTDeviceDetails, "IotDeviceDetails", "csharp");
@@ -1830,13 +1823,10 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(IoTRoleProperties.ioTEdgeAgentInfo, "IotEdgeAgentInfo", "csharp");
 @@clientName(IoTAddonProperties.ioTDeviceDetails, "IotDeviceDetails", "csharp");
 @@clientName(IoTAddonProperties.ioTEdgeDeviceDetails, "IotEdgeDeviceDetails", "csharp");
-
-// Round 4: Operation name renames
 @@clientName(DataBoxEdgeDevices.listByDataBoxEdgeDevice, "GetEdgeNodes", "csharp");
 @@clientName(Orders.listDCAccessCode, "GetDataCenterAccessCode", "csharp");
 @@clientName(AvailableSkusOperationGroup.list, "GetAvailableSkus", "csharp");
 
-// Round 6: Fix CannotRemoveBaseType — restore ResourceData inheritance
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DataBoxEdgeDeviceExtendedInfo,
   Azure.ResourceManager.Foundations.ProxyResource,
