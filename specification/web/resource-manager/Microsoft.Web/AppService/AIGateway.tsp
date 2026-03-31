@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.Web;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_03_01_preview)
 @doc("The properties of an AI gateway.")
 model AiGatewayProperties {
   @doc("The description of the resource.")
@@ -22,7 +22,7 @@ model AiGatewayProperties {
   aiGatewayId?: string;
 }
 
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_03_01_preview)
 @doc("An AI gateway resource.")
 model AiGateway is Azure.ResourceManager.TrackedResource<AiGatewayProperties> {
   @key("name")
@@ -33,7 +33,7 @@ model AiGateway is Azure.ResourceManager.TrackedResource<AiGatewayProperties> {
   name: string;
 }
 
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_03_01_preview)
 @armResourceOperations
 @doc("The operations of AI gateways.")
 interface AiGateways {
