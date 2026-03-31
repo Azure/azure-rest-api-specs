@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.CloudHealth",
-    "version": "2026-01-01-preview",
+    "version": "2026-05-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -2589,6 +2589,36 @@
         "kind"
       ]
     },
+    "DynamicThresholdSensitivity": {
+      "type": "string",
+      "description": "Sensitivity level for dynamic threshold detection",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicThresholdSensitivity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low sensitivity — fewer anomalies detected, wider threshold band"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium sensitivity — balanced detection"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High sensitivity — more anomalies detected, tighter threshold band"
+          }
+        ]
+      }
+    },
     "Entity": {
       "type": "object",
       "description": "An entity (aka node) of a health model",
@@ -3903,7 +3933,8 @@
         "LessThanOrEqual",
         "GreaterThanOrEqual",
         "Equal",
-        "NotEqual"
+        "NotEqual",
+        "Dynamic"
       ],
       "x-ms-enum": {
         "name": "SignalOperator",
@@ -3938,6 +3969,11 @@
             "name": "NotEqual",
             "value": "NotEqual",
             "description": "Not equal to"
+          },
+          {
+            "name": "Dynamic",
+            "value": "Dynamic",
+            "description": "Dynamic threshold — uses statistical analysis of historical signal values"
           }
         ]
       }
@@ -3982,11 +4018,18 @@
           "type": "number",
           "format": "double",
           "description": "Threshold value. Required for static operators. When operator is Dynamic, defaults to the minimum representable value if omitted."
+        },
+        "sensitivity": {
+          "$ref": "#/definitions/DynamicThresholdSensitivity",
+          "description": "Sensitivity level for dynamic threshold detection. Only applicable when operator is Dynamic."
+        },
+        "lookBackWindow": {
+          "type": "string",
+          "description": "ISO 8601 duration for the historical look-back window used by dynamic threshold computation. Only applicable when operator is Dynamic."
         }
       },
       "required": [
-        "operator",
-        "threshold"
+        "operator"
       ]
     },
     "authenticationSettingName": {

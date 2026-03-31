@@ -24,6 +24,9 @@ enum Versions {
 
   @doc("2026-01-01-preview")
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("2026-05-01-preview")
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -200,8 +203,32 @@ model ThresholdRuleV2 {
   @doc("Operator how to compare the signal value with the threshold")
   operator: SignalOperator;
 
-  @doc("Threshold value")
-  threshold: float64;
+  @madeOptional(Versions.v2026_05_01_preview)
+  @doc("Threshold value. Required for static operators. When operator is Dynamic, defaults to the minimum representable value if omitted.")
+  threshold?: float64;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Sensitivity level for dynamic threshold detection. Only applicable when operator is Dynamic.")
+  sensitivity?: DynamicThresholdSensitivity;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("ISO 8601 duration for the historical look-back window used by dynamic threshold computation. Only applicable when operator is Dynamic.")
+  lookBackWindow?: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Sensitivity level for dynamic threshold detection")
+union DynamicThresholdSensitivity {
+  string,
+
+  @doc("Low sensitivity — fewer anomalies detected, wider threshold band")
+  Low: "Low",
+
+  @doc("Medium sensitivity — balanced detection")
+  Medium: "Medium",
+
+  @doc("High sensitivity — more anomalies detected, tighter threshold band")
+  High: "High",
 }
 
 @removed(Versions.v2026_01_01_preview)
@@ -385,6 +412,10 @@ union SignalOperator {
   @added(Versions.v2026_01_01_preview)
   @doc("Not equal to")
   NotEqual: "NotEqual",
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Dynamic threshold — uses statistical analysis of historical signal values")
+  Dynamic: "Dynamic",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
