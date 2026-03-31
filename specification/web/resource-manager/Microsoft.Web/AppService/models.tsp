@@ -2478,7 +2478,7 @@ model OutboundVnetRouting {
   /**
    * Enables Managed Identity operations over virtual network.
    */
-  @added(Versions.v2026_05_01_preview)
+  @added(Versions.v2026_03_01_preview)
   managedIdentityTraffic?: boolean;
 }
 
