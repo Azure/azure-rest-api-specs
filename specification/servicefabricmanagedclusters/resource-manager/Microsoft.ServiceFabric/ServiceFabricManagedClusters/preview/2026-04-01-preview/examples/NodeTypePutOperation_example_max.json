@@ -75,6 +75,7 @@
         "enableNodePublicIP": true,
         "enableNodePublicIPv6": true,
         "enableOverProvisioning": false,
+        "enableResilientEphemeralOsDisk": true,
         "evictionPolicy": "Deallocate",
         "frontendConfigurations": [
           {
@@ -83,6 +84,7 @@
             "loadBalancerInboundNatPoolId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/inboundNatPools/LoadBalancerNATPool"
           }
         ],
+        "isOutboundOnly": true,
         "isPrimary": false,
         "isSpotVM": true,
         "isStateless": true,
@@ -93,9 +95,25 @@
           "NodeColor": "green",
           "SomeProperty": "5"
         },
+        "proxyAgentSettings": {
+          "enabled": true,
+          "keyIncarnationId": 17,
+          "wireServer": {
+            "mode": "Audit",
+            "inVMAccessControlProfileReferenceId": "someReferenceId"
+          },
+          "imds": {
+            "mode": "Audit",
+            "inVMAccessControlProfileReferenceId": "someReferenceId"
+          },
+          "addProxyAgentExtension": true
+        },
+        "scaleInPolicy": {
+          "mode": "Default"
+        },
         "secureBootEnabled": true,
-        "securityType": "ConfidentialVM",
         "securityEncryptionType": "DiskWithVMGuestState",
+        "securityType": "ConfidentialVM",
         "serviceArtifactReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/myVmArtifactProfile",
         "spotRestoreTimeout": "PT30M",
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
@@ -156,12 +174,7 @@
           "EnableContainers",
           "EnableHyperV"
         ],
-        "vmSize": "Standard_DS3",
-        "isOutboundOnly": true,
-        "enableResilientEphemeralOsDisk": true,
-        "scaleInPolicy": {
-          "mode": "Default"
-        }
+        "vmSize": "Standard_DS3"
       }
     },
     "resourceGroupName": "resRg",
@@ -243,6 +256,7 @@
           "enableNodePublicIP": true,
           "enableNodePublicIPv6": true,
           "enableOverProvisioning": false,
+          "enableResilientEphemeralOsDisk": true,
           "evictionPolicy": "Deallocate",
           "frontendConfigurations": [
             {
@@ -251,6 +265,7 @@
               "loadBalancerInboundNatPoolId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/inboundNatPools/LoadBalancerNATPool"
             }
           ],
+          "isOutboundOnly": true,
           "isPrimary": false,
           "isSpotVM": true,
           "isStateless": true,
@@ -262,9 +277,22 @@
             "SomeProperty": "5"
           },
           "provisioningState": "Creating",
+          "proxyAgentSettings": {
+            "enabled": true,
+            "keyIncarnationId": 17,
+            "wireServer": {
+              "mode": "Audit",
+              "inVMAccessControlProfileReferenceId": "someReferenceId"
+            },
+            "imds": {
+              "mode": "Audit",
+              "inVMAccessControlProfileReferenceId": "someReferenceId"
+            },
+            "addProxyAgentExtension": true
+          },
           "secureBootEnabled": true,
-          "securityType": "ConfidentialVM",
           "securityEncryptionType": "DiskWithVMGuestState",
+          "securityType": "ConfidentialVM",
           "serviceArtifactReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/myVmArtifactProfile",
           "spotRestoreTimeout": "PT30M",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
@@ -330,9 +358,7 @@
             "1",
             "2",
             "3"
-          ],
-          "isOutboundOnly": true,
-          "enableResilientEphemeralOsDisk": true
+          ]
         },
         "tags": {}
       },
@@ -416,6 +442,7 @@
           "enableNodePublicIP": true,
           "enableNodePublicIPv6": true,
           "enableOverProvisioning": false,
+          "enableResilientEphemeralOsDisk": true,
           "evictionPolicy": "Deallocate",
           "frontendConfigurations": [
             {
@@ -424,6 +451,7 @@
               "loadBalancerInboundNatPoolId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/loadBalancers/test-LB/inboundNatPools/LoadBalancerNATPool"
             }
           ],
+          "isOutboundOnly": true,
           "isPrimary": false,
           "isSpotVM": true,
           "isStateless": true,
@@ -435,9 +463,25 @@
             "SomeProperty": "5"
           },
           "provisioningState": "Updating",
+          "proxyAgentSettings": {
+            "enabled": true,
+            "keyIncarnationId": 17,
+            "wireServer": {
+              "mode": "Audit",
+              "inVMAccessControlProfileReferenceId": "someReferenceId"
+            },
+            "imds": {
+              "mode": "Audit",
+              "inVMAccessControlProfileReferenceId": "someReferenceId"
+            },
+            "addProxyAgentExtension": true
+          },
+          "scaleInPolicy": {
+            "mode": "Default"
+          },
           "secureBootEnabled": true,
-          "securityType": "ConfidentialVM",
           "securityEncryptionType": "DiskWithVMGuestState",
+          "securityType": "ConfidentialVM",
           "serviceArtifactReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/serviceArtifacts/myServiceArtifact/vmArtifactsProfiles/myVmArtifactProfile",
           "spotRestoreTimeout": "PT30M",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
@@ -503,12 +547,7 @@
             "1",
             "2",
             "3"
-          ],
-          "isOutboundOnly": true,
-          "enableResilientEphemeralOsDisk": true,
-          "scaleInPolicy": {
-            "mode": "Default"
-          }
+          ]
         },
         "tags": {}
       },

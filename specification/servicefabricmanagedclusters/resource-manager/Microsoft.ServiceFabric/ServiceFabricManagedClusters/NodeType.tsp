@@ -565,6 +565,12 @@ model NodeTypeProperties {
    */
   @added(Versions.v2026_04_01_preview)
   scaleInPolicy?: ScaleInPolicy;
+
+  /**
+   * Specifies the settings for the proxy agent on the node type.
+   */
+  @added(Versions.v2026_04_01_preview)
+  proxyAgentSettings?: ProxyAgentSettings;
 }
 
 /**
@@ -1334,4 +1340,50 @@ model ScaleInPolicy {
    * The scale in policy mode for a node type.
    */
   mode?: ScaleInPolicyMode;
+}
+
+/**
+ * Specifies ProxyAgent settings for the virtual machine or virtual machine scale set. Minimum api-version: 2023-09-01.
+ */
+model ProxyAgentSettings {
+  /**
+   * Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set.
+   */
+  enabled?: boolean;
+
+  /**
+   * Increasing the value of this property allows users to reset the key used for securing communication channel between guest and host.
+   */
+  keyIncarnationId?: int32;
+
+  /**
+   * Specifies the Wire Server endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
+   */
+  wireServer?: HostEndpointSettings;
+
+  /**
+   * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
+   */
+  imds?: HostEndpointSettings;
+
+  /**
+   * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
+   */
+  addProxyAgentExtension?: boolean;
+}
+
+/**
+ * Specifies particular host endpoint settings.
+ */
+model HostEndpointSettings {
+  /**
+   * Specifies the execution mode. In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints. In Enforce mode, the system will enforce the access control and it is the recommended mode of operation.
+   */
+  mode?: string;
+
+  /**
+   * Specifies the InVMAccessControlProfileVersion resource id in the format of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for virtual machine"
+  inVMAccessControlProfileReferenceId?: string;
 }
