@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
 using NewRelic.Observability;
@@ -261,9 +262,16 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 
-// ===== C# usage decorators for read-only models that need setters =====
-// These models were previously read-write in the old AutoRest SDK.
-// Adding input usage generates setters on the flattened properties.
+// ===== C# flatten properties for backward compatibility =====
+// These models were previously flattened in the old AutoRest SDK.
+// Using @flattenProperty to preserve top-level property access.
+@@flattenProperty(AccountResource.properties, "csharp");
+@@flattenProperty(OrganizationResource.properties, "csharp");
+@@flattenProperty(PlanDataResource.properties, "csharp");
+
+// ===== C# usage decorators for property types that need setters =====
+// The flattened properties need setters for backward compatibility.
+// Adding input usage generates setters on the inner property types.
 @@usage(AccountProperties, Usage.input | Usage.output, "csharp");
 @@usage(OrganizationProperties, Usage.input | Usage.output, "csharp");
 @@usage(PlanDataProperties, Usage.input | Usage.output, "csharp");
