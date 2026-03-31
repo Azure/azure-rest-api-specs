@@ -318,12 +318,14 @@ Use the rule IDs from the instruction files (e.g., `RPC-Put-V1-01`, `RPC-Patch-V
 
 After presenting the review findings to the human reviewer for approval:
 1. **Wait for explicit confirmation** from the reviewer before posting anything to the PR.
-2. **Check existing comments first.** Before posting, fetch the PR's existing review comments using `get_review_comments`. For each finding you intend to post, check whether an equivalent comment already exists on the same file and line (or nearby lines) covering the same rule ID or issue. **Skip posting** any finding that is already covered by an existing comment — whether from a previous run of this agent, another reviewer, or an automated check. This avoids duplicate noise for the PR author and other reviewers.
+2. **Check existing comments first.** Before posting, fetch the PR's existing review comments using `get_review_comments` — check **all** threads regardless of state (active, resolved, outdated, collapsed). For each finding you intend to post, check whether an equivalent comment already exists on the same file and line (or nearby lines) covering the same rule ID or issue. **Skip posting** any finding that is already covered by an existing comment — whether from a previous run of this agent, another reviewer, or an automated check. This avoids duplicate noise for the PR author and other reviewers.
 3. Once approved and de-duplicated, post review comments on the PR using the GitHub tools — one comment per finding, attached to the specific file and **exact line number** where the violation occurs.
-4. Use the format: `**[NEW]** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` or `**[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` followed by the suggested fix. The file path and line number are included in the comment text for readability, even though the comment is also anchored to the file and line in the GitHub UI.
-5. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
-6. Report to the human reviewer which findings were skipped as duplicates and which were posted.
-7. Do NOT post comments without the human reviewer's approval.
+4. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR — this property did not exist in the previous version").
+5. For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟡 Warning`, or `💡 Suggestion`.
+6. Use the format: `**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` or `**[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` followed by the classification reasoning and suggested fix.
+7. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
+8. Report to the human reviewer which findings were skipped as duplicates and which were posted.
+9. Do NOT post comments without the human reviewer's approval.
 
 ## Local Review & Fix Workflow (Fix Mode)
 
