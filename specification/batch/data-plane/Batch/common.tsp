@@ -417,6 +417,7 @@ alias CommonParameters = {
   @encode(DateTimeKnownEncoding.rfc7231)
   @clientName("requestDate", "csharp")
   @clientName("ocp_date", "python")
+  @access(Access.internal, "python")
   ocpdate?: utcDateTime;
 };
 
