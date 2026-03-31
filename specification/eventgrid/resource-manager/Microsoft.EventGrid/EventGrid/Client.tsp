@@ -108,48 +108,11 @@ interface Clients {
 );
 
 // csharp configuration
-@@clientName(ResourceProvisioningState,
-  "EventGridResourceProvisioningState",
-  "csharp"
-);
-@@clientName(Partner, "EventGridPartnerContent", "csharp");
 @@clientName(Partner.authorizationExpirationTimeInUtc,
   "AuthorizationExpireOn",
   "csharp"
 );
-@@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
-@@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
 @@clientName(InboundIpRule.ipMask, "IPMask", "csharp");
-@@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
-@@clientName(EventType, "EventTypeUnderTopic", "csharp");
-@@clientName(EventSubscription, "EventGridSubscription", "csharp");
-@@clientName(Domain, "EventGridDomain", "csharp");
-@@clientName(Topic, "EventGridTopic", "csharp");
-@@clientName(Namespace, "EventGridNamespace", "csharp");
-@@clientName(Channel, "PartnerNamespaceChannel", "csharp");
-@@clientName(Client, "EventGridNamespaceClient", "csharp");
-@@clientName(InputSchema, "EventGridInputSchema", "csharp");
-@@clientName(ChannelType, "PartnerNamespaceChannelType", "csharp");
-@@clientName(ChannelProvisioningState,
-  "PartnerNamespaceChannelProvisioningState",
-  "csharp"
-);
-@@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
-@@clientName(DomainProvisioningState,
-  "EventGridDomainProvisioningState",
-  "csharp"
-);
-@@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
-@@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
-@@clientName(TopicProvisioningState,
-  "EventGridTopicProvisioningState",
-  "csharp"
-);
-@@clientName(Filter, "EventGridFilter", "csharp");
-@@clientName(PrivateEndpointConnection,
-  "EventGridPrivateEndpointConnection",
-  "csharp"
-);
 @@clientName(ChannelProperties.expirationTimeIfNotActivatedUtc,
   "ExpireOnIfNotActivated",
   "csharp"
@@ -287,8 +250,6 @@ interface Clients {
   "IPMatchesAuthenticationName",
   "csharp"
 );
-
-// Endpoint and resource ID type overrides
 @@alternateType(DomainProperties.endpoint, url, "csharp");
 @@alternateType(TopicProperties.endpoint, url, "csharp");
 @@alternateType(PartnerNamespaceProperties.endpoint, url, "csharp");
@@ -363,7 +324,6 @@ interface Clients {
 @@clientName(EventSubscriptionFullUrl.endpointUrl, "Endpoint", "csharp");
 @@alternateType(EventSubscriptionFullUrl.endpointUrl, url, "csharp");
 @@alternateType(SubscriptionFullUrl.endpointUrl, url, "csharp");
-// Identity type mapping - map EventGrid's IdentityInfo to ARM ManagedServiceIdentity
 @@alternateType(Domain.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
@@ -429,8 +389,6 @@ interface Clients {
   Azure.Core.uuid,
   "csharp"
 );
-
-// Usage for models that need public constructor/setters
 @@usage(PartnerDetails, Usage.input, "csharp");
 @@usage(EventType, Usage.input, "csharp");
 @@usage(TopicTypeProperties, Usage.input, "csharp");
@@ -439,8 +397,6 @@ interface Clients {
 @@usage(DomainTopic, Usage.input, "csharp");
 @@usage(PartnerConfiguration, Usage.input, "csharp");
 @@usage(TopicTypeAdditionalEnforcedPermission, Usage.input, "csharp");
-
-// GetFullUrl → GetFullUri (preserve old C# method name)
 @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(TopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(DomainEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
@@ -452,3 +408,86 @@ interface Clients {
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Subscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
+@@clientName(Partner, "EventGridPartnerContent", "csharp");
+@@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
+@@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
+@@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
+@@clientName(EventType, "EventTypeUnderTopic", "csharp");
+@@clientName(EventSubscription, "EventGridSubscription", "csharp");
+@@clientName(Domain, "EventGridDomain", "csharp");
+@@clientName(Topic, "EventGridTopic", "csharp");
+@@clientName(Namespace, "EventGridNamespace", "csharp");
+@@clientName(Channel, "PartnerNamespaceChannel", "csharp");
+@@clientName(Client, "EventGridNamespaceClient", "csharp");
+@@clientName(InputSchema, "EventGridInputSchema", "csharp");
+@@clientName(ChannelType, "PartnerNamespaceChannelType", "csharp");
+@@clientName(ChannelProvisioningState,
+  "PartnerNamespaceChannelProvisioningState",
+  "csharp"
+);
+@@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
+@@clientName(DomainProvisioningState,
+  "EventGridDomainProvisioningState",
+  "csharp"
+);
+@@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
+@@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
+@@clientName(TopicProvisioningState,
+  "EventGridTopicProvisioningState",
+  "csharp"
+);
+@@clientName(Filter, "EventGridFilter", "csharp");
+@@clientName(PrivateEndpointConnection,
+  "EventGridPrivateEndpointConnectionData",
+  "csharp"
+);
+
+@@clientName(ResourceProvisioningState,
+  "EventGridResourceProvisioningState",
+  "csharp"
+);
+
+// Rename PrivateLinkServiceConnectionState back to ConnectionState for backward compat
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+
+// Change PrivateEndpoint.id from string to ResourceIdentifier for backward compat
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// GetDeliveryAttributes must return Pageable results for backward compat
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(EventSubscriptions.getDeliveryAttributes,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(TopicEventSubscriptions.getDeliveryAttributes,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(DomainEventSubscriptions.getDeliveryAttributes,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(EventSubscriptionOperationGroup.getDeliveryAttributes,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(SystemTopicEventSubscriptions.getDeliveryAttributes,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(PartnerTopicEventSubscriptions.getDeliveryAttributes,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Subscriptions.getDeliveryAttributes,
+  "csharp"
+);
