@@ -1645,6 +1645,7 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(ContactDetails, "DataBoxEdgeContactDetails", "csharp");
 @@clientName(DataPolicy, "DataBoxEdgeDataPolicy", "csharp");
 @@clientName(DataResidencyType, "DataBoxEdgeDataResidencyType", "csharp");
+@@clientName(DataBoxEdgeDeviceProperties.dataResidency, "Residency", "csharp");
 @@clientName(DeviceType, "DataBoxEdgeDeviceType", "csharp");
 @@clientName(DownloadPhase, "DataBoxEdgeDownloadPhase", "csharp");
 @@clientName(EtcdInfo, "DataBoxEdgeEtcdInfo", "csharp");
@@ -1800,6 +1801,7 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@usage(HostCapacity, Usage.input | Usage.output);
 @@usage(NumaNodeData, Usage.input | Usage.output);
 @@usage(TriggerSupportPackageRequest, Usage.input | Usage.output);
+@@usage(UploadCertificateRequest, Usage.input | Usage.output, "csharp");
 
 // Round 3: string → System.Uri (@@alternateType with url scalar)
 @@alternateType(DataBoxEdgeDeviceExtendedInfoProperties.clientSecretStoreUrl, url, "csharp");
