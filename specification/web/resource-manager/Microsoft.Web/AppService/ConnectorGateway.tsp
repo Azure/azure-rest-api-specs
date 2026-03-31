@@ -19,7 +19,7 @@ namespace Microsoft.Web;
 model ConnectorGatewayProperties {
   @doc("The description of the resource.")
   @visibility(Lifecycle.Read)
-  gatewayId?: string;
+  connectorGatewayId?: string;
 }
 
 @added(Versions.v2026_05_01_preview)
