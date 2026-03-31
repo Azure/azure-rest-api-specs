@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2026-03-15",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "fleetspaceName": "fleetspace1",
+    "body": {
+      "properties": {
+        "fleetspaceApiKind": "NoSQL",
+        "serviceTier": "GeneralPurpose",
+        "dataRegions": [
+          "westus2"
+        ],
+        "throughputPoolConfiguration": {
+          "minThroughput": 100000,
+          "maxThroughput": 500000
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
+        "name": "fleetspace1",
+        "type": "Microsoft.DocumentDB/fleets/fleetspaces",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "fleetspaceApiKind": "NoSQL",
+          "serviceTier": "GeneralPurpose",
+          "dataRegions": [
+            "westus2"
+          ],
+          "throughputPoolConfiguration": {
+            "minThroughput": 100000,
+            "maxThroughput": 500000
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2026-03-15",
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2026-03-15"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1",
+        "name": "fleetspace1",
+        "type": "Microsoft.DocumentDB/fleets/fleetspaces",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "fleetspaceApiKind": "NoSQL",
+          "serviceTier": "GeneralPurpose",
+          "dataRegions": [
+            "westus2"
+          ],
+          "throughputPoolConfiguration": {
+            "minThroughput": 100000,
+            "maxThroughput": 500000
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Fleetspace_Create",
+  "title": "CosmosDB Fleetspace Create"
+}
