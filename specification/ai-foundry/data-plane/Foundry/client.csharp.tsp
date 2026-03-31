@@ -142,6 +142,8 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
 @@clientName(EvalRunResultComparison.metric, "MetricName", "csharp");
 
+@@alternateType(EvaluationScheduleTask.evalRun, unknown, "csharp");
+
 @@clientName(InsightSummary.method, "MethodName", "csharp");
 
 @@clientName(RedTeam.numTurns, "TurnCount", "csharp");
