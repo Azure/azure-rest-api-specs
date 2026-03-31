@@ -1,0 +1,216 @@
+# Using the API Reviewer Agent
+
+The **API Reviewer** is a Visual Studio Code Copilot agent that reviews Azure REST API
+specifications for conformance to the [Azure REST API Guidelines][api-guidelines],
+ARM Resource Provider Contract ([RPC][rpc-contract]) rules, and repository conventions.
+It can also apply fixes directly to local files.
+
+## Prerequisites
+
+- **VS Code** with [GitHub Copilot][copilot-ext] and
+  [GitHub Copilot Chat][copilot-chat-ext] extensions installed.
+- **This repository** (`azure-rest-api-specs` or `azure-rest-api-specs-pr`)
+  cloned and open as a workspace in VS Code.
+- **GitHub authentication** — for PR reviews, the agent uses the GitHub MCP
+  server which authenticates via OAuth. If prompted, authorize the GitHub
+  connection when the consent dialog appears.
+
+## How to Open the Agent
+
+1. Open the **Copilot Chat** panel in VS Code (Ctrl+Shift+I or click the Copilot icon).
+2. In the agent picker at the top of the chat, select **api-reviewer**.
+3. Type your request in the chat input.
+
+Alternatively, type `@api-reviewer` at the start of your message in any Copilot Chat panel.
+
+## Operating Modes
+
+The agent operates in two modes:
+
+| Mode | When to use | What it does |
+| ---- | ----------- | ------------ |
+| **Review mode** (default) | Review a PR or inspect files | Read-only. Structured report with file paths, line numbers, rule IDs, and fix suggestions. |
+| **Fix mode** | Review **and** correct local files | Reviews first, presents findings, then applies approved fixes directly to your local files. |
+
+The agent automatically selects the mode based on your prompt:
+
+- Words like **"review"**, **"check"**, **"inspect"** trigger review mode.
+- Words like **"fix"**, **"apply"**, **"correct"**, **"update"** trigger fix mode.
+- If ambiguous, the agent will ask which mode you prefer.
+
+## Review Mode
+
+### Reviewing a PR
+
+Provide a PR URL or number:
+
+```text
+Review PR #41405
+```
+
+```text
+Review https://github.com/Azure/azure-rest-api-specs/pull/41405
+```
+
+For the private repo, use the full URL or shorthand:
+
+```text
+Review specs-pr#23440
+```
+
+The agent will:
+
+1. Fetch the PR metadata and changed files from GitHub.
+2. Load the applicable rule sets (OpenAPI, ARM, TypeSpec).
+3. Compare against the previous API version to detect breaking changes.
+4. Produce a structured report with every violation tagged as **[NEW]** (introduced in this PR) or **[EXISTING]** (pre-existing).
+
+### Reviewing Local Files
+
+You can also point the agent at files in your workspace without a PR:
+
+```text
+Check this swagger file for ARM compliance: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/loadBalancer.json
+```
+
+```text
+Review this TypeSpec project: specification/contoso/resource-manager/Microsoft.Contoso/Contoso.Management/
+```
+
+### Understanding the Report
+
+The report is organized by severity and origin:
+
+| Section | Meaning |
+| ------- | ------- |
+| **Blocking Issues — New** | Violations introduced in this PR. Must be fixed before merge. |
+| **Blocking Issues — Existing** | Pre-existing violations carried forward from previous versions. Should be fixed but are not regressions. |
+| **Warnings — New** | Non-blocking issues introduced in this PR. Should be fixed. |
+| **Warnings — Existing** | Pre-existing non-blocking issues. Consider fixing. |
+| **Suggestions** | Optional improvements. |
+| **Breaking Change Analysis** | Summary of breaking changes vs. the previous API version. |
+
+Each finding includes:
+
+- **Rule ID** — e.g., `RPC-Put-V1-01`, `ARG001`, `TSP-2.1`
+- **File path and line number** — exact location (e.g., `L42` or `L10-L15`)
+- **JSON path** (for OpenAPI) — e.g., `$.paths['/widgets'].put.responses.200`
+- **Issue description** — what is wrong
+- **Fix suggestion** — exact code/JSON change to apply
+
+### Posting Comments on a PR
+
+After reviewing the report, you can ask the agent to post findings as PR review comments:
+
+```text
+Post the approved review comments on PR #41405
+```
+
+The agent will always present findings in chat first and wait for your
+explicit approval before posting anything to the PR.
+
+## Fix Mode
+
+Fix mode is for working on your **local branch or fork**. The agent reviews
+your files, presents its findings, and then applies fixes with your approval.
+
+### Basic Usage
+
+```text
+Review and fix my local spec in specification/contoso/resource-manager/Microsoft.Contoso/stable/2025-01-01/
+```
+
+```text
+Fix all blocking issues in specification/network/resource-manager/Microsoft.Network/stable/2025-07-01/loadBalancer.json
+```
+
+```text
+Review this TypeSpec project and apply fixes: specification/contoso/resource-manager/Microsoft.Contoso/Contoso.Management/
+```
+
+### How It Works
+
+1. **Review** — The agent performs the same thorough review as review mode.
+2. **Present findings** — Issues are shown in the structured report before any changes are made.
+3. **Categorize fixes** — The agent groups issues into:
+   - **Auto-fixable** — mechanical, unambiguous changes (e.g., adding
+     missing `description`, `"type": "object"`, `x-ms-enum`, fixing casing).
+   - **Requires confirmation** — judgment calls (e.g., restructuring models, adding CRUD operations, changing enum values).
+4. **Get approval** — The agent asks you to confirm. You can say:
+   - `"fix all"` — apply all fixes
+   - `"fix blocking only"` — apply only blocking issues
+   - Cherry-pick specific findings to fix
+5. **Apply fixes** — minimal, precise edits in priority order (blocking before warnings, new before existing).
+6. **Validate** — for TypeSpec, runs `tsp compile .` and fixes compilation
+   errors. For JSON, verifies well-formed syntax and `$ref` resolution.
+
+## What Gets Reviewed
+
+| File pattern | Rules applied |
+| ------------ | ------------- |
+| `specification/**/resource-manager/**/*.json` | Generic OpenAPI + ARM-specific rules |
+| `specification/**/data-plane/**/*.json` | Generic OpenAPI + data-plane checks |
+| `specification/**/*.tsp` | TypeSpec rules |
+| `specification/**/tspconfig.yaml` | TypeSpec config rules |
+| `specification/**/examples/*.json` | Validated against the spec they reference |
+
+### Key Rule Areas
+
+- **Versioning** — `YYYY-MM-DD[-preview]` format, no breaking changes, uniform versioning within a service
+- **Naming** — camelCase properties, PascalCase models, `{Resource}_{Verb}` operationIds
+- **ARM resources** — tracked resource CRUD completeness, PATCH constraints, secret handling, ARG compatibility
+- **TypeSpec** — project structure, decorators, doc comments, ARM resource patterns, `union` vs `enum`
+- **Security** — no secrets in GET responses, `x-ms-secret` annotations, proper auth definitions
+- **LRO** — correct `x-ms-long-running-operation` usage, response schemas, polling headers
+
+## Tips
+
+- **Be specific.** Point the agent at a specific file or directory rather
+  than asking it to review "everything". This produces faster,
+  higher-quality results.
+- **Use fix mode early.** Run the agent on your local files before pushing
+  a PR to catch issues proactively.
+- **Combine with CI.** The agent checks the same rules as CI validation.
+  Fixing issues locally before pushing reduces CI round-trips.
+- **Breaking change reviews.** Ask the agent to compare two specific
+  versions: `"Compare the 2024-03-01 and 2024-07-01 versions of this
+  spec for breaking changes"`.
+- **Iterate.** After fixes are applied, ask the agent to re-review the
+  same files to confirm everything is clean.
+
+## Scope and Limitations
+
+The agent **does**:
+
+- Review OpenAPI v2 (Swagger) JSON specifications
+- Review TypeSpec (`.tsp`) source files and `tspconfig.yaml`
+- Detect breaking changes between API versions
+- Apply fixes to local files in fix mode
+- Post review comments on PRs (with your approval)
+
+The agent **does not**:
+
+- Generate SDKs — use the Azure SDK MCP tools for that
+- Author new TypeSpec projects from scratch — use the
+  [azure-typespec-author](../.github/skills/azure-typespec-author/SKILL.md)
+  skill
+- Address `client.tsp` SDK-layer customizations from review feedback —
+  use the [api-review-feedback][api-review-feedback] chat mode
+- Fix CI pipeline failures — see the [CI Fix Guide](ci-fix.md)
+- Review SDK code, pipeline configs, or infrastructure files
+
+## Related Resources
+
+- [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
+- [Getting Started with OpenAPI Specifications](Getting%20started%20with%20OpenAPI%20specifications.md)
+- [Getting Started with TypeSpec Specifications](Getting-started-with-TypeSpec-specifications.md)
+- [Breaking Changes Guidelines](Breaking%20changes%20guidelines.md)
+- [CI Fix Guide](ci-fix.md)
+- [Directory Structure](directory-structure.md)
+
+<!-- Link references -->
+[api-guidelines]: https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
+[rpc-contract]: https://github.com/cloud-and-ai-microsoft/resource-provider-contract
+[copilot-ext]: https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+[copilot-chat-ext]: https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
+[api-review-feedback]: ../.github/chatmodes/api-review-feedback.chatmode.md
