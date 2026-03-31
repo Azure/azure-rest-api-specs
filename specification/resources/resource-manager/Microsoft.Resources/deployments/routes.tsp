@@ -18,8 +18,6 @@ interface DeploymentsOperationGroup {
   /**
    * Calculate the hash of the given template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CalculateTemplateHash")
   @tag("Deployments")
   @autoRoute
   calculateTemplateHash is ArmProviderActionSync<
@@ -34,8 +32,7 @@ interface DeploymentOperationsOperationGroup {
   /**
    * Gets a deployments operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_Get")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @tag("DeploymentOperations")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations/{operationId}")
   @get
@@ -64,8 +61,6 @@ interface DeploymentOperationsOperationGroup {
   /**
    * Gets all deployments operations for a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_List")
   @tag("DeploymentOperations")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations")
   @get

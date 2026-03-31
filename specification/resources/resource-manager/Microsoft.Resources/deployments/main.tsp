@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
 /**
  * Provides operations for working with deployments.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "DeploymentsClient" })
 @versioned(Versions)

@@ -509,6 +509,7 @@ enum ProvisioningOperation {
 /**
  * An error response for a resource management request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -551,6 +552,7 @@ model DeploymentProperties {
   /**
    * The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   template?: unknown;
 
   /**
@@ -652,6 +654,7 @@ model DeploymentParameter {
   /**
    * Input value to the parameter .
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   value?: unknown;
 
   /**
@@ -703,6 +706,7 @@ model DeploymentExternalInput {
   /**
    * External input value.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   value: unknown;
 }
 
@@ -718,6 +722,7 @@ model DeploymentExternalInputDefinition {
   /**
    * Configuration for the external input.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   config?: unknown;
 }
 
@@ -747,6 +752,7 @@ model DeploymentExtensionConfigItem {
   /**
    * The value of the extension config property.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   value?: unknown;
 
   /**
@@ -838,6 +844,7 @@ model DeploymentPropertiesExtended {
   /**
    * Key/value pairs that represent deployment output.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   @visibility(Lifecycle.Read)
   outputs?: unknown;
 
@@ -862,6 +869,7 @@ model DeploymentPropertiesExtended {
   /**
    * Deployment parameters.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   @visibility(Lifecycle.Read)
   parameters?: unknown;
 
@@ -922,6 +930,7 @@ model DeploymentPropertiesExtended {
   /**
    * Contains diagnostic information collected during validation process.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
   diagnostics?: DeploymentDiagnosticsDefinition[];
 
@@ -1300,6 +1309,7 @@ model ResourceReference {
   /**
    * The extensible resource identifiers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   @visibility(Lifecycle.Read)
   identifiers?: unknown;
 
@@ -1385,6 +1395,7 @@ model DeploymentExportResult {
   /**
    * The template content.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   template?: unknown;
 }
 
@@ -1472,16 +1483,19 @@ model WhatIfOperationProperties {
   /**
    * List of resource changes predicted by What-If operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   changes?: WhatIfChange[];
 
   /**
    * List of resource changes predicted by What-If operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   potentialChanges?: WhatIfChange[];
 
   /**
    * List of resource diagnostics detected by What-If operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
   diagnostics?: DeploymentDiagnosticsDefinition[];
 }
@@ -1508,6 +1522,7 @@ model WhatIfChange {
   /**
    * A subset of properties that uniquely identify a Bicep extensible resource because it lacks a resource id like an Azure resource has.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   identifiers?: unknown;
 
   /**
@@ -1528,11 +1543,13 @@ model WhatIfChange {
   /**
    * The snapshot of the resource before the deployment is executed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   before?: unknown;
 
   /**
    * The predicted snapshot of the resource after the deployment is executed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   after?: unknown;
 
   /**
@@ -1559,11 +1576,13 @@ model WhatIfPropertyChange {
   /**
    * The value of the property before the deployment is executed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   before?: unknown;
 
   /**
    * The value of the property after the deployment is executed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   after?: unknown;
 
   /**
@@ -1718,6 +1737,7 @@ model TargetResource {
   /**
    * The extensible resource identifiers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   identifiers?: unknown;
 
   /**
@@ -1738,6 +1758,7 @@ model HttpMessage {
   /**
    * HTTP message content.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   content?: unknown;
 }
 

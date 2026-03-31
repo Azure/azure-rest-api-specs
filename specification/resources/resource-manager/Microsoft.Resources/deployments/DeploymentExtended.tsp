@@ -13,6 +13,7 @@ namespace Microsoft.Resources;
 /**
  * Deployment information.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "For backward compatibility"
 @extensionResource
 model DeploymentExtended
   is Azure.ResourceManager.ExtensionResource<DeploymentPropertiesExtended> {
@@ -33,9 +34,11 @@ model DeploymentExtended
    * Deployment tags
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DeploymentExtendedScopeOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
@@ -57,8 +60,6 @@ interface DeploymentExtendeds {
   /**
    * Gets a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_GetAtScope")
   @tag("Deployments")
   getAtScope is Extension.Read<
     Extension.ScopeParameter,
@@ -69,8 +70,6 @@ interface DeploymentExtendeds {
   /**
    * Checks whether the deployment exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CheckExistenceAtScope")
   @tag("Deployments")
   checkExistenceAtScope is Extension.CheckExistence<
     Extension.ScopeParameter,
@@ -81,8 +80,7 @@ interface DeploymentExtendeds {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CreateOrUpdateAtScope")
+  @summary("Deploys resources at a given scope.")
   @tag("Deployments")
   createOrUpdateAtScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.ScopeParameter,
@@ -96,8 +94,7 @@ interface DeploymentExtendeds {
   /**
    * A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_DeleteAtScope")
+  @summary("Deletes a deployment from the deployment history.")
   @tag("Deployments")
   deleteAtScope is Extension.DeleteWithoutOkAsync<
     Extension.ScopeParameter,
@@ -108,8 +105,6 @@ interface DeploymentExtendeds {
   /**
    * Get all the deployments at the given scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ListAtScope")
   @tag("Deployments")
   listAtScope is Extension.ListByTarget<
     Extension.ScopeParameter,
@@ -134,8 +129,7 @@ interface DeploymentExtendeds {
   /**
    * You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CancelAtScope")
+  @summary("Cancels a currently running template deployment.")
   @tag("Deployments")
   @action("cancel")
   cancelAtScope is Extension.ActionSync<
@@ -149,8 +143,7 @@ interface DeploymentExtendeds {
   /**
    * Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ValidateAtScope")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @tag("Deployments")
   @action("validate")
   validateAtScope is Extension.ActionAsync<
@@ -172,8 +165,6 @@ interface DeploymentExtendeds {
   /**
    * Exports the template used for specified deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ExportTemplateAtScope")
   @tag("Deployments")
   @action("exportTemplate")
   exportTemplateAtScope is Extension.ActionSync<
@@ -187,8 +178,6 @@ interface DeploymentExtendeds {
   /**
    * Gets a deployments operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_GetAtScope")
   @tag("DeploymentOperations")
   @get
   @route("/{+scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
@@ -209,8 +198,6 @@ interface DeploymentExtendeds {
   /**
    * Gets all deployments operations for a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_ListAtScope")
   @tag("DeploymentOperations")
   @list
   @get
@@ -231,6 +218,7 @@ interface DeploymentExtendeds {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DeploymentExtendedTenantOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
@@ -269,6 +257,7 @@ interface Deployments {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  @summary("Deploys resources at tenant scope.")
   @tag("Deployments")
   createOrUpdateAtTenantScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.Tenant,
@@ -282,6 +271,7 @@ interface Deployments {
   /**
    * A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
    */
+  @summary("Deletes a deployment from the deployment history.")
   @tag("Deployments")
   deleteAtTenantScope is Extension.DeleteWithoutOkAsync<
     Extension.Tenant,
@@ -292,6 +282,7 @@ interface Deployments {
   /**
    * You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
    */
+  @summary("Cancels a currently running template deployment.")
   @tag("Deployments")
   @action("cancel")
   cancelAtTenantScope is Extension.ActionSync<
@@ -305,6 +296,7 @@ interface Deployments {
   /**
    * Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @tag("Deployments")
   @action("validate")
   validateAtTenantScope is Extension.ActionAsync<
@@ -352,8 +344,6 @@ interface Deployments {
   /**
    * Gets a deployments operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_GetAtTenantScope")
   @tag("DeploymentOperations")
   @get
   @route("/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
@@ -375,7 +365,6 @@ interface Deployments {
    * Get all the deployments at the tenant scope.
    */
   @tag("Deployments")
-  @operationId("Deployments_ListAtTenantScope")
   list is Extension.ListByTarget<
     Extension.Tenant,
     DeploymentExtended,
@@ -399,8 +388,6 @@ interface Deployments {
   /**
    * Gets all deployments operations for a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_ListAtTenantScope")
   @tag("DeploymentOperations")
   @list
   @get
@@ -421,6 +408,7 @@ interface Deployments {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DeploymentExtendedManagementGroupOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
@@ -445,8 +433,6 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Gets a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_GetAtManagementGroupScope")
   @tag("Deployments")
   getAtManagementGroupScope is Extension.Read<
     Extension.ManagementGroup<"groupId">,
@@ -457,8 +443,6 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Checks whether the deployment exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CheckExistenceAtManagementGroupScope")
   @tag("Deployments")
   checkExistenceAtManagementGroupScope is Extension.CheckExistence<
     Extension.ManagementGroup<"groupId">,
@@ -469,8 +453,7 @@ interface DeploymentExtendedManagementGroup {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CreateOrUpdateAtManagementGroupScope")
+  @summary("Deploys resources at management group scope.")
   @tag("Deployments")
   createOrUpdateAtManagementGroupScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.ManagementGroup<"groupId">,
@@ -484,8 +467,7 @@ interface DeploymentExtendedManagementGroup {
   /**
    * A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_DeleteAtManagementGroupScope")
+  @summary("Deletes a deployment from the deployment history.")
   @tag("Deployments")
   deleteAtManagementGroupScope is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup<"groupId">,
@@ -496,8 +478,6 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Get all the deployments for a management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ListAtManagementGroupScope")
   @tag("Deployments")
   listAtManagementGroupScope is Extension.ListByTarget<
     Extension.ManagementGroup<"groupId">,
@@ -522,8 +502,7 @@ interface DeploymentExtendedManagementGroup {
   /**
    * You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CancelAtManagementGroupScope")
+  @summary("Cancels a currently running template deployment.")
   @tag("Deployments")
   @action("cancel")
   cancelAtManagementGroupScope is Extension.ActionSync<
@@ -537,8 +516,7 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ValidateAtManagementGroupScope")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @tag("Deployments")
   @action("validate")
   validateAtManagementGroupScope is Extension.ActionAsync<
@@ -560,8 +538,6 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Returns changes that will be made by the deployment if executed at the scope of the management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_WhatIfAtManagementGroupScope")
   @tag("Deployments")
   @action("whatIf")
   whatIfAtManagementGroupScope is Extension.ActionAsync<
@@ -575,8 +551,6 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Exports the template used for specified deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ExportTemplateAtManagementGroupScope")
   @tag("Deployments")
   @action("exportTemplate")
   exportTemplateAtManagementGroupScope is Extension.ActionSync<
@@ -590,8 +564,6 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Gets a deployments operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_GetAtManagementGroupScope")
   @tag("DeploymentOperations")
   @get
   @route("/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
@@ -612,8 +584,6 @@ interface DeploymentExtendedManagementGroup {
   /**
    * Gets all deployments operations for a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_ListAtManagementGroupScope")
   @tag("DeploymentOperations")
   @list
   @get
@@ -634,6 +604,7 @@ interface DeploymentExtendedManagementGroup {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface DeploymentExtendedSubscriptionOps
   extends Azure.ResourceManager.Legacy.RoutedOperations<
       {
@@ -652,8 +623,6 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Gets a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_GetAtSubscriptionScope")
   @tag("Deployments")
   getAtSubscriptionScope is Extension.Read<
     Extension.Subscription,
@@ -664,8 +633,6 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Checks whether the deployment exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CheckExistenceAtSubscriptionScope")
   @tag("Deployments")
   checkExistenceAtSubscriptionScope is Extension.CheckExistence<
     Extension.Subscription,
@@ -676,8 +643,7 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CreateOrUpdateAtSubscriptionScope")
+  @summary("Deploys resources at subscription scope.")
   @tag("Deployments")
   createOrUpdateAtSubscriptionScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.Subscription,
@@ -691,8 +657,7 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_DeleteAtSubscriptionScope")
+  @summary("Deletes a deployment from the deployment history.")
   @tag("Deployments")
   deleteAtSubscriptionScope is Extension.DeleteWithoutOkAsync<
     Extension.Subscription,
@@ -703,8 +668,6 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Get all the deployments for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ListAtSubscriptionScope")
   @tag("Deployments")
   listAtSubscriptionScope is Extension.ListByTarget<
     Extension.Subscription,
@@ -729,8 +692,7 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CancelAtSubscriptionScope")
+  @summary("Cancels a currently running template deployment.")
   @tag("Deployments")
   @action("cancel")
   cancelAtSubscriptionScope is Extension.ActionSync<
@@ -744,8 +706,7 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ValidateAtSubscriptionScope")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @tag("Deployments")
   @action("validate")
   validateAtSubscriptionScope is Extension.ActionAsync<
@@ -767,8 +728,6 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Returns changes that will be made by the deployment if executed at the scope of the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_WhatIfAtSubscriptionScope")
   @tag("Deployments")
   @action("whatIf")
   whatIfAtSubscriptionScope is Extension.ActionAsync<
@@ -782,8 +741,6 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Exports the template used for specified deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ExportTemplateAtSubscriptionScope")
   @tag("Deployments")
   @action("exportTemplate")
   exportTemplateAtSubscriptionScope is Extension.ActionSync<
@@ -797,8 +754,6 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Gets a deployments operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_GetAtSubscriptionScope")
   @tag("DeploymentOperations")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}")
@@ -819,8 +774,6 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * Gets all deployments operations for a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeploymentOperations_ListAtSubscriptionScope")
   @tag("DeploymentOperations")
   @list
   @get
@@ -868,24 +821,19 @@ interface DeploymentExtendedOperationGroup {
   /**
    * Gets a deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_Get")
   @tag("Deployments")
   get is DeploymentExtendedResourceGroupOps.Read<DeploymentExtended>;
 
   /**
    * Checks whether the deployment exists.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CheckExistence")
   @tag("Deployments")
   checkExistence is DeploymentExtendedResourceGroupOps.CheckExistence<DeploymentExtended>;
 
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_CreateOrUpdate")
+  @summary("Deploys resources to a resource group.")
   @tag("Deployments")
   createOrUpdate is DeploymentExtendedResourceGroupOps.CreateOrUpdateAsync<
     DeploymentExtended,
@@ -897,16 +845,13 @@ interface DeploymentExtendedOperationGroup {
   /**
    * A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. Deleting a template deployment does not affect the state of the resource group. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_Delete")
+  @summary("Deletes a deployment from the deployment history.")
   @tag("Deployments")
   delete is DeploymentExtendedResourceGroupOps.DeleteWithoutOkAsync<DeploymentExtended>;
 
   /**
    * Get all the deployments for a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ListByResourceGroup")
   @tag("Deployments")
   listByResourceGroup is DeploymentExtendedResourceGroupOps.List<
     DeploymentExtended,
@@ -929,8 +874,7 @@ interface DeploymentExtendedOperationGroup {
   /**
    * You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resource group partially deployed.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_Cancel")
+  @summary("Cancels a currently running template deployment.")
   @tag("Deployments")
   cancel is DeploymentExtendedResourceGroupOps.ActionSync<
     DeploymentExtended,
@@ -941,8 +885,6 @@ interface DeploymentExtendedOperationGroup {
   /**
    * Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_Validate")
   @tag("Deployments")
   validate is DeploymentExtendedResourceGroupOps.ActionAsync<
     DeploymentExtended,
@@ -962,8 +904,6 @@ interface DeploymentExtendedOperationGroup {
   /**
    * Returns changes that will be made by the deployment if executed at the scope of the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_WhatIf")
   @tag("Deployments")
   whatIf is DeploymentExtendedResourceGroupOps.ActionAsync<
     DeploymentExtended,
@@ -974,8 +914,6 @@ interface DeploymentExtendedOperationGroup {
   /**
    * Exports the template used for specified deployment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Deployments_ExportTemplate")
   @tag("Deployments")
   exportTemplate is DeploymentExtendedResourceGroupOps.ActionSync<
     DeploymentExtended,

@@ -46,6 +46,7 @@ using Microsoft.Resources;
   "GetAtTenantScope"
 );
 @@clientLocation(Deployments.listAtTenantScope, "DeploymentOperations");
+@@clientName(Deployments.list, "ListAtTenantScope");
 @@clientLocation(DeploymentExtendedManagementGroup.getAtManagementGroupScope,
   Deployments
 );
