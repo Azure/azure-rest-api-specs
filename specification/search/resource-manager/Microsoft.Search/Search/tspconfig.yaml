@@ -16,6 +16,10 @@ options:
     model-namespace: false
     namespace: "Azure.ResourceManager.Search"
     flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Search"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-search"
     namespace: "azure.mgmt.search"
@@ -25,10 +29,12 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-search"
     namespace: "com.azure.resourcemanager.search"
-    service-name: "Search"
+    service-name: "Search Service"
     flavor: azure
     use-object-for-unknown: true
+    uuid-as-string: false
     premium: true
+    generate-tests: false
     enable-sync-stack: false
     remove-inner: CheckNameAvailabilityOutput
     client-side-validations: true

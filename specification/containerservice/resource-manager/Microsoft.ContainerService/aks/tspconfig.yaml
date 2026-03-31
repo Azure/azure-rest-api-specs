@@ -6,6 +6,7 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
+    use-read-only-status-schema: true
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/managedClusters.json"
     examples-dir: "{project-root}/examples"
@@ -18,10 +19,16 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservice-generated"
-    namespace: "com.azure.resourcemanager.containerservice.generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservice"
+    namespace: "com.azure.resourcemanager.containerservice"
     service-name: "Container Service"
     flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    uuid-as-string: false
+    float32-as-double: false
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerservice"
     emitter-output-dir: "{output-dir}/{service-dir}/armcontainerservice"
@@ -40,6 +47,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservice"
     package-details:
       name: "@azure/arm-containerservice"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ContainerService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 
 linter:
   extends:

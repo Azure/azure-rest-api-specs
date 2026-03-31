@@ -149,12 +149,6 @@ stages:
                   Exit 1
               }
 
-              # Set repo owner to 'azure-sdk' when customized branch is provided
-              $sdkRepoOwner = 'azure-sdk'
-              Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
-              Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
-              $sdkRepoUrl = "https://github.com/azure-sdk/$(SdkRepoName)"
-
               # Check if branch exists remotely
               Write-Host "Checking if branch '$SdkRepoBranch' exists in remote repository '$sdkRepoUrl'..."
               $branchExists = git ls-remote --heads $sdkRepoUrl "refs/heads/$SdkRepoBranch"
@@ -206,7 +200,9 @@ stages:
           versionSpec: $(NodeVersion)
         displayName: 'Install Node.js'
 
-      - template: /eng/common/pipelines/templates/steps/authenticate-temp-npmrc.yml
+      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+        parameters:
+          npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
 
       - task: UsePythonVersion@0
         inputs:
@@ -266,6 +262,8 @@ stages:
         displayName: 'Generate SDK'
         ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           continueOnError: true
+        env:
+          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
@@ -282,10 +280,10 @@ stages:
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - pwsh: |
             $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
-
-            # use the user provided branch name when SdkRepoOwner is set as 'azure-sdk'
-            if ('$(SdkRepoOwner)' -eq 'azure-sdk') {
-              $sdkPrBranchName = '${{ parameters.SdkRepoBranch }}'
+            $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
+            # use the user provided branch name
+            if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
+              $sdkPrBranchName = $sdkRepoBranch
             }
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
@@ -309,7 +307,7 @@ stages:
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
-            BaseRepoOwner: azure-sdk
+            BaseRepoOwner: $(SdkRepoOwner)
             CommitMsg: $(GeneratedSDKInformation)
             TargetRepoOwner: azure
             TargetRepoName: $(SdkRepoName)
@@ -335,7 +333,7 @@ stages:
               -RepoOwner "azure"
               -RepoName "$(SdkRepoName)"
               -BaseBranch "main"
-              -PROwner "azure-sdk"
+              -PROwner "$(SdkRepoOwner)"
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"

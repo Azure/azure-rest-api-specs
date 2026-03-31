@@ -51,11 +51,12 @@ op getReplace(
   botRight?: float64[],
 ): Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel> | Microsoft.Network.CloudError;
 
+@@alternateType(HeatMapOpsResourceParameters.heatMapType, "default", "java");
 @@override(HeatMapModels.get, getReplace, "go");
 @@alternateType(getReplace::parameters.heatMapType, "default", "go");
 @@clientName(Microsoft.Network,
   "TrafficManagerManagementClient",
-  "javascript, python"
+  "javascript,python,java"
 );
 
 // csharp configurations

@@ -17,7 +17,7 @@ namespace Microsoft.ContainerService;
 /**
  * Available Guardrails Version
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 @parentResource(SubscriptionLocationResource)
 model GuardrailsAvailableVersion
   is Azure.ResourceManager.ProxyResource<
@@ -40,7 +40,7 @@ model GuardrailsAvailableVersion
 );
 
 @armResourceOperations
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 interface GuardrailsAvailableVersions {
   /**
    * Contains Guardrails version along with its support info and whether it is a default version.
@@ -69,7 +69,7 @@ interface GuardrailsAvailableVersions {
 /**
  * Whether the version is preview or stable.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union GuardrailsSupport {
   string,
 
@@ -88,7 +88,7 @@ union GuardrailsSupport {
  * Whether the version is default or not and support info.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model GuardrailsAvailableVersionsProperties {
   /** Whether this is the default version. */
   @visibility(Lifecycle.Read)
@@ -104,6 +104,6 @@ model GuardrailsAvailableVersionsProperties {
 /**
  * Hold values properties, which is array of GuardrailsVersions
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model GuardrailsAvailableVersionsList
   is Azure.Core.Page<GuardrailsAvailableVersion>;
