@@ -392,6 +392,7 @@ interface Deployments {
       @query("$top")
       $top?: int32;
     },
+    Response = DeploymentListResult,
     Error = CloudError
   >;
 
@@ -721,6 +722,7 @@ interface DeploymentExtendedSubscriptionGroup {
       @query("$top")
       $top?: int32;
     },
+    Response = DeploymentListResult,
     Error = CloudError
   >;
 
@@ -877,7 +879,18 @@ interface DeploymentExtendedOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Deployments_CheckExistence")
   @tag("Deployments")
-  checkExistence is DeploymentExtendedResourceGroupOps.CheckExistence<DeploymentExtended>;
+  checkExistence is DeploymentExtendedResourceGroupOps.CheckExistence<
+    DeploymentExtended,
+    ErrorType = CloudError | {
+      ...Response<400>;
+
+      /**
+       * The template deployment validation detected failures.
+       */
+      @bodyRoot
+      body: DeploymentValidateResult;
+    }
+  >;
 
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
@@ -920,7 +933,8 @@ interface DeploymentExtendedOperationGroup {
        */
       @query("$top")
       $top?: int32;
-    }
+    },
+    Response = DeploymentListResult
   >;
 
   /**

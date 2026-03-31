@@ -24,7 +24,8 @@ interface DeploymentsOperationGroup {
   @autoRoute
   calculateTemplateHash is ArmProviderActionSync<
     Request = {},
-    Response = TemplateHashResult
+    Response = TemplateHashResult,
+    Error = CloudError
   >;
 }
 

@@ -6,6 +6,10 @@ using Microsoft.Resources;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(WhatIfOperationResult.properties);
 
+@@clientName(DeploymentsOperationGroup.calculateTemplateHash::parameters.body,
+  "template"
+);
+
 @@clientLocation(DeploymentExtendeds.getAtScope, Deployments);
 @@clientLocation(DeploymentExtendeds.checkExistenceAtScope, Deployments);
 @@clientLocation(DeploymentExtendeds.createOrUpdateAtScope, Deployments);
