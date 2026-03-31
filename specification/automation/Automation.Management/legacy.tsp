@@ -18,6 +18,7 @@ using Azure.ResourceManager.Private;
  * @template Error Optional. The error response, if non-standard.
  * @template OptionalRequestBody Optional. Indicates whether the request body is optional.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
 @autoRoute
 @armResourceAction(Resource)
 @Azure.ResourceManager.Private.enforceConstraint(Resource, Foundations.Resource)

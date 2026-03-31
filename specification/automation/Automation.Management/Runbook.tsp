@@ -13,25 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Automation;
 
-alias ReplaceContentRequest = {
-  @header("Content-Type")
-  contentType: "text/plain";
-
-  @doc("The runbook draft content.")
-  @bodyRoot
-  runbookContent: string;
-};
-
-alias ReplaceContentResponse = {
-  @header("Content-Type")
-  contentType: "text/powershell";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @bodyRoot
-  @encode("bytes")
-  body: bytes;
-};
-
 /**
  * Definition of the runbook type.
  */
@@ -137,6 +118,8 @@ interface Runbooks {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @tag("RunbookDraft")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @put
@@ -144,6 +127,9 @@ interface Runbooks {
   replaceContent is ArmResourceActionAsyncCustom<
     Runbook,
     {
+      /**
+       * The content type of the runbook draft content.
+       */
       @header("Content-Type")
       contentType: "text/plain";
 
