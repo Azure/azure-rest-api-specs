@@ -46,27 +46,27 @@ directive:
     reason: MongoDB.Atlas namespace is business requirement.
   - suppress: PathResourceProviderNamePascalCase
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}"]
     reason: MongoDB.Atlas namespace is business requirement.
   - suppress: PathResourceProviderNamePascalCase
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusterTierRegions"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusterTierRegions"]
     reason: MongoDB.Atlas namespace is business requirement.
   - suppress: PathResourceProviderNamePascalCase
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusters"]
     reason: MongoDB.Atlas namespace is business requirement.
   - suppress: PathResourceProviderNamePascalCase
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters/{clusterName}"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/clusters/{clusterName}"]
     reason: MongoDB.Atlas namespace is business requirement.
   - suppress: PathResourceProviderNamePascalCase
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/tierLimitReached"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectId}/tierLimitReached"]
     reason: MongoDB.Atlas namespace is business requirement.
   - suppress: RepeatedPathInfo
     from: openapi.json
-    reason: The projectId in ProjectProperties is a read-only server-generated Atlas identifier, distinct from the path parameter.
+    reason: The projectId in ClusterProperties is a create/read Atlas identifier used for cluster association, distinct from the path parameter.
   - suppress: AvoidAnonymousTypes
     from: openapi.json
     reason: Typespec generated definitions contain anonymous types.
