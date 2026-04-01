@@ -48,6 +48,10 @@ using Microsoft.Cache;
 // Fix Java SDK handwritten code
 @@usage(RedisResource, Usage.input | Usage.output, "java");
 @@usage(RedisFirewallRuleCreateParameters, Usage.input, "java");
+@@alternateType(Azure.ResourceManager.CommonTypes.OperationStatusResult.percentComplete,
+  float32,
+  "java"
+);
 
 @@clientName(RedisCommonPropertiesRedisConfiguration,
   "RedisCommonConfiguration",
