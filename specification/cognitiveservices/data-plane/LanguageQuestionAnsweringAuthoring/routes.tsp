@@ -267,8 +267,8 @@ interface QuestionAnsweringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @sharedRoute
-  @patch(#{ implicitOptionality: true })
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
+  @patch(#{ implicitOptionality: false })
   updateSources is Foundations.LongRunningOperation<
     {
       /**
@@ -299,9 +299,9 @@ interface QuestionAnsweringProjects {
   #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "method overload `updateSources` already support byos with fileUri"
   @added(Versions.v2025_05_15_preview)
   @sharedRoute
-  @patch(#{ implicitOptionality: true })
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
+  @patch(#{ implicitOptionality: false })
   updateSourcesFromFiles is Foundations.LongRunningOperation<
     {
       @doc("This request has a multi-part body.")
@@ -346,8 +346,8 @@ interface QuestionAnsweringProjects {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/qnas")
-  @patch(#{ implicitOptionality: true })
   @pollingOperation(QuestionAnsweringProjects.getUpdateQnasStatus)
+  @patch(#{ implicitOptionality: false })
   updateQnas is Foundations.LongRunningOperation<
     {
       /**

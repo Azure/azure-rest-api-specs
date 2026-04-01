@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01",
+    "amlFilesystemName": "fs1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "tags": {
+              "Dept": "ContosoAds"
+            },
+            "name": "expansionjob1",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob1",
+            "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "newStorageCapacityTiB": 16.0,
+              "status": {
+                "state": "Completed",
+                "statusMessage": "Expansion completed successfully",
+                "percentComplete": 100.0,
+                "startTimeUTC": "2024-03-21T17:25:43.511Z",
+                "completionTimeUTC": "2024-03-21T19:15:43.511Z"
+              }
+            }
+          },
+          {
+            "tags": {
+              "Dept": "ContosoFinance"
+            },
+            "name": "expansionjob2",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob2",
+            "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "newStorageCapacityTiB": 32.0,
+              "status": {
+                "state": "InProgress",
+                "statusMessage": "Expansion is in progress",
+                "percentComplete": 45.0,
+                "startTimeUTC": "2024-03-22T10:30:15.120Z"
+              }
+            }
+          },
+          {
+            "tags": {
+              "Dept": "ContosoHR"
+            },
+            "name": "expansionjob3",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs/expansionjob3",
+            "type": "Microsoft.StorageCache/amlFilesystem/expansionJob",
+            "properties": {
+              "provisioningState": "Failed",
+              "newStorageCapacityTiB": 24.0,
+              "status": {
+                "state": "Failed",
+                "statusCode": "InsufficientCapacity",
+                "statusMessage": "Insufficient capacity available in the region for the requested expansion",
+                "percentComplete": 0.0,
+                "startTimeUTC": "2024-03-21T08:45:22.334Z",
+                "completionTimeUTC": "2024-03-21T08:50:22.334Z"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/expansionJobs?api-version=2026-01-01&$skiptoken=abc123"
+      }
+    }
+  }
+}

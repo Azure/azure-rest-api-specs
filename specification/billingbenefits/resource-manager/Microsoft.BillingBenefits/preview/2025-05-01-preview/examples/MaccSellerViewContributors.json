@@ -3,8 +3,8 @@
     "api-version": "2025-05-01-preview",
     "body": {
       "properties": {
-        "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
         "$filter": "properties/status ne 'Canceled'",
+        "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
         "contributors": true,
         "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614"
       }
@@ -16,60 +16,60 @@
         "value": [
           {
             "properties": {
-              "provisioningState": "Succeeded",
-              "status": "Active",
-              "entityType": "Primary",
-              "displayName": "Macc 20230614",
-              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
-              "commitment": {
-                "grain": "FullTerm",
-                "amount": 20000,
-                "currencyCode": "USD"
-              },
-              "startAt": "2023-07-01T00:00:00Z",
-              "endAt": "2024-06-30T00:00:00Z",
               "allowContributors": true,
               "automaticShortfall": "Enabled",
               "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-              "systemId": "13810867107109237",
+              "commitment": {
+                "amount": 20000,
+                "currencyCode": "USD",
+                "grain": "FullTerm"
+              },
+              "displayName": "Macc 20230614",
+              "endAt": "2024-06-30T00:00:00Z",
+              "entityType": "Primary",
+              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+              "provisioningState": "Succeeded",
+              "resourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
               "shortfall": {
-                "productCode": "000278da-0000-0160-330f-a0b98cdbbdc4",
+                "balanceVersion": 4,
+                "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
                 "charge": {
                   "amount": 20000,
                   "currencyCode": "USD",
                   "grain": "FullTerm"
                 },
-                "startAt": "2023-07-01T00:00:00Z",
                 "endAt": "2024-07-01T00:00:00Z",
-                "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-                "balanceVersion": 4,
+                "productCode": "000278da-0000-0160-330f-a0b98cdbbdc4",
+                "startAt": "2023-07-01T00:00:00Z",
                 "systemId": "shortfall56789012"
               },
-              "resourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614"
+              "startAt": "2023-07-01T00:00:00Z",
+              "status": "Active",
+              "systemId": "13810867107109237"
             },
             "systemData": {
-              "createdByType": "User",
               "createdAt": "2023-06-12T22:05:09Z",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2023-06-12T22:05:09Z"
+              "createdByType": "User",
+              "lastModifiedAt": "2023-06-12T22:05:09Z",
+              "lastModifiedByType": "User"
             }
           },
           {
             "properties": {
-              "displayName": "Contributor 1",
-              "resourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/{leadMaccName}/contributor/{maccContributorName}",
-              "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
-              "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
-              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
-              "entityType": "Contributor",
               "commitment": {
-                "grain": "FullTerm",
                 "amount": 20000,
-                "currencyCode": "USD"
+                "currencyCode": "USD",
+                "grain": "FullTerm"
               },
-              "startAt": "2023-07-01T00:00:00Z",
+              "displayName": "Contributor 1",
               "endAt": "2024-06-30T00:00:00Z",
+              "entityType": "Contributor",
+              "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+              "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
+              "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
               "provisioningState": "Succeeded",
+              "resourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/{leadMaccName}/contributor/{maccContributorName}",
+              "startAt": "2023-07-01T00:00:00Z",
               "status": "Active",
               "systemId": "13810867107109237"
             }
@@ -77,5 +77,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "SellerResource_List",
+  "title": "SellerViewContributors"
 }
