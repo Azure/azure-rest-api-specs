@@ -221,3 +221,32 @@ Read-only child resource of `Cluster` for surfacing cluster storage volumes.
 | `ClusterVolumeMediaType` | `Unknown`, `Disk`, `SSD`, `Journal`, `SCM` |
 | `ClusterVolumeFaultDomainAwareness` | `Unknown`, `Drive`, `Enclosure`, `Server`, `Chassis`, `Rack` |
 | `ClusterVolumeProvisioningType` | `Thin`, `Fixed` |
+
+## HciJobType
+
+### New enum value
+
+| Value | Description |
+|---|---|
+| `ConfigureFaultDomain` | Job to configure fault domains for the cluster. |
+
+## HciConfigureFaultDomainJobProperties (new model)
+
+Extends `ClusterJobProperties` with discriminator value `ConfigureFaultDomain`.
+
+### New fields
+
+| Field | Type | Access | Description |
+|---|---|---|---|
+| `faultDomainCount` | `int32` | Read/Write | Number of fault domains to create (1-8). |
+| `faultDomainPrefix` | `string` | Read/Write | Naming prefix for fault domains (e.g., "Rack" creates Rack1, Rack2, etc.). |
+| `nodeAssignment` | `FaultDomainNodeAssignment[]` | Read/Write | Mapping of fault domain names to their assigned nodes. |
+
+## FaultDomainNodeAssignment (new model)
+
+### New fields
+
+| Field | Type | Access | Description |
+|---|---|---|---|
+| `faultDomainName` | `string` | Read/Write | Name of the fault domain (e.g., Rack1, Rack2). |
+| `nodes` | `string[]` | Read/Write | List of node names assigned to this fault domain. |

@@ -21,6 +21,9 @@ union HciJobType {
   /** Job to repair a server in the cluster. */
   RepairServer: "RepairServer",
 
+  /** Job to configure fault domains for the cluster. */
+  ConfigureFaultDomain: "ConfigureFaultDomain",
+
   // PRIVATE PREVIEW - Arc Gateway and GPU job types
   /** Job to configure arc gateway for the cluster. */
   ConfigureArcGateway: "ConfigureArcGateway",
@@ -6574,6 +6577,39 @@ model HciRepairServerJobProperties extends ClusterJobProperties {
   /** List of protected parameters to pass to trigger job for cluster. */
   @Azure.ResourceManager.identifiers(#["secretName"])
   secrets?: EceDeploymentSecrets[];
+}
+
+////////////////////////////////////////////////////////////////
+////////////// Fault Domain Config Job Models /////////////////
+////////////////////////////////////////////////////////////////
+
+/** Mapping of a fault domain to its assigned nodes. */
+@added(Versions.v2026_03_15_preview)
+model FaultDomainNodeAssignment {
+  /** Name of the fault domain (e.g., Rack1, Rack2). */
+  faultDomainName: string;
+
+  /** List of node names assigned to this fault domain. */
+  nodes: string[];
+}
+
+/** Properties for configuring fault domains in the cluster. */
+@added(Versions.v2026_03_15_preview)
+model HciConfigureFaultDomainJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureFaultDomain;
+
+  /** Number of fault domains to create (1-8). */
+  @minValue(1)
+  @maxValue(8)
+  faultDomainCount: int32;
+
+  /** Naming prefix for fault domains. Each fault domain is named <Prefix>1, <Prefix>2, etc. */
+  faultDomainPrefix: string;
+
+  /** Mapping of fault domain names to their assigned nodes. */
+  @Azure.ResourceManager.identifiers(#["faultDomainName"])
+  nodeAssignment: FaultDomainNodeAssignment[];
 }
 
 ////////////////////////////////////////////////////////////////
