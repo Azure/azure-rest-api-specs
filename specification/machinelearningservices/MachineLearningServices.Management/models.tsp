@@ -2987,6 +2987,12 @@ union DistributionType {
   TensorFlow: "TensorFlow",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   Mpi: "Mpi",
+
+  /**
+   * Ray distribution type.
+   */
+  @added(Versions.v2026_01_15_preview)
+  Ray: "Ray",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -15173,6 +15179,51 @@ model PyTorch extends DistributionConfiguration {
    * [Required] Specifies the type of distribution framework.
    */
   distributionType: "PyTorch";
+}
+
+/**
+ * Ray distribution configuration.
+ * A class for managing the configuration for a distributed Ray job.
+ */
+@added(Versions.v2026_01_15_preview)
+model Ray extends DistributionConfiguration {
+  /**
+   * The port of the head ray process.
+   */
+  port?: int32;
+
+  /**
+   * The address of Ray head node.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  address?: string | null;
+
+  /**
+   * Provide this argument to start the Ray dashboard GUI.
+   */
+  includeDashboard?: boolean;
+
+  /**
+   * The port to bind the dashboard server to.
+   */
+  dashboardPort?: int32;
+
+  /**
+   * Additional arguments passed to ray start in head node.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  headNodeAdditionalArgs?: string | null;
+
+  /**
+   * Additional arguments passed to ray start in worker node.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  workerNodeAdditionalArgs?: string | null;
+
+  /**
+   * [Required] Specifies the type of distribution framework.
+   */
+  distributionType: "Ray";
 }
 
 /**

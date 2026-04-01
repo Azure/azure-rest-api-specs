@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "body": {
+      "properties": {
+        "description": "Ray distributed command job",
+        "codeId": "string",
+        "command": "python train.py",
+        "computeId": "string",
+        "displayName": "ray-multi-node-job",
+        "distribution": {
+          "distributionType": "Ray",
+          "port": 6379,
+          "includeDashboard": true,
+          "dashboardPort": 8265
+        },
+        "environmentId": "string",
+        "environmentVariables": {
+          "string": "string"
+        },
+        "experimentName": "ray-experiment",
+        "identity": {
+          "identityType": "AMLToken"
+        },
+        "jobType": "Command",
+        "resources": {
+          "instanceCount": 2,
+          "instanceType": "string",
+          "properties": {}
+        },
+        "tags": {
+          "string": "string"
+        }
+      }
+    },
+    "id": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "id": "string",
+        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "properties": {
+          "description": "Ray distributed command job",
+          "codeId": "string",
+          "command": "python train.py",
+          "computeId": "string",
+          "displayName": "ray-multi-node-job",
+          "distribution": {
+            "distributionType": "Ray",
+            "port": 6379,
+            "address": null,
+            "includeDashboard": true,
+            "dashboardPort": 8265,
+            "headNodeAdditionalArgs": null,
+            "workerNodeAdditionalArgs": null
+          },
+          "environmentId": "string",
+          "environmentVariables": {
+            "string": "string"
+          },
+          "experimentName": "ray-experiment",
+          "identity": {
+            "identityType": "AMLToken"
+          },
+          "jobType": "Command",
+          "status": "Starting",
+          "resources": {
+            "instanceCount": 2,
+            "instanceType": "string",
+            "properties": {}
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2026-01-15T00:00:00.000Z",
+          "createdBy": "string",
+          "createdByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "id": "string",
+        "type": "Microsoft.MachineLearningServices/workspaces/jobs",
+        "properties": {
+          "description": "Ray distributed command job",
+          "codeId": "string",
+          "command": "python train.py",
+          "computeId": "string",
+          "displayName": "ray-multi-node-job",
+          "distribution": {
+            "distributionType": "Ray",
+            "port": 6379,
+            "address": null,
+            "includeDashboard": true,
+            "dashboardPort": 8265,
+            "headNodeAdditionalArgs": null,
+            "workerNodeAdditionalArgs": null
+          },
+          "environmentId": "string",
+          "environmentVariables": {
+            "string": "string"
+          },
+          "experimentName": "ray-experiment",
+          "identity": {
+            "identityType": "AMLToken"
+          },
+          "jobType": "Command",
+          "status": "Starting",
+          "resources": {
+            "instanceCount": 2,
+            "instanceType": "string",
+            "properties": {}
+          },
+          "tags": {
+            "string": "string"
+          }
+        },
+        "systemData": {
+          "createdAt": "2026-01-15T00:00:00.000Z",
+          "createdBy": "string",
+          "createdByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Jobs_CreateOrUpdate",
+  "title": "CreateOrUpdate Command Job With Ray Distribution."
+}

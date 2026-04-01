@@ -16964,6 +16964,9 @@
           "CreateOrUpdate AutoML Job.": {
             "$ref": "./examples/Job/AutoMLJob/createOrUpdate.json"
           },
+          "CreateOrUpdate Command Job With Ray Distribution.": {
+            "$ref": "./examples/Job/CommandJob/createOrUpdateRayDistribution.json"
+          },
           "CreateOrUpdate Command Job.": {
             "$ref": "./examples/Job/CommandJob/createOrUpdate.json"
           },
@@ -29060,7 +29063,8 @@
       "enum": [
         "PyTorch",
         "TensorFlow",
-        "Mpi"
+        "Mpi",
+        "Ray"
       ],
       "x-ms-enum": {
         "name": "DistributionType",
@@ -29077,6 +29081,11 @@
           {
             "name": "Mpi",
             "value": "Mpi"
+          },
+          {
+            "name": "Ray",
+            "value": "Ray",
+            "description": "Ray distribution type."
           }
         ]
       }
@@ -39261,6 +39270,47 @@
         }
       ],
       "x-ms-discriminator-value": "Random"
+    },
+    "Ray": {
+      "type": "object",
+      "description": "Ray distribution configuration.\nA class for managing the configuration for a distributed Ray job.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port of the head ray process."
+        },
+        "address": {
+          "type": "string",
+          "description": "The address of Ray head node.",
+          "x-nullable": true
+        },
+        "includeDashboard": {
+          "type": "boolean",
+          "description": "Provide this argument to start the Ray dashboard GUI."
+        },
+        "dashboardPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port to bind the dashboard server to."
+        },
+        "headNodeAdditionalArgs": {
+          "type": "string",
+          "description": "Additional arguments passed to ray start in head node.",
+          "x-nullable": true
+        },
+        "workerNodeAdditionalArgs": {
+          "type": "string",
+          "description": "Additional arguments passed to ray start in worker node.",
+          "x-nullable": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Ray"
     },
     "Recurrence": {
       "type": "object",
