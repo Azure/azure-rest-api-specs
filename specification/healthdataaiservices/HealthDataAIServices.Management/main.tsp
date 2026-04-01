@@ -42,23 +42,6 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
-/** Patch request body for DeidService */
-model DeidUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** Updatable managed service identity */
-  identity?: ManagedServiceIdentityUpdate;
-
-  /** RP-specific properties */
-  properties?: DeidPropertiesUpdate;
-}
-
-model DeidPropertiesUpdate
-  is OptionalProperties<UpdateableProperties<DeidServiceProperties>>;
-
-#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
-model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
 @Azure.Core.lroStatus
@@ -115,7 +98,7 @@ interface DeidServices {
   listByResourceGroup is ArmResourceListByParent<DeidService>;
   listBySubscription is ArmListBySubscription<DeidService>;
   create is ArmResourceCreateOrUpdateAsync<DeidService>;
-  update is ArmCustomPatchAsync<DeidService, DeidUpdate>;
+
   delete is ArmResourceDeleteWithoutOkAsync<DeidService>;
 }
 
