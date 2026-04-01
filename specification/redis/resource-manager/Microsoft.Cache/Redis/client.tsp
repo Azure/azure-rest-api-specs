@@ -21,6 +21,135 @@ using Microsoft.Cache;
 @@clientName(Microsoft.Cache.TlsVersion.`1.1`, "ONE1", "python");
 @@clientName(Microsoft.Cache.TlsVersion.`1.2`, "ONE2", "python");
 
+// Service definition is wrong
+@@alternateType(Microsoft.Cache.RedisCommonPropertiesRedisConfiguration,
+  RedisCommonPropertiesRedisConfigurationRecordString,
+  "java"
+);
+/**
+ * All Redis Settings. Few possible keys: rdb-backup-enabled,rdb-storage-connection-string,rdb-backup-frequency,maxmemory-delta, maxmemory-policy,notify-keyspace-events, aof-backup-enabled, aof-storage-connection-string-0, aof-storage-connection-string-1 etc.
+ */
+model RedisCommonPropertiesRedisConfigurationRecordString {
+  ...Record<string>;
+
+  /**
+   * Specifies whether the RDB backup is enabled
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `rdb-backup-enabled`?: string;
+
+  /**
+   * Specifies the frequency for creating rdb backup in minutes. Valid values: (15, 30, 60, 360, 720, 1440)
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `rdb-backup-frequency`?: string;
+
+  /**
+   * Specifies the maximum number of snapshots for rdb backup
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `rdb-backup-max-snapshot-count`?: string;
+
+  /**
+   * The storage account connection string for storing rdb file
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `rdb-storage-connection-string`?: string;
+
+  /**
+   * Specifies whether the aof backup is enabled
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `aof-backup-enabled`?: string;
+
+  /**
+   * First storage account connection string
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `aof-storage-connection-string-0`?: string;
+
+  /**
+   * Second storage account connection string
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `aof-storage-connection-string-1`?: string;
+
+  /**
+   * Value in megabytes reserved for fragmentation per shard
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `maxfragmentationmemory-reserved`?: string;
+
+  /**
+   * The eviction strategy used when your data won't fit within its memory limit.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `maxmemory-policy`?: string;
+
+  /**
+   * Value in megabytes reserved for non-cache usage per shard e.g. failover.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `maxmemory-reserved`?: string;
+
+  /**
+   * Value in megabytes reserved for non-cache usage per shard e.g. failover.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `maxmemory-delta`?: string;
+
+  /**
+   * The max clients config
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  @visibility(Lifecycle.Read)
+  maxclients?: string;
+
+  /**
+   * The keyspace events which should be monitored.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `notify-keyspace-events`?: string;
+
+  /**
+   * Preferred auth method to communicate to storage account used for data archive, specify SAS or ManagedIdentity, default value is SAS
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  @visibility(Lifecycle.Read)
+  `preferred-data-archive-auth-method`?: string;
+
+  /**
+   * Preferred auth method to communicate to storage account used for data persistence, specify SAS or ManagedIdentity, default value is SAS
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `preferred-data-persistence-auth-method`?: string;
+
+  /**
+   * Zonal Configuration
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  @visibility(Lifecycle.Read)
+  `zonal-configuration`?: string;
+
+  /**
+   * Specifies whether the authentication is disabled. Setting this property is highly discouraged from security point of view; you should never disable authentication using this property!
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  authnotrequired?: string;
+
+  /**
+   * SubscriptionId of the storage account for persistence (aof/rdb) using ManagedIdentity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `storage-subscription-id`?: string;
+
+  /**
+   * Specifies whether AAD based authentication has been enabled or disabled for the cache
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following Redis.conf casing style"
+  `aad-enabled`?: string;
+}
+
 // Java SDK specific customizations to resolve breaking changes
 @@clientName(RedisCommonPropertiesRedisConfiguration,
   "RedisConfiguration",
