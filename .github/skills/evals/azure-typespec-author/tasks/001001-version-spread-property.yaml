@@ -6,7 +6,7 @@ description: |
 tags:
   - versioning
 inputs:
-  prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in a new API version 2025-05-04-preview only."
+  prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. Use azure-typespec-author to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in a new API version 2025-05-04-preview only."
   files:
     - path: Microsoft.Widget/Widget/employee.tsp
     - path: Microsoft.Widget/Widget/main.tsp
@@ -15,3 +15,23 @@ expected:
   output_contains:
     - "Task Type"
     - "API Version Evolution"
+graders:
+  - type: action_sequence
+    name: mcp_workflow
+    config:
+      matching_mode: in_order_match
+      expected_actions:
+        - edit
+        - azsdk_run_typespec_validation
+  # - type: prompt
+  #   name: spread_model_identity_versioning_check
+  #   config:
+  #     prompt: |
+  #       Check the modified TypeSpec files and verify:
+  #       1. The spread model ManagedServiceIdentityProperty should remain on the Employee model.
+  #       2. An augment decorator should be added to mark the identity property as only available starting from `2025-05-04-preview`.
+
+  #       If both are correct, call set_waza_grade_pass.
+  #       Otherwise, call set_waza_grade_fail with your reasoning.
+  #     model: "gpt-4o-mini"
+  #     continue_session: false
