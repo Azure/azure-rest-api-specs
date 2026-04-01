@@ -144,4 +144,3 @@ For complex tasks (adding resources, models, running the pipeline), use the **`@
 | `.github/eng/workflow.md` | Full workflow, validation, troubleshooting |
 | `.github/eng/repo-structure.md` | Repo structure, private vs public differences, sync process |
 | `.github/eng/new-api-version.md` | Creating new API versions |
-| `.github/eng/changelog-2026-03-15-preview.md` | Changes in current preview version |
