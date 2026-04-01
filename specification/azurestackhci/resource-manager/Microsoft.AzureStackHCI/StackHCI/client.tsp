@@ -139,7 +139,7 @@ using Microsoft.AzureStackHCI;
 
 // From rename-mapping: Extension → Arc prefix
 @@clientName(Microsoft.AzureStackHCI.ExtensionInstanceView,
-  "HciExtensionInstanceView",
+  "ArcExtensionInstanceView",
   "csharp"
 );
 @@clientName(Microsoft.AzureStackHCI.ExtensionInstanceViewStatus,
