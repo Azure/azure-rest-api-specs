@@ -225,7 +225,7 @@ interface Chat {
       /**
        * Role name.
        */
-      @pattern("^[A-Za-z0-9_.-]{1,64}$")
+      @pattern("^[a-z0-9_.-]{1,64}$")
       @path
       role: string;
     },
@@ -252,7 +252,7 @@ interface Chat {
       /**
        * Role name.
        */
-      @pattern("^[A-Za-z0-9_.-]{1,64}$")
+      @pattern("^[a-z0-9_.-]{1,64}$")
       @path
       role: string;
 
@@ -285,7 +285,7 @@ interface Chat {
       /**
        * Role name.
        */
-      @pattern("^[A-Za-z0-9_.-]{1,64}$")
+      @pattern("^[a-z0-9_.-]{1,64}$")
       @path
       role: string;
     },

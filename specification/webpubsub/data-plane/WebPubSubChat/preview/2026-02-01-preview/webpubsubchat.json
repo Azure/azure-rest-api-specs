@@ -420,7 +420,7 @@
             "description": "Role name.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+            "pattern": "^[a-z0-9_.-]{1,64}$"
           }
         ],
         "responses": {
@@ -474,7 +474,7 @@
             "description": "Role name.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+            "pattern": "^[a-z0-9_.-]{1,64}$"
           },
           {
             "name": "request",
@@ -534,7 +534,7 @@
             "description": "Role name.",
             "required": true,
             "type": "string",
-            "pattern": "^[A-Za-z0-9_.-]{1,64}$"
+            "pattern": "^[a-z0-9_.-]{1,64}$"
           }
         ],
         "responses": {
@@ -1269,11 +1269,11 @@
     },
     "ChatRoleInfo": {
       "type": "object",
-      "description": "Represents role information.\nA role must contain either user permissions or room permissions, but not both.",
+      "description": "Represents role information.\nA role name must start with 'user.' or 'room.' prefix.\nA role must contain either user permissions or room permissions, but not both.",
       "properties": {
         "role": {
           "type": "string",
-          "description": "Role name."
+          "description": "Role name. Must start with 'user.' or 'room.' prefix."
         },
         "permissions": {
           "type": "array",

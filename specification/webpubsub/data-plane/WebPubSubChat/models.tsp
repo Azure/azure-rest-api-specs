@@ -47,10 +47,11 @@ model ChatMessageInfo {
 
 /**
  * Represents role information.
+ * A role name must start with 'user.' or 'room.' prefix.
  * A role must contain either user permissions or room permissions, but not both.
  */
 model ChatRoleInfo {
-  /** Role name. */
+  /** Role name. Must start with 'user.' or 'room.' prefix. */
   role: string;
 
   /** Permissions associated with the role. Do not mix user permissions and room permissions in one role. */
