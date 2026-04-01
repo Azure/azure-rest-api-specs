@@ -21,6 +21,9 @@
       "name": "Datasets"
     },
     {
+      "name": "Jobs"
+    },
+    {
       "name": "Deployments"
     },
     {
@@ -58,9 +61,6 @@
     },
     {
       "name": "Schedules"
-    },
-    {
-      "name": "DataGenerationJobs"
     }
   ],
   "paths": {
@@ -2431,377 +2431,6 @@
         ]
       }
     },
-    "/data_generation/jobs": {
-      "get": {
-        "operationId": "DataGenerationJobs_list",
-        "summary": "Returns a list of data generation jobs",
-        "description": "Returns a list of data generation jobs.",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 20
-            },
-            "explode": false
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
-            "schema": {
-              "$ref": "#/components/schemas/PageOrder"
-            },
-            "explode": false
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "scenario",
-            "in": "query",
-            "required": false,
-            "description": "Filter data generation jobs by their scenario.",
-            "schema": {
-              "$ref": "#/components/schemas/DataGenerationJobScenario"
-            },
-            "explode": false
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "description": "Filter data generation jobs by their type.",
-            "schema": {
-              "$ref": "#/components/schemas/DataGenerationJobType"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "has_more"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/DataGenerationJob"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "first_id": {
-                      "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
-                    }
-                  },
-                  "description": "The response data for a requested list of items."
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      },
-      "post": {
-        "operationId": "DataGenerationJobs_create",
-        "summary": "Creates a data generation job.",
-        "description": "Creates a data generation job.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "required": true,
-                "description": "The URL to poll the created data generation job status and retrieve the job details.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataGenerationJob"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataGenerationJob"
-              }
-            }
-          },
-          "description": "Data generation job create request body"
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      }
-    },
-    "/data_generation/jobs/{data_generation_job_id}": {
-      "get": {
-        "operationId": "DataGenerationJobs_get",
-        "summary": "Get info about a data generation job.",
-        "description": "Gets the details of a data generation job by its ID.",
-        "parameters": [
-          {
-            "name": "data_generation_job_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the data generation job.",
-            "schema": {
-              "type": "string",
-              "maxLength": 1024
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataGenerationJob"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "DataGenerationJobs_delete",
-        "description": "Deletes a data generation job by its ID.",
-        "parameters": [
-          {
-            "name": "data_generation_job_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the data generation job to delete.",
-            "schema": {
-              "type": "string",
-              "maxLength": 1024
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      }
-    },
-    "/data_generation/jobs/{data_generation_job_id}/cancel": {
-      "post": {
-        "operationId": "DataGenerationJobs_cancel",
-        "summary": "Cancels a data generation job.",
-        "description": "Cancels a data generation job by its ID.",
-        "parameters": [
-          {
-            "name": "data_generation_job_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the data generation job to cancel.",
-            "schema": {
-              "type": "string",
-              "maxLength": 1024
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataGenerationJob"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      }
-    },
     "/datasets": {
       "get": {
         "operationId": "Datasets_listLatest",
@@ -3234,6 +2863,71 @@
             }
           },
           "description": "The pending upload request parameters"
+        }
+      }
+    },
+    "/datasets:generate": {
+      "post": {
+        "operationId": "Datasets_generate",
+        "description": "Start a data generation job.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "The location for checking the status of the job created.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Datasets"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataGenerationJob"
+              }
+            }
+          },
+          "description": "The data generation job request."
         }
       }
     },
@@ -5386,6 +5080,251 @@
         "tags": [
           "Insights"
         ]
+      }
+    },
+    "/jobs": {
+      "get": {
+        "operationId": "FoundryJobs_list",
+        "summary": "Returns a list of foundry jobs",
+        "description": "Returns a list of foundry jobs.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Filter foundry jobs by their type.",
+            "schema": {
+              "$ref": "#/components/schemas/FoundryJobType"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FoundryJob"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Jobs=V1Preview"
+          ]
+        }
+      }
+    },
+    "/jobs/{job_id}": {
+      "get": {
+        "operationId": "FoundryJobs_get",
+        "summary": "Get the details of a Foundry job.",
+        "description": "Gets the details of a job by its id.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the foundry job.",
+            "schema": {
+              "type": "string",
+              "maxLength": 1024
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FoundryJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Jobs=V1Preview"
+          ]
+        }
+      }
+    },
+    "/jobs/{job_id}:cancel": {
+      "post": {
+        "operationId": "FoundryJobs_cancel",
+        "summary": "Cancels a foundry job.",
+        "description": "Cancels a foundry job by its ID.",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the foundry job to cancel.",
+            "schema": {
+              "type": "string",
+              "maxLength": 1024
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FoundryJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Jobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Jobs=V1Preview"
+          ]
+        }
       }
     },
     "/memory_stores": {
@@ -12975,17 +12914,22 @@
         "type": "object",
         "required": [
           "name",
+          "type",
           "sources",
           "options",
-          "scenario",
-          "id",
-          "status",
-          "created_at"
+          "scenario"
         ],
         "properties": {
           "name": {
             "type": "string",
             "description": "The display name of the data generation job."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DataGeneration"
+            ],
+            "description": "The type of the data generation job, which is always 'DataGeneration' for this model."
           },
           "sources": {
             "type": "array",
@@ -13010,20 +12954,6 @@
             ],
             "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
           },
-          "id": {
-            "type": "string",
-            "description": "The job identifier.",
-            "readOnly": true
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobStatus"
-              }
-            ],
-            "description": "The current status of the job.",
-            "readOnly": true
-          },
           "outputs": {
             "type": "array",
             "items": {
@@ -13045,29 +12975,13 @@
             ],
             "description": "The token usage information for the data generation job.",
             "readOnly": true
-          },
-          "created_at": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
-            "readOnly": true
-          },
-          "finished_at": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).",
-            "readOnly": true
-          },
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.Error"
-              }
-            ],
-            "description": "Error information set only when status is 'failed'.",
-            "readOnly": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/FoundryJob"
+          }
+        ],
         "description": "Data Generation Job resource."
       },
       "DataGenerationJobOptions": {
@@ -13206,24 +13120,6 @@
           }
         ],
         "description": "The supported source types for a data generation job."
-      },
-      "DataGenerationJobStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "queued",
-              "running",
-              "succeeded",
-              "failed",
-              "cancelled"
-            ]
-          }
-        ],
-        "description": "Status values for data generation job."
       },
       "DataGenerationJobType": {
         "anyOf": [
@@ -15655,6 +15551,96 @@
           }
         ],
         "description": "FileDatasetVersion Definition"
+      },
+      "FoundryJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "status",
+          "created_by",
+          "last_updated_by",
+          "created_time"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the job.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the job."
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryJobType"
+              }
+            ],
+            "description": "The type of the job."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Azure.Core.Foundations.OperationState"
+              }
+            ],
+            "description": "The status of the job.",
+            "readOnly": true
+          },
+          "created_by": {
+            "type": "string",
+            "description": "The user who created the job.",
+            "readOnly": true
+          },
+          "last_updated_by": {
+            "type": "string",
+            "description": "The user who last updated the job.",
+            "readOnly": true
+          },
+          "created_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the job is created.",
+            "readOnly": true
+          },
+          "completed_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp when the job is completed.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error information set only when status is 'failed'.",
+            "readOnly": true
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {}
+        },
+        "description": "Foundry job result"
+      },
+      "FoundryJobType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "DataGeneration"
+            ]
+          }
+        ],
+        "description": "The types of Foundry jobs."
       },
       "FunctionToolCall": {
         "type": "object",

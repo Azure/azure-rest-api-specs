@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-
+import "../jobs/models.tsp";
 namespace Azure.AI.Projects;
 
 @doc("The supported data generation job types.")
@@ -43,9 +43,12 @@ union DataGenerationJobStatus {
 }
 
 @doc("Data Generation Job resource.")
-model DataGenerationJob {
+model DataGenerationJob extends FoundryJob {
   @doc("The display name of the data generation job.")
   name: string;
+
+  @doc("The type of the data generation job, which is always 'DataGeneration' for this model.")
+  type: "DataGeneration";
 
   @doc("The sources used for the data generation job.")
   sources: Array<DataGenerationJobSource>;
@@ -55,14 +58,6 @@ model DataGenerationJob {
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
   scenario: DataGenerationJobScenario;
-
-  @doc("The job identifier.")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  @doc("The current status of the job.")
-  @visibility(Lifecycle.Read)
-  status: DataGenerationJobStatus;
 
   @doc("The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
   outputs?: Array<DataGenerationJobOutput>;
@@ -74,18 +69,6 @@ model DataGenerationJob {
   @doc("The token usage information for the data generation job.")
   @visibility(Lifecycle.Read)
   token_usage?: TokenUsage;
-
-  @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
-  @visibility(Lifecycle.Read)
-  created_at: int64;
-
-  @doc("The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).")
-  @visibility(Lifecycle.Read)
-  finished_at?: int64;
-
-  @doc("Error information set only when status is 'failed'.")
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
 }
 
 @doc("Output information for a data generation job.")

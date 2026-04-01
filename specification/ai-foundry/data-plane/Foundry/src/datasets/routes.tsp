@@ -1,6 +1,8 @@
 import "../common/models.tsp";
 import "../servicepatterns.tsp";
 import "./models.tsp";
+import "../jobs/data_generation_models.tsp";
+import "../jobs/routes.tsp";
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
@@ -51,5 +53,25 @@ interface Datasets
       version: string;
     },
     AssetCredentialResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Start a data generation job.")
+  @post
+  @Rest.action("datasets:generate")
+  generate is Azure.Core.Foundations.ResourceCollectionOperation<
+    DatasetVersion,
+    {
+      @doc("The data generation job request.")
+      @body
+      body: DataGenerationJob;
+    },
+    TypeSpec.Http.Response<202> &
+      DataGenerationJob & {
+        @doc("The location for checking the status of the job created.")
+        @header("Location")
+        location: string;
+      }
   >;
 }
