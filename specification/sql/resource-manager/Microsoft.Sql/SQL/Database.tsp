@@ -253,10 +253,9 @@ interface Databases {
        * The operation identifier.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @path
       @segment("operations")
-      operationId: string;
+      operationId: Azure.Core.uuid;
     }
   >;
 
