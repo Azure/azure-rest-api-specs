@@ -93,9 +93,28 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-agent-name",
+            "in": "header",
+            "required": false,
+            "description": "The unique name that identifies the agent. Max 63 chars, must start and end with alphanumeric, hyphens allowed in the middle.",
+            "schema": {
+              "type": "string",
+              "maxLength": 63
+            }
+          },
+          {
+            "name": "x-ms-code-zip-sha256",
+            "in": "header",
+            "required": false,
+            "description": "SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
-        "description": "Creates the agent. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.\nThe request is multipart/form-data with a JSON metadata part (including agent name) and a binary code part.\nMaximum upload size is 250 MB.",
+        "description": "Creates the agent. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.\nThe agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.\nThe SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -348,9 +367,18 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-code-zip-sha256",
+            "in": "header",
+            "required": false,
+            "description": "SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
-        "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version. Updates a code-based agent by uploading new code and creating a new version.\nIf the code and definition are unchanged (matched by content_hash), returns the existing version.\nThe request is multipart/form-data with a JSON metadata part and a binary code part.\nMaximum upload size is 250 MB.",
+        "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version. Updates a code-based agent by uploading new code and creating a new version.\nIf the code and definition are unchanged (matched by x-ms-code-zip-sha256 header), returns the existing version.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -557,9 +585,18 @@
               "type": "string"
             },
             "explode": false
+          },
+          {
+            "name": "x-ms-code-zip-sha256",
+            "in": "header",
+            "required": false,
+            "description": "SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
-        "description": "Create a new agent version. Create a new agent version from code. Uploads the code zip and creates or updates\nthe agent in a single call. If an agent with the given name already exists, a new\nversion is added. If not, the agent is created with its first version.\nThe request is multipart/form-data with a JSON metadata part and a binary code part.\nMaximum upload size is 250 MB.",
+        "description": "Create a new agent version. Create a new agent version from code. Uploads the code zip and creates a new version\nfor an existing agent. The SHA-256 hex digest of the zip is provided in the\n`x-ms-code-zip-sha256` header for integrity and dedup.\nThe request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).\nMaximum upload size is 250 MB.",
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -11196,10 +11233,6 @@
               "type": "string"
             },
             "description": "The entry point command and arguments for the code execution."
-          },
-          "content_hash": {
-            "type": "string",
-            "description": "SHA-256 hex digest of the uploaded code zip. Used for change detection — if the hash matches the latest version, the server returns the existing version without re-uploading."
           }
         },
         "description": "Code-based deployment configuration for a hosted agent.",
@@ -11419,10 +11452,10 @@
           "metadata": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/CreateAgentFromCodeRequest"
+                "$ref": "#/components/schemas/CreateAgentVersionFromCodeRequest"
               }
             ],
-            "description": "JSON metadata including the agent name, description, and hosted definition."
+            "description": "JSON metadata including description and hosted definition."
           },
           "code": {
             "type": "string",
@@ -11434,47 +11467,6 @@
           "metadata",
           "code"
         ]
-      },
-      "CreateAgentFromCodeRequest": {
-        "type": "object",
-        "required": [
-          "name",
-          "definition"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 63,
-            "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
-          },
-          "description": {
-            "type": "string",
-            "maxLength": 512,
-            "description": "A human-readable description of the agent."
-          },
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
-            "x-oaiTypeLabel": "map"
-          },
-          "definition": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/HostedAgentDefinition"
-              }
-            ],
-            "description": "The hosted agent definition including code_configuration (runtime, entry_point, content_hash), cpu, memory, and protocol_versions."
-          }
-        },
-        "description": "JSON metadata for creating a new code-based agent.\nExtends CreateAgentVersionFromCodeRequest with a required `name` field since\n`POST /agents` does not have `agent_name` in the URL path.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
       },
       "CreateAgentFromManifestRequest": {
         "type": "object",
@@ -11611,10 +11603,10 @@
                 "$ref": "#/components/schemas/HostedAgentDefinition"
               }
             ],
-            "description": "The hosted agent definition including code_configuration (runtime, entry_point, content_hash), cpu, memory, and protocol_versions."
+            "description": "The hosted agent definition including code_configuration (runtime, entry_point), cpu, memory, and protocol_versions."
           }
         },
-        "description": "JSON metadata for code-based agent version operations (update agent, create version).\nThe agent name comes from the URL path parameter, so it is not included here.\nFollows the same `definition` pattern as CreateAgentVersionRequest for consistency.",
+        "description": "JSON metadata for code-based agent operations (create, update, create version).\nThe agent name comes from the URL path parameter or the `x-ms-agent-name` header,\nso it is not included in this model.\nThe content hash (SHA-256 of the zip) is carried in the `x-ms-code-zip-sha256` header.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "CodeAgents=V1Preview"
