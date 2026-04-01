@@ -14,8 +14,8 @@ namespace Azure.AI.Projects;
  * files within a live ADC sandbox session. All file content is streamed
  * end-to-end (no buffering in Agents service memory).
  *
- * Sessions are scoped to agents (not versions), giving optionality to
- * mutate the associated agent version independently of the session lifecycle.
+ * Sessions are scoped to agent endpoints (not individual versions), allowing
+ * the endpoint to evolve the backing agent version independently of the session lifecycle.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Session Files")
