@@ -9707,7 +9707,11 @@
             "description": "Data schema scenario, always `benchmark` for benchmark evaluations."
           },
           "benchmark_name": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BenchmarkName"
+              }
+            ],
             "description": "The name of the benchmark specification."
           },
           "benchmark_version": {
@@ -10380,6 +10384,29 @@
           }
         },
         "description": "A base class for connection credentials"
+      },
+      "BenchmarkName": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "builtin.gpqa_diamond",
+              "builtin.bbeh",
+              "builtin.bigbenchhard",
+              "builtin.frontierscience",
+              "builtin.musr",
+              "builtin.truthful_qa",
+              "builtin.inspect_ai.gpqa_diamond",
+              "builtin.inspect_ai.chembench",
+              "builtin.inspect_ai.aime_2025",
+              "builtin.inspect_ai.musr"
+            ]
+          }
+        ],
+        "description": "The set of available benchmark specifications."
       },
       "BingCustomSearchConfiguration": {
         "type": "object",
@@ -11525,6 +11552,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/EvalGraderAzureAIEvaluator"
+                },
+                {
+                  "$ref": "#/components/schemas/EvalGraderInspectAI"
                 }
               ]
             },
@@ -12199,6 +12229,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/EvalGraderAzureAIEvaluator"
+                },
+                {
+                  "$ref": "#/components/schemas/EvalGraderInspectAI"
                 }
               ]
             },
@@ -12338,6 +12371,32 @@
           }
         },
         "title": "AzureAIEvaluatorGrader"
+      },
+      "EvalGraderInspectAI": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "task_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inspect_ai"
+            ],
+            "description": "The object type, which is always `inspect_ai`."
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the benchmark."
+          },
+          "task_name": {
+            "type": "string",
+            "description": "The inspect_ai task module path (e.g., `inspect_evals/gpqa_diamond`)."
+          }
+        },
+        "description": "Grader inspect_ai definition for inspect_ai benchmark evaluators."
       },
       "EvalResult": {
         "type": "object",
