@@ -88,6 +88,7 @@ Alternative (JSON):
 - `go` installed and available on `PATH`
 - Local clone of `azure-sdk-for-go` (referred to as `<goSdkRoot>`)
 - Local clone of `azure-rest-api-specs` (referred to as `<specsRoot>`)
+- install tsp-client: under `<goSdkRoot>\eng\common\tsp-client`, Run Command 'npm install'
 
 Run the command under:
 
