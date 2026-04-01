@@ -1,0 +1,48 @@
+{
+  "operationId": "Containers_ListByAccount",
+  "title": "List Containers in a Prompt Service Account",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-01-01-preview",
+    "accountName": "testaccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount/containers/gpt4-prompts",
+            "name": "gpt4-prompts",
+            "type": "Microsoft.PromptService/accounts/containers",
+            "properties": {
+              "description": "Container for GPT-4 prompt caching",
+              "modelName": "gpt-4",
+              "provider": "OpenAI",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PromptService/accounts/testaccount/containers/claude3-prompts",
+            "name": "claude3-prompts",
+            "type": "Microsoft.PromptService/accounts/containers",
+            "properties": {
+              "description": "Container for Claude-3 prompt caching",
+              "modelName": "claude-3",
+              "provider": "Anthropic",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Account testaccount not found"
+        }
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./workspaces.tsp";
 import "./datasets.tsp";
+import "./dataConnections.tsp";
 import "./pipelines.tsp";
 import "./jobs.tsp";
 import "./operation.tsp";

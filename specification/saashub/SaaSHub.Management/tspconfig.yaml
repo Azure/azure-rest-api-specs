@@ -1,6 +1,9 @@
 emit:
   - "@azure-tools/typespec-autorest"
   # - "@azure-tools/typespec-csharp"  # Disabled due to GeneratorPageableHelpers protection level bug in emitter
+parameters:
+  service-dir:
+    default: "sdk/saashub"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -9,33 +12,36 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-saashub"
     flavor: azure
+    package-dir: "azure-resourcemanager-saashub"
     namespace: "com.azure.resourcemanager.saashub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-saashub"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-saashub"
     package-name: "@azure/arm-saashub"
     package-details:
       name: "@azure/arm-saashub"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-saashub"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/saashub"
-    emitter-output-dir: "{output-dir}/{service-dir}/armsaashub"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsaashub"
+    package-dir: "armsaashub"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     generate-examples: true
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+    emitter-output-dir: "{output-dir}/{service-dir}/armsaashub"
   "@azure-tools/typespec-python":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-saashub"
-    package-name: "azure-mgmt-saashub"
+    package-dir: "azure-mgmt-saashub"
+    package-name: "{package-dir}"
     namespace: "azure.mgmt.saashub"
     generate-test: true
     generate-sample: true
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-saashub"
   # "@azure-tools/typespec-csharp": # Temporarily disabled due to beta emitter bug (v0.2.0-beta.20250926.1)
   #   flavor: azure
   #   package-dir: "Azure.ResourceManager.SaasHub"
@@ -60,6 +66,3 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
-parameters:
-  service-dir:
-    default: sdk/placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation

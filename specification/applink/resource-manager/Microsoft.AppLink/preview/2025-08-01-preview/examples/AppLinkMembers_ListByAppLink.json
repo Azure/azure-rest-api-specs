@@ -17,13 +17,23 @@
               "metadata": {
                 "resourceId": "/subscriptions/bc7e0da9-5e4c-4a91-9252-9658837006cf/resourcegroups/applink-rg/providers/Microsoft.ContainerService/managedClusters/applink-member1"
               },
-              "mode": "FullyManaged",
-              "fullyManagedUpgradeProfile": {
-                "releaseChannel": "Stable"
+              "upgradeProfile": {
+                "mode": "FullyManaged",
+                "fullyManagedUpgradeProfile": {
+                  "releaseChannel": "Stable"
+                }
               },
               "observabilityProfile": {
                 "metrics": {
                   "metricsEndpoint": "https://mcp-fqdn"
+                }
+              },
+              "connectivityProfile": {
+                "privateConnect": {
+                  "subnetResourceId": "/subscriptions/bc7e0da9-5e4c-4a91-9252-9658837006cf/resourceGroups/applink-vnet-rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+                },
+                "eastWestGateway": {
+                  "visibility": "Internal"
                 }
               },
               "provisioningState": "Succeeded"
@@ -50,13 +60,20 @@
               "metadata": {
                 "resourceId": "/subscriptions/bc7e0da9-5e4c-4a91-9252-9658837006cf/resourcegroups/applink-rg/providers/Microsoft.ContainerService/managedClusters/applink-member2"
               },
-              "mode": "SelfManaged",
-              "selfManagedUpgradeProfile": {
-                "version": "1.27"
+              "upgradeProfile": {
+                "mode": "SelfManaged",
+                "selfManagedUpgradeProfile": {
+                  "version": "1.27"
+                }
               },
               "observabilityProfile": {
                 "metrics": {
                   "metricsEndpoint": "https://mcp-fqdn"
+                }
+              },
+              "connectivityProfile": {
+                "eastWestGateway": {
+                  "visibility": "External"
                 }
               },
               "provisioningState": "Succeeded"

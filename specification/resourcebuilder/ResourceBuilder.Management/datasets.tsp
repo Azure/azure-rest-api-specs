@@ -45,6 +45,9 @@ union DatasetKind {
   /** ARM (Azure Resource Manager) managed resource dataset. */
   ArmResource: "ArmResource",
 
+  /** ARM (Azure Resource Manager) relationship dataset. */
+  ArmRelationship: "ArmRelationship",
+
   string,
 }
 
@@ -60,8 +63,17 @@ model DatasetProperties {
   /** ArmResource ArmResourceDatasetSchema object. */
   armResourceSchema?: ArmResourceDatasetSchema;
 
+  /** ArmRelationship ArmRelationshipDatasetSchema object. */
+  armRelationshipSchema?: ArmRelationshipDatasetSchema;
+
   /** Azure regions where the dataset exists. */
   locations?: string[];
+
+  /** Reference to an existing data connection resource that provides the source connection for this dataset. */
+  connection?: DataConnectionReference;
+
+  /** Path (e.g. blob prefix) within the target specified by the connection. Applicable only for StorageAccount kind connections. */
+  path?: string;
 }
 
 /** Dataset column */
@@ -76,49 +88,16 @@ model DatasetColumn {
   description?: string;
 }
 
-/** Additional Properties column */
-model AdditionalProperties {
-  /** Name of the column. */
-  name: string;
-
-  /** Value of the column. */
-  value: string;
-}
-
 /** ARM resource dataset schema. */
 model ArmResourceDatasetSchema {
-  /** The full ARM resource ID. */
-  resourceId: string;
-
   /** The type of the ARM resource. */
-  resourceType: string;
+  type: string;
+}
 
-  /** The name of the ARM resource. */
-  resourceName: string;
-
-  /** The tenant ID where the resource resides. */
-  tenantId: string;
-
-  /** The subscription ID where the resource resides. */
-  subscriptionId: string;
-
-  /** The resource group where the resource resides. */
-  resourceGroup: string;
-
-  /** The kind of the ARM resource (optional). */
-  resourceKind?: string;
-
-  /** The Azure region where the resource is located (optional). */
-  resourceLocation?: string;
-
-  /** The tags associated with the ARM resource (optional). */
-  resourceTags?: AdditionalProperties[];
-
-  /** The resource properties of the ARM resource (optional). */
-  resourceProperties?: AdditionalProperties[];
-
-  /** The timestamp when the resource information was captured (optional). */
-  resourceTimestamp?: utcDateTime;
+/** ARM relationship dataset schema. */
+model ArmRelationshipDatasetSchema {
+  /** The type of the ARM relationship. */
+  type: string;
 }
 
 /** Dataset column type */

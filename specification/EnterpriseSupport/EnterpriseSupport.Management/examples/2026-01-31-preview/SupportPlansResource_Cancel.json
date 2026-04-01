@@ -1,0 +1,24 @@
+{
+  "operationId": "SupportPlansResource_Cancel",
+  "title": "Cancel a Support Plan",
+  "parameters": {
+    "api-version": "2026-01-31-preview",
+    "subscriptionId": "2371cdc8-6182-4357-a276-9d30e2a6cb7e",
+    "resourceGroupName": "rg1",
+    "supportPlanName": "sp2",
+    "body": {
+      "serviceEndDate": "2026-02-28T18:59:59.190Z",
+      "reasonCode": "contributing-ba-exit"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.EnterpriseSupport/locations/global/operationStatuses/cancel-op-id?api-version=2026-01-31-preview",
+        "Location": "https://management.azure.com/subscriptions/2371cdc8-6182-4357-a276-9d30e2a6cb7e/resourceGroups/rg1/providers/Microsoft.EnterpriseSupport/supportPlans/sp2?api-version=2026-01-31-preview",
+        "Retry-After": "60"
+      }
+    },
+    "204": {}
+  }
+}

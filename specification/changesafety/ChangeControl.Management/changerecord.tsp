@@ -156,6 +156,88 @@ model ChangeRecordRetrieveNextStagesResponseItem {
   parameters?: Record<Parameter>;
 }
 
+@doc("RetrieveAllStages POST Action response.")
+@added(Versions.v2026_01_01_preview)
+model ChangeRecordRetrieveAllStagesResponse {
+  @doc("Array of all stages from the StageMap merged with any existing StageProgression execution data.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["properties/stageReference"])
+  value: Array<ChangeRecordRetrieveAllStagesResponseItem>;
+
+  @doc("Link for next set of results.")
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+
+  @doc("Total count of stages in the response.")
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  totalRecords: int32;
+}
+
+@doc("Stage data merged from StageMap definition and StageProgression execution status.")
+@added(Versions.v2026_01_01_preview)
+model ChangeRecordRetrieveAllStagesResponseItem {
+  @doc("ARM resource ID of the StageProgression if it exists, null otherwise.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("Name of the StageProgression resource if it exists, null otherwise.")
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  @doc("Resource type. Null if StageProgression does not exist.")
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  @doc("ARM systemData with creation/modification timestamps if StageProgression exists, null otherwise.")
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+
+  @doc("Stage progression properties. For stages with existing StageProgression resources: includes all properties from the resource. For stages without StageProgression resources: contains only stageReference, stageVariables, sequence, and status set to 'Uninitialized'.")
+  @visibility(Lifecycle.Read)
+  properties: ChangeRecordRetrieveAllStagesResponseItemProperties;
+}
+
+@doc("Properties of a stage in the RetrieveAllStages response.")
+@added(Versions.v2026_01_01_preview)
+model ChangeRecordRetrieveAllStagesResponseItemProperties {
+  @doc("Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changerecord resource.")
+  @visibility(Lifecycle.Read)
+  stageReference: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Stage specific key value pairs of parameter names & their values."
+  @doc("Variables to apply on the change for the stage. Key value pairs supporting any JSON values.")
+  @visibility(Lifecycle.Read)
+  stageVariables?: Record<unknown>;
+
+  @doc("Current state of the stage progression. Set to 'Uninitialized' for stages without existing StageProgression resources.")
+  @visibility(Lifecycle.Read)
+  status: ChangeRecordStageProgressionState;
+
+  @doc("The sequence of the stageProgression resource.")
+  @visibility(Lifecycle.Read)
+  sequence: int32;
+
+  @doc("Comments about the stage progression.")
+  @visibility(Lifecycle.Read)
+  comments?: string;
+
+  @doc("Collection of related links for the change.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["name"])
+  links?: Link[];
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Provides flexible object schema for stage-specific orchestration metadata and dynamic tool-specific configuration data."
+  @doc("Additional metadata related to the StageProgression resource.")
+  @visibility(Lifecycle.Read)
+  additionalData?: {};
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters can be any type and can have an arbitrary name as key, hence using a Record."
+  @doc("Parameters and their values for the current Stage.")
+  @visibility(Lifecycle.Read)
+  parameters?: Record<Parameter>;
+}
+
 @added(Versions.v2026_01_01_preview)
 @doc("Internal status of the ChangeRecord resource.")
 union ChangeRecordStatus {
@@ -364,6 +446,26 @@ interface ChangeRecords {
     ChangeRecord,
     void,
     ChangeRecordRetrieveAuditTrailResponse,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+
+  @doc("Retrieves a complete view of all stages defined in the ChangeRecord's associated StageMap, merged with current execution status from existing StageProgression resources.")
+  @action("retrieveAllStages")
+  retrieveAllStages is ArmResourceActionSync<
+    ChangeRecord,
+    void,
+    ChangeRecordRetrieveAllStagesResponse
+  >;
+
+  @doc("Retrieves a complete view of all stages defined in the ChangeRecord's associated StageMap, merged with current execution status from existing StageProgression resources at subscription level.")
+  @action("retrieveAllStages")
+  retrieveAllStagesAtSubscriptionLevel is ArmResourceActionSync<
+    ChangeRecord,
+    void,
+    ChangeRecordRetrieveAllStagesResponse,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;

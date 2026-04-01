@@ -1,0 +1,121 @@
+{
+  "parameters": {
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "products": [
+        {
+          "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+          "quantity": 25,
+          "evaluationType": "Immediate"
+        }
+      ],
+      "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "requestMetadata": {
+              "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+              "quantity": 25,
+              "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8"
+            },
+            "eligibilityResults": [
+              {
+                "isEligible": "Ineligible",
+                "ineligibilityReasons": [
+                  "prerequisiteConstraintsNotMet"
+                ],
+                "eligibilityConstraints": [
+                  {
+                    "constraintType": "prerequisiteConstraints",
+                    "isEligible": "Ineligible",
+                    "mustHaveAtLeastOne": {
+                      "constraintsMet": false,
+                      "lookbackWindow": {
+                        "type": "Lifetime"
+                      },
+                      "products": [
+                        {
+                          "productCodes": [
+                            "e98fa6d5-439f-4a52-8f28-33a084cfdf6a",
+                            "e98fa6d5-439f-4a52-8f28-3p8762zfdf6a"
+                          ],
+                          "requiredMinSeats": 50,
+                          "requiredMaxSeats": null,
+                          "actualSeats": 25
+                        }
+                      ],
+                      "cumulativeSeatConstraint": {
+                        "requiredMinSeats": 100,
+                        "requiredMaxSeats": null,
+                        "actualCumulativeSeats": 75
+                      }
+                    },
+                    "mustHaveAny": {
+                      "constraintsMet": false,
+                      "lookbackWindow": {
+                        "type": "Period",
+                        "period": "P6M"
+                      },
+                      "products": [
+                        {
+                          "productCodes": [
+                            "e873fa6d5-439f-4a52-8f28-33a084cfdf6a"
+                          ],
+                          "requiredMinSeats": 10,
+                          "requiredMaxSeats": null,
+                          "actualSeats": 0
+                        }
+                      ],
+                      "cumulativeSeatConstraint": null
+                    },
+                    "mustHaveNone": {
+                      "constraintsMet": true,
+                      "lookbackWindow": {
+                        "type": "Lifetime"
+                      },
+                      "products": [
+                        {
+                          "productCodes": [
+                            "d4e5f6a7-b8c9-4012-d345-e6f7a8b9c0d1"
+                          ],
+                          "requiredMinSeats": 1,
+                          "requiredMaxSeats": null,
+                          "actualSeats": 0
+                        }
+                      ],
+                      "cumulativeSeatConstraint": null
+                    },
+                    "failureDetails": {
+                      "message": "Customer failed to meet MustHaveAtLeastOne and MustHaveAny prerequisite constraints",
+                      "failingItems": [
+                        {
+                          "failedConstraintGroup": "MustHaveAtLeastOne",
+                          "productCodes": [
+                            "e98fa6d5-439f-4a52-8f28-33a084cfdf6a",
+                            "e98fa6d5-439f-4a52-8f28-3p8762zfdf6a"
+                          ]
+                        },
+                        {
+                          "failedConstraintGroup": "MustHaveAny",
+                          "productCodes": [
+                            "e873fa6d5-439f-4a52-8f28-33a084cfdf6a"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_ValidatePromotions",
+  "title": "Validate Promotions - prerequisiteConstraints Constraint Failed"
+}

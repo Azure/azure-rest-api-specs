@@ -496,17 +496,19 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "The name of the Environment",
+            "description": "The name of the environment.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Environment"
+              "$ref": "#/definitions/CosmicEnvironment"
             }
           },
           "default": {
@@ -551,10 +553,12 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "The name of the Environment",
+            "description": "The name of the environment.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "resource",
@@ -562,7 +566,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Environment"
+              "$ref": "#/definitions/CosmicEnvironment"
             }
           }
         ],
@@ -570,13 +574,13 @@
           "200": {
             "description": "Resource 'Environment' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Environment"
+              "$ref": "#/definitions/CosmicEnvironment"
             }
           },
           "201": {
             "description": "Resource 'Environment' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/Environment"
+              "$ref": "#/definitions/CosmicEnvironment"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -636,10 +640,12 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "The name of the Environment",
+            "description": "The name of the environment.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "properties",
@@ -655,7 +661,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Environment"
+              "$ref": "#/definitions/CosmicEnvironment"
             }
           },
           "default": {
@@ -700,10 +706,12 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "The name of the Environment",
+            "description": "The name of the environment.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -748,100 +756,70 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "CapacityConfiguration": {
+    "CapacityPolicy": {
       "type": "object",
       "description": "Capacity configuration for the environment.",
       "properties": {
-        "instanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of instances across all partitions."
-        },
-        "partitionOverrides": {
+        "locations": {
           "type": "array",
-          "description": "Per-partition capacity overrides within this region.",
+          "description": "Per-location desired capacity keyed by canonical Azure region name.",
           "items": {
-            "$ref": "#/definitions/CapacityPartitionOverride"
+            "$ref": "#/definitions/LocationCapacity"
           },
           "x-ms-identifiers": [
-            "partitionName"
+            "name"
           ]
         }
       }
     },
-    "CapacityPartitionOverride": {
+    "CosmicEnvironment": {
       "type": "object",
-      "description": "Capacity override for a specific partition within a region.",
+      "description": "An Environment resource representing a per-ring deployment environment within a namespace.",
       "properties": {
-        "partitionName": {
-          "type": "string",
-          "description": "The partition name."
-        },
-        "instanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of instances in this partition."
-        },
-        "regionOverrides": {
-          "type": "array",
-          "description": "Per-region capacity overrides.",
-          "items": {
-            "$ref": "#/definitions/CapacityRegionOverride"
-          },
-          "x-ms-identifiers": [
-            "region"
-          ]
+        "properties": {
+          "$ref": "#/definitions/CosmicEnvironmentProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
-    "CapacityRegionOverride": {
+    "CosmicEnvironmentProperties": {
       "type": "object",
-      "description": "Capacity override for a specific region.",
+      "description": "Properties of an Environment resource.",
       "properties": {
-        "region": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure region name."
+        "platformRing": {
+          "$ref": "#/definitions/CosmicRing",
+          "description": "Platform ring classification (e.g. test, sdf, msit, prod)."
         },
-        "instanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of instances in this region."
+        "topology": {
+          "$ref": "#/definitions/Topology",
+          "description": "Topology configuration including per-location networking and partition declarations."
+        },
+        "capacity": {
+          "$ref": "#/definitions/CapacityPolicy",
+          "description": "Capacity configuration for the environment."
+        },
+        "resourcePolicy": {
+          "$ref": "#/definitions/ResourcePolicy",
+          "description": "Resource policy configuration for the environment."
+        },
+        "status": {
+          "$ref": "#/definitions/EnvironmentStatus",
+          "description": "The status of the environment.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/CosmicProvisioningState",
+          "description": "The provisioning state of the environment resource.",
+          "readOnly": true
         }
       },
       "required": [
-        "region",
-        "instanceCount"
+        "capacity"
       ]
     },
     "CosmicProvisioningState": {
@@ -1013,7 +991,7 @@
         ]
       }
     },
-    "EgressPublicIpConfiguration": {
+    "EgressPublicIps": {
       "type": "object",
       "description": "Egress public IP configuration using BYOIP.",
       "properties": {
@@ -1035,21 +1013,6 @@
         }
       }
     },
-    "Environment": {
-      "type": "object",
-      "description": "An Environment resource representing a per-ring deployment environment within a namespace.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EnvironmentProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "EnvironmentListResult": {
       "type": "object",
       "description": "The response of a Environment list operation.",
@@ -1058,7 +1021,7 @@
           "type": "array",
           "description": "The Environment items on this page",
           "items": {
-            "$ref": "#/definitions/Environment"
+            "$ref": "#/definitions/CosmicEnvironment"
           }
         },
         "nextLink": {
@@ -1069,47 +1032,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "EnvironmentProperties": {
-      "type": "object",
-      "description": "Properties of an Environment resource.",
-      "properties": {
-        "topology": {
-          "type": "array",
-          "description": "Topology configuration for the environment.",
-          "items": {
-            "$ref": "#/definitions/TopologyConfiguration"
-          },
-          "x-ms-identifiers": [
-            "partitionName"
-          ]
-        },
-        "capacity": {
-          "$ref": "#/definitions/CapacityConfiguration",
-          "description": "Capacity configuration for the environment."
-        },
-        "resourcePolicy": {
-          "$ref": "#/definitions/ResourcePolicyConfiguration",
-          "description": "Resource policy configuration for the environment."
-        },
-        "networking": {
-          "$ref": "#/definitions/NetworkingConfiguration",
-          "description": "Networking configuration for the environment including BYOIP and SNAT settings."
-        },
-        "status": {
-          "$ref": "#/definitions/EnvironmentStatus",
-          "description": "The status of the environment.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/CosmicProvisioningState",
-          "description": "The provisioning state of the environment resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "capacity"
       ]
     },
     "EnvironmentStatus": {
@@ -1124,30 +1046,11 @@
           "type": "array",
           "description": "Per-region realization details.",
           "items": {
-            "$ref": "#/definitions/RegionRealization"
+            "$ref": "#/definitions/Realization"
           },
           "x-ms-identifiers": [
-            "realizationId"
+            "id"
           ]
-        },
-        "conditions": {
-          "type": "array",
-          "description": "Status conditions reporting errors or important state transitions.",
-          "items": {
-            "$ref": "#/definitions/StatusCondition"
-          },
-          "x-ms-identifiers": [
-            "type"
-          ]
-        },
-        "expectedCompletionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expected completion time for an in-progress operation."
-        },
-        "statusDescription": {
-          "type": "string",
-          "description": "A human-readable description of the current environment status."
         }
       }
     },
@@ -1172,27 +1075,21 @@
       "type": "object",
       "description": "The updatable properties of the Environment.",
       "properties": {
+        "platformRing": {
+          "$ref": "#/definitions/CosmicRing",
+          "description": "Platform ring classification (e.g. test, sdf, msit, prod)."
+        },
         "topology": {
-          "type": "array",
-          "description": "Topology configuration for the environment.",
-          "items": {
-            "$ref": "#/definitions/TopologyConfiguration"
-          },
-          "x-ms-identifiers": [
-            "partitionName"
-          ]
+          "$ref": "#/definitions/Topology",
+          "description": "Topology configuration including per-location networking and partition declarations."
         },
         "capacity": {
-          "$ref": "#/definitions/CapacityConfiguration",
+          "$ref": "#/definitions/CapacityPolicy",
           "description": "Capacity configuration for the environment."
         },
         "resourcePolicy": {
-          "$ref": "#/definitions/ResourcePolicyConfiguration",
+          "$ref": "#/definitions/ResourcePolicy",
           "description": "Resource policy configuration for the environment."
-        },
-        "networking": {
-          "$ref": "#/definitions/NetworkingConfiguration",
-          "description": "Networking configuration for the environment including BYOIP and SNAT settings."
         }
       }
     },
@@ -1250,7 +1147,7 @@
         ]
       }
     },
-    "IngressPublicIpConfiguration": {
+    "IngressPublicIp": {
       "type": "object",
       "description": "Ingress public IP configuration using BYOIP.",
       "properties": {
@@ -1279,34 +1176,11 @@
         "ipTagValue"
       ]
     },
-    "InstanceLevelPublicIpConfiguration": {
+    "Instance": {
       "type": "object",
-      "description": "Instance-level public IP configuration.",
+      "description": "Operational instance within a realization.",
       "properties": {
-        "prefixLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The prefix length for the public IP."
-        },
-        "ipTagType": {
-          "type": "string",
-          "description": "The IP tag type."
-        },
-        "ipTagValue": {
-          "type": "string",
-          "description": "The IP tag value."
-        },
-        "ipVersion": {
-          "$ref": "#/definitions/IpVersion",
-          "description": "The IP version (IPv4 or IPv6). Defaults to IPv4."
-        }
-      }
-    },
-    "InstanceRealization": {
-      "type": "object",
-      "description": "Realization details for a specific instance.",
-      "properties": {
-        "instanceId": {
+        "id": {
           "type": "string",
           "description": "The instance identifier."
         },
@@ -1314,24 +1188,55 @@
           "type": "string",
           "description": "The partition this instance belongs to."
         },
+        "routingPartition": {
+          "type": "string",
+          "description": "Legacy routing partition metadata preserved for migration parity."
+        },
         "clusterResourceId": {
           "type": "string",
           "format": "arm-id",
           "description": "The ARM resource ID of the cluster backing this instance."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The provisioning state of this instance."
-        },
-        "migrationState": {
-          "$ref": "#/definitions/MigrationState",
-          "description": "The current migration state of this instance."
         }
       },
       "required": [
-        "instanceId",
+        "id",
         "partition"
       ]
+    },
+    "InstanceOverride": {
+      "type": "object",
+      "description": "Migration-only per-instance resource override.",
+      "properties": {
+        "instanceId": {
+          "type": "string",
+          "description": "Opaque RP instance identifier (GUID)."
+        },
+        "instanceQuota": {
+          "$ref": "#/definitions/InstanceQuota",
+          "description": "Optional per-instance quota override."
+        }
+      },
+      "required": [
+        "instanceId"
+      ]
+    },
+    "InstanceQuota": {
+      "type": "object",
+      "description": "Per-instance quota override shape (migration-only).",
+      "properties": {
+        "vmFamily": {
+          "type": "string",
+          "description": "The Azure VM family."
+        },
+        "podResources": {
+          "type": "array",
+          "description": "Per-service pod resource specifications.",
+          "items": {
+            "$ref": "#/definitions/PodResource"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "IpVersion": {
       "type": "string",
@@ -1356,6 +1261,34 @@
           }
         ]
       }
+    },
+    "LocationCapacity": {
+      "type": "object",
+      "description": "Per-location desired capacity.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Canonical Azure region name."
+        },
+        "totalInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total desired instance count in this location."
+        },
+        "partitions": {
+          "type": "array",
+          "description": "Optional breakdown of capacity by partition key.",
+          "items": {
+            "$ref": "#/definitions/PartitionCapacity"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "MigrationState": {
       "type": "string",
@@ -1464,6 +1397,13 @@
           "description": "Indicates whether Nightwatch monitoring is enabled for the namespace.",
           "default": false
         },
+        "deploymentReadiness": {
+          "type": "array",
+          "description": "Legacy process metadata listing rollout readiness rings.",
+          "items": {
+            "$ref": "#/definitions/CosmicRing"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/CosmicProvisioningState",
           "description": "The provisioning state of the namespace resource.",
@@ -1528,36 +1468,13 @@
           "type": "boolean",
           "description": "Indicates whether Nightwatch monitoring is enabled for the namespace.",
           "default": false
-        }
-      }
-    },
-    "NetworkingConfiguration": {
-      "type": "object",
-      "description": "Networking configuration for the environment.",
-      "properties": {
-        "ingressPublicIps": {
+        },
+        "deploymentReadiness": {
           "type": "array",
-          "description": "BYOIP (Bring Your Own IP) tags for ingress traffic.",
+          "description": "Legacy process metadata listing rollout readiness rings.",
           "items": {
-            "$ref": "#/definitions/IngressPublicIpConfiguration"
-          },
-          "x-ms-identifiers": [
-            "ipTagType",
-            "ipTagValue"
-          ]
-        },
-        "egressPublicIps": {
-          "$ref": "#/definitions/EgressPublicIpConfiguration",
-          "description": "BYOIP (Bring Your Own IP) configuration for egress traffic."
-        },
-        "snatPortsPerNode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Optional SNAT ports to allocate per node. Empty or unset means not specified."
-        },
-        "instanceLevelPublicIp": {
-          "$ref": "#/definitions/InstanceLevelPublicIpConfiguration",
-          "description": "Instance-level public IP configuration."
+            "$ref": "#/definitions/CosmicRing"
+          }
         }
       }
     },
@@ -1585,36 +1502,87 @@
         ]
       }
     },
-    "PartitionRealization": {
+    "Partition": {
       "type": "object",
-      "description": "Realization details for a specific partition.",
+      "description": "Partition label present in this realization.",
       "properties": {
         "name": {
           "type": "string",
           "description": "The partition name."
-        },
-        "realizationState": {
-          "$ref": "#/definitions/RealizationState",
-          "description": "The realization state of this partition."
         }
       },
       "required": [
         "name"
       ]
     },
-    "PodResourceSpec": {
+    "PartitionCapacity": {
       "type": "object",
-      "description": "Resource specification for a single service pod.",
+      "description": "Explicit capacity configuration for a specific partition.",
       "properties": {
-        "serviceName": {
+        "name": {
           "type": "string",
-          "description": "The name of the service."
+          "description": "The partition name."
         },
-        "replicas": {
+        "instanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of replicas per cluster."
+          "description": "The number of instances to realize for this partition."
+        }
+      },
+      "required": [
+        "name",
+        "instanceCount"
+      ]
+    },
+    "PartitionDefaultPolicy": {
+      "type": "object",
+      "description": "Partition-level default resource policy.",
+      "properties": {
+        "os": {
+          "$ref": "#/definitions/OsType",
+          "description": "The operating system type override."
         },
+        "podResources": {
+          "type": "array",
+          "description": "Per-service pod resource specifications.",
+          "items": {
+            "$ref": "#/definitions/PodResource"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PartitionOverride": {
+      "type": "object",
+      "description": "Partition-scoped policy overrides.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The partition name."
+        },
+        "partitionDefault": {
+          "$ref": "#/definitions/PartitionDefaultPolicy",
+          "description": "Partition-level default policy."
+        },
+        "instanceOverrides": {
+          "type": "array",
+          "description": "Migration-only per-instance overrides.",
+          "items": {
+            "$ref": "#/definitions/InstanceOverride"
+          },
+          "x-ms-identifiers": [
+            "instanceId"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "PodResource": {
+      "type": "object",
+      "description": "Pod resource envelope.",
+      "properties": {
         "cores": {
           "type": "string",
           "description": "CPU cores requested per pod (e.g. '0.5', '2')."
@@ -1631,30 +1599,84 @@
           "type": "string",
           "description": "Memory limit per pod. If unset, defaults to approximately 2x the request."
         },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of replicas per cluster."
+        },
         "rollingUpdateReplicaPercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "Percentage of replicas considered during rolling updates (default: 10)."
-        },
-        "gpus": {
-          "type": "string",
-          "description": "Number of GPUs per pod."
+          "description": "Percentage of replicas considered during rolling updates."
         }
       }
+    },
+    "Realization": {
+      "type": "object",
+      "description": "Realization details for a specific region.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable RP-generated identifier for diagnostics."
+        },
+        "region": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "Canonical Azure region name."
+        },
+        "state": {
+          "$ref": "#/definitions/RealizationState",
+          "description": "Realization-specific state."
+        },
+        "partitions": {
+          "type": "array",
+          "description": "Partition realization details.",
+          "items": {
+            "$ref": "#/definitions/Partition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "instances": {
+          "type": "array",
+          "description": "Instance realization details.",
+          "items": {
+            "$ref": "#/definitions/Instance"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "networking": {
+          "$ref": "#/definitions/TopologyLocation",
+          "description": "Effective networking configuration applied by the RP for this region."
+        }
+      },
+      "required": [
+        "id",
+        "region"
+      ]
     },
     "RealizationState": {
       "type": "string",
       "description": "The realization state of an environment resource.",
       "enum": [
+        "Accepted",
         "InProgress",
         "Succeeded",
         "Failed",
-        "Pending"
+        "Canceled",
+        "PartiallySucceeded"
       ],
       "x-ms-enum": {
         "name": "RealizationState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Realization has been accepted."
+          },
           {
             "name": "InProgress",
             "value": "InProgress",
@@ -1671,178 +1693,169 @@
             "description": "Realization failed."
           },
           {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Realization is pending."
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Realization was canceled."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "Realization partially succeeded."
           }
         ]
       },
       "readOnly": true
     },
-    "RegionRealization": {
+    "RegionDefaultPolicy": {
       "type": "object",
-      "description": "Realization details for a specific region.",
+      "description": "Region-level default resource policy.",
       "properties": {
-        "region": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure region name."
-        },
-        "realizationId": {
+        "ipVersion": {
+          "$ref": "#/definitions/IpVersion",
+          "description": "The IP version override for this region."
+        }
+      }
+    },
+    "RegionOverride": {
+      "type": "object",
+      "description": "Region-scoped policy overrides.",
+      "properties": {
+        "name": {
           "type": "string",
-          "description": "The realization identifier."
+          "description": "Canonical Azure region name."
         },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The provisioning state of this realization."
-        },
-        "healthState": {
-          "$ref": "#/definitions/HealthState",
-          "description": "The health state of this realization."
+        "regionDefault": {
+          "$ref": "#/definitions/RegionDefaultPolicy",
+          "description": "Region-level default policy."
         },
         "partitions": {
           "type": "array",
-          "description": "Partition realization details.",
+          "description": "Partition-scoped policy overrides keyed by partition name.",
           "items": {
-            "$ref": "#/definitions/PartitionRealization"
+            "$ref": "#/definitions/PartitionOverride"
           },
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "instances": {
-          "type": "array",
-          "description": "Instance realization details.",
-          "items": {
-            "$ref": "#/definitions/InstanceRealization"
-          },
-          "x-ms-identifiers": [
-            "instanceId"
-          ]
         }
       },
       "required": [
-        "region",
-        "realizationId"
+        "name"
       ]
-    },
-    "RegionalResourcePolicy": {
-      "type": "object",
-      "description": "Resource policy override for a specific region.",
-      "properties": {
-        "region": {
-          "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The Azure region name."
-        },
-        "resourcePolicy": {
-          "$ref": "#/definitions/ResourcePolicy",
-          "description": "Default resource policy for all rings."
-        }
-      }
     },
     "ResourcePolicy": {
       "type": "object",
-      "description": "Default resource policy settings.",
+      "description": "Resource policy configuration with layered ring/region/partition overrides.",
       "properties": {
-        "vmFamily": {
-          "type": "string",
-          "description": "The default Azure VM family (e.g. 'Standard_D', 'Standard_E')."
+        "ringDefault": {
+          "$ref": "#/definitions/RingDefaultPolicy",
+          "description": "Default resource policy for the ring."
         },
-        "osType": {
-          "$ref": "#/definitions/OsType",
-          "description": "The operating system type (e.g. Linux, Windows)."
-        },
-        "gpus": {
-          "type": "number",
-          "format": "double",
-          "description": "The number of GPUs requested."
-        },
-        "gpuDriverType": {
-          "$ref": "#/definitions/GpuDriverType",
-          "description": "The GPU driver type (e.g. CUDA, GRID)."
-        },
+        "regionOverrides": {
+          "type": "array",
+          "description": "Per-region resource policy overrides keyed by canonical location.",
+          "items": {
+            "$ref": "#/definitions/RegionOverride"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "RingDefaultPolicy": {
+      "type": "object",
+      "description": "Ring-scoped default resource policy.",
+      "properties": {
         "podResources": {
           "type": "array",
           "description": "Per-service pod resource specifications.",
           "items": {
-            "$ref": "#/definitions/PodResourceSpec"
+            "$ref": "#/definitions/PodResource"
           },
-          "x-ms-identifiers": [
-            "serviceName"
-          ]
+          "x-ms-identifiers": []
+        },
+        "os": {
+          "$ref": "#/definitions/OsType",
+          "description": "The operating system type."
+        },
+        "ipVersion": {
+          "$ref": "#/definitions/IpVersion",
+          "description": "The IP version (IPv4 or IPv6)."
         }
       }
     },
-    "ResourcePolicyConfiguration": {
+    "Topology": {
       "type": "object",
-      "description": "Resource policy configuration for the environment.",
+      "description": "Optional per-location topology declarations including networking and partition identity.",
       "properties": {
-        "resourcePolicy": {
-          "$ref": "#/definitions/ResourcePolicy",
-          "description": "Default resource policy for all rings."
-        },
-        "regionOverrides": {
+        "locations": {
           "type": "array",
-          "description": "Per-region resource policy overrides.",
+          "description": "Per-location topology declarations keyed by canonical Azure region name.",
           "items": {
-            "$ref": "#/definitions/RegionalResourcePolicy"
+            "$ref": "#/definitions/TopologyLocation"
           },
           "x-ms-identifiers": [
-            "region"
+            "name"
           ]
         }
       }
     },
-    "StatusCondition": {
+    "TopologyLocation": {
       "type": "object",
-      "description": "A condition reporting detailed status information.",
+      "description": "Per-location topology configuration including networking and optional partition declarations.",
       "properties": {
-        "type": {
+        "name": {
           "type": "string",
-          "description": "The type of condition (e.g. InMigration, PlacementAbandoned)."
+          "description": "Canonical Azure region name."
         },
-        "conditionStatus": {
-          "type": "string",
-          "description": "The status of the condition: True, False, or Unknown."
+        "snatPortsPerNode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional SNAT ports to allocate per node."
         },
-        "reason": {
-          "type": "string",
-          "description": "A one-word CamelCase reason for the condition's last transition."
+        "ingressPublicIps": {
+          "type": "array",
+          "description": "BYOIP configuration for ingress traffic.",
+          "items": {
+            "$ref": "#/definitions/IngressPublicIp"
+          },
+          "x-ms-identifiers": [
+            "ipTagType",
+            "ipTagValue"
+          ]
         },
-        "message": {
-          "type": "string",
-          "description": "A human-readable message with details about the last transition."
+        "egressPublicIps": {
+          "$ref": "#/definitions/EgressPublicIps",
+          "description": "BYOIP configuration for egress traffic."
         },
-        "lastHeartbeatTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last time an update was received for this condition."
-        },
-        "lastTransitionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last time this condition transitioned from one status to another."
+        "partitions": {
+          "type": "array",
+          "description": "Optional declared partition set for this location.",
+          "items": {
+            "$ref": "#/definitions/TopologyPartition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
-        "type"
+        "name"
       ]
     },
-    "TopologyConfiguration": {
+    "TopologyPartition": {
       "type": "object",
-      "description": "Topology configuration for the environment.",
+      "description": "Declared partition identity for a location.",
       "properties": {
-        "partitionName": {
+        "name": {
           "type": "string",
           "description": "The partition name."
-        },
-        "regions": {
-          "type": "array",
-          "description": "The Azure regions where instances should be placed (e.g. ['eastus', 'westus']).",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.azureLocation"
-          }
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     }
   },
   "parameters": {}

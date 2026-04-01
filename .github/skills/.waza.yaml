@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/microsoft/waza/main/schemas/config.schema.json
+
+paths:
+  skills: ../skills
+  evals: evals/
+  results: results/
+defaults:
+  engine: copilot-sdk
+  model: gpt-5.1-codex-mini
+  timeout: 300
+  parallel: false
+  workers: 4
+  verbose: false
+  sessionLog: false
+cache:
+  enabled: false
+  dir: .waza-cache
+server:
+  port: 3000
+  resultsDir: results/
+dev:
+  model: claude-sonnet-4-20250514
+  target: medium-high
+  maxIterations: 5
+tokens:
+  warningThreshold: 500
+  fallbackLimit: 1000
+graders:
+  programTimeout: 30
+storage:
+  containerName: waza-results

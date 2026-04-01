@@ -1,0 +1,51 @@
+id: 001006-version-add-preview-after-stable
+name: "Versioning: Add preview after stable"
+description: |
+  Test that the skill handles adding a new preview version after a stable version.
+tags:
+  - basic
+  - happy-path
+  - versioning
+inputs:
+  prompt: "add a new preview version `2025-05-04-preview` to my service widget resource manager. Carry over all the features from the latest stable version"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/shared.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+    - path: Microsoft.Widget/Widget/package.json
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"
+  graders:
+    - type: diff
+      name: version_enum_check
+      config:
+        expected_files:
+          - path: "Microsoft.Widget/Widget/main.tsp"
+            contains:
+              - "+@previewVersion"
+              - '+v2025-05-04-preview: "2025-05-04-preview"'
+    - type: action_sequence
+      name: mcp_workflow
+      config:
+        matching_mode: in_order_match
+        expected_actions:
+          - edit
+          - azsdk_run_typespec_validation
+    - type: tool_constraint
+      name: mcp_guardrails
+      config:
+        expect_tools:
+          - edit
+          - azsdk_run_typespec_validation
+    - type: prompt
+      name: setup_check
+      config:
+        prompt: |
+          A new preview version `2025-05-04-preview` has been added to the Versions enum in main.tsp. The new version is decorated with @previewVersion and has the correct version string.
+
+          If all criteria are met, call set_waza_grade_pass.
+          Otherwise, call set_waza_grade_fail with your reasoning.
+        model: "gpt-4o-mini"

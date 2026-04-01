@@ -7,8 +7,9 @@ import "./edgevolume.tsp";
 import "./backendconnectionstate.tsp";
 import "./subvolumecommon.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ArcContainerStorage;
 
@@ -57,6 +58,10 @@ model IngestSubvolumeProperties {
   @doc("Eviction configuration for the subvolume.")
   eviction?: IngestSubvolumeEvictionConfig;
 
+  @added(Versions.v2026_03_01_preview)
+  @doc("The action to take on any linked IngestSubVolumes that are requested to be deleted")
+  onDelete?: OnDelete;
+
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
@@ -100,6 +105,18 @@ union EvictionOrder {
 
   @doc("Any other string value is allowed as a custom order.")
   string, // Open enum allows any other string value
+}
+
+// Define the open enum for onDelete action
+@doc("Defines the possible actions for IngestSubvolume after deletion has been requested")
+union OnDelete {
+  @doc("Ingest all files prior to deleting the files and volume")
+  `trigger-immediate-ingest`: "trigger-immediate-ingest",
+
+  @doc("Delete all files and the ingest volume immediately after ingest volume deletion requested")
+  abandon: "abandon",
+
+  string,
 }
 
 @doc("The eviction configuration for the subvolume.")

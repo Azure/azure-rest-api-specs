@@ -1,0 +1,142 @@
+{
+  "title": "ClusterJobs_CreateOrUpdate_VmConnectProvisionJob",
+  "operationId": "ClusterJobs_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "vmConnectProvision",
+    "api-version": "2023-12-01-preview",
+    "resource": {
+      "properties": {
+        "jobType": "VmConnectProvision",
+        "deploymentMode": "Deploy",
+        "vmConnectProvisionJobDetails": [
+          {
+            "vmName": "myVM",
+            "nodeName": "Node-1",
+            "vmResourceGroupName": "myVMs-rg"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/vmConnectProvision",
+        "name": "vmConnectProvision",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "VmConnectProvision",
+          "deploymentMode": "Deploy",
+          "vmConnectProvisionJobDetails": [
+            {
+              "vmName": "myVM",
+              "nodeName": "Node-1",
+              "vmResourceGroupName": "myVMs-rg"
+            }
+          ],
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "VM Connect Provision Deployment",
+                  "description": "Open port to enable RDP Connection.",
+                  "startTimeUtc": "2024-01-29T10:43:27",
+                  "endTimeUtc": "2024-01-29T10:45:47",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "VM Connect Provision Deployment",
+                  "description": "Open port to enable RDP Connection.",
+                  "startTimeUtc": "2024-01-29T10:43:27",
+                  "endTimeUtc": "2024-01-29T10:45:47",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/vmConnectProvision",
+        "name": "vmConnectProvision",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "VmConnectProvision",
+          "deploymentMode": "Deploy",
+          "vmConnectProvisionJobDetails": [
+            {
+              "vmName": "myVM",
+              "nodeName": "Node-1",
+              "vmResourceGroupName": "myVMs-rg"
+            }
+          ],
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "VM Connect Provision Deployment",
+                  "description": "Open port to enable RDP Connection.",
+                  "startTimeUtc": "2024-01-29T10:43:27",
+                  "endTimeUtc": "2024-01-29T10:45:47",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "VM Connect Provision Deployment",
+                  "description": "Open port to enable RDP Connection.",
+                  "startTimeUtc": "2024-01-29T10:43:27",
+                  "endTimeUtc": "2024-01-29T10:45:47",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded"
+        }
+      }
+    }
+  }
+}
