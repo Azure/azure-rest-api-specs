@@ -6,6 +6,7 @@ import "@typespec/versioning";
 import "./typespec/routes.tsp";
 import "./typespec/accesstokens.tsp";
 import "./typespec/testruns.tsp";
+import "./typespec/browsersessions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -56,4 +57,7 @@ enum Versions {
 
   @doc("Preview version 2026-01-01-preview with experimental features.")
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("Preview version 2026-04-01-preview with experimental features.")
+  v2026_04_01_preview: "2026-04-01-preview",
 }

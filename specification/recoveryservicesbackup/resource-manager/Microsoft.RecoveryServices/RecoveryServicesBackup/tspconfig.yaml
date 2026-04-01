@@ -9,13 +9,9 @@ options:
     output-file: "{version-status}/{version}/bms.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    service-dir: "sdk/recoveryservices-backup"
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.RecoveryServicesBackup"
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.RecoveryServicesBackup"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservices-backup/Azure.ResourceManager.RecoveryServicesBackup"
   "@azure-tools/typespec-python":
     service-dir: "sdk/recoveryservices"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-recoveryservicesbackup"
