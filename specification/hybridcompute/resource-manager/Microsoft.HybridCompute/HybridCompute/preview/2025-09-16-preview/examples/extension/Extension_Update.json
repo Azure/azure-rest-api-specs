@@ -1,60 +1,62 @@
 {
   "parameters": {
-    "subscriptionId": "{subscriptionId}",
-    "resourceGroupName": "myResourceGroup",
-    "machineName": "myMachine",
-    "extensionName": "CustomScriptExtension",
     "api-version": "2025-09-16-preview",
+    "extensionName": "CustomScriptExtension",
     "extensionParameters": {
       "properties": {
-        "publisher": "Microsoft.Compute",
-        "typeHandlerVersion": "1.10",
-        "enableAutomaticUpgrade": true,
         "type": "CustomScriptExtension",
+        "enableAutomaticUpgrade": true,
+        "publisher": "Microsoft.Compute",
         "settings": {
           "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -lt 100 }\""
-        }
+        },
+        "typeHandlerVersion": "1.10"
       }
-    }
+    },
+    "machineName": "myMachine",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "{subscriptionId}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
         "name": "CustomScriptExtension",
         "type": "Microsoft.HybridCompute/machines/extensions",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/Extensions/CustomScriptExtension",
         "location": "eastus2euap",
         "properties": {
-          "publisher": "Microsoft.Compute",
           "type": "string",
-          "typeHandlerVersion": "1.10.3",
-          "enableAutomaticUpgrade": true,
           "autoUpgradeMinorVersion": false,
-          "settings": {
-            "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
-          },
-          "protectedSettings": {},
-          "provisioningState": "Succeeded",
+          "enableAutomaticUpgrade": true,
           "instanceView": {
             "name": "CustomScriptExtension",
             "type": "CustomScriptExtension",
-            "typeHandlerVersion": "1.10.3",
             "status": {
               "code": "success",
               "level": "Information",
               "message": "Finished executing command, StdOut: , StdErr:",
               "time": "2020-01-08T20:42:10.999Z"
-            }
-          }
+            },
+            "typeHandlerVersion": "1.10.3"
+          },
+          "protectedSettings": {},
+          "provisioningState": "Succeeded",
+          "publisher": "Microsoft.Compute",
+          "settings": {
+            "commandToExecute": "powershell.exe -c \"Get-Process | Where-Object { $_.CPU -gt 10000 }\""
+          },
+          "typeHandlerVersion": "1.10.3"
         }
       }
     },
     "202": {
       "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
         "Location": "{callbackUrl}",
-        "Retry-After": 200,
-        "Azure-AsyncOperation": "{callbackUri}"
+        "Retry-After": 200
       }
     }
-  }
+  },
+  "operationId": "MachineExtensions_Update",
+  "title": "Create or Update a Machine Extension"
 }

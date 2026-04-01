@@ -1,19 +1,21 @@
 {
   "parameters": {
-    "subscriptionId": "{subscriptionId}",
-    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-09-16-preview",
     "machineName": "myMachine",
+    "resourceGroupName": "myResourceGroup",
     "runCommandName": "myRunCommand",
-    "api-version": "2025-09-16-preview"
+    "subscriptionId": "{subscriptionId}"
   },
   "responses": {
     "202": {
       "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
         "Location": "{callbackUrl}",
-        "Retry-After": 200,
-        "Azure-AsyncOperation": "{callbackUri}"
+        "Retry-After": 200
       }
     },
     "204": {}
-  }
+  },
+  "operationId": "MachineRunCommands_Delete",
+  "title": "Delete a Machine Run Command"
 }

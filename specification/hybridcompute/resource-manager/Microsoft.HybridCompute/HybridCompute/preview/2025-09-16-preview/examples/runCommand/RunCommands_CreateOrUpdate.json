@@ -1,16 +1,15 @@
 {
   "parameters": {
-    "subscriptionId": "{subscriptionId}",
-    "resourceGroupName": "myResourceGroup",
-    "machineName": "myMachine",
-    "runCommandName": "myRunCommand",
     "api-version": "2025-09-16-preview",
+    "machineName": "myMachine",
+    "resourceGroupName": "myResourceGroup",
+    "runCommandName": "myRunCommand",
     "runCommandProperties": {
       "location": "eastus2",
       "properties": {
-        "source": {
-          "script": "Write-Host Hello World!"
-        },
+        "asyncExecution": false,
+        "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+        "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
         "parameters": [
           {
             "name": "param1",
@@ -21,26 +20,27 @@
             "value": "value2"
           }
         ],
-        "asyncExecution": false,
-        "runAsUser": "user1",
         "runAsPassword": "<runAsPassword>",
-        "timeoutInSeconds": 3600,
-        "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
-        "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
+        "runAsUser": "user1",
+        "source": {
+          "script": "Write-Host Hello World!"
+        },
+        "timeoutInSeconds": 3600
       }
-    }
+    },
+    "subscriptionId": "{subscriptionId}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
         "name": "myRunCommand",
         "type": "Microsoft.HybridCompute/machines/runcommands",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
         "location": "eastus2",
         "properties": {
-          "source": {
-            "script": "Write-Host Hello World!"
-          },
+          "asyncExecution": false,
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
           "parameters": [
             {
               "name": "param1",
@@ -51,30 +51,25 @@
               "value": "value2"
             }
           ],
-          "asyncExecution": false,
+          "provisioningState": "Succeeded",
           "runAsUser": "user1",
-          "timeoutInSeconds": 3600,
-          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
-          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
-          "provisioningState": "Succeeded"
+          "source": {
+            "script": "Write-Host Hello World!"
+          },
+          "timeoutInSeconds": 3600
         }
       }
     },
     "201": {
-      "headers": {
-        "Location": "{callbackUrl}",
-        "Retry-After": 200,
-        "Azure-AsyncOperation": "{callbackUri}"
-      },
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
         "name": "myRunCommand",
         "type": "Microsoft.HybridCompute/machines/runcommands",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/runcommands/myRunCommand",
         "location": "eastus2",
         "properties": {
-          "source": {
-            "script": "Write-Host Hello World!"
-          },
+          "asyncExecution": false,
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
           "parameters": [
             {
               "name": "param1",
@@ -85,14 +80,21 @@
               "value": "value2"
             }
           ],
-          "asyncExecution": false,
+          "provisioningState": "Creating",
           "runAsUser": "user1",
-          "timeoutInSeconds": 3600,
-          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
-          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
-          "provisioningState": "Creating"
+          "source": {
+            "script": "Write-Host Hello World!"
+          },
+          "timeoutInSeconds": 3600
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
+        "Location": "{callbackUrl}",
+        "Retry-After": 200
       }
     }
-  }
+  },
+  "operationId": "MachineRunCommands_CreateOrUpdate",
+  "title": "Create or Update a Run Command"
 }

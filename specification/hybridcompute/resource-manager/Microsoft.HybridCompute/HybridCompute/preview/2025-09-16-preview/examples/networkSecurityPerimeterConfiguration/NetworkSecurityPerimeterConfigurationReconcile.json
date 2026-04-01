@@ -1,10 +1,10 @@
 {
   "parameters": {
     "api-version": "2025-09-16-preview",
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "perimeterName": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.myAssociation",
     "resourceGroupName": "my-resource-group",
     "scopeName": "my-privatelinkscope",
-    "perimeterName": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.myAssociation"
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
   },
   "responses": {
     "200": {
@@ -14,10 +14,12 @@
     },
     "202": {
       "headers": {
+        "Azure-AsyncOperation": "{callbackUri}",
         "Location": "{callbackUrl}",
-        "Retry-After": 200,
-        "Azure-AsyncOperation": "{callbackUri}"
+        "Retry-After": 200
       }
     }
-  }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope",
+  "title": "Reconciles the network security perimeter configuration of the private link scope."
 }
