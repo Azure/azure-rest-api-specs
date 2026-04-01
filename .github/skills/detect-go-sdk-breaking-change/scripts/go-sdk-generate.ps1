@@ -1,0 +1,1 @@
+go run . generate c:\project\azure-sdk-for-go c:\project\azure-rest-api-specs --tsp-config=specification\webpubsub\resource-manager\Microsoft.SignalRService\SignalRService\tspconfig.yaml
