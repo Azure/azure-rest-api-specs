@@ -24,12 +24,157 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-preview-2025-02-01-preview
+tag: package-preview-2025-08-01-preview
 ```
 
-### Composite packages
+### Tag: package-preview-2025-08-01-preview
 
-The following packages may be composed from multiple api-versions.
+These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-01-preview'
+input-file:
+  - preview/2025-08-01-preview/BackupShortTermRetentionPolicies.json
+  - preview/2025-08-01-preview/BlobAuditing.json
+  - preview/2025-08-01-preview/DatabaseAdvancedThreatProtectionSettings.json
+  - preview/2025-08-01-preview/DatabaseAdvisors.json
+  - preview/2025-08-01-preview/DatabaseAutomaticTuning.json
+  - preview/2025-08-01-preview/DatabaseColumns.json
+  - preview/2025-08-01-preview/DatabaseEncryptionProtectorRevalidate.json
+  - preview/2025-08-01-preview/DatabaseEncryptionProtectorRevert.json
+  - preview/2025-08-01-preview/DatabaseExtensions.json
+  - preview/2025-08-01-preview/DatabaseOperations.json
+  - preview/2025-08-01-preview/DatabaseRecommendedActions.json
+  - preview/2025-08-01-preview/Databases.json
+  - preview/2025-08-01-preview/DatabaseSchemas.json
+  - preview/2025-08-01-preview/DatabaseSecurityAlertPolicies.json
+  - preview/2025-08-01-preview/DatabaseSqlVulnerabilityAssessmentBaselines.json
+  - preview/2025-08-01-preview/DatabaseSqlVulnerabilityAssessmentExecuteScan.json
+  - preview/2025-08-01-preview/DatabaseSqlVulnerabilityAssessmentRuleBaselines.json
+  - preview/2025-08-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
+  - preview/2025-08-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
+  - preview/2025-08-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
+  - preview/2025-08-01-preview/DatabaseTables.json
+  - preview/2025-08-01-preview/DatabaseUsages.json
+  - preview/2025-08-01-preview/DatabaseVulnerabilityAssessmentRuleBaselines.json
+  - preview/2025-08-01-preview/DatabaseVulnerabilityAssessments.json
+  - preview/2025-08-01-preview/DatabaseVulnerabilityAssessmentScans.json
+  - preview/2025-08-01-preview/DataMaskingPolicies.json
+  - preview/2025-08-01-preview/DataMaskingRules.json
+  - preview/2025-08-01-preview/DataWarehouseUserActivities.json
+  - preview/2025-08-01-preview/DeletedServers.json
+  - preview/2025-08-01-preview/DistributedAvailabilityGroups.json
+  - preview/2025-08-01-preview/ElasticPoolOperations.json
+  - preview/2025-08-01-preview/ElasticPools.json
+  - preview/2025-08-01-preview/EncryptionProtectors.json
+  - preview/2025-08-01-preview/EndpointCertificates.json
+  - preview/2025-08-01-preview/FailoverGroups.json
+  - preview/2025-08-01-preview/FirewallRules.json
+  - preview/2025-08-01-preview/GeoBackupPolicies.json
+  - preview/2025-08-01-preview/InstanceFailoverGroups.json
+  - preview/2025-08-01-preview/InstancePoolOperations.json
+  - preview/2025-08-01-preview/InstancePools.json
+  - preview/2025-08-01-preview/IPv6FirewallRules.json
+  - preview/2025-08-01-preview/JobAgents.json
+  - preview/2025-08-01-preview/JobCredentials.json
+  - preview/2025-08-01-preview/JobExecutions.json
+  - preview/2025-08-01-preview/JobPrivateEndpoints.json
+  - preview/2025-08-01-preview/Jobs.json
+  - preview/2025-08-01-preview/JobStepExecutions.json
+  - preview/2025-08-01-preview/JobSteps.json
+  - preview/2025-08-01-preview/JobTargetExecutions.json
+  - preview/2025-08-01-preview/JobTargetGroups.json
+  - preview/2025-08-01-preview/JobVersions.json
+  - preview/2025-08-01-preview/LedgerDigestUploads.json
+  - preview/2025-08-01-preview/LocationCapabilities.json
+  - preview/2025-08-01-preview/LongTermRetentionBackups.json
+  - preview/2025-08-01-preview/LongTermRetentionManagedInstanceBackups.json
+  - preview/2025-08-01-preview/LongTermRetentionPolicies.json
+  - preview/2025-08-01-preview/MaintenanceWindowOptions.json
+  - preview/2025-08-01-preview/MaintenanceWindows.json
+  - preview/2025-08-01-preview/ManagedBackupShortTermRetentionPolicies.json
+  - preview/2025-08-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
+  - preview/2025-08-01-preview/ManagedDatabaseColumns.json
+  - preview/2025-08-01-preview/ManagedDatabaseMoveOperations.json
+  - preview/2025-08-01-preview/ManagedDatabaseQueries.json
+  - preview/2025-08-01-preview/ManagedDatabaseRestoreDetails.json
+  - preview/2025-08-01-preview/ManagedDatabases.json
+  - preview/2025-08-01-preview/ManagedDatabaseSchemas.json
+  - preview/2025-08-01-preview/ManagedDatabaseSecurityAlertPolicies.json
+  - preview/2025-08-01-preview/ManagedDatabaseSecurityEvents.json
+  - preview/2025-08-01-preview/ManagedDatabaseSensitivityLabels.json
+  - preview/2025-08-01-preview/ManagedDatabaseTables.json
+  - preview/2025-08-01-preview/ManagedDatabaseTransparentDataEncryption.json
+  - preview/2025-08-01-preview/ManagedDatabaseVulnerabilityAssessmentRuleBaselines.json
+  - preview/2025-08-01-preview/ManagedDatabaseVulnerabilityAssessments.json
+  - preview/2025-08-01-preview/ManagedDatabaseVulnerabilityAssessmentScans.json
+  - preview/2025-08-01-preview/ManagedInstanceAdministrators.json
+  - preview/2025-08-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
+  - preview/2025-08-01-preview/ManagedInstanceAzureADOnlyAuthentications.json
+  - preview/2025-08-01-preview/ManagedInstanceDtcs.json
+  - preview/2025-08-01-preview/ManagedInstanceEncryptionProtectors.json
+  - preview/2025-08-01-preview/ManagedInstanceKeys.json
+  - preview/2025-08-01-preview/ManagedInstanceLongTermRetentionPolicies.json
+  - preview/2025-08-01-preview/ManagedInstanceOperations.json
+  - preview/2025-08-01-preview/ManagedInstancePrivateEndpointConnections.json
+  - preview/2025-08-01-preview/ManagedInstancePrivateLinkResources.json
+  - preview/2025-08-01-preview/ManagedInstances.json
+  - preview/2025-08-01-preview/ManagedInstanceTdeCertificates.json
+  - preview/2025-08-01-preview/ManagedInstanceVulnerabilityAssessments.json
+  - preview/2025-08-01-preview/ManagedLedgerDigestUploads.json
+  - preview/2025-08-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
+  - preview/2025-08-01-preview/ManagedServerDnsAliases.json
+  - preview/2025-08-01-preview/ManagedServerSecurityAlertPolicies.json
+  - preview/2025-08-01-preview/NetworkSecurityPerimeterConfigurations.json
+  - preview/2025-08-01-preview/Operations.json
+  - preview/2025-08-01-preview/OutboundFirewallRules.json
+  - preview/2025-08-01-preview/PrivateEndpointConnections.json
+  - preview/2025-08-01-preview/PrivateLinkResources.json
+  - preview/2025-08-01-preview/RecoverableDatabases.json
+  - preview/2025-08-01-preview/RecoverableManagedDatabases.json
+  - preview/2025-08-01-preview/ReplicationLinks.json
+  - preview/2025-08-01-preview/RestorableDroppedDatabases.json
+  - preview/2025-08-01-preview/RestorableDroppedManagedDatabases.json
+  - preview/2025-08-01-preview/RestorePoints.json
+  - preview/2025-08-01-preview/SensitivityLabels.json
+  - preview/2025-08-01-preview/ServerAdvancedThreatProtectionSettings.json
+  - preview/2025-08-01-preview/ServerAdvisors.json
+  - preview/2025-08-01-preview/ServerAutomaticTuning.json
+  - preview/2025-08-01-preview/ServerAzureADAdministrators.json
+  - preview/2025-08-01-preview/ServerAzureADOnlyAuthentications.json
+  - preview/2025-08-01-preview/ServerConfigurationOptions.json
+  - preview/2025-08-01-preview/ServerConnectionPolicies.json
+  - preview/2025-08-01-preview/ServerDevOpsAudit.json
+  - preview/2025-08-01-preview/ServerDnsAliases.json
+  - preview/2025-08-01-preview/ServerKeys.json
+  - preview/2025-08-01-preview/ServerOperations.json
+  - preview/2025-08-01-preview/Servers.json
+  - preview/2025-08-01-preview/ServerSecurityAlertPolicies.json
+  - preview/2025-08-01-preview/ServerTrustCertificates.json
+  - preview/2025-08-01-preview/ServerTrustGroups.json
+  - preview/2025-08-01-preview/ServerUsages.json
+  - preview/2025-08-01-preview/ServerVulnerabilityAssessments.json
+  - preview/2025-08-01-preview/SqlAgent.json
+  - preview/2025-08-01-preview/SqlVulnerabilityAssessmentBaseline.json
+  - preview/2025-08-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
+  - preview/2025-08-01-preview/SqlVulnerabilityAssessmentRuleBaseline.json
+  - preview/2025-08-01-preview/SqlVulnerabilityAssessmentScanResult.json
+  - preview/2025-08-01-preview/SqlVulnerabilityAssessmentScans.json
+  - preview/2025-08-01-preview/SqlVulnerabilityAssessmentsSettings.json
+  - preview/2025-08-01-preview/StartStopManagedInstanceSchedules.json
+  - preview/2025-08-01-preview/SubscriptionUsages.json
+  - preview/2025-08-01-preview/SynapseLinkWorkspaces.json
+  - preview/2025-08-01-preview/SyncAgents.json
+  - preview/2025-08-01-preview/SyncGroups.json
+  - preview/2025-08-01-preview/SyncMembers.json
+  - preview/2025-08-01-preview/TdeCertificates.json
+  - preview/2025-08-01-preview/TimeZones.json
+  - preview/2025-08-01-preview/TransparentDataEncryptions.json
+  - preview/2025-08-01-preview/Usages.json
+  - preview/2025-08-01-preview/VirtualClusters.json
+  - preview/2025-08-01-preview/VirtualNetworkRules.json
+  - preview/2025-08-01-preview/WorkloadClassifiers.json
+  - preview/2025-08-01-preview/WorkloadGroups.json
+```
 
 ### Tag: package-preview-2025-02-01-preview
 
@@ -1884,6 +2029,10 @@ input-file:
  - ./preview/2021-11-01-preview/WorkloadClassifiers.json
  - ./preview/2021-11-01-preview/WorkloadGroups.json
 ```
+
+### Composite packages
+
+The following packages may be composed from multiple api-versions.
 
 ### Tag: package-composite-v5
 
