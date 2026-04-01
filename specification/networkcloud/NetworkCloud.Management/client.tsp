@@ -400,5 +400,5 @@ using Microsoft.NetworkCloud;
 @@alternateType(Foundations.ExtendedLocation.type, string, "go");
 
 @@clientName(Microsoft.NetworkCloud, "NetworkCloudMgmtClient", "python");
-@@clientName(HugepagesSize.`1G`, "One_G", "python");
-@@clientName(HugepagesSize.`2M`, "Two_M", "python");
+@@clientName(HugepagesSize.`1G`, "ONE_G", "python");
+@@clientName(HugepagesSize.`2M`, "TWO_M", "python");
