@@ -52,3 +52,83 @@ using Microsoft.ContainerInstance;
   "ListResultContainerGroupProperties",
   "python"
 );
+
+// C# backward-compatible type renames for Azure.ResourceManager.ContainerInstance migration
+@@clientName(Container, "ContainerInstanceContainer", "csharp");
+@@clientName(IpAddress, "ContainerGroupIPAddress", "csharp");
+@@clientName(ImageRegistryCredential,
+  "ContainerGroupImageRegistryCredential",
+  "csharp"
+);
+@@clientName(DnsConfiguration, "ContainerGroupDnsConfiguration", "csharp");
+@@clientName(EncryptionProperties,
+  "ContainerGroupEncryptionProperties",
+  "csharp"
+);
+@@clientName(LogAnalytics, "ContainerGroupLogAnalytics", "csharp");
+@@clientName(ElasticProfile, "ContainerGroupElasticProfile", "csharp");
+@@clientName(SecretReference, "ContainerGroupSecretReference", "csharp");
+@@clientName(IdentityAcls,
+  "ContainerGroupIdentityAccessControlLevels",
+  "csharp"
+);
+@@clientName(Port, "ContainerGroupPort", "csharp");
+@@clientName(AzureFileVolume, "ContainerInstanceAzureFileVolume", "csharp");
+@@clientName(GitRepoVolume, "ContainerInstanceGitRepoVolume", "csharp");
+@@clientName(EnvironmentVariable, "ContainerEnvironmentVariable", "csharp");
+@@clientName(ResourceLimits, "ContainerResourceLimits", "csharp");
+@@clientName(ResourceRequests, "ContainerResourceRequestsContent", "csharp");
+@@clientName(ResourceRequirements, "ContainerResourceRequirements", "csharp");
+@@clientName(VolumeMount, "ContainerVolumeMount", "csharp");
+@@clientName(Volume, "ContainerVolume", "csharp");
+@@clientName(Event, "ContainerEvent", "csharp");
+@@clientName(ContainerPropertiesInstanceView,
+  "ContainerInstanceView",
+  "csharp"
+);
+@@clientName(OperatingSystemTypes,
+  "ContainerInstanceOperatingSystemType",
+  "csharp"
+);
+@@clientName(Capabilities, "ContainerCapabilities", "csharp");
+@@clientName(CapabilitiesCapabilities,
+  "ContainerSupportedCapabilities",
+  "csharp"
+);
+@@clientName(Logs, "ContainerLogs", "csharp");
+@@clientName(ContainerAttachResponse, "ContainerAttachResult", "csharp");
+@@clientName(ContainerExecRequest, "ContainerExecContent", "csharp");
+@@clientName(ContainerExecResponse, "ContainerExecResult", "csharp");
+@@clientName(GpuResource, "ContainerGpuResourceInfo", "csharp");
+@@clientName(GpuSku, "ContainerGpuSku", "csharp");
+@@clientName(Scheme, "ContainerHttpGetScheme", "csharp");
+@@clientName(LogAnalyticsLogType,
+  "ContainerGroupLogAnalyticsLogType",
+  "csharp"
+);
+@@clientName(ContainerGroupIpAddressType,
+  "ContainerGroupIPAddressType",
+  "csharp"
+);
+@@clientName(ContainerGroupPropertiesPropertiesInstanceView,
+  "ContainerGroupInstanceView",
+  "csharp"
+);
+@@clientName(SecurityContextDefinition,
+  "ContainerSecurityContextDefinition",
+  "csharp"
+);
+@@clientName(NetworkProfile, "ContainerGroupNetworkProfile", "csharp");
+@@clientName(FileShare, "ContainerGroupFileShare", "csharp");
+@@clientName(UpdateProfile, "NGroupUpdateProfile", "csharp");
+@@clientName(UpdateProfileRollingUpdateProfile,
+  "NGroupRollingUpdateProfile",
+  "csharp"
+);
+
+// C# resource hierarchy: restore TrackedResourceData inheritance
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(ContainerGroup,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
