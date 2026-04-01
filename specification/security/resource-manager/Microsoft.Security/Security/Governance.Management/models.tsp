@@ -100,14 +100,14 @@ union GovernanceRuleConditionOperator {
  */
 model GovernanceAssignmentsList {
   /**
-   * [Placeholder] Discription for value property
+   * Collection of governance assignments in this page
    */
   @visibility(Lifecycle.Read)
   @pageItems
   value?: GovernanceAssignment[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The URI to fetch the next page
    */
   @nextLink
   nextLink?: string;
@@ -298,14 +298,14 @@ model ErrorAdditionalInfo {
  */
 model GovernanceRuleList {
   /**
-   * [Placeholder] Discription for value property
+   * Collection of governance rules in this page
    */
   @visibility(Lifecycle.Read)
   @pageItems
   value?: GovernanceRule[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The URI to fetch the next page
    */
   @nextLink
   nextLink?: string;

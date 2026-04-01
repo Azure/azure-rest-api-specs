@@ -42,14 +42,14 @@ union ControlType {
  */
 model SecureScoresList {
   /**
-   * [Placeholder] Discription for value property
+   * Collection of secure scores in this page
    */
   @visibility(Lifecycle.Read)
   @pageItems
   value?: SecureScoreItem[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The URI to fetch the next page.
    */
   @nextLink
   nextLink?: string;
@@ -204,14 +204,14 @@ model ErrorAdditionalInfo {
  */
 model SecureScoreControlList {
   /**
-   * [Placeholder] Discription for value property
+   * Collection of security controls in this page
    */
   @visibility(Lifecycle.Read)
   @pageItems
   value?: SecureScoreControlDetails[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The URI to fetch the next page.
    */
   @nextLink
   nextLink?: string;

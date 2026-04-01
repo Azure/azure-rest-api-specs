@@ -931,15 +931,13 @@ union ExpandEnum {
  * List of security assessment metadata
  */
 model SecurityAssessmentMetadataResponseList {
-  /**
-   * [Placeholder] Discription for value property
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
   @visibility(Lifecycle.Read)
   value?: SecurityAssessmentMetadataResponse[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The URI to fetch the next page.
    */
   @nextLink
   // FIXME: (url) Please double check that this is the correct type for your scenario.
@@ -1159,14 +1157,14 @@ model ErrorAdditionalInfo {
  */
 model SecurityAssessmentList {
   /**
-   * [Placeholder] Discription for value property
+   * Collection of security assessments in this page
    */
   @pageItems
   @visibility(Lifecycle.Read)
   value?: SecurityAssessmentResponse[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The URI to fetch the next page.
    */
   @nextLink
   // FIXME: (url) Please double check that this is the correct type for your scenario.

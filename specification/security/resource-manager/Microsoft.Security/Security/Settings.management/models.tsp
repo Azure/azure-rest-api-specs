@@ -67,13 +67,13 @@ union SettingName {
  */
 model SettingsList {
   /**
-   * [Placeholder] Discription for value property
+   * The settings list.
    */
   @pageItems
   value?: Setting[];
 
   /**
-   * [Placeholder] Discription for nextLink property
+   * The URI to fetch the next page.
    */
   @nextLink
   nextLink?: string;
