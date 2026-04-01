@@ -619,7 +619,7 @@
             "name": "agent_session_id",
             "in": "query",
             "required": false,
-            "description": "Optional session ID to group related invocations. If not provided, a new session ID will be auto-generated.",
+            "description": "Optional session ID returned by the session CRUD APIs to reuse an existing sandbox. If not provided, a new session ID will be auto-generated.",
             "schema": {
               "type": "string"
             },
@@ -885,7 +885,7 @@
     "/agents/{agent_name}/endpoint/sessions": {
       "post": {
         "operationId": "Agents_createSession",
-        "description": "Creates a new session for an agent. The session is backed by the agent version\nspecified in the version_indicator. Session creation is a long-running operation —\nthe response includes an `x-ms-session-operation-id` header for tracking progress\nvia the Get Operation endpoint.",
+        "description": "Creates a new session for an agent endpoint.\nThe endpoint resolves the backing agent version from `version_indicator` and\nenforces session ownership using the provided isolation key for session-mutating operations.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -912,7 +912,7 @@
             "name": "x-session-isolation-key",
             "in": "header",
             "required": true,
-            "description": "Isolation key for session ownership validation. Required for all session-mutating operations.",
+            "description": "Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations.",
             "schema": {
               "type": "string"
             }
@@ -929,17 +929,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Response for session creation (201 Created with LRO tracking header).",
-            "headers": {
-              "x-ms-session-operation-id": {
-                "required": true,
-                "description": "Operation ID for tracking the create LRO.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "200": {
+            "description": "The request has succeeded.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1147,7 +1138,7 @@
       },
       "delete": {
         "operationId": "Agents_deleteSession",
-        "description": "Deletes a session. This is a long-running operation — the session transitions through\n`deleting` to `deleted` as sandbox and volume cleanup are performed asynchronously.\nThe response includes an `x-ms-session-operation-id` header for tracking progress.\nReturns 204 No Content if the session does not exist (idempotent).",
+        "description": "Deletes a session synchronously.\nReturns 204 No Content when the session is deleted or does not exist.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -1183,7 +1174,7 @@
             "name": "x-session-isolation-key",
             "in": "header",
             "required": true,
-            "description": "Isolation key for session ownership validation. Required for all session-mutating operations.",
+            "description": "Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations.",
             "schema": {
               "type": "string"
             }
@@ -1200,25 +1191,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Response for session deletion (202 Accepted with LRO tracking header).",
-            "headers": {
-              "x-ms-session-operation-id": {
-                "required": true,
-                "description": "Operation ID for tracking the delete LRO.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentSessionResource"
-                }
-              }
-            }
-          },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
@@ -1603,93 +1575,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{session_id}/operations/{operation_id}": {
-      "get": {
-        "operationId": "Agents_getSessionOperation",
-        "description": "Gets the status of a session operation (create, update, or delete LRO).\nThe response includes the operation status and the current state of the associated session.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "operation_id",
-            "in": "path",
-            "required": true,
-            "description": "The operation identifier returned in the x-ms-session-operation-id response header.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentSessionOperationObject"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agents"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
           ]
         }
       }
@@ -12283,125 +12168,6 @@
           }
         }
       },
-      "AgentSessionOperationError": {
-        "type": "object",
-        "required": [
-          "code",
-          "message"
-        ],
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "The error code."
-          },
-          "message": {
-            "type": "string",
-            "description": "A human-readable error message."
-          }
-        },
-        "description": "Error details for a failed session operation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "AgentSessionOperationObject": {
-        "type": "object",
-        "required": [
-          "operation_id",
-          "operation_type",
-          "status"
-        ],
-        "properties": {
-          "operation_id": {
-            "type": "string",
-            "description": "The operation identifier."
-          },
-          "operation_type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSessionOperationType"
-              }
-            ],
-            "description": "The type of operation."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSessionOperationStatus"
-              }
-            ],
-            "description": "The status of the operation."
-          },
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSessionOperationError"
-              }
-            ],
-            "description": "Error details when status is \"failed\"."
-          },
-          "session": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentSessionResource"
-              }
-            ],
-            "description": "The current state of the associated session. Allows callers to inspect session state alongside operation outcome."
-          }
-        },
-        "description": "A session operation object for tracking long-running session lifecycle changes.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "AgentSessionOperationStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "NotStarted",
-              "InProgress",
-              "Succeeded",
-              "Failed",
-              "Cancelled"
-            ]
-          }
-        ],
-        "description": "The status of a session operation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "AgentSessionOperationType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "Create",
-              "Update",
-              "Delete"
-            ]
-          }
-        ],
-        "description": "The type of session operation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
       "AgentSessionResource": {
         "type": "object",
         "required": [
@@ -12435,19 +12201,19 @@
           },
           "created_at": {
             "type": "integer",
-            "format": "int64",
+            "format": "unixtime",
             "description": "The Unix timestamp (in seconds) when the session was created.",
             "readOnly": true
           },
           "last_accessed_at": {
             "type": "integer",
-            "format": "int64",
+            "format": "unixtime",
             "description": "The Unix timestamp (in seconds) when the session was last accessed.",
             "readOnly": true
           },
           "expires_at": {
             "type": "integer",
-            "format": "int64",
+            "format": "unixtime",
             "description": "The Unix timestamp (in seconds) when the session expires (rolling, 30 days from last activity).",
             "readOnly": true
           }
@@ -14931,7 +14697,7 @@
         "properties": {
           "agent_session_id": {
             "type": "string",
-            "description": "Optional user-provided session ID. Auto-generated if omitted."
+            "description": "Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted."
           },
           "version_indicator": {
             "allOf": [
@@ -41878,7 +41644,7 @@
           },
           "agent_version": {
             "type": "string",
-            "description": "The agent version identifier."
+            "description": "The agent version identifier returned by the agent version APIs."
           }
         },
         "allOf": [

@@ -225,10 +225,9 @@ interface Agents {
   // ── Session Lifecycle Operations ────────────────────────
 
   /**
-   * Creates a new session for an agent. The session is backed by the agent version
-   * specified in the version_indicator. Session creation is a long-running operation —
-   * the response includes an `x-ms-session-operation-id` header for tracking progress
-   * via the Get Operation endpoint.
+   * Creates a new session for an agent endpoint.
+   * The endpoint resolves the backing agent version from `version_indicator` and
+   * enforces session ownership using the provided isolation key for session-mutating operations.
    */
   @post
   @route("/agents/{agent_name}/endpoint/sessions")
@@ -245,13 +244,13 @@ interface Agents {
       /** The name of the agent to create a session for. */
       @path agent_name: string;
 
-      /** Isolation key for session ownership validation. Required for all session-mutating operations. */
+      /** Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations. */
       @header("x-session-isolation-key")
       isolation_key: string;
 
       ...CreateAgentSessionRequest;
     },
-    CreatedAgentSessionResponse
+    OkResponse<AgentSessionResource>
   >;
 
   /**
@@ -279,12 +278,9 @@ interface Agents {
   >;
 
   /**
-   * Deletes a session. This is a long-running operation — the session transitions through
-   * `deleting` to `deleted` as sandbox and volume cleanup are performed asynchronously.
-   * The response includes an `x-ms-session-operation-id` header for tracking progress.
-   * Returns 204 No Content if the session does not exist (idempotent).
+   * Deletes a session synchronously.
+   * Returns 204 No Content when the session is deleted or does not exist.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @extension(
@@ -303,11 +299,11 @@ interface Agents {
       /** The session identifier. */
       @path session_id: string;
 
-      /** Isolation key for session ownership validation. Required for all session-mutating operations. */
+      /** Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations. */
       @header("x-session-isolation-key")
       isolation_key: string;
     },
-    AcceptedAgentSessionDeleteResponse | NoContentResponse
+    NoContentResponse
   >;
 
   /**
@@ -337,31 +333,4 @@ interface Agents {
     SessionListResult
   >;
 
-  /**
-   * Gets the status of a session operation (create, update, or delete LRO).
-   * The response includes the operation status and the current state of the associated session.
-   */
-  @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/operations/{operation_id}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
-  @removed(Versions.v1)
-  getSessionOperation is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
-    {
-      /** The name of the agent. */
-      @path agent_name: string;
-
-      /** The session identifier. */
-      @path session_id: string;
-
-      /** The operation identifier returned in the x-ms-session-operation-id response header. */
-      @path operation_id: string;
-    },
-    AgentSessionOperationObject
-  >;
 }

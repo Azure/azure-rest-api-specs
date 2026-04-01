@@ -991,7 +991,7 @@ model AgentCard {
 union AgentSessionStatus {
   string,
 
-  /** Session creation LRO is in progress. */
+  /** Session initialization is in progress. */
   Creating: "Creating",
 
   /** Session is running and operational. */
@@ -1000,10 +1000,10 @@ union AgentSessionStatus {
   /** Session sandbox is auto-suspended; resumes on next invocation. */
   Idle: "Idle",
 
-  /** Reserved — session re-parenting LRO is in progress (future phase). */
+  /** Reserved for future session re-parenting flows. */
   Updating: "Updating",
 
-  /** Session operation failed — requires delete to recover. */
+  /** Session initialization or lifecycle handling failed and requires delete to recover. */
   Failed: "Failed",
 
   /** Session is being deleted (cleanup in progress). */
@@ -1014,56 +1014,6 @@ union AgentSessionStatus {
 
   /** Session TTL exceeded (30 days from last activity). */
   Expired: "Expired",
-}
-
-// ── Session Operation Enums ─────────────────────────────
-
-/** The type of session operation. */
-@extension(
-  "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
-)
-@removed(Versions.v1)
-union AgentSessionOperationType {
-  string,
-
-  /** Session creation. */
-  Create: "Create",
-
-  /** Reserved — session re-parenting (future phase). */
-  Update: "Update",
-
-  /** Session deletion and resource cleanup. */
-  Delete: "Delete",
-}
-
-/** The status of a session operation. */
-@extension(
-  "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
-)
-@removed(Versions.v1)
-union AgentSessionOperationStatus {
-  string,
-
-  /** Operation has been accepted but not yet begun. */
-  NotStarted: "NotStarted",
-
-  /** Operation is in progress. */
-  InProgress: "InProgress",
-
-  /** Operation completed successfully. */
-  Succeeded: "Succeeded",
-
-  /** Operation failed — see error for details. */
-  Failed: "Failed",
-
-  /** Operation was cancelled. */
-  Cancelled: "Cancelled",
 }
 
 // ── Version Indicator ───────────────────────────────────
@@ -1080,7 +1030,7 @@ union VersionIndicatorType {
   string,
 
   /** Direct reference to a specific agent version. */
-  version_ref: "version_ref",
+  VersionRef: "version_ref",
 }
 
 /** Base class for version indicators. Uses type discriminator for polymorphism. */
@@ -1108,9 +1058,9 @@ model VersionIndicator {
 @removed(Versions.v1)
 model VersionRefIndicator extends VersionIndicator {
   /** Discriminator value for version_ref. */
-  type: VersionIndicatorType.version_ref;
+  type: VersionIndicatorType.VersionRef;
 
-  /** The agent version identifier. */
+  /** The agent version identifier returned by the agent version APIs. */
   agent_version: string;
 }
 
@@ -1136,16 +1086,19 @@ model AgentSessionResource {
   status: AgentSessionStatus;
 
   /** The Unix timestamp (in seconds) when the session was created. */
+  @encode("unixTimestamp", int64)
   @visibility(Lifecycle.Read)
-  created_at: int64;
+  created_at: utcDateTime;
 
   /** The Unix timestamp (in seconds) when the session was last accessed. */
+  @encode("unixTimestamp", int64)
   @visibility(Lifecycle.Read)
-  last_accessed_at: int64;
+  last_accessed_at: utcDateTime;
 
   /** The Unix timestamp (in seconds) when the session expires (rolling, 30 days from last activity). */
+  @encode("unixTimestamp", int64)
   @visibility(Lifecycle.Read)
-  expires_at: int64;
+  expires_at: utcDateTime;
 }
 
 // ── Session Request Models ──────────────────────────────
@@ -1160,97 +1113,11 @@ model AgentSessionResource {
 )
 @removed(Versions.v1)
 model CreateAgentSessionRequest {
-  /** Optional user-provided session ID. Auto-generated if omitted. */
+  /** Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted. */
   agent_session_id?: string;
 
   /** Determines which agent version backs the session. */
   version_indicator: VersionIndicator;
-}
-
-// ── Session Operation Models ────────────────────────────
-
-/** Error details for a failed session operation. */
-@extension(
-  "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
-)
-@removed(Versions.v1)
-model AgentSessionOperationError {
-  /** The error code. */
-  code: string;
-
-  /** A human-readable error message. */
-  message: string;
-}
-
-/** Represents a session operation tracking a long-running create, update, or delete. */
-@doc("A session operation object for tracking long-running session lifecycle changes.")
-@extension(
-  "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
-)
-@removed(Versions.v1)
-model AgentSessionOperationObject {
-  /** The operation identifier. */
-  operation_id: string;
-
-  /** The type of operation. */
-  operation_type: AgentSessionOperationType;
-
-  /** The status of the operation. */
-  status: AgentSessionOperationStatus;
-
-  /** Error details when status is "failed". */
-  error?: AgentSessionOperationError;
-
-  /** The current state of the associated session. Allows callers to inspect session state alongside operation outcome. */
-  session?: AgentSessionResource;
-}
-
-// ── Session Response Models ─────────────────────────────
-
-/** Response for session creation (201 Created with LRO tracking header). */
-@extension(
-  "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
-)
-@removed(Versions.v1)
-model CreatedAgentSessionResponse {
-  @statusCode
-  code: 201;
-
-  /** Operation ID for tracking the create LRO. */
-  @header("x-ms-session-operation-id")
-  operation_id: string;
-
-  @body
-  body: AgentSessionResource;
-}
-
-/** Response for session deletion (202 Accepted with LRO tracking header). */
-@extension(
-  "x-ms-foundry-meta",
-  #{
-    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-  }
-)
-@removed(Versions.v1)
-model AcceptedAgentSessionDeleteResponse {
-  @statusCode
-  code: 202;
-
-  /** Operation ID for tracking the delete LRO. */
-  @header("x-ms-session-operation-id")
-  operation_id: string;
-
-  @body
-  body: AgentSessionResource;
 }
 
 // ── Session List Result ─────────────────────────────────
