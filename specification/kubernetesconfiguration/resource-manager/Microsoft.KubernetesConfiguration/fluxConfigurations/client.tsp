@@ -67,4 +67,6 @@ using Azure.ClientGenerator.Core;
 );
 
 // Exclude OperationStatus APIs from C# SDK - they are built into the core library
-@@scope(Microsoft.KubernetesConfiguration.FluxConfigurations.fluxConfigOperationStatusGet, "!csharp");
+@@scope(Microsoft.KubernetesConfiguration.FluxConfigurations.fluxConfigOperationStatusGet,
+  "!csharp"
+);

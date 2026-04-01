@@ -48,4 +48,7 @@ using Azure.ClientGenerator.Core;
 );
 
 // C# fixes: rename interface to avoid namespace conflict (§4.9)
-@@clientName(Microsoft.KubernetesConfiguration.ExtensionTypes, "ExtensionTypeInterface", "csharp");
+@@clientName(Microsoft.KubernetesConfiguration.ExtensionTypes,
+  "ExtensionTypeInterface",
+  "csharp"
+);

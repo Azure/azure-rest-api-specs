@@ -69,6 +69,10 @@ using Azure.ClientGenerator.Core;
 
 // C# fixes: mark single-page list operations as pageable for correct Collection generation
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for correct Collection generation in C#"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for correct Collection generation in C#"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope,
+  "csharp"
+);
