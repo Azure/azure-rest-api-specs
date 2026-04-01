@@ -151,15 +151,9 @@ namespace Customizations;
   "javascript"
 );
 
-@@clientOption(Storage.File.MetadataHeaders.metadata,
-  "collectionHeaderPrefix",
-  "x-ms-meta-",
-  "csharp"
-);
-
 @@clientOption(Storage.File, "includeRootSlash", false, "javascript");
 
-@@clientOption(Storage.File, "omitSlashFromEmptyRoute", true, "python");
+@@clientOption(Storage.File, "omitSlashFromEmptyRoute", true, "python,csharp");
 
 @@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
   "signedDelegatedUserTenantId",
@@ -176,12 +170,84 @@ namespace Customizations;
 );
 
 @@Legacy.disablePageable(Storage.File.Service.listSharesSegment,
-  "python,javascript"
+  "python,javascript,csharp"
 );
 @@Legacy.disablePageable(Storage.File.Directory.listFilesAndDirectoriesSegment,
-  "python,javascript"
+  "python,javascript,csharp"
 );
 @@Legacy.disablePageable(Storage.File.Directory.listHandles,
-  "python,javascript"
+  "python,javascript,csharp"
 );
-@@Legacy.disablePageable(Storage.File.File.listHandles, "python,javascript");
+@@Legacy.disablePageable(Storage.File.File.listHandles, "python,javascript,csharp");
+
+
+// csharp customizations
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+model ShareClientParameters {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  fileRequestIntent?: ShareTokenIntent;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+model FileClientParameters {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  fileRequestIntent?: ShareTokenIntent;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  allowTrailingDot?: boolean;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  allowSourceTrailingDot?: boolean;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  fileRangeWriteFromUrl: FileRangeWriteFromUrlType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+model DirectoryClientParameters {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  fileRequestIntent?: ShareTokenIntent;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  allowTrailingDot?: boolean;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  allowSourceTrailingDot?: boolean;
+}
+
+@@clientInitialization(Storage.File,
+  { parameters: ShareClientParameters },
+  "csharp"
+);
+
+@@clientInitialization(Storage.File.Directory,
+  { parameters: DirectoryClientParameters },
+  "csharp"
+);
+
+@@clientInitialization(Storage.File.File,
+  { parameters: FileClientParameters },
+  "csharp"
+);
+
+@@alternateType(AccessPolicy.start, utcDateTime, "csharp");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
+@@alternateType(MetadataHeaders.metadata, Record<string>, "csharp");
+@@alternateType(FileProperty.eTag, string, "csharp");
+
+@@clientName(Storage.File, "ShareClient", "csharp");
+@@clientName(AccessPolicy.start, "StartsOn", "csharp");
+@@clientName(AccessPolicy.expiry, "ExpiresOn", "csharp");
+@@clientName(Directory, "DirectoryRestClient", "csharp");
+@@clientName(File, "FileRestClient", "csharp");
+@@clientName(Service, "ServiceRestClient", "csharp");
+@@clientName(Share, "ShareRestClient", "csharp");
+@@clientName(StorageErrorCode, "ShareErrorCode", "csharp");
+@@clientName(PermissionCopyModeType, "PermissionCopyMode", "csharp");
+@@access(FileRangeWriteFromUrlType, Access.`internal`, "csharp");
+
+@@clientOption(Storage.File.MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "csharp"
+);
