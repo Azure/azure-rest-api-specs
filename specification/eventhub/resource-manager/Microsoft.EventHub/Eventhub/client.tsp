@@ -164,6 +164,11 @@ using Microsoft.EventHub;
 @@clientName(ErrorAdditionalInfo, "EventHubsErrorAdditionalInfo", "java");
 @@clientName(ErrorResponse, "EventHubsErrorResponse", "csharp");
 @@clientName(ErrorResponse, "EventHubsErrorResponse", "java");
+
+// java naming mitigations
+@@clientName(NetworkRuleIPAction, "NetworkRuleIpAction", "java");
+@@clientName(SchemaGroupProperties.eTag, "etag", "java");
+
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
 @@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
 @@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
