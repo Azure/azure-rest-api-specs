@@ -53,7 +53,8 @@ interface WebSiteInstanceStatusOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WebSiteInstanceStatuses {
   /**
    * Description for Gets all scale-out instances of an app.
@@ -104,7 +105,8 @@ interface WebSiteInstanceStatusOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WebSiteInstanceStatusOperationGroup {
   /**
    * Description for Gets all scale-out instances of an app.
