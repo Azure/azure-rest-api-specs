@@ -37,7 +37,9 @@ interface Agents {
 
   /**
    * Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.
-   * The request is multipart/form-data with a JSON metadata part (including agent name) and a binary code part.
+   * The agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.
+   * The SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.
+   * The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
@@ -49,6 +51,16 @@ interface Agents {
     AgentDefinitionOptInKeys,
     {
       @header contentType: "multipart/form-data";
+
+      /** The unique name that identifies the agent. Max 63 chars, must start and end with alphanumeric, hyphens allowed in the middle. */
+      @header("x-ms-agent-name")
+      @maxLength(63)
+      agentName: string;
+
+      /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
+      @header("x-ms-code-zip-sha256")
+      codeZipSha256: string;
+
       @multipartBody body: CreateAgentFromCodeContent;
     },
     AgentObject
@@ -74,8 +86,8 @@ interface Agents {
 
   /**
    * Updates a code-based agent by uploading new code and creating a new version.
-   * If the code and definition are unchanged (matched by content_hash), returns the existing version.
-   * The request is multipart/form-data with a JSON metadata part and a binary code part.
+   * If the code and definition are unchanged (matched by x-ms-code-zip-sha256 header), returns the existing version.
+   * The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent update, not BYOS."
@@ -97,6 +109,11 @@ interface Agents {
       agent_name: string;
 
       @header contentType: "multipart/form-data";
+
+      /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
+      @header("x-ms-code-zip-sha256")
+      codeZipSha256: string;
+
       @multipartBody body: CreateAgentVersionFromCodeContent;
     },
     AgentObject
@@ -274,10 +291,10 @@ interface Agents {
   >;
 
   /**
-   * Create a new agent version from code. Uploads the code zip and creates or updates
-   * the agent in a single call. If an agent with the given name already exists, a new
-   * version is added. If not, the agent is created with its first version.
-   * The request is multipart/form-data with a JSON metadata part and a binary code part.
+   * Create a new agent version from code. Uploads the code zip and creates a new version
+   * for an existing agent. The SHA-256 hex digest of the zip is provided in the
+   * `x-ms-code-zip-sha256` header for integrity and dedup.
+   * The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
    * Maximum upload size is 250 MB.
    */
   #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
@@ -302,6 +319,11 @@ interface Agents {
       agent_name: string;
 
       @header contentType: "multipart/form-data";
+
+      /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
+      @header("x-ms-code-zip-sha256")
+      codeZipSha256: string;
+
       @multipartBody body: CreateAgentVersionFromCodeContent;
     },
     AgentVersionObject
