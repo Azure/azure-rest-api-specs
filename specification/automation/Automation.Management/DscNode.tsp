@@ -11,6 +11,11 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Automation;
+
+#suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+alias UnknownType = {
+  unknownType: unknown;
+};
 /**
  * Definition of a DscNode
  */
@@ -142,7 +147,7 @@ interface DscNodes {
   getContent is ArmResourceRead<
     DscNode,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DscNode>,
-    Response = ArmResponse<unknown>,
+    Response = ArmResponse<UnknownType.unknownType>,
     Parameters = {
       /**
        * The report id.

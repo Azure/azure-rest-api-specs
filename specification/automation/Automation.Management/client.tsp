@@ -50,3 +50,4 @@ using Microsoft.Automation;
   "ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties",
   "javascript"
 );
+@@alternateType(UnknownType.unknownType, Record<unknown>, "javascript");
