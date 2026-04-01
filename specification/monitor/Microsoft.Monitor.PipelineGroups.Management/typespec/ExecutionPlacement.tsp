@@ -34,6 +34,13 @@ model PlacementConstraint {
 @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model DistributionPolicy {
   @doc("Maximum number of instances allowed per compute unit (node/VM). If not specified, default scheduling applies.")
+  @renamedFrom(Microsoft.Monitor.Versions.v2026_04_01, "maxInstancesPerHost")
+  @removed(Microsoft.Monitor.Versions.v2026_04_01)
+  maxInstancesPerHostWithoutMinimum?: int32;
+
+  @doc("Maximum number of instances allowed per compute unit (node/VM). If not specified, default scheduling applies.")
+  @minValue(1)
+  @added(Microsoft.Monitor.Versions.v2026_04_01)
   maxInstancesPerHost?: int32;
 }
 
