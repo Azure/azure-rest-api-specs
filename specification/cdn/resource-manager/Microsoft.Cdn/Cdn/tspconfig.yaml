@@ -49,7 +49,9 @@ options:
     inject-spans: true
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Cdn"
+    package-name: "Azure.ResourceManager.Cdn"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

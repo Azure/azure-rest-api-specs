@@ -695,3 +695,199 @@ using Microsoft.Cdn;
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
+
+// Fix colliding GetAll extension methods on SubscriptionResource
+@@clientName(ResourceUsageOperationGroup.list, "GetResourceUsages", "csharp");
+@@clientName(ManagedRuleSetsOperationGroup.list,
+  "GetManagedRuleSets",
+  "csharp"
+);
+
+// Fix ResourceReference.id type: string → armResourceIdentifier (covers all ResourceReference usages)
+@@alternateType(ResourceReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Fix standalone string properties that should be ResourceIdentifier
+@@alternateType(ProfileProperties.frontDoorId, Azure.Core.uuid, "csharp");
+@@alternateType(OriginProperties.privateLinkResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(OriginUpdatePropertiesParameters.privateLinkResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DeepCreatedOriginProperties.privateLinkResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ActivatedResourceReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(CdnEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// Fix ETag type: string → eTag
+@@alternateType(CdnWebApplicationFirewallPolicy.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+
+// Fix Uri type: string → url
+@@alternateType(PolicySettings.defaultRedirectUrl, url, "csharp");
+
+// Fix BinaryData type: string → bytes
+@@alternateType(PolicySettings.defaultCustomBlockResponseBody, bytes, "csharp");
+
+// Fix property renames for backward compatibility
+@@clientName(PolicySettings.defaultRedirectUrl, "DefaultRedirectUri", "csharp");
+@@clientName(CdnWebApplicationFirewallPolicyProperties.endpointLinks,
+  "EndpointLinks",
+  "csharp"
+);
+@@clientName(CdnEndpoint.id, "Id", "csharp");
+
+// Fix property renames: Operator properties (old: XxxOperator, new: Operator)
+@@clientName(ClientPortMatchConditionParameters.operator,
+  "ClientPortOperator",
+  "csharp"
+);
+@@clientName(CookiesMatchConditionParameters.operator,
+  "CookiesOperator",
+  "csharp"
+);
+@@clientName(HostNameMatchConditionParameters.operator,
+  "HostNameOperator",
+  "csharp"
+);
+@@clientName(HttpVersionMatchConditionParameters.operator,
+  "HttpVersionOperator",
+  "csharp"
+);
+@@clientName(IsDeviceMatchConditionParameters.operator,
+  "IsDeviceOperator",
+  "csharp"
+);
+@@clientName(PostArgsMatchConditionParameters.operator,
+  "PostArgsOperator",
+  "csharp"
+);
+@@clientName(QueryStringMatchConditionParameters.operator,
+  "QueryStringOperator",
+  "csharp"
+);
+@@clientName(RemoteAddressMatchConditionParameters.operator,
+  "RemoteAddressOperator",
+  "csharp"
+);
+@@clientName(RequestBodyMatchConditionParameters.operator,
+  "RequestBodyOperator",
+  "csharp"
+);
+@@clientName(RequestHeaderMatchConditionParameters.operator,
+  "RequestHeaderOperator",
+  "csharp"
+);
+@@clientName(RequestMethodMatchConditionParameters.operator,
+  "RequestMethodOperator",
+  "csharp"
+);
+@@clientName(RequestSchemeMatchConditionParameters.operator,
+  "RequestSchemeOperator",
+  "csharp"
+);
+@@clientName(RequestUriMatchConditionParameters.operator,
+  "RequestUriOperator",
+  "csharp"
+);
+@@clientName(ServerPortMatchConditionParameters.operator,
+  "ServerPortOperator",
+  "csharp"
+);
+@@clientName(SslProtocolMatchConditionParameters.operator,
+  "SslProtocolOperator",
+  "csharp"
+);
+@@clientName(SocketAddrMatchConditionParameters.operator,
+  "SocketAddressOperator",
+  "csharp"
+);
+@@clientName(UrlFileExtensionMatchConditionParameters.operator,
+  "UriFileExtensionOperator",
+  "csharp"
+);
+@@clientName(UrlFileNameMatchConditionParameters.operator,
+  "UriFileNameOperator",
+  "csharp"
+);
+@@clientName(UrlPathMatchConditionParameters.operator,
+  "UriPathOperator",
+  "csharp"
+);
+
+// Fix property renames: other property name mismatches
+@@clientName(AFDDomainProperties.azureDnsZone, "DnsZone", "csharp");
+@@clientName(AFDDomainUpdatePropertiesParameters.azureDnsZone,
+  "DnsZone",
+  "csharp"
+);
+@@clientName(AFDDomainProperties.preValidatedCustomDomainResourceId,
+  "PreValidatedCustomDomainResource",
+  "csharp"
+);
+@@clientName(AFDDomainUpdatePropertiesParameters.preValidatedCustomDomainResourceId,
+  "PreValidatedCustomDomainResource",
+  "csharp"
+);
+@@clientName(AFDOriginProperties.azureOrigin, "Origin", "csharp");
+@@clientName(AFDOriginUpdatePropertiesParameters.azureOrigin,
+  "Origin",
+  "csharp"
+);
+@@clientName(CustomDomainProperties.customHttpsParameters,
+  "CustomDomainHttpsContent",
+  "csharp"
+);
+@@clientName(CustomDomainProperties.customHttpsProvisioningSubstate,
+  "CustomHttpsAvailabilityState",
+  "csharp"
+);
+@@clientName(SecurityPolicyProperties.parameters,
+  "SecurityPolicyParameters",
+  "csharp"
+);
+@@clientName(OriginGroupProperties.responseBasedOriginErrorDetectionSettings,
+  "ResponseBasedOriginErrorDetectionSettings",
+  "csharp"
+);
+@@clientName(ResponseBasedOriginErrorDetectionParameters.responseBasedDetectedErrorTypes,
+  "ResponseBasedDetectedErrorType",
+  "csharp"
+);
+@@clientName(CheckNameAvailabilityInput.type, "ResourceType", "csharp");
+@@clientName(CheckEndpointNameAvailabilityInput.type, "ResourceType", "csharp");
+@@clientName(ValidateCustomDomainOutput.customDomainValidated,
+  "IsCustomDomainValid",
+  "csharp"
+);
+@@clientName(OriginGroupProperties.trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
+  "TrafficRestorationTimeInMinutes",
+  "csharp"
+);
+@@clientName(OriginGroupUpdatePropertiesParameters.trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
+  "TrafficRestorationTimeInMinutes",
+  "csharp"
+);
+
+// Fix method renames for backward compatibility
+@@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
+@@clientName(Profiles.profilesListResourceUsage,
+  "GetCdnProfileResourceUsages",
+  "csharp"
+);
