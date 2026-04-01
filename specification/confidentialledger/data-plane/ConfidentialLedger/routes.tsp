@@ -441,6 +441,10 @@ op getRuntimeOptions is ConfidentialLedgerCommon.LedgerOperation<
 @patch
 op updateRuntimeOptions is ConfidentialLedgerCommon.LedgerOperation<
   {
+    /** Content type */
+    @header("Content-Type")
+    contentType: "application/merge-patch+json";
+
     /** JS Runtime options */
     @bodyRoot
     jsRuntimeOptions: JsRuntimeOptions;
@@ -601,7 +605,9 @@ op createUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
     @bodyRoot
     body: UserDefinedRoles;
   },
-  {}
+  {
+    @bodyRoot body: string;
+  }
 >;
 
 /**
@@ -617,12 +623,18 @@ op createUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
 @patch
 op updateUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
   {
+    /** Content type */
+    @header("Content-Type")
+    contentType: "application/merge-patch+json";
+
     /** Request body */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
     @bodyRoot
     body: UserDefinedRoles;
   },
-  {}
+  {
+    @bodyRoot body: string;
+  }
 >;
 
 /**
@@ -641,5 +653,7 @@ op deleteUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
     @query("roleName")
     roleName: string;
   },
-  {}
+  {
+    @bodyRoot body: string;
+  }
 >;

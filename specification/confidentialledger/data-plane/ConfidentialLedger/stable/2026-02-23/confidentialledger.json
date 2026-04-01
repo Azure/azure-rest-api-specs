@@ -405,6 +405,10 @@
         "operationId": "CreateUserDefinedRole",
         "summary": "Creates new roles and their actions",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -421,7 +425,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -440,6 +447,13 @@
         "operationId": "UpdateUserDefinedRole",
         "summary": "Patch replaces the allowed action on existing roles,if the desire is to remove\nan existing action, the role must be deleted and recreated.",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -456,7 +470,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -475,6 +492,10 @@
         "operationId": "DeleteUserDefinedRole",
         "summary": "Deletes user defined roles",
         "description": "A user defined role allows the users to create and manage their own role\nactions using the API.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -489,7 +510,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -924,6 +948,9 @@
         "operationId": "UpdateRuntimeOptions",
         "summary": "Runtime options for user defined endpoints.",
         "description": "Updates the runtime options.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
