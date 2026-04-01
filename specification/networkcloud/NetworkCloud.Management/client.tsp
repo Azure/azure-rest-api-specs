@@ -512,9 +512,12 @@ using Microsoft.NetworkCloud;
   "csharp"
 );
 @@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
-@@clientName(ClusterInspectParameters, "ClusterInspectContent", "csharp");
+@@clientName(ClusterInspectParameters,
+  "NetworkCloudClusterInspectContent",
+  "csharp"
+);
 @@clientName(ClusterManagerUpdateRelayPrivateEndpointConnectionParameters,
-  "ClusterManagerUpdateRelayPrivateEndpointConnectionContent",
+  "NetworkCloudClusterManagerRelayPrivateEndpointConnectionContent",
   "csharp"
 );
 @@clientName(FilterDevices, "NetworkCloudFilterDevices", "csharp");
@@ -522,3 +525,40 @@ using Microsoft.NetworkCloud;
 @@clientName(TransportProtocol.UDP, "Udp", "csharp");
 @@clientName(VolumeSpec.sizeMiB, "AllocatedInSizeMiB", "csharp");
 @@clientName(VolumeStatus.allocatedSizeMiB, "AllocatedInSizeMiB", "csharp");
+@@clientName(TransportProtocol, "NetworkCloudTransportProtocol", "csharp");
+@@clientName(SecurityRuleDirection,
+  "NetworkCloudSecurityRuleDirection",
+  "csharp"
+);
+@@clientName(RelayPrivateEndpointConnectionState,
+  "NetworkCloudRelayPrivateEndpointConnectionState",
+  "csharp"
+);
+@@clientName(KubernetesVersionProvisioningState,
+  "NetworkCloudKubernetesVersionProvisioningState",
+  "csharp"
+);
+@@clientName(KubernetesVersionValue,
+  "NetworkCloudKubernetesVersionValue",
+  "csharp"
+);
+@@clientName(AccessBridgeAllowedName,
+  "NetworkCloudAccessBridgeAllowedName",
+  "csharp"
+);
+@@clientName(AccessBridgeDetailedStatus,
+  "NetworkCloudAccessBridgeDetailedStatus",
+  "csharp"
+);
+@@clientName(AccessBridgeEndpoint,
+  "NetworkCloudAccessBridgeEndpoint",
+  "csharp"
+);
+@@clientName(AccessBridgeProvisioningState,
+  "NetworkCloudAccessBridgeProvisioningState",
+  "csharp"
+);
+@@clientName(AccessBridgeSecurityRule,
+  "NetworkCloudAccessBridgeSecurityRule",
+  "csharp"
+);
