@@ -175,11 +175,11 @@ model EvaluationRule {
   @doc("Configure to use ML-based dynamic thresholds. When used, degradedRule and unhealthyRule must not be set.")
   dynamicDetectionRule?: DynamicDetectionRule;
 
-  @doc("Degraded rule with static threshold.")
+  @doc("Degraded threshold rule.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   degradedRule?: ThresholdRuleV2;
 
-  @doc("Unhealthy rule with static threshold.")
+  @doc("Unhealthy threshold rule.")
   @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
   @madeRequired(Versions.v2026_01_01_preview)
   unhealthyRule: ThresholdRuleV2;
@@ -204,7 +204,7 @@ model ThresholdRuleV2 {
   operator: SignalOperator;
 
   @madeOptional(Versions.v2026_05_01_preview)
-  @doc("Threshold value. Required for static operators. When operator is Dynamic, defaults to the minimum representable value if omitted.")
+  @doc("Threshold value. Required for static operators. Not applicable when operator is Dynamic.")
   threshold?: float64;
 
   @added(Versions.v2026_05_01_preview)
