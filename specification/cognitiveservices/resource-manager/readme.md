@@ -126,6 +126,20 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems"].post.parameters[5].schema.type
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post.parameters[5].schema.type
+  - code: PostResponseCodes
+    reason: Cancel operation returns 202 for async polling matching existing service behavior for long-running operations.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/jobs/{jobName}/cancel"].post
+  - code: AvoidAdditionalProperties
+    reason: Foundry Job API uses Record<T> types matching the established Machine Learning Services pattern.
+    where:
+      - $.definitions.FoundryCommandJob.properties.inputs
+      - $.definitions.FoundryCommandJob.properties.outputs
+      - $.definitions.FoundryCommandJob.properties.environmentVariables
+      - $.definitions.FoundryJobBase.properties.services
+      - $.definitions.FoundryJobBase.properties.tags
+      - $.definitions.FoundryJobBase.properties.properties
+      - $.definitions.FoundryJobService.properties.properties
 ```
 
 ### Tag: package-2025-12-01
