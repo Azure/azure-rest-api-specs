@@ -11,6 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
+    use-read-only-status-schema: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storage"
     namespace: "azure.mgmt.storage"
@@ -18,15 +19,21 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storage-generated"
-    namespace: "com.azure.resourcemanager.storage.generated"
-    service-name: "Storage" # human-readable service name, whitespace allowed
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storage"
+    namespace: "com.azure.resourcemanager.storage"
+    service-name: "Storage"
     flavor: azure
-    premium: false # TODO(change it to true when release)
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    uuid-as-string: false
+    float32-as-double: false
+    property-include-always:
+      - EncryptionIdentity.encryptionUserAssignedIdentity
     rename-model:
       FailoverRequestFailoverType: FailoverType
       ListKeysRequestExpand: ListKeyExpand
-    enable-sync-stack: false
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-storage"
     service-dir: sdk/storage
@@ -44,6 +51,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

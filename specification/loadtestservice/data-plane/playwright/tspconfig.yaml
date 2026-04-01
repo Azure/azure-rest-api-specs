@@ -12,11 +12,12 @@ parameters:
     default: ""
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/playwright.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
+    # Intentionally hardcoded to stable API version for SDK method generation.
+    api-version: "2025-09-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-playwright"
     namespace: "azure.developer.playwright"
     generate-test: true
@@ -36,12 +37,16 @@ options:
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
+    # Intentionally hardcoded to stable API version for SDK method generation.
+    api-version: "2025-09-01"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.Developer.Playwright"
     flavor: azure
   "@azure-tools/typespec-java":
+    # Intentionally hardcoded to stable API version for SDK method generation.
+    api-version: "2025-09-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-playwright"
     namespace: com.azure.developer.playwright
     partial-update: true
