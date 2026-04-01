@@ -177,11 +177,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "javascript"
 );
 @@clientName(BlobProperties.deletedTime, "deletedOn", "javascript");
-@@clientName(BlobProperties.eTag, "etag", "javascript");
+@@clientName(BlobProperties.eTag, "etag", "javascript,python");
 @@clientName(ContainerProperties.deletedTime, "deletedOn", "javascript");
-@@clientName(ContainerProperties.eTag, "etag", "javascript");
-@@clientName(EtagResponseHeader.eTag, "etag", "javascript");
-@@clientName(EtagResponseHeaderPrivate.eTag, "etag", "javascript");
+@@clientName(ContainerProperties.eTag, "etag", "javascript,python");
+@@clientName(EtagResponseHeader.eTag, "etag", "javascript,python");
+@@clientName(EtagResponseHeaderPrivate.eTag, "etag", "javascript,python");
 @@clientName(GeoReplication.lastSyncTime, "lastSyncOn", "javascript");
 @@clientName(KeyInfo.start, "startsOn", "javascript");
 @@clientName(KeyInfo.expiry, "expiresOn", "javascript");
@@ -449,8 +449,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
-
-@@clientName(Storage.Blob.ContainerProperties.eTag, "etag", "python");
 
 @@alternateType(Storage.Blob.UserDelegationKey.signedStart, string, "python");
 @@alternateType(Storage.Blob.UserDelegationKey.signedExpiry, string, "python");
