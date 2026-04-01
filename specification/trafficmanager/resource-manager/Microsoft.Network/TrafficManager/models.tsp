@@ -307,18 +307,21 @@ model ProxyResource extends Resource {}
 @extension("x-ms-azure-resource", true)
 model Resource {
   /**
-   * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
+   * Read-only. Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
    */
+  @visibility(Lifecycle.Read)
   id?: armResourceIdentifier;
 
   /**
-   * The name of the resource
+   * Read-only. The name of the resource
    */
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
-   * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
+   * Read-only. The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
    */
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
