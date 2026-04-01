@@ -37,6 +37,8 @@ using TypeSpec.Versioning;
 @versioned(ApiVersions)
 namespace PurviewUnifiedCatalog;
 
+@@minLength(Azure.Core.Foundations.ApiVersionParameter.apiVersion, 0);
+
 @doc("Service API versions")
 enum ApiVersions {
   @doc("2026-03-20-preview service API version")

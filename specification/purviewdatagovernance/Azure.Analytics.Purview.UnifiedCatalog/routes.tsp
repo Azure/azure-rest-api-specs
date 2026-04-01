@@ -915,12 +915,12 @@ interface DataColumns {
     DataColumn
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  @tag("DataColumn")
-  @doc("Deletes a data column by identifier.")
-  @delete
-  Delete is UnifiedCatalogOperations.ResourceDelete<DataColumn>;
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+  // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  // @tag("DataColumn")
+  // @doc("Deletes a data column by identifier.")
+  // @delete
+  // Delete is UnifiedCatalogOperations.ResourceDelete<DataColumn>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -963,7 +963,7 @@ interface DataColumns {
     DataColumnIdForRelationship & {
       @doc("The type of entity to retrieve relationships for.")
       @query
-      entityType?: EntityCategory;
+      entityType: EntityCategory;
     },
     DataColumnRelationshipResponse
   >;
@@ -978,7 +978,7 @@ interface DataColumns {
     DataColumnIdForRelationship & {
       @doc("The type of entity to retrieve relationships for.")
       @query
-      entityType?: EntityCategory;
+      entityType: EntityCategory;
 
       @doc("Relationship payload.")
       @bodyRoot
@@ -997,7 +997,7 @@ interface DataColumns {
     DataColumnIdForRelationship & {
       @doc("The type of entity to retrieve relationships for.")
       @query
-      entityType?: EntityCategory;
+      entityType: EntityCategory;
 
       @doc("Related entity identifier.")
       @query

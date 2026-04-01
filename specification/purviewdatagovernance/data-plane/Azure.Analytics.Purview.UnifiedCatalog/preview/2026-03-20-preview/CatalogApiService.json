@@ -1963,48 +1963,6 @@
             "$ref": "./examples/DataColumns_Get_Gen.json"
           }
         }
-      },
-      "delete": {
-        "operationId": "DataColumns_Delete",
-        "tags": [
-          "DataColumn"
-        ],
-        "description": "Deletes a data column by identifier.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the data column.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataColumns_Delete": {
-            "$ref": "./examples/DataColumns_Delete_Gen.json"
-          }
-        }
       }
     },
     "/dataColumns/{dataColumnId}/relationships": {
@@ -2030,7 +1988,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity to retrieve relationships for.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2174,7 +2132,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity to retrieve relationships for.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -2327,7 +2285,7 @@
             "name": "entityType",
             "in": "query",
             "description": "The type of entity to retrieve relationships for.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "DOMAIN",
@@ -8623,7 +8581,7 @@
       "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "minLength": 1,
+      "minLength": 0,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
