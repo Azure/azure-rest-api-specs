@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -20,8 +20,13 @@ model NetworkPacketBroker
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NetworkPacketBroker properties */
+  @doc("The NetworkPacketBroker properties")
   properties: NetworkPacketBrokerProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -40,10 +45,16 @@ interface NetworkPacketBrokers {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkPacketBroker>;
 
   @doc("Displays NetworkPacketBrokers list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<NetworkPacketBroker>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkPacketBroker,
+    Response = NetworkPacketBrokersListResult
+  >;
 
   @doc("Displays Network Packet Brokers list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<NetworkPacketBroker>;
+  listBySubscription is ArmListBySubscription<
+    NetworkPacketBroker,
+    Response = NetworkPacketBrokersListResult
+  >;
 }
 
 @@doc(NetworkPacketBrokers.create::parameters.resource, "Request payload.");
