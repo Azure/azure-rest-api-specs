@@ -66,10 +66,3 @@ interface EvaluationTaxonomies {}
 @@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );
-
-interface Toolboxes {}
-@@clientLocation(Azure.AI.Projects.Toolboxes.createToolbox, Toolboxes);
-@@clientLocation(Azure.AI.Projects.Toolboxes.updateToolbox, Toolboxes);
-@@clientLocation(Azure.AI.Projects.Toolboxes.getToolbox, Toolboxes);
-@@clientLocation(Azure.AI.Projects.Toolboxes.listToolboxes, Toolboxes);
-@@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolbox, Toolboxes);
