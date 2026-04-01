@@ -194,5 +194,5 @@ model SupportedLocationsResult {
    * The URL to get the next set of results.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 }

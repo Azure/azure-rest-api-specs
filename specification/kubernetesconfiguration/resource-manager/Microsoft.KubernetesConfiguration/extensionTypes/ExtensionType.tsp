@@ -109,7 +109,6 @@ interface ExtensionTypeSupportedLocations {
    * List all supported Azure locations for the specified extension type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required by ARM linter for list operations and @pageItems/@nextLink on the model do not emit it for custom route operations."
-  @added(Versions.v2026_04_01)
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/locations")

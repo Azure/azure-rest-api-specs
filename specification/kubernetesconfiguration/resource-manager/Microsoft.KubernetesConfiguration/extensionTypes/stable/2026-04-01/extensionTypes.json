@@ -49,7 +49,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/locations": {
       "get": {
-        "operationId": "ExtensionTypeSupportedLocations_ListSupportedLocations",
+        "operationId": "ExtensionTypes_ListSupportedLocations",
         "tags": [
           "ExtensionTypes",
           "ClusterExtensionTypes"
@@ -948,10 +948,12 @@
           "description": "Array of supported Azure location names.",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       },
