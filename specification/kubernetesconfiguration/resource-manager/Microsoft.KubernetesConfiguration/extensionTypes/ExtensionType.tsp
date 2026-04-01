@@ -13,7 +13,6 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * The Extension Type object.
  */
-@subscriptionResource
 model ExtensionType
   is Azure.ResourceManager.ProxyResource<ExtensionTypeProperties> {
   ...ResourceNameParameter<

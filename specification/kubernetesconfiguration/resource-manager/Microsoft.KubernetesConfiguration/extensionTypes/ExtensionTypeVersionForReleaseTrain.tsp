@@ -14,7 +14,6 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * The Extension Type Version object.
  */
-@subscriptionResource
 @parentResource(ExtensionType)
 model ExtensionTypeVersionForReleaseTrain
   is Azure.ResourceManager.ProxyResource<ExtensionTypeVersionForReleaseTrainProperties> {

@@ -3,6 +3,12 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+// C# type customizations for backward compatibility
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationFluxConfigurationsMgmtClient",
   "python"
@@ -58,4 +64,9 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.KubernetesConfiguration.FluxConfigurationPatchProperties,
   "FluxConfigPatchProperties",
   "java"
+);
+
+// Exclude OperationStatus APIs from C# SDK - they are built into the core library
+@@scope(Microsoft.KubernetesConfiguration.FluxConfigurations.fluxConfigOperationStatusGet,
+  "!csharp"
 );
