@@ -6,6 +6,7 @@ tags:
   - name: Agents
   - name: Agent Containers
   - name: Agent Invocations
+  - name: Agent Sessions
   - name: Connections
   - name: Datasets
   - name: Deployments
@@ -1440,6 +1441,88 @@ paths:
           '*/*':
             schema: {}
         description: Optional request body.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+  /agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream:
+    get:
+      operationId: AgentSessions_getSessionLogStream
+      description: |-
+        Streams console logs (stdout / stderr) for a specific hosted agent session
+        as a Server-Sent Events (SSE) stream.
+
+        Each SSE frame contains:
+        - `event`: always `"log"`
+        - `data`: a plain-text log line (currently JSON-formatted, but the schema
+        is not contractual and may include additional keys or change format
+        over time — clients should treat it as an opaque string)
+
+        Example SSE frames:
+        ```
+        event: log
+        data: {"timestamp":"2026-03-10T09:33:17.121Z","stream":"stdout","message":"Starting FoundryCBAgent server on port 8088"}
+
+        event: log
+        data: {"timestamp":"2026-03-10T09:33:17.130Z","stream":"stderr","message":"INFO: Application startup complete."}
+
+        event: log
+        data: {"timestamp":"2026-03-10T09:34:52.714Z","stream":"status","message":"Successfully connected to container"}
+
+        event: log
+        data: {"timestamp":"2026-03-10T09:35:52.714Z","stream":"status","message":"No logs since last 60 seconds"}
+        ```
+
+        The stream remains open until the client disconnects or the server
+        terminates the connection. Clients should handle reconnection as needed.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: session_id
+          in: path
+          required: true
+          description: The session ID (maps to an ADC sandbox).
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/SessionLogEvent'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
       x-ms-foundry-meta:
         required_previews:
           - HostedAgents=V1Preview
@@ -26813,6 +26896,56 @@ components:
             - Evaluation
             - Insight
       description: Type of the task.
+    SessionLogEvent:
+      type: object
+      required:
+        - event
+        - data
+      properties:
+        event:
+          allOf:
+            - $ref: '#/components/schemas/SessionLogEventType'
+          description: The SSE event type. Currently `log`, but additional event types may be added in the future. Clients should ignore unrecognized event types.
+          example: log
+        data:
+          type: string
+          description: The event payload as plain text. Currently JSON-formatted but the schema is not contractual and may change.
+          example: '{"timestamp":"2026-03-10T09:33:17.121467567+00:00","stream":"stdout","message":"Starting server on port 18080"}'
+      description: |-
+        A single Server-Sent Event frame emitted by the hosted agent session log stream.
+
+        Each frame contains an `event` field identifying the event type and a `data`
+        field carrying the payload as plain text. Although the current `data` payload
+        is JSON-formatted, its schema is not contractual — additional keys may appear
+        and the format may change over time. Clients should treat `data` as an
+        opaque string and optionally attempt JSON parsing.
+
+        New event types may be added in the future. Clients should gracefully
+        ignore unrecognized event types.
+
+        Wire format:
+        ```
+        event: log
+        data: {"timestamp":"2026-03-10T09:33:17.121Z","stream":"stdout","message":"Starting server on port 18080"}
+
+        event: log
+        data: {"timestamp":"2026-03-10T09:34:52.714Z","stream":"status","message":"Successfully connected to container"}
+        ```
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+    SessionLogEventType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - log
+      description: |-
+        Known SSE event types emitted by the hosted agent session log stream.
+        Additional event types may be introduced in future versions.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
     SharepointGroundingToolCall:
       type: object
       required:
