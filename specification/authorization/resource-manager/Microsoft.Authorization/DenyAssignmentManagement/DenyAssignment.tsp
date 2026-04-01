@@ -121,9 +121,13 @@ interface DenyAssignments {
   /**
    * Create or update the specified deny assignment.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId required for backward compatibility with existing SDK"
   @added(Versions.v2024_07_01_preview)
   @operationId("DenyAssignments_CreateOrUpdate")
-  create is Extension.CreateOrReplaceSync<Extension.ScopeParameter, DenyAssignment>;
+  create is Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
+    DenyAssignment
+  >;
 
   /**
    * Delete the specified deny assignment.
