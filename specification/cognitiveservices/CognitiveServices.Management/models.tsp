@@ -5702,8 +5702,26 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 union FoundryJobType {
   string,
 
+  /** AutoML job type. */
+  AutoML: "AutoML",
+
   /** Command job type. */
   Command: "Command",
+
+  /** Sweep job type. */
+  Sweep: "Sweep",
+
+  /** Pipeline job type. */
+  Pipeline: "Pipeline",
+
+  /** Spark job type. */
+  Spark: "Spark",
+
+  /** FineTuning job type. */
+  FineTuning: "FineTuning",
+
+  /** Distillation job type. */
+  Distillation: "Distillation",
 }
 
 /**
@@ -5771,6 +5789,9 @@ union FoundryDistributionType {
 
   /** MPI distribution. */
   Mpi: "Mpi",
+
+  /** Ray distribution. */
+  Ray: "Ray",
 }
 
 /**
@@ -5782,6 +5803,11 @@ union FoundryJobInputType {
   literal: "literal",
   uri_file: "uri_file",
   uri_folder: "uri_folder",
+  mltable: "mltable",
+  custom_model: "custom_model",
+  mlflow_model: "mlflow_model",
+  triton_model: "triton_model",
+  safetensors_model: "safetensors_model",
 }
 
 /**
@@ -5792,6 +5818,11 @@ union FoundryJobOutputType {
   string,
   uri_file: "uri_file",
   uri_folder: "uri_folder",
+  mltable: "mltable",
+  custom_model: "custom_model",
+  mlflow_model: "mlflow_model",
+  triton_model: "triton_model",
+  safetensors_model: "safetensors_model",
 }
 
 /**
@@ -6039,6 +6070,39 @@ model FoundryTensorFlow extends FoundryDistributionConfiguration {
 }
 
 /**
+ * Ray distribution configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+model FoundryRay extends FoundryDistributionConfiguration {
+  /** Ray distribution type. */
+  distributionType: FoundryDistributionType.Ray;
+
+  /** The port of the head ray process. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'port' is nullable in 'FoundryRay' for backward compatibility"
+  port?: int32 | null;
+
+  /** The address of Ray head node. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'address' is nullable in 'FoundryRay' for backward compatibility"
+  address?: string | null;
+
+  /** Provide this argument to start the Ray dashboard GUI. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'includeDashboard' is nullable in 'FoundryRay' for backward compatibility"
+  includeDashboard?: boolean | null;
+
+  /** The port to bind the dashboard server to. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'dashboardPort' is nullable in 'FoundryRay' for backward compatibility"
+  dashboardPort?: int32 | null;
+
+  /** Additional arguments passed to ray start in head node. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'headNodeAdditionalArgs' is nullable in 'FoundryRay' for backward compatibility"
+  headNodeAdditionalArgs?: string | null;
+
+  /** Additional arguments passed to ray start in worker node. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'workerNodeAdditionalArgs' is nullable in 'FoundryRay' for backward compatibility"
+  workerNodeAdditionalArgs?: string | null;
+}
+
+/**
  * Foundry job input definition.
  */
 @added(Versions.v2026_01_15_preview)
@@ -6081,6 +6145,9 @@ model FoundryUriFileJobInput extends FoundryJobInput {
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   uri: string;
+
+  /** Optional workspace connection name for accessing BYO storage. */
+  connectionName?: string;
 }
 
 /**
@@ -6098,6 +6165,9 @@ model FoundryUriFolderJobInput extends FoundryJobInput {
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   uri: string;
+
+  /** Optional workspace connection name for accessing BYO storage. */
+  connectionName?: string;
 }
 
 /**
@@ -6127,6 +6197,9 @@ model FoundryUriFileJobOutput extends FoundryJobOutput {
 
   /** Output Asset URI. */
   uri?: string;
+
+  /** Optional workspace connection name for accessing BYO storage. */
+  connectionName?: string;
 }
 
 /**
@@ -6142,6 +6215,9 @@ model FoundryUriFolderJobOutput extends FoundryJobOutput {
 
   /** Output Asset URI. */
   uri?: string;
+
+  /** Optional workspace connection name for accessing BYO storage. */
+  connectionName?: string;
 }
 
 /**

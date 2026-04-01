@@ -7348,6 +7348,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Foundry Jobs": {
+            "$ref": "./examples/ListFoundryJobs.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -7411,6 +7416,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Foundry Job": {
+            "$ref": "./examples/GetFoundryJob.json"
           }
         }
       },
@@ -7494,6 +7504,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Foundry Job": {
+            "$ref": "./examples/CreateFoundryJob.json"
+          }
         }
       },
       "delete": {
@@ -7564,6 +7579,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Foundry Job": {
+            "$ref": "./examples/DeleteFoundryJob.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7638,6 +7658,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel Foundry Job": {
+            "$ref": "./examples/CancelFoundryJob.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13912,7 +13937,8 @@
       "enum": [
         "PyTorch",
         "TensorFlow",
-        "Mpi"
+        "Mpi",
+        "Ray"
       ],
       "x-ms-enum": {
         "name": "FoundryDistributionType",
@@ -13932,6 +13958,11 @@
             "name": "Mpi",
             "value": "Mpi",
             "description": "MPI distribution."
+          },
+          {
+            "name": "Ray",
+            "value": "Ray",
+            "description": "Ray distribution."
           }
         ]
       }
@@ -14075,7 +14106,12 @@
       "enum": [
         "literal",
         "uri_file",
-        "uri_folder"
+        "uri_folder",
+        "mltable",
+        "custom_model",
+        "mlflow_model",
+        "triton_model",
+        "safetensors_model"
       ],
       "x-ms-enum": {
         "name": "FoundryJobInputType",
@@ -14092,6 +14128,26 @@
           {
             "name": "uri_folder",
             "value": "uri_folder"
+          },
+          {
+            "name": "mltable",
+            "value": "mltable"
+          },
+          {
+            "name": "custom_model",
+            "value": "custom_model"
+          },
+          {
+            "name": "mlflow_model",
+            "value": "mlflow_model"
+          },
+          {
+            "name": "triton_model",
+            "value": "triton_model"
+          },
+          {
+            "name": "safetensors_model",
+            "value": "safetensors_model"
           }
         ]
       }
@@ -14120,7 +14176,12 @@
       "description": "Enum to determine the Foundry job output type.",
       "enum": [
         "uri_file",
-        "uri_folder"
+        "uri_folder",
+        "mltable",
+        "custom_model",
+        "mlflow_model",
+        "triton_model",
+        "safetensors_model"
       ],
       "x-ms-enum": {
         "name": "FoundryJobOutputType",
@@ -14133,6 +14194,26 @@
           {
             "name": "uri_folder",
             "value": "uri_folder"
+          },
+          {
+            "name": "mltable",
+            "value": "mltable"
+          },
+          {
+            "name": "custom_model",
+            "value": "custom_model"
+          },
+          {
+            "name": "mlflow_model",
+            "value": "mlflow_model"
+          },
+          {
+            "name": "triton_model",
+            "value": "triton_model"
+          },
+          {
+            "name": "safetensors_model",
+            "value": "safetensors_model"
           }
         ]
       }
@@ -14380,16 +14461,52 @@
       "type": "string",
       "description": "Enum to determine the type of Foundry job.",
       "enum": [
-        "Command"
+        "AutoML",
+        "Command",
+        "Sweep",
+        "Pipeline",
+        "Spark",
+        "FineTuning",
+        "Distillation"
       ],
       "x-ms-enum": {
         "name": "FoundryJobType",
         "modelAsString": true,
         "values": [
           {
+            "name": "AutoML",
+            "value": "AutoML",
+            "description": "AutoML job type."
+          },
+          {
             "name": "Command",
             "value": "Command",
             "description": "Command job type."
+          },
+          {
+            "name": "Sweep",
+            "value": "Sweep",
+            "description": "Sweep job type."
+          },
+          {
+            "name": "Pipeline",
+            "value": "Pipeline",
+            "description": "Pipeline job type."
+          },
+          {
+            "name": "Spark",
+            "value": "Spark",
+            "description": "Spark job type."
+          },
+          {
+            "name": "FineTuning",
+            "value": "FineTuning",
+            "description": "FineTuning job type."
+          },
+          {
+            "name": "Distillation",
+            "value": "Distillation",
+            "description": "Distillation job type."
           }
         ]
       }
@@ -14491,6 +14608,50 @@
         }
       }
     },
+    "FoundryRay": {
+      "type": "object",
+      "description": "Ray distribution configuration.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port of the head ray process.",
+          "x-nullable": true
+        },
+        "address": {
+          "type": "string",
+          "description": "The address of Ray head node.",
+          "x-nullable": true
+        },
+        "includeDashboard": {
+          "type": "boolean",
+          "description": "Provide this argument to start the Ray dashboard GUI.",
+          "x-nullable": true
+        },
+        "dashboardPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port to bind the dashboard server to.",
+          "x-nullable": true
+        },
+        "headNodeAdditionalArgs": {
+          "type": "string",
+          "description": "Additional arguments passed to ray start in head node.",
+          "x-nullable": true
+        },
+        "workerNodeAdditionalArgs": {
+          "type": "string",
+          "description": "Additional arguments passed to ray start in worker node.",
+          "x-nullable": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FoundryDistributionConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Ray"
+    },
     "FoundryTensorFlow": {
       "type": "object",
       "description": "TensorFlow distribution configuration.",
@@ -14528,6 +14689,10 @@
           "description": "[Required] Input Asset URI.",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Optional workspace connection name for accessing BYO storage."
         }
       },
       "required": [
@@ -14551,6 +14716,10 @@
         "uri": {
           "type": "string",
           "description": "Output Asset URI."
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Optional workspace connection name for accessing BYO storage."
         }
       },
       "allOf": [
@@ -14573,6 +14742,10 @@
           "description": "[Required] Input Asset URI.",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Optional workspace connection name for accessing BYO storage."
         }
       },
       "required": [
@@ -14596,6 +14769,10 @@
         "uri": {
           "type": "string",
           "description": "Output Asset URI."
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Optional workspace connection name for accessing BYO storage."
         }
       },
       "allOf": [
