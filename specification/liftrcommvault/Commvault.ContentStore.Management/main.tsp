@@ -680,7 +680,8 @@ model StopBackupProtectionGroupRequest {
 model BackupProtectionGroupRequest {
   @doc("The vm list details.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  vmList: VmList;
+  @Azure.ResourceManager.identifiers(#[])
+  vmList: VmListItem[];
 
   @added(Versions.v5_preview)
   @doc("The backup options for the VM backup")
@@ -699,19 +700,11 @@ model BackupProtectionGroupResponse {
   jobIds: string[];
 }
 
-@doc("The VM list for backup")
-model VmList {
-  @doc("The list of VM GUIDs to backup")
+@doc("The VM list item for backup")
+model VmListItem {
+  @doc("The GUID of the VM to backup")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @Azure.ResourceManager.identifiers(#[])
-  vmGuid: VmGuid[];
-}
-
-@doc("The VM GUID for backup")
-model VmGuid {
-  @doc("The id of the VM")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  id: string;
+  vmGuid: string;
 }
 
 @doc("The backup options for the VM backup")

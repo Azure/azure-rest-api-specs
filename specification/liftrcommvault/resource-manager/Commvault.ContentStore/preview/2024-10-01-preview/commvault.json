@@ -1708,12 +1708,48 @@
         ]
       }
     },
+    "BackupLevel": {
+      "type": "string",
+      "description": "The level of backup",
+      "enum": [
+        "FULL",
+        "INCREMENTAL",
+        "DIFFERENTIAL",
+        "SYNTHETIC_FULL"
+      ],
+      "x-ms-enum": {
+        "name": "BackupLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "FULL",
+            "description": "Full backup level"
+          },
+          {
+            "name": "Incremental",
+            "value": "INCREMENTAL",
+            "description": "Incremental backup level"
+          },
+          {
+            "name": "Differential",
+            "value": "DIFFERENTIAL",
+            "description": "Differential backup level"
+          },
+          {
+            "name": "SyntheticFull",
+            "value": "SYNTHETIC_FULL",
+            "description": "Synthetic full backup level"
+          }
+        ]
+      }
+    },
     "BackupOptions": {
       "type": "object",
       "description": "The backup options for the VM backup",
       "properties": {
         "backupLevel": {
-          "type": "string",
+          "$ref": "#/definitions/BackupLevel",
           "description": "Indicates whether to stop backup or not for the VM",
           "x-ms-mutability": [
             "read",
@@ -1754,7 +1790,6 @@
         }
       },
       "required": [
-        "backupLevel",
         "jobDescription",
         "backupCopyImmediately",
         "runSnapShotBackup",
@@ -1766,8 +1801,12 @@
       "description": "The properties of BackupProtectionGroupRequest",
       "properties": {
         "vmList": {
-          "$ref": "#/definitions/VmList",
+          "type": "array",
           "description": "The vm list details.",
+          "items": {
+            "$ref": "#/definitions/VmListItem"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -3406,23 +3445,6 @@
         "vmInfoList"
       ]
     },
-    "VmGuid": {
-      "type": "object",
-      "description": "The VM GUID for backup",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the VM",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "VmInfo": {
       "type": "object",
       "description": "The properties of information of a VM",
@@ -3525,25 +3547,13 @@
         "storageAccountId"
       ]
     },
-    "VmList": {
+    "VmListItem": {
       "type": "object",
-      "description": "The VM list for backup",
+      "description": "The VM list item for backup",
       "properties": {
         "vmGuid": {
-          "type": "array",
-          "description": "The list of VM GUIDs to backup",
-          "items": {
-            "$ref": "#/definitions/VmGuid"
-          },
-          "x-ms-identifiers": [],
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "backupOptions": {
-          "$ref": "#/definitions/BackupOptions",
-          "description": "The backup options for the VM backup",
+          "type": "string",
+          "description": "The GUID of the VM to backup",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3551,8 +3561,7 @@
         }
       },
       "required": [
-        "vmGuid",
-        "backupOptions"
+        "vmGuid"
       ]
     },
     "VmTag": {

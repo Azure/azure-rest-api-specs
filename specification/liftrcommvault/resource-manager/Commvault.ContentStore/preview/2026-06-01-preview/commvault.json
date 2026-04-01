@@ -1993,8 +1993,12 @@
       "description": "The properties of BackupProtectionGroupRequest",
       "properties": {
         "vmList": {
-          "$ref": "#/definitions/VmList",
+          "type": "array",
           "description": "The vm list details.",
+          "items": {
+            "$ref": "#/definitions/VmListItem"
+          },
+          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -3642,23 +3646,6 @@
         "vmInfoList"
       ]
     },
-    "VmGuid": {
-      "type": "object",
-      "description": "The VM GUID for backup",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the VM",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "VmInfo": {
       "type": "object",
       "description": "The properties of information of a VM",
@@ -3761,17 +3748,13 @@
         "storageAccountId"
       ]
     },
-    "VmList": {
+    "VmListItem": {
       "type": "object",
-      "description": "The VM list for backup",
+      "description": "The VM list item for backup",
       "properties": {
         "vmGuid": {
-          "type": "array",
-          "description": "The list of VM GUIDs to backup",
-          "items": {
-            "$ref": "#/definitions/VmGuid"
-          },
-          "x-ms-identifiers": [],
+          "type": "string",
+          "description": "The GUID of the VM to backup",
           "x-ms-mutability": [
             "read",
             "create"
