@@ -1,0 +1,27 @@
+﻿{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "mySnapshot",
+    "api-version": "2026-03-02",
+    "immutabilityPolicyData": {
+      "immutabilityPeriodSinceCreationInDays": 30,
+      "state": "Locked"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "immutabilityPeriodSinceCreationInDays": 30,
+        "state": "Locked"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operations/{operationId}&monitor=true&api-version=2026-03-02"
+      }
+    }
+  },
+  "operationId": "Snapshots_UpdateImmutabilityPolicyLock",
+  "title": "Update immutability policy lock of a snapshot."
+}

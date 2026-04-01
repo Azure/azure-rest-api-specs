@@ -2455,6 +2455,152 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{resourceName}/updateImmutabilityPolicy": {
+      "post": {
+        "operationId": "Snapshots_UpdateImmutabilityPolicy",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Updates the immutability policy of a snapshot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "immutabilityPolicyData",
+            "in": "body",
+            "description": "Immutability policy data supplied in the body of the update immutability policy operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImmutabilityPolicyData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImmutabilityPolicyData"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update immutability policy of a snapshot.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_UpdateImmutabilityPolicy.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{resourceName}/updateImmutabilityPolicyLock": {
+      "post": {
+        "operationId": "Snapshots_UpdateImmutabilityPolicyLock",
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Updates the immutability policy lock of a snapshot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "immutabilityPolicyData",
+            "in": "body",
+            "description": "Immutability policy data supplied in the body of the update immutability policy lock operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImmutabilityPolicyData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImmutabilityPolicyData"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update immutability policy lock of a snapshot.": {
+            "$ref": "./examples/snapshotExamples/Snapshot_UpdateImmutabilityPolicyLock.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -3990,6 +4136,63 @@
         "access",
         "durationInSeconds"
       ]
+    },
+    "ImmutabilityPolicyData": {
+      "type": "object",
+      "description": "Data used for updating the immutability policy of a snapshot.",
+      "properties": {
+        "immutabilityPeriodSinceCreationInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The immutability period for the snapshots created with this policy, in number of days since creation."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the immutability policy. Possible values include: 'Unlocked', 'Locked'. When not specified, the immutability policy is not set ",
+          "enum": [
+            "Unlocked",
+            "Locked"
+          ],
+          "x-ms-enum": {
+            "name": "ImmutabilityPolicyState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unlocked",
+                "value": "Unlocked",
+                "description": "The immutability policy of the snapshot can be modified by the privileged user."
+              },
+              {
+                "name": "Locked",
+                "value": "Locked",
+                "description": "The immutability policy of the snapshot can NOT be modified by any user until the locked period expires."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "HyperVGeneration": {
+      "type": "string",
+      "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVGeneration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1"
+          },
+          {
+            "name": "V2",
+            "value": "V2"
+          }
+        ]
+      }
     },
     "ImageDiskReference": {
       "type": "object",
