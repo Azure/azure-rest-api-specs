@@ -54,7 +54,8 @@ interface IdentifierOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface Identifiers {
   /**
    * Description for Get domain ownership identifier for web app.
@@ -137,7 +138,8 @@ interface IdentifierOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface IdentifierOperationGroup {
   /**
    * Description for Get domain ownership identifier for web app.

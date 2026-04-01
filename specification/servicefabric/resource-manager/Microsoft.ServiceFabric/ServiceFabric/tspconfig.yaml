@@ -8,6 +8,7 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "."
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-file: "{version-status}/{version}/servicefabric.json"
     emit-lro-options: "all"
@@ -26,6 +27,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-servicefabric"
+    compatibility-lro: true
     package-details:
       name: "@azure/arm-servicefabric"
     flavor: azure
@@ -45,6 +47,8 @@ options:
     flavor: azure
     service-name: Service Fabric
     use-object-for-unknown: true
+    rename-model:
+      "ArmProxyResource": "ProxyResource"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
