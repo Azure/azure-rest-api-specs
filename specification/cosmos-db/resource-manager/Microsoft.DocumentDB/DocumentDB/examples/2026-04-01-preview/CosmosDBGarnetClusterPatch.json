@@ -6,7 +6,9 @@
     "clusterName": "garnet-prod",
     "body": {
       "properties": {
-        "clusterType": "Production"
+        "clusterType": "Production",
+        "authenticationMethod": "Entra",
+        "persistence": true
       }
     }
   },
@@ -25,7 +27,12 @@
         "tags": {},
         "properties": {
           "provisioningState": "Succeeded",
-          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management"
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
+          "shardCount": 4,
+          "nodeSku": "Standard_DS13_v2",
+          "replicationFactor": 2,
+          "authenticationMethod": "Entra",
+          "persistence": true
         }
       }
     }

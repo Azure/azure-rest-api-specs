@@ -75,13 +75,26 @@ model GarnetClusterResourceProperties {
   replicationFactor?: int32;
 
   /** Number of nodes. */
+  @removed(Versions.v2026_04_01_preview)
   nodeCount?: int32;
+
+  /** Number of shards in the cluster. */
+  @added(Versions.v2026_04_01_preview)
+  shardCount?: int32;
 
   /** Virtual Machine SKU used for clusters. Default value is Standard_DS14_v2. */
   nodeSku?: string;
 
   /** If the data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the garnet cluster virtual machines. */
   availabilityZone?: boolean;
+
+  /** The authentication method used for the Garnet cluster. */
+  @added(Versions.v2026_04_01_preview)
+  authenticationMethod?: GarnetAuthenticationType;
+
+  /** Flag to indicate if persistence is enabled for the Garnet cluster. */
+  @added(Versions.v2026_04_01_preview)
+  persistence?: boolean;
 
   /** Allocation state of the cluster and data center resources. Active implies the virtual machines of the cluster are allocated, deallocated implies virtual machines and resources are deallocated. */
   allocationState?: AllocationState;
@@ -115,6 +128,16 @@ union AllocationState {
   /** Deallocated implies virtual machines and resources are deallocated. */
   Deallocated: "Deallocated",
 }
+
+/** The authentication method used for the Garnet cluster. */
+@added(Versions.v2026_04_01_preview)
+union GarnetAuthenticationType {
+  string,
+
+  /** Microsoft Entra authentication. */
+  Entra: "Entra",
+}
+
 /**
  * The status of the resource at the time the operation was called.
  */
@@ -201,6 +224,18 @@ model GarnetClusterResourcePatchProperties {
    * Extensions to be added or updated on cluster.
    */
   extensions?: string[];
+
+  /**
+   * The authentication method used for the Garnet cluster.
+   */
+  @added(Versions.v2026_04_01_preview)
+  authenticationMethod?: GarnetAuthenticationType;
+
+  /**
+   * Flag to indicate if persistence is enabled for the Garnet cluster.
+   */
+  @added(Versions.v2026_04_01_preview)
+  persistence?: boolean;
 }
 
 /**
