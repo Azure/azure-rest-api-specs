@@ -108,10 +108,6 @@ model ScheduledStartConfiguration {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @pattern("^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$")
   utcOffset: string;
-
-  @doc("The absolute UTC time when the gate will complete. Set when the gate is created.")
-  @visibility(Lifecycle.Read)
-  absoluteStartTime?: utcDateTime;
 }
 
 @doc("A group to be updated.")

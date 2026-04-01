@@ -118,7 +118,7 @@ model ScheduledStartProperties {
 
   @doc("The absolute UTC time when the gate will complete. Set when the gate is created.")
   @visibility(Lifecycle.Read)
-  absoluteStartTime?: utcDateTime;
+  absoluteStartTime: utcDateTime;
 }
 
 @doc("The properties of the Update Run that the Gate is targeting.")
