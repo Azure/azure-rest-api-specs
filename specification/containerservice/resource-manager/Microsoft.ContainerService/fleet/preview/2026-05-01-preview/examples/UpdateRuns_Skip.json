@@ -44,11 +44,17 @@
                 "groups": [
                   {
                     "name": "group-a",
-                    "maxConcurrency": "2"
+                    "maxConcurrency": "2",
+                    "memberSelector": {
+                      "byLabel": "region=us-west"
+                    }
                   },
                   {
                     "name": "group-b",
-                    "maxConcurrency": "2"
+                    "maxConcurrency": "2",
+                    "memberSelector": {
+                      "byLabel": "region=us-east"
+                    }
                   }
                 ],
                 "afterStageWaitInSeconds": 3600
