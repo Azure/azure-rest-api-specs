@@ -3505,6 +3505,9 @@
           "ClusterJobs_Get_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
           },
+          "ClusterJobs_Get_ConfigureFaultDomainJob": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureFaultDomainJob.json"
+          },
           "ClusterJobs_Get_ConfigureSdnIntegrationJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureSdnIntegrationJob.json"
           },
@@ -3606,6 +3609,9 @@
           },
           "ClusterJobs_CreateOrUpdate_ConfigureCVMJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureFaultDomainJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureFaultDomain.json"
           },
           "ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable.json"
@@ -15528,6 +15534,27 @@
         }
       }
     },
+    "FaultDomainNodeAssignment": {
+      "type": "object",
+      "description": "Mapping of a fault domain to its assigned nodes.",
+      "properties": {
+        "faultDomainName": {
+          "type": "string",
+          "description": "Name of the fault domain (e.g., Rack1, Rack2)."
+        },
+        "nodes": {
+          "type": "array",
+          "description": "List of node names assigned to this fault domain.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "faultDomainName",
+        "nodes"
+      ]
+    },
     "ForcePushNetworkAdapterJobProperties": {
       "type": "object",
       "description": "Properties for force push of network adapter configuration.",
@@ -15914,6 +15941,44 @@
         }
       ],
       "x-ms-discriminator-value": "ConfigureCVM"
+    },
+    "HciConfigureFaultDomainJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring fault domains in the cluster.",
+      "properties": {
+        "faultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of fault domains to create (1-8).",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "faultDomainPrefix": {
+          "type": "string",
+          "description": "Naming prefix for fault domains. Each fault domain is named <Prefix>1, <Prefix>2, etc."
+        },
+        "nodeAssignment": {
+          "type": "array",
+          "description": "Mapping of fault domain names to their assigned nodes.",
+          "items": {
+            "$ref": "#/definitions/FaultDomainNodeAssignment"
+          },
+          "x-ms-identifiers": [
+            "faultDomainName"
+          ]
+        }
+      },
+      "required": [
+        "faultDomainCount",
+        "faultDomainPrefix",
+        "nodeAssignment"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureFaultDomain"
     },
     "HciConfigureSdnIntegrationJobProperties": {
       "type": "object",
@@ -16347,6 +16412,7 @@
       "enum": [
         "AddServer",
         "RepairServer",
+        "ConfigureFaultDomain",
         "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
@@ -16368,6 +16434,11 @@
             "name": "RepairServer",
             "value": "RepairServer",
             "description": "Job to repair a server in the cluster."
+          },
+          {
+            "name": "ConfigureFaultDomain",
+            "value": "ConfigureFaultDomain",
+            "description": "Job to configure fault domains for the cluster."
           },
           {
             "name": "ConfigureArcGateway",
