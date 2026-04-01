@@ -6,7 +6,7 @@ using Microsoft.EventHub;
 
 @@clientName(Microsoft.EventHub,
   "EventHubManagementClient",
-  "python,javascript"
+  "python,javascript,java"
 );
 
 // Fix TLS version naming changes for Go SDK backward compatibility
