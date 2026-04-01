@@ -1,0 +1,33 @@
+{
+  "operationId": "HorizonDbPrivateLinkResources_List",
+  "title": "Gets private link resources for HorizonDb",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "clusterName": "examplecluster",
+    "api-version": "2026-01-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.HorizonDb/clusters/privateLinkResources",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/privateLinkResources/default",
+            "properties": {
+              "groupId": "default",
+              "requiredMembers": [
+                "examplecluster.clusterid",
+                "examplecluster.clusterid.ro"
+              ],
+              "requiredZoneNames": [
+                "privatelink.horizondb.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
