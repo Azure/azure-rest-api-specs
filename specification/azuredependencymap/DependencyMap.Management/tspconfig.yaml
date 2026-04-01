@@ -2,7 +2,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
-    default: "sdk/dependencymap"
+    default: "sdk/map"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -16,8 +16,8 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.ResourceManager.DependencyMap"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dependencymap"
-    namespace: "azure.mgmt.dependencymap"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-map"
+    namespace: "azure.mgmt.map"
     generate-test: true
     generate-sample: true
     flavor: "azure"
