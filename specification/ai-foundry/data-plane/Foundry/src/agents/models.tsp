@@ -992,28 +992,28 @@ union AgentSessionStatus {
   string,
 
   /** Session initialization is in progress. */
-  Creating: "Creating",
+  Creating: "creating",
 
   /** Session is running and operational. */
-  Active: "Active",
+  Active: "active",
 
   /** Session sandbox is auto-suspended; resumes on next invocation. */
-  Idle: "Idle",
+  Idle: "idle",
 
   /** Reserved for future session re-parenting flows. */
-  Updating: "Updating",
+  Updating: "updating",
 
   /** Session initialization or lifecycle handling failed and requires delete to recover. */
-  Failed: "Failed",
+  Failed: "failed",
 
   /** Session is being deleted (cleanup in progress). */
-  Deleting: "Deleting",
+  Deleting: "deleting",
 
   /** Session has been explicitly deleted. */
-  Deleted: "Deleted",
+  Deleted: "deleted",
 
   /** Session TTL exceeded (30 days from last activity). */
-  Expired: "Expired",
+  Expired: "expired",
 }
 
 // ── Version Indicator ───────────────────────────────────
