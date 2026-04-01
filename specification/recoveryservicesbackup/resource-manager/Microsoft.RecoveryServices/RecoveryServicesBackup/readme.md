@@ -55,6 +55,15 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - stable/2026-01-01/bms.json
+```
+
 ### Tag: package-preview-2026-01-01-preview
 
 These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
