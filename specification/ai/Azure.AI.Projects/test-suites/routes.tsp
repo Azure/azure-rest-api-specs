@@ -25,10 +25,6 @@ alias TestSuiteFilterQueryParams = {
   @query("kind")
   @doc("Filter by test suite kind (batch or continuous).")
   kind?: TestSuiteKind;
-
-  @query("enabled")
-  @doc("Filter by enabled status.")
-  enabled?: boolean;
 };
 
 @added(Versions.v2025_10_15_preview)

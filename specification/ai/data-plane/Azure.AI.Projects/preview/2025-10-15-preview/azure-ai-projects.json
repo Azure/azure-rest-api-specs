@@ -6311,20 +6311,9 @@
           "type": "string",
           "description": "Name of the agent this test suite is associated with.\nOptional — allows test suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks)."
         },
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether this test suite is active.\nDisabled test suites are skipped by continuous eval rules and CI/CD gates."
-        },
         "tags": {
           "type": "object",
           "description": "Test suite's tags. Tags are fully mutable and can be used for filtering.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Test suite's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
           "additionalProperties": {
             "type": "string"
           }

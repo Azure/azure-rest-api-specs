@@ -121,17 +121,8 @@ model TestSuite {
     """)
   agentName?: string;
 
-  @doc("""
-    Whether this test suite is active.
-    Disabled test suites are skipped by continuous eval rules and CI/CD gates.
-    """)
-  enabled?: boolean;
-
   @doc("Test suite's tags. Tags are fully mutable and can be used for filtering.")
   tags?: Record<string>;
-
-  @doc("Test suite's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
-  properties?: Record<string>;
 
   @visibility(Lifecycle.Read)
   @doc("System metadata for the resource.")
