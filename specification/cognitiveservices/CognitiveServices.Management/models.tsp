@@ -3370,7 +3370,6 @@ model RaiPolicyProperties {
   /**
    * The list of custom rai topics.
    */
-  @removed(Versions.v2026_01_15_preview)
   @identifiers(#[])
   customTopics?: CustomTopicConfig[];
 
@@ -3446,7 +3445,6 @@ model RaiBlocklistConfig {
  * Gets or sets the source to which filter applies.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "'CustomTopicConfig' extends 'RaiTopicConfig' using inheritance to match service-side object hierarchy"
-@removed(Versions.v2026_01_15_preview)
 model CustomTopicConfig extends RaiTopicConfig {
   /**
    * Content source to apply the Content Filters.
@@ -3457,7 +3455,6 @@ model CustomTopicConfig extends RaiTopicConfig {
 /**
  * Azure OpenAI RAI topic config.
  */
-@removed(Versions.v2026_01_15_preview)
 model RaiTopicConfig {
   /**
    * Name of RAI topic.
