@@ -203,7 +203,7 @@ interface Servers {
   >;
 
   /**
-   * Migrates an Azure Database for PostgreSQL server from VNet integration to a Private Link network model
+   * Migrates an Azure Database for PostgreSQL server from VNet integration to a Private Link network model.
    */
   @added(Versions.v2026_01_01)
   @action("migrateNetwork")
