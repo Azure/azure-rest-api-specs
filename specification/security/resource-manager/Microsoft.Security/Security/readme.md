@@ -136,10 +136,7 @@ These settings apply only when `--tag=package-preview-2026-04-only` is specified
 
 ```yaml $(tag) == 'package-preview-2026-04-only'
 input-file:
-  - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-  - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-  - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-  - preview/2026-04-01-preview/sqlVulnerabilityAssessmentsSettingsOperations.json
+  - preview/2026-04-01-preview/openapi.json
 
 suppressions:
   - code: PathForResourceAction
@@ -209,9 +206,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - preview/2025-10-01-preview/operations.json
-  - preview/2025-10-01-preview/operationResults.json
-  - preview/2025-10-01-preview/operationStatuses.json
+  - preview/2025-10-01-preview/openapi.json
   - preview/2025-10-01-preview/pricings.json
 ```
 
@@ -232,8 +227,7 @@ These settings apply only when `--tag=package-2025-05-04` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-04'
 input-file:
-  - stable/2025-05-04/assessmentMetadata.json
-  - stable/2025-05-04/assessments.json
+  - stable/2025-05-04/openapi.json
 ```
 
 ### Tag: package-2025-03
@@ -319,9 +313,7 @@ These settings apply only when `--tag=package-2024-08` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-08'
 input-file:
-  - stable/2024-08-01/securityStandards.json
-  - stable/2024-08-01/standardAssignments.json
-  - stable/2024-08-01/customRecommedations.json
+  - stable/2024-08-01/openapi.json
 ```
 
 ### Tag: package-preview-2024-05
@@ -388,8 +380,7 @@ These settings apply only when `--tag=package-preview-2023-12` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-12'
 input-file:
-  - preview/2023-12-01-preview/securityContacts.json
-  - preview/2023-12-01-preview/automations.json
+  - preview/2023-12-01-preview/openapi.json
 ```
 
 ### Tag: package-2023-11-15
@@ -631,12 +622,9 @@ input-file:
 - preview/2015-06-01-preview/tasks.json
 - preview/2015-06-01-preview/topologies.json
 - preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-- preview/2017-08-01-preview/autoProvisioningSettings.json
-- preview/2017-08-01-preview/compliances.json
 - preview/2017-08-01-preview/deviceSecurityGroups.json
-- preview/2017-08-01-preview/informationProtectionPolicies.json
 - preview/2017-08-01-preview/settings.json
-- preview/2017-08-01-preview/workspaceSettings.json
+- preview/2017-08-01-preview/openapi.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/automations.json
 - preview/2019-01-01-preview/regulatoryCompliance.json
@@ -670,14 +658,11 @@ input-file:
 - preview/2015-06-01-preview/tasks.json
 - preview/2015-06-01-preview/topologies.json
 - preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-- preview/2017-08-01-preview/autoProvisioningSettings.json
-- preview/2017-08-01-preview/compliances.json
 - preview/2017-08-01-preview/deviceSecurityGroups.json
-- preview/2017-08-01-preview/informationProtectionPolicies.json
 - preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
 - preview/2017-08-01-preview/iotSecuritySolutions.json
+- preview/2017-08-01-preview/openapi.json
 - preview/2017-08-01-preview/settings.json
-- preview/2017-08-01-preview/workspaceSettings.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/automations.json
 - preview/2019-01-01-preview/regulatoryCompliance.json
@@ -706,57 +691,35 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 input-file:
 - preview/2015-06-01-preview/locations.json
 - preview/2015-06-01-preview/tasks.json
-- preview/2017-08-01-preview/autoProvisioningSettings.json
-- preview/2017-08-01-preview/compliances.json
-- preview/2017-08-01-preview/informationProtectionPolicies.json
-- preview/2017-08-01-preview/workspaceSettings.json
+- preview/2017-08-01-preview/openapi.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/regulatoryCompliance.json
 - preview/2019-01-01-preview/subAssessments.json
 - preview/2021-05-01-preview/softwareInventories.json
 - preview/2021-10-01-preview/mdeOnboardings.json
-- preview/2022-01-01-preview/governanceAssignments.json
-- preview/2022-01-01-preview/governanceRules.json
+- preview/2022-01-01-preview/openapi.json
 - preview/2022-07-01-preview/applications.json
 - preview/2023-01-01-preview/securityOperators.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsSettingsOperations.json
+- preview/2026-04-01-preview/openapi.json
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
-- preview/2023-12-01-preview/automations.json
-- preview/2023-12-01-preview/securityContacts.json
+- preview/2023-12-01-preview/openapi.json
 - preview/2024-08-01-preview/securityConnectors.json
-- stable/2025-05-04/assessmentMetadata.json
-- stable/2025-05-04/assessments.json
+- stable/2025-05-04/openapi.json
 - preview/2025-09-01-preview/defenderForStorageSettings.json
 - preview/2025-11-01-preview/securityConnectorsDevOps.json
-- preview/2025-10-01-preview/operations.json
-- preview/2025-10-01-preview/operationResults.json
-- preview/2025-10-01-preview/operationStatuses.json
+- preview/2025-10-01-preview/openapi.json
 - stable/2017-08-01/complianceResults.json
 - stable/2019-01-01/advancedThreatProtectionSettings.json
-- stable/2019-08-01/deviceSecurityGroups.json
-- stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- stable/2019-08-01/iotSecuritySolutions.json
-- stable/2020-01-01/allowedConnections.json
-- stable/2020-01-01/discoveredSecuritySolutions.json
-- stable/2020-01-01/externalSecuritySolutions.json
-- stable/2020-01-01/jitNetworkAccessPolicies.json
+- stable/2019-08-01/openapi.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/SecuritySolutions.json
-- stable/2020-01-01/securitySolutionsReferenceData.json
-- stable/2020-01-01/serverVulnerabilityAssessments.json
-- stable/2020-01-01/topologies.json
+- stable/2020-01-01/openapi.json
 - stable/2022-01-01/alerts.json
 - stable/2022-05-01/settings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
 - preview/2025-10-01-preview/pricings.json
-- stable/2024-08-01/securityStandards.json
-- stable/2024-08-01/standardAssignments.json
-- stable/2024-08-01/customRecommedations.json
+- stable/2024-08-01/openapi.json
 - stable/2026-01-01/privateLinks.json
 
 # Autorest suppressions
@@ -828,10 +791,7 @@ input-file:
 - preview/2015-06-01-preview/locations.json
 - preview/2015-06-01-preview/operations.json
 - preview/2015-06-01-preview/tasks.json
-- preview/2017-08-01-preview/autoProvisioningSettings.json
-- preview/2017-08-01-preview/compliances.json
-- preview/2017-08-01-preview/informationProtectionPolicies.json
-- preview/2017-08-01-preview/workspaceSettings.json
+- preview/2017-08-01-preview/openapi.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/automations.json
 - preview/2019-01-01-preview/regulatoryCompliance.json
@@ -839,42 +799,26 @@ input-file:
 - preview/2020-01-01-preview/securityContacts.json
 - preview/2021-05-01-preview/softwareInventories.json
 - preview/2021-10-01-preview/mdeOnboardings.json
-- preview/2022-01-01-preview/governanceAssignments.json
-- preview/2022-01-01-preview/governanceRules.json
+- preview/2022-01-01-preview/openapi.json
 - preview/2022-07-01-preview/applications.json
 - preview/2022-12-01-preview/defenderForStorageSettings.json
 - preview/2023-01-01-preview/securityOperators.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- preview/2026-04-01-preview/sqlVulnerabilityAssessmentsSettingsOperations.json
+- preview/2026-04-01-preview/openapi.json
 - preview/2023-02-15-preview/sensitivitySettings.json
 - preview/2023-05-01-preview/healthReports.json
 - preview/2023-10-01-preview/securityConnectors.json
 - stable/2017-08-01/complianceResults.json
 - stable/2019-01-01/advancedThreatProtectionSettings.json
-- stable/2019-08-01/deviceSecurityGroups.json
-- stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- stable/2019-08-01/iotSecuritySolutions.json
-- stable/2020-01-01/allowedConnections.json
-- stable/2020-01-01/discoveredSecuritySolutions.json
-- stable/2020-01-01/externalSecuritySolutions.json
-- stable/2020-01-01/jitNetworkAccessPolicies.json
+- stable/2019-08-01/openapi.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/SecuritySolutions.json
-- stable/2020-01-01/securitySolutionsReferenceData.json
-- stable/2020-01-01/serverVulnerabilityAssessments.json
-- stable/2020-01-01/topologies.json
-- stable/2025-05-04/assessmentMetadata.json
-- stable/2025-05-04/assessments.json
+- stable/2020-01-01/openapi.json
+- stable/2025-05-04/openapi.json
 - stable/2022-01-01/alerts.json
 - stable/2022-05-01/settings.json
 - stable/2023-01-01/pricings.json
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
-- stable/2024-08-01/standardAssignments.json
-- stable/2024-08-01/securityStandards.json
-- stable/2024-08-01/customRecommedations.json
+- stable/2024-08-01/openapi.json
 - stable/2025-03-01/securityConnectorsDevOps.json
 
 suppressions:
@@ -967,11 +911,8 @@ These settings apply only when `--tag=package-2017-08-preview-python-only` is sp
 
 ``` yaml $(tag) == 'package-2017-08-preview-python-only'
 input-file:
-- preview/2017-08-01-preview/autoProvisioningSettings.json
-- preview/2017-08-01-preview/compliances.json
-- preview/2017-08-01-preview/informationProtectionPolicies.json
+- preview/2017-08-01-preview/openapi.json
 - preview/2017-08-01-preview/securityContacts.json
-- preview/2017-08-01-preview/workspaceSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -985,15 +926,12 @@ These settings apply only when `--tag=package-2017-08-preview-only` is specified
 ``` yaml $(tag) == 'package-2017-08-preview-only'
 input-file:
 - preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-- preview/2017-08-01-preview/autoProvisioningSettings.json
-- preview/2017-08-01-preview/compliances.json
 - preview/2017-08-01-preview/deviceSecurityGroups.json
-- preview/2017-08-01-preview/informationProtectionPolicies.json
 - preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
 - preview/2017-08-01-preview/iotSecuritySolutions.json
+- preview/2017-08-01-preview/openapi.json
 - preview/2017-08-01-preview/securityContacts.json
 - preview/2017-08-01-preview/settings.json
-- preview/2017-08-01-preview/workspaceSettings.json
 
 # Needed when there is more than one input file
 override-info:
@@ -1104,9 +1042,7 @@ These settings apply only when `--tag=package-2019-08-python-only` is specified 
 
 ``` yaml $(tag) == 'package-2019-08-python-only'
 input-file:
-- stable/2019-08-01/deviceSecurityGroups.json
-- stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- stable/2019-08-01/iotSecuritySolutions.json
+- stable/2019-08-01/openapi.json
 
 # Needed when there is more than one input file
 override-info:
@@ -1175,17 +1111,10 @@ These settings apply only when `--tag=package-2020-01-only` is specified on the 
 ``` yaml $(tag) == 'package-2020-01-only'
 input-file:
 - stable/2020-01-01/alerts.json
-- stable/2020-01-01/allowedConnections.json
 - stable/2020-01-01/assessmentMetadata.json
 - stable/2020-01-01/assessments.json
-- stable/2020-01-01/discoveredSecuritySolutions.json
-- stable/2020-01-01/externalSecuritySolutions.json
-- stable/2020-01-01/jitNetworkAccessPolicies.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/SecuritySolutions.json
-- stable/2020-01-01/securitySolutionsReferenceData.json
-- stable/2020-01-01/serverVulnerabilityAssessments.json
-- stable/2020-01-01/topologies.json
+- stable/2020-01-01/openapi.json
 
 # Needed when there is more than one input file
 override-info:
@@ -1290,8 +1219,7 @@ These settings apply only when `--tag=package-2022-01-preview-only` is specified
 
 ``` yaml $(tag) == 'package-2022-01-preview-only'
 input-file:
-  - preview/2022-01-01-preview/governanceAssignments.json
-  - preview/2022-01-01-preview/governanceRules.json
+  - preview/2022-01-01-preview/openapi.json
 
 # Needed when there is more than one input file
 override-info:
