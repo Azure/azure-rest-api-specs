@@ -161,6 +161,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Returns the list of available operations.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -198,6 +203,11 @@
             "schema": {
               "$ref": "#/definitions/AlertCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of configured email notification(alert) configurations.": {
+            "$ref": "./examples/ReplicationAlertSettings_List.json"
           }
         },
         "x-ms-pageable": {
@@ -244,6 +254,11 @@
             "schema": {
               "$ref": "#/definitions/Alert"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an email notification(alert) configuration.": {
+            "$ref": "./examples/ReplicationAlertSettings_Get.json"
           }
         }
       },
@@ -295,6 +310,11 @@
               "$ref": "#/definitions/Alert"
             }
           }
+        },
+        "x-ms-examples": {
+          "Configures email notifications for this vault.": {
+            "$ref": "./examples/ReplicationAlertSettings_Create.json"
+          }
         }
       }
     },
@@ -337,6 +357,11 @@
             "schema": {
               "$ref": "#/definitions/ApplianceCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of appliances.": {
+            "$ref": "./examples/ReplicationAppliances_List.json"
           }
         },
         "x-ms-pageable": {
@@ -385,6 +410,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of Azure Site Recovery events.": {
+            "$ref": "./examples/ReplicationEvents_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -430,6 +460,11 @@
               "$ref": "#/definitions/Event"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the details of an Azure Site recovery event.": {
+            "$ref": "./examples/ReplicationEvents_Get.json"
+          }
         }
       }
     },
@@ -465,6 +500,11 @@
             "schema": {
               "$ref": "#/definitions/FabricCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of ASR fabrics.": {
+            "$ref": "./examples/ReplicationFabrics_List.json"
           }
         },
         "x-ms-pageable": {
@@ -518,6 +558,11 @@
             "schema": {
               "$ref": "#/definitions/Fabric"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of an ASR fabric.": {
+            "$ref": "./examples/ReplicationFabrics_Get.json"
           }
         }
       },
@@ -584,6 +629,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates an Azure Site Recovery fabric.": {
+            "$ref": "./examples/ReplicationFabrics_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Fabric"
@@ -639,6 +689,11 @@
           },
           "204": {
             "description": "Resource does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Purges the site.": {
+            "$ref": "./examples/ReplicationFabrics_Purge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -702,6 +757,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Checks the consistency of the ASR fabric.": {
+            "$ref": "./examples/ReplicationFabrics_CheckConsistency.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Fabric"
@@ -759,6 +819,11 @@
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          }
+        },
+        "x-ms-examples": {
+          "Migrates the site to AAD.": {
+            "$ref": "./examples/ReplicationFabrics_MigrateToAad.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -831,6 +896,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Perform failover of the process server.": {
+            "$ref": "./examples/ReplicationFabrics_ReassociateGateway.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Fabric"
@@ -888,6 +958,11 @@
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the site.": {
+            "$ref": "./examples/ReplicationFabrics_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -951,6 +1026,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Removes the appliance's infrastructure under the fabric.": {
+            "$ref": "./examples/ReplicationInfrastructure_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1023,6 +1103,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Renews certificate for the fabric.": {
+            "$ref": "./examples/ReplicationFabrics_RenewCertificate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Fabric"
@@ -1069,6 +1154,11 @@
             "schema": {
               "$ref": "#/definitions/LogicalNetworkCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of logical networks under a fabric.": {
+            "$ref": "./examples/ReplicationLogicalNetworks_ListByReplicationFabrics.json"
           }
         },
         "x-ms-pageable": {
@@ -1123,6 +1213,11 @@
               "$ref": "#/definitions/LogicalNetwork"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets a logical network with specified server id and logical network name.": {
+            "$ref": "./examples/ReplicationLogicalNetworks_Get.json"
+          }
         }
       }
     },
@@ -1165,6 +1260,11 @@
             "schema": {
               "$ref": "#/definitions/NetworkCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of networks under a fabric.": {
+            "$ref": "./examples/ReplicationNetworks_ListByReplicationFabrics.json"
           }
         },
         "x-ms-pageable": {
@@ -1219,6 +1319,11 @@
               "$ref": "#/definitions/Network"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets a network with specified server id and network name.": {
+            "$ref": "./examples/ReplicationNetworks_Get.json"
+          }
         }
       }
     },
@@ -1268,6 +1373,11 @@
             "schema": {
               "$ref": "#/definitions/NetworkMappingCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all the network mappings under a network.": {
+            "$ref": "./examples/ReplicationNetworkMappings_ListByReplicationNetworks.json"
           }
         },
         "x-ms-pageable": {
@@ -1328,6 +1438,11 @@
             "schema": {
               "$ref": "#/definitions/NetworkMapping"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets network mapping by name.": {
+            "$ref": "./examples/ReplicationNetworkMappings_Get.json"
           }
         }
       },
@@ -1406,6 +1521,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates network mapping.": {
+            "$ref": "./examples/ReplicationNetworkMappings_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1491,6 +1611,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates network mapping.": {
+            "$ref": "./examples/ReplicationNetworkMappings_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkMapping"
@@ -1562,6 +1687,11 @@
             "description": "Resource does not exist."
           }
         },
+        "x-ms-examples": {
+          "Delete network mapping.": {
+            "$ref": "./examples/ReplicationNetworkMappings_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1607,6 +1737,11 @@
             "schema": {
               "$ref": "#/definitions/ProtectionContainerCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of protection container for a fabric.": {
+            "$ref": "./examples/ReplicationProtectionContainers_ListByReplicationFabrics.json"
           }
         },
         "x-ms-pageable": {
@@ -1660,6 +1795,11 @@
             "schema": {
               "$ref": "#/definitions/ProtectionContainer"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the protection container details.": {
+            "$ref": "./examples/ReplicationProtectionContainers_Get.json"
           }
         }
       },
@@ -1731,6 +1871,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a protection container.": {
+            "$ref": "./examples/ReplicationProtectionContainers_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1811,6 +1956,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Adds a protectable item to the replication protection container.": {
+            "$ref": "./examples/ReplicationProtectionContainers_DiscoverProtectableItem.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ProtectionContainer"
@@ -1875,6 +2025,11 @@
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          }
+        },
+        "x-ms-examples": {
+          "Removes a protection container.": {
+            "$ref": "./examples/ReplicationProtectionContainers_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1952,6 +2107,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of migration items in the protection container.": {
+            "$ref": "./examples/ReplicationMigrationItems_ListByReplicationProtectionContainers.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2010,6 +2170,11 @@
             "schema": {
               "$ref": "#/definitions/MigrationItem"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a migration item.": {
+            "$ref": "./examples/ReplicationMigrationItems_Get.json"
           }
         }
       },
@@ -2088,6 +2253,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Enables migration.": {
+            "$ref": "./examples/ReplicationMigrationItems_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2173,6 +2343,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates migration item.": {
+            "$ref": "./examples/ReplicationMigrationItems_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/MigrationItem"
@@ -2249,6 +2424,11 @@
           },
           "204": {
             "description": "Resource does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete the migration item.": {
+            "$ref": "./examples/ReplicationMigrationItems_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2335,6 +2515,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Migrate item.": {
+            "$ref": "./examples/ReplicationMigrationItems_Migrate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/MigrationItem"
@@ -2395,6 +2580,11 @@
             "schema": {
               "$ref": "#/definitions/MigrationRecoveryPointCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the recovery points for a migration item.": {
+            "$ref": "./examples/MigrationRecoveryPoints_ListByReplicationMigrationItems.json"
           }
         },
         "x-ms-pageable": {
@@ -2462,6 +2652,11 @@
             "schema": {
               "$ref": "#/definitions/MigrationRecoveryPoint"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a recovery point for a migration item.": {
+            "$ref": "./examples/MigrationRecoveryPoints_Get.json"
           }
         }
       }
@@ -2542,6 +2737,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Pause replication.": {
+            "$ref": "./examples/ReplicationMigrationItems_PauseReplication.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2629,6 +2829,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Resume replication.": {
+            "$ref": "./examples/ReplicationMigrationItems_ResumeReplication.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/MigrationItem"
@@ -2712,6 +2917,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Resynchronizes replication.": {
+            "$ref": "./examples/ReplicationMigrationItems_Resync.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2799,6 +3009,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Test migrate item.": {
+            "$ref": "./examples/ReplicationMigrationItems_TestMigrate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/MigrationItem"
@@ -2884,6 +3099,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Test migrate cleanup.": {
+            "$ref": "./examples/ReplicationMigrationItems_TestMigrateCleanup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/MigrationItem"
@@ -2960,6 +3180,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of protectable items.": {
+            "$ref": "./examples/ReplicationProtectableItems_ListByReplicationProtectionContainers.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3019,6 +3244,11 @@
               "$ref": "#/definitions/ProtectableItem"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the details of a protectable item.": {
+            "$ref": "./examples/ReplicationProtectableItems_Get.json"
+          }
         }
       }
     },
@@ -3068,6 +3298,11 @@
             "schema": {
               "$ref": "#/definitions/ReplicationProtectedItemCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of Replication protected items.": {
+            "$ref": "./examples/ReplicationProtectedItems_ListByReplicationProtectionContainers.json"
           }
         },
         "x-ms-pageable": {
@@ -3128,6 +3363,11 @@
             "schema": {
               "$ref": "#/definitions/ReplicationProtectedItem"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a Replication protected item.": {
+            "$ref": "./examples/ReplicationProtectedItems_Get.json"
           }
         }
       },
@@ -3206,6 +3446,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Enables protection.": {
+            "$ref": "./examples/ReplicationProtectedItems_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3291,6 +3536,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates the replication protected Item settings.": {
+            "$ref": "./examples/ReplicationProtectedItems_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -3360,6 +3610,11 @@
           },
           "204": {
             "description": "Resource does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Purges protection.": {
+            "$ref": "./examples/ReplicationProtectedItems_Purge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3444,6 +3699,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Add disk(s) for protection.": {
+            "$ref": "./examples/ReplicationProtectedItems_AddDisks.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3531,6 +3791,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Change or apply recovery point.": {
+            "$ref": "./examples/ReplicationProtectedItems_ApplyRecoveryPoint.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -3607,6 +3872,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute cancel failover.": {
+            "$ref": "./examples/ReplicationProtectedItems_FailoverCancel.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -3681,6 +3951,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute commit failover.": {
+            "$ref": "./examples/ReplicationProtectedItems_FailoverCommit.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3768,6 +4043,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute planned failover.": {
+            "$ref": "./examples/ReplicationProtectedItems_PlannedFailover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -3853,6 +4133,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute Reverse Replication\\Reprotect.": {
+            "$ref": "./examples/ReplicationProtectedItems_Reprotect.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -3913,6 +4198,11 @@
             "schema": {
               "$ref": "#/definitions/RecoveryPointCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of recovery points for a replication protected item.": {
+            "$ref": "./examples/RecoveryPoints_ListByReplicationProtectedItems.json"
           }
         },
         "x-ms-pageable": {
@@ -3980,6 +4270,11 @@
             "schema": {
               "$ref": "#/definitions/RecoveryPoint"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a recovery point.": {
+            "$ref": "./examples/RecoveryPoints_Get.json"
           }
         }
       }
@@ -4072,6 +4367,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Reinstall the mobility service on a protected item.": {
+            "$ref": "./examples/ReplicationProtectedItems_ReinstallMobilityService.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -4152,6 +4452,11 @@
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          }
+        },
+        "x-ms-examples": {
+          "Disables protection.": {
+            "$ref": "./examples/ReplicationProtectedItems_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4238,6 +4543,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Removes disk(s).": {
+            "$ref": "./examples/ReplicationProtectedItems_RemoveDisks.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -4312,6 +4622,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Resynchronize or repair replication.": {
+            "$ref": "./examples/ReplicationProtectedItems_RepairReplication.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4399,6 +4714,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Resolve health errors.": {
+            "$ref": "./examples/ReplicationProtectedItems_ResolveHealthErrors.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -4484,6 +4804,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute switch provider.": {
+            "$ref": "./examples/ReplicationProtectedItems_SwitchProvider.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -4544,6 +4869,11 @@
             "schema": {
               "$ref": "#/definitions/TargetComputeSizeCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of target compute sizes for the replication protected item.": {
+            "$ref": "./examples/TargetComputeSizes_ListByReplicationProtectedItems.json"
           }
         },
         "x-ms-pageable": {
@@ -4627,6 +4957,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute test failover.": {
+            "$ref": "./examples/ReplicationProtectedItems_TestFailover.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4714,6 +5049,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute test failover cleanup.": {
+            "$ref": "./examples/ReplicationProtectedItems_TestFailoverCleanup.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -4797,6 +5137,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute unplanned failover.": {
+            "$ref": "./examples/ReplicationProtectedItems_UnplannedFailover.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4884,6 +5229,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates appliance for replication protected Item.": {
+            "$ref": "./examples/ReplicationProtectedItems_UpdateAppliance.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -4969,6 +5319,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update the mobility service on a protected item.": {
+            "$ref": "./examples/ReplicationProtectedItems_UpdateMobilityService.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectedItem"
@@ -5031,6 +5386,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of Replication protection clusters in fabric, container.": {
+            "$ref": "./examples/ReplicationProtectionClusters_ListByReplicationProtectionContainers.json"
           }
         },
         "x-ms-pageable": {
@@ -5101,6 +5461,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a Replication protection cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_Get.json"
           }
         }
       },
@@ -5195,6 +5560,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Replication protection Cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectionCluster"
@@ -5278,6 +5648,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Purge the replication protection cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_Purge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5378,6 +5753,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute the change recovery point operation for cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_ApplyRecoveryPoint.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectionCluster"
@@ -5468,6 +5848,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute commit failover for cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_FailoverCommit.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectionCluster"
@@ -5547,6 +5932,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Tracks the Replication protection cluster async operation.": {
+            "$ref": "./examples/ReplicationProtectionClusters_GetOperationResults.json"
+          }
         }
       }
     },
@@ -5613,6 +6003,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of cluster recovery points.": {
+            "$ref": "./examples/ClusterRecoveryPoints_ListByReplicationProtectionCluster.json"
           }
         },
         "x-ms-pageable": {
@@ -5691,6 +6086,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a recovery point.": {
+            "$ref": "./examples/ClusterRecoveryPoint_Get.json"
           }
         }
       }
@@ -5776,6 +6176,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Resynchronize or repair replication of protection cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_RepairReplication.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5877,6 +6282,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute test failover for cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_TestFailover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectionCluster"
@@ -5974,6 +6384,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute test failover cleanup for cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_TestFailoverCleanup.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6075,6 +6490,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute unplanned cluster failover.": {
+            "$ref": "./examples/ReplicationProtectionClusters_UnplannedFailover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ReplicationProtectionCluster"
@@ -6128,6 +6548,11 @@
             "schema": {
               "$ref": "#/definitions/ProtectionContainerMappingCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of protection container mappings for a protection container.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_ListByReplicationProtectionContainers.json"
           }
         },
         "x-ms-pageable": {
@@ -6188,6 +6613,11 @@
             "schema": {
               "$ref": "#/definitions/ProtectionContainerMapping"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_Get.json"
           }
         }
       },
@@ -6266,6 +6696,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6351,6 +6786,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ProtectionContainerMapping"
@@ -6420,6 +6860,11 @@
           },
           "204": {
             "description": "Resource does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Purge protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_Purge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6501,6 +6946,11 @@
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          }
+        },
+        "x-ms-examples": {
+          "Remove protection container mapping.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6593,6 +7043,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Switches protection from one container to another or one replication provider to another.": {
+            "$ref": "./examples/ReplicationProtectionContainers_SwitchClusterProtection.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ProtectionContainer"
@@ -6675,6 +7130,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Switches protection from one container to another or one replication provider to another.": {
+            "$ref": "./examples/ReplicationProtectionContainers_SwitchProtection.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ProtectionContainer"
@@ -6721,6 +7181,11 @@
             "schema": {
               "$ref": "#/definitions/RecoveryServicesProviderCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of registered recovery services providers for the fabric.": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_ListByReplicationFabrics.json"
           }
         },
         "x-ms-pageable": {
@@ -6774,6 +7239,11 @@
             "schema": {
               "$ref": "#/definitions/RecoveryServicesProvider"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a recovery services provider.": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_Get.json"
           }
         }
       },
@@ -6847,6 +7317,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Adds a recovery services provider.": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RecoveryServicesProvider"
@@ -6909,6 +7384,11 @@
           },
           "204": {
             "description": "Resource does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Purges recovery service provider from fabric.": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_Purge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6979,6 +7459,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Refresh details from the recovery services provider.": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_RefreshProvider.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RecoveryServicesProvider"
@@ -7045,6 +7530,11 @@
             "description": "There is no content to send for this request, but the headers may be useful."
           }
         },
+        "x-ms-examples": {
+          "Deletes provider from fabric. Note: Deleting provider for any fabric other than SingleHost is unsupported. To maintain backward compatibility for released clients the object \"deleteRspInput\" is used (if the object is empty we assume that it is old client and continue the old behavior).": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -7090,6 +7580,11 @@
             "schema": {
               "$ref": "#/definitions/StorageClassificationCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of storage classification objects under a fabric.": {
+            "$ref": "./examples/ReplicationStorageClassifications_ListByReplicationFabrics.json"
           }
         },
         "x-ms-pageable": {
@@ -7144,6 +7639,11 @@
               "$ref": "#/definitions/StorageClassification"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the details of a storage classification.": {
+            "$ref": "./examples/ReplicationStorageClassifications_Get.json"
+          }
         }
       }
     },
@@ -7193,6 +7693,11 @@
             "schema": {
               "$ref": "#/definitions/StorageClassificationMappingCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of storage classification mappings objects under a storage.": {
+            "$ref": "./examples/ReplicationStorageClassificationMappings_ListByReplicationStorageClassifications.json"
           }
         },
         "x-ms-pageable": {
@@ -7253,6 +7758,11 @@
             "schema": {
               "$ref": "#/definitions/StorageClassificationMapping"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a storage classification mapping.": {
+            "$ref": "./examples/ReplicationStorageClassificationMappings_Get.json"
           }
         }
       },
@@ -7333,6 +7843,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create storage classification mapping.": {
+            "$ref": "./examples/ReplicationStorageClassificationMappings_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/StorageClassificationMapping"
@@ -7404,6 +7919,11 @@
             "description": "Resource does not exist."
           }
         },
+        "x-ms-examples": {
+          "Delete a storage classification mapping.": {
+            "$ref": "./examples/ReplicationStorageClassificationMappings_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -7449,6 +7969,11 @@
             "schema": {
               "$ref": "#/definitions/VCenterCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of vCenter registered under a fabric.": {
+            "$ref": "./examples/ReplicationvCenters_ListByReplicationFabrics.json"
           }
         },
         "x-ms-pageable": {
@@ -7502,6 +8027,11 @@
             "schema": {
               "$ref": "#/definitions/VCenter"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a vCenter.": {
+            "$ref": "./examples/ReplicationvCenters_Get.json"
           }
         }
       },
@@ -7573,6 +8103,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Add vCenter.": {
+            "$ref": "./examples/ReplicationvCenters_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7651,6 +8186,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update vCenter operation.": {
+            "$ref": "./examples/ReplicationvCenters_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/VCenter"
@@ -7715,6 +8255,11 @@
             "description": "Resource does not exist."
           }
         },
+        "x-ms-examples": {
+          "Remove vCenter operation.": {
+            "$ref": "./examples/ReplicationvCenters_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -7762,6 +8307,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of jobs.": {
+            "$ref": "./examples/ReplicationJobs_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -7806,6 +8356,11 @@
             "schema": {
               "$ref": "#/definitions/Job"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the job details.": {
+            "$ref": "./examples/ReplicationJobs_Get.json"
           }
         }
       }
@@ -7863,6 +8418,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancels the specified job.": {
+            "$ref": "./examples/ReplicationJobs_Cancel.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7925,6 +8485,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Restarts the specified job.": {
+            "$ref": "./examples/ReplicationJobs_Restart.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7998,6 +8563,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Resumes the specified job.": {
+            "$ref": "./examples/ReplicationJobs_Resume.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Job"
@@ -8062,6 +8632,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Exports the details of the Azure Site Recovery jobs of the vault.": {
+            "$ref": "./examples/ReplicationJobs_Export.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Job"
@@ -8124,6 +8699,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of migration items in the vault.": {
+            "$ref": "./examples/ReplicationMigrationItems_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -8161,6 +8741,11 @@
             "schema": {
               "$ref": "#/definitions/NetworkMappingCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all the network mappings under a vault.": {
+            "$ref": "./examples/ReplicationNetworkMappings_List.json"
           }
         },
         "x-ms-pageable": {
@@ -8202,6 +8787,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of networks. View-only API.": {
+            "$ref": "./examples/ReplicationNetworks_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -8239,6 +8829,11 @@
             "schema": {
               "$ref": "#/definitions/PolicyCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of replication policies.": {
+            "$ref": "./examples/ReplicationPolicies_List.json"
           }
         },
         "x-ms-pageable": {
@@ -8285,6 +8880,11 @@
             "schema": {
               "$ref": "#/definitions/Policy"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the requested policy.": {
+            "$ref": "./examples/ReplicationPolicies_Get.json"
           }
         }
       },
@@ -8349,6 +8949,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates the policy.": {
+            "$ref": "./examples/ReplicationPolicies_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8420,6 +9025,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates the policy.": {
+            "$ref": "./examples/ReplicationPolicies_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Policy"
@@ -8477,6 +9087,11 @@
             "description": "Resource does not exist."
           }
         },
+        "x-ms-examples": {
+          "Delete the policy.": {
+            "$ref": "./examples/ReplicationPolicies_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -8529,6 +9144,11 @@
             "schema": {
               "$ref": "#/definitions/ReplicationProtectedItemCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of replication protected items.": {
+            "$ref": "./examples/ReplicationProtectedItems_List.json"
           }
         },
         "x-ms-pageable": {
@@ -8591,6 +9211,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of Replication protection clusters in vault.": {
+            "$ref": "./examples/ReplicationProtectionClusters_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -8630,6 +9255,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of all protection container mappings in a vault.": {
+            "$ref": "./examples/ReplicationProtectionContainerMappings_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -8667,6 +9297,11 @@
             "schema": {
               "$ref": "#/definitions/ProtectionContainerCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of all protection containers in a vault.": {
+            "$ref": "./examples/ReplicationProtectionContainers_List.json"
           }
         },
         "x-ms-pageable": {
@@ -8722,6 +9357,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of replication protection intent objects.": {
+            "$ref": "./examples/ReplicationProtectionIntents_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -8766,6 +9406,11 @@
             "schema": {
               "$ref": "#/definitions/ReplicationProtectionIntent"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the details of a Replication protection intent item.": {
+            "$ref": "./examples/ReplicationProtectionIntents_Get.json"
           }
         }
       },
@@ -8817,6 +9462,11 @@
               "$ref": "#/definitions/ReplicationProtectionIntent"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create protection intent Resource.": {
+            "$ref": "./examples/ReplicationProtectionIntents_Create.json"
+          }
         }
       }
     },
@@ -8852,6 +9502,11 @@
             "schema": {
               "$ref": "#/definitions/RecoveryPlanCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of recovery plans.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_List.json"
           }
         },
         "x-ms-pageable": {
@@ -8898,6 +9553,11 @@
             "schema": {
               "$ref": "#/definitions/RecoveryPlan"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the requested recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_Get.json"
           }
         }
       },
@@ -8962,6 +9622,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a recovery plan with the given details.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9033,6 +9698,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates the given recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RecoveryPlan"
@@ -9088,6 +9758,11 @@
           },
           "204": {
             "description": "Resource does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9151,6 +9826,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute cancel failover of the recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_FailoverCancel.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RecoveryPlan"
@@ -9211,6 +9891,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute commit failover of the recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_FailoverCommit.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9284,6 +9969,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute planned failover of the recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_PlannedFailover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RecoveryPlan"
@@ -9344,6 +10034,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute reprotect of the recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_Reprotect.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9417,6 +10112,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute test failover of the recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_TestFailover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RecoveryPlan"
@@ -9486,6 +10186,11 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Execute test failover cleanup of the recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_TestFailoverCleanup.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9559,6 +10264,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Execute unplanned failover of the recovery plan.": {
+            "$ref": "./examples/ReplicationRecoveryPlans_UnplannedFailover.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/RecoveryPlan"
@@ -9600,6 +10310,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of registered recovery services providers in the vault. This is a view only api.": {
+            "$ref": "./examples/ReplicationRecoveryServicesProviders_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -9639,6 +10354,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of storage classification mappings objects under a vault.": {
+            "$ref": "./examples/ReplicationStorageClassificationMappings_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -9676,6 +10396,11 @@
             "schema": {
               "$ref": "#/definitions/StorageClassificationCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of storage classification objects under a vault.": {
+            "$ref": "./examples/ReplicationStorageClassifications_List.json"
           }
         },
         "x-ms-pageable": {
@@ -9723,6 +10448,11 @@
               "$ref": "#/definitions/SupportedOperatingSystems"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the data of supported operating systems by SRS.": {
+            "$ref": "./examples/SupportedOperatingSystems_Get.json"
+          }
         }
       }
     },
@@ -9758,6 +10488,11 @@
             "schema": {
               "$ref": "#/definitions/VaultHealthDetails"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the health summary for the vault.": {
+            "$ref": "./examples/ReplicationVaultHealth_Get.json"
           }
         }
       }
@@ -9810,6 +10545,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Refreshes health summary of the vault.": {
+            "$ref": "./examples/ReplicationVaultHealth_Refresh.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/VaultHealthDetails"
@@ -9849,6 +10589,11 @@
             "schema": {
               "$ref": "#/definitions/VaultSettingCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of vault setting.": {
+            "$ref": "./examples/ReplicationVaultSetting_List.json"
           }
         },
         "x-ms-pageable": {
@@ -9895,6 +10640,11 @@
             "schema": {
               "$ref": "#/definitions/VaultSetting"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the vault setting.": {
+            "$ref": "./examples/ReplicationVaultSetting_Get.json"
           }
         }
       },
@@ -9958,6 +10708,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.": {
+            "$ref": "./examples/ReplicationVaultSetting_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/VaultSetting"
@@ -9999,6 +10754,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets the list of vCenter registered under the vault.": {
+            "$ref": "./examples/ReplicationvCenters_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -10033,6 +10793,11 @@
               "$ref": "#/definitions/ReplicationEligibilityResultsCollection"
             }
           }
+        },
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_List.json"
+          }
         }
       }
     },
@@ -10064,6 +10829,11 @@
             "schema": {
               "$ref": "#/definitions/ReplicationEligibilityResults"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_Get.json"
           }
         }
       }
