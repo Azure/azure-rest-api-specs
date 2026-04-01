@@ -17,13 +17,13 @@ model AgentCompute is TrackedResource<AgentComputeProperties> {
   ...ResourceNameParameter<
     Resource = AgentCompute,
     KeyName = "agentComputeName",
-    SegmentName = "agentComputes",
+    SegmentName = "agentCompute",
     NamePattern = "^[a-z][a-z0-9]{2,62}$"
   >;
 }
 
 @armResourceOperations
-interface AgentComputes {
+interface AgentComputeOps {
   /** Get the properties of an agent compute. */
   get is ArmResourceRead<AgentCompute>;
 
