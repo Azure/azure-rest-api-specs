@@ -5272,6 +5272,10 @@
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/dscnodereportoperations"
         },
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -5306,8 +5310,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {}
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
