@@ -1001,7 +1001,7 @@ interface DataColumns {
 
       @doc("Related entity identifier.")
       @query
-      entityId?: uuid;
+      entityId: uuid;
     },
     DeleteResponse
   >;

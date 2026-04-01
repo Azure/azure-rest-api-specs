@@ -1971,7 +1971,7 @@ model DataColumnQueryRequest {
   skip?: int32;
 
   @doc("Maximum number of items to return (page size)")
-  top: int32;
+  top?: int32;
 
   @doc("Include data columns without relationships (orphans)")
   includingOrphans: boolean;
