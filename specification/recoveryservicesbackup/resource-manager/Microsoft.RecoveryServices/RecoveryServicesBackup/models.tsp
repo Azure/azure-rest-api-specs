@@ -8410,6 +8410,36 @@ model OperationStatusValidateOperationExtendedInfo
 }
 
 /**
+ * Bulk restore validation response containing validation results grouped by error category.
+ */
+@added(Versions.v2026_03_01)
+model BulkRestoreValidationResponse {
+  /**
+   * Validation results grouped by error category. Each key is an error category (e.g., "CommonParameterValidationErrors"),
+   * and each value is an array of ErrorDetail objects containing validation errors for that category.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary response for validation results grouped by category"
+  validationResults?: Record<ErrorDetail[]>;
+}
+
+/**
+ * Operation status extended info for bulk restore validation.
+ */
+@added(Versions.v2026_03_01)
+model OperationStatusValidateBulkRestoreExtendedInfo
+  extends OperationStatusExtendedInfo {
+  /**
+   * Gets the bulk restore validation operation response
+   */
+  bulkRestoreValidationResponse?: BulkRestoreValidationResponse;
+
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "OperationStatusValidateBulkRestoreExtendedInfo";
+}
+
+/**
  * AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -8519,6 +8549,195 @@ model IaasVMRestoreWithRehydrationRequest extends RestoreRequest {
   recoveryPointRehydrationInfo?: RecoveryPointRehydrationInfo;
 
   ...IaasVMRestoreRequestProperties;
+}
+
+/**
+ * Base class for protected item restore details. Workload-specific protected item restore details are derived from this class.
+ */
+@added(Versions.v2026_03_01)
+@discriminator("objectType")
+model ProtectedItemRestoreDetailsBase {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: string;
+
+  /**
+   * ID of the backup copy to be recovered.
+   */
+  recoveryPointId: string;
+
+  /**
+   * Fully qualified ARM ID of the VM which is being recovered.
+   */
+  sourceResourceId: string;
+
+  /**
+   * Protected Item Id of the entity.
+   * Format - /subscriptions/{subscriptionId}/resourceGroups/{rgName}/providers/Microsoft.RecoveryServices/vaults/{VaultName}/backupFabrics/Azure/protectionContainers/{ProtectionContainerName}/protectedItems/{protectedItemName}
+   */
+  protectedItemId: string;
+}
+
+/**
+ * IaaS VM protected item restore details.
+ * Use this type in the protectedItemRestoreDetails array when using IaaSVMBulkRestoreRequest.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01)
+model IAASVMProtectedItemRestoreDetails
+  extends ProtectedItemRestoreDetailsBase {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "IAASVMProtectedItemRestoreDetails";
+
+  /**
+   * This is the complete ARM Id of the VM that will be created.
+   * For e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}
+   */
+  targetVirtualMachineId?: string;
+
+  /**
+   * List of Disk LUNs for partial restore
+   */
+  restoreDiskLunList?: int32[];
+
+  /**
+   * DiskEncryptionSet's ID - needed if the VM needs to be encrypted at rest during restore with customer managed key.
+   */
+  diskEncryptionSetId?: string;
+
+  /**
+   * Stores Secured VM Details
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  securedVMDetails?: SecuredVMDetails;
+}
+
+/**
+ * Common properties for At Scale restore operations. Used as a mixin for bulk restore request types.
+ */
+alias BulkRestoreRequestBaseProperties = {
+  /**
+   * Type of this recovery. AlternateLocation/OriginalLocation/RestoreDisks
+   */
+  recoveryType: RecoveryType;
+
+  /**
+   * List of Workload specific details which are needed during the restore operation.
+   */
+  @identifiers(#[])
+  protectedItemRestoreDetails: ProtectedItemRestoreDetailsBase[];
+};
+
+/**
+ * Base class for bulk restore request. Workload-specific bulk restore requests are derived from this class.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "BulkRestoreRequestBase is a proper base class for polymorphic bulk restore requests"
+@added(Versions.v2026_03_01)
+model BulkRestoreRequestBase extends RestoreRequest {
+  ...BulkRestoreRequestBaseProperties;
+}
+
+alias IaaSVMBulkRestoreRequestProperties = {
+  /**
+   * This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.
+   * For e.g. /subscriptions/{subId}/resourcegroups/{rg}
+   */
+  targetResourceGroupId?: string;
+
+  /**
+   * Fully qualified ARM ID of the storage account to which the VMs are to be restored.
+   */
+  storageAccountId: string;
+
+  /**
+   * Region in which the virtual machine is restored.
+   */
+  region?: string;
+
+  /**
+   * Managed Identity information required to access customer storage account.
+   */
+  identityInfo?: IdentityInfo;
+
+  /**
+   * Flag to denote of an Unmanaged disk VM should be restored with Managed disks.
+   */
+  restoreWithManagedDisks?: boolean;
+
+  /**
+   * This is the virtual network Id of the vnet that will be attached to the virtual machine.
+   * User will be validated for join action permissions in the linked access.
+   */
+  virtualNetworkId?: string;
+
+  /**
+   * Subnet ID, is the subnet ID associated with the to be restored VM. For the Azure Resource Manager VMs it would be ARM resource ID used to represent
+   * the subnet.
+   */
+  subnetId?: string;
+
+  /**
+   * Target extended location where the VM should be restored,
+   * should be null if restore is to be done in public cloud
+   */
+  extendedLocation?: ExtendedLocation;
+
+  /**
+   * This field decides what would be the name of the restored virtual machine. We will append this prefix to the original VM Name to get the final name.
+   */
+  targetVmNamePrefix?: string;
+
+  /**
+   * Specifies target network access settings for disks of VM to be restored.
+   */
+  targetDiskNetworkAccessSettings?: TargetDiskNetworkAccessSettings;
+
+  /**
+   * DiskEncryptionSet's ID - needed if the VM needs to be encrypted at rest during restore with customer managed key.
+   */
+  diskEncryptionSetId?: string;
+
+  /**
+   * Target zone where the VM and its disks should be restored.
+   */
+  zones?: string[];
+
+  /**
+   * IaaS VM workload specific restore details for restores using managed identity.
+   */
+  identityBasedRestoreDetails?: IdentityBasedRestoreDetails;
+
+  /**
+   * Target subscription id for cross subscription restore.
+   */
+  targetSubscriptionId?: string;
+
+  /**
+   * Skip the pre OLR backup if it is enabled.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OLR is an acronym and should remain uppercase"
+  skipPreOLRBackup?: boolean;
+};
+
+/**
+ * IaaS VM bulk restore request for At Scale restore operation.
+ * The protectedItemRestoreDetails array should contain IAASVMProtectedItemRestoreDetails objects.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase as a polymorphic child"
+@added(Versions.v2026_03_01)
+model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "IaaSVMBulkRestoreRequest";
+
+  ...IaaSVMBulkRestoreRequestProperties;
 }
 
 /**
@@ -8651,6 +8870,70 @@ model FetchTieringCostSavingsInfoForVaultRequest
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   objectType: "FetchTieringCostSavingsInfoForVaultRequest";
+}
+
+/**
+ * Request body for GetRecoveryPoints bulk operation.
+ */
+@added(Versions.v2026_03_01)
+model GetRecoveryPointsRequest {
+  /**
+   * Resource properties.
+   */
+  properties?: GetRecoveryPointsRequestProperties;
+}
+
+/**
+ * Properties for GetRecoveryPoints request.
+ */
+@added(Versions.v2026_03_01)
+model GetRecoveryPointsRequestProperties {
+  /**
+   * List of protected item Ids for which recovery points are needed.
+   */
+  protectedItemIds: string[];
+}
+
+/**
+ * Response body for GetRecoveryPoints bulk operation.
+ */
+@added(Versions.v2026_03_01)
+model GetRecoveryPointsResponse {
+  /**
+   * Dictionary mapping protected item Id to its latest recovery point resource.
+   * The key is the lowercase protected item ARM Id.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary response for bulk operation"
+  value?: Record<RecoveryPointResource>;
+
+  /**
+   * The URL to get the next set of recovery points. Present when response is paginated (more than 10 items).
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Response body for PreCheckRestore bulk operation.
+ */
+@added(Versions.v2026_03_01)
+model PreCheckRestoreResponse {
+  /**
+   * Pre-check validation results containing validation status and messages.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Response model for validation"
+  value?: Record<string>;
+}
+
+/**
+ * Request body for Bulk Restore operation.
+ */
+@added(Versions.v2026_03_01)
+model BulkRestoreRequest {
+  /**
+   * Resource properties.
+   */
+  properties?: RestoreRequest;
 }
 
 /**

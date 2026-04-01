@@ -2,11 +2,13 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.RecoveryServices;
@@ -200,6 +202,82 @@ interface Jobs {
     @query("$filter")
     $filter?: string,
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation interface for listing child jobs, not a standard ARM resource CRUD operation"
+@added(Versions.v2026_03_01)
+interface BackupChildJobs {
+  /**
+   * Lists child jobs of a parent job. This is useful for jobs like BulkRestore where each restore operation for an individual VM is tracked as a child job.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/backupChildJobs")
+  @get
+  @tag("BackupChildJobs")
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Name of the parent job whose child jobs are to be fetched.
+     */
+    @path
+    jobName: string,
+
+    /**
+     * OData filter options.
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
+     * skipToken Filter.
+     */
+    @query("$skipToken")
+    $skipToken?: string,
+  ): ArmResponse<JobResourceList> | ErrorResponse;
+
+  /**
+   * Gets extended child job information associated with the parent job.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/backupChildJobs/{childJobName}")
+  @get
+  @tag("BackupChildJobs")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Name of the parent job.
+     */
+    @path
+    jobName: string,
+
+    /**
+     * Name of the child job whose details are to be fetched.
+     */
+    @path
+    childJobName: string,
+  ): ArmResponse<JobResource> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -746,4 +824,264 @@ interface TieringCostOperationStatus {
     @path
     operationId: string,
   ): ArmResponse<OperationStatus> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Added for bulk restore At Scale operations"
+@added(Versions.v2026_03_01)
+interface BulkRestoreOperations {
+  /**
+   * Gets recovery points for multiple protected items in bulk.
+   * This is an asynchronous operation that always returns 202 Accepted.
+   * Returns a dictionary mapping each protected item ID to its latest recovery point.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/getRecoveryPoints")
+  @post
+  @tag("BulkRestore")
+  getRecoveryPoints(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Fabric name associated with the backup items.
+     */
+    @path
+    fabricName: string,
+
+    /**
+     * GetRecoveryPoints Request
+     */
+    @bodyRoot
+    parameters: GetRecoveryPointsRequest,
+  ): ArmAcceptedResponse<
+    "Accepted",
+    ArmLroLocationHeader<
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      GetRecoveryPointsResponse,
+      string
+    > &
+      ArmAsyncOperationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>> &
+      Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+
+  /**
+   * Pre-validates a bulk restore request.
+   * This is an asynchronous operation that always returns 202 Accepted.
+   * Performs validation checks before triggering the actual restore operation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Long running operation with Azure-AsyncOperation header only"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/preCheckRestore")
+  @post
+  @tag("BulkRestore")
+  preCheckRestore(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Fabric name associated with the backup items.
+     */
+    @path
+    fabricName: string,
+
+    /**
+     * PreCheck Restore Request
+     */
+    @bodyRoot
+    parameters: BulkRestoreRequest,
+  ): ArmAcceptedResponse<
+    "Accepted",
+    ArmAsyncOperationHeader<FinalResult = PreCheckRestoreResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+
+  /**
+   * Triggers bulk restore operation for multiple protected items.
+   * This is an asynchronous operation that always returns 202 Accepted.
+   * This long running operation restores multiple VMs in a single request.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Long running operation with Azure-AsyncOperation header only"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/restore")
+  @post
+  @tag("BulkRestore")
+  restore(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Fabric name associated with the backup items.
+     */
+    @path
+    fabricName: string,
+
+    /**
+     * Bulk Restore Request
+     */
+    @bodyRoot
+    parameters: BulkRestoreRequest,
+  ): ArmAcceptedResponse<
+    "Accepted",
+    ArmAsyncOperationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-resource operations interface"
+@added(Versions.v2026_03_01)
+interface FabricOperationStatus {
+  /**
+   * Fetches the status of an operation. The status can be in progress, completed
+   * or failed. You can refer to the OperationStatus enum for all the possible states of the operation.
+   * If the operation has completed, this method returns the OperationStatus with extended information
+   * specific to the operation type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to link multiple scenario-specific examples to a single generic operation"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationsStatus/{operationId}")
+  @get
+  @tag("OperationStatus")
+  // This operation supports multiple scenarios (bulk restore, get recovery points, etc.) with different example files.
+  // Using @OpenAPI.extension to manually link scenario-specific examples since automatic discovery won't match non-standard example names.
+  @OpenAPI.extension(
+    "x-ms-examples",
+    #{
+      `Get Status of Bulk Restore Operation`: #{
+        $ref: "./examples/AzureIaasVm/BulkRestore_OperationsStatus.json",
+      },
+      `Get Status of Get Recovery Points Bulk Operation`: #{
+        $ref: "./examples/AzureIaasVm/GetRecoveryPoints_OperationsStatus.json",
+      },
+    }
+  )
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Fabric name associated with the backup items.
+     */
+    @path
+    fabricName: string,
+
+    /**
+     * OperationID which represents the operation whose status needs to be fetched.
+     */
+    @path
+    operationId: string,
+  ): ArmResponse<OperationStatus> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-resource operations interface"
+@added(Versions.v2026_03_01)
+interface ValidateBulkRestoreOperationsStatus {
+  /**
+   * Fetches the status of a triggered validate bulk restore operation (preCheckRestore).
+   * The status can be in progress, completed or failed.
+   * When completed, returns OperationStatus with OperationStatusValidateBulkRestoreExtendedInfo
+   * containing the validation results in the bulkRestoreValidationResponse property.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/validateBulkRestoreOperationsStatus/{operationId}")
+  @get
+  @tag("ValidateBulkRestoreOperationsStatus")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Fabric name associated with the backup items.
+     */
+    @path
+    fabricName: string,
+
+    /**
+     * OperationID which represents the validate operation whose status needs to be fetched.
+     */
+    @path
+    operationId: string,
+  ): ArmResponse<OperationStatus> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-resource operations interface"
+@added(Versions.v2026_03_01)
+interface RecoveryPointOperationResults {
+  /**
+   * Provides the result of the getRecoveryPoints long-running operation.
+   * This endpoint is polled via the Location header returned from the getRecoveryPoints operation.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/recoveryPointOperationResults/{operationId}")
+  @get
+  @tag("RecoveryPointOperationResults")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @maxLength(50)
+    @minLength(2)
+    @pattern("^[A-Za-z][-A-Za-z0-9]*[A-Za-z0-9]$")
+    @path
+    vaultName: string,
+
+    /**
+     * Fabric name associated with the backup items.
+     */
+    @path
+    fabricName: string,
+
+    /**
+     * OperationID which represents the operation whose result needs to be fetched.
+     */
+    @path
+    operationId: string,
+  ): ArmResponse<GetRecoveryPointsResponse> | ErrorResponse;
 }

@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "resourceGroupName": "testRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault",
+    "jobName": "00000000-0000-0000-0000-000000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000002",
+            "type": "Microsoft.RecoveryServices/vaults/backupJobs/backupChildJobs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupJobs/00000000-0000-0000-0000-000000000001/backupChildJobs/00000000-0000-0000-0000-000000000002",
+            "properties": {
+              "activityId": "00000000-0000-0000-0000-000000000002",
+              "backupManagementType": "AzureIaasVM",
+              "containerName": "iaasvmcontainerv2;testRg;testvm1",
+              "duration": "PT21M10.3115535S",
+              "entityFriendlyName": "testvm1",
+              "jobType": "AzureIaaSVMJob",
+              "operation": "Restore",
+              "startTime": "2025-12-25T08:19:07.3227097Z",
+              "status": "InProgress",
+              "virtualMachineVersion": "Compute",
+              "actionsInfo": [
+                "Cancellable"
+              ]
+            }
+          },
+          {
+            "name": "00000000-0000-0000-0000-000000000003",
+            "type": "Microsoft.RecoveryServices/vaults/backupJobs/backupChildJobs",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupJobs/00000000-0000-0000-0000-000000000001/backupChildJobs/00000000-0000-0000-0000-000000000003",
+            "properties": {
+              "activityId": "00000000-0000-0000-0000-000000000003",
+              "backupManagementType": "AzureIaasVM",
+              "containerName": "iaasvmcontainerv2;testRg;testvm2",
+              "duration": "PT19M13.1722215S",
+              "entityFriendlyName": "testvm2",
+              "jobType": "AzureIaaSVMJob",
+              "operation": "Restore",
+              "startTime": "2025-12-25T08:19:06.8410199Z",
+              "status": "InProgress",
+              "virtualMachineVersion": "Compute",
+              "actionsInfo": [
+                "Cancellable"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupChildJobs_List",
+  "title": "List Child Jobs for a Parent Job"
+}

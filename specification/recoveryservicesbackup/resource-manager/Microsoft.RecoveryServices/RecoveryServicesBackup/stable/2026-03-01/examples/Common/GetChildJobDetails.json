@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "resourceGroupName": "testRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault",
+    "jobName": "00000000-0000-0000-0000-000000000001",
+    "childJobName": "00000000-0000-0000-0000-000000000002"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupJobs/00000000-0000-0000-0000-000000000001/backupChildJobs/00000000-0000-0000-0000-000000000002",
+        "name": "00000000-0000-0000-0000-000000000002",
+        "type": "Microsoft.RecoveryServices/vaults/backupJobs/backupChildJobs",
+        "properties": {
+          "jobType": "AzureIaaSVMJob",
+          "actionsInfo": [
+            "Cancellable"
+          ],
+          "containerName": "iaasvmcontainerv2;testRg;testvm1",
+          "duration": "PT3M16.9799309S",
+          "virtualMachineVersion": "Compute",
+          "extendedInfo": {
+            "tasksList": [
+              {
+                "taskId": "Transfer data from vault",
+                "duration": "PT0S",
+                "status": "Completed"
+              },
+              {
+                "taskId": "Create the restored virtual machine",
+                "duration": "PT0S",
+                "status": "Completed"
+              }
+            ],
+            "propertyBag": {
+              "Job Type": "Recover VM to an alternate location",
+              "Original VM Name": "testvm1",
+              "Target VM Name": "restoredvm1",
+              "Target VNet Name": "testVNet",
+              "Target Storage Account Name": "testStorageAccount",
+              "Recovery point time ": "12/24/2025 12:11:28 PM",
+              "Target resource group": "testRg"
+            },
+            "internalPropertyBag": {
+              "AdHoc": "AdHoc",
+              "restoreLocationType": "AlternateLocation"
+            },
+            "progressPercentage": 100,
+            "estimatedRemainingDuration": "PT0S"
+          },
+          "entityFriendlyName": "testvm1",
+          "backupManagementType": "AzureIaasVM",
+          "operation": "Restore",
+          "status": "Completed",
+          "startTime": "2025-12-25T08:21:22.7123729Z",
+          "endTime": "2025-12-25T08:24:39.6923038Z",
+          "activityId": "00000000-0000-0000-0000-000000000002"
+        }
+      }
+    }
+  },
+  "operationId": "BackupChildJobs_Get",
+  "title": "Get Child Job Details"
+}

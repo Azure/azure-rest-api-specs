@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "fabricName": "Azure",
+    "parameters": {
+      "properties": {
+        "objectType": "IaaSVMBulkRestoreRequest",
+        "recoveryType": "AlternateLocation",
+        "targetVmNamePrefix": "restoredvm",
+        "targetResourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg",
+        "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Storage/storageAccounts/testStorageAccount",
+        "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Network/virtualNetworks/testVNet",
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Network/virtualNetworks/testVNet/subnets/default",
+        "region": "eastus",
+        "protectedItemRestoreDetails": [
+          {
+            "objectType": "IAASVMProtectedItemRestoreDetails",
+            "recoveryPointId": "348916168024334",
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Compute/virtualMachines/testvm1",
+            "protectedItemId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;testRg;testvm1/protectedItems/VM;iaasvmcontainerv2;testRg;testvm1"
+          },
+          {
+            "objectType": "IAASVMProtectedItemRestoreDetails",
+            "recoveryPointId": "348916168024335",
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Compute/virtualMachines/testvm2",
+            "protectedItemId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;testRg;testvm2/protectedItems/VM;iaasvmcontainerv2;testRg;testvm2"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "testRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/validateBulkRestoreOperationsStatus/00000000-0000-0000-0000-000000000000?api-version=2026-03-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "BulkRestoreOperations_PreCheckRestore",
+  "title": "Pre-Check Restore Validation for Bulk Restore Operation",
+  "description": "Validates restore requests for multiple protected items. Returns 200 for immediate validation success, or 202 for async validation. When 202 is returned, poll the Azure-AsyncOperation URL to get an OperationStatus response. The OperationStatus.properties field will contain an OperationStatusValidateBulkRestoreExtendedInfo object with objectType='OperationStatusValidateBulkRestoreExtendedInfo' and a bulkRestoreValidationResponse property containing the complete validation results."
+}
+
