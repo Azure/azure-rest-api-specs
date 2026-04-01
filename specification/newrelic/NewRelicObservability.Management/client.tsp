@@ -265,8 +265,11 @@ namespace Azure.ResourceManager.Models {
 // ===== C# flatten properties for backward compatibility =====
 // These models were previously flattened in the old AutoRest SDK.
 // Using @flattenProperty to preserve top-level property access.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for C# SDK backward compatibility"
 @@flattenProperty(AccountResource.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for C# SDK backward compatibility"
 @@flattenProperty(OrganizationResource.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for C# SDK backward compatibility"
 @@flattenProperty(PlanDataResource.properties, "csharp");
 
 // ===== C# usage decorators for property types that need setters =====
