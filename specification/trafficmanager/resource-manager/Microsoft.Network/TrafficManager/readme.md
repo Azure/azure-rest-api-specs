@@ -57,6 +57,9 @@ directive:
     reason: This will cause breaking changes in .NET SDK
     from: trafficmanager.json
     where: $.definitions.UserMetricsModel
+  - suppress: XmsResourceInPutResponse
+    reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
+    from: trafficmanager.json
   - suppress: UnSupportedPatchProperties
     reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
     from: trafficmanager.json

@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -304,7 +302,6 @@ model ProxyResource extends Resource {}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource
-@extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
