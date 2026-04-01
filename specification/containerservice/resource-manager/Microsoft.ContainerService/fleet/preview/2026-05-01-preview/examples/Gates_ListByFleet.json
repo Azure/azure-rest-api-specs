@@ -39,6 +39,39 @@
               "gateType": "Approval",
               "state": "Pending"
             }
+          },
+          {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/gates/87654321-019z-xwvu-t000-000000000001",
+            "name": "87654321-019z-xwvu-t000-000000000001",
+            "type": "Microsoft.ContainerService/fleets/gates",
+            "systemData": {
+              "createdBy": "anotherUser",
+              "createdByType": "User",
+              "createdAt": "2022-03-23T05:40:40.657Z",
+              "lastModifiedBy": "anotherUser",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+            },
+            "eTag": "kd30rkdfo49=",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "displayName": "Wait until Friday evening before starting",
+              "target": {
+                "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/updateRuns/run1",
+                "updateRunProperties": {
+                  "name": "run1",
+                  "stage": "stage2",
+                  "timing": "Before"
+                }
+              },
+              "gateType": "ScheduledStart",
+              "scheduledStartProperties": {
+                "startDay": "Friday",
+                "startTime": "18:00",
+                "utcOffset": "-05:00"
+              },
+              "state": "Pending"
+            }
           }
         ],
         "nextLink": null

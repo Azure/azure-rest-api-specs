@@ -1,0 +1,52 @@
+{
+  "operationId": "Gates_Get",
+  "title": "Gets a ScheduledStart Gate resource.",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "gateName": "12345678-910a-bcde-f000-000000000001"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "kd30rkdfo49="
+      },
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/gates/12345678-910a-bcde-f000-000000000001",
+        "name": "12345678-910a-bcde-f000-000000000001",
+        "type": "Microsoft.ContainerService/fleets/gates",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        },
+        "eTag": "kd30rkdfo49=",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "Wait for Friday evening",
+          "target": {
+            "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/updateRuns/run1",
+            "updateRunProperties": {
+              "name": "run1",
+              "stage": "stage1",
+              "group": "group1",
+              "timing": "Before"
+            }
+          },
+          "gateType": "ScheduledStart",
+          "scheduledStartProperties": {
+            "startDay": "Friday",
+            "startTime": "18:00",
+            "utcOffset": "-05:00"
+          },
+          "state": "Pending"
+        }
+      }
+    }
+  }
+}
