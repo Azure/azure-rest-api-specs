@@ -78,6 +78,10 @@ namespace ApplicationInsightsManagementClient;
   "sSLCertRemainingLifetimeCheck",
   "javascript"
 );
+@@clientName(AnalyticsItems.AnalyticsItemsOperationGroup.list::parameters.type,
+  "$DO_NOT_NORMALIZE$type",
+  "javascript"
+);
 @@clientName(Workbooks.revisionsList, "listRevisionsList", "javascript");
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
