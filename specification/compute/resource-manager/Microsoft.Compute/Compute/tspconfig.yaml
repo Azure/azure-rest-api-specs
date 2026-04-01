@@ -35,11 +35,20 @@ options:
       name: "@azure/arm-compute"
   "@azure-tools/typespec-java":
     service-dir: "sdk/compute"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-generated"
-    namespace: "com.azure.resourcemanager.compute.generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute"
+    namespace: "com.azure.resourcemanager.compute"
     service-name: "Compute"
     flavor: azure
+    premium: true
+    generate-tests: false
     client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    float32-as-double: false
+    preserve-model:
+      - AvailabilitySetSkuTypes
+    remove-inner:
+      - StorageProfile
 
 linter:
   extends:
