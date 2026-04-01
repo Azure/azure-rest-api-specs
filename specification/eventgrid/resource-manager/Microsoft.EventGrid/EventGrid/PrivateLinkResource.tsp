@@ -15,84 +15,42 @@ namespace Microsoft.EventGrid;
 /**
  * Information of the private link resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
-model PrivateLinkResource {
-  /**
-   * Properties of the private link resource.
-   */
-  properties?: PrivateLinkResourceProperties;
+model PrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = PrivateLinkResource,
+    KeyName = "privateLinkResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
+}
 
-  /** Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName} */
-  id?: armResourceIdentifier;
-
-  /** The name of the resource */
-  name?: string;
-
-  /** The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts" */
-  type?: armResourceType;
+/**
+ * Private link resource under a Domain.
+ */
+@parentResource(Domain)
+model DomainPrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = DomainPrivateLinkResource,
+    KeyName = "privateLinkResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
-interface PrivateLinkResourceOps
-  extends Azure.ResourceManager.Legacy.RoutedOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-
-        /**
-         * The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.
-         */
-        @path
-        parentType: string,
-
-        /**
-         * The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).
-         */
-        @path
-        parentName: string,
-      },
-      {},
-      ResourceRoute = #{
-        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}",
-      }
-    > {}
-
-@armResourceOperations(#{ allowStaticRoutes: true })
-interface PrivateLinkResources {
+interface DomainPrivateLinkResources {
   /**
    * Get properties of a private link resource.
    */
-  @summary("Get a private link resource.")
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}")
-  get is PrivateLinkResourceOps.ActionSync<
-    PrivateLinkResource,
-    Request = void,
-    Parameters = {
-      /**
-       * The name of private link resource will be either topic, domain, partnerNamespace or namespace.
-       */
-      @path
-      privateLinkResourceName: string;
-    },
-    Response = ArmResponse<PrivateLinkResource>
-  >;
+  get is ArmResourceRead<DomainPrivateLinkResource>;
 
   /**
-   * List all the private link resources under a topic, domain, or partner namespace or namespace.
+   * List all the private link resources under a domain.
    */
-  @get
-  @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources")
-  @summary("List private link resources under specific topic, domain, or partner namespace or namespace.")
-  listByResource is PrivateLinkResourceOps.ActionSync<
-    PrivateLinkResource,
-    Request = void,
+  listByResource is ArmResourceListByParent<
+    DomainPrivateLinkResource,
     Parameters = {
       /**
        * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
@@ -105,8 +63,91 @@ interface PrivateLinkResources {
        */
       @query("$top")
       $top?: int32;
-    },
-    Response = ArmResponse<PrivateLinkResourcesListResult>
+    }
+  >;
+}
+
+/**
+ * Private link resource under a Topic.
+ */
+@parentResource(Topic)
+model TopicPrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = TopicPrivateLinkResource,
+    KeyName = "privateLinkResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface TopicPrivateLinkResources {
+  /**
+   * Get properties of a private link resource.
+   */
+  get is ArmResourceRead<TopicPrivateLinkResource>;
+
+  /**
+   * List all the private link resources under a topic.
+   */
+  listByResource is ArmResourceListByParent<
+    TopicPrivateLinkResource,
+    Parameters = {
+      /**
+       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+}
+
+/**
+ * Private link resource under a PartnerNamespace.
+ */
+@parentResource(PartnerNamespace)
+model PartnerNamespacePrivateLinkResource
+  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = PartnerNamespacePrivateLinkResource,
+    KeyName = "privateLinkResourceName",
+    SegmentName = "privateLinkResources",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface PartnerNamespacePrivateLinkResources {
+  /**
+   * Get properties of a private link resource.
+   */
+  get is ArmResourceRead<PartnerNamespacePrivateLinkResource>;
+
+  /**
+   * List all the private link resources under a partner namespace.
+   */
+  listByResource is ArmResourceListByParent<
+    PartnerNamespacePrivateLinkResource,
+    Parameters = {
+      /**
+       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+       */
+      @query("$top")
+      $top?: int32;
+    }
   >;
 }
 

@@ -112,7 +112,13 @@
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "PrivateLinkResources"
+      "name": "DomainPrivateLinkResources"
+    },
+    {
+      "name": "TopicPrivateLinkResources"
+    },
+    {
+      "name": "PartnerNamespacePrivateLinkResources"
     },
     {
       "name": "SystemTopics"
@@ -2657,6 +2663,113 @@
         "x-ms-examples": {
           "Domains_ListSharedAccessKeys": {
             "$ref": "./examples/Domains_ListSharedAccessKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/privateLinkResources": {
+      "get": {
+        "operationId": "DomainPrivateLinkResources_ListByResource",
+        "tags": [
+          "DomainPrivateLinkResources"
+        ],
+        "description": "List all the private link resources under a domain.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DomainPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "DomainPrivateLinkResources_Get",
+        "tags": [
+          "DomainPrivateLinkResources"
+        ],
+        "description": "Get properties of a private link resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the DomainPrivateLinkResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DomainPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -8341,6 +8454,113 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PartnerNamespacePrivateLinkResources_ListByResource",
+        "tags": [
+          "PartnerNamespacePrivateLinkResources"
+        ],
+        "description": "List all the private link resources under a partner namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespacePrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PartnerNamespacePrivateLinkResources_Get",
+        "tags": [
+          "PartnerNamespacePrivateLinkResources"
+        ],
+        "description": "Get properties of a private link resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerNamespaceName",
+            "in": "path",
+            "description": "Name of the partner namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the PartnerNamespacePrivateLinkResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartnerNamespacePrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/regenerateKey": {
       "post": {
         "operationId": "PartnerNamespaces_RegenerateKey",
@@ -11198,6 +11418,113 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/privateLinkResources": {
+      "get": {
+        "operationId": "TopicPrivateLinkResources_ListByResource",
+        "tags": [
+          "TopicPrivateLinkResources"
+        ],
+        "description": "List all the private link resources under a topic.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "description": "Name of the topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TopicPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "TopicPrivateLinkResources_Get",
+        "tags": [
+          "TopicPrivateLinkResources"
+        ],
+        "description": "Get properties of a private link resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "description": "Name of the topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the TopicPrivateLinkResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TopicPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/regenerateKey": {
       "post": {
         "operationId": "Topics_RegenerateKey",
@@ -11874,139 +12201,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources": {
-      "get": {
-        "operationId": "PrivateLinkResources_ListByResource",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "summary": "List private link resources under specific topic, domain, or partner namespace or namespace.",
-        "description": "List all the private link resources under a topic, domain, or partner namespace or namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parentName",
-            "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkResources_ListByResource": {
-            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}": {
-      "get": {
-        "operationId": "PrivateLinkResources_Get",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "summary": "Get a private link resource.",
-        "description": "Get properties of a private link resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parentName",
-            "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateLinkResourceName",
-            "in": "path",
-            "description": "The name of private link resource will be either topic, domain, partnerNamespace or namespace.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkResources_Get": {
-            "$ref": "./examples/PrivateLinkResources_Get.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -12195,10 +12389,6 @@
           }
         ]
       }
-    },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
     },
     "AzureADPartnerClientAuthentication": {
       "type": "object",
@@ -13515,6 +13705,42 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "DomainPrivateLinkResource": {
+      "type": "object",
+      "description": "Private link resource under a Domain.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DomainPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a DomainPrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DomainPrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DomainPrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DomainProperties": {
@@ -17009,6 +17235,42 @@
         }
       ]
     },
+    "PartnerNamespacePrivateLinkResource": {
+      "type": "object",
+      "description": "Private link resource under a PartnerNamespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PartnerNamespacePrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PartnerNamespacePrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PartnerNamespacePrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PartnerNamespacePrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PartnerNamespaceProperties": {
       "type": "object",
       "description": "Properties of the partner namespace.",
@@ -17899,30 +18161,6 @@
         }
       }
     },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "Information of the private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of the private link resource.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of private link resource will be either topic, domain, partnerNamespace or namespace."
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        }
-      }
-    },
     "PrivateLinkResourceProperties": {
       "type": "object",
       "properties": {
@@ -17945,27 +18183,6 @@
           }
         }
       }
-    },
-    "PrivateLinkResourcesListResult": {
-      "type": "object",
-      "description": "Result of the List private link resources operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateLinkResource items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "PublicNetworkAccess": {
       "type": "string",
@@ -19253,6 +19470,42 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "TopicPrivateLinkResource": {
+      "type": "object",
+      "description": "Private link resource under a Topic.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TopicPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a TopicPrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TopicPrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TopicPrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "TopicProperties": {

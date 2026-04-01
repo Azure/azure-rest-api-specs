@@ -491,3 +491,7 @@ interface Clients {
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Subscriptions.getDeliveryAttributes,
   "csharp"
 );
+
+// PrivateLinkResource per-parent model naming
+@@clientName(DomainPrivateLinkResource, "EventGridDomainPrivateLinkResource", "csharp");
+@@clientName(TopicPrivateLinkResource, "EventGridTopicPrivateLinkResource", "csharp");
