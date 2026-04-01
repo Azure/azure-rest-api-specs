@@ -92,6 +92,24 @@ model UpdateStage {
   afterGates?: GateConfiguration[];
 }
 
+@doc("Configuration for ScheduledStart gate")
+@added(Versions.v2026_05_01_preview)
+model ScheduledStartConfiguration {
+  @doc("The day of the week when the scheduled start occurs.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  startDay: DayOfWeek;
+
+  @doc("The local time of day when the scheduled start occurs in 24-hour (HH:mm) format.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^([01][0-9]|2[0-3]):[0-5][0-9]$")
+  startTime: string;
+
+  @doc("The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$")
+  utcOffset: string;
+}
+
 @doc("A group to be updated.")
 model UpdateGroup {
   @doc("""
@@ -159,4 +177,8 @@ model GateConfiguration {
 
   @doc("The type of the Gate determines how it is completed.")
   type: GateType;
+
+  @doc("Scheduled start configuration for gates of type ScheduledStart.")
+  @added(Versions.v2026_05_01_preview)
+  scheduledStartConfiguration?: ScheduledStartConfiguration;
 }
