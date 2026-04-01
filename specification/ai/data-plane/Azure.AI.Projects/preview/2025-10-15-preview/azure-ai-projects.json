@@ -6353,21 +6353,10 @@
           "type": "string",
           "description": "Evaluator name from the project's evaluator catalog.\nSupports both built-in evaluators (e.g. coherence, fluency, task_adherence)\nand custom evaluators registered in the catalog."
         },
-        "evaluatorVersion": {
-          "type": "string",
-          "description": "Evaluator version. Omit to use the latest version."
-        },
         "threshold": {
           "type": "number",
           "format": "double",
           "description": "Pass/fail threshold. Scores >= threshold pass.\nOmit for informational-only evaluators that report a score\nwithout gating the test suite result."
-        },
-        "initializationParameters": {
-          "type": "object",
-          "description": "Initialization parameters for the evaluator.\nLLM-judge evaluators require at least deployment_name.\nExample: { \"deployment_name\": \"gpt-4o-mini\" }",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [

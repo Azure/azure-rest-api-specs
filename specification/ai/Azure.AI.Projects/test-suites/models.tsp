@@ -61,22 +61,12 @@ model TestSuiteEvaluator {
     """)
   evaluatorName: string;
 
-  @doc("Evaluator version. Omit to use the latest version.")
-  evaluatorVersion?: string;
-
   @doc("""
     Pass/fail threshold. Scores >= threshold pass.
     Omit for informational-only evaluators that report a score
     without gating the test suite result.
     """)
   threshold?: float64;
-
-  @doc("""
-    Initialization parameters for the evaluator.
-    LLM-judge evaluators require at least deployment_name.
-    Example: { "deployment_name": "gpt-4o-mini" }
-    """)
-  initializationParameters?: Record<string>;
 }
 
 // ---------------------------------------------------------------------------
