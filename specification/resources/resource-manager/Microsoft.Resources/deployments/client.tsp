@@ -6,4 +6,4 @@ using Microsoft.Resources;
 
 @@clientName(Microsoft.Resources.DeploymentExtended, "Deployment", "java");
 @@clientName(Microsoft.Resources.Deployment, "DeploymentParameters", "java");
-@@clientName(Microsoft.Resources.Deployment, "DeploymentsMgmtClient", "java");
+@@clientName(Microsoft.Resources.Deployment, "DeploymentsMgmtClient", "python");
