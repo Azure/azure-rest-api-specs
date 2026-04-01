@@ -19,6 +19,12 @@ using Microsoft.Sql;
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
+@@clientName(SyncGroupProperties.hubDatabaseUserName,
+  "hubDatabaseUsername",
+  "java"
+);
+
+@@usage(ServerDnsAlias, Azure.ClientGenerator.Core.Usage.input, "java");
 
 @@clientName(SqlVulnerabilityAssessmentScanRecord,
   "VulnerabilityAssessmentScanRecordForSql",
