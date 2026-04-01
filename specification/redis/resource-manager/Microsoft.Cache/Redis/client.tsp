@@ -155,6 +155,10 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
   "RedisConfiguration",
   "java"
 );
+@@clientName(RedisCommonPropertiesRedisConfigurationRecordString,
+  "RedisConfiguration",
+  "java"
+);
 @@clientName(RedisCreateProperties.staticIP, "staticIp", "java");
 @@clientName(RedisProperties.hostName, "hostname", "java");
 @@clientName(ImportRDBParameters, "ImportRdbParameters", "java");
