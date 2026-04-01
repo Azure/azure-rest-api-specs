@@ -79,3 +79,10 @@
 - tool: TypeSpecRequirement
   path: ./stable/2022-04-01/*.json
   reason: Brownfield service not ready to migrate
+# DenyAssignment TypeSpec migration suppressions
+- tool: BreakingChange(Cross-Version)
+  path: ./preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  reason: TypeSpec conversion generates different parameter structures than hand-written Swagger. Functionally equivalent - parameters are inline instead of referenced.
+- tool: Avocado
+  path: ./readme.md
+  reason: Authorization service readme tags intentionally aggregate multiple API version swagger files per tag, as is the established pattern for this service.
