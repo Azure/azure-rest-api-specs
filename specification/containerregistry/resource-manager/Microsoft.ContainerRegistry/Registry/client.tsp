@@ -220,7 +220,6 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryExportPolicyStatus",
   "csharp"
 );
-@@clientName(GarbageCollectionProperties.enabled, "IsEnabled", "csharp");
 @@clientName(GenerateCredentialsParameters,
   "ContainerRegistryGenerateCredentialsContent",
   "csharp"
@@ -292,7 +291,7 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 @@clientName(PipelineRunResponse.importedArtifacts,
-  "ImportedArtifactsList",
+  "ImportedArtifacts",
   "csharp"
 );
 @@clientName(PipelineRunSourceProperties,
@@ -482,6 +481,7 @@ namespace Microsoft.ContainerRegistry {
 // also writable in the previous SDK; mark them as input to preserve the existing usage pattern.
 @@usage(ArchiveVersion, Usage.input, "csharp");
 @@usage(WebhookProperties, Usage.input, "csharp");
+@@usage(Webhook, Usage.input, "csharp");
 
 // flattenProperty restores the flat property layout produced by the previous autorest-based SDK,
 // where resource properties were exposed directly on the resource class rather than through a nested object.
