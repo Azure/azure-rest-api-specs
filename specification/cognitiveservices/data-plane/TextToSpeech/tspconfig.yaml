@@ -1,0 +1,39 @@
+parameters:
+  "service-dir":
+    default: "sdk/cognitiveservices"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/use-standard-operations": "PUT create and POST action operations use Foundations.Operation to preserve exact response headers and status codes"
+    "@azure-tools/typespec-azure-core/use-standard-names": "Migrated from swagger; operation names match existing API conventions"
+    "@azure-tools/typespec-azure-core/byos": "Existing API uses multipart/form-data upload; BYOS not applicable"
+    "@azure-tools/typespec-client-generator-core/property-name-conflict": "Fixed via @@clientName in client.tsp; warning only appears in main compile"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/texttospeech.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-cognitiveservices-speech-texttospeech"
+    namespace: "azure.cognitiveservices.speech.texttospeech"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.CognitiveServices.Speech.TextToSpeech"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/cognitiveservices-speech-texttospeech"
+    package-details:
+      name: "@azure/cognitiveservices-speech-texttospeech"
+    experimental-extensible-enums: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-cognitiveservices-speech-texttospeech"
+    namespace: com.azure.cognitiveservices.speech.texttospeech
+    flavor: azure

@@ -12,51 +12,31 @@ namespace Microsoft.DevTestLab;
 /**
  * A Service Fabric.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ServiceFabric extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("servicefabrics")
-  name: string;
+@parentResource(User)
+model ServiceFabric
+  is Azure.ResourceManager.ProxyResource<ServiceFabricProperties, false> {
+  ...ResourceNameParameter<
+    Resource = ServiceFabric,
+    KeyName = "serviceFabricName",
+    SegmentName = "servicefabrics",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  properties: ServiceFabricProperties;
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
-
-@armResourceOperations
-interface ServiceFabricOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-
-        /** The name of the user profile. */
-        @path @segment("users") userName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = ServiceFabric,
-        KeyName = "name",
-        SegmentName = "servicefabrics",
-        NamePattern = ""
-      >>
-    > {}
 
 @armResourceOperations
 interface ServiceFabrics {
   /**
    * Get service fabric.
    */
-  get is ServiceFabricOps.Read<
+  get is ArmResourceRead<
     ServiceFabric,
     Parameters = {
       /**
@@ -70,7 +50,7 @@ interface ServiceFabrics {
   /**
    * Create or replace an existing service fabric. This operation can take a while to complete.
    */
-  createOrUpdate is ServiceFabricOps.CreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServiceFabric,
     LroHeaders = ArmLroLocationHeader<FinalResult = ServiceFabric> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -81,7 +61,7 @@ interface ServiceFabrics {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ServiceFabricOps.CustomPatchSync<
+  update is ArmCustomPatchSync<
     ServiceFabric,
     PatchModel = ServiceFabricFragment
   >;
@@ -90,7 +70,7 @@ interface ServiceFabrics {
    * Delete service fabric. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ServiceFabricOps.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     ServiceFabric,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -98,7 +78,7 @@ interface ServiceFabrics {
   /**
    * List service fabrics in a given user profile.
    */
-  list is ServiceFabricOps.List<
+  list is ArmResourceListByParent<
     ServiceFabric,
     Parameters = {
       /**
@@ -131,7 +111,7 @@ interface ServiceFabrics {
   /**
    * Lists the applicable start/stop schedules, if any.
    */
-  listApplicableSchedules is ServiceFabricOps.ActionSync<
+  listApplicableSchedules is ArmResourceActionSync<
     ServiceFabric,
     void,
     ArmResponse<ApplicableSchedule>
@@ -140,12 +120,28 @@ interface ServiceFabrics {
   /**
    * Start a service fabric. This operation can take a while to complete.
    */
-  start is ServiceFabricOps.ActionAsync<ServiceFabric, void, OkResponse>;
+  start is ArmResourceActionAsync<
+    ServiceFabric,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 
   /**
    * Stop a service fabric This operation can take a while to complete.
    */
-  stop is ServiceFabricOps.ActionAsync<ServiceFabric, void, OkResponse>;
+  stop is ArmResourceActionAsync<
+    ServiceFabric,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 
 @@doc(ServiceFabric.name, "The name of the service fabric.");

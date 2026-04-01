@@ -51,7 +51,7 @@ model FilterQueryParameter {
 @autoRoute
 @doc("Update a {name}", TResource)
 @armResourceUpdate(TResource)
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op FleetCustomPatchSync<
   TResource extends Foundations.Resource,
   TPatchModel extends TypeSpec.Reflection.Model = TagsUpdateModel<TResource>,

@@ -163,6 +163,7 @@ export class Readme {
         try {
           parsedObj = inputFileSchema.parse(obj);
         } catch (error) {
+          /* v8 ignore else -- defensive rethrow */
           if (error instanceof z.ZodError) {
             throw new SpecModelError(
               `Unable to parse input-file YAML for tag ${tagName} in ${this.#path}`,
@@ -173,10 +174,9 @@ export class Readme {
                 cause: error,
               },
             );
-          } /* v8 ignore start: defensive rethrow */ else {
+          } else {
             throw error;
           }
-          /* v8 ignore stop */
         }
 
         if (!parsedObj["input-file"]) {
