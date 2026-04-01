@@ -3,4 +3,4 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.Marketplace, "MarketplaceMgmtClient","python");
+@@clientName(Microsoft.Marketplace, "MarketplaceMgmtClient", "python");
