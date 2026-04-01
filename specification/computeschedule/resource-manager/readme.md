@@ -35,7 +35,7 @@ tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2026-04-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-03-01-preview'
+```yaml $(tag) == 'package-2026-04-15-preview'
 input-file:
   - Microsoft.ComputeSchedule/preview/2026-04-15-preview/computeschedule.json
 suppressions:  
