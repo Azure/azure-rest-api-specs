@@ -8,24 +8,11 @@ using Azure.ClientGenerator.Core;
 // Preserve legacy Java names for renamed encryption identity models.
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
-  "java,javascript"
+  "java,javascript,python"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
   "java,javascript"
-);
-
-@@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
-  "EncryptionCustomerManagedKeyEncryption",
-  "python"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
-  "EncryptionCustomerManagedKeyEncryptionKeyIdentity",
-  "python"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
-  "EncryptionCustomerManagedKeyEncryptionKeyIdentityType",
-  "python"
 );
 
 // C# backward-compatible renames to match existing GA SDK surface.
