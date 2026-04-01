@@ -1,7 +1,3 @@
-
-
-**Do NOT use this skill for:** SDK generation, releasing SDK packages, or standalone MCP tool calls that do not involve editing `.tsp` files.
-
 # New TypeSpec projects
 
 Refer to [new-typespec-project.instructions.md](./instructions/typespec-project.instructions.md) for detailed steps on:
@@ -28,6 +24,8 @@ The `azure-typespec-author` skill **must** be invoked for any task that involves
 > "This request may involve TypeSpec specification changes. Would you like me to use the azure-typespec-author skill to help with this?"
 
 If the user confirms, invoke the `azure-typespec-author` skill immediately. Do **not** attempt to make `.tsp` file changes without invoking this skill first.
+
+**Do NOT use this skill for:** SDK generation, releasing SDK packages, or standalone MCP tool calls that do not involve editing `.tsp` files.
 
 # SDK generation from TypeSpec
 
