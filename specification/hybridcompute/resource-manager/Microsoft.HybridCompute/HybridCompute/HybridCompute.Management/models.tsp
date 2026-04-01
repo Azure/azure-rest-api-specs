@@ -1188,7 +1188,7 @@ model MachineProperties {
   /**
    * Metadata pertaining to the geographic location of the resource.
    */
-  locationData?: LocationData;
+  locationData?: CommonTypes.LocationData;
 
   /**
    * Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM.
@@ -2182,7 +2182,7 @@ model MachineUpdateProperties {
   /**
    * Metadata pertaining to the geographic location of the resource.
    */
-  locationData?: LocationData;
+  locationData?: CommonTypes.LocationData;
 
   /**
    * Specifies the operating system settings for the hybrid machine.
@@ -3543,7 +3543,6 @@ model ProvisioningIssueProperties {
    * ARM Ids of the resources that can be associated to the same perimeter to remediate the issue
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   suggestedResourceIds?: string[];
 
   /**
