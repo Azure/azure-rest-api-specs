@@ -15,9 +15,13 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sql"
     namespace: "com.azure.resourcemanager.sql"
     flavor: "azure"
-    service-name: "SQL"
-    remove-inner: SQL,HuntingBookmark,Entity
+    service-name: "Sql"
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
     use-object-for-unknown: true
+    uuid-as-string: false
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
@@ -42,9 +46,9 @@ options:
       name: "@azure/arm-sql"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/sql"
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-sql"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/arm-sql"
-    fix-const-stuttering: true
+    emitter-output-dir: "{output-dir}/{service-dir}/armsql"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsql"
+    fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
