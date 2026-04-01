@@ -2856,6 +2856,12 @@ model DatabaseAccountRegenerateKeyParameters {
    * The access key to regenerate.
    */
   keyKind: KeyKind;
+
+  /**
+   * Optional flag indicating whether to skip account keys last usage check.
+   */
+  @added(Versions.v2026_04_01_preview)
+  skipAccountKeysLastUsageCheck?: boolean;
 }
 
 /**
