@@ -179,11 +179,11 @@ modelerfour:
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: SecureScore.Managment
+### Tag: SecureScore.Management
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
 
-```yaml $(tag) == 'SecureScore.Managment'
+```yaml $(tag) == 'SecureScore.Management'
 input-file:
   - stable/2020-01-01/secureScore.json
 ```
@@ -221,11 +221,11 @@ input-file:
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: Standards.Managment
+### Tag: Standards.Management
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
 
-```yaml $(tag) == 'Standards.Managment'
+```yaml $(tag) == 'Standards.Management'
 input-file:
   - preview/2021-08-01-preview/standards.json
   - preview/2021-08-01-preview/assignments.json
@@ -338,11 +338,11 @@ input-file:
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: CompianceResults.Management
+### Tag: ComplianceResults.Management
 
 These settings apply only when `--tag=package-2026-01` is specified on the command line.
 
-```yaml $(tag) == 'CompianceResults.Management'
+```yaml $(tag) == 'ComplianceResults.Management'
 input-file:
   - stable/2017-08-01/complianceResults.json
 ```
