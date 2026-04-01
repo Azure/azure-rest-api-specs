@@ -141,65 +141,129 @@ using Microsoft.DocumentDB;
 @@clientName(DatabaseAccounts.regenerateKey::parameters.body,
   "keyToRegenerate"
 );
-@@clientLocation(DatabaseAccounts.databaseListMetrics, "Database");
-@@clientName(DatabaseAccounts.databaseListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.databaseListUsages, "Database");
-@@clientName(DatabaseAccounts.databaseListUsages, "ListUsages");
-@@clientLocation(DatabaseAccounts.databaseListMetricDefinitions, "Database");
+@@clientLocation(DatabaseAccounts.databaseListMetrics, "Database",
+  "java,python,go,javascript"
+);
+@@clientName(DatabaseAccounts.databaseListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
+@@clientLocation(DatabaseAccounts.databaseListUsages, "Database",
+  "java,python,go,javascript"
+);
+@@clientName(DatabaseAccounts.databaseListUsages, "ListUsages",
+  "java,python,go,javascript"
+);
+@@clientLocation(DatabaseAccounts.databaseListMetricDefinitions, "Database",
+  "java,python,go,javascript"
+);
 @@clientName(DatabaseAccounts.databaseListMetricDefinitions,
   "ListMetricDefinitions"
+,
+  "java,python,go,javascript"
 );
-@@clientLocation(DatabaseAccounts.collectionListMetrics, "Collection");
-@@clientName(DatabaseAccounts.collectionListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.collectionListUsages, "Collection");
-@@clientName(DatabaseAccounts.collectionListUsages, "ListUsages");
+@@clientLocation(DatabaseAccounts.collectionListMetrics, "Collection",
+  "java,python,go,javascript"
+);
+@@clientName(DatabaseAccounts.collectionListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
+@@clientLocation(DatabaseAccounts.collectionListUsages, "Collection",
+  "java,python,go,javascript"
+);
+@@clientName(DatabaseAccounts.collectionListUsages, "ListUsages",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.collectionListMetricDefinitions,
   "Collection"
+,
+  "java,python,go,javascript"
 );
 @@clientName(DatabaseAccounts.collectionListMetricDefinitions,
   "ListMetricDefinitions"
+,
+  "java,python,go,javascript"
 );
 @@clientLocation(DatabaseAccounts.collectionRegionListMetrics,
   "CollectionRegion"
+,
+  "java,python,go,javascript"
 );
-@@clientName(DatabaseAccounts.collectionRegionListMetrics, "ListMetrics");
+@@clientName(DatabaseAccounts.collectionRegionListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.databaseAccountRegionListMetrics,
   "DatabaseAccountRegion"
+,
+  "java,python,go,javascript"
 );
-@@clientName(DatabaseAccounts.databaseAccountRegionListMetrics, "ListMetrics");
+@@clientName(DatabaseAccounts.databaseAccountRegionListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.percentileSourceTargetListMetrics,
   "PercentileSourceTarget"
+,
+  "java,python,go,javascript"
 );
-@@clientName(DatabaseAccounts.percentileSourceTargetListMetrics, "ListMetrics");
+@@clientName(DatabaseAccounts.percentileSourceTargetListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.percentileTargetListMetrics,
   "PercentileTarget"
+,
+  "java,python,go,javascript"
 );
-@@clientName(DatabaseAccounts.percentileTargetListMetrics, "ListMetrics");
-@@clientLocation(DatabaseAccounts.percentileListMetrics, "Percentile");
-@@clientName(DatabaseAccounts.percentileListMetrics, "ListMetrics");
+@@clientName(DatabaseAccounts.percentileTargetListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
+@@clientLocation(DatabaseAccounts.percentileListMetrics, "Percentile",
+  "java,python,go,javascript"
+);
+@@clientName(DatabaseAccounts.percentileListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.collectionPartitionRegionListMetrics,
   "CollectionPartitionRegion"
+,
+  "java,python,go,javascript"
 );
 @@clientName(DatabaseAccounts.collectionPartitionRegionListMetrics,
   "ListMetrics"
+,
+  "java,python,go,javascript"
 );
 @@clientLocation(DatabaseAccounts.collectionPartitionListMetrics,
   "CollectionPartition"
+,
+  "java,python,go,javascript"
 );
-@@clientName(DatabaseAccounts.collectionPartitionListMetrics, "ListMetrics");
+@@clientName(DatabaseAccounts.collectionPartitionListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.collectionPartitionListUsages,
   "CollectionPartition"
+,
+  "java,python,go,javascript"
 );
-@@clientName(DatabaseAccounts.collectionPartitionListUsages, "ListUsages");
+@@clientName(DatabaseAccounts.collectionPartitionListUsages, "ListUsages",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.partitionKeyRangeIdListMetrics,
   "PartitionKeyRangeId"
+,
+  "java,python,go,javascript"
 );
-@@clientName(DatabaseAccounts.partitionKeyRangeIdListMetrics, "ListMetrics");
+@@clientName(DatabaseAccounts.partitionKeyRangeIdListMetrics, "ListMetrics",
+  "java,python,go,javascript"
+);
 @@clientLocation(DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
   "PartitionKeyRangeIdRegion"
+,
+  "java,python,go,javascript"
 );
 @@clientName(DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
   "ListMetrics"
+,
+  "java,python,go,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseAccountGetResults.properties);
