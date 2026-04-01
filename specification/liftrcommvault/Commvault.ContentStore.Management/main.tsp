@@ -678,9 +678,10 @@ model StopBackupProtectionGroupRequest {
 
 @doc("The properties of BackupProtectionGroupRequest")
 model BackupProtectionGroupRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "identifiers not applicable across version type change"
   @doc("The vm list details.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @Azure.ResourceManager.identifiers(#[])
+  @typeChangedFrom(Versions.v5_preview, VmList)
   vmList: VmListItem[];
 
   @added(Versions.v5_preview)
@@ -705,6 +706,21 @@ model VmListItem {
   @doc("The GUID of the VM to backup")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   vmGuid: string;
+}
+
+@doc("The VM list wrapper for backup request")
+model VmList {
+  @doc("The list of VM GUIDs to backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#[])
+  vmGuid: VmGuid[];
+}
+
+@doc("The VM GUID identifier")
+model VmGuid {
+  @doc("The identifier of the VM")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  id: string;
 }
 
 @doc("The backup options for the VM backup")
