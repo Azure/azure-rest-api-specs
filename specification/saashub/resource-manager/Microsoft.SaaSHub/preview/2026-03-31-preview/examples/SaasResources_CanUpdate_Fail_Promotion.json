@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "properties": {
+        "quantity": 25,
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+            "quantity": 25
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyPromotionConstraints",
+        "reason": "Failed to satisfy promotion constraints",
+        "updateScenario": "UpdateSchedule",
+        "additionalInfo": {
+          "refundableQuantity": null,
+          "coTerm": null,
+          "addOn": null,
+          "promotion": [
+            {
+              "promotionId": "39NFJQT1Z4T3/0001/39NFJQT1Q5KM",
+              "isEligible": "Ineligible",
+              "ineligibilityReasons": [
+                "skuPurchasedPreviously"
+              ],
+              "eligibilityConstraints": [
+                {
+                  "constraintType": "termDuration",
+                  "isEligible": "Eligible"
+                },
+                {
+                  "constraintType": "firstPurchase",
+                  "isEligible": "Ineligible"
+                },
+                {
+                  "constraintType": "seatQuantity",
+                  "isEligible": "Eligible"
+                }
+              ]
+            }
+          ],
+          "futurePrice": null
+        }
+      }
+    }
+  },
+  "operationId": "SaasResources_CanUpdate",
+  "title": "Update Promotion - Failed"
+}

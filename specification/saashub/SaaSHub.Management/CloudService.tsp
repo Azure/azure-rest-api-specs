@@ -9,6 +9,7 @@ import "./versions.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SaaSHub;
 /**
@@ -25,6 +26,7 @@ model CloudService
 }
 
 @armResourceOperations
+@removed(SaaSHubVersions.v2026_03_31_preview)
 interface CloudServices {
   /**
    * Gets a SaaSHub cloud service by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.
