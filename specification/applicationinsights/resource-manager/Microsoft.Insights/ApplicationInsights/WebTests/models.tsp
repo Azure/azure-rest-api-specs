@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace WebTestsApi;
 
 /**
  * The kind of WebTest that this web test watches. Choices are ping, multistep and standard.

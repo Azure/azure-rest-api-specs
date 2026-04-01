@@ -11,28 +11,27 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Insights;
+namespace WebTestsApi;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface WebTestsOperationGroup {
   /**
    * Get all Application Insights web tests defined for the specified component.
    */
-  @autoRoute
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{componentName}/webtests")
   @get
   @list
-  @action("webtests")
-  listByComponent is ArmProviderActionSync<
-    Response = webTestListResult,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The name of the Application Insights component resource.
-       */
-      @path
-      @segment("components")
-      componentName: string;
-    },
-    Error = never
-  >;
+  listByComponent(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    /**
+     * The name of the Application Insights component resource.
+     */
+    @path
+    componentName: string,
+
+    ...Azure.ResourceManager.ResourceGroupParameter,
+  ): webTestListResult;
 }

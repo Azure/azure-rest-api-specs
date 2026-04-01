@@ -11,7 +11,7 @@ using TypeSpec.OpenAPI;
 
 using ApplicationInsightsCommonTypes;
 
-namespace Microsoft.Insights;
+namespace WebTestsApi;
 /**
  * An Application Insights WebTest definition.
  */
