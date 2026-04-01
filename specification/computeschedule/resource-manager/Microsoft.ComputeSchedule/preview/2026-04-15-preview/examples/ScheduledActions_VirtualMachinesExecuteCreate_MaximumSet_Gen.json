@@ -1,0 +1,216 @@
+{
+  "title": "ScheduledActions_VirtualMachinesExecuteCreate_MaximumSet",
+  "operationId": "ScheduledActions_VirtualMachinesExecuteCreate",
+  "parameters": {
+    "api-version": "2026-04-15-preview",
+    "subscriptionId": "732116BD-AF31-4E74-9283-B387C44B4A44",
+    "locationparameter": "eastus2",
+    "requestBody": {
+      "resourceConfigParameters": {
+        "baseProfile": {
+          "vmProperties": {
+            "zones": [
+              "1"
+            ],
+            "identity": {
+              "type": "SystemAssigned"
+            },
+            "tags": {
+              "environment": "production",
+              "department": "engineering"
+            },
+            "vmProperties": {
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "Canonical",
+                  "offer": "0001-com-ubuntu-server-jammy",
+                  "sku": "22_04-lts-gen2",
+                  "version": "latest"
+                },
+                "osDisk": {
+                  "osType": "Linux",
+                  "name": "myOsDisk",
+                  "caching": "ReadWrite",
+                  "createOption": "FromImage",
+                  "diskSizeGB": 128,
+                  "managedDisk": {
+                    "storageAccountType": "Premium_LRS"
+                  },
+                  "deleteOption": "Delete"
+                },
+                "dataDisks": [
+                  {
+                    "lun": 0,
+                    "name": "myDataDisk-0",
+                    "caching": "ReadOnly",
+                    "createOption": "Empty",
+                    "diskSizeGB": 256,
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    },
+                    "deleteOption": "Delete"
+                  }
+                ],
+                "diskControllerType": "SCSI"
+              },
+              "additionalCapabilities": {
+                "ultraSSDEnabled": false,
+                "hibernationEnabled": false
+              },
+              "osProfile": {
+                "computerName": "myVM",
+                "adminUsername": "azureuser",
+                "linuxConfiguration": {
+                  "disablePasswordAuthentication": true,
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "/home/azureuser/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQ..."
+                      }
+                    ]
+                  },
+                  "provisionVMAgent": true,
+                  "patchSettings": {
+                    "patchMode": "AutomaticByPlatform",
+                    "assessmentMode": "AutomaticByPlatform"
+                  }
+                },
+                "allowExtensionOperations": true
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "properties": {
+                      "primary": true,
+                      "deleteOption": "Delete"
+                    },
+                    "id": "/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/myNic"
+                  }
+                ]
+              },
+              "securityProfile": {
+                "uefiSettings": {
+                  "secureBootEnabled": true,
+                  "vTpmEnabled": true
+                },
+                "securityType": "TrustedLaunch"
+              },
+              "diagnosticsProfile": {
+                "bootDiagnostics": {
+                  "enabled": true
+                }
+              }
+            }
+          },
+          "extensions": [
+            {
+              "name": "AzureMonitorLinuxAgent",
+              "properties": {
+                "publisher": "Microsoft.Azure.Monitor",
+                "type": "AzureMonitorLinuxAgent",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "enableAutomaticUpgrade": true,
+                "settings": {},
+                "suppressFailures": false
+              }
+            }
+          ],
+          "computeApiVersion": "2024-07-01",
+          "name": "baseVmConfig"
+        },
+        "resourceOverrides": [
+          {
+            "vmProperties": {
+              "zones": [
+                "2"
+              ],
+              "tags": {
+                "environment": "production",
+                "department": "engineering",
+                "role": "web-server"
+              },
+              "vmProperties": {
+                "storageProfile": {
+                  "osDisk": {
+                    "osType": "Linux",
+                    "name": "overrideOsDisk",
+                    "caching": "ReadWrite",
+                    "createOption": "FromImage",
+                    "diskSizeGB": 256,
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    },
+                    "deleteOption": "Delete"
+                  }
+                },
+                "networkProfile": {
+                  "networkInterfaces": [
+                    {
+                      "properties": {
+                        "primary": true,
+                        "deleteOption": "Delete"
+                      },
+                      "id": "/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/myNic-override"
+                    }
+                  ]
+                }
+              }
+            },
+            "computeApiVersion": "2024-07-01",
+            "name": "overrideVmConfig-0"
+          }
+        ],
+        "resourceCount": 3,
+        "resourcePrefix": "myBulkVm"
+      },
+      "executionParameters": {
+        "optimizationPreference": "Cost",
+        "retryPolicy": {
+          "retryCount": 3,
+          "retryWindowInMinutes": 30,
+          "onFailureAction": "Unknown"
+        }
+      },
+      "correlationid": "01234567-89ab-cdef-0123-456789abcdef"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "Bulk VM creation completed",
+        "type": "VirtualMachine",
+        "location": "eastus2",
+        "results": [
+          {
+            "resourceId": "/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myBulkVm-0",
+            "errorCode": "Success",
+            "errorDetails": "",
+            "operation": {
+              "operationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "resourceId": "/subscriptions/732116BD-AF31-4E74-9283-B387C44B4A44/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myBulkVm-0",
+              "opType": "CreateOrUpdate",
+              "subscriptionId": "732116BD-AF31-4E74-9283-B387C44B4A44",
+              "deadline": "2026-04-15T10:00:00.000Z",
+              "deadlineType": "InitiateAt",
+              "state": "Succeeded",
+              "timezone": "UTC",
+              "timeZone": "UTC",
+              "resourceOperationError": {
+                "errorCode": "",
+                "errorDetails": ""
+              },
+              "completedAt": "2026-04-15T09:35:42.468Z",
+              "retryPolicy": {
+                "retryCount": 3,
+                "retryWindowInMinutes": 30,
+                "onFailureAction": "Unknown"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

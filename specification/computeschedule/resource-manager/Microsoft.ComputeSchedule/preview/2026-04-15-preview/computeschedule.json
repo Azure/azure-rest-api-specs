@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.ComputeSchedule",
-    "version": "2026-03-01-preview",
+    "version": "2026-04-15-preview",
     "description": "Microsoft.ComputeSchedule Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -2102,6 +2102,31 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "BulkVMConfiguration": {
+      "type": "object",
+      "description": "Specifies the configuration for a virtual machine operation",
+      "properties": {
+        "vmProperties": {
+          "$ref": "#/definitions/BulkactionVMSpec",
+          "description": "Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure"
+        },
+        "extensions": {
+          "type": "array",
+          "description": "Virtual Machine Extensions Array to be applied to the Virtual Machines.",
+          "items": {
+            "$ref": "#/definitions/BulkactionVMExtension"
+          }
+        },
+        "computeApiVersion": {
+          "type": "string",
+          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines."
+        },
+        "name": {
+          "type": "string",
+          "description": "identifier for created virtual machine, if not passed it will create one from resource prefix."
         }
       }
     },
@@ -5264,16 +5289,14 @@
       "description": "Resource creation data model",
       "properties": {
         "baseProfile": {
-          "type": "object",
-          "description": "Virtual machine profile object that contains VM properties that are common across all VMs in this batch  (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)",
-          "additionalProperties": {}
+          "$ref": "#/definitions/BulkVMConfiguration",
+          "description": "Virtual machine profile object that contains VM properties that are common across all VMs in this batch  (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)"
         },
         "resourceOverrides": {
           "type": "array",
           "description": "Virtual machine profile array that contains VM properties that needs to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.",
           "items": {
-            "type": "object",
-            "additionalProperties": {}
+            "$ref": "#/definitions/BulkVMConfiguration"
           }
         },
         "resourceCount": {
