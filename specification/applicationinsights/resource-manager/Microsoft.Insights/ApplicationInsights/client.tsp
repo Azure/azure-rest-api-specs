@@ -19,7 +19,7 @@ using DeletedWorkbookApi;
 using Favorites;
 using LiveTokenApi;
 using WebTestLocation;
-using Microsoft.Insights;
+using WebTestsApi;
 using WorkBookOperations;
 using WorkbooksApi;
 using WorkbookTemplatesApi;
@@ -37,7 +37,7 @@ using Azure.ClientGenerator.Core;
     Favorites,
     LiveTokenApi,
     WebTestLocation,
-    Microsoft.Insights,
+    WebTestsApi,
     WorkBookOperations,
     WorkbooksApi,
     WorkbookTemplatesApi
@@ -62,19 +62,19 @@ namespace ApplicationInsightsManagementClient;
   "java"
 );
 
-@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCheck,
+@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCheck,
   "sslCheck",
   "java"
 );
-@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
   "sslCertRemainingLifetimeCheck",
   "java"
 );
-@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCheck,
+@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCheck,
   "sSLCheck",
   "javascript"
 );
-@@clientName(Microsoft.Insights.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
+@@clientName(WebTestsApi.WebTestPropertiesValidationRules.SSLCertRemainingLifetimeCheck,
   "sSLCertRemainingLifetimeCheck",
   "javascript"
 );
@@ -85,18 +85,18 @@ namespace ApplicationInsightsManagementClient;
   "python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op replaceListByComponent(
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  componentName: string,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  body: void,
-): Microsoft.Insights.webTestListResult;
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+// #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+// op replaceListByComponent(
+//   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+//   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+//   ...Azure.ResourceManager.Legacy.Provider,
+//   componentName: string,
+//   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+//   body: void,
+// ): Microsoft.Insights.webTestListResult;
 
-@@override(WebTestsOperationGroup.listByComponent,
-  replaceListByComponent,
-  "go,python"
-);
+// @@override(WebTestsOperationGroup.listByComponent,
+//   replaceListByComponent,
+//   "go,python"
+// );
