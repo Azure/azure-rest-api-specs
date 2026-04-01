@@ -666,3 +666,12 @@ using Microsoft.AzureStackHCI;
   Azure.Core.azureLocation,
   "csharp"
 );
+// Old GA had ResourceIdentifier type for these string properties
+@@alternateType(Microsoft.AzureStackHCI.RemoteSupportNodeSettings.arcResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.DeploymentSettingsProperties.arcNodeResourceIds,
+  Azure.Core.armResourceIdentifier[],
+  "csharp"
+);
