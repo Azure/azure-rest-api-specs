@@ -135,8 +135,6 @@ namespace Azure.AI.Projects;
 
 // Hide classes not currently used
 @@clientName(Target, "EvaluationTarget", "csharp");
-@@access(AzureAIAgentTarget, Access.internal);
-@@access(AzureAIModelTarget, Access.internal);
 
 @@clientName(EvalResult.passed, "IsPassed", "csharp");
 @@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
