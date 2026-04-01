@@ -2199,6 +2199,16 @@ model AccountKeyMetadata {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   generationTime?: utcDateTime;
+
+  /**
+   * Approximate time in UTC of the most recent usage of the key in ISO-8601 format.
+   * If the value is missing from the object, it means there is no recorded data plane
+   * usage for this key.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_04_01_preview)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  approximateLastUsageTime?: utcDateTime;
 }
 
 /**
