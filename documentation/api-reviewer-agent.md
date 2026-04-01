@@ -25,16 +25,18 @@ Alternatively, type `@api-reviewer` at the start of your message in any Copilot 
 
 ## Operating Modes
 
-The agent operates in two modes:
+The agent operates in three modes:
 
 | Mode | When to use | What it does |
 | ---- | ----------- | ------------ |
 | **Review mode** (default) | Review a PR or inspect files | Read-only. Structured report with file paths, line numbers, rule IDs, and fix suggestions. |
+| **Local changes mode** | Review uncommitted/staged changes in your local workspace | Read-only. Detects local git changes, asks you to scope the review (all changes or specific folder), validates directory structure and spec compliance. |
 | **Fix mode** | Review **and** correct local files | Reviews first, presents findings, then applies approved fixes directly to your local files. |
 
 The agent automatically selects the mode based on your prompt:
 
-- Words like **"review"**, **"check"**, **"inspect"** trigger review mode.
+- Words like **"review"**, **"check"**, **"inspect"** with a PR reference trigger review mode.
+- Words like **"review my changes"**, **"check my changes"** (without a PR) trigger local changes mode.
 - Words like **"fix"**, **"apply"**, **"correct"**, **"update"** trigger fix mode.
 - If ambiguous, the agent will ask which mode you prefer.
 
@@ -109,6 +111,86 @@ Post the approved review comments on PR #41405
 The agent will always present findings in chat first and wait for your
 explicit approval before posting anything to the PR.
 
+## Local Changes Mode
+
+Local changes mode is for engineers who have modified or introduced an API locally
+and want to validate compliance **before** pushing a PR. The agent detects local
+git changes, asks you to choose the review scope, validates the directory
+structure, and reviews specs for TypeSpec and RPC compliance.
+
+### Basic Usage
+
+```text
+Review my changes
+```
+
+```text
+Check my local changes for API guideline compliance
+```
+
+```text
+Review the changes I made in C:\repos\specs\specification\app
+```
+
+```text
+Review my changes in specification/compute/resource-manager/Microsoft.Compute/
+```
+
+### How It Works
+
+1. **Detect changes** — The agent runs `git status` and `git diff --name-only`
+   to find all changed, added, or untracked specification files in your workspace.
+
+2. **Ask for scope** — The agent presents the changed directories and asks:
+   - **Review all changes** across the repository, or
+   - **Focus on a specific folder** — provide a relative path
+     (e.g., `specification/app`) or an absolute path
+     (e.g., `C:\repos\specs\specification\app`).
+
+3. **Discover files** — The agent recursively scans the target directory to
+   locate all specification artifacts: `.tsp` files, OpenAPI `.json` files,
+   `tspconfig.yaml`, `readme.md`, and example files. It presents a file
+   inventory grouped by service.
+
+4. **Validate directory structure** — Before reviewing individual files, the
+   agent checks the folder layout against Azure conventions:
+   - ARM specs under `resource-manager/<RPNS>/<service>/`
+   - Data-plane specs under `data-plane/<service>/`
+   - Stable/preview version folders named correctly (`YYYY-MM-DD` / `YYYY-MM-DD-preview`)
+   - Required files present (`main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/`)
+   - No `package.json` in TypeSpec project directories
+   - ARM TypeSpec service folders end with `.Management`
+
+5. **Review specs** — The agent applies the full review checklists:
+   - **TypeSpec compliance**: decorators, doc comments, `union` vs `enum`,
+     ARM resource base types, `Operations` interface
+   - **RPC compliance**: ARM resource paths, CRUD completeness,
+     PUT/PATCH/DELETE rules, operations API endpoint
+   - **OpenAPI compliance**: naming, versioning, security definitions,
+     enums, pagination, LRO, descriptions
+
+6. **Compare versions** — If a previous API version exists locally, the agent
+   compares against it for breaking changes and classifies issues as
+   **[NEW]** or **[EXISTING]**.
+
+7. **Report** — The agent presents the structured report. No files are modified.
+   To apply fixes, switch to fix mode (e.g., "fix the issues you found").
+
+### Specifying a Folder Path
+
+You can provide either a **workspace-relative path** or an **absolute path**:
+
+| Format | Example |
+| ------ | ------- |
+| Relative | `specification/app` |
+| Relative (deep) | `specification/compute/resource-manager/Microsoft.Compute/ComputeRP` |
+| Absolute (Windows) | `C:\repos\specs\specification\app` |
+| Absolute (macOS/Linux) | `/home/user/specs/specification/app` |
+
+The agent normalizes all paths to workspace-relative for reporting. If the
+path does not exist or contains no specification files, the agent asks for
+a corrected path.
+
 ## Fix Mode
 
 Fix mode is for working on your **local branch or fork**. The agent reviews
@@ -168,10 +250,16 @@ Review this TypeSpec project and apply fixes: specification/contoso/resource-man
 - **Be specific.** Point the agent at a specific file or directory rather
   than asking it to review "everything". This produces faster,
   higher-quality results.
+- **Use local changes mode early.** Run `Review my changes` on your local
+  workspace before pushing a PR to catch directory structure and compliance
+  issues proactively.
 - **Use fix mode early.** Run the agent on your local files before pushing
   a PR to catch issues proactively.
 - **Combine with CI.** The agent checks the same rules as CI validation.
   Fixing issues locally before pushing reduces CI round-trips.
+- **Scope to a folder.** When your changes span multiple services, scope
+  the review to one folder at a time for faster, more focused results:
+  `"Review my changes in specification/app"`.
 - **Breaking change reviews.** Ask the agent to compare two specific
   versions: `"Compare the 2024-03-01 and 2024-07-01 versions of this
   spec for breaking changes"`.
@@ -184,6 +272,8 @@ The agent **does**:
 
 - Review OpenAPI v2 (Swagger) JSON specifications
 - Review TypeSpec (`.tsp`) source files and `tspconfig.yaml`
+- Detect local git changes and validate them against Azure guidelines
+- Validate directory structure against Azure specification conventions
 - Detect breaking changes between API versions
 - Apply fixes to local files in fix mode
 - Post review comments on PRs (with your approval)

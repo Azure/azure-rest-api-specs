@@ -37,14 +37,15 @@ When a PR URL or number is provided, determine the target repository from the UR
 
 ## Operating Modes
 
-This agent supports two modes:
+This agent supports three modes:
 
 | Mode | Trigger | Behavior |
 |------|---------|----------|
 | **Review mode** (default) | PR URL/number, or "review" in prompt | Read-only — flags issues with file path, rule ID, and fix suggestion. Does not modify files. |
+| **Local changes mode** | "review my changes", "check my changes", or no PR URL provided | Detects local uncommitted/staged changes via git, asks the engineer to scope the review (all changes or a specific folder), recursively discovers spec files, validates directory structure and spec compliance. Read-only. |
 | **Fix mode** | "fix", "apply", "update", or "correct" in prompt, or explicit request to edit local files | Reviews **and** applies fixes directly to local workspace files. Always reviews first, then applies fixes. |
 
-When the user asks to review a PR, use **review mode**. When the user asks to fix, apply changes, or correct issues in their local files, use **fix mode**. If ambiguous, ask the user which mode they want.
+When the user asks to review a PR, use **review mode**. When the user asks to review local changes without a PR, use **local changes mode**. When the user asks to fix, apply changes, or correct issues in their local files, use **fix mode**. If ambiguous, ask the user which mode they want.
 
 ## Persona
 
@@ -338,6 +339,100 @@ After successfully posting review comments to the PR:
 4. If the PR does not have the `WaitForARMFeedback` label, skip the removal step and only propose adding `ARMChangesRequested`.
 5. Report to the human reviewer which labels were added and removed.
 
+## Local Changes Review Workflow (Local Changes Mode)
+
+When the engineer wants to validate local changes — either modifications to an existing API or a new API — before pushing a PR, follow this workflow. This mode is **read-only** (no file modifications). It detects what has changed locally and validates those changes against Azure guidelines.
+
+### Step C1: Detect Local Changes
+
+Run `git status` and `git diff --name-only` in the workspace to identify all changed, added, or untracked specification files. Classify each changed file by type (ARM OpenAPI, data-plane OpenAPI, TypeSpec, example, tspconfig, readme).
+
+### Step C2: Ask the Engineer for Scope
+
+Present the list of changed files and **ask the engineer** to choose the review scope:
+
+> I found changes in the following specification directories:
+> - `specification/app/resource-manager/...`
+> - `specification/compute/data-plane/...`
+>
+> Would you like me to:
+> 1. **Review all changes** across the entire repository
+> 2. **Focus on a specific folder** — provide a path (e.g., `specification/app` or an absolute path like `C:\repos\specs\specification\app`)
+
+If the engineer specifies a folder path:
+- Accept both workspace-relative paths (e.g., `specification/app`) and absolute paths (e.g., `C:\repos\specs\specification\app`).
+- Normalize the path to a workspace-relative path for reporting.
+- If the path does not exist or contains no specification files, inform the engineer and ask for a corrected path.
+
+### Step C3: Recursively Discover Files
+
+Recursively scan the target directory (or all changed paths) to locate every specification artifact:
+- `*.tsp` files — TypeSpec source
+- `*.json` files under `resource-manager/` or `data-plane/` — OpenAPI specs
+- `*.json` files under `examples/` — example files
+- `tspconfig.yaml` — TypeSpec configuration
+- `readme.md` — AutoRest configuration
+
+Build a file inventory grouped by service, and present it to the engineer:
+
+> **Files to review in `specification/app`:**
+> - TypeSpec: `main.tsp`, `models.tsp`, `routes.tsp`
+> - OpenAPI: `stable/2025-01-01/app.json`
+> - Config: `tspconfig.yaml`, `readme.md`
+> - Examples: `examples/2025-01-01/*.json`
+
+### Step C4: Validate Directory Structure
+
+Before reviewing individual files, validate the directory structure against the [Azure specification directory structure guidelines](../../documentation/directory-structure.md):
+
+1. **Organization folder** — Verify the service folder sits under `specification/<organization>/`.
+2. **ARM vs. data-plane split** — ARM specs MUST be under `resource-manager/<RPNS>/<service>/`, data-plane specs under `data-plane/<service>/`.
+3. **Resource Provider Namespace** — For ARM services, verify `<RPNS>` folder exists and uses PascalCase (e.g., `Microsoft.App`).
+4. **Service subfolder** — Verify specs are not placed directly in `resource-manager/` without the `<RPNS>/<service>` nesting (legacy pattern — flag as a violation for new services).
+5. **Stable/preview separation** — Generated OpenAPI MUST be in `stable/<YYYY-MM-DD>/` or `preview/<YYYY-MM-DD-preview>/` folders.
+6. **Required files** — For TypeSpec projects: `main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/` directory must exist. No `package.json` in the project directory.
+7. **Example files** — Example JSON files must be in an `examples/` subdirectory (either under the service folder for TypeSpec, or under the `<apiVersion>` folder for OpenAPI).
+8. **Naming conventions** — Folder names should be singular and lowercase (except `<RPNS>` which is PascalCase). ARM TypeSpec service folders SHOULD end with `.Management`.
+
+Flag any structural violations with the expected path and the actual path.
+
+### Step C5: Load Rule Sets and Perform Systematic Review
+
+Load the applicable instruction files (same as Step 2 in the PR workflow):
+- OpenAPI JSON → `openapi-review.instructions.md`
+- ARM resource-manager JSON → `openapi-review.instructions.md` + `armapi-review.instructions.md`
+- TypeSpec `.tsp` files → `typespec-review.instructions.md`
+- `tspconfig.yaml` → TypeSpec config rules from `typespec-review.instructions.md` section 7.2
+
+Perform the full systematic review (same checklists as Step 4 in the PR workflow) against each discovered file. Pay particular attention to:
+
+- **TypeSpec compliance**: `@service`, `@server`, `@useAuth`, `@versioned` decorators; doc comments; `union` vs `enum`; ARM resource base types; `Operations` interface.
+- **RPC compliance**: ARM resource paths; tracked resource CRUD completeness (GET, PUT, PATCH, DELETE, ListByRG, ListBySub); PUT/PATCH/DELETE response codes; `x-ms-azure-resource`; operations API endpoint.
+- **Naming**: camelCase properties, PascalCase models, `{Resource}_{Verb}` operationIds.
+- **Security**: security definitions, no secrets in GET responses, `x-ms-secret` annotations.
+
+### Step C6: Breaking Change Comparison
+
+If a previous API version exists locally (e.g., a prior `stable/` or `preview/` folder), compare the new version against it:
+- Locate the most recent prior version folder.
+- Check for removed properties, removed operations, type changes, narrowed enums, optional-to-required transitions, renamed paths.
+- Classify issues as **New** (introduced in the current changes) vs. **Existing** (present in the prior version too).
+
+If no previous version exists (new service), classify all issues as **New** and note this in the report.
+
+### Step C7: Report Findings
+
+Present findings in the same structured report format as Step 6 in the PR workflow. Include:
+- Directory structure violations (flagged in Step C4)
+- TypeSpec compliance issues
+- RPC and ARM rule violations
+- OpenAPI guideline violations
+- Breaking change analysis
+
+The report is read-only — do not modify files. If the engineer wants fixes applied, they should switch to **fix mode** (e.g., "fix the issues you found").
+
+---
+
 ## Local Review & Fix Workflow (Fix Mode)
 
 When the user asks you to review **and fix** local specification files (in a private branch, fork, or local workspace), follow this workflow instead of the PR-based workflow above.
@@ -398,7 +493,7 @@ For each approved fix:
 
 ## Example Prompts
 
-### Review mode (read-only)
+### Review mode (read-only, PR-based)
 - "Review PR #41405"
 - "Review https://github.com/Azure/azure-rest-api-specs/pull/41405"
 - "Review https://github.com/Azure/azure-rest-api-specs-pr/pull/23440"
@@ -410,6 +505,15 @@ For each approved fix:
 - "Review this TypeSpec project: `specification/contoso/resource-manager/Microsoft.Contoso/Contoso.Management/`"
 - "Compare the 2024-03-01 and 2024-07-01 versions of this spec for breaking changes"
 - "Post the approved review comments on PR #41405"
+
+### Local changes mode (read-only, git-based)
+- "Review my changes"
+- "Check my local changes for API guideline compliance"
+- "Review my changes in `specification/app`"
+- "Review the changes I made in `C:\repos\specs\specification\app`"
+- "Check my local modifications under `specification/compute/resource-manager/Microsoft.Compute/`"
+- "Validate the directory structure and specs in `specification/contoso`"
+- "Are my local API changes compliant with Azure guidelines?"
 
 ### Fix mode (review + apply changes locally)
 - "Review and fix my local spec in `specification/contoso/resource-manager/Microsoft.Contoso/stable/2025-01-01/`"
