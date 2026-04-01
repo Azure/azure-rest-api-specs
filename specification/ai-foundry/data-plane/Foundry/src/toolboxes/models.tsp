@@ -119,11 +119,8 @@ alias CreateToolboxRequest = {
   @doc("Arbitrary key-value metadata to associate with the toolbox.")
   metadata?: Record<string>;
 
-  @doc("The list of tools to include in the toolbox.")
+  @doc("The list of tools to include in the initial version of the toolbox.")
   tools: OpenAI.Tool[];
-
-  @doc("Policy configuration for the toolbox.")
-  policies?: ToolboxPolicies;
 };
 
 alias CreateToolboxVersionRequest = {
