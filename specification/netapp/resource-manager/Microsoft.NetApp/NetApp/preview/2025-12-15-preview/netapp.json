@@ -7237,6 +7237,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -7261,7 +7266,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/SvmPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -9094,6 +9099,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -9118,7 +9128,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/ClusterPeerCommandResponse"
         },
         "x-ms-long-running-operation": true
@@ -15287,9 +15297,23 @@
       "type": "object",
       "description": "Information about cluster peering process",
       "properties": {
-        "peerAcceptCommand": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPeerCommandResponseProperties",
+          "description": "Represents the properties of the cluster peer command response."
+        }
+      }
+    },
+    "ClusterPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the cluster peer command response.",
+      "properties": {
+        "clusterPeeringCommand": {
           "type": "string",
-          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>"
+          "description": "ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>."
+        },
+        "passphrase": {
+          "type": "string",
+          "description": "Passphrase for use with cluster peer command"
         }
       }
     },
@@ -20999,6 +21023,16 @@
     "SvmPeerCommandResponse": {
       "type": "object",
       "description": "Information about svm peering process",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SvmPeerCommandResponseProperties",
+          "description": "Represents the properties of the SVM peer command response."
+        }
+      }
+    },
+    "SvmPeerCommandResponseProperties": {
+      "type": "object",
+      "description": "Properties of the SVM peer command response.",
       "properties": {
         "svmPeeringCommand": {
           "type": "string",
