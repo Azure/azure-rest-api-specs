@@ -16,7 +16,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @armResourceOperations
 interface ACAAssessmentOperations {
   @added(ACAApiVersions.v2025_09_09_preview)
@@ -42,12 +41,10 @@ interface AssessedWebApplicationOperations {
   @added(ACAApiVersions.v2025_09_09_preview)
   get is ArmResourceRead<AssessedWebApplication>;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style"
   @added(ACAApiVersions.v2025_09_09_preview)
   listByParent is ArmResourceListByParent<AssessedWebApplication>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @armResourceOperations
 interface ACAOptionsOperations {
   @added(ACAApiVersions.v2025_09_09_preview)
@@ -57,7 +54,6 @@ interface ACAOptionsOperations {
   listByParent is ArmResourceListByParent<ACAAssessmentOptions>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @armResourceOperations
 interface ACASummaryOperations {
   @added(ACAApiVersions.v2025_09_09_preview)
@@ -67,7 +63,6 @@ interface ACASummaryOperations {
   listByParent is ArmResourceListByParent<ACASummary>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @armResourceOperations
 interface ACAManagedEnvironmentOperations {
   @added(ACAApiVersions.v2025_09_09_preview)
@@ -77,7 +72,6 @@ interface ACAManagedEnvironmentOperations {
   listByParent is ArmResourceListByParent<ACAManagedEnvironment>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @armResourceOperations
 interface ACACostDetailOperations {
   @added(ACAApiVersions.v2025_09_09_preview)

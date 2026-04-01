@@ -14,7 +14,6 @@ using OpenAPI;
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Shared Resources.")
 model SharedResourcesDto {
   @doc("Gets the list of shared data disks.")
@@ -41,7 +40,6 @@ model SharedResourcesDto {
   quorumWitness?: AzureQuorumWitnessDto;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Class representing an Azure Managed Disk SKU.")
 model AzureManagedDiskSkuDto {
   @doc("Gets the Type (\"tier\") of disk - e.g. standard, premium, ultra.")
@@ -73,7 +71,6 @@ model AzureManagedDiskSkuDto {
   recommendedIops?: float32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Quorum Witness.")
 model AzureQuorumWitnessDto {
   @doc("Gets quorum witness type.")
@@ -92,7 +89,6 @@ model ImpactedAssessmentObject {
   objectType?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Azure Virtual Machine SKU.")
 model AzureVirtualMachineSkuDto {
   @doc("Gets the Virtual Machine Family, for example : standardMSFamily.")

@@ -10,7 +10,6 @@ using OpenAPI;
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("ARM model of ACA Assessment Options.")
 @parentResource(AssessmentProject)
 model ACAAssessmentOptions is ProxyResource<ACAAssessmentOptionsProperties> {
@@ -24,7 +23,6 @@ model ACAAssessmentOptions is ProxyResource<ACAAssessmentOptionsProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("ACA Assessment Options Properties.")
 model ACAAssessmentOptionsProperties {
@@ -34,7 +32,6 @@ model ACAAssessmentOptionsProperties {
   edges: Record<ACAAssessmentOptionsOutboundEdgeGroup>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("A class that represents the outbound edges from a given node.")
 model ACAAssessmentOptionsOutboundEdgeGroup {
   @doc("Gets or sets the Workload Profile SKU categories.")

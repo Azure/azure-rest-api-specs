@@ -6,7 +6,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("ARM model of ACA Summary.")
 @parentResource(ACAAssessment)
 model ACASummary is ProxyResource<ACASummaryProperties> {
@@ -20,7 +19,6 @@ model ACASummary is ProxyResource<ACASummaryProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Summary property doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("ACA Summary Properties.")
 model ACASummaryProperties is SummaryProperties {

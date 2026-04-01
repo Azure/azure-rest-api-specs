@@ -14,7 +14,6 @@ using OpenAPI;
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("ARM model of ACA Assessment.")
 @parentResource(AssessmentProject)
 model ACAAssessment is ProxyResource<ACAAssessmentProperties> {
@@ -28,7 +27,6 @@ model ACAAssessment is ProxyResource<ACAAssessmentProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("ACA Assessment Properties.")
 model ACAAssessmentProperties
   is AssessmentProperties<Scope, ACAAssessmentSettings, AssessmentDetails>;

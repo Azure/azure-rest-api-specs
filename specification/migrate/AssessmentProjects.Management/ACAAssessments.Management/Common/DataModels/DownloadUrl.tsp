@@ -4,6 +4,7 @@ namespace Microsoft.Migrate;
 model DownloadUrl {
   @doc("Hyperlink to download report.")
   @visibility(Lifecycle.Read)
+  @secret
   assessmentReportUrl: string;
 
   @doc("Expiry date of download url.")

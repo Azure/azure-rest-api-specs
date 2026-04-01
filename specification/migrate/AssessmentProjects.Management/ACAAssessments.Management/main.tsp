@@ -7,7 +7,7 @@ import "@typespec/openapi";
 
 import "./acaroutes.tsp";
 import "./ACAApiVersions.tsp";
-import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -16,7 +16,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations interface is intentionally excluded"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations endpoint is provided by the parent AssessmentProjects.Management project"
 @armProviderNamespace
 @service(#{ title: "Azure Migrate Assessment Service" })
 @versioned(ACAApiVersions)

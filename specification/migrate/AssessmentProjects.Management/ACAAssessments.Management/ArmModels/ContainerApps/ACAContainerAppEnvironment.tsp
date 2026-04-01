@@ -6,7 +6,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("ARM model of ACA Managed Environment.")
 @parentResource(ACAAssessment)
 model ACAManagedEnvironment is ProxyResource<ACAManagedEnvironmentProperties> {
@@ -20,7 +19,6 @@ model ACAManagedEnvironment is ProxyResource<ACAManagedEnvironmentProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("ARM model of ACA Managed Environment Properties.")
 model ACAManagedEnvironmentProperties is ContainerAppEnvironment;

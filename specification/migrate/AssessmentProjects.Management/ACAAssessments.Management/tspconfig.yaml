@@ -7,6 +7,8 @@ output-dir: "{project-root}/../../"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "ACA is a standard Azure acronym (Azure Container Apps) used as a prefix throughout this service module, consistent with other Migrate assessment types (AKS, AVS, etc.)."
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{output-dir}"
