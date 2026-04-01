@@ -57,6 +57,9 @@ directive:
     reason: This will cause breaking changes in .NET SDK
     from: trafficmanager.json
     where: $.definitions.UserMetricsModel
+  - suppress: UnSupportedPatchProperties
+    reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
+    from: trafficmanager.json
 ```
 
 ### Tag: package-preview-2024-04
