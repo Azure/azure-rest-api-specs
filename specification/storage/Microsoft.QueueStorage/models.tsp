@@ -254,6 +254,7 @@ model Metrics {
 }
 
 /** CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain */
+@Xml.name("CorsRule")
 model CorsRule {
   /** The allowed origins. */
   @Xml.name("AllowedOrigins") allowedOrigins: string;
@@ -390,13 +391,17 @@ model SignedIdentifier {
 /** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Start")
-  @encode("rfc3339")
+  @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
   /** The date-time the policy expires. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Expiry")
-  @encode("rfc3339")
+  @encode("rfc3339-fixed-width")
   expiry?: utcDateTime;
 
   /** The permissions for acl the policy. */
@@ -407,6 +412,7 @@ model AccessPolicy {
  * The object returned in the QueueMessageList array when calling Get Messages on
  * a Queue.
  */
+@Xml.name("QueueMessage")
 model ReceivedMessage {
   /**
    * The Id of the Message.
@@ -516,6 +522,7 @@ model QueueMessage {
  * The object returned in the QueueMessageList array when calling Put Message on a
  * Queue
  */
+@Xml.name("QueueMessage")
 model SentMessage {
   /**
    * The Id of the Message.
@@ -554,6 +561,7 @@ model SentMessage {
  * The object returned in the QueueMessageList array when calling Peek Messages on
  * a Queue
  */
+@Xml.name("QueueMessage")
 model PeekedMessage {
   /**
    * The Id of the Message.
@@ -673,14 +681,6 @@ alias TimeNextVisibleResponseHeaderPrivate = {
   @encode("rfc7231")
   @header("x-ms-time-next-visible")
   timeNextVisible: utcDateTime;
-};
-
-/** The metadata headers parameter (required). */
-alias MetadataHeadersParameter = {
-  /** The metadata headers. */
-  @alternateType(Record<string>, "rust")
-  @header("x-ms-meta")
-  metadata: string;
 };
 
 /** The metadata headers. */

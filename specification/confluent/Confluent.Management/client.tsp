@@ -6,7 +6,10 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Confluent;
 
-@@clientName(Microsoft.Confluent, "ConfluentManagementClient", "javascript");
+@@clientName(Microsoft.Confluent,
+  "ConfluentManagementClient",
+  "javascript,python"
+);
 // Added Java Configuration to pass specs CI check.
 // Need to revisit before SDK release.
 @@clientName(APIKeyResourceEntity, "ApiKeyResourceEntity", "java,csharp");
