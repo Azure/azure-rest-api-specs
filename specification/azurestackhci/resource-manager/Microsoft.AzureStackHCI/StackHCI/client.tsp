@@ -675,3 +675,12 @@ using Microsoft.AzureStackHCI;
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
+// Old GA had BinaryData type for connectivityProperties
+@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.connectivityProperties,
+  unknown,
+  "csharp"
+);
+@@alternateType(Microsoft.AzureStackHCI.ArcSettingsPatchProperties.connectivityProperties,
+  unknown,
+  "csharp"
+);
