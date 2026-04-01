@@ -149,28 +149,6 @@ union DeviceRegistryNamespaceAuthenticationType {
 }
 
 /**
- * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
- */
-union IotHubAuthenticationType {
-  string,
-
-  /**
-   * Key Based authentication type.
-   */
-  KeyBased: "KeyBased",
-
-  /**
-   * User assigned authentication type.
-   */
-  UserAssigned: "UserAssigned",
-
-  /**
-   * System assigned authentication type.
-   */
-  SystemAssigned: "SystemAssigned",
-}
-
-/**
  * Allocation policy to be used by this provisioning service.
  */
 union AllocationPolicy {
@@ -519,32 +497,9 @@ model IotHubDefinitionDescription {
   name?: string;
 
   /**
-   * Host name of the IoT hub. This is required when connectionString is not provided.
-   */
-  @added(Versions.v2026_10_01)
-  hostName?: string;
-
-  /**
-   * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
-   */
-  @added(Versions.v2026_10_01)
-  authenticationType?: IotHubAuthenticationType;
-
-  /**
-   * The selected user-assigned identity resource Id associated with IoT hub. This is required when authenticationType is UserAssigned.
-   */
-  @added(Versions.v2026_10_01)
-  selectedUserAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  /**
    * Connection string of the IoT hub.
    */
-  @madeOptional(Versions.v2026_10_01)
-  connectionString?: string;
+  connectionString: string;
 
   /**
    * ARM region of the IoT hub.

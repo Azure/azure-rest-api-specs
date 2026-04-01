@@ -26,7 +26,7 @@ model PrivateEndpointConnection
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a helper interface for private endpoint connection operations"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PrivateEndpointConnectionsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
