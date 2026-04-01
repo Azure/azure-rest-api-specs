@@ -12,7 +12,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
-  "java,javascript"
+  "java,javascript,python"
 );
 
 // C# backward-compatible renames to match existing GA SDK surface.
