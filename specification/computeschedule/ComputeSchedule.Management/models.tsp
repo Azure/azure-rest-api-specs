@@ -671,11 +671,13 @@ model FlexProperties {
 model ResourceProvisionFlexPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("JSON object that contains VM properties that are common across all VMs in this batch")
-  baseProfile?: Record<unknown>;
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
+  baseProfile?: BulkVMConfiguration;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
-  resourceOverrides?: Record<unknown>[];
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
+  resourceOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;

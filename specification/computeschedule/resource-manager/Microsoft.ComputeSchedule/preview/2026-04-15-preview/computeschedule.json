@@ -5253,16 +5253,14 @@
       "description": "Resource creation data model for flex VM provisioning",
       "properties": {
         "baseProfile": {
-          "type": "object",
-          "description": "JSON object that contains VM properties that are common across all VMs in this batch",
-          "additionalProperties": {}
+          "$ref": "#/definitions/BulkVMConfiguration",
+          "description": "JSON object that contains VM properties that are common across all VMs in this batch"
         },
         "resourceOverrides": {
           "type": "array",
           "description": "JSON array that contains VM properties that should be overridden for each VM in the batch",
           "items": {
-            "type": "object",
-            "additionalProperties": {}
+            "$ref": "#/definitions/BulkVMConfiguration"
           }
         },
         "resourceCount": {

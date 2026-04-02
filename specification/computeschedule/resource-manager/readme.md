@@ -39,22 +39,6 @@ These settings apply only when `--tag=package-2026-04-15-preview` is specified o
 input-file:
   - Microsoft.ComputeSchedule/preview/2026-04-15-preview/computeschedule.json
 suppressions:  
-  - code: AvoidAdditionalProperties
-    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
-    from: computeschedule.json
-    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
-  - code: AvoidAdditionalProperties
-    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
-    from: computeschedule.json
-    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
-  - code: AvoidAdditionalProperties
-    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
-    from: computeschedule.json
-    where: $.definitions.ResourceProvisionFlexPayload.properties.baseProfile
-  - code: AvoidAdditionalProperties
-    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
-    from: computeschedule.json
-    where: $.definitions.ResourceProvisionFlexPayload.properties.resourceOverrides.items
   - code: RemovedAdditionalProperties
     reason: Changing from Record<unknown> to strongly-typed BulkVMConfiguration to follow ARM compliance and perform validation for these properties.
     from: computeschedule.json
