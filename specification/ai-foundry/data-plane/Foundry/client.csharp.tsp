@@ -10,7 +10,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/memory-stores/routes.tsp";
-import "./src/toolsets/routes.tsp";
+import "./src/toolboxes/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -174,3 +174,9 @@ namespace Azure.AI.Projects;
 @@alternateType(CronTrigger.startTime, utcDateTime, "csharp");
 @@alternateType(CronTrigger.endTime, utcDateTime, "csharp");
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "csharp");
+
+// --------------------------------------------------------------------------------
+// Schedules sub‐client
+// --------------------------------------------------------------------------------
+
+@@clientName(ToolboxObject, "ToolboxRecord");
