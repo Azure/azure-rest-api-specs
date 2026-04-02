@@ -26010,3 +26010,6 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+@@added(VirtualNetworkPropertiesFormat.summarizedGatewayPrefixes,
+  Versions.v2025_07_01
+);
