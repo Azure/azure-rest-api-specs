@@ -373,6 +373,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
+@@clientName(AIServicesAccountIdentity.subdomainUrl, "SubdomainUri", "csharp");
+@@alternateType(AIServicesAccountIdentity.subdomainUrl, url, "csharp");
 @@access(AnalyzeResult, Access.internal, "csharp");
 @@access(AzureActiveDirectoryApplicationCredentials, Access.internal, "csharp");
 @@alternateType(AzureMachineLearningSkill.resourceId,
@@ -381,6 +383,8 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
 @@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@clientName(ChatCompletionSchemaProperties.strict, "IsStrict", "csharp");
+@@alternateType(ChatCompletionSkill.uri, url, "csharp");
 @@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
 @@access(DataSourceCredentials, Access.internal, "csharp");
 @@alternateType(Search.DocumentExtractionSkill.dataToExtract,
@@ -2746,6 +2750,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchRequest.speller, "querySpeller");
 @@clientName(SearchRequest.semanticConfiguration, "semanticConfigurationName");
 @@clientName(SearchIndex.semantic, "semanticSearch");
+@@clientName(SearchIndexResponse.semantic, "semanticSearch");
 @@clientName(SearchField.analyzer, "analyzerName");
 @@clientName(SearchField.searchAnalyzer, "searchAnalyzerName");
 @@clientName(SearchField.indexAnalyzer, "indexAnalyzerName");
