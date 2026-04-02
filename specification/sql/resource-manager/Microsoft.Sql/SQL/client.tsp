@@ -61,3 +61,12 @@ using Microsoft.Sql;
 @@clientName(AvailabilityZoneType.`1`, "One", "go");
 @@clientName(AvailabilityZoneType.`2`, "Two", "go");
 @@clientName(AvailabilityZoneType.`3`, "Three", "go");
+
+@@alternateType(BlobAuditingPolicyName, "default", "go");
+@@alternateType(CurrentSensitivityLabelSource, "current", "go");
+@@alternateType(RecommendedSensitivityLabelSource, "recommended", "go");
+@@alternateType(VulnerabilityAssessmentSystemDatabaseName, "master", "go");
+@@alternateType(CheckNameAvailabilityResourceType,
+  "Microsoft.Sql/servers",
+  "go"
+);
