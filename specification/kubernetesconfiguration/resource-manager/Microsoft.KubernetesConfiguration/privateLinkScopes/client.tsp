@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.KubernetesConfiguration;
 
 @@clientName(Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationPrivateLinkScopesMgmtClient",
@@ -36,27 +37,51 @@ using Azure.ClientGenerator.Core;
   "ConnectionProvisioningState",
   "java"
 );
-@@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope,
+@@clientName(KubernetesConfigurationPrivateLinkScope,
   "PrivateLinkScope",
   "java"
 );
-@@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopes,
-  "Scopes",
-  "java"
-);
-@@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties,
+@@clientName(KubernetesConfigurationPrivateLinkScopes, "Scopes", "java");
+@@clientName(KubernetesConfigurationPrivateLinkScopeProperties,
   "PrivateLinkScopeProperties",
   "java"
 );
-@@clientName(Microsoft.KubernetesConfiguration.PrivateEndpointConnections,
-  "Connections",
-  "java"
+@@clientName(PrivateEndpointConnections, "Connections", "java");
+@@clientName(PrivateEndpointConnection, "Connection", "java");
+@@clientName(PrivateLinkResources, "Resources", "java");
+
+// C# type customizations for backward compatibility
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
 );
-@@clientName(Microsoft.KubernetesConfiguration.PrivateEndpointConnection,
-  "Connection",
-  "java"
+@@alternateType(KubernetesConfigurationPrivateLinkScopeProperties.clusterResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
 );
-@@clientName(Microsoft.KubernetesConfiguration.PrivateLinkResources,
-  "Resources",
-  "java"
+@@alternateType(KubernetesConfigurationPrivateLinkScopeProperties.privateLinkScopeId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(ProvisioningState,
+  "KubernetesConfigurationPrivateLinkScopeProvisioningState",
+  "csharp"
+);
+@@clientName(PublicNetworkAccessType,
+  "KubernetesConfigurationPrivateLinkScopePublicNetworkAccessType",
+  "csharp"
+);
+
+// C# fixes: mark single-page list operations as pageable for correct Collection generation
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for correct Collection generation in C#"
+@@Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for correct Collection generation in C#"
+@@Legacy.markAsPageable(Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope,
+  "csharp"
 );
