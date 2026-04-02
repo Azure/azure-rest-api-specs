@@ -1935,12 +1935,11 @@ model FrontendIPConfigurationPropertiesFormat {
   /**
    * The Ddos protection settings associated with the frontend IP configuration.
    */
-  ddosSettings?: DdosFrontendIPConfigurationSettings;
+  ddosSettings?: DdosFrontendIpConfigurationSettings;
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DdosFrontendIPConfigurationSettings {
+model DdosFrontendIpConfigurationSettings {
   /** The reference to the Ddos Custom Policy resource. */
   ddosCustomPolicy?: SubResource;
 }
