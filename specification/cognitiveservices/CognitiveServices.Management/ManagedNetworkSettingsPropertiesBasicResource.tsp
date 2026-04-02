@@ -63,6 +63,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    * Delete API for managed network settings of a cognitive services account.
    */
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
   @tag("ManagedNetwork")
   delete is ArmResourceDeleteWithoutOkAsync<ManagedNetworkSettingsPropertiesBasicResource>;
 
