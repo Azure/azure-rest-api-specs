@@ -280,6 +280,7 @@ Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[
 ```markdown
 ## API Review: `<service-name>/<api-version>`
 
+**PR:** `<PR-URL>`
 **Previous version:** `<previous-version>` (or "None — new service")
 
 ### Blocking Issues — New (must fix before merge)
@@ -324,6 +325,7 @@ These issues also exist in the previous version (`<previous-version>`) and were 
 
 ### Summary
 
+- **PR:** `<PR-URL>`
 - Files reviewed: <count>
 - Previous version compared: `<version>` (or "N/A — new service")
 - **New blocking issues: <count>**
@@ -352,11 +354,11 @@ After presenting the review findings to the human reviewer for approval:
    Another ARM reviewer (not this agent) posted the comment at the old line. Do **not** resolve their comment — it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "*The code referenced by this comment has moved. The same violation now appears at `<file>` L`<N>`. The issue is still unresolved.*" This helps the author and reviewer find the right code without creating duplicate threads.
 
    **Scenario D — No new findings beyond what existing comments already cover:**
-   If every finding from the current review is already covered by an existing comment (same file, same or nearby line, same rule), **do not post any new comments**. Report to the human reviewer: "*All findings from this review are already covered by existing comments on the PR. No new comments are needed — the existing threads already highlight the required changes.*" List the existing comment threads that match.
+   If every finding from the current review is already covered by an existing comment (same file, same or nearby line, same rule), **do not post any new comments**. Report to the human reviewer: "*All findings from this review are already covered by existing comments on the PR. No new comments are needed — the existing threads already highlight the required changes.*" List the existing comment threads that match, **including the comment URL** for each so the reviewer can click through and verify.
 
    **Scenario E — Existing comment's violation has been fixed:**
    An existing unresolved comment flags a violation, but the current review finds that the violation **no longer exists** in the latest code (the PR author fixed it). Report this to the human reviewer:
-   - List each addressed comment with its URL, the rule it flagged, and confirmation that the code now complies.
+   - List each addressed comment with its **clickable comment URL**, the rule it flagged, and confirmation that the code now complies. The URL lets the reviewer navigate directly to the original thread to verify the fix.
    - **Propose resolving** each addressed comment. Do **not** resolve without the engineer's explicit consent — the engineer may want to verify the fix themselves or leave the thread open for follow-up discussion.
    - If the engineer approves, resolve the comment and add a reply: "*This issue has been addressed in the latest changes. Resolving.*"
    - If the comment was from a different human reviewer, do **not** resolve it — instead, **add a reply** noting the fix: "*The violation flagged in this comment appears to have been addressed in the latest code changes at `<file>` L`<N>`. The original reviewer may want to verify and resolve.*"

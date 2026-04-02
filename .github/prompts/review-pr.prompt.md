@@ -84,6 +84,7 @@ Review pull request ${input:prReference:Enter the PR URL or number (e.g. https:/
    - Details: ...
 
    ### Summary
+   - **PR:** <PR-URL>
    - Files reviewed: <count>
    - Previous version compared: <version> (or "N/A — new service")
    - **New blocking issues: <count>**

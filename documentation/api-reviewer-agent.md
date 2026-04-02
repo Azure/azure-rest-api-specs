@@ -92,6 +92,7 @@ The report is organized by severity and origin:
 
 Each finding includes:
 
+- **PR URL** — shown in the report header and summary for easy navigation
 - **Rule ID** — e.g., `RPC-Put-V1-01`, `ARG001`, `TSP-2.1`
 - **File path and line number** — exact location (e.g., `L42` or `L10-L15`)
 - **JSON path** (for OpenAPI) — e.g., `$.paths['/widgets'].put.responses.200`
@@ -125,8 +126,8 @@ according to these scenarios:
 | **A — Already covered** | Same rule, same file, same line | Finding is skipped. No new comment posted. |
 | **B — Line shifted (same author)** | Same rule, but the code moved to a different line. The old comment was from the agent or the same engineer. | The outdated comment is **resolved** and a new comment is posted at the correct line, with a link back to the old thread. |
 | **C — Line shifted (different reviewer)** | Same rule, code moved, but the old comment was from a different human reviewer. | The agent **does not** resolve the other reviewer's comment or post a duplicate. Instead, it **adds a reply** to the existing thread noting the new line number, so the author and reviewer can find the right code. |
-| **D — No new findings** | Every finding is already covered by existing comments. | No new comments are posted. The agent reports: *"All findings are already covered by existing comments on the PR."* |
-| **E — Violation fixed** | An existing unresolved comment flags a violation that no longer exists in the latest code. | The agent reports which comments have been addressed and **proposes resolving** them — but only with your explicit consent. If the comment was from a different reviewer, the agent replies noting the fix instead of resolving. |
+| **D — No new findings** | Every finding is already covered by existing comments. | No new comments are posted. The agent reports: *"All findings are already covered by existing comments on the PR."* It lists each matching existing thread with its **clickable comment URL** so the reviewer can navigate directly to verify. |
+| **E — Violation fixed** | An existing unresolved comment flags a violation that no longer exists in the latest code. | The agent reports which comments have been addressed — each with its **clickable comment URL** so the reviewer can navigate and verify the fix — and **proposes resolving** them, but only with your explicit consent. If the comment was from a different reviewer, the agent replies noting the fix instead of resolving. |
 
 Before executing any actions, the agent presents a **reconciliation summary**:
 
