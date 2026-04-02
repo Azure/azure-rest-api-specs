@@ -5703,3 +5703,156 @@ model RaiPolicyListResult {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model 'RaiBlocklistItemsBulkDeleteRequest' preserved for backward compatibility with existing API surface"
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
+
+/**
+ * Properties of a Cognitive Services accelerator deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorDeploymentProperties {
+  /**
+   * AzureML Registry model asset URI. Required on creation; immutable after creation.
+   * Example: azureml://registries/{registry}/models/{model}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  `model`: string;
+
+  /**
+   * AzureML Registry deployment template URI. Required on creation.
+   * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  deploymentTemplate?: string;
+
+  /**
+   * Accelerator type (e.g., H100_80GB). Required on creation; immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  acceleratorType?: string;
+
+  /**
+   * Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+
+  /**
+   * Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.
+   */
+  @visibility(Lifecycle.Read)
+  acceleratorsPerInstance?: int32;
+
+  /**
+   * Read-only. Total accelerators allocated: sku.capacity (instances) x acceleratorsPerInstance.
+   */
+  @visibility(Lifecycle.Read)
+  totalAccelerators?: int32;
+
+  /**
+   * Read-only. Current provisioning state.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Read-only. Status message and timestamp from the last provisioning operation.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningDetails?: AcceleratorDeploymentProvisioningDetails;
+
+  /**
+   * Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  routes?: AcceleratorDeploymentRoutes;
+}
+
+/**
+ * Provisioning status details for an accelerator deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorDeploymentProvisioningDetails {
+  /**
+   * A human-readable status message from the last provisioning operation.
+   */
+  message?: string;
+
+  /**
+   * Timestamp of the last provisioning operation.
+   */
+  lastOperationTimestamp?: utcDateTime;
+}
+
+/**
+ * Inference route paths for an accelerator deployment, relative to the account endpoint.
+ * Populated when provisioningState is Succeeded.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorDeploymentRoutes {
+  /**
+   * Relative path to the chat completions scoring endpoint.
+   */
+  chatCompletionsScoringPath?: string;
+
+  /**
+   * Relative path to the Swagger/OpenAPI endpoint.
+   */
+  swagger?: string;
+
+  /**
+   * Relative path to the messages API scoring endpoint.
+   */
+  messagesApiScoringPath?: string;
+}
+
+/**
+ * The list of accelerator deployments.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorDeploymentListResult {
+  /**
+   * The link used to get the next page of accelerator deployments.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the list of accelerator deployments and their properties.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: AcceleratorDeployment[];
+}
+
+/**
+ * The request body used to update tags, SKU, and mutable properties of an accelerator deployment.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorDeploymentPatch {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'AcceleratorDeploymentPatch' to support extensible key-value pairs matching service behavior"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /**
+   * The resource model definition representing SKU.
+   */
+  sku?: Sku;
+
+  /**
+   * Mutable properties of an accelerator deployment.
+   */
+  properties?: AcceleratorDeploymentMutableProperties;
+}
+
+/**
+ * Mutable properties of an accelerator deployment, used for PATCH operations.
+ */
+@added(Versions.v2026_03_15_preview)
+model AcceleratorDeploymentMutableProperties {
+  /**
+   * Template auto-upgrade policy.
+   */
+  versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
+}
