@@ -10,6 +10,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/memory-stores/routes.tsp";
+import "./src/toolsets/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -18,6 +19,7 @@ namespace Azure.AI.Projects;
 // Fix the xref.
 // --------------------------------------------------------------------------------
 @@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
+@@clientNamespace(Azure.Core.Foundations, "Azure.AI.Projects", "csharp");
 
 // --------------------------------------------------------------------------------
 // Root client
@@ -109,13 +111,66 @@ namespace Azure.AI.Projects;
   "operationStatus",
   "csharp"
 );
+@@clientName(OpenAI.Error, "ApiError");
+@@clientName(OpenAI.InputFileContentParam.file_url, "FileUri", "csharp");
 
-// Evaluators
+@@clientName(AttackStrategy.ROT13, "Rot13", "csharp");
+
+@@alternateType(DayOfWeek,
+  {
+    identity: "System.DayOfWeek",
+  },
+  "csharp"
+);
+
+@@access(OpenAI.DetailEnum, Access.internal);
+@@clientName(OpenAI.DetailEnum, "InternalImageDetailLevel");
+@@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
+@@clientName(OpenAI.InputImageContentParamAutoParam,
+  "InternalInputImageContentParamAutoParam"
+);
+// --------------------------------------------------------------------------------
+// Evaluators sub‐client
+// --------------------------------------------------------------------------------
 @@access(EvaluatorDefinitionType, Access.public);
 
+// Hide classes not currently used
+@@clientName(Target, "EvaluationTarget", "csharp");
+
+@@clientName(EvalResult.passed, "IsPassed", "csharp");
+@@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
+@@clientName(EvalRunResultComparison.metric, "MetricName", "csharp");
+
+@@alternateType(EvaluationScheduleTask.evalRun, unknown, "csharp");
+
+@@clientName(InsightSummary.method, "MethodName", "csharp");
+
+@@clientName(RedTeam.numTurns, "TurnCount", "csharp");
+@@clientName(RedTeam.simulationOnly, "IsSimulationOnly", "csharp");
+
+@@clientName(TaxonomySubCategory.enabled, "IsEnabled", "csharp");
+
+@@clientName(DeleteMemoryStoreResponse.deleted, "IsDeleted", "csharp");
+
+@@clientName(MemoryStoreDefaultOptions.chat_summary_enabled,
+  "IsChatSummaryEnabled",
+  "csharp"
+);
+@@clientName(MemoryStoreDefaultOptions.user_profile_enabled,
+  "IsUserProfileEnabled",
+  "csharp"
+);
+
+@@clientName(MemoryStoreDeleteScopeResponse.deleted, "IsDeleted", "csharp");
 // --------------------------------------------------------------------------------
 // Schedules sub‐client
 // --------------------------------------------------------------------------------
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
-@@clientName(OpenAI.Error, "ApiError");
+
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "csharp");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "csharp");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "csharp");
+@@alternateType(CronTrigger.startTime, utcDateTime, "csharp");
+@@alternateType(CronTrigger.endTime, utcDateTime, "csharp");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "csharp");

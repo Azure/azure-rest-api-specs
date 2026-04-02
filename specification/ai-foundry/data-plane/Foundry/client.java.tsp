@@ -167,7 +167,12 @@ namespace Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "java");
 
 // TimeZone property override via model indirection
-@alternateType({ identity: "java.util.TimeZone" }, "java")
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");

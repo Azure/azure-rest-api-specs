@@ -156,7 +156,6 @@ using Azure.AI.Projects;
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Evaluators.listLatestVersions, "list");
-@@clientName(Evaluators.startPendingUpload, "pendingUpload");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");

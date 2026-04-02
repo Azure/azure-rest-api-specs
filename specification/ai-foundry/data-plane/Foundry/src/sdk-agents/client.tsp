@@ -53,8 +53,6 @@ using Azure.AI.Projects;
 
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult");
 
-@@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
-
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
@@ -73,6 +71,13 @@ using Azure.AI.Projects;
   "cachedTokensCount"
 );
 
+//rename object types to avoid confusion with Java objects
+@@clientName(AgentObject.object, "objectType");
+@@clientName(AgentVersionObject.object, "objectType");
+@@clientName(DeleteMemoryStoreResponse.object, "objectType");
+@@clientName(MemoryStoreObject.object, "objectType");
+@@clientName(MemoryStoreDeleteScopeResponse.object, "objectType");
+
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
@@ -90,6 +95,43 @@ using Azure.AI.Projects;
   "CustomGrammarFormatParameter",
   "java"
 );
+@@clientName(OpenAI.AutoCodeInterpreterToolParam,
+  "AutoCodeInterpreterToolParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerAutoParam, "ContainerAutoParameter", "java");
+@@clientName(OpenAI.ContainerNetworkPolicyParam,
+  "ContainerNetworkPolicyParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyAllowlistParam,
+  "ContainerNetworkPolicyAllowlistParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDisabledParam,
+  "ContainerNetworkPolicyDisabledParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDomainSecretParam,
+  "ContainerNetworkPolicyDomainSecretParameter",
+  "java"
+);
+@@clientName(OpenAI.CustomTextFormatParam, "CustomTextFormatParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+  "FunctionShellToolParameterEnvironmentContainerReferenceParameter",
+  "java"
+);
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
+  "FunctionShellToolParameterEnvironmentLocalEnvironmentParameter",
+  "java"
+);
+@@clientName(OpenAI.InlineSkillParam, "InlineSkillParameter", "java");
+@@clientName(OpenAI.InlineSkillSourceParam,
+  "InlineSkillSourceParameter",
+  "java"
+);
+@@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
+@@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -105,6 +147,12 @@ using Azure.AI.Projects;
 @@access(MemoryStores.updateMemories, Access.internal);
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
+
+// Disabled convenient API generation to provide a custom shim returning `void` in the client
+@@convenientAPI(Agents.deleteAgent, false, "java");
+@@convenientAPI(Agents.deleteAgentVersion, false, "java");
+@@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
+@@convenientAPI(MemoryStores.deleteScope, false, "java");
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
@@ -127,6 +175,12 @@ using Azure.AI.Projects;
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
 
+@@usage(AzureCreateResponseOptions, Usage.input);
+@@access(AzureCreateResponseOptions, Access.public);
+
+@@usage(AzureCreateResponseDetails, Usage.output);
+@@access(AzureCreateResponseDetails, Access.public);
+
 // --------------------------------------------------------------------------------
 // Type overrides
 // --------------------------------------------------------------------------------
@@ -136,11 +190,67 @@ using Azure.AI.Projects;
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
+// AI Tooling: openai-java de-dup
+// Suppress emission of standalone models that are exact duplicates of openai-java classes.
+// Map them to their openai-java equivalents so the codegen does not emit its own versions.
+//   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
+//   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
+//   Reasoning + ReasoningSummary/GenerateSummary/Effort → com.openai.models.Reasoning
+@@alternateType(OpenAI.ComparisonFilter,
+  {
+    identity: "com.openai.models.ComparisonFilter",
+  },
+  "java"
+);
+@@alternateType(OpenAI.CompoundFilter,
+  {
+    identity: "com.openai.models.CompoundFilter",
+  },
+  "java"
+);
+@@alternateType(OpenAI.Reasoning,
+  {
+    identity: "com.openai.models.Reasoning",
+  },
+  "java"
+);
+//   ConversationResource → com.openai.models.conversations.Conversation
+@@alternateType(OpenAI.ConversationResource,
+  {
+    identity: "com.openai.models.conversations.Conversation",
+  },
+  "java"
+);
+
 // TimeZone property override via model indirection
-@alternateType({
-  identity: "java.util.TimeZone"
-}, "java")
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
 model TimeZoneType {}
 
 @@alternateType(OpenAI.ApproximateLocation.timezone, TimeZoneType, "java");
-@@alternateType(OpenAI.WebSearchApproximateLocation.timezone, TimeZoneType, "java");
+@@alternateType(OpenAI.WebSearchApproximateLocation.timezone,
+  TimeZoneType,
+  "java"
+);
+
+// --------------------------------------------------------------------------------
+// Conversations: only expose listConversations (Foundry-specific), suppress the rest
+// --------------------------------------------------------------------------------
+
+@@scope(Conversations.createConversation, "!(java)");
+@@scope(Conversations.updateConversation, "!(java)");
+@@scope(Conversations.getConversation, "!(java)");
+@@scope(Conversations.deleteConversation, "!(java)");
+@@scope(Conversations.createConversationItems, "!(java)");
+@@scope(Conversations.getConversationItem, "!(java)");
+@@scope(Conversations.deleteConversationItem, "!(java)");
+@@scope(Conversations.listConversationItems, "!(java)");
+
+// Rename and moving listAgentConversations to Agents subclient, so we prevent having a Conversation subclient
+// of our own, to prevent confusion.
+@@clientName(Conversations.listConversations, "listAgentConversations", "java");
+@@clientLocation(Conversations.listConversations, Agents);

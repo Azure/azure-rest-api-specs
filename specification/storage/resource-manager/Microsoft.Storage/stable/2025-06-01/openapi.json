@@ -6832,7 +6832,7 @@
     },
     "AccessTier": {
       "type": "string",
-      "description": "Required for storage accounts where kind = BlobStorage. The access tier is used for billing. The 'Premium' access tier is the default value for premium block blobs storage account type and it cannot be changed for the premium block blobs storage account type.",
+      "description": "The default access tier for block blobs in the storage account. Required for storage accounts where kind = BlobStorage. See more details in: https://learn.microsoft.com/azure/storage/blobs/access-tiers-overview.",
       "enum": [
         "Hot",
         "Cool",
@@ -10834,7 +10834,8 @@
             "value": "Canceled"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "NfsSetting": {
       "type": "object",
@@ -11400,7 +11401,8 @@
             "value": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "PrivateEndpointServiceConnectionStatus": {
       "type": "string",
@@ -11933,7 +11935,8 @@
             "value": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "RunStatusEnum": {
       "type": "string",
@@ -12346,7 +12349,8 @@
             "value": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "SkuInformation": {
       "type": "object",
@@ -12607,7 +12611,8 @@
             "value": "NetworkSourceDeleted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StorageAccount": {
       "type": "object",
@@ -13641,7 +13646,8 @@
             "value": "Failed"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StorageTaskAssignmentReport": {
       "type": "object",

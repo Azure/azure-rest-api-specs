@@ -29,7 +29,6 @@ interface EvaluationTaxonomies {
     Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List evaluation taxonomies")
   @Rest.listsResource(EvaluationTaxonomy)
   list is Azure.Core.Foundations.ResourceList<

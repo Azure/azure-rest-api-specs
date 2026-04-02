@@ -26,9 +26,16 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Root client
   // --------------------------------------------------------------------------------
-  @@clientName(Agents, "AgentsClient", "csharp");
-  @@clientName(AgentObject, "AgentRecord");
-  @@clientName(AgentProtocol, "AgentCommunicationMethod");
+  @@clientName(Agents, "AgentAdministrationClient", "csharp");
+  @@clientInitialization(Azure.AI.Projects.Agents,
+    {
+      initializedBy: InitializedBy.parent | InitializedBy.individually,
+    }
+  );
+
+  @@clientName(AgentObject, "ProjectsAgentRecord");
+  @@clientName(AgentKind, "ProjectsAgentKind");
+  @@clientName(AgentProtocol, "ProjectsAgentProtocol");
 
   @@clientName(BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
@@ -42,21 +49,26 @@ namespace Azure.AI.Projects {
   @@clientName(MemorySearchOptions, "MemorySearchToolOptions");
 
   @@clientName(OpenApiTool, "OpenAPITool");
+  @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
   @@clientName(OpenApiAnonymousAuthDetails,
     "OpenAPIAnonymousAuthenticationDetails"
   );
-  @@clientName(OpenApiAuthDetails, "OpenAPIAuthenticationDetails");
-  @@clientName(OpenApiFunctionDefinition, "OpenAPIFunctionDefinition");
+  @@clientName(OpenApiAuthDetails, "OpenApiAuthenticationDetails");
   @@clientName(OpenApiManagedAuthDetails,
     "OpenAPIManagedAuthenticationDetails"
   );
   @@clientName(OpenApiProjectConnectionAuthDetails,
-    "OpenAPIProjectConnectionAuthenticationDetails"
+    "OpenApiProjectConnectionAuthenticationDetails"
   );
   @@clientName(OpenApiProjectConnectionSecurityScheme,
-    "OpenAPIProjectConnectionSecurityScheme"
+    "OpenApiProjectConnectionSecurityScheme"
   );
   @@clientName(OpenApiManagedSecurityScheme, "OpenAPIManagedSecurityScheme");
+
+  @@clientName(OpenApiFunctionDefinition.auth,
+    "AuthenticationDetails",
+    "csharp"
+  );
   @@clientName(RaiConfig, "ContentFilterConfiguration");
   @@clientName(SharepointGroundingToolParameters,
     "SharePointGroundingToolOptions"
@@ -128,6 +140,48 @@ namespace Azure.AI.Projects {
   @@access(OpenAI.WebSearchTool, Access.internal);
   @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool");
 
+  @@clientName(HostedAgentDefinition.container_protocol_versions,
+    "versions",
+    "csharp"
+  );
+
+  @@clientName(BingCustomSearchToolParameters,
+    "BingCustomSearchToolOptions",
+    "csharp"
+  );
+  @@clientName(BrowserAutomationToolParameters,
+    "BrowserAutomationToolOptions",
+    "csharp"
+  );
+  @@clientName(BingGroundingSearchConfiguration.set_lang,
+    "BingUserInterfaceLanguage",
+    "csharp"
+  );
+  @@clientName(BingGroundingTool.bing_grounding, "SearchToolOptions", "csharp");
+  @@clientName(BrowserAutomationPreviewTool.browser_automation_preview,
+    "ToolParameters",
+    "csharp"
+  );
+  @@clientName(BrowserAutomationToolParameters.connection,
+    "ToolConnectionParameters",
+    "csharp"
+  );
+  @@clientName(CaptureStructuredOutputsTool.outputs,
+    "OutputDefinition",
+    "csharp"
+  );
+  @@clientName(MemorySearchPreviewTool.update_delay,
+    "UpdateDelayInSecs",
+    "csharp"
+  );
+  @@clientName(MicrosoftFabricPreviewTool.fabric_dataagent_preview,
+    "ToolOptions",
+    "csharp"
+  );
+  @@clientName(SharepointPreviewTool.sharepoint_grounding_preview,
+    "ToolOptions",
+    "csharp"
+  );
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -137,6 +191,7 @@ namespace Azure.AI.Projects {
 
   @@usage(PromptAgentDefinition, Usage.input | Usage.output);
   @@access(PromptAgentDefinition, Access.public);
+  @@clientName(PromptAgentDefinition, "DeclarativeAgentDefinition");
 
   @@usage(AgentObject, Usage.output);
   @@access(AgentObject, Access.public);
@@ -144,5 +199,5 @@ namespace Azure.AI.Projects {
 
   @@usage(AgentVersionObject, Usage.output);
   @@access(AgentVersionObject, Access.public);
-  @@clientName(AgentVersionObject, "AgentVersion");
+  @@clientName(AgentVersionObject, "ProjectsAgentVersion");
 }

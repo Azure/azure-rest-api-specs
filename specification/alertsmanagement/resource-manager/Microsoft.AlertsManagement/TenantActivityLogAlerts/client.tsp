@@ -7,3 +7,7 @@ using Azure.ClientGenerator.Core;
   "TenantActivityLogAlertsMgmtClient",
   "python"
 );
+@@clientName(Microsoft.AlertsManagement,
+  "TenantActivityLogAlertsManagementClient",
+  "javascript"
+);

@@ -1982,10 +1982,9 @@ paths:
       operationId: Insights_generate
       description: Generate Insights
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: Foundry-Features
           in: header
-          required: true
+          required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -2004,6 +2003,13 @@ paths:
           schema:
             type: string
             format: http-date
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
@@ -2013,16 +2019,10 @@ paths:
                 $ref: '#/components/schemas/Insight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
       requestBody:
@@ -2036,7 +2036,14 @@ paths:
       operationId: Insights_list
       description: List all insights in reverse chronological order (newest first).
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Insights=V1Preview
         - name: type
           in: query
           required: false
@@ -2072,14 +2079,13 @@ paths:
           schema:
             type: boolean
           explode: false
-        - name: Foundry-Features
-          in: header
+        - name: api-version
+          in: query
           required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          description: The API version to use for this operation.
           schema:
             type: string
-            enum:
-              - Insights=V1Preview
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -2089,16 +2095,10 @@ paths:
                 $ref: '#/components/schemas/PagedInsight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
   /insights/{id}:
@@ -2106,16 +2106,9 @@ paths:
       operationId: Insights_get
       description: Get a specific insight by Id.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: id
-          in: path
-          required: true
-          description: The unique identifier for the insights report.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
-          required: true
+          required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             type: string
@@ -2128,6 +2121,19 @@ paths:
           schema:
             type: boolean
           explode: false
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier for the insights report.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -2137,16 +2143,10 @@ paths:
                 $ref: '#/components/schemas/Insight'
         default:
           description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
   /memory_stores:
@@ -6778,6 +6778,7 @@ components:
       type: object
       required:
         - type
+        - code_text
       properties:
         type:
           type: string
@@ -6786,12 +6787,6 @@ components:
         code_text:
           type: string
           description: Inline code text for the evaluator
-        entry_point:
-          type: string
-          description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
-        image_tag:
-          type: string
-          description: The container image tag to use for evaluator code execution
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code

@@ -43,7 +43,6 @@ interface EvaluationRules {
   >;
 
   // PUT /evaluationrules/{id}
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or update an evaluation rule.")
   @Http.put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<

@@ -4,7 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Purview;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(AccountUpdateParameters.properties);
+@@Legacy.flattenProperty(AccountUpdateParameters.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Operation.properties);
@@ -38,7 +38,7 @@ using Microsoft.Purview;
 @@Legacy.flattenProperty(KafkaConfiguration.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(PrivateLinkResource.properties);
+@@Legacy.flattenProperty(PrivateLinkResource.properties, "!javascript");
 
 @@clientLocation(AccountsOperationGroup.checkNameAvailability, Accounts);
 

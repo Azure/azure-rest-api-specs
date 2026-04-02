@@ -5,6 +5,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Streams;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -17,7 +18,7 @@ interface AgentContainers {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+  @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:start")
   @extension(
@@ -51,7 +52,7 @@ interface AgentContainers {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+  @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:update")
   @extension(
@@ -85,7 +86,7 @@ interface AgentContainers {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+  @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:stop")
   @extension(
@@ -113,7 +114,7 @@ interface AgentContainers {
    * The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
    * https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
    */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+  @pollingOperation(AgentContainers.getAgentContainerOperation)
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/containers/default:delete")
   @extension(

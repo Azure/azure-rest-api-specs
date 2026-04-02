@@ -177,7 +177,7 @@ op searchCreateOrUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 @action("searchUpdateCustomization")
 op searchUpdateCustomization(
   ...ApiVersionParameter,
@@ -755,7 +755,10 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "!java,!python,!javascript"
 );
 
-@@clientName(Microsoft.Search, "SearchManagementClient", "python, javascript");
+@@clientName(Microsoft.Search,
+  "SearchManagementClient",
+  "python,javascript,java"
+);
 
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
@@ -858,7 +861,7 @@ model AccessRulePropertiesSubscriptionsItem {
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
-  "go,python,javascript"
+  "go,python,javascript,java"
 );
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");

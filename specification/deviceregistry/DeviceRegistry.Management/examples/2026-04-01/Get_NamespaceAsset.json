@@ -183,6 +183,12 @@
             }
           ],
           "status": {
+            "healthState": {
+              "status": "Degraded",
+              "lastTransitionTime": "2025-11-03T08:10:12Z",
+              "message": "Broker experiencing backpressure. Client id with maximum queue size: client-123 (1200 messages).",
+              "reasonCode": "BrokerRateLimited"
+            },
             "config": {
               "version": 9,
               "lastTransitionTime": "2025-03-11T02:19:16.489Z",
@@ -219,6 +225,33 @@
                     }
                   ]
                 }
+              }
+            ],
+            "eventGroups": [
+              {
+                "name": "eventGroup1",
+                "events": [
+                  {
+                    "name": "event1",
+                    "messageSchemaReference": {
+                      "schemaRegistryNamespace": "liagdwhnvlhcptvmufws",
+                      "schemaName": "lytgdlsvivtcrtuvje",
+                      "schemaVersion": "1"
+                    },
+                    "error": {
+                      "code": "400",
+                      "message": "Error",
+                      "details": [
+                        {
+                          "code": "400.123.456.789",
+                          "message": "Validation error",
+                          "info": "Property is not valid.",
+                          "correlationId": "xqoettlcdlxchoscv"
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             ],
             "streams": [

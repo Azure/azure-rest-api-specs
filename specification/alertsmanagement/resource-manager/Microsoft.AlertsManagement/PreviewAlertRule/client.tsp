@@ -8,6 +8,10 @@ using Microsoft.AlertsManagement;
   "PreviewAlertRuleMgmtClient",
   "python"
 );
+@@clientName(Microsoft.AlertsManagement,
+  "PreviewAlertRuleManagementClient",
+  "javascript"
+);
 @@clientName(AlertSeverity.`0`, "ZERO", "python");
 @@clientName(AlertSeverity.`1`, "ONE", "python");
 @@clientName(AlertSeverity.`2`, "TWO", "python");

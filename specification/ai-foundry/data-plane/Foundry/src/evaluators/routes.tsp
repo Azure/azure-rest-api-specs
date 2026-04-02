@@ -1,6 +1,5 @@
 import "../common/models.tsp";
 import "../servicepatterns.tsp";
-import "../datasets/models.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
@@ -121,50 +120,5 @@ interface Evaluators {
       evaluatorVersion: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
-  >;
-
-  // POST /evaluators/{evaluatorName}/versions/{version}/startPendingUpload
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
-  @Rest.action("startPendingUpload")
-  startPendingUpload is Azure.Core.Foundations.ResourceOperation<
-    EvaluatorVersion,
-    {
-      ...EvaluatorsPreviewHeader;
-
-      @doc("The pending upload request parameters")
-      @Http.bodyRoot
-      pendingUploadRequest: PendingUploadRequest;
-
-      @doc("The specific version id of the EvaluatorVersion to operate on.")
-      @Rest.segment("versions")
-      @Http.path
-      version: string;
-    },
-    PendingUploadResponse
-  >;
-
-  // POST /evaluators/{evaluatorName}/versions/{version}/credentials
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
-  @Http.post
-  @Rest.action("credentials")
-  @Rest.actionSeparator("/")
-  getCredentials is Azure.Core.Foundations.ResourceOperation<
-    EvaluatorVersion,
-    {
-      ...EvaluatorsPreviewHeader;
-
-      @doc("The credential request parameters")
-      @Http.bodyRoot
-      credentialRequest: EvaluatorCredentialRequest;
-
-      @doc("The specific version id of the EvaluatorVersion to operate on.")
-      @Rest.segment("versions")
-      @Http.path
-      version: string;
-    },
-    AssetCredentialResponse
   >;
 }

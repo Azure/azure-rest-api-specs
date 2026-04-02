@@ -25,7 +25,6 @@ interface Agents {
   /**
    * Creates the agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
@@ -39,7 +38,6 @@ interface Agents {
    * Updates the agent by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}")
   updateAgent is FoundryDataPlanePreviewOperation<
@@ -56,7 +54,6 @@ interface Agents {
   /**
    * Creates an agent from a manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents:import")
   createAgentFromManifest is FoundryDataPlaneOperation<
@@ -68,7 +65,6 @@ interface Agents {
    * Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
    * If no changes, returns the existing agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/import")
   updateAgentFromManifest is FoundryDataPlaneOperation<
@@ -84,7 +80,6 @@ interface Agents {
   /**
    * Deletes an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}")
   deleteAgent is FoundryDataPlaneOperation<
@@ -110,7 +105,6 @@ interface Agents {
   /**
    * Create a new agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
@@ -135,7 +129,6 @@ interface Agents {
   /**
    * Create a new agent version from a manifest.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions:import")
   createAgentVersionFromManifest is FoundryDataPlaneOperation<
@@ -174,7 +167,6 @@ interface Agents {
   /**
    * Deletes a specific version of an agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
   deleteAgentVersion is FoundryDataPlaneOperation<
