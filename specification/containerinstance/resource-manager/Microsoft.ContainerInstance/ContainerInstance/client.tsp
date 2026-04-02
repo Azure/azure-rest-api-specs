@@ -126,6 +126,9 @@ using Microsoft.ContainerInstance;
   "csharp"
 );
 
+// C# rename for ARM common Resource — avoids duplicate-client-name with local Resource model
+@@clientName(Azure.ResourceManager.CommonTypes.Resource, "ArmResource", "csharp");
+
 // C# resource hierarchy: restore TrackedResourceData inheritance
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@Legacy.hierarchyBuilding(ContainerGroup,

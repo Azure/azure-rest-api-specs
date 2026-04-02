@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ContainerInstance;
 
@@ -523,6 +525,8 @@ model ContainerGroupListResult is Azure.Core.Page<ListResultContainerGroup>;
  * The Resource model definition.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name" "Renaming to ContainerGroupPatch for C# backward compat"
+@clientName("ContainerGroupPatch", "csharp")
 model Resource {
   /**
    * The resource id.
