@@ -1,0 +1,30 @@
+{
+  "operationId": "AutoProjects_ListByResourceGroup",
+  "title": "List Auto Projects by Resource Group",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/autoProjects/myAutoProject",
+            "name": "myAutoProject",
+            "type": "Microsoft.Logic/autoProjects",
+            "location": "eastus",
+            "tags": {
+              "environment": "production"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "description": "Production workflow auto project"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

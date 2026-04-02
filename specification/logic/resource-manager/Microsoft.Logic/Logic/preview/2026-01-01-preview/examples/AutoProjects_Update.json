@@ -1,0 +1,40 @@
+{
+  "operationId": "AutoProjects_Update",
+  "title": "Update Auto Project",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "autoProjectName": "myAutoProject",
+    "api-version": "2026-01-01-preview",
+    "properties": {
+      "tags": {
+        "environment": "staging"
+      },
+      "properties": {
+        "description": "Updated auto project description"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/autoProjects/myAutoProject",
+        "name": "myAutoProject",
+        "type": "Microsoft.Logic/autoProjects",
+        "location": "eastus",
+        "tags": {
+          "environment": "staging"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Updated auto project description"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Logic/locations/eastus/operationStatuses/update-op-id?api-version=2026-01-01-preview"
+      }
+    }
+  }
+}
