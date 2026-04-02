@@ -1798,5 +1798,5 @@ model RegionOfChoiceSettings {
   /**
    * The status of region of choice settings - Enabled or Disabled.
    */
-  status: State;
+  status?: State;
 }
