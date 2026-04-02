@@ -6236,23 +6236,6 @@
       "type": "object",
       "description": "DataAssetQueryRequest.",
       "properties": {
-        "skip": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of items to skip."
-        },
-        "top": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of items to return."
-        },
-        "orderby": {
-          "type": "array",
-          "description": "To order the records.",
-          "items": {
-            "$ref": "#/definitions/CatalogApiServiceOrderBy"
-          }
-        },
         "ids": {
           "type": "array",
           "description": "To filter by Ids.",
@@ -6280,10 +6263,14 @@
         },
         "assetTypes": {
           "type": "array",
-          "description": "To filter by data map asset Ids.",
+          "description": "To filter by data map asset types.",
           "items": {
             "type": "string"
           }
+        },
+        "includingOrphans": {
+          "type": "boolean",
+          "description": "To filter by status."
         }
       }
     },

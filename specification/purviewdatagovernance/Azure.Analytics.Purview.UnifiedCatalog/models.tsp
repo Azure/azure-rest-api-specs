@@ -683,15 +683,6 @@ model DataAssetRequest {
 }
 @doc("DataAssetQueryRequest.")
 model DataAssetQueryRequest {
-  @doc("Number of items to skip.")
-  skip?: int32;
-
-  @doc("Number of items to return.")
-  top?: int32;
-
-  @doc("To order the records.")
-  orderby?: CatalogApiServiceOrderBy[];
-
   @doc("To filter by Ids.")
   ids?: string[];
 
@@ -704,8 +695,11 @@ model DataAssetQueryRequest {
   @doc("To filter by data map asset Ids.")
   sourceAssetIds?: string[];
 
-  @doc("To filter by data map asset Ids.")
+  @doc("To filter by data map asset types.")
   assetTypes?: string[];
+
+  @doc("To filter by status.")
+  includingOrphans?: boolean;
 }
 
 @doc("FacetValue.")
