@@ -11,18 +11,7 @@ alias ToolboxesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesO
 @tag("Toolboxes")
 interface Toolboxes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create a toolbox.")
-  @operationId("createToolbox")
-  @put
-  @route("/toolboxes/{toolbox_name}")
-  @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
-  createToolbox is FoundryDataPlaneOperation<
-    CreateToolboxRequest & ToolboxesPreviewHeader,
-    ToolboxObject
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-  @doc("Create a new version of an existing toolbox.")
+  @doc("Create a new version of a toolbox. If the toolbox does not exist, it will be created.")
   @operationId("createToolboxVersion")
   @post
   @route("/toolboxes/{toolbox_name}/versions")

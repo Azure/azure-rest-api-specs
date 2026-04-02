@@ -106,29 +106,10 @@ model DeleteToolboxVersionResponse {
   deleted: boolean;
 }
 
-alias CreateToolboxRequest = {
-  @doc("The name of the toolbox.")
+alias CreateToolboxVersionRequest = {
+  @doc("The name of the toolbox. If the toolbox does not exist, it will be created.")
   @path
   @maxLength(256)
-  toolbox_name: string;
-
-  @doc("A human-readable description of the toolbox.")
-  @maxLength(512)
-  description?: string;
-
-  @doc("Arbitrary key-value metadata to associate with the toolbox.")
-  metadata?: Record<string>;
-
-  @doc("The list of tools to include in the toolbox.")
-  tools: OpenAI.Tool[];
-
-  @doc("Policy configuration for the toolbox.")
-  policies?: ToolboxPolicies;
-};
-
-alias CreateToolboxVersionRequest = {
-  @doc("The name of the toolbox to add a new version to.")
-  @path
   toolbox_name: string;
 
   @doc("A human-readable description of the toolbox.")

@@ -211,7 +211,7 @@ using Azure.AI.Projects;
 // Toolboxes sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Toolboxes.createToolbox, "create");
+@@clientName(Toolboxes.createToolboxVersion, "create");
 @@clientName(Toolboxes.updateToolbox, "update");
 @@clientName(Toolboxes.getToolbox, "get");
 @@clientName(Toolboxes.listToolboxes, "list");
