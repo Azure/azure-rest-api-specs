@@ -66,7 +66,7 @@ directive:
     reason: MongoDB.Atlas namespace is business requirement.
   - suppress: RepeatedPathInfo
     from: openapi.json
-    reason: The projectName in ProjectProperties is needed for LIST responses to return the project name alongside the server-assigned projectId.
+    reason: The projectName and clusterName in resource properties are needed for LIST responses to return resource names alongside server-assigned IDs.
   - suppress: AvoidAnonymousTypes
     from: openapi.json
     reason: Typespec generated definitions contain anonymous types.
