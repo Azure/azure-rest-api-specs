@@ -157,7 +157,9 @@ A TypeSpec project **MUST NOT** contain:
 ### 4.5 Type Constraints
 
 - String properties with well-known formats **SHOULD** use appropriate scalar types: `url`, `utcDateTime`, `duration`, `uuid`.
+- Datetime properties **MUST** use `utcDateTime` (not `string`) to generate proper `format: date-time` in swagger and enable SDK datetime type generation.
 - Integer properties **SHOULD** specify bit width: `int32`, `int64`.
+- Integer properties with known valid ranges **SHOULD** use `@minValue` and `@maxValue` decorators (e.g., percentages: `@minValue(0) @maxValue(100)`, port numbers: `@minValue(1) @maxValue(65535)`).
 - Array properties **MUST** have their element type defined.
 - **AVOID** using `unknown` type — use a concrete type or a well-defined model.
 
@@ -171,6 +173,7 @@ A TypeSpec project **MUST NOT** contain:
 - ARM proxy resources **MUST** extend `ProxyResource<TProperties>`.
 - Extension resources **MUST** extend `ExtensionResource<TProperties>`.
 - **DO NOT** manually define `id`, `name`, `type`, `location`, `tags`, or `systemData` — these come from the base types.
+- **DO NOT** use private/custom decorators or manual resource base types when standard ARM base types (`TrackedResource`, `ProxyResource`, `ExtensionResource`) exist for the resource pattern.
 
 ### 5.2 CRUD Operations
 
@@ -265,6 +268,9 @@ A TypeSpec project **MUST NOT** contain:
   ```
 - Suppressions of **errors** are not allowed — errors must be fixed.
 - Flag any unexplained or blanket suppressions.
+- Suppression reasons **MUST NOT** contain placeholder text such as `FIXME`, `TODO`, or `TBD`. These indicate the author deferred the justification and never returned to it.
+- Suppression reasons **MUST NOT** justify by reference to another resource's pattern (e.g., "Matching AiGateway pattern"). Each suppression must stand on its own with a technical justification for **why** the rule does not apply to this specific case.
+- Suppression reasons **MUST** be factually accurate. If the reason claims "existing API design" or "would break the service contract" but the PR itself changes the relevant path or model, flag the inconsistency.
 
 ---
 
@@ -279,6 +285,62 @@ Flag these issues when found:
 - **Circular references** without `@visibility` to break the cycle.
 - **Hardcoded API version strings** instead of using the versioning enum.
 - **Missing examples** — every operation should have corresponding example files.
+- **Manual swagger alongside TypeSpec** — once a service has transitioned to TypeSpec, new manually authored swagger files **MUST NOT** be added to the same package tag. All new API versions must use TypeSpec, with generated swagger from `tsp compile .`.
+- **`@operationId` overrides** — avoid using `@operationId` decorators in TypeSpec. Instead, restructure interfaces and operation names so the generated operationId naturally follows the ARM `{ResourceType}_{Verb}` pattern. `@operationId` overrides create tech debt that must eventually be cleaned up.
+- **URI properties** — properties that hold URLs or SAS URIs **MUST** use the TypeSpec `url` scalar type (which generates `"format": "uri"` in swagger) rather than plain `string`.
+- **Duplicate `@added` decorators** — a symbol should only be introduced once with `@added`. Multiple `@added(...)` decorators on the same property suggest a copy-paste error; keep only the earliest version.
+- **`Record<unknown>` / `Record<string>` for typed data** — avoid using `Record<>` (which generates `additionalProperties`) when the shape of the data is known. Define a dedicated model with typed properties instead.
+- **Doc comment copy-paste errors** — verify that doc comments accurately describe the element they annotate (e.g., a `WorkspaceUpdate` model should not be documented as "Describes an experiment update").
+- **Spelling/typo errors in doc comments and descriptions** — flag common misspellings (e.g., `payed` → `paid`, `consoto` → `contoso`, `endpoin` → `endpoint`) as they propagate into generated SDKs and documentation.
+- **Polymorphic-format properties** — a single property that accepts multiple formats (e.g., both an integer `5` and a percentage string `"20%"`) creates ambiguity and error-prone client code. Model these as separate properties (e.g., `maxConcurrency: int32` and `maxConcurrencyPercent: string`) or use a discriminated union model.
+- **`@added` version misalignment** — when using `@added(Versions.vXXXX)` to gate a new feature, verify that the feature does not inadvertently alter descriptions or schemas of earlier API versions. If the feature is for version `2025-08-01`, it must not affect the generated OpenAPI for `2025-06-01`.
+- **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
+
+---
+
+## 11. ARM TypeSpec Additional Rules
+
+### 11.1 `@segment` Casing for Resource Types (TSP-SEGMENT-CASE)
+
+- The `@segment` decorator value for ARM resource types **MUST** use camelCase (e.g., `@segment("connectorGateways")`, `@segment("virtualMachines")`).
+- All-lowercase segment values (e.g., `@segment("connectorgateways")`) violate ARM path naming conventions and produce incorrect permanent resource type paths.
+- Once a resource type path is published (even in preview), changing it is a breaking change — catch casing issues before first publication.
+
+### 11.2 PATCH Operation Naming (TSP-PATCH-NAME)
+
+- ARM PATCH operations **SHOULD** be named `update` (not `patch`) so the generated `operationId` follows the ARM convention `{ResourceType}_Update` rather than `{ResourceType}_Patch`.
+- Example: `update is ArmTagsPatchSync<MyResource>;` instead of `patch is ArmTagsPatchSync<MyResource>;`.
+
+### 11.3 Use `armResourceIdentifier` for Resource References (TSP-ARM-RESOURCE-ID)
+
+- When a TypeSpec property references another ARM resource, use the `armResourceIdentifier` scalar type with a type constraint:
+  ```tsp
+  sourceVaultId?: armResourceIdentifier<[{ type: "Microsoft.RecoveryServices/vaults" }]>;
+  ```
+- Do not use plain `string` for ARM resource ID properties — `armResourceIdentifier` enables ARM validation and rich SDK typing.
+
+### 11.4 Numeric Properties Must Use Numeric Types (TSP-NUMERIC-TYPE)
+
+- Properties whose names or doc comments clearly indicate numeric values (e.g., `numberOfCores`, `ram`, `vCpu`, `diskSizeGB`) **SHOULD** use `int32`, `int64`, or `float64` — not `string`.
+- If backward compatibility forces a string type for a numeric value, the doc comment **MUST** document the expected format and units.
+
+---
+
+## 12. `tspconfig.yaml` Additional Validation
+
+### 12.1 `emit` List Consistency (TSP-CONFIG-EMIT)
+
+- If emitter-specific options are configured under `options:` (e.g., for `@azure-tools/typespec-python`, `@azure-tools/typespec-java`), the corresponding emitters **SHOULD** also be listed under `emit:`.
+- Options configured for emitters not in the `emit` list create confusion about what the config actually drives.
+
+### 12.2 `service-dir` Correctness (TSP-CONFIG-SERVICE-DIR)
+
+- Each language emitter's `service-dir` override (if present) **MUST** point to the correct SDK directory for this service.
+- A `service-dir` copied from another service (e.g., `sdk/machinelearning` when the project is for `guestconfiguration`) will cause SDK generation to write to the wrong location.
+
+### 12.3 Duplicate Example Directories (TSP-CONFIG-EXAMPLES)
+
+- With TypeSpec, examples may exist in both `{project-root}/examples/` (source) and `{version}/examples/` (generated output). Verify these are not independently maintained duplicates that can drift — there should be a single source of truth.
 
 ---
 
@@ -294,17 +356,34 @@ When reviewing TypeSpec files, verify:
 - ✅ All types declared under the main namespace
 - ✅ Model names PascalCase, property names camelCase, operation names camelCase
 - ✅ Every element has a `/** ... */` doc comment
+- ✅ Doc comments are accurate (no copy-paste errors from other models)
 - ✅ `union` used instead of `enum` for extensible Azure enums
 - ✅ Visibility decorators use `Lifecycle` class values
 - ✅ ARM resources extend correct base types (`TrackedResource`, `ProxyResource`, etc.)
 - ✅ All CRUD operations present for ARM tracked resources
 - ✅ `Operations` interface defined for ARM resource providers
 - ✅ `@armProviderNamespace` applied correctly
+- ✅ `@segment` values use camelCase for resource type path segments (TSP-SEGMENT-CASE)
+- ✅ PATCH operations named `update` not `patch` (TSP-PATCH-NAME)
+- ✅ ARM resource ID properties use `armResourceIdentifier` not `string` (TSP-ARM-RESOURCE-ID)
+- ✅ No `@operationId` overrides — restructure interfaces instead
+- ✅ URI properties use `url` scalar type, not plain `string`
+- ✅ Standard ARM base types used (no custom/private resource decorators)
 - ✅ Client customizations only in `client.tsp`
 - ✅ `tspconfig.yaml` references correct linter ruleset
-- ✅ No unexplained suppressions
+- ✅ `tspconfig.yaml` `emit` list matches configured emitter options (TSP-CONFIG-EMIT)
+- ✅ `tspconfig.yaml` `service-dir` values point to the correct service directories (TSP-CONFIG-SERVICE-DIR)
+- ✅ No unexplained suppressions; no FIXME/TODO/TBD in suppression reasons
+- ✅ Suppression reasons are factually accurate and technically justified
+- ✅ No duplicate `@added` decorators on the same symbol
+- ✅ `@added` version targeting is correct — features don't leak into earlier API version outputs
+- ✅ No polymorphic-format properties — use separate typed properties or discriminated unions
+- ✅ Numeric properties use numeric types, not string (TSP-NUMERIC-TYPE)
+- ✅ No `Record<>` usage when typed models can be defined
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, doc comment, or examples suggest a secret but `@secret` is missing
 - ✅ No `#suppress` directives silencing `secret-prop` lint rules — apply `@secret` instead
+- ✅ Integer properties have `@minValue`/`@maxValue` when range is known
+- ✅ Datetime properties use `utcDateTime` scalar, not `string`
 - ✅ No breaking changes between API versions
 - ✅ Generated OpenAPI files match `tsp compile .` output
 - ✅ Example files present for all operations

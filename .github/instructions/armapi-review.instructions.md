@@ -29,6 +29,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - The `Microsoft.{Namespace}` in every path **MUST** match the resource provider namespace declared in the specification.
 - Flag any mismatch between path namespace and the `title` or `host` metadata.
+- The RP namespace **SHOULD NOT** repeat the resource type name (e.g., `Microsoft.CloudPartnerProgramMembership` with resource type `membership` is redundant — prefer `Microsoft.CloudPartnerProgram` with resource type `memberships`).
 
 ### 1.4 Operations API (RPC-Operations-V1)
 
@@ -63,6 +64,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - Nested resources **MUST** have a List operation under their parent.
 - Nested resources **MUST NOT** be embedded inline in the parent resource's GET response body (see Azure Resource Graph guideline ARG001 below). Return a resource ID reference instead.
+- For singleton nested resources (only one instance exists), the resource name **SHOULD** be `default`. The collection GET (`/parent/{parentName}/children`) and singleton GET (`/parent/{parentName}/children/default`) must both exist.
 
 ### 2.4 Resource References Between Resources
 
@@ -79,6 +81,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Resources that are created by end users **MUST** expose a PUT operation.
 - **Exception**: POST may be used to create **proxy resources only** when the business scenario requires the service to generate the resource name. Tracked resources **MUST** always use PUT.
 - PUT **MUST** be idempotent — sending the same PUT request multiple times must produce the same result.
+- A re-PUT (PUT to an existing resource with the same body) **MUST NOT** fail. ARM expects PUT to be idempotent and usable for both create and update.
 
 ### 3.2 PUT Must Not Expose Secrets in Response
 
@@ -135,7 +138,17 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - The `200`/`201` response of an LRO **MUST** have a schema definition — empty LRO responses are invalid.
 - Always use unique identifiers (GUIDs) for operation results — never hash-based identifiers that could collide across sequential operations on the same resource.
 
-### 6.2 Operation Results Placement
+### 6.2 LRO 202 Response Header Declarations (RPC-Async-V1-HEADERS)
+
+- When an operation is marked `x-ms-long-running-operation: true`, the `202` response in the swagger **MUST** declare the polling headers used by the operation:
+  - If `final-state-via: azure-async-operation`, the `202` response headers **MUST** declare `Azure-AsyncOperation` (type: string).
+  - If `final-state-via: location`, the `202` response headers **MUST** declare `Location` (type: string).
+  - Include `Retry-After` (type: integer, format: int32) when the service supports it.
+- A `202` response with no declared headers (empty `"202": { "description": "Accepted" }`) makes the LRO contract ambiguous for ARM and SDKs — flag it.
+- Similarly, LRO PUT/PATCH operations returning `201` **SHOULD** declare the appropriate polling headers on the `201` response.
+- **Choose one authoritative polling pattern.** ARM guidance says clients should poll `Azure-AsyncOperation` when present and only use `Location` when `Azure-AsyncOperation` is not returned. If a spec advertises **both** headers, recommend choosing one pattern (prefer `Azure-AsyncOperation` for status-monitor pattern) so the contract is unambiguous.
+
+### 6.3 Operation Results Placement
 
 - The `/operationResults` API used to track async operations **MUST** be modeled as a root-level resource, not as a child of the resource being operated on.
 - If modeled as a child, `404 Not Found` will be returned after a deletion completes, causing ARM to fail to track the async operation.
@@ -190,6 +203,13 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - If a string property has a finite set of values enforced by the service, declare it as an enum type with `x-ms-enum` to enable client-side validation and discoverability.
 
+### 8.4 `additionalProperties` Restriction
+
+- `additionalProperties` (open-ended key-value maps) **MUST NOT** be used for service-owned properties whose structure is known at design time.
+- `additionalProperties` is only acceptable for **user-defined pass-through data** (e.g., tags, custom metadata) that the service does not validate or interpret.
+- If the set of keys is known or bounded, model them as explicit named properties instead.
+- If the data is a collection, model it as an array of typed objects rather than a map.
+
 ### 8.4 Visibility and Mutability
 
 - Properties that can be set on creation but **not** subsequently updated **MUST** be annotated with `x-ms-mutability: ["create", "read"]` (or `@visibility("create", "read")` in TypeSpec).
@@ -200,6 +220,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 - If resource A references resource B, and resource B's GET response includes a back-reference to resource A, mark **one** of the references as `readOnly`.
 - Writable circular references prevent ARM from determining dependency ordering in deployment templates.
+
+### 8.6 Deprecated Properties
+
+- Properties that are deprecated **SHOULD** use the OpenAPI `"deprecated": true` keyword in addition to documenting "Deprecated" in the description.
+- Using only a description mention of deprecation may be missed by tooling; the `deprecated` keyword enables SDK generators and linters to produce proper deprecation warnings.
 
 ---
 
@@ -250,17 +275,42 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ---
 
+## 10A. `readme.md` Suppression Scoping & Tag Coverage
+
+### 10A.0 Suppression Rigor for GA vs. Preview (RPC-SUPPRESS-GA)
+
+- Suppressions carried forward from **preview** API versions are **not automatically acceptable** in **GA (stable)** versions.
+- For GA releases, reviewers **MUST** challenge each suppression: can the underlying violation now be fixed? Preview was the time let it slide; GA is the deadline to fix.
+- `PathForResourceAction` suppressions in GA versions are **blocking** because they can prevent proper RBAC action registration.
+- `LroLocationHeader` suppressions in GA versions are **blocking** because they indicate incorrect async patterns.
+- Suppression reasons that say "back-compat with preview" are not sufficient for GA \u2014 provide a concrete technical justification for each suppression.
+
+### 10A.1 Suppression Must Be Under Correct Tag (RPC-SUPPRESS-SCOPE)
+
+- Suppressions in `readme.md` are scoped to the tag block they appear in. A suppression under `package-2025-03-01` does **not** apply to `package-2025-07-01`.
+- When a PR adds a new swagger file to a **new** package tag, verify any carried-over suppressions are duplicated/moved to the new tag's `suppressions` list — or they will not take effect and CI will fail.
+- Suppressions **MUST** include specific `from` and `where` clauses to target the exact file and JSON path of the violation. Blanket suppressions that suppress an entire file without specifying the path are not allowed — they mask other violations that may be introduced later.
+
+### 10A.2 Operations API Must Be in Package Tag (RPC-Operations-V1-TAG)
+
+- For ARM RPs, the `operations.json` (or equivalent operations API spec) **MUST** be included in every published package tag's input-file list.
+- If a new tag only includes the service resource swagger but omits the operations API, flag it — the resulting SDK will be missing the operations endpoint.
+
+---
+
 ## 11. API Version Practices (ARM-Specific)
 
 ### 11.1 Uniform Versioning Within a Service
 
 - All resource types within a single Service under an RP namespace **MUST** version uniformly — they share the same `api-version` value.
 - A change to any resource type in the service requires a new api-version for the entire service.
+- A single package tag in `readme.md` **MUST NOT** mix swagger files from different API versions. For example, including both `stable/2024-10-01/foo.json` and `preview/2025-06-01-preview/bar.json` in the same tag violates uniform versioning.
 
 ### 11.2 Incremental Version Progression
 
 - Copy the entire API surface when creating a new version. New preview versions should include all existing GA functionality plus new changes.
 - When promoting from preview to GA, the GA version **MUST** have a later date than the preview version.
+- The `default` API version tag in `readme.md` **MUST** point to the latest **stable** version. Do not change the default tag from a stable version to a preview version — the default tag is what SDK consumers get by default and must be a GA release.
 
 ---
 
@@ -271,6 +321,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - POST actions should only be used for:
   - Actions on a single resource instance (e.g. `restart`, `listKeys`)
   - Provider-level actions
+- POST action path segments and operation names **SHOULD** use verb phrases (e.g., `validateBackupParameters`, `beginRestore`) rather than noun phrases (e.g., `prebackup`, `prerestore`). Verb-based names are clearer about what the action does.
 - **DO NOT** use POST actions for what should be CRUD operations — if the actions resemble create/read/update/delete, model them as proper resource operations with PUT/PATCH/GET/DELETE instead.
 
 ### 12.2 POST to Create Resources (Exception)
@@ -303,9 +354,18 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Operations API endpoint exists for the resource provider
 - ✅ LRO 200/201 responses include schema definitions
 - ✅ Operation results modeled as root-level resources (not children)
-- ✅ Uniform API versioning across all resource types in the service
+- ✅ Uniform API versioning across all resource types in the service; no mixed versions in a single package tag
 - ✅ API version parity across Azure clouds
 - ✅ No writable circular dependencies between resources
-- ✅ POST actions used only for non-CRUD operations
+- ✅ POST actions used only for non-CRUD operations; action names use verb phrases
+- ✅ Singleton nested resources use `default` pattern with both collection and singleton GET
+- ✅ `additionalProperties` only used for user-defined pass-through data, not service-owned properties
+- ✅ Deprecated properties use `"deprecated": true` keyword, not just description text
+- ✅ LRO 202 responses declare polling headers (`Azure-AsyncOperation`, `Location`) in the swagger schema (RPC-Async-V1-HEADERS)
+- ✅ LRO operations choose one authoritative polling pattern, not both headers simultaneously
+- ✅ Properties inside `properties` bag do not reuse ARM top-level names (`id`, `name`, `type`)
+- ✅ Suppressions in `readme.md` are under the correct package tag with specific `from`/`where` clauses (RPC-SUPPRESS-SCOPE)
+- ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
+- ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)
 
 Flag all violations clearly with JSON path references, the specific RPC rule ID where applicable, and a concrete fix suggestion.
