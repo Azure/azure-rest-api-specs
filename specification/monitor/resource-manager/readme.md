@@ -47,6 +47,15 @@ input-file:
   - Microsoft.Monitor/Operations/preview/2025-05-03-preview/operations.json
 ```
 
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+- Microsoft.Monitor\preview\2023-10-01-preview\azuremonitor.json
+```
+
 ---
 
 # Code Generation

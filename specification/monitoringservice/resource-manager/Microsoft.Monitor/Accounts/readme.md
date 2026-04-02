@@ -53,15 +53,6 @@ input-file:
 - preview/2025-05-03-preview/azuremonitorworkspace.json
 ```
 
-### Tag: package-2023-10-01-preview
-
-These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line
-
-``` yaml $(tag) == 'package-2023-10-01-preview'
-input-file:
-- preview/2023-10-01-preview/azuremonitor.json
-```
-
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
