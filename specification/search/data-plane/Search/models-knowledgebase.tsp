@@ -648,6 +648,7 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
+@removed(Versions.v2026_04_01)
 model SharePointSensitivityLabelInfo {
   /** The display name for the sensitivity label. */
   displayName?: string;
