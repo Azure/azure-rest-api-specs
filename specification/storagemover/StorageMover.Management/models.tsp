@@ -177,7 +177,8 @@ union Frequency {
   Daily: "Daily",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Onetime: "Onetime",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** No schedule frequency. The job definition will not run on a schedule. */
   None: "None",
 }
 
