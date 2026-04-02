@@ -74,6 +74,10 @@ model DeploymentSafeguardsProperties {
   @doc("The pod security standards level")
   @added(Versions.v2025_05_02_preview)
   podSecurityStandardsLevel?: PodSecurityStandardsLevel;
+
+  @doc("User defined list of specific safeguard rules to exclude. Deployments will not be checked against these rules even if they are in scope")
+  @added(Versions.v2025_08_02_preview)
+  excludedRules?: Array<string>;
 }
 
 @lroStatus

@@ -37,4 +37,9 @@ enum Versions {
   @doc("Deployment Safeguards api version 2025-07-01")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_07_01: "2025-07-01",
+
+  /** 2025-08-02-preview version */
+  @doc("Deployment Safeguards api version 2025-08-02-preview")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2025_08_02_preview: "2025-08-02-preview",
 }
