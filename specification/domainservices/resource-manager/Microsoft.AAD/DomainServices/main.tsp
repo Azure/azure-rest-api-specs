@@ -15,7 +15,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./DomainService.tsp";
 import "./OuContainer.tsp";
-
+import "./routes.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
@@ -25,6 +25,7 @@ using TypeSpec.Versioning;
 /**
  * The AAD Domain Services API.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Domain Services Resource Provider" })
 @versioned(Versions)
@@ -42,4 +43,11 @@ enum Versions {
   v2025_10_01_preview: "2025-10-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+@tag("DomainServices")
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationEntityListResult>,
+      CloudError
+    > {}
+
+@@doc(Operations.list, "Lists all the available Domain Services operations.");

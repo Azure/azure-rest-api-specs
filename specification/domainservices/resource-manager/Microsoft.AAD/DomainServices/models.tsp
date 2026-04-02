@@ -349,13 +349,15 @@ union CreatedByType {
  * Response for successful unsuspend of a domain service.
  */
 model UnsuspendDomainServiceResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   message?: string;
 }
 
 /**
  * An error response from the Domain Services.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -367,6 +369,8 @@ model CloudError {
 /**
  * An error response from the Domain Services.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -386,6 +390,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: CloudErrorBody[];
 }
 
@@ -407,6 +412,23 @@ model OperationEntity {
    * The origin of the operation.
    */
   origin?: string;
+}
+
+/**
+ * The list of domain service operation response.
+ */
+model OperationEntityListResult {
+  /**
+   * The list of operations.
+   */
+  @pageItems
+  value?: OperationEntity[];
+
+  /**
+   * The continuation token for the next page of results.
+   */
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -476,6 +498,7 @@ model DomainServiceProperties {
   /**
    * List of ReplicaSets
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   replicaSets?: ReplicaSet[];
 
   /**
@@ -527,7 +550,7 @@ model DomainServiceProperties {
   /**
    * the current deployment or provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -586,12 +609,14 @@ model ReplicaSet {
    */
   @visibility(Lifecycle.Read)
   @maxValue(5)
+  @minValue(0)
   selfUnsuspendCounter?: int32;
 
   /**
    * Last domain evaluation run DateTime
    */
   @visibility(Lifecycle.Read)
+  @encode(DateTimeKnownEncoding.rfc7231)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   healthLastEvaluated?: utcDateTime;
 
@@ -697,6 +722,7 @@ model LdapsSettings {
   /**
    * The password to decrypt the provided Secure LDAP certificate pfx file.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pfxCertificatePassword?: string;
 
   /**
@@ -731,6 +757,7 @@ model ResourceForestSettings {
   /**
    * List of settings for Resource Forest
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   settings?: ForestTrust[];
 
   /**
@@ -766,6 +793,7 @@ model ForestTrust {
   /**
    * Trust Password
    */
+  @secret
   trustPassword?: string;
 }
 
@@ -890,11 +918,13 @@ model ConfigDiagnostics {
    * Last domain configuration diagnostics DateTime
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @encode(DateTimeKnownEncoding.rfc7231)
   lastExecuted?: utcDateTime;
 
   /**
    * List of Configuration Diagnostics validator results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validatorResults?: ConfigDiagnosticsValidatorResult[];
 }
 
@@ -969,7 +999,7 @@ model Resource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -982,6 +1012,40 @@ model Resource {
    */
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
+}
+
+/**
+ * The list of Domain Services.
+ */
+model DomainServiceListResult {
+  /**
+   * The list of Domain Services.
+   */
+  @pageItems
+  value?: DomainService[];
+
+  /**
+   * The continuation token for the next page of results.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The list of OuContainers in DomainService instance.
+ */
+model OuContainerListResult {
+  /**
+   * The list of OuContainers.
+   */
+  @pageItems
+  value?: OuContainer[];
+
+  /**
+   * The continuation token for the next page of results.
+   */
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -1015,6 +1079,7 @@ model OuContainerProperties {
   /**
    * The list of container accounts
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accounts?: ContainerAccount[];
 
   /**
@@ -1032,7 +1097,7 @@ model OuContainerProperties {
   /**
    * The current deployment or provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -1040,6 +1105,7 @@ model OuContainerProperties {
 /**
  * Container Account Description
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ContainerAccount {
   /**
    * The account name
@@ -1054,5 +1120,6 @@ model ContainerAccount {
   /**
    * The account password
    */
+  @secret
   password?: string;
 }

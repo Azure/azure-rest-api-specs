@@ -7,7 +7,7 @@ using Microsoft.AAD;
   "domainService"
 );
 @@clientName(DomainServices.update::parameters.properties, "domainService");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DomainService.properties);
 
 @@clientLocation(OuContainers.get, "OuContainer");
@@ -17,5 +17,6 @@ using Microsoft.AAD;
 @@clientName(OuContainers.update::parameters.properties, "containerAccount");
 @@clientLocation(OuContainers.delete, "OuContainer");
 @@clientLocation(OuContainers.list, "OuContainer");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(OuContainer.properties);
+@@clientLocation(Operations.list, "DomainServiceOperations");

@@ -13,6 +13,8 @@ namespace Microsoft.AAD;
 /**
  * Resource for OuContainer.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(DomainService)
 model OuContainer
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<OuContainerProperties> {
   ...ResourceNameParameter<
@@ -25,26 +27,25 @@ model OuContainer
   /**
    * Resource etag
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
 @armResourceOperations
+@tag("OuContainer")
 interface OuContainers {
   /**
    * Get OuContainer in DomainService instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OuContainer_Get")
-  get is ArmResourceRead<OuContainer>;
+  @summary("Get particular OuContainer in DomainService instance")
+  get is ArmResourceRead<OuContainer, Error = CloudError>;
 
   /**
    * The Create OuContainer operation creates a new OuContainer under the specified Domain Service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("OuContainer_Create")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create OuContainer")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     OuContainer,
     Request = ContainerAccount,
@@ -52,18 +53,20 @@ interface OuContainers {
       OuContainer,
       ArmLroLocationHeader<FinalResult = OuContainer> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
+    > | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OuContainer> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: OuContainer;
-    })
+    }),
+    Error = CloudError
   >;
 
   /**
    * The Update OuContainer operation can be used to update the existing OuContainers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("OuContainer_Update")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update OuContainer (PATCH Resource)")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OuContainer,
@@ -71,26 +74,30 @@ interface OuContainers {
     Response = ArmResponse<OuContainer> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: OuContainer;
-    })
+    }),
+    Error = CloudError
   >;
 
   /**
    * The Delete OuContainer operation deletes specified OuContainer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("OuContainer_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete OuContainer")
   delete is ArmResourceDeleteWithoutOkAsync<
     OuContainer,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * The List of OuContainers in DomainService instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OuContainer_List")
-  list is ArmResourceListByParent<OuContainer>;
+  @summary("List of OuContainers in DomainService instance")
+  list is ArmResourceListByParent<
+    OuContainer,
+    Response = ArmResponse<OuContainerListResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(OuContainer.name, "The name of the OuContainer.");

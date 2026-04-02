@@ -40,23 +40,24 @@
   },
   "tags": [
     {
-      "name": "Operations"
-    },
-    {
       "name": "DomainServices"
     },
     {
-      "name": "OuContainers"
+      "name": "Operations"
+    },
+    {
+      "name": "OuContainer"
     }
   ],
   "paths": {
     "/providers/Microsoft.AAD/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "DomainServiceOperations_List",
         "tags": [
+          "DomainServices",
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all the available Domain Services operations.",
         "parameters": [
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -66,14 +67,55 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationEntityListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.Aad/operations": {
+      "get": {
+        "operationId": "OuContainerOperations_List",
+        "tags": [
+          "OuContainer"
+        ],
+        "description": "Lists all the available OuContainer operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/OuContainerOperations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -87,6 +129,7 @@
         "tags": [
           "DomainServices"
         ],
+        "summary": "List Domain Services in Subscription",
         "description": "The List Domain Services in Subscription operation lists all the domain services available under the given subscription (and across all resource groups within that subscription).",
         "parameters": [
           {
@@ -106,7 +149,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -126,6 +169,7 @@
         "tags": [
           "DomainServices"
         ],
+        "summary": "List Domain Services in Resource Group",
         "description": "The List Domain Services in Resource Group operation lists all the domain services available under the given resource group.",
         "parameters": [
           {
@@ -148,7 +192,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -168,6 +212,7 @@
         "tags": [
           "DomainServices"
         ],
+        "summary": "Get Domain Service",
         "description": "The Get Domain Service operation retrieves a json representation of the Domain Service.",
         "parameters": [
           {
@@ -198,7 +243,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -213,6 +258,7 @@
         "tags": [
           "DomainServices"
         ],
+        "summary": "Create or Update Domain Service (PUT Resource)",
         "description": "The Create Domain Service operation creates a new domain service with the specified parameters. If the specific service already exists, then any patchable properties will be updated and any immutable properties will remain unchanged.",
         "parameters": [
           {
@@ -272,21 +318,21 @@
               "$ref": "#/definitions/DomainService"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -306,6 +352,7 @@
         "tags": [
           "DomainServices"
         ],
+        "summary": "Update Domain Service (PATCH Resource)",
         "description": "The Update Domain Service operation can be used to update the existing deployment. The update call only supports the properties listed in the PATCH body.",
         "parameters": [
           {
@@ -348,21 +395,21 @@
               "$ref": "#/definitions/DomainService"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -381,6 +428,7 @@
         "tags": [
           "DomainServices"
         ],
+        "summary": "Delete Domain Service (DELETE Resource)",
         "description": "The Delete Domain Service operation deletes an existing Domain Service.",
         "parameters": [
           {
@@ -405,6 +453,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -422,7 +475,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -437,13 +490,14 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend": {
-      "post": {
-        "operationId": "DomainServices_Unsuspend",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/ouContainer": {
+      "get": {
+        "operationId": "OuContainer_List",
         "tags": [
-          "DomainServices"
+          "OuContainer"
         ],
-        "description": "Unsuspend a suspended Domain Service resource.",
+        "summary": "List of OuContainers in DomainService instance",
+        "description": "The List of OuContainers in DomainService instance.",
         "parameters": [
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -467,52 +521,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/UnsuspendDomainServiceResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Unsuspend Domain Service": {
-            "$ref": "./examples/UnsuspendDomainService.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/ouContainer": {
-      "get": {
-        "operationId": "OuContainer_List",
-        "tags": [
-          "OuContainers"
-        ],
-        "description": "The List of OuContainers in DomainService instance.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
               "$ref": "#/definitions/OuContainerListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -526,12 +541,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/ouContainer/{ouContainerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/ouContainer/{ouContainerName}": {
       "get": {
         "operationId": "OuContainer_Get",
         "tags": [
-          "OuContainers"
+          "OuContainer"
         ],
+        "summary": "Get particular OuContainer in DomainService instance",
         "description": "Get OuContainer in DomainService instance.",
         "parameters": [
           {
@@ -542,6 +558,14 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
           },
           {
             "name": "ouContainerName",
@@ -561,7 +585,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -574,8 +598,9 @@
       "put": {
         "operationId": "OuContainer_Create",
         "tags": [
-          "OuContainers"
+          "OuContainer"
         ],
+        "summary": "Create OuContainer",
         "description": "The Create OuContainer operation creates a new OuContainer under the specified Domain Service instance.",
         "parameters": [
           {
@@ -586,6 +611,14 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
           },
           {
             "name": "ouContainerName",
@@ -634,6 +667,11 @@
               "$ref": "#/definitions/OuContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -648,7 +686,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -666,8 +704,9 @@
       "patch": {
         "operationId": "OuContainer_Update",
         "tags": [
-          "OuContainers"
+          "OuContainer"
         ],
+        "summary": "Update OuContainer (PATCH Resource)",
         "description": "The Update OuContainer operation can be used to update the existing OuContainers.",
         "parameters": [
           {
@@ -678,6 +717,14 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
           },
           {
             "name": "ouContainerName",
@@ -723,7 +770,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -740,8 +787,9 @@
       "delete": {
         "operationId": "OuContainer_Delete",
         "tags": [
-          "OuContainers"
+          "OuContainer"
         ],
+        "summary": "Delete OuContainer",
         "description": "The Delete OuContainer operation deletes specified OuContainer.",
         "parameters": [
           {
@@ -752,6 +800,14 @@
           },
           {
             "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
           },
           {
             "name": "ouContainerName",
@@ -785,7 +841,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -799,16 +855,101 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}/unsuspend": {
+      "post": {
+        "operationId": "DomainServices_Unsuspend",
+        "tags": [
+          "DomainServices"
+        ],
+        "summary": "Unsuspend Domain Service",
+        "description": "Unsuspend a suspended Domain Service resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "domainServiceName",
+            "in": "path",
+            "description": "The name of the domain service.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{3,255}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnsuspendDomainServiceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unsuspend Domain Service": {
+            "$ref": "./examples/UnsuspendDomainService.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "CloudError": {
+      "type": "object",
+      "description": "An error response from the Domain Services.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the Domain Services."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the Domain Services.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
+    },
     "ConfigDiagnostics": {
       "type": "object",
       "description": "Configuration Diagnostics",
       "properties": {
         "lastExecuted": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc7231",
           "description": "Last domain configuration diagnostics DateTime"
         },
         "validatorResults": {
@@ -921,7 +1062,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The account password"
+          "format": "password",
+          "description": "The account password",
+          "x-ms-secret": true
         }
       }
     },
@@ -1218,11 +1361,11 @@
     },
     "DomainServiceListResult": {
       "type": "object",
-      "description": "The response of a DomainService list operation.",
+      "description": "The list of Domain Services.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DomainService items on this page",
+          "description": "The list of Domain Services.",
           "items": {
             "$ref": "#/definitions/DomainService"
           }
@@ -1230,12 +1373,9 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The continuation token for the next page of results."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DomainServiceProperties": {
       "type": "object",
@@ -1393,7 +1533,9 @@
         },
         "trustPassword": {
           "type": "string",
-          "description": "Trust Password"
+          "format": "password",
+          "description": "Trust Password",
+          "x-ms-secret": true
         }
       }
     },
@@ -1646,6 +1788,64 @@
         ]
       }
     },
+    "OperationDisplayInfo": {
+      "type": "object",
+      "description": "The operation supported by Domain Services.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The action that users can perform, based on their permission level."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Domain Services."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        }
+      }
+    },
+    "OperationEntity": {
+      "type": "object",
+      "description": "The operation supported by Domain Services.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Domain Services."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of the operation."
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "type": "object",
+      "description": "The list of domain service operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of operations.",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The continuation token for the next page of results."
+        }
+      }
+    },
     "OuContainer": {
       "type": "object",
       "description": "Resource for OuContainer.",
@@ -1683,11 +1883,11 @@
     },
     "OuContainerListResult": {
       "type": "object",
-      "description": "The response of a OuContainer list operation.",
+      "description": "The list of OuContainers in DomainService instance.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The OuContainer items on this page",
+          "description": "The list of OuContainers.",
           "items": {
             "$ref": "#/definitions/OuContainer"
           }
@@ -1695,12 +1895,9 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The continuation token for the next page of results."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "OuContainerProperties": {
       "type": "object",
@@ -1794,12 +1991,13 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of times the customer has self-resumed the domain service. Valid values range from 0 to 5, where 5 is the maximum allowed count before further self-resume is denied and support intervention is required.",
+          "minimum": 0,
           "maximum": 5,
           "readOnly": true
         },
         "healthLastEvaluated": {
           "type": "string",
-          "format": "date-time",
+          "format": "date-time-rfc7231",
           "description": "Last domain evaluation run DateTime",
           "readOnly": true
         },
