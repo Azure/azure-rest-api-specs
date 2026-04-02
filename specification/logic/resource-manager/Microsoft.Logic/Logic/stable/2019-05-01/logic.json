@@ -912,6 +912,319 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/drafts": {
+      "get": {
+        "tags": [
+          "WorkflowDrafts"
+        ],
+        "operationId": "WorkflowDrafts_List",
+        "description": "Gets a list of workflow drafts.",
+        "x-ms-examples": {
+          "List workflow drafts": {
+            "$ref": "./examples/WorkflowDrafts_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowDraftListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/drafts/{draftName}": {
+      "get": {
+        "tags": [
+          "WorkflowDrafts"
+        ],
+        "operationId": "WorkflowDrafts_Get",
+        "description": "Gets a workflow draft.",
+        "x-ms-examples": {
+          "Get a workflow draft": {
+            "$ref": "./examples/WorkflowDrafts_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "draftName",
+            "description": "The workflow draft name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowDraft"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WorkflowDrafts"
+        ],
+        "operationId": "WorkflowDrafts_CreateOrUpdate",
+        "description": "Creates or updates a workflow draft.",
+        "x-ms-examples": {
+          "Create or update a workflow draft": {
+            "$ref": "./examples/WorkflowDrafts_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "draftName",
+            "description": "The workflow draft name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "draft",
+            "description": "The workflow draft.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkflowDraft"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowDraft"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WorkflowDraft"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WorkflowDrafts"
+        ],
+        "operationId": "WorkflowDrafts_Delete",
+        "description": "Deletes a workflow draft.",
+        "x-ms-examples": {
+          "Delete a workflow draft": {
+            "$ref": "./examples/WorkflowDrafts_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "draftName",
+            "description": "The workflow draft name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/drafts/{draftName}/run": {
+      "post": {
+        "tags": [
+          "WorkflowDrafts"
+        ],
+        "operationId": "WorkflowDrafts_Run",
+        "description": "Runs a workflow draft.",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Run a workflow draft": {
+            "$ref": "./examples/WorkflowDrafts_Run.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowName",
+            "description": "The workflow name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "draftName",
+            "description": "The workflow draft name.",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers": {
       "get": {
         "tags": [
@@ -6685,6 +6998,104 @@
         }
       },
       "description": "The list of workflow versions."
+    },
+    "WorkflowDraft": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowDraftProperties",
+          "description": "The workflow draft properties."
+        }
+      },
+      "description": "The workflow draft.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ]
+    },
+    "WorkflowDraftProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowProvisioningState",
+          "readOnly": true,
+          "description": "Gets the provisioning state."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the changed time."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The state."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the version."
+        },
+        "accessEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the access endpoint."
+        },
+        "endpointsConfiguration": {
+          "$ref": "#/definitions/FlowEndpointsConfiguration",
+          "description": "The endpoints configuration."
+        },
+        "accessControl": {
+          "$ref": "#/definitions/FlowAccessControlConfiguration",
+          "description": "The access control configuration."
+        },
+        "integrationAccount": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration account."
+        },
+        "integrationServiceEnvironment": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration service environment."
+        },
+        "definition": {
+          "$ref": "#/definitions/Object",
+          "description": "The definition."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowParameter"
+          },
+          "description": "The parameters."
+        }
+      },
+      "description": "The workflow draft properties."
+    },
+    "WorkflowDraftListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowDraft",
+            "description": "The workflow draft."
+          },
+          "description": "A list of workflow drafts."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of workflow drafts."
     },
     "WorkflowTrigger": {
       "type": "object",
