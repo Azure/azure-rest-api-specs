@@ -652,15 +652,23 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@clientName(privateEndpointConnectionsUpdateCustomization::parameters.resource,
   "privateEndpointConnection",
-  "go"
+  "go,javascript"
 );
 @@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.resource,
   "sharedPrivateLinkResource",
-  "go"
+  "go,javascript"
 );
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.body,
   "checkNameAvailabilityInput",
-  "go"
+  "go,javascript"
+);
+@@clientName(searchCreateOrUpdateCustomization::parameters.resource,
+  "service",
+  "javascript"
+);
+@@clientName(searchUpdateCustomization::parameters.properties,
+  "service",
+  "javascript"
 );
 
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
