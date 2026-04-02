@@ -36,7 +36,6 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 
@@ -3967,7 +3966,6 @@ model VirtualNetworkPropertiesFormat {
   /**
    * A summarized list of advertised prefixes for the virtual network.
    */
-  @added(Versions.v2025_07_01)
   summarizedGatewayPrefixes?: AddressSpace;
 }
 

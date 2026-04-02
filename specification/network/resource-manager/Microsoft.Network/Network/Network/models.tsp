@@ -25905,6 +25905,7 @@ model VirtualNetworkAppliancePropertiesFormat {
   /**
    * Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_07_01)
   privateIPAddressVersion?: VirtualNetworkApplianceIpVersionType;
 
