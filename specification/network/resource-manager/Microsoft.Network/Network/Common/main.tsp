@@ -1377,6 +1377,11 @@ model DdosSettings {
   protectionMode?: DdosSettingsProtectionMode;
 
   /**
+   * The DDoS custom policy associated with the public IP.
+   */
+  ddosCustomPolicy?: SubResource;
+
+  /**
    * The DDoS protection plan associated with the public IP. Can only be set if ProtectionMode is Enabled
    */
   ddosProtectionPlan?: SubResource;
