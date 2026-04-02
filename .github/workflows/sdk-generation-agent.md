@@ -1,5 +1,6 @@
 ---
 description: Trigger SDK generation from issues and comments, monitor pipeline status, and report SDK PR links.
+timeout-minutes: 60  # Job timeout
 on:
   issues:
     types: [opened, labeled]
@@ -42,6 +43,7 @@ env:
 tools:
   github:
     toolsets: [default, actions]
+    min-integrity: approved
 safe-outputs:
   add-comment:
     max: 15
