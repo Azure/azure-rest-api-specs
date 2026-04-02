@@ -3,7 +3,6 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -12,7 +11,6 @@ using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.MachineLearningServices;
 
