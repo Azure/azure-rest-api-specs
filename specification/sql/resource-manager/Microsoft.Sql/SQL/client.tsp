@@ -31,6 +31,23 @@ using Microsoft.Sql;
 
 @@usage(ServerDnsAlias, Azure.ClientGenerator.Core.Usage.input, "java");
 
+@@alternateType(CheckNameAvailabilityResourceType,
+  "Microsoft.Sql/servers",
+  "java"
+);
+
+@@alternateType(ServerProperties.minimalTlsVersion, string, "java");
+
+@@clientName(DNSRefreshOperationStatus,
+  "DnsRefreshConfigurationPropertiesStatus",
+  "java"
+);
+@@clientName(ReplicationModeType, "ReplicationMode", "java");
+@@clientName(UpsertManagedServerOperationStepWithEstimatesAndDurationStatus,
+  "Status",
+  "java"
+);
+
 @@clientName(SqlVulnerabilityAssessmentScanRecord,
   "VulnerabilityAssessmentScanRecordForSql",
   "go"
