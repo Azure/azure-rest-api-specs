@@ -25934,10 +25934,10 @@ model VirtualNetworkAppliancePropertiesFormat {
 union VirtualNetworkApplianceIpVersionType {
   string,
 
-  /** IPv4 */
+  /** IPv4 version */
   IPv4: "IPv4",
 
-  /** Dual Stack */
+  /** Dual Stack version */
   DualStack: "DualStack",
 }
 
