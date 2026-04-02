@@ -394,3 +394,11 @@ using Microsoft.NetworkCloud;
 @@usage(RackSku, Usage.input, "csharp");
 @@usage(BareMetalMachine, Usage.input, "csharp");
 @@usage(StorageAppliance, Usage.input, "csharp");
+
+@@clientName(HugepagesSize.`1G`, "OneG", "go");
+@@clientName(HugepagesSize.`2M`, "TwoM", "go");
+@@alternateType(Foundations.ExtendedLocation.type, string, "go");
+
+@@clientName(Microsoft.NetworkCloud, "NetworkCloudMgmtClient", "python");
+@@clientName(HugepagesSize.`1G`, "ONE_G", "python");
+@@clientName(HugepagesSize.`2M`, "TWO_M", "python");

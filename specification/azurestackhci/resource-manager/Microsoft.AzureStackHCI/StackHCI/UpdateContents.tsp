@@ -13,7 +13,7 @@ namespace Microsoft.AzureStackHCI;
  * Represents a update content.
  */
 @parentResource(SubscriptionLocationResource)
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_04_01_preview)
 model UpdateContent
   is Azure.ResourceManager.ProxyResource<UpdateContentProperties> {
   ...ResourceNameParameter<
@@ -23,7 +23,7 @@ model UpdateContent
 }
 
 @armResourceOperations
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_04_01_preview)
 interface UpdateContents {
   /**
    * Gets content for an update.

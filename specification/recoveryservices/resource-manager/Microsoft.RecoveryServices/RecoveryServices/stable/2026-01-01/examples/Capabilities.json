@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "input": {
+      "type": "Microsoft.RecoveryServices/Vaults",
+      "properties": {
+        "dnsZones": [
+          {
+            "subResource": "AzureBackup"
+          },
+          {
+            "subResource": "AzureSiteRecovery"
+          }
+        ]
+      }
+    },
+    "location": "westus",
+    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.RecoveryServices/Vaults",
+        "properties": {
+          "dnsZones": [
+            {
+              "requiredZoneNames": [
+                "privatelink.wus.backup.windowsazure.com",
+                "privatelink.queue.core.windows.net",
+                "privatelink.blob.core.windows.net"
+              ],
+              "subResource": "AzureBackup"
+            },
+            {
+              "requiredZoneNames": [
+                "privatelink.siterecovery.windowsazure.com"
+              ],
+              "subResource": "AzureSiteRecovery"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "RecoveryServices_Capabilities",
+  "title": "Capabilities for Microsoft.RecoveryServices/Vaults"
+}

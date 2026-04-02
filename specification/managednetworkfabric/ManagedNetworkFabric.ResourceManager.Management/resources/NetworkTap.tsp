@@ -2,7 +2,7 @@ import "../models/common.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -19,8 +19,13 @@ model NetworkTap extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NetworkTap Properties */
+  @doc("The NetworkTap Properties")
   properties: NetworkTapProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -39,29 +44,62 @@ interface NetworkTaps {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkTap>;
 
   @doc("Displays Network Taps list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<NetworkTap>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkTap,
+    Response = NetworkTapsListResult
+  >;
 
   @doc("Displays Network Taps list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<NetworkTap>;
+  listBySubscription is ArmListBySubscription<
+    NetworkTap,
+    Response = NetworkTapsListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
-  updateAdministrativeState is ArmResourceActionAsync<
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
     NetworkTap,
     UpdateAdministrativeState,
     CommonPostActionResponseForDeviceUpdate
   >;
 
   @doc("Implements the operation to the underlying resources.")
-  resync is ArmResourceActionAsync<
+  @action("updateAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    NetworkTap,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
+  >;
+
+  @doc("Implements the operation to the underlying resources.")
+  @action("resync")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "resync")
+  @sharedRoute
+  resyncDeprecated is ArmResourceActionAsync<
     NetworkTap,
     void,
     CommonPostActionResponseForStateUpdate
   >;
+
+  @doc("Implements the operation to the underlying resources.")
+  @action("resync")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  resync is ArmResourceActionAsync<NetworkTap, void, NetworkTapResyncResponse>;
 }
 
 @@doc(NetworkTaps.create::parameters.resource, "Request payload.");
 @@doc(NetworkTaps.update::parameters.properties,
   "Network Tap properties to update."
+);
+@@doc(NetworkTaps.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
 );
 @@doc(NetworkTaps.updateAdministrativeState::parameters.body,
   "Request payload."
