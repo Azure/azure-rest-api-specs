@@ -47,6 +47,7 @@ input-file:
   - stable/2025-07-01/networkGateway.json
   - stable/2025-07-01/networkingOperations.json
   - stable/2025-07-01/networkManager.json
+  - stable/2025-07-01/networkManagerCommit.json
   - stable/2025-07-01/networkSecurityPerimeter.json
   - stable/2025-07-01/networkWatcher.json
   - stable/2025-07-01/serviceGateway.json
@@ -88,6 +89,15 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: ResourceNameRestriction
+    from: networkManagerCommit.json
+    reason: The resource name parameter 'networkManagerName' is not defined with a 'pattern' restriction. Suppress it to avoid breaking change because it is referenced by all AvNM APIs.
+    where:
+      - $.paths.[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}]
+      - $.paths.[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits]
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkManagerCommit.json
+    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
