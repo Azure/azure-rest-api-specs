@@ -323,6 +323,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ddosCustomPolicies": {
+      "get": {
+        "operationId": "DdosCustomPolicies_ListAll",
+        "tags": [
+          "ddosCustomPolicies"
+        ],
+        "description": "Gets all the DDoS custom policies in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DdosCustomPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ddosProtectionPlans": {
       "get": {
         "operationId": "DdosProtectionPlans_List",
@@ -3043,6 +3077,43 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies": {
+      "get": {
+        "operationId": "DdosCustomPolicies_List",
+        "tags": [
+          "ddosCustomPolicies"
+        ],
+        "description": "Gets all the DDoS custom policies in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DdosCustomPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ddosCustomPolicies/{ddosCustomPolicyName}": {
@@ -17276,6 +17347,27 @@
         {
           "$ref": "./common.json#/definitions/Common.Resource"
         }
+      ]
+    },
+    "DdosCustomPolicyListResult": {
+      "type": "object",
+      "description": "The response of a DdosCustomPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DdosCustomPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/DdosCustomPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "DdosCustomPolicyPropertiesFormat": {

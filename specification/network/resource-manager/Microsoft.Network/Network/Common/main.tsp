@@ -1939,6 +1939,7 @@ model FrontendIPConfigurationPropertiesFormat {
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DdosFrontendIPConfigurationSettings {
   /** The reference to the Ddos Custom Policy resource. */
   ddosCustomPolicy?: SubResource;
