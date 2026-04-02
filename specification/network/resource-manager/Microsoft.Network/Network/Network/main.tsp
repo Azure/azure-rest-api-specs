@@ -119,6 +119,7 @@ import "./VpnServerConfiguration.tsp";
 import "./VpnServerConfigurationPolicyGroup.tsp";
 import "./VirtualHub.tsp";
 import "./RouteMap.tsp";
+import "./ConnectionPolicy.tsp";
 import "./VpnGateway.tsp";
 import "./ConnectionSharedKeyResult.tsp";
 import "./VpnSiteLinkConnection.tsp";
