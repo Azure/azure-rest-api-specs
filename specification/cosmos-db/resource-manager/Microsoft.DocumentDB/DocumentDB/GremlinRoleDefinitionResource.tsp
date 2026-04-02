@@ -27,7 +27,6 @@ model GremlinRoleDefinitionResource
   >;
 }
 
-@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface GremlinRoleDefinitionResources {
   /**

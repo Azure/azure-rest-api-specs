@@ -46,7 +46,6 @@ input-file:
 ```
 
 ### Tag: package-2026-03-15
-
 These settings apply only when `--tag=package-2026-03-15` is specified on the command line.
 
 ```yaml $(tag) == 'package-2026-03-15'
