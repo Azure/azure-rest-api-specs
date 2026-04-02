@@ -77,6 +77,8 @@ interface Search {
        *
        *   Maximum size: up to the full global extent (-180,-90 to 180,90)
        */
+      @minItems(4)
+      @maxItems(4)
       @query("bbox")
       bbox?: float64[];
 
@@ -91,6 +93,8 @@ interface Search {
       /**
        * A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat
        */
+      @minItems(2)
+      @maxItems(2)
       @query("coordinates")
       coordinates?: float64[];
 
@@ -470,6 +474,8 @@ interface Search {
        *
        * **Note:** `coordinates` becomes a secondary signal if `bbox` is provided.
        */
+      @minItems(2)
+      @maxItems(2)
       @query("coordinates")
       coordinates?: float64[];
 
@@ -482,6 +488,8 @@ interface Search {
        *
        *   Maximum size: up to the full global extent (-180,-90 to 180,90)
        */
+      @minItems(4)
+      @maxItems(4)
       @query("bbox")
       bbox?: float64[];
 
