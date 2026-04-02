@@ -1129,7 +1129,8 @@ model ClusterUpdate {
   /**
    * The identity of the resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 
   /**
    * Resource tags.
