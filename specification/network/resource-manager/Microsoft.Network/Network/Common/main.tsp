@@ -38,6 +38,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.versioned(Versions)
 namespace Common;
@@ -166,6 +167,12 @@ union RouteNextHopType {
    * VirtualAppliance
    */
   VirtualAppliance: "VirtualAppliance",
+
+  /**
+   * VirtualApplianceEcmp
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
 
   /**
    * None
@@ -3778,6 +3785,12 @@ model RoutePropertiesFormat {
   nextHopIpAddress?: string;
 
   /**
+   * The next hop definition containing ECMP next hop IP addresses. Only allowed when nextHopType is VirtualApplianceEcmp.
+   */
+  @added(Versions.v2025_07_01)
+  nextHop?: RouteNextHopEcmp;
+
+  /**
    * The provisioning state of the route resource.
    */
   @visibility(Lifecycle.Read)
@@ -3788,6 +3801,21 @@ model RoutePropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   hasBgpOverride?: boolean;
+}
+
+/**
+ * The next hop definition for ECMP routes containing multiple next hop IP addresses.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2025_07_01)
+model RouteNextHopEcmp {
+  /**
+   * List of next hop IP addresses for ECMP routing. Must contain between 2 and 64 IP addresses.
+   */
+  @minItems(2)
+  @maxItems(64)
+  nextHopIpAddresses?: string[];
 }
 
 /**

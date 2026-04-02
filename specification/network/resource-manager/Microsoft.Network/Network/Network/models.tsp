@@ -2920,6 +2920,12 @@ union NextHopType {
   HyperNetGateway: "HyperNetGateway",
 
   /**
+   * VirtualApplianceEcmp
+   */
+  @added(Versions.v2025_07_01)
+  VirtualApplianceEcmp: "VirtualApplianceEcmp",
+
+  /**
    * None
    */
   None: "None",
