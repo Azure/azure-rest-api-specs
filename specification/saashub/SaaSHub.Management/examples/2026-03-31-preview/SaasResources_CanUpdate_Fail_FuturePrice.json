@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "properties": {
+        "quantity": 25,
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+            "quantity": 25
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyFuturePriceConstraints",
+        "reason": "Failed to satisfy future price constraints",
+        "updateScenario": "UpdateSchedule",
+        "additionalInfo": {
+          "refundableQuantity": null,
+          "coTerm": null,
+          "addOn": null,
+          "promotion": null,
+          "futurePrice": [
+            {
+              "termEndDate": "2026-03-12T00:00:00Z",
+              "totalQuantity": 2501,
+              "isEligible": "Eligible",
+              "qualifyingResources": [
+                {
+                  "resourceId": "/providers/Microsoft.SaaSHub/saasResources/qualifyingResourceName"
+                }
+              ],
+              "futurePriceConcessionTypes": [
+                "FuturePercentNotToExceedCap",
+                "FuturePriceNotToExceedCap"
+              ],
+              "minimumQuantityRequired": 2400
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "SaasResources_CanUpdate",
+  "title": "Update Future Price - Failed"
+}

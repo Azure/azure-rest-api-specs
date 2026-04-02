@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "targetProducts": [
+        {
+          "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+          "itemTrackingId": "LINE_001"
+        },
+        {
+          "productCode": "6ba7b820-9dad-11d1-80b4-00c04fd430c8",
+          "itemTrackingId": "LINE_002"
+        }
+      ],
+      "copurchasedProducts": [
+        {
+          "productCode": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
+          "quantity": 50,
+          "startDate": "2026-01-01T00:00:00Z",
+          "resourceId": "/providers/Microsoft.SaaSHub/saasResources/sub-123",
+          "itemTrackingId": "LINE_001"
+        },
+        {
+          "productCode": "6ba7b821-9dad-11d1-80b4-00c04fd430c8",
+          "quantity": 30,
+          "startDate": "2026-01-01T00:00:00Z",
+          "itemTrackingId": "LINE_002"
+        }
+      ],
+      "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/a1b2c3d4-e5f6-4071-8192-a3b4c5d6e7f8:b2c3d4e5-f6a7-4182-9203-b4c5d6e7f8a9"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "requestMetadata": {
+              "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+              "pricingAudience": "Direct-Commercial",
+              "itemTrackingId": "LINE_001",
+              "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/a1b2c3d4-e5f6-4071-8192-a3b4c5d6e7f8:b2c3d4e5-f6a7-4182-9203-b4c5d6e7f8a9"
+            },
+            "qualifyingCoterminousResources": [
+              {
+                "termEndDate": "2026-12-31T23:59:59Z",
+                "futurePriceConcessionTypes": [
+                  "Volume",
+                  "Loyalty"
+                ],
+                "minimumQuantityRequired": 25,
+                "totalQuantity": 75,
+                "isEligible": "Eligible",
+                "qualifyingResources": [
+                  {
+                    "productCode": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
+                    "resourceId": "/providers/Microsoft.SaaSHub/saasResources/resource-123",
+                    "quantity": 50,
+                    "isCopurchased": true,
+                    "itemTrackingId": "LINE_001"
+                  },
+                  {
+                    "productCode": "6ba7b812-9dad-11d1-80b4-00c04fd430c8",
+                    "resourceId": "/providers/Microsoft.SaaSHub/saasResources/existing-resource-001",
+                    "quantity": 25,
+                    "isCopurchased": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "requestMetadata": {
+              "productCode": "6ba7b820-9dad-11d1-80b4-00c04fd430c8",
+              "pricingAudience": "Direct-Commercial",
+              "itemTrackingId": "LINE_002",
+              "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/a1b2c3d4-e5f6-4071-8192-a3b4c5d6e7f8:b2c3d4e5-f6a7-4182-9203-b4c5d6e7f8a9"
+            },
+            "qualifyingCoterminousResources": [
+              {
+                "termEndDate": "2026-06-30T23:59:59Z",
+                "futurePriceConcessionTypes": [
+                  "PercentageDiscount"
+                ],
+                "minimumQuantityRequired": 50,
+                "totalQuantity": 30,
+                "isEligible": "Ineligible",
+                "qualifyingResources": [
+                  {
+                    "productCode": "6ba7b821-9dad-11d1-80b4-00c04fd430c8",
+                    "resourceId": "/providers/Microsoft.SaaSHub/saasResources/copurchased-resource-002",
+                    "quantity": 30,
+                    "isCopurchased": true,
+                    "itemTrackingId": "LINE_002"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_ValidateFuturePriceEligibility",
+  "title": "Validate Future Price Eligibility - Bulk Products Mixed Results"
+}
