@@ -280,22 +280,3 @@ model issue {
 /**
  * Describes an Azure resource.
  */
-model Resource {
-  /**
-   * Resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}

@@ -108,26 +108,6 @@ model SecurityTaskParameters {
 /**
  * Describes an Azure resource.
  */
-model Resource {
-  /**
-   * Resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
 /**
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
