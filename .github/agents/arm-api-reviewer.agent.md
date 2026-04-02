@@ -346,7 +346,7 @@ After presenting the review findings to the human reviewer for approval:
    The existing comment already covers the exact same rule violation on the same file and line. **Skip posting.** No action needed.
 
    **Scenario B — Same finding, different line, comment was from _this agent or the same engineer running the agent_:**
-   The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "*(Updated from [previous comment](<url>) — line shifted due to code changes.)*").
+   The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "*(Updated from previous comment at \<url\> — line shifted due to code changes.)*").
 
    **Scenario C — Same finding, different line, comment was from a _different_ human reviewer:**
    Another ARM reviewer (not this agent) posted the comment at the old line. Do **not** resolve their comment — it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "*The code referenced by this comment has moved. The same violation now appears at `<file>` L`<N>`. The issue is still unresolved.*" This helps the author and reviewer find the right code without creating duplicate threads.
@@ -364,7 +364,7 @@ After presenting the review findings to the human reviewer for approval:
 4. Once approved and de-duplicated, post review comments on the PR using the GitHub tools — one comment per finding, attached to the specific file and **exact line number** where the violation occurs.
 5. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR — this property did not exist in the previous version").
 6. For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟡 Warning`, or `💡 Suggestion`.
-7. Use the format: `**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` or `**[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` followed by the classification reasoning and suggested fix.
+7. Use the format: `` **[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description> `` or `` **[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description> `` followed by the classification reasoning and suggested fix.
 8. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
 9. **Report a reconciliation summary** to the human reviewer before posting:
    - Findings to **post as new comments** (with line numbers)

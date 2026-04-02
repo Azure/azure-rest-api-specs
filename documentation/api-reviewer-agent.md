@@ -254,7 +254,7 @@ a corrected path.
 Fix mode is for working on your **local branch or fork**. The agent reviews
 your files, presents its findings, and then applies fixes with your approval.
 
-### Basic Usage
+### Usage
 
 ```text
 Review and fix my local spec in specification/contoso/resource-manager/Microsoft.Contoso/stable/2025-01-01/
@@ -268,7 +268,7 @@ Fix all blocking issues in specification/network/resource-manager/Microsoft.Netw
 Review this TypeSpec project and apply fixes: specification/contoso/resource-manager/Microsoft.Contoso/Contoso.Management/
 ```
 
-### How It Works
+### Fix Workflow
 
 1. **Review** — The agent performs the same thorough review as review mode.
 2. **Present findings** — Issues are shown in the structured report before any changes are made.
