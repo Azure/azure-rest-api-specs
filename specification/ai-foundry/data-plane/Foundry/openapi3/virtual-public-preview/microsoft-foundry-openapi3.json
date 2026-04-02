@@ -12,6 +12,9 @@
       "name": "Agent Containers"
     },
     {
+      "name": "Agent Session Files"
+    },
+    {
       "name": "Agent Invocations"
     },
     {
@@ -58,6 +61,12 @@
     },
     {
       "name": "Schedules"
+    },
+    {
+      "name": "Skills"
+    },
+    {
+      "name": "Toolsets"
     }
   ],
   "paths": {
@@ -72,7 +81,17 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "AgentEndpoints=V1Preview"
+                  ]
+                }
+              ]
             }
           },
           {
@@ -418,6 +437,1149 @@
         "tags": [
           "Agents"
         ]
+      },
+      "patch": {
+        "operationId": "Agents_patchAgentObject",
+        "description": "Updates an agent endpoint.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchAgentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/invocations/docs/openapi.json/{agent_version}": {
+      "get": {
+        "operationId": "AgentInvocations_getAgentInvocationOpenApiSpec",
+        "description": "Retrieves the OpenAPI specification for an agent version's invocation contract.\nReturns 404 if the agent does not expose an OpenAPI specification.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/invocations/{agent_version}": {
+      "post": {
+        "operationId": "AgentInvocations_createAgentInvocation",
+        "description": "Creates an invocation for the specified agent version.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "query",
+            "required": false,
+            "description": "Optional session ID returned by the session CRUD APIs to reuse an existing sandbox. If not provided, a new session ID will be auto-generated.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-invocation-id": {
+                "required": true,
+                "description": "Unique identifier for this invocation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-agent-session-id": {
+                "required": true,
+                "description": "Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "*/*": {
+                "schema": {}
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "*/*": {
+              "schema": {}
+            }
+          },
+          "description": "The request body."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel/{agent_version}": {
+      "post": {
+        "operationId": "AgentInvocations_cancelAgentInvocation",
+        "description": "Cancels an invocation.\nReturns 404 if the agent does not support this operation or if the invocation ID is not found.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "invocation_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the invocation to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "*/*": {
+                "schema": {}
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "*/*": {
+              "schema": {}
+            }
+          },
+          "description": "Optional request body."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/{agent_version}": {
+      "get": {
+        "operationId": "AgentInvocations_getAgentInvocation",
+        "description": "Retrieves the invocation with the given ID.\nReturns 404 if the agent does not support this operation or if the invocation ID is not found.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "invocation_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the invocation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "*/*": {
+                "schema": {}
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions": {
+      "post": {
+        "operationId": "Agents_createSession",
+        "description": "Creates a new session for an agent endpoint.\nThe endpoint resolves the backing agent version from `version_indicator` and\nenforces session ownership using the provided isolation key for session-mutating operations.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to create a session for.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-session-isolation-key",
+            "in": "header",
+            "required": true,
+            "description": "Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSessionResource"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAgentSessionRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "Agents_listSessions",
+        "description": "Returns a list of sessions for the specified agent.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "pagination_token",
+            "in": "query",
+            "required": false,
+            "description": "Opaque continuation token from a previous list response.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionListResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{session_id}": {
+      "get": {
+        "operationId": "Agents_getSession",
+        "description": "Retrieves a session by ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSessionResource"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "Agents_deleteSession",
+        "description": "Deletes a session synchronously.\nReturns 204 No Content when the session is deleted or does not exist.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-session-isolation-key",
+            "in": "header",
+            "required": true,
+            "description": "Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{session_id}/files": {
+      "get": {
+        "operationId": "AgentSessionFiles_listSessionFiles",
+        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The directory path to list, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentSessionFiles_deleteSessionFile",
+        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file or directory path to delete, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "recursive",
+            "in": "query",
+            "required": false,
+            "description": "Whether to recursively delete directory contents. Defaults to false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{session_id}/files/content": {
+      "put": {
+        "operationId": "AgentSessionFiles_uploadSessionFile",
+        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The destination file path within the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionFileWriteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "AgentSessionFiles_downloadSessionFile",
+        "description": "Download a file from the session sandbox as a binary stream.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file path to download from the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/import": {
@@ -708,7 +1870,17 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "AgentEndpoints=V1Preview"
+                  ]
+                }
+              ]
             }
           },
           {
@@ -1730,375 +2902,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "ContainerAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/versions/{agent_version}/invocations": {
-      "post": {
-        "operationId": "AgentInvocations_createAgentInvocation",
-        "description": "Creates an invocation for the specified agent version.",
-        "parameters": [
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_session_id",
-            "in": "query",
-            "required": false,
-            "description": "Optional session ID to group related invocations. If not provided, a new session ID will be auto-generated.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-invocation-id": {
-                "required": true,
-                "description": "Unique identifier for this invocation.",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "*/*": {
-                "schema": {}
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Invocations"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "*/*": {
-              "schema": {}
-            }
-          },
-          "description": "The request body."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/versions/{agent_version}/invocations/docs/openapi.json": {
-      "get": {
-        "operationId": "AgentInvocations_getAgentInvocationOpenApiSpec",
-        "description": "Retrieves the OpenAPI specification for an agent version's invocation contract.\nReturns 404 if the agent does not expose an OpenAPI specification.",
-        "parameters": [
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {}
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Invocations"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}": {
-      "get": {
-        "operationId": "AgentInvocations_getAgentInvocation",
-        "description": "Retrieves the invocation with the given ID.\nReturns 404 if the agent does not support this operation or if the invocation ID is not found.",
-        "parameters": [
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "invocation_id",
-            "in": "path",
-            "required": true,
-            "description": "The unique identifier of the invocation.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "*/*": {
-                "schema": {}
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Invocations"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}/cancel": {
-      "post": {
-        "operationId": "AgentInvocations_cancelAgentInvocation",
-        "description": "Cancels an invocation.\nReturns 404 if the agent does not support this operation or if the invocation ID is not found.",
-        "parameters": [
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_version",
-            "in": "path",
-            "required": true,
-            "description": "The version of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "invocation_id",
-            "in": "path",
-            "required": true,
-            "description": "The unique identifier of the invocation to cancel.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "*/*": {
-                "schema": {}
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Invocations"
-        ],
-        "requestBody": {
-          "required": false,
-          "content": {
-            "*/*": {
-              "schema": {}
-            }
-          },
-          "description": "Optional request body."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
           ]
         }
       }
@@ -4454,6 +5257,178 @@
         }
       }
     },
+    "/evaluators/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Evaluators_getCredentials",
+        "description": "Get the SAS credential to access the storage account associated with an Evaluator version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetCredentialResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorCredentialRequest"
+              }
+            }
+          },
+          "description": "The credential request parameters"
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}/startPendingUpload": {
+      "post": {
+        "operationId": "Evaluators_startPendingUpload",
+        "description": "Start a new or get an existing pending upload of an evaluator for a specific version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PendingUploadResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PendingUploadRequest"
+              }
+            }
+          },
+          "description": "The pending upload request parameters"
+        }
+      }
+    },
     "/indexes": {
       "get": {
         "operationId": "Indexes_listLatest",
@@ -5012,6 +5987,280 @@
         "tags": [
           "Insights"
         ]
+      }
+    },
+    "/managedAgentIdentityBlueprints": {
+      "get": {
+        "operationId": "ManagedAgentIdentityBlueprints_listManagedAgentIdentityBlueprints",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedManagedAgentIdentityBlueprint"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      }
+    },
+    "/managedAgentIdentityBlueprints/{blueprint_name}": {
+      "put": {
+        "operationId": "ManagedAgentIdentityBlueprints_createOrUpdateManagedAgentIdentityBlueprint",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "blueprint_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the managed agent identity blueprint to create.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedAgentIdentityBlueprint"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateManagedAgentIdentityBlueprintRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "ManagedAgentIdentityBlueprints_getManagedAgentIdentityBlueprint",
+        "description": "Retrieves a managed agent identity blueprint by name.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "blueprint_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the managed agent identity blueprint to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedAgentIdentityBlueprint"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "ManagedAgentIdentityBlueprints_deleteManagedAgentIdentityBlueprint",
+        "description": "Deletes a managed agent identity blueprint by name.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "blueprint_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the managed agent identity blueprint to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       }
     },
     "/memory_stores": {
@@ -9281,9 +10530,1072 @@
           "Schedules"
         ]
       }
+    },
+    "/skills": {
+      "post": {
+        "operationId": "Skills_createSkill",
+        "description": "Creates a skill.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "maxLength": 63,
+                    "description": "The unique name of the skill."
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 1024,
+                    "description": "A human-readable description of the skill."
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "maxLength": 102400,
+                    "description": "Instructions that define the behavior of the skill."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Set of key-value pairs associated with the skill."
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "Skills_listSkills",
+        "description": "Returns the list of all skills.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SkillObject"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
+    "/skills/{skill_name}": {
+      "get": {
+        "operationId": "Skills_getSkill",
+        "description": "Retrieves a skill.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      },
+      "post": {
+        "operationId": "Skills_updateSkill",
+        "description": "Updates an existing skill.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "maxLength": 1024,
+                    "description": "A human-readable description of the skill."
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "maxLength": 102400,
+                    "description": "Instructions that define the behavior of the skill."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Set of key-value pairs associated with the skill."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "Skills_deleteSkill",
+        "description": "Deletes a skill.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSkillResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
+    "/skills/{skill_name}:download": {
+      "get": {
+        "operationId": "Skills_downloadSkill",
+        "description": "Downloads a skill package.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body for downloading a skill package.",
+            "content": {
+              "application/gzip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
+    "/skills:import": {
+      "post": {
+        "operationId": "Skills_createSkillFromPackage",
+        "description": "Creates a skill from a GZip package.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/gzip": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          },
+          "description": "The GZip package used to create the skill."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
+    "/toolsets": {
+      "post": {
+        "operationId": "createToolset",
+        "description": "Create a toolset.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolsets=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolsetObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolsets"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "maxLength": 256,
+                    "description": "The name of the toolset."
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "A human-readable description of the toolset."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Arbitrary key-value metadata to associate with the toolset."
+                  },
+                  "tools": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OpenAI.Tool"
+                    },
+                    "description": "The list of tools to include in the toolset."
+                  }
+                },
+                "required": [
+                  "name",
+                  "tools"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolsets=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "listToolsets",
+        "description": "List all toolsets.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolsets=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ToolsetObject"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolsets"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolsets=V1Preview"
+          ]
+        }
+      }
+    },
+    "/toolsets/{tool_set_name}": {
+      "post": {
+        "operationId": "updateToolset",
+        "description": "Update a toolset.",
+        "parameters": [
+          {
+            "name": "tool_set_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolset to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolsets=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolsetObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolsets"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "description": "A human-readable description of the toolset."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Arbitrary key-value metadata to associate with the toolset."
+                  },
+                  "tools": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/OpenAI.Tool"
+                    },
+                    "description": "The list of tools to include in the toolset."
+                  }
+                },
+                "required": [
+                  "tools"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolsets=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "getToolset",
+        "description": "Retrieve a toolset.",
+        "parameters": [
+          {
+            "name": "tool_set_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolset to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolsets=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolsetObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolsets"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolsets=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "deleteToolset",
+        "description": "Delete a toolset.",
+        "parameters": [
+          {
+            "name": "tool_set_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolset to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolsets=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteToolsetResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolsets"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolsets=V1Preview"
+          ]
+        }
+      }
     }
   },
   "security": [
+    {
+      "ApiKeyAuth": []
+    },
     {
       "OAuth2Auth": [
         "https://ai.azure.com/.default"
@@ -9326,6 +11638,14 @@
               "a2a_preview"
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "base_url": {
             "type": "string",
@@ -9450,6 +11770,14 @@
             "type": "string",
             "description": "The name of an index in an IndexResource attached to this agent."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "query_type": {
             "allOf": [
               {
@@ -9473,6 +11801,174 @@
           }
         },
         "description": "A AI Search Index resource."
+      },
+      "AgentBlueprintReference": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AgentBlueprintReferenceType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "ManagedAgentIdentityBlueprint": "#/components/schemas/ManagedAgentIdentityBlueprintReference"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentBlueprintReferenceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ManagedAgentIdentityBlueprint"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCard": {
+        "type": "object",
+        "required": [
+          "version",
+          "skills"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "description": "The version of the agent card."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "The description of the agent card."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCardSkill"
+            },
+            "maxItems": 16,
+            "description": "The set of skills that an agent can perform."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardSkill": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "a unique identifier for the skill"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "The name of the skill"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "A description of the skill"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCardSkillTag"
+            },
+            "maxItems": 5,
+            "description": "set of tagwords describing classes of capabilities for the skill"
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCardSkillExample"
+            },
+            "maxItems": 5,
+            "description": "A list of example scenarios that the skill can perform."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardSkillExample": {
+        "type": "string",
+        "maxLength": 1024,
+        "description": "A skill example string with a maximum length of 1024 characters.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardSkillTag": {
+        "type": "string",
+        "maxLength": 32,
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentCardUpdate": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32,
+            "description": "The version of the agent card."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "The description of the agent card."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentCardSkill"
+            },
+            "maxItems": 16,
+            "description": "The set of skills that an agent can perform."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "AgentClusterInsightRequest": {
         "type": "object",
@@ -9774,7 +12270,131 @@
           "WorkflowAgents=V1Preview",
           "ContainerAgents=V1Preview"
         ],
-        "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
+        "description": "Opt-in keys for defining preview Hosted or Workflow Agents."
+      },
+      "AgentEndpoint": {
+        "type": "object",
+        "properties": {
+          "version_selector": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionSelector"
+              }
+            ],
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+          },
+          "protocols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointProtocol"
+            },
+            "description": "The protocols that the agent supports"
+          },
+          "authorization_schemes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+            },
+            "description": "The authorization schemes supported by the agent endpoint"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentEndpointAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationSchemeType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraAuthorizationScheme",
+            "BotService": "#/components/schemas/BotServiceAuthorizationScheme",
+            "BotServiceRbac": "#/components/schemas/BotServiceRbacAuthorizationScheme"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentEndpointAuthorizationSchemeType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "BotService",
+              "BotServiceRbac"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentEndpointProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "activity",
+              "responses",
+              "a2a",
+              "invocations"
+            ]
+          }
+        ]
+      },
+      "AgentEndpointUpdate": {
+        "type": "object",
+        "properties": {
+          "version_selector": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionSelectorUpdate"
+              }
+            ],
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+          },
+          "protocols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointProtocol"
+            },
+            "description": "The protocols that the agent supports"
+          },
+          "authorization_schemes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+            },
+            "description": "The authorization schemes supported by the agent endpoint"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "AgentEvaluation": {
         "type": "object",
@@ -9968,6 +12588,28 @@
           }
         }
       },
+      "AgentIdentity": {
+        "type": "object",
+        "required": [
+          "principal_id",
+          "client_id"
+        ],
+        "properties": {
+          "principal_id": {
+            "type": "string",
+            "description": "The principal ID of the agent instance"
+          },
+          "client_id": {
+            "type": "string",
+            "description": "The client ID of the agent instance. Also referred to as the instance ID"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "AgentKind": {
         "anyOf": [
           {
@@ -10020,6 +12662,70 @@
               "latest"
             ],
             "description": "The latest version of the agent."
+          },
+          "agent_endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "The endpoint configuration for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "instance_identity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentity"
+              }
+            ],
+            "description": "The instance identity of the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "blueprint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentity"
+              }
+            ],
+            "description": "The blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCard"
+              }
+            ],
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           }
         }
       },
@@ -10060,6 +12766,89 @@
             "type": "string",
             "description": "The version identifier of the agent."
           }
+        }
+      },
+      "AgentSessionResource": {
+        "type": "object",
+        "required": [
+          "agent_session_id",
+          "version_indicator",
+          "status",
+          "created_at",
+          "last_accessed_at",
+          "expires_at"
+        ],
+        "properties": {
+          "agent_session_id": {
+            "type": "string",
+            "description": "The session identifier."
+          },
+          "version_indicator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionIndicator"
+              }
+            ],
+            "description": "The version indicator determining which agent version backs this session."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentSessionStatus"
+              }
+            ],
+            "description": "The current status of the session."
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (in seconds) when the session was created.",
+            "readOnly": true
+          },
+          "last_accessed_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (in seconds) when the session was last accessed.",
+            "readOnly": true
+          },
+          "expires_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (in seconds) when the session expires (rolling, 30 days from last activity).",
+            "readOnly": true
+          }
+        },
+        "description": "An agent session providing a long-lived compute sandbox for hosted agent invocations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "AgentSessionStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "creating",
+              "active",
+              "idle",
+              "updating",
+              "failed",
+              "deleting",
+              "deleted",
+              "expired"
+            ]
+          }
+        ],
+        "description": "The status of an agent session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
         }
       },
       "AgentTaxonomyInput": {
@@ -10204,6 +12993,58 @@
               }
             ],
             "description": "Error details if the agent version provisioning failed."
+          },
+          "instance_identity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentity"
+              }
+            ],
+            "description": "The instance identity of the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
+          },
+          "blueprint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentity"
+              }
+            ],
+            "description": "The blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
+          },
+          "agent_guid": {
+            "type": "string",
+            "description": "The unique GUID identifier of the agent.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            },
+            "readOnly": true
           }
         }
       },
@@ -10547,7 +13388,11 @@
             "description": "Data schema scenario, always `benchmark` for benchmark evaluations."
           },
           "benchmark_name": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BenchmarkName"
+              }
+            ],
             "description": "The name of the benchmark specification."
           },
           "benchmark_version": {
@@ -10823,6 +13668,14 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -10926,6 +13779,14 @@
           "indexes"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "indexes": {
             "type": "array",
             "items": {
@@ -11205,6 +14066,29 @@
         },
         "description": "A base class for connection credentials"
       },
+      "BenchmarkName": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "builtin.gpqa_diamond",
+              "builtin.bbeh",
+              "builtin.bigbenchhard",
+              "builtin.frontierscience",
+              "builtin.musr",
+              "builtin.truthful_qa",
+              "builtin.inspect_ai.gpqa_diamond",
+              "builtin.inspect_ai.chembench",
+              "builtin.inspect_ai.aime_2025",
+              "builtin.inspect_ai.musr"
+            ]
+          }
+        ],
+        "description": "The set of available benchmark specifications."
+      },
       "BingCustomSearchConfiguration": {
         "type": "object",
         "required": [
@@ -11212,6 +14096,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -11253,6 +14145,14 @@
               "bing_custom_search_preview"
             ],
             "description": "The object type, which is always 'bing_custom_search_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_custom_search_preview": {
             "allOf": [
@@ -11357,6 +14257,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -11374,6 +14282,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -11404,6 +14320,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -11428,6 +14352,14 @@
               "bing_grounding"
             ],
             "description": "The object type, which is always 'bing_grounding'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_grounding": {
             "allOf": [
@@ -11554,6 +14486,54 @@
         },
         "description": "Blob reference details."
       },
+      "BotServiceAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "BotService"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "BotServiceRbacAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "BotServiceRbac"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "BrowserAutomationPreviewTool": {
         "type": "object",
         "required": [
@@ -11567,6 +14547,14 @@
               "browser_automation_preview"
             ],
             "description": "The object type, which is always 'browser_automation_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "browser_automation_preview": {
             "allOf": [
@@ -11671,6 +14659,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "The ID of the project connection to your Azure Playwright resource."
@@ -11684,6 +14680,14 @@
           "connection"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "connection": {
             "allOf": [
               {
@@ -11838,8 +14842,7 @@
       "CodeBasedEvaluatorDefinition": {
         "type": "object",
         "required": [
-          "type",
-          "code_text"
+          "type"
         ],
         "properties": {
           "type": {
@@ -11851,6 +14854,18 @@
           "code_text": {
             "type": "string",
             "description": "Inline code text for the evaluator"
+          },
+          "entry_point": {
+            "type": "string",
+            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')"
+          },
+          "image_tag": {
+            "type": "string",
+            "description": "The container image tag to use for evaluator code execution"
+          },
+          "blob_uri": {
+            "type": "string",
+            "description": "The blob URI for the evaluator storage"
           }
         },
         "allOf": [
@@ -12262,6 +15277,45 @@
                 "WorkflowAgents=V1Preview"
               ]
             }
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint reference for the agent.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "agent_endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpoint"
+              }
+            ],
+            "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCard"
+              }
+            ],
+            "description": "Optional agent card for the agent",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           }
         },
         "x-ms-foundry-meta": {
@@ -12269,6 +15323,32 @@
             "HostedAgents=V1Preview",
             "ContainerAgents=V1Preview",
             "WorkflowAgents=V1Preview"
+          ]
+        }
+      },
+      "CreateAgentSessionRequest": {
+        "type": "object",
+        "required": [
+          "version_indicator"
+        ],
+        "properties": {
+          "agent_session_id": {
+            "type": "string",
+            "description": "Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted."
+          },
+          "version_indicator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionIndicator"
+              }
+            ],
+            "description": "Determines which agent version backs the session."
+          }
+        },
+        "description": "Request to create a new agent session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
           ]
         }
       },
@@ -12334,6 +15414,19 @@
                 "HostedAgents=V1Preview",
                 "ContainerAgents=V1Preview",
                 "WorkflowAgents=V1Preview"
+              ]
+            }
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint reference for the agent.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
               ]
             }
           }
@@ -12407,6 +15500,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/EvalGraderAzureAIEvaluator"
+                },
+                {
+                  "$ref": "#/components/schemas/EvalGraderInspectAI"
                 }
               ]
             },
@@ -12467,6 +15563,24 @@
           }
         },
         "title": "CreateEvalRunRequest"
+      },
+      "CreateOrUpdateManagedAgentIdentityBlueprintRequest": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name that identifies the managed agent identity blueprint.\nName can be used to retrieve/update/delete the managed agent identity blueprint.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "CreatedBy": {
         "type": "object",
@@ -12910,6 +16024,60 @@
         },
         "description": "The result of a delete response operation."
       },
+      "DeleteSkillResponse": {
+        "type": "object",
+        "required": [
+          "object",
+          "name",
+          "deleted"
+        ],
+        "properties": {
+          "object": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SkillObjectType"
+              }
+            ],
+            "description": "The object type. Always 'skill.deleted'.",
+            "default": "skill.deleted"
+          },
+          "name": {
+            "type": "string",
+            "description": "The unique name of the skill."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the skill was successfully deleted."
+          }
+        },
+        "description": "A deleted skill Object"
+      },
+      "DeleteToolsetResponse": {
+        "type": "object",
+        "required": [
+          "object",
+          "name",
+          "deleted"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "toolset.deleted"
+            ],
+            "description": "The object type. Always 'toolset.deleted'."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the toolset."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the toolset was successfully deleted."
+          }
+        },
+        "description": "Response returned when a toolset is deleted."
+      },
       "Deployment": {
         "type": "object",
         "required": [
@@ -12978,6 +16146,34 @@
         ],
         "description": "A message authored by a developer to guide the model during evaluation."
       },
+      "EntraAuthorizationScheme": {
+        "type": "object",
+        "required": [
+          "type",
+          "isolation_key_source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          },
+          "isolation_key_source": {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "EntraIDCredentials": {
         "type": "object",
         "required": [
@@ -12999,6 +16195,30 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EntraIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Entra"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "Eval": {
         "type": "object",
@@ -13070,6 +16290,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/EvalGraderAzureAIEvaluator"
+                },
+                {
+                  "$ref": "#/components/schemas/EvalGraderInspectAI"
                 }
               ]
             },
@@ -13197,6 +16420,7 @@
           },
           "initialization_parameters": {
             "type": "object",
+            "additionalProperties": {},
             "description": "The initialization parameters for the evaluation. Must support structured outputs."
           },
           "data_mapping": {
@@ -13208,6 +16432,32 @@
           }
         },
         "title": "AzureAIEvaluatorGrader"
+      },
+      "EvalGraderInspectAI": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "task_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "inspect_ai"
+            ],
+            "description": "The object type, which is always `inspect_ai`."
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the benchmark."
+          },
+          "task_name": {
+            "type": "string",
+            "description": "The inspect_ai task module path (e.g., `inspect_evals/gpqa_diamond`)."
+          }
+        },
+        "description": "Grader inspect_ai definition for inspect_ai benchmark evaluators."
       },
       "EvalResult": {
         "type": "object",
@@ -14375,6 +17625,20 @@
         },
         "description": "Evaluator Configuration"
       },
+      "EvaluatorCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blobUri"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
+          }
+        },
+        "description": "Request body for getting evaluator credentials"
+      },
       "EvaluatorDefinition": {
         "type": "object",
         "required": [
@@ -14772,6 +18036,14 @@
       "FabricDataAgentToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -14824,6 +18096,38 @@
           }
         ],
         "description": "FileDatasetVersion Definition"
+      },
+      "FixedRatioVersionSelectionRule": {
+        "type": "object",
+        "required": [
+          "type",
+          "traffic_percentage"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "FixedRatio"
+            ]
+          },
+          "traffic_percentage": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "The percentage of traffic to route to the version. Must be between 0 and 100."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VersionSelectionRule"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "FolderDatasetVersion": {
         "type": "object",
@@ -14884,6 +18188,84 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "HeaderIsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind",
+          "user_isolation_key",
+          "chat_isolation_key"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "Header"
+            ]
+          },
+          "user_isolation_key": {
+            "type": "string",
+            "description": "The user isolation key header value"
+          },
+          "chat_isolation_key": {
+            "type": "string",
+            "description": "The chat isolation key header value"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IsolationKeySource"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "HeaderTelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type",
+          "header_name",
+          "secret_id",
+          "secret_key"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "header"
+            ],
+            "description": "The authentication type, always 'header' for header-based secret authentication."
+          },
+          "header_name": {
+            "type": "string",
+            "description": "The name of the HTTP header to inject the secret value into.",
+            "example": "X-Otlp-Api-Key"
+          },
+          "secret_id": {
+            "type": "string",
+            "description": "The identifier of the secret store or connection.",
+            "example": "my-secret-store"
+          },
+          "secret_key": {
+            "type": "string",
+            "description": "The key within the secret to retrieve the authentication value.",
+            "example": "OTLP_KEY"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpointAuth"
+          }
+        ],
+        "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "HostedAgentDefinition": {
         "type": "object",
@@ -14949,6 +18331,14 @@
             "type": "string",
             "description": "The image ID for the agent, applicable to image-based hosted agents.",
             "example": "my-registry.azurecr.io/my-hosted-agent:latest"
+          },
+          "telemetry_config": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryConfig"
+              }
+            ],
+            "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
           }
         },
         "allOf": [
@@ -15495,6 +18885,48 @@
         },
         "description": "Metadata about the insights."
       },
+      "IsolationKeySource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/IsolationKeySourceKind"
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "Entra": "#/components/schemas/EntraIsolationKeySource",
+            "Header": "#/components/schemas/HeaderIsolationKeySource"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "IsolationKeySourceKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Entra",
+              "Header"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "ItemGenerationParams": {
         "type": "object",
         "required": [
@@ -15538,6 +18970,47 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
+      },
+      "ManagedAgentIdentityBlueprint": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "ManagedAgentIdentityBlueprintReference": {
+        "type": "object",
+        "required": [
+          "type",
+          "blueprint_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ManagedAgentIdentityBlueprint"
+            ]
+          },
+          "blueprint_id": {
+            "type": "string",
+            "description": "The ID of the managed blueprint"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentBlueprintReference"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -15756,6 +19229,14 @@
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "memory_store_name": {
             "type": "string",
             "description": "The name of the memory store to use."
@@ -15800,6 +19281,14 @@
               "memory_search"
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "memory_store_name": {
             "type": "string",
@@ -16365,6 +19854,14 @@
               "fabric_dataagent_preview"
             ],
             "description": "The object type, which is always 'fabric_dataagent_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -17276,6 +20773,14 @@
             ],
             "description": "The type of the code interpreter tool. Always `code_interpreter`.",
             "x-stainless-const": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "container": {
             "anyOf": [
@@ -21585,6 +25090,14 @@
               }
             ],
             "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -23011,6 +26524,14 @@
               }
             ],
             "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -23695,6 +27216,14 @@
               }
             ],
             "description": "Whether to generate a new image or edit an existing image. Default: `auto`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -29436,6 +32965,14 @@
             "description": "The type of the local shell tool. Always `local_shell`.",
             "x-stainless-const": true,
             "default": "local_shell"
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -35141,6 +38678,7 @@
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
+            "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
@@ -35497,6 +39035,7 @@
               "fabric_dataagent_preview",
               "sharepoint_grounding_preview",
               "memory_search_preview",
+              "work_iq_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -35920,6 +39459,14 @@
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "custom_search_configuration": {
             "allOf": [
               {
@@ -36292,6 +39839,48 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
+      "OtlpTelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "endpoint",
+          "protocol"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ],
+            "description": "The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints."
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "The OTLP collector endpoint URL.",
+            "example": "https://my-collector.example.com/otlp"
+          },
+          "protocol": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryTransportProtocol"
+              }
+            ],
+            "description": "The transport protocol for the OTLP endpoint.",
+            "example": "Http"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TelemetryEndpoint"
+          }
+        ],
+        "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "PageOrder": {
         "type": "string",
         "enum": [
@@ -36488,6 +40077,27 @@
         },
         "description": "Paged collection of Insight items"
       },
+      "PagedManagedAgentIdentityBlueprint": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagedAgentIdentityBlueprint"
+            },
+            "description": "The ManagedAgentIdentityBlueprint items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of ManagedAgentIdentityBlueprint items"
+      },
       "PagedRedTeam": {
         "type": "object",
         "required": [
@@ -36550,6 +40160,32 @@
           }
         },
         "description": "Paged collection of ScheduleRun items"
+      },
+      "PatchAgentRequest": {
+        "type": "object",
+        "properties": {
+          "agent_endpoint": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEndpointUpdate"
+              }
+            ],
+            "description": "The endpoint configuration for the agent"
+          },
+          "agent_card": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentCardUpdate"
+              }
+            ],
+            "description": "Optional agent card for the agent"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
       },
       "PendingUploadRequest": {
         "type": "object",
@@ -37415,6 +41051,102 @@
         ],
         "description": "Type of the task."
       },
+      "SessionDirectoryEntry": {
+        "type": "object",
+        "required": [
+          "name",
+          "size",
+          "is_directory",
+          "modified_time"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "The name of the file or directory."
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The size in bytes (0 for directories)."
+          },
+          "is_directory": {
+            "type": "boolean",
+            "description": "Whether this entry is a directory."
+          },
+          "modified_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The last modification time in UTC (ISO 8601)."
+          }
+        },
+        "description": "A single entry in a directory listing."
+      },
+      "SessionDirectoryListResponse": {
+        "type": "object",
+        "required": [
+          "path",
+          "entries"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path that was listed, relative to the session home directory."
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionDirectoryEntry"
+            },
+            "description": "The directory entries."
+          }
+        },
+        "description": "Response from listing a directory in a session sandbox."
+      },
+      "SessionFileWriteResponse": {
+        "type": "object",
+        "required": [
+          "path",
+          "bytes_written"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path where the file was written, relative to the session home directory."
+          },
+          "bytes_written": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of bytes written."
+          }
+        },
+        "description": "Response from uploading a file to a session sandbox."
+      },
+      "SessionListResult": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentSessionResource"
+            },
+            "description": "The list of sessions."
+          },
+          "pagination_token": {
+            "type": "string",
+            "description": "Opaque token to retrieve the next page. Null when there are no more results."
+          }
+        },
+        "description": "Paged result for session list operations.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "SharepointGroundingToolCall": {
         "type": "object",
         "required": [
@@ -37499,6 +41231,14 @@
       "SharepointGroundingToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -37524,6 +41264,14 @@
             ],
             "description": "The object type, which is always 'sharepoint_grounding_preview'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "sharepoint_grounding_preview": {
             "allOf": [
               {
@@ -37539,6 +41287,60 @@
           }
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
+      },
+      "SkillObject": {
+        "type": "object",
+        "required": [
+          "object",
+          "skill_id",
+          "has_blob",
+          "name"
+        ],
+        "properties": {
+          "object": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SkillObjectType"
+              }
+            ],
+            "description": "The object type, which is always 'skill'.",
+            "default": "skill"
+          },
+          "skill_id": {
+            "type": "string",
+            "description": "The unique identifier of the skill."
+          },
+          "has_blob": {
+            "type": "boolean",
+            "description": "Whether the skill was created from a GZip blob package."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name of the skill."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A human-readable description of the skill."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Set of key-value pairs associated with the skill."
+          }
+        },
+        "description": "A skill object."
+      },
+      "SkillObjectType": {
+        "type": "string",
+        "enum": [
+          "skill",
+          "skill.deleted"
+        ],
+        "description": "The object type of a skill resource."
       },
       "Sku": {
         "type": "object",
@@ -37964,6 +41766,185 @@
         },
         "description": "Taxonomy sub-category definition."
       },
+      "TelemetryConfig": {
+        "type": "object",
+        "required": [
+          "endpoints"
+        ],
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryEndpoint"
+            },
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "Customer-supplied telemetry export endpoint configurations."
+          }
+        },
+        "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryDataKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          }
+        ],
+        "description": "The type of telemetry data to export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpoint": {
+        "type": "object",
+        "required": [
+          "kind",
+          "data"
+        ],
+        "properties": {
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointKind"
+              }
+            ],
+            "description": "The telemetry export endpoint kind."
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelemetryDataKind"
+            },
+            "description": "Data types to export to this endpoint. Use an empty array to export no data.",
+            "example": [
+              "ContainerStdoutStderr",
+              "ContainerOtel",
+              "Metrics"
+            ]
+          },
+          "auth": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuth"
+              }
+            ],
+            "description": "Optional authentication configuration."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "OTLP": "#/components/schemas/OtlpTelemetryEndpoint"
+          }
+        },
+        "description": "A telemetry export endpoint configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuth": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TelemetryEndpointAuthType"
+              }
+            ],
+            "description": "The authentication type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "header": "#/components/schemas/HeaderTelemetryEndpointAuth"
+          }
+        },
+        "description": "Authentication configuration for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointAuthType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "header"
+            ]
+          }
+        ],
+        "description": "The type of authentication for a telemetry endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryEndpointKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "OTLP"
+            ]
+          }
+        ],
+        "description": "The kind of telemetry export endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "TelemetryTransportProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Http",
+              "Grpc"
+            ]
+          }
+        ],
+        "description": "The transport protocol for telemetry export.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -38010,12 +41991,79 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "A project connection in a ToolProjectConnectionList attached to this tool."
           }
         },
         "description": "A project connection resource."
+      },
+      "ToolsetObject": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "created_at",
+          "updated_at",
+          "name",
+          "tools"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "toolset"
+            ],
+            "description": "The object type, which is always 'toolset'."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the toolset."
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (seconds) when the toolset was created."
+          },
+          "updated_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp (seconds) when the toolset was last updated."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The name of the toolset."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 512,
+            "description": "A human-readable description of the toolset."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Arbitrary key-value metadata to associate with the toolset."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "The list of tools contained in this toolset."
+          }
+        },
+        "description": "A toolset that stores reusable tool definitions for agents."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
@@ -38199,6 +42247,19 @@
                 "WorkflowAgents=V1Preview"
               ]
             }
+          },
+          "blueprint_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentBlueprintReference"
+              }
+            ],
+            "description": "The blueprint reference for the agent.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "AgentEndpoints=V1Preview"
+              ]
+            }
           }
         }
       },
@@ -38278,6 +42339,164 @@
           ]
         }
       },
+      "VersionIndicator": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VersionIndicatorType"
+              }
+            ],
+            "description": "The type of version indicator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "version_ref": "#/components/schemas/VersionRefIndicator"
+          }
+        },
+        "description": "Version indicator determining which agent version backs the session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "VersionIndicatorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "version_ref"
+            ]
+          }
+        ],
+        "description": "The type of version indicator used to determine the agent version backing a session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "VersionRefIndicator": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "version_ref"
+            ],
+            "description": "Discriminator value for version_ref."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version identifier returned by the agent version APIs."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VersionIndicator"
+          }
+        ],
+        "description": "Version indicator that references a specific agent version by name.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "VersionSelectionRule": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_version"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/VersionSelectorType"
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version to route traffic to"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "FixedRatio": "#/components/schemas/FixedRatioVersionSelectionRule"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "VersionSelector": {
+        "type": "object",
+        "required": [
+          "version_selection_rules"
+        ],
+        "properties": {
+          "version_selection_rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionSelectionRule"
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "VersionSelectorType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "FixedRatio"
+            ]
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "VersionSelectorUpdate": {
+        "type": "object",
+        "properties": {
+          "version_selection_rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionSelectionRule"
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "WebSearchConfiguration": {
         "type": "object",
         "required": [
@@ -38285,6 +42504,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing custom search"
@@ -38324,6 +42551,49 @@
           }
         ],
         "description": "Weekly recurrence schedule."
+      },
+      "WorkIQPreviewTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "work_iq_preview"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "work_iq_preview"
+            ],
+            "description": "The object type, which is always 'work_iq_preview'."
+          },
+          "work_iq_preview": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WorkIQPreviewToolParameters"
+              }
+            ],
+            "description": "The WorkIQ tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A WorkIQ server-side tool."
+      },
+      "WorkIQPreviewToolParameters": {
+        "type": "object",
+        "required": [
+          "project_connection_id"
+        ],
+        "properties": {
+          "project_connection_id": {
+            "type": "string",
+            "description": "The ID of the WorkIQ project connection."
+          }
+        },
+        "description": "The WorkIQ tool parameters."
       },
       "WorkflowActionOutputItem": {
         "type": "object",
@@ -38448,6 +42718,11 @@
       }
     },
     "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api-key"
+      },
       "OAuth2Auth": {
         "type": "oauth2",
         "flows": {

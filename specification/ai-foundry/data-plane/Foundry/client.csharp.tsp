@@ -127,6 +127,11 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@access(EvaluatorDefinitionType, Access.public);
 
+// Hide classes not currently used
+@@clientName(Target, "EvaluationTarget", "csharp");
+@@access(AzureAIAgentTarget, Access.internal);
+@@access(AzureAIModelTarget, Access.internal);
+
 // --------------------------------------------------------------------------------
 // Schedules sub‐client
 // --------------------------------------------------------------------------------

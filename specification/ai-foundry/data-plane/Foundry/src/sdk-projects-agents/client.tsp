@@ -33,7 +33,9 @@ namespace Azure.AI.Projects {
     }
   );
 
-  @@clientName(AgentObject, "AgentRecord");
+  @@clientName(AgentObject, "ProjectsAgentRecord");
+  @@clientName(AgentKind, "ProjectsAgentKind");
+  @@clientName(AgentProtocol, "ProjectsAgentProtocol");
 
   @@clientName(BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
@@ -197,5 +199,5 @@ namespace Azure.AI.Projects {
 
   @@usage(AgentVersionObject, Usage.output);
   @@access(AgentVersionObject, Access.public);
-  @@clientName(AgentVersionObject, "AgentVersion");
+  @@clientName(AgentVersionObject, "ProjectsAgentVersion");
 }

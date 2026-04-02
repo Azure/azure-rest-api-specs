@@ -48,7 +48,7 @@ model GraderAzureAIEvaluator {
   evaluator_version?: string;
 
   /** The initialization parameters for the evaluation. Must support structured outputs. */
-  initialization_parameters?: {};
+  initialization_parameters?: Record<unknown>;
 
   /** The model to use for the evaluation. Must support structured outputs. */
   data_mapping?: Record<string>;
@@ -57,6 +57,18 @@ model GraderAzureAIEvaluator {
 @summary("AzureAIEvaluatorGrader")
 model EvalGraderAzureAIEvaluator {
   ...GraderAzureAIEvaluator;
+}
+
+/** Grader inspect_ai definition for inspect_ai benchmark evaluators. */
+model EvalGraderInspectAI {
+  /** The object type, which is always `inspect_ai`. */
+  type: "inspect_ai";
+
+  /** The display name of the benchmark. */
+  name: string;
+
+  /** The inspect_ai task module path (e.g., `inspect_evals/gpqa_diamond`). */
+  task_name: string;
 }
 
 /** Base class for run data sources with discriminator support. */
@@ -84,13 +96,48 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
     | "benchmark_preview";
 }
 
+/** The set of available benchmark specifications. */
+union BenchmarkName {
+  string,
+
+  /** GPQA Diamond — graduate-level science reasoning. */
+  builtinGPQADiamond: "builtin.gpqa_diamond",
+
+  /** BBEH — BIG-Bench Extra Hard. */
+  builtinBBEH: "builtin.bbeh",
+
+  /** BIG-Bench Hard — challenging BIG-Bench tasks. */
+  builtinBigBenchHard: "builtin.bigbenchhard",
+
+  /** FrontierScience — frontier scientific reasoning. */
+  builtinFrontierScience: "builtin.frontierscience",
+
+  /** MuSR — multi-step reasoning. */
+  builtinMuSR: "builtin.musr",
+
+  /** TruthfulQA — truthfulness evaluation. */
+  builtinTruthfulQA: "builtin.truthful_qa",
+
+  /** GPQA Diamond via inspect_ai framework. */
+  builtinInspectAIGPQADiamond: "builtin.inspect_ai.gpqa_diamond",
+
+  /** ChemBench via inspect_ai framework. */
+  builtinInspectAIChemBench: "builtin.inspect_ai.chembench",
+
+  /** AIME 2025 via inspect_ai framework. */
+  builtinInspectAIAIME2025: "builtin.inspect_ai.aime_2025",
+
+  /** MuSR via inspect_ai framework. */
+  builtinInspectAIMuSR: "builtin.inspect_ai.musr",
+}
+
 /** Data source configuration for benchmark evaluations. */
 model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
   /** Data schema scenario, always `benchmark` for benchmark evaluations. */
   scenario: "benchmark_preview";
 
   /** The name of the benchmark specification. */
-  benchmark_name: string;
+  benchmark_name: BenchmarkName;
 
   /** The version of the benchmark specification (e.g., '0.1'). Latest version if not specified. */
   benchmark_version?: string;
@@ -113,7 +160,7 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
     | AzureAIBenchmarkDataSourceConfig
 );
 
-/** Adding Azure AI Evaluator type to testing criteria for foundry extension. */
+/** Adding Azure AI Evaluator and inspect_ai types to testing criteria for foundry extension. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
@@ -124,7 +171,8 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | EvalGraderAzureAIEvaluator)[]
+    | EvalGraderAzureAIEvaluator
+    | EvalGraderInspectAI)[]
 );
 
 model Eval is OpenAI.Eval {
@@ -159,7 +207,7 @@ model Eval is OpenAI.Eval {
     | AzureAIBenchmarkDataSourceConfig
 );
 
-/** Adding Azure AI Evaluator type to testing criteria for foundry extension. */
+/** Adding Azure AI Evaluator and inspect_ai types to testing criteria for foundry extension. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
@@ -170,7 +218,8 @@ model Eval is OpenAI.Eval {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | EvalGraderAzureAIEvaluator)[]
+    | EvalGraderAzureAIEvaluator
+    | EvalGraderInspectAI)[]
 );
 model CreateEvalRequest is OpenAI.CreateEvalRequest {
   /**
