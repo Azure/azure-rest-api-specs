@@ -2644,6 +2644,74 @@
         }
       ]
     },
+    "/{containerName}?restype=container&comp=session": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "operationId": "Container_CreateSession",
+        "description": "The Create Session operation enables users to create a session scoped to a container.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "name": "createSessionRequest",
+            "in": "body",
+            "required": true,
+            "x-ms-client-name": "CreateSessionConfiguration",
+            "schema": {
+              "$ref": "#/definitions/CreateSessionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Session created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateSessionResponse"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/ContainerName"
+        },
+        {
+          "name": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": ["container"]
+        },
+        {
+          "name": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": ["session"]
+        }
+      ]
+    },
     "/{containerName}/{blob}": {
       "get": {
         "tags": [
@@ -10385,6 +10453,67 @@
         },
         "Value": {
           "type": "string"
+        }
+      }
+    },
+    "AuthenticationType": {
+      "type": "string",
+      "enum": ["HMAC"],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true
+      },
+      "description": "The type of authentication required to create the session. The only type currently supported is HMAC."
+    },
+    "CreateSessionRequest": {
+      "type": "object",
+      "required": ["AuthenticationType"],
+      "x-ms-client-name": "CreateSessionConfiguration",
+      "xml": {
+        "name": "CreateSessionRequest"
+      },
+      "properties": {
+        "AuthenticationType": {
+          "$ref": "#/definitions/AuthenticationType"
+        }
+      }
+    },
+    "CreateSessionResponse": {
+      "type": "object",
+      "xml": {
+        "name": "CreateSessionResult"
+      },
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "A unique identifier for the created session."
+        },
+        "Expiration": {
+          "type": "string",
+          "format": "date-time-rfc1123",
+          "description": "The time when the session will expire. The format follows RFC 1123."
+        },
+        "AuthenticationType": {
+          "$ref": "#/definitions/AuthenticationType"
+        },
+        "Credentials": {
+          "$ref": "#/definitions/SessionCredentials"
+        }
+      }
+    },
+    "SessionCredentials": {
+      "type": "object",
+      "xml": {
+        "name": "Credentials"
+      },
+      "properties": {
+        "SessionToken": {
+          "type": "string",
+          "description": "An opaque token used to authorize subsequent requests in the session. Must be treated as a security credential."
+        },
+        "SessionKey": {
+          "type": "string",
+          "description": "Only returned when AuthenticationType is HMAC. A symmetric encryption key used to sign requests in the session using the Shared Key protocol."
         }
       }
     },
