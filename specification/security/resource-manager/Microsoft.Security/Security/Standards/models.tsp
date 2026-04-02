@@ -128,7 +128,7 @@ model StandardComponentProperties {
 model TrackedResource {
   ...Resource;
   ...AzureTrackedResourceLocation;
-  ...Kind;
+  ...AzureTrackedResourceKind;
   ...ETag;
   ...Tags;
 }
@@ -146,7 +146,7 @@ model AzureTrackedResourceLocation {
 /**
  * Describes an Azure resource with kind
  */
-model Kind {
+model AzureTrackedResourceKind {
   /**
    * Kind of the resource
    */
