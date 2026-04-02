@@ -106,6 +106,10 @@ using Http;
   "csharp"
 );
 @@clientName(BaseDetails, "AlertsManagementBaseDetails", "csharp");
+@@clientName(AlertsOperationGroup.metaData,
+  "GetServiceAlertMetadata",
+  "csharp"
+);
 @@alternateType(Essentials.smartGroupId, Azure.Core.uuid, "csharp");
 @@alternateType(AlertModificationProperties.alertId, Azure.Core.uuid, "csharp");
 @@alternateType(AlertIdParameter.alertId, Azure.Core.uuid, "csharp");
