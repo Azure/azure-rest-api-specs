@@ -62,6 +62,7 @@ model PolicyProperties {
 @removed(Versions.v2026_04_01)
 @doc("The certificate configuration.")
 model CertificateConfiguration {
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The configuration to set up an ICA.")
   certificateAuthorityConfiguration: CertificateAuthorityConfiguration;
 

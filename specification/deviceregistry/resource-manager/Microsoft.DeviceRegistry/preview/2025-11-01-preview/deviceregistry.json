@@ -5199,17 +5199,17 @@
         "keyType"
       ]
     },
-    "CertificateAuthorityConfigurationUpdate": {
-      "type": "object",
-      "description": "The configuration to set up an ICA."
-    },
     "CertificateConfiguration": {
       "type": "object",
       "description": "The certificate configuration.",
       "properties": {
         "certificateAuthorityConfiguration": {
           "$ref": "#/definitions/CertificateAuthorityConfiguration",
-          "description": "The configuration to set up an ICA."
+          "description": "The configuration to set up an ICA.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "leafCertificateConfiguration": {
           "$ref": "#/definitions/LeafCertificateConfiguration",
@@ -5225,10 +5225,6 @@
       "type": "object",
       "description": "The certificate configuration.",
       "properties": {
-        "certificateAuthorityConfiguration": {
-          "$ref": "#/definitions/CertificateAuthorityConfigurationUpdate",
-          "description": "The configuration to set up an ICA."
-        },
         "leafCertificateConfiguration": {
           "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
           "description": "The leaf certificate configuration."

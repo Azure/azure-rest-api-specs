@@ -5477,10 +5477,6 @@
         ]
       }
     },
-    "BringYourOwnRootUpdate": {
-      "type": "object",
-      "description": "Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA."
-    },
     "BrokerStateStoreDestinationConfiguration": {
       "type": "object",
       "description": "The configuration for a MQTT broker state store destination.",
@@ -5532,23 +5528,17 @@
         "keyType"
       ]
     },
-    "CertificateAuthorityConfigurationUpdate": {
-      "type": "object",
-      "description": "The configuration to set up an ICA.",
-      "properties": {
-        "bringYourOwnRoot": {
-          "$ref": "#/definitions/BringYourOwnRootUpdate",
-          "description": "Configuration for Bring Your Own Root."
-        }
-      }
-    },
     "CertificateConfiguration": {
       "type": "object",
       "description": "The certificate configuration.",
       "properties": {
         "certificateAuthorityConfiguration": {
           "$ref": "#/definitions/CertificateAuthorityConfiguration",
-          "description": "The configuration to set up an ICA."
+          "description": "The configuration to set up an ICA.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "leafCertificateConfiguration": {
           "$ref": "#/definitions/LeafCertificateConfiguration",
@@ -5564,10 +5554,6 @@
       "type": "object",
       "description": "The certificate configuration.",
       "properties": {
-        "certificateAuthorityConfiguration": {
-          "$ref": "#/definitions/CertificateAuthorityConfigurationUpdate",
-          "description": "The configuration to set up an ICA."
-        },
         "leafCertificateConfiguration": {
           "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
           "description": "The leaf certificate configuration."
