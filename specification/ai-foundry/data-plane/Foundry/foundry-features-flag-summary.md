@@ -23,7 +23,7 @@ in order to enable preview features on these GA routes.
 ## v1 Preview routes with required "Foundry-Features" HTTP header to enable preview features
 
 You must include this HTTP request header, with the value specified below,
-in order to successfully complete operations using these routes.
+in order to succesfully complete operations using these routes.
 
 | Operation Group | Operation | Method | Path | Foundry-Features Header Value |
 |-----------------|-----------|--------|------|-------------------------------|
