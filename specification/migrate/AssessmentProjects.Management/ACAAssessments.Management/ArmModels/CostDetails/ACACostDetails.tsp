@@ -4,10 +4,11 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
-@doc("ARM model of ACA Cost Detail.")
-@parentResource(ACAAssessment)
-model ACACostDetail is ProxyResource<ACACostDetailProperties> {
-  @doc("ACA Cost Detail Name.")
+@doc("ARM model of Azure Container Apps Cost Detail.")
+@parentResource(ContainerAppsAssessment)
+model ContainerAppsCostDetail
+  is ProxyResource<ContainerAppsCostDetailProperties> {
+  @doc("Azure Container Apps Cost Detail Name.")
   @segment("costDetails")
   @key("costDetailName")
   @path
@@ -18,5 +19,5 @@ model ACACostDetail is ProxyResource<ACACostDetailProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
-@doc("ARM model of ACA Cost Detail Properties.")
-model ACACostDetailProperties is ContainerApp;
+@doc("ARM model of Azure Container Apps Cost Detail Properties.")
+model ContainerAppsCostDetailProperties is ContainerApp;

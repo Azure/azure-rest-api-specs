@@ -11,7 +11,7 @@ model ContainerAppEnvironment {
 
   @doc("Gets the workload profile type for the environment.")
   @visibility(Lifecycle.Read)
-  workloadProfileType?: ACAWorkloadProfileType;
+  workloadProfileType?: ContainerAppsWorkloadProfileType;
 
   @doc("Gets the total vCPU cores allocated to the environment.")
   @visibility(Lifecycle.Read)

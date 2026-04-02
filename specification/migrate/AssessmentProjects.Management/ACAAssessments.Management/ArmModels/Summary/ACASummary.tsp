@@ -6,10 +6,10 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Migrate;
 
-@doc("ARM model of ACA Summary.")
-@parentResource(ACAAssessment)
-model ACASummary is ProxyResource<ACASummaryProperties> {
-  @doc("ACA Assessment Summary Name.")
+@doc("ARM model of Azure Container Apps Summary.")
+@parentResource(ContainerAppsAssessment)
+model ContainerAppsSummary is ProxyResource<ContainerAppsSummaryProperties> {
+  @doc("Azure Container Apps Assessment Summary Name.")
   @segment("summaries")
   @key("summaryName")
   @path
@@ -20,8 +20,8 @@ model ACASummary is ProxyResource<ACASummaryProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Summary property doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
-@doc("ACA Summary Properties.")
-model ACASummaryProperties is SummaryProperties {
+@doc("Azure Container Apps Summary Properties.")
+model ContainerAppsSummaryProperties is SummaryProperties {
   @doc("Gets the number of web apps.")
   @visibility(Lifecycle.Read)
   webAppCount: int32;

@@ -1,0 +1,53 @@
+{
+  "title": "ContainerAppsManagedEnvironmentOperations_ListByParent_MaximumSet",
+  "operationId": "ContainerAppsManagedEnvironmentOperations_ListByParent",
+  "parameters": {
+    "api-version": "2025-09-09-preview",
+    "subscriptionId": "572C3D3F-425D-4AE8-A935-72631EADDE56",
+    "resourceGroupName": "rgcontainerAppsAssessments",
+    "projectName": "testProject",
+    "assessmentName": "testcontainerAppsAssessment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "region": "EastUs",
+              "workloadProfileType": "Consumption",
+              "cores": 4,
+              "memoryInGib": 8,
+              "numberOfContainerApps": 3,
+              "monthlyCost": 150.5,
+              "createdTimestamp": "2025-02-14T07:09:09.242Z",
+              "updatedTimestamp": "2025-02-14T07:09:09.242Z",
+              "containerApps": [
+                {
+                  "id": "testcontainerAppsAssessment-app1",
+                  "name": "testcontainerAppsAssessment-app1",
+                  "environmentName": "testcontainerAppsAssessment-env",
+                  "cores": 1,
+                  "memoryInGib": 2,
+                  "monthlyCost": 50
+                }
+              ]
+            },
+            "id": "/subscriptions/572C3D3F-425D-4AE8-A935-72631EADDE56/resourceGroups/rgcontainerAppsAssessments/providers/Microsoft.Migrate/assessmentprojects/testProject/containerAppsAssessments/testcontainerAppsAssessment/managedEnvironments/testcontainerAppsAssessment-env",
+            "name": "testcontainerAppsAssessment-env",
+            "type": "Microsoft.Migrate/assessmentProjects/containerAppsAssessments/managedEnvironments",
+            "systemData": {
+              "createdBy": "rfrp",
+              "createdByType": "User",
+              "createdAt": "2025-02-14T07:09:08.948Z",
+              "lastModifiedBy": "xwqzbue",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-02-14T07:09:08.948Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

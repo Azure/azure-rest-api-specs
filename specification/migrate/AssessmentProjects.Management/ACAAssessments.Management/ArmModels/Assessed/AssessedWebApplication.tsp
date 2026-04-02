@@ -14,7 +14,7 @@ using OpenAPI;
 namespace Microsoft.Migrate;
 
 @doc("ARM model of Assessed Web Application.")
-@parentResource(ACAAssessment)
+@parentResource(ContainerAppsAssessment)
 model AssessedWebApplication
   is ProxyResource<AssessedWebApplicationProperties> {
   @doc("Assessed Web Application Name.")

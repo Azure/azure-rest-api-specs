@@ -14,11 +14,12 @@ using OpenAPI;
 
 namespace Microsoft.Migrate;
 
-@doc("ARM model of ACA Assessment.")
+@doc("ARM model of Azure Container Apps Assessment.")
 @parentResource(AssessmentProject)
-model ACAAssessment is ProxyResource<ACAAssessmentProperties> {
-  @doc("ACA Assessment Name.")
-  @segment("acaAssessments")
+model ContainerAppsAssessment
+  is ProxyResource<ContainerAppsAssessmentProperties> {
+  @doc("Azure Container Apps Assessment Name.")
+  @segment("containerAppsAssessments")
   @key("assessmentName")
   @path
   // "^[^<>&:\\?\/#\x00-\x1F\x7F]{1,260}$"
@@ -27,6 +28,10 @@ model ACAAssessment is ProxyResource<ACAAssessmentProperties> {
   name: string;
 }
 
-@doc("ACA Assessment Properties.")
-model ACAAssessmentProperties
-  is AssessmentProperties<Scope, ACAAssessmentSettings, AssessmentDetails>;
+@doc("Azure Container Apps Assessment Properties.")
+model ContainerAppsAssessmentProperties
+  is AssessmentProperties<
+    Scope,
+    ContainerAppsAssessmentSettings,
+    AssessmentDetails
+  >;

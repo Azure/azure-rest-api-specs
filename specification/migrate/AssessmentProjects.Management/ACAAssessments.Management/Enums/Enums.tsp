@@ -29,7 +29,7 @@ union PricingTier {
 }
 
 @doc("Workload Profile Type for Azure Container Apps.")
-union ACAWorkloadProfileType {
+union ContainerAppsWorkloadProfileType {
   @doc("Consumption workload profile — up to 4 vCPUs, 8 GiB memory.")
   Consumption: "Consumption",
 
@@ -40,7 +40,7 @@ union ACAWorkloadProfileType {
 }
 
 @doc("Workload Profile SKU for Azure Container Apps.")
-union ACAWorkloadProfileSku {
+union ContainerAppsWorkloadProfileSku {
   @doc("Consumption workload profile.")
   Consumption: "Consumption",
 

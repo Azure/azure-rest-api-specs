@@ -2551,8 +2551,8 @@ union AzureTarget {
   @doc("Avs - Azure Target")
   Avs: "Avs",
 
-  @doc("ACA - Azure Target")
-  ACA: "ACA",
+  @doc("ContainerApps - Azure Target")
+  ContainerApps: "ContainerApps",
 
   string,
 }

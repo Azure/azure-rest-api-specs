@@ -4,11 +4,23 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Migrate;
 
-@@clientName(ACAOptionsOperations, "AcaOptionsOperations", "autorest");
-@@clientName(ACAAssessmentOperations, "AcaAssessmentOperations", "autorest");
-@@clientName(ACAManagedEnvironmentOperations,
-  "AcaManagedEnvironmentOperations",
+@@clientName(ContainerAppsOptionsOperations,
+  "ContainerAppsOptionsOperations",
   "autorest"
 );
-@@clientName(ACACostDetailOperations, "AcaCostDetailOperations", "autorest");
-@@clientName(ACASummaryOperations, "AcaSummaryOperations", "autorest");
+@@clientName(ContainerAppsAssessmentOperations,
+  "ContainerAppsAssessmentOperations",
+  "autorest"
+);
+@@clientName(ContainerAppsManagedEnvironmentOperations,
+  "ContainerAppsManagedEnvironmentOperations",
+  "autorest"
+);
+@@clientName(ContainerAppsCostDetailOperations,
+  "ContainerAppsCostDetailOperations",
+  "autorest"
+);
+@@clientName(ContainerAppsSummaryOperations,
+  "ContainerAppsSummaryOperations",
+  "autorest"
+);

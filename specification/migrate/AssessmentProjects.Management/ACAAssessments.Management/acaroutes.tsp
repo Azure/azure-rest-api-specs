@@ -17,63 +17,67 @@ using Azure.ResourceManager;
 namespace Microsoft.Migrate;
 
 @armResourceOperations
-interface ACAAssessmentOperations {
-  @added(ACAApiVersions.v2025_09_09_preview)
-  create is ArmResourceCreateOrUpdateAsync<ACAAssessment>;
+interface ContainerAppsAssessmentOperations {
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  create is ArmResourceCreateOrUpdateAsync<ContainerAppsAssessment>;
 
-  @added(ACAApiVersions.v2025_09_09_preview)
-  get is ArmResourceRead<ACAAssessment>;
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  get is ArmResourceRead<ContainerAppsAssessment>;
 
-  @added(ACAApiVersions.v2025_09_09_preview)
-  listByParent is ArmResourceListByParent<ACAAssessment>;
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  listByParent is ArmResourceListByParent<ContainerAppsAssessment>;
 
-  @added(ACAApiVersions.v2025_09_09_preview)
-  delete is ArmResourceDeleteSync<ACAAssessment>;
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  delete is ArmResourceDeleteSync<ContainerAppsAssessment>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Download URL Post Action body is empty."
-  @added(ACAApiVersions.v2025_09_09_preview)
-  @doc("Get URL for downloading ACA Assessment Report.")
-  downloadUrl is ArmResourceActionAsync<ACAAssessment, {}, DownloadUrl>;
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  @doc("Get URL for downloading Azure Container Apps Assessment Report.")
+  downloadUrl is ArmResourceActionAsync<
+    ContainerAppsAssessment,
+    {},
+    DownloadUrl
+  >;
 }
 
 @armResourceOperations
 interface AssessedWebApplicationOperations {
-  @added(ACAApiVersions.v2025_09_09_preview)
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
   get is ArmResourceRead<AssessedWebApplication>;
 
-  @added(ACAApiVersions.v2025_09_09_preview)
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
   listByParent is ArmResourceListByParent<AssessedWebApplication>;
 }
 
 @armResourceOperations
-interface ACAOptionsOperations {
-  @added(ACAApiVersions.v2025_09_09_preview)
-  get is ArmResourceRead<ACAAssessmentOptions>;
+interface ContainerAppsOptionsOperations {
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  get is ArmResourceRead<ContainerAppsAssessmentOptions>;
 
-  @added(ACAApiVersions.v2025_09_09_preview)
-  listByParent is ArmResourceListByParent<ACAAssessmentOptions>;
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  listByParent is ArmResourceListByParent<ContainerAppsAssessmentOptions>;
 }
 
 @armResourceOperations
-interface ACASummaryOperations {
-  @added(ACAApiVersions.v2025_09_09_preview)
-  get is ArmResourceRead<ACASummary>;
+interface ContainerAppsSummaryOperations {
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  get is ArmResourceRead<ContainerAppsSummary>;
 
-  @added(ACAApiVersions.v2025_09_09_preview)
-  listByParent is ArmResourceListByParent<ACASummary>;
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  listByParent is ArmResourceListByParent<ContainerAppsSummary>;
 }
 
 @armResourceOperations
-interface ACAManagedEnvironmentOperations {
-  @added(ACAApiVersions.v2025_09_09_preview)
-  get is ArmResourceRead<ACAManagedEnvironment>;
+interface ContainerAppsManagedEnvironmentOperations {
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  get is ArmResourceRead<ContainerAppsManagedEnvironment>;
 
-  @added(ACAApiVersions.v2025_09_09_preview)
-  listByParent is ArmResourceListByParent<ACAManagedEnvironment>;
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  listByParent is ArmResourceListByParent<ContainerAppsManagedEnvironment>;
 }
 
 @armResourceOperations
-interface ACACostDetailOperations {
-  @added(ACAApiVersions.v2025_09_09_preview)
-  listByParent is ArmResourceListByParent<ACACostDetail>;
+interface ContainerAppsCostDetailOperations {
+  @added(ContainerAppsApiVersions.v2025_09_09_preview)
+  listByParent is ArmResourceListByParent<ContainerAppsCostDetail>;
 }

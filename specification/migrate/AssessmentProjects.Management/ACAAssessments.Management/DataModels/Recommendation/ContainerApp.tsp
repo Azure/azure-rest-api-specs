@@ -3,7 +3,7 @@ import "../../Enums/Enums.tsp";
 namespace Microsoft.Migrate;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
-@doc("Data model of Container App within an ACA environment.")
+@doc("Data model of Container App within an Azure Container Apps environment.")
 model ContainerApp {
   @doc("Gets id.")
   @visibility(Lifecycle.Read)
@@ -19,11 +19,11 @@ model ContainerApp {
 
   @doc("Gets the workload profile type.")
   @visibility(Lifecycle.Read)
-  workloadProfileType?: ACAWorkloadProfileType;
+  workloadProfileType?: ContainerAppsWorkloadProfileType;
 
   @doc("Gets the workload profile SKU.")
   @visibility(Lifecycle.Read)
-  sku?: ACAWorkloadProfileSku;
+  sku?: ContainerAppsWorkloadProfileSku;
 
   @doc("Gets vCPU cores allocated to the container app.")
   @visibility(Lifecycle.Read)

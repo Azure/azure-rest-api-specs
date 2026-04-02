@@ -10,11 +10,12 @@ using OpenAPI;
 
 namespace Microsoft.Migrate;
 
-@doc("ARM model of ACA Assessment Options.")
+@doc("ARM model of Azure Container Apps Assessment Options.")
 @parentResource(AssessmentProject)
-model ACAAssessmentOptions is ProxyResource<ACAAssessmentOptionsProperties> {
-  @doc("ACA Assessment Options Name.")
-  @segment("acaAssessmentOptions")
+model ContainerAppsAssessmentOptions
+  is ProxyResource<ContainerAppsAssessmentOptionsProperties> {
+  @doc("Azure Container Apps Assessment Options Name.")
+  @segment("containerAppsAssessmentOptions")
   @key("assessmentOptionsName")
   @path
   // "^[^<>&:\\?\/#\x00-\x1F\x7F]{1,260}$"
@@ -24,21 +25,21 @@ model ACAAssessmentOptions is ProxyResource<ACAAssessmentOptionsProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
-@doc("ACA Assessment Options Properties.")
-model ACAAssessmentOptionsProperties {
+@doc("Azure Container Apps Assessment Options Properties.")
+model ContainerAppsAssessmentOptionsProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Singleton resource"
   @doc("Gets the mapping of Assessment Options in graph representation.")
   @visibility(Lifecycle.Read)
-  edges: Record<ACAAssessmentOptionsOutboundEdgeGroup>;
+  edges: Record<ContainerAppsAssessmentOptionsOutboundEdgeGroup>;
 }
 
 @doc("A class that represents the outbound edges from a given node.")
-model ACAAssessmentOptionsOutboundEdgeGroup {
+model ContainerAppsAssessmentOptionsOutboundEdgeGroup {
   @doc("Gets or sets the Workload Profile SKU categories.")
-  categories: ACAWorkloadProfileSku[];
+  categories: ContainerAppsWorkloadProfileSku[];
 
   @doc("Gets or sets the Workload Profile Types.")
-  workloadProfileTypes: ACAWorkloadProfileType[];
+  workloadProfileTypes: ContainerAppsWorkloadProfileType[];
 
   @doc("Gets or sets the Pricing Tier.")
   tiers: PricingTier[];

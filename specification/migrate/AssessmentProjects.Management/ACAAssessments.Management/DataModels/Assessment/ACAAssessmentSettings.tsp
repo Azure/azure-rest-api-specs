@@ -3,13 +3,13 @@ import "../../Common/StandardizedContracts/AssessmentProperties.tsp";
 
 namespace Microsoft.Migrate;
 
-@doc("Data model of ACA Assessment Settings.")
-model ACAAssessmentSettings is AssessmentSettings {
+@doc("Data model of Azure Container Apps Assessment Settings.")
+model ContainerAppsAssessmentSettings is AssessmentSettings {
   @doc("Gets or sets the workload profile SKU category.")
-  category: ACAWorkloadProfileSku;
+  category: ContainerAppsWorkloadProfileSku;
 
   @doc("Gets or sets the workload profile type.")
-  workloadProfileType: ACAWorkloadProfileType;
+  workloadProfileType: ContainerAppsWorkloadProfileType;
 
   @doc("Gets or sets pricing tier.")
   pricingTier: PricingTier;
