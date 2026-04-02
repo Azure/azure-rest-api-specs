@@ -1935,7 +1935,7 @@
       "description": "The backup options for the VM backup",
       "properties": {
         "backupLevel": {
-          "$ref": "#/definitions/BackupLevel",
+          "type": "string",
           "description": "Indicates whether to stop backup or not for the VM",
           "x-ms-mutability": [
             "read",
@@ -1976,6 +1976,7 @@
         }
       },
       "required": [
+        "backupLevel",
         "jobDescription",
         "backupCopyImmediately",
         "runSnapShotBackup",
@@ -3761,10 +3762,19 @@
             "read",
             "create"
           ]
+        },
+        "backupOptions": {
+          "$ref": "#/definitions/BackupOptions",
+          "description": "The backup options for the VM backup",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
-        "vmGuid"
+        "vmGuid",
+        "backupOptions"
       ]
     },
     "VmListItem": {

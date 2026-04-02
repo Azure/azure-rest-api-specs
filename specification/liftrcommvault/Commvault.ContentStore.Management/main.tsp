@@ -714,6 +714,11 @@ model VmList {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @Azure.ResourceManager.identifiers(#[])
   vmGuid: VmGuid[];
+
+  @removed(Versions.v5_preview)
+  @doc("The backup options for the VM backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backupOptions: BackupOptions;
 }
 
 @doc("The VM GUID identifier")
@@ -727,6 +732,8 @@ model VmGuid {
 model BackupOptions {
   @doc("Indicates whether to stop backup or not for the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @madeOptional(Versions.v5_preview)
+  @typeChangedFrom(Versions.v5_preview, string)
   backupLevel?: BackupLevel;
 
   @doc("The name of the backup job to be shown in Commvault")
