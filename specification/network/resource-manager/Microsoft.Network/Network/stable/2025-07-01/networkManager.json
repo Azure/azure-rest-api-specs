@@ -73,6 +73,9 @@
       "name": "ScopeConnections"
     },
     {
+      "name": "Commits"
+    },
+    {
       "name": "SecurityAdminConfigurations"
     },
     {
@@ -930,6 +933,260 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/NetworkManagerCommit"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits": {
+      "get": {
+        "operationId": "Commits_List",
+        "tags": [
+          "Commits"
+        ],
+        "description": "Lists the specified commit.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CommitListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}": {
+      "get": {
+        "operationId": "Commits_Get",
+        "tags": [
+          "Commits"
+        ],
+        "description": "Gets the specified commit.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "commitName",
+            "in": "path",
+            "description": "The name of the commit.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Commit"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Commits_CreateOrUpdate",
+        "tags": [
+          "Commits"
+        ],
+        "description": "Creates or updates a commit.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "commitName",
+            "in": "path",
+            "description": "The name of the commit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to specify which commit to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Commit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Commit' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Commit"
+            }
+          },
+          "201": {
+            "description": "Resource 'Commit' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Commit"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Commit"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Commits_Delete",
+        "tags": [
+          "Commits"
+        ],
+        "description": "Deletes a commit.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "commitName",
+            "in": "path",
+            "description": "The name of the commit.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -5393,6 +5650,103 @@
         {
           "$ref": "./common.json#/definitions/ChildResource"
         }
+      ]
+    },
+    "Commit": {
+      "type": "object",
+      "description": "The commit resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CommitProperties",
+          "description": "The Commit properties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "CommitListResult": {
+      "type": "object",
+      "description": "The response of a Commit list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Commit items on this page",
+          "items": {
+            "$ref": "#/definitions/Commit"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CommitProperties": {
+      "type": "object",
+      "description": "Properties of commit",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the commit."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        },
+        "commitType": {
+          "$ref": "./common.json#/definitions/ConfigurationType",
+          "description": "Commit Type."
+        },
+        "configurationIds": {
+          "type": "array",
+          "description": "List of configuration IDs.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "List of target locations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "activeLocations": {
+          "type": "array",
+          "description": "List of active locations.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "Unique identifier for this commit."
+        }
+      },
+      "required": [
+        "commitType",
+        "targetLocations"
       ]
     },
     "ConfigurationGroup": {
