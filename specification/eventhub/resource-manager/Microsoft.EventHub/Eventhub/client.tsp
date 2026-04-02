@@ -168,6 +168,10 @@ using Microsoft.EventHub;
 // java naming mitigations
 @@clientName(NetworkRuleIPAction, "NetworkRuleIpAction", "java");
 @@clientName(SchemaGroupProperties.eTag, "etag", "java");
+@@clientLocation(NetworkSecurityPerimeterConfigurations.list,
+  "NetworkSecurityPerimeterConfigurations",
+  "java"
+);
 
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
 @@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
