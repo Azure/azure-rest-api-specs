@@ -1,0 +1,49 @@
+parameters:
+  "service-dir":
+    default: "sdk/redhatopenshift"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/redhatopenshift.json"
+    emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/redhatopenshift"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-redhatopenshift"
+    namespace: "azure.mgmt.redhatopenshift"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-redhatopenshift"
+    namespace: "com.azure.resourcemanager.redhatopenshift"
+    service-name: "RedHatOpenShift"
+    enable-sync-stack: true
+    flavor: azure
+    use-object-for-unknown: true
+    float32-as-double: false
+  "@azure-tools/typespec-ts":
+    "service-dir": "sdk/redhatopenshift"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-redhatopenshift"
+    compatibility-lro: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-redhatopenshift"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/redhatopenshift"
+    emitter-output-dir: "{output-dir}/{service-dir}/armredhatopenshift"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armredhatopenshift"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

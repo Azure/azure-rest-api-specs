@@ -5,6 +5,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "."
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/botservice.json"
@@ -14,6 +15,9 @@ options:
     flavor: azure
     clear-output-folder: true
     model-namespace: true
+    namespace: "Azure.ResourceManager.BotService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.BotService"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
@@ -27,6 +31,7 @@ options:
     namespace: "com.azure.resourcemanager.botservice"
     service-name: "BotService" # human-readable service name, whitespace allowed
     flavor: azure
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-botservice"
     typespec-title-map:
