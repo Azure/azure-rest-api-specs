@@ -2817,13 +2817,18 @@
         "description": "Get the SAS credential to access the storage account associated with an Evaluator version.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
             "schema": {
               "type": "string"
             }
@@ -2841,13 +2846,14 @@
             }
           },
           {
-            "name": "version",
-            "in": "path",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "description": "The API version to use for this operation.",
             "schema": {
               "type": "string"
-            }
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -2863,19 +2869,10 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -2903,13 +2900,18 @@
         "description": "Start a new or get an existing pending upload of an evaluator for a specific version.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
             "schema": {
               "type": "string"
             }
@@ -2927,13 +2929,14 @@
             }
           },
           {
-            "name": "version",
-            "in": "path",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "The specific version id of the EvaluatorVersion to operate on.",
+            "description": "The API version to use for this operation.",
             "schema": {
               "type": "string"
-            }
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -2949,19 +2952,10 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }

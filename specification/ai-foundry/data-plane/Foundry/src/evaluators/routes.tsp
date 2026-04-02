@@ -3,6 +3,9 @@ import "../servicepatterns.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
+using Http;
+using OpenAPI;
+using Rest;
 
 alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
@@ -122,14 +125,14 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  // POST /evaluators/{evaluatorName}/versions/{version}/startPendingUpload
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
-  @Rest.action("startPendingUpload")
-  startPendingUpload is Azure.Core.Foundations.ResourceOperation<
-    EvaluatorVersion,
+  @post
+  @route("/evaluators/{name}/versions/{version}/startPendingUpload")
+  startPendingUpload is FoundryDataPlaneOperation<
     {
-      ...EvaluatorsPreviewHeader;
+      @path
+      name: string;
 
       @doc("The pending upload request parameters")
       @Http.bodyRoot
@@ -139,21 +142,19 @@ interface Evaluators {
       @Rest.segment("versions")
       @Http.path
       version: string;
-    },
+    } & EvaluatorsPreviewHeader,
     PendingUploadResponse
   >;
 
-  // POST /evaluators/{evaluatorName}/versions/{version}/credentials
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
-  @Http.post
-  @Rest.action("credentials")
-  @Rest.actionSeparator("/")
-  getCredentials is Azure.Core.Foundations.ResourceOperation<
-    EvaluatorVersion,
+  @post
+  @route("/evaluators/{name}/versions/{version}/credentials")
+  getCredentials is FoundryDataPlaneOperation<
     {
-      ...EvaluatorsPreviewHeader;
+      @path
+      name: string;
 
       @doc("The credential request parameters")
       @Http.bodyRoot
@@ -163,7 +164,7 @@ interface Evaluators {
       @Rest.segment("versions")
       @Http.path
       version: string;
-    },
+    } & EvaluatorsPreviewHeader,
     AssetCredentialResponse
   >;
 }
