@@ -15,8 +15,10 @@ interface Geolocation {
    * to block or modify content based on the geographical location from which the
    * application is accessed.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Matching the 'IP' casing of the original API contract."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get the ISO country/region code for a given IP address.")
+  @OpenAPI.operationId("Geolocation_GetIPToLocation")
   @route("/geolocation/ip/{format}")
   @get
   getIpToLocation is Azure.Core.Foundations.Operation<
