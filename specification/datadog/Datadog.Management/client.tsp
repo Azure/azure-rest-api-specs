@@ -171,10 +171,6 @@ using Microsoft.Datadog;
 @@alternateType(PartnerBillingEntity.partnerEntityUri, url, "csharp");
 @@alternateType(DatadogSingleSignOnProperties.singleSignOnUrl, url, "csharp");
 @@alternateType(DatadogOrganizationProperties.redirectUri, url, "csharp");
-@@alternateType(ActivateSaaSParameterRequest.saaSGuid,
-  Azure.Core.uuid,
-  "csharp"
-);
 @@alternateType(DatadogMonitorResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
