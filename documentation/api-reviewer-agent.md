@@ -109,6 +109,40 @@ Post the approved review comments on PR #41405
 The agent will always present findings in chat first and wait for your
 explicit approval before posting anything to the PR.
 
+### Comment Reconciliation on Repeat Reviews
+
+When the agent reviews a PR that already has review comments (from a prior run
+of the agent, another ARM reviewer, or automated checks), it reconciles its
+findings against the existing comments before posting anything. This prevents
+duplicate noise and keeps the PR thread clean.
+
+The agent builds an inventory of **all** existing review comment threads —
+including resolved, outdated, and collapsed ones — and handles each finding
+according to these scenarios:
+
+| Scenario | Condition | What happens |
+| -------- | --------- | ------------ |
+| **A — Already covered** | Same rule, same file, same line | Finding is skipped. No new comment posted. |
+| **B — Line shifted (same author)** | Same rule, but the code moved to a different line. The old comment was from the agent or the same engineer. | The outdated comment is **resolved** and a new comment is posted at the correct line, with a link back to the old thread. |
+| **C — Line shifted (different reviewer)** | Same rule, code moved, but the old comment was from a different human reviewer. | The agent **does not** resolve the other reviewer's comment or post a duplicate. Instead, it **adds a reply** to the existing thread noting the new line number, so the author and reviewer can find the right code. |
+| **D — No new findings** | Every finding is already covered by existing comments. | No new comments are posted. The agent reports: *"All findings are already covered by existing comments on the PR."* |
+| **E — Violation fixed** | An existing unresolved comment flags a violation that no longer exists in the latest code. | The agent reports which comments have been addressed and **proposes resolving** them — but only with your explicit consent. If the comment was from a different reviewer, the agent replies noting the fix instead of resolving. |
+
+Before executing any actions, the agent presents a **reconciliation summary**:
+
+```text
+Reconciliation plan:
+• Post 3 new comments (2 blocking, 1 warning)
+• Resolve & repost 1 comment (line shifted from L42 → L58) [Scenario B]
+• Reply to 1 existing comment from @reviewer (line shifted to L120) [Scenario C]
+• Skip 4 findings — already covered by existing threads [Scenario A]
+• Propose resolving 2 comments — violations addressed in latest changes [Scenario E]
+
+Approve this plan?
+```
+
+You confirm the plan before any comments are posted, resolved, or replied to.
+
 ### Updating PR Labels
 
 After posting review comments, the agent can also propose label changes on the PR:
