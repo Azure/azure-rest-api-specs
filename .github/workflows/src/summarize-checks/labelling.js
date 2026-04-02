@@ -141,18 +141,19 @@ export const ImpactAssessmentSchema = z.object({
  *   https://github.com/Azure/azure-sdk-tools/issues/6374
  */
 /**
- * @typedef {"SameVersion" | "CrossVersion"} BreakingChangesCheckType
- * @typedef {"VersioningReviewRequired" | "BreakingChangeReviewRequired"} ReviewRequiredLabel
- * @typedef {"Versioning-Approved-*" | "BreakingChange-Approved-*"} ReviewApprovalPrefixLabel
+ * @typedef {"SameVersion" | "CrossVersion" | "ARMModelling"} BreakingChangesCheckType
+ * @typedef {"VersioningReviewRequired" | "BreakingChangeReviewRequired" | "ARMModellingReviewRequired"} ReviewRequiredLabel
+ * @typedef {"Versioning-Approved-*" | "BreakingChange-Approved-*" | "ARMModelling-Approved-*"} ReviewApprovalPrefixLabel
  * @typedef {"Versioning-Approved-Benign" | "Versioning-Approved-BugFix" | "Versioning-Approved-PrivatePreview" | "Versioning-Approved-BranchPolicyException" | "Versioning-Approved-Previously" | "Versioning-Approved-Retired"} ValidVersioningApproval
  * @typedef {"BreakingChange-Approved-Benign" | "BreakingChange-Approved-BugFix" | "BreakingChange-Approved-UserImpact" | "BreakingChange-Approved-BranchPolicyException" | "BreakingChange-Approved-Previously" | "BreakingChange-Approved-Security"} ValidBreakingChangeApproval
- * @typedef {ReviewRequiredLabel | ReviewApprovalPrefixLabel | ValidBreakingChangeApproval | ValidVersioningApproval} SpecsBreakingChangesLabel
+ * @typedef {"ARMModelling-Approved-OfficeHours"} ValidARMModellingApproval
+ * @typedef {ReviewRequiredLabel | ReviewApprovalPrefixLabel | ValidBreakingChangeApproval | ValidVersioningApproval | ValidARMModellingApproval} SpecsBreakingChangesLabel
  */
 /**
  * @typedef {Object} BreakingChangesCheckConfig
  * @property {ReviewRequiredLabel} reviewRequiredLabel
  * @property {ReviewApprovalPrefixLabel} approvalPrefixLabel
- * @property {(ValidVersioningApproval | ValidBreakingChangeApproval)[]} approvalLabels
+ * @property {(ValidVersioningApproval | ValidBreakingChangeApproval | ValidARMModellingApproval)[]} approvalLabels
  * @property {string} [deprecatedReviewRequiredLabel]
  */
 
@@ -403,6 +404,11 @@ export const breakingChangesCheckType = {
       "BreakingChange-Approved-Previously",
       "BreakingChange-Approved-Security",
     ],
+  },
+  ARMModelling: {
+    reviewRequiredLabel: "ARMModellingReviewRequired",
+    approvalPrefixLabel: "ARMModelling-Approved-*",
+    approvalLabels: ["ARMModelling-Approved-OfficeHours"],
   },
 };
 
@@ -725,7 +731,12 @@ function getBlockedOnVersioningPolicy(labelContext) {
     labelContext.present.has("BreakingChangeReviewRequired") &&
     !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
 
-  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
+  const pendingARMModellingReview =
+    labelContext.present.has("ARMModellingReviewRequired") &&
+    !anyApprovalLabelPresent("ARMModelling", [...labelContext.present]);
+
+  const blockedOnVersioningPolicy =
+    pendingVersioningReview || pendingBreakingChangeReview || pendingARMModellingReview;
   return blockedOnVersioningPolicy;
 }
 
@@ -789,6 +800,8 @@ export const verRev = breakingChangesCheckType.SameVersion.reviewRequiredLabel;
 export const verRevApproval = breakingChangesCheckType.SameVersion.approvalPrefixLabel;
 export const brChRev = breakingChangesCheckType.CrossVersion.reviewRequiredLabel;
 export const brChRevApproval = breakingChangesCheckType.CrossVersion.approvalPrefixLabel;
+export const armModellingRev = breakingChangesCheckType.ARMModelling.reviewRequiredLabel;
+export const armModellingRevApproval = breakingChangesCheckType.ARMModelling.approvalPrefixLabel;
 
 /** @type {RequiredLabelRule[]} */
 const rulesPri0dataPlane = [
@@ -884,6 +897,12 @@ const rulesPri0NotReadyForArmReview = [
     allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
     anyRequiredLabels: [brChRevApproval],
     troubleshootingGuide: notReadyForArmReviewReason(brChRev),
+  },
+  {
+    precedence: 0,
+    allPrerequisiteLabels: ["NotReadyForARMReview", armModellingRev],
+    anyRequiredLabels: [armModellingRevApproval],
+    troubleshootingGuide: notReadyForArmReviewReason(armModellingRev),
   },
 ];
 

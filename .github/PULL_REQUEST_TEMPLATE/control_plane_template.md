@@ -7,6 +7,8 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
+**Step 2 Details**: For detailed information about the ARM API changes review process (Step 2), including ARM Modelling Review requirements, see the [Step 2: ARM Review Guide](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/pr-workflow-step2-arm-review.md).
+
 ![spec_pr_review_workflow_diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/5bb5e7ce-8aff-4dbb-a3f8-0d9b68fef5b1)
 
 ## Purpose of this PR
@@ -30,7 +32,7 @@ and followed the instructions by checking all the boxes:
 - [ ] I have reviewed following [Resource Provider guidelines](https://aka.ms/rpguidelines), including
   [ARM resource provider contract](https://aka.ms/azurerpc) and
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
-  I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR.
+  I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR. See the [Step 2: ARM Review Guide](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/pr-workflow-step2-arm-review.md) for details on what to expect.
 - [ ] A [release plan](https://aka.ms/azsdkdocs/release-plans) has been created. If not, please create one as it will help guide you through the REST API and SDK creation process. 
 
 ## Additional information
@@ -57,7 +59,8 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 - To understand what you must do next to merge this PR, see the `Next Steps to Merge` comment. It will appear within few minutes of submitting this PR and will continue to be up-to-date with current PR state.
 - For guidance on fixing this PR CI check failures, see the hyperlinks provided in given failure 
   and https://aka.ms/ci-fix.
-- For help with ARM review (PR workflow diagram Step 2), see https://aka.ms/azsdk/pr-arm-review.
+- For help with ARM review (PR workflow diagram Step 2), including ARM Modelling Review requirements, see the [Step 2: ARM Review Guide](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/pr-workflow-step2-arm-review.md) and https://aka.ms/azsdk/pr-arm-review.
+- If you need to schedule ARM Modelling Office Hours, visit https://aka.ms/azsdk/arm-modelling-office-hours.
 - If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
   This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.
 - If the help provided by the previous points is not enough, post to https://aka.ms/azsdk/support/specreview-channel and link to this PR.
