@@ -1,5 +1,5 @@
 ---
-agent: api-reviewer
+agent: arm-api-reviewer
 description: "Review an Azure REST API specification PR for guideline compliance. Provide a PR URL or number."
 ---
 

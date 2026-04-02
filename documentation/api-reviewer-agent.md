@@ -1,6 +1,6 @@
-# Using the API Reviewer Agent
+# Using the ARM API Reviewer Agent
 
-The **API Reviewer** is a Visual Studio Code Copilot agent that reviews Azure REST API
+The **ARM API Reviewer** is a Visual Studio Code Copilot agent that reviews Azure REST API
 specifications for conformance to the [Azure REST API Guidelines][api-guidelines],
 ARM Resource Provider Contract ([RPC][rpc-contract]) rules, and repository conventions.
 It can also apply fixes directly to local files.
@@ -18,10 +18,8 @@ It can also apply fixes directly to local files.
 ## How to Open the Agent
 
 1. Open the **Copilot Chat** panel in VS Code (Ctrl+Shift+I or click the Copilot icon).
-2. In the agent picker at the top of the chat, select **api-reviewer**.
+2. In the agent picker at the top of the chat, select **ARM API Reviewer**.
 3. Type your request in the chat input.
-
-Alternatively, type `@api-reviewer` at the start of your message in any Copilot Chat panel.
 
 ## Operating Modes
 
@@ -110,6 +108,32 @@ Post the approved review comments on PR #41405
 
 The agent will always present findings in chat first and wait for your
 explicit approval before posting anything to the PR.
+
+### Updating PR Labels
+
+After posting review comments, the agent can also propose label changes on the PR:
+
+- **Add** `ARMChangesRequested` to signal the PR author needs to address feedback.
+- **Remove** `WaitForARMFeedback` (if present) since ARM feedback has been provided.
+
+The agent will propose these changes and wait for your explicit approval
+before modifying any labels.
+
+### Suppression Continuity Analysis
+
+When a PR adds or modifies a `readme.md` containing `directive` / `suppress`
+entries, the agent performs a **suppression continuity analysis** by comparing
+the new version's suppressions against the previous API version's `readme.md`:
+
+| Scenario | What the agent does |
+| -------- | ------------------- |
+| **Carried-over suppression** — same rule ID exists in both versions | Acceptable. No action needed. |
+| **Dropped suppression** — exists in previous version but missing in new | Investigates whether the PR's spec changes fix the underlying violation. If yes, notes it as a positive finding. If not, flags a **warning** that the author may have accidentally dropped a required suppression (which would cause CI failures). |
+| **New suppression** — exists in new version but not previous | Checks for a clear, specific `reason`. Flags suppressions with missing/vague reasons, security-related rule suppressions (`secret-prop`, `security-definition-missing`), or suppressions that mask issues the spec should fix. |
+| **First version** — no previous `readme.md` exists | All suppressions are treated as new and validated per the rules above. |
+
+This analysis helps catch accidentally dropped suppressions that would break CI,
+as well as unjustified new suppressions that mask real compliance issues.
 
 ## Local Changes Mode
 
@@ -235,6 +259,7 @@ Review this TypeSpec project and apply fixes: specification/contoso/resource-man
 | `specification/**/*.tsp` | TypeSpec rules |
 | `specification/**/tspconfig.yaml` | TypeSpec config rules |
 | `specification/**/examples/*.json` | Validated against the spec they reference |
+| `specification/**/readme.md` | AutoRest config — tag configurations, input file lists, and **suppressions** |
 
 ### Key Rule Areas
 
@@ -244,6 +269,7 @@ Review this TypeSpec project and apply fixes: specification/contoso/resource-man
 - **TypeSpec** — project structure, decorators, doc comments, ARM resource patterns, `union` vs `enum`
 - **Security** — no secrets in GET responses, `x-ms-secret` annotations, proper auth definitions
 - **LRO** — correct `x-ms-long-running-operation` usage, response schemas, polling headers
+- **Suppressions** — `readme.md` suppression continuity across API versions (carried-over, dropped, and new suppressions)
 
 ## Tips
 
@@ -272,11 +298,13 @@ The agent **does**:
 
 - Review OpenAPI v2 (Swagger) JSON specifications
 - Review TypeSpec (`.tsp`) source files and `tspconfig.yaml`
+- Review `readme.md` suppressions and perform suppression continuity analysis across API versions
 - Detect local git changes and validate them against Azure guidelines
 - Validate directory structure against Azure specification conventions
 - Detect breaking changes between API versions
 - Apply fixes to local files in fix mode
 - Post review comments on PRs (with your approval)
+- Propose and apply PR label changes (`ARMChangesRequested` / `WaitForARMFeedback`) with your approval
 
 The agent **does not**:
 
