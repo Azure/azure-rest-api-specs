@@ -695,9 +695,6 @@ model DataAssetQueryRequest {
   @doc("To filter by Ids.")
   ids?: string[];
 
-  @doc("To filter by domain Ids.")
-  domainIds?: string[];
-
   @doc("To filter by name keyword.")
   nameKeyword?: string;
 
