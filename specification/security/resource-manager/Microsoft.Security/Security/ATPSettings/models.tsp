@@ -20,7 +20,3 @@ model AdvancedThreatProtectionProperties {
    */
   isEnabled?: boolean;
 }
-
-/**
- * Describes an Azure resource.
- */

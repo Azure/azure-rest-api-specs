@@ -214,9 +214,6 @@ model SensitiveDataDiscoveryProperties {
 }
 
 /**
- * Describes an Azure resource.
- */
-/**
  * Describes the state of a malware scan operation.
  */
 model MalwareScan {

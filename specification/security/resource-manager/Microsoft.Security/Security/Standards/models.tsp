@@ -134,9 +134,6 @@ model TrackedResource {
 }
 
 /**
- * Describes an Azure resource.
- */
-/**
  * Describes an Azure resource with location
  */
 model AzureTrackedResourceLocation {

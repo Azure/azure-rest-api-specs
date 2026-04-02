@@ -124,7 +124,3 @@ model ApiCollectionProperties {
   @visibility(Lifecycle.Read)
   sensitivityLabel?: string;
 }
-
-/**
- * Describes an Azure resource.
- */

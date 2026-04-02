@@ -301,9 +301,6 @@ model ConnectedResource {
 }
 
 /**
- * Describes an Azure resource.
- */
-/**
  * Describes an Azure resource with location
  */
 model Location {

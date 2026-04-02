@@ -100,9 +100,6 @@ model AutoProvisioningSettingProperties {
 }
 
 /**
- * Describes an Azure resource.
- */
-/**
  * List of Compliance objects response
  */
 model ComplianceList {

@@ -231,9 +231,6 @@ model AdditionalData {
 }
 
 /**
- * Describes an Azure resource.
- */
-/**
  * Details of the resource that was assessed
  */
 model SqlServerVulnerabilityProperties extends AdditionalData {

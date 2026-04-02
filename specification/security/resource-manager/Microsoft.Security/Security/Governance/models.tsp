@@ -202,9 +202,6 @@ model GovernanceAssignmentAdditionalData {
 }
 
 /**
- * Describes an Azure resource.
- */
-/**
  * Page of a governance rules list
  */
 model GovernanceRuleList {

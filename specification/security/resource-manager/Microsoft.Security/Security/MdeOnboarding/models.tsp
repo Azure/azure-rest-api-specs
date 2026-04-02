@@ -38,7 +38,3 @@ model MdeOnboardingDataProperties {
    */
   onboardingPackageLinux?: bytes;
 }
-
-/**
- * Describes an Azure resource.
- */

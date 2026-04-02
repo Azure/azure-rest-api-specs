@@ -81,9 +81,6 @@ model SettingsList {
 }
 
 /**
- * Describes an Azure resource.
- */
-/**
  * Represents a data export setting
  */
 model DataExportSettings extends Setting {

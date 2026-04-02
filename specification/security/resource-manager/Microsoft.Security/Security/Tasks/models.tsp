@@ -105,7 +105,3 @@ model SecurityTaskParameters {
   @visibility(Lifecycle.Read)
   name?: string;
 }
-
-/**
- * Describes an Azure resource.
- */

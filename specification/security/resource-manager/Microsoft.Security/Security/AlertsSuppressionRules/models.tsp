@@ -101,10 +101,3 @@ model ScopeElement {
    */
   field?: string;
 }
-
-/**
- * Describes an Azure resource.
- */
-/**
- * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
- */

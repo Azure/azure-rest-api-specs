@@ -22,7 +22,3 @@ model SecurityOperatorList {
   @pageItems
   value: SecurityOperator[];
 }
-
-/**
- * Describes an Azure resource.
- */
