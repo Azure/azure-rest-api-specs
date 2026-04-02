@@ -55,6 +55,9 @@ input-file:
   - stable/2025-07-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
+  - code: ParametersInPointGet
+    from: loadBalancer.json
+    reason: Want to add extra parameter for GET Load Balancer operation. This parameter "detailLevel" is extremely important so customers can query big resources, without having a huge performance impact on our RP infrastructure.
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
@@ -103,17 +106,6 @@ directive:
     where: "$.definitions.systemData"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterSystemData"
-```
-
-### Tag: package-2025-07-01
-
-These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-07-01'
-suppressions:
-  - code: ParametersInPointGet
-    from: loadBalancer.json
-    reason: Want to add extra parameter for GET Load Balancer operation. This parameter "detailLevel" is extremely important so customers can query big resources, without having a huge performance impact on our RP infrastructure.
 ```
 
 ### Tag: package-2025-05-01
@@ -285,9 +277,6 @@ suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: network.json
     reason: False alarm.
-  - code: ParametersInPointGet
-    from: loadBalancer.json
-    reason: Want to add extra parameter for GET Load Balancer operation. This parameter "detailLevel" is extremely important so customers can query big resources, without having a huge performance impact on our RP infrastructure.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
