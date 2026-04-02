@@ -154,19 +154,6 @@ alias ListToolboxVersionsRequest = {
   ...CommonPageQueryParameters;
 };
 
-alias UpdateToolboxRequest = {
-  @doc("The name of the toolbox to update.")
-  @path
-  toolbox_name: string;
-
-  @doc("A human-readable description of the toolbox.")
-  @maxLength(512)
-  description?: string;
-
-  @doc("Arbitrary key-value metadata to associate with the toolbox.")
-  metadata?: Record<string>;
-};
-
 alias DeleteToolboxRequest = {
   @doc("The name of the toolbox to delete.")
   @path

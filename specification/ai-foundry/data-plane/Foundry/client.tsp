@@ -212,7 +212,6 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(Toolboxes.createToolboxVersion, "create");
-@@clientName(Toolboxes.updateToolbox, "update");
 @@clientName(Toolboxes.getToolbox, "get");
 @@clientName(Toolboxes.listToolboxes, "list");
 @@clientName(Toolboxes.deleteToolbox, "delete");
