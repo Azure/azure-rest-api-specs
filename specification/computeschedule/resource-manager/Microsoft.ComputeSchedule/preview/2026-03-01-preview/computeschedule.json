@@ -5233,9 +5233,12 @@
           "additionalProperties": {}
         },
         "resourceOverrides": {
-          "type": "object",
+          "type": "array",
           "description": "JSON array that contains VM properties that should be overridden for each VM in the batch",
-          "additionalProperties": {}
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          }
         },
         "resourceCount": {
           "type": "integer",
