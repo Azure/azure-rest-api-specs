@@ -2535,11 +2535,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/getMultiCloudRoutes": {
       "post": {
-        "operationId": "ExpressRouteCircuits_ListMultiCloudRoutesTable",
+        "operationId": "ExpressRouteCircuits_MultiCloudRoutesTable",
         "tags": [
           "ExpressRouteCircuitMultiCloudRoutesTable"
         ],
-        "description": "Gets the currently advertised routes table associated with the express route multi cloud interconnect circuit in a resource group.",
+        "description": "Gets the currently advertised routes table associated with the express route multi cloud circuit in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2553,7 +2553,7 @@
           {
             "name": "circuitName",
             "in": "path",
-            "description": "The name of the express route multi cloud interconnect circuit.",
+            "description": "The name of the express route multi cloud circuit.",
             "required": true,
             "type": "string"
           }
@@ -2588,7 +2588,7 @@
         },
         "x-ms-examples": {
           "List Route Tables": {
-            "$ref": "./examples/ExpressRouteCircuitRouteTableList.json"
+            "$ref": "./examples/ExpressRouteCircuitMultiCloudRouteTableList.json"
           }
         },
         "x-ms-long-running-operation-options": {
