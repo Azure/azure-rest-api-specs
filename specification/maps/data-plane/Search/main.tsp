@@ -55,10 +55,5 @@ namespace MapsSearch {
      * The 2026-01-01 API version.
      */
     v2026_01_01: "2026-01-01",
-
-    /**
-     * The 2025-06-01-preview API version.
-     */
-    v2025_06_01_preview: "2025-06-01-preview",
   }
 }
