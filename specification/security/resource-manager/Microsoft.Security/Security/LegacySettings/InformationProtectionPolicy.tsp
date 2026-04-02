@@ -32,8 +32,8 @@ interface InformationProtectionPolicies {
   /**
    * Details of the information protection policy.
    */
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
     InformationProtectionPolicy,
     Error = CloudError
   >;
@@ -41,8 +41,8 @@ interface InformationProtectionPolicies {
   /**
    * Details of the information protection policy.
    */
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     InformationProtectionPolicy,
     Error = CloudError
   >;
@@ -50,8 +50,8 @@ interface InformationProtectionPolicies {
   /**
    * Information protection policies of a specific management group.
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     InformationProtectionPolicy,
     Response = ArmResponse<InformationProtectionPolicyList>,
     Error = CloudError

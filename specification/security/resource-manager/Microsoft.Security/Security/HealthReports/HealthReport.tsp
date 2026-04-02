@@ -61,14 +61,14 @@ interface HealthReports {
   /**
    * Get a list of all health reports inside a scope. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     HealthReport,
     Response = ArmResponse<HealthReportsList>
   >;
 }
 
-@@minLength(Extension.ScopeParameter.scope, 1);
+@@minLength(Azure.ResourceManager.Extension.ScopeParameter.scope, 1);
 @@doc(HealthReport.name,
   "The health report Key - Unique key for the health report type"
 );

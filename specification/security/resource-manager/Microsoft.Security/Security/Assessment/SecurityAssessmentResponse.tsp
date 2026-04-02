@@ -25,7 +25,8 @@ model SecurityAssessmentResponse
   >;
 }
 
-model SecurityAssessmentResponsesScopeParameter is Extension.ScopeParameter;
+model SecurityAssessmentResponsesScopeParameter
+  is Azure.ResourceManager.Extension.ScopeParameter;
 
 @armResourceOperations(#{ omitTags: true })
 interface SecurityAssessmentResponses {
@@ -33,7 +34,7 @@ interface SecurityAssessmentResponses {
    * Get a security assessment on your scanned resource
    */
   @tag("Assessments")
-  get is Extension.Read<
+  get is Azure.ResourceManager.Extension.Read<
     SecurityAssessmentResponsesScopeParameter,
     SecurityAssessmentResponse,
     Parameters = {
@@ -61,7 +62,7 @@ interface SecurityAssessmentResponses {
    * Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result
    */
   @tag("Assessments")
-  delete is Extension.DeleteSync<
+  delete is Azure.ResourceManager.Extension.DeleteSync<
     SecurityAssessmentResponsesScopeParameter,
     SecurityAssessmentResponse,
     Error = CloudError
@@ -71,8 +72,8 @@ interface SecurityAssessmentResponses {
    * Get security assessments on all your scanned resources inside a scope
    */
   @tag("Assessments")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     SecurityAssessmentResponse,
     Response = ArmResponse<SecurityAssessmentList>,
     Error = CloudError

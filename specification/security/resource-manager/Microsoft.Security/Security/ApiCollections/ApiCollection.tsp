@@ -15,7 +15,7 @@ namespace Microsoft.Security;
 @maxLength(50)
 scalar ApiManagementServiceName extends string;
 
-alias serviceExternalResource = Extension.ExternalResource<
+alias serviceExternalResource = Azure.ResourceManager.Extension.ExternalResource<
   "Microsoft.ApiManagement",
   "service",
   "serviceName",
@@ -47,7 +47,7 @@ interface ApiCollections {
   @summary("Gets an onboarded Azure API Management API")
   @tag("D4APICollection")
   @tag("APIMConfig")
-  getByAzureApiManagementService is Extension.Read<
+  getByAzureApiManagementService is Azure.ResourceManager.Extension.Read<
     serviceExternalResource,
     ApiCollection
   >;
@@ -73,7 +73,7 @@ interface ApiCollections {
   @summary("Offboard an Azure API Management API from Microsoft Defender for APIs")
   @tag("OffboardFromD4API")
   @tag("APIMConfig")
-  offboardAzureApiManagementApi is Extension.DeleteSync<
+  offboardAzureApiManagementApi is Azure.ResourceManager.Extension.DeleteSync<
     serviceExternalResource,
     ApiCollection
   >;
@@ -84,7 +84,7 @@ interface ApiCollections {
   @summary("Gets a list of onboarded Azure API Management APIs")
   @tag("D4APICollectionList")
   @tag("APIMConfig")
-  listByAzureApiManagementService is Extension.ListByTarget<
+  listByAzureApiManagementService is Azure.ResourceManager.Extension.ListByTarget<
     serviceExternalResource,
     ApiCollection,
     Response = ArmResponse<ApiCollectionList>

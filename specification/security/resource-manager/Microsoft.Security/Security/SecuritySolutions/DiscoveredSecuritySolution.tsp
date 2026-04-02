@@ -47,8 +47,8 @@ interface DiscoveredSecuritySolutions {
    * Gets a list of discovered Security Solutions for the subscription and location.
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  listByHomeRegion is Extension.ListByTarget<
-    Extension.Subscription,
+  listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.Subscription,
     DiscoveredSecuritySolution,
     Response = ArmResponse<DiscoveredSecuritySolutionList>,
     Error = CloudError

@@ -30,8 +30,8 @@ interface Compliances {
   /**
    * Details of a specific Compliance.
    */
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
     Compliance,
     Error = CloudError
   >;
@@ -39,8 +39,8 @@ interface Compliances {
   /**
    * The Compliance scores of the specific management group.
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     Compliance,
     Response = ArmResponse<ComplianceList>,
     Error = CloudError

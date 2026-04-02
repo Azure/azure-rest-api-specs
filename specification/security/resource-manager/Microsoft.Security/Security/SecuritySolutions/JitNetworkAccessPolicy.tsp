@@ -113,8 +113,8 @@ interface JitNetworkAccessPolicies {
    * Policies for protecting resources using Just-in-Time access control for the subscription, location
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  listByRegion is Extension.ListByTarget<
-    Extension.Subscription,
+  listByRegion is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.Subscription,
     JitNetworkAccessPolicy,
     Response = ArmResponse<JitNetworkAccessPoliciesList>,
     Error = CloudError

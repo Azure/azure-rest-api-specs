@@ -29,8 +29,8 @@ interface Applications {
   /**
    * Get a specific application for the requested scope by applicationId
    */
-  get is Extension.Read<
-    Extension.Subscription,
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.Subscription,
     Application,
     Error = CloudError
   >;
@@ -38,8 +38,8 @@ interface Applications {
   /**
    * Creates or update a security application on the given subscription.
    */
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.Subscription,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
+    Azure.ResourceManager.Extension.Subscription,
     Application,
     Error = CloudError
   >;
@@ -47,8 +47,8 @@ interface Applications {
   /**
    * Delete an Application over a given scope
    */
-  delete is Extension.DeleteSync<
-    Extension.Subscription,
+  delete is Azure.ResourceManager.Extension.DeleteSync<
+    Azure.ResourceManager.Extension.Subscription,
     Application,
     Error = CloudError
   >;
@@ -56,8 +56,8 @@ interface Applications {
   /**
    * Get a list of all relevant applications over a subscription level scope
    */
-  list is Extension.ListByTarget<
-    Extension.Subscription,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.Subscription,
     Application,
     Response = ArmResponse<ApplicationsList>,
     Error = CloudError
@@ -82,10 +82,10 @@ alias SecurityConnectorApplicationOps = Azure.ResourceManager.Legacy.ExtensionOp
     securityConnectorName: string;
   },
   {
-    ...Extension.ExtensionProviderNamespace<Application>;
+    ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<Application>;
   },
   {
-    ...Extension.ExtensionProviderNamespace<Application>;
+    ...Azure.ResourceManager.Extension.ExtensionProviderNamespace<Application>;
 
     /** The security Application key - unique key for the standard application */
     @path

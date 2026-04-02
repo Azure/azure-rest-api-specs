@@ -30,29 +30,32 @@ interface CustomRecommendations {
   /**
    * Get a specific custom recommendation for the requested scope by customRecommendationName
    */
-  get is Extension.Read<Extension.ScopeParameter, CustomRecommendation>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    CustomRecommendation
+  >;
 
   /**
    * Creates or updates a custom recommendation over a given scope
    */
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     CustomRecommendation
   >;
 
   /**
    * Delete a custom recommendation over a given scope
    */
-  delete is Extension.DeleteSync<
-    Extension.ScopeParameter,
+  delete is Azure.ResourceManager.Extension.DeleteSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     CustomRecommendation
   >;
 
   /**
    * Get a list of all relevant custom recommendations over a scope
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     CustomRecommendation,
     Response = ArmResponse<CustomRecommendationsList>
   >;

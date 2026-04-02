@@ -62,8 +62,8 @@ interface ComplianceResults {
    * Security compliance results in the subscription
    */
   @tag("Compliance Results")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     ComplianceResult,
     Response = ArmResponse<ComplianceResultList>,
     Error = CloudError

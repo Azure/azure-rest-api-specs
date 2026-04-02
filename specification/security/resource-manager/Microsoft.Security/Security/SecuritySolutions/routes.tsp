@@ -88,7 +88,7 @@ interface JitNetworkAccessPoliciesOperationGroup {
   @action("jitNetworkAccessPolicies")
   listByResourceGroup is ArmProviderActionSync<
     Response = JitNetworkAccessPoliciesList,
-    Scope = Extension.ResourceGroup,
+    Scope = Azure.ResourceManager.Extension.ResourceGroup,
     Error = CloudError
   >;
 }

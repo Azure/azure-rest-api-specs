@@ -47,8 +47,8 @@ interface AllowedConnectionsResources {
    * Gets the list of all possible traffic between resources for the subscription and location.
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  listByHomeRegion is Extension.ListByTarget<
-    Extension.Subscription,
+  listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.Subscription,
     AllowedConnectionsResource,
     Response = ArmResponse<AllowedConnectionsList>,
     Error = CloudError

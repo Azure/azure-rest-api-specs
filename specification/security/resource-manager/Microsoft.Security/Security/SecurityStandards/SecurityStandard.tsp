@@ -30,26 +30,32 @@ interface SecurityStandards {
   /**
    * Get a specific security standard for the requested scope by standardId
    */
-  get is Extension.Read<Extension.ScopeParameter, SecurityStandard>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    SecurityStandard
+  >;
 
   /**
    * Creates or updates a security standard over a given scope
    */
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     SecurityStandard
   >;
 
   /**
    * Delete a security standard over a given scope
    */
-  delete is Extension.DeleteSync<Extension.ScopeParameter, SecurityStandard>;
+  delete is Azure.ResourceManager.Extension.DeleteSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    SecurityStandard
+  >;
 
   /**
    * Get a list of all relevant security standards over a scope
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     SecurityStandard,
     Response = ArmResponse<SecurityStandardList>
   >;

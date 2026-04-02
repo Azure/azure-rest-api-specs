@@ -26,6 +26,6 @@ interface ApiCollectionsOperationGroup {
   @action("apiCollections")
   listByResourceGroup is ArmProviderActionSync<
     Response = ApiCollectionList,
-    Scope = Extension.ResourceGroup
+    Scope = Azure.ResourceManager.Extension.ResourceGroup
   >;
 }

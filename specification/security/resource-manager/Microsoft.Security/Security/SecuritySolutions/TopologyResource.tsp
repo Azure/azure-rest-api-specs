@@ -44,8 +44,8 @@ interface TopologyResources {
    * Gets a list that allows to build a topology view of a subscription and location.
    */
   @Azure.ResourceManager.Legacy.renamePathParameter("location", "ascLocation")
-  listByHomeRegion is Extension.ListByTarget<
-    Extension.Subscription,
+  listByHomeRegion is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.Subscription,
     TopologyResource,
     Response = ArmResponse<TopologyList>,
     Error = CloudError

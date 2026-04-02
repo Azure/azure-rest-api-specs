@@ -30,8 +30,8 @@ interface DeviceSecurityGroups {
   /**
    * Use this method to get the device security group for the specified IoT Hub resource.
    */
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
     DeviceSecurityGroup,
     Error = CloudError
   >;
@@ -39,8 +39,8 @@ interface DeviceSecurityGroups {
   /**
    * Use this method to creates or updates the device security group on a specified IoT Hub resource.
    */
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     DeviceSecurityGroup,
     Error = CloudError
   >;
@@ -48,8 +48,8 @@ interface DeviceSecurityGroups {
   /**
    * User this method to deletes the device security group.
    */
-  delete is Extension.DeleteSync<
-    Extension.ScopeParameter,
+  delete is Azure.ResourceManager.Extension.DeleteSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     DeviceSecurityGroup,
     Error = CloudError
   >;
@@ -57,8 +57,8 @@ interface DeviceSecurityGroups {
   /**
    * Use this method get the list of device security groups for the specified IoT Hub resource.
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     DeviceSecurityGroup,
     Response = ArmResponse<DeviceSecurityGroupList>,
     Error = CloudError

@@ -38,7 +38,7 @@ interface AlertsOperationGroup {
   @list
   listByResourceGroup is ArmProviderActionSync<
     Response = AlertList,
-    Scope = Extension.ResourceGroup,
+    Scope = Azure.ResourceManager.Extension.ResourceGroup,
     Error = CloudError
   >;
   /**

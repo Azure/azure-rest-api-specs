@@ -69,8 +69,8 @@ interface GovernanceRules {
   /**
    * Get a specific governance rule for the requested scope by ruleId
    */
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
     GovernanceRule,
     Error = CloudError
   >;
@@ -78,8 +78,8 @@ interface GovernanceRules {
   /**
    * Creates or updates a governance rule over a given scope
    */
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  createOrUpdate is Azure.ResourceManager.Extension.CreateOrReplaceSync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     GovernanceRule,
     Error = CloudError
   >;
@@ -88,8 +88,8 @@ interface GovernanceRules {
    * Delete a Governance rule over a given scope
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is Extension.DeleteWithoutOkAsync<
-    Extension.ScopeParameter,
+  delete is Azure.ResourceManager.Extension.DeleteWithoutOkAsync<
+    Azure.ResourceManager.Extension.ScopeParameter,
     GovernanceRule,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
@@ -98,8 +98,8 @@ interface GovernanceRules {
   /**
    * Get a list of all relevant governance rules over a scope
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     GovernanceRule,
     Response = ArmResponse<GovernanceRuleList>,
     Error = CloudError
@@ -108,8 +108,8 @@ interface GovernanceRules {
   /**
    * Execute a governance rule
    */
-  execute is Extension.ActionAsyncBase<
-    Extension.ScopeParameter,
+  execute is Azure.ResourceManager.Extension.ActionAsyncBase<
+    Azure.ResourceManager.Extension.ScopeParameter,
     GovernanceRule,
     ExecuteGovernanceRuleParams,
     ArmAcceptedLroResponse,

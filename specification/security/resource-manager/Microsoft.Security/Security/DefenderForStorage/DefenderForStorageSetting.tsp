@@ -108,8 +108,8 @@ interface DefenderForStorageSettings {
    * Lists the Defender for Storage settings for the specified storage account.
    */
   @tag("DefenderForStorage")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     DefenderForStorageSetting,
     Response = ArmResponse<DefenderForStorageSettingList>,
     Error = CloudError

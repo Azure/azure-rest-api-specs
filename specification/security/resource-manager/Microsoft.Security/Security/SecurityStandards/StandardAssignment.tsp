@@ -25,7 +25,8 @@ model StandardAssignment
   >;
 }
 
-model ResourceIdScopeParameter is Extension.ScopeParameter;
+model ResourceIdScopeParameter
+  is Azure.ResourceManager.Extension.ScopeParameter;
 
 @armResourceOperations
 interface StandardAssignments {
@@ -33,13 +34,16 @@ interface StandardAssignments {
    * This operation retrieves a single standard assignment, given its name and the scope it was created at.
    */
   @summary("Retrieves a standard assignment.")
-  get is Extension.Read<ResourceIdScopeParameter, StandardAssignment>;
+  get is Azure.ResourceManager.Extension.Read<
+    ResourceIdScopeParameter,
+    StandardAssignment
+  >;
 
   /**
    *  This operation creates or updates a standard assignment with the given scope and name. standard assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.
    */
   @summary("Creates or updates a standard assignment.")
-  create is Extension.CreateOrReplaceSync<
+  create is Azure.ResourceManager.Extension.CreateOrReplaceSync<
     ResourceIdScopeParameter,
     StandardAssignment
   >;
@@ -48,13 +52,16 @@ interface StandardAssignments {
    * This operation deletes a standard assignment, given its name and the scope it was created in. The scope of a standard assignment is the part of its ID preceding '/providers/Microsoft.Security/standardAssignments/{standardAssignmentName}'.
    */
   @summary("Deletes a standard assignment.")
-  delete is Extension.DeleteSync<ResourceIdScopeParameter, StandardAssignment>;
+  delete is Azure.ResourceManager.Extension.DeleteSync<
+    ResourceIdScopeParameter,
+    StandardAssignment
+  >;
 
   /**
    * Get a list of all relevant standard assignments over a scope
    */
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     StandardAssignment,
     Response = ArmResponse<StandardAssignmentsList>
   >;
