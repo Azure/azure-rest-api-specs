@@ -361,9 +361,9 @@ union ManagedIdentityType {
   SystemAssigned: "SystemAssigned",
 
   /**
-   * UserAssigned
+   * Both SystemAssigned and UserAssigned identities. UserAssigned standalone is not supported by Purview.
    */
-  UserAssigned: "UserAssigned",
+  SystemAssignedUserAssigned: "SystemAssigned,UserAssigned"
 }
 
 /**
