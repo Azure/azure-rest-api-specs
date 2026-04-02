@@ -1799,8 +1799,7 @@ model DestinationProperties {
    * Subscription Id of Azure Data Lake Store
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  dataLakeSubscriptionId?: string;
+  dataLakeSubscriptionId?: uuid;
 
   /**
    * The Azure Data Lake Store name for the captured events
