@@ -234,7 +234,7 @@ stages:
             sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
           fi
 
-          if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
+          if [ "${{ parameters.ApiVersion }}" != "" ]; then
             optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
             sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
           fi

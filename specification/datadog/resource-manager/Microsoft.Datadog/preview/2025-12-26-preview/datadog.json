@@ -2133,11 +2133,11 @@
   "definitions": {
     "ActivateSaaSParameterRequest": {
       "type": "object",
-      "description": "SaaS guid for Activate and Validate SaaS Resource",
+      "description": "SaaS resource details for Activate and Validate SaaS Resource",
       "properties": {
-        "saaSGuid": {
+        "saaSResourceId": {
           "type": "string",
-          "description": "SaaS guid of marketplace saas subscription to be activated."
+          "description": "SaaS resource id of marketplace saas subscription to be activated."
         },
         "userInfo": {
           "$ref": "#/definitions/UserInfo",
@@ -2149,7 +2149,7 @@
         }
       },
       "required": [
-        "saaSGuid"
+        "saaSResourceId"
       ]
     },
     "AgentRules": {
