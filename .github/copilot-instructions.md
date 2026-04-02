@@ -9,6 +9,10 @@ Refer to [new-typespec-project.instructions.md](./instructions/typespec-project.
 
 Refer to [language-emitter.instructions.md](./instructions/language-emitter.instructions.md) for detailed steps on how to add language emitters to an existing `tspconfig.yaml` file in a TypeSpec project.
 
+# SDK customization and build failure resolution
+
+Refer `generate-sdk-locally` skill in `.github/skills/generate-sdk-locally/SKILL.md` to resolve any prompts about TypeSpec customization or SDK generation failures. This includes fixing build errors, applying TypeSpec decorators, resolving breaking changes, renaming SDK clients or models, hiding operations, and fixing analyzer errors.
+
 # SDK generation from TypeSpec
 
 You must use Azure SDK MCP server to generate SDK from TypeSpec.
