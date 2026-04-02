@@ -1,8 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
-
-using Azure.ResourceManager;
 
 /**
  * The status state of the request.
