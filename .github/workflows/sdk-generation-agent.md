@@ -1,6 +1,6 @@
 ---
 description: Trigger SDK generation from issues and comments, monitor pipeline status, and report SDK PR links.
-timeout-minutes: 60  # Job timeout
+timeout-minutes: 60 # Job timeout
 on:
   issues:
     types: [opened, labeled]
@@ -99,9 +99,9 @@ When validation succeeds, execute the following steps in order.
 
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
 - If release plan is not found then add a comment in the issue to state that release plan is not found for SDK generation and complete the workflow.
-- If get release plan is successful, then run following steps from the azure-rest-api-specs repo root. 
-    - Run `npm ci`.
-    - update the release plan by executing `azsdk release-plan update --typespec-path <TypeSpec project path> --workitem-id <work-item-id> --pull-request <spec pull request url> --api-version "latest"` from azure-rest-api-specs repo root. Use the TypeSpec project path from the issue context, the work item ID from the release plan, and the spec pull request URL identified in step 3.
+- If get release plan is successful, then run following steps from the azure-rest-api-specs repo root.
+  - Run `npm ci`.
+  - update the release plan by executing `azsdk release-plan update --typespec-path <TypeSpec project path> --workitem-id <work-item-id> --pull-request <spec pull request url> --api-version "latest"` from azure-rest-api-specs repo root. Use the TypeSpec project path from the issue context, the work item ID from the release plan, and the spec pull request URL identified in step 3.
 - Capture the TypeSpec project path, API version, release type, and target languages from the issue context (dispatch runs rely on the issue referenced by `issue_url`).
 - For `issue_comment` triggers, inspect the comment body for case-insensitive mentions of supported language names (`Python`, `.NET`, `JavaScript`, `Java`, `Go`). If one or more supported languages are explicitly requested, override the target language list to only those deduplicated matches. When no supported languages are mentioned, fall back to the release plan language list.
 - **Guard**: If the TypeSpec project path or release plan details (work item ID, release plan ID, API version, or release type) cannot be resolved from the issue context, do **not** proceed with SDK generation. Instead, add a comment on the issue explaining which required details are missing and call `noop`. Do not continue to step 5.
