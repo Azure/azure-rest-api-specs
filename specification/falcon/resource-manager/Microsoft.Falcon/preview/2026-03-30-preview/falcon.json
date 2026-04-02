@@ -741,6 +741,24 @@
         }
       ]
     },
+    "ComplianceFramework": {
+      "type": "object",
+      "description": "Compliance framework configuration.",
+      "properties": {
+        "framework": {
+          "type": "string",
+          "description": "The compliance framework name."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "The enforcement mode for the compliance framework."
+        }
+      },
+      "required": [
+        "framework",
+        "enforcementMode"
+      ]
+    },
     "FleetNamespace": {
       "type": "object",
       "description": "Fleet Namespace resource",
@@ -817,9 +835,15 @@
           "type": "string",
           "description": "The PME group used to provide access and JIT to resources.\ni.e. TM-Falcon."
         },
-        "complianceFrameworks": {
-          "type": "string",
-          "description": "Comma-separated list of compliance frameworks applicable to this fleet namespace."
+        "compliance": {
+          "type": "array",
+          "description": "List of compliance frameworks applicable to this fleet namespace.",
+          "items": {
+            "$ref": "#/definitions/ComplianceFramework"
+          },
+          "x-ms-identifiers": [
+            "framework"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/FleetNamespaceProvisioningState",
@@ -856,9 +880,15 @@
           "type": "string",
           "description": "The PME group used to provide access and JIT to resources.\ni.e. TM-Falcon."
         },
-        "complianceFrameworks": {
-          "type": "string",
-          "description": "Comma-separated list of compliance frameworks applicable to this fleet namespace."
+        "compliance": {
+          "type": "array",
+          "description": "List of compliance frameworks applicable to this fleet namespace.",
+          "items": {
+            "$ref": "#/definitions/ComplianceFramework"
+          },
+          "x-ms-identifiers": [
+            "framework"
+          ]
         }
       }
     },
