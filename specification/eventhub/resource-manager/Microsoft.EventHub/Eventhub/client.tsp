@@ -173,6 +173,11 @@ using Microsoft.EventHub;
   "java"
 );
 
+@@alternateType(DestinationProperties.dataLakeSubscriptionId,
+  Azure.Core.uuid,
+  "java"
+);
+
 @@clientName(TlsVersion, "EventHubsTlsVersion", "csharp");
 @@clientName(TlsVersion.`1.0`, "Tls1_0", "csharp");
 @@clientName(TlsVersion.`1.1`, "Tls1_1", "csharp");
