@@ -45,8 +45,8 @@ model ToolboxObject {
     @doc("The latest version of the toolbox.")
     latest: ToolboxVersionObject;
 
-    @doc("The version that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
-    default: ToolboxVersionObject;
+    @doc("The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
+    default: string;
   };
 }
 
