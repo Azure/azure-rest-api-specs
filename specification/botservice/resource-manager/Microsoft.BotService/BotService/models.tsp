@@ -190,6 +190,31 @@ union OperationResultStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union ChannelNameUnion {
+  string,
+  AlexaChannel: "AlexaChannel",
+  FacebookChannel: "FacebookChannel",
+  EmailChannel: "EmailChannel",
+  KikChannel: "KikChannel",
+  TelegramChannel: "TelegramChannel",
+  SlackChannel: "SlackChannel",
+  MsTeamsChannel: "MsTeamsChannel",
+  SkypeChannel: "SkypeChannel",
+  WebChatChannel: "WebChatChannel",
+  DirectLineChannel: "DirectLineChannel",
+  SmsChannel: "SmsChannel",
+  LineChannel: "LineChannel",
+  DirectLineSpeechChannel: "DirectLineSpeechChannel",
+  OutlookChannel: "OutlookChannel",
+  Omnichannel: "Omnichannel",
+  TelephonyChannel: "TelephonyChannel",
+  AcsChatChannel: "AcsChatChannel",
+  SearchAssistant: "SearchAssistant",
+  M365Extensions: "M365Extensions",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ChannelName {
   AlexaChannel,
   FacebookChannel,
