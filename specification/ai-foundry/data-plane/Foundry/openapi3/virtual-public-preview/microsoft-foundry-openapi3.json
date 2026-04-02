@@ -38834,7 +38834,7 @@
           "object",
           "id",
           "name",
-          "versions"
+          "default_version"
         ],
         "properties": {
           "object": {
@@ -38853,32 +38853,9 @@
             "maxLength": 256,
             "description": "The name of the toolbox."
           },
-          "description": {
+          "default_version": {
             "type": "string",
-            "maxLength": 512,
-            "description": "A human-readable description of the toolbox."
-          },
-          "versions": {
-            "type": "object",
-            "properties": {
-              "latest": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ToolboxVersionObject"
-                  }
-                ],
-                "description": "The latest version of the toolbox."
-              },
-              "default": {
-                "type": "string",
-                "description": "The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox."
-              }
-            },
-            "required": [
-              "latest",
-              "default"
-            ],
-            "description": "The versions of the toolbox."
+            "description": "The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox."
           }
         },
         "description": "A toolbox that stores reusable tool definitions for agents."

@@ -36,18 +36,8 @@ model ToolboxObject {
   @maxLength(256)
   name: string;
 
-  @doc("A human-readable description of the toolbox.")
-  @maxLength(512)
-  description?: string;
-
-  @doc("The versions of the toolbox.")
-  versions: {
-    @doc("The latest version of the toolbox.")
-    latest: ToolboxVersionObject;
-
-    @doc("The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
-    default: string;
-  };
+  @doc("The version identifier that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
+  default_version: string;
 }
 
 @doc("A specific version of a toolbox.")
