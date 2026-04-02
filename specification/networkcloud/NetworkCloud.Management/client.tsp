@@ -7,13 +7,6 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.NetworkCloud;
 
-@@scope(BareMetalMachines.createOrUpdate, "!csharp");
-@@scope(BareMetalMachines.delete, "!csharp");
-@@scope(Racks.createOrUpdate, "!csharp");
-@@scope(Racks.delete, "!csharp");
-@@scope(StorageAppliances.createOrUpdate, "!csharp");
-@@scope(StorageAppliances.delete, "!csharp");
-
 // --- go ---
 @@clientName(HugepagesSize.`1G`, "OneG", "go");
 @@clientName(HugepagesSize.`2M`, "TwoM", "go");
@@ -22,8 +15,19 @@ using Microsoft.NetworkCloud;
   "go"
 );
 
+// --- python ---
+@@clientName(Microsoft.NetworkCloud, "NetworkCloudMgmtClient", "python");
+@@clientName(HugepagesSize.`1G`, "ONE_G", "python");
+@@clientName(HugepagesSize.`2M`, "TWO_M", "python");
+
 // --- csharp ---
-// Map eTag from spread alias to Azure.ETag? for ApiCompat (property name is 'etag' lowercase)
+@@scope(BareMetalMachines.createOrUpdate, "!csharp");
+@@scope(BareMetalMachines.delete, "!csharp");
+@@scope(Racks.createOrUpdate, "!csharp");
+@@scope(Racks.delete, "!csharp");
+@@scope(StorageAppliances.createOrUpdate, "!csharp");
+@@scope(StorageAppliances.delete, "!csharp");
+
 @@alternateType(AccessBridge.etag, eTag, "csharp");
 @@alternateType(AgentPool.etag, eTag, "csharp");
 @@alternateType(BareMetalMachine.etag, eTag, "csharp");
@@ -399,6 +403,7 @@ using Microsoft.NetworkCloud;
 @@usage(RackSku, Usage.input, "csharp");
 @@usage(BareMetalMachine, Usage.input, "csharp");
 @@usage(StorageAppliance, Usage.input, "csharp");
+
 @@clientName(ActionState, "NetworkCloudActionState", "csharp");
 @@clientName(ActionState.endTime, "EndOn", "csharp");
 @@clientName(ActionStateStatus, "NetworkCloudActionStateStatus", "csharp");

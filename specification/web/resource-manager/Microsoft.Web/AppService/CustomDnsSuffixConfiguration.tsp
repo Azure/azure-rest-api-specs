@@ -32,7 +32,8 @@ model CustomDnsSuffixConfiguration
   kind?: string;
 }
 
-@armResourceOperations
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ omitTags: true })
 interface CustomDnsSuffixConfigurations {
   /**
    * Get Custom Dns Suffix configuration of an App Service Environment
