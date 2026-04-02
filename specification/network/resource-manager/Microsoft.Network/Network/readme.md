@@ -29,6 +29,9 @@ title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
 tag: package-2025-07-01
+directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: The vmssNetwork.json (2018-10-01) is required in the default tag alongside 2025-07-01 swaggers for backward compatibility.
 ```
 
 ### Tag: package-2025-07-01
