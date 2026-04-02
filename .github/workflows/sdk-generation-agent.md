@@ -32,8 +32,8 @@ permissions:
   id-token: write
 strict: false
 imports:
-  - shared-github-aw-imports\install_azsdk_cli_import.md
-  - shared-github-aw-imports\global_networks_auth_import.md
+  - shared-github-aw-imports/install_azsdk_cli_import.md
+  - shared-github-aw-imports/global_networks_auth_import.md
 env:
   AZSDK_CLI_PATH: /tmp/bin
   AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
