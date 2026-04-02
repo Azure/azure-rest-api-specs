@@ -25,11 +25,10 @@ using TypeSpec.Versioning;
  * Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage deny assignments. A deny assignment describes the set of actions on resources that are denied for Azure Active Directory users.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/require-versioned" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace
 @service(#{ title: "AuthorizationManagementClient" })
 @armProviderNamespace("Microsoft.Authorization")
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.DenyAssignment;
 
 /**

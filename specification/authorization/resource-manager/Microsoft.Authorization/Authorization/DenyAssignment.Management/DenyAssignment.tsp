@@ -73,6 +73,7 @@ alias DenyAssignmentForResourceOps = Azure.ResourceManager.Legacy.ExtensionOpera
      * The name of the resource to get deny assignments for.
      */
     @path
+    @pattern("^[a-zA-Z0-9._-]+$")
     @segment("")
     @key
     resourceName: string;
@@ -132,38 +133,9 @@ interface DenyAssignments {
   /**
    * Gets deny assignments for a resource.
    */
-  listForResource is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  listForResource is DenyAssignmentForResourceOps.List<
     DenyAssignment,
     Parameters = {
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-
-      /**
-       * The namespace of the resource provider.
-       */
-      @path
-      resourceProviderNamespace: string;
-
-      /**
-       * The parent resource identity.
-       */
-      @path
-      parentResourcePath: string;
-
-      /**
-       * The resource type of the resource.
-       */
-      @path
-      resourceType: string;
-
-      /**
-       * The name of the resource to get deny assignments for.
-       */
-      @pattern("^[a-zA-Z0-9._-]+$")
-      @path
-      resourceName: string;
-
       /**
        * The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.
        */
