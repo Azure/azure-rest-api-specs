@@ -1,54 +1,55 @@
-parameters:
-  "service-dir":
-    default: "sdk/managementgroups"
 emit:
-  - "@azure-tools/typespec-autorest"
-options:
-  "@azure-tools/typespec-autorest":
-    omit-unreachable-types: true
-    emitter-output-dir: "{project-root}"
-    output-file: "{version-status}/{version}/management.json"
-    emit-lro-options: "all"
-    examples-dir: "{project-root}/examples"
-    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ManagementGroups"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.ManagementGroups"
-  "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-managementgroups"
-    namespace: "azure.mgmt.managementgroups"
-    generate-test: true
-    generate-sample: true
-    flavor: "azure"
-  "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-managementgroups"
-    namespace: "com.azure.resourcemanager.managementgroups"
-    service-name: "ManagementGroups" # human-readable service name, whitespace allowed
-    flavor: azure
-    rename-model:
-      CheckNameAvailabilityRequestType: Type
-    add-inner: HierarchySettingsInfo
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-managementgroups"
-    flavor: azure
-    typespec-title-map:
-      ManagementClient: ManagementGroupsAPI
-    experimental-extensible-enums: true
-    package-details:
-      name: "@azure/arm-managementgroups"
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/managementgroups"
-    emitter-output-dir: "{output-dir}/{service-dir}/armmanagementgroups"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmanagementgroups"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
+- '@azure-tools/typespec-autorest'
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  - '@azure-tools/typespec-azure-rulesets/resource-manager'
+options:
+  '@azure-tools/typespec-autorest':
+    arm-types-dir: '{project-root}/../../../../common-types/resource-management'
+    emit-lro-options: all
+    emitter-output-dir: '{project-root}'
+    examples-dir: '{project-root}/examples'
+    omit-unreachable-types: true
+    output-file: '{version-status}/{version}/management.json'
+  '@azure-tools/typespec-csharp':
+    clear-output-folder: true
+    emitter-output-dir: '{output-dir}/{service-dir}/Azure.ResourceManager.ManagementGroups'
+    flavor: azure
+    model-namespace: true
+    namespace: Azure.ResourceManager.ManagementGroups
+  '@azure-tools/typespec-go':
+    emitter-output-dir: '{output-dir}/{service-dir}/armmanagementgroups'
+    fix-const-stuttering: true
+    flavor: azure
+    generate-fakes: true
+    generate-samples: true
+    head-as-boolean: true
+    inject-spans: true
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armmanagementgroups
+    service-dir: sdk/resourcemanager/managementgroups
+  '@azure-tools/typespec-java':
+    add-inner: HierarchySettingsInfo
+    emitter-output-dir: '{output-dir}/{service-dir}/azure-resourcemanager-managementgroups'
+    flavor: azure
+    namespace: com.azure.resourcemanager.managementgroups
+    rename-model:
+      CheckNameAvailabilityRequestType: Type
+    service-name: ManagementGroups
+  '@azure-tools/typespec-python':
+    api-version: '2023-04-01'
+    emitter-output-dir: '{output-dir}/{service-dir}/azure-mgmt-managementgroups'
+    flavor: azure
+    generate-sample: true
+    generate-test: true
+    namespace: azure.mgmt.managementgroups
+  '@azure-tools/typespec-ts':
+    emitter-output-dir: '{output-dir}/{service-dir}/arm-managementgroups'
+    experimental-extensible-enums: true
+    flavor: azure
+    package-details:
+      name: '@azure/arm-managementgroups'
+    typespec-title-map:
+      ManagementClient: ManagementGroupsAPI
+parameters:
+  service-dir:
+    default: sdk/managementgroups

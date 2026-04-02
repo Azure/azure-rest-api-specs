@@ -6,7 +6,7 @@ using Microsoft.Management;
 
 namespace ClientCustomizations;
 
-@@clientName(Microsoft.Management, "ManagementGroupsMgmtClient", "python");
+@@clientName(Microsoft.Management, "ManagementGroupsAPI", "python");
 
 @@clientLocation(checkNameAvailability, "API", "go");
 @@clientLocation(startTenantBackfill, "API", "go");
