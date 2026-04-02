@@ -152,7 +152,7 @@ interface ElasticPools {
     ElasticPool,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ElasticPool>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ElasticPool>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 }
 

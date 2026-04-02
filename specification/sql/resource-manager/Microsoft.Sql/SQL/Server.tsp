@@ -210,7 +210,7 @@ interface Servers {
     Server,
     TdeCertificate,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Server>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 }
 

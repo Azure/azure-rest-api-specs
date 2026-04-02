@@ -63,7 +63,7 @@ interface ManagedInstanceEncryptionProtectors {
     ManagedInstanceEncryptionProtector,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstanceEncryptionProtector>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceEncryptionProtector>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 }
 

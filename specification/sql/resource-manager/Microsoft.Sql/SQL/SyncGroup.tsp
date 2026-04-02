@@ -137,7 +137,7 @@ interface SyncGroups {
     SyncGroup,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SyncGroup>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SyncGroup>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**

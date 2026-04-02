@@ -138,7 +138,7 @@ interface ManagedInstances {
     ManagedInstance,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>,
+    Response = OkResponse | ArmAcceptedLroResponse,
     Parameters = {
       /**
        * The type of replica to be failed over.
@@ -169,7 +169,7 @@ interface ManagedInstances {
     ManagedInstance,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -267,7 +267,7 @@ interface ManagedInstances {
     ManagedInstance,
     ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -279,7 +279,7 @@ interface ManagedInstances {
     ManagedInstance,
     TdeCertificate,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedInstance>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstance>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**

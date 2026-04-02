@@ -42,9 +42,8 @@ interface ManagedLedgerDigestUploadsOperationGroup {
   @tag("ManagedLedgerDigestUploads")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedLedgerDigestUploads,
-    Response = ArmResourceUpdatedResponse<ManagedLedgerDigestUploads> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ManagedLedgerDigestUploads> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ManagedLedgerDigestUploads> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedLedgerDigestUploads> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

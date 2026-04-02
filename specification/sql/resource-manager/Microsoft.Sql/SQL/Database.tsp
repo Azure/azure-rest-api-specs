@@ -197,7 +197,7 @@ interface Databases {
     Database,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>,
+    Response = OkResponse | ArmAcceptedLroResponse,
     Parameters = {
       /**
        * The name of the encryption protector to be updated.
@@ -216,7 +216,7 @@ interface Databases {
     Database,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>,
+    Response = OkResponse | ArmAcceptedLroResponse,
     Parameters = {
       /**
        * The name of the encryption protector to be updated.
@@ -277,7 +277,7 @@ interface Databases {
     Database,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>,
+    Response = OkResponse | ArmAcceptedLroResponse,
     Parameters = {
       /**
        * The type of replica to be failed over.
@@ -325,7 +325,7 @@ interface Databases {
     Database,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Database>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Database>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**

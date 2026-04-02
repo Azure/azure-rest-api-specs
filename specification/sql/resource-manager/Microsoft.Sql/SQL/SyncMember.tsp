@@ -78,7 +78,7 @@ interface SyncMembers {
     SyncMember,
     void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SyncMember>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SyncMember>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**

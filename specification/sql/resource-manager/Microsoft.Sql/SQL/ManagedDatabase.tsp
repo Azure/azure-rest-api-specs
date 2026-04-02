@@ -121,7 +121,7 @@ interface ManagedDatabases {
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -132,7 +132,7 @@ interface ManagedDatabases {
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -143,7 +143,7 @@ interface ManagedDatabases {
     ManagedDatabase,
     CompleteDatabaseRestoreDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -164,7 +164,7 @@ interface ManagedDatabases {
     ManagedDatabase,
     ManagedDatabaseStartMoveDefinition,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ManagedDatabase>,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedDatabase>>
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
