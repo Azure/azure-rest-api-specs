@@ -3,5 +3,3 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Resources;
-
-@@clientName(Microsoft.Resources.Deployment, "DeploymentParameters", "java");
