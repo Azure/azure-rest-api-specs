@@ -1,12 +1,12 @@
 {
   "parameters": {
-    "api-version": "2022-04-01",
+    "api-version": "2024-07-01-preview",
     "parentResourcePath": "parentResourcePath",
     "resourceGroupName": "rgname",
     "resourceName": "resourceName",
     "resourceProviderNamespace": "resourceProviderNamespace",
     "resourceType": "resourceType",
-    "subscriptionId": "subId"
+    "subscriptionId": "a925f2f7-5c63-4b7b-8799-25a5f97bc3b2"
   },
   "responses": {
     "200": {
@@ -15,9 +15,10 @@
           {
             "name": "denyAssignmentId",
             "type": "Microsoft.Authorization/denyAssignments",
-            "id": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
             "properties": {
               "description": "Deny assignment description",
+              "denyAssignmentEffect": "enforced",
               "denyAssignmentName": "Deny assignment name",
               "doNotApplyToChildScopes": false,
               "excludePrincipals": [
@@ -32,9 +33,7 @@
                   "actions": [
                     "action"
                   ],
-                  "dataActions": [
-                    "action"
-                  ],
+                  "dataActions": [],
                   "notActions": [],
                   "notDataActions": []
                 }
@@ -45,7 +44,15 @@
                   "id": "principalId1"
                 }
               ],
-              "scope": "/subscriptions/subId/resourcegroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName"
+              "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/rgname/providers/resourceProviderNamespace/parentResourcePath/resourceType/resourceName"
+            },
+            "systemData": {
+              "createdAt": "2024-07-01T00:00:00.0000000Z",
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-07-01T00:00:00.0000000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User"
             }
           }
         ]

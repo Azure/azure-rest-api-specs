@@ -1,17 +1,18 @@
 {
   "parameters": {
-    "api-version": "2022-04-01",
+    "api-version": "2024-07-01-preview",
     "denyAssignmentId": "denyAssignmentId",
-    "scope": "subscriptions/subId/resourcegroups/rgname"
+    "scope": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/rgname"
   },
   "responses": {
     "200": {
       "body": {
         "name": "denyAssignmentId",
         "type": "Microsoft.Authorization/denyAssignments",
-        "id": "/subscriptions/subId/resourcegroups/rgname/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
+        "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/rgname/providers/Microsoft.Authorization/denyAssignments/denyAssignmentId",
         "properties": {
           "description": "Deny assignment description",
+          "denyAssignmentEffect": "enforced",
           "denyAssignmentName": "Deny assignment name",
           "doNotApplyToChildScopes": false,
           "excludePrincipals": [
@@ -37,7 +38,15 @@
               "id": "principalId1"
             }
           ],
-          "scope": "/subscriptions/subId/resourcegroups/rgname"
+          "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/rgname"
+        },
+        "systemData": {
+          "createdAt": "2024-07-01T00:00:00.0000000Z",
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2024-07-01T00:00:00.0000000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User"
         }
       }
     }

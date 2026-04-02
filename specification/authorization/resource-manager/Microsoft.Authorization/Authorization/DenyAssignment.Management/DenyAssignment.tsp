@@ -117,6 +117,62 @@ interface DenyAssignments {
   get is Extension.Read<Extension.ScopeParameter, DenyAssignment>;
 
   /**
+   * Create or update a deny assignment by scope and name.
+   */
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    Extension.ScopeParameter,
+    DenyAssignment
+  >;
+
+  /**
+   * Delete a deny assignment by scope and name.
+   */
+  delete is Extension.DeleteSync<Extension.ScopeParameter, DenyAssignment>;
+
+  /**
+   * Gets deny assignments for a resource.
+   */
+  listForResource is Extension.ListByTarget<
+    Extension.ScopeParameter,
+    DenyAssignment,
+    Parameters = {
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+
+      /**
+       * The namespace of the resource provider.
+       */
+      @path
+      resourceProviderNamespace: string;
+
+      /**
+       * The parent resource identity.
+       */
+      @path
+      parentResourcePath: string;
+
+      /**
+       * The resource type of the resource.
+       */
+      @path
+      resourceType: string;
+
+      /**
+       * The name of the resource to get deny assignments for.
+       */
+      @pattern("^[a-zA-Z0-9._-]+$")
+      @path
+      resourceName: string;
+
+      /**
+       * The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
+
+  /**
    * Gets deny assignments for a scope.
    */
   listForScope is Extension.ListByTarget<
@@ -161,20 +217,6 @@ interface DenyAssignments {
   >;
 
   /**
-   * Gets deny assignments for a resource.
-   */
-  listForResource is DenyAssignmentForResourceOps.List<
-    DenyAssignment,
-    Parameters = {
-      /**
-       * The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.
-       */
-      @query("$filter")
-      $filter?: string;
-    }
-  >;
-
-  /**
    * Gets a deny assignment by ID.
    */
   @tag("DenyAssignments")
@@ -183,3 +225,6 @@ interface DenyAssignments {
 
 @@doc(DenyAssignment.name, "The ID of the deny assignment to get.");
 @@doc(DenyAssignment.properties, "Deny assignment properties.");
+@@doc(DenyAssignments.createOrUpdate::parameters.resource,
+  "Parameters for the deny assignment."
+);

@@ -1,20 +1,69 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Microsoft.Common;
 
 namespace Microsoft.DenyAssignment;
 
 /**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Application
+   */
+  Application: "Application",
+
+  /**
+   * ManagedIdentity
+   */
+  ManagedIdentity: "ManagedIdentity",
+
+  /**
+   * Key
+   */
+  Key: "Key",
+}
+
+/**
+ * The type of the principal such as user, group, servicePrincipal, etc.
+ */
+union DenyAssignmentPrincipalType {
+  string,
+}
+
+/**
+ * The effect of the deny assignment. 'enforced' blocks access, 'audit' logs without blocking.
+ */
+union DenyAssignmentEffect {
+  string,
+
+  /**
+   * enforced
+   */
+  enforced: "enforced",
+
+  /**
+   * audit
+   */
+  audit: "audit",
+}
+
+/**
  * Deny assignment properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DenyAssignmentProperties {
   /**
    * The display name of the deny assignment.
@@ -35,6 +84,7 @@ model DenyAssignmentProperties {
   /**
    * The deny assignment scope.
    */
+  @visibility(Lifecycle.Read)
   scope?: string;
 
   /**
@@ -45,17 +95,22 @@ model DenyAssignmentProperties {
   /**
    * Array of principals to which the deny assignment applies.
    */
-  principals?: Principal[];
+  principals?: DenyAssignmentPrincipal[];
 
   /**
    * Array of principals to which the deny assignment does not apply.
    */
-  excludePrincipals?: Principal[];
+  excludePrincipals?: DenyAssignmentPrincipal[];
 
   /**
    * Specifies whether this deny assignment was created by Azure and cannot be edited or deleted.
    */
   isSystemProtected?: boolean;
+
+  /**
+   * The effect of the deny assignment. 'enforced' blocks access, 'audit' logs without blocking.
+   */
+  denyAssignmentEffect?: DenyAssignmentEffect;
 
   @doc("The conditions on the deny assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'")
   condition?: string;
@@ -125,6 +180,21 @@ model DenyAssignmentPermission {
    * Version of the condition.
    */
   conditionVersion?: string;
+}
+
+/**
+ * Deny assignment principal.
+ */
+model DenyAssignmentPrincipal {
+  /**
+   * The object ID of the principal.
+   */
+  id?: string;
+
+  /**
+   * The type of the principal such as user, group, servicePrincipal, etc.
+   */
+  type?: DenyAssignmentPrincipalType;
 }
 
 /**

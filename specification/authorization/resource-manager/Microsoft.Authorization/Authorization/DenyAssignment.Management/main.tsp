@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.11.12
- * Date: 2026-03-18T03:11:33.728Z
+ * Version: 0.11.13
+ * Date: 2026-04-02T05:33:50.551Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -22,22 +22,23 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to get deny assignments. A deny assignment describes the set of actions on resources that are denied for Azure Active Directory users.
+ * Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage deny assignments. A deny assignment describes the set of actions on resources that are denied for Azure Active Directory users.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace("Microsoft.Authorization")
+#suppress "@azure-tools/typespec-azure-core/require-versioned" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armProviderNamespace
 @service(#{ title: "AuthorizationManagementClient" })
-@versioned(Versions)
-// FIXME: Common type version v2 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armProviderNamespace("Microsoft.Authorization")
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DenyAssignment;
 
 /**
  * The available API versions.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum Versions {
   /**
-   * The 2022-04-01 API version.
+   * The 2024-07-01-preview API version.
    */
-  v2022_04_01: "2022-04-01",
+  v2024_07_01_preview: "2024-07-01-preview",
 }
