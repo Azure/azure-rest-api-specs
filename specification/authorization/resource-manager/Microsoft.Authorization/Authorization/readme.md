@@ -26,7 +26,9 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-09-01-preview
+tag: package-2025-12-01-preview
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Suppression
@@ -91,6 +93,42 @@ directive:
   - suppress: R2015
     from: common-types.json
     reason: common-types doesn't need to reference api version.
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: authorization-DenyAssignmentCalls.json
+    reason: Deny assignments follow the same explicit+scope path pattern as existing role definitions and role assignments. Explicit subscription/RG/resource paths are required for backward compatibility.
+  - suppress: PathContainsResourceType
+    from: authorization-DenyAssignmentCalls.json
+    reason: The resource-level list path uses generic {resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName} parameters, matching the existing role assignments pattern.
+  - suppress: RepeatedPathInfo
+    from: authorization-DenyAssignmentCalls.json
+    reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
+```
+
+### Tag: package-2025-12-01-preview
+
+These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01-preview'
+input-file:
+  - stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
+  - preview/2024-09-01-preview/common-types.json
+  - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - preview/2024-09-01-preview/EligibleChildResources.json
+  - preview/2024-09-01-preview/RoleAssignmentSchedule.json
+  - preview/2024-09-01-preview/RoleAssignmentScheduleInstance.json
+  - preview/2024-09-01-preview/RoleAssignmentScheduleRequest.json
+  - preview/2024-09-01-preview/RoleEligibilitySchedule.json
+  - preview/2024-09-01-preview/RoleEligibilityScheduleInstance.json
+  - preview/2024-09-01-preview/RoleEligibilityScheduleRequest.json
+  - preview/2024-09-01-preview/RoleManagementPolicy.json
+  - preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
+  - preview/2022-08-01-preview/RoleManagementAlerts.json
+  - preview/2025-12-01-preview/AttributeNamespaces.json
 ```
 
 ### Tag: package-2024-09-01-preview
