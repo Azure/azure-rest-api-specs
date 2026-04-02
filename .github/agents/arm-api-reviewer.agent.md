@@ -339,14 +339,41 @@ Use the rule IDs from the instruction files (e.g., `RPC-Put-V1-01`, `RPC-Patch-V
 
 After presenting the review findings to the human reviewer for approval:
 1. **Wait for explicit confirmation** from the reviewer before posting anything to the PR.
-2. **Check existing comments first.** Before posting, fetch the PR's existing review comments using `get_review_comments` — check **all** threads regardless of state (active, resolved, outdated, collapsed). For each finding you intend to post, check whether an equivalent comment already exists on the same file and line (or nearby lines) covering the same rule ID or issue. **Skip posting** any finding that is already covered by an existing comment — whether from a previous run of this agent, another reviewer, or an automated check. This avoids duplicate noise for the PR author and other reviewers.
-3. Once approved and de-duplicated, post review comments on the PR using the GitHub tools — one comment per finding, attached to the specific file and **exact line number** where the violation occurs.
-4. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR — this property did not exist in the previous version").
-5. For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟡 Warning`, or `💡 Suggestion`.
-6. Use the format: `**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` or `**[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` followed by the classification reasoning and suggested fix.
-7. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
-8. Report to the human reviewer which findings were skipped as duplicates and which were posted.
-9. Do NOT post comments without the human reviewer's approval.
+2. **Check existing comments first.** Before posting, fetch the PR's existing review comments using `get_review_comments` — check **all** threads regardless of state (active, resolved, outdated, collapsed). Build an inventory of every existing comment: its author, file, line number, rule ID or issue topic, resolution state, and whether it is outdated (code has changed since the comment was posted).
+3. **De-duplicate and reconcile** each finding against the existing comment inventory using these rules:
+
+   **Scenario A — Same finding, same location, any author:**
+   The existing comment already covers the exact same rule violation on the same file and line. **Skip posting.** No action needed.
+
+   **Scenario B — Same finding, different line, comment was from _this agent or the same engineer running the agent_:**
+   The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "*(Updated from [previous comment](<url>) — line shifted due to code changes.)*").
+
+   **Scenario C — Same finding, different line, comment was from a _different_ human reviewer:**
+   Another ARM reviewer (not this agent) posted the comment at the old line. Do **not** resolve their comment — it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "*The code referenced by this comment has moved. The same violation now appears at `<file>` L`<N>`. The issue is still unresolved.*" This helps the author and reviewer find the right code without creating duplicate threads.
+
+   **Scenario D — No new findings beyond what existing comments already cover:**
+   If every finding from the current review is already covered by an existing comment (same file, same or nearby line, same rule), **do not post any new comments**. Report to the human reviewer: "*All findings from this review are already covered by existing comments on the PR. No new comments are needed — the existing threads already highlight the required changes.*" List the existing comment threads that match.
+
+   **Scenario E — Existing comment's violation has been fixed:**
+   An existing unresolved comment flags a violation, but the current review finds that the violation **no longer exists** in the latest code (the PR author fixed it). Report this to the human reviewer:
+   - List each addressed comment with its URL, the rule it flagged, and confirmation that the code now complies.
+   - **Propose resolving** each addressed comment. Do **not** resolve without the engineer's explicit consent — the engineer may want to verify the fix themselves or leave the thread open for follow-up discussion.
+   - If the engineer approves, resolve the comment and add a reply: "*This issue has been addressed in the latest changes. Resolving.*"
+   - If the comment was from a different human reviewer, do **not** resolve it — instead, **add a reply** noting the fix: "*The violation flagged in this comment appears to have been addressed in the latest code changes at `<file>` L`<N>`. The original reviewer may want to verify and resolve.*"
+
+4. Once approved and de-duplicated, post review comments on the PR using the GitHub tools — one comment per finding, attached to the specific file and **exact line number** where the violation occurs.
+5. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR — this property did not exist in the previous version").
+6. For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟡 Warning`, or `💡 Suggestion`.
+7. Use the format: `**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` or `**[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` — <issue description>` followed by the classification reasoning and suggested fix.
+8. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
+9. **Report a reconciliation summary** to the human reviewer before posting:
+   - Findings to **post as new comments** (with line numbers)
+   - Existing comments to **resolve and repost** (Scenario B — line shifted, same author)
+   - Existing comments to **reply to** (Scenario C — line shifted, different author)
+   - Findings **already covered** by existing comments (skipped)
+   - Existing comments whose violations have been **fixed** — propose resolving (Scenario E)
+   - Wait for the reviewer to approve the plan before executing.
+10. Do NOT post comments without the human reviewer's approval.
 
 ### Step 8: Update PR Labels
 
