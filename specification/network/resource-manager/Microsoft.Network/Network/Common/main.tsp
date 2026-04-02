@@ -1931,6 +1931,17 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * The Ddos protection settings associated with the frontend IP configuration.
+   */
+  ddosSettings?: DdosFrontendIPConfigurationSettings;
+}
+
+/** DDoS protection settings for a frontend IP configuration. */
+model DdosFrontendIPConfigurationSettings {
+  /** The reference to the Ddos Custom Policy resource. */
+  ddosCustomPolicy?: SubResource;
 }
 
 /**

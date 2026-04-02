@@ -76,6 +76,18 @@ interface DdosCustomPolicies {
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
+
+  /**
+   * Gets all the DDoS custom policies in a resource group.
+   */
+  @tag("ddosCustomPolicies")
+  list is ArmResourceListByParent<DdosCustomPolicy, Error = CloudError>;
+
+  /**
+   * Gets all the DDoS custom policies in a subscription.
+   */
+  @tag("ddosCustomPolicies")
+  listAll is ArmListBySubscription<DdosCustomPolicy, Error = CloudError>;
 }
 
 @@doc(DdosCustomPolicy.name, "The name of the DDoS custom policy.");
