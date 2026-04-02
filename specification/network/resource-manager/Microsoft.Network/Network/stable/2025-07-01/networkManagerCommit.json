@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}": {
       "parameters": [
         {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
           "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -49,7 +49,7 @@
           "$ref": "#/parameters/CommitNameParameter"
         },
         {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         }
       ],
       "get": {
@@ -68,7 +68,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -117,7 +117,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -153,7 +153,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -180,7 +180,7 @@
         },
         "parameters": [
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -189,7 +189,7 @@
             "$ref": "#/parameters/NetworkManagerNameParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ListTopParameter"
@@ -208,7 +208,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -232,12 +232,12 @@
         "systemData": {
           "readOnly": true,
           "description": "The system metadata related to this resource.",
-          "$ref": "./network.json#/definitions/SystemData"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ChildResource"
+          "$ref": "./common.json#/definitions/ChildResource"
         }
       ],
       "description": "The commit resource"
@@ -268,7 +268,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource."
         },
         "resourceGuid": {
@@ -278,7 +278,7 @@
         },
         "commitType": {
           "type": "string",
-          "$ref": "./networkManager.json#/definitions/ConfigurationType",
+          "$ref": "./common.json#/definitions/ConfigurationType",
           "description": "Commit Type."
         },
         "configurationIds": {
