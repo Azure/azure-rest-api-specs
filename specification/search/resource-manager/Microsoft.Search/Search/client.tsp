@@ -665,95 +665,95 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
   usagesListBySubscriptionCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(usageBySubscriptionSku,
   usageBySubscriptionSkuCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySubscription,
   searchServicesListBySubscriptionCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listByResourceGroup,
   searchServicesListByResourceGroupCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.get,
   searchGetCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.createOrUpdate,
   searchCreateOrUpdateCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.update,
   searchUpdateCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.delete,
   searchDeleteCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.create,
   queryKeysCreateCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.queryKeysDelete,
   queryKeysDeleteCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.adminKeysGet,
   adminKeysGetCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listBySearchService,
   queryKeysListBySearchServiceCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.listByService,
   privateEndpointConnectionsListByServiceCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.get,
   privateEndpointConnectionsGetCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.update,
   privateEndpointConnectionsUpdateCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(PrivateEndpointConnections.delete,
   privateEndpointConnectionsDeleteCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.listSupported,
   privateLinkResourcesListSupportedCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SearchServices.regenerate,
   privateLinkResourcesRegenerateCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.listByService,
   SharedPrivateLinkResourcesListByServiceCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.get,
   SharedPrivateLinkResourcesGetCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.createOrUpdate,
   SharedPrivateLinkResourcesCreateOrUpdateCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
   SharedPrivateLinkResourcesDeleteCustomization,
-  "go,csharp"
+  "go,csharp,javascript"
 );
 
 @@clientName(Microsoft.Search,
@@ -763,96 +763,96 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(usagesListBySubscriptionCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(usageBySubscriptionSkuCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(searchServicesListBySubscriptionCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(searchServicesListByResourceGroupCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(searchGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(searchCreateOrUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(searchUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(searchDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(queryKeysCreateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(queryKeysDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 
 @@clientName(adminKeysGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(queryKeysListBySearchServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(privateEndpointConnectionsListByServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(privateEndpointConnectionsGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(privateEndpointConnectionsUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(privateEndpointConnectionsDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(privateLinkResourcesListSupportedCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(privateLinkResourcesRegenerateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(SharedPrivateLinkResourcesListByServiceCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(SharedPrivateLinkResourcesGetCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(SharedPrivateLinkResourcesCreateOrUpdateCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientName(SharedPrivateLinkResourcesDeleteCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp"
+  "go,csharp,javascript"
 );
 @@clientLocation(usageBySubscriptionSku, "ManagementClient", "go");
 /** Network security perimeter configuration */
