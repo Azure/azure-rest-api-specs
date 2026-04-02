@@ -1,0 +1,89 @@
+{
+  "operationId": "AIManagerNamespaces_CreateOrUpdate",
+  "title": "Creates or updates an AI Manager namespace resource.",
+  "parameters": {
+    "api-version": "2026-04-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "aiManagerName": "aimanager1",
+    "namespaceName": "namespace1",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "key1": "value1"
+      },
+      "properties": {
+        "labels": {
+          "app": "myapp"
+        },
+        "annotations": {
+          "note": "example"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
+        "name": "namespace1",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "labels": {
+            "app": "myapp"
+          },
+          "annotations": {
+            "note": "example"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-04-02-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
+        "name": "namespace1",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "labels": {
+            "app": "myapp"
+          },
+          "annotations": {
+            "note": "example"
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}

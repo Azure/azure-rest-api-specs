@@ -1,0 +1,42 @@
+{
+  "operationId": "AIManagerNamespaces_Get",
+  "title": "Gets an AI Manager namespace resource.",
+  "parameters": {
+    "api-version": "2026-04-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "aiManagerName": "aimanager1",
+    "namespaceName": "namespace1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace1",
+        "name": "namespace1",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces",
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "properties": {
+          "labels": {
+            "app": "myapp"
+          },
+          "annotations": {
+            "note": "example"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
