@@ -1,19 +1,21 @@
 {
   "parameters": {
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d",
+    "domainServiceName": "TestDomainService.com",
     "resourceGroupName": "TestResourceGroup",
-    "domainServiceName": "TestDomainService.com"
+    "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d"
   },
   "responses": {
     "202": {
+      "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
       "headers": {
         "Location": "https://management.azure.com/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/domainServices/TestDomainService.com?api-version=2025-10-01-preview"
-      },
-      "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+      }
     },
     "204": {
       "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
     }
-  }
+  },
+  "operationId": "DomainServices_Delete",
+  "title": "Delete Domain Service"
 }
