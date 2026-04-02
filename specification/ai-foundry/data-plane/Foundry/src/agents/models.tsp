@@ -250,6 +250,17 @@ model AgentVersionObject {
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
+
+  @removed(Versions.v1)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  @doc("The unique GUID identifier of the agent.")
+  @visibility(Lifecycle.Read)
+  agent_guid?: string;
 }
 
 @removed(Versions.v1)
