@@ -24,15 +24,20 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the hybridaks.
 
+
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-02-01-preview
+tag: package-preview-2026-04
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
+### Tag: package-preview-2026-04
+
+These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04'
+input-file:
+  - Microsoft.HybridContainerService/preview/2026-04-01-preview/openapi.json
 ```
 
 ### Tag: package-preview-2025-02-01-preview
