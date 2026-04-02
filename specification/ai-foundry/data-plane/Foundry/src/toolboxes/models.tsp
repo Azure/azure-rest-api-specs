@@ -44,6 +44,9 @@ model ToolboxObject {
   versions: {
     @doc("The latest version of the toolbox.")
     latest: ToolboxVersionObject;
+
+    @doc("The version that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox.")
+    default: ToolboxVersionObject;
   };
 }
 
@@ -158,6 +161,15 @@ alias DeleteToolboxRequest = {
   @doc("The name of the toolbox to delete.")
   @path
   toolbox_name: string;
+};
+
+alias UpdateToolboxRequest = {
+  @doc("The name of the toolbox to update.")
+  @path
+  toolbox_name: string;
+
+  @doc("The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest.")
+  default_version: string;
 };
 
 alias DeleteToolboxVersionRequest = {

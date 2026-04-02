@@ -7814,6 +7814,92 @@
           ]
         }
       },
+      "patch": {
+        "operationId": "updateToolbox",
+        "description": "Update a toolbox to point to a specific version.",
+        "parameters": [
+          {
+            "name": "toolbox_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the toolbox to update.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Toolboxes=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolboxObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Toolboxes"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "default_version": {
+                    "type": "string",
+                    "description": "The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest."
+                  }
+                },
+                "required": [
+                  "default_version"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Toolboxes=V1Preview"
+          ]
+        }
+      },
       "delete": {
         "operationId": "deleteToolbox",
         "description": "Delete a toolbox and all its versions.",
@@ -36126,10 +36212,19 @@
                   }
                 ],
                 "description": "The latest version of the toolbox."
+              },
+              "default": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ToolboxVersionObject"
+                  }
+                ],
+                "description": "The version that the toolbox currently points to. Defaults to the latest version. Can be changed via updateToolbox."
               }
             },
             "required": [
-              "latest"
+              "latest",
+              "default"
             ],
             "description": "The versions of the toolbox."
           }
