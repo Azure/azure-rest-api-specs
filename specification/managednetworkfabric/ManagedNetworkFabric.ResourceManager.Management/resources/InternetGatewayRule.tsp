@@ -3,7 +3,7 @@ import "../models/InternetGatewayRule.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -21,7 +21,7 @@ model InternetGatewayRule
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The Internet Gateway Rule properties */
+  @doc("The Internet Gateway Rule properties")
   properties: InternetGatewayRuleProperties;
 }
 
@@ -41,10 +41,16 @@ interface InternetGatewayRules {
   delete is ArmResourceDeleteWithoutOkAsync<InternetGatewayRule>;
 
   @doc("Implements Internet Gateway Rules list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<InternetGatewayRule>;
+  listByResourceGroup is ArmResourceListByParent<
+    InternetGatewayRule,
+    Response = InternetGatewayRulesListResult
+  >;
 
   @doc("List all Internet Gateway rules in the given subscription.")
-  listBySubscription is ArmListBySubscription<InternetGatewayRule>;
+  listBySubscription is ArmListBySubscription<
+    InternetGatewayRule,
+    Response = InternetGatewayRulesListResult
+  >;
 }
 
 @@doc(InternetGatewayRules.create::parameters.resource, "Request payload.");
