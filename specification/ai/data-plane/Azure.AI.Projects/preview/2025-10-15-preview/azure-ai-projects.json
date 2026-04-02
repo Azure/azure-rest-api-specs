@@ -796,6 +796,261 @@
         }
       }
     },
+    "/evaluationSuites": {
+      "get": {
+        "operationId": "EvaluationSuites_ListLatest",
+        "description": "List the latest version of each EvaluationSuiteVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "description": "Filter by associated agent name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "Filter by evaluation suite kind (batch or continuous).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "batch",
+              "continuous"
+            ],
+            "x-ms-enum": {
+              "name": "EvaluationSuiteKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Batch",
+                  "value": "batch",
+                  "description": "Offline evaluation backed by a dataset.\nUsed for batch, scheduled, or CI/CD evals."
+                },
+                {
+                  "name": "Continuous",
+                  "value": "continuous",
+                  "description": "Online evaluation with no dataset.\nEvaluators run against live production traces."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluationSuiteVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluationSuites/{name}/versions": {
+      "get": {
+        "operationId": "EvaluationSuites_ListVersions",
+        "description": "List all versions of the given EvaluationSuiteVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluationSuiteVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluationSuites/{name}/versions/{version}": {
+      "get": {
+        "operationId": "EvaluationSuites_GetVersion",
+        "description": "Get the specific version of the EvaluationSuiteVersion. The service returns 404 Not Found error if the EvaluationSuiteVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the EvaluationSuiteVersion to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSuiteVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EvaluationSuites_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing EvaluationSuiteVersion with the given version id",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the EvaluationSuiteVersion to create or update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "evaluationSuiteVersion",
+            "in": "body",
+            "description": "The EvaluationSuiteVersion to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationSuiteVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSuiteVersion"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSuiteVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationSuites_DeleteVersion",
+        "description": "Delete the specific version of the EvaluationSuiteVersion. The service returns 204 No Content if the EvaluationSuiteVersion was deleted successfully or if the EvaluationSuiteVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the EvaluationSuiteVersion to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -2415,192 +2670,6 @@
         "x-ms-examples": {
           "SyncEvals_Create_MaximumSet": {
             "$ref": "./examples/SyncEvals_Create_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/testSuites": {
-      "get": {
-        "operationId": "TestSuites_List",
-        "description": "List test suites with optional filters.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedTestSuite"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/testSuites/{id}": {
-      "get": {
-        "operationId": "TestSuites_Get",
-        "description": "Get a test suite by id.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Unique identifier of the test suite within the project.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestSuite"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "TestSuites_CreateOrUpdate",
-        "description": "Create or update a test suite.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Unique identifier of the test suite within the project.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "testSuite",
-            "in": "body",
-            "description": "Test suite resource",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TestSuite"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TestSuite"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/TestSuite"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "TestSuites_Delete",
-        "description": "Delete a test suite.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Unique identifier of the test suite within the project.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
           }
         }
       }
@@ -4396,6 +4465,118 @@
         "properties"
       ]
     },
+    "EvaluationSuiteEvaluator": {
+      "type": "object",
+      "description": "Configuration for an evaluator within an evaluation suite.",
+      "properties": {
+        "evaluatorName": {
+          "type": "string",
+          "description": "Evaluator name from the project's evaluator catalog.\nSupports both built-in evaluators (e.g. coherence, fluency, task_adherence)\nand custom evaluators registered in the catalog."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Pass/fail threshold. Scores >= threshold pass.\nOmit for informational-only evaluators that report a score\nwithout gating the evaluation suite result."
+        }
+      },
+      "required": [
+        "evaluatorName"
+      ]
+    },
+    "EvaluationSuiteKind": {
+      "type": "string",
+      "description": "The kind of evaluation suite, determining its intended evaluation mode.",
+      "enum": [
+        "batch",
+        "continuous"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationSuiteKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Batch",
+            "value": "batch",
+            "description": "Offline evaluation backed by a dataset.\nUsed for batch, scheduled, or CI/CD evals."
+          },
+          {
+            "name": "Continuous",
+            "value": "continuous",
+            "description": "Online evaluation with no dataset.\nEvaluators run against live production traces."
+          }
+        ]
+      }
+    },
+    "EvaluationSuiteVersion": {
+      "type": "object",
+      "description": "An evaluation suite bundles evaluation criteria — an optional dataset, one or more\nevaluators, and pass/fail thresholds — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name.\nDoes not need to be unique. Shown in portal list views and eval reports."
+        },
+        "kind": {
+          "$ref": "#/definitions/EvaluationSuiteKind",
+          "description": "Evaluation suite kind.\nBatch: requires a dataset reference; evaluators run against dataset rows.\nContinuous: evaluators only; data comes from live production traces."
+        },
+        "dataset": {
+          "$ref": "#/definitions/DatasetReference",
+          "description": "Dataset reference for offline evaluation.\nRequired when kind is batch. Must be null when kind is continuous.\nThe referenced dataset must exist in the project's dataset registry."
+        },
+        "evaluators": {
+          "type": "array",
+          "description": "Evaluator configurations. At least one is required.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/EvaluationSuiteEvaluator"
+          }
+        },
+        "agentName": {
+          "type": "string",
+          "description": "Name of the agent this evaluation suite is associated with.\nOptional — allows evaluation suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks)."
+        },
+        "id": {
+          "type": "string",
+          "description": "Asset ID, a unique identifier for the asset",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the resource",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "evaluators",
+        "name",
+        "version"
+      ]
+    },
     "EvaluationTarget": {
       "type": "object",
       "description": "Abstract base model for defining evaluation targets.",
@@ -5437,6 +5618,27 @@
         "value"
       ]
     },
+    "PagedEvaluationSuiteVersion": {
+      "type": "object",
+      "description": "Paged collection of EvaluationSuiteVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluationSuiteVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluationSuiteVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedIndex": {
       "type": "object",
       "description": "Paged collection of Index items",
@@ -5530,27 +5732,6 @@
           "description": "The ScheduleRun items on this page",
           "items": {
             "$ref": "#/definitions/ScheduleRun"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedTestSuite": {
-      "type": "object",
-      "description": "Paged collection of TestSuite items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TestSuite items on this page",
-          "items": {
-            "$ref": "#/definitions/TestSuite"
           }
         },
         "nextLink": {
@@ -6273,108 +6454,6 @@
       "required": [
         "type"
       ]
-    },
-    "TestSuite": {
-      "type": "object",
-      "description": "A test suite bundles evaluation criteria — an optional dataset, one or more\nevaluators, and pass/fail thresholds — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of the test suite within the project.",
-          "readOnly": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Human-readable display name.\nDoes not need to be unique. Shown in portal list views and eval reports."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of what this test suite validates."
-        },
-        "kind": {
-          "$ref": "#/definitions/TestSuiteKind",
-          "description": "Test suite kind.\nBatch: requires a dataset reference; evaluators run against dataset rows.\nContinuous: evaluators only; data comes from live production traces."
-        },
-        "dataset": {
-          "$ref": "#/definitions/DatasetReference",
-          "description": "Dataset reference for offline evaluation.\nRequired when kind is batch. Must be null when kind is continuous.\nThe referenced dataset must exist in the project's dataset registry."
-        },
-        "evaluators": {
-          "type": "array",
-          "description": "Evaluator configurations. At least one is required.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/TestSuiteEvaluator"
-          }
-        },
-        "agentName": {
-          "type": "string",
-          "description": "Name of the agent this test suite is associated with.\nOptional — allows test suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks)."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Test suite's tags. Tags are fully mutable and can be used for filtering.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "type": "object",
-          "description": "System metadata for the resource.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "id",
-        "kind",
-        "evaluators",
-        "systemData"
-      ]
-    },
-    "TestSuiteEvaluator": {
-      "type": "object",
-      "description": "Configuration for an evaluator within a test suite.",
-      "properties": {
-        "evaluatorName": {
-          "type": "string",
-          "description": "Evaluator name from the project's evaluator catalog.\nSupports both built-in evaluators (e.g. coherence, fluency, task_adherence)\nand custom evaluators registered in the catalog."
-        },
-        "threshold": {
-          "type": "number",
-          "format": "double",
-          "description": "Pass/fail threshold. Scores >= threshold pass.\nOmit for informational-only evaluators that report a score\nwithout gating the test suite result."
-        }
-      },
-      "required": [
-        "evaluatorName"
-      ]
-    },
-    "TestSuiteKind": {
-      "type": "string",
-      "description": "The kind of test suite, determining its intended evaluation mode.",
-      "enum": [
-        "batch",
-        "continuous"
-      ],
-      "x-ms-enum": {
-        "name": "TestSuiteKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Batch",
-            "value": "batch",
-            "description": "Offline evaluation backed by a dataset.\nUsed for batch, scheduled, or CI/CD evals."
-          },
-          {
-            "name": "Continuous",
-            "value": "continuous",
-            "description": "Online evaluation with no dataset.\nEvaluators run against live production traces."
-          }
-        ]
-      }
     },
     "TreatmentEffectType": {
       "type": "string",

@@ -16,9 +16,9 @@ namespace Azure.AI.Projects;
 // Enums
 // ---------------------------------------------------------------------------
 
-@doc("The kind of test suite, determining its intended evaluation mode.")
+@doc("The kind of evaluation suite, determining its intended evaluation mode.")
 @added(Versions.v2025_10_15_preview)
-union TestSuiteKind {
+union EvaluationSuiteKind {
   string,
 
   @doc("""
@@ -51,9 +51,9 @@ model DatasetReference {
   datasetVersion?: string;
 }
 
-@doc("Configuration for an evaluator within a test suite.")
+@doc("Configuration for an evaluator within an evaluation suite.")
 @added(Versions.v2025_10_15_preview)
-model TestSuiteEvaluator {
+model EvaluationSuiteEvaluator {
   @doc("""
     Evaluator name from the project's evaluator catalog.
     Supports both built-in evaluators (e.g. coherence, fluency, task_adherence)
@@ -64,7 +64,7 @@ model TestSuiteEvaluator {
   @doc("""
     Pass/fail threshold. Scores >= threshold pass.
     Omit for informational-only evaluators that report a score
-    without gating the test suite result.
+    without gating the evaluation suite result.
     """)
   threshold?: float64;
 }
@@ -74,34 +74,25 @@ model TestSuiteEvaluator {
 // ---------------------------------------------------------------------------
 
 @doc("""
-  A test suite bundles evaluation criteria — an optional dataset, one or more
+  An evaluation suite bundles evaluation criteria — an optional dataset, one or more
   evaluators, and pass/fail thresholds — into a reusable, named artifact that
   can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
   """)
-@resource("testSuites")
+@resource("evaluationSuites")
 @added(Versions.v2025_10_15_preview)
-model TestSuite {
-  @doc("Unique identifier of the test suite within the project.")
-  @key("id")
-  @encodedName("application/json", "id")
-  @visibility(Lifecycle.Read)
-  id: string;
-
+model EvaluationSuiteVersion {
   @doc("""
     Human-readable display name.
     Does not need to be unique. Shown in portal list views and eval reports.
     """)
   displayName?: string;
 
-  @doc("Description of what this test suite validates.")
-  description?: string;
-
   @doc("""
-    Test suite kind.
+    Evaluation suite kind.
     Batch: requires a dataset reference; evaluators run against dataset rows.
     Continuous: evaluators only; data comes from live production traces.
     """)
-  kind: TestSuiteKind;
+  kind: EvaluationSuiteKind;
 
   @doc("""
     Dataset reference for offline evaluation.
@@ -112,19 +103,14 @@ model TestSuite {
 
   @doc("Evaluator configurations. At least one is required.")
   @minItems(1)
-  evaluators: TestSuiteEvaluator[];
+  evaluators: EvaluationSuiteEvaluator[];
 
   @doc("""
-    Name of the agent this test suite is associated with.
-    Optional — allows test suites to exist before being linked to an agent,
+    Name of the agent this evaluation suite is associated with.
+    Optional — allows evaluation suites to exist before being linked to an agent,
     or to be used as shared baselines (e.g. safety checks).
     """)
   agentName?: string;
 
-  @doc("Test suite's tags. Tags are fully mutable and can be used for filtering.")
-  tags?: Record<string>;
-
-  @visibility(Lifecycle.Read)
-  @doc("System metadata for the resource.")
-  systemData: Record<string>;
+  ...AssetBase;
 }
