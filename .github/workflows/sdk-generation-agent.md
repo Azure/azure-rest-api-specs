@@ -42,7 +42,6 @@ env:
 tools:
   github:
     toolsets: [default, actions]
-    min-integrity: approved
 safe-outputs:
   add-comment:
     max: 15
