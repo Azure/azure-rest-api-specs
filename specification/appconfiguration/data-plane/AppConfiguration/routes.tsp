@@ -556,7 +556,7 @@ alias LabelsRequestParams = {
   @added(Versions.v2026_05_01_preview)
   @doc("A filter used to indicate the resource type of the labels. Accepted values: 'kv' for key-value labels, 'ff' for feature flag labels.")
   @query("resource-type")
-  resourceType: string;
+  resourceType?: string;
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
