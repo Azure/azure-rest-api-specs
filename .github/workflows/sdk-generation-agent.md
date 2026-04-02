@@ -1,6 +1,6 @@
 ---
 description: Trigger SDK generation from issues and comments, monitor pipeline status, and report SDK PR links.
-timeout-minutes: 30  # Job timeout
+timeout-minutes: 60  # Job timeout
 on:
   issues:
     types: [opened, labeled]
@@ -10,7 +10,6 @@ on:
     inputs:
       issue_url:
         description: "Issue URL providing SDK generation context"
-        default: "https://github.com/Azure/azure-rest-api-specs/issues/40516"
 if: >
   github.event_name == 'workflow_dispatch' ||
   (github.event_name == 'issues' &&
@@ -87,18 +86,16 @@ If the triggering event does not meet its corresponding requirements, immediatel
 
 When validation succeeds, execute the following steps in order.
 
-1. Announce workflow start by commenting on the resolved issue with `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`. If the issue cannot be determined for any reason, fall back to the `messages.run-started` safe output.
+1. Identify the target issue number and collect issue context (for manual dispatch, use the supplied or default `issue_url`).
 
-2. Identify the target issue number and collect issue context (for manual dispatch, use the supplied or default `issue_url`).
-
-3. Find whether there is an open TypeSpec API spec pull request associated with this request.
+2. Find whether there is an open TypeSpec API spec pull request associated with this request.
 
 - Identify TypeSpec API spec PR from issue context.
 - Check if API spec PR is in open status or merged status.
 - If such a PR is found and if it's open, set source branch for SDK generation to exactly `refs/pull/<PR number>`.
 - If no such PR is found, use default branch context.
 
-4. Use the azsdk CLI at `azsdk` (installed earlier) to gather release plan metadata and required arguments:
+3. Use the azsdk CLI at `azsdk` (installed earlier) to gather release plan metadata and required arguments:
 
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
 - If release plan is not found then add a comment in the issue to state that release plan is not found for SDK generation and complete the workflow.
@@ -109,7 +106,7 @@ When validation succeeds, execute the following steps in order.
 - For `issue_comment` triggers, inspect the comment body for case-insensitive mentions of supported language names (`Python`, `.NET`, `JavaScript`, `Java`, `Go`). If one or more supported languages are explicitly requested, override the target language list to only those deduplicated matches. When no supported languages are mentioned, fall back to the release plan language list.
 - **Guard**: If the TypeSpec project path or release plan details (work item ID, release plan ID, API version, or release type) cannot be resolved from the issue context, do **not** proceed with SDK generation. Instead, add a comment on the issue explaining which required details are missing and call `noop`. Do not continue to step 5.
 
-5. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
+4. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
 
 - `--typespec-project <PATH>` (required)
 - `--api-version <VERSION>` (required)
@@ -117,8 +114,6 @@ When validation succeeds, execute the following steps in order.
 - `--language <LANGUAGE>` (required, run once per language determined in step 4 after any comment-based filtering; supported languages: Python, .NET, JavaScript, Java, Go)
 - `--workitem-id <WORK_ITEM_ID>` to tie the generation back to the release plan work item
 - Capture the pipeline/run URL emitted by the CLI for status tracking.
-
-6. Immediately add a comment with the pipeline run link/status URL or failure details (use `noop` only if no issue comment can be posted).
 
 ## Monitoring and Status Updates
 
