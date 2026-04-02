@@ -80,7 +80,7 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   image_tag?: string;
 
   @doc("The blob URI for the evaluator storage")
-  blob_uri?: string;
+  blob_uri?: url;
 }
 
 @doc("Prompt-based evaluator")
@@ -129,7 +129,7 @@ model EvaluatorVersion {
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
-  blobUri: url;
+  blob_uri: url;
 }
 
 @doc("Evaluator Metric")

@@ -134,14 +134,14 @@ interface Evaluators {
       @path
       name: string;
 
-      @doc("The pending upload request parameters")
-      @Http.bodyRoot
-      pendingUploadRequest: PendingUploadRequest;
-
       @doc("The specific version id of the EvaluatorVersion to operate on.")
       @Rest.segment("versions")
       @Http.path
       version: string;
+
+      @doc("The pending upload request parameters")
+      @Http.bodyRoot
+      pendingUploadRequest: PendingUploadRequest;
     } & EvaluatorsPreviewHeader,
     PendingUploadResponse
   >;
