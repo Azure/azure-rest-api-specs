@@ -49,3 +49,15 @@ using Microsoft.Sql;
 @@clientName(MinimalTlsVersion.`1.1`, "TLS1_1", "python");
 @@clientName(MinimalTlsVersion.`1.2`, "TLS1_2", "python");
 @@clientName(MinimalTlsVersion.`1.3`, "TLS1_3", "python");
+
+@@clientName(MinimalTlsVersion.`1.0`, "One0", "go");
+@@clientName(MinimalTlsVersion.`1.1`, "One1", "go");
+@@clientName(MinimalTlsVersion.`1.2`, "One2", "go");
+@@clientName(MinimalTlsVersion.`1.3`, "One3", "go");
+
+@@clientName(DiffBackupIntervalInHours.`12`, "Twelve", "go");
+@@clientName(DiffBackupIntervalInHours.`24`, "TwentyFour", "go");
+
+@@clientName(AvailabilityZoneType.`1`, "One", "go");
+@@clientName(AvailabilityZoneType.`2`, "Two", "go");
+@@clientName(AvailabilityZoneType.`3`, "Three", "go");
