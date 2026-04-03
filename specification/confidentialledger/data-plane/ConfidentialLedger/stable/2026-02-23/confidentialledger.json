@@ -492,10 +492,6 @@
         "operationId": "DeleteUserDefinedRole",
         "summary": "Deletes user defined roles",
         "description": "A user defined role allows the users to create and manage their own role\nactions using the API.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -509,11 +505,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "string"
-            }
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",

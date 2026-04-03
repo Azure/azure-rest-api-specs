@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/openapi";
 import "./models.tsp";
 import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using OpenAPI;
 
 namespace ConfidentialLedger;
 
@@ -436,10 +438,33 @@ op getRuntimeOptions is ConfidentialLedgerCommon.LedgerOperation<
  */
 #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("Runtime options for user defined endpoints.")
+@sharedRoute
 @route("/app/userDefinedEndpoints/runtimeOptions")
 @patch
 op updateRuntimeOptions is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /** JS Runtime options */
+    @bodyRoot
+    jsRuntimeOptions: JsRuntimeOptions;
+  },
+  JsRuntimeOptions
+>;
+
+/**
+ * Updates the runtime options.
+ */
+#suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("UpdateRuntimeOptions")
+@summary("Runtime options for user defined endpoints.")
+@sharedRoute
+@route("/app/userDefinedEndpoints/runtimeOptions")
+@patch
+op updateRuntimeOptionsStable is ConfidentialLedgerCommon.LedgerOperation<
   {
     /** Content type */
     @header("Content-Type")
@@ -595,10 +620,34 @@ op getUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("Creates new roles and their actions")
+@sharedRoute
 @route("/app/roles")
 @put
 op createUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /** Request body */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
+    @bodyRoot
+    body: UserDefinedRoles;
+  },
+  {}
+>;
+
+/**
+ * User defined roles allow users to define and manage app specific AuthZ policy.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("CreateUserDefinedRole")
+@summary("Creates new roles and their actions")
+@sharedRoute
+@route("/app/roles")
+@put
+op createUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
   {
     /** Request body */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
@@ -615,13 +664,40 @@ op createUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
  */
 #suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("""
   Patch replaces the allowed action on existing roles,if the desire is to remove
   an existing action, the role must be deleted and recreated.
   """)
+@sharedRoute
 @route("/app/roles")
 @patch
 op updateUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
+  {
+    /** Request body */
+    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
+    @bodyRoot
+    body: UserDefinedRoles;
+  },
+  {}
+>;
+
+/**
+ * User defined roles allow users to define and manage app specific AuthZ policy.
+ */
+#suppress "@typespec/http/patch-implicit-optional" "Irrelevant linter warning"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("UpdateUserDefinedRole")
+@summary("""
+  Patch replaces the allowed action on existing roles,if the desire is to remove
+  an existing action, the role must be deleted and recreated.
+  """)
+@sharedRoute
+@route("/app/roles")
+@patch
+op updateUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
   {
     /** Content type */
     @header("Content-Type")
@@ -642,7 +718,9 @@ op updateUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
  * actions using the API.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@removed(Versions.v2026_02_23)
 @summary("Deletes user defined roles")
+@sharedRoute
 @route("/app/roles")
 @delete
 op deleteUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
@@ -653,7 +731,28 @@ op deleteUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
     @query("roleName")
     roleName: string;
   },
+  {}
+>;
+
+/**
+ * A user defined role allows the users to create and manage their own role
+ * actions using the API.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to match preview operationId"
+@added(Versions.v2026_02_23)
+@operationId("DeleteUserDefinedRole")
+@summary("Deletes user defined roles")
+@sharedRoute
+@route("/app/roles")
+@delete
+op deleteUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
   {
-    @bodyRoot body: string;
-  }
+    /**
+     * user defined role name
+     */
+    @query("roleName")
+    roleName: string;
+  },
+  void
 >;
