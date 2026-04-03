@@ -78,23 +78,30 @@ alias PermissionsForResourceOps = Azure.ResourceManager.Legacy.ExtensionOperatio
   {}
 >;
 
+alias RoleDefinitionOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+  },
+  {
+    /**
+     * The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.
+     */
+    @path
+    roleId: string;
+  },
+  ResourceRoute = #{
+    useStaticRoute: true,
+    route: "/{+roleId}?disambiguation_dummy",
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface RoleDefinitionsByIdOperationGroup {
   /**
    * Gets a role definition by ID.
    */
-  @route("/{+roleId}?disambiguation_dummy")
   @tag("RoleDefinitions")
-  @get
-  getById(
-    /**
-     * The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.
-     */
-    @path
-    roleId: string,
-
-    ...ApiVersionParameter,
-  ): ArmResponse<RoleDefinition> | ErrorResponse;
+  getById is RoleDefinitionOps.Read<RoleDefinition>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
