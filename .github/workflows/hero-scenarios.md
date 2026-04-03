@@ -70,21 +70,23 @@ a developer achieving a real business outcome, not just CRUD operations.
 ### Scenario Design Principles
 
 - Each scenario should compose multiple API calls into a meaningful
-  workflow — and where the service naturally integrates with other Azure
-  services (e.g., a database watcher sending alerts via Azure Monitor,
-  or a container app pulling secrets from Key Vault), include those
-  cross-service interactions to show how the API fits into the broader
-  Azure ecosystem. Look at other service specs in the repository to
-  discover integration points.
+  workflow. Real developer workflows often span multiple Azure services
+  — a load test resource needs an App Service to test, a Key Vault for
+  encryption keys, Azure Monitor for alerting. **Include calls to other
+  Azure service APIs when that's what a developer would actually do.**
+  Don't limit yourself to only the service under review — look at other
+  service specs in the repository to discover integration points and
+  include those cross-service calls in the scenario.
 - Derive scenarios from the operations and resource types in the spec,
   but frame them as customer goals, not API calls. Bad: "Create, get,
   update, and delete a workspace." Good: "Monitor SQL databases and
   route performance alerts to a Teams channel via Azure Monitor."
-- Cover the full breadth of the API surface through the scenarios —
-  not by listing CRUD per resource, but by weaving resources together
-  into workflows. Aim for 3–5 scenarios with progressive complexity:
-  start with the core "happy path," then show cross-service
-  integration, security/private networking, and diagnostics/recovery.
+- Let the API surface determine how many scenarios you generate — don't
+  force a fixed count. A rich API with many resource types may warrant
+  several scenarios; a thin management-plane API may only need one or
+  two honest ones. Never pad with CRUD-organized filler. Every scenario
+  must tell a cohesive story where each step depends on the previous
+  one and leads to the next.
 
 ### Golden Example — What Good Looks Like
 
