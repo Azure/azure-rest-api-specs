@@ -8996,7 +8996,8 @@
                     "additionalProperties": {
                       "type": "string"
                     },
-                    "description": "Set of key-value pairs associated with the skill."
+                    "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+                    "x-oaiTypeLabel": "map"
                   }
                 },
                 "required": [
@@ -9290,7 +9291,8 @@
                     "additionalProperties": {
                       "type": "string"
                     },
-                    "description": "Set of key-value pairs associated with the skill."
+                    "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+                    "x-oaiTypeLabel": "map"
                   }
                 }
               }
@@ -9444,7 +9446,7 @@
     "/skills:import": {
       "post": {
         "operationId": "Skills_createSkillFromPackage",
-        "description": "Creates a skill from a GZip package.",
+        "description": "Creates a skill from a gzip package.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -9504,7 +9506,7 @@
               }
             }
           },
-          "description": "The GZip package used to create the skill."
+          "description": "The gzip package used to create the skill."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -10289,14 +10291,6 @@
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "base_url": {
             "type": "string",
             "format": "uri",
@@ -10419,14 +10413,6 @@
           "index_name": {
             "type": "string",
             "description": "The name of an index in an IndexResource attached to this agent."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "query_type": {
             "allOf": [
@@ -11801,14 +11787,6 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -11912,14 +11890,6 @@
           "indexes"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "indexes": {
             "type": "array",
             "items": {
@@ -12206,14 +12176,6 @@
           "instance_name"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -12255,14 +12217,6 @@
               "bing_custom_search_preview"
             ],
             "description": "The object type, which is always 'bing_custom_search_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_custom_search_preview": {
             "allOf": [
@@ -12367,14 +12321,6 @@
           "search_configurations"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -12392,14 +12338,6 @@
           "project_connection_id"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -12430,14 +12368,6 @@
           "search_configurations"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -12462,14 +12392,6 @@
               "bing_grounding"
             ],
             "description": "The object type, which is always 'bing_grounding'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_grounding": {
             "allOf": [
@@ -12610,14 +12532,6 @@
             ],
             "description": "The object type, which is always 'browser_automation_preview'."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "browser_automation_preview": {
             "allOf": [
               {
@@ -12721,14 +12635,6 @@
           "project_connection_id"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "The ID of the project connection to your Azure Playwright resource."
@@ -12742,14 +12648,6 @@
           "connection"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "connection": {
             "allOf": [
               {
@@ -15856,14 +15754,6 @@
       "FabricDataAgentToolParameters": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -16848,14 +16738,6 @@
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "memory_store_name": {
             "type": "string",
             "description": "The name of the memory store to use."
@@ -16900,14 +16782,6 @@
               "memory_search"
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "memory_store_name": {
             "type": "string",
@@ -17473,14 +17347,6 @@
               "fabric_dataagent_preview"
             ],
             "description": "The object type, which is always 'fabric_dataagent_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -38665,14 +38531,6 @@
       "SharepointGroundingToolParameters": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -38697,14 +38555,6 @@
               "sharepoint_grounding_preview"
             ],
             "description": "The object type, which is always 'sharepoint_grounding_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "sharepoint_grounding_preview": {
             "allOf": [
@@ -38736,7 +38586,7 @@
           },
           "has_blob": {
             "type": "boolean",
-            "description": "Whether the skill was created from a GZip blob package."
+            "description": "Whether the skill was created from a gzip blob package."
           },
           "name": {
             "type": "string",
@@ -38753,7 +38603,8 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "Set of key-value pairs associated with the skill."
+            "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+            "x-oaiTypeLabel": "map"
           }
         },
         "description": "A skill object."
@@ -39228,14 +39079,6 @@
           "project_connection_id"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "A project connection in a ToolProjectConnectionList attached to this tool."
@@ -39622,14 +39465,6 @@
           "instance_name"
         ],
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing custom search"
