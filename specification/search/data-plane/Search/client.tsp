@@ -507,6 +507,22 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchResult, Access.internal, "csharp");
 @@access(SuggestDocumentsResult, Access.internal, "csharp");
 @@access(SuggestResult, Access.internal, "csharp");
+
+// Name Path customizations
+@@clientName(indexNamePath.indexName, "indexName", "csharp");
+@@clientName(indexerNamePath.indexerName, "indexerName", "csharp");
+@@clientName(dataSourceNamePath.dataSourceName,
+  "dataSourceConnectionName",
+  "csharp"
+);
+@@clientName(skillsetNamePath.skillsetName, "skillsetName", "csharp");
+@@clientName(synonymMapNamePath.synonymMapName, "synonymMapName", "csharp");
+@@clientName(aliasNamePath.aliasName, "aliasName", "csharp");
+@@clientName(sourceNamePath.sourceName, "sourceName", "csharp");
+@@clientName(knowledgeBaseNamePath.knowledgeBaseName,
+  "knowledgeBaseName",
+  "csharp"
+);
 // end of .NET specific customizations
 
 @@access(SearchClient.Documents.searchGet, Access.internal);
