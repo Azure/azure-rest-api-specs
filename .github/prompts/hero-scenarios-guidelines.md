@@ -252,9 +252,8 @@ For each scenario, include:
 
 ## Step 4 — Post the Suggestion
 
-Use `add-comment` to post a PR comment with the suggestion.
-
-**If no README exists**, post a PR comment with a full suggested README:
+**If no README exists**, use `add-comment` to post a PR comment with a
+full suggested README:
 
 ```
 ## 📖 Suggested README.md
@@ -272,23 +271,20 @@ The README should include:
    does, who it is for, and what problem it solves.
 2. **Hero scenarios** — the scenarios generated in Step 3.
 
-**If a README already exists**, only suggest new scenarios not already
-covered:
+**If a README already exists**, post an inline code suggestion on the
+README file using `create-pull-request-review-comment`. Place the
+comment at the end of the file and use a GitHub suggestion block so the
+author can apply it with one click:
 
+````
+```suggestion
+<the new scenario section as raw markdown>
 ```
-## 📖 Suggested README addition
+````
 
-> **Path:** `specification/{service}/{specDir}/README.md`
->
-> This PR introduces new API surface that enables an additional hero
-> scenario not covered in the existing README. Consider appending:
-
-<the new scenario as raw markdown — same format as above>
-```
-
-Since the README is markdown and the PR comment renders markdown, the
-content will display correctly including the `http` code blocks. The
-author can copy it into a new or existing README.md file.
+Then submit the review using `submit-pull-request-review` with event
+`COMMENT` and a one-sentence body summarizing what was suggested.
 
 If the existing README already covers all the API surface in this PR,
-post a one-sentence message confirming no new scenarios are needed.
+submit a `COMMENT` review with a one-sentence body confirming no new
+scenarios are needed.

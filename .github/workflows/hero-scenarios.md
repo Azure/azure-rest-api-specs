@@ -19,6 +19,14 @@ safe-outputs:
   add-comment:
     max: 1
     target: "${{ github.event.pull_request.number }}"
+  create-pull-request-review-comment:
+    max: 5
+    side: "RIGHT"
+    target: "${{ github.event.pull_request.number }}"
+  submit-pull-request-review:
+    max: 1
+    footer: "if-body"
+    target: "${{ github.event.pull_request.number }}"
   messages:
     footer: "> 📖 *Suggested by [{workflow_name}]({run_url})*"
     run-started: "📖 [{workflow_name}]({run_url}) is generating hero scenarios for this PR…"
