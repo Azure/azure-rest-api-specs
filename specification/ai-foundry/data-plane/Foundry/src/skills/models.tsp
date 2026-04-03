@@ -37,7 +37,7 @@ alias CreateSkillFromPackageRequest = {
   @header("Content-Type")
   content_type: "application/gzip";
 
-  @doc("The GZip package used to create the skill.")
+  @doc("The gzip package used to create the skill.")
   @body
   body: bytes;
 };
