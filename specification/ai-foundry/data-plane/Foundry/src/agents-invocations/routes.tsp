@@ -124,7 +124,7 @@ interface AgentInvocations {
       @header contentType?: string;
 
       /** Optional request body. */
-      @body request?: bytes;
+      @body request?: unknown;
     } & AgentInvocationPreviewHeader,
     {
       /** The content type of the response body. */
