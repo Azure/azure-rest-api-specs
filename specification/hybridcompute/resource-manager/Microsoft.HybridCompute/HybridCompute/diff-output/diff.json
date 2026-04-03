@@ -544,10 +544,6 @@
             "Operations"
           ]
         ],
-        "description": {
-          "__old": "Gets a list of hybrid compute operations.",
-          "__new": "List the operations for the provider"
-        },
         "responses": {
           "200": {
             "schema": {
@@ -659,9 +655,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "tags": [
           [
             "-",
@@ -745,18 +738,15 @@
         "tags__deleted": [
           "licenses"
         ],
-        "parameters": [
-          [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "body"
+        "responses": {
+          "200": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          ]
-        ],
-        "responses": {
+          },
           "202__added": {
             "description": "ignore",
             "headers": {
@@ -858,9 +848,12 @@
         "responses": {
           "201": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -898,9 +891,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -951,7 +947,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation__deleted": true,
         "tags": [
           [
             "-",
@@ -961,10 +956,19 @@
             "+",
             "Licenses"
           ]
-        ]
+        ],
+        "responses": {
+          "200": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
       },
       "patch": {
-        "x-ms-long-running-operation__deleted": true,
         "tags": [
           [
             "-",
@@ -974,10 +978,19 @@
             "+",
             "Licenses"
           ]
-        ]
+        ],
+        "responses": {
+          "200": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
       },
       "delete": {
-        "x-ms-long-running-operation__deleted": true,
         "tags": [
           [
             "-",
@@ -987,7 +1000,17 @@
             "+",
             "Licenses"
           ]
-        ]
+        ],
+        "responses": {
+          "200": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines": {
@@ -1079,9 +1102,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1109,9 +1135,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -2106,19 +2135,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<SetupExtensionRequest>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SetupExtensionRequest",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "GatewayListResult__added": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -2525,6 +2541,25 @@
       "properties": {
         "value": {
           "readOnly__deleted": true
+        }
+      }
+    },
+    "ExtensionValueListResult": {
+      "description": {
+        "__old": "The List Extension Metadata response.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "The list of extension metadata",
+            "__new": "[Placeholder] Discription for value property"
+          }
         }
       }
     },

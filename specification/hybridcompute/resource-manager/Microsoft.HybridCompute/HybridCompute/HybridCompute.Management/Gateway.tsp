@@ -34,7 +34,7 @@ interface Gateways {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Gateway,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Gateway> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Gateway> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -47,7 +47,11 @@ interface Gateways {
   /**
    * The operation to delete a gateway.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Gateway>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Gateway,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmCombinedLroHeaders<FinalResult = Gateway>
+  >;
 
   /**
    * The operation to get all gateways of a non-Azure machine

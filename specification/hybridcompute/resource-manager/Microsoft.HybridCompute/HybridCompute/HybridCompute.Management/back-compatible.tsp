@@ -160,3 +160,6 @@ using Microsoft.HybridCompute;
 @@clientLocation(Machines.listByMachines, "HybridIdentityMetadata");
 @@clientLocation(Machines.getHybridIdentityMetadata, "HybridIdentityMetadata");
 @@clientName(Machines.getHybridIdentityMetadata, "Get");
+@@clientName(LicensesOperationGroup.validateLicense::parameters.body,
+  "parameters"
+);

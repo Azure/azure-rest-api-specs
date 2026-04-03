@@ -54,3 +54,5 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list, "Gets a list of hybrid compute operations.");

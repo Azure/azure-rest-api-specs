@@ -23,7 +23,8 @@ interface LicensesOperationGroup {
   @autoRoute
   validateLicense is ArmProviderActionAsync<
     Request = License,
-    Response = License,
+    Response = ArmResponse<License> &
+      ArmLroLocationHeader<FinalResult = License>,
     Scope = SubscriptionActionScope
   >;
 }

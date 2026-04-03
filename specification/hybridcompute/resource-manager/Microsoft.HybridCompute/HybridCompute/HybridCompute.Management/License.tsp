@@ -35,8 +35,8 @@ interface Licenses {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     License,
-    Response = ArmResourceUpdatedResponse<License>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = License> &
+    Response = ArmResourceUpdatedResponse<License> &
+      ArmLroLocationHeader<FinalResult = License> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -47,7 +47,9 @@ interface Licenses {
   update is ArmCustomPatchAsync<
     License,
     PatchModel = LicenseUpdate,
-    Response = ArmResponse<License>
+    Response = ArmResponse<License> &
+      ArmLroLocationHeader<FinalResult = License> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -56,7 +58,9 @@ interface Licenses {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     License,
-    Response = ArmDeletedResponse | ArmDeletedNoContentResponse
+    Response = (ArmDeletedResponse &
+      ArmLroLocationHeader<FinalResult = License> &
+      Azure.Core.Foundations.RetryAfterHeader) | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -68,6 +68,8 @@ interface ExtensionValues {
    * Gets all Extension versions based on location, publisher, extensionType
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @list
+  @get
   @operationId("ExtensionMetadata_List")
   list is ExtensionValueOps.List<
     ExtensionValue,

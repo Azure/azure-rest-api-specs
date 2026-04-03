@@ -284,7 +284,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Gets a list of hybrid compute operations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -556,6 +556,9 @@
           "GET a list of extensions": {
             "$ref": "./examples/extension/ExtensionMetadata_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -710,7 +713,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -724,6 +727,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/License"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "202": {
@@ -753,8 +762,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/License"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1127,6 +1135,11 @@
               "$ref": "#/definitions/Gateway"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1239,6 +1252,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1266,7 +1284,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Gateway"
         },
         "x-ms-long-running-operation": true
       }
@@ -1395,9 +1414,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'License' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/License"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1411,7 +1441,12 @@
           "Create or Update a License": {
             "$ref": "./examples/license/License_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/License"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Licenses_Update",
@@ -1449,9 +1484,20 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/License"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1465,7 +1511,12 @@
           "Update a License": {
             "$ref": "./examples/license/License_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/License"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Licenses_Delete",
@@ -1494,7 +1545,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "The request has succeeded.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -1510,7 +1572,12 @@
           "Delete a License": {
             "$ref": "./examples/license/License_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/License"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines": {
@@ -1784,6 +1851,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1811,7 +1883,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Machine"
         },
         "x-ms-long-running-operation": true
       }
@@ -1863,6 +1936,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1888,7 +1966,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CSetupExtensionRequest%3E"
+          "final-state-schema": "#/definitions/SetupExtensionRequest"
         },
         "x-ms-long-running-operation": true
       }
@@ -4700,19 +4778,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<SetupExtensionRequest>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SetupExtensionRequest",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "CloudMetadata": {
       "type": "object",
       "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...).",
@@ -5071,6 +5136,12 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
         }
       }
     },

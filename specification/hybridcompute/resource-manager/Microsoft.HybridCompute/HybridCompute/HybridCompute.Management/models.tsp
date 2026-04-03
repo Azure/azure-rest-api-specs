@@ -2771,6 +2771,13 @@ model ExtensionValueListResult {
   @pageItems
   @identifiers(#[])
   value?: ExtensionValue[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: url;
 }
 
 /**
@@ -3831,3 +3838,5 @@ model KeyDetails {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   renewAfter?: utcDateTime;
 }
+
+model GatewaysListResult is Azure.Core.Page<Gateway>;

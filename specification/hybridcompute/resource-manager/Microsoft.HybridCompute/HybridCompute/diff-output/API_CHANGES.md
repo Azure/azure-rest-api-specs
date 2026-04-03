@@ -159,11 +159,16 @@ Change Type: added
 | `definitions.SettingsProperties.properties.gatewayProperties.description__added` | added | `Settings Gateway properties` |
 | `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}'].get.description__deleted` | deleted | `Gets an Agent Version along with the download link currently present.` |
 
-### Changes for `x-ms-pageable`
+### Changes for `headers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense'].post.responses.200.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}'].delete.responses.200.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}'].patch.responses.200.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}'].put.responses.200.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 
 ### Changes for `202`
 
@@ -171,14 +176,29 @@ Change Type: added
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense'].post.responses.202__added` | added | `{"description":"ignore","headers":{"Location":{"type":"string","description":"The Location header co...` |
 
+### Changes for `format`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AgentUpgrade.properties.correlationId.format__added` | added | `uuid` |
+| `definitions.AgentUpgrade.properties.lastAttemptTimestamp.format__added` | added | `date-time` |
+| `definitions.MachineAssessPatchesResult.properties.assessmentActivityId.format__added` | added | `uuid` |
+| `definitions.MachineInstallPatchesParameters.properties.maximumDuration.format__added` | added | `duration` |
+| `definitions.MachineProperties.properties.parentClusterResourceId.format__added` | added | `arm-id` |
+| `definitions.MachineProperties.properties.privateLinkScopeResourceId.format__added` | added | `arm-id` |
+| `definitions.MachineProperties.properties.vmId.format__added` | added | `uuid` |
+| `definitions.MachineProperties.properties.vmUuid.format__added` | added | `uuid` |
+| `definitions.MachineUpdateProperties.properties.parentClusterResourceId.format__added` | added | `arm-id` |
+| `definitions.MachineUpdateProperties.properties.privateLinkScopeResourceId.format__added` | added | `arm-id` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].put.responses.201.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/addExtensions'].post.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+
 ### Changes for `Azure-AsyncOperation`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].delete.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].put.responses.201.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}'].delete.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/addExtensions'].post.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}'].delete.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}'].patch.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].delete.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
@@ -187,21 +207,6 @@ Change Type: added
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].delete.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile'].post.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.responses.202.headers['Azure-AsyncOperation__deleted']` | deleted | `{"type":"string","description":"The URI to poll for completion status."}` |
-
-### Changes for `x-ms-long-running-operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}'].delete['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}'].patch['x-ms-long-running-operation__deleted']` | deleted | `true` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}'].put['x-ms-long-running-operation__deleted']` | deleted | `true` |
-
-### Changes for `headers`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 
 ### Changes for `get`
 
@@ -334,12 +339,6 @@ Change Type: added
 |------|------------|-------|
 | `definitions['Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
 
-### Changes for `Azure.ResourceManager.ArmResponse<SetupExtensionRequest>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<SetupExtensionRequest>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
-
 ### Changes for `GatewayListResult`
 
 | Path | Change Type | Value |
@@ -467,26 +466,17 @@ Change Type: added
 | `definitions.StorageProfile.readOnly__deleted` | deleted | `true` |
 | `definitions.Subnet.readOnly__deleted` | deleted | `true` |
 
-### Changes for `format`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AgentUpgrade.properties.correlationId.format__added` | added | `uuid` |
-| `definitions.AgentUpgrade.properties.lastAttemptTimestamp.format__added` | added | `date-time` |
-| `definitions.MachineAssessPatchesResult.properties.assessmentActivityId.format__added` | added | `uuid` |
-| `definitions.MachineInstallPatchesParameters.properties.maximumDuration.format__added` | added | `duration` |
-| `definitions.MachineProperties.properties.parentClusterResourceId.format__added` | added | `arm-id` |
-| `definitions.MachineProperties.properties.privateLinkScopeResourceId.format__added` | added | `arm-id` |
-| `definitions.MachineProperties.properties.vmId.format__added` | added | `uuid` |
-| `definitions.MachineProperties.properties.vmUuid.format__added` | added | `uuid` |
-| `definitions.MachineUpdateProperties.properties.parentClusterResourceId.format__added` | added | `arm-id` |
-| `definitions.MachineUpdateProperties.properties.privateLinkScopeResourceId.format__added` | added | `arm-id` |
-
 ### Changes for `x-ms-identifiers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AgentVersionsList.properties.value['x-ms-identifiers__deleted']` | deleted | `["agentVersion"]` |
+
+### Changes for `nextLink`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ExtensionValueListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 
 ### Changes for `systemData`
 
@@ -567,6 +557,8 @@ Change Type: added
 |------|-----------|----------|
 | `definitions.AgentConfiguration.properties.configMode['x-ms-enum'].name` | `Agent configuration mode` | `AgentConfigurationMode` |
 | `definitions.ExtensionTargetProperties.properties.targetVersion.description` | `Extension Upgrade Target Version.` | `Properties for the specified Extension to Upgrade.` |
+| `definitions.ExtensionValueListResult.description` | `The List Extension Metadata response.` | `[Placeholder] Discription for page model` |
+| `definitions.ExtensionValueListResult.properties.value.description` | `The list of extension metadata` | `[Placeholder] Discription for value property` |
 | `definitions.ExtensionValueV2.allOf[0].$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.HybridComputePrivateLinkScope.allOf[0].$ref` | `#/definitions/PrivateLinkScopesResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
 | `definitions.HybridComputePrivateLinkScopeProperties.properties.publicNetworkAccess.description` | `The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).` | `Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.` |
@@ -581,18 +573,20 @@ Change Type: added
 | `definitions.RunCommandManagedIdentity.description` | ` Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.` | `Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.` |
 | `definitions.WindowsParameters.properties.classificationsToInclude.items['x-ms-enum'].name` | `VMGuestPatchClassification_Windows` | `VMGuestPatchClassificationWindows` |
 | `info.description` | `Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.` | `The Hybrid Compute Management Client.` |
-| `paths['/providers/microsoft.HybridCompute/operations'].get.description` | `Gets a list of hybrid compute operations.` | `List the operations for the provider` |
 | `paths['/providers/microsoft.HybridCompute/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult` |
 | `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions'].get.description` | `Gets all Agent Versions along with the download link currently present.` | `Gets all agent versions based on location and publisher` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/gateways'].get.responses.200.schema.$ref` | `#/definitions/GatewaysListResult` | `#/definitions/GatewayListResult` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/licenses'].get.responses.200.schema.$ref` | `#/definitions/LicensesListResult` | `#/definitions/LicenseListResult` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense'].post.parameters[0].name` | `parameters` | `body` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways'].get.responses.200.schema.$ref` | `#/definitions/GatewaysListResult` | `#/definitions/GatewayListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `The URI to poll for completion status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].put.responses.201.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `The URI to poll for completion status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses'].get.responses.200.schema.$ref` | `#/definitions/LicensesListResult` | `#/definitions/LicenseListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `The URI to poll for completion status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/addExtensions'].post.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/addExtensions'].post.responses.202.headers['Azure-AsyncOperation'].description` | `The URI to poll for completion status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions'].get.responses.200.schema.$ref` | `#/definitions/MachineExtensionsListResult` | `#/definitions/MachineExtensionListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}'].patch.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |

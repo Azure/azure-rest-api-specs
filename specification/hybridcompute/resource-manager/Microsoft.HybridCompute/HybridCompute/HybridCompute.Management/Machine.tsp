@@ -123,7 +123,11 @@ interface Machines {
   /**
    * The operation to delete a hybrid machine.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Machine>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Machine,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmCombinedLroHeaders<FinalResult = Machine>
+  >;
 
   /**
    * Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.
@@ -182,7 +186,9 @@ interface Machines {
   setupExtensions is ArmResourceActionAsync<
     Machine,
     SetupExtensionRequest,
-    ArmResponse<SetupExtensionRequest>
+    ArmResponse<SetupExtensionRequest>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmCombinedLroHeaders<FinalResult = SetupExtensionRequest>
   >;
 
   /**

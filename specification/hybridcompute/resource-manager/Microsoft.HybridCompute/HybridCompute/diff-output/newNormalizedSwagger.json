@@ -197,7 +197,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Gets a list of hybrid compute operations.",
         "parameters": [],
         "responses": {
           "200": {
@@ -433,6 +433,9 @@
           "GET a list of extensions": {
             "$ref": "./examples/extension/ExtensionMetadata_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -561,7 +564,7 @@
         "description": "The operation to validate a license.",
         "parameters": [
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -574,6 +577,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/License"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "202": {
@@ -896,6 +905,11 @@
               "$ref": "#/definitions/Gateway"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -978,6 +992,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1098,6 +1117,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/License"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -1111,7 +1136,8 @@
           "Create or Update a License": {
             "$ref": "./examples/license/License_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Licenses_Update",
@@ -1141,6 +1167,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/License"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -1154,7 +1186,8 @@
           "Update a License": {
             "$ref": "./examples/license/License_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Licenses_Delete",
@@ -1173,7 +1206,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ignore"
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "ignore"
@@ -1189,7 +1228,8 @@
           "Delete a License": {
             "$ref": "./examples/license/License_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines": {
@@ -1399,6 +1439,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1459,6 +1504,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3598,19 +3648,6 @@
         "body"
       ]
     },
-    "Azure.ResourceManager.ArmResponse<SetupExtensionRequest>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SetupExtensionRequest",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "CloudMetadata": {
       "type": "object",
       "description": "The metadata of the cloud environment (Azure/GCP/AWS/OCI...).",
@@ -3827,15 +3864,20 @@
     },
     "ExtensionValueListResult": {
       "type": "object",
-      "description": "The List Extension Metadata response.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of extension metadata",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/ExtensionValue"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
