@@ -112,5 +112,7 @@ model EvaluationSuiteVersion {
     """)
   agentName?: string;
 
+  // AssetBase provides: name (string, @key), version (string, read-only),
+  // id (string, read-only), description (string, optional), tags (Record<string>, optional)
   ...AssetBase;
 }
