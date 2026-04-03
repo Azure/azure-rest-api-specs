@@ -11,7 +11,7 @@ Refer to [language-emitter.instructions.md](./instructions/language-emitter.inst
 
 # When to invoke the azure-typespec-author skill
 
-The `azure-typespec-author` skill **must** be invoked for any task that involves creating and modifying TypeSpec (`.tsp`) files under the specification directory in this repository. This includes but is not limited to:
+The `azure-typespec-author` skill **must** be invoked for any task that involves creating and modifying TypeSpec (`.tsp`) files except for `client.tsp` under the specification directory in this repository. This includes but is not limited to:
 
 - Adding, bumping, or promoting API versions (preview, stable)
 - Adding or modifying resources, operations, models, properties, or decorators
@@ -25,7 +25,7 @@ The `azure-typespec-author` skill **must** be invoked for any task that involves
 
 If the user confirms, invoke the `azure-typespec-author` skill immediately. Do **not** attempt to make `.tsp` file changes without invoking this skill first.
 
-**Do NOT use this skill for:** SDK generation, releasing SDK packages, or standalone MCP tool calls that do not involve editing `.tsp` files.
+**Do NOT use this skill for:** SDK generation, releasing SDK packages, `client.tsp` or code customization, or standalone MCP tool calls that do not involve editing `.tsp` files.
 
 # SDK generation from TypeSpec
 
