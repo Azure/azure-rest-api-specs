@@ -9,6 +9,28 @@ using Microsoft.Cdn;
   "go"
 );
 @@clientName(CdnEndpoint, "LinkedEndpoint", "go");
+@@clientName(CdnWebApplicationFirewallPolicy, "CdnWafPolicy", "go");
+@@clientName(WebApplicationFirewallPolicy,
+  "WebApplicationFirewallPolicy",
+  "go"
+);
+@@clientName(CdnWebApplicationFirewallPolicyProperties,
+  "CdnWafPolicyProperties",
+  "go"
+);
+@@clientName(WebApplicationFirewallPolicyProperties,
+  "WebApplicationFirewallPolicyProperties",
+  "go"
+);
+
+@@clientLocation(checkEndpointNameAvailability, "ManagementClient", "go");
+@@clientLocation(checkNameAvailability, "ManagementClient", "go");
+@@clientLocation(checkNameAvailabilityWithSubscription,
+  "ManagementClient",
+  "go"
+);
+@@clientLocation(validateProbe, "ManagementClient", "go");
+
 @@clientName(CdnEndpoint, "EndpointResource", "java");
 
 @@clientName(ValidateProbeInput.probeURL, "probeUrl", "java");
@@ -194,29 +216,9 @@ using Microsoft.Cdn;
   "TwoHundred",
   "javascript,go"
 );
-@@clientName(CdnWebApplicationFirewallPolicy, "CdnWafPolicy", "go");
-@@clientName(WebApplicationFirewallPolicy,
-  "WebApplicationFirewallPolicy",
-  "go"
-);
-@@clientName(CdnWebApplicationFirewallPolicyProperties,
-  "CdnWafPolicyProperties",
-  "go"
-);
-@@clientName(WebApplicationFirewallPolicyProperties,
-  "WebApplicationFirewallPolicyProperties",
-  "go"
-);
 
-@@clientLocation(checkEndpointNameAvailability, "ManagementClient", "go");
-@@clientLocation(checkNameAvailability, "ManagementClient", "go");
-@@clientLocation(checkNameAvailabilityWithSubscription,
-  "ManagementClient",
-  "go"
-);
-@@clientLocation(validateProbe, "ManagementClient", "go");
-
-// C# backward-compatible renames for SDK migration
+// C# SDK customizations: backward-compatible renames, access/usage configurations,
+// client name overrides, and type alternates for the CDN management API C# SDK.
 @@clientName(ActivatedResourceReference,
   "FrontDoorActivatedResourceInfo",
   "csharp"
@@ -385,8 +387,6 @@ using Microsoft.Cdn;
   "RequestSchemeMatchConditionMatchValue",
   "csharp"
 );
-
-// Additional C# renames for migration
 @@clientName(UrlSigningKey, "UriSigningKey", "csharp");
 @@clientName(EndpointPropertiesUpdateParametersDeliveryPolicy,
   "EndpointDeliveryPolicy",
@@ -407,8 +407,6 @@ using Microsoft.Cdn;
   "EqualsValue",
   "csharp"
 );
-
-// AFD resource type renames (AFD → FrontDoor prefix for csharp)
 @@clientName(AFDDomain, "FrontDoorCustomDomain", "csharp");
 @@clientName(AFDDomainProperties, "FrontDoorCustomDomainProperties", "csharp");
 @@clientName(AFDDomainHttpsParameters,
@@ -432,6 +430,8 @@ using Microsoft.Cdn;
   "csharp"
 );
 @@clientName(AFDEndpoint, "FrontDoorEndpoint", "csharp");
+@@clientName(AFDEndpoints.listResourceUsage, "GetResourceUsages", "csharp");
+@@clientName(AFDOriginGroups.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(AFDEndpointProperties, "FrontDoorEndpointProperties", "csharp");
 @@clientName(AFDEndpointUpdateParameters,
   "FrontDoorEndpointUpdateParameters",
@@ -464,15 +464,25 @@ using Microsoft.Cdn;
   "FrontDoorOriginGroupUpdatePropertiesParameters",
   "csharp"
 );
+@@clientName(AFDOriginGroupUpdatePropertiesParameters.trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
+  "TrafficRestorationTimeInMinutes",
+  "csharp"
+);
 @@clientName(AFDStateProperties, "FrontDoorStateProperties", "csharp");
 @@clientName(AFDRouteGrpcState, "FrontDoorRouteGrpcState", "csharp");
-
-// Other missing renames
 @@clientName(IpAddressGroup, "IPAddressGroup", "csharp");
 @@clientName(Status, "ValidationStatus", "csharp");
 @@clientName(ValidateSecretInput, "ValidateSecretContent", "csharp");
 @@clientName(MigrationParameters, "MigrationContent", "csharp");
 @@clientName(CdnMigrationToAfdParameters, "CdnMigrationToAfdContent", "csharp");
+@@clientName(EndpointProperties.customDomains,
+  "DeepCreatedCustomDomains",
+  "csharp"
+);
+@@clientName(EndpointPropertiesUpdateParameters.urlSigningKeys,
+  "UriSigningKeys",
+  "csharp"
+);
 @@access(DeepCreatedCustomDomain, Access.public, "csharp");
 @@usage(DeepCreatedCustomDomain,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
@@ -483,8 +493,6 @@ using Microsoft.Cdn;
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-
-// Fix duplicate property names from auto-flattened list wrappers
 @@clientName(CdnWebApplicationFirewallPolicyProperties.rateLimitRules,
   "RateLimitSettings",
   "csharp"
@@ -497,14 +505,10 @@ using Microsoft.Cdn;
   "CustomSettings",
   "csharp"
 );
-
-// Fix duplicate GetResourceUsage methods on ProfileResource
 @@clientName(Profiles.profilesListResourceUsage,
   "GetCdnProfileResourceUsages",
   "csharp"
 );
-
-// C# backward-compatible renames: Action/Condition parameters (Properties -> Parameters rename)
 @@clientName(CacheExpirationActionParameters,
   "CacheExpirationActionProperties",
   "csharp"
@@ -522,8 +526,6 @@ using Microsoft.Cdn;
   "RouteConfigurationOverrideActionProperties",
   "csharp"
 );
-
-// C# backward-compatible renames: Url* -> Uri* prefix
 @@clientName(UrlRedirectAction, "UriRedirectAction", "csharp");
 @@clientName(UrlRewriteAction, "UriRewriteAction", "csharp");
 @@clientName(UrlSigningAction, "UriSigningAction", "csharp");
@@ -539,8 +541,6 @@ using Microsoft.Cdn;
   "UriSigningActionProperties",
   "csharp"
 );
-
-// C# backward-compatible renames: *Parameters/*Input -> *Content
 @@clientName(CanMigrateParameters, "CanMigrateContent", "csharp");
 @@clientName(CustomDomainParameters,
   "CdnCustomDomainCreateOrUpdateContent",
@@ -550,8 +550,6 @@ using Microsoft.Cdn;
 @@clientName(ProfileUpgradeParameters, "ProfileUpgradeContent", "csharp");
 @@clientName(PurgeParameters, "PurgeContent", "csharp");
 @@clientName(ValidateProbeInput, "ValidateProbeContent", "csharp");
-
-// C# backward-compatible renames: MatchCondition parameters
 @@clientName(ClientPortMatchConditionParameters,
   "ClientPortMatchCondition",
   "csharp"
@@ -628,8 +626,6 @@ using Microsoft.Cdn;
   "UriPathMatchCondition",
   "csharp"
 );
-
-// C# backward-compatible renames: DeliveryRule conditions
 @@clientName(DeliveryRuleSocketAddrCondition,
   "DeliveryRuleSocketAddressCondition",
   "csharp"
@@ -646,8 +642,6 @@ using Microsoft.Cdn;
   "DeliveryRuleUriPathCondition",
   "csharp"
 );
-
-// C# backward-compatible renames: Other type renames
 @@clientName(CidrIpAddress, "CidrIPAddress", "csharp");
 @@clientName(GeoFilterActions, "GeoFilterAction", "csharp");
 @@clientName(Operator, "MatchOperator", "csharp");
@@ -666,15 +660,16 @@ using Microsoft.Cdn;
 );
 @@clientName(Sku, "CdnSku", "csharp");
 @@clientName(UrlSigningParamIdentifier, "UriSigningParamIdentifier", "csharp");
-
-// Make CdnSku public (was internal after rename)
+@@clientName(ResourceUsageOperationGroup.list, "GetResourceUsages", "csharp");
+@@clientName(ManagedRuleSetsOperationGroup.list,
+  "GetManagedRuleSets",
+  "csharp"
+);
 @@access(Sku, Access.public, "csharp");
 @@usage(Sku,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-
-// Make ManagedRuleSetDefinition and related types public
 @@access(ManagedRuleSetDefinition, Access.public, "csharp");
 @@usage(ManagedRuleSetDefinition,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
@@ -695,21 +690,11 @@ using Microsoft.Cdn;
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-
-// Fix colliding GetAll extension methods on SubscriptionResource
-@@clientName(ResourceUsageOperationGroup.list, "GetResourceUsages", "csharp");
-@@clientName(ManagedRuleSetsOperationGroup.list,
-  "GetManagedRuleSets",
-  "csharp"
-);
-
-// Fix ResourceReference.id type: string → armResourceIdentifier (covers all ResourceReference usages)
+@@usage(CustomDomain, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@alternateType(ResourceReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
-// Fix standalone string properties that should be ResourceIdentifier
 @@alternateType(ProfileProperties.frontDoorId, Azure.Core.uuid, "csharp");
 @@alternateType(OriginProperties.privateLinkResourceId,
   Azure.Core.armResourceIdentifier,
@@ -732,28 +717,30 @@ using Microsoft.Cdn;
   "csharp"
 );
 @@alternateType(CdnEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
-
-// Fix ETag type: string → eTag
 @@alternateType(CdnWebApplicationFirewallPolicy.etag,
   Azure.Core.eTag,
   "csharp"
 );
-
-// Fix Uri type: string → url
+@@alternateType(OriginGroupUpdatePropertiesParameters.origins,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(RouteUpdatePropertiesParameters.ruleSets,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
 @@alternateType(PolicySettings.defaultRedirectUrl, url, "csharp");
-
-// Fix BinaryData type: string → bytes
 @@alternateType(PolicySettings.defaultCustomBlockResponseBody, bytes, "csharp");
-
-// Fix property renames for backward compatibility
+@@alternateType(CdnWebApplicationFirewallPolicyProperties.endpointLinks,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
 @@clientName(PolicySettings.defaultRedirectUrl, "DefaultRedirectUri", "csharp");
 @@clientName(CdnWebApplicationFirewallPolicyProperties.endpointLinks,
   "EndpointLinks",
   "csharp"
 );
 @@clientName(CdnEndpoint.id, "Id", "csharp");
-
-// Fix property renames: Operator properties (old: XxxOperator, new: Operator)
 @@clientName(ClientPortMatchConditionParameters.operator,
   "ClientPortOperator",
   "csharp"
@@ -830,8 +817,6 @@ using Microsoft.Cdn;
   "UriPathOperator",
   "csharp"
 );
-
-// Fix property renames: other property name mismatches
 @@clientName(AFDDomainProperties.azureDnsZone, "DnsZone", "csharp");
 @@clientName(AFDDomainUpdatePropertiesParameters.azureDnsZone,
   "DnsZone",
@@ -880,14 +865,23 @@ using Microsoft.Cdn;
   "TrafficRestorationTimeInMinutes",
   "csharp"
 );
-@@clientName(OriginGroupUpdatePropertiesParameters.trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
-  "TrafficRestorationTimeInMinutes",
-  "csharp"
-);
-
-// Fix method renames for backward compatibility
 @@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
+@@clientName(RuleSets.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(Profiles.profilesListResourceUsage,
   "GetCdnProfileResourceUsages",
   "csharp"
 );
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model WritableSubResource {
+    /** the id */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
