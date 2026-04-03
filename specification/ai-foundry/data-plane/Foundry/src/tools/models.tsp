@@ -780,6 +780,8 @@ namespace Azure.AI.Projects {
      */
     type: "work_iq_preview";
 
+    ...ToolNameAndDescriptionExtension;
+
     /**
      * The WorkIQ tool parameters.
      */
