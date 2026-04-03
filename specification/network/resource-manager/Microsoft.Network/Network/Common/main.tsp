@@ -3964,7 +3964,7 @@ model VirtualNetworkPropertiesFormat {
   defaultPublicNatGateway?: SubResource;
 
   /**
-   * A summarized list of advertised prefixes for the virtual network.
+   * A configurable list of summarized gateway prefixes advertised for the virtual network.
    */
   summarizedGatewayPrefixes?: AddressSpace;
 }
