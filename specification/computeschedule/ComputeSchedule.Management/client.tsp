@@ -222,6 +222,16 @@ using TypeSpec.Versioning;
 );
 @@clientName(ResourceType, "ScheduledActionResourceType", "csharp");
 
+@@clientName(AllocationStrategy, "ComputeScheduleAllocationStrategy", "csharp");
+@@clientName(DistributionStrategy, "ComputeScheduleDistributionStrategy", "csharp");
+@@clientName(OsType, "ComputeScheduleOSType", "csharp");
+@@clientName(PriorityType, "ComputeSchedulePriorityType", "csharp");
+@@clientName(PriorityProfile, "ComputeSchedulePriorityProfile", "csharp");
+@@clientName(FlexProperties, "ComputeScheduleFlexProperties", "csharp");
+@@clientName(VmSizeProfile, "ComputeScheduleVmSizeProfile", "csharp");
+@@clientName(ZonePreference, "ComputeScheduleZonePreference", "csharp");
+@@clientName(ZoneAllocationPolicy, "ComputeScheduleZoneAllocationPolicy", "csharp");
+
 @@clientName(OccurrenceExtension.listOccurrenceByVms,
   "GetAssociatedOccurrences",
   "csharp"
