@@ -1296,7 +1296,12 @@ interface PolicyStatesOperationGroup {
   @post
   triggerSubscriptionEvaluation(
     ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
+
+    /** The ID of the target subscription. The value must be an UUID. */
+    @path
+    @segment("subscriptions")
+    @minLength(1)
+    subscriptionId: Azure.Core.uuid,
   ): {
     @statusCode statusCode: 200;
   } | ArmAcceptedLroResponse<

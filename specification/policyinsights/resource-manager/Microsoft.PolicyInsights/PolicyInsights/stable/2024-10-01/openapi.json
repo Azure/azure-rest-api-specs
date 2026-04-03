@@ -4426,7 +4426,13 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The ID of the target subscription. The value must be an UUID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "minLength": 1
           }
         ],
         "responses": {
