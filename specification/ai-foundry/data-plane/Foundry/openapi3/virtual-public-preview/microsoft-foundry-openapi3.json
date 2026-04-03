@@ -57,6 +57,9 @@
       "name": "Schedules"
     },
     {
+      "name": "Skills"
+    },
+    {
       "name": "Toolboxes"
     }
   ],
@@ -8913,6 +8916,603 @@
         ]
       }
     },
+    "/skills": {
+      "post": {
+        "operationId": "Skills_createSkill",
+        "description": "Creates a skill.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "maxLength": 63,
+                    "description": "The unique name of the skill."
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 1024,
+                    "description": "A human-readable description of the skill."
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "maxLength": 102400,
+                    "description": "Instructions that define the behavior of the skill."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Set of key-value pairs associated with the skill."
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "Skills_listSkills",
+        "description": "Returns the list of all skills.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SkillObject"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
+    "/skills/{skill_name}": {
+      "get": {
+        "operationId": "Skills_getSkill",
+        "description": "Retrieves a skill.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      },
+      "post": {
+        "operationId": "Skills_updateSkill",
+        "description": "Updates an existing skill.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "maxLength": 1024,
+                    "description": "A human-readable description of the skill."
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "maxLength": 102400,
+                    "description": "Instructions that define the behavior of the skill."
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Set of key-value pairs associated with the skill."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "Skills_deleteSkill",
+        "description": "Deletes a skill.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSkillResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
+    "/skills/{skill_name}:download": {
+      "get": {
+        "operationId": "Skills_downloadSkill",
+        "description": "Downloads a skill package.",
+        "parameters": [
+          {
+            "name": "skill_name",
+            "in": "path",
+            "required": true,
+            "description": "The unique name of the skill.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body for downloading a skill package.",
+            "content": {
+              "application/gzip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
+    "/skills:import": {
+      "post": {
+        "operationId": "Skills_createSkillFromPackage",
+        "description": "Creates a skill from a GZip package.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Skills=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Skills"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/gzip": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          },
+          "description": "The GZip package used to create the skill."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Skills=V1Preview"
+          ]
+        }
+      }
+    },
     "/toolboxes": {
       "get": {
         "operationId": "listToolboxes",
@@ -9689,6 +10289,14 @@
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "base_url": {
             "type": "string",
             "format": "uri",
@@ -9811,6 +10419,14 @@
           "index_name": {
             "type": "string",
             "description": "The name of an index in an IndexResource attached to this agent."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "query_type": {
             "allOf": [
@@ -11185,6 +11801,14 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -11288,6 +11912,14 @@
           "indexes"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "indexes": {
             "type": "array",
             "items": {
@@ -11574,6 +12206,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -11615,6 +12255,14 @@
               "bing_custom_search_preview"
             ],
             "description": "The object type, which is always 'bing_custom_search_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_custom_search_preview": {
             "allOf": [
@@ -11719,6 +12367,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -11736,6 +12392,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing search"
@@ -11766,6 +12430,14 @@
           "search_configurations"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "search_configurations": {
             "type": "array",
             "items": {
@@ -11790,6 +12462,14 @@
               "bing_grounding"
             ],
             "description": "The object type, which is always 'bing_grounding'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_grounding": {
             "allOf": [
@@ -11930,6 +12610,14 @@
             ],
             "description": "The object type, which is always 'browser_automation_preview'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "browser_automation_preview": {
             "allOf": [
               {
@@ -12033,6 +12721,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "The ID of the project connection to your Azure Playwright resource."
@@ -12046,6 +12742,14 @@
           "connection"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "connection": {
             "allOf": [
               {
@@ -13271,6 +13975,24 @@
           }
         },
         "description": "The result of a delete response operation."
+      },
+      "DeleteSkillResponse": {
+        "type": "object",
+        "required": [
+          "name",
+          "deleted"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The unique name of the skill."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the skill was successfully deleted."
+          }
+        },
+        "description": "A deleted skill Object"
       },
       "Deployment": {
         "type": "object",
@@ -15134,6 +15856,14 @@
       "FabricDataAgentToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -16118,6 +16848,14 @@
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "memory_store_name": {
             "type": "string",
             "description": "The name of the memory store to use."
@@ -16162,6 +16900,14 @@
               "memory_search"
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "memory_store_name": {
             "type": "string",
@@ -16727,6 +17473,14 @@
               "fabric_dataagent_preview"
             ],
             "description": "The object type, which is always 'fabric_dataagent_preview'."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -17638,6 +18392,14 @@
             ],
             "description": "The type of the code interpreter tool. Always `code_interpreter`.",
             "x-stainless-const": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "container": {
             "anyOf": [
@@ -21947,6 +22709,14 @@
               }
             ],
             "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -23373,6 +24143,14 @@
               }
             ],
             "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -24057,6 +24835,14 @@
               }
             ],
             "description": "Whether to generate a new image or edit an existing image. Default: `auto`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -29798,6 +30584,14 @@
             "description": "The type of the local shell tool. Always `local_shell`.",
             "x-stainless-const": true,
             "default": "local_shell"
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           }
         },
         "allOf": [
@@ -35503,6 +36297,7 @@
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
+            "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
@@ -35859,6 +36654,7 @@
               "fabric_dataagent_preview",
               "sharepoint_grounding_preview",
               "memory_search_preview",
+              "work_iq_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -36281,6 +37077,14 @@
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "custom_search_configuration": {
             "allOf": [
@@ -37861,6 +38665,14 @@
       "SharepointGroundingToolParameters": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connections": {
             "type": "array",
             "items": {
@@ -37886,6 +38698,14 @@
             ],
             "description": "The object type, which is always 'sharepoint_grounding_preview'."
           },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "sharepoint_grounding_preview": {
             "allOf": [
               {
@@ -37901,6 +38721,42 @@
           }
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
+      },
+      "SkillObject": {
+        "type": "object",
+        "required": [
+          "skill_id",
+          "has_blob",
+          "name"
+        ],
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "description": "The unique identifier of the skill."
+          },
+          "has_blob": {
+            "type": "boolean",
+            "description": "Whether the skill was created from a GZip blob package."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The unique name of the skill."
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024,
+            "description": "A human-readable description of the skill."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Set of key-value pairs associated with the skill."
+          }
+        },
+        "description": "A skill object."
       },
       "Sku": {
         "type": "object",
@@ -38372,6 +39228,14 @@
           "project_connection_id"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "A project connection in a ToolProjectConnectionList attached to this tool."
@@ -38758,6 +39622,14 @@
           "instance_name"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
           "project_connection_id": {
             "type": "string",
             "description": "Project connection id for grounding with bing custom search"
@@ -38797,6 +39669,49 @@
           }
         ],
         "description": "Weekly recurrence schedule."
+      },
+      "WorkIQPreviewTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "work_iq_preview"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "work_iq_preview"
+            ],
+            "description": "The object type, which is always 'work_iq_preview'."
+          },
+          "work_iq_preview": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WorkIQPreviewToolParameters"
+              }
+            ],
+            "description": "The WorkIQ tool parameters."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A WorkIQ server-side tool."
+      },
+      "WorkIQPreviewToolParameters": {
+        "type": "object",
+        "required": [
+          "project_connection_id"
+        ],
+        "properties": {
+          "project_connection_id": {
+            "type": "string",
+            "description": "The ID of the WorkIQ project connection."
+          }
+        },
+        "description": "The WorkIQ tool parameters."
       },
       "WorkflowActionOutputItem": {
         "type": "object",
