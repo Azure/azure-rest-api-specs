@@ -38,6 +38,15 @@ input-file:
 - preview/2022-05-01-preview/migrateEngine.json
 ```
 
+### Tag: package-migrateengine-2022-05
+
+These settings apply only when `--tag=package-migrateengine-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrateengine-2022-05'
+input-file:
+- preview/2022-05-01-preview/migrateEngine.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
