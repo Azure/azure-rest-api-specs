@@ -121,6 +121,7 @@ model MemoryStoreOperationUsage {
 @doc("Status of a memory store update operation.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreUpdateStatus {
+  string,
   queued: "queued",
   in_progress: "in_progress",
 
