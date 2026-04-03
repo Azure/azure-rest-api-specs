@@ -1316,7 +1316,12 @@ interface PolicyStatesOperationGroup {
   @post
   triggerResourceGroupEvaluation(
     ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
+
+    /** The ID of the target subscription. The value must be an UUID. */
+    @path
+    @segment("subscriptions")
+    @minLength(1)
+    subscriptionId: Azure.Core.uuid,
 
     /**
      * Resource group name.
