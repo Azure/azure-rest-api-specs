@@ -26,6 +26,11 @@ using Microsoft.ContainerRegistry;
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
 
+@@clientName(MyPrivateLinkResource,
+  "PrivateLinkResource",
+  "java"
+);
+
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
 
 // C# configurations for backward compatibility and naming conventions.
