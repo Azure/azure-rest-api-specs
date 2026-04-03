@@ -5714,7 +5714,7 @@ model AcceleratorDeploymentProperties {
    * Example: azureml://registries/{registry}/models/{model}/versions/{version}
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  `model`: string;
+  `model`?: string;
 
   /**
    * AzureML Registry deployment template URI. Required on creation.
