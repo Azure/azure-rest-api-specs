@@ -120,7 +120,7 @@ model DownloadSkillResponse {
   @header("Content-Type")
   content_type: "application/gzip";
 
-  @doc("The GZip skill package content.")
+  @doc("The gzip skill package content.")
   @body
   body: bytes;
 }
