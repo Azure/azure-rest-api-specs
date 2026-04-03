@@ -1,9 +1,3 @@
-import "@typespec/rest";
-import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
-
-using Azure.ResourceManager;
-
 /**
  * The status state of the request.
  */
@@ -394,7 +388,7 @@ model GeoJsonPointData {
    * _Altitude/Elevation_ is an optional third element. Please refer to [RFC
    * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.
    */
-  coordinates: float64[];
+  coordinates?: float64[];
 }
 
 /**
