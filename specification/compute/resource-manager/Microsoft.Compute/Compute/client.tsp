@@ -13,11 +13,22 @@ using ComputeSku;
 /**
  * Compute Client
  */
-@client({
-  name: "ComputeClient",
-  service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
-  autoMergeService: true,
-})
+@client(
+  {
+    name: "ComputeClient",
+    service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
+    autoMergeService: true,
+  },
+  "!python"
+)
+@client(
+  {
+    name: "ComputeManagementClient",
+    service: [Compute, ComputeDisk, ComputeGallery, ComputeSku],
+    autoMergeService: true,
+  },
+  "python"
+)
 namespace ComputeCombine;
 
 // VirtualMachineInstanceView needs input usage for premium layer constructor and setters
