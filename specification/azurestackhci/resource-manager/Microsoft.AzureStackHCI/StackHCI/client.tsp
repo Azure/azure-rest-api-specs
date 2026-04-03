@@ -357,6 +357,99 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 
+// ==================== Request → Content renames ====================
+@@clientName(Microsoft.AzureStackHCI.ChangeRingRequest,
+  "ChangeRingContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.CheckUpdatesRequest,
+  "CheckUpdatesContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ClaimDeviceRequest,
+  "ClaimDeviceContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.DownloadRequest,
+  "DownloadContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ProvisioningRequest,
+  "ProvisioningContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ReconcileArcSettingsRequest,
+  "ReconcileArcSettingsContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ReleaseDeviceRequest,
+  "ReleaseDeviceContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.SecretsLocationsChangeRequest,
+  "SecretsLocationsChangeContent",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ValidateOwnershipVouchersRequest,
+  "ValidateOwnershipVouchersContent",
+  "csharp"
+);
+
+// ==================== Response → Result rename ====================
+@@clientName(Microsoft.AzureStackHCI.ValidateOwnershipVouchersResponse,
+  "ValidateOwnershipVouchersResult",
+  "csharp"
+);
+
+// ==================== Generic type name renames (add Hci prefix) ====================
+@@clientName(Microsoft.AzureStackHCI.AssemblyInfo, "HciAssemblyInfo", "csharp");
+@@clientName(Microsoft.AzureStackHCI.HardwareProfile,
+  "HciDeploymentHardwareProfile",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.NetworkAdapter,
+  "HciNetworkAdapter",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.OsProfile, "HciDeploymentOSProfile", "csharp");
+@@clientName(Microsoft.AzureStackHCI.UserDetails, "HciUserDetails", "csharp");
+@@clientName(Microsoft.AzureStackHCI.TimeConfiguration,
+  "HciTimeConfiguration",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.WebProxyConfiguration,
+  "HciWebProxyConfiguration",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.DnsZones, "HciDnsZones", "csharp");
+@@clientName(Microsoft.AzureStackHCI.IpAddressRange,
+  "HciIPAddressRange",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.JobStatus, "HciJobStatus", "csharp");
+@@clientName(Microsoft.AzureStackHCI.SecretType, "HciSecretType", "csharp");
+@@clientName(Microsoft.AzureStackHCI.SecretsType, "HciSecretsType", "csharp");
+@@clientName(Microsoft.AzureStackHCI.StorageType, "HciStorageType", "csharp");
+@@clientName(Microsoft.AzureStackHCI.VolumeType, "HciVolumeType", "csharp");
+@@clientName(Microsoft.AzureStackHCI.DeviceDetail, "HciDeviceDetail", "csharp");
+@@clientName(Microsoft.AzureStackHCI.IdentityProvider,
+  "HciIdentityProvider",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.KubernetesVersion,
+  "HciKubernetesVersion",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.OperationDetail,
+  "HciOperationDetail",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.SiteDetails, "HciSiteDetails", "csharp");
+@@clientName(Microsoft.AzureStackHCI.ProvisioningDetails,
+  "HciProvisioningDetails",
+  "csharp"
+);
+
 // ==================== Property renames ====================
 @@clientName(Microsoft.AzureStackHCI.ClusterReportedProperties.lastUpdated,
   "LastUpdatedOn",
