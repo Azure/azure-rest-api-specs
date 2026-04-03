@@ -73,3 +73,48 @@ using Microsoft.ServiceFabric;
 @@access(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig, Access.public, "csharp");
 @@access(Microsoft.ServiceFabric.ClusterState, Access.public, "csharp");
 @@access(Microsoft.ServiceFabric.ProvisioningState, Access.public, "csharp");
+
+// Property renames on ClusterProperties (and ClusterPropertiesUpdateParameters)
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.eventStoreServiceEnabled,
+  "IsEventStoreServiceEnabled", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.infrastructureServiceManager,
+  "IsInfrastructureServiceManagerEnabled", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.waveUpgradePaused,
+  "IsWaveUpgradePaused", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.upgradePauseStartTimestampUtc,
+  "UpgradePauseStartOn", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.upgradePauseEndTimestampUtc,
+  "UpgradePauseEndOn", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.sfZonalUpgradeMode,
+  "ServiceFabricZonalUpgradeMode", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.clusterEndpoint,
+  "ClusterEndpoint", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.managementEndpoint,
+  "ManagementEndpoint", "csharp");
+
+// Same renames on ClusterPropertiesUpdateParameters
+@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.eventStoreServiceEnabled,
+  "IsEventStoreServiceEnabled", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.infrastructureServiceManager,
+  "IsInfrastructureServiceManagerEnabled", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.waveUpgradePaused,
+  "IsWaveUpgradePaused", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.upgradePauseStartTimestampUtc,
+  "UpgradePauseStartOn", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.upgradePauseEndTimestampUtc,
+  "UpgradePauseEndOn", "csharp");
+
+// Property renames on NodeTypeDescription
+@@clientName(Microsoft.ServiceFabric.NodeTypeDescription.multipleAvailabilityZones,
+  "IsMultipleAvailabilityZonesSupported", "csharp");
+
+// Property renames on ClusterVersionDetails
+@@clientName(Microsoft.ServiceFabric.ClusterVersionDetails.supportExpiryUtc,
+  "SupportExpireOn", "csharp");
+
+// Type overrides for URI properties
+@@alternateType(Microsoft.ServiceFabric.ClusterProperties.clusterEndpoint, url, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ClusterProperties.managementEndpoint, url, "csharp");
+@@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.blobEndpoint, url, "csharp");
+@@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.queueEndpoint, url, "csharp");
+@@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.tableEndpoint, url, "csharp");
