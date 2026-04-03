@@ -133,3 +133,65 @@ interface AgentVersionsOperationGroup {
     version: string,
   ): ArmResponse<AgentVersion> | ErrorResponse;
 }
+
+alias NetworkConfigurationsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the hybrid machine.
+     */
+    @path
+    @segment("machines")
+    @key
+    @minLength(1)
+    @pattern("^[a-zA-Z0-9-_\\.]{1,54}$")
+    machineName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<NetworkConfiguration>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<NetworkConfiguration>;
+
+    /**
+     * The name of the network configuration resource.
+     */
+    @path
+    @segment("networkConfigurations")
+    @key
+    networkConfigurationName: "current";
+  },
+  "NetworkConfigurations"
+>;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface NetworkConfigurationsOperationGroup {
+  /**
+   * Returns a NetworkConfiguration for the target resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkConfigurations_Get")
+  get is NetworkConfigurationsOps.Read<NetworkConfiguration>;
+
+  /**
+   * Create or update the NetworkConfiguration of the target resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkConfigurations_CreateOrUpdate")
+  createOrUpdate is NetworkConfigurationsOps.CreateOrUpdateSync<NetworkConfiguration>;
+
+  /**
+   * Update the endpoint to the target resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("NetworkConfigurations_Update")
+  update is NetworkConfigurationsOps.CustomPatchSync<
+    NetworkConfiguration,
+    PatchModel = NetworkConfiguration
+  >;
+}

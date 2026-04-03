@@ -157,3 +157,6 @@ using Microsoft.HybridCompute;
 @@clientLocation(PrivateLinkScopesOperationGroup.getValidationDetails,
   "PrivateLinkScopes"
 );
+@@clientLocation(Machines.listByMachines, "HybridIdentityMetadata");
+@@clientLocation(Machines.getHybridIdentityMetadata, "HybridIdentityMetadata");
+@@clientName(Machines.getHybridIdentityMetadata, "Get");

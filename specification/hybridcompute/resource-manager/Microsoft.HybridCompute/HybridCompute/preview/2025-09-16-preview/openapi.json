@@ -80,6 +80,9 @@
     },
     {
       "name": "NetworkSecurityPerimeterConfigurations"
+    },
+    {
+      "name": "NetworkConfigurationsOperationGroup"
     }
   ],
   "paths": {
@@ -2305,6 +2308,100 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata": {
+      "post": {
+        "operationId": "HybridIdentityMetadata_ListByMachines",
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Implements GET HybridIdentityMetadata in a machine.",
+        "description": "Returns the list of HybridIdentityMetadata of the given machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}": {
+      "get": {
+        "operationId": "HybridIdentityMetadata_Get",
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metadataName",
+            "in": "path",
+            "description": "The id of the HybridIdentityMetadata to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/installPatches": {
       "post": {
         "operationId": "Machines_InstallPatches",
@@ -2793,6 +2890,155 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.HybridCompute/networkConfigurations/current": {
+      "get": {
+        "operationId": "NetworkConfigurations_Get",
+        "tags": [
+          "NetworkConfigurationsOperationGroup"
+        ],
+        "description": "Returns a NetworkConfiguration for the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkConfigurations_CreateOrUpdate",
+        "tags": [
+          "NetworkConfigurationsOperationGroup"
+        ],
+        "description": "Create or update the NetworkConfiguration of the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NetworkConfigurations_Update",
+        "tags": [
+          "NetworkConfigurationsOperationGroup"
+        ],
+        "description": "Update the endpoint to the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands": {
       "get": {
         "operationId": "MachineRunCommands_List",
@@ -2990,6 +3236,84 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/MachineRunCommand"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MachineRunCommands_Update",
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "description": "The operation to update a run command.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "description": "The name of the run command.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommandUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/MachineRunCommand"
         },
         "x-ms-long-running-operation": true
@@ -5202,6 +5526,65 @@
         }
       }
     },
+    "HybridIdentityMetadata": {
+      "type": "object",
+      "description": "Defines the HybridIdentityMetadata.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HybridIdentityMetadataProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HybridIdentityMetadataList": {
+      "type": "object",
+      "description": "List of HybridIdentityMetadata.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HybridIdentityMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/HybridIdentityMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HybridIdentityMetadataProperties": {
+      "type": "object",
+      "description": "Defines the resource properties.",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "The unique identifier for the resource."
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "The Public Key."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Identity",
+          "description": "Identity for the resource.",
+          "readOnly": true
+        }
+      }
+    },
     "IdentityKeyStore": {
       "type": "string",
       "description": "Specifies the identity key store a machine is using.",
@@ -5241,6 +5624,45 @@
         "subnet": {
           "$ref": "#/definitions/Subnet",
           "description": "The subnet to which this IP address belongs.",
+          "readOnly": true
+        }
+      }
+    },
+    "KeyDetails": {
+      "type": "object",
+      "description": "Public key details",
+      "properties": {
+        "publicKey": {
+          "type": "string",
+          "description": "Public key",
+          "readOnly": true
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Key expiration date",
+          "readOnly": true
+        },
+        "renewAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recommended key renewal date",
+          "readOnly": true
+        }
+      }
+    },
+    "KeyProperties": {
+      "type": "object",
+      "description": "Public key information for client authentication",
+      "properties": {
+        "clientPublicKey": {
+          "$ref": "#/definitions/KeyDetails",
+          "description": "Current public key details",
+          "readOnly": true
+        },
+        "candidatePublicKey": {
+          "$ref": "#/definitions/KeyDetails",
+          "description": "Candidate public key details",
           "readOnly": true
         }
       }
@@ -6903,6 +7325,61 @@
         "tpmEkCertificate": {
           "type": "string",
           "description": "Endorsement Key Certificate of the Trusted Platform Module (TPM) that the client provides to be used during initial resource onboarding."
+        }
+      }
+    },
+    "NetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkConfigurationProperties",
+          "description": "Network configuration properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkConfigurationProperties": {
+      "type": "object",
+      "description": "Network configuration properties",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Azure resource tenant Id",
+          "readOnly": true
+        },
+        "networkConfigurationScopeId": {
+          "type": "string",
+          "description": "Associated Network Configuration Scope Id (GUID)"
+        },
+        "networkConfigurationScopeResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Associated Network Configuration Scope Resource Id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/privateLinkScopes"
+              }
+            ]
+          }
+        },
+        "keyProperties": {
+          "$ref": "#/definitions/KeyProperties",
+          "description": "Public key information for client authentication",
+          "readOnly": true
         }
       }
     },

@@ -9,96 +9,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata__deleted": {
-      "get": {
-        "operationId": "HybridIdentityMetadata_ListByMachines",
-        "tags": [
-          "HybridIdentityMetadata"
-        ],
-        "summary": "Implements GET HybridIdentityMetadata in a machine.",
-        "description": "Returns the list of HybridIdentityMetadata of the given machine.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HybridIdentityMetadataList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HybridIdentityMetadataListByVirtualMachines": {
-            "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachines.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}__deleted": {
-      "get": {
-        "operationId": "HybridIdentityMetadata_Get",
-        "tags": [
-          "HybridIdentityMetadata"
-        ],
-        "summary": "Gets HybridIdentityMetadata.",
-        "description": "Implements HybridIdentityMetadata GET method.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          },
-          {
-            "name": "metadataName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HybridIdentityMetadata"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetHybridIdentityMetadata": {
-            "$ref": "./examples/HybridIdentityMetadata_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/{licenseProfileName}__deleted": {
       "get": {
         "operationId": "LicenseProfiles_Get",
@@ -353,141 +263,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current__deleted": {
-      "get": {
-        "operationId": "NetworkConfigurations_Get",
-        "tags": [
-          "NetworkConfigurations"
-        ],
-        "description": "Returns a NetworkConfiguration for the target resource.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NetworkConfiguration"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkConfigurationsGet": {
-            "$ref": "./examples/networkConfiguration/NetworkConfigurationsGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "NetworkConfigurations_CreateOrUpdate",
-        "tags": [
-          "NetworkConfigurations"
-        ],
-        "description": "Create or update the NetworkConfiguration of the target resource.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NetworkConfiguration"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NetworkConfiguration"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NetworkConfiguration"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkConfigurationsCreate": {
-            "$ref": "./examples/networkConfiguration/NetworkConfigurationsCreate.json"
-          },
-          "NetworkConfigurationsUpdate": {
-            "$ref": "./examples/networkConfiguration/NetworkConfigurationsUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "NetworkConfigurations_Update",
-        "tags": [
-          "NetworkConfigurations"
-        ],
-        "description": "Update the endpoint to the target resource.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NetworkConfiguration"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NetworkConfiguration"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkConfigurationsPatch": {
-            "$ref": "./examples/networkConfiguration/NetworkConfigurationsPatch.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default__added": {
@@ -1439,6 +1214,130 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata": {
+      "get__deleted": {
+        "operationId": "HybridIdentityMetadata_ListByMachines",
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "summary": "Implements GET HybridIdentityMetadata in a machine.",
+        "description": "Returns the list of HybridIdentityMetadata of the given machine.",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVirtualMachines": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post__added": {
+        "operationId": "HybridIdentityMetadata_ListByMachines",
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Implements GET HybridIdentityMetadata in a machine.",
+        "description": "Returns the list of HybridIdentityMetadata of the given machine.",
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/HybridIdentityMetadata_Get.json"
+          }
+        },
+        "tags": [
+          [
+            "-",
+            "HybridIdentityMetadata"
+          ],
+          [
+            "+",
+            "Machines"
+          ]
+        ],
+        "parameters": [
+          [
+            "-",
+            {
+              "name": "machineName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 54,
+              "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "machineName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "~",
+            {
+              "pattern__deleted": "^[a-zA-Z0-9-_\\.]{1,54}$"
+            }
+          ]
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/installPatches": {
       "post": {
         "tags": [
@@ -1518,6 +1417,90 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "NetworkConfigurationsGet": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsGet.json"
+          }
+        },
+        "tags": [
+          [
+            "-",
+            "NetworkConfigurations"
+          ],
+          [
+            "+",
+            "NetworkConfigurationsOperationGroup"
+          ]
+        ]
+      },
+      "put": {
+        "x-ms-examples__deleted": {
+          "NetworkConfigurationsCreate": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsCreate.json"
+          },
+          "NetworkConfigurationsUpdate": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsUpdate.json"
+          }
+        },
+        "tags": [
+          [
+            "-",
+            "NetworkConfigurations"
+          ],
+          [
+            "+",
+            "NetworkConfigurationsOperationGroup"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "parameters",
+                "__new": "resource"
+              }
+            }
+          ]
+        ]
+      },
+      "patch": {
+        "x-ms-examples__deleted": {
+          "NetworkConfigurationsPatch": {
+            "$ref": "./examples/networkConfiguration/NetworkConfigurationsPatch.json"
+          }
+        },
+        "tags": [
+          [
+            "-",
+            "NetworkConfigurations"
+          ],
+          [
+            "+",
+            "NetworkConfigurationsOperationGroup"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "parameters",
+                "__new": "properties"
+              }
+            }
+          ]
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands": {
       "get": {
         "parameters": [
@@ -1549,70 +1532,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}": {
-      "patch__deleted": {
-        "operationId": "MachineRunCommands_Update",
-        "tags": [
-          "MachineRunCommands"
-        ],
-        "description": "The operation to update the run command.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
-          },
-          {
-            "name": "runCommandName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
-          },
-          {
-            "name": "runCommandProperties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommandUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/MachineRunCommand"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The URL of the resource used to check the status of the asynchronous operation."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update a Run Command": {
-            "$ref": "./examples/runCommand/RunCommands_Update.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
       "get": {
         "parameters": [
           [
@@ -1669,6 +1588,58 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-schema__added": "#/definitions/MachineRunCommand"
+        }
+      },
+      "patch": {
+        "x-ms-examples__deleted": {
+          "Update a Run Command": {
+            "$ref": "./examples/runCommand/RunCommands_Update.json"
+          }
+        },
+        "description": {
+          "__old": "The operation to update the run command.",
+          "__new": "The operation to update a run command."
+        },
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__added": 1,
+              "maxLength__added": 54,
+              "pattern": {
+                "__old": "[a-zA-Z0-9-_\\.]+",
+                "__new": "^[a-zA-Z0-9-_\\.]{1,54}$"
+              }
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "runCommandProperties",
+                "__new": "properties"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
@@ -1910,108 +1881,6 @@
         "value"
       ]
     },
-    "HybridIdentityMetadata__deleted": {
-      "type": "object",
-      "description": "Defines the HybridIdentityMetadata.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HybridIdentityMetadataProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
-          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
-        }
-      ]
-    },
-    "HybridIdentityMetadataList__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        },
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/HybridIdentityMetadata"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "HybridIdentityMetadataProperties__deleted": {
-      "type": "object",
-      "description": "Defines the resource properties.",
-      "properties": {
-        "vmId": {
-          "type": "string",
-          "description": "The unique identifier for the resource."
-        },
-        "publicKey": {
-          "type": "string",
-          "description": "The Public Key."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Identity",
-          "readOnly": true
-        }
-      }
-    },
-    "KeyDetails__deleted": {
-      "type": "object",
-      "description": "Public key details",
-      "properties": {
-        "publicKey": {
-          "type": "string",
-          "description": "Public key",
-          "readOnly": true
-        },
-        "notAfter": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Key expiration date",
-          "readOnly": true
-        },
-        "renewAfter": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Recommended key renewal date",
-          "readOnly": true
-        }
-      }
-    },
-    "KeyProperties__deleted": {
-      "type": "object",
-      "description": "Public key information for client authentication",
-      "properties": {
-        "clientPublicKey": {
-          "$ref": "#/definitions/KeyDetails",
-          "description": "Current public key details",
-          "readOnly": true
-        },
-        "candidatePublicKey": {
-          "$ref": "#/definitions/KeyDetails",
-          "description": "Candidate public key details",
-          "readOnly": true
-        }
-      }
-    },
     "LicenseProfilesListResult__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -2087,60 +1956,6 @@
           "type": "string",
           "format": "uri",
           "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "NetworkConfiguration__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkConfigurationProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "NetworkConfigurationProperties__deleted": {
-      "type": "object",
-      "description": "Network configuration properties",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Azure resource tenant Id",
-          "readOnly": true
-        },
-        "networkConfigurationScopeId": {
-          "type": "string",
-          "description": "Associated Network Configuration Scope Id (GUID)"
-        },
-        "networkConfigurationScopeResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Associated Network Configuration Scope Resource Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.HybridCompute/privateLinkScopes"
-              }
-            ]
-          }
-        },
-        "keyProperties": {
-          "$ref": "#/definitions/KeyProperties",
-          "description": "Public key information for client authentication",
-          "readOnly": true
         }
       }
     },
@@ -2784,6 +2599,29 @@
         }
       }
     },
+    "HybridIdentityMetadata": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "description__deleted": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+          }
+        ]
+      ]
+    },
+    "HybridIdentityMetadataProperties": {
+      "properties": {
+        "identity": {
+          "description__added": "Identity for the resource."
+        }
+      }
+    },
     "IpAddress": {
       "readOnly__deleted": true,
       "properties": {
@@ -3103,6 +2941,13 @@
         },
         "privateLinkScopeResourceId": {
           "format__added": "arm-id"
+        }
+      }
+    },
+    "NetworkConfiguration": {
+      "properties": {
+        "properties": {
+          "description__added": "Network configuration properties"
         }
       }
     },

@@ -58,6 +58,30 @@ alias MachineOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+alias HybridIdentityMetadataOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the hybrid machine.
+     */
+    @path
+    @segment("machines")
+    machineName: string;
+  },
+  {
+    /**
+     * The id of the HybridIdentityMetadata to get.
+     */
+    @path
+    @segment("hybridIdentityMetadata")
+    metadataName: string;
+  }
+>;
+
 @armResourceOperations
 interface Machines {
   /**
@@ -185,6 +209,26 @@ interface Machines {
     Machine,
     void,
     ArmResponse<PrivateLinkScopeValidationDetails>
+  >;
+
+  /**
+   * Returns the list of HybridIdentityMetadata of the given machine.
+   */
+  @summary("Implements GET HybridIdentityMetadata in a machine.")
+  @action("hybridIdentityMetadata")
+  listByMachines is ArmResourceActionSync<
+    Machine,
+    void,
+    ArmResponse<HybridIdentityMetadataList>
+  >;
+
+  /**
+   * Implements HybridIdentityMetadata GET method.
+   */
+  @summary("Gets HybridIdentityMetadata.")
+  getHybridIdentityMetadata is HybridIdentityMetadataOps.Read<
+    Machine,
+    Response = ArmResponse<HybridIdentityMetadata>
   >;
 }
 

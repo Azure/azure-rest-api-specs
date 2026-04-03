@@ -38,6 +38,15 @@ interface MachineRunCommands {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MachineRunCommand>;
 
   /**
+   * The operation to update a run command.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    MachineRunCommand,
+    PatchModel = MachineRunCommandUpdate
+  >;
+
+  /**
    * The operation to delete a run command.
    */
   delete is ArmResourceDeleteWithoutOkAsync<MachineRunCommand>;
