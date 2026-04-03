@@ -200,4 +200,11 @@ namespace Azure.AI.Projects {
   @@usage(AgentVersionObject, Usage.output);
   @@access(AgentVersionObject, Access.public);
   @@clientName(AgentVersionObject, "ProjectsAgentVersion");
+
+  // --------------------------------------------------------------------------------
+  // Toolboxes sub‐client
+  // --------------------------------------------------------------------------------
+
+  @@clientName(ToolboxObject, "ToolboxRecord");
+  @@clientName(ToolboxVersionObject, "ToolboxVersion");
 }
