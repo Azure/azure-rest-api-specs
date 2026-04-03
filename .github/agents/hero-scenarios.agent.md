@@ -12,6 +12,9 @@ tools:
   github:
     toolsets: [context, repos, pull_requests]
     min-integrity: unapproved
+  bash: ["cat", "echo", "grep", "head", "ls", "pwd", "sort", "tail", "wc"]
+  cache-memory:
+  repo-memory:
 safe-outputs:
   add-comment:
     max: 1
