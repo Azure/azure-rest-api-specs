@@ -70,3 +70,5 @@ namespace Microsoft.Relationships {
   ServiceGroupMemberRelationshipCreateOrUpdate,
   "javascript"
 );
+
+@@clientName(Microsoft.Relationships, "RelationshipsMgmtClient", "python");
