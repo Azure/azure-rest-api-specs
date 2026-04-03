@@ -19,23 +19,17 @@ namespace Azure.AI.Projects;
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Session Files")
-@removed(Versions.v1)
 interface AgentSessionFiles {
-
-  #suppress "@azure-tools/typespec-azure-core/byos" "The file is targeting the per-session files mounted to a foundry agent"
   /**
    * Upload a file to the session sandbox via binary stream.
    * Maximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.
    */
+  #suppress "@azure-tools/typespec-azure-core/byos" "The file is targeting the per-session files mounted to a foundry agent"
   @put
-  @route("/agents/{agent_name}/sessions/{session_id}/files/content")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files/content")
   @extension(
     "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.hosted_agents_v1_preview
-      ],
-    }
+    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
   )
   uploadSessionFile is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
@@ -51,6 +45,7 @@ interface AgentSessionFiles {
 
       /** The binary file content to upload. */
       @header("Content-Type") contentType: "application/octet-stream";
+
       @body content: bytes;
     },
     SessionFileWriteResponse
@@ -60,14 +55,10 @@ interface AgentSessionFiles {
    * Download a file from the session sandbox as a binary stream.
    */
   @get
-  @route("/agents/{agent_name}/sessions/{session_id}/files/content")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files/content")
   @extension(
     "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.hosted_agents_v1_preview
-      ],
-    }
+    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
   )
   downloadSessionFile is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
@@ -89,14 +80,10 @@ interface AgentSessionFiles {
    * Returns only the immediate children of the specified directory (non-recursive).
    */
   @get
-  @route("/agents/{agent_name}/sessions/{session_id}/files")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files")
   @extension(
     "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.hosted_agents_v1_preview
-      ],
-    }
+    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
   )
   listSessionFiles is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
@@ -118,14 +105,10 @@ interface AgentSessionFiles {
    * If `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.
    */
   @delete
-  @route("/agents/{agent_name}/sessions/{session_id}/files")
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/files")
   @extension(
     "x-ms-foundry-meta",
-    #{
-      required_previews: #[
-        AgentDefinitionOptInKeys.hosted_agents_v1_preview
-      ],
-    }
+    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
   )
   deleteSessionFile is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
