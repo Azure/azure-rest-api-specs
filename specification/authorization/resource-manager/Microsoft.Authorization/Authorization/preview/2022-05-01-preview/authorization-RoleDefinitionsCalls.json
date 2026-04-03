@@ -47,47 +47,6 @@
     }
   ],
   "paths": {
-    "/{roleId}": {
-      "get": {
-        "operationId": "RoleDefinitions_GetById",
-        "tags": [
-          "RoleDefinitions"
-        ],
-        "description": "Gets a role definition by ID.",
-        "parameters": [
-          {
-            "name": "roleId",
-            "in": "path",
-            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
-            "required": true,
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RoleDefinition"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get role definition by role ID": {
-            "$ref": "./examples/GetRoleDefinitionByRoleId.json"
-          }
-        }
-      }
-    },
     "/{scope}/providers/Microsoft.Authorization/roleDefinitions": {
       "get": {
         "operationId": "RoleDefinitions_List",
@@ -412,6 +371,49 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/{roleId}?disambiguation_dummy": {
+      "get": {
+        "operationId": "RoleDefinitions_GetById",
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "description": "Gets a role definition by ID.",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get role definition by role ID": {
+            "$ref": "./examples/GetRoleDefinitionByRoleId.json"
+          }
         }
       }
     }

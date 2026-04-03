@@ -83,7 +83,7 @@ interface RoleDefinitionsByIdOperationGroup {
   /**
    * Gets a role definition by ID.
    */
-  @route("/{+roleId}")
+  @route("/{+roleId}?disambiguation_dummy")
   @tag("RoleDefinitions")
   @get
   getById(
