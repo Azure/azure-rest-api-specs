@@ -36,8 +36,9 @@ model UpdateStage {
 
   @doc("""
     Select the members of the stage.
-      * Only key/value pairs with the `=` operator are accepted in the label selector.
-      * If empty or not specified, no Fleet members will be selected for the stage.
+      * If specified without UpdateGroup, one implicit group containing the selected members will be created.
+      * If specified with UpdateGroup, members will be pre-filtered before group-level selection logic is applied.
+      * If not specified, group-level selection logic will be used.
     """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_05_01_preview)
@@ -157,8 +158,8 @@ model UpdateGroup {
 
   @doc("""
     Select the members of the group.
-      * Only key/value pairs with the `=` operator are accepted in the label selector.
-      * If empty or not specified, no Fleet members will be selected for the group.
+      * If specified, label-based selection will override group name based selection.
+      * If not specified, group name based selection will be used.
     """)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_05_01_preview)

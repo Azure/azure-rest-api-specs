@@ -5790,7 +5790,7 @@
         },
         "memberSelector": {
           "$ref": "#/definitions/MemberSelector",
-          "description": "Select the members of the group.\n  * Only key/value pairs with the `=` operator are accepted in the label selector.\n  * If empty or not specified, no Fleet members will be selected for the group.",
+          "description": "Select the members of the group.\n  * If specified, label-based selection will override group name based selection.\n  * If not specified, group name based selection will be used.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6141,7 +6141,7 @@
         },
         "memberSelector": {
           "$ref": "#/definitions/MemberSelector",
-          "description": "Select the members of the stage.\n  * Only key/value pairs with the `=` operator are accepted in the label selector.\n  * If empty or not specified, no Fleet members will be selected for the stage.",
+          "description": "Select the members of the stage.\n  * If specified without UpdateGroup, one implicit group containing the selected members will be created.\n  * If specified with UpdateGroup, members will be pre-filtered before group-level selection logic is applied.\n  * If not specified, group-level selection logic will be used.",
           "x-ms-mutability": [
             "read",
             "create"
