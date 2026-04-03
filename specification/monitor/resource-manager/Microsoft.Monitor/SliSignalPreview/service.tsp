@@ -15,6 +15,6 @@ namespace Microsoft.Monitor;
 
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @doc("API Version 2025-03-01")
+  @doc("API Version 2025-03-01-preview")
   v2025_03_01_preview: "2025-03-01-preview",
 }

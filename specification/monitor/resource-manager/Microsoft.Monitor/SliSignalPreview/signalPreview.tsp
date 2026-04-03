@@ -15,16 +15,16 @@ namespace Microsoft.Monitor;
 @doc("Defines the available preview types for signal preview.")
 union PreviewType {
   @doc("Preview for good signal.")
-  GoodSignal: "goodsignal",
+  GoodSignal: "GoodSignal",
 
   @doc("Preview for total signal.")
-  TotalSignal: "totalsignal",
+  TotalSignal: "TotalSignal",
 
   @doc("Preview for signal.")
-  Signal: "signal",
+  Signal: "Signal",
 
   @doc("Preview for SLO evaluation.")
-  Slo: "slo",
+  Slo: "Slo",
 
   string,
 }
@@ -89,11 +89,7 @@ interface SloView {
   @action("providers/Microsoft.Monitor/sliSignalPreview")
   @doc("Returns preview data for the signal.")
   sliSignalPreview(
-    @path
-    @pattern("^[A-Za-z0-9._()~-]{1,250}$")
-    @doc("The name of the service group.")
-    serviceGroupName: string,
-
+    ...ServiceGroupBaseParameters,
     ...Azure.ResourceManager.ApiVersionParameter,
 
     @body

@@ -6,6 +6,21 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.Monitor;
 
+@doc("Defines the properties of an SLI.")
+model SliProperties {
+  @doc("Represents good signals used in request-based SLI calculations.")
+  goodSignals?: Signal;
+
+  @doc("Represents total signals used in request-based SLI calculations.")
+  totalSignals?: Signal;
+
+  @doc("Signals used for window-based SLI calculations.")
+  signals?: Signal;
+
+  @doc("Defines the uptime criteria for window-based SLIs.")
+  windowUptimeCriteria?: WindowUptimeCriteria;
+}
+
 @doc("Represents a signal model used in SLI calculations.")
 model Signal {
   @doc("Sources of metrics used for SLIs.")
@@ -71,16 +86,16 @@ model Condition {
 @doc("Defines scalar functions used in filtering.")
 union ScalarFunction {
   @doc("Maximum value.")
-  "max",
+  Max: "max",
 
   @doc("Minimum value.")
-  "min",
+  Min: "min",
 
   @doc("Average value.")
-  "avg",
+  Avg: "avg",
 
   @doc("Summation.")
-  "sum",
+  Sum: "sum",
 
   string,
 }
@@ -88,16 +103,16 @@ union ScalarFunction {
 @doc("Defines the available sampling types.")
 union SamplingType {
   @doc("Maximum value.")
-  "max",
+  Max: "max",
 
   @doc("Minimum value.")
-  "min",
+  Min: "min",
 
   @doc("Average value.")
-  "avg",
+  Avg: "avg",
 
   @doc("Summation.")
-  "sum",
+  Sum: "sum",
 
   string,
 }
@@ -152,7 +167,7 @@ model SpatialAggregation {
   dimensions: string[];
 }
 
-@doc("Defines the available aggregation types.")
+@doc("Defines the available temporal aggregation types for aggregating measurements over a specific time window within the same time series.")
 union TemporalAggregationType {
   @doc("Average value.")
   "Average",
@@ -184,7 +199,7 @@ union TemporalAggregationType {
   string,
 }
 
-@doc("Defines the available aggregation types.")
+@doc("Defines the available spatial aggregation types for aggregating measurements across multiple time series.")
 union SpatialAggregationType {
   @doc("Average value.")
   "Average",
