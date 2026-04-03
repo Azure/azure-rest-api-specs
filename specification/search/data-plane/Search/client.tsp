@@ -485,6 +485,25 @@ namespace KnowledgeBaseRetrievalClient {
   "csharp"
 );
 @@access(SearchDocumentsResult, Access.internal, "csharp");
+@@access(SearchDocumentsResult, Access.internal, "python");
+@@access(DebugInfo, Access.internal, "python");
+@@access(AutocompleteMode, Access.public, "python");
+@@access(IndexActionType, Access.public, "python");
+@@access(QueryAnswerType, Access.public, "python");
+@@access(QueryCaptionType, Access.public, "python");
+@@access(QueryDebugMode, Access.public, "python");
+@@access(QueryType, Access.public, "python");
+@@access(ScoringStatistics, Access.public, "python");
+@@access(SearchMode, Access.public, "python");
+@@access(SemanticErrorMode, Access.public, "python");
+@@access(SemanticSearchResultsType, Access.public, "python");
+@@access(VectorFilterMode, Access.public, "python");
+@@access(VectorQuery, Access.public, "python");
+@@access(VectorizedQuery, Access.public, "python");
+@@access(VectorizableImageBinaryQuery, Access.public, "python");
+@@access(VectorizableImageUrlQuery, Access.public, "python");
+@@access(VectorizableTextQuery, Access.public, "python");
+@@access(VectorQueryKind, Access.public, "python");
 @@access(SearchResult, Access.internal, "csharp");
 @@access(SuggestDocumentsResult, Access.internal, "csharp");
 @@access(SuggestResult, Access.internal, "csharp");
@@ -974,8 +993,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientName(Search.OcrSkillLanguage.`is`, "IsEnum", "python");
-@@clientName(Search.ScoringStatistics.Global, "GlobalEnum", "python");
 @@clientNamespace(Search.OcrLineEnding, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.OcrLineEnding,
   "com.azure.search.documents.indexes",
@@ -1029,7 +1046,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientName(Search.SplitSkillLanguage.`is`, "IsEnum", "python");
 @@clientNamespace(Search.TextSplitMode, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.TextSplitMode,
   "com.azure.search.documents.indexes",
@@ -1061,7 +1077,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientName(Search.TextTranslationSkillLanguage.`is`, "IsEnum", "python");
 @@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputMode,
   "Azure.Search.Documents.Indexes"
 );
@@ -2786,6 +2801,7 @@ namespace KnowledgeBaseRetrievalClient {
   "maxStoragePerIndexInBytes"
 );
 @@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "csharp");
+@@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "python");
 @@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
 @@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
 @@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip");
@@ -3134,6 +3150,18 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
   "OpenAIClipImageTextEmbeddingsViTLargePatch14336",
   "javascript"
+);
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+  "OpenAiClipImageTextEmbeddingsVitLargePatch14_336",
+  "python"
+);
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
+  "FacebookDinoV2ImageEmbeddingsVitBase",
+  "python"
+);
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
+  "FacebookDinoV2ImageEmbeddingsVitGiant",
+  "python"
 );
 @@alternateType(Search.SearchOptions.select, string, "javascript");
 @@alternateType(Search.SearchOptions.orderBy, string, "javascript");
