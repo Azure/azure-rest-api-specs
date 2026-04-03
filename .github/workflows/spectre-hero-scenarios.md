@@ -2,8 +2,8 @@
 on:
   pull_request_target:
     types: [labeled]
-labels: [spec-architecture-review-needed]
-if: github.event.label.name == 'spec-architecture-review-needed'
+labels: [hero-scenarios-needed]
+if: github.event.label.name == 'hero-scenarios-needed'
 description: "Spectre Hero Scenarios: Suggest a service README with hero scenarios for API specifications"
 permissions:
   contents: read
