@@ -6,7 +6,7 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-alias ToolboxesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.toolbox_v1_preview>;
+alias ToolboxesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.toolboxes_v1_preview>;
 
 @tag("Toolboxes")
 interface Toolboxes {

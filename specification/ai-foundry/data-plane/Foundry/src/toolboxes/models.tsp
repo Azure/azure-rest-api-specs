@@ -8,7 +8,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const ToolboxesRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.toolbox_v1_preview],
+  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
 };
 
 union ToolboxObjectType {
