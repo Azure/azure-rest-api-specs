@@ -176,6 +176,7 @@ using Microsoft.DBforPostgreSQL;
   "csharp"
 );
 
+// TODO: This workaround can be removed once https://github.com/Azure/azure-sdk-for-net/issues/57770 is resolved.
 /**
  * Resource type used for name availability verification.
  */
