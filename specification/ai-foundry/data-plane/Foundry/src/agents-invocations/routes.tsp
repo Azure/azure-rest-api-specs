@@ -20,8 +20,6 @@ interface AgentInvocations {
    * Retrieves the OpenAPI specification for an agent version's invocation contract.
    * Returns 404 if the agent does not expose an OpenAPI specification.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
-  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "404 is required to indicate OpenAPI spec is not provided"
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/openapi.json")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
@@ -42,7 +40,6 @@ interface AgentInvocations {
   /**
    * Creates an invocation for the specified agent version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/invocations")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
@@ -82,7 +79,6 @@ interface AgentInvocations {
    * Retrieves the invocation with the given ID.
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
@@ -110,7 +106,6 @@ interface AgentInvocations {
    * Cancels an invocation.
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}/cancel")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
