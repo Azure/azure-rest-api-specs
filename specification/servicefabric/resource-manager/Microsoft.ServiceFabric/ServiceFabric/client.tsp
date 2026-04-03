@@ -135,7 +135,6 @@ using Microsoft.ServiceFabric;
 
 // Type overrides for BinaryData properties (old API used System.BinaryData for thumbprints)
 @@alternateType(Microsoft.ServiceFabric.CertificateDescription.thumbprint, bytes, "csharp");
-@@alternateType(Microsoft.ServiceFabric.CertificateDescription.thumbprintSecondary, bytes, "csharp");
 @@alternateType(Microsoft.ServiceFabric.ClientCertificateCommonName.certificateIssuerThumbprint, bytes, "csharp");
 @@alternateType(Microsoft.ServiceFabric.ClientCertificateThumbprint.certificateThumbprint, bytes, "csharp");
 @@alternateType(Microsoft.ServiceFabric.ServerCertificateCommonName.certificateIssuerThumbprint, bytes, "csharp");
