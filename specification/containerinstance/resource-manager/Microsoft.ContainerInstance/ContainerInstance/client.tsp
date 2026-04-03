@@ -125,13 +125,56 @@ using Microsoft.ContainerInstance;
   "NGroupRollingUpdateProfile",
   "csharp"
 );
+@@clientName(FileShareProperties,
+  "ContainerGroupFileShareProperties",
+  "csharp"
+);
+@@clientName(IdentityAccessControl,
+  "ContainerGroupIdentityAccessControl",
+  "csharp"
+);
+@@clientName(SecurityContextCapabilitiesDefinition,
+  "ContainerSecurityContextCapabilitiesDefinition",
+  "csharp"
+);
+@@clientName(UsageName, "ContainerInstanceUsageName", "csharp");
+@@clientName(IdentityAccessLevel,
+  "ContainerGroupIdentityAccessLevel",
+  "csharp"
+);
 
 // C# rename for ARM common Resource — avoids duplicate-client-name with local Resource model
-@@clientName(Azure.ResourceManager.CommonTypes.Resource, "ArmResource", "csharp");
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "csharp"
+);
 
 // C# resource hierarchy: restore TrackedResourceData inheritance
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@Legacy.hierarchyBuilding(ContainerGroup,
   Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(ContainerGroupProfile,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(NGroup,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
+
+// C# property type overrides: restore old SDK types for backward compatibility
+@@alternateType(ContainerAttachResponse.webSocketUri, url, "csharp");
+@@alternateType(ContainerExecResponse.webSocketUri, url, "csharp");
+@@alternateType(Capabilities.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(LogAnalytics.workspaceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ContainerGroupSubnetId.id,
+  Azure.Core.armResourceIdentifier,
   "csharp"
 );
