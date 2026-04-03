@@ -38,3 +38,13 @@ using ComputeDisk;
 @@clientName(PublicNetworkAccess, "DiskPublicNetworkAccess", "csharp");
 @@clientName(EncryptionSettingsCollection, "EncryptionSettingsGroup", "csharp");
 @@clientName(Encryption, "DiskEncryption", "csharp");
+
+// ARM resource renames for backward compatibility
+// Disk → ManagedDisk (old: ManagedDiskResource, ManagedDiskData, ManagedDiskCollection)
+@@clientName(Disk, "ManagedDisk", "csharp");
+
+// PrivateEndpointConnection → ComputePrivateEndpointConnection (old RP-prefix convention)
+@@clientName(PrivateEndpointConnection,
+  "ComputePrivateEndpointConnection",
+  "csharp"
+);

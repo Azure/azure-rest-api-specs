@@ -489,3 +489,20 @@ using Compute;
   "VirtualMachineScaleSetRollingUpgradeProperties",
   "csharp"
 );
+
+// ── ARM resource renames for backward compatibility ──
+
+// Image → DiskImage (old: DiskImageResource, DiskImageData, DiskImageCollection)
+@@clientName(Image, "DiskImage", "csharp");
+
+// RestorePointCollection → RestorePointGroup (old: RestorePointGroupResource, RestorePointGroupData)
+@@clientName(RestorePointCollection, "RestorePointGroup", "csharp");
+
+// SshPublicKeyResource → SshPublicKey (old: SshPublicKeyResource, SshPublicKeyData, SshPublicKeyCollection)
+@@clientName(SshPublicKeyResource, "SshPublicKey", "csharp");
+
+// VirtualMachineScaleSetVMRunCommands interface → Vm casing (old: VirtualMachineScaleSetVmRunCommandResource)
+@@clientName(VirtualMachineScaleSetVMRunCommands,
+  "VirtualMachineScaleSetVmRunCommands",
+  "csharp"
+);
