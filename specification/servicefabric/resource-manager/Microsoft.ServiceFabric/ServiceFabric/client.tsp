@@ -31,17 +31,19 @@ using Microsoft.ServiceFabric;
 );
 
 // C# renames to preserve backward compatibility with autorest-generated SDK
-// NOTE: Resource type renames were previously blocked by a generator bug where
+// NOTE: Resource type renames are SKIPPED for now due to a generator bug where
 // @@clientName on resource models extending custom @customAzureResource ProxyResource
-// caused the generator to produce empty stub Resource classes. Retesting with
-// emitter 1.0.0-alpha.20260402.2.
+// causes the generator to produce empty stub Resource classes (missing ResourceType,
+// Data, constructors, and all operations). This is a known issue to revisit once
+// the generator is fixed. The old API used "ServiceFabric" prefix on all resource
+// types (e.g., ServiceFabricClusterResource, ServiceFabricApplicationResource).
 // See: https://github.com/Azure/azure-sdk-for-net/issues/55604
-
-@@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
-@@clientName(Microsoft.ServiceFabric.ApplicationResource, "ServiceFabricApplication", "csharp");
-@@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
-@@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
-@@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
+//
+// @@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ApplicationResource, "ServiceFabricApplication", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
 // @@clientName(Microsoft.ServiceFabric.VMSizeResource, "ServiceFabricVmSizeResource", "csharp");
 
 // Model type renames
