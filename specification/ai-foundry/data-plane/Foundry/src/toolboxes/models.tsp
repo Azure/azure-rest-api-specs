@@ -11,13 +11,6 @@ const ToolboxesRequiredPreviews = #{
   conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
 };
 
-union ToolboxObjectType {
-  toolbox: "toolbox",
-  toolboxVersion: "toolbox.version",
-  toolboxDeleted: "toolbox.deleted",
-  toolboxVersionDeleted: "toolbox.version.deleted",
-}
-
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
   @doc("Responsible AI content filtering configuration.")
@@ -26,9 +19,6 @@ model ToolboxPolicies {
 
 @doc("A toolbox that stores reusable tool definitions for agents.")
 model ToolboxObject {
-  @doc("The object type, which is always 'toolbox'.")
-  object: ToolboxObjectType.toolbox;
-
   @doc("The unique identifier of the toolbox.")
   id: string;
 
@@ -43,9 +33,6 @@ model ToolboxObject {
 @doc("A specific version of a toolbox.")
 model ToolboxVersionObject {
   ...MetadataPropertyForResponse;
-
-  @doc("The object type, which is always 'toolbox.version'.")
-  object: ToolboxObjectType.toolboxVersion;
 
   @doc("The unique identifier of the toolbox version.")
   id: string;
@@ -70,33 +57,6 @@ model ToolboxVersionObject {
 
   @doc("Policy configuration for the toolbox version.")
   policies?: ToolboxPolicies;
-}
-
-@doc("Response returned when a toolbox is deleted.")
-model DeleteToolboxResponse {
-  @doc("The object type. Always 'toolbox.deleted'.")
-  object: ToolboxObjectType.toolboxDeleted;
-
-  @doc("The name of the toolbox.")
-  name: string;
-
-  @doc("Whether the toolbox was successfully deleted.")
-  deleted: boolean;
-}
-
-@doc("Response returned when a toolbox version is deleted.")
-model DeleteToolboxVersionResponse {
-  @doc("The object type. Always 'toolbox.version.deleted'.")
-  object: ToolboxObjectType.toolboxVersionDeleted;
-
-  @doc("The name of the toolbox.")
-  name: string;
-
-  @doc("The version identifier that was deleted.")
-  version: string;
-
-  @doc("Whether the version was successfully deleted.")
-  deleted: boolean;
 }
 
 alias CreateToolboxVersionRequest = {

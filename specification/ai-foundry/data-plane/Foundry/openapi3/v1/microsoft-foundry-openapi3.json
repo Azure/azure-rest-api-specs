@@ -7937,15 +7937,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteToolboxResponse"
-                }
-              }
-            }
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -8338,15 +8331,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteToolboxVersionResponse"
-                }
-              }
-            }
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -11388,63 +11374,6 @@
           }
         },
         "description": "The result of a delete response operation."
-      },
-      "DeleteToolboxResponse": {
-        "type": "object",
-        "required": [
-          "object",
-          "name",
-          "deleted"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "toolbox.deleted"
-            ],
-            "description": "The object type. Always 'toolbox.deleted'."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the toolbox."
-          },
-          "deleted": {
-            "type": "boolean",
-            "description": "Whether the toolbox was successfully deleted."
-          }
-        },
-        "description": "Response returned when a toolbox is deleted."
-      },
-      "DeleteToolboxVersionResponse": {
-        "type": "object",
-        "required": [
-          "object",
-          "name",
-          "version",
-          "deleted"
-        ],
-        "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "toolbox.version.deleted"
-            ],
-            "description": "The object type. Always 'toolbox.version.deleted'."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the toolbox."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version identifier that was deleted."
-          },
-          "deleted": {
-            "type": "boolean",
-            "description": "Whether the version was successfully deleted."
-          }
-        },
-        "description": "Response returned when a toolbox version is deleted."
       },
       "Deployment": {
         "type": "object",
@@ -36175,19 +36104,11 @@
       "ToolboxObject": {
         "type": "object",
         "required": [
-          "object",
           "id",
           "name",
           "default_version"
         ],
         "properties": {
-          "object": {
-            "type": "string",
-            "enum": [
-              "toolbox"
-            ],
-            "description": "The object type, which is always 'toolbox'."
-          },
           "id": {
             "type": "string",
             "description": "The unique identifier of the toolbox."
@@ -36222,7 +36143,6 @@
         "type": "object",
         "required": [
           "metadata",
-          "object",
           "id",
           "name",
           "version",
@@ -36238,13 +36158,6 @@
             "nullable": true,
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
             "x-oaiTypeLabel": "map"
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "toolbox.version"
-            ],
-            "description": "The object type, which is always 'toolbox.version'."
           },
           "id": {
             "type": "string",

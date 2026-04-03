@@ -90,7 +90,7 @@ interface Toolboxes {
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   deleteToolbox is FoundryDataPlaneOperation<
     DeleteToolboxRequest & ToolboxesPreviewHeader,
-    DeleteToolboxResponse
+    void
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -101,6 +101,6 @@ interface Toolboxes {
   @extension("x-ms-foundry-meta", ToolboxesRequiredPreviews)
   deleteToolboxVersion is FoundryDataPlaneOperation<
     DeleteToolboxVersionRequest & ToolboxesPreviewHeader,
-    DeleteToolboxVersionResponse
+    void
   >;
 }
