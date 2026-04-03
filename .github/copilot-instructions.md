@@ -11,7 +11,15 @@ Refer to [language-emitter.instructions.md](./instructions/language-emitter.inst
 
 # SDK customization and build failure resolution
 
-Refer `generate-sdk-locally` skill in `.github/skills/generate-sdk-locally/SKILL.md` to resolve any prompts about TypeSpec customization or SDK generation failures. This includes fixing build errors, applying TypeSpec decorators, resolving breaking changes, renaming SDK clients or models, hiding operations, and fixing analyzer errors.
+Refer `generate-sdk-locally` skill in `.github/skills/generate-sdk-locally/SKILL.md` to check:
+- If SDK generation or SDK build fails
+- If user explicitly asks to fix TypeSpec to resolve SDK errors
+- If user asks to customize TypeSpec for SDK generation
+- If user asks to rename, hide, or restructure SDK clients or models
+- If user asks to fix breaking changes, compilation errors, or analyzer errors
+- If user says "fix the errors on this PR" and the errors are related to TypeSpec or SDK generation
+
+You **must** invoke this skill and use `azure-sdk-mcp:azsdk_customized_code_update` instead of making manual code edits when the errors are related to TypeSpec customization or SDK build failures.
 
 # SDK generation from TypeSpec
 

@@ -2,14 +2,22 @@
 name: generate-sdk-locally
 license: MIT
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   distribution: shared
-description: "Generate, build, and test Azure SDKs locally from TypeSpec, with automatic customization to resolve build errors and apply SDK changes. **UTILITY SKILL**. USE FOR: \"generate SDK locally\", \"build SDK\", \"run SDK tests\", \"update changelog\", \"fix SDK build errors\", \"fix breaking changes\", \"resolve SDK generation errors\", \"customize TypeSpec\", \"apply TypeSpec customization\", \"rename SDK client\", \"rename SDK model\", \"hide operation from SDK\", \"fix analyzer errors\", \"fix compilation errors\", \"resolve customization drift\", \"create subclient\", \"apply client.tsp changes\". DO NOT USE FOR: publishing to package registries, CI pipeline configuration, API design review. INVOKES: azure-sdk-mcp:azsdk_package_generate_code, azure-sdk-mcp:azsdk_package_build_code, azure-sdk-mcp:azsdk_package_run_tests, azure-sdk-mcp:azsdk_customized_code_update."
+description: "Generate, build, and test Azure SDKs locally from TypeSpec, with automatic customization to resolve build errors and apply SDK changes. **UTILITY SKILL**. USE FOR: \"generate SDK locally\", \"build SDK\", \"run SDK tests\", \"update changelog\", \"fix SDK build errors\", \"fix breaking changes\", \"resolve SDK generation errors\", \"customize TypeSpec\", \"apply TypeSpec customization\", \"rename SDK client\", \"rename SDK model\", \"hide operation from SDK\", \"fix analyzer errors\", \"fix compilation errors\", \"resolve customization drift\", \"create subclient\", \"apply client.tsp changes\", \"fix the errors on this PR\", \"fix SDK generation errors\", \"fix TypeSpec errors\". DO NOT USE FOR: publishing to package registries, CI pipeline configuration, API design review. INVOKES: azure-sdk-mcp:azsdk_package_generate_code, azure-sdk-mcp:azsdk_package_build_code, azure-sdk-mcp:azsdk_package_run_tests, azure-sdk-mcp:azsdk_customized_code_update."
 compatibility:
   requires: "azure-sdk-mcp server, local azure-sdk-for-{language} clone, language build tools"
 ---
 
 # Generate SDK Locally
+
+Refer this skill to check:
+- If SDK generation or SDK build fails
+- If user explicitly asks to fix TypeSpec to resolve SDK errors
+- If user asks to customize TypeSpec for SDK generation
+- If user asks to rename, hide, or restructure SDK clients or models
+- If user asks to fix breaking changes, compilation errors, or analyzer errors
+- If user says "fix the errors on this PR" and the errors are related to TypeSpec or SDK generation
 
 ## MCP Tools
 
