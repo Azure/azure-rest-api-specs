@@ -1,0 +1,18 @@
+id: 002003-ARM-define-full-update-operation
+name: "ARM: Define PATCH operation correctly"
+description: |
+  Test defining a correct PATCH update operation using ArmCustomPatchAsync instead of ArmResourcePatchAsync.
+  Based on benchmark case 002003-ARM-define-full-update-operation.
+tags:
+  - arm
+  - operations
+inputs:
+  prompt: "Define a PATCH operation for Employees. It is to update properties of an employee. Ensure the definition meets TypeSpec Azure guidelines."
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"
