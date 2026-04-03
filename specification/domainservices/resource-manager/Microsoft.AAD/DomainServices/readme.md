@@ -35,8 +35,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - preview/2025-10-01-preview/domainservices.json
-  - preview/2025-10-01-preview/oucontainer.json
+  - preview/2025-10-01-preview/openapi.json
 ```
 
 ### Tag: package-preview-2025-06-01
@@ -45,7 +44,8 @@ These settings apply only when `--tag=package-preview-2025-06-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-06-01'
 input-file:
-  - preview/2025-06-01/openapi.json
+  - preview/2025-06-01/domainservices.json
+  - preview/2025-06-01/oucontainer.json
 ```
 
 ### Tag: package-preview-2025-05-01
