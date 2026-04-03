@@ -1602,6 +1602,12 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+
+@@clientName(Search.AzureBlobKnowledgeSourceParameters.isADLSGen2,
+  "adlsGen2",
+  "java"
+);
+
 @@clientNamespace(Search.IndexedOneLakeKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
@@ -2813,6 +2819,14 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchServiceCounters.synonymMaps, "synonymMapCounter");
 @@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter");
 @@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter");
+@@clientName(SearchServiceCounters.vectorIndexSize,
+  "vectorIndexSizeInBytes",
+  "java"
+);
+@@clientName(GetIndexStatisticsResult.vectorIndexSize,
+  "vectorIndexSizeInBytes",
+  "java"
+);
 @@clientName(SearchServiceLimits.maxStoragePerIndex,
   "maxStoragePerIndexInBytes"
 );
@@ -2871,10 +2885,13 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(PIIDetectionSkill.maskingCharacter, "mask");
 @@clientName(ListAliasesResult.value, "aliases");
 @@clientName(AMLParameters.uri, "scoringUri");
+@@clientName(AMLParameters.uri, "scoringUrl", "java");
 @@clientName(AMLParameters.key, "authenticationKey");
 @@clientName(AMLVectorizer.amlParameters, "AMLParameters");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUri");
+@@clientName(AzureMachineLearningSkill.uri, "scoringUrl", "java");
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
+@@clientName(ChatCompletionSkill.uri, "url", "java");
 @@clientName(SkillNames.skillNames, "skillNameList", "csharp");
 @@clientName(AMLParameters, "AzureMachineLearningParameters");
 @@clientName(AMLVectorizer, "AzureMachineLearningVectorizer");
@@ -3171,13 +3188,33 @@ namespace KnowledgeBaseRetrievalClient {
   "OpenAiClipImageTextEmbeddingsVitLargePatch14_336",
   "python"
 );
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+  "VIT_LARGE",
+  "java"
+);
 @@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
   "FacebookDinoV2ImageEmbeddingsVitBase",
   "python"
 );
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
+  "VIT_BASE",
+  "java"
+);
 @@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
   "FacebookDinoV2ImageEmbeddingsVitGiant",
   "python"
+);
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
+  "VIT_GIANT",
+  "java"
+);
+@@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3English,
+  "V3_ENGLISH",
+  "java"
+);
+@@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3Multilingual,
+  "V3_MULTILINGUAL",
+  "java"
 );
 @@alternateType(Search.SearchOptions.select, string, "javascript");
 @@alternateType(Search.SearchOptions.orderBy, string, "javascript");
@@ -3222,6 +3259,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
   "Azure.Search.Documents.KnowledgeBases"
 );
+
+@@clientName(Search.KnowledgeBaseRetrievalRequest,
+  "KnowledgeBaseRetrievalOptions",
+  "java"
+);
 @@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
   "com.azure.search.documents.knowledgebases",
   "java"
@@ -3229,6 +3271,12 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
   "Azure.Search.Documents.KnowledgeBases"
 );
+
+@@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
+  "KnowledgeBaseRetrievalResult",
+  "java"
+);
+
 @@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
   "com.azure.search.documents.knowledgebases",
   "java"
@@ -3583,6 +3631,12 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebases",
   "java"
 );
+
+@@clientName(Search.KnowledgeBaseIndexedSharePointReference.docUrl,
+  "documentUrl",
+  "java"
+);
+
 @@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
@@ -3590,6 +3644,12 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebases",
   "java"
 );
+
+@@clientName(Search.KnowledgeBaseIndexedOneLakeReference.docUrl,
+  "documentUrl",
+  "java"
+);
+
 @@clientNamespace(Search.KnowledgeBaseWebReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
