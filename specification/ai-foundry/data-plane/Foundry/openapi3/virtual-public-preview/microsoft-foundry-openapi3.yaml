@@ -5,6 +5,7 @@ info:
 tags:
   - name: Agents
   - name: Agent Containers
+  - name: Agent Invocations
   - name: Connections
   - name: Datasets
   - name: Deployments
@@ -1196,6 +1197,252 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
+  /agents/{agent_name}/versions/{agent_version}/invocations:
+    post:
+      operationId: AgentInvocations_createAgentInvocation
+      description: Creates an invocation for the specified agent version.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: query
+          required: false
+          description: Optional session ID to group related invocations. If not provided, a new session ID will be auto-generated.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-agent-invocation-id:
+              required: true
+              description: Unique identifier for this invocation.
+              schema:
+                type: string
+            x-agent-session-id:
+              required: true
+              description: Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
+          content:
+            '*/*':
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations
+      requestBody:
+        required: true
+        content:
+          '*/*':
+            schema: {}
+        description: The request body.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+  /agents/{agent_name}/versions/{agent_version}/invocations/docs/openapi.json:
+    get:
+      operationId: AgentInvocations_getAgentInvocationOpenApiSpec
+      description: |-
+        Retrieves the OpenAPI specification for an agent version's invocation contract.
+        Returns 404 if the agent does not expose an OpenAPI specification.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+  /agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}:
+    get:
+      operationId: AgentInvocations_getAgentInvocation
+      description: |-
+        Retrieves the invocation with the given ID.
+        Returns 404 if the agent does not support this operation or if the invocation ID is not found.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: invocation_id
+          in: path
+          required: true
+          description: The unique identifier of the invocation.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            '*/*':
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
+  /agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}/cancel:
+    post:
+      operationId: AgentInvocations_cancelAgentInvocation
+      description: |-
+        Cancels an invocation.
+        Returns 404 if the agent does not support this operation or if the invocation ID is not found.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_version
+          in: path
+          required: true
+          description: The version of the agent.
+          schema:
+            type: string
+        - name: invocation_id
+          in: path
+          required: true
+          description: The unique identifier of the invocation to cancel.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            '*/*':
+              schema: {}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations
+      requestBody:
+        required: false
+        content:
+          '*/*':
+            schema: {}
+        description: Optional request body.
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
   /agents/{agent_name}/versions:import:
     post:
       operationId: Agents_createAgentVersionFromManifest
@@ -9954,6 +10201,8 @@ components:
           example:
             - protocol: responses
               version: v0.1.1
+            - protocol: invocations
+              version: v0.0.1
             - protocol: a2a
               version: v0.3.0
         cpu:
