@@ -1,0 +1,32 @@
+---
+on:
+  pull_request_target:
+    types: [labeled]
+labels: [hero-scenarios-needed]
+if: github.event.label.name == 'hero-scenarios-needed'
+description: "Hero Scenarios: Suggest a service README with hero scenarios for API specifications"
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
+tools:
+  github:
+    toolsets: [context, repos, pull_requests]
+    min-integrity: unapproved
+  bash: true
+safe-outputs:
+  messages:
+    footer: "> 📖 *Suggested by [{workflow_name}]({run_url})*"
+    run-started: "📖 [{workflow_name}]({run_url}) is generating hero scenarios for this PR…"
+    run-success: "📖 [{workflow_name}]({run_url}) posted a README suggestion. ✅"
+    run-failure: "📖 [{workflow_name}]({run_url}) {status}. ❌"
+timeout-minutes: 10
+
+---
+
+# Hero Scenario Suggestion
+
+Review pull request #${{ github.event.pull_request.number }} and suggest
+a service README with hero scenarios based on the API surface changed.
+
+Follow the procedure in [hero-scenarios-guidelines.md](../prompts/hero-scenarios-guidelines.md).
