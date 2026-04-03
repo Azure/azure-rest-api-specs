@@ -36,6 +36,7 @@ interface ExtensionTypeOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionType_List")
   @autoRoute
+  @list
   @get
   @action("extensionTypes")
   list is ArmProviderActionSync<
@@ -61,6 +62,7 @@ interface ExtensionPublisherOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionPublisher_List")
   @autoRoute
+  @list
   @get
   @action("publishers")
   list is ArmProviderActionSync<
@@ -89,4 +91,45 @@ interface PrivateLinkScopesOperationGroup {
     @path
     privateLinkScopeId: string,
   ): ArmResponse<PrivateLinkScopeValidationDetails> | ErrorResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface AgentVersionsOperationGroup {
+  /**
+   * Gets all agent versions based on location and publisher
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AgentVersion_List")
+  @autoRoute
+  @list
+  @get
+  @action("agentVersions")
+  list is ArmProviderActionSync<
+    Response = AgentVersionsList,
+    Parameters = {
+      /**
+       * The publisher of the agent version being received.
+       */
+      @path
+      @segment("osType")
+      osType: string;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AgentVersion_Get")
+  @route("/providers/Microsoft.HybridCompute/osType/{osType}/agentVersions/{version}")
+  @get
+  get(
+    /**
+     * The id (Guid) of the Azure Arc PrivateLinkScope resource.
+     */
+    @path
+    @segment("osType")
+    osType: string,
+
+    @path
+    @segment("agentVersions")
+    version: string,
+  ): ArmResponse<AgentVersion> | ErrorResponse;
 }

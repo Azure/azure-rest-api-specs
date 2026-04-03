@@ -1,0 +1,6073 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridComputeManagementClient",
+    "version": "2025-09-16-preview",
+    "description": "The Hybrid Compute Management Client."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/microsoft.HybridCompute/locations/{location}/publishers": {
+      "get": {
+        "operationId": "ExtensionPublisher_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExtensionPublisherListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a list of extension publishers": {
+            "$ref": "./examples/extension/ExtensionPublisher_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes": {
+      "get": {
+        "operationId": "ExtensionType_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "publisher",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a list of extension types": {
+            "$ref": "./examples/extension/ExtensionType_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions": {
+      "get": {
+        "operationId": "ExtensionMetadataV2_List",
+        "tags": [
+          "ExtensionValueV2s"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "publisher",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValueListResultV2"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a list of extension metadata": {
+            "$ref": "./examples/extension/ExtensionMetadataV2_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}": {
+      "get": {
+        "operationId": "ExtensionMetadataV2_Get",
+        "tags": [
+          "ExtensionValueV2s"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "publisher",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValueV2"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET an extension metadata": {
+            "$ref": "./examples/extension/ExtensionMetadataV2_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/microsoft.HybridCompute/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Hybrid Compute Provider Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.HybridCompute/osType/{osType}/agentVersions": {
+      "get": {
+        "operationId": "AgentVersion_List",
+        "parameters": [
+          {
+            "name": "osType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AgentVersionsList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}": {
+      "get": {
+        "operationId": "AgentVersion_Get",
+        "parameters": [
+          {
+            "name": "osType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AgentVersion"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/gateways": {
+      "get": {
+        "operationId": "Gateways_ListBySubscription",
+        "tags": [
+          "Gateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Gateways by Subscription": {
+            "$ref": "./examples/gateway/Gateway_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/licenses": {
+      "get": {
+        "operationId": "Licenses_ListBySubscription",
+        "tags": [
+          "Licenses"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LicenseListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Licenses by Subscription": {
+            "$ref": "./examples/license/License_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}": {
+      "get": {
+        "operationId": "PrivateLinkScopes_GetValidationDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "privateLinkScopeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_GetValidation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/machines": {
+      "get": {
+        "operationId": "Machines_ListBySubscription",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Machines by resource group": {
+            "$ref": "./examples/machine/Machines_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/privateLinkScopes": {
+      "get": {
+        "operationId": "PrivateLinkScopes_List",
+        "tags": [
+          "HybridComputePrivateLinkScopes"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScopeListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopesList.json": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense": {
+      "post": {
+        "operationId": "Licenses_ValidateLicense",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a License": {
+            "$ref": "./examples/license/License_ValidateLicense.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions": {
+      "get": {
+        "operationId": "ExtensionMetadata_List",
+        "tags": [
+          "ExtensionValues"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValueListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a list of extensions": {
+            "$ref": "./examples/extension/ExtensionMetadata_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions/{version}": {
+      "get": {
+        "operationId": "ExtensionMetadata_Get",
+        "tags": [
+          "ExtensionValues"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValue"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET an extensions metadata": {
+            "$ref": "./examples/extension/ExtensionMetadata_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways": {
+      "get": {
+        "operationId": "Gateways_ListByResourceGroup",
+        "tags": [
+          "Gateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/GatewayListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Gateways by Resource Group": {
+            "$ref": "./examples/gateway/Gateway_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}": {
+      "get": {
+        "operationId": "Gateways_Get",
+        "tags": [
+          "Gateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Gateway": {
+            "$ref": "./examples/gateway/Gateway_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Gateways_CreateOrUpdate",
+        "tags": [
+          "Gateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Gateway": {
+            "$ref": "./examples/gateway/Gateway_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Gateways_Update",
+        "tags": [
+          "Gateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GatewayUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Gateway": {
+            "$ref": "./examples/gateway/Gateway_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Gateways_Delete",
+        "tags": [
+          "Gateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Gateway": {
+            "$ref": "./examples/gateway/Gateway_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses": {
+      "get": {
+        "operationId": "Licenses_ListByResourceGroup",
+        "tags": [
+          "Licenses"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LicenseListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET all Machine Extensions": {
+            "$ref": "./examples/license/License_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}": {
+      "get": {
+        "operationId": "Licenses_Get",
+        "tags": [
+          "Licenses"
+        ],
+        "parameters": [
+          {
+            "name": "licenseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get License": {
+            "$ref": "./examples/license/License_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Licenses_CreateOrUpdate",
+        "tags": [
+          "Licenses"
+        ],
+        "parameters": [
+          {
+            "name": "licenseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a License": {
+            "$ref": "./examples/license/License_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Licenses_Update",
+        "tags": [
+          "Licenses"
+        ],
+        "parameters": [
+          {
+            "name": "licenseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a License": {
+            "$ref": "./examples/license/License_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Licenses_Delete",
+        "tags": [
+          "Licenses"
+        ],
+        "parameters": [
+          {
+            "name": "licenseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a License": {
+            "$ref": "./examples/license/License_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines": {
+      "get": {
+        "operationId": "Machines_ListByResourceGroup",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Machines by resource group": {
+            "$ref": "./examples/machine/Machines_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}": {
+      "get": {
+        "operationId": "Machines_Get",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Machine": {
+            "$ref": "./examples/machine/Machines_Get.json"
+          },
+          "Get Machine with License Profile Instance View": {
+            "$ref": "./examples/machine/Machines_Get_LicenseProfileInstanceView.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Machines_CreateOrUpdate",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Machine": {
+            "$ref": "./examples/machine/Machines_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Machines_Update",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Machine": {
+            "$ref": "./examples/machine/Machines_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Machines_Delete",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Machine": {
+            "$ref": "./examples/machine/Machines_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/assessPatches": {
+      "post": {
+        "operationId": "Machines_AssessPatches",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineAssessPatchesResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assess patch state of a machine.": {
+            "$ref": "./examples/machine/Machine_AssessPatches.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/installPatches": {
+      "post": {
+        "operationId": "Machines_InstallPatches",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "installPatchesInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineInstallPatchesParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineInstallPatchesResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Install patch state of a machine.": {
+            "$ref": "./examples/machine/Machine_InstallPatches.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/addExtensions": {
+      "post": {
+        "operationId": "SetupExtensions",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "extensions",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetupExtensionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SetupExtensionRequest"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Setup Machine Extensions": {
+            "$ref": "./examples/extension/Extension_Add.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/current": {
+      "get": {
+        "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_GetValidationForMachine.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions": {
+      "get": {
+        "operationId": "MachineExtensions_List",
+        "tags": [
+          "MachineExtensions"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET all Machine Extensions - List": {
+            "$ref": "./examples/extension/Extension_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}": {
+      "get": {
+        "operationId": "MachineExtensions_Get",
+        "tags": [
+          "MachineExtensions"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Machine Extension": {
+            "$ref": "./examples/extension/Extension_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MachineExtensions_CreateOrUpdate",
+        "tags": [
+          "MachineExtensions"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Machine Extension": {
+            "$ref": "./examples/extension/Extension_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "MachineExtensions_Update",
+        "tags": [
+          "MachineExtensions"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineExtension"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Machine Extension": {
+            "$ref": "./examples/extension/Extension_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MachineExtensions_Delete",
+        "tags": [
+          "MachineExtensions"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Machine Extension": {
+            "$ref": "./examples/extension/Extension_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles": {
+      "get": {
+        "operationId": "LicenseProfiles_List",
+        "tags": [
+          "LicenseProfiles"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfileListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all License Profiles": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default": {
+      "get": {
+        "operationId": "LicenseProfiles_Get",
+        "tags": [
+          "LicenseProfiles"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LicenseProfiles_CreateOrUpdate",
+        "tags": [
+          "LicenseProfiles"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LicenseProfiles_Update",
+        "tags": [
+          "LicenseProfiles"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseProfileUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LicenseProfile"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LicenseProfiles_Delete",
+        "tags": [
+          "LicenseProfiles"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a License Profile": {
+            "$ref": "./examples/licenseProfile/LicenseProfile_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/networkProfile": {
+      "get": {
+        "operationId": "NetworkProfile_Get",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Network Profile": {
+            "$ref": "./examples/NetworkProfile_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands": {
+      "get": {
+        "operationId": "MachineRunCommands_List",
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommandListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET all Machine Run Commands": {
+            "$ref": "./examples/runCommand/RunCommands_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}": {
+      "get": {
+        "operationId": "MachineRunCommands_Get",
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Run Command": {
+            "$ref": "./examples/runCommand/RunCommands_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MachineRunCommands_CreateOrUpdate",
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "runCommandProperties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/MachineRunCommand"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a Run Command": {
+            "$ref": "./examples/runCommand/RunCommands_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/MachineRunCommand"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "MachineRunCommands_Delete",
+        "tags": [
+          "MachineRunCommands"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "runCommandName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Machine Run Command": {
+            "$ref": "./examples/runCommand/RunCommands_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/upgradeExtensions": {
+      "post": {
+        "operationId": "UpgradeExtensions",
+        "tags": [
+          "Machines"
+        ],
+        "parameters": [
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          },
+          {
+            "name": "extensionUpgradeParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineExtensionUpgrade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upgrade Machine Extensions": {
+            "$ref": "./examples/extension/Extensions_Upgrade.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes": {
+      "get": {
+        "operationId": "PrivateLinkScopes_ListByResourceGroup",
+        "tags": [
+          "HybridComputePrivateLinkScopes"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScopeListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeListByResourceGroup": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}": {
+      "get": {
+        "operationId": "PrivateLinkScopes_Get",
+        "tags": [
+          "HybridComputePrivateLinkScopes"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateLinkScopes_CreateOrUpdate",
+        "tags": [
+          "HybridComputePrivateLinkScopes"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeCreate": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Create.json"
+          },
+          "PrivateLinkScopeUpdate": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Update.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PrivateLinkScopes_UpdateTags",
+        "tags": [
+          "HybridComputePrivateLinkScopes"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "PrivateLinkScopeTags",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HybridComputePrivateLinkScope"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeUpdateTagsOnly": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_UpdateTagsOnly.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateLinkScopes_Delete",
+        "tags": [
+          "HybridComputePrivateLinkScopes"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopesDelete": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the list of network security perimeter configurations of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "perimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[.]{1}.+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the network security perimeter configuration of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile": {
+      "post": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "perimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[.]{1}.+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reconciles the network security perimeter configuration of the private link scope.": {
+            "$ref": "./examples/networkSecurityPerimeterConfiguration/NetworkSecurityPerimeterConfigurationReconcile.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByPrivateLinkScope",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a private link scope.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/privateEndpoint/PrivateEndpointConnection_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopePrivateLinkResource_ListGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateLinkResources/{groupName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopePrivateLinkResource_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}/{baseResourceType}": {
+      "get": {
+        "operationId": "Settings_Get",
+        "tags": [
+          "SettingsOperationGroup"
+        ],
+        "parameters": [
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "baseResourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConfigurationsGet": {
+            "$ref": "./examples/settings/SettingsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Settings_Update",
+        "tags": [
+          "SettingsOperationGroup"
+        ],
+        "parameters": [
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "baseResourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SettingsUpdate": {
+            "$ref": "./examples/settings/SettingsUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Settings_Patch",
+        "tags": [
+          "SettingsOperationGroup"
+        ],
+        "parameters": [
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "baseResourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConfigurationsPatch": {
+            "$ref": "./examples/settings/SettingsPatch.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AccessRuleProperties",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "AccessRuleDirection",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "proxyUrl": {
+          "type": "string",
+          "readOnly": true
+        },
+        "incomingConnectionsPorts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "extensionsAllowList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationExtension"
+          },
+          "readOnly": true
+        },
+        "extensionsBlockList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationExtension"
+          },
+          "readOnly": true
+        },
+        "proxyBypass": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "extensionsEnabled": {
+          "type": "string",
+          "readOnly": true
+        },
+        "guestConfigurationEnabled": {
+          "type": "string",
+          "readOnly": true
+        },
+        "configMode": {
+          "type": "string",
+          "enum": [
+            "full",
+            "monitor"
+          ],
+          "x-ms-enum": {
+            "name": "AgentConfigurationMode",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AgentUpgrade": {
+      "type": "object",
+      "properties": {
+        "desiredVersion": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean"
+        },
+        "lastAttemptDesiredVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "lastAttemptTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastAttemptStatus": {
+          "type": "string",
+          "enum": [
+            "Success",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "LastAttemptStatusEnum",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "lastAttemptMessage": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AgentVersion": {
+      "type": "object",
+      "properties": {
+        "agentVersion": {
+          "type": "string"
+        },
+        "downloadLink": {
+          "type": "string"
+        },
+        "osType": {
+          "type": "string"
+        }
+      }
+    },
+    "AgentVersionsList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/AgentVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AvailablePatchCountByClassification": {
+      "type": "object",
+      "properties": {
+        "security": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "critical": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "definition": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "updateRollup": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "featurePack": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "servicePack": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "tools": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "updates": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "other": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "Azure.ResourceManager.ArmResponse<MachineAssessPatchesResult>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/MachineAssessPatchesResult"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<MachineInstallPatchesResult>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/MachineInstallPatchesResult"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<SetupExtensionRequest>": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/SetupExtensionRequest"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "CloudMetadata": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationExtension": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConnectionDetail": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "linkIdentifier": {
+          "type": "string",
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "memberName": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Disk": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "diskType": {
+          "type": "string"
+        },
+        "generatedId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "maxSizeInBytes": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usedSpaceInBytes": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "EsuKey": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string"
+        },
+        "licenseStatus": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "EsuProfileUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "assignedLicense": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionPublisher": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionPublisherListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExtensionPublisher"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionTargetProperties": {
+      "type": "object",
+      "properties": {
+        "targetVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionTypeListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExtensionType"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionValue": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionValueProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionValueListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionValue"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionValueListResultV2": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExtensionValueV2"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionValueProperties": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "readOnly": true
+        },
+        "extensionType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publisher": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionValueV2": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionValueV2Properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionValueV2Properties": {
+      "type": "object",
+      "properties": {
+        "extensionUris": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "readOnly": true
+        },
+        "extensionSignatureUri": {
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "type": "string",
+          "readOnly": true
+        },
+        "architecture": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtensionValueProperties"
+        }
+      ]
+    },
+    "ExtensionsResourceStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Info",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "ExtensionsStatusLevelTypes",
+            "modelAsString": false
+          }
+        },
+        "displayStatus": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "FirmwareProfile": {
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Gateway": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GatewayListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Gateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GatewayProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Accepted",
+            "Canceled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "gatewayId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "gatewayType": {
+          "type": "string",
+          "enum": [
+            "Public"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayType",
+            "modelAsString": true
+          }
+        },
+        "gatewayEndpoint": {
+          "type": "string",
+          "readOnly": true
+        },
+        "allowedFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GatewayUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GatewayUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ]
+    },
+    "GatewayUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "allowedFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HardwareProfile": {
+      "type": "object",
+      "properties": {
+        "totalPhysicalMemoryInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "numberOfCpuSockets": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "processors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Processor"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HybridComputePrivateLinkScope": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HybridComputePrivateLinkScopeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HybridComputePrivateLinkScopeListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/HybridComputePrivateLinkScope"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HybridComputePrivateLinkScopeProperties": {
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "SecuredByPerimeter"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateLinkScopeId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionDataModel"
+          },
+          "readOnly": true
+        },
+        "serviceExtensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceExtension"
+          }
+        }
+      }
+    },
+    "IpAddress": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "ipAddressVersion": {
+          "type": "string"
+        },
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "readOnly": true
+        }
+      }
+    },
+    "License": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LicenseProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LicenseDetails": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Activated",
+            "Deactivated"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseState",
+            "modelAsString": true
+          }
+        },
+        "target": {
+          "type": "string",
+          "enum": [
+            "Windows Server 2012",
+            "Windows Server 2012 R2"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseTarget",
+            "modelAsString": true
+          }
+        },
+        "edition": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Datacenter"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseEdition",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "pCore",
+            "vCore"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseCoreType",
+            "modelAsString": true
+          }
+        },
+        "processors": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "assignedLicenses": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "immutableId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "volumeLicenseDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeLicenseDetails"
+          }
+        }
+      }
+    },
+    "LicenseListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/License"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LicenseProfile": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LicenseProfileProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LicenseProfileArmEsuProperties": {
+      "type": "object",
+      "properties": {
+        "assignedLicense": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LicenseProfileArmEsuPropertiesWithoutAssignedLicense"
+        }
+      ]
+    },
+    "LicenseProfileArmEsuPropertiesWithoutAssignedLicense": {
+      "type": "object",
+      "properties": {
+        "serverType": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Datacenter"
+          ],
+          "x-ms-enum": {
+            "name": "EsuServerType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "esuEligibility": {
+          "type": "string",
+          "enum": [
+            "Eligible",
+            "Ineligible",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EsuEligibility",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "esuKeyState": {
+          "type": "string",
+          "enum": [
+            "Inactive",
+            "Active"
+          ],
+          "x-ms-enum": {
+            "name": "EsuKeyState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LicenseProfileStorageModelEsuProperties"
+        }
+      ]
+    },
+    "LicenseProfileArmProductProfileProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Enabling",
+            "Enabled",
+            "Disabled",
+            "Disabling",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseProfileSubscriptionStatus",
+            "modelAsString": true
+          }
+        },
+        "productType": {
+          "type": "string",
+          "enum": [
+            "WindowsServer",
+            "WindowsIoTEnterprise"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseProfileProductType",
+            "modelAsString": true
+          }
+        },
+        "enrollmentDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "disenrollmentDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "readOnly": true
+        },
+        "productFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductFeature"
+          }
+        }
+      }
+    },
+    "LicenseProfileListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/LicenseProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LicenseProfileMachineInstanceView": {
+      "type": "object",
+      "properties": {
+        "licenseStatus": {
+          "type": "string",
+          "enum": [
+            "Unlicensed",
+            "Licensed",
+            "OOBGrace",
+            "OOTGrace",
+            "NonGenuineGrace",
+            "Notification",
+            "ExtendedGrace"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "licenseChannel": {
+          "type": "string",
+          "readOnly": true
+        },
+        "softwareAssurance": {
+          "$ref": "#/definitions/LicenseProfileMachineInstanceViewSoftwareAssurance",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "esuProfile": {
+          "$ref": "#/definitions/LicenseProfileMachineInstanceViewEsuProperties"
+        },
+        "productProfile": {
+          "$ref": "#/definitions/LicenseProfileArmProductProfileProperties",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LicenseProfileMachineInstanceViewEsuProperties": {
+      "type": "object",
+      "properties": {
+        "assignedLicense": {
+          "$ref": "#/definitions/License"
+        },
+        "licenseAssignmentState": {
+          "type": "string",
+          "enum": [
+            "Assigned",
+            "NotAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseAssignmentState",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LicenseProfileArmEsuPropertiesWithoutAssignedLicense"
+        }
+      ]
+    },
+    "LicenseProfileMachineInstanceViewSoftwareAssurance": {
+      "type": "object",
+      "properties": {
+        "softwareAssuranceCustomer": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LicenseProfileProperties": {
+      "type": "object",
+      "properties": {
+        "softwareAssurance": {
+          "$ref": "#/definitions/LicenseProfilePropertiesSoftwareAssurance",
+          "x-ms-client-flatten": true
+        },
+        "esuProfile": {
+          "$ref": "#/definitions/LicenseProfileArmEsuProperties",
+          "x-ms-client-flatten": true
+        },
+        "productProfile": {
+          "$ref": "#/definitions/LicenseProfileArmProductProfileProperties",
+          "x-ms-client-flatten": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Accepted",
+            "Canceled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LicenseProfilePropertiesSoftwareAssurance": {
+      "type": "object",
+      "properties": {
+        "softwareAssuranceCustomer": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LicenseProfileStorageModelEsuProperties": {
+      "type": "object",
+      "properties": {
+        "assignedLicenseImmutableId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "esuKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EsuKey"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "LicenseProfileUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LicenseProfileUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ]
+    },
+    "LicenseProfileUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "softwareAssurance": {
+          "$ref": "#/definitions/LicenseProfileUpdatePropertiesSoftwareAssurance",
+          "x-ms-client-flatten": true
+        },
+        "esuProfile": {
+          "$ref": "#/definitions/EsuProfileUpdateProperties",
+          "x-ms-client-flatten": true
+        },
+        "productProfile": {
+          "$ref": "#/definitions/ProductProfileUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LicenseProfileUpdatePropertiesSoftwareAssurance": {
+      "type": "object",
+      "properties": {
+        "softwareAssuranceCustomer": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LicenseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Accepted",
+            "Canceled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "licenseType": {
+          "type": "string",
+          "enum": [
+            "ESU"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
+        },
+        "licenseDetails": {
+          "$ref": "#/definitions/LicenseDetails"
+        }
+      }
+    },
+    "LicenseUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LicenseUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ]
+    },
+    "LicenseUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "licenseType": {
+          "type": "string",
+          "enum": [
+            "ESU"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseType",
+            "modelAsString": true
+          }
+        },
+        "licenseDetails": {
+          "$ref": "#/definitions/LicenseUpdatePropertiesLicenseDetails",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LicenseUpdatePropertiesLicenseDetails": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Activated",
+            "Deactivated"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseState",
+            "modelAsString": true
+          }
+        },
+        "target": {
+          "type": "string",
+          "enum": [
+            "Windows Server 2012",
+            "Windows Server 2012 R2"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseTarget",
+            "modelAsString": true
+          }
+        },
+        "edition": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Datacenter"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseEdition",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "pCore",
+            "vCore"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseCoreType",
+            "modelAsString": true
+          }
+        },
+        "processors": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "LinuxParameters": {
+      "type": "object",
+      "properties": {
+        "classificationsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "Security",
+              "Other"
+            ],
+            "x-ms-enum": {
+              "name": "VMGuestPatchClassificationLinux",
+              "modelAsString": true
+            }
+          }
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Machine": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineProperties",
+          "x-ms-client-flatten": true
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtension"
+          },
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "AVS",
+            "HCI",
+            "SCVMM",
+            "VMware",
+            "EPS",
+            "GCP",
+            "AWS"
+          ],
+          "x-ms-enum": {
+            "name": "ArcKindEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MachineAssessPatchesResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "assessmentActivityId": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "availablePatchCountByClassification": {
+          "$ref": "#/definitions/AvailablePatchCountByClassification"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "startedBy": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Platform"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStartedBy",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "patchServiceUsed": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "WU",
+            "WU_WSUS",
+            "YUM",
+            "APT",
+            "Zypper"
+          ],
+          "x-ms-enum": {
+            "name": "PatchServiceUsed",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "osType": {
+          "type": "string",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineExtension": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MachineExtensionInstanceView": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "typeHandlerVersion": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/MachineExtensionInstanceViewStatus"
+        }
+      }
+    },
+    "MachineExtensionInstanceViewStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Info",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusLevelTypes",
+            "modelAsString": true
+          }
+        },
+        "displayStatus": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "MachineExtensionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/MachineExtension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MachineExtensionProperties": {
+      "type": "object",
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "typeHandlerVersion": {
+          "type": "string"
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean"
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean"
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "protectedSettings": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/MachineExtensionInstanceView"
+        }
+      }
+    },
+    "MachineExtensionUpdate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineExtensionUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ]
+    },
+    "MachineExtensionUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "typeHandlerVersion": {
+          "type": "string"
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean"
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean"
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "protectedSettings": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "MachineExtensionUpgrade": {
+      "type": "object",
+      "properties": {
+        "extensionTargets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ExtensionTargetProperties"
+          }
+        }
+      }
+    },
+    "MachineInstallPatchesParameters": {
+      "type": "object",
+      "properties": {
+        "maximumDuration": {
+          "type": "string",
+          "format": "duration"
+        },
+        "rebootSetting": {
+          "type": "string",
+          "enum": [
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "VMGuestPatchRebootSetting",
+            "modelAsString": true
+          }
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters"
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters"
+        }
+      },
+      "required": [
+        "maximumDuration",
+        "rebootSetting"
+      ]
+    },
+    "MachineInstallPatchesResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "installationActivityId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "rebootStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "NotNeeded",
+            "Required",
+            "Started",
+            "Failed",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "VMGuestPatchRebootStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "maintenanceWindowExceeded": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "excludedPatchCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "notSelectedPatchCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "pendingPatchCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "installedPatchCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "failedPatchCount": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "startedBy": {
+          "type": "string",
+          "enum": [
+            "User",
+            "Platform"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStartedBy",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "patchServiceUsed": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "WU",
+            "WU_WSUS",
+            "YUM",
+            "APT",
+            "Zypper"
+          ],
+          "x-ms-enum": {
+            "name": "PatchServiceUsed",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "osType": {
+          "type": "string",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OsType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "errorDetails": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MachineProperties": {
+      "type": "object",
+      "properties": {
+        "locationData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/locationData"
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentConfiguration",
+          "readOnly": true
+        },
+        "serviceStatuses": {
+          "$ref": "#/definitions/ServiceStatuses"
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "readOnly": true
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "readOnly": true
+        },
+        "firmwareProfile": {
+          "$ref": "#/definitions/FirmwareProfile",
+          "readOnly": true
+        },
+        "cloudMetadata": {
+          "$ref": "#/definitions/CloudMetadata"
+        },
+        "agentUpgrade": {
+          "$ref": "#/definitions/AgentUpgrade"
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile"
+        },
+        "licenseProfile": {
+          "$ref": "#/definitions/LicenseProfileMachineInstanceView"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Error",
+            "AwaitingConnection"
+          ],
+          "x-ms-enum": {
+            "name": "StatusTypes",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "lastStatusChange": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
+          },
+          "readOnly": true
+        },
+        "agentVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "vmId": {
+          "type": "string",
+          "format": "uuid",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "machineFqdn": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientPublicKey": {
+          "type": "string"
+        },
+        "identityKeyStore": {
+          "type": "string",
+          "enum": [
+            "TPM",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityKeyStore",
+            "modelAsString": true
+          }
+        },
+        "tpmEkCertificate": {
+          "type": "string"
+        },
+        "osName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "osVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "osType": {
+          "type": "string"
+        },
+        "vmUuid": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtensionInstanceView"
+          }
+        },
+        "osSku": {
+          "type": "string",
+          "readOnly": true
+        },
+        "osEdition": {
+          "type": "string",
+          "readOnly": true
+        },
+        "domainName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "adFqdn": {
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsFqdn": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "parentClusterResourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "hardwareResourceId": {
+          "type": "string"
+        },
+        "mssqlDiscovered": {
+          "type": "string"
+        },
+        "detectedProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineRunCommand": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MachineRunCommandProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MachineRunCommandInstanceView": {
+      "type": "object",
+      "properties": {
+        "executionState": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Pending",
+            "Running",
+            "Failed",
+            "Succeeded",
+            "TimedOut",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ExecutionState",
+            "modelAsString": true
+          }
+        },
+        "executionMessage": {
+          "type": "string"
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "output": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionsResourceStatus"
+          }
+        }
+      }
+    },
+    "MachineRunCommandListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/MachineRunCommand"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MachineRunCommandProperties": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/MachineRunCommandScriptSource"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCommandInputParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "protectedParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RunCommandInputParameter"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "asyncExecution": {
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "type": "string"
+        },
+        "runAsPassword": {
+          "type": "string"
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "outputBlobUri": {
+          "type": "string"
+        },
+        "errorBlobUri": {
+          "type": "string"
+        },
+        "outputBlobManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity"
+        },
+        "errorBlobManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/MachineRunCommandInstanceView",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineRunCommandScriptSource": {
+      "type": "object",
+      "properties": {
+        "script": {
+          "type": "string"
+        },
+        "scriptUri": {
+          "type": "string"
+        },
+        "commandId": {
+          "type": "string"
+        },
+        "scriptUriManagedIdentity": {
+          "$ref": "#/definitions/RunCommandManagedIdentity"
+        }
+      }
+    },
+    "MachineRunCommandUpdate": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ]
+    },
+    "MachineUpdate": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "AVS",
+            "HCI",
+            "SCVMM",
+            "VMware",
+            "EPS",
+            "GCP",
+            "AWS"
+          ],
+          "x-ms-enum": {
+            "name": "ArcKindEnum",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/MachineUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ]
+    },
+    "MachineUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "locationData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/locationData"
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile"
+        },
+        "cloudMetadata": {
+          "$ref": "#/definitions/CloudMetadata"
+        },
+        "agentUpgrade": {
+          "$ref": "#/definitions/AgentUpgrade"
+        },
+        "parentClusterResourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "identityKeyStore": {
+          "type": "string"
+        },
+        "tpmEkCertificate": {
+          "type": "string"
+        }
+      }
+    },
+    "NetworkInterface": {
+      "type": "object",
+      "properties": {
+        "macAddress": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ipAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpAddress"
+          }
+        }
+      }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "readOnly": true
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/ResourceAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterProfile"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationReconcileResult": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "accessRulesVersion": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          },
+          "readOnly": true
+        },
+        "diagnosticSettingsVersion": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OSProfile": {
+      "type": "object",
+      "properties": {
+        "computerName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "windowsConfiguration": {
+          "$ref": "#/definitions/OSProfileWindowsConfiguration"
+        },
+        "linuxConfiguration": {
+          "$ref": "#/definitions/OSProfileLinuxConfiguration"
+        }
+      }
+    },
+    "OSProfileLinuxConfiguration": {
+      "type": "object",
+      "properties": {
+        "patchSettings": {
+          "$ref": "#/definitions/PatchSettings",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OSProfileWindowsConfiguration": {
+      "type": "object",
+      "properties": {
+        "patchSettings": {
+          "$ref": "#/definitions/PatchSettings",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PatchSettings": {
+      "type": "object",
+      "properties": {
+        "assessmentMode": {
+          "type": "string",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "AssessmentModeTypes",
+            "modelAsString": true
+          }
+        },
+        "patchMode": {
+          "type": "string",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform",
+            "AutomaticByOS",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "PatchModeTypes",
+            "modelAsString": true
+          }
+        },
+        "enableHotpatching": {
+          "type": "boolean"
+        },
+        "status": {
+          "$ref": "#/definitions/PatchSettingsStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "PatchSettingsStatus": {
+      "type": "object",
+      "properties": {
+        "hotpatchEnablementStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "PendingEvaluation",
+            "Disabled",
+            "ActionRequired",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "HotpatchEnablementStatus",
+            "modelAsString": true
+          }
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionDataModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkScopeValidationDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "SecuredByPerimeter"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true
+          }
+        },
+        "connectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetail"
+          }
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "actionsRequired": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "description",
+        "status"
+      ]
+    },
+    "Processor": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfCores": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "ProductFeature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "subscriptionStatus": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Enabling",
+            "Enabled",
+            "Disabled",
+            "Disabling",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseProfileSubscriptionStatus",
+            "modelAsString": true
+          }
+        },
+        "enrollmentDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "disenrollmentDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "readOnly": true
+        }
+      }
+    },
+    "ProductFeatureUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "subscriptionStatus": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseProfileSubscriptionStatusUpdate",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProductProfileUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "subscriptionStatus": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseProfileSubscriptionStatusUpdate",
+            "modelAsString": true
+          }
+        },
+        "productType": {
+          "type": "string",
+          "enum": [
+            "WindowsServer",
+            "WindowsIoTEnterprise"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseProfileProductType",
+            "modelAsString": true
+          }
+        },
+        "productFeatures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductFeatureUpdate"
+          }
+        }
+      }
+    },
+    "ProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ProvisioningIssueProperties",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProvisioningIssueProperties": {
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "type": "string",
+          "enum": [
+            "MissingPerimeterConfiguration",
+            "MissingIdentityConfiguration",
+            "ConfigurationPropagationFailure",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningIssueType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningIssueSeverity",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceAssociation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "accessMode": {
+          "type": "string",
+          "enum": [
+            "enforced",
+            "audit",
+            "learning"
+          ],
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RunCommandInputParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "RunCommandManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceExtension": {
+      "type": "object",
+      "properties": {
+        "serviceExtensionType": {
+          "type": "string",
+          "x-nullable": false
+        },
+        "serviceExtensionPublicNetworkAccess": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceExtensionPublicNetworkAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ServiceExtensionType": {
+      "type": "string",
+      "x-nullable": false
+    },
+    "ServiceStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "startupType": {
+          "type": "string"
+        }
+      }
+    },
+    "ServiceStatuses": {
+      "type": "object",
+      "properties": {
+        "extensionService": {
+          "$ref": "#/definitions/ServiceStatus"
+        },
+        "guestConfigurationService": {
+          "$ref": "#/definitions/ServiceStatus"
+        }
+      }
+    },
+    "Settings": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SettingsProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SettingsGatewayProperties": {
+      "type": "object",
+      "properties": {
+        "gatewayResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/gateways"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SettingsProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "gatewayProperties": {
+          "$ref": "#/definitions/SettingsGatewayProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SetupExtensionRequest": {
+      "type": "object",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MachineExtensionProperties"
+          }
+        }
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "properties": {
+        "disks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        }
+      }
+    },
+    "Subnet": {
+      "type": "object",
+      "properties": {
+        "addressPrefix": {
+          "type": "string"
+        }
+      }
+    },
+    "TagsResource": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TypeSpec.Http.OkResponse": {
+      "type": "object"
+    },
+    "VolumeLicenseDetails": {
+      "type": "object",
+      "properties": {
+        "programYear": {
+          "type": "string",
+          "enum": [
+            "Year 1",
+            "Year 2",
+            "Year 3"
+          ],
+          "x-ms-enum": {
+            "name": "ProgramYear",
+            "modelAsString": true
+          }
+        },
+        "invoiceId": {
+          "type": "string"
+        }
+      }
+    },
+    "WindowsParameters": {
+      "type": "object",
+      "properties": {
+        "classificationsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "Security",
+              "UpdateRollUp",
+              "FeaturePack",
+              "ServicePack",
+              "Definition",
+              "Tools",
+              "Updates"
+            ],
+            "x-ms-enum": {
+              "name": "VMGuestPatchClassificationWindows",
+              "modelAsString": true
+            }
+          }
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kbNumbersToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeKbsRequiringReboot": {
+          "type": "boolean"
+        },
+        "maxPatchPublishDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "patchNameMasksToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "patchNameMasksToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

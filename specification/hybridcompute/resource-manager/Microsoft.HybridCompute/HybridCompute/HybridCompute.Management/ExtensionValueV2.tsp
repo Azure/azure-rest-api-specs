@@ -25,6 +25,42 @@ model ExtensionValueV2
   >;
 }
 
+alias ExtensionValueV2Ops = Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /**
+     * The provider namespace. Always "Microsoft.HybridCompute".
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.HybridCompute";
+
+    @path
+    @segment("locations")
+    @key("location")
+    @minLength(1)
+    location: string;
+
+    @path
+    @segment("publishers")
+    @key
+    publisher: string;
+
+    @path
+    @segment("extensionTypes")
+    @key
+    extensionType: string;
+  },
+  {},
+  {
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
 @armResourceOperations
 interface ExtensionValueV2s {
   /**
@@ -32,19 +68,15 @@ interface ExtensionValueV2s {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionMetadataV2_Get")
-  get is ArmResourceRead<
-    ExtensionValueV2,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
-  >;
+  get is ExtensionValueV2Ops.Read<ExtensionValueV2>;
 
   /**
    * Gets all Extension versions based on location, publisher, extensionType
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionMetadataV2_List")
-  list is ArmResourceListByParent<
+  list is ExtensionValueV2Ops.List<
     ExtensionValueV2,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Response = ArmResponse<ExtensionValueListResultV2>
   >;
 }

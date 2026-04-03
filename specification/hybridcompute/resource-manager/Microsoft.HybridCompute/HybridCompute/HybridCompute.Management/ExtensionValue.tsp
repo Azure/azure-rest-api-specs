@@ -24,6 +24,43 @@ model ExtensionValue
   >;
 }
 
+alias ExtensionValueOps = Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /**
+     * The provider namespace. Always "Microsoft.HybridCompute".
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.HybridCompute";
+
+    @path
+    @segment("locations")
+    @key("location")
+    @minLength(1)
+    location: string;
+
+    @path
+    @segment("publishers")
+    @key
+    publisher: string;
+
+    @path
+    @segment("extensionTypes")
+    @key
+    extensionType: string;
+  },
+  {},
+  {
+    @path
+    @segment("versions")
+    @key
+    version: string;
+  }
+>;
+
 @armResourceOperations
 interface ExtensionValues {
   /**
