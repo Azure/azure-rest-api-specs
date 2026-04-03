@@ -109,6 +109,7 @@ interface ContainerGroupProfiles {
   >;
 }
 alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  "ContainerGroupProfileRevision",
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
