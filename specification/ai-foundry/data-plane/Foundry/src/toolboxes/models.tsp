@@ -113,14 +113,14 @@ alias DeleteToolboxRequest = {
   toolbox_name: string;
 };
 
-alias UpdateToolboxRequest = {
+model UpdateToolboxRequest {
   @doc("The name of the toolbox to update.")
   @path
   toolbox_name: string;
 
   @doc("The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest.")
   default_version: string;
-};
+}
 
 alias DeleteToolboxVersionRequest = {
   @doc("The name of the toolbox.")

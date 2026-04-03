@@ -7819,13 +7819,7 @@
         "description": "Update a toolbox to point to a specific version.",
         "parameters": [
           {
-            "name": "toolbox_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the toolbox to update.",
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/UpdateToolboxRequest.toolbox_name"
           },
           {
             "name": "Foundry-Features",
@@ -7880,16 +7874,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "default_version": {
-                    "type": "string",
-                    "description": "The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest."
-                  }
-                },
-                "required": [
-                  "default_version"
-                ]
+                "$ref": "#/components/schemas/UpdateToolboxRequest"
               }
             }
           }
@@ -8384,6 +8369,15 @@
           "minLength": 1
         },
         "explode": false
+      },
+      "UpdateToolboxRequest.toolbox_name": {
+        "name": "toolbox_name",
+        "in": "path",
+        "required": true,
+        "description": "The name of the toolbox to update.",
+        "schema": {
+          "type": "string"
+        }
       }
     },
     "schemas": {
@@ -36406,6 +36400,18 @@
               "type": "string"
             },
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
+          }
+        }
+      },
+      "UpdateToolboxRequest": {
+        "type": "object",
+        "required": [
+          "default_version"
+        ],
+        "properties": {
+          "default_version": {
+            "type": "string",
+            "description": "The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest."
           }
         }
       },

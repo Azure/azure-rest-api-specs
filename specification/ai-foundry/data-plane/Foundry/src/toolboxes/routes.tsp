@@ -4,11 +4,11 @@ import "./models.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
- 
-@@usage(UpdateToolboxRequest, Usage.input);
-@@access(UpdateToolboxRequest, Access.public);
 
 namespace Azure.AI.Projects;
+
+@@usage(UpdateToolboxRequest, Usage.input);
+@@access(UpdateToolboxRequest, Access.public);
 
 alias ToolboxesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.toolboxes_v1_preview>;
 
