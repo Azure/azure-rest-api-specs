@@ -38,3 +38,9 @@ using Microsoft.RoleManagementAlerts;
   autoMergeService: true,
 })
 namespace Microsoft.AuthorizationCombinedClient;
+
+@@clientName(Microsoft.AuthorizationCombinedClient,
+  "AuthorizationManagementClient",
+  "javascript"
+);
+@@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
