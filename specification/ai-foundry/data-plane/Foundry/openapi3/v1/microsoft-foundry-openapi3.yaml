@@ -19,6 +19,7 @@ tags:
   - name: Responses
   - name: Redteams
   - name: Schedules
+  - name: Toolsets
 paths:
   /agents:
     post:
@@ -4972,6 +4973,321 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Schedules
+  /toolsets:
+    post:
+      operationId: createToolset
+      description: Create a toolset.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolsetObject'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 256
+                  description: The name of the toolset.
+                description:
+                  type: string
+                  maxLength: 512
+                  description: A human-readable description of the toolset.
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Arbitrary key-value metadata to associate with the toolset.
+                tools:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpenAI.Tool'
+                  description: The list of tools to include in the toolset.
+              required:
+                - name
+                - tools
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+    get:
+      operationId: listToolsets
+      description: List all toolsets.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ToolsetObject'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+  /toolsets/{tool_set_name}:
+    post:
+      operationId: updateToolset
+      description: Update a toolset.
+      parameters:
+        - name: tool_set_name
+          in: path
+          required: true
+          description: The name of the toolset to update.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolsetObject'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  maxLength: 512
+                  description: A human-readable description of the toolset.
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Arbitrary key-value metadata to associate with the toolset.
+                tools:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpenAI.Tool'
+                  description: The list of tools to include in the toolset.
+              required:
+                - tools
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+    get:
+      operationId: getToolset
+      description: Retrieve a toolset.
+      parameters:
+        - name: tool_set_name
+          in: path
+          required: true
+          description: The name of the toolset to retrieve.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolsetObject'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
+    delete:
+      operationId: deleteToolset
+      description: Delete a toolset.
+      parameters:
+        - name: tool_set_name
+          in: path
+          required: true
+          description: The name of the toolset to delete.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Toolsets=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteToolsetResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Toolsets
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Toolsets=V1Preview
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
@@ -5004,6 +5320,12 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `"a2a_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         base_url:
           type: string
           format: uri
@@ -5088,6 +5410,12 @@ components:
         index_name:
           type: string
           description: The name of an index in an IndexResource attached to this agent.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         query_type:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchQueryType'
@@ -5704,6 +6032,12 @@ components:
           enum:
             - azure_ai_search
           description: The object type, which is always 'azure_ai_search'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -5766,6 +6100,12 @@ components:
       required:
         - indexes
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         indexes:
           type: array
           items:
@@ -5955,6 +6295,12 @@ components:
         - project_connection_id
         - instance_name
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing search
@@ -5986,6 +6332,12 @@ components:
           enum:
             - bing_custom_search_preview
           description: The object type, which is always 'bing_custom_search_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         bing_custom_search_preview:
           allOf:
             - $ref: '#/components/schemas/BingCustomSearchToolParameters'
@@ -6048,6 +6400,12 @@ components:
       required:
         - search_configurations
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         search_configurations:
           type: array
           items:
@@ -6062,6 +6420,12 @@ components:
       required:
         - project_connection_id
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing search
@@ -6084,6 +6448,12 @@ components:
       required:
         - search_configurations
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         search_configurations:
           type: array
           items:
@@ -6104,6 +6474,12 @@ components:
           enum:
             - bing_grounding
           description: The object type, which is always 'bing_grounding'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -6191,6 +6567,12 @@ components:
           enum:
             - browser_automation_preview
           description: The object type, which is always 'browser_automation_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         browser_automation_preview:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolParameters'
@@ -6253,6 +6635,12 @@ components:
       required:
         - project_connection_id
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: The ID of the project connection to your Azure Playwright resource.
@@ -6262,6 +6650,12 @@ components:
       required:
         - connection
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         connection:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
@@ -7031,6 +7425,25 @@ components:
             - true
           description: Always return true
       description: The result of a delete response operation.
+    DeleteToolsetResponse:
+      type: object
+      required:
+        - object
+        - name
+        - deleted
+      properties:
+        object:
+          type: string
+          enum:
+            - toolset.deleted
+          description: The object type. Always 'toolset.deleted'.
+        name:
+          type: string
+          description: The name of the toolset.
+        deleted:
+          type: boolean
+          description: Whether the toolset was successfully deleted.
+      description: Response returned when a toolset is deleted.
     Deployment:
       type: object
       required:
@@ -8437,6 +8850,12 @@ components:
     FabricDataAgentToolParameters:
       type: object
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connections:
           type: array
           items:
@@ -9037,6 +9456,12 @@ components:
           enum:
             - memory_search_preview
           description: The type of the tool. Always `memory_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -9384,6 +9809,12 @@ components:
           enum:
             - fabric_dataagent_preview
           description: The object type, which is always 'fabric_dataagent_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         fabric_dataagent_preview:
           allOf:
             - $ref: '#/components/schemas/FabricDataAgentToolParameters'
@@ -10037,6 +10468,12 @@ components:
             - code_interpreter
           description: The type of the code interpreter tool. Always `code_interpreter`.
           x-stainless-const: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         container:
           anyOf:
             - type: string
@@ -13091,6 +13528,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
           nullable: true
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -18868,6 +19311,12 @@ components:
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
           default: local_shell
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -24010,6 +24459,12 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -25066,6 +25521,12 @@ components:
     SharepointGroundingToolParameters:
       type: object
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connections:
           type: array
           items:
@@ -25086,6 +25547,12 @@ components:
           enum:
             - sharepoint_grounding_preview
           description: The object type, which is always 'sharepoint_grounding_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         sharepoint_grounding_preview:
           allOf:
             - $ref: '#/components/schemas/SharepointGroundingToolParameters'
@@ -25394,10 +25861,61 @@ components:
       required:
         - project_connection_id
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: A project connection in a ToolProjectConnectionList attached to this tool.
       description: A project connection resource.
+    ToolsetObject:
+      type: object
+      required:
+        - object
+        - id
+        - created_at
+        - updated_at
+        - name
+        - tools
+      properties:
+        object:
+          type: string
+          enum:
+            - toolset
+          description: The object type, which is always 'toolset'.
+        id:
+          type: string
+          description: The unique identifier of the toolset.
+        created_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (seconds) when the toolset was created.
+        updated_at:
+          type: integer
+          format: unixtime
+          description: The Unix timestamp (seconds) when the toolset was last updated.
+        name:
+          type: string
+          maxLength: 256
+          description: The name of the toolset.
+        description:
+          type: string
+          maxLength: 512
+          description: A human-readable description of the toolset.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Arbitrary key-value metadata to associate with the toolset.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The list of tools contained in this toolset.
+      description: A toolset that stores reusable tool definitions for agents.
     TracesPreviewEvalRunDataSource:
       type: object
       required:
@@ -25577,6 +26095,12 @@ components:
         - project_connection_id
         - instance_name
       properties:
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
         project_connection_id:
           type: string
           description: Project connection id for grounding with bing custom search

@@ -53,8 +53,6 @@ using Azure.AI.Projects;
 
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult");
 
-@@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
-
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
