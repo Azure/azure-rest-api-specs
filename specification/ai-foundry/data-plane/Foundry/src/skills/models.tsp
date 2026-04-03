@@ -28,8 +28,7 @@ alias CreateSkillRequest = {
   @maxLength(102400)
   instructions?: string;
 
-  @doc("Set of key-value pairs associated with the skill.")
-  metadata?: Record<string>;
+...MetadataPropertyForRequest;
 };
 
 alias CreateSkillFromPackageRequest = {
