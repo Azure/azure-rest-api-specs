@@ -162,16 +162,20 @@
                 "type": "string"
               },
               "Cache-Control": {
-                "type": "string"
+                "type": "string",
+                "description": "The cache control of the file."
               },
               "Content-Disposition": {
-                "type": "string"
+                "type": "string",
+                "description": "The content disposition of the file."
               },
               "Content-Encoding": {
-                "type": "string"
+                "type": "string",
+                "description": "The content encoding of the file."
               },
               "Content-Language": {
-                "type": "string"
+                "type": "string",
+                "description": "The content language of the file."
               },
               "Content-Length": {
                 "type": "integer",
@@ -179,7 +183,8 @@
               },
               "Content-MD5": {
                 "type": "string",
-                "format": "byte"
+                "format": "byte",
+                "description": "An MD5 hash returned for the content."
               },
               "Content-Range": {
                 "type": "string"
@@ -365,7 +370,7 @@
               },
               "x-ms-structured-body": {
                 "type": "string",
-                "description": "Structured body response header."
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               },
               "x-ms-structured-content-length": {
                 "type": "integer",
@@ -388,16 +393,20 @@
                 "type": "string"
               },
               "Cache-Control": {
-                "type": "string"
+                "type": "string",
+                "description": "The cache control of the file."
               },
               "Content-Disposition": {
-                "type": "string"
+                "type": "string",
+                "description": "The content disposition of the file."
               },
               "Content-Encoding": {
-                "type": "string"
+                "type": "string",
+                "description": "The content encoding of the file."
               },
               "Content-Language": {
-                "type": "string"
+                "type": "string",
+                "description": "The content language of the file."
               },
               "Content-Length": {
                 "type": "integer",
@@ -405,7 +414,8 @@
               },
               "Content-MD5": {
                 "type": "string",
-                "format": "byte"
+                "format": "byte",
+                "description": "An MD5 hash returned for the content."
               },
               "Content-Range": {
                 "type": "string"
@@ -591,7 +601,7 @@
               },
               "x-ms-structured-body": {
                 "type": "string",
-                "description": "Structured body response header."
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               },
               "x-ms-structured-content-length": {
                 "type": "integer",
@@ -963,7 +973,7 @@
           {
             "name": "x-ms-structured-body",
             "in": "header",
-            "description": "Optional. Used for structured put operations.",
+            "description": "Required if the request body is a structured message. Specifies the message schema version and properties.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "structuredBodyType"
@@ -971,7 +981,7 @@
           {
             "name": "x-ms-structured-content-length",
             "in": "header",
-            "description": "Optional. Used for structured put operations to specify content length.",
+            "description": "Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length.",
             "required": false,
             "type": "integer",
             "format": "int64",
@@ -1103,7 +1113,7 @@
               },
               "x-ms-structured-body": {
                 "type": "string",
-                "description": "Structured body response header."
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               },
               "x-ms-version": {
                 "type": "string",
@@ -1282,7 +1292,7 @@
           {
             "name": "sharesnapshot",
             "in": "query",
-            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
+            "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
             "required": false,
             "type": "string"
           },
@@ -1339,16 +1349,20 @@
             "description": "The request has succeeded.",
             "headers": {
               "Cache-Control": {
-                "type": "string"
+                "type": "string",
+                "description": "The cache control of the file."
               },
               "Content-Disposition": {
-                "type": "string"
+                "type": "string",
+                "description": "The content disposition of the file."
               },
               "Content-Encoding": {
-                "type": "string"
+                "type": "string",
+                "description": "The content encoding of the file."
               },
               "Content-Language": {
-                "type": "string"
+                "type": "string",
+                "description": "The content language of the file."
               },
               "Content-Length": {
                 "type": "integer",
@@ -1356,7 +1370,8 @@
               },
               "Content-MD5": {
                 "type": "string",
-                "format": "byte"
+                "format": "byte",
+                "description": "An MD5 hash returned for the content."
               },
               "Content-Type": {
                 "type": "string"
@@ -3581,7 +3596,7 @@
           {
             "name": "x-ms-share-provisioned-iops",
             "in": "header",
-            "description": "Optional. Specifies the provisioned number of input/output operations per second (IOPS) of the share.",
+            "description": "Optional. Specifies the provisioned IOPS of the share.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -3644,17 +3659,17 @@
               "x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time": {
                 "type": "string",
                 "format": "date-time-rfc7231",
-                "description": "Approximate time remaining in the share's existing provisioned bandwidth downgrade request."
+                "description": "The next allowed provisioned bandwidth downgrade time."
               },
               "x-ms-share-next-allowed-provisioned-iops-downgrade-time": {
                 "type": "string",
                 "format": "date-time-rfc7231",
-                "description": "Approximate time remaining in the share's existing provisioned IOPS downgrade request."
+                "description": "The next allowed provisioned IOPS downgrade time."
               },
               "x-ms-share-next-allowed-quota-downgrade-time": {
                 "type": "string",
                 "format": "date-time-rfc7231",
-                "description": "Approximate time remaining in the share's existing downgrade request."
+                "description": "The next allowed quota downgrade time."
               },
               "x-ms-share-provisioned-bandwidth-mibps": {
                 "type": "integer",
@@ -4307,23 +4322,28 @@
               },
               "x-ms-share-included-burst-iops": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The share included burst IOPS."
               },
               "x-ms-share-max-burst-credits-for-iops": {
                 "type": "integer",
-                "format": "int64"
+                "format": "int64",
+                "description": "The share max burst credits for IOPS."
               },
               "x-ms-share-provisioned-bandwidth-mibps": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The share provisioned bandwidth in mebibytes per second."
               },
               "x-ms-share-provisioned-iops": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The share provisioned IOPS."
               },
               "x-ms-share-quota": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "description": "The current share quota."
               },
               "x-ms-version": {
                 "type": "string",
@@ -4864,7 +4884,7 @@
               },
               "x-ms-server-encrypted": {
                 "type": "boolean",
-                "description": "Whether server-encrypted."
+                "description": "The value of this header indicates whether the file data and application metadata are completely encrypted."
               },
               "x-ms-version": {
                 "type": "string",
@@ -7335,7 +7355,7 @@
           {
             "name": "Content-MD5",
             "in": "header",
-            "description": "An MD5 hash of the content. This hash is used to verify the integrity of data during transport.",
+            "description": "An MD5 hash of the content. This hash is used to verify the integrity of the data during transport.",
             "required": false,
             "type": "string",
             "format": "byte",
@@ -7410,7 +7430,7 @@
           {
             "name": "x-ms-structured-body",
             "in": "header",
-            "description": "Optional. Used for structured put operations.",
+            "description": "Required if the request body is a structured message. Specifies the message schema version and properties.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "structuredBodyType"
@@ -7418,7 +7438,7 @@
           {
             "name": "x-ms-structured-content-length",
             "in": "header",
-            "description": "Optional. Used for structured put operations to specify content length.",
+            "description": "Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length.",
             "required": false,
             "type": "integer",
             "format": "int64",
@@ -7441,7 +7461,8 @@
             "headers": {
               "Content-MD5": {
                 "type": "string",
-                "format": "byte"
+                "format": "byte",
+                "description": "An MD5 hash returned for the content."
               },
               "Date": {
                 "type": "string",
@@ -7476,7 +7497,7 @@
               },
               "x-ms-structured-body": {
                 "type": "string",
-                "description": "Structured body response header."
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               },
               "x-ms-version": {
                 "type": "string",
@@ -7800,7 +7821,7 @@
           {
             "name": "sharesnapshot",
             "in": "query",
-            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
+            "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
             "required": false,
             "type": "string"
           },
@@ -8131,7 +8152,7 @@
           {
             "name": "sharesnapshot",
             "in": "query",
-            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
+            "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
             "required": false,
             "type": "string"
           },
@@ -8267,7 +8288,7 @@
           {
             "name": "sharesnapshot",
             "in": "query",
-            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
+            "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
             "required": false,
             "type": "string"
           },
@@ -8429,7 +8450,7 @@
           {
             "name": "x-ms-destination-lease-id",
             "in": "header",
-            "description": "Required if the destination file has an active lease.",
+            "description": "Required if the destination has an active lease.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "destinationLeaseId"
@@ -8740,7 +8761,7 @@
           {
             "name": "x-ms-link-text",
             "in": "header",
-            "description": "NFS only. Required. The path to the original file, the symbolic link is pointing to.",
+            "description": "NFS only. The path to the original file, the symbolic link is pointing to.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "linkText"
@@ -8922,7 +8943,7 @@
           {
             "name": "sharesnapshot",
             "in": "query",
-            "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query.",
+            "description": "The snapshot parameter is an opaque DateTime value that specifies a share snapshot.",
             "required": false,
             "type": "string"
           },
@@ -8973,7 +8994,7 @@
               },
               "x-ms-link-text": {
                 "type": "string",
-                "description": "The path to the original file, the symbolic link is pointing to."
+                "description": "NFS only. The path to the original file, the symbolic link is pointing to."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -9174,7 +9195,7 @@
               "x-ms-link-count": {
                 "type": "integer",
                 "format": "int32",
-                "description": "Number of hard links to the file."
+                "description": "NFS only. The link count."
               },
               "x-ms-mode": {
                 "type": "string",

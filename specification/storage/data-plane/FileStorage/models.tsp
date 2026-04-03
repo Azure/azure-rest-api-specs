@@ -1978,3 +1978,411 @@ alias LeaseActionParameter<TAction extends string> = {
   @header("x-ms-lease-action")
   action: TAction;
 };
+
+//
+// Tier 2 Aliases — Consolidated from repeated inline definitions
+//
+
+/** Lease duration parameter. */
+alias LeaseDurationParameter = {
+  /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
+  @header("x-ms-lease-duration") leaseDuration?: int32;
+};
+
+/** Handle ID parameter. */
+alias HandleIdParameter = {
+  /** Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles. */
+  @header("x-ms-handle-id") handleId: string;
+};
+
+/** Force close handles response headers. */
+alias ForceCloseHandlesResponseHeaders = {
+  /** A string describing next handle to be closed. */
+  @header("x-ms-marker") marker?: string;
+
+  @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
+
+  @header("x-ms-number-of-handles-failed")
+  numberOfHandlesFailedToClose: int32;
+};
+
+/** Copy source header. */
+alias CopySourceHeader = {
+  /** Specifies the URL of the source file or blob, up to 2 KB in length. */
+  @header("x-ms-copy-source") copySource: string;
+};
+
+/** File last written mode header. */
+alias FileLastWrittenModeHeader = {
+  /** If the file last write time should be preserved or overwritten. */
+  @header("x-ms-file-last-write-time")
+  fileLastWrittenMode?: FileLastWrittenMode;
+};
+
+/** Link count response header. */
+alias LinkCountResponseHeader = {
+  /** NFS only. The link count. */
+  @header("x-ms-link-count") linkCount?: int32;
+};
+
+/** Content-MD5 request header. */
+alias ContentMD5RequestHeader = {
+  /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  @header("Content-MD5") contentMD5?: bytes;
+};
+
+/** Content-MD5 response header. */
+alias ContentMD5ResponseHeader = {
+  /** An MD5 hash returned for the content. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  @header("Content-MD5") contentMD5?: bytes;
+};
+
+/** File property semantics header. */
+alias FilePropertySemanticsHeader = {
+  /** SMB only. Default value is New. */
+  @header("x-ms-file-property-semantics")
+  filePropertySemantics?: FilePropertySemantics;
+};
+
+/** Structured body request headers. */
+alias StructuredBodyRequestHeaders = {
+  ...StructuredBodyGetRequestHeader;
+
+  /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
+  @header("x-ms-structured-content-length") structuredContentLength?: int64;
+};
+
+/** Structured body response header. */
+alias StructuredBodyResponseHeader = {
+  /** Specifies the response content should be returned as a structured message and specifies the message schema version and properties. */
+  @header("x-ms-structured-body") structuredBodyType?: string;
+};
+
+/** Structured body response headers with content length. */
+alias StructuredBodyResponseHeaders = {
+  ...StructuredBodyResponseHeader;
+
+  /** Structured content length. */
+  @header("x-ms-structured-content-length") structuredContentLength?: int64;
+};
+
+/** Share access tier request header. */
+alias ShareAccessTierRequestHeader = {
+  /** Specifies the access tier of the share. */
+  @header("x-ms-access-tier") accessTier?: ShareAccessTier;
+};
+
+/** Share root squash request header. */
+alias ShareRootSquashRequestHeader = {
+  /** Root squash to set on the share. Only valid for NFS shares. */
+  @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
+};
+
+/** Share provisioned IOPS request header. */
+alias ShareProvisionedIopsRequestHeader = {
+  /** Optional. Specifies the provisioned IOPS of the share. */
+  @header("x-ms-share-provisioned-iops")
+  @alternateType(int64, "csharp")
+  shareProvisionedIops?: int32;
+};
+
+/** Share provisioned bandwidth request header. */
+alias ShareProvisionedBandwidthRequestHeader = {
+  /** Optional. Specifies the provisioned bandwidth of the share, in MiBps. */
+  @header("x-ms-share-provisioned-bandwidth-mibps")
+  @alternateType(int64, "csharp")
+  shareProvisionedBandwidthMibps?: int32;
+};
+
+/** Enable snapshot virtual directory access header. */
+alias EnableSnapshotVirtualDirectoryAccessHeader = {
+  /** Optional. Used to enable snapshot virtual directory access. */
+  @header("x-ms-enable-snapshot-virtual-directory-access")
+  enableSnapshotVirtualDirectoryAccess?: boolean;
+};
+
+/** Enable SMB directory lease header. */
+alias EnableSmbDirectoryLeaseHeader = {
+  /** Optional. Used to enable SMB directory lease. */
+  @header("x-ms-enable-smb-directory-lease")
+  enableSmbDirectoryLease?: boolean;
+};
+
+/** Destination lease ID parameter. */
+alias DestinationLeaseIdParameter = {
+  /** Required if the destination has an active lease. */
+  @header("x-ms-destination-lease-id") destinationLeaseId?: string;
+};
+
+/** Server encrypted response header. */
+alias ServerEncryptedResponseHeader = {
+  /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
+  @header("x-ms-server-encrypted") serverEncrypted?: boolean;
+};
+
+/** Copy source authorization header. */
+alias CopySourceAuthorizationHeader = {
+  /** Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source. */
+  @header("x-ms-copy-source-authorization")
+  copySourceAuthorization?: string;
+};
+
+/** File content length response header (x-ms-content-length). */
+alias FileContentLengthResponseHeader = {
+  /** The length of the file. */
+  @header("x-ms-content-length") fileContentLength: int64;
+};
+
+/** Previous share snapshot parameter. */
+alias PreviousSnapshotParameter = {
+  /** The previous snapshot parameter is an opaque DateTime value that specifies a previous file snapshot to compare against. */
+  @query prevsharesnapshot?: string;
+};
+
+/** Support rename header. */
+alias SupportRenameHeader = {
+  /** This header is allowed only when PrevShareSnapshot query parameter is set. Determines whether the changed ranges for a file that has been renamed or moved should be listed. */
+  @header("x-ms-file-support-rename") supportRename?: boolean;
+};
+
+/** File last write time response header (with encoding). */
+alias FileLastWriteTimeResponseHeader = {
+  /** The file last write time. */
+  @header("x-ms-file-last-write-time")
+  @encode("rfc7231")
+  @alternateType(string, "python")
+  fileLastWriteTime?: utcDateTime;
+};
+
+/** Content CRC64 response header. */
+alias ContentCrc64ResponseHeader = {
+  /** CRC64 hash of the range content. */
+  @header("x-ms-content-crc64") contentCrc64?: string;
+};
+
+// ================================================================
+// Tier 3 aliases — single-use inline definitions extracted for consistency
+// ================================================================
+
+/** Delete snapshots option header. */
+alias DeleteSnapshotsHeader = {
+  /** Specifies the option include to delete the base share and all of its snapshots. */
+  @header("x-ms-delete-snapshots")
+  deleteSnapshots?: DeleteSnapshotsOptionType;
+};
+
+/** Deleted share name header for restore operations. */
+alias ShareDeletedNameHeader = {
+  /** Specifies the name of the previously-deleted share. */
+  @header("x-ms-deleted-share-name") deletedShareName?: string;
+};
+
+/** Deleted share version header for restore operations. */
+alias ShareDeletedVersionHeader = {
+  /** Specifies the version of the previously-deleted share. */
+  @header("x-ms-deleted-share-version") deletedShareVersion?: string;
+};
+
+/** Lease break period parameter. */
+alias BreakPeriodParameter = {
+  /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
+  @header("x-ms-lease-break-period") breakPeriod?: int32;
+};
+
+/** Snapshot response header. */
+alias SnapshotResponseHeader = {
+  /** This header is a DateTime value that uniquely identifies the share snapshot. The value of this header may be used in subsequent requests to access the share snapshot. This value is opaque. */
+  @header("x-ms-snapshot") snapshot: string;
+};
+
+/** File permission key response header. */
+alias FilePermissionKeyResponseHeader = {
+  /** Key of the permission set for the directory/file. */
+  @header("x-ms-file-permission-key") filePermissionKey: string;
+};
+
+/** File permission key request header. */
+alias FilePermissionKeyRequestHeader = {
+  /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
+  @header("x-ms-file-permission-key") filePermissionKey: string;
+};
+
+/** Enabled protocols header for share creation. */
+alias EnabledProtocolsHeader = {
+  /** Protocols to enable on the share. */
+  @header("x-ms-enabled-protocols") enabledProtocols?: string;
+};
+
+/** File extended info header for directory listing. */
+alias FileExtendedInfoHeader = {
+  /** Include extended information. */
+  @header("x-ms-file-extended-info") includeExtendedInfo?: boolean;
+};
+
+/** File permission copy mode header for copy operations. */
+alias FilePermissionCopyModeHeader = {
+  /** Specifies the option to copy file security descriptor from source file or to set it using the value which is defined by the header value of x-ms-file-permission or x-ms-file-permission-key. */
+  @header("x-ms-file-permission-copy-mode")
+  filePermissionCopyMode?: PermissionCopyModeType;
+};
+
+/** Ignore read-only header for copy operations. */
+alias IgnoreReadOnlyHeader = {
+  /** A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden. */
+  @header("x-ms-file-copy-ignore-readonly")
+  ignoreReadOnly?: boolean;
+};
+
+/** Set archive attribute header for copy operations. */
+alias SetArchiveAttributeHeader = {
+  /** Optional. Sets the archive attribute on the destination file. */
+  @header("x-ms-file-copy-set-archive")
+  setArchiveAttribute?: boolean;
+};
+
+/** File mode copy mode header for NFS copy operations. */
+alias ModeCopyModeHeader = {
+  /** Specifies mode copy option for the file. */
+  @header("x-ms-file-mode-copy-mode")
+  fileModeCopyMode?: ModeCopyMode;
+};
+
+/** File owner copy mode header for NFS copy operations. */
+alias OwnerCopyModeHeader = {
+  /** Specifies owner copy option for the file. */
+  @header("x-ms-file-owner-copy-mode")
+  fileOwnerCopyMode?: OwnerCopyMode;
+};
+
+/** Copy ID response header. */
+alias CopyIdResponseHeader = {
+  /** String identifier for this copy operation. */
+  @header("x-ms-copy-id") copyId: string;
+};
+
+/** Copy status response header. */
+alias CopyStatusResponseHeader = {
+  /** State of the copy operation identified by x-ms-copy-id. */
+  @header("x-ms-copy-status") copyStatus: CopyStatus;
+};
+
+/** Copy action abort header. */
+alias CopyActionAbortHeader = {
+  /** Must be the literal "abort" to abort the pending copy operation. */
+  @header("x-ms-copy-action") copyActionAbortConstant: "abort";
+};
+
+/** Copy ID query parameter. */
+alias CopyIdQueryParameter = {
+  /** The copy identifier provided in the x-ms-copy-id header of the original Copy File operation. */
+  @query copyid: string;
+};
+
+/** Link text header for symbolic link operations. */
+alias LinkTextHeader = {
+  /** NFS only. The path to the original file, the symbolic link is pointing to. */
+  @header("x-ms-link-text") linkText: string;
+};
+
+/** Target file header for hard link operations. */
+alias TargetFileHeader = {
+  /** NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. */
+  @header("x-ms-file-target-file") targetFile: string;
+};
+
+/** Range-get content MD5 request header. */
+alias RangeGetContentMD5Header = {
+  /** When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  @header("x-ms-range-get-content-md5") rangeGetContentMD5?: boolean;
+};
+
+/** Structured body type request header for get operations. */
+alias StructuredBodyGetRequestHeader = {
+  /** Specifies the response content should be returned as a structured message and specifies the message schema version and properties. */
+  @header("x-ms-structured-body") structuredBodyType?: string;
+};
+
+/** File content MD5 response header (x-ms-content-md5). */
+alias FileContentMD5ResponseHeader = {
+  /** The MD5 hash of the full file content. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  @header("x-ms-content-md5") fileContentMD5?: bytes;
+};
+
+/** NFS timestamp response headers for symbolic link and hard link operations. */
+alias NfsTimestampResponseHeaders = {
+  /** The file creation time. */
+  @header("x-ms-file-creation-time") fileCreationTime?: string;
+
+  /** The file last write time. */
+  @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+
+  /** The file change time. */
+  @header("x-ms-file-change-time") fileChangeTime?: string;
+
+  /** The fileId of the file. */
+  @header("x-ms-file-id") fileId?: string;
+
+  /** The parent fileId of the file. */
+  @header("x-ms-file-parent-id") fileParentId?: string;
+};
+
+/** Share provisioning response headers (quota, IOPS, bandwidth, burst). Used in setProperties and restore responses. */
+alias ShareProvisioningResponseHeaders = {
+  /** The current share quota. */
+  @header("x-ms-share-quota") quota?: int32;
+
+  /** The share provisioned IOPS. */
+  @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
+
+  /** The share provisioned bandwidth in mebibytes per second. */
+  @header("x-ms-share-provisioned-bandwidth-mibps")
+  provisionedBandwidthMibps?: int32;
+
+  /** The share included burst IOPS. */
+  @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
+
+  /** The share max burst credits for IOPS. */
+  @header("x-ms-share-max-burst-credits-for-iops")
+  maxBurstCreditsForIops?: int64;
+};
+
+/** Share downgrade time response headers. Used in getProperties and setProperties responses. */
+alias ShareDowngradeTimeResponseHeaders = {
+  /** The next allowed quota downgrade time. */
+  @encode("rfc7231")
+  @header("x-ms-share-next-allowed-quota-downgrade-time")
+  nextAllowedQuotaDowngradeTime?: utcDateTime;
+
+  /** The next allowed provisioned IOPS downgrade time. */
+  @encode("rfc7231")
+  @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
+  nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
+
+  /** The next allowed provisioned bandwidth downgrade time. */
+  @encode("rfc7231")
+  @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
+  nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
+};
+
+/** Standard HTTP content response headers for file download and getProperties. */
+alias FileHttpContentResponseHeaders = {
+  /** An MD5 hash returned for the content. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
+  @header("Content-MD5") contentMD5?: bytes;
+
+  /** The content encoding of the file. */
+  @header("Content-Encoding") contentEncoding?: string;
+
+  /** The cache control of the file. */
+  @header("Cache-Control") cacheControl?: string;
+
+  /** The content disposition of the file. */
+  @header("Content-Disposition") contentDisposition?: string;
+
+  /** The content language of the file. */
+  @header("Content-Language") contentLanguage?: string;
+};

@@ -182,36 +182,17 @@ interface Share {
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...ShareQuotaOptionalHeader;
+      ...ShareAccessTierRequestHeader;
 
-      /** Specifies the access tier of the share. */
-      @header("x-ms-access-tier") accessTier?: ShareAccessTier;
+      ...EnabledProtocolsHeader;
 
-      /** Protocols to enable on the share. */
-      @header("x-ms-enabled-protocols") enabledProtocols?: string;
-
-      /** Root squash to set on the share. Only valid for NFS shares. */
-      @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
-
-      /** Optional. Used to enable snapshot virtual directory access. */
-      @header("x-ms-enable-snapshot-virtual-directory-access")
-      enableSnapshotVirtualDirectoryAccess?: boolean;
-
+      ...ShareRootSquashRequestHeader;
+      ...EnableSnapshotVirtualDirectoryAccessHeader;
       ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
-
-      /** Optional. Specifies the provisioned IOPS of the share. */
-      @header("x-ms-share-provisioned-iops")
-      @alternateType(int64, "csharp")
-      shareProvisionedIops?: int32;
-
-      /** Optional. Specifies the provisioned bandwidth of the share, in MiBps. */
-      @header("x-ms-share-provisioned-bandwidth-mibps")
-      @alternateType(int64, "csharp")
-      shareProvisionedBandwidthMibps?: int32;
-
-      /** Optional. Used to enable SMB directory lease. */
-      @header("x-ms-enable-smb-directory-lease")
-      enableSmbDirectoryLease?: boolean;
+      ...ShareProvisionedIopsRequestHeader;
+      ...ShareProvisionedBandwidthRequestHeader;
+      ...EnableSmbDirectoryLeaseHeader;
     },
     {
       @statusCode statusCode: 201;
@@ -330,8 +311,7 @@ interface Share {
       ...TimeoutParameter;
 
       /** Specifies the option include to delete the base share and all of its snapshots. */
-      @header("x-ms-delete-snapshots")
-      deleteSnapshots?: DeleteSnapshotsOptionType;
+      ...DeleteSnapshotsHeader;
 
       ...FileRequestIntentParameter;
       ...LeaseIdOptionalParameter;
@@ -353,10 +333,7 @@ interface Share {
   acquireLease is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-
-      /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
-      @header("x-ms-lease-duration") leaseDuration?: int32;
-
+      ...LeaseDurationParameter;
       ...ProposeLeaseIdParameter;
       ...LeaseActionParameter<"acquire">;
       ...ShareSnapshotParameter;
@@ -446,8 +423,7 @@ interface Share {
     {
       ...TimeoutParameter;
 
-      /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
-      @header("x-ms-lease-break-period") breakPeriod?: int32;
+      ...BreakPeriodParameter;
 
       ...LeaseIdOptionalParameter;
       ...LeaseActionParameter<"break">;
@@ -479,8 +455,7 @@ interface Share {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
 
-      /** This header is a DateTime value that uniquely identifies the share snapshot. The value of this header may be used in subsequent requests to access the share snapshot. This value is opaque. */
-      @header("x-ms-snapshot") snapshot: string;
+      ...SnapshotResponseHeader;
     }
   >;
 
@@ -500,8 +475,7 @@ interface Share {
     {
       @statusCode statusCode: 201;
 
-      /** Key of the permission set for the directory/file. */
-      @header("x-ms-file-permission-key") filePermissionKey: string;
+      ...FilePermissionKeyResponseHeader;
     },
     "application/json"
   >;
@@ -513,8 +487,7 @@ interface Share {
   @get
   getPermission is StorageOperationResponseBody<
     {
-      /** Key of the permission to be set for the directory/file. Note: Only one of the x-ms-file-permission or x-ms-file-permission-key should be specified. */
-      @header("x-ms-file-permission-key") filePermissionKey: string;
+      ...FilePermissionKeyRequestHeader;
 
       ...TimeoutParameter;
 
@@ -540,71 +513,21 @@ interface Share {
     {
       ...TimeoutParameter;
       ...ShareQuotaOptionalHeader;
-
-      /** Specifies the access tier of the share. */
-      @header("x-ms-access-tier") accessTier?: ShareAccessTier;
-
+      ...ShareAccessTierRequestHeader;
       ...LeaseIdOptionalParameter;
-
-      /** Root squash to set on the share. Only valid for NFS shares. */
-      @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
-
-      /** Optional. Used to enable snapshot virtual directory access. */
-      @header("x-ms-enable-snapshot-virtual-directory-access")
-      enableSnapshotVirtualDirectoryAccess?: boolean;
-
+      ...ShareRootSquashRequestHeader;
+      ...EnableSnapshotVirtualDirectoryAccessHeader;
       ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
-
-      /** Optional. Specifies the provisioned number of input/output operations per second (IOPS) of the share. */
-      @header("x-ms-share-provisioned-iops")
-      @alternateType(int64, "csharp")
-      shareProvisionedIops?: int32;
-
-      /** Optional. Specifies the provisioned bandwidth of the share, in MiBps. */
-      @header("x-ms-share-provisioned-bandwidth-mibps")
-      @alternateType(int64, "csharp")
-      shareProvisionedBandwidthMibps?: int32;
-
-      /** Optional. Used to enable SMB directory lease. */
-      @header("x-ms-enable-smb-directory-lease")
-      enableSmbDirectoryLease?: boolean;
+      ...ShareProvisionedIopsRequestHeader;
+      ...ShareProvisionedBandwidthRequestHeader;
+      ...EnableSmbDirectoryLeaseHeader;
     },
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
-      /** The current share quota. */
-      @header("x-ms-share-quota") quota?: int32;
-
-      /** The share provisioned IOPS. */
-      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
-
-      /** The share provisioned bandwidth in mebibytes per second. */
-      @header("x-ms-share-provisioned-bandwidth-mibps")
-      provisionedBandwidthMibps?: int32;
-
-      /** The share included burst IOPS. */
-      @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
-
-      /** The share max burst credits for IOPS. */
-      @header("x-ms-share-max-burst-credits-for-iops")
-      maxBurstCreditsForIops?: int64;
-
-      /** Approximate time remaining in the share's existing downgrade request. */
-      @encode("rfc7231")
-      @header("x-ms-share-next-allowed-quota-downgrade-time")
-      nextAllowedQuotaDowngradeTime?: utcDateTime;
-
-      /** Approximate time remaining in the share's existing provisioned IOPS downgrade request. */
-      @encode("rfc7231")
-      @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
-      nextAllowedProvisionedIopsDowngradeTime?: utcDateTime;
-
-      /** Approximate time remaining in the share's existing provisioned bandwidth downgrade request. */
-      @encode("rfc7231")
-      @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
-      nextAllowedProvisionedBandwidthDowngradeTime?: utcDateTime;
+      ...ShareProvisioningResponseHeaders;
+      ...ShareDowngradeTimeResponseHeaders;
     }
   >;
 
@@ -702,11 +625,9 @@ interface Share {
     {
       ...TimeoutParameter;
 
-      /** Specifies the name of the previously-deleted share. */
-      @header("x-ms-deleted-share-name") deletedShareName?: string;
+      ...ShareDeletedNameHeader;
 
-      /** Specifies the version of the previously-deleted share. */
-      @header("x-ms-deleted-share-version") deletedShareVersion?: string;
+      ...ShareDeletedVersionHeader;
 
       ...FileRequestIntentParameter;
     },
@@ -714,16 +635,7 @@ interface Share {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      @header("x-ms-share-quota") quota?: int32;
-      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
-
-      @header("x-ms-share-provisioned-bandwidth-mibps")
-      provisionedBandwidthMibps?: int32;
-
-      @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
-
-      @header("x-ms-share-max-burst-credits-for-iops")
-      maxBurstCreditsForIops?: int64;
+      ...ShareProvisioningResponseHeaders;
     }
   >;
 }
@@ -747,11 +659,7 @@ interface Directory {
       ...FilePermissionFormatParameter;
       ...FileRequestIntentParameter;
       ...NfsRequestHeaders;
-
-      /** SMB only. Default value is New. */
-      @header("x-ms-file-property-semantics")
-      filePropertySemantics?: FilePropertySemantics;
-
+      ...FilePropertySemanticsHeader;
       ...AllowTrailingDotParameter;
     },
     {
@@ -782,8 +690,7 @@ interface Directory {
       ...LastModifiedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
 
-      /** Whether server-encrypted. */
-      @header("x-ms-server-encrypted") serverEncrypted?: boolean;
+      ...ServerEncryptedResponseHeader;
 
       ...NfsResponseHeaders;
     }
@@ -869,8 +776,7 @@ interface Directory {
 
       ...TimeoutParameter;
 
-      /** Include extended information. */
-      @header("x-ms-file-extended-info") includeExtendedInfo?: boolean;
+      ...FileExtendedInfoHeader;
 
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
@@ -912,9 +818,7 @@ interface Directory {
   @put
   forceCloseHandles is StorageOperationNoBody<
     {
-      /** Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles. */
-      @header("x-ms-handle-id") handleId: string;
-
+      ...HandleIdParameter;
       ...TimeoutParameter;
       ...MarkerParameter;
       ...ShareSnapshotParameter;
@@ -923,13 +827,7 @@ interface Directory {
       ...FileRequestIntentParameter;
     },
     {
-      /** A string describing next handle to be closed. */
-      @header("x-ms-marker") marker?: string;
-
-      @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-
-      @header("x-ms-number-of-handles-failed")
-      numberOfHandlesFailedToClose: int32;
+      ...ForceCloseHandlesResponseHeaders;
     }
   >;
 
@@ -943,9 +841,7 @@ interface Directory {
     {
       ...TimeoutParameter;
       ...RenameRequestHeaders;
-
-      /** Required if the destination has an active lease. */
-      @header("x-ms-destination-lease-id") destinationLeaseId?: string;
+      ...DestinationLeaseIdParameter;
 
       /** If specified, the provided file attributes shall be set. */
       @header("x-ms-file-attributes") fileAttributes?: string;
@@ -1017,23 +913,13 @@ interface File {
       /** Optional, NFS only. Type of the file or directory. */
       @header("x-ms-file-file-type") nfsFileType?: NfsFileType;
 
-      /** An MD5 hash of the content. This hash is used to verify the integrity of the data during transport. */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("Content-MD5") contentMD5?: bytes;
-
-      /** SMB only. Default value is New. */
-      @header("x-ms-file-property-semantics")
-      filePropertySemantics?: FilePropertySemantics;
+      ...ContentMD5RequestHeader;
+      ...FilePropertySemanticsHeader;
 
       /** Optional. Specifies the content length of the file. */
       @header("Content-Length") optionalContentLength?: int64;
 
-      /** Required if the request body is a structured message. Specifies the message schema version and properties. */
-      @header("x-ms-structured-body") structuredBodyType?: string;
-
-      /** Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length. */
-      @header("x-ms-structured-content-length") structuredContentLength?: int64;
-
+      ...StructuredBodyRequestHeaders;
       ...OptionalBody;
     },
     {
@@ -1043,16 +929,12 @@ interface File {
       ...RequestServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
       ...NfsResponseHeaders;
-
-      /** An MD5 hash returned for the content. */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("Content-MD5") contentMD5?: bytes;
+      ...ContentMD5ResponseHeader;
 
       /** Content length of the file. */
       @header("Content-Length") contentLength?: int64;
 
-      /** Indicates the structured message body was accepted and mirrors back the message schema version and properties. */
-      @header("x-ms-structured-body") structuredBodyType?: string;
+      ...StructuredBodyResponseHeader;
     }
   >;
 
@@ -1066,16 +948,13 @@ interface File {
       ...TimeoutParameter;
       ...RangeHeader;
 
-      /** When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size. */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("x-ms-range-get-content-md5") rangeGetContentMD5?: boolean;
+      ...RangeGetContentMD5Header;
 
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
 
-      /** Optional. Used for structured get operations. */
-      @header("x-ms-structured-body") structuredBodyType?: string;
+      ...StructuredBodyGetRequestHeader;
     },
     {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying supported status codes for download operation."
@@ -1085,35 +964,18 @@ interface File {
       @header("Content-Length") contentLength: int64;
       @header("Content-Range") contentRange?: string;
       @header("ETag") etag: Azure.Core.eTag;
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("Content-MD5") contentMD5?: bytes;
-      @header("Content-Encoding") contentEncoding?: string;
-      @header("Cache-Control") cacheControl?: string;
-      @header("Content-Disposition") contentDisposition?: string;
-      @header("Content-Language") contentLanguage?: string;
+      ...FileHttpContentResponseHeaders;
       @header("Accept-Ranges") acceptRanges?: string;
       ...CopyStatusResponseHeaders;
 
-      /** The MD5 hash of the full file content. */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("x-ms-content-md5") fileContentMD5?: bytes;
+      ...FileContentMD5ResponseHeader;
 
-      /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
-      @header("x-ms-server-encrypted") serverEncrypted?: boolean;
-
+      ...ServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
       ...LeaseResponseHeaders;
-
-      /** Structured body response header. */
-      @header("x-ms-structured-body") structuredBodyType?: string;
-
-      /** Structured content length. */
-      @header("x-ms-structured-content-length") structuredContentLength?: int64;
-
+      ...StructuredBodyResponseHeaders;
       ...NfsResponseHeaders;
-
-      /** NFS only. The link count. */
-      @header("x-ms-link-count") linkCount?: int32;
+      ...LinkCountResponseHeader;
 
       @body content?: bytes;
     }
@@ -1125,8 +987,7 @@ interface File {
   @head
   getProperties is StorageOperationNoBody<
     {
-      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
-      @query sharesnapshot?: string;
+      ...ShareSnapshotParameter;
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
@@ -1144,23 +1005,13 @@ interface File {
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
       @header("ETag") etag: Azure.Core.eTag;
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("Content-MD5") contentMD5?: bytes;
-      @header("Content-Encoding") contentEncoding?: string;
-      @header("Cache-Control") cacheControl?: string;
-      @header("Content-Disposition") contentDisposition?: string;
-      @header("Content-Language") contentLanguage?: string;
+      ...FileHttpContentResponseHeaders;
       ...CopyStatusResponseHeaders;
-
-      /** The value of this header indicates whether the file data and application metadata are completely encrypted. */
-      @header("x-ms-server-encrypted") serverEncrypted?: boolean;
-
+      ...ServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
       ...LeaseResponseHeaders;
       ...NfsResponseHeaders;
-
-      /** NFS only. The link count. */
-      @header("x-ms-link-count") linkCount?: int32;
+      ...LinkCountResponseHeader;
     }
   >;
 
@@ -1177,9 +1028,7 @@ interface File {
     },
     {
       @statusCode statusCode: 202;
-
-      /** NFS only. The link count. */
-      @header("x-ms-link-count") linkCount?: int32;
+      ...LinkCountResponseHeader;
     }
   >;
 
@@ -1212,9 +1061,7 @@ interface File {
       @header("x-ms-mode") fileMode?: string;
       @header("x-ms-owner") owner?: string;
       @header("x-ms-group") group?: string;
-
-      /** NFS only. The link count. */
-      @header("x-ms-link-count") linkCount?: int32;
+      ...LinkCountResponseHeader;
     }
   >;
 
@@ -1250,10 +1097,7 @@ interface File {
   acquireLease is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-
-      /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
-      @header("x-ms-lease-duration") leaseDuration?: int32;
-
+      ...LeaseDurationParameter;
       ...ProposeLeaseIdParameter;
       ...LeaseActionParameter<"acquire">;
       ...FileRequestIntentParameter;
@@ -1366,44 +1210,22 @@ interface File {
       @header("Content-Length") contentLength: int64;
 
       ...TimeoutParameter;
-
-      /** An MD5 hash of the content. This hash is used to verify the integrity of data during transport. */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("Content-MD5") contentMD5?: bytes;
-
+      ...ContentMD5RequestHeader;
       ...LeaseIdOptionalParameter;
-
-      /** If the file last write time should be preserved or overwritten. */
-      @header("x-ms-file-last-write-time")
-      fileLastWrittenMode?: FileLastWrittenMode;
-
+      ...FileLastWrittenModeHeader;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
-      /** Optional. Used for structured put operations. */
-      @header("x-ms-structured-body") structuredBodyType?: string;
-
-      /** Optional. Used for structured put operations to specify content length. */
-      @header("x-ms-structured-content-length") structuredContentLength?: int64;
-
+      ...StructuredBodyRequestHeaders;
       ...OptionalBody;
     },
     {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing client name customization"
-      @header("Content-MD5") contentMD5?: bytes;
+      ...ContentMD5ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
-
-      /** The file last write time. */
-      @header("x-ms-file-last-write-time")
-      @encode("rfc7231")
-      @alternateType(string, "python")
-      fileLastWriteTime?: utcDateTime;
-
-      /** Structured body response header. */
-      @header("x-ms-structured-body") structuredBodyType?: string;
+      ...FileLastWriteTimeResponseHeader;
+      ...StructuredBodyResponseHeader;
     }
   >;
 
@@ -1419,8 +1241,7 @@ interface File {
       /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
       @header("Range") range: string;
 
-      /** Specifies the URL of the source file or blob, up to 2 KB in length. */
-      @header("x-ms-copy-source") copySource: string;
+      ...CopySourceHeader;
 
       /** Bytes of source data in the specified range. */
       @header("x-ms-source-range") sourceRange?: string;
@@ -1445,15 +1266,8 @@ interface File {
       sourceIfNoneMatchCrc64?: string;
 
       ...LeaseIdOptionalParameter;
-
-      /** Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source. */
-      @header("x-ms-copy-source-authorization")
-      copySourceAuthorization?: string;
-
-      /** If the file last write time should be preserved or overwritten. */
-      @header("x-ms-file-last-write-time")
-      fileLastWrittenMode?: FileLastWrittenMode;
-
+      ...CopySourceAuthorizationHeader;
+      ...FileLastWrittenModeHeader;
       ...AllowTrailingDotParameter;
       ...SourceAllowTrailingDotParameter;
       ...FileRequestIntentParameter;
@@ -1462,17 +1276,9 @@ interface File {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
-      /** CRC64 hash of the range content. */
-      @header("x-ms-content-crc64") contentCrc64?: string;
-
+      ...ContentCrc64ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
-
-      /** The file last write time. */
-      @encode("rfc7231")
-      @header("x-ms-file-last-write-time")
-      @alternateType(string, "python")
-      fileLastWriteTime?: utcDateTime;
+      ...FileLastWriteTimeResponseHeader;
     }
   >;
 
@@ -1483,28 +1289,19 @@ interface File {
   @get
   getRangeList is StorageOperationResponseBody<
     {
-      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
-      @query sharesnapshot?: string;
-
-      /** The previous snapshot parameter is an opaque DateTime value that specifies a previous file snapshot to compare against. */
-      @query prevsharesnapshot?: string;
-
+      ...ShareSnapshotParameter;
+      ...PreviousSnapshotParameter;
       ...TimeoutParameter;
       ...RangeHeader;
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
-      /** This header is allowed only when PrevShareSnapshot query parameter is set. Determines whether the changed ranges for a file that has been renamed or moved should be listed. */
-      @header("x-ms-file-support-rename") supportRename?: boolean;
+      ...SupportRenameHeader;
     },
     {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
-
-      /** The length of the file. */
-      @header("x-ms-content-length") fileContentLength: int64;
-
+      ...FileContentLengthResponseHeader;
       @body rangeList: ShareFileRangeList;
     }
   >;
@@ -1516,9 +1313,7 @@ interface File {
   @put
   startCopy is StorageOperationNoBody<
     {
-      /** Specifies the URL of the source file or blob, up to 2 KB in length. */
-      @header("x-ms-copy-source") copySource: string;
-
+      ...CopySourceHeader;
       ...TimeoutParameter;
       ...MetadataHeaders;
 
@@ -1530,13 +1325,9 @@ interface File {
       /** Key of the permission to be set. */
       @header("x-ms-file-permission-key") filePermissionKey?: string;
 
-      /** Specifies the option to copy file security descriptor from source file or to set it using the value which is defined by the header value of x-ms-file-permission or x-ms-file-permission-key. */
-      @header("x-ms-file-permission-copy-mode")
-      filePermissionCopyMode?: PermissionCopyModeType;
+      ...FilePermissionCopyModeHeader;
 
-      /** A boolean value that specifies whether the ReadOnly attribute on a preexisting destination file should be respected or overridden. */
-      @header("x-ms-file-copy-ignore-readonly")
-      ignoreReadOnly?: boolean;
+      ...IgnoreReadOnlyHeader;
 
       /** If specified, the provided file attributes shall be set. */
       @header("x-ms-file-attributes") fileAttributes?: string;
@@ -1550,9 +1341,7 @@ interface File {
       /** Change time for the file. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
 
-      /** Optional. Sets the archive attribute on the destination file. */
-      @header("x-ms-file-copy-set-archive")
-      setArchiveAttribute?: boolean;
+      ...SetArchiveAttributeHeader;
 
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1560,24 +1349,18 @@ interface File {
       ...FileRequestIntentParameter;
       ...NfsRequestHeaders;
 
-      /** Specifies mode copy option for the file. */
-      @header("x-ms-file-mode-copy-mode")
-      fileModeCopyMode?: ModeCopyMode;
+      ...ModeCopyModeHeader;
 
-      /** Specifies owner copy option for the file. */
-      @header("x-ms-file-owner-copy-mode")
-      fileOwnerCopyMode?: OwnerCopyMode;
+      ...OwnerCopyModeHeader;
     },
     {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
 
-      /** String identifier for this copy operation. */
-      @header("x-ms-copy-id") copyId: string;
+      ...CopyIdResponseHeader;
 
-      /** State of the copy operation identified by x-ms-copy-id. */
-      @header("x-ms-copy-status") copyStatus: CopyStatus;
+      ...CopyStatusResponseHeader;
     }
   >;
 
@@ -1589,11 +1372,9 @@ interface File {
   @put
   abortCopy is StorageOperationNoBody<
     {
-      /** Must be the literal "abort" to abort the pending copy operation. */
-      @header("x-ms-copy-action") copyActionAbortConstant: "abort";
+      ...CopyActionAbortHeader;
 
-      /** The copy identifier provided in the x-ms-copy-id header of the original Copy File operation. */
-      @query copyid: string;
+      ...CopyIdQueryParameter;
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
@@ -1618,10 +1399,7 @@ interface File {
       ...MarkerParameter;
       ...MaxResultsParameter;
       ...TimeoutParameter;
-
-      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
-      @query sharesnapshot?: string;
-
+      ...ShareSnapshotParameter;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
@@ -1639,26 +1417,15 @@ interface File {
   @put
   forceCloseHandles is StorageOperationNoBody<
     {
-      /** Specifies handle ID opened on the file or directory to be closed. Asterisk ('*') is a wildcard that specifies all handles. */
-      @header("x-ms-handle-id") handleId: string;
-
+      ...HandleIdParameter;
       ...TimeoutParameter;
       ...MarkerParameter;
-
-      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
-      @query sharesnapshot?: string;
-
+      ...ShareSnapshotParameter;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
     {
-      /** A string describing next handle to be closed. */
-      @header("x-ms-marker") marker?: string;
-
-      @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-
-      @header("x-ms-number-of-handles-failed")
-      numberOfHandlesFailedToClose: int32;
+      ...ForceCloseHandlesResponseHeaders;
     }
   >;
 
@@ -1672,9 +1439,7 @@ interface File {
     {
       ...TimeoutParameter;
       ...RenameRequestHeaders;
-
-      /** Required if the destination file has an active lease. */
-      @header("x-ms-destination-lease-id") destinationLeaseId?: string;
+      ...DestinationLeaseIdParameter;
 
       /** If specified, the provided file attributes shall be set. */
       @header("x-ms-file-attributes") fileAttributes?: string;
@@ -1737,8 +1502,7 @@ interface File {
       /** Optional, NFS only. The owning group of the file or directory. */
       @header("x-ms-group") group?: string;
 
-      /** NFS only. Required. The path to the original file, the symbolic link is pointing to. */
-      @header("x-ms-link-text") linkText: string;
+      ...LinkTextHeader;
 
       ...FileRequestIntentParameter;
     },
@@ -1747,20 +1511,7 @@ interface File {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
 
-      /** The file creation time. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-
-      /** The file last write time. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-
-      /** The file change time. */
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-
-      /** The fileId of the file. */
-      @header("x-ms-file-id") fileId?: string;
-
-      /** The parent fileId of the file. */
-      @header("x-ms-file-parent-id") fileParentId?: string;
+      ...NfsTimestampResponseHeaders;
 
       ...NfsResponseHeaders;
     }
@@ -1774,18 +1525,14 @@ interface File {
   getSymbolicLink is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-
-      /** The snapshot parameter is an opaque DateTime value that, when present, specifies the share snapshot to query. */
-      @query sharesnapshot?: string;
-
+      ...ShareSnapshotParameter;
       ...FileRequestIntentParameter;
     },
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
 
-      /** The path to the original file, the symbolic link is pointing to. */
-      @header("x-ms-link-text") linkText: string;
+      ...LinkTextHeader;
     }
   >;
 
@@ -1800,8 +1547,7 @@ interface File {
       ...FileTypeParameter;
       ...LeaseIdOptionalParameter;
 
-      /** NFS only. Required. Specifies the path of the target file to which the link will be created, up to 2 KiB in length. */
-      @header("x-ms-file-target-file") targetFile: string;
+      ...TargetFileHeader;
 
       ...FileRequestIntentParameter;
     },
@@ -1810,23 +1556,9 @@ interface File {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
 
-      /** The file creation time. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      ...NfsTimestampResponseHeaders;
 
-      /** The file last write time. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-
-      /** The file change time. */
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-
-      /** The fileId of the file. */
-      @header("x-ms-file-id") fileId?: string;
-
-      /** The parent fileId of the file. */
-      @header("x-ms-file-parent-id") fileParentId?: string;
-
-      /** Number of hard links to the file. */
-      @header("x-ms-link-count") linkCount?: int32;
+      ...LinkCountResponseHeader;
 
       ...NfsResponseHeaders;
     }
