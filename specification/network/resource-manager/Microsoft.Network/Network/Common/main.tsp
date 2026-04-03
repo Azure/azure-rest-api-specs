@@ -33,6 +33,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
@@ -1379,6 +1380,7 @@ model DdosSettings {
   /**
    * The DDoS custom policy associated with the public IP.
    */
+  @added(Versions.v2025_07_01)
   ddosCustomPolicy?: SubResource;
 
   /**
