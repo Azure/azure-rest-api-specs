@@ -133,6 +133,17 @@ using Microsoft.ServiceFabric;
 // Type override for DateTimeOffset property (old API used System.DateTimeOffset?)
 @@alternateType(Microsoft.ServiceFabric.ClusterVersionDetails.supportExpiryUtc, utcDateTime, "csharp");
 
+// Type overrides for BinaryData properties (old API used System.BinaryData for thumbprints)
+@@alternateType(Microsoft.ServiceFabric.CertificateDescription.thumbprint, bytes, "csharp");
+@@alternateType(Microsoft.ServiceFabric.CertificateDescription.thumbprintSecondary, bytes, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ClientCertificateCommonName.certificateIssuerThumbprint, bytes, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ClientCertificateThumbprint.certificateThumbprint, bytes, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ServerCertificateCommonName.certificateIssuerThumbprint, bytes, "csharp");
+
+// Type overrides for TimeSpan properties (old API used System.TimeSpan)
+@@alternateType(Microsoft.ServiceFabric.ClusterUpgradePolicy.upgradeReplicaSetCheckTimeout, duration, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ApplicationUpgradePolicy.upgradeReplicaSetCheckTimeout, duration, "csharp");
+
 // NOTE: @@hierarchyBuilding causes cascading base type changes on all Data classes
 // in the namespace. Skipping for now - ClusterCodeVersionsResult base type change
 // accepted as known breaking change.
