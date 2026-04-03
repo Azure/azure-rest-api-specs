@@ -44,7 +44,8 @@ alias ExtensionTypeOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
     extensionTypeName: string;
-  }
+  },
+  ResourceName = "LocationExtensionType"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -134,7 +135,8 @@ alias ExtensionTypeOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOpe
   {
     ...Extension.ExtensionProviderNamespace<ExtensionType>;
     ...KeysOf<ExtensionType>;
-  }
+  },
+  ResourceName = "ClusterExtensionType"
 >;
 
 @armResourceOperations(#{ omitTags: true })

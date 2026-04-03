@@ -52,7 +52,8 @@ alias ExtensionTypeVersionForReleaseTrainOps = Azure.ResourceManager.Legacy.Exte
     @segment("versions")
     @key
     versionNumber: string;
-  }
+  },
+  ResourceName = "LocationExtensionTypeVersion"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -142,7 +143,8 @@ alias ExtensionTypeVersionForReleaseTrainOperationGroupOps = Azure.ResourceManag
     @segment("versions")
     @key
     versionNumber: string;
-  }
+  },
+  ResourceName = "ClusterExtensionTypeVersion"
 >;
 
 @armResourceOperations(#{ omitTags: true })
