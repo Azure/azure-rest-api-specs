@@ -89,7 +89,7 @@ model SkillObject {
   @doc("The unique identifier of the skill.")
   skill_id: string;
 
-  @doc("Whether the skill was created from a GZip blob package.")
+  @doc("Whether the skill was created from a gzip blob package.")
   has_blob: boolean;
 
   @doc("The unique name of the skill.")
