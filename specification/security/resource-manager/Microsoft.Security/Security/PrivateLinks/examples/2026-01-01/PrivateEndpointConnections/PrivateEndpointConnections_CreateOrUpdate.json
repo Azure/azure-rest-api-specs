@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by administrator",
+          "actionsRequired": "None",
+          "status": "Approved"
+        }
+      }
+    },
+    "privateEndpointConnectionName": "pe",
+    "privateLinkName": "pls",
+    "resourceGroupName": "rg",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pe",
+        "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe",
+        "properties": {
+          "groupIds": [
+            "containers"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by administrator",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "pe",
+        "type": "Microsoft.Security/privateLinks/privateEndpointConnections",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateEndpointConnections/pe",
+        "properties": {
+          "groupIds": [
+            "containers"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/pe"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by administrator",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+  "title": "Create or update private endpoint connection"
+}

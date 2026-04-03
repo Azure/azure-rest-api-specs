@@ -200,6 +200,9 @@ These settings apply only when `--tag=package-2026-01` is specified on the comma
 ```yaml $(tag) == 'PrivateLinks.Management'
 input-file:
   - stable/2026-01-01/privateLinks.json
+modelerfour:
+  lenient-model-deduplication: true
+  prenamer: true
 ```
 
 ### Composite packages
