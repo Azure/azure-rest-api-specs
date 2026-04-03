@@ -125,3 +125,16 @@ using Microsoft.ServiceFabric;
 @@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.blobEndpoint, url, "csharp");
 @@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.queueEndpoint, url, "csharp");
 @@alternateType(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig.tableEndpoint, url, "csharp");
+
+// Type overrides for Guid properties (old API used System.Guid)
+@@alternateType(Microsoft.ServiceFabric.AzureActiveDirectory.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ApplicationUserAssignedIdentity.principalId, Azure.Core.uuid, "csharp");
+
+// Type override for DateTimeOffset property (old API used System.DateTimeOffset?)
+@@alternateType(Microsoft.ServiceFabric.ClusterVersionDetails.supportExpiryUtc, utcDateTime, "csharp");
+
+// NOTE: @@hierarchyBuilding causes cascading base type changes on all Data classes
+// in the namespace. Skipping for now - ClusterCodeVersionsResult base type change
+// accepted as known breaking change.
+
+
