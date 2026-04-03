@@ -23,12 +23,14 @@ interface Timezone {
    * historical, and future time zone information for the specified IANA time zone
    * ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Matching the 'ID' casing of the original API contract."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("""
     Use to get the current, historical, and future time zone information for the
     specified IANA time zone ID.
     """)
   @route("/timezone/byId/{format}")
+  @OpenAPI.operationId("Timezone_GetTimezoneByID")
   @get
   getTimezoneById is Azure.Core.Foundations.Operation<
     ResponseFormatParameters & {
@@ -182,9 +184,11 @@ interface Timezone {
    * The `Get Windows Time Zones` API is an HTTP `GET` request that returns a full
    * list of Windows Time Zone IDs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Matching the operation ID of the original API contract."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get the list of Windows Time Zone IDs.")
   @route("/timezone/enumWindows/{format}")
+  @OpenAPI.operationId("Timezone_GetTimezoneEnumWindows")
   @get
   getWindowsTimezoneIds is Azure.Core.Foundations.Operation<
     ResponseFormatParameters & {
@@ -211,9 +215,11 @@ interface Timezone {
    * of Internet Assigned Numbers Authority (IANA) time zone IDs. Updates to the
    * IANA service are reflected in the system within one day.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Matching the operation ID of the original API contract."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get the list of IANA time zone IDs.")
   @route("/timezone/enumIana/{format}")
+  @OpenAPI.operationId("Timezone_GetTimezoneEnumIANA")
   @get
   getIanaTimezoneIds is Azure.Core.Foundations.Operation<
     ResponseFormatParameters & {
@@ -239,9 +245,11 @@ interface Timezone {
    * The `Get Time Zone IANA Version` API is an HTTP `GET` request that returns the
    * current Internet Assigned Numbers Authority (IANA) version number as Metadata.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Matching the operation ID of the original API contract."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get the current IANA version number.")
   @route("/timezone/ianaVersion/{format}")
+  @OpenAPI.operationId("Timezone_GetTimezoneIANAVersion")
   @get
   getIanaVersion is Azure.Core.Foundations.Operation<
     ResponseFormatParameters & {
@@ -270,9 +278,11 @@ interface Timezone {
    * ID. It is possible to narrow these results by adding an optional territory
    * parameter.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Matching the IANA casing of the original API contract."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to get the IANA ID.")
   @route("/timezone/windowsToIana/{format}")
+  @OpenAPI.operationId("Timezone_GetTimezoneWindowsToIANA")
   @get
   getWindowsToIana is Azure.Core.Foundations.Operation<
     ResponseFormatParameters & {

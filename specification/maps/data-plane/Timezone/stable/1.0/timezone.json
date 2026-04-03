@@ -223,7 +223,7 @@
     },
     "/timezone/byId/{format}": {
       "get": {
-        "operationId": "Timezone_GetTimezoneById",
+        "operationId": "Timezone_GetTimezoneByID",
         "summary": "Use to get the current, historical, and future time zone information for the\nspecified IANA time zone ID.",
         "description": "The `Get Timezone By ID` API is an HTTP `GET` request that returns current,\nhistorical, and future time zone information for the specified IANA time zone\nID.",
         "parameters": [
@@ -364,7 +364,7 @@
     },
     "/timezone/enumIana/{format}": {
       "get": {
-        "operationId": "Timezone_GetIanaTimezoneIds",
+        "operationId": "Timezone_GetTimezoneEnumIANA",
         "summary": "Use to get the list of IANA time zone IDs.",
         "description": "The `Get IANA Time Zones` API is an HTTP `GET` request that returns a full list\nof Internet Assigned Numbers Authority (IANA) time zone IDs. Updates to the\nIANA service are reflected in the system within one day.",
         "parameters": [
@@ -417,12 +417,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve Iana timezone Ids": {
+            "$ref": "./examples/GetTimezoneEnumIANA.json"
+          }
         }
       }
     },
     "/timezone/enumWindows/{format}": {
       "get": {
-        "operationId": "Timezone_GetWindowsTimezoneIds",
+        "operationId": "Timezone_GetTimezoneEnumWindows",
         "summary": "Use to get the list of Windows Time Zone IDs.",
         "description": "The `Get Windows Time Zones` API is an HTTP `GET` request that returns a full\nlist of Windows Time Zone IDs.",
         "parameters": [
@@ -475,12 +480,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve Windows timezone Ids": {
+            "$ref": "./examples/GetTimezoneEnumWindows.json"
+          }
         }
       }
     },
     "/timezone/ianaVersion/{format}": {
       "get": {
-        "operationId": "Timezone_GetIanaVersion",
+        "operationId": "Timezone_GetTimezoneIANAVersion",
         "summary": "Use to get the current IANA version number.",
         "description": "The `Get Time Zone IANA Version` API is an HTTP `GET` request that returns the\ncurrent Internet Assigned Numbers Authority (IANA) version number as Metadata.",
         "parameters": [
@@ -530,12 +540,17 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve IANA version metadata": {
+            "$ref": "./examples/GetTimezoneIANAVersion.json"
+          }
         }
       }
     },
     "/timezone/windowsToIana/{format}": {
       "get": {
-        "operationId": "Timezone_GetWindowsToIana",
+        "operationId": "Timezone_GetTimezoneWindowsToIANA",
         "summary": "Use to get the IANA ID.",
         "description": "The `Get Windows to IANA Time Zone` API is an HTTP `GET` request that returns a\ncorresponding Internet Assigned Numbers Authority (IANA) ID, given a valid\nWindows Time Zone ID. Multiple IANA IDs may be returned for a single Windows\nID. It is possible to narrow these results by adding an optional territory\nparameter.",
         "parameters": [
@@ -603,6 +618,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successfully retrieve corresponding timezone IANA": {
+            "$ref": "./examples/GetTimezoneWindowsToIANA.json"
           }
         }
       }
