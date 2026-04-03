@@ -24306,7 +24306,7 @@ model PolicySettings {
    */
   @maxValue(1440)
   @minValue(5)
-  captchaCookieExpirationInMins?: int32;
+  captchaExpirationInMins?: int32;
 }
 
 /**
