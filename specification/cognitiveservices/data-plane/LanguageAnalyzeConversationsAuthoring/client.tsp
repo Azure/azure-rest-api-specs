@@ -9,6 +9,16 @@ using Versioning;
 @useDependency(Language.Conversations.Authoring.Versions.v2025_11_15_preview)
 namespace Language.ConversationsAuthoringClientCustomizations;
 
+// C#-specific client name customizations
+@@clientName(Language.Conversations.Authoring,
+  "ConversationAnalysisAuthoring",
+  "csharp"
+);
+@@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
+  "UtteranceEntityEvaluationResult",
+  "csharp"
+);
+
 @@clientName(conversationAuthoringListDeployments, "listDeployments");
 @@clientName(conversationAuthoringListProjects, "listProjects");
 @@clientName(conversationAuthoringListSupportedLanguages,
