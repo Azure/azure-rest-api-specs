@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Maps, "AzureMapsManagementClient", "javascript,python");
 
-// Preserve legacy Java names for renamed encryption identity models.
+// Preserve legacy Java/JS names for renamed encryption identity models.
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
   "java,javascript"
@@ -15,6 +15,7 @@ using Azure.ClientGenerator.Core;
   "java,javascript"
 );
 
+// Python: restore legacy swagger model names for backward compatibility
 @@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
   "EncryptionCustomerManagedKeyEncryption",
   "python"
