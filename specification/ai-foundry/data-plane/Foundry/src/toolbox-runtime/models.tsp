@@ -6,10 +6,13 @@ namespace Azure.AI.Projects;
 
 /**
  * A JSON-RPC request identifier.
+ * Per JSON-RPC 2.0 spec, id can be a string, number, or null.
+ * null is discouraged but valid — the server MUST respond with id: null.
  */
 union ToolsetMCPRequestId {
   string,
   int64,
+  null,
 }
 
 /**
@@ -752,9 +755,10 @@ model ToolsetMCPJsonRpcResultResponse {
   jsonrpc: "2.0";
 
   /**
-   * The request identifier.
+   * The request identifier. Echoes the id from the request.
+   * Per JSON-RPC 2.0, this is null when the request id was null.
    */
-  id: ToolsetMCPRequestId;
+  id: ToolsetMCPRequestId | null;
 
   /**
    * The successful method result payload.
