@@ -99,8 +99,7 @@ model SkillObject {
   @maxLength(1024)
   description?: string;
 
-  @doc("Set of key-value pairs associated with the skill.")
-  metadata?: Record<string>;
+  ...MetadataPropertyForRequest;
 }
 
 @doc("A deleted skill Object")
