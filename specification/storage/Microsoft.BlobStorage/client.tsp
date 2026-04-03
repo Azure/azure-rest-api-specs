@@ -309,10 +309,10 @@ enum ListBlobsIncludeItemGo {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ImmutabilityPolicySetting {
   /** The immutability policy is locked. */
-  Locked: "locked",
+  Locked: "Locked",
 
   /** The immutability policy is unlocked. */
-  Unlocked: "unlocked",
+  Unlocked: "Unlocked",
 }
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
@@ -325,7 +325,9 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(BlobPrefix.name, string, "go");
 @@alternateType(Block.name, string, "go");
 @@alternateType(BlockIdParameter.blockid, string, "go");
+@@alternateType(BlockLookupList.committed, string[], "go");
 @@alternateType(BlockLookupList.latest, string[], "go");
+@@alternateType(BlockLookupList.uncommitted, string[], "go");
 @@alternateType(ConditionalRequestHeaders.ifMatch, Azure.Core.eTag, "go");
 @@alternateType(ConditionalRequestHeaders.ifNoneMatch, Azure.Core.eTag, "go");
 @@alternateType(EncryptionAlgorithmParameter.encryptionAlgorithm,
@@ -393,6 +395,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 @@clientOption(BlobItem, "omitSerdeMethods", "all", "go");
+@@clientOption(Storage.Blob.Blob.download, "responseEnvelopeName", "BlobClientDownloadResponseInternal", "go");
 
 @@clientName(QueryType, "QueryFormatType", "python");
 @@clientName(Storage.Blob.BlockBlob.uploadBlobFromUrl,

@@ -879,6 +879,7 @@ interface Blob {
 
       /** For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier. */
       @header("x-ms-archive-status")
+      @alternateType(string, "go")
       archiveStatus?: ArchiveStatus;
 
       /** The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set. */
