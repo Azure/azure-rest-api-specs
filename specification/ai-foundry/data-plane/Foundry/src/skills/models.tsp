@@ -6,15 +6,6 @@ const SkillsRequiredPreviews = #{
   conditional_previews: #[FoundryFeaturesOptInKeys.skills_v1_preview],
 };
 
-@doc("The object type of a skill resource.")
-enum SkillObjectType {
-  @doc("A skill object.")
-  skill: "skill",
-
-  @doc("A deleted skill object.")
-  skillDeleted: "skill.deleted",
-}
-
 alias CreateSkillRequest = {
   @doc("The unique name of the skill.")
   @maxLength(63)
@@ -81,9 +72,6 @@ alias DeleteSkillRequest = {
 
 @doc("A skill object.")
 model SkillObject {
-  @doc("The object type, which is always 'skill'.")
-  object: SkillObjectType = SkillObjectType.skill;
-
   @doc("The unique identifier of the skill.")
   skill_id: string;
 
@@ -103,9 +91,6 @@ model SkillObject {
 
 @doc("A deleted skill Object")
 model DeleteSkillResponse {
-  @doc("The object type. Always 'skill.deleted'.")
-  object: SkillObjectType = SkillObjectType.skillDeleted;
-
   @doc("The unique name of the skill.")
   name: string;
 
