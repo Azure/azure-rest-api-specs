@@ -25,6 +25,7 @@ using Microsoft.App;
   "java"
 );
 
-@@clientLocation(Jobs.jobExecution, Microsoft.App, "java");
+@@clientLocation(Jobs.jobExecution, Microsoft.App, "java,javascript");
 @@clientName(RuntimeJavaJavaAgent, "RuntimeJavaAgent", "go");
 @@clientName(RuntimeJavaJavaAgentLogging, "RuntimeJavaAgentLogging", "go");
+@@clientName(AvailableWorkloadProfilesOperationGroup.get, "list", "javascript");
