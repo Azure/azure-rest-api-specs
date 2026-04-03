@@ -17,7 +17,7 @@ interface OuContainerOperations {
    * Lists all the available OuContainer operations.
    */
   @get
-  @route("/providers/microsoft.Aad/operations")
+  @route("/providers/Microsoft.Aad/operations")
   @doc("Lists all the available OuContainer operations.")
   @list
   @tag("OuContainer")

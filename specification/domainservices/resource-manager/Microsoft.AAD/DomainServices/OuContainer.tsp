@@ -80,7 +80,8 @@ interface OuContainers {
   update is ArmCustomPatchAsync<
     OuContainer,
     PatchModel = ContainerAccount,
-    Response = ArmResponse<OuContainer> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<OuContainer> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OuContainer> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: OuContainer;
     }),

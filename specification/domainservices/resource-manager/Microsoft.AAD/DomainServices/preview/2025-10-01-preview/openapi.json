@@ -87,7 +87,7 @@
         }
       }
     },
-    "/providers/microsoft.Aad/operations": {
+    "/providers/Microsoft.Aad/operations": {
       "get": {
         "operationId": "OuContainerOperations_List",
         "tags": [
@@ -419,7 +419,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DomainService"
         },
         "x-ms-long-running-operation": true
       },
@@ -780,7 +781,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OuContainer"
         },
         "x-ms-long-running-operation": true
       },

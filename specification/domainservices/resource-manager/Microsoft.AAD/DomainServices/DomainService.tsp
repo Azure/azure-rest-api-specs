@@ -76,7 +76,7 @@ interface DomainServices {
   update is ArmCustomPatchAsync<
     DomainService,
     PatchModel = DomainService,
-    Response = ArmResponse<DomainService> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
+    Response = ArmResponse<DomainService> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = DomainService>> & {
       @bodyRoot
       _: DomainService;
     }),
