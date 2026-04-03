@@ -41,6 +41,12 @@ input-file:
 suppressions:
   - code: MissingApiInDefaultTag
     reason: "storageSpaces API was deprecated and removed after 2022-09-01-preview."
+  - code: AvoidAdditionalProperties
+    where:
+      - $.definitions.AgentPoolProperties.properties.nodeLabels
+      - $.definitions.KubernetesVersionReadiness.properties.patchVersions
+    reason: "Record<string> maps are required for Kubernetes labels and patch versions, consistent with AKS 
+behavior since 2022-09-01-preview."
 ```
 
 
