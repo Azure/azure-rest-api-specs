@@ -1101,3 +1101,4 @@ using Microsoft.Sql;
 @@visibility(ManagedInstancePrivateLink.properties, Lifecycle.Read);
 @@visibility(PrivateLinkResource.properties, Lifecycle.Read);
 @@doc(RestorableDroppedDatabase.location, "Resource location.");
+@@clientName(Azure.ResourceManager.CommonTypes.SystemData, "systemdata");

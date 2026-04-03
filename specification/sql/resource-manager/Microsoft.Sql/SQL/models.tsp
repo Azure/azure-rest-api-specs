@@ -4761,44 +4761,6 @@ model ExtendedServerBlobAuditingPolicyProperties {
 }
 
 /**
- * Metadata pertaining to creation and last modification of the resource.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model systemData {
-  /**
-   * The identity that created the resource.
-   */
-  createdBy?: string;
-
-  /**
-   * The type of identity that created the resource.
-   */
-  createdByType?: CreatedByType;
-
-  /**
-   * The timestamp of resource creation (UTC).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdAt?: utcDateTime;
-
-  /**
-   * The identity that last modified the resource.
-   */
-  lastModifiedBy?: string;
-
-  /**
-   * The type of identity that last modified the resource.
-   */
-  lastModifiedByType?: CreatedByType;
-
-  /**
-   * The timestamp of resource last modification (UTC)
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedAt?: utcDateTime;
-}
-
-/**
  * Properties of an Advanced Threat Protection state.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6597,7 +6559,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput
    * SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputResource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: systemData;
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 
   /**
    * Resource properties.
@@ -6643,7 +6605,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineInput
    * SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineInputResource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: systemData;
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 
   /**
    * Resource properties.
