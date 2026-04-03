@@ -1,5 +1,7 @@
 import "./src/agents/routes.tsp";
 import "./src/agents-containers/routes.tsp";
+import "./src/agents-session-files/routes.tsp";
+import "./src/agents-invocations/routes.tsp";
 import "./src/common/custom-types.tsp";
 import "./src/common/service.tsp";
 import "./src/connections/routes.tsp";
