@@ -818,22 +818,22 @@
             "required": false,
             "type": "string",
             "enum": [
-              "batch",
-              "continuous"
+              "dataset_backed",
+              "evaluator_only"
             ],
             "x-ms-enum": {
               "name": "EvaluationSuiteKind",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "Batch",
-                  "value": "batch",
-                  "description": "Offline evaluation backed by a dataset.\nUsed for batch, scheduled, or CI/CD evals."
+                  "name": "DatasetBacked",
+                  "value": "dataset_backed",
+                  "description": "Evaluation suite backed by a dataset.\nEvaluators run against dataset rows. Used for batch, scheduled, or CI/CD evals."
                 },
                 {
-                  "name": "Continuous",
-                  "value": "continuous",
-                  "description": "Online evaluation with no dataset.\nEvaluators run against live production traces."
+                  "name": "EvaluatorOnly",
+                  "value": "evaluator_only",
+                  "description": "Evaluation suite with evaluators only, no dataset.\nEvaluators run against live production traces."
                 }
               ]
             }
@@ -4485,24 +4485,24 @@
     },
     "EvaluationSuiteKind": {
       "type": "string",
-      "description": "The kind of evaluation suite, determining its intended evaluation mode.",
+      "description": "The kind of evaluation suite, determining its composition.",
       "enum": [
-        "batch",
-        "continuous"
+        "dataset_backed",
+        "evaluator_only"
       ],
       "x-ms-enum": {
         "name": "EvaluationSuiteKind",
         "modelAsString": true,
         "values": [
           {
-            "name": "Batch",
-            "value": "batch",
-            "description": "Offline evaluation backed by a dataset.\nUsed for batch, scheduled, or CI/CD evals."
+            "name": "DatasetBacked",
+            "value": "dataset_backed",
+            "description": "Evaluation suite backed by a dataset.\nEvaluators run against dataset rows. Used for batch, scheduled, or CI/CD evals."
           },
           {
-            "name": "Continuous",
-            "value": "continuous",
-            "description": "Online evaluation with no dataset.\nEvaluators run against live production traces."
+            "name": "EvaluatorOnly",
+            "value": "evaluator_only",
+            "description": "Evaluation suite with evaluators only, no dataset.\nEvaluators run against live production traces."
           }
         ]
       }

@@ -16,22 +16,22 @@ namespace Azure.AI.Projects;
 // Enums
 // ---------------------------------------------------------------------------
 
-@doc("The kind of evaluation suite, determining its intended evaluation mode.")
+@doc("The kind of evaluation suite, determining its composition.")
 @added(Versions.v2025_10_15_preview)
 union EvaluationSuiteKind {
   string,
 
   @doc("""
-    Offline evaluation backed by a dataset.
-    Used for batch, scheduled, or CI/CD evals.
+    Evaluation suite backed by a dataset.
+    Evaluators run against dataset rows. Used for batch, scheduled, or CI/CD evals.
     """)
-  Batch: "batch",
+  DatasetBacked: "dataset_backed",
 
   @doc("""
-    Online evaluation with no dataset.
+    Evaluation suite with evaluators only, no dataset.
     Evaluators run against live production traces.
     """)
-  Continuous: "continuous",
+  EvaluatorOnly: "evaluator_only",
 }
 
 // ---------------------------------------------------------------------------
