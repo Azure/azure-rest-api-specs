@@ -44,10 +44,11 @@ a developer achieving a real business outcome, not just CRUD operations.
   workflow. Real developer workflows often span multiple Azure services
   — a load test resource needs an App Service to test, a Key Vault for
   encryption keys, Azure Monitor for alerting. **Include calls to other
-  Azure service APIs when that's what a developer would actually do.**
-  Don't limit yourself to only the service under review — look at other
-  service specs in the repository to discover integration points and
-  include those cross-service calls in the scenario.
+  Azure service APIs when the changed spec already references them**
+  (e.g., resource IDs, linked resource properties, or cross-service
+  dependencies visible in the spec files). Do NOT browse the wider
+  repository to discover integration points — only use cross-service
+  references that are explicit in the changed specification.
 - Derive scenarios from the operations and resource types in the spec,
   but frame them as customer goals, not API calls. Bad: "Create, get,
   update, and delete a workspace." Good: "Monitor SQL databases and
@@ -115,6 +116,19 @@ Content-Type: application/json
 }
 
 HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}/targets/{targetName}",
+  "name": "{targetName}",
+  "type": "Microsoft.DatabaseWatcher/watchers/targets",
+  "properties": {
+    "targetType": "SqlDb",
+    "connectionServerName": "sql-prod.database.windows.net",
+    "targetAuthenticationType": "SystemAssigned",
+    "provisioningState": "Succeeded"
+  }
+}
 ```
 
 ```http
@@ -131,6 +145,19 @@ Content-Type: application/json
 }
 
 HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}/alertRuleResources/{ruleName}",
+  "name": "{ruleName}",
+  "type": "Microsoft.DatabaseWatcher/watchers/alertRuleResources",
+  "properties": {
+    "alertRuleResourceId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Insights/scheduledQueryRules/{rule}",
+    "alertRuleTemplateId": "high-cpu-utilization",
+    "createdWithProperties": "CreatedWithActionGroup",
+    "provisioningState": "Succeeded"
+  }
+}
 ```
 
 ```http
@@ -139,6 +166,12 @@ POST /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatche
 
 HTTP/1.1 202 Accepted
 Azure-AsyncOperation: https://management.azure.com/subscriptions/{sub}/providers/Microsoft.DatabaseWatcher/locations/eastus2/operationStatuses/{id}
+Retry-After: 10
+
+{
+  "id": "/subscriptions/{sub}/providers/Microsoft.DatabaseWatcher/locations/eastus2/operationStatuses/{id}",
+  "status": "Running"
+}
 ```
 
 ---

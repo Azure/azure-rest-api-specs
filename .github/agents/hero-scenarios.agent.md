@@ -7,13 +7,11 @@ if: github.event.label.name == 'hero-scenarios-needed'
 description: "Hero Scenarios: Suggest a service README with hero scenarios for API specifications"
 permissions:
   contents: read
-  pull-requests: read
-  actions: read
+  pull-requests: write
 tools:
   github:
     toolsets: [context, repos, pull_requests]
     min-integrity: unapproved
-  bash: true
 safe-outputs:
   messages:
     footer: "> 📖 *Suggested by [{workflow_name}]({run_url})*"
