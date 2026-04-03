@@ -811,7 +811,7 @@
         },
         "name": {
           "type": "string",
-          "description": "identifier for created virtual machine, if not passed it will create one from resource prefix."
+          "description": "Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix."
         }
       }
     },
@@ -3082,7 +3082,7 @@
         },
         "resourceOverrides": {
           "type": "array",
-          "description": "Bulk Actions Virtual Machine Profile array, that contains VM properties that should to be overridden for each VM in the batch",
+          "description": "Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch",
           "items": {
             "$ref": "#/definitions/BulkVMConfiguration"
           },
@@ -3095,7 +3095,7 @@
         },
         "resourcePrefix": {
           "type": "string",
-          "description": "if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1.."
+          "description": "If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1.."
         }
       },
       "required": [
@@ -3112,7 +3112,7 @@
         },
         "resourceOverrides": {
           "type": "array",
-          "description": "Bulk Actions Virtual Machine Profile array, that contains VM properties that should to be overridden for each VM in the batch",
+          "description": "Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch",
           "items": {
             "$ref": "#/definitions/BulkVMConfiguration"
           },
@@ -3125,7 +3125,7 @@
         },
         "resourcePrefix": {
           "type": "string",
-          "description": "if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1.."
+          "description": "If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1.."
         },
         "flexProperties": {
           "$ref": "#/definitions/FlexProperties",
