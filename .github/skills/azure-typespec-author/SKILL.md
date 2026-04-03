@@ -2,8 +2,8 @@
 name: azure-typespec-author
 license: MIT
 metadata:
-  version: "1.0.0"
-description: "Authors and modifies Azure TypeSpec (.tsp) API specifications. USE FOR: any TypeSpec/tsp change — api versions (add, bump, preview, stable, promote), resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO, suppressions, operationId, spread model. Covers ARM resource-manager and data-plane services. DO NOT USE FOR: SDK generation, releasing SDK packages, or single MCP tool calls. INVOKES: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation."
+  version: "1.1.0"
+description: "Authors and modifies Azure TypeSpec (.tsp) API specifications. USE FOR: any TypeSpec/tsp change — api versions (add, bump, preview, stable, promote), resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO, suppressions, operationId, spread model. Covers ARM resource-manager and data-plane services. DO NOT USE FOR: SDK generation, releasing SDK packages, or single MCP tool calls. INVOKES: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation, azure-sdk-mcp:azsdk_package_generate_code, azure-sdk-mcp:azsdk_package_build_code, azure-sdk-mcp:azsdk_customized_code_update."
 compatibility:
   requires: "azure-sdk-mcp server with azsdk_typespec_generate_authoring_plan and azsdk_run_typespec_validation tools"
 ---
@@ -16,6 +16,9 @@ compatibility:
 | ------------------------------------------------------ | --------------------------------------------------------- |
 | `azure-sdk-mcp:azsdk_typespec_generate_authoring_plan` | Generate grounded authoring plan (General Authoring only) |
 | `azure-sdk-mcp:azsdk_run_typespec_validation`          | Validate TypeSpec                                         |
+| `azure-sdk-mcp:azsdk_package_generate_code`            | Generate SDK from TypeSpec (SDK impact check)             |
+| `azure-sdk-mcp:azsdk_package_build_code`               | Build SDK package (SDK impact check)                      |
+| `azure-sdk-mcp:azsdk_customized_code_update`           | Apply TypeSpec customizations to resolve SDK build errors |
 
 **Prerequisite:** `azure-sdk-mcp` server must be running.
 
@@ -43,6 +46,7 @@ Copy and update as you progress:
 - [ ] Step 3: Retrieved authoring plan
 - [ ] Step 4: Applied changes
 - [ ] Step 5: Validated with TypeSpec validation and `tsp compile .`
+- [ ] Step 6: SDK impact check (optional but recommended for model/enum/operation changes)
 
 ### Step 1: Analyze & Classify
 
@@ -100,6 +104,22 @@ See [validation guide](references/validation.md) for sub-steps. You must run Typ
 
 ---
 
+### Step 6: SDK Impact Check (Optional)
+
+After validation passes, check whether your TypeSpec changes break SDK generation. This is **recommended** for changes that modify models, enums, operations, property types, or remove/rename existing definitions.
+
+See [SDK impact check](references/sdk-impact-check.md) for the full procedure.
+
+**Quick summary:**
+1. Generate SDK for at least one language using `azure-sdk-mcp:azsdk_package_generate_code`
+2. Build the SDK using `azure-sdk-mcp:azsdk_package_build_code`
+3. If build fails, run `azure-sdk-mcp:azsdk_customized_code_update` to apply `client.tsp` customizations that resolve the breaks
+4. Report what breaking changes were detected and what fixes were applied
+
+> **Why:** TypeSpec changes that compile successfully can still break SDK generation. Catching this now prevents weeks of back-and-forth after merge.
+
+---
+
 ## Reference Files
 
 | File                                                                                    | Purpose                                   |
@@ -109,6 +129,7 @@ See [validation guide](references/validation.md) for sub-steps. You must run Typ
 | [general-authoring-intake.md](references/general-authoring-intake.md)                   | Step 2 for General Authoring tasks        |
 | [agentic-search.md](references/agentic-search.md)                                       | Procedure for fetching external docs      |
 | [validation.md](references/validation.md)                                               | Step 5: validation sub-steps              |
+| [sdk-impact-check.md](references/sdk-impact-check.md)                                   | Step 6: SDK impact check procedure        |
 
 ## Examples
 
@@ -121,3 +142,4 @@ See [validation guide](references/validation.md) for sub-steps. You must run Typ
 
 - **TypeSpec validation fails** — display all errors, provide fix suggestions, re-run validation.
 - **API Version Evolution** — use the versioning guide URLs in the [version evolution reference](references/api-version-evolution.md); do not call the authoring plan tool.
+- **SDK build fails after TypeSpec changes** — run `azure-sdk-mcp:azsdk_customized_code_update` with the build errors. The tool applies `client.tsp` decorators and/or code patches to resolve breaks. See [SDK impact check](references/sdk-impact-check.md).

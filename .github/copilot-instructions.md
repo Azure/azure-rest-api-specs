@@ -21,6 +21,8 @@ Refer `generate-sdk-locally` skill in `.github/skills/generate-sdk-locally/SKILL
 
 You **must** invoke this skill and use `azure-sdk-mcp:azsdk_customized_code_update` instead of making manual code edits when the errors are related to TypeSpec customization or SDK build failures.
 
+After authoring TypeSpec changes using the `azure-typespec-author` skill, if the changes involve models, enums, operations, or property types, run the SDK impact check (Step 6 in the authoring workflow) to detect and resolve SDK breaking changes before merge.
+
 # SDK generation from TypeSpec
 
 You must use Azure SDK MCP server to generate SDK from TypeSpec.
