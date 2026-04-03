@@ -19,7 +19,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkill is FoundryDataPlaneOperation<
     CreateSkillRequest & SkillsPreviewHeader,
-    SkillObject
+    ResourceCreatedResponse<SkillObject>
   >;
 
   /**
@@ -30,7 +30,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillFromPackage is FoundryDataPlaneOperation<
     CreateSkillFromPackageRequest & SkillsPreviewHeader,
-    SkillObject
+    ResourceCreatedResponse<SkillObject>
   >;
 
   /**

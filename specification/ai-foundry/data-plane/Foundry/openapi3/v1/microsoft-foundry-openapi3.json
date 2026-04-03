@@ -8017,8 +8017,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8544,8 +8544,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11296,6 +11296,14 @@
               "capture_structured_outputs"
             ],
             "description": "The type of the tool. Always `capture_structured_outputs`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
           },
           "outputs": {
             "allOf": [
