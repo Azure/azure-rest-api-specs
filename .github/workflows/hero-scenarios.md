@@ -86,6 +86,103 @@ a developer achieving a real business outcome, not just CRUD operations.
   start with the core "happy path," then show cross-service
   integration, security/private networking, and diagnostics/recovery.
 
+### Golden Example — What Good Looks Like
+
+Study this example before generating scenarios. It is from the
+DatabaseWatcher service and demonstrates all the principles above:
+one cohesive workflow weaving four resource types toward a business
+outcome, with cross-service integration baked into every step.
+
+---
+
+#### Scenario: Monitor SQL databases and route performance alerts to a Teams channel
+
+A DBA needs to continuously monitor production SQL databases and get
+alerted in a Teams channel when CPU exceeds 80%. She provisions a
+database watcher backed by an ADX datastore, adds her SQL databases as
+monitoring targets, wires an Azure Monitor alert rule to a Teams action
+group, and starts the watcher.
+
+**Prerequisites:** An Azure resource group, an ADX cluster, and an
+Azure Monitor action group connected to a Teams channel already exist.
+
+```http
+### Step 1 — Create a database watcher with an ADX datastore
+PUT /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}?api-version=2025-01-02
+Content-Type: application/json
+
+{
+  "location": "eastus2",
+  "identity": { "type": "SystemAssigned" },
+  "properties": {
+    "datastore": {
+      "adxClusterResourceId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Kusto/clusters/{cluster}",
+      "kustoClusterUri": "https://{cluster}.eastus2.kusto.windows.net",
+      "kustoDatabaseName": "watcher-data",
+      "kustoOfferingType": "adx"
+    }
+  }
+}
+
+HTTP/1.1 201 Created
+Azure-AsyncOperation: https://management.azure.com/subscriptions/{sub}/providers/Microsoft.DatabaseWatcher/locations/eastus2/operationStatuses/{id}
+```
+
+```http
+### Step 2 — Add a SQL Database target to monitor
+PUT /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}/targets/{targetName}?api-version=2025-01-02
+Content-Type: application/json
+
+{
+  "properties": {
+    "targetType": "SqlDb",
+    "connectionServerName": "sql-prod.database.windows.net",
+    "targetAuthenticationType": "SystemAssigned"
+  }
+}
+
+HTTP/1.1 200 OK
+```
+
+```http
+### Step 3 — Create an alert rule linked to an Azure Monitor action group
+PUT /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}/alertRuleResources/{ruleName}?api-version=2025-01-02
+Content-Type: application/json
+
+{
+  "properties": {
+    "alertRuleResourceId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Insights/scheduledQueryRules/{rule}",
+    "alertRuleTemplateId": "high-cpu-utilization",
+    "createdWithProperties": "CreatedWithActionGroup"
+  }
+}
+
+HTTP/1.1 200 OK
+```
+
+```http
+### Step 4 — Start the watcher
+POST /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}/start?api-version=2025-01-02
+
+HTTP/1.1 202 Accepted
+Azure-AsyncOperation: https://management.azure.com/subscriptions/{sub}/providers/Microsoft.DatabaseWatcher/locations/eastus2/operationStatuses/{id}
+```
+
+---
+
+Notice what makes this good:
+- **One business outcome** (monitor DBs, alert in Teams) drives the
+  entire scenario — not "create a watcher, then create a target."
+- **Four different resource types** (watcher, target, alert rule, action)
+  are composed into a single workflow, not separate scenarios.
+- **Cross-service references** (ADX cluster, Azure Monitor, SQL Server)
+  appear naturally in the request bodies.
+- **The scenario ends with value** — the watcher is running and will
+  alert the team. Not just "resource created successfully."
+
+Use this as your quality bar. Every scenario you generate should have
+this level of cohesion and purpose.
+
 ### Scenario Format
 
 For each scenario, include:
@@ -102,45 +199,8 @@ For each scenario, include:
   group, an ADX cluster, and an Azure Monitor action group
   connected to a Teams channel already exist.")
 - **API call sequence**: the ordered HTTP flow showing method, path,
-  and key request/response details. Use `http` fenced code blocks:
-
-  ```http
-  ### Step 1 — Create a database watcher with an ADX datastore
-  PUT /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}?api-version=2025-01-02
-  Content-Type: application/json
-
-  {
-    "location": "eastus2",
-    "identity": { "type": "SystemAssigned" },
-    "properties": {
-      "datastore": {
-        "adxClusterResourceId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Kusto/clusters/{cluster}",
-        "kustoClusterUri": "https://{cluster}.eastus2.kusto.windows.net",
-        "kustoDatabaseName": "watcher-data",
-        "kustoOfferingType": "adx"
-      }
-    }
-  }
-
-  HTTP/1.1 201 Created
-  Azure-AsyncOperation: https://management.azure.com/subscriptions/{sub}/providers/Microsoft.DatabaseWatcher/locations/eastus2/operationStatuses/{id}
-  ```
-
-  ```http
-  ### Step 2 — Add a SQL Database target to monitor
-  PUT /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}/targets/{targetName}?api-version=2025-01-02
-  Content-Type: application/json
-
-  {
-    "properties": {
-      "targetType": "SqlDb",
-      "connectionServerName": "sql-prod.database.windows.net",
-      "targetAuthenticationType": "SystemAssigned"
-    }
-  }
-
-  HTTP/1.1 200 OK
-  ```
+  and key request/response details. Use `http` fenced code blocks
+  (see the golden example above for the exact format).
 
   Every `http` block MUST show the complete round-trip:
   the request (method, path, headers, body) AND the response
