@@ -29,10 +29,9 @@ model CreateAgentVersionRequest {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
 }
@@ -81,21 +80,19 @@ model CreateAgentRequest {
 
   ...CreateAgentVersionRequest;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
   agent_endpoint?: AgentEndpoint;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("Optional agent card for the agent")
@@ -106,10 +103,9 @@ model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model PatchAgentRequest {
   ...MetadataPropertyForRequest;
@@ -149,51 +145,46 @@ model AgentObject {
     latest: AgentVersionObject;
   };
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("The endpoint configuration for the agent")
   endpoint?: AgentEndpoint;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("The instance identity of the agent")
   instance_identity?: AgentIdentity;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("The blueprint for the agent")
   blueprint?: AgentIdentity;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("The blueprint for the agent")
   blueprint_reference?: AgentBlueprintReference;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   agent_card?: AgentCard;
@@ -233,33 +224,30 @@ model AgentVersionObject {
   @doc("Error details if the agent version provisioning failed.")
   error?: ApiError;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
   instance_identity?: AgentIdentity;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
 
-  @removed(Versions.v1)
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
   @doc("The blueprint for the agent")
@@ -295,7 +283,6 @@ union AgentProtocol {
   invocations: "invocations",
 }
 
-@removed(Versions.v1)
 union AgentEndpointProtocol {
   string,
   activity: "activity",
@@ -554,29 +541,26 @@ union ContainerLogKind {
   system: "system",
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 union VersionSelectorType {
   string,
   FixedRatio: "FixedRatio",
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model VersionSelector {
   version_selection_rules: VersionSelectionRule[];
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 @discriminator("type")
 model VersionSelectionRule {
@@ -589,7 +573,7 @@ model VersionSelectionRule {
 @removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model FixedRatioVersionSelectionRule extends VersionSelectionRule {
   type: VersionSelectorType.FixedRatio;
@@ -600,39 +584,35 @@ model FixedRatioVersionSelectionRule extends VersionSelectionRule {
   traffic_percentage: int32;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 @discriminator("type")
 model AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
   isolation_key_source: IsolationKeySource;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.BotService;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model BotServiceRbacAuthorizationScheme
   extends AgentEndpointAuthorizationScheme {
@@ -640,28 +620,25 @@ model BotServiceRbacAuthorizationScheme
 }
 
 @discriminator("kind")
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model IsolationKeySource {
   kind: IsolationKeySourceKind;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model EntraIsolationKeySource extends IsolationKeySource {
   kind: IsolationKeySourceKind.Entra;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model HeaderIsolationKeySource extends IsolationKeySource {
   kind: IsolationKeySourceKind.Header;
@@ -673,10 +650,9 @@ model HeaderIsolationKeySource extends IsolationKeySource {
   chat_isolation_key: string;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 union AgentEndpointAuthorizationSchemeType {
   string,
@@ -685,10 +661,9 @@ union AgentEndpointAuthorizationSchemeType {
   BotServiceRbac: "BotServiceRbac",
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 union IsolationKeySourceKind {
   string,
@@ -696,10 +671,9 @@ union IsolationKeySourceKind {
   Header: "Header",
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentEndpoint {
   @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
@@ -712,10 +686,9 @@ model AgentEndpoint {
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentIdentity {
   @doc("The principal ID of the agent instance")
@@ -725,30 +698,27 @@ model AgentIdentity {
   client_id: string;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 union AgentBlueprintReferenceType {
   string,
   ManagedAgentIdentityBlueprint: "ManagedAgentIdentityBlueprint",
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 @discriminator("type")
 model AgentBlueprintReference {
   type: AgentBlueprintReferenceType;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model ManagedAgentIdentityBlueprintReference extends AgentBlueprintReference {
   type: AgentBlueprintReferenceType.ManagedAgentIdentityBlueprint;
@@ -758,26 +728,23 @@ model ManagedAgentIdentityBlueprintReference extends AgentBlueprintReference {
 }
 
 /** A skill example string with a maximum length of 1024 characters. */
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 @maxLength(1024)
 scalar AgentCardSkillExample extends string;
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 @maxLength(32)
 scalar AgentCardSkillTag extends string;
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentCardSkill {
   @doc("a unique identifier for the skill")
@@ -803,10 +770,9 @@ model AgentCardSkill {
   examples?: AgentCardSkillExample[];
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentCard {
   @doc("The version of the agent card.")

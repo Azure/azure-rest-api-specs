@@ -8,10 +8,9 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
 model CreateOrUpdateManagedAgentIdentityBlueprintRequest {
   @doc("""
@@ -26,7 +25,6 @@ model CreateOrUpdateManagedAgentIdentityBlueprintRequest {
   name: string;
 }
 
-@removed(Versions.v1)
 model ManagedAgentIdentityBlueprint {
   @visibility(Lifecycle.Read)
   name: string;

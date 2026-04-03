@@ -72,17 +72,7 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "AgentEndpoints=V1Preview"
-                  ]
-                }
-              ]
+              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
             }
           },
           {
@@ -795,17 +785,7 @@
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "AgentEndpoints=V1Preview"
-                  ]
-                }
-              ]
+              "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
             }
           },
           {
@@ -10311,7 +10291,8 @@
         "enum": [
           "HostedAgents=V1Preview",
           "WorkflowAgents=V1Preview",
-          "ContainerAgents=V1Preview"
+          "ContainerAgents=V1Preview",
+          "AgentEndpoints=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
       },

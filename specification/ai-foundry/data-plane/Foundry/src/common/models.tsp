@@ -56,6 +56,8 @@ union AgentDefinitionOptInKeys {
 
   @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
+
+  agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {
@@ -64,7 +66,6 @@ union FoundryFeaturesOptInKeys {
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
-  agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {

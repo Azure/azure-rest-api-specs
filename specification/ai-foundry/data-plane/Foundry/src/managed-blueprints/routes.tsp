@@ -15,12 +15,11 @@ interface ManagedAgentIdentityBlueprints {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   createOrUpdateManagedAgentIdentityBlueprint is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the managed agent identity blueprint to create. */
       @path blueprint_name: string;
@@ -38,12 +37,11 @@ interface ManagedAgentIdentityBlueprints {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   getManagedAgentIdentityBlueprint is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the managed agent identity blueprint to retrieve. */
       @path blueprint_name: string;
@@ -59,12 +57,11 @@ interface ManagedAgentIdentityBlueprints {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   deleteManagedAgentIdentityBlueprint is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
       /** The name of the managed agent identity blueprint to delete. */
       @path blueprint_name: string;
@@ -77,12 +74,11 @@ interface ManagedAgentIdentityBlueprints {
   @extension(
     "x-ms-foundry-meta",
     #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   listManagedAgentIdentityBlueprints is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
       ...PageOrderQueryParameter;
       ...PageLimitQueryParameter;
