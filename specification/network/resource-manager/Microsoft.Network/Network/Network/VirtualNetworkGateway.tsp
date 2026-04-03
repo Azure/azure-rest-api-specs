@@ -267,6 +267,17 @@ interface VirtualNetworkGateways {
   >;
 
   /**
+   * This operation retrieves a list of effective routes the virtual network gateway has learned.
+   */
+  @tag("VirtualNetworkGateways")
+  getEffectiveRoutes is ArmResourceActionAsync<
+    VirtualNetworkGateway,
+    void,
+    GatewayEffectiveRouteListResult,
+    Error = CloudError
+  >;
+
+  /**
    * This operation retrieves the resiliency information for an Express Route Gateway, including the gateway's current resiliency score and recommendations to further improve the score
    */
   @tag("VirtualNetworkGateways")

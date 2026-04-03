@@ -20617,6 +20617,20 @@ model GatewayRouteListResult {
 }
 
 /**
+ * List of virtual network gateway effective routes.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+model GatewayEffectiveRouteListResult {
+  /**
+   * List of gateway effective routes.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @pageItems
+  value?: GatewayEffectiveRoute[];
+}
+
+/**
  * Gateway routing details.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -20663,6 +20677,50 @@ model GatewayRoute {
    */
   @visibility(Lifecycle.Read)
   weight?: int32;
+}
+
+/**
+ * Gateway effective routing details.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+model GatewayEffectiveRoute {
+  /**
+   * The gateway's local address.
+   */
+  @visibility(Lifecycle.Read)
+  localAddress?: string;
+
+  /**
+   * The address prefixes of the route.
+   */
+  @visibility(Lifecycle.Read)
+  addressPrefixes?: string[];
+
+  /**
+   * The next hop IP address.
+   */
+  @visibility(Lifecycle.Read)
+  nextHopIpAddress?: string;
+
+  /**
+   * The type of the next hop.
+   */
+  @visibility(Lifecycle.Read)
+  nextHopType?: GatewayEffectiveRouteNextHopType;
+}
+
+/**
+ * The type of the next hop for a gateway effective route.
+ */
+union GatewayEffectiveRouteNextHopType {
+  string,
+
+  /** Tunnel next hop type. */
+  Tunnel: "Tunnel",
+
+  /** Virtual network next hop type. */
+  VirtualNetwork: "VirtualNetwork",
 }
 
 /**
