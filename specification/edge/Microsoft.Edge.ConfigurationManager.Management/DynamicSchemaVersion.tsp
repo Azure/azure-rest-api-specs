@@ -17,6 +17,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2026_03_01)
 @doc("Dynamic Schema Version Resource")
 @parentResource(DynamicSchema)
 @resource("versions")
@@ -28,6 +29,7 @@ model DynamicSchemaVersion is ProxyResource<SchemaVersionProperties> {
   ...EntityTagProperty;
 }
 
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface DynamicSchemaVersions {
   @doc("Get a Dynamic Schema Version Resource")

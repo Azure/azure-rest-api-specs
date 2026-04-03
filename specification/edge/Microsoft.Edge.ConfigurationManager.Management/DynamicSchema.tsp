@@ -18,6 +18,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@removed(Versions.v2026_03_01)
 @doc("DynamicSchema Properties")
 model DynamicSchemaProperties {
   @added(Versions.v2025_08_01)
@@ -38,6 +39,7 @@ model DynamicSchemaProperties {
   provisioningState?: ProvisioningState;
 }
 
+@removed(Versions.v2026_03_01)
 @doc("DynamicSchema Resource")
 @parentResource(Schema)
 model DynamicSchema is ProxyResource<DynamicSchemaProperties> {
@@ -51,6 +53,7 @@ model DynamicSchema is ProxyResource<DynamicSchemaProperties> {
   ...EntityTagProperty;
 }
 
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface DynamicSchemas {
   @doc("Get a DynamicSchema Resource")
