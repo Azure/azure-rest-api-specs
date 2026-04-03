@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -26,10 +26,7 @@ using Microsoft.ContainerRegistry;
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
 
-@@clientName(MyPrivateLinkResource,
-  "PrivateLinkResource",
-  "java"
-);
+@@clientName(MyPrivateLinkResource, "PrivateLinkResource", "java");
 
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
 
