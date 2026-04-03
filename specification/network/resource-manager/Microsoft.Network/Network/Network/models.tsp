@@ -6,7 +6,6 @@ import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -10339,14 +10338,12 @@ model DdosCustomPolicyPropertiesFormat {
   /**
    * The list of frontend IP configurations associated with the custom policy. This list is read-only.
    */
-  @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   frontEndIpConfiguration?: SubResource[];
 
   /**
    * The list of public IP addresses associated with the custom policy. This list is read-only.
    */
-  @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddresses?: SubResource[];
