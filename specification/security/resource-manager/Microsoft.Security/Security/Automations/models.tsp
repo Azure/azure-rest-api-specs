@@ -163,28 +163,6 @@ union Operator {
 }
 
 /**
- * The type of the action that will be triggered by the Automation
- */
-union ActionType {
-  string,
-
-  /**
-   * LogicApp
-   */
-  LogicApp: "LogicApp",
-
-  /**
-   * EventHub
-   */
-  EventHub: "EventHub",
-
-  /**
-   * Workspace
-   */
-  Workspace: "Workspace",
-}
-
-/**
  * The source type that will trigger the notification
  */
 union SourceType {

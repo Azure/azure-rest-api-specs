@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -29,18 +30,6 @@ union Origin {
    * user,system
    */
   `user,system`: "user,system",
-}
-
-/**
- * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
- */
-union ActionType {
-  string,
-
-  /**
-   * Internal
-   */
-  Internal: "Internal",
 }
 
 /**

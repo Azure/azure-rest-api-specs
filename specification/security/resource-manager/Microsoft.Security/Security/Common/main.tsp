@@ -103,3 +103,102 @@ model Resource {
   @visibility(Lifecycle.Read)
   type?: string;
 }
+
+/**
+ * Enum. Indicates the action type.
+ */
+union ActionType {
+  string,
+
+  /**
+   * LogicApp
+   */
+  LogicApp: "LogicApp",
+
+  /**
+   * EventHub
+   */
+  EventHub: "EventHub",
+
+  /**
+   * Workspace
+   */
+  Workspace: "Workspace",
+
+  /**
+   * Internal
+   */
+  Internal: "Internal",
+}
+
+/**
+ * A status describing the success/failure of the enablement/disablement operation.
+ */
+model OperationStatus {
+  /**
+   * The operation status code.
+   */
+  code?: string;
+
+  /**
+   * Additional information regarding the success/failure of the operation.
+   */
+  message?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union SettingName {
+  string,
+
+  /**
+   * MCAS
+   */
+  MCAS: "MCAS",
+
+  /**
+   * WDATP
+   */
+  WDATP: "WDATP",
+
+  /**
+   * WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW
+   */
+  WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW: "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
+
+  /**
+   * WDATP_UNIFIED_SOLUTION
+   */
+  WDATP_UNIFIED_SOLUTION: "WDATP_UNIFIED_SOLUTION",
+
+  /**
+   * Sentinel
+   */
+  Sentinel: "Sentinel",
+
+  /**
+   * Name of the Defender for Storage Settings name.
+   */
+  current: "current",
+}
+
+/**
+ * Optional. Write scan result on blobIndexTags by default.
+ */
+union BlobScanResultsOptions {
+  string,
+
+  /**
+   * Write scan results on the blobs index tags.
+   */
+  blobIndexTags: "blobIndexTags",
+
+  /**
+   * Write scan results on the blobs index tags.
+   */
+  BlobIndexTags: "BlobIndexTags",
+
+  /**
+   * Do not write scan results on the blobs index tags.
+   */
+  None: "None",
+}
