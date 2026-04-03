@@ -173,3 +173,6 @@ using Microsoft.MachineLearningServices;
   "AzureMachineLearningServicesManagementClient",
   "javascript"
 );
+
+@@usage(FineTuningVertical, Azure.ClientGenerator.Core.Usage.output);
+@@usage(FineTuningJob, Azure.ClientGenerator.Core.Usage.output);
