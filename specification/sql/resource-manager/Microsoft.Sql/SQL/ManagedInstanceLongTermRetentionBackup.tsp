@@ -24,7 +24,7 @@ model ManagedInstanceLongTermRetentionBackup
   >;
 }
 
-alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -53,7 +53,6 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.E
     @key
     databaseName: string;
   },
-  {},
   {
     /** The backup name. */
     @path

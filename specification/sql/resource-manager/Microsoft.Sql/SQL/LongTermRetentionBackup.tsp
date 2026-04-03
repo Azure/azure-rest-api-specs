@@ -24,7 +24,7 @@ model LongTermRetentionBackup
   >;
 }
 
-alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -53,7 +53,6 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @key
     longTermRetentionDatabaseName: string;
   },
-  {},
   {
     /** The backup name. */
     @path
