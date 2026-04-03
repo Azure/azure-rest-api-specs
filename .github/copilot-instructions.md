@@ -11,7 +11,7 @@ Refer to [language-emitter.instructions.md](./instructions/language-emitter.inst
 
 # When to invoke the azure-typespec-author skill
 
-The `azure-typespec-author` skill **must** be invoked immediately for any task that involves creating and modifying TypeSpec (`.tsp`) files except for `client.tsp` under the specification directory in this repository. This includes but is not limited to:
+The `azure-typespec-author` skill **must** be invoked immediately in all modes (including plan mode) for any task that involves creating and modifying TypeSpec (`.tsp`) files except for `client.tsp` under the specification directory in this repository. This includes but is not limited to:
 
 - Adding, bumping, or promoting API versions (preview, stable)
 - Adding or modifying resources, operations, models, properties, or decorators
