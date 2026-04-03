@@ -708,7 +708,8 @@ alias ClientRequestIdHeader = {
 
 alias QueueMessageBodyParameter = {
   /**
-   * A Message object which can be stored in a Queue
+   * The queue message. The message must be in a format that can be included in
+   * an XML request with UTF-8 encoding. The encoded message can be up to 64 KB in size.
    */
   @bodyRoot
   queueMessage?: QueueMessage;
