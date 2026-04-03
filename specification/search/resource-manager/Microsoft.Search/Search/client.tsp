@@ -50,6 +50,31 @@ op servicesCheckNameAvailabilityCustomization(
 ): ArmResponse<CheckNameAvailabilityOutput> | CloudError;
 
 /**
+ * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@autoRoute
+op servicesCheckNameAvailabilityCustomizationForJs(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /**
+   * The search service name to validate. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length.
+   */
+  name: string,
+
+  /**
+   * The type of the resource whose name is to be validated. This value must always be 'searchServices'.
+   */
+  type: "searchServices",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  params?: `search-management-request-options`,
+): ArmResponse<CheckNameAvailabilityOutput> | CloudError;
+
+/**
  * Get a list of all Azure AI Search quota usages across the subscription.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -660,7 +685,7 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 );
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.body,
   "checkNameAvailabilityInput",
-  "go,javascript"
+  "go"
 );
 @@clientName(searchCreateOrUpdateCustomization::parameters.resource,
   "service",
@@ -675,6 +700,11 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   servicesCheckNameAvailabilityCustomization,
   "go,csharp,javascript"
 );
+@@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
+  servicesCheckNameAvailabilityCustomizationForJs,
+  "javascript"
+);
+
 @@Azure.ClientGenerator.Core.override(UsagesOperationGroup.listBySubscription,
   usagesListBySubscriptionCustomization,
   "go,csharp,javascript"
@@ -772,6 +802,10 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
   "go,csharp,javascript"
+);
+@@clientName(servicesCheckNameAvailabilityCustomizationForJs::parameters.params,
+  "searchManagementRequestOptions",
+  "javascript"
 );
 @@clientName(usagesListBySubscriptionCustomization::parameters.params,
   "searchManagementRequestOptions",
