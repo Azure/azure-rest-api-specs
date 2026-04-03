@@ -110,7 +110,8 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(S3WithHmacSourceType.MINIO, "Minio", "csharp");
-@@clientName(S3WithHmacSourceType.BACKBLAZE, "Backblaze", "csharp");
 @@clientName(S3WithHmacSourceType.IBM, "Ibm", "csharp");
-@@clientName(S3WithHmacSourceType.CLOUDFLARE, "Cloudflare", "csharp");
 @@clientName(S3WithHmacSourceType.GCS, "Gcs", "csharp");
+@@clientName(S3WithHmacSourceType.ALIBABA, "Alibaba", "csharp");
+@@clientName(S3WithHmacSourceType.DELL_EMC, "DellEmc", "csharp");
+@@clientName(S3WithHmacSourceType.OTHER, "Other", "csharp");
