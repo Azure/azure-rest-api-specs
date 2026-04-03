@@ -38,7 +38,11 @@ These settings apply only when `--tag=package-preview-2026-04` is specified on t
 ```yaml $(tag) == 'package-preview-2026-04'
 input-file:
   - Microsoft.HybridContainerService/preview/2026-04-01-preview/openapi.json
+suppressions:
+  - code: MissingApiInDefaultTag
+    reason: "storageSpaces API was deprecated and removed after 2022-09-01-preview."
 ```
+
 
 ### Tag: package-preview-2025-02-01-preview
 
