@@ -2,6 +2,7 @@ import "../common/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -13,6 +14,7 @@ const AgentInvocationRequiredPreviews = #{
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Invocations")
+@removed(Versions.v1)
 interface AgentInvocations {
   /**
    * Retrieves the OpenAPI specification for an agent version's invocation contract.
