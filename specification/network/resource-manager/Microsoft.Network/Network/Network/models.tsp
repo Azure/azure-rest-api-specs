@@ -10338,14 +10338,15 @@ model DdosCustomPolicyPropertiesFormat {
   /**
    * The list of frontend IP configurations associated with the custom policy. This list is read-only.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   frontEndIpConfiguration?: SubResource[];
 
   /**
    * The list of public IP addresses associated with the custom policy. This list is read-only.
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   publicIPAddresses?: SubResource[];
 }
 
