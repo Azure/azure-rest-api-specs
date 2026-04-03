@@ -1,29 +1,5 @@
 ## Changed Paths
 
-Path: /subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions/{version}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/assessPatches
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/installPatches
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/current
-Change Type: added
-
 Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata
 Change Type: deleted
 
@@ -36,20 +12,8 @@ Change Type: deleted
 Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default
 Change Type: added
 
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current
-Change Type: deleted
-
 Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current
 Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/assessPatches
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/installPatches
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}/{baseResourceType}
-Change Type: added
 
 ## Swagger Changes
 
@@ -59,107 +23,35 @@ Change Type: added
 |------|------------|-------|
 | `info['x-ms-code-generation-settings__deleted']` | deleted | `{"name":"HybridComputeManagementClient"}` |
 
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions__deleted']` | deleted | `{"get":{"operationId":"ExtensionMetadata_List","tags":["extensions"],"parameters":[{"name":"location...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}__deleted']` | deleted | `{"get":{"operationId":"ExtensionMetadata_Get","tags":["extensions"],"parameters":[{"name":"location"...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}__deleted']` | deleted | `{"get":{"operationId":"Settings_Get","tags":["Settings"],"parameters":[{"name":"baseProvider","in":"...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/assessPatches`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/assessPatches__deleted']` | deleted | `{"post":{"operationId":"Machines_AssessPatches","tags":["machines"],"parameters":[{"name":"name","in...` |
-
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata__deleted']` | deleted | `{"get":{"operationId":"HybridIdentityMetadata_ListByMachines","tags":["HybridIdentityMetadata"],"par...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata__deleted']` | deleted | `{"get":{"operationId":"HybridIdentityMetadata_ListByMachines","tags":["HybridIdentityMetadata"],"sum...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}__deleted']` | deleted | `{"get":{"operationId":"HybridIdentityMetadata_Get","tags":["HybridIdentityMetadata"],"parameters":[{...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/installPatches`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/installPatches__deleted']` | deleted | `{"post":{"operationId":"Machines_InstallPatches","tags":["machines"],"parameters":[{"name":"name","i...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}__deleted']` | deleted | `{"get":{"operationId":"HybridIdentityMetadata_Get","tags":["HybridIdentityMetadata"],"summary":"Gets...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/{licenseProfileName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/{licenseProfileName}__deleted']` | deleted | `{"get":{"operationId":"LicenseProfiles_Get","tags":["licenseProfiles"],"parameters":[{"name":"machin...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current__deleted']` | deleted | `{"get":{"operationId":"PrivateLinkScopes_GetValidationDetailsForMachine","parameters":[{"name":"mach...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/{licenseProfileName}__deleted']` | deleted | `{"get":{"operationId":"LicenseProfiles_Get","tags":["licenseProfiles"],"description":"Retrieves info...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current__deleted']` | deleted | `{"get":{"operationId":"NetworkConfigurations_Get","tags":["NetworkConfigurations"],"parameters":[{"n...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions__added']` | added | `{"get":{"operationId":"ExtensionMetadata_List","tags":["ExtensionValues"],"parameters":[],"responses...` |
-
-### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions/{version}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/versions/{version}__added']` | added | `{"get":{"operationId":"ExtensionMetadata_Get","tags":["ExtensionValues"],"parameters":[{"name":"vers...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/assessPatches`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/assessPatches__added']` | added | `{"post":{"operationId":"Machines_AssessPatches","tags":["Machines"],"parameters":[{"name":"machineNa...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/installPatches`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/{name}/installPatches__added']` | added | `{"post":{"operationId":"Machines_InstallPatches","tags":["Machines"],"parameters":[{"name":"machineN...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/current`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/current__added']` | added | `{"get":{"operationId":"PrivateLinkScopes_GetValidationDetailsForMachine","tags":["Machines"],"parame...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current__deleted']` | deleted | `{"get":{"operationId":"NetworkConfigurations_Get","tags":["NetworkConfigurations"],"description":"Re...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default__added']` | added | `{"get":{"operationId":"LicenseProfiles_Get","tags":["LicenseProfiles"],"parameters":[{"name":"machin...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}/{baseResourceType}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}/{baseResourceType}__added']` | added | `{"get":{"operationId":"Settings_Get","tags":["SettingsOperationGroup"],"parameters":[{"name":"settin...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default__added']` | added | `{"get":{"operationId":"LicenseProfiles_Get","tags":["LicenseProfiles"],"description":"Retrieves info...` |
 
 ### Changes for `tags`
 
@@ -171,6 +63,7 @@ Change Type: added
 | `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}'].get.tags__deleted` | deleted | `["AgentVersions"]` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/privateLinkScopes'].get.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense'].post.tags__deleted` | deleted | `["licenses"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current'].get.tags__added` | added | `["Machines"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes'].get.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].delete.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].get.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
@@ -181,7 +74,7 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NetworkSecurityPerimeterConfiguration.properties.name__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.NetworkSecurityPerimeterConfiguration.properties.name__deleted` | deleted | `{"type":"string","description":"Azure resource name","readOnly":true}` |
 | `paths['/providers/microsoft.HybridCompute/locations/{location}/publishers'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}'].get.parameters[0].name__deleted` | deleted | `location` |
@@ -221,7 +114,7 @@ Change Type: added
 | `definitions.MachineExtensionInstanceView.properties.status.type__deleted` | deleted | `object` |
 | `definitions.MachineExtensionUpgrade.properties.extensionTargets.type__added` | added | `object` |
 | `definitions.MachineProperties.properties.detectedProperties.type__added` | added | `object` |
-| `definitions.NetworkSecurityPerimeterConfiguration.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.NetworkSecurityPerimeterConfiguration.properties.type__deleted` | deleted | `{"type":"string","description":"Azure resource type","readOnly":true}` |
 | `definitions.OSProfile.properties.linuxConfiguration.type__deleted` | deleted | `object` |
 | `definitions.OSProfile.properties.windowsConfiguration.type__deleted` | deleted | `object` |
 | `definitions.PatchSettings.properties.status.type__deleted` | deleted | `object` |
@@ -236,6 +129,8 @@ Change Type: added
 | `paths['/providers/microsoft.HybridCompute/locations/{location}/publishers'].get.parameters[0].minLength__deleted` | deleted | `1` |
 | `paths['/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes'].get.parameters[0].minLength__deleted` | deleted | `1` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}'].get.parameters[0].minLength__deleted` | deleted | `1` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions'].get.parameters[0].minLength__added` | added | `1` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}'].get.parameters[0].minLength__added` | added | `1` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands'].get.parameters[0].minLength__added` | added | `1` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].delete.parameters[0].minLength__added` | added | `1` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].get.parameters[0].minLength__added` | added | `1` |
@@ -265,6 +160,28 @@ Change Type: added
 |------|------------|-------|
 | `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions'].get['x-ms-examples__deleted']` | deleted | `{"GET Agent Versions":{"$ref":"./examples/AgentVersions_Get.json"}}` |
 | `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}'].get['x-ms-examples__deleted']` | deleted | `{"GET Agent Versions":{"$ref":"./examples/AgentVersion_GetLatest.json"}}` |
+
+### Changes for `description`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.LicenseProfileMachineInstanceView.properties.esuProfile.description__added` | added | `Properties for the Machine ESU profile.` |
+| `definitions.Machine.properties.identity.description__added` | added | `Identity for the resource.` |
+| `definitions.MachineProperties.properties.locationData.description__added` | added | `Metadata pertaining to the geographic location of the resource.` |
+| `definitions.MachineUpdate.properties.identity.description__added` | added | `Identity for the resource.` |
+| `definitions.MachineUpdateProperties.properties.locationData.description__added` | added | `Metadata pertaining to the geographic location of the resource.` |
+| `definitions.MachineUpdateProperties.properties.osProfile.description__added` | added | `Specifies the operating system settings for the hybrid machine.` |
+| `definitions.ServiceExtensionType.description__deleted` | deleted | `The name of the Azure Arc Extension.` |
+| `definitions.Settings.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.Settings.properties.properties.description__added` | added | `Settings properties` |
+| `definitions.SettingsProperties.properties.gatewayProperties.description__added` | added | `Settings Gateway properties` |
+| `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}'].get.description__deleted` | deleted | `Gets an Agent Version along with the download link currently present.` |
+
+### Changes for `x-ms-pageable`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 
 ### Changes for `202`
 
@@ -307,6 +224,7 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current'].get.parameters[0].maxLength__added` | added | `54` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands'].get.parameters[0].maxLength__added` | added | `54` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].delete.parameters[0].maxLength__added` | added | `54` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].get.parameters[0].maxLength__added` | added | `54` |
@@ -316,7 +234,7 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].patch__deleted` | deleted | `{"operationId":"MachineRunCommands_Update","tags":["MachineRunCommands"],"parameters":[{"name":"mach...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].patch__deleted` | deleted | `{"operationId":"MachineRunCommands_Update","tags":["MachineRunCommands"],"description":"The operatio...` |
 
 ### Changes for `Location`
 
@@ -334,13 +252,13 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DetectedProperties__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"},"readOnly":true}` |
+| `definitions.DetectedProperties__deleted` | deleted | `{"type":"object","description":"Detected properties from the machine.","additionalProperties":{"type...` |
 
 ### Changes for `ExtensionTarget`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ExtensionTarget__deleted` | deleted | `{"type":"object","additionalProperties":{"$ref":"#/definitions/ExtensionTargetProperties","type":"ob...` |
+| `definitions.ExtensionTarget__deleted` | deleted | `{"type":"object","description":"Describes the Machine Extension Target Properties","additionalProper...` |
 
 ### Changes for `GatewaysListResult`
 
@@ -352,7 +270,7 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.HybridIdentityMetadata__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/HybridIdentityMetadataProperties"...` |
+| `definitions.HybridIdentityMetadata__deleted` | deleted | `{"type":"object","description":"Defines the HybridIdentityMetadata.","properties":{"properties":{"$r...` |
 
 ### Changes for `HybridIdentityMetadataList`
 
@@ -364,19 +282,19 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.HybridIdentityMetadataProperties__deleted` | deleted | `{"type":"object","properties":{"vmId":{"type":"string"},"publicKey":{"type":"string"},"identity":{"$...` |
+| `definitions.HybridIdentityMetadataProperties__deleted` | deleted | `{"type":"object","description":"Defines the resource properties.","properties":{"vmId":{"type":"stri...` |
 
 ### Changes for `KeyDetails`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.KeyDetails__deleted` | deleted | `{"type":"object","properties":{"publicKey":{"type":"string","readOnly":true},"notAfter":{"type":"str...` |
+| `definitions.KeyDetails__deleted` | deleted | `{"type":"object","description":"Public key details","properties":{"publicKey":{"type":"string","desc...` |
 
 ### Changes for `KeyProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.KeyProperties__deleted` | deleted | `{"type":"object","properties":{"clientPublicKey":{"$ref":"#/definitions/KeyDetails","readOnly":true}...` |
+| `definitions.KeyProperties__deleted` | deleted | `{"type":"object","description":"Public key information for client authentication","properties":{"cli...` |
 
 ### Changes for `LicenseProfilesListResult`
 
@@ -412,61 +330,61 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NetworkConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"location":{"type":"string","x-ms-mutability":["create","read"]},"ten...` |
+| `definitions.NetworkConfigurationProperties__deleted` | deleted | `{"type":"object","description":"Network configuration properties","properties":{"location":{"type":"...` |
 
 ### Changes for `OperationListResult`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OperationListResult__deleted` | deleted | `{"type":"object","properties":{"value":{"type":"array","items":{"$ref":"#/definitions/OperationValue...` |
+| `definitions.OperationListResult__deleted` | deleted | `{"type":"object","description":"The List Compute Operation operation response.","properties":{"value...` |
 
 ### Changes for `OperationValue`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OperationValue__deleted` | deleted | `{"type":"object","properties":{"origin":{"type":"string","readOnly":true},"name":{"type":"string","r...` |
+| `definitions.OperationValue__deleted` | deleted | `{"type":"object","description":"Describes the properties of a Compute Operation value.","properties"...` |
 
 ### Changes for `OperationValueDisplay`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OperationValueDisplay__deleted` | deleted | `{"type":"object","properties":{"operation":{"type":"string","readOnly":true},"resource":{"type":"str...` |
+| `definitions.OperationValueDisplay__deleted` | deleted | `{"type":"object","description":"Describes the properties of a Hybrid Compute Operation Value Display...` |
 
 ### Changes for `PrivateLinkScopesResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.PrivateLinkScopesResource__deleted` | deleted | `{"type":"object","properties":{"id":{"type":"string","readOnly":true},"name":{"type":"string","readO...` |
+| `definitions.PrivateLinkScopesResource__deleted` | deleted | `{"type":"object","description":"An azure resource object","properties":{"id":{"type":"string","descr...` |
 
 ### Changes for `TargetVersion`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.TargetVersion__deleted` | deleted | `{"type":"string"}` |
+| `definitions.TargetVersion__deleted` | deleted | `{"type":"string","description":"Extension Upgrade Target Version."}` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<MachineAssessPatchesResult>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<MachineAssessPatchesResult>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/MachineAssessPatchesResult"}},"required...` |
+| `definitions['Azure.ResourceManager.ArmResponse<MachineAssessPatchesResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<MachineInstallPatchesResult>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<MachineInstallPatchesResult>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/MachineInstallPatchesResult"}},"require...` |
+| `definitions['Azure.ResourceManager.ArmResponse<MachineInstallPatchesResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/NetworkSecurityPerimeterConfigurationRe...` |
+| `definitions['Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<SetupExtensionRequest>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<SetupExtensionRequest>__added']` | added | `{"type":"object","properties":{"body":{"$ref":"#/definitions/SetupExtensionRequest"}},"required":["b...` |
+| `definitions['Azure.ResourceManager.ArmResponse<SetupExtensionRequest>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"$ref...` |
 
 ### Changes for `GatewayListResult`
 
@@ -490,43 +408,43 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LicenseProfileMachineInstanceViewSoftwareAssurance__added` | added | `{"type":"object","properties":{"softwareAssuranceCustomer":{"type":"boolean"}}}` |
+| `definitions.LicenseProfileMachineInstanceViewSoftwareAssurance__added` | added | `{"type":"object","properties":{"softwareAssuranceCustomer":{"type":"boolean","description":"Specifie...` |
 
 ### Changes for `LicenseProfileProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LicenseProfileProperties__added` | added | `{"type":"object","properties":{"softwareAssurance":{"$ref":"#/definitions/LicenseProfilePropertiesSo...` |
+| `definitions.LicenseProfileProperties__added` | added | `{"type":"object","description":"Describe the properties of a license profile.","properties":{"softwa...` |
 
 ### Changes for `LicenseProfilePropertiesSoftwareAssurance`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LicenseProfilePropertiesSoftwareAssurance__added` | added | `{"type":"object","properties":{"softwareAssuranceCustomer":{"type":"boolean"}}}` |
+| `definitions.LicenseProfilePropertiesSoftwareAssurance__added` | added | `{"type":"object","properties":{"softwareAssuranceCustomer":{"type":"boolean","description":"Specifie...` |
 
 ### Changes for `LicenseProfileUpdateProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LicenseProfileUpdateProperties__added` | added | `{"type":"object","properties":{"softwareAssurance":{"$ref":"#/definitions/LicenseProfileUpdateProper...` |
+| `definitions.LicenseProfileUpdateProperties__added` | added | `{"type":"object","description":"Describe the Update properties of a license profile.","properties":{...` |
 
 ### Changes for `LicenseProfileUpdatePropertiesSoftwareAssurance`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LicenseProfileUpdatePropertiesSoftwareAssurance__added` | added | `{"type":"object","properties":{"softwareAssuranceCustomer":{"type":"boolean"}}}` |
+| `definitions.LicenseProfileUpdatePropertiesSoftwareAssurance__added` | added | `{"type":"object","properties":{"softwareAssuranceCustomer":{"type":"boolean","description":"Specifie...` |
 
 ### Changes for `LicenseUpdatePropertiesLicenseDetails`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LicenseUpdatePropertiesLicenseDetails__added` | added | `{"type":"object","properties":{"state":{"type":"string","enum":["Activated","Deactivated"],"x-ms-enu...` |
+| `definitions.LicenseUpdatePropertiesLicenseDetails__added` | added | `{"type":"object","properties":{"state":{"type":"string","description":"Describes the state of the li...` |
 
 ### Changes for `MachineExtensionInstanceViewStatus`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MachineExtensionInstanceViewStatus__added` | added | `{"type":"object","properties":{"code":{"type":"string"},"level":{"type":"string","enum":["Info","War...` |
+| `definitions.MachineExtensionInstanceViewStatus__added` | added | `{"type":"object","description":"Instance view status.","properties":{"code":{"type":"string","descri...` |
 
 ### Changes for `MachineExtensionListResult`
 
@@ -544,25 +462,25 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OSProfileLinuxConfiguration__added` | added | `{"type":"object","properties":{"patchSettings":{"$ref":"#/definitions/PatchSettings","x-ms-client-fl...` |
+| `definitions.OSProfileLinuxConfiguration__added` | added | `{"type":"object","description":"Specifies the linux configuration for update management.","propertie...` |
 
 ### Changes for `OSProfileWindowsConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OSProfileWindowsConfiguration__added` | added | `{"type":"object","properties":{"patchSettings":{"$ref":"#/definitions/PatchSettings","x-ms-client-fl...` |
+| `definitions.OSProfileWindowsConfiguration__added` | added | `{"type":"object","description":"Specifies the windows configuration for update management.","propert...` |
 
 ### Changes for `PatchSettingsStatus`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.PatchSettingsStatus__added` | added | `{"type":"object","properties":{"hotpatchEnablementStatus":{"type":"string","enum":["Unknown","Pendin...` |
+| `definitions.PatchSettingsStatus__added` | added | `{"type":"object","description":"Status of the hotpatch capability enrollment or disenrollment.","pro...` |
 
 ### Changes for `TypeSpec.Http.OkResponse`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object"}` |
+| `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object","description":"The request has succeeded."}` |
 
 ### Changes for `readOnly`
 
@@ -666,7 +584,7 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NetworkSecurityPerimeterConfiguration.properties.id__deleted` | deleted | `{"type":"string","readOnly":true}` |
+| `definitions.NetworkSecurityPerimeterConfiguration.properties.id__deleted` | deleted | `{"type":"string","description":"Azure resource Id","readOnly":true}` |
 
 ### Changes for `x-ms-mutability`
 
@@ -693,14 +611,24 @@ Change Type: added
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.AgentConfiguration.properties.configMode['x-ms-enum'].name` | `Agent configuration mode` | `AgentConfigurationMode` |
+| `definitions.ExtensionTargetProperties.properties.targetVersion.description` | `Extension Upgrade Target Version.` | `Properties for the specified Extension to Upgrade.` |
 | `definitions.ExtensionValueV2.allOf[0].$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.HybridComputePrivateLinkScope.allOf[0].$ref` | `#/definitions/PrivateLinkScopesResource` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.HybridComputePrivateLinkScopeProperties.properties.publicNetworkAccess.description` | `The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).` | `Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.` |
 | `definitions.LinuxParameters.properties.classificationsToInclude.items['x-ms-enum'].name` | `VMGuestPatchClassification_Linux` | `VMGuestPatchClassificationLinux` |
 | `definitions.Machine.properties.kind['x-ms-enum'].name` | `ArcKindEnum ` | `ArcKindEnum` |
+| `definitions.MachineInstallPatchesResult.properties.status.description` | `The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", "Unknown" or "CompletedWithWarnings."` | `The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Unknown", "Failed", "Succeeded", or "CompletedWithWarnings."` |
+| `definitions.MachineRunCommandProperties.properties.errorBlobManagedIdentity.description` | `User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged ` | `User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged` |
+| `definitions.MachineRunCommandProperties.properties.outputBlobManagedIdentity.description` | `User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged ` | `User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged` |
+| `definitions.MachineRunCommandProperties.properties.outputBlobUri.description` | `Specifies the Azure storage blob where script output stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter. ` | `Specifies the Azure storage blob where script output stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter.` |
 | `definitions.MachineUpdate.properties.kind['x-ms-enum'].name` | `ArcKindEnum ` | `ArcKindEnum` |
+| `definitions.PrivateLinkScopeValidationDetails.properties.publicNetworkAccess.description` | `The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).` | `Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.` |
+| `definitions.RunCommandManagedIdentity.description` | ` Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.` | `Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.` |
 | `definitions.WindowsParameters.properties.classificationsToInclude.items['x-ms-enum'].name` | `VMGuestPatchClassification_Windows` | `VMGuestPatchClassificationWindows` |
 | `info.description` | `Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.` | `The Hybrid Compute Management Client.` |
+| `paths['/providers/microsoft.HybridCompute/operations'].get.description` | `Gets a list of hybrid compute operations.` | `List the operations for the provider` |
 | `paths['/providers/microsoft.HybridCompute/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult` |
+| `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions'].get.description` | `Gets all Agent Versions along with the download link currently present.` | `Gets all agent versions based on location and publisher` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/gateways'].get.responses.200.schema.$ref` | `#/definitions/GatewaysListResult` | `#/definitions/GatewayListResult` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/licenses'].get.responses.200.schema.$ref` | `#/definitions/LicensesListResult` | `#/definitions/LicenseListResult` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense'].post.parameters[0].name` | `parameters` | `body` |
@@ -722,6 +650,8 @@ Change Type: added
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].put.parameters[0].pattern` | `[a-zA-Z0-9-_\\.]+` | `^[a-zA-Z0-9-_\\.]{1,54}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `The URI to poll for completion status.` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/upgradeExtensions'].post.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/assessPatches'].post.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/installPatches'].post.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile'].post.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.responses.202.headers.Location.description` | `The URL of the resource used to check the status of the asynchronous operation.` | `The Location header contains the URL where the status of the long running operation can be checked.` |

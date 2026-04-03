@@ -20,66 +20,77 @@ model Settings is Azure.ResourceManager.ProxyResource<SettingsProperties> {
   >;
 }
 
-alias ExternalResource = Extension.ExternalResource<
-  "{baseProvider}",
-  "{baseResourceType}",
-  "{baseResourceName}"
+alias SettingsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /**
+     * The name of the base Resource Provider.
+     */
+    @path
+    @segment("providers")
+    @key
+    @pattern("[a-zA-Z0-9-_\\.]+")
+    baseProvider: string;
+
+    /**
+     * The name of the base Resource Type.
+     */
+    @path
+    @key
+    @pattern("[a-zA-Z0-9-_\\.]+")
+    baseResourceType: string;
+
+    /**
+     * The name of the base resource.
+     */
+    @path
+    @key
+    @pattern("[a-zA-Z0-9-_\\.]+")
+    baseResourceName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Settings>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<Settings>;
+
+    /**
+     * The name of the settings resource.
+     */
+    @path
+    @key
+    @segment("settings")
+    @pattern("default")
+    settingsResourceName: string;
+  },
+  "Settings"
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface SettingsOperationGroup {
   /**
    * Returns the base Settings for the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Settings_Get")
-  get is ArmResourceRead<
-    Settings,
-    Parameters = {
-      /**
-       * The name of the base Resource Type.
-       */
-      @pattern("[a-zA-Z0-9-_\\.]+")
-      @path
-      baseResourceType: string;
-    }
-  >;
+  get is SettingsOps.Read<Settings>;
 
   /**
    * Updates the base Settings of the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Settings_Update")
-  update is ArmResourceCreateOrReplaceSync<
-    Settings,
-    Parameters = {
-      /**
-       * The name of the base Resource Type.
-       */
-      @pattern("[a-zA-Z0-9-_\\.]+")
-      @path
-      baseResourceType: string;
-    }
-  >;
+  update is SettingsOps.CreateOrUpdateSync<Settings>;
 
   /**
    * Update the base Settings of the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Settings_Patch")
-  @patch(#{ implicitOptionality: false })
-  patch is ArmCustomPatchSync<
-    Settings,
-    PatchModel = Settings,
-    Parameters = {
-      /**
-       * The name of the base Resource Type.
-       */
-      @pattern("[a-zA-Z0-9-_\\.]+")
-      @path
-      baseResourceType: string;
-    }
-  >;
+  patch is SettingsOps.CustomPatchSync<Settings, PatchModel = Settings>;
 }
 
 @@doc(Settings.name, "The name of the settings resource.");

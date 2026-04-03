@@ -27,14 +27,8 @@ model ExtensionValue
 alias ExtensionValueOps = Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
-
-    /**
-     * The provider namespace. Always "Microsoft.HybridCompute".
-     */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.HybridCompute";
+    ...SubscriptionIdParameter;
+    ...Legacy.Provider;
 
     @path
     @segment("locations")
@@ -68,19 +62,15 @@ interface ExtensionValues {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionMetadata_Get")
-  get is ArmResourceRead<
-    ExtensionValue,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is ExtensionValueOps.Read<ExtensionValue>;
 
   /**
    * Gets all Extension versions based on location, publisher, extensionType
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionMetadata_List")
-  list is ArmResourceListByParent<
+  list is ExtensionValueOps.List<
     ExtensionValue,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<ExtensionValueListResult>
   >;
 }

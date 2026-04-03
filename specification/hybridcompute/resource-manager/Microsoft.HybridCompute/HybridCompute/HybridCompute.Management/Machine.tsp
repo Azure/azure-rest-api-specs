@@ -41,6 +41,23 @@ model Machine is Azure.ResourceManager.TrackedResource<MachineProperties> {
   kind?: ArcKindEnum;
 }
 
+alias MachineOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+  },
+  {
+    /**
+     * The name of the hybrid machine.
+     */
+    @path
+    @segment("machines")
+    name: string;
+  }
+>;
+
 @armResourceOperations
 interface Machines {
   /**
@@ -106,33 +123,19 @@ interface Machines {
   /**
    * The operation to assess patches on a hybrid machine identity in Azure.
    */
-  assessPatches is ArmResourceActionAsync<
+  assessPatches is MachineOps.ActionAsync<
     Machine,
     void,
-    ArmResponse<MachineAssessPatchesResult>,
-    Parameters = {
-      /**
-       * The name of the hybrid machine.
-       */
-      @path
-      name: string;
-    }
+    ArmResponse<MachineAssessPatchesResult>
   >;
 
   /**
    * The operation to install patches on a hybrid machine identity in Azure.
    */
-  installPatches is ArmResourceActionAsync<
+  installPatches is MachineOps.ActionAsync<
     Machine,
     MachineInstallPatchesParameters,
-    ArmResponse<MachineInstallPatchesResult>,
-    Parameters = {
-      /**
-       * The name of the hybrid machine.
-       */
-      @path
-      name: string;
-    }
+    ArmResponse<MachineInstallPatchesResult>
   >;
 
   /**
@@ -177,7 +180,7 @@ interface Machines {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinkScopes_GetValidationDetailsForMachine")
   @get
-  @action("current")
+  @action("privateLinkScopes/current")
   getValidationDetailsForMachine is ArmResourceActionSync<
     Machine,
     void,

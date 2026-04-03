@@ -501,6 +501,122 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions": {
+      "get": {
+        "operationId": "ExtensionMetadata_List",
+        "tags": [
+          "ExtensionValues"
+        ],
+        "description": "Gets all Extension versions based on location, publisher, extensionType",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "publisher",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValueListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a list of extensions": {
+            "$ref": "./examples/extension/ExtensionMetadata_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}": {
+      "get": {
+        "operationId": "ExtensionMetadata_Get",
+        "tags": [
+          "ExtensionValues"
+        ],
+        "description": "Gets an Extension Metadata based on location, publisher, extensionType and version",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "publisher",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionType",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionValue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET an extensions metadata": {
+            "$ref": "./examples/extension/ExtensionMetadata_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/machines": {
       "get": {
         "operationId": "Machines_ListBySubscription",
@@ -640,26 +756,61 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/Microsoft.HybridCompute/settings/{settingsResourceName}": {
       "get": {
-        "operationId": "ExtensionMetadata_List",
+        "operationId": "Settings_Get",
         "tags": [
-          "ExtensionValues"
+          "SettingsOperationGroup"
         ],
-        "description": "Gets all Extension versions based on location, publisher, extensionType",
+        "description": "Returns the base Settings for the target resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "baseProvider",
+            "in": "path",
+            "description": "The name of the base Resource Provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "baseResourceType",
+            "in": "path",
+            "description": "The name of the base Resource Type.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "baseResourceName",
+            "in": "path",
+            "description": "The name of the base resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "description": "The name of the settings resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExtensionValueListResult"
+              "$ref": "#/definitions/Settings"
             }
           },
           "default": {
@@ -670,19 +821,17 @@
           }
         },
         "x-ms-examples": {
-          "GET a list of extensions": {
-            "$ref": "./examples/extension/ExtensionMetadata_List.json"
+          "NetworkConfigurationsGet": {
+            "$ref": "./examples/settings/SettingsGet.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/versions/{version}": {
-      "get": {
-        "operationId": "ExtensionMetadata_Get",
+      },
+      "put": {
+        "operationId": "Settings_Update",
         "tags": [
-          "ExtensionValues"
+          "SettingsOperationGroup"
         ],
-        "description": "Gets an Extension Metadata based on location, publisher, extensionType and version",
+        "description": "Updates the base Settings of the target resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -691,18 +840,61 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "version",
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "baseProvider",
             "in": "path",
-            "description": "The version of the Extension being received.",
+            "description": "The name of the base Resource Provider.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "baseResourceType",
+            "in": "path",
+            "description": "The name of the base Resource Type.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "baseResourceName",
+            "in": "path",
+            "description": "The name of the base resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "description": "The name of the settings resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Settings details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'Settings' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ExtensionValue"
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "201": {
+            "description": "Resource 'Settings' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Settings"
             }
           },
           "default": {
@@ -713,8 +905,86 @@
           }
         },
         "x-ms-examples": {
-          "GET an extensions metadata": {
-            "$ref": "./examples/extension/ExtensionMetadata_Get.json"
+          "SettingsUpdate": {
+            "$ref": "./examples/settings/SettingsUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Settings_Patch",
+        "tags": [
+          "SettingsOperationGroup"
+        ],
+        "description": "Update the base Settings of the target resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "baseProvider",
+            "in": "path",
+            "description": "The name of the base Resource Provider.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "baseResourceType",
+            "in": "path",
+            "description": "The name of the base Resource Type.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "baseResourceName",
+            "in": "path",
+            "description": "The name of the base resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "settingsResourceName",
+            "in": "path",
+            "description": "The name of the settings resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "default"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Settings details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConfigurationsPatch": {
+            "$ref": "./examples/settings/SettingsPatch.json"
           }
         }
       }
@@ -1543,165 +1813,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/{name}/assessPatches": {
-      "post": {
-        "operationId": "Machines_AssessPatches",
-        "tags": [
-          "Machines"
-        ],
-        "description": "The operation to assess patches on a hybrid machine identity in Azure.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "description": "The name of the hybrid machine.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the hybrid machine.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MachineAssessPatchesResult"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Assess patch state of a machine.": {
-            "$ref": "./examples/machine/Machine_AssessPatches.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMachineAssessPatchesResult%3E"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/{name}/installPatches": {
-      "post": {
-        "operationId": "Machines_InstallPatches",
-        "tags": [
-          "Machines"
-        ],
-        "description": "The operation to install patches on a hybrid machine identity in Azure.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "description": "The name of the hybrid machine.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the hybrid machine.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "installPatchesInput",
-            "in": "body",
-            "description": "Input for InstallPatches as directly received by the API",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MachineInstallPatchesParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MachineInstallPatchesResult"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Install patch state of a machine.": {
-            "$ref": "./examples/machine/Machine_InstallPatches.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMachineInstallPatchesResult%3E"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/addExtensions": {
       "post": {
         "operationId": "SetupExtensions",
@@ -1779,13 +1890,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/current": {
-      "get": {
-        "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/assessPatches": {
+      "post": {
+        "operationId": "Machines_AssessPatches",
         "tags": [
           "Machines"
         ],
-        "description": "Returns a Azure Arc PrivateLinkScope's validation details for a given machine.",
+        "description": "The operation to assess patches on a hybrid machine identity in Azure.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1797,21 +1908,32 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "machineName",
+            "name": "name",
             "in": "path",
             "description": "The name of the hybrid machine.",
             "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
+              "$ref": "#/definitions/MachineAssessPatchesResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1822,10 +1944,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateLinkScopeGet": {
-            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_GetValidationForMachine.json"
+          "Assess patch state of a machine.": {
+            "$ref": "./examples/machine/Machine_AssessPatches.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMachineAssessPatchesResult%3E"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/extensions": {
@@ -2174,6 +2301,80 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/installPatches": {
+      "post": {
+        "operationId": "Machines_InstallPatches",
+        "tags": [
+          "Machines"
+        ],
+        "description": "The operation to install patches on a hybrid machine identity in Azure.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "installPatchesInput",
+            "in": "body",
+            "description": "Input for InstallPatches as directly received by the API",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MachineInstallPatchesParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MachineInstallPatchesResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Install patch state of a machine.": {
+            "$ref": "./examples/machine/Machine_InstallPatches.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMachineInstallPatchesResult%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -2539,6 +2740,55 @@
         "x-ms-examples": {
           "GET Network Profile": {
             "$ref": "./examples/NetworkProfile_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current": {
+      "get": {
+        "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
+        "tags": [
+          "Machines"
+        ],
+        "description": "Returns a Azure Arc PrivateLinkScope's validation details for a given machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the hybrid machine.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/privateLinkScope/PrivateLinkScopes_GetValidationForMachine.json"
           }
         }
       }
@@ -3690,191 +3940,6 @@
         "x-ms-examples": {
           "Gets private endpoint connection.": {
             "$ref": "./examples/privateLinkScope/PrivateLinkScopePrivateLinkResource_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/settings/{settingsResourceName}/{baseResourceType}": {
-      "get": {
-        "operationId": "Settings_Get",
-        "tags": [
-          "SettingsOperationGroup"
-        ],
-        "description": "Returns the base Settings for the target resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "settingsResourceName",
-            "in": "path",
-            "description": "The name of the settings resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "default"
-          },
-          {
-            "name": "baseResourceType",
-            "in": "path",
-            "description": "The name of the base Resource Type.",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Settings"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkConfigurationsGet": {
-            "$ref": "./examples/settings/SettingsGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Settings_Update",
-        "tags": [
-          "SettingsOperationGroup"
-        ],
-        "description": "Updates the base Settings of the target resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "settingsResourceName",
-            "in": "path",
-            "description": "The name of the settings resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "default"
-          },
-          {
-            "name": "baseResourceType",
-            "in": "path",
-            "description": "The name of the base Resource Type.",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Settings details",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Settings"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Settings' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Settings"
-            }
-          },
-          "201": {
-            "description": "Resource 'Settings' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Settings"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SettingsUpdate": {
-            "$ref": "./examples/settings/SettingsUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Settings_Patch",
-        "tags": [
-          "SettingsOperationGroup"
-        ],
-        "description": "Update the base Settings of the target resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "settingsResourceName",
-            "in": "path",
-            "description": "The name of the settings resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "default"
-          },
-          {
-            "name": "baseResourceType",
-            "in": "path",
-            "description": "The name of the base Resource Type.",
-            "required": true,
-            "type": "string",
-            "pattern": "[a-zA-Z0-9-_\\.]+"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Settings details",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Settings"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Settings"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkConfigurationsPatch": {
-            "$ref": "./examples/settings/SettingsPatch.json"
           }
         }
       }
