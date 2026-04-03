@@ -13,7 +13,7 @@ namespace Microsoft.Monitor;
 @doc("Represents an SLI resource within the ProviderHub.")
 model Sli is ProxyResource<SliResource> {
   @doc("Name of the SLI that is given by the user.")
-  @pattern("^[a-zA-Z0-9-_()~]{3,64}$")
+  @pattern("^[a-zA-Z0-9_()~-]{3,64}$")
   @key("sliName")
   @segment("slis")
   @path
@@ -40,7 +40,7 @@ model SliResource {
 
   @visibility(Lifecycle.Read)
   @doc("Indicates the current execution status of the SLI resource in ARM responses.")
-  executionState: ExecutionState;
+  executionState?: ExecutionState;
 
   @doc("Destination AMW accounts.")
   @identifiers(#["resourceId"])
@@ -49,18 +49,18 @@ model SliResource {
   @visibility(Lifecycle.Read)
   @doc("The destination Azure Monitor Workspace (AMW) accounts where the SLI emits metrics.")
   @identifiers(#["metricNamespace", "metricName"])
-  destinationMetrics: Metric[];
+  destinationMetrics?: Metric[];
 
   @doc("Defines the SLO baseline associated with the SLI.")
   baselineProperties: BaselineProperties;
 
   @visibility(Lifecycle.Read)
   @doc("The streaming rule Id associated with the Sli resource.")
-  streamingRuleId: string;
+  streamingRuleId?: string;
 
   @visibility(Lifecycle.Read)
   @doc("The streaming rule last updated timestamp associated with the Sli resource.")
-  streamingRuleLastUpdatedTimestamp: string;
+  streamingRuleLastUpdatedTimestamp?: utcDateTime;
 
   @doc("A flag to determine whether alert is enabled.")
   enableAlert: boolean;
@@ -99,10 +99,10 @@ model Metric {
 @doc("Defines the category of an SLI")
 union Category {
   @doc("Indicates availability-related metrics.")
-  "Availability",
+  Availability: "Availability",
 
   @doc("Indicates latency-related metrics.")
-  "Latency",
+  Latency: "Latency",
 
   string,
 }
