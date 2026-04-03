@@ -37,6 +37,7 @@ using Microsoft.ServiceFabric;
 @@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
 @@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
 @@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
+@@clientName(Microsoft.ServiceFabric.VMSizeResource, "ServiceFabricVmSizeResource", "csharp");
 
 // Model type renames
 @@clientName(Microsoft.ServiceFabric.AzureActiveDirectory, "ClusterAadSetting", "csharp");
@@ -65,3 +66,10 @@ using Microsoft.ServiceFabric;
 @@clientName(Microsoft.ServiceFabric.ClusterState, "ServiceFabricClusterState", "csharp");
 @@clientName(Microsoft.ServiceFabric.ProvisioningState, "ServiceFabricProvisioningState", "csharp");
 @@clientName(Microsoft.ServiceFabric.PartitionScheme, "ApplicationPartitionScheme", "csharp");
+
+// Access modifiers - types that were public in old API but generated as internal
+@@access(Microsoft.ServiceFabric.AzureActiveDirectory, Access.public, "csharp");
+@@access(Microsoft.ServiceFabric.ClusterVersionDetails, Access.public, "csharp");
+@@access(Microsoft.ServiceFabric.DiagnosticsStorageAccountConfig, Access.public, "csharp");
+@@access(Microsoft.ServiceFabric.ClusterState, Access.public, "csharp");
+@@access(Microsoft.ServiceFabric.ProvisioningState, Access.public, "csharp");
