@@ -6,11 +6,15 @@ applyTo: "specification/**/resource-manager/**/*.json"
 
 This file contains **ARM control plane–specific** review rules that supplement the generic OpenAPI review instructions in `openapi-review.instructions.md`. All generic rules (versioning, naming, JSON conventions, enums, error handling, pagination, descriptions, x-ms extensions, etc.) are enforced by that file and are **not repeated here**. When reviewing ARM resource-manager swagger files, apply **both** instruction sets. If the Azure RPC contract conflicts with the generic guidelines, the ARM RPC rules below take precedence.
 
+**Authoritative source for ARM control-plane rules:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0). The RPC defines the contract between ARM and resource providers for PUT, PATCH, DELETE, GET, POST, and async operations. All rules in this file are derived from or aligned with the RPC. When in doubt, consult the RPC contract directly.
+
 Flag every violation clearly with the file path, JSON path or line number, the specific rule ID, and a concrete suggestion for how to fix it. Respond in markdown format.
 
 ---
 
 ## 1. ARM Resource Path Structure
+
+**Reference: [RPC — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
 
 ### 1.1 Tracked Resource Paths (RPC-Put-V1-01, RPC-Get-V1-11)
 
@@ -19,6 +23,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.{Namespace}/{resourceType}/{resourceName}
   ```
 - If a tracked resource path is missing the `subscriptions` or `resourceGroups` segments, flag it as an error and instruct the author to add them.
+- Tracked resources **MUST NOT** be nested beyond the third level of nesting (RPC-Put-V1-19). ARM only guarantees consistent routing, RBAC, and behavior for tracked resources up to three levels deep.
+- All API paths for PUT operations **MUST** have an even number of segments (alternating resource type and resource name) (RPC-Put-V1-02).
 
 ### 1.2 Proxy Resource Paths
 
@@ -44,6 +50,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 2. ARM Resource Model Rules
 
+**Reference: [RPC — Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
+
 ### 2.1 PUT Response Must Be an ARM Resource (RPC-Put-V1-12)
 
 - The `200` and `201` response models for a PUT operation **MUST** have `x-ms-azure-resource: true` set somewhere in their schema hierarchy (typically inherited from the common-types `Resource` base).
@@ -52,13 +60,17 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 ### 2.2 Tracked Resource Requirements
 
 - A **tracked resource** (has `location` as required property) **MUST** implement all of:
-  - **GET** — return the resource (RPC-Get-V1-01)
-  - **PUT** — create or replace the resource (RPC-Put-V1-01)
+  - **GET** — return the resource; must only return `200` and must not be an LRO (RPC-Get-V1-01, RPC-Get-V1-14)
+  - **PUT** — create or replace the resource (RPC-Put-V1-22)
   - **PATCH** — update the resource; at minimum must support updating `tags` (RPC-Patch-V1-03)
-  - **DELETE** — remove the resource (RPC-Delete-V1-01)
-  - **List by Resource Group** (RPC-Get-V1-11)
-  - **List by Subscription** (RPC-Get-V1-11)
+  - **DELETE** — remove the resource (RPC-Delete-V1-03)
+  - **List by Resource Group** — collection GET under resource group (RPC-Get-V1-05)
+  - **List by Subscription** — collection GET under subscription (RPC-Get-V1-05)
 - If any of these operations are missing for a tracked resource, flag it as an ARM Error.
+- Point GET operations **MUST NOT** have query parameters other than `api-version` (RPC-Get-V1-08).
+- Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties (RPC-Get-V1-09).
+- The model in the `value` array of a collection GET **MUST** be the same model as the point GET response (RPC-Get-V1-10).
+- Collection GET operations **MUST** specify `x-ms-pageable` (RPC-Get-V1-13).
 
 ### 2.3 Nested Resources
 
@@ -76,12 +88,20 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 3. PUT Operation Rules
 
+**Reference: [RPC — PUT Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/put-resource.md)**
+
 ### 3.1 PUT for Resource Creation
 
-- Resources that are created by end users **MUST** expose a PUT operation.
+- Resources that are created by end users **MUST** expose a PUT operation (RPC-Put-V1-22).
 - **Exception**: POST may be used to create **proxy resources only** when the business scenario requires the service to generate the resource name. Tracked resources **MUST** always use PUT.
-- PUT **MUST** be idempotent — sending the same PUT request multiple times must produce the same result.
+- PUT **MUST** be idempotent — sending the same PUT request multiple times must produce the same result (RPC-Put-V1-20).
 - A re-PUT (PUT to an existing resource with the same body) **MUST NOT** fail. ARM expects PUT to be idempotent and usable for both create and update.
+- PUT **MUST** return `201` for new resource creation and `200` for replacement of an existing resource (RPC-Put-V1-11). These status codes apply to both synchronous and asynchronous PUT operations.
+- PUT **MUST NOT** return `202` for async operations. The required async model for PUT is `201`/`200` with a `provisioningState` property. The `202` model for PUT is deprecated and no longer supported for new resource types.
+- PUT **MUST NOT** implicitly create other tracked resources — only the resource identified in the URL may be created (RPC-Put-V1-16). Implicit creation of other tracked resources means those resources won't be hydrated in ARM.
+- PUT **SHOULD NOT** implicitly create nested or other proxy resources (RPC-Put-V1-17).
+- The API path for PUT **MUST** have an even number of segments (alternating type/name) (RPC-Put-V1-02).
+- The PUT request and response body **MUST** use the same model (RPC-Put-V1-25). The response of PUT **MUST** match the response of GET and PATCH for the same resource (RPC-Put-V1-12).
 
 ### 3.2 PUT Must Not Expose Secrets in Response
 
@@ -93,35 +113,56 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 4. PATCH Operation Rules
 
+**Reference: [RPC — PATCH Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/patch-resource.md)**
+
 ### 4.1 PATCH Body Must Not Have Required Properties (RPC-Patch-V1-10)
 
 - PATCH request body parameters **MUST NOT** have any properties marked as `required`.
 - PATCH request body properties **MUST NOT** have `default` values.
 - PATCH request body properties **MUST NOT** have `x-ms-mutability` set to only `["create"]`.
 - A PATCH operation updates only the fields the customer provides — forced defaults or required fields break this contract.
+- PATCH **MUST NOT** update `id`, `name`, `type`, `location`, or `properties.provisioningState` — these are readOnly or immutable (RPC-Patch-V1-02).
+- PATCH **MUST** follow JSON Merge Patch semantics ([RFC 7396](https://tools.ietf.org/html/rfc7396)) for fields inside the `properties` envelope (RPC-Patch-V1-05).
 - **Recommendation**: Define a separate "Update" or "PatchBody" model containing only the patchable properties, rather than reusing the full resource model.
 
-### 4.2 Tracked Resource PATCH Must Support Tags (RPC-Patch-V1-03)
+### 4.2 PATCH Response Codes (RPC-Patch-V1-06)
+
+- Synchronous PATCH **MUST** return `200` (OK).
+- Asynchronous PATCH **MUST** return `202` (Accepted). Additionally, `200` **MUST** also be specified in the swagger for async PATCH operations so SDKs can discover the final response schema.
+- If the resource or resource group does not exist, PATCH **MUST** return `404` (NotFound) (RPC-Patch-V1-07).
+
+### 4.3 Tracked Resource PATCH Must Support Tags (RPC-Patch-V1-03)
 
 - For tracked resources, the PATCH operation **MUST** support updating `tags` at minimum.
 - Ideally, all mutable properties should be patchable for a better customer experience.
 
-### 4.3 PATCH Must Not Expose Secrets in Response
+### 4.4 PATCH Must Not Expose Secrets in Response
 
 - Same rule as PUT — the PATCH response **MUST NOT** return secret values.
+
+### 4.5 PATCH Must Have a Request Body (RPC-Patch-V1-12)
+
+- Every PATCH request **MUST** have a request body containing at least one property.
 
 ---
 
 ## 5. DELETE Operation Rules
 
+**Reference: [RPC — DELETE Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/delete-resource.md)**
+
 ### 5.1 DELETE Response Codes (RPC-Delete-V1-01)
 
-- Non-async DELETE operations **MUST** define responses for:
-  - `200` — successful deletion (with body)
-  - `204` — resource not found / already deleted (no body)
+- Synchronous DELETE operations **MUST** define responses for:
+  - `200` — successful deletion
+  - `204` — resource does not exist / already deleted (no body)
+  - `default` — error response
+- Asynchronous DELETE operations **MUST** define responses for:
+  - `202` — accepted for async processing
+  - `204` — resource does not exist / already deleted (no body)
   - `default` — error response
 - Do **not** return `404` for a resource that doesn't exist — return `204` instead.
-- Async DELETE operations **MUST** also include `202` (Accepted) per RPC-Async-V1-09.
+- DELETE response body **MUST** be empty (RPC-Delete-V1-04).
+- All tracked resources **MUST** support DELETE (RPC-Delete-V1-03). All proxy resources **SHOULD** support DELETE (RPC-Delete-V1-05).
 
 ### 5.2 DELETE Must Not Have a Request Body
 
@@ -131,27 +172,72 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 6. Long-Running Operations (ARM-Specific)
 
-### 6.1 Async Response Validation (RPC-Async-V1)
+**Reference: [RPC — Asynchronous Operations](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/async-api-reference.md)**
 
-- LRO PUT operations returning `201` **MUST** include a response schema (the resource body).
-- LRO POST and DELETE operations returning `202` **MUST** include `Location` or `Azure-AsyncOperation` headers.
-- The `200`/`201` response of an LRO **MUST** have a schema definition — empty LRO responses are invalid.
-- Always use unique identifiers (GUIDs) for operation results — never hash-based identifiers that could collide across sequential operations on the same resource.
+### 6.1 Async PUT Model (RPC-Async-V1-01)
 
-### 6.2 LRO 202 Response Header Declarations (RPC-Async-V1-HEADERS)
+- Async PUT **MUST** return `201` (create) or `200` (replace) with a `provisioningState` property set to a non-terminal value. PUT **MUST NOT** return `202` — the `202` model for PUT is deprecated and no longer supported for new resource types.
+- The PUT response body **MUST** contain the resource with properties reflecting the in-progress operation (i.e., the state the resource will be in once the async operation completes).
+- Starting January 2025, new RP namespace implementations **MUST** include the `Azure-AsyncOperation` header in the `201`/`200` response pointing to an operation status resource. Brownfield implementations are **strongly recommended** to add this header.
+- If the resource is already in a **non-terminal `provisioningState`** (i.e., a previous async operation is still in progress), the service **MUST** return `409 Conflict`. A new PUT cannot be accepted while a prior operation is still running.
+- Subsequent GET operations on the resource during provisioning **MUST** return `200` (OK) with a non-terminal `provisioningState` until the operation completes.
+- After the operation completes, `provisioningState` **MUST** transition to a terminal state (`Succeeded`, `Failed`, or `Canceled`).
 
-- When an operation is marked `x-ms-long-running-operation: true`, the `202` response in the swagger **MUST** declare the polling headers used by the operation:
-  - If `final-state-via: azure-async-operation`, the `202` response headers **MUST** declare `Azure-AsyncOperation` (type: string).
-  - If `final-state-via: location`, the `202` response headers **MUST** declare `Location` (type: string).
-  - Include `Retry-After` (type: integer, format: int32) when the service supports it.
-- A `202` response with no declared headers (empty `"202": { "description": "Accepted" }`) makes the LRO contract ambiguous for ARM and SDKs — flag it.
-- Similarly, LRO PUT/PATCH operations returning `201` **SHOULD** declare the appropriate polling headers on the `201` response.
-- **Choose one authoritative polling pattern.** ARM guidance says clients should poll `Azure-AsyncOperation` when present and only use `Location` when `Azure-AsyncOperation` is not returned. If a spec advertises **both** headers, recommend choosing one pattern (prefer `Azure-AsyncOperation` for status-monitor pattern) so the contract is unambiguous.
+### 6.2 Async PATCH Model (RPC-Async-V1-08)
 
-### 6.3 Operation Results Placement
+- Async PATCH **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header. The `200` status code **MUST** also be defined in the swagger so SDKs can discover the final response schema (RPC-Patch-V1-06).
+- If the resource has a `provisioningState` property, it **MUST** transition to a non-terminal state (e.g., `"Updating"`) while the operation is in progress.
+- The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return the exact same response that would have been returned had the PATCH been synchronous (i.e., `200` with the updated resource body).
 
-- The `/operationResults` API used to track async operations **MUST** be modeled as a root-level resource, not as a child of the resource being operated on.
-- If modeled as a child, `404 Not Found` will be returned after a deletion completes, causing ARM to fail to track the async operation.
+### 6.3 Async DELETE Model (RPC-Async-V1-09)
+
+- Async DELETE **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header.
+- If the resource has a `provisioningState` property, it **MUST** transition to a non-terminal state (e.g., `"Deleting"`).
+- The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return `200` (OK) or `204` (NoContent) and the resource **MUST** no longer exist.
+
+### 6.4 Async POST Action Model (RPC-Async-V1-11)
+
+- Async POST **MUST** return `202` (Accepted) with both a `Location` header and an `Azure-AsyncOperation` header.
+- The `Location` URL **MUST** return `202` (with no body) while the operation is in progress. When the operation completes, it **MUST** return `200` (OK) with a response body, or `204` (NoContent) if no body is needed (e.g., restarting a VM).
+- POST actions do **NOT** affect the resource's `provisioningState` property. Only PUT, PATCH, and DELETE operations update `provisioningState`.
+
+### 6.5 `provisioningState` Requirements (RPC-Async-V1-02, RPC-Async-V1-03, RPC-Async-V1-16)
+
+- A resource that supports at least one asynchronous verb (PUT or PATCH) **MUST** contain a `provisioningState` property in its model.
+- `provisioningState` **MUST** include the terminal states: `Succeeded`, `Failed`, and `Canceled`. If no `provisioningState` is returned, ARM assumes `Succeeded`.
+- `provisioningState` **MUST** be marked `readOnly` in the swagger.
+- `provisioningState` represents the status of the **latest long-running PUT, PATCH, or DELETE** operation — it does **NOT** represent the overall health or functional state of the resource. POST actions do **not** affect `provisioningState`.
+- RP-defined non-terminal states are allowed (e.g., `"Creating"`, `"Updating"`, `"Deleting"`, `"PreparingVMDisk"`, `"MountingDrives"`, `"Accepted"`). Any state other than the three terminal states is considered non-terminal.
+- `provisioningState` transitions are constrained: it can only move from **non-terminal → non-terminal** or **non-terminal → terminal**. It **MUST NOT** transition directly from one terminal state to another without an intervening non-terminal state (which would be set by a new operation).
+- If a user includes `provisioningState` in a PUT request body (e.g., after a GET), the RP **MUST** treat it as a readOnly property. If the provided value matches the current value on the service, ignore it. If it does not match, the RP **MUST** reject the request with `400 Bad Request`.
+
+### 6.6 `202` Response and Polling Headers (RPC-Async-V1-07, RPC-Async-V1-06, RPC-Async-V1-14)
+
+- A `202` response **MUST NOT** include a response body.
+- A `202` response **MUST** include a `Location` header with an absolute URI pointing to a monitoring URL. The URI host **MUST** match the host in the `referer` header.
+- Starting January 2025, new RP namespaces **MUST** also include the `Azure-AsyncOperation` header (RPC-Async-V1-06). Brownfield implementations are **strongly recommended** to add it.
+- The `Location` and `Azure-AsyncOperation` URIs **MUST** have an even number of segments with alternating resource type and resource name pattern.
+- The `Location` and `Azure-AsyncOperation` URIs **MUST NOT** be exposed via any other header, API, or command — ARM only signs these two headers.
+- Include `Retry-After` header (integer, seconds) when supported. Minimum 10 seconds, maximum 10 minutes. Default client polling interval is 60 seconds if `Retry-After` is not provided.
+- A `202` response with no declared headers in the swagger (empty `"202": { "description": "Accepted" }`) makes the LRO contract ambiguous for ARM and SDKs — flag it.
+- All asynchronous operations **MUST** have `x-ms-long-running-operation` set to `true` in the swagger (RPC-Async-V1-15).
+
+### 6.7 Polling Behavior
+
+- **`Location` header polling**: The polling URL returns `202` (with no body) while the operation is in progress and returns the **exact same response** as the synchronous completion when the operation finishes. For DELETE, the final response is `200` or `204`. For PATCH, the final response is `200` with the updated resource body. For POST, the final response is `200` or `204`.
+- **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the *status*, not a failure of the underlying operation.
+- The `Azure-AsyncOperation` status object **MUST** include `status` (Required) with terminal values `Succeeded`, `Failed`, or `Canceled`. If `status` is `Failed` or `Canceled`, `error.code` and `error.message` are **Required**.
+
+### 6.8 Operation Results Placement
+
+- For **new service onboardings**, operation statuses **MUST** be at subscription scope (e.g., `/subscriptions/{subscriptionId}/providers/{namespace}/locations/{location}/operationStatuses/{operationId}`). Subscription-level operation statuses provide better security through RBAC.
+- If `operationResults`/`operationStatuses` are exposed under resource scope, long-running DELETE operations will cause them to become inaccessible after the parent resource is deleted, returning `404 Not Found`.
+- The RP **MUST** ensure the operation result API is called in the same tenant and subscription that the operation originated in. The operation ID **MUST NOT** be the same as the correlation ID or request ID.
+- Operation status `properties` **MUST NOT** contain sensitive information — operation status resources may be accessible through polling endpoints with different RBAC restrictions than the original operation.
+
+### 6.9 Long-Running Operations Exceeding One Day
+
+- For operations that may take longer than one day, RPs **SHOULD** expose a proxy resource for retrieving the latest operation status via a GET (e.g., `GET .../scenarioTests/{name}/testExecutionResults/latest`). This allows clients to retrieve status even if the original `Location` or `Azure-AsyncOperation` URI is lost (e.g., portal tab closed).
 
 ---
 
@@ -300,6 +386,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 11. API Version Practices (ARM-Specific)
 
+**Reference: [RPC — API Versioning](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
+
 ### 11.1 Uniform Versioning Within a Service
 
 - All resource types within a single Service under an RP namespace **MUST** version uniformly — they share the same `api-version` value.
@@ -316,12 +404,19 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ## 12. POST Actions (ARM-Specific)
 
+**Reference: [RPC — Resource Actions](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)**
+
 ### 12.1 Use POST Actions Sparingly
 
 - POST actions should only be used for:
   - Actions on a single resource instance (e.g. `restart`, `listKeys`)
   - Provider-level actions
-- POST action path segments and operation names **SHOULD** use verb phrases (e.g., `validateBackupParameters`, `beginRestore`) rather than noun phrases (e.g., `prebackup`, `prerestore`). Verb-based names are clearer about what the action does.
+- POST action **MUST** have an action name in the URL path (RPC-POST-V1-01). POST **MUST NOT** be applied to a resource type — only to a specific resource instance or the provider (RPC-POST-V1-07).
+- All parameters for a POST action **MUST** be in the request body, not in the URI (RPC-POST-V1-05). This ensures proper authorization checks.
+- Synchronous POST **MUST** return `200` (OK) with response schema, or `204` (No Content) if no response body is needed (RPC-POST-V1-02).
+- Asynchronous POST **MUST** return `202` (Accepted) and **SHOULD** additionally specify `200` with a response schema if the final response has content (RPC-POST-V1-03).
+- POST action path segments and operation names **SHOULD** use verb phrases (e.g., `validateBackupParameters`, `beginRestore`) rather than noun phrases (e.g., `prebackup`, `prerestore`).
+- Prefix the action name with `list` to enable ARM template deployment to call the POST action via the `list()` template function (RPC-POST-V1-10).
 - **DO NOT** use POST actions for what should be CRUD operations — if the actions resemble create/read/update/delete, model them as proper resource operations with PUT/PATCH/GET/DELETE instead.
 
 ### 12.2 POST to Create Resources (Exception)
@@ -330,40 +425,59 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - This exception does **not** apply to tracked resources — they **MUST** always use PUT.
 - Prefer allowing customers to specify their own resource names (via PUT) as this is more compatible with ARM templates and Policy.
 
+### 12.3 Version or Catalog Listings as Proxy Resources (RPC-LIST-VERSIONS)
+
+- When a service needs to expose a list of available versions, SKUs, offerings, or other catalog-like data, model them as **proxy resource GET collections** — not as custom action endpoints or ad-hoc GET operations.
+- The pattern is: `GET .../providers/Microsoft.{Namespace}/locations/{location}/{catalogResourceType}` returning a paginated list of proxy resources.
+- Each item in the list **MUST** be modeled as a proper ARM proxy resource (with `id`, `name`, `type`, and `properties`).
+- **DO NOT** model version/catalog listings as non-resource GET endpoints that return bare arrays or non-ARM-shaped responses — these cannot be tracked by ARM, are not compatible with RBAC, and the AKS-style `orchestrators` pattern is discouraged for new services.
+
 ---
 
 ## ARM Review Checklist Summary
 
 When reviewing ARM resource-manager swagger files, verify:
 
-- ✅ Tracked resource paths include `/subscriptions/` and `/resourceGroups/` segments
+- ✅ Tracked resource paths include `/subscriptions/` and `/resourceGroups/` segments; even-segmented paths (RPC-Put-V1-01, RPC-Put-V1-02)
+- ✅ Tracked resources not nested beyond third level (RPC-Put-V1-19)
 - ✅ Top-level resource body properties are from the allowed set only; custom properties are inside `properties`
-- ✅ PUT request and 200 response schemas are identical
-- ✅ PUT 200/201 response has `x-ms-azure-resource: true` in hierarchy
+- ✅ PUT request and response schemas are identical; PUT response matches GET and PATCH (RPC-Put-V1-12, RPC-Put-V1-25)
+- ✅ PUT returns `201` (create) or `200` (replace) — never `202` for async PUT (RPC-Put-V1-11)
+- ✅ PUT does not implicitly create other tracked resources (RPC-Put-V1-16)
 - ✅ Tracked resources have all required operations (GET, PUT, PATCH, DELETE, ListByRG, ListBySub)
-- ✅ PATCH body has no required properties, no defaults, no create-only mutability
-- ✅ PATCH for tracked resources supports at least tag updates
-- ✅ DELETE defines 200, 204, and default responses (plus 202 if async)
+- ✅ GET operations return only `200` and are not LROs (RPC-Get-V1-01, RPC-Get-V1-14)
+- ✅ Point GET has no query params other than `api-version` (RPC-Get-V1-08)
+- ✅ Collection GET has only `value` and `nextLink` at top level with `x-ms-pageable` (RPC-Get-V1-09, RPC-Get-V1-13)
+- ✅ PATCH body has no required properties, no defaults, no create-only mutability (RPC-Patch-V1-10)
+- ✅ PATCH does not update `id`, `name`, `type`, `location`, or `provisioningState` (RPC-Patch-V1-02)
+- ✅ PATCH follows JSON Merge Patch (RFC 7396) semantics (RPC-Patch-V1-05)
+- ✅ PATCH for tracked resources supports at least tag updates (RPC-Patch-V1-03)
+- ✅ Sync DELETE defines `200` + `204`; async DELETE defines `202` + `204`; DELETE body is empty (RPC-Delete-V1-01, RPC-Delete-V1-04)
+- ✅ Resources with async PUT/PATCH have `provisioningState` (readOnly) with terminal states Succeeded/Failed/Canceled (RPC-Async-V1-02, RPC-Async-V1-03)
+- ✅ Async PUT returns `201`/`200` + provisioningState — never `202`; returns `409` if resource already in non-terminal state (RPC-Async-V1-01)
+- ✅ Async PATCH/DELETE/POST return `202` with both `Location` and `Azure-AsyncOperation` headers; `202` body is empty (RPC-Async-V1-08/09/11/14)
+- ✅ Greenfield RPs (since Jan 2025) include `Azure-AsyncOperation` header on all async responses including PUT `201` (RPC-Async-V1-06)
+- ✅ Polling URIs have even segments, are absolute, and are not exposed via other means
+- ✅ `Location` polling returns 202 in-progress → sync response on completion; `Azure-AsyncOperation` always returns 200 with status object
+- ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
+- ✅ Operation statuses at subscription scope for new services; no sensitive data in operation status properties
 - ✅ No secrets in GET/PUT/PATCH responses; secrets annotated with `x-ms-secret: true`
 - ✅ Secret retrieval exposed via `list*` POST action, not GET
+- ✅ POST actions have action name in URL, params in body, correct response codes (RPC-POST-V1-01, RPC-POST-V1-05)
 - ✅ Resource references use fully qualified ARM resource IDs
 - ✅ No embedded child resources or child counts in parent GET response
 - ✅ No customer data in control plane properties
 - ✅ Properties not removed between API versions
 - ✅ Booleans reviewed — extensible enums preferred
 - ✅ Operations API endpoint exists for the resource provider
-- ✅ LRO 200/201 responses include schema definitions
-- ✅ Operation results modeled as root-level resources (not children)
+- ✅ Operation results modeled at subscription scope (preferred), not as children of the deleted resource
 - ✅ Uniform API versioning across all resource types in the service; no mixed versions in a single package tag
-- ✅ API version parity across Azure clouds
 - ✅ No writable circular dependencies between resources
-- ✅ POST actions used only for non-CRUD operations; action names use verb phrases
+- ✅ Version/catalog listings modeled as proxy resource collections, not ad-hoc endpoints (RPC-LIST-VERSIONS)
 - ✅ Singleton nested resources use `default` pattern with both collection and singleton GET
-- ✅ `additionalProperties` only used for user-defined pass-through data, not service-owned properties
+- ✅ `additionalProperties` only used for user-defined pass-through data, not service-owned properties (RPC-Put-V1-23)
 - ✅ Deprecated properties use `"deprecated": true` keyword, not just description text
-- ✅ LRO 202 responses declare polling headers (`Azure-AsyncOperation`, `Location`) in the swagger schema (RPC-Async-V1-HEADERS)
-- ✅ LRO operations choose one authoritative polling pattern, not both headers simultaneously
-- ✅ Properties inside `properties` bag do not reuse ARM top-level names (`id`, `name`, `type`)
+- ✅ Properties inside `properties` bag do not reuse ARM top-level names (`id`, `name`, `type`) (RPC-Put-V1-09)
 - ✅ Suppressions in `readme.md` are under the correct package tag with specific `from`/`where` clauses (RPC-SUPPRESS-SCOPE)
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
 - ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)

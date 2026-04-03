@@ -73,6 +73,11 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Resource type names in paths **MUST** use camelCase (e.g. `virtualMachines`).
 - Path parameters **SHOULD** use full resource name, not abbreviations (e.g. `{virtualMachineName}` not `{vmName}`).
 - Path parameter names **MUST** be descriptive of the resource they identify (e.g., `{syncSetName}` not `{childResourceName}`, `{configurationName}` not `{name}`).
+- Resource name path parameters **SHOULD** include a `pattern` constraint with:
+  - A maximum length limit (e.g., `{1,128}` or `{1,64}`) to prevent excessively long names.
+  - Prevention of leading special characters (e.g., `^(?![.-])`) — resource names should not start with `.` or `-`.
+  - Allowed character set (e.g., `[A-Za-z0-9_.-]`) that matches the service's actual validation.
+  - Example: `"pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"`
 - For action operations on a resource, the URL pattern **SHOULD** be: `/<resource-collection>/<resource-id>:<action>`.
 - For action operations on a collection: `/<resource-collection>:<action>`.
 - **DO NOT** use action URLs for standard CRUD operations that map naturally to GET/PUT/PATCH/DELETE.
@@ -204,7 +209,6 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - Mark LRO operations with `"x-ms-long-running-operation": true`.
 - Specify the polling strategy with `x-ms-long-running-operation-options` (e.g. `"final-state-via": "azure-async-operation"` or `"location"`).
 - LRO operations **MUST** return `202-Accepted` (for POST/DELETE) or `201-Created` / `200-OK` (for PUT) with an `Operation-Location` or `Azure-AsyncOperation` header.
-- **DO NOT** implement PATCH as an LRO. Use an LRO POST action pattern instead.
 - Status monitor responses **MUST** include `id`, `status` (one of `NotStarted`, `Running`, `Succeeded`, `Failed`, `Canceled`), and `error` (on failure).
 - LRO responses **SHOULD** include a `retry-after` header when the operation is not complete.
 
@@ -265,6 +269,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - Every operation **MUST** have a unique `operationId`.
 - ARM operation IDs **MUST** follow the `{ResourceType}_{Action}` pattern (e.g. `VirtualMachines_Get`, `VirtualMachines_CreateOrUpdate`, `VirtualMachines_List`).
+- The Operations API response `display` object **MUST** use camelCase property names: `provider`, `resource`, `operation`, `description` — not PascalCase (`Provider`, `Resource`, `Operation`, `Description`). This applies to both the swagger schema and example files.
 - Use standard verb suffixes: GET → `Get` / `List`, PUT → `CreateOrUpdate`, PATCH → `Update`, DELETE → `Delete`, POST → `<ActionName>`.
 - The noun part in `operationId` **SHOULD NOT** repeat inside the verb part.
 - There **MUST** be exactly one underscore in the `operationId`.
@@ -297,8 +302,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - Every operation, parameter, property, model definition, and enum value **MUST** have a non-empty `description`.
 - Property descriptions **MUST NOT** simply repeat the property name (e.g. `"name": { "description": "name" }` is not acceptable).
-- Operation descriptions **SHOULD** start with a verb and end with a period (e.g. `"Gets the specified virtual machine."`).
-- Start descriptions with a capital letter.
+- Operation descriptions **SHOULD** start with a verb and end with a period (e.g. `"Gets the specified virtual machine."`).- PUT operation descriptions **MUST NOT** imply non-idempotent behavior. Avoid language like "Creates a new..." or "This will create a new version" — instead use "Creates or updates..." or "Creates or replaces..." to reflect PUT's idempotent, upsert semantics.- Start descriptions with a capital letter.
 - Specify units for quantifiable properties (e.g. "The timeout in seconds.", "The size in megabytes.").
 - Property names for temporal or measurement values **SHOULD** encode the unit when the type alone does not make it clear (e.g., `startTimeInUTC`, `durationInMs`, `throughputMiBPerSec`, `backupTimeInMinutes`). This is especially important when not using `format: date-time` or ISO 8601 duration.
 - Avoid: "Gets or sets...", "Gets...", "Sets..." in property descriptions — describe what the property represents.
@@ -401,16 +405,36 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 - ARM properties that are objects (`tags`, `systemData`, etc.) **MUST NOT** be set to `null` in examples. Either omit the property or provide a valid object. Setting known ARM object properties to `null` fails schema validation.
 - DELETE 200/204 response examples **SHOULD** have empty bodies (`"200": {}`, `"204": {}`). Do not include unexpected content like `message` fields in DELETE response bodies.
 
-### 22.8 Example File Size (EX-SIZE)
+### 22.8 Example Secret & Credential Placeholders (EX-SECRET-PLACEHOLDER)
+
+- Example files **MUST NOT** contain actual or realistic-looking secrets, tokens, SSH keys, passwords, connection strings, or API keys.
+- Use clearly identifiable string placeholders instead:
+  - SSH keys: `"{ssh-rsa public key}"` or `"ssh-rsa AAAA...{example}"`
+  - Passwords: `"********"` or `"{password}"`
+  - Connection strings: `"{connection-string}"`
+  - API keys/tokens: `"00000000-0000-0000-0000-000000000000"` or `"{api-key}"`
+- Base64-encoded blobs that look like real secrets **MUST** be replaced with clearly fake placeholder values or truncated with `...{example}`.
+- **Rationale:** Examples are published in documentation and SDK test fixtures. Realistic-looking secrets cause security scanner false positives and may lead customers to believe they need similar-looking values.
+
+### 22.9 Example File Size (EX-SIZE)
 
 - Example files **SHOULD** be kept to a reasonable size. Extremely large examples (>500 lines) make review difficult and add repo bloat.
 - For "maximum set" examples, include a representative subset of fields rather than thousands of lines of repetitive data.
 
 ---
 
-## 23. JSON Schema Correctness
+## 23. Unused & Orphaned Definitions (SCHEMA-UNUSED-DEF)
 
-### 23.1 `$ref` Must Not Have Sibling Keywords (SCHEMA-REF-SIBLINGS)
+- Every model definition in the `definitions` section **MUST** be referenced by at least one `$ref` in the same file or by another file in the same package tag.
+- Definitions that are defined but never referenced (orphaned) add spec bloat, confuse SDK generators, and may trigger "unused definition" validation warnings.
+- Common causes: copy-paste from a template, a PATCH model that was refactored but the old definition was not removed, or a definition intended for a future version that was accidentally included.
+- **Fix:** Remove the orphaned definition if it is genuinely unused. If it was intended as the PATCH body, wire the PATCH operation to reference it.
+
+---
+
+## 24. JSON Schema Correctness
+
+### 24.1 `$ref` Must Not Have Sibling Keywords (SCHEMA-REF-SIBLINGS)
 
 - In OpenAPI 2.0 / JSON Schema draft-04, keywords alongside `$ref` (e.g., `type`, `description`, `readOnly`) are **ignored** by compliant tooling.
 - If a `$ref` is used alongside sibling properties, flag it — the sibling properties will not take effect and may cause incorrect SDK/docs generation.
@@ -423,24 +447,24 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
   "readOnly": true
   ```
 
-### 23.2 Consistent common-types Version (SCHEMA-COMMON-TYPES-VERSION)
+### 24.2 Consistent common-types Version (SCHEMA-COMMON-TYPES-VERSION)
 
 - A single swagger file **SHOULD** reference a single version of common-types (e.g., all `$ref` paths use `v5`).
 - Mixing common-types versions within the same file (e.g., `v3` for parameters and `v5` for resource types) can lead to subtle schema incompatibilities.
 - If different common-types versions are used, flag it and recommend aligning to the newest version used in the file.
 - Common-types version `v2` is outdated — prefer `v5` or `v6` for new specs.
 
-### 23.3 Proactive Format Detection (SCHEMA-FORMAT-DETECT)
+### 24.3 Proactive Format Detection (SCHEMA-FORMAT-DETECT)
 
 - If a string property's description mentions ISO-8601, datetime, or timestamp concepts but the schema lacks `"format": "date-time"`, flag it.
 - If a string property's name or examples suggest GUID/UUID values (e.g., `tenantId`, `objectId`, `clientId`) but the schema lacks `"format": "uuid"`, flag it.
 - If a string property contains what appears to be an ARM resource ID (from name or description), recommend using a `$ref` to a common resource ID type or adding appropriate `format`/`pattern` annotations.
 
-### 23.4 `nextLink` Should Be Read-Only (SCHEMA-NEXTLINK-READONLY)
+### 24.4 `nextLink` Should Be Read-Only (SCHEMA-NEXTLINK-READONLY)
 
 - The `nextLink` property in list result schemas **SHOULD** be marked `"readOnly": true` to indicate it is server-generated and response-only.
 
-### 23.5 Semantic Type Correctness (SCHEMA-SEMANTIC-TYPE)
+### 24.5 Semantic Type Correctness (SCHEMA-SEMANTIC-TYPE)
 
 - Properties whose names or descriptions clearly indicate numeric values (e.g., `numberOfCores`, `ram`, `vCpu`, `diskSizeGB`, `memoryInMB`, `maxRetries`) **SHOULD** use `integer` or `number` types, not `string`.
 - When a numeric property is modeled as `string` for backward-compatibility reasons, the description **MUST** document the expected format and units (e.g., "RAM in megabytes, as a numeric string").
@@ -482,5 +506,10 @@ When reviewing, systematically check:
 - ✅ String properties with datetime/UUID descriptions have matching `format` (SCHEMA-FORMAT-DETECT)
 - ✅ `nextLink` properties marked `readOnly: true` (SCHEMA-NEXTLINK-READONLY)
 - ✅ Numeric properties use integer/number types, not string (SCHEMA-SEMANTIC-TYPE)
+- ✅ No unused/orphaned definitions in `definitions` section (SCHEMA-UNUSED-DEF)
+- ✅ Example files use string placeholders for secrets, SSH keys, and credentials — no realistic-looking sensitive values (EX-SECRET-PLACEHOLDER)
+- ✅ Resource name path parameters include `pattern` constraints with length limits and character restrictions
+- ✅ PUT operation descriptions use idempotent language ("Creates or updates..." not "Creates a new...")
+- ✅ Operations API display object uses camelCase property names (`provider`, `resource`, `operation`, `description`)
 
 Flag all violations clearly with JSON path references, the specific rule, and a concrete fix suggestion.

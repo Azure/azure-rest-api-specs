@@ -127,6 +127,7 @@ A TypeSpec project **MUST NOT** contain:
 - Every model, property, operation, parameter, enum, union, and alias **MUST** have a doc comment using `/** ... */` format.
 - Doc comments **MUST NOT** simply repeat the element name.
 - Doc comments **SHOULD** start with a capital letter and end with a period.
+- PUT operation doc comments **MUST NOT** imply non-idempotent behavior (e.g., "Creates a new..." or "This will create a new version"). Use idempotent language: "Creates or updates..." or "Creates or replaces...".
 - Specify units for quantifiable properties (e.g., `"The timeout in seconds."`).
 
 ### 4.3 Enums vs. Unions
@@ -160,6 +161,11 @@ A TypeSpec project **MUST NOT** contain:
 - Datetime properties **MUST** use `utcDateTime` (not `string`) to generate proper `format: date-time` in swagger and enable SDK datetime type generation.
 - Integer properties **SHOULD** specify bit width: `int32`, `int64`.
 - Integer properties with known valid ranges **SHOULD** use `@minValue` and `@maxValue` decorators (e.g., percentages: `@minValue(0) @maxValue(100)`, port numbers: `@minValue(1) @maxValue(65535)`).
+- String properties used as resource name path parameters **SHOULD** include a `@pattern` decorator with:
+  - A maximum length limit (e.g., `{1,128}`) to prevent excessively long names.
+  - Prevention of leading special characters (e.g., `^(?![.-])`) — names should not start with `.` or `-`.
+  - Allowed character set matching the service's actual validation.
+  - Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
 - Array properties **MUST** have their element type defined.
 - **AVOID** using `unknown` type — use a concrete type or a well-defined model.
 
