@@ -136,6 +136,21 @@ using Microsoft.BillingBenefits;
 );
 @@clientName(PaymentDetail.paymentDate, "PayOn", "csharp");
 @@clientName(SavingsPlanUpdateRequestProperties.renew, "IsRenewed", "csharp");
+@@clientName(SavingsPlanOrderAliasProperties.renew, "IsRenewed", "csharp");
+@@clientName(BenefitValidateResponseProperty.valid, "IsValid", "csharp");
+@@clientName(MaccModelProperties.allowContributors,
+  "IsAllowContributors",
+  "csharp"
+);
+@@clientName(MaccPatchRequestProperties.allowContributors,
+  "IsAllowContributors",
+  "csharp"
+);
+@@clientName(DiscountProperties, "BillingBenefitsDiscountProperties", "csharp");
+@@clientName(ConditionalCreditProperties,
+  "BillingBenefitsConditionalCreditProperties",
+  "csharp"
+);
 @@alternateType(ReservationOrderAliasResponseProperties.billingScopeId,
   Azure.Core.armResourceIdentifier,
   "csharp"
