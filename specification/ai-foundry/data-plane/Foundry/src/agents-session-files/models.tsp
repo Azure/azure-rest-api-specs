@@ -7,7 +7,6 @@ namespace Azure.AI.Projects;
 // Response models
 // ---------------------------------------------------------------------------
 
-@removed(Versions.v1)
 @doc("Response from uploading a file to a session sandbox.")
 model SessionFileWriteResponse {
   @doc("The path where the file was written, relative to the session home directory.")
@@ -17,7 +16,6 @@ model SessionFileWriteResponse {
   bytes_written: safeint;
 }
 
-@removed(Versions.v1)
 @doc("A single entry in a directory listing.")
 model SessionDirectoryEntry {
   @doc("The name of the file or directory.")
@@ -35,7 +33,6 @@ model SessionDirectoryEntry {
   modified_time: utcDateTime;
 }
 
-@removed(Versions.v1)
 @doc("Response from listing a directory in a session sandbox.")
 model SessionDirectoryListResponse {
   @doc("The path that was listed, relative to the session home directory.")
