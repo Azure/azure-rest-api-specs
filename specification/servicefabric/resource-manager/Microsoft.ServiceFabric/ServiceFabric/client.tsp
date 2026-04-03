@@ -143,29 +143,6 @@ using Microsoft.ServiceFabric;
 @@alternateType(Microsoft.ServiceFabric.ClusterUpgradePolicy.upgradeReplicaSetCheckTimeout, duration, "csharp");
 @@alternateType(Microsoft.ServiceFabric.ApplicationUpgradePolicy.upgradeReplicaSetCheckTimeout, duration, "csharp");
 
-// Base type overrides: old API had these as TrackedResourceData, but spec uses custom ProxyResource
-// The custom ProxyResource has location/tags/etag so it's functionally a TrackedResource
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationResource,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationTypeResource,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationTypeVersionResource,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ServiceResource,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-
 // NOTE: @@hierarchyBuilding causes cascading base type changes on all Data classes
 // in the namespace. Skipping for now - ClusterCodeVersionsResult base type change
 // accepted as known breaking change.
