@@ -31,13 +31,20 @@ using Microsoft.ServiceFabric;
 );
 
 // C# renames to preserve backward compatibility with autorest-generated SDK
-// Resource type renames (from autorest rename-mapping and prepend-rp-prefix)
-@@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
-@@clientName(Microsoft.ServiceFabric.ApplicationResource, "ServiceFabricApplication", "csharp");
-@@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
-@@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
-@@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
-@@clientName(Microsoft.ServiceFabric.VMSizeResource, "ServiceFabricVmSizeResource", "csharp");
+// NOTE: Resource type renames are SKIPPED for now due to a generator bug where
+// @@clientName on resource models extending custom @customAzureResource ProxyResource
+// causes the generator to produce empty stub Resource classes (missing ResourceType,
+// Data, constructors, and all operations). This is a known issue to revisit once
+// the generator is fixed. The old API used "ServiceFabric" prefix on all resource
+// types (e.g., ServiceFabricClusterResource, ServiceFabricApplicationResource).
+// See: https://github.com/Azure/azure-sdk-for-net/issues/55604
+//
+// @@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ApplicationResource, "ServiceFabricApplication", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
+// @@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
+// @@clientName(Microsoft.ServiceFabric.VMSizeResource, "ServiceFabricVmSizeResource", "csharp");
 
 // Model type renames
 @@clientName(Microsoft.ServiceFabric.AzureActiveDirectory, "ClusterAadSetting", "csharp");
