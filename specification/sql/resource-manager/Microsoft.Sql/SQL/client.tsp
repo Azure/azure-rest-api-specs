@@ -77,12 +77,12 @@ using Microsoft.Sql;
 @@clientName(MinimalTlsVersion.`1.2`, "One2", "go");
 @@clientName(MinimalTlsVersion.`1.3`, "One3", "go");
 
-@@clientName(DiffBackupIntervalInHours.`12`, "Twelve", "go");
-@@clientName(DiffBackupIntervalInHours.`24`, "TwentyFour", "go");
+@@clientName(DiffBackupIntervalInHours.`12`, "Twelve", "go,javascript");
+@@clientName(DiffBackupIntervalInHours.`24`, "TwentyFour", "go,javascript");
 
-@@clientName(AvailabilityZoneType.`1`, "One", "go");
-@@clientName(AvailabilityZoneType.`2`, "Two", "go");
-@@clientName(AvailabilityZoneType.`3`, "Three", "go");
+@@clientName(AvailabilityZoneType.`1`, "One", "go,javascript");
+@@clientName(AvailabilityZoneType.`2`, "Two", "go,javascript");
+@@clientName(AvailabilityZoneType.`3`, "Three", "go,javascript");
 
 @@alternateType(BlobAuditingPolicyName, "default", "go");
 @@alternateType(CurrentSensitivityLabelSource, "current", "go");
