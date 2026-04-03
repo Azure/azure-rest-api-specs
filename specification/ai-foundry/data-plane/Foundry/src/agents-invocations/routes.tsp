@@ -14,7 +14,6 @@ const AgentInvocationRequiredPreviews = #{
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agent Invocations")
-@removed(Versions.v1)
 interface AgentInvocations {
   /**
    * Retrieves the OpenAPI specification for an agent version's invocation contract.
