@@ -79,3 +79,17 @@
 - tool: TypeSpecRequirement
   path: ./stable/2022-04-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Specs added as folder structure v1, not yet converted to v2
+  paths:
+    - AccessReview.Management
+    - AttributeNamespaces.Management
+    - Authorization.Management
+    - ClassicAdmin.Management
+    - DenyAssignment.Management
+    - ProviderOperations.Management
+    - RoleAssignment.Management
+    - RoleDefinitions.Management
+    - RoleManagementAlerts.Management
