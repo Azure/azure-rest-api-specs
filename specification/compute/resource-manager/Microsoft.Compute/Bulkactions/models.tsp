@@ -267,7 +267,7 @@ model BulkVMConfiguration {
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;
 
-  @doc("identifier for created virtual machine, if not passed it will create one from resource prefix.")
+  @doc("Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix.")
   name?: string;
 }
 
@@ -276,14 +276,14 @@ model ResourceProvisionPayload {
   @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
   baseProfile?: BulkVMConfiguration;
 
-  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should to be overridden for each VM in the batch")
+  @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch")
   @identifiers(#[])
   resourceOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
 
-  @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
+  @doc("If resourceOverrides doesn't contain \"name\", the service will create a name based on the prefix and ResourceCount, e.g., resourceprefix-0, resourceprefix-1..")
   resourcePrefix?: string;
 }
 
