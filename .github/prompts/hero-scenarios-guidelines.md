@@ -4,19 +4,29 @@
 
 1. List the files changed in the pull request using the GitHub API.
 2. Filter to **API specification files** only (`.tsp`, `.json` under
-   `specification/`, `tspconfig.yaml`). Ignore examples, CI, docs.
+   `specification/`, `tspconfig.yaml`). Ignore files under `examples/`
+   directories, CI configuration, and documentation files.
 3. Determine the **service name** and **spec directory** from the file
    paths (e.g., `specification/DatabaseWatcher/` → DatabaseWatcher).
+   If the PR touches multiple spec directories within the same service
+   (e.g., both `resource-manager/` and `data-plane/`), treat them as a
+   single service and analyze the combined API surface. If the PR
+   touches specs for **different services**, generate separate hero
+   scenario suggestions for each service.
 4. If no specification surface was changed, post a single message saying
    no hero scenarios are applicable and stop.
 
 ## Step 1 — Check for Existing README
 
-Check whether the spec directory already contains a `README.md` that
-documents the service and its hero scenarios.
+Check whether the service already has a `README.md` with hero scenarios.
+Look in the top-level service directory (e.g.,
+`specification/loadtestservice/README.md`) and in each spec subdirectory
+(e.g., `resource-manager/Microsoft.LoadTestService/loadtesting/readme.md`,
+`data-plane/loadtesting/readme.md`).
 
-- **If no README exists** (or it only contains AutoRest configuration),
-  you will generate a full suggested `README.md` in Step 3.
+- **If no README with hero scenarios exists** (or all READMEs only
+  contain AutoRest configuration), you will generate a full suggested
+  `README.md` in Step 3.
 - **If a README already exists** with substantive service documentation,
   read it and note the existing hero scenarios. In Step 3, you will only
   suggest new scenarios that cover API surface introduced by this PR and
@@ -100,6 +110,28 @@ Content-Type: application/json
 
 HTTP/1.1 201 Created
 Azure-AsyncOperation: https://management.azure.com/subscriptions/{sub}/providers/Microsoft.DatabaseWatcher/locations/eastus2/operationStatuses/{id}
+Retry-After: 10
+
+{
+  "id": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.DatabaseWatcher/watchers/{name}",
+  "name": "{name}",
+  "type": "Microsoft.DatabaseWatcher/watchers",
+  "location": "eastus2",
+  "identity": {
+    "type": "SystemAssigned",
+    "principalId": "{principalId}",
+    "tenantId": "{tenantId}"
+  },
+  "properties": {
+    "datastore": {
+      "adxClusterResourceId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Kusto/clusters/{cluster}",
+      "kustoClusterUri": "https://{cluster}.eastus2.kusto.windows.net",
+      "kustoDatabaseName": "watcher-data",
+      "kustoOfferingType": "adx"
+    },
+    "provisioningState": "Creating"
+  }
+}
 ```
 
 ```http
@@ -219,6 +251,8 @@ For each scenario, include:
   in the initial response.
 
 ## Step 4 — Post the Suggestion
+
+Use `add-comment` to post a PR comment with the suggestion.
 
 **If no README exists**, post a PR comment with a full suggested README:
 
