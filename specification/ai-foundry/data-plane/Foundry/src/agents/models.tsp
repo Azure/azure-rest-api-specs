@@ -159,8 +159,6 @@ union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
   responses: "responses",
-
-  @removed(Versions.v1)
   invocations: "invocations",
 }
 
@@ -279,6 +277,7 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("The protocols that the agent supports for ingress communication of the containers.")
   @example(#[
     #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "invocations", version: "v0.0.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
   container_protocol_versions: ProtocolVersionRecord[];
