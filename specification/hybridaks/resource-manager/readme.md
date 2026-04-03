@@ -20,6 +20,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
+## Suppression
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.AgentPoolProperties.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.NamedAgentPoolProfile.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.KubernetesVersionProperties.properties.patchVersions
+    reason: "patchVersions is a map of patch version info, following AKS behavior."
+
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: "storageSpaces API was deprecated and removed after 2022-09-01-preview."
+```
+
 ### Basic Information
 
 These are the global settings for the hybridaks.
@@ -39,13 +58,8 @@ These settings apply only when `--tag=package-preview-2026-04` is specified on t
 input-file:
   - Microsoft.HybridContainerService/preview/2026-04-01-preview/openapi.json
 suppressions:
-  - code: MissingApiInDefaultTag
+  - code: MISSING_APIS_IN_DEFAULT_TAG
     reason: "storageSpaces API was deprecated and removed after 2022-09-01-preview."
-  - code: AvoidAdditionalProperties
-    where:
-      - $.definitions.AgentPoolProperties.properties.nodeLabels
-      - $.definitions.KubernetesVersionReadiness.properties.patchVersions
-    reason: "Record<string> maps are required for Kubernetes labels and patch versions, consistent with AKS 
 behavior since 2022-09-01-preview."
 ```
 
