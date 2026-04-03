@@ -698,7 +698,7 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomization,
-  "go,csharp,javascript"
+  "go,csharp"
 );
 @@Azure.ClientGenerator.Core.override(ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomizationForJs,
@@ -801,7 +801,7 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 
 @@clientName(servicesCheckNameAvailabilityCustomization::parameters.params,
   "searchManagementRequestOptions",
-  "go,csharp,javascript"
+  "go,csharp"
 );
 @@clientName(servicesCheckNameAvailabilityCustomizationForJs::parameters.params,
   "searchManagementRequestOptions",
