@@ -12057,7 +12057,6 @@ model AzureOpenAiHyperParameters {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @discriminator("modelProvider")
-@usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningVertical {
   /**
    * [Required] Input model for fine tuning.
@@ -13580,7 +13579,6 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
-@usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningJob extends JobBaseProperties {
   /**
    * [Required]
