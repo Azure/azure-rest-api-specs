@@ -45,7 +45,7 @@ tag: package-2026-03-01
 
 These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-08-01'
+```yaml $(tag) == 'package-2026-03-01'
 input-file:
   - stable/2026-03-01/configurationmanager.json
 ```
