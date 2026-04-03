@@ -75,6 +75,14 @@ using Microsoft.KubernetesConfiguration;
   "KubernetesConfigurationPrivateLinkScopePublicNetworkAccessType",
   "csharp"
 );
+@@clientName(PrivateLinkResource,
+  "KubernetesConfigurationPrivateLinkResource",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "KubernetesConfigurationPrivateEndpointConnection",
+  "csharp"
+);
 
 // C# fixes: mark single-page list operations as pageable for correct Collection generation
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for correct Collection generation in C#"
