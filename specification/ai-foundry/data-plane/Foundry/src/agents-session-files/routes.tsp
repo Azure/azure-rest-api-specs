@@ -50,7 +50,7 @@ interface AgentSessionFiles {
       @query path: string;
 
       /** The binary file content to upload. */
-      @header contentType: "application/octet-stream";
+      @header("Content-Type") contentType: "application/octet-stream";
       @body content: bytes;
     },
     SessionFileWriteResponse
