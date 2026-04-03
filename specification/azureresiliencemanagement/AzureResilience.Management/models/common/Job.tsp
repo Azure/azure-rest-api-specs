@@ -118,12 +118,14 @@ model JobTaskDetail {
   @visibility(Lifecycle.Read)
   subTasksList?: JobTaskDetail[];
 
+  @added(Versions.v2026_03_01_preview)
   @identifiers(#[])
   @doc("Retry details of the task.")
   @visibility(Lifecycle.Read)
   retryDetails?: JobTaskRetryDetail[];
 }
 
+@added(Versions.v2026_03_01_preview)
 @doc("Job task retry details. Represents a retry attempt of a task with the same structure as the original task.")
 model JobTaskRetryDetail {
   ...JobTaskDetail;
