@@ -4,7 +4,7 @@ on:
     types: [labeled]
 labels: [hero-scenarios-needed]
 if: github.event.label.name == 'hero-scenarios-needed'
-description: "Spectre Hero Scenarios: Suggest a service README with hero scenarios for API specifications"
+description: "Hero Scenarios: Suggest a service README with hero scenarios for API specifications"
 permissions:
   contents: read
   pull-requests: read
