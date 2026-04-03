@@ -45,16 +45,6 @@ union AutomatedResponseType {
   BlobSoftDelete: "BlobSoftDelete",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union SettingName {
-  string,
-
-  /**
-   * Name of the Defender for Storage Settings name.
-   */
-  current: "current",
-}
-
 /**
  * List of Defender for Storage settings.
  */
@@ -180,21 +170,6 @@ model OnUploadFilters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   excludeBlobsLargerThan?: unknown | null;
-}
-
-/**
- * A status describing the success/failure of the enablement/disablement operation.
- */
-model OperationStatus {
-  /**
-   * The operation status code.
-   */
-  code?: string;
-
-  /**
-   * Additional information regarding the success/failure of the operation.
-   */
-  message?: string;
 }
 
 /**

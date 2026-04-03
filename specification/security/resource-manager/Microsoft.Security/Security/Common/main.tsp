@@ -180,25 +180,3 @@ union SettingName {
    */
   current: "current",
 }
-
-/**
- * Optional. Write scan result on blobIndexTags by default.
- */
-union BlobScanResultsOptions {
-  string,
-
-  /**
-   * Write scan results on the blobs index tags.
-   */
-  blobIndexTags: "blobIndexTags",
-
-  /**
-   * Write scan results on the blobs index tags.
-   */
-  BlobIndexTags: "BlobIndexTags",
-
-  /**
-   * Do not write scan results on the blobs index tags.
-   */
-  None: "None",
-}

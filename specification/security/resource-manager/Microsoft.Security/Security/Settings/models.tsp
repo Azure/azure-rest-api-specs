@@ -33,36 +33,6 @@ union SettingKind {
   AlertSyncSettings: "AlertSyncSettings",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union SettingName {
-  string,
-
-  /**
-   * MCAS
-   */
-  MCAS: "MCAS",
-
-  /**
-   * WDATP
-   */
-  WDATP: "WDATP",
-
-  /**
-   * WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW
-   */
-  WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW: "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
-
-  /**
-   * WDATP_UNIFIED_SOLUTION
-   */
-  WDATP_UNIFIED_SOLUTION: "WDATP_UNIFIED_SOLUTION",
-
-  /**
-   * Sentinel
-   */
-  Sentinel: "Sentinel",
-}
-
 /**
  * Subscription settings list.
  */
