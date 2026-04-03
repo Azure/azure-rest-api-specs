@@ -92,7 +92,7 @@ namespace Storage.Blob {
     TError
   >;
 
-  /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
+  /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
@@ -128,13 +128,13 @@ namespace Storage.Blob {
     {
       ...DateResponseHeader;
 
-      /** Storage service statistics. */
+      /** Storage service statistics */
       @body
       storageServiceStats: StorageServiceStats;
     }
   >;
 
-  /** Returns a list of the containers in the storage account. */
+  /** The List Containers Segment operation returns a list of the containers under the specified account */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
@@ -147,7 +147,7 @@ namespace Storage.Blob {
       ...MaxResultsParameter;
       ...TimeoutParameter;
 
-      /** Specify to include additional, optional information. */
+      /** Include this parameter to specify that the container's metadata be returned as part of the response body. */
       @query include?: Array<ListContainersIncludeType>;
     },
     ListContainersSegmentResponse
@@ -159,14 +159,14 @@ namespace Storage.Blob {
   @route("?restype=service&comp=userdelegationkey")
   op getUserDelegationKey is StorageOperation<
     {
-      /** Key information. */
+      /** Key information provided in the request */
       @body
       keyInfo: KeyInfo;
 
       ...TimeoutParameter;
     },
     {
-      /** The user delegation key. */
+      /** The user delegation key */
       @body
       userDelegationKey: UserDelegationKey;
 
