@@ -38,7 +38,7 @@ These are the global settings for the configurationmanager.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-03-01
+tag: package-2025-08-01
 ```
 
 ### Tag: package-2026-03-01
