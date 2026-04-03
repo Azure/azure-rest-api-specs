@@ -10,7 +10,14 @@ using Microsoft.ServiceFabric;
 );
 @@clientName(Azure.ResourceManager.CommonTypes.ProxyResource,
   "ArmProxyResource",
-  "python,java,javascript"
+  "python,java,javascript,csharp"
+);
+
+// Rename the custom ProxyResource to avoid collision with
+// Azure.ResourceManager.CommonTypes.ProxyResource which confuses the C# generator
+@@clientName(Microsoft.ServiceFabric.ProxyResource,
+  "ServiceFabricProxyResource",
+  "csharp"
 );
 
 @@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
@@ -22,3 +29,39 @@ using Microsoft.ServiceFabric;
   "ManagedIdentityType",
   "java"
 );
+
+// C# renames to preserve backward compatibility with autorest-generated SDK
+// Resource type renames (from autorest rename-mapping and prepend-rp-prefix)
+@@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
+@@clientName(Microsoft.ServiceFabric.ApplicationResource, "ServiceFabricApplication", "csharp");
+@@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
+@@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
+@@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
+
+// Model type renames
+@@clientName(Microsoft.ServiceFabric.AzureActiveDirectory, "ClusterAadSetting", "csharp");
+@@clientName(Microsoft.ServiceFabric.CertificateDescription, "ClusterCertificateDescription", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClientCertificateCommonName, "ClusterClientCertificateCommonName", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClientCertificateThumbprint, "ClusterClientCertificateThumbprint", "csharp");
+@@clientName(Microsoft.ServiceFabric.EndpointRangeDescription, "ClusterEndpointRangeDescription", "csharp");
+@@clientName(Microsoft.ServiceFabric.NodeTypeDescription, "ClusterNodeTypeDescription", "csharp");
+@@clientName(Microsoft.ServiceFabric.Notification, "ClusterNotification", "csharp");
+@@clientName(Microsoft.ServiceFabric.NotificationTarget, "ClusterNotificationTarget", "csharp");
+@@clientName(Microsoft.ServiceFabric.ServerCertificateCommonName, "ClusterServerCertificateCommonName", "csharp");
+@@clientName(Microsoft.ServiceFabric.ServerCertificateCommonNames, "ClusterServerCertificateCommonNames", "csharp");
+
+// Enum/union type renames
+@@clientName(Microsoft.ServiceFabric.AddOnFeatures, "ClusterAddOnFeature", "csharp");
+@@clientName(Microsoft.ServiceFabric.DurabilityLevel, "ClusterDurabilityLevel", "csharp");
+@@clientName(Microsoft.ServiceFabric.MoveCost, "ApplicationMoveCost", "csharp");
+@@clientName(Microsoft.ServiceFabric.NotificationCategory, "ClusterNotificationCategory", "csharp");
+@@clientName(Microsoft.ServiceFabric.NotificationChannel, "ClusterNotificationChannel", "csharp");
+@@clientName(Microsoft.ServiceFabric.NotificationLevel, "ClusterNotificationLevel", "csharp");
+@@clientName(Microsoft.ServiceFabric.ReliabilityLevel, "ClusterReliabilityLevel", "csharp");
+@@clientName(Microsoft.ServiceFabric.RollingUpgradeMode, "ApplicationRollingUpgradeMode", "csharp");
+@@clientName(Microsoft.ServiceFabric.ServiceKind, "ApplicationServiceKind", "csharp");
+@@clientName(Microsoft.ServiceFabric.StoreName, "ClusterCertificateStoreName", "csharp");
+@@clientName(Microsoft.ServiceFabric.UpgradeMode, "ClusterUpgradeMode", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterState, "ServiceFabricClusterState", "csharp");
+@@clientName(Microsoft.ServiceFabric.ProvisioningState, "ServiceFabricProvisioningState", "csharp");
+@@clientName(Microsoft.ServiceFabric.PartitionScheme, "ApplicationPartitionScheme", "csharp");
