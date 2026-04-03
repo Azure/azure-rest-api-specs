@@ -33,6 +33,16 @@ union ConnectionState {
 }
 
 /**
+ * The sync authentication mode for the connected registry.
+ */
+@added(Versions.vLatestPreview)
+union SyncAuthType {
+  string,
+  SyncToken: "SyncToken",
+  ManagedIdentity: "ManagedIdentity",
+}
+
+/**
  * The activation status of the connected registry.
  */
 union ActivationStatus {
@@ -202,7 +212,20 @@ model SyncProperties {
   /**
    * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.
    */
+  @removed(Versions.vLatestPreview)
   tokenId: string;
+
+  /**
+   * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.
+   */
+  @added(Versions.vLatestPreview)
+  tokenId?: string;
+
+  /**
+   * The sync authentication mode. Inferred from the presence of tokenId or identity when not specified.
+   */
+  @added(Versions.vLatestPreview)
+  authType?: SyncAuthType;
 
   /**
    * The cron expression indicating the schedule that the connected registry will sync with its parent.
@@ -354,6 +377,12 @@ model GarbageCollectionProperties {
  * The parameters for updating a connected registry.
  */
 model ConnectedRegistryUpdateParameters {
+  /**
+   * The identity of the connected registry.
+   */
+  @added(Versions.vLatestPreview)
+  identity?: IdentityProperties;
+
   /**
    * The properties of the connected registry update parameters.
    */

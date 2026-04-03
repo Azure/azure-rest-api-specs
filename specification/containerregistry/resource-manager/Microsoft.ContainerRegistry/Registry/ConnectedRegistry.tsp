@@ -22,6 +22,13 @@ model ConnectedRegistry
     SegmentName = "connectedRegistries",
     NamePattern = "^[a-zA-Z0-9]*$"
   >;
+
+  /**
+   * The identity of the connected registry.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.vLatestPreview)
+  identity?: IdentityProperties;
 }
 
 @armResourceOperations
