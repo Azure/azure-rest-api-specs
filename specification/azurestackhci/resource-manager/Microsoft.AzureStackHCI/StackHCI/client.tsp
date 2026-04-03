@@ -375,6 +375,24 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 
+// Step date properties: match old SDK names (eliminates custom HciUpdateStep.cs alias file)
+@@clientName(Microsoft.AzureStackHCI.Step.startTimeUtc, "StartOn", "csharp");
+@@clientName(Microsoft.AzureStackHCI.Step.endTimeUtc, "EndOn", "csharp");
+@@clientName(Microsoft.AzureStackHCI.Step.lastUpdatedTimeUtc,
+  "LastUpdatedOn",
+  "csharp"
+);
+
+// UpdateSummariesProperties date properties: match old SDK names (eliminates custom HciClusterUpdateSummaryData.cs)
+@@clientName(Microsoft.AzureStackHCI.UpdateSummariesProperties.lastChecked,
+  "LastCheckedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.UpdateSummariesProperties.lastUpdated,
+  "LastUpdatedOn",
+  "csharp"
+);
+
 @@clientName(Microsoft.AzureStackHCI.DeploymentStep.startTimeUtc,
   "StartOn",
   "csharp"
