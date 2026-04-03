@@ -154,6 +154,9 @@ A TypeSpec project **MUST NOT** contain:
 - Create-only properties (immutable after creation) **MUST** use `@visibility(Lifecycle.Create, Lifecycle.Read)`.
 - Properties used only in responses **MUST NOT** be marked as required in request contexts.
 - Use the `Lifecycle` class values for visibility decorators (`Lifecycle.Create`, `Lifecycle.Read`, `Lifecycle.Update`).
+- Write-only properties (`@visibility(Lifecycle.Create, Lifecycle.Update)` without `Lifecycle.Read`) are **NOT allowed** (OAPI027). Every non-secret property that can be set **MUST** also be readable via GET. The only exception is secret properties annotated with `@secret`.
+- If a property is read-only, it **MUST** always be read-only. Do not make the same property conditionally read-only or conditionally read/write depending on context. Use separate properties for each case (OAPI020).
+- If a property is immutable (create + read), it **MUST** always be immutable. Do not make the same property conditionally immutable. Use separate properties for each case (OAPI029).
 
 ### 4.5 Type Constraints
 
@@ -301,6 +304,7 @@ Flag these issues when found:
 - **Polymorphic-format properties** — a single property that accepts multiple formats (e.g., both an integer `5` and a percentage string `"20%"`) creates ambiguity and error-prone client code. Model these as separate properties (e.g., `maxConcurrency: int32` and `maxConcurrencyPercent: string`) or use a discriminated union model.
 - **`@added` version misalignment** — when using `@added(Versions.vXXXX)` to gate a new feature, verify that the feature does not inadvertently alter descriptions or schemas of earlier API versions. If the feature is for version `2025-08-01`, it must not affect the generated OpenAPI for `2025-06-01`.
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
+- **Spread-only model types as full models** — a model type used only for spreading (`...`) into other types **SHOULD** be declared as an `alias` instead. Using `model` for types that are only spread generates unnecessary types in the output. See [TypeSpec alias documentation](https://typespec.io/docs/language-basics/alias) (TypeSpec-BestPractice-01).
 
 ---
 

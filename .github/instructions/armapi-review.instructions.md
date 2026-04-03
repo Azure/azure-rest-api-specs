@@ -296,6 +296,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - For **new service onboardings**, operation statuses **MUST** be at subscription scope (e.g., `/subscriptions/{subscriptionId}/providers/{namespace}/locations/{location}/operationStatuses/{operationId}`). Subscription-level operation statuses provide better security through RBAC.
 - If `operationResults`/`operationStatuses` are exposed under resource scope, long-running DELETE operations will cause them to become inaccessible after the parent resource is deleted, returning `404 Not Found`.
 - The RP **MUST** ensure the operation result API is called in the same tenant and subscription that the operation originated in. The operation ID **MUST NOT** be the same as the correlation ID or request ID.
+- Operation IDs **MUST** be globally unique for each operation instance. **DO NOT** derive operation IDs from a hash of resource properties — sequential operations on the same resource initiated close together can produce identical hashes, causing clients and ARM's template deployment engine to mix up operations. Generate a new GUID for each operation (RPC-BestPractice-08).
 - Operation status `properties` **MUST NOT** contain sensitive information — operation status resources may be accessible through polling endpoints with different RBAC restrictions than the original operation.
 
 ### 6.9 Long-Running Operations Exceeding One Day
@@ -403,6 +404,51 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - If a property can legitimately return `null` in a response, it **MUST** be annotated with `"x-ms-nullable": true`.
 - Do not rely on the absence of `"required"` to imply nullability — be explicit.
 
+### 8.11 Write-Only Properties Are Forbidden (OAPI027)
+
+- Properties **MUST NOT** be write-only. A property annotated with `x-ms-mutability: ["create", "update"]` (without `"read"`) is a write-only property and is **not allowed**.
+- Every property that can be set on a resource **MUST** also be readable via GET. If a property is accepted on PUT/PATCH but not returned on GET, ARM Template What-If will show the property as a diff (noise), and ARM Change Analysis will flag false changes.
+- **Exception**: Secret properties that are accepted on write but returned as `null` on read are acceptable — these should use `"x-ms-secret": true` and `x-ms-mutability: ["create", "update"]`.
+- If a non-secret write-only property is found, flag it as a blocking issue and instruct the author to make the property readable.
+
+### 8.12 No Conditional Read-Only or Conditional Immutable Properties (OAPI020, OAPI029)
+
+- If a property is `readOnly`, it **MUST** always be `readOnly`. Do not make the same property conditionally read-only in some scenarios and read/write in others. Use separate properties for each case.
+- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable. Do not make the same property conditionally immutable based on resource state or other conditions. Use separate properties for each case.
+- Conditional behavior on the same property creates inconsistent API behavior and confusion for CLI tools, SDKs, and Azure Policy.
+
+### 8.13 Avoid CSV-Encoded Values in Properties (PLCY004)
+
+- Properties **MUST NOT** use comma-separated value (CSV) strings to represent collections or multiple values. Use a JSON array instead.
+- CSV-encoded strings prevent Azure Policy from evaluating individual values and make writing template or policy logic very difficult or impossible.
+- If a property's description or examples suggest comma-separated values (e.g., `"values": "East US, West US, Central US"`), flag it and instruct the author to model the property as an array of strings.
+
+### 8.14 Avoid Properties That Accept Multiple Data Types (OAPI025)
+
+- Properties **SHOULD NOT** accept values of different JSON types (e.g., both `"42"` and `42`, or both `true` and `"true"`).
+- If a property must accept multiple types for backward compatibility, the service **MUST** preserve the user-provided data type and formatting in the PUT response and subsequent GETs. Do not normalize between types.
+- Mixed-type properties cause noise in ARM Template What-If and ARM Change Analysis. Prefer rejecting the incorrect type with `400 Bad Request`.
+
+### 8.15 Default Values Must Be Static (OAPI022)
+
+- Properties with `default` values **MUST** use the same default value on every similar PUT request. Do not derive the default value from other properties in the resource or from external state.
+- The `default` annotation in the swagger **MUST** specify the actual default value so that clients, documentation, and policy can discover it.
+
+### 8.16 Service Must Preserve Array Ordering (OAPI024)
+
+- The order of items in array properties from a PUT or PATCH request **MUST** be preserved in the PUT/PATCH response and subsequent GET responses.
+- Do not reorder, sort, or normalize array contents. Reordering breaks tools that diff resource payloads over time (ARM Template What-If, ARM Change Analysis).
+
+### 8.17 Service Must Preserve Property Value Casing (OAPI026)
+
+- The value of string properties from a PUT/PATCH request **MUST** match the corresponding value in the PUT/PATCH response and subsequent GETs. Do not normalize casing, location formats, or IP address representations.
+- Examples of incorrect normalization: `"westus"` → `"West US"`, `"::1"` → `"0:0:0:0:0:0:0:1"`, case changes on resource IDs.
+
+### 8.18 Service Must Reject Unknown Properties (OAPI018)
+
+- If a PUT or PATCH payload contains properties that the RP does not recognize, the service **MUST** reject the request with `400 Bad Request` and an appropriate ARM error response body.
+- Do not silently discard unknown properties — the user must be informed that their payload is incorrect. Silent discarding causes the GET response to differ from the PUT request, leading to What-If noise and customer confusion.
+
 ---
 
 ## 9. Inline Properties vs. Nested Resources (Design Choice)
@@ -412,12 +458,13 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - The property set is an intrinsic part of the resource's state.
 - The properties must be operated on together with other properties of the resource.
 - The property set is small and not expected to grow significantly.
+- The elements of the collection have ordering requirements that require the entire array to be operated on atomically (e.g., reordering elements, removing one element and adjusting the order of the rest in a single operation).
 
 ### 9.2 When to Use Nested Resources Instead
 
 - The property set is complex enough to warrant its own lifecycle (separate CRUD operations).
 - The properties have RBAC or routing requirements separate from the parent resource.
-- The collection could grow large (arrays with unbounded or very large element counts **MUST** be modeled as nested resources, not inline arrays).
+- The collection could grow large (arrays with unbounded or very large element counts **MUST** be modeled as nested resources, not inline arrays). **Warning**: Large inline arrays can cause the resource representation to exceed ARM's maximum payload size limits.
 - Each element needs its own ARM resource ID.
 
 ### 9.3 Never Model Both
@@ -487,8 +534,9 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 11.1 Uniform Versioning Within a Service
 
-- All resource types within a single Service under an RP namespace **MUST** version uniformly — they share the same `api-version` value.
-- A change to any resource type in the service requires a new api-version for the entire service.
+- An RP has one namespace shared by the one or more Services that make up the RP. It is **strongly recommended** that an RP consist of a single Service (RPC-BestPractice-14).
+- All resource types within a single Service under an RP namespace **MUST** version uniformly — they share the same `api-version` value. This version becomes the Service's version when it is ultimately deployed in **all** supported regions.
+- A change to any resource type in the service (adding a new request/response property or a new operation) requires a new api-version for the entire service.
 - A single package tag in `readme.md` **MUST NOT** mix swagger files from different API versions. For example, including both `stable/2024-10-01/foo.json` and `preview/2025-06-01-preview/bar.json` in the same tag violates uniform versioning.
 
 ### 11.2 Incremental Version Progression
@@ -496,6 +544,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - Copy the entire API surface when creating a new version. New preview versions should include all existing GA functionality plus new changes.
 - When promoting from preview to GA, the GA version **MUST** have a later date than the preview version.
 - The `default` API version tag in `readme.md` **MUST** point to the latest **stable** version. Do not change the default tag from a stable version to a preview version — the default tag is what SDK consumers get by default and must be a GA release.
+
+### 11.3 API Version Parity Across Clouds (RPC-BestPractice-15)
+
+- For each API version, the service **SHOULD** expose the same functionality across every cloud where it is available (e.g., Public, Mooncake, Fairfax). An API version in one cloud should not correspond to different functionality than the same API version in another cloud.
+- If a resource type is available in multiple clouds, the latest stable (non-preview) API version **SHOULD** be available in each cloud.
 
 ---
 
@@ -598,6 +651,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ `Location` polling returns 202 in-progress → sync response on completion; `Azure-AsyncOperation` always returns 200 with status object
 - ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
 - ✅ Operation statuses at subscription scope for new services; no sensitive data in operation status properties
+- ✅ Operation IDs are globally unique GUIDs — not derived from hashes of resource properties (RPC-BestPractice-08)
 
 ### Property Design (Properties Bag Review)
 - ✅ String properties actively reviewed — enums used for finite/limited value sets
@@ -610,6 +664,11 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ No writable circular dependencies between resources
 - ✅ `additionalProperties` only used for user-defined pass-through data, not service-owned properties (RPC-Put-V1-23)
 - ✅ Deprecated properties use `"deprecated": true` keyword, not just description text
+- ✅ No write-only properties (`x-ms-mutability: ["create", "update"]` without `"read"`) except for secrets (OAPI027)
+- ✅ No conditional read-only or conditional immutable properties — consistency required (OAPI020, OAPI029)
+- ✅ No CSV-encoded strings representing collections — use JSON arrays (PLCY004)
+- ✅ Properties do not accept multiple data types; data types preserved in responses (OAPI025)
+- ✅ Default values are static constants, not derived from other properties (OAPI022)
 
 ### List APIs
 - ✅ List APIs return `{ value: [...], nextLink }` wrapper; `nextLink` has `format: uri`; marked with `x-ms-pageable`
@@ -628,9 +687,11 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ Singleton nested resources use `default` pattern with both collection and singleton GET
 - ✅ Private endpoint connections use common-types or dedicated file
 - ✅ Collections not modeled as both inline array and nested resource
+- ✅ Inline arrays not used for unbounded/very large collections; large arrays risk exceeding ARM payload size limits
 
 ### Versioning & Suppressions
 - ✅ Uniform API versioning across all resource types in the service; no mixed versions in a single package tag
+- ✅ API version parity across clouds — same functionality per API version in Public, Mooncake, Fairfax (RPC-BestPractice-15)
 - ✅ Suppressions in `readme.md` are under the correct package tag with specific `from`/`where` clauses (RPC-SUPPRESS-SCOPE)
 - ✅ Suppressions for GA versions justified individually — preview back-compat is not sufficient (RPC-SUPPRESS-GA)
 - ✅ Every package tag includes the operations API spec (RPC-Operations-V1-TAG)

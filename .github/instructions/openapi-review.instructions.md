@@ -136,7 +136,10 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 ### Field Mutability
 
 - Read-only properties **MUST** be marked `"readOnly": true` (e.g. `id`, `name`, `type`, `systemData`, computed properties).
+- If a property is `readOnly`, it **MUST** always be `readOnly`. Do not make the same property conditionally read-only or conditionally read/write depending on context. Use separate properties for each case (OAPI020).
+- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable. Do not make the same property conditionally immutable. Use separate properties for each case (OAPI029).
 - Use `x-ms-mutability` to specify `["create", "read"]`, `["read"]`, or `["create", "update", "read"]` behavior.
+- Write-only properties (`x-ms-mutability: ["create", "update"]` without `"read"`) are **NOT allowed** (OAPI027). Every non-secret property that can be set **MUST** also be readable via GET. Write-only properties cause noise in ARM Template What-If and ARM Change Analysis. The only exception is secret properties annotated with `x-ms-secret: true`.
 - Required read-only properties **MUST NOT** be required in request bodies. Check that `"required"` arrays don't include read-only fields for request schemas.
 
 ### Schema Consistency
@@ -146,6 +149,9 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - **DO NOT** return secret/sensitive fields in GET responses (e.g. `administratorPassword`). Secrets **MAY** only be returned via POST if absolutely necessary.
 - Proactively check every `"type": "string"` property for secret indicators — see **SEC-SECRET-DETECT** below.
 - **DO NOT** include fields whose values are trivially computable from other fields.
+- Properties with `default` values **MUST** use a static constant — the same default on every similar PUT request. Do not derive defaults from other properties in the resource. The `default` annotation in the swagger must specify the actual constant value.
+- Properties **MUST NOT** use comma-separated value (CSV) strings to represent collections. Use a JSON array instead. CSV-encoded strings prevent Azure Policy from evaluating individual values (PLCY004).
+- Properties **SHOULD NOT** accept values of different JSON types (e.g., both `"42"` and `42`). If backward-compatibility forces this, the service must preserve the user's data type in responses. Prefer rejecting incorrect types with `400 Bad Request` (OAPI025).
 
 ### Null Values
 
@@ -481,7 +487,7 @@ When reviewing, systematically check:
 - ✅ No breaking changes vs. previous version of the same API
 - ✅ Security definitions present and applied to all operations
 - ✅ All property names in camelCase, model names in PascalCase
-- ✅ `readOnly`, `required`, and `x-ms-mutability` correctly applied
+- ✅ `readOnly`, `required`, and `x-ms-mutability` correctly applied; no write-only properties (OAPI027); no conditional read-only or immutable properties (OAPI020, OAPI029)
 - ✅ Common-types referenced (not redefined) for ARM standard types; no duplicate definitions across files in same tag
 - ✅ All CRUD operations and List operations present for ARM resources
 - ✅ `x-ms-pageable` on list operations with correct `nextLinkName`
@@ -497,6 +503,8 @@ When reviewing, systematically check:
 - ✅ No anonymous body parameter types; no request body on DELETE; no array-typed request bodies; no free-form objects
 - ✅ Consistent resource schema across PUT/GET/PATCH responses
 - ✅ No `null` values in response schemas; no secrets in GET responses
+- ✅ No CSV-encoded strings representing collections — use JSON arrays (PLCY004)
+- ✅ Default values are static constants, not derived from other properties (OAPI022)
 - ✅ Plural property names are arrays; scalar properties use singular names
 - ✅ Properties with `format` also specify `type`; ARM resource IDs use `format: arm-id`; URLs use `format: uri`
 - ✅ Every string property inspected for secret indicators (SEC-SECRET-DETECT): flag if property name, description, or examples suggest a secret but `x-ms-secret: true` is missing

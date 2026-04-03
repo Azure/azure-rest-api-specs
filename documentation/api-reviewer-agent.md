@@ -5,6 +5,9 @@ specifications for conformance to the [Azure REST API Guidelines][api-guidelines
 ARM Resource Provider Contract ([RPC][rpc-contract]) rules, and repository conventions.
 It can also apply fixes directly to local files.
 
+> **New to the agent?** See the [Getting Started Guide](arm-api-reviewer-getting-started.md)
+> for step-by-step setup instructions — from installing VS Code to running your first review.
+
 ## Prerequisites
 
 - **VS Code** with [GitHub Copilot][copilot-ext] and
