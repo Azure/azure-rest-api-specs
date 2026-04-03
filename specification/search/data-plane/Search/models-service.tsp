@@ -3050,10 +3050,10 @@ union PermissionFilter {
 union SearchIndexPermissionFilterOption {
   string,
 
-  /** enabled. */
+  /** Permission filtering is enabled for the index. */
   Enabled: "enabled",
 
-  /** disabled. */
+  /** Permission filtering is disabled for the index. */
   Disabled: "disabled",
 }
 

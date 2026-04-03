@@ -933,7 +933,7 @@ model VectorThreshold {
   kind: VectorThresholdKind;
 }
 
-/** TThe query parameters to configure hybrid search behaviors. */
+/** The query parameters to configure hybrid search behaviors. */
 model HybridSearch {
   /** Determines the maximum number of documents to be retrieved by the text query portion of a hybrid search request. Those documents will be combined with the documents matching the vector queries to produce a single final list of results. Choosing a larger maxTextRecallSize value will allow retrieving and paging through more documents (using the top and skip parameters), at the cost of higher resource utilization and higher latency. The value needs to be between 1 and 10,000. Default is 1000. */
   maxTextRecallSize?: int32;
