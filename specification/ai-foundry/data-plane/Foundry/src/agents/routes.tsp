@@ -46,7 +46,10 @@ interface Agents {
   @post
   @route("/agents")
   @sharedRoute
-  @extension("x-ms-foundry-meta", #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] })
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
   createAgentFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -94,7 +97,10 @@ interface Agents {
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
-  @extension("x-ms-foundry-meta", #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] })
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
   updateAgentFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -263,31 +269,6 @@ interface Agents {
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
-  >;
-
-  /**
-   * Updates an agent endpoint.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
-  @patch(#{ implicitOptionality: true })
-  @route("/agents/{agent_name}/endpoint")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
-  @removed(Versions.v1)
-  updateAgentEndpointObject is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.agent_endpoint_v1_preview,
-    {
-      /** The name of the agent to retrieve. */
-      @path agent_name: string;
-
-      @header("Content-Type") contentType: "application/merge-patch+json";
-      ...UpdateAgentEndpointRequest;
-    },
-    AgentObject
   >;
 
   /**
