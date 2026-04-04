@@ -394,7 +394,9 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 );
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(BlobItem, "omitSerdeMethods", "all", "go");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Blob.Blob.download,
   "responseEnvelopeName",
   "BlobClientDownloadResponseInternal",
@@ -436,10 +438,14 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
   "python"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Blob, "includeRootSlash", false, "javascript");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Error, "header", "x-ms-error-code:errorCode", "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Error, "restErrorCodeHeader", "x-ms-error-code", "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(MetadataHeaders.metadata,
   "headerCollectionPrefix",
   "x-ms-meta",
@@ -617,11 +623,13 @@ model BlobServicePropertiesCsharp {
 @@access(DelimitedTextConfiguration, Access.internal, "csharp");
 @@access(JsonTextConfiguration, Access.internal, "csharp");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(MetadataHeaders.metadata,
   "collectionHeaderPrefix",
   "x-ms-meta-",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Blob, "omitSlashFromEmptyRoute", true, "csharp,python");
 
 /** ----- This section overrides the setMetadata operations for Rust to require the metadata headers ----- */
