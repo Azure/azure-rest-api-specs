@@ -129,7 +129,12 @@ interface Evaluators {
   @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
   @post
   @route("/evaluators/{name}/versions/{version}/startPendingUpload")
-  startPendingUpload is FoundryDataPlaneOperation<
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
+  startPendingUpload is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       @path
       name: string;
@@ -142,7 +147,7 @@ interface Evaluators {
       @doc("The pending upload request parameters")
       @Http.bodyRoot
       pendingUploadRequest: PendingUploadRequest;
-    } & EvaluatorsPreviewHeader,
+    },
     PendingUploadResponse
   >;
 
@@ -151,7 +156,12 @@ interface Evaluators {
   @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
   @post
   @route("/evaluators/{name}/versions/{version}/credentials")
-  getCredentials is FoundryDataPlaneOperation<
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
+  getCredentials is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       @path
       name: string;
@@ -164,7 +174,7 @@ interface Evaluators {
       @Rest.segment("versions")
       @Http.path
       version: string;
-    } & EvaluatorsPreviewHeader,
+    },
     AssetCredentialResponse
   >;
 }

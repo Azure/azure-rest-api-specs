@@ -1,6 +1,9 @@
+import "@typespec/openapi";
+
 import "../common/models.tsp";
 
 using TypeSpec.Rest;
+using OpenAPI;
 
 namespace Azure.AI.Projects;
 
@@ -73,12 +76,24 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("Inline code text for the evaluator")
   code_text?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')")
   entry_point?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The blob URI for the evaluator storage")
   blob_uri?: url;
 }
@@ -126,6 +141,10 @@ model EvaluatorVersion {
   ...AssetBase;
 }
 
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+)
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")

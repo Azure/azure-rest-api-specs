@@ -2910,6 +2910,14 @@ paths:
       operationId: Evaluators_getCredentials
       description: Get the SAS credential to access the storage account associated with an Evaluator version.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -2921,14 +2929,6 @@ paths:
           description: The specific version id of the EvaluatorVersion to operate on.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: api-version
           in: query
           required: true
@@ -2958,11 +2958,22 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluatorCredentialRequest'
         description: The credential request parameters
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /evaluators/{name}/versions/{version}/startPendingUpload:
     post:
       operationId: Evaluators_startPendingUpload
       description: Start a new or get an existing pending upload of an evaluator for a specific version.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -2974,14 +2985,6 @@ paths:
           description: The specific version id of the EvaluatorVersion to operate on.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3011,6 +3014,9 @@ paths:
             schema:
               $ref: '#/components/schemas/PendingUploadRequest'
         description: The pending upload request parameters
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
   /indexes:
     get:
       operationId: Indexes_listLatest
@@ -7953,12 +7959,22 @@ components:
         entry_point:
           type: string
           description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         blob_uri:
           type: string
+          format: uri
           description: The blob URI for the evaluator storage
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
@@ -9956,13 +9972,16 @@ components:
     EvaluatorCredentialRequest:
       type: object
       required:
-        - blobUri
+        - blob_uri
       properties:
-        blobUri:
+        blob_uri:
           type: string
           format: uri
           description: 'The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`'
       description: Request body for getting evaluator credentials
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorDefinition:
       type: object
       required:
