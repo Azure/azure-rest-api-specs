@@ -3,6 +3,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -272,6 +273,30 @@ interface Agents {
   >;
 
   /**
+   * Updates an agent endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  @patch(#{ implicitOptionality: true })
+  @route("/agents/{agent_name}")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  patchAgentObject is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent to retrieve. */
+      @path agent_name: string;
+
+      @header("Content-Type") contentType: "application/merge-patch+json";
+      ...PatchAgentRequest;
+    },
+    AgentObject
+  >;
+
+  /*
    * Create a new agent version from code. Uploads the code zip and creates a new version
    * for an existing agent. The SHA-256 hex digest of the zip is provided in the
    * `x-ms-code-zip-sha256` header for integrity and dedup.

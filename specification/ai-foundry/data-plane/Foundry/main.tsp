@@ -13,6 +13,7 @@ import "./src/evaluations/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/indexes/routes.tsp";
 import "./src/insights/routes.tsp";
+import "./src/managed-blueprints/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/openai-conversations/routes.tsp";
 import "./src/openai-evaluations/routes.tsp";
