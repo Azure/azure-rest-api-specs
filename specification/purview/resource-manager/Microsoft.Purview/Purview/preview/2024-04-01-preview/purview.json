@@ -2919,6 +2919,7 @@
       "enum": [
         "None",
         "SystemAssigned",
+        "UserAssigned",
         "SystemAssigned,UserAssigned"
       ],
       "x-ms-enum": {
@@ -2936,9 +2937,14 @@
             "description": "SystemAssigned"
           },
           {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "UserAssigned. Note: standalone UserAssigned is not supported by Purview at resource creation time; use SystemAssigned,UserAssigned for combined identity."
+          },
+          {
             "name": "SystemAssigned,UserAssigned",
             "value": "SystemAssigned,UserAssigned",
-            "description": "Both SystemAssigned and UserAssigned identities. UserAssigned standalone is not supported by Purview."
+            "description": "Both SystemAssigned and UserAssigned identities."
           }
         ]
       }

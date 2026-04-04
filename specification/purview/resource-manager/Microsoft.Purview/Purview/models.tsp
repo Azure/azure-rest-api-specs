@@ -361,7 +361,12 @@ union ManagedIdentityType {
   SystemAssigned: "SystemAssigned",
 
   /**
-   * Both SystemAssigned and UserAssigned identities. UserAssigned standalone is not supported by Purview.
+   * UserAssigned. Note: standalone UserAssigned is not supported by Purview at resource creation time; use SystemAssigned,UserAssigned for combined identity.
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * Both SystemAssigned and UserAssigned identities.
    */
   `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
@@ -1049,6 +1054,7 @@ model TrackedResource {
   @visibility(Lifecycle.Read)
   type?: string;
 }
+
 
 /**
  * The Managed Identity of the resource
