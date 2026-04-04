@@ -395,7 +395,11 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 @@clientOption(BlobItem, "omitSerdeMethods", "all", "go");
-@@clientOption(Storage.Blob.Blob.download, "responseEnvelopeName", "BlobClientDownloadResponseInternal", "go");
+@@clientOption(Storage.Blob.Blob.download,
+  "responseEnvelopeName",
+  "BlobClientDownloadResponseInternal",
+  "go"
+);
 
 @@clientName(QueryType, "QueryFormatType", "python");
 @@clientName(Storage.Blob.BlockBlob.uploadBlobFromUrl,
@@ -413,12 +417,15 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@alternateType(BlockIdParameter.blockid, string, "python");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is to support legacy SDKs"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobs,
   "python,javascript,csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is to support legacy SDKs"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Container.listBlobHierarchySegment,
   "python,javascript,csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is to support legacy SDKs"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Storage.Blob.Service.listContainers,
   "python,javascript,csharp"
 );
@@ -626,6 +633,10 @@ alias MetadataHeadersRequired = {
 };
 
 /** operation sets one or more user-defined name-value pairs for the specified container. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+@put
 @sharedRoute
 @route("?restype=container&comp=metadata")
 op setMetadataRequiredMetadataContainer is StorageOperationNoBody<
