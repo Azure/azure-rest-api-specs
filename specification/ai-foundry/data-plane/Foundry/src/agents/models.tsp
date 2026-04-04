@@ -10,7 +10,8 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
     AgentDefinitionOptInKeys.container_agents_v1_preview,
-    AgentDefinitionOptInKeys.workflow_agents_v1_preview
+    AgentDefinitionOptInKeys.workflow_agents_v1_preview,
+    AgentDefinitionOptInKeys.code_agents_v1_preview
   ],
 };
 
@@ -260,6 +261,30 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
+@doc("Container-based deployment configuration for a hosted agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model ContainerConfiguration {
+  @doc("The container image for the hosted agent.")
+  @example("my-registry.azurecr.io/my-hosted-agent:latest")
+  image: string;
+}
+
+@doc("Code-based deployment configuration for a hosted agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model CodeConfiguration {
+  @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
+  runtime: string;
+
+  @doc("The entry point command and arguments for the code execution.")
+  entry_point: string[];
+}
+
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
@@ -280,7 +305,7 @@ model HostedAgentDefinition extends AgentDefinition {
     #{ protocol: "invocations", version: "v0.0.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
   ])
-  container_protocol_versions: ProtocolVersionRecord[];
+  container_protocol_versions?: ProtocolVersionRecord[];
 
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
@@ -301,6 +326,31 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("The image ID for the agent, applicable to image-based hosted agents.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
   image?: string;
+
+  @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  container_configuration?: ContainerConfiguration;
+
+  @doc("The protocols that the agent supports for ingress communication.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  @example(#[
+    #{ protocol: "responses", version: "v0.1.1" },
+    #{ protocol: "a2a", version: "v0.3.0" }
+  ])
+  protocol_versions?: ProtocolVersionRecord[];
+
+  @doc("Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  code_configuration?: CodeConfiguration;
 }
 
 @doc("The container app agent definition.")
@@ -411,4 +461,47 @@ union ContainerLogKind {
 
   /** System logs from the container. */
   system: "system",
+}
+
+/**
+ * JSON metadata for code-based agent operations (create, update, create version).
+ * The agent name comes from the URL path parameter or the `x-ms-agent-name` header,
+ * so it is not included in this model.
+ * The content hash (SHA-256 of the zip) is carried in the `x-ms-code-zip-sha256` header.
+ */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model CreateAgentVersionFromCodeRequest {
+  @doc("A human-readable description of the agent.")
+  @maxLength(512)
+  description?: string;
+
+  ...MetadataPropertyForRequest;
+
+  @doc("The hosted agent definition including code_configuration (runtime, entry_point), cpu, memory, and protocol_versions.")
+  definition: HostedAgentDefinition;
+}
+
+/** Multipart request body for updating or versioning a code-based agent (POST /agents/{name} and POST /agents/{name}/versions). */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model CreateAgentVersionFromCodeContent {
+  /** JSON metadata including description and hosted definition. */
+  metadata: HttpPart<CreateAgentVersionFromCodeRequest>;
+
+  /** The code zip file (max 250 MB). */
+  code: HttpPart<bytes>;
+}
+
+/** Multipart request body for creating a new code-based agent (POST /agents). Inherits from CreateAgentVersionFromCodeContent for future extensibility. */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+)
+model CreateAgentFromCodeContent {
+  ...CreateAgentVersionFromCodeContent;
 }

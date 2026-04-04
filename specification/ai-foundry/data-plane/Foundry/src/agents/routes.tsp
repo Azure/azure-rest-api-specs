@@ -27,10 +27,45 @@ interface Agents {
    */
   @post
   @route("/agents")
+  @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     CreateAgentRequest,
+    AgentObject
+  >;
+
+  /**
+   * Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.
+   * The agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.
+   * The SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.
+   * The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
+   * Maximum upload size is 250 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
+  @post
+  @route("/agents")
+  @sharedRoute
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  createAgentFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      @header contentType: "multipart/form-data";
+
+      /** The unique name that identifies the agent. Max 63 chars, must start and end with alphanumeric, hyphens allowed in the middle. */
+      @header("x-ms-agent-name")
+      @maxLength(63)
+      agentName: string;
+
+      /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
+      @header("x-ms-code-zip-sha256")
+      codeZipSha256: string;
+
+      @multipartBody body: CreateAgentFromCodeContent;
+    },
     AgentObject
   >;
 
@@ -40,6 +75,7 @@ interface Agents {
    */
   @post
   @route("/agents/{agent_name}")
+  @sharedRoute
   updateAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -47,6 +83,44 @@ interface Agents {
       @path agent_name: string;
 
       ...UpdateAgentRequest;
+    },
+    AgentObject
+  >;
+
+  /**
+   * Updates a code-based agent by uploading new code and creating a new version.
+   * If the code and definition are unchanged (matched by x-ms-code-zip-sha256 header), returns the existing version.
+   * The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
+   * Maximum upload size is 250 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent update, not BYOS."
+  @post
+  @route("/agents/{agent_name}")
+  @sharedRoute
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  updateAgentFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      /**
+       * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+       * - Must start and end with alphanumeric characters,
+       * - Can contain hyphens in the middle
+       * - Must not exceed 63 characters.
+       */
+      @maxLength(63)
+      @path
+      agent_name: string;
+
+      @header contentType: "multipart/form-data";
+
+      /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
+      @header("x-ms-code-zip-sha256")
+      codeZipSha256: string;
+
+      @multipartBody body: CreateAgentVersionFromCodeContent;
     },
     AgentObject
   >;
@@ -107,6 +181,7 @@ interface Agents {
    */
   @post
   @route("/agents/{agent_name}/versions")
+  @sharedRoute
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersion is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
@@ -194,5 +269,44 @@ interface Agents {
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentVersionObject>
+  >;
+
+  /**
+   * Create a new agent version from code. Uploads the code zip and creates a new version
+   * for an existing agent. The SHA-256 hex digest of the zip is provided in the
+   * `x-ms-code-zip-sha256` header for integrity and dedup.
+   * The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
+   * Maximum upload size is 250 MB.
+   */
+  #suppress "@azure-tools/typespec-azure-core/byos" "Code is uploaded as part of agent creation, not BYOS."
+  @post
+  @route("/agents/{agent_name}/versions")
+  @sharedRoute
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
+  )
+  createAgentVersionFromCode is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys,
+    {
+      /**
+       * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
+       * - Must start and end with alphanumeric characters,
+       * - Can contain hyphens in the middle
+       * - Must not exceed 63 characters.
+       */
+      @maxLength(63)
+      @path
+      agent_name: string;
+
+      @header contentType: "multipart/form-data";
+
+      /** SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification. */
+      @header("x-ms-code-zip-sha256")
+      codeZipSha256: string;
+
+      @multipartBody body: CreateAgentVersionFromCodeContent;
+    },
+    AgentVersionObject
   >;
 }
