@@ -53,19 +53,19 @@ op FoundryDataPlaneOperation<
 union AgentDefinitionOptInKeys {
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
-
-  @removed(Versions.v1)
   container_agents_v1_preview: "ContainerAgents=V1Preview",
-
   agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
+  code_agents_v1_preview: "CodeAgents=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {
+  skills_v1_preview: "Skills=V1Preview",
   evaluations_v1_preview: "Evaluations=V1Preview",
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
+  toolboxes_v1_preview: "Toolboxes=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
