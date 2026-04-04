@@ -626,7 +626,6 @@ model VersionSelectionRule {
   agent_version: string;
 }
 
-@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }

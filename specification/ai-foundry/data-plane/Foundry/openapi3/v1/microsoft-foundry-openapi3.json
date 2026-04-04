@@ -15836,6 +15836,38 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FixedRatioVersionSelectionRule": {
+        "type": "object",
+        "required": [
+          "type",
+          "traffic_percentage"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "FixedRatio"
+            ]
+          },
+          "traffic_percentage": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "The percentage of traffic to route to the version. Must be between 0 and 100."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/VersionSelectionRule"
+          }
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
       "FolderDatasetVersion": {
         "type": "object",
         "required": [
@@ -39552,7 +39584,10 @@
           }
         },
         "discriminator": {
-          "propertyName": "type"
+          "propertyName": "type",
+          "mapping": {
+            "FixedRatio": "#/components/schemas/FixedRatioVersionSelectionRule"
+          }
         },
         "x-ms-foundry-meta": {
           "required_previews": [
