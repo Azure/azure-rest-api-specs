@@ -232,7 +232,7 @@ model TierLimitReachedResponse {
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ProjectLimitStatus {
   @doc("Type of the limit.")
-  type: string;
+  type: ClusterTier;
 
   @doc("Maximum allowed value.")
   maximum: int32;
