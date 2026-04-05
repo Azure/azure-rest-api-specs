@@ -190,7 +190,7 @@ model Project is ProxyResource<ProjectProperties> {
   @doc("Name of the MongoDB Atlas Project resource.")
   @path
   @visibility(Lifecycle.Read)
-  projectName: string;
+  name: string;
 }
 
 @armResourceOperations
@@ -320,7 +320,7 @@ model Cluster is ProxyResource<ClusterProperties> {
   @doc("Name of the MongoDB Atlas Cluster resource.")
   @path
   @visibility(Lifecycle.Read)
-  clusterName: string;
+  name: string;
 }
 
 @armResourceOperations
