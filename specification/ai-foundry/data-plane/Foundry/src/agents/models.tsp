@@ -547,21 +547,3 @@ model CreateAgentSessionRequest {
   version_indicator: VersionIndicator;
 }
 
-// ── Session List Result ─────────────────────────────────
-
-/** Paged result for session list operations using continuation token pagination. */
-@doc("Paged result for session list operations.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
-@removed(Versions.v1)
-model SessionListResult {
-  /** The list of sessions. */
-  @pageItems
-  data: AgentSessionResource[];
-
-  /** Opaque token to retrieve the next page. Null when there are no more results. */
-  @continuationToken
-  pagination_token?: string;
-}
