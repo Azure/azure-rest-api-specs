@@ -7,11 +7,33 @@
   },
   "responses": {
     "200": {
-      "body": {}
+      "body": {
+        "value": [
+            {
+                "localAddress": "203.0.113.1",
+                "addressPrefixes": ["10.20.0.0/16"],
+                "nextHopIpAddress": "203.0.113.2",
+                "nextHopType": "Tunnel"
+            },
+            {
+                "localAddress": "203.0.113.1",
+                "addressPrefixes": ["10.30.0.0/16"],
+                "nextHopIpAddress": "203.0.113.3",
+                "nextHopType": "Tunnel"
+            },
+            {
+                "localAddress": "203.0.113.1",
+                "addressPrefixes": ["10.10.0.0/16"],
+                "nextHopIpAddress": "",
+                "nextHopType": "VirtualNetwork"
+            }
+        ]
+      }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2025-07-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-07-01"
       }
     }
   },

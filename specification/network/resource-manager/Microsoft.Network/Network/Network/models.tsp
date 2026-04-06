@@ -20619,13 +20619,13 @@ model GatewayRouteListResult {
 /**
  * List of virtual network gateway effective routes.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield service: GatewayEffectiveRouteListResult uses Legacy.feature for consistency with existing VirtualNetworkGateway models."
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayEffectiveRouteListResult {
   /**
    * List of gateway effective routes.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "GatewayEffectiveRoute items do not have a unique identifier property - routes are identified by the combination of localAddress and addressPrefixes."
   @pageItems
   value?: GatewayEffectiveRoute[];
 }
@@ -20682,7 +20682,7 @@ model GatewayRoute {
 /**
  * Gateway effective routing details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "GatewayEffectiveRoute items do not have a unique identifier property - routes are identified by the combination of localAddress and addressPrefixes."
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayEffectiveRoute {
   /**
