@@ -60,7 +60,10 @@ directive:
   - suppress: XmsResourceInPutResponse
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].put
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys/default"].put
   - suppress: ResourceHasXMsResourceEnabled
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
