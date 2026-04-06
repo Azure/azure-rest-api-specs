@@ -8,24 +8,60 @@ namespace Customizations;
 
 @@clientNamespace(Storage.File,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python"
+  "!csharp,!python,!go"
 );
 @@clientNamespace(Storage.File.Service,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python"
+  "!csharp,!python,!go"
 );
 @@clientNamespace(Storage.File.Share,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python"
+  "!csharp,!python,!go"
 );
 @@clientNamespace(Storage.File.Directory,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python"
+  "!csharp,!python,!go"
 );
 @@clientNamespace(Storage.File.File,
   "Azure.Storage.Files.Shares",
-  "!csharp,!python"
+  "!csharp,!python,!go"
 );
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.File,
+  },
+  "go"
+)
+interface DirectoryClient extends Storage.File.Directory {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.File,
+  },
+  "go"
+)
+interface FileClient extends Storage.File.File {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.File,
+  },
+  "go"
+)
+interface ServiceClient extends Storage.File.Service {}
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+@client(
+  {
+    service: Storage.File,
+  },
+  "go"
+)
+interface ShareClient extends Storage.File.Share {}
 
 @@alternateType(Storage.File.AccessPolicy.start, utcDateTime, "go");
 @@alternateType(Storage.File.AccessPolicy.expiry, utcDateTime, "go");
