@@ -5,15 +5,18 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ComputeSchedule;
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a reference to a sub-resource.")
 model SubResource {
   @doc("The ID of the sub-resource.")
   id?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a reference to Key Vault Secret")
 model KeyVaultSecretReference {
   @doc("The URL referencing a secret in a Key Vault.")
@@ -27,6 +30,7 @@ model KeyVaultSecretReference {
  * The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 enum ResourceIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -35,6 +39,7 @@ enum ResourceIdentityType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model UserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
@@ -52,6 +57,7 @@ model UserAssignedIdentitiesValue {
 /**
  * Identity for the virtual machine.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model VirtualMachineIdentity {
   /**
    * The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
@@ -80,6 +86,7 @@ model VirtualMachineIdentity {
 /**
  * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union ZonePlacementPolicyType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -94,6 +101,7 @@ union ZonePlacementPolicyType {
 /**
  * Describes the user-defined constraints for resource hardware placement.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model Placement {
   /**
    * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
@@ -115,6 +123,7 @@ model Placement {
  * Additional parameters for Reimaging Non-Ephemeral Virtual Machine.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility with existing Compute contract naming"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model OSProfileProvisioningData {
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
   @secret
@@ -129,6 +138,7 @@ model OSProfileProvisioningData {
 /**
  * Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model VirtualMachineReimageParameters {
   /**
    * Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.

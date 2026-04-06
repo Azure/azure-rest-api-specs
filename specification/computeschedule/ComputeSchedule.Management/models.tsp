@@ -204,6 +204,7 @@ model BulkactionVMSpec {
    * The identity of the virtual machine, if configured.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
   identity?: VirtualMachineIdentity;
 
   /**
@@ -213,6 +214,7 @@ model BulkactionVMSpec {
   extendedLocation?: ExtendedLocation;
 
   @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
+  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
   placement?: Placement;
 
   /**
@@ -222,6 +224,7 @@ model BulkactionVMSpec {
   tags?: Record<string>;
 
   @doc("Describes the properties of a Virtual Machine.")
+  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
   vmProperties?: BulkactionVMProfile;
 }
 

@@ -1,10 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.ComputeSchedule;
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Defines a virtual machine extension.")
 model BulkactionVMExtension {
   @doc("The name of the virtual machine extension.")
@@ -14,6 +18,7 @@ model BulkactionVMExtension {
   properties: BulkActionVmExtensionProperties;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes the properties of a Virtual Machine Extension.")
 model BulkActionVmExtensionProperties {
   @doc("How the extension handler should be forced to update even if the extension configuration has not changed.")

@@ -1,12 +1,15 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ComputeSchedule;
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes the properties of a Virtual Machine for create.")
 model BulkactionVMProfile {
   @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.")
@@ -49,6 +52,7 @@ model BulkactionVMProfile {
   applicationProfile?: ApplicationProfile;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")
 model ScheduledEventsPolicy {
   @doc("The configuration parameters used while creating userInitiatedRedeploy scheduled event setting creation.")
@@ -64,24 +68,28 @@ model ScheduledEventsPolicy {
   allInstancesDown?: AllInstancesDown;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies Redeploy related Scheduled Event related configurations.")
 model UserInitiatedRedeploy {
   @doc("Specifies Redeploy Scheduled Event related configurations.")
   automaticallyApprove?: boolean;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies Reboot related Scheduled Event related configurations.")
 model UserInitiatedReboot {
   @doc("Specifies Reboot Scheduled Event related configurations.")
   automaticallyApprove?: boolean;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies additional publishing targets for scheduled events.")
 model ScheduledEventsAdditionalPublishingTargets {
   @doc("The configuration parameters used while creating eventGridAndResourceGraph Scheduled Event setting.")
   eventGridAndResourceGraph?: EventGridAndResourceGraph;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies eventGridAndResourceGraph related Scheduled Event related configurations.")
 model EventGridAndResourceGraph {
   @doc("Specifies if event grid and resource graph is enabled for Scheduled event related configurations.")
@@ -91,12 +99,14 @@ model EventGridAndResourceGraph {
   scheduledEventsApiVersion?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies if Scheduled Events should be auto-approved when all instances are down.")
 model AllInstancesDown {
   @doc("Specifies if Scheduled Events should be auto-approved when all instances are down. Its default value is true.")
   automaticallyApprove?: boolean;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the storage settings for the virtual machine disks.")
 model StorageProfile {
   @doc("Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations.")
@@ -114,6 +124,7 @@ model StorageProfile {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set.")
 model ImageReference extends SubResource {
   @doc("The image publisher.")
@@ -135,6 +146,7 @@ model ImageReference extends SubResource {
   communityGalleryImageId?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).")
 model OSDisk {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
@@ -175,6 +187,7 @@ model OSDisk {
   deleteOption?: DiskDeleteOptionTypes;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes the parameters of ephemeral disk settings that can be specified for operating system disk. Note: The ephemeral disk settings can only be specified for managed disk.")
 model DiffDiskSettings {
   @doc("Specifies the ephemeral disk settings for operating system disk.")
@@ -184,6 +197,7 @@ model DiffDiskSettings {
   placement?: DiffDiskPlacement;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the ephemeral disk option for operating system disk.")
 union DiffDiskOptions {
   string,
@@ -192,6 +206,7 @@ union DiffDiskOptions {
   Local: "Local",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk, resource disk or nvme disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer Ephemeral OS disk size requirements for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements. Minimum api-version for NvmeDisk: 2024-03-01.")
 union DiffDiskPlacement {
   string,
@@ -206,6 +221,7 @@ union DiffDiskPlacement {
   NvmeDisk: "NvmeDisk",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies how the virtual machine disk should be created. Possible values are **Attach:** This value is used when you are using a specialized disk to create the virtual machine. **FromImage:** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you should also use the imageReference element described above. If you are using a marketplace image, you should also use the plan element previously described. **Empty:** This value is used when creating an empty data disk. **Copy:** This value is used to create a data disk from a snapshot or another disk. **Restore:** This value is used to create a data disk from a disk restore point.")
 union DiskCreateOptionTypes {
   string,
@@ -226,6 +242,7 @@ union DiskCreateOptionTypes {
   Restore: "Restore",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the behavior of the managed disk when the VM gets deleted, for example whether the managed disk is deleted or detached. Supported values are: **Delete.** If this value is used, the managed disk is deleted when VM gets deleted. **Detach.** If this value is used, the managed disk is retained after VM gets deleted. Minimum api-version: 2021-03-01.")
 union DiskDeleteOptionTypes {
   string,
@@ -237,6 +254,7 @@ union DiskDeleteOptionTypes {
   Detach: "Detach",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**")
 union OperatingSystemTypes {
   string,
@@ -248,6 +266,7 @@ union OperatingSystemTypes {
   Linux: "Linux",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The default values are: **None for Standard storage. ReadOnly for Premium storage**")
 union CachingTypes {
   string,
@@ -265,6 +284,7 @@ union CachingTypes {
 /**
  * Specifies the storage account type for the managed disk. Managed OS disk storage account type can only be set when you create the scale set. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. Premium_ZRS uses Premium SSD zone redundant storage. StandardSSD_ZRS uses Standard SSD zone redundant storage. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/azure/virtual-machines/linux/disks-types
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union StorageAccountTypes {
   string,
 
@@ -293,6 +313,7 @@ union StorageAccountTypes {
 /**
  * Describes the uri of a disk.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model VirtualHardDisk {
   @doc("Specifies the virtual hard disk's uri.")
   uri?: string;
@@ -301,6 +322,7 @@ model VirtualHardDisk {
 /**
  * Describes a Encryption Settings for a Disk
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model DiskEncryptionSettings {
   @doc("Specifies the location of the disk encryption key, which is a Key Vault Secret.")
   diskEncryptionKey?: KeyVaultSecretReference;
@@ -315,6 +337,7 @@ model DiskEncryptionSettings {
 /**
  * Describes a reference to Key Vault Key
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model KeyVaultKeyReference {
   @doc("The URL referencing a key encryption key in Key Vault.")
   keyUrl: string;
@@ -327,6 +350,7 @@ model KeyVaultKeyReference {
  * The parameters of a managed disk.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model ManagedDiskParameters extends SubResource {
   @doc("Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.")
   storageAccountType?: StorageAccountTypes;
@@ -343,12 +367,14 @@ model ManagedDiskParameters extends SubResource {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Maintaining existing struct in compute model"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model DiskEncryptionSetParameters extends SubResource {}
 
 /**
  * Specifies the security profile settings for the managed disk. **Note:** It can only be set for Confidential VMs.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for Virtual Machine"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model VMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob.. **Note:** It can be set for only Confidential VMs.")
   securityEncryptionType?: SecurityEncryptionTypes;
@@ -360,6 +386,7 @@ model VMDiskSecurityProfile {
 /**
  * Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob.. **Note:** It can be set for only Confidential VMs.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union SecurityEncryptionTypes {
   string,
 
@@ -373,6 +400,7 @@ union SecurityEncryptionTypes {
   NonPersistedTPM: "NonPersistedTPM",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a data disk.")
 model DataDisk {
   @doc("Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.")
@@ -419,11 +447,13 @@ model DataDisk {
 /**
  * The API entity reference.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model ApiEntityReference {
   @doc("The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
   id?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values are: **ForceDetach.** detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. **This feature is still in preview**. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'.")
 union DiskDetachOptionTypes {
   string,
@@ -435,6 +465,7 @@ union DiskDetachOptionTypes {
 /**
  * Specifies the disk controller type configured for the VM and VirtualMachineScaleSet. This property is only supported for virtual machines whose operating system disk and VM sku supports Generation 2 (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please check the HyperVGenerations capability returned as part of VM sku capabilities in the response of Microsoft.Compute SKUs api for the region contains V2 (https://docs.microsoft.com/rest/api/compute/resourceskus/list). For more information about Disk Controller Types supported please refer to https://aka.ms/azure-diskcontrollertypes.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union DiskControllerTypes {
   string,
 
@@ -448,6 +479,7 @@ union DiskControllerTypes {
 /**
  * Enables or disables a capability on the virtual machine or virtual machine scale set.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model AdditionalCapabilities {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SSD is an abbreviation for Solid State Drive"
   @doc("The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled.")
@@ -457,6 +489,7 @@ model AdditionalCapabilities {
   hibernationEnabled?: boolean;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the operating system settings for the virtual machine. Some of the settings cannot be changed once VM is provisioned.")
 model OSProfile {
   /**
@@ -508,6 +541,7 @@ model OSProfile {
 /**
  * Specifies Windows operating system settings on the virtual machine.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model WindowsConfiguration {
   /**
    * Indicates whether virtual machine agent should be provisioned on the virtual machine. When this property is not specified in the request body, it is set to true by default. This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
@@ -546,6 +580,7 @@ model WindowsConfiguration {
 /**
  * Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model AdditionalUnattendContent {
   /**
    * The pass name. Currently, the only allowable value is OobeSystem.
@@ -571,6 +606,7 @@ model AdditionalUnattendContent {
 /**
  * Specifies settings related to VM Guest Patching on Windows.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model PatchSettings {
   /**
    * Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true
@@ -597,6 +633,7 @@ model PatchSettings {
  * Specifies additional settings to be applied when patch mode AutomaticByPlatform is selected in Windows patch settings.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for Virtual Machine"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model WindowsVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Specifies the reboot setting for all AutomaticByPlatform patch installation operations.
@@ -610,6 +647,7 @@ model WindowsVMGuestPatchAutomaticByPlatformSettings {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RM is an abbreviation for Remote Management"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes Windows Remote Management configuration of the VM")
 model WinRMConfiguration {
   /**
@@ -620,6 +658,7 @@ model WinRMConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RM is an abbreviation for Remote Management"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes Protocol and thumbprint of Windows Remote Management listener")
 model WinRMListener {
   /**
@@ -633,6 +672,7 @@ model WinRMListener {
   certificateUrl?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.")
 union SettingNames {
   string,
@@ -647,6 +687,7 @@ union SettingNames {
 /**
  * Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union WindowsVMGuestPatchMode {
   string,
 
@@ -663,6 +704,7 @@ union WindowsVMGuestPatchMode {
 /**
  * Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine.<br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union WindowsPatchAssessmentMode {
   string,
 
@@ -676,6 +718,7 @@ union WindowsPatchAssessmentMode {
 /**
  * Specifies the reboot setting for all AutomaticByPlatform patch installation operations.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
 
@@ -695,6 +738,7 @@ union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
 /**
  * Specifies the protocol of WinRM listener. Possible values are: **http,** **https.**
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union ProtocolTypes {
   string,
 
@@ -708,6 +752,7 @@ union ProtocolTypes {
 /**
  * Specifies the Linux operating system settings on the virtual machine. For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros).
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model LinuxConfiguration {
   /**
    * Specifies whether password authentication should be disabled.
@@ -737,6 +782,7 @@ model LinuxConfiguration {
   enableVMAgentPlatformUpdates?: boolean;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   /**
@@ -746,6 +792,7 @@ model SshConfiguration {
   publicKeys?: SshPublicKey[];
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.")
 model SshPublicKey {
   /**
@@ -759,6 +806,7 @@ model SshPublicKey {
   keyData?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies settings related to VM Guest Patching on Linux.")
 model LinuxPatchSettings {
   /**
@@ -778,6 +826,7 @@ model LinuxPatchSettings {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for Virtual Machine"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies additional settings to be applied when patch mode AutomaticByPlatform is selected in Linux patch settings.")
 model LinuxVMGuestPatchAutomaticByPlatformSettings {
   /**
@@ -794,6 +843,7 @@ model LinuxVMGuestPatchAutomaticByPlatformSettings {
 /**
  * Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual machines associated to virtual machine scale set with OrchestrationMode as Flexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machine's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union LinuxVMGuestPatchMode {
   string,
 
@@ -807,6 +857,7 @@ union LinuxVMGuestPatchMode {
 /**
  * Specifies the mode of VM Guest Patch Assessment for the IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You control the timing of patch assessments on a virtual machine. <br /><br /> **AutomaticByPlatform** - The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union LinuxPatchAssessmentMode {
   string,
 
@@ -820,6 +871,7 @@ union LinuxPatchAssessmentMode {
 /**
  * Specifies the reboot setting for all AutomaticByPlatform patch installation operations.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
 
@@ -836,6 +888,7 @@ union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   Always: "Always",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a set of certificates which are all in the same Key Vault.")
 model VaultSecretGroup {
   @doc("The relative URL of the Key Vault containing all of the certificates in VaultCertificates.")
@@ -846,6 +899,7 @@ model VaultSecretGroup {
   vaultCertificates?: VaultCertificate[];
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.")
 model VaultCertificate {
   @doc("This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  'data':'<Base64-encoded-certificate>',<br>  'dataType':'pfx',<br>  'password':'<pfx-file-password>'<br>} <br> To install certificates on a virtual machine it is recommended to use the [Azure Key Vault virtual machine extension for Linux](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-linux) or the [Azure Key Vault virtual machine extension for Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).")
@@ -855,6 +909,7 @@ model VaultCertificate {
   certificateStore?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the network interfaces or the networking configuration of the virtual machine.")
 model NetworkProfile {
   @doc("Specifies the list of resource Ids for the network interfaces associated with the virtual machine.")
@@ -869,12 +924,14 @@ model NetworkProfile {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a network interface reference.")
 model NetworkInterfaceReference extends SubResource {
   @doc("Describes a network interface reference properties.")
   properties?: NetworkInterfaceReferenceProperties;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a network interface reference properties.")
 model NetworkInterfaceReferenceProperties {
   @doc("Specifies the primary network interface in case the virtual machine has more than 1 network interface.")
@@ -884,6 +941,7 @@ model NetworkInterfaceReferenceProperties {
   deleteOption?: DeleteOptions;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machine network interface configurations.")
 model VirtualMachineNetworkInterfaceConfiguration {
   @doc("The network interface configuration name.")
@@ -897,6 +955,7 @@ model VirtualMachineNetworkInterfaceConfiguration {
   tags?: Record<string>;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machine network profile's IP configuration.")
 model VirtualMachineNetworkInterfaceConfigurationProperties {
   @doc("Specifies the primary network interface in case the virtual machine has more than 1 network interface.")
@@ -938,6 +997,7 @@ model VirtualMachineNetworkInterfaceConfigurationProperties {
   auxiliarySku?: NetworkInterfaceAuxiliarySku;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machines network configuration's DNS settings.")
 model VirtualMachineNetworkInterfaceDnsSettingsConfiguration {
   @doc("List of DNS servers IP addresses")
@@ -945,6 +1005,7 @@ model VirtualMachineNetworkInterfaceDnsSettingsConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machine network profile's IP configuration.")
 model VirtualMachineNetworkInterfaceIPConfiguration {
   @doc("The IP configuration name.")
@@ -955,6 +1016,7 @@ model VirtualMachineNetworkInterfaceIPConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machine network interface IP configuration properties.")
 model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   @doc("Specifies the identifier of the subnet.")
@@ -982,6 +1044,7 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machines IP Configuration's PublicIPAddress configuration")
 model VirtualMachinePublicIPAddressConfiguration {
   @doc("The publicIP address configuration name.")
@@ -999,6 +1062,7 @@ model VirtualMachinePublicIPAddressConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machines IP Configuration's PublicIPAddress configuration")
 model VirtualMachinePublicIPAddressConfigurationProperties {
   @doc("The idle timeout of the public IP address.")
@@ -1028,6 +1092,7 @@ model VirtualMachinePublicIPAddressConfigurationProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes a virtual machines network configuration's DNS settings.")
 model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
   @doc("The Domain name label prefix of the PublicIPAddress resources that will be created. The generated name label is the concatenation of the domain name label and vm network profile unique ID.")
@@ -1037,6 +1102,7 @@ model VirtualMachinePublicIPAddressDnsSettingsConfiguration {
   domainNameLabelScope?: DomainNameLabelScopeTypes;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Contains the IP tag associated with the public IP address.")
 model VirtualMachineIpTag {
   @doc("IP tag type. Example: FirstPartyUsage.")
@@ -1046,6 +1112,7 @@ model VirtualMachineIpTag {
   tag?: string;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specify what happens to the network interface when the VM is deleted")
 union DeleteOptions {
   string,
@@ -1057,6 +1124,7 @@ union DeleteOptions {
   Detach: "Detach",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("The Domain name label scope.The concatenation of the hashed domain name label that generated according to the policy from domain name label scope and vm index will be the domain name labels of the PublicIPAddress resources that will be created")
 union DomainNameLabelScopeTypes {
   string,
@@ -1074,6 +1142,7 @@ union DomainNameLabelScopeTypes {
   NoReuse: "NoReuse",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Available from compute Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.")
 union IPVersions {
   string,
@@ -1085,6 +1154,7 @@ union IPVersions {
   IPv6: "IPv6",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations")
 union NetworkApiVersion {
   string,
@@ -1097,6 +1167,7 @@ union NetworkApiVersion {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation for Internet Protocol"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.")
 model PublicIPAddressSku {
   @doc("Specify public IP sku name")
@@ -1106,6 +1177,7 @@ model PublicIPAddressSku {
   tier?: PublicIPAddressSkuTier;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specify public IP sku name")
 union PublicIPAddressSkuName {
   string,
@@ -1117,6 +1189,7 @@ union PublicIPAddressSkuName {
   Standard: "Standard",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specify public IP sku tier")
 union PublicIPAddressSkuTier {
   string,
@@ -1128,6 +1201,7 @@ union PublicIPAddressSkuTier {
   Global: "Global",
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Specify the public IP allocation type")
 union PublicIPAllocationMethod {
   string,
@@ -1142,6 +1216,7 @@ union PublicIPAllocationMethod {
 /**
  * Specifies whether the Auxiliary mode is enabled for the Network Interface resource.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union NetworkInterfaceAuxiliaryMode {
   string,
 
@@ -1158,6 +1233,7 @@ union NetworkInterfaceAuxiliaryMode {
 /**
  * Specifies whether the Auxiliary sku is enabled for the Network Interface resource.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union NetworkInterfaceAuxiliarySku {
   string,
 
@@ -1180,6 +1256,7 @@ union NetworkInterfaceAuxiliarySku {
 /**
  * Contains the list of gallery applications that should be made available to the VM
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model ApplicationProfile {
   @doc("Specifies the gallery applications that should be made available to the VM")
   @identifiers(#["packageReferenceId"])
@@ -1190,6 +1267,7 @@ model ApplicationProfile {
  * Specifies the required information to reference a compute gallery application version
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for virtual machine"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model VMGalleryApplication {
   @doc("Optional, Specifies a passthrough value for more generic context.")
   tags?: string;
@@ -1213,11 +1291,13 @@ model VMGalleryApplication {
 /**
  * The parameters of a capacity reservation Profile.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model CapacityReservationProfile {
   @doc("Specifies the capacity reservation group resource id that should be used for allocating the virtual machine provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details.")
   capacityReservationGroup?: SubResource;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Profile for the scheduled events.")
 model ScheduledEventsProfile {
   @doc("Specifies Terminate Scheduled Event related configurations.")
@@ -1227,6 +1307,7 @@ model ScheduledEventsProfile {
   osImageNotificationProfile?: OSImageNotificationProfile;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Profile properties for the Terminate Scheduled event.")
 model TerminateNotificationProfile {
   @doc("Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)")
@@ -1237,6 +1318,7 @@ model TerminateNotificationProfile {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OS is an abbreviation for operating system"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Profile for the OS Image Scheduled event.")
 model OSImageNotificationProfile {
   @doc("Length of time a Virtual Machine being reimaged or having its OS upgraded will have to potentially approve the OS Image Scheduled Event before the event is auto approved (timed out). The configuration is specified in ISO 8601 format, and the value must be 15 minutes (PT15M)")
@@ -1249,6 +1331,7 @@ model OSImageNotificationProfile {
 /**
  * Specifies the boot diagnostic settings state. Minimum compute api-version: 2015-06-15.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model DiagnosticsProfile {
   @doc("Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. **NOTE**: If storageUri is being specified then ensure that the storage account is in the same region and subscription as the VM. You can easily view the output of your console log. Azure also enables you to see a screenshot of the VM from the hypervisor.")
   bootDiagnostics?: BootDiagnostics;
@@ -1257,6 +1340,7 @@ model DiagnosticsProfile {
 /**
  * Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. You can easily view the output of your console log. Azure also enables you to see a screenshot of the VM from the hypervisor.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model BootDiagnostics {
   @doc("Whether boot diagnostics should be enabled on the Virtual Machine.")
   enabled?: boolean;
@@ -1268,6 +1352,7 @@ model BootDiagnostics {
 /**
  * Specifies the Security profile settings for the virtual machine or virtual machine scale set.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model SecurityProfile {
   @doc("Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Minimum compute api-version: 2020-12-01.")
   uefiSettings?: UefiSettings;
@@ -1288,6 +1373,7 @@ model SecurityProfile {
 /**
  * Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Minimum api-version: 2020-12-01.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model UefiSettings {
   @doc("Specifies whether secure boot should be enabled on the virtual machine. Minimum compute api-version: 2020-12-01.")
   secureBootEnabled?: boolean;
@@ -1299,6 +1385,7 @@ model UefiSettings {
 /**
  * Specifies the Managed Identity used by ADE to get access token for keyvault operations.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model EncryptionIdentity {
   @doc("Specifies ARM Resource ID of one of the user identities associated with the VM.")
   userAssignedIdentityResourceId?: string;
@@ -1307,6 +1394,7 @@ model EncryptionIdentity {
 /**
  * Specifies ProxyAgent settings for the virtual machine or virtual machine scale set. Minimum api-version: 2023-09-01.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model ProxyAgentSettings {
   @doc("Specifies whether ProxyAgent feature should be enabled on the virtual machine or virtual machine scale set.")
   enabled?: boolean;
@@ -1331,6 +1419,7 @@ model ProxyAgentSettings {
  * Specifies particular host endpoint settings.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for virtual machine"
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model HostEndpointSettings {
   @doc("Specifies the execution mode. In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints. In Enforce mode, the system will enforce the access control and it is the recommended mode of operation.")
   mode?: Modes;
@@ -1342,6 +1431,7 @@ model HostEndpointSettings {
 /**
  * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union SecurityTypes {
   string,
 
@@ -1355,6 +1445,7 @@ union SecurityTypes {
 /**
  * Specifies the mode that ProxyAgent will execute on if the feature is enabled. ProxyAgent will start to audit or monitor but not enforce access control over requests to host endpoints in Audit mode, while in Enforce mode it will enforce access control. The default value is Enforce mode.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union Mode {
   string,
 
@@ -1368,6 +1459,7 @@ union Mode {
 /**
  * Specifies the execution mode. In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints. In Enforce mode, the system will enforce the access control and it is the recommended mode of operation.
  */
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 union Modes {
   string,
 
