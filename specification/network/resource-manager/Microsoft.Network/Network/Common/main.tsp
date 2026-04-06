@@ -1933,14 +1933,14 @@ model FrontendIPConfigurationPropertiesFormat {
   provisioningState?: ProvisioningState;
 
   /**
-   * The Ddos protection settings associated with the frontend IP configuration.
+   * The DDoS protection settings associated with the frontend IP configuration.
    */
   ddosSettings?: DdosFrontendIpConfigurationSettings;
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
 model DdosFrontendIpConfigurationSettings {
-  /** The reference to the Ddos Custom Policy resource. */
+  /** The reference to the DDoS Custom Policy resource. */
   ddosCustomPolicy?: SubResource;
 }
 
