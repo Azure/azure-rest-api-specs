@@ -10,27 +10,35 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/main.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-carbonoptimization"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-carbonoptimization"
+    package-name: "azure-mgmt-carbonoptimization"
     namespace: "azure.mgmt.carbonoptimization"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-typespec/http-client-csharp-mgmt":
+    package-dir: "Azure.ResourceManager.CarbonOptimization"
     namespace: "Azure.ResourceManager.CarbonOptimization"
+    clear-output-folder: true
     emitter-output-dir: "{output-dir}/sdk/carbon/{namespace}"
   "@azure-tools/typespec-ts":
+    package-dir: "arm-carbonoptimization"
     experimental-extensible-enums: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-carbonoptimization"
     flavor: azure
+    generate-sample: true
     package-details:
       name: "@azure/arm-carbonoptimization"
   "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-carbonoptimization"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-carbonoptimization"
-    namespace: "com.azure.resourcemanager.carbonoptimization"
+    namespace: "com.azure.resourcemanager:azure-resourcemanager-carbon"
     flavor: azure
     service-name: "Carbon Optimization"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/carbonoptimization"
+    package-dir: "armcarbonoptimization"
     emitter-output-dir: "{output-dir}/{service-dir}/armcarbonoptimization"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcarbonoptimization"
     fix-const-stuttering: true

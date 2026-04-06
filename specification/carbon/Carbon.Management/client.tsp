@@ -72,6 +72,10 @@ using Microsoft.Carbon;
   "CarbonOptimizationManagementClient",
   "javascript"
 );
+
+// Go
+@@clientName(Microsoft.Carbon, "CarbonOptimizationClient", "go");
+
 @@clientName(CarbonEmissionDataAvailableDateRange,
   "CarbonEmissionAvailableDateRange",
   "csharp"
