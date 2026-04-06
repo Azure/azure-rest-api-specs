@@ -17,10 +17,10 @@ namespace Microsoft.Network;
 /**
  * The commit resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Using ChildResource base type with includeInapplicableMetadataInPayload for consistency with all existing Network Manager child resources (e.g., ScopeConnection, AdminRuleCollection, ConnectivityConfiguration)"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ChildResource is the established pattern for all Network Manager child resources to maintain consistent swagger output across the service"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheriting from ChildResource is required to match the existing Network Manager resource model hierarchy"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature(Features.networkManager) for consistency with all Network Manager resources in this TypeSpec project"
 @parentResource(NetworkManager)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
@@ -44,7 +44,7 @@ model Commit extends ChildResource {
 /**
  * Properties of commit
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature(Features.networkManager) for consistency with all Network Manager resources"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @added(Versions.v2025_07_01)
 model CommitProperties {
@@ -92,7 +92,7 @@ model CommitProperties {
   forceUpdateTag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature(Features.networkManager) for consistency with all Network Manager resources"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @added(Versions.v2025_07_01)
 @armResourceOperations
@@ -113,7 +113,7 @@ interface Commits {
   /**
    * Deletes a commit.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete returns 202/204 for async deletion, matching the pattern used by other Network Manager child resources (e.g., AdminRuleCollection, NetworkManagerRoutingConfiguration)"
   delete is ArmResourceDeleteWithoutOkAsync<
     Commit,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
