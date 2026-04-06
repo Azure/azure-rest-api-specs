@@ -27,6 +27,9 @@ namespace Customizations;
   "!csharp,!python"
 );
 
+@@alternateType(Storage.File.AccessPolicy.start, utcDateTime, "go");
+@@alternateType(Storage.File.AccessPolicy.expiry, utcDateTime, "go");
+
 @@alternateType(Storage.File.AccessPolicy.start, string, "javascript,python");
 @@alternateType(Storage.File.AccessPolicy.expiry, string, "javascript,python");
 @@clientName(Storage.File.AccessPolicy.start, "startsOn", "javascript");

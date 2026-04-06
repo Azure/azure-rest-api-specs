@@ -45,13 +45,11 @@ options:
   #   temp-omit-doc-links: true
   # TODO: Replace this with client.tsp solution once it lands (issue: https://github.com/Azure/typespec-rust/issues/806)
   #   omit-constructors: true
-  # "@azure-tools/typespec-go":
-  #   containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azfile"
-  #   service-dir: "sdk/storage"
-  #   emitter-output-dir: "{output-dir}/{service-dir}/azfile/internal/generated"
-  #   generate-fakes: false
-  #   omit-constructors: true
-  #   go-generate: build.go
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azfile"
+    service-dir: "sdk/storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azfile/internal/generated"
+    generate-fakes: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
