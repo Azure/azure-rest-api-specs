@@ -55,8 +55,6 @@ input-file:
   - stable/2025-07-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
-  - code: MULTIPLE_API_VERSION
-    reason: vmssNetwork.json (2018-10-01) is a separate TypeSpec project (Microsoft.Compute) included alongside current version files.
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
@@ -91,6 +89,8 @@ suppressions:
     where:
       - $.definitions.GetServiceGatewayServicesResult
 directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: vmssNetwork.json (2018-10-01) is a separate TypeSpec project (Microsoft.Compute) included alongside current version files.
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
     transform: >
