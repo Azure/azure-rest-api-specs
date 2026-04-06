@@ -7,9 +7,12 @@ namespace Customizations;
 
 @@clientNamespace(Storage.DataLake, "Azure.Storage.Files.DataLake", "!python");
 
-@@clientName(Storage.DataLake.EtagResponseHeader.eTag, "etag", "javascript");
-@@clientName(Storage.DataLake.FileSystemItem.eTag, "etag", "javascript");
-@@clientName(Storage.DataLake.PathItem.eTag, "etag", "javascript");
+@@clientName(Storage.DataLake.EtagResponseHeader.eTag,
+  "etag",
+  "javascript,python"
+);
+@@clientName(Storage.DataLake.FileSystemItem.eTag, "etag", "javascript,python");
+@@clientName(Storage.DataLake.PathItem.eTag, "etag", "javascript,python");
 
 @@clientName(Storage.DataLake.BlobItemInternal, "BlobItemModel", "javascript");
 @@clientName(Storage.DataLake.BlobPropertiesInternal,
@@ -34,3 +37,5 @@ namespace Customizations;
 
 @@clientOption(Storage.DataLake, "includeRootSlash", false, "javascript");
 @@clientOption(Storage.DataLake, "omitSlashFromEmptyRoute", true, "python");
+
+@@clientName(Storage.DataLake.PathItem, "Path", "python");
