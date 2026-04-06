@@ -56,14 +56,6 @@ model InternetGatewayPatchableProperties {
 @doc("The Internet Gateway patch resource definition.")
 model InternetGatewayPatch extends TagsUpdate {
   @doc("Resource properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: InternetGatewayPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Resource properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: InternetGatewayPatchProperties;
 }
 
