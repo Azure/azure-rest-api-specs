@@ -14,7 +14,12 @@
     }
   },
   "responses": {
-    "202": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2026-03-15",
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationResults/{operationId}?api-version=2026-03-15"
+      }
+    },
     "200": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/services/GraphAPICompute",
