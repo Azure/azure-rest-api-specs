@@ -183,9 +183,7 @@ interface Share {
       ...MetadataHeaders;
       ...ShareQuotaOptionalHeader;
       ...ShareAccessTierRequestHeader;
-
       ...EnabledProtocolsHeader;
-
       ...ShareRootSquashRequestHeader;
       ...EnableSnapshotVirtualDirectoryAccessHeader;
       ...PaidBurstingRequestHeaders;
@@ -422,9 +420,7 @@ interface Share {
   breakLease is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-
       ...BreakPeriodParameter;
-
       ...LeaseIdOptionalParameter;
       ...LeaseActionParameter<"break">;
       ...ShareSnapshotParameter;
@@ -454,7 +450,6 @@ interface Share {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
       ...SnapshotResponseHeader;
     }
   >;
@@ -474,7 +469,6 @@ interface Share {
     },
     {
       @statusCode statusCode: 201;
-
       ...FilePermissionKeyResponseHeader;
     },
     "application/json"
@@ -488,7 +482,6 @@ interface Share {
   getPermission is StorageOperationResponseBody<
     {
       ...FilePermissionKeyRequestHeader;
-
       ...TimeoutParameter;
 
       /** Optional. Specifies the format in which the permission is returned. Acceptable values are SDDL or binary. */
@@ -624,11 +617,8 @@ interface Share {
   restore is StorageOperationNoBody<
     {
       ...TimeoutParameter;
-
       ...ShareDeletedNameHeader;
-
       ...ShareDeletedVersionHeader;
-
       ...FileRequestIntentParameter;
     },
     {
@@ -689,9 +679,7 @@ interface Directory {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
-
       ...ServerEncryptedResponseHeader;
-
       ...NfsResponseHeaders;
     }
   >;
@@ -775,9 +763,7 @@ interface Directory {
       @query include?: ListFilesIncludeType[];
 
       ...TimeoutParameter;
-
       ...FileExtendedInfoHeader;
-
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
     },
@@ -947,13 +933,10 @@ interface File {
     {
       ...TimeoutParameter;
       ...RangeHeader;
-
       ...RangeGetContentMD5Header;
-
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
-
       ...StructuredBodyGetRequestHeader;
     },
     {
@@ -967,16 +950,13 @@ interface File {
       ...FileHttpContentResponseHeaders;
       @header("Accept-Ranges") acceptRanges?: string;
       ...CopyStatusResponseHeaders;
-
       ...FileContentMD5ResponseHeader;
-
       ...ServerEncryptedResponseHeader;
       ...FileSmtPropertyResponseHeaders;
       ...LeaseResponseHeaders;
       ...StructuredBodyResponseHeaders;
       ...NfsResponseHeaders;
       ...LinkCountResponseHeader;
-
       @body content?: bytes;
     }
   >;
@@ -988,7 +968,6 @@ interface File {
   getProperties is StorageOperationNoBody<
     {
       ...ShareSnapshotParameter;
-
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1326,7 +1305,6 @@ interface File {
       @header("x-ms-file-permission-key") filePermissionKey?: string;
 
       ...FilePermissionCopyModeHeader;
-
       ...IgnoreReadOnlyHeader;
 
       /** If specified, the provided file attributes shall be set. */
@@ -1342,24 +1320,19 @@ interface File {
       @header("x-ms-file-change-time") fileChangeTime?: string;
 
       ...SetArchiveAttributeHeader;
-
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
       ...SourceAllowTrailingDotParameter;
       ...FileRequestIntentParameter;
       ...NfsRequestHeaders;
-
       ...ModeCopyModeHeader;
-
       ...OwnerCopyModeHeader;
     },
     {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
       ...CopyIdResponseHeader;
-
       ...CopyStatusResponseHeader;
     }
   >;
@@ -1373,9 +1346,7 @@ interface File {
   abortCopy is StorageOperationNoBody<
     {
       ...CopyActionAbortHeader;
-
       ...CopyIdQueryParameter;
-
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1503,16 +1474,13 @@ interface File {
       @header("x-ms-group") group?: string;
 
       ...LinkTextHeader;
-
       ...FileRequestIntentParameter;
     },
     {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
       ...NfsTimestampResponseHeaders;
-
       ...NfsResponseHeaders;
     }
   >;
@@ -1531,7 +1499,6 @@ interface File {
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
       ...LinkTextHeader;
     }
   >;
@@ -1546,20 +1513,15 @@ interface File {
       ...TimeoutParameter;
       ...FileTypeParameter;
       ...LeaseIdOptionalParameter;
-
       ...TargetFileHeader;
-
       ...FileRequestIntentParameter;
     },
     {
       @statusCode statusCode: 201;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-
       ...NfsTimestampResponseHeaders;
-
       ...LinkCountResponseHeader;
-
       ...NfsResponseHeaders;
     }
   >;
