@@ -31,7 +31,7 @@ model PrivateLinkResourceListResult {
    * The list of private link resources. Since this list may be incomplete, the nextLink field should be used to request the next list of private link resources.
    */
   @pageItems
-  value?: PrivateLinkResource[];
+  value?: MyPrivateLinkResource[];
 
   /**
    * The URI that can be used to request the next list of private link resources.
