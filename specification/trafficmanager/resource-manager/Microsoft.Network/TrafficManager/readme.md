@@ -69,8 +69,9 @@ directive:
     from: trafficmanager.json
     where: $.definitions.Resource
   - suppress: UnSupportedPatchProperties
-    reason: The id, name, and type properties are inherited from a legacy custom Resource base model that predates ARM common-types. Removing them from the patch body would be a breaking change for existing SDK consumers.
+    reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
     from: trafficmanager.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].patch
 ```
 
 ### Tag: package-preview-2024-04
