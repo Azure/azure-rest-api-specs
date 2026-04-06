@@ -55,7 +55,7 @@ model GraderAzureAIEvaluator {
 }
 
 @summary("AzureAIEvaluatorGrader")
-model EvalGraderAzureAIEvaluator {
+model TestingCriterionAzureAIEvaluator {
   ...GraderAzureAIEvaluator;
 }
 
@@ -124,7 +124,7 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | EvalGraderAzureAIEvaluator)[]
+    | TestingCriterionAzureAIEvaluator)[]
 );
 
 model Eval is OpenAI.Eval {
@@ -170,7 +170,7 @@ model Eval is OpenAI.Eval {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | EvalGraderAzureAIEvaluator)[]
+    | TestingCriterionAzureAIEvaluator)[]
 );
 model CreateEvalRequest is OpenAI.CreateEvalRequest {
   /**

@@ -322,7 +322,10 @@ union ImageGenToolBackgroundExpandable {
   auto: "auto",
 }
 
-@@clientName(ImageGenToolBackgroundExpandable, "ImageGenToolBackground", "java");
+@@clientName(ImageGenToolBackgroundExpandable,
+  "ImageGenToolBackground",
+  "java"
+);
 @@alternateType(OpenAI.ImageGenTool.background,
   ImageGenToolBackgroundExpandable,
   "java"
@@ -398,10 +401,7 @@ union ImageGenToolSizeExpandable {
   "RESOLUTION_1536_X_1024",
   "java"
 );
-@@alternateType(OpenAI.ImageGenTool.size,
-  ImageGenToolSizeExpandable,
-  "java"
-);
+@@alternateType(OpenAI.ImageGenTool.size, ImageGenToolSizeExpandable, "java");
 
 // InputFidelity
 union InputFidelityExpandable {
@@ -444,10 +444,7 @@ union RankerVersionTypeExpandable {
   "DEFAULT_2024_11_15",
   "java"
 );
-@@alternateType(OpenAI.RankerVersionType,
-  RankerVersionTypeExpandable,
-  "java"
-);
+@@alternateType(OpenAI.RankerVersionType, RankerVersionTypeExpandable, "java");
 
 // SearchContextSize
 union SearchContextSizeExpandable {
@@ -458,10 +455,7 @@ union SearchContextSizeExpandable {
 }
 
 @@clientName(SearchContextSizeExpandable, "SearchContextSize", "java");
-@@alternateType(OpenAI.SearchContextSize,
-  SearchContextSizeExpandable,
-  "java"
-);
+@@alternateType(OpenAI.SearchContextSize, SearchContextSizeExpandable, "java");
 
 // WebSearchToolSearchContextSize (inline union on WebSearchTool.search_context_size)
 union WebSearchToolSearchContextSizeExpandable {
