@@ -1,0 +1,1259 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeRecommenderResourceProviderClient",
+    "version": "2026-05-05-preview",
+    "description": "The Compute Recommender Resource Provider Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ComputeDiagnosticBases"
+    },
+    {
+      "name": "SkuMixPlacementScores"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Compute/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot": {
+      "get": {
+        "operationId": "SpotPlacementScores_Get",
+        "tags": [
+          "ComputeDiagnosticBases"
+        ],
+        "description": "Gets Spot Placement Scores metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComputeDiagnosticBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of Spot Placement Scores.": {
+            "$ref": "./examples/GetSpotPlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/placementScores/spot/generate": {
+      "post": {
+        "operationId": "SpotPlacementScores_Post",
+        "tags": [
+          "ComputeDiagnosticBases"
+        ],
+        "description": "Generates placement scores for Spot VM skus.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "spotPlacementScoresInput",
+            "in": "body",
+            "description": "SpotPlacementScores object supplied in the body of the Post spot placement scores operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SpotPlacementScoresInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SpotPlacementScoresResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Returns spot VM placement scores for given configurations.": {
+            "$ref": "./examples/GenerateSpotPlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/skuMixPlacementScores/recommendations": {
+      "get": {
+        "operationId": "SkuMixPlacementScores_Get",
+        "tags": [
+          "SkuMixPlacementScores"
+        ],
+        "description": "Gets SkuMixPlacement scoring metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuMixPlacementBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the metadata of SkuMixPlacement Scores.": {
+            "$ref": "./examples/GetSkuMixPlacementScores.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/skuMixPlacementScores/recommendations/generate": {
+      "post": {
+        "operationId": "SkuMixPlacementScores_Post",
+        "tags": [
+          "SkuMixPlacementScores"
+        ],
+        "description": "Generates placement scores for VM SKU mix placement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "skuMixPlacementRequest",
+            "in": "body",
+            "description": "SkuMixPlacement request object supplied in the body of the generate operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuMixPlacementRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuMixPlacementResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generates SkuMixPlacement scores for VM SKU mix placement with explicit VM sizes.": {
+            "$ref": "./examples/GenerateSkuMixPlacementScores.json"
+          },
+          "Generates SkuMixPlacement scores using VM attribute-based selection.": {
+            "$ref": "./examples/GenerateSkuMixPlacementScoresWithAttributes.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AcceleratorManufacturer": {
+      "type": "string",
+      "description": "Accelerator manufacturer.",
+      "enum": [
+        "AMD",
+        "Nvidia",
+        "Xilinx"
+      ],
+      "x-ms-enum": {
+        "name": "AcceleratorManufacturer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD accelerator."
+          },
+          {
+            "name": "Nvidia",
+            "value": "Nvidia",
+            "description": "Nvidia accelerator."
+          },
+          {
+            "name": "Xilinx",
+            "value": "Xilinx",
+            "description": "Xilinx accelerator."
+          }
+        ]
+      }
+    },
+    "AcceleratorType": {
+      "type": "string",
+      "description": "Accelerator type.",
+      "enum": [
+        "GPU",
+        "FPGA"
+      ],
+      "x-ms-enum": {
+        "name": "AcceleratorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GPU",
+            "value": "GPU",
+            "description": "GPU accelerator."
+          },
+          {
+            "name": "FPGA",
+            "value": "FPGA",
+            "description": "FPGA accelerator."
+          }
+        ]
+      }
+    },
+    "ArchitectureType": {
+      "type": "string",
+      "description": "Architecture type of the VM.",
+      "enum": [
+        "ARM64",
+        "X64"
+      ],
+      "x-ms-enum": {
+        "name": "ArchitectureType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ARM64",
+            "value": "ARM64",
+            "description": "ARM64 architecture."
+          },
+          {
+            "name": "X64",
+            "value": "X64",
+            "description": "x64 architecture."
+          }
+        ]
+      }
+    },
+    "ComputeDiagnosticBase": {
+      "type": "object",
+      "description": "Contains metadata of a diagnostic type",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticProperties",
+          "description": "Contains additional properties of a diagnostic"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CpuManufacturer": {
+      "type": "string",
+      "description": "CPU manufacturer.",
+      "enum": [
+        "Intel",
+        "AMD",
+        "Microsoft",
+        "Ampere"
+      ],
+      "x-ms-enum": {
+        "name": "CpuManufacturer",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Intel",
+            "value": "Intel",
+            "description": "Intel CPU."
+          },
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD CPU."
+          },
+          {
+            "name": "Microsoft",
+            "value": "Microsoft",
+            "description": "Microsoft CPU."
+          },
+          {
+            "name": "Ampere",
+            "value": "Ampere",
+            "description": "Ampere CPU."
+          }
+        ]
+      }
+    },
+    "DiagnosticProperties": {
+      "type": "object",
+      "description": "Contains additional properties of a diagnostic",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "Describes what are the supported resource types for a diagnostic.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HyperVGeneration": {
+      "type": "string",
+      "description": "Hyper-V generation.",
+      "enum": [
+        "Gen1",
+        "Gen2"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVGeneration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Gen1",
+            "value": "Gen1",
+            "description": "Generation 1."
+          },
+          {
+            "name": "Gen2",
+            "value": "Gen2",
+            "description": "Generation 2."
+          }
+        ]
+      }
+    },
+    "LocalStorageDiskType": {
+      "type": "string",
+      "description": "Local storage disk type.",
+      "enum": [
+        "HDD",
+        "SSD"
+      ],
+      "x-ms-enum": {
+        "name": "LocalStorageDiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HDD",
+            "value": "HDD",
+            "description": "HDD local storage."
+          },
+          {
+            "name": "SSD",
+            "value": "SSD",
+            "description": "SSD local storage."
+          }
+        ]
+      }
+    },
+    "PlacementScore": {
+      "type": "object",
+      "description": "The spot placement score for sku/region/zone combination.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource's CRP virtual machine SKU size."
+        },
+        "region": {
+          "type": "string",
+          "description": "The region."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone."
+        },
+        "score": {
+          "type": "string",
+          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation."
+        },
+        "isQuotaAvailable": {
+          "type": "boolean",
+          "description": "Whether the desired quota is available."
+        }
+      }
+    },
+    "ResourceSize": {
+      "type": "object",
+      "description": "SpotPlacementRecommender API response.",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "The resource's CRP virtual machine SKU size."
+        }
+      }
+    },
+    "SkuMixPlacementAllocationStrategy": {
+      "type": "string",
+      "description": "Allocation strategy for determining the optimal SKU split.",
+      "enum": [
+        "LowestPrice",
+        "Prioritized",
+        "EvictionOptimized"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementAllocationStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowestPrice",
+            "value": "LowestPrice",
+            "description": "VMs allocated to optimize for lowest price."
+          },
+          {
+            "name": "Prioritized",
+            "value": "Prioritized",
+            "description": "VMs allocated based on customer-specified rank for each VM size."
+          },
+          {
+            "name": "EvictionOptimized",
+            "value": "EvictionOptimized",
+            "description": "VMs allocated to optimize for lowest eviction rate (Spot only)."
+          }
+        ]
+      }
+    },
+    "SkuMixPlacementBase": {
+      "type": "object",
+      "description": "Contains metadata of the SkuMixPlacement scoring resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SkuMixPlacementProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SkuMixPlacementCapacityProfile": {
+      "type": "object",
+      "description": "Capacity-related properties for the placement request.",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity to run the workload. For VMs: [1..10,000]. For vCPUs: [1..100,000]."
+        },
+        "capacityType": {
+          "$ref": "#/definitions/SkuMixPlacementCapacityType",
+          "description": "The unit type for the capacity value."
+        },
+        "priority": {
+          "$ref": "#/definitions/SkuMixPlacementPriority",
+          "description": "The priority of the VMs to allocate."
+        },
+        "spotPriorityProfile": {
+          "$ref": "#/definitions/SkuMixPlacementSpotPriorityProfile",
+          "description": "Required when priority is Spot. Contains spot-specific configuration."
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/SkuMixPlacementAllocationStrategy",
+          "description": "The allocation strategy for determining the optimal SKU split."
+        },
+        "osType": {
+          "$ref": "#/definitions/SkuMixPlacementOSType",
+          "description": "The OS type. Required when allocationStrategy is LowestPrice because pricing varies by OS."
+        },
+        "zoneAllocationPolicy": {
+          "$ref": "#/definitions/SkuMixPlacementZoneAllocationPolicy",
+          "description": "Zone allocation policy. Default: BestEffortBalanced."
+        }
+      },
+      "required": [
+        "capacity",
+        "capacityType",
+        "priority",
+        "allocationStrategy"
+      ]
+    },
+    "SkuMixPlacementCapacityType": {
+      "type": "string",
+      "description": "The unit type for the capacity value.",
+      "enum": [
+        "VM",
+        "VCpu"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementCapacityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Vm",
+            "value": "VM",
+            "description": "Capacity measured in number of VMs."
+          },
+          {
+            "name": "VCpu",
+            "value": "VCpu",
+            "description": "Capacity measured in number of vCPUs."
+          }
+        ]
+      }
+    },
+    "SkuMixPlacementDeploymentChoice": {
+      "type": "object",
+      "description": "A single deployment choice recommendation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this deployment choice."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Placement score from 1 to 10 (inclusive). Higher is better.",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "skuSplit": {
+          "type": "array",
+          "description": "The list of VM size / zone allocations that make up this deployment choice.",
+          "items": {
+            "$ref": "#/definitions/SkuMixPlacementItem"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "zone"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "score",
+        "skuSplit"
+      ]
+    },
+    "SkuMixPlacementInstanceDescription": {
+      "type": "object",
+      "description": "Describes which VM sizes (or VM attributes) to consider.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SkuMixPlacementInstanceDescriptionType",
+          "description": "The type of instance description."
+        },
+        "vmSizes": {
+          "type": "array",
+          "description": "The list of VM sizes. Required when type is VMSizes.",
+          "items": {
+            "$ref": "#/definitions/SkuMixPlacementVMSize"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "vmAttributes": {
+          "$ref": "#/definitions/VmAttributes",
+          "description": "VM attribute constraints. Required when type is VMAttributes."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SkuMixPlacementInstanceDescriptionType": {
+      "type": "string",
+      "description": "The type of instance description provided in the request.",
+      "enum": [
+        "VMSizes",
+        "VMAttributes"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementInstanceDescriptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VMSizes",
+            "value": "VMSizes",
+            "description": "Instance description is a list of explicit VM sizes."
+          },
+          {
+            "name": "VMAttributes",
+            "value": "VMAttributes",
+            "description": "Instance description is a set of VM attribute constraints."
+          }
+        ]
+      }
+    },
+    "SkuMixPlacementItem": {
+      "type": "object",
+      "description": "A single VM size allocation within a deployment choice.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "VM size name (e.g. Standard_D2s_v3)."
+        },
+        "priority": {
+          "$ref": "#/definitions/SkuMixPlacementPriority",
+          "description": "Priority of this allocation (Regular or Spot)."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Recommended allocation capacity."
+        },
+        "zone": {
+          "type": "string",
+          "description": "Logical zone (e.g. \"1\", \"2\", \"3\"). Omitted or empty for regional deployments."
+        }
+      },
+      "required": [
+        "name",
+        "priority",
+        "capacity"
+      ]
+    },
+    "SkuMixPlacementOSType": {
+      "type": "string",
+      "description": "The OS type of the VMs.",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementOSType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows OS."
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Linux OS."
+          }
+        ]
+      }
+    },
+    "SkuMixPlacementPartialFulfillmentReason": {
+      "type": "string",
+      "description": "Reason for partial fulfillment of the requested capacity.",
+      "enum": [
+        "None",
+        "InsufficientCapacity",
+        "InsufficientQuota"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementPartialFulfillmentReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Full capacity was fulfilled."
+          },
+          {
+            "name": "InsufficientCapacity",
+            "value": "InsufficientCapacity",
+            "description": "Not enough allocable capacity was available."
+          },
+          {
+            "name": "InsufficientQuota",
+            "value": "InsufficientQuota",
+            "description": "Not enough quota was available."
+          }
+        ]
+      }
+    },
+    "SkuMixPlacementPriority": {
+      "type": "string",
+      "description": "Priority levels for VM allocation.",
+      "enum": [
+        "Regular",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementPriority",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regular",
+            "value": "Regular",
+            "description": "Regular priority VMs with guaranteed capacity."
+          },
+          {
+            "name": "Spot",
+            "value": "Spot",
+            "description": "Spot priority VMs with lower cost but potential eviction."
+          }
+        ]
+      }
+    },
+    "SkuMixPlacementProperties": {
+      "type": "object",
+      "description": "Contains properties of the SkuMixPlacement resource.",
+      "properties": {
+        "supportedResourceTypes": {
+          "type": "array",
+          "description": "Describes what resource types are supported by the mix placement scoring service.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SkuMixPlacementRequest": {
+      "type": "object",
+      "description": "Sku Mix Placement API request.",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "description": "Optional logical zones to consider (e.g. [\"1\",\"2\",\"3\"]). Omitted or empty implies regional deployment.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capacityProfile": {
+          "$ref": "#/definitions/SkuMixPlacementCapacityProfile",
+          "description": "All capacity-related properties."
+        },
+        "instanceDescription": {
+          "$ref": "#/definitions/SkuMixPlacementInstanceDescription",
+          "description": "Describes how the service should choose candidate VM sizes."
+        }
+      },
+      "required": [
+        "capacityProfile",
+        "instanceDescription"
+      ]
+    },
+    "SkuMixPlacementResponse": {
+      "type": "object",
+      "description": "Sku Mix Placement API response.",
+      "properties": {
+        "placementChoices": {
+          "type": "array",
+          "description": "List of placement choice recommendations.",
+          "items": {
+            "$ref": "#/definitions/SkuMixPlacementDeploymentChoice"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "partialFulfillmentReason": {
+          "$ref": "#/definitions/SkuMixPlacementPartialFulfillmentReason",
+          "description": "Indicates whether the response is a complete or partial fulfillment."
+        }
+      },
+      "required": [
+        "placementChoices",
+        "partialFulfillmentReason"
+      ]
+    },
+    "SkuMixPlacementSpotPriorityProfile": {
+      "type": "object",
+      "description": "Spot priority configuration. Required when priority is Spot.",
+      "properties": {
+        "maxPricePerVm": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum price per VM the customer is willing to pay. Default: -1 (no price restriction)."
+        }
+      }
+    },
+    "SkuMixPlacementVMSize": {
+      "type": "object",
+      "description": "A VM size with optional rank for prioritization.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "SKU name (e.g. Standard_D2s_v3)."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Rank of the VM size. Lower = higher priority (starting at 0). Only valid with Prioritized strategy."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SkuMixPlacementZonalDistributionStrategy": {
+      "type": "string",
+      "description": "Strategy for distributing capacity across availability zones.",
+      "enum": [
+        "BestEffortBalanced",
+        "Prioritized"
+      ],
+      "x-ms-enum": {
+        "name": "SkuMixPlacementZonalDistributionStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BestEffortBalanced",
+            "value": "BestEffortBalanced",
+            "description": "Capacity distributed across zones on a best-effort balanced basis."
+          },
+          {
+            "name": "Prioritized",
+            "value": "Prioritized",
+            "description": "Zones filled based on zone preferences/rank. Higher priority zones filled first."
+          }
+        ]
+      }
+    },
+    "SkuMixPlacementZoneAllocationPolicy": {
+      "type": "object",
+      "description": "Zone allocation policy for the placement request.",
+      "properties": {
+        "distributionStrategy": {
+          "$ref": "#/definitions/SkuMixPlacementZonalDistributionStrategy",
+          "description": "Distribution strategy for allocating capacity across zones."
+        },
+        "zonePreferences": {
+          "type": "array",
+          "description": "Per-zone allocation preferences. Used with the Prioritized strategy.",
+          "items": {
+            "$ref": "#/definitions/SkuMixPlacementZonePreference"
+          },
+          "x-ms-identifiers": [
+            "zone"
+          ]
+        }
+      }
+    },
+    "SkuMixPlacementZonePreference": {
+      "type": "object",
+      "description": "Per-zone allocation preference.",
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "Logical zone (e.g. \"1\", \"2\", \"3\")."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Rank of the zone. Lower values = higher priority (0 is highest)."
+        }
+      },
+      "required": [
+        "zone"
+      ]
+    },
+    "SpotPlacementScoresInput": {
+      "type": "object",
+      "description": "SpotPlacementScores API Input.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        }
+      }
+    },
+    "SpotPlacementScoresResponse": {
+      "type": "object",
+      "description": "SpotPlacementScores API response.",
+      "properties": {
+        "desiredLocations": {
+          "type": "array",
+          "description": "The desired regions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "desiredSizes": {
+          "type": "array",
+          "description": "The desired virtual machine SKU sizes.",
+          "items": {
+            "$ref": "#/definitions/ResourceSize"
+          }
+        },
+        "desiredCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Desired instance count per region/zone based on the scope."
+        },
+        "availabilityZones": {
+          "type": "boolean",
+          "description": "Defines if the scope is zonal or regional."
+        },
+        "placementScores": {
+          "type": "array",
+          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.",
+          "items": {
+            "$ref": "#/definitions/PlacementScore"
+          }
+        }
+      }
+    },
+    "VmAttributeMinMaxDouble": {
+      "type": "object",
+      "description": "Double min/max range for VM attributes.",
+      "properties": {
+        "min": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum value."
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum value."
+        }
+      }
+    },
+    "VmAttributeMinMaxInteger": {
+      "type": "object",
+      "description": "Integer min/max range for VM attributes.",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum value."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum value."
+        }
+      }
+    },
+    "VmAttributeSupport": {
+      "type": "string",
+      "description": "Whether a VM capability should be excluded, included, or required.",
+      "enum": [
+        "Excluded",
+        "Included",
+        "Required"
+      ],
+      "x-ms-enum": {
+        "name": "VmAttributeSupport",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Excluded",
+            "value": "Excluded",
+            "description": "Exclude VM sizes that have the capability."
+          },
+          {
+            "name": "Included",
+            "value": "Included",
+            "description": "Allow VM sizes with and without the capability."
+          },
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "Only allow VM sizes that have the capability."
+          }
+        ]
+      }
+    },
+    "VmAttributes": {
+      "type": "object",
+      "description": "VM attribute constraints for attribute-based VM selection.",
+      "properties": {
+        "vCpuCount": {
+          "$ref": "#/definitions/VmAttributeMinMaxInteger",
+          "description": "vCPU count range. Required."
+        },
+        "memoryInGiB": {
+          "$ref": "#/definitions/VmAttributeMinMaxDouble",
+          "description": "Memory range in GiB. Required."
+        },
+        "architectureTypes": {
+          "type": "array",
+          "description": "Supported VM architectures. Required.",
+          "items": {
+            "$ref": "#/definitions/ArchitectureType"
+          }
+        },
+        "memoryInGiBPerVCpu": {
+          "$ref": "#/definitions/VmAttributeMinMaxDouble",
+          "description": "Memory-per-vCPU range in GiB."
+        },
+        "dataDiskCount": {
+          "$ref": "#/definitions/VmAttributeMinMaxInteger",
+          "description": "Data disk count range."
+        },
+        "networkInterfaceCount": {
+          "$ref": "#/definitions/VmAttributeMinMaxInteger",
+          "description": "NIC count range."
+        },
+        "networkBandwidthInMbps": {
+          "$ref": "#/definitions/VmAttributeMinMaxDouble",
+          "description": "Network bandwidth range in Mbps."
+        },
+        "localStorageSupport": {
+          "$ref": "#/definitions/VmAttributeSupport",
+          "description": "Whether local storage support should be excluded, included, or required."
+        },
+        "localStorageInGiB": {
+          "$ref": "#/definitions/VmAttributeMinMaxDouble",
+          "description": "Local storage capacity range in GiB."
+        },
+        "localStorageDiskTypes": {
+          "type": "array",
+          "description": "Allowed local storage disk types.",
+          "items": {
+            "$ref": "#/definitions/LocalStorageDiskType"
+          }
+        },
+        "rdmaSupport": {
+          "$ref": "#/definitions/VmAttributeSupport",
+          "description": "Whether RDMA support should be excluded, included, or required."
+        },
+        "rdmaNetworkInterfaceCount": {
+          "$ref": "#/definitions/VmAttributeMinMaxInteger",
+          "description": "RDMA NIC count range."
+        },
+        "acceleratorSupport": {
+          "$ref": "#/definitions/VmAttributeSupport",
+          "description": "Whether accelerator support should be excluded, included, or required."
+        },
+        "acceleratorManufacturers": {
+          "type": "array",
+          "description": "Allowed accelerator manufacturers.",
+          "items": {
+            "$ref": "#/definitions/AcceleratorManufacturer"
+          }
+        },
+        "acceleratorTypes": {
+          "type": "array",
+          "description": "Allowed accelerator types.",
+          "items": {
+            "$ref": "#/definitions/AcceleratorType"
+          }
+        },
+        "acceleratorCount": {
+          "$ref": "#/definitions/VmAttributeMinMaxInteger",
+          "description": "Accelerator count range."
+        },
+        "vmCategories": {
+          "type": "array",
+          "description": "Allowed VM categories.",
+          "items": {
+            "$ref": "#/definitions/VmCategory"
+          }
+        },
+        "cpuManufacturers": {
+          "type": "array",
+          "description": "Allowed CPU manufacturers.",
+          "items": {
+            "$ref": "#/definitions/CpuManufacturer"
+          }
+        },
+        "burstableSupport": {
+          "$ref": "#/definitions/VmAttributeSupport",
+          "description": "Whether burstable SKUs should be excluded, included, or required."
+        },
+        "hyperVGenerations": {
+          "type": "array",
+          "description": "Allowed Hyper-V generations.",
+          "items": {
+            "$ref": "#/definitions/HyperVGeneration"
+          }
+        },
+        "excludedVMSizes": {
+          "type": "array",
+          "description": "VM sizes to explicitly exclude.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedVMSizes": {
+          "type": "array",
+          "description": "VM sizes to explicitly allow; attribute filtering applied only to this set.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "vCpuCount",
+        "memoryInGiB",
+        "architectureTypes"
+      ]
+    },
+    "VmCategory": {
+      "type": "string",
+      "description": "VM category classification.",
+      "enum": [
+        "GeneralPurpose",
+        "ComputeOptimized",
+        "MemoryOptimized",
+        "StorageOptimized",
+        "GpuAccelerated",
+        "FpgaAccelerated",
+        "HighPerformanceCompute"
+      ],
+      "x-ms-enum": {
+        "name": "VmCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GeneralPurpose",
+            "value": "GeneralPurpose",
+            "description": "General purpose VMs."
+          },
+          {
+            "name": "ComputeOptimized",
+            "value": "ComputeOptimized",
+            "description": "Compute optimized VMs."
+          },
+          {
+            "name": "MemoryOptimized",
+            "value": "MemoryOptimized",
+            "description": "Memory optimized VMs."
+          },
+          {
+            "name": "StorageOptimized",
+            "value": "StorageOptimized",
+            "description": "Storage optimized VMs."
+          },
+          {
+            "name": "GpuAccelerated",
+            "value": "GpuAccelerated",
+            "description": "GPU accelerated VMs."
+          },
+          {
+            "name": "FpgaAccelerated",
+            "value": "FpgaAccelerated",
+            "description": "FPGA accelerated VMs."
+          },
+          {
+            "name": "HighPerformanceCompute",
+            "value": "HighPerformanceCompute",
+            "description": "High performance compute VMs."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -22,8 +22,8 @@ model NetworkMonitor extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NetworkFabric Properties */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("The NetworkMonitor properties.")
   properties: NetworkMonitorProperties;
 }
 
