@@ -255,6 +255,19 @@ using TypeSpec.Versioning;
   "csharp"
 );
 
+@@clientName(DiskEncryptionSetParameters,
+  "ComputeScheduleDiskEncryptionSetConfig",
+  "csharp"
+);
+@@clientName(ManagedDiskParameters,
+  "ComputeScheduleManagedDiskConfig",
+  "csharp"
+);
+@@clientName(VirtualMachineReimageParameters,
+  "ComputeScheduleVirtualMachineReimageConfig",
+  "csharp"
+);
+
 @@clientName(OccurrenceExtension.listOccurrenceByVms,
   "GetAssociatedOccurrences",
   "csharp"
