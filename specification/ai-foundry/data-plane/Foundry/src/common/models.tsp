@@ -54,8 +54,8 @@ union AgentDefinitionOptInKeys {
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   container_agents_v1_preview: "ContainerAgents=V1Preview",
-
-  agent_endpoint_v1_preview: "AgentEndpoint=V1Preview",
+  agent_endpoint_v1_preview: "AgentEndpoints=V1Preview",
+  code_agents_v1_preview: "CodeAgents=V1Preview",
 }
 
 union FoundryFeaturesOptInKeys {
@@ -94,6 +94,22 @@ op FoundryDataPlanePreviewOperation<
 > is FoundryDataPlaneOperation<
   {
     ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>;
+    ...Params;
+  },
+  Response,
+  ErrorResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryDataPlaneRequiredPreviewOperation<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  Params extends Reflection.Model,
+  Response,
+  ErrorResponse = ApiErrorResponse
+> is FoundryDataPlaneOperation<
+  {
+    ...WithRequiredFoundryPreviewHeader<AreaPreviewLabel>;
     ...Params;
   },
   Response,
