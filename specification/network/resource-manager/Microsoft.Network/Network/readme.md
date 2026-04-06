@@ -89,8 +89,6 @@ suppressions:
     where:
       - $.definitions.GetServiceGatewayServicesResult
 directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: vmssNetwork.json (2018-10-01) is a separate TypeSpec project (Microsoft.Compute) included alongside current version files.
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
     transform: >
