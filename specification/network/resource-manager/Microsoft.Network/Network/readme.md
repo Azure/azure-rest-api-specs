@@ -31,14 +31,6 @@ openapi-type: arm
 tag: package-2025-07-01
 ```
 
-### Suppression
-
-``` yaml
-directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: The vmss network APIs (vmssNetwork.json) have been stable since 2018-10-01 and are intentionally shared across newer package tags without changes.
-```
-
 ### Tag: package-2025-07-01
 
 These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
