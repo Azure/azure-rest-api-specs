@@ -134,25 +134,30 @@ namespace Customizations;
 
 @@clientName(Storage.File.OptionalBody.optionalBody, "body", "javascript");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File.Error,
   "header",
   "x-ms-error-code:errorCode",
   "javascript"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File.Error,
   "restErrorCodeHeader",
   "x-ms-error-code",
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File.MetadataHeaders.metadata,
   "headerCollectionPrefix",
   "x-ms-meta",
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File, "includeRootSlash", false, "javascript");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File, "omitSlashFromEmptyRoute", true, "python,csharp");
 
 @@clientName(Storage.File.UserDelegationKey.signedDelegatedUserTid,
@@ -168,18 +173,22 @@ namespace Customizations;
   "snapshotUsageBytes",
   "javascript"
 );
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(Storage.File.Service.listSharesSegment,
   "python,javascript,csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(Storage.File.Directory.listFilesAndDirectoriesSegment,
   "python,javascript,csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(Storage.File.Directory.listHandles,
   "python,javascript,csharp"
 );
-@@Legacy.disablePageable(Storage.File.File.listHandles, "python,javascript,csharp");
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
+@@Legacy.disablePageable(Storage.File.File.listHandles,
+  "python,javascript,csharp"
+);
 
 // csharp customizations
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
@@ -192,13 +201,10 @@ model ShareClientParameters {
 model FileClientParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   fileRequestIntent?: ShareTokenIntent;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   allowTrailingDot?: boolean;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   allowSourceTrailingDot?: boolean;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   fileRangeWriteFromUrl: FileRangeWriteFromUrlType;
 }
@@ -207,26 +213,30 @@ model FileClientParameters {
 model DirectoryClientParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   fileRequestIntent?: ShareTokenIntent;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   allowTrailingDot?: boolean;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   allowSourceTrailingDot?: boolean;
 }
 
 @@clientInitialization(Storage.File,
-  { parameters: ShareClientParameters },
+  {
+    parameters: ShareClientParameters,
+  },
   "csharp"
 );
 
 @@clientInitialization(Storage.File.Directory,
-  { parameters: DirectoryClientParameters },
+  {
+    parameters: DirectoryClientParameters,
+  },
   "csharp"
 );
 
 @@clientInitialization(Storage.File.File,
-  { parameters: FileClientParameters },
+  {
+    parameters: FileClientParameters,
+  },
   "csharp"
 );
 
@@ -244,8 +254,9 @@ model DirectoryClientParameters {
 @@clientName(Share, "ShareRestClient", "csharp");
 @@clientName(StorageErrorCode, "ShareErrorCode", "csharp");
 @@clientName(PermissionCopyModeType, "PermissionCopyMode", "csharp");
-@@access(FileRangeWriteFromUrlType, Access.`internal`, "csharp");
+@@access(FileRangeWriteFromUrlType, Access.internal, "csharp");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File.MetadataHeaders.metadata,
   "collectionHeaderPrefix",
   "x-ms-meta-",
