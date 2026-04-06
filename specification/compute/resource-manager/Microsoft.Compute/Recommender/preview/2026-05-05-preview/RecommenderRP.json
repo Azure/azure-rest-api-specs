@@ -703,12 +703,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Lower range of recommended allocation capacity."
-        },
-        "capacityMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Upper range of recommended allocation capacity."
+          "description": "Recommended allocation capacity."
         },
         "zone": {
           "type": "string",
@@ -718,8 +713,7 @@
       "required": [
         "name",
         "priority",
-        "capacity",
-        "capacityMax"
+        "capacity"
       ]
     },
     "SkuMixPlacementOSType": {
@@ -852,11 +846,6 @@
             "id"
           ]
         },
-        "validUntil": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date/time until when the recommendations are valid."
-        },
         "partialFulfillmentReason": {
           "$ref": "#/definitions/SkuMixPlacementPartialFulfillmentReason",
           "description": "Indicates whether the response is a complete or partial fulfillment."
@@ -864,7 +853,6 @@
       },
       "required": [
         "placementChoices",
-        "validUntil",
         "partialFulfillmentReason"
       ]
     },
@@ -953,11 +941,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Rank of the zone. Lower values = higher priority (0 is highest)."
-        },
-        "targetMaxCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Best-effort limit to avoid allocating more than this count within the zone."
         }
       },
       "required": [

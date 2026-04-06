@@ -169,9 +169,6 @@ model SkuMixPlacementZonePreference {
 
   /** Rank of the zone. Lower values = higher priority (0 is highest). */
   rank?: int32;
-
-  /** Best-effort limit to avoid allocating more than this count within the zone. */
-  targetMaxCapacity?: int32;
 }
 
 /** Describes which VM sizes (or VM attributes) to consider. */
@@ -207,9 +204,6 @@ model SkuMixPlacementResponse {
   @identifiers(#["id"])
   placementChoices: SkuMixPlacementDeploymentChoice[];
 
-  /** Date/time until when the recommendations are valid. */
-  validUntil: utcDateTime;
-
   /** Indicates whether the response is a complete or partial fulfillment. */
   partialFulfillmentReason: SkuMixPlacementPartialFulfillmentReason;
 }
@@ -239,11 +233,8 @@ model SkuMixPlacementItem {
   /** Priority of this allocation (Regular or Spot). */
   priority: SkuMixPlacementPriority;
 
-  /** Lower range of recommended allocation capacity. */
+  /** Recommended allocation capacity. */
   capacity: int32;
-
-  /** Upper range of recommended allocation capacity. */
-  capacityMax: int32;
 
   /** Logical zone (e.g. "1", "2", "3"). Omitted or empty for regional deployments. */
   zone?: string;
