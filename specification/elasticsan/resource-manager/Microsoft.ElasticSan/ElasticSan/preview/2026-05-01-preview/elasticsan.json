@@ -2786,29 +2786,6 @@
         ]
       }
     },
-    "GeneralPurposeVolumeGroupQosTier": {
-      "type": "object",
-      "description": "General purpose Quality of Service tier metadata.",
-      "properties": {
-        "generalPurposeIscsiZones": {
-          "type": "array",
-          "description": "Availability zones supported for iSCSI in general purpose tier.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "tierCapabilities": {
-          "type": "array",
-          "description": "The capability information in the general purpose tier.",
-          "items": {
-            "$ref": "#/definitions/SKUCapability"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "Identity": {
       "type": "object",
       "description": "Identity for the resource.",
@@ -3025,29 +3002,6 @@
             "value": "Stopped (deallocated)"
           }
         ]
-      }
-    },
-    "PerformanceCriticalVolumeGroupQosTier": {
-      "type": "object",
-      "description": "Performance critical Quality of Service tier metadata.",
-      "properties": {
-        "performanceCriticalZones": {
-          "type": "array",
-          "description": "Availability zones supported for performance critical tier.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "tierCapabilities": {
-          "type": "array",
-          "description": "The capability information in the performance critical tier.",
-          "items": {
-            "$ref": "#/definitions/SKUCapability"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
       }
     },
     "PolicyState": {
@@ -3486,11 +3440,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "volumeGroupQosTier": {
-          "$ref": "#/definitions/VolumeGroupQosTier",
-          "description": "The Volume Group Quality of Service tier metadata for the specified SKU. Applicable only to ElasticSanVersion V2; for V1, use 'tier'.",
-          "readOnly": true
         }
       },
       "required": [
@@ -3535,6 +3484,15 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "zoneDetails": {
+          "type": "array",
+          "description": "Details of capabilities available in each zone.",
+          "items": {
+            "$ref": "#/definitions/SkuZoneDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3590,6 +3548,29 @@
             "description": "Premium Tier"
           }
         ]
+      }
+    },
+    "SkuZoneDetails": {
+      "type": "object",
+      "description": "Details of capabilities available in each zone.",
+      "properties": {
+        "name": {
+          "type": "array",
+          "description": "The zone(s).",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "The capabilities supported in the zone(s).",
+          "items": {
+            "$ref": "#/definitions/SKUCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
       }
     },
     "Snapshot": {
@@ -3936,22 +3917,6 @@
         "deleteRetentionPolicy": {
           "$ref": "#/definitions/DeleteRetentionPolicy",
           "description": "The retention policy for the soft deleted volume group and its associated resources."
-        }
-      }
-    },
-    "VolumeGroupQosTier": {
-      "type": "object",
-      "description": "The Volume Group Quality of Service tier metadata in the specified SKU.",
-      "properties": {
-        "performanceCritical": {
-          "$ref": "#/definitions/PerformanceCriticalVolumeGroupQosTier",
-          "description": "Performance critical tier metadata.",
-          "readOnly": true
-        },
-        "generalPurpose": {
-          "$ref": "#/definitions/GeneralPurposeVolumeGroupQosTier",
-          "description": "General purpose tier metadata.",
-          "readOnly": true
         }
       }
     },

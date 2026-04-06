@@ -321,69 +321,6 @@ model SkuInformation {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   capabilities?: SKUCapability[];
-
-  /**
-   * The Volume Group Quality of Service tier metadata for the specified SKU. Applicable only to ElasticSanVersion V2; for V1, use 'tier'.
-   */
-  @added(Versions.v2026_05_01_preview)
-  @visibility(Lifecycle.Read)
-  volumeGroupQosTier?: VolumeGroupQosTier;
-}
-
-/**
- * The Volume Group Quality of Service tier metadata in the specified SKU.
- */
-@added(Versions.v2026_05_01_preview)
-model VolumeGroupQosTier {
-  /**
-   * Performance critical tier metadata.
-   */
-  @visibility(Lifecycle.Read)
-  performanceCritical?: PerformanceCriticalVolumeGroupQosTier;
-
-  /**
-   * General purpose tier metadata.
-   */
-  @visibility(Lifecycle.Read)
-  generalPurpose?: GeneralPurposeVolumeGroupQosTier;
-}
-
-/**
- * Performance critical Quality of Service tier metadata.
- */
-@added(Versions.v2026_05_01_preview)
-model PerformanceCriticalVolumeGroupQosTier {
-  /**
-   * Availability zones supported for performance critical tier.
-   */
-  @visibility(Lifecycle.Read)
-  performanceCriticalZones?: string[];
-
-  /**
-   * The capability information in the performance critical tier.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  tierCapabilities?: SKUCapability[];
-}
-
-/**
- * General purpose Quality of Service tier metadata.
- */
-@added(Versions.v2026_05_01_preview)
-model GeneralPurposeVolumeGroupQosTier {
-  /**
-   * Availability zones supported for iSCSI in general purpose tier.
-   */
-  @visibility(Lifecycle.Read)
-  generalPurposeIscsiZones?: string[];
-
-  /**
-   * The capability information in the general purpose tier.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#[])
-  tierCapabilities?: SKUCapability[];
 }
 
 /**
@@ -401,6 +338,33 @@ model SkuLocationInfo {
    */
   @visibility(Lifecycle.Read)
   zones?: string[];
+
+  /**
+   * Details of capabilities available in each zone.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  zoneDetails?: SkuZoneDetails[];
+}
+
+/**
+ * Details of capabilities available in each zone.
+ */
+@added(Versions.v2026_05_01_preview)
+model SkuZoneDetails {
+  /**
+   * The zone(s).
+   */
+  @visibility(Lifecycle.Read)
+  name?: string[];
+
+  /**
+   * The capabilities supported in the zone(s).
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  capabilities?: SKUCapability[];
 }
 
 /**
