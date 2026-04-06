@@ -405,10 +405,6 @@
         "operationId": "CreateUserDefinedRole",
         "summary": "Creates new roles and their actions",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -427,7 +423,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/UserDefinedRoles"
             }
           },
           "default": {
@@ -447,10 +443,6 @@
         "operationId": "UpdateUserDefinedRole",
         "summary": "Patch replaces the allowed action on existing roles,if the desire is to remove\nan existing action, the role must be deleted and recreated.",
         "description": "User defined roles allow users to define and manage app specific AuthZ policy.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -472,7 +464,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/UserDefinedRoles"
             }
           },
           "default": {

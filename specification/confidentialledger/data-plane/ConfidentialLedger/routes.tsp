@@ -655,7 +655,7 @@ op createUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
     body: UserDefinedRoles;
   },
   {
-    @bodyRoot body: string;
+    @bodyRoot body: UserDefinedRoles;
   }
 >;
 
@@ -709,7 +709,7 @@ op updateUserDefinedRoleStable is ConfidentialLedgerCommon.LedgerOperation<
     body: UserDefinedRoles;
   },
   {
-    @bodyRoot body: string;
+    @bodyRoot body: UserDefinedRoles;
   }
 >;
 

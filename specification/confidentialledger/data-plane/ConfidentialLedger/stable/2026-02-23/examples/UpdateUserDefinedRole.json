@@ -17,7 +17,16 @@
   "responses": {
     "200": {
       "description": "Created new user defined roles and actions",
-      "body": "Role replaced successfully."
+      "body": {
+        "roles": [
+          {
+            "roleName": "administrator",
+            "roleActions": [
+              "Microsoft.ConfidentialLedger/ledger/users/write"
+            ]
+          }
+        ]
+      }
     }
   }
 }
