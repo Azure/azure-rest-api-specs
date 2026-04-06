@@ -168,9 +168,26 @@ interface ManagedApplyMaintenanceWindow {
    * Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
+  @removed(Versions.v2026_04_01_preview)
   @action("applyMaintenanceWindow")
+  @sharedRoute
   @operationId("managedApplyMaintenanceWindow_Post")
-  post is ArmResourceActionSync<ManagedCluster, void, OkResponse>;
+  postNoBody is ArmResourceActionSync<ManagedCluster, void, OkResponse>;
+
+  /**
+   * Action to Apply Maintenance window on the Service Fabric Managed Clusters. Any pending update will be applied.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
+  @added(Versions.v2026_04_01_preview)
+  @action("applyMaintenanceWindow")
+  @sharedRoute
+  @operationId("managedApplyMaintenanceWindow_Post")
+  post is ArmResourceActionSync<
+    ManagedCluster,
+    ApplyMaintenanceWindowRequest,
+    OkResponse,
+    OptionalRequestBody = true
+  >;
 }
 
 @armResourceOperations
@@ -1060,6 +1077,27 @@ model ManagedMaintenanceWindowStatusContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
   @visibility(Lifecycle.Read)
   lastWindowEndTimeUTC?: utcDateTime;
+}
+
+/**
+ * Describes the request to apply a maintenance window on a Service Fabric Managed Cluster.
+ */
+@added(Versions.v2026_04_01_preview)
+model ApplyMaintenanceWindowRequest {
+  /**
+   * Effective start date of the maintenance window in yyyy-MM-dd HH:mm format. If not provided, defaults to the current time.
+   */
+  startDateTime?: string;
+
+  /**
+   * Duration of the maintenance window in hh:mm format. If not provided, defaults to 5 hours. Example: 08:30 for 8 and a half hours.
+   */
+  duration?: string;
+
+  /**
+   * Name of the timezone. List of timezones can be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell. If not provided, defaults to UTC. Example: Pacific Standard Time, UTC, W. Europe Standard Time, Korea Standard Time, Central Australia Standard Time.
+   */
+  timeZone?: string;
 }
 
 /**
