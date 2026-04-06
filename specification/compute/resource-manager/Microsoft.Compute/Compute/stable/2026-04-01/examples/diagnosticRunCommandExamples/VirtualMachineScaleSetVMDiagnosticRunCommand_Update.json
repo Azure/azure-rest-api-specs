@@ -5,7 +5,14 @@
     "vmScaleSetName": "myvmScaleSet",
     "instanceId": "0",
     "runCommandName": "myRunCommand",
-    "api-version": "2025-04-01"
+    "api-version": "2026-04-01",
+    "runCommand": {
+      "properties": {
+        "source": {
+          "commandId": "FleetDiagnosticsWindows"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -35,11 +42,11 @@
           "asyncExecution": false,
           "treatFailureAsDeploymentFailure": false,
           "timeoutInSeconds": 3600,
-          "provisioningState": "Succeeded"
+          "provisioningState": "Updating"
         }
       }
     }
   },
-  "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_Get",
-  "title": "Get VirtualMachineScaleSet VM diagnostic run commands."
+  "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_Update",
+  "title": "Update VirtualMachineScaleSet VM diagnostic run command."
 }

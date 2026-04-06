@@ -6,19 +6,20 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./VirtualMachine.tsp";
+import "./VirtualMachineRunCommand.tsp";
 
 using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Versioning;
+using TypeSpec.Versioning;
 
-namespace Microsoft.Compute;
+namespace Compute;
 /**
  * Describes a Virtual Machine diagnostic run command.
  */
-@added(Versions.v2025_04_01)
+@added(Versions.v2026_04_01)
 @parentResource(VirtualMachine)
 model VirtualMachineDiagnosticRunCommand
   is Azure.ResourceManager.TrackedResource<VirtualMachineRunCommandProperties> {
@@ -49,7 +50,7 @@ interface VirtualMachineDiagnosticRunCommands {
   /**
    * The operation to get the diagnostic run command.
    */
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   getByVirtualMachine is VirtualMachineDiagnosticRunCommandOps.Read<
     VirtualMachineDiagnosticRunCommand,
     Parameters = {
@@ -64,7 +65,7 @@ interface VirtualMachineDiagnosticRunCommands {
   /**
    * The operation to create or update the diagnostic run command.
    */
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   createOrUpdate is VirtualMachineDiagnosticRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineDiagnosticRunCommand,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
@@ -73,7 +74,7 @@ interface VirtualMachineDiagnosticRunCommands {
   /**
    * The operation to update the diagnostic run command.
    */
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   @patch(#{ implicitOptionality: false })
   update is VirtualMachineDiagnosticRunCommandOps.CustomPatchAsync<
     VirtualMachineDiagnosticRunCommand,
@@ -89,14 +90,14 @@ interface VirtualMachineDiagnosticRunCommands {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   delete is VirtualMachineDiagnosticRunCommandOps.DeleteAsync<VirtualMachineDiagnosticRunCommand>;
 
   /**
    * The operation to get all diagnostic run commands of a Virtual Machine.
    */
   @list
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   diagnosticListByVirtualMachine is VirtualMachineDiagnosticRunCommandOps.List<
     VirtualMachineDiagnosticRunCommand,
     Parameters = {
@@ -130,7 +131,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    * The operation to get the VMSS VM diagnostic run command.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Get")
   get is VirtualMachineScaleSetVMDiagnosticRunCommandOps.Read<
     VirtualMachineDiagnosticRunCommand,
@@ -147,7 +148,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    * The operation to create or update the VMSS VM diagnostic run command.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_CreateOrUpdate")
   createOrUpdate is VirtualMachineScaleSetVMDiagnosticRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineDiagnosticRunCommand,
@@ -159,7 +160,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@typespec/http/patch-implicit-optional" "non-standard operations"
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Update")
   update is VirtualMachineScaleSetVMDiagnosticRunCommandOps.CustomPatchAsync<
     VirtualMachineDiagnosticRunCommand,
@@ -174,7 +175,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Delete")
   delete is VirtualMachineScaleSetVMDiagnosticRunCommandOps.DeleteAsync<VirtualMachineDiagnosticRunCommand>;
 
@@ -182,7 +183,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
    * The operation to get all diagnostic run commands of an instance in Virtual Machine Scaleset.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_List")
   @list
   diagnosticList is VirtualMachineScaleSetVMDiagnosticRunCommandOps.List<

@@ -2,9 +2,10 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "vmName": "myVM",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
     "runCommandName": "myRunCommand",
-    "api-version": "2025-04-01",
+    "api-version": "2026-04-01",
     "runCommand": {
       "location": "West US",
       "properties": {
@@ -22,7 +23,8 @@
           }
         ],
         "asyncExecution": false,
-        "treatFailureAsDeploymentFailure": false,
+        "treatFailureAsDeploymentFailure": true,
+        "runAsPassword": "<runAsPassword>",
         "timeoutInSeconds": 3600
       }
     }
@@ -31,13 +33,9 @@
     "200": {
       "body": {
         "name": "myRunCommand",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRunCommand",
-        "type": "Microsoft.Compute/virtualMachines/runCommands",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
         "location": "westus",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
           "source": {
             "commandId": "FleetDiagnosticsWindows"
@@ -53,7 +51,7 @@
             }
           ],
           "asyncExecution": false,
-          "treatFailureAsDeploymentFailure": false,
+          "treatFailureAsDeploymentFailure": true,
           "timeoutInSeconds": 3600,
           "provisioningState": "Succeeded"
         }
@@ -62,13 +60,9 @@
     "201": {
       "body": {
         "name": "myRunCommand",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRunCommand",
-        "type": "Microsoft.Compute/virtualMachines/runCommands",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
         "location": "westus",
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
-        },
         "properties": {
           "source": {
             "commandId": "FleetDiagnosticsWindows"
@@ -84,13 +78,13 @@
             }
           ],
           "asyncExecution": false,
-          "treatFailureAsDeploymentFailure": false,
+          "treatFailureAsDeploymentFailure": true,
           "timeoutInSeconds": 3600,
           "provisioningState": "Creating"
         }
       }
     }
   },
-  "operationId": "VirtualMachineDiagnosticRunCommands_CreateOrUpdate",
-  "title": "Create or update a diagnostic run command."
+  "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_CreateOrUpdate",
+  "title": "Create VirtualMachineScaleSet VM diagnostic run command."
 }

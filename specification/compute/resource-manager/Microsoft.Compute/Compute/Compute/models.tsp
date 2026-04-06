@@ -8495,7 +8495,7 @@ model VirtualMachineRunCommandsListResult
 /**
  * The List diagnostic run command operation response
  */
-@added(Versions.v2025_04_01)
+@added(Versions.v2026_04_01)
 model VirtualMachineDiagnosticRunCommandsListResult
   is Azure.Core.Page<VirtualMachineDiagnosticRunCommand>;
 
