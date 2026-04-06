@@ -122,17 +122,7 @@ model JobTaskDetail {
   @identifiers(#[])
   @doc("Retry details of the task.")
   @visibility(Lifecycle.Read)
-  retryDetails?: JobTaskRetryDetail[];
-}
-
-@added(Versions.v2026_03_01_preview)
-@doc("Job task retry details. Represents a retry attempt of a task with the same structure as the original task.")
-model JobTaskRetryDetail {
-  ...JobTaskDetail;
-
-  @doc("The retry attempt number (1-based).")
-  @visibility(Lifecycle.Read)
-  retryAttempt?: int32;
+  retryDetails?: JobRetryDetails[];
 }
 
 @doc("Additional information for job.")
