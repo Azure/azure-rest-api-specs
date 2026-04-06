@@ -263,8 +263,10 @@ using Azure.AI.Projects;
 // Force emitting these two, as patched code uses values from these enums to internally set Foundry-Features header.
 @@usage(AgentDefinitionOptInKeys, Usage.input, "python");
 @@access(AgentDefinitionOptInKeys, Access.internal, "python");
+@@clientName(AgentDefinitionOptInKeys, "_AgentDefinitionOptInKeys", "python");
 @@usage(FoundryFeaturesOptInKeys, Usage.input, "python");
 @@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+@@clientName(FoundryFeaturesOptInKeys, "_FoundryFeaturesOptInKeys", "python");
 
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters

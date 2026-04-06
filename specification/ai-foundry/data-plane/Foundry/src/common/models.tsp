@@ -60,6 +60,7 @@ union AgentDefinitionOptInKeys {
 
 /** Opt-in keys for enabling preview Foundry features. */
 union FoundryFeaturesOptInKeys {
+  skills_v1_preview: "Skills=V1Preview",
   evaluations_v1_preview: "Evaluations=V1Preview",
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",

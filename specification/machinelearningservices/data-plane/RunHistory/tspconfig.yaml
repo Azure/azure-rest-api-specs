@@ -1,0 +1,19 @@
+parameters:
+  "service-dir":
+    default: "sdk/ml"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    emit-lro-options: "none"
+    output-file: "{version-status}/{version}/run-history.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-ml"
+    namespace: "azure.ai.ml._restclient.runhistory"
+    flavor: azure
+    generate-test: false
+    generate-sample: false
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

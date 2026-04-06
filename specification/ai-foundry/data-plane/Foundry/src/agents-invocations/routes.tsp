@@ -21,7 +21,7 @@ interface AgentInvocations {
    * Returns 404 if the agent does not expose an OpenAPI specification.
    */
   @get
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/openapi.json")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations/docs/openapi.json")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocationOpenApiSpec is FoundryDataPlaneOperation<
     {
@@ -41,7 +41,7 @@ interface AgentInvocations {
    * Creates an invocation for the specified agent version.
    */
   @post
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   createAgentInvocation is FoundryDataPlaneOperation<
     {
@@ -51,7 +51,7 @@ interface AgentInvocations {
       /** The version of the agent. */
       @path agent_version: string;
 
-      /** Optional session ID to group related invocations. If not provided, a new session ID will be auto-generated. */
+      /** Optional session ID returned by the session CRUD APIs to reuse an existing sandbox. If not provided, a new session ID will be auto-generated. */
       @query agent_session_id?: string;
 
       /** The content type of the request body. */
@@ -80,7 +80,7 @@ interface AgentInvocations {
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
   @get
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   getAgentInvocation is FoundryDataPlaneOperation<
     {
@@ -107,7 +107,7 @@ interface AgentInvocations {
    * Returns 404 if the agent does not support this operation or if the invocation ID is not found.
    */
   @post
-  @route("/agents/{agent_name}/versions/{agent_version}/invocations/{invocation_id}/cancel")
+  @route("/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel")
   @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
   cancelAgentInvocation is FoundryDataPlaneOperation<
     {
