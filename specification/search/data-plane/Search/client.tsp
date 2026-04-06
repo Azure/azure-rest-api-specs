@@ -335,11 +335,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SynonymMap, Access.public);
 @@usage(SynonymMap, Usage.input);
 @@access(AutocompleteItem, Access.public);
-@@usage(AutocompleteItem, Usage.input);
+@@usage(AutocompleteItem, Usage.input, "!csharp");
 @@access(SuggestResult, Access.public);
 @@usage(SuggestResult, Usage.input);
 @@access(IndexingResult, Access.public);
-@@usage(IndexingResult, Usage.input);
+@@usage(IndexingResult, Usage.input, "!csharp");
 @@access(FacetResult, Access.public);
 @@usage(FacetResult, Usage.input);
 @@access(QueryAnswerResult, Access.public);
@@ -403,6 +403,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(EdgeNGramTokenFilter, Access.internal, "csharp");
 @@clientName(EdgeNGramTokenFilter, "InternalEdgeNGramTokenFilter", "csharp");
 @@clientName(EntityRecognitionSkillV3, "EntityRecognitionSkill", "csharp");
+@@clientName(GetIndexStatisticsResult, "SearchIndexStatistics", "csharp");
 @@clientName(IndexerCurrentState, "IndexerState", "csharp");
 @@clientName(IndexerCurrentState.resetDatasourceDocumentIds,
   "ResetDataSourceDocumentIds",
@@ -413,6 +414,12 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(KeyPhraseExtractionSkill.modelVersion, Access.internal, "csharp");
 @@alternateType(KnowledgeBase.eTag, eTag, "csharp");
 @@alternateType(KnowledgeSource.eTag, eTag, "csharp");
+@@alternateType(KnowledgeSourceSynchronizationError.documentationLink,
+  url,
+  "csharp"
+);
+@@alternateType(KnowledgeBaseAzureBlobReference.blobUrl, url, "csharp");
+@@alternateType(KnowledgeBaseIndexedOneLakeReference.docUrl, url, "csharp");
 @@access(LanguageDetectionSkill.modelVersion, Access.internal, "csharp");
 @@clientName(LengthTokenFilter.min, "MinLength", "csharp");
 @@clientName(LengthTokenFilter.max, "MaxLength", "csharp");
@@ -431,6 +438,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(PIIDetectionSkill, "PiiDetectionSkill", "csharp");
 @@clientName(RegexFlags, "RegexFlag", "csharp");
 @@clientName(SkillNames, "ResetSkillsOptions", "csharp");
+@@alternateType(SearchIndexResponse.eTag, eTag, "csharp");
 @@alternateType(SearchIndexer.eTag, eTag, "csharp");
 @@alternateType(SearchIndexerSkillset.eTag, eTag, "csharp");
 @@clientName(SearchIndexerKnowledgeStore, "KnowledgeStore", "csharp");
@@ -472,7 +480,8 @@ namespace KnowledgeBaseRetrievalClient {
   armResourceIdentifier,
   "csharp"
 );
-
+@@alternateType(WebApiVectorizerParameters.uri, url, "csharp");
+@@alternateType(VectorizableImageUrlQuery.url, url, "csharp");
 @@clientName(AutocompleteResult, "AutocompleteResults", "csharp");
 @@access(IndexAction, Access.internal, "csharp");
 @@access(IndexAction, Access.internal, "csharp");
