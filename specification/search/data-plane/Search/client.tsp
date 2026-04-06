@@ -413,7 +413,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(IndexingMode.IndexingResetDocs, "ResetDocuments", "csharp");
 @@access(KeyPhraseExtractionSkill.modelVersion, Access.internal, "csharp");
 @@alternateType(KnowledgeBase.eTag, eTag, "csharp");
-@@alternateType(KnowledgeBase.eTag, etag, "javascript");
 @@alternateType(KnowledgeSource.eTag, eTag, "csharp");
 @@alternateType(KnowledgeSourceSynchronizationError.documentationLink,
   url,
@@ -3181,6 +3180,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(Search.SearchServiceCounters, "ServiceCounters", "javascript");
 @@clientName(Search.SearchServiceLimits, "ServiceLimits", "javascript");
 @@clientName(Search.SearchAlias.eTag, "etag", "javascript");
+@@clientName(Search.KnowledgeBase.eTag, "etag", "javascript");
 @@clientName(Search.RankingOrder.RerankerScore, "RerankerScore", "javascript");
 @@clientName(Search.ChatCompletionResponseFormat.jsonSchemaProperties,
   "chatCompletionSchemaProperties",
