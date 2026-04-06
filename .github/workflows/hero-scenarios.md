@@ -33,7 +33,6 @@ safe-outputs:
     run-success: "📖 [{workflow_name}]({run_url}) posted a README suggestion. ✅"
     run-failure: "📖 [{workflow_name}]({run_url}) {status}. ❌"
 timeout-minutes: 10
-
 ---
 
 # Hero Scenario Suggestion
