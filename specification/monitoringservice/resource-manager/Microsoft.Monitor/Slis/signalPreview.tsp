@@ -29,27 +29,6 @@ union PreviewType {
   string,
 }
 
-@doc("Specifies how the SLI is evaluated.")
-union EvaluationType {
-  @doc("Evaluates SLI based on time windows.")
-  "WindowBased",
-
-  @doc("Evaluates SLI based on request counts.")
-  "RequestBased",
-
-  string,
-}
-
-alias SignalPreviewServiceGroupRoute = "/providers/Microsoft.Management/serviceGroups";
-
-@doc("ServiceGroup as parameter")
-model ServiceGroupBaseParameters {
-  @path
-  @pattern("^[A-Za-z0-9._()~-]{1,250}$")
-  @doc("The name of the service group.")
-  serviceGroupName: string;
-}
-
 @doc("Defines the properties for signal preview SLI.")
 model SignalPreviewSliProperties {
   @doc("The preview type for the signal preview operation.")
@@ -83,7 +62,7 @@ interface SloView {
   /**
   POST Actions
   */
-  @route(SignalPreviewServiceGroupRoute)
+  @route(ServiceGroupRoute)
   @post
   @armResourceCollectionAction
   @action("providers/Microsoft.Monitor/sliSignalPreview")
