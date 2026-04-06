@@ -60,6 +60,7 @@ directive:
   - suppress: XmsResourceInPutResponse
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].put
   - suppress: ResourceHasXMsResourceEnabled
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
@@ -67,9 +68,6 @@ directive:
   - suppress: UnSupportedPatchProperties
     reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
     from: trafficmanager.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].patch
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].patch
 ```
 
 ### Tag: package-preview-2024-04
