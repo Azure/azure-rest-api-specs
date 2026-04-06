@@ -96,6 +96,11 @@ model CommitProperties {
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
 @added(Versions.v2025_07_01)
 @armResourceOperations
+// Note: PATCH/Update operation is intentionally omitted. This is consistent with other
+// Network Manager child resources (e.g., ScopeConnection, ConnectivityConfiguration,
+// NetworkManagerRoutingConfiguration) which also only expose GET, PUT, DELETE, and List.
+// Commits are immutable deployment records — partial updates are not semantically meaningful.
+// Customers should use PUT (CreateOrUpdate) to replace the full resource.
 interface Commits {
   /**
    * Gets the specified commit.
