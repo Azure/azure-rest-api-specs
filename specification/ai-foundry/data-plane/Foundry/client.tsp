@@ -21,6 +21,10 @@ import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
+import "./src/skills/routes.tsp";
+import "./src/agents-invocations/routes.tsp";
+import "./src/agents-session-files/routes.tsp";
+import "./src/managed-blueprints/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
