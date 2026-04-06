@@ -976,7 +976,6 @@ model BatchNodeCounts {
 @doc("Contains utilization and resource usage statistics for the lifetime of a Pool.")
 model BatchPoolStatistics {
   @doc("The URL for the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -1058,7 +1057,6 @@ model BatchPoolResourceStatistics {
 @doc("Resource usage statistics for a Job.")
 model BatchJobStatistics {
   @doc("The URL of the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -1147,7 +1145,6 @@ model BatchNodeFile {
   name?: string;
 
   @doc("The URL of the file.")
-  @clientName("uri", "csharp")
   url?: url;
 
   @doc("Whether the object represents a directory.")
@@ -1191,7 +1188,6 @@ model BatchJobSchedule {
 
   @doc("The URL of the Job Schedule.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Job Schedule. This is an opaque string. You can use it to detect whether the Job Schedule has changed between requests. In particular, you can be pass the ETag with an Update Job Schedule request to specify that your changes should take effect only if nobody else has modified the schedule in the meantime.")
@@ -1530,7 +1526,6 @@ model ContainerRegistryReference {
   password?: string;
 
   @doc("The registry URL. If omitted, the default is \"docker.io\".")
-  @clientName("registryServerUri", "csharp")
   registryServer?: url;
 
   @doc("The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.")
@@ -1552,11 +1547,9 @@ model ResourceFile {
   autoStorageContainerName?: string;
 
   @doc("The URL of the blob container within Azure Blob Storage. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access.")
-  @clientName("storageContainerUri", "csharp")
   storageContainerUrl?: url;
 
   @doc("The URL of the file to download. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access.")
-  @clientName("httpUri", "csharp")
   httpUrl?: url;
 
   @doc("The blob prefix to use when downloading blobs from an Azure Storage container. Only the blobs whose names begin with the specified prefix will be downloaded. The property is valid only when autoStorageContainerName or storageContainerUrl is used. This prefix can be a partial filename or a subdirectory. If a prefix is not specified, all the files in the container will be downloaded.")
@@ -1598,7 +1591,6 @@ model OutputFileBlobContainerDestination {
   path?: string;
 
   @doc("The URL of the container within Azure Blob Storage to which to upload the file(s). If not using a managed identity, the URL must include a Shared Access Signature (SAS) granting write permissions to the container.")
-  @clientName("containerUri", "csharp")
   containerUrl: url;
 
   @doc("The reference to the user assigned identity to use to access Azure Blob Storage specified by containerUrl. The identity must have write access to the Azure Blob Storage container.")
@@ -2375,7 +2367,6 @@ model AzureFileShareConfiguration {
   accountKey: string;
 
   @doc("The Azure Files URL. This is of the form 'https://{account}.file.core.windows.net/'.")
-  @clientName("azureFileUri", "csharp")
   azureFileUrl: url;
 
   @doc("The relative path on the compute node where the file system will be mounted. All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable.")
@@ -2407,7 +2398,6 @@ model RecentBatchJob {
   id?: string;
 
   @doc("The URL of the Job.")
-  @clientName("uri", "csharp")
   url?: url;
 }
 
@@ -2415,7 +2405,6 @@ model RecentBatchJob {
 @doc("Resource usage statistics for a Job Schedule.")
 model BatchJobScheduleStatistics {
   @doc("The URL of the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -2502,7 +2491,6 @@ model BatchJob {
 
   @doc("The URL of the Job.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Job. This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime.")
@@ -2757,7 +2745,6 @@ model BatchJobPreparationAndReleaseTaskStatus {
   nodeId?: string;
 
   @doc("The URL of the Compute Node to which this entry refers.")
-  @clientName("nodeUri", "csharp")
   nodeUrl?: url;
 
   @doc("Information about the execution status of the Job Preparation Task on this Compute Node.")
@@ -2786,7 +2773,6 @@ model BatchJobPreparationTaskExecutionInfo {
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Job Preparation Task on the Compute Node.")
-  @clientName("taskRootDirectoryUri", "csharp")
   taskRootDirectoryUrl?: url;
 
   @doc("The exit code of the program specified on the Task command line. This parameter is returned only if the Task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the Compute Node operating system, such as when a process is forcibly terminated.")
@@ -2856,7 +2842,6 @@ model BatchJobReleaseTaskExecutionInfo {
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Job Release Task on the Compute Node.")
-  @clientName("taskRootDirectoryUri", "csharp")
   taskRootDirectoryUrl?: url;
 
   @doc("The exit code of the program specified on the Task command line. This parameter is returned only if the Task is in the completed state. The exit code for a process reflects the specific convention implemented by the application developer for that process. If you use the exit code value to make decisions in your code, be sure that you know the exit code convention used by the application process. Note that the exit code may also be generated by the Compute Node operating system, such as when a process is forcibly terminated.")
@@ -2929,7 +2914,6 @@ model BatchPool {
 
   @doc("The URL of the Pool.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Pool. This is an opaque string. You can use it to detect whether the Pool has changed between requests. In particular, you can be pass the ETag when updating a Pool to specify that your changes should take effect only if nobody else has modified the Pool in the meantime.")
@@ -3315,7 +3299,6 @@ model BatchTask {
 
   @doc("The URL of the Task.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The ETag of the Task. This is an opaque string. You can use it to detect whether the Task has changed between requests. In particular, you can be pass the ETag when updating a Task to specify that your changes should take effect only if nobody else has modified the Task in the meantime.")
@@ -3580,7 +3563,6 @@ model BatchNodeInfo {
   affinityId?: string;
 
   @doc("The URL of the Compute Node on which the Task ran.")
-  @clientName("nodeUri", "csharp")
   nodeUrl?: url;
 
   @doc("The ID of the Pool on which the Task ran.")
@@ -3593,7 +3575,6 @@ model BatchNodeInfo {
   taskRootDirectory?: string;
 
   @doc("The URL to the root directory of the Task on the Compute Node.")
-  @clientName("taskRootDirectoryUri", "csharp")
   taskRootDirectoryUrl?: url;
 }
 
@@ -3618,7 +3599,6 @@ model MultiInstanceSettings {
 @doc("Resource usage statistics for a Task.")
 model BatchTaskStatistics {
   @doc("The URL of the statistics.")
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The start time of the time range covered by the statistics.")
@@ -3880,7 +3860,6 @@ model BatchNode {
 
   @doc("The URL of the Compute Node.")
   @visibility(Lifecycle.Read)
-  @clientName("uri", "csharp")
   url: url;
 
   @doc("The current state of the Compute Node.")
@@ -3973,7 +3952,6 @@ model BatchNode {
 @clientName("BatchTaskDetails", "java")
 model BatchTaskInfo {
   @doc("The URL of the Task.")
-  @clientName("taskUri", "csharp")
   taskUrl?: url;
 
   @doc("The ID of the Job to which the Task belongs.")
@@ -4127,7 +4105,6 @@ model BatchNodeRemoteLoginSettings {
 @doc("The Azure Batch service log files upload parameters for a Compute Node.")
 model UploadBatchServiceLogsOptions {
   @doc("The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified.")
-  @clientName("containerUri", "csharp")
   containerUrl: url;
 
   @doc("The start of the time range from which to upload Batch Service log file(s). Any log file containing a log message in the time range will be uploaded. This means that the operation might retrieve more logs than have been requested since the entire log file is always uploaded, but the operation should not retrieve fewer logs than have been requested.")

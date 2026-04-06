@@ -391,7 +391,8 @@ alias CommonParameters = {
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)
   @query
-  @clientName("timeOutInSeconds", "csharp")
+
+  @clientName("timeout", "csharp")
   @clientName("timeout", "go,python")
   @clientName("timeOut", "java")
   @encode("seconds", int32)
@@ -415,7 +416,7 @@ alias CommonParameters = {
     """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
-  @clientName("ocpDate", "csharp")
+  @clientName("requestDate", "csharp")
   ocpdate?: utcDateTime;
 };
 
