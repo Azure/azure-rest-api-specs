@@ -48,4 +48,69 @@ directive:
   - suppress: TenantLevelAPIsNotAllowed
     reason: SLIs scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
     from: openapi.json
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypesDataDictionary.properties.Burnrate
+    from: openapi.json
+    reason: This property name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypesDataDictionary.properties.Good
+    from: openapi.json
+    reason: This property name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypesDataDictionary.properties.Total
+    from: openapi.json
+    reason: This property name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypesDataDictionary.properties.Value
+    from: openapi.json
+    reason: This property name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypesDataDictionary.properties.Uptime
+    from: openapi.json
+    reason: This property name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypesDataDictionary.properties.Downtime
+    from: openapi.json
+    reason: This property name needs to match the service response format for sampling type data.
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.TimeSeriesData.properties.dimensionValues
+    from: openapi.json
+    reason: The dimensionValues property is a dictionary where keys are dynamic dimension names provided by customers in their queries, requiring the use of additionalProperties.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypeProjection.x-ms-enum.values[?(@.name == 'Value')].name
+    from: openapi.json
+    reason: This enum value name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypeProjection.x-ms-enum.values[?(@.name == 'Good')].name
+    from: openapi.json
+    reason: This enum value name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypeProjection.x-ms-enum.values[?(@.name == 'Total')].name
+    from: openapi.json
+    reason: This enum value name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypeProjection.x-ms-enum.values[?(@.name == 'Uptime')].name
+    from: openapi.json
+    reason: This enum value name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypeProjection.x-ms-enum.values[?(@.name == 'Downtime')].name
+    from: openapi.json
+    reason: This enum value name needs to match the service response format for sampling type data.
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.SamplingTypeProjection.x-ms-enum.values[?(@.name == 'Burnrate')].name
+    from: openapi.json
+    reason: This enum value name needs to match the service response format for sampling type data.
 ```
