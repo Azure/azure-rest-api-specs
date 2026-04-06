@@ -191,7 +191,8 @@ model Resources {
 }
 
 @doc("Specifies the properties of a Virtual Machine")
-model BulkactionVMSpec {
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+model BulkActionVMSpec {
   /**
    * The marketplace image plan used for the virtual machine.
    */
@@ -225,17 +226,17 @@ model BulkactionVMSpec {
 
   @doc("Describes the properties of a Virtual Machine.")
   @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-  vmProperties?: BulkactionVMProfile;
+  vmProperties?: BulkActionVMProfile;
 }
 
 @doc("Specifies the configuration for a virtual machine operation")
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model BulkVMConfiguration {
   @doc("Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
-  vmProperties?: BulkactionVMSpec;
+  vmProperties?: BulkActionVMSpec;
 
   @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  extensions?: BulkactionVMExtension[];
+  extensions?: BulkActionVMExtension[];
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;
@@ -247,12 +248,10 @@ model BulkVMConfiguration {
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("Virtual machine profile object that contains VM properties that are common across all VMs in this batch  (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
   baseProfile?: BulkVMConfiguration;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("Virtual machine profile array that contains VM properties that needs to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
   resourceOverrides?: BulkVMConfiguration[];
@@ -672,12 +671,10 @@ model FlexProperties {
 @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
 @doc("Resource creation data model for flex VM provisioning")
 model ResourceProvisionFlexPayload {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("JSON object that contains VM properties that are common across all VMs in this batch")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
   baseProfile?: BulkVMConfiguration;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
   resourceOverrides?: BulkVMConfiguration[];

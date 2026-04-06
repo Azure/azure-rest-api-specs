@@ -1879,48 +1879,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
-      "type": "object",
-      "description": "The complex type of the extended location.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extended location."
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocationType",
-          "description": "The type of the extended location."
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
-    "Azure.ResourceManager.CommonTypes.ExtendedLocationType": {
-      "type": "string",
-      "description": "The supported ExtendedLocation types.",
-      "enum": [
-        "EdgeZone",
-        "CustomLocation"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EdgeZone",
-            "value": "EdgeZone",
-            "description": "Azure Edge Zones location type"
-          },
-          {
-            "name": "CustomLocation",
-            "value": "CustomLocation",
-            "description": "Azure Custom Locations type"
-          }
-        ]
-      }
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1951,34 +1909,6 @@
         ]
       },
       "readOnly": true
-    },
-    "BulkactionVMSpec": {
-      "type": "object",
-      "description": "Specifies the properties of a Virtual Machine",
-      "properties": {
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "The marketplace image plan used for the virtual machine."
-        },
-        "zones": {
-          "type": "array",
-          "description": "The availability zones.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
-          "description": "The extended location of the Virtual Machine."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags to apply to the virtual machines created by this bulk action.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "CancelOccurrenceRequest": {
       "type": "object",

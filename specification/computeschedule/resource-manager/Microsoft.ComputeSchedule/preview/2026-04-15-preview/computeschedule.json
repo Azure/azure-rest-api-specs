@@ -2095,6 +2095,122 @@
         }
       }
     },
+    "BulkActionVMExtension": {
+      "type": "object",
+      "description": "Defines a virtual machine extension.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the virtual machine extension."
+        },
+        "properties": {
+          "$ref": "#/definitions/BulkActionVmExtensionProperties",
+          "description": "Properties of the virtual machine extension."
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "BulkActionVMProfile": {
+      "type": "object",
+      "description": "Describes the properties of a Virtual Machine for create.",
+      "properties": {
+        "scheduledEventsPolicy": {
+          "$ref": "#/definitions/ScheduledEventsPolicy",
+          "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Specifies the network interfaces of the virtual machine."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Specifies the Security related profile settings for the virtual machine."
+        },
+        "diagnosticsProfile": {
+          "$ref": "#/definitions/DiagnosticsProfile",
+          "description": "Specifies the boot diagnostic settings state. Minimum compute api-version: 2015-06-15."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
+        },
+        "extensionsTimeBudget": {
+          "type": "string",
+          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). Minimum compute api-version: 2020-06-01."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. Minimum compute api-version: 2021-03-01."
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. Minimum compute api-version: 2021-04-01."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should be made available to the VM."
+        }
+      }
+    },
+    "BulkActionVMSpec": {
+      "type": "object",
+      "description": "Specifies the properties of a Virtual Machine",
+      "properties": {
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
+          "description": "The marketplace image plan used for the virtual machine."
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "The identity of the virtual machine, if configured."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location of the Virtual Machine."
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags to apply to the virtual machines created by this bulk action.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "vmProperties": {
+          "$ref": "#/definitions/BulkActionVMProfile",
+          "description": "Describes the properties of a Virtual Machine."
+        }
+      }
+    },
     "BulkActionVmExtensionProperties": {
       "type": "object",
       "description": "Describes the properties of a Virtual Machine Extension.",
@@ -2155,14 +2271,14 @@
       "description": "Specifies the configuration for a virtual machine operation",
       "properties": {
         "vmProperties": {
-          "$ref": "#/definitions/BulkactionVMSpec",
+          "$ref": "#/definitions/BulkActionVMSpec",
           "description": "Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure"
         },
         "extensions": {
           "type": "array",
           "description": "Virtual Machine Extensions Array to be applied to the Virtual Machines.",
           "items": {
-            "$ref": "#/definitions/BulkactionVMExtension"
+            "$ref": "#/definitions/BulkActionVMExtension"
           }
         },
         "computeApiVersion": {
@@ -2172,122 +2288,6 @@
         "name": {
           "type": "string",
           "description": "identifier for created virtual machine, if not passed it will create one from resource prefix."
-        }
-      }
-    },
-    "BulkactionVMExtension": {
-      "type": "object",
-      "description": "Defines a virtual machine extension.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the virtual machine extension."
-        },
-        "properties": {
-          "$ref": "#/definitions/BulkActionVmExtensionProperties",
-          "description": "Properties of the virtual machine extension."
-        }
-      },
-      "required": [
-        "name",
-        "properties"
-      ]
-    },
-    "BulkactionVMProfile": {
-      "type": "object",
-      "description": "Describes the properties of a Virtual Machine for create.",
-      "properties": {
-        "scheduledEventsPolicy": {
-          "$ref": "#/definitions/ScheduledEventsPolicy",
-          "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Specifies the storage settings for the virtual machine disks."
-        },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OSProfile",
-          "description": "Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned."
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
-          "description": "Specifies the network interfaces of the virtual machine."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Specifies the Security related profile settings for the virtual machine."
-        },
-        "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. Minimum compute api-version: 2015-06-15."
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
-        },
-        "extensionsTimeBudget": {
-          "type": "string",
-          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). Minimum compute api-version: 2020-06-01."
-        },
-        "scheduledEventsProfile": {
-          "$ref": "#/definitions/ScheduledEventsProfile",
-          "description": "Specifies Scheduled Event related configurations."
-        },
-        "userData": {
-          "type": "string",
-          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. Minimum compute api-version: 2021-03-01."
-        },
-        "capacityReservation": {
-          "$ref": "#/definitions/CapacityReservationProfile",
-          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. Minimum compute api-version: 2021-04-01."
-        },
-        "applicationProfile": {
-          "$ref": "#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM."
-        }
-      }
-    },
-    "BulkactionVMSpec": {
-      "type": "object",
-      "description": "Specifies the properties of a Virtual Machine",
-      "properties": {
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "The marketplace image plan used for the virtual machine."
-        },
-        "zones": {
-          "type": "array",
-          "description": "The availability zones.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/VirtualMachineIdentity",
-          "description": "The identity of the virtual machine, if configured."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
-          "description": "The extended location of the Virtual Machine."
-        },
-        "placement": {
-          "$ref": "#/definitions/Placement",
-          "description": "Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags to apply to the virtual machines created by this bulk action.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "vmProperties": {
-          "$ref": "#/definitions/BulkactionVMProfile",
-          "description": "Describes the properties of a Virtual Machine."
         }
       }
     },

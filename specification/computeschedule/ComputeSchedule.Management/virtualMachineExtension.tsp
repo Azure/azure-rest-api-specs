@@ -10,7 +10,7 @@ namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Defines a virtual machine extension.")
-model BulkactionVMExtension {
+model BulkActionVMExtension {
   @doc("The name of the virtual machine extension.")
   name: string;
 
