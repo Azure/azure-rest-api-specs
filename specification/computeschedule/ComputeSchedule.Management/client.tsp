@@ -242,6 +242,19 @@ using TypeSpec.Versioning;
   "csharp"
 );
 
+@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+  "AutomaticallyApproveRedeploy",
+  "csharp"
+);
+@@clientName(UserInitiatedReboot.automaticallyApprove,
+  "AutomaticallyApproveReboot",
+  "csharp"
+);
+@@clientName(AllInstancesDown.automaticallyApprove,
+  "AutomaticallyApproveAllInstancesDown",
+  "csharp"
+);
+
 @@clientName(OccurrenceExtension.listOccurrenceByVms,
   "GetAssociatedOccurrences",
   "csharp"
