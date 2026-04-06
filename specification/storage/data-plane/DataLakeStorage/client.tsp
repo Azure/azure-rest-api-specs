@@ -23,19 +23,22 @@ namespace Customizations;
   "sealed",
   "javascript"
 );
-
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.DataLake.StorageError,
   "header",
   "x-ms-error-code:errorCode",
   "javascript"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.DataLake.StorageError,
   "restErrorCodeHeader",
   "x-ms-error-code",
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.DataLake, "includeRootSlash", false, "javascript");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.DataLake, "omitSlashFromEmptyRoute", true, "python");
 
 @@clientName(Storage.DataLake.PathItem, "Path", "python");
