@@ -74,4 +74,58 @@ interface Toolboxes {}
 @@clientLocation(Azure.AI.Projects.Toolboxes.updateToolbox, Toolboxes);
 @@clientLocation(Azure.AI.Projects.Toolboxes.getToolbox, Toolboxes);
 @@clientLocation(Azure.AI.Projects.Toolboxes.listToolboxes, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.listToolboxVersions, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.getToolboxVersion, Toolboxes);
 @@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolbox, Toolboxes);
+@@clientLocation(Azure.AI.Projects.Toolboxes.deleteToolboxVersion, Toolboxes);
+
+interface Skills {}
+@@clientLocation(Azure.AI.Projects.Skills.createSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.createSkillFromPackage, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.getSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.downloadSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.listSkills, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
+@@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
+
+interface AgentInvocations {}
+@@clientLocation(Azure.AI.Projects.AgentInvocations.getAgentInvocationOpenApiSpec,
+  AgentInvocations
+);
+@@clientLocation(Azure.AI.Projects.AgentInvocations.createAgentInvocation,
+  AgentInvocations
+);
+@@clientLocation(Azure.AI.Projects.AgentInvocations.getAgentInvocation,
+  AgentInvocations
+);
+@@clientLocation(Azure.AI.Projects.AgentInvocations.cancelAgentInvocation,
+  AgentInvocations
+);
+
+interface AgentSessionFiles {}
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile,
+  AgentSessionFiles
+);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
+  AgentSessionFiles
+);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles,
+  AgentSessionFiles
+);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
+  AgentSessionFiles
+);
+
+interface ManagedAgentIdentityBlueprints {}
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint,
+  ManagedAgentIdentityBlueprints
+);
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint,
+  ManagedAgentIdentityBlueprints
+);
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint,
+  ManagedAgentIdentityBlueprints
+);
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints,
+  ManagedAgentIdentityBlueprints
+);
