@@ -71,7 +71,7 @@ directive:
   - suppress: UnSupportedPatchProperties
     reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
     from: trafficmanager.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].patch
+    where: $.definitions.Profile.properties
 ```
 
 ### Tag: package-preview-2024-04
