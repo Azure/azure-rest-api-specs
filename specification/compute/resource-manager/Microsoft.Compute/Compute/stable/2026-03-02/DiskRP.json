@@ -4146,9 +4146,9 @@
           "format": "int32",
           "description": "The immutability duration for the snapshot, in number of days."
         },
-        "state": {
+        "type": {
           "type": "string",
-          "description": "The state of the immutability policy. Possible values include: 'Unlocked', 'Locked'. When not specified, the immutability policy is not set ",
+          "description": "The type of the immutability policy. Possible values include: 'Unlocked', 'Locked'.",
           "enum": [
             "Unlocked",
             "Locked"
@@ -4160,12 +4160,12 @@
               {
                 "name": "Unlocked",
                 "value": "Unlocked",
-                "description": "The immutability policy of the snapshot can be modified by the privileged user."
+                "description": "Privileged users can modify the snapshot's immutability policy, if it is unlocked type."
               },
               {
                 "name": "Locked",
                 "value": "Locked",
-                "description": "The immutability policy of the snapshot can NOT be modified by any user until the locked period expires."
+                "description": "The snapshot immutability policy cannot be modified by any user until the lock period expires."
               }
             ]
           }
