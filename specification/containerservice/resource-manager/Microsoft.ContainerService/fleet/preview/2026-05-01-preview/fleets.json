@@ -5790,6 +5790,14 @@
           "description": "The max number of upgrades that can run concurrently in this specific group.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the group you want to tolerate at a time.\nActual concurrency may be lower depending on stage-level concurrency limits or individual member conditions.\nGroup maxConcurrency has a min value of \"1\". The max value is min(number of clusters in the group, the stage maxConcurrency).\nIf no value is provided, defaults to 1.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the number of clusters in the group. \n      Fractional results are rounded down. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\" --> up to 3 members from this group upgrade at once.\n    • \"100%\" --> “all at once”, up to all members for this group upgrade at the same time.\n    • \"25%\" --> up to 25% of the members in the group will be upgraded at the same time.",
           "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
         },
+        "memberSelector": {
+          "$ref": "#/definitions/MemberSelector",
+          "description": "Select the members of the group.\n  * If specified, label-based selection will override group name based selection.\n  * If not specified, group name based selection will be used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "beforeGates": {
           "type": "array",
           "description": "A list of Gates that will be created before this Group is executed.",
@@ -6129,7 +6137,7 @@
         },
         "memberSelector": {
           "$ref": "#/definitions/MemberSelector",
-          "description": "Select the members of the stage.\n  * Only key/value pairs with the `=` operator are accepted in the label selector.\n  * If empty or not specified, no Fleet members will be selected for the stage.\nSetting both `memberSelector` and `groups` is invalid.",
+          "description": "Select the members of the stage.\n  * If specified without UpdateGroup, one implicit group containing the selected members will be created.\n  * If specified with UpdateGroup, members will be pre-filtered before group-level selection logic is applied.\n  * If not specified, group-level selection logic will be used.",
           "x-ms-mutability": [
             "read",
             "create"
