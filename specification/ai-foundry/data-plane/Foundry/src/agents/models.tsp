@@ -886,3 +886,131 @@ model CreateAgentVersionFromCodeContent {
 model CreateAgentFromCodeContent {
   ...CreateAgentVersionFromCodeContent;
 }
+
+// ══════════════════════════════════════════════════════════
+// Session Lifecycle Management
+// ══════════════════════════════════════════════════════════
+
+// ── Session Status ──────────────────────────────────────
+
+/** The status of an agent session. */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
+)
+union AgentSessionStatus {
+  string,
+
+  /** Session initialization is in progress. */
+  Creating: "creating",
+
+  /** Session is running and operational. */
+  Active: "active",
+
+  /** Session sandbox is auto-suspended; resumes on next invocation. */
+  Idle: "idle",
+
+  /** Reserved for future session re-parenting flows. */
+  Updating: "updating",
+
+  /** Session initialization or lifecycle handling failed and requires delete to recover. */
+  Failed: "failed",
+
+  /** Session is being deleted (cleanup in progress). */
+  Deleting: "deleting",
+
+  /** Session has been explicitly deleted. */
+  Deleted: "deleted",
+
+  /** Session TTL exceeded (30 days from last activity). */
+  Expired: "expired",
+}
+
+// ── Version Indicator ───────────────────────────────────
+
+/** The type of version indicator used to determine the agent version backing a session. */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
+)
+union VersionIndicatorType {
+  string,
+
+  /** Direct reference to a specific agent version. */
+  VersionRef: "version_ref",
+}
+
+/** Base class for version indicators. Uses type discriminator for polymorphism. */
+@doc("Version indicator determining which agent version backs the session.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
+)
+@discriminator("type")
+model VersionIndicator {
+  /** The type of version indicator. */
+  type: VersionIndicatorType;
+}
+
+/** Version indicator that references a specific agent version by name. */
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
+)
+model VersionRefIndicator extends VersionIndicator {
+  /** Discriminator value for version_ref. */
+  type: VersionIndicatorType.VersionRef;
+
+  /** The agent version identifier returned by the agent version APIs. */
+  agent_version: string;
+}
+
+// ── Session Resource ────────────────────────────────────
+
+/** Represents an agent session resource. */
+@doc("An agent session providing a long-lived compute sandbox for hosted agent invocations.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
+)
+model AgentSessionResource {
+  /** The session identifier. */
+  agent_session_id: string;
+
+  /** The version indicator determining which agent version backs this session. */
+  version_indicator: VersionIndicator;
+
+  /** The current status of the session. */
+  status: AgentSessionStatus;
+
+  /** The Unix timestamp (in seconds) when the session was created. */
+  @encode("unixTimestamp", int64)
+  @visibility(Lifecycle.Read)
+  created_at: utcDateTime;
+
+  /** The Unix timestamp (in seconds) when the session was last accessed. */
+  @encode("unixTimestamp", int64)
+  @visibility(Lifecycle.Read)
+  last_accessed_at: utcDateTime;
+
+  /** The Unix timestamp (in seconds) when the session expires (rolling, 30 days from last activity). */
+  @encode("unixTimestamp", int64)
+  @visibility(Lifecycle.Read)
+  expires_at: utcDateTime;
+}
+
+// ── Session Request Models ──────────────────────────────
+
+/** Request body for creating a new agent session. */
+@doc("Request to create a new agent session.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
+)
+model CreateAgentSessionRequest {
+  /** Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted. */
+  agent_session_id?: string;
+
+  /** Determines which agent version backs the session. */
+  version_indicator: VersionIndicator;
+}

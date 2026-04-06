@@ -3,7 +3,6 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -333,5 +332,109 @@ interface Agents {
       @multipartBody body: CreateAgentVersionFromCodeContent;
     },
     AgentVersionObject
+  >;
+
+  // ── Session Lifecycle Operations ────────────────────────
+
+  /**
+   * Creates a new session for an agent endpoint.
+   * The endpoint resolves the backing agent version from `version_indicator` and
+   * enforces session ownership using the provided isolation key for session-mutating operations.
+   */
+  @post
+  @route("/agents/{agent_name}/endpoint/sessions")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  createSession is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent to create a session for. */
+      @path agent_name: string;
+
+      /** Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations. */
+      @header("x-session-isolation-key")
+      isolation_key: string;
+
+      ...CreateAgentSessionRequest;
+    },
+    ResourceCreatedResponse<AgentSessionResource>
+  >;
+
+  /**
+   * Retrieves a session by ID.
+   */
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  getSession is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The session identifier. */
+      @path session_id: string;
+    },
+    AgentSessionResource
+  >;
+
+  /**
+   * Deletes a session synchronously.
+   * Returns 204 No Content when the session is deleted or does not exist.
+   */
+  @delete
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  deleteSession is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The session identifier. */
+      @path session_id: string;
+
+      /** Isolation key used by the agent endpoint to enforce session ownership for session-mutating operations. */
+      @header("x-session-isolation-key")
+      isolation_key: string;
+    },
+    NoContentResponse
+  >;
+
+  /**
+   * Returns a list of sessions for the specified agent.
+   */
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions")
+  @list
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
+    }
+  )
+  listSessions is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<AgentSessionResource>
   >;
 }

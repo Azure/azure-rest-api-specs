@@ -44,7 +44,7 @@ interface AgentInvocations {
       /** The name of the agent. */
       @path agent_name: string;
 
-      /** Optional session ID to group related invocations. If not provided, a new session ID will be auto-generated. */
+      /** Optional session ID returned by the session CRUD APIs to reuse an existing sandbox. If not provided, a new session ID will be auto-generated. */
       @query agent_session_id?: string;
 
       /** The content type of the request body. */
