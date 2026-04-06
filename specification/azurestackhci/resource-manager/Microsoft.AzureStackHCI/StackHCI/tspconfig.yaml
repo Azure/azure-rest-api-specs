@@ -6,6 +6,9 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{project-root}/{version-status}/{version}/hci.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Hci"
+    emitter-output-dir: "{output-dir}/sdk/azurestackhci/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/azurestackhci
     module: github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhci
@@ -45,4 +48,4 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   service-dir:
-    default: sdk/placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    default: sdk/azurestackhci #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
