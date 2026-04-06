@@ -3,7 +3,6 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -350,7 +349,6 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   createSession is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -377,7 +375,6 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   getSession is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -402,7 +399,6 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   deleteSession is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {
@@ -431,7 +427,6 @@ interface Agents {
       required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
     }
   )
-  @removed(Versions.v1)
   listSessions is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
     {

@@ -898,7 +898,6 @@ model CreateAgentFromCodeContent {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-@removed(Versions.v1)
 union AgentSessionStatus {
   string,
 
@@ -934,7 +933,6 @@ union AgentSessionStatus {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-@removed(Versions.v1)
 union VersionIndicatorType {
   string,
 
@@ -948,7 +946,6 @@ union VersionIndicatorType {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-@removed(Versions.v1)
 @discriminator("type")
 model VersionIndicator {
   /** The type of version indicator. */
@@ -960,7 +957,6 @@ model VersionIndicator {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-@removed(Versions.v1)
 model VersionRefIndicator extends VersionIndicator {
   /** Discriminator value for version_ref. */
   type: VersionIndicatorType.VersionRef;
@@ -977,7 +973,6 @@ model VersionRefIndicator extends VersionIndicator {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-@removed(Versions.v1)
 model AgentSessionResource {
   /** The session identifier. */
   agent_session_id: string;
@@ -1012,7 +1007,6 @@ model AgentSessionResource {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
 )
-@removed(Versions.v1)
 model CreateAgentSessionRequest {
   /** Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted. */
   agent_session_id?: string;
