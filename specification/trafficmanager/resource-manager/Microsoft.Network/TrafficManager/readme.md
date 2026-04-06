@@ -60,6 +60,7 @@ directive:
   - suppress: XmsResourceInPutResponse
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
+    where: $.definitions.Resource
   - suppress: ResourceHasXMsResourceEnabled
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
@@ -67,6 +68,7 @@ directive:
   - suppress: UnSupportedPatchProperties
     reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
     from: trafficmanager.json
+    where: $.definitions.Profile
 ```
 
 ### Tag: package-preview-2024-04
