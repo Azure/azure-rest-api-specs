@@ -3180,7 +3180,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(Search.SearchServiceCounters, "ServiceCounters", "javascript");
 @@clientName(Search.SearchServiceLimits, "ServiceLimits", "javascript");
 @@clientName(Search.SearchAlias.eTag, "etag", "javascript");
-@@clientName(Search.RankingOrder.RerankerScore, "ReRankerScore", "javascript");
+@@clientName(Search.KnowledgeBase.eTag, "etag", "javascript");
+@@clientName(Search.RankingOrder.RerankerScore, "RerankerScore", "javascript");
 @@clientName(Search.ChatCompletionResponseFormat.jsonSchemaProperties,
   "chatCompletionSchemaProperties",
   "javascript"
