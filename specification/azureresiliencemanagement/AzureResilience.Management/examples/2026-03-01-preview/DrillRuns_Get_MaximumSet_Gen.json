@@ -108,6 +108,8 @@
                 "retryDetails": [
                   {
                     "retryAttempt": 1,
+                    "taskId": "task1",
+                    "taskName": "SampleTask",
                     "status": "Failed",
                     "startTime": "2025-05-15T11:00:00.000Z",
                     "endTime": "2025-05-15T11:30:00.000Z",
@@ -119,13 +121,17 @@
                         "Retry the operation"
                       ]
                     },
+                    "linkedJobIds": [
+                      "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryJobs/dc6998ef-80ed-4001-b6d4-5325a0309beh"
+                    ],
                     "userComments": [
                       {
                         "commentType": "Description",
                         "commentTime": "2025-05-15T11:30:00.000Z",
                         "comments": "First retry attempt failed"
                       }
-                    ]
+                    ],
+                    "subTasksList": []
                   }
                 ]
               }
