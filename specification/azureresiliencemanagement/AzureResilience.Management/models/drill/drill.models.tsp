@@ -66,7 +66,7 @@ model DrillProperties {
   chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
 
   @doc("Chaos Experiment properties.")
-  chaosExperimentProperties: ChaosExperimentPropertiesOfDrill;
+  chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
   @doc("Execution state of the Drill. Whether it is currently running or not.")
   @visibility(Lifecycle.Read)
