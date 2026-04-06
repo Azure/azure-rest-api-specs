@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/deployments"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/deployments.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-deployments"
+    namespace: "azure.mgmt.resource.deployments"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-deployments"
+    namespace: "com.azure.resourcemanager.deployments"
+    service-name: "Deployments" # human-readable service name, whitespace allowed
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesdeployments"
+    service-dir: "sdk/resources"
+    compatibility-lro: true
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourcesdeployments"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeployments"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdeployments"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    stutter: resources
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

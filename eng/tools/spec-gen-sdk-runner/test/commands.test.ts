@@ -387,6 +387,127 @@ describe("generateSdkForSpecPr", () => {
     );
   });
 
+  test("should not set hasTypeSpecProjects when generateFromTypeSpec is true but executionResult is notEnabled", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "batch",
+      sdkRepoName: "azure-sdk-for-net",
+      sdkLanguage: SdkName.Net,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: [
+          "specification/reservations/resource-manager/Microsoft.Capacity/preview/2021-10-01-preview/examples/Reservations_Get.json",
+        ],
+        typespecProject:
+          "specification/reservations/resource-manager/Microsoft.Capacity/Reservations/tspconfig.yaml",
+        readmeMd: "specification/reservations/resource-manager/readme.md",
+      },
+    ];
+    const mockExecutionReport = {
+      executionResult: "notEnabled",
+      generateFromTypeSpec: true,
+      packages: [],
+      vsoLogPath: "path/to/log",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    const { statusCode } = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    // Verify hasTypeSpecProjects is false because executionResult is "notEnabled"
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "notEnabled", // overallExecutionResult
+      false, // overallRunHasBreakingChange
+      true, // hasManagementPlaneSpecs
+      false, // hasTypeSpecProjects - should be false since executionResult is "notEnabled"
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      true, // sdkGenerationExecuted
+    );
+  });
+
+  test("should set hasTypeSpecProjects when generateFromTypeSpec is true and executionResult is not notEnabled", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "batch",
+      sdkRepoName: "azure-sdk-for-net",
+      sdkLanguage: SdkName.Net,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: [
+          "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
+        ],
+        typespecProject: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        readmeMd: "specification/contosowidgetmanager/resource-manager/readme.md",
+      },
+    ];
+    const mockExecutionReport = {
+      executionResult: "succeeded",
+      generateFromTypeSpec: true,
+      packages: [],
+      vsoLogPath: "path/to/log",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    const { statusCode } = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    // Verify hasTypeSpecProjects is true because executionResult is "succeeded"
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded", // overallExecutionResult
+      false, // overallRunHasBreakingChange
+      true, // hasManagementPlaneSpecs
+      true, // hasTypeSpecProjects - should be true since executionResult is "succeeded"
+      "", // stagedArtifactsFolder
+      [], // apiViewRequestData
+      true, // sdkGenerationExecuted
+    );
+  });
+
   test("should handle errors during execution report reading for a changed spec", async () => {
     const mockCommandInput = {
       localSdkRepoPath: "path/to/local/repo",
