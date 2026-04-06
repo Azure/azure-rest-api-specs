@@ -61,6 +61,18 @@ directive:
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
     where: $.definitions.Resource
+  - suppress: XmsResourceInPutResponse
+    reason: Pre-existing issue - legacy User Metrics model does not set x-ms-azure-resource
+    from: trafficmanager.json
+    where: $.definitions.UserMetricsModel
+  - suppress: XmsResourceInPutResponse
+    reason: Pre-existing issue - legacy Profile model does not set x-ms-azure-resource
+    from: trafficmanager.json
+    where: $.definitions.Profile
+  - suppress: XmsResourceInPutResponse
+    reason: Pre-existing issue - legacy Endpoint model does not set x-ms-azure-resource
+    from: trafficmanager.json
+    where: $.definitions.Endpoint
   - suppress: ResourceHasXMsResourceEnabled
     reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
     from: trafficmanager.json
