@@ -2920,7 +2920,7 @@ union NextHopType {
   HyperNetGateway: "HyperNetGateway",
 
   /**
-   * VirtualApplianceEcmp
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
    */
   @added(Versions.v2025_07_01)
   VirtualApplianceEcmp: "VirtualApplianceEcmp",

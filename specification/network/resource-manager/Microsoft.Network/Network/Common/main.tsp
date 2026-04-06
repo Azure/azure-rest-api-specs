@@ -38,7 +38,6 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.versioned(Versions)
 namespace Common;
@@ -169,7 +168,7 @@ union RouteNextHopType {
   VirtualAppliance: "VirtualAppliance",
 
   /**
-   * VirtualApplianceEcmp
+   * Routes traffic to virtual appliances using Equal-Cost Multi-Path (ECMP) routing with multiple next hop IP addresses.
    */
   @added(Versions.v2025_07_01)
   VirtualApplianceEcmp: "VirtualApplianceEcmp",
@@ -3806,7 +3805,7 @@ model RoutePropertiesFormat {
 /**
  * The next hop definition for ECMP routes containing multiple next hop IP addresses.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield service: RouteNextHopEcmp uses Legacy.feature for consistency with existing Network routing models"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @added(Versions.v2025_07_01)
 model RouteNextHopEcmp {
@@ -3815,7 +3814,7 @@ model RouteNextHopEcmp {
    */
   @minItems(2)
   @maxItems(64)
-  nextHopIpAddresses?: string[];
+  nextHopIpAddresses: string[];
 }
 
 /**
