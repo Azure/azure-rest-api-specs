@@ -87,7 +87,7 @@ model CommitProperties {
   activeLocations?: string[];
 
   /**
-   * Unique identifier for this commit.
+   * A value that, when changed, forces the commit to be re-evaluated and redeployed.
    */
   forceUpdateTag?: string;
 }
@@ -121,7 +121,7 @@ interface Commits {
   >;
 
   /**
-   * Lists the specified commit.
+   * Lists all commits for the specified network manager.
    */
   list is ArmResourceListByParent<
     Commit,

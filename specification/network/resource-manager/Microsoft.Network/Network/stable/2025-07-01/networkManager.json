@@ -943,7 +943,7 @@
         "tags": [
           "Commits"
         ],
-        "description": "Lists the specified commit.",
+        "description": "Lists all commits for the specified network manager.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -992,6 +992,11 @@
             "schema": {
               "$ref": "./common.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Manager Commit": {
+            "$ref": "./examples/NetworkManagerCommitList.json"
           }
         },
         "x-ms-pageable": {
@@ -1044,6 +1049,11 @@
             "schema": {
               "$ref": "./common.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Network Manager Commit": {
+            "$ref": "./examples/NetworkManagerCommitGet.json"
           }
         }
       },
@@ -1119,6 +1129,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or Update Network Manager Commit": {
+            "$ref": "./examples/NetworkManagerCommitPut.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/Commit"
@@ -1183,6 +1198,11 @@
             "schema": {
               "$ref": "./common.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Network Manager Commit": {
+            "$ref": "./examples/NetworkManagerCommitDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5741,7 +5761,7 @@
         },
         "forceUpdateTag": {
           "type": "string",
-          "description": "Unique identifier for this commit."
+          "description": "A value that, when changed, forces the commit to be re-evaluated and redeployed."
         }
       },
       "required": [
