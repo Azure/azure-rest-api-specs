@@ -225,7 +225,7 @@ interface Agents {
 
       ...CreateAgentSessionRequest;
     },
-    OkResponse<AgentSessionResource>
+    ResourceCreatedResponse<AgentSessionResource>
   >;
 
   /**
@@ -300,11 +300,8 @@ interface Agents {
       /** The name of the agent. */
       @path agent_name: string;
 
-      ...PageLimitQueryParameter;
-
-      /** Opaque continuation token from a previous list response. */
-      @query pagination_token?: string;
+      ...CommonPageQueryParameters;
     },
-    SessionListResult
+    AgentsPagedResult<AgentSessionResource>
   >;
 }
