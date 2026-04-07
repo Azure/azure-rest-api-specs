@@ -23,7 +23,7 @@ interface Skills {
   >;
 
   /**
-   * Creates a skill from a gzip package.
+   * Creates a skill from a zip package.
    */
   @post
   @route("/skills:import")
