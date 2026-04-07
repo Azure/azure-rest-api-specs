@@ -370,7 +370,18 @@
             "description": "The operation was successful."
           },
           "202": {
-            "description": "The operation will be completed asynchronously."
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL for checking the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before querying the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
