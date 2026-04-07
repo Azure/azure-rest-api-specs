@@ -380,6 +380,28 @@ union NatGatewaySkuName {
 }
 
 /**
+ * Whether Nat64 is enabled for the NAT gateway resource.
+ */
+union Nat64State {
+  string,
+
+  /**
+   * None
+   */
+  None: "None",
+
+  /**
+   * Enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Disabled
+   */
+  Disabled: "Disabled",
+}
+
+/**
  * Migration phase of Public IP Address.
  */
 union PublicIPAddressMigrationPhase {
@@ -3175,6 +3197,11 @@ model NatGatewayPropertiesFormat {
    * Reference to an existing service gateway.
    */
   serviceGateway?: SubResource;
+
+  /**
+   * Whether Nat64 is enabled for the NAT gateway resource.
+   */
+  nat64?: Nat64State;
 
   /**
    * The resource GUID property of the NAT gateway resource.
