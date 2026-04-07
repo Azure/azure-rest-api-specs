@@ -430,7 +430,13 @@
             "description": "The long running image build has been canceled."
           },
           "202": {
-            "description": "The request is accepted."
+            "description": "The request is accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
