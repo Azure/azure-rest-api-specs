@@ -94,7 +94,20 @@ union PublicNetworkAccess {
 /**
  * Paginated list of private link resources. Contains an array of private links and optional pagination information.
  */
-model PrivateLinksList is Azure.Core.Page<PrivateLinkResource>;
+model PrivateLinksList {
+  /**
+   * The PrivateLinkResource items on this page
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value: PrivateLinkResource[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Properties of a private link resource. These properties control the behavior and configuration of private endpoint connectivity to Defender services.

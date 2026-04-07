@@ -24,10 +24,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * API spec for Microsoft.Security (Azure Security Center) resource provider
+ * API specification for Microsoft.Security (Microsoft Defender for Cloud) private links resource provider. This API enables customers to create and manage private endpoint connections to Defender for Cloud services, providing secure connectivity without exposing traffic to the public internet. private links support private connectivity to Defender APIs and regional data endpoints.
  */
 @armProviderNamespace
-@service(#{ title: "SecurityCenter" })
+@service(#{ title: "Microsoft Defender for Cloud - private links" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Security;

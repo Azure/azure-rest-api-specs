@@ -47,3 +47,14 @@ using Microsoft.Security;
   autoMergeService: true,
 })
 namespace SecurityManagementClient;
+
+model `private-link-parameters` {
+  /**
+   * The name of the private link resource.
+   */
+  @path
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+  privateLinkName: string;
+}
