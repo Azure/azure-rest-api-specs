@@ -49,21 +49,6 @@ model CrossTenantVaultMappingResource
 @armResourceOperations
 interface CrossTenantVaultMappings {
   /**
-   * Gets a specific cross-tenant vault mapping configuration for cross-tenant restore operations.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operationId and x-ms-examples required for service contract compatibility"
-  @operationId("CrossTenantVaultMapping_Get")
-  @extension(
-    "x-ms-examples",
-    #{
-      `Get Cross Tenant Vault Mapping`: #{
-        $ref: "./examples/CrossTenantVaultMappingOperations/GetCrossTenantVaultMapping.json",
-      },
-    }
-  )
-  getCrossTenantVaultMapping is ArmResourceRead<CrossTenantVaultMappingResource>;
-
-  /**
    * Creates or updates the cross-tenant vault mapping for cross-tenant restore operations.
    * This API updates the target vault properties with source vault ID and creates catalog mapping.
    */

@@ -501,58 +501,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}": {
-      "get": {
-        "operationId": "CrossTenantVaultMapping_Get",
-        "tags": [
-          "CrossTenantVaultMappings"
-        ],
-        "description": "Gets a specific cross-tenant vault mapping configuration for cross-tenant restore operations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "vaultName",
-            "in": "path",
-            "description": "The name of the VaultResource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "crossTenantVaultMappingName",
-            "in": "path",
-            "description": "Cross-tenant vault mapping name.",
-            "required": true,
-            "type": "string",
-            "pattern": ".*"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CrossTenantVaultMappingResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Cross Tenant Vault Mapping": {
-            "$ref": "./examples/CrossTenantVaultMappingOperations/GetCrossTenantVaultMapping.json"
-          }
-        }
-      },
       "put": {
         "operationId": "CrossTenantVaultMapping_Create",
         "tags": [
@@ -10526,16 +10474,19 @@
         },
         "sourceTenantId": {
           "type": "string",
-          "description": "Tenant ID of the source vault for cross-tenant mapping."
+          "description": "Tenant ID of the source vault for cross-tenant mapping.",
+          "readOnly": true
         },
         "mappingName": {
           "type": "string",
-          "description": "Name of the mapping."
+          "description": "Name of the mapping.",
+          "readOnly": true
         },
         "createdTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the mapping was created."
+          "description": "Timestamp when the mapping was created.",
+          "readOnly": true
         },
         "resourceGuardOperationRequests": {
           "type": "array",

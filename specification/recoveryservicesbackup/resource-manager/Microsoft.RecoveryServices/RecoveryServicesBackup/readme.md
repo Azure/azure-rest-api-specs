@@ -576,6 +576,14 @@ directive:
     from: bms.json
     where: $.definitions.VaultCredentialCertificateResponse
     reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings"]
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would be a breaking change affecting the entire specification.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping"]
+    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility. Adding a pattern would be a breaking change affecting the entire specification.
 
 suppressions:
   - from: bms.json
