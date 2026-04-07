@@ -12,7 +12,15 @@ namespace Microsoft.OpenEnergyPlatform;
 @doc("The provisioning state of the resource.")
 union ProvisioningState {
   string,
-  ResourceProvisioningState,
+
+  @doc("Resource has been created successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
 
   @doc("Resource is being created.")
   Creating: "Creating",
@@ -52,6 +60,7 @@ model DataPartitionNames {
 
 @doc("The resource model definition used for updating a tracked ARM resource.")
 model EnergyResourceUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags use Record type per ARM convention"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -77,5 +86,6 @@ model DataPartitionsListResult {
   dataPartitionInfo?: DataPartitionProperties[];
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing API requires empty body for listPartitions"
 @doc("Empty request body for list partitions action.")
 model ListPartitionsRequest {}

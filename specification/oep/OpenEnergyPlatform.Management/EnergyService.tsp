@@ -39,6 +39,7 @@ interface EnergyServices {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<EnergyService, EnergyResourceUpdate>;
 
+  #suppress "deprecated" "Existing API returns 200, 202, 204 - ArmResourceDeleteAsync is the correct pattern"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns 200, 202, 204"
   @doc("Deletes oep resource")
   delete is ArmResourceDeleteAsync<EnergyService>;
@@ -53,6 +54,9 @@ interface EnergyServices {
   checkNameAvailability is checkGlobalNameAvailability;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-response-codes" "Existing API returns 202 only"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API returns 202 only"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API uses Azure-AsyncOperation header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing API returns body in 202 response"
   @doc("Method that gets called if new partition is to be added in a resource.")
   @armResourceAction(EnergyService)
   @post
@@ -61,10 +65,13 @@ interface EnergyServices {
     ...ResourceInstanceParameters<EnergyService>,
     @doc("add partition action payload")
     @body
-    body?: DataPartitionAddOrRemoveRequest,
+    body: DataPartitionAddOrRemoveRequest,
   ): ArmAcceptedLroResponse<"The data partitions will be created asynchronously", DataPartitionAddOrRemoveRequest> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-response-codes" "Existing API returns 202 only"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API returns 202 only"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API uses Azure-AsyncOperation header"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing API returns body in 202 response"
   @doc("Method that gets called if new partition is to be removed from a resource.")
   @armResourceAction(EnergyService)
   @post
@@ -73,7 +80,7 @@ interface EnergyServices {
     ...ResourceInstanceParameters<EnergyService>,
     @doc("remove partition action payload")
     @body
-    body?: DataPartitionAddOrRemoveRequest,
+    body: DataPartitionAddOrRemoveRequest,
   ): ArmAcceptedLroResponse<"The data partitions will be deleted asynchronously", DataPartitionAddOrRemoveRequest> | ErrorResponse;
 
   @doc("Method that gets called when list of partitions is requested.")

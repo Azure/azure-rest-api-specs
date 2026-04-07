@@ -10,36 +10,6 @@ options:
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/Microsoft.OpenEnergyPlatform/{version-status}/{version}/openenergyplatform.json"
-  "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-openenergyplatform"
-    namespace: "azure.mgmt.openenergyplatform"
-    flavor: "azure"
-    generate-test: true
-    generate-sample: true
-  "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-openenergyplatform"
-    flavor: "azure"
-    namespace: "com.azure.resourcemanager.openenergyplatform"
-    service-name: "Open Energy Platform"
-  "@azure-tools/typespec-ts":
-    experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-openenergyplatform"
-    flavor: azure
-    package-details:
-      name: "@azure/arm-openenergyplatform"
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/openenergyplatform"
-    emitter-output-dir: "{output-dir}/{service-dir}/armopenenergyplatform"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armopenenergyplatform"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
-  "@azure-tools/typespec-csharp":
-    namespace: "Azure.ResourceManager.OpenEnergyPlatform"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
