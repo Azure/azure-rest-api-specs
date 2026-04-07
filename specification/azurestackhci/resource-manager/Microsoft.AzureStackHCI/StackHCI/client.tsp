@@ -411,7 +411,10 @@ using Microsoft.AzureStackHCI;
   "HciNetworkAdapter",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.OsProfile, "HciDeploymentOSProfile", "csharp");
+@@clientName(Microsoft.AzureStackHCI.OsProfile,
+  "HciDeploymentOSProfile",
+  "csharp"
+);
 @@clientName(Microsoft.AzureStackHCI.UserDetails, "HciUserDetails", "csharp");
 @@clientName(Microsoft.AzureStackHCI.TimeConfiguration,
   "HciTimeConfiguration",
