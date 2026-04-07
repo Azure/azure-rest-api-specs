@@ -279,21 +279,64 @@ model DirectoryClientParameters {
   "csharp"
 );
 
+// Defining an override for backward compatibility for C# since the XML payload was serialized with the
+// elements/properties in a different order than defined in the swagger.
+
+/**
+ * Storage service properties.
+ */
+@Xml.name("StorageServiceProperties")
+model StorageServicePropertiesCsharp {
+  /**
+   * A summary of request statistics grouped by API in hourly aggregates for files.
+   */
+  @Xml.name("HourMetrics") hourMetrics?: StorageServiceProperties.hourMetrics;
+
+  /**
+   * A summary of request statistics grouped by API in minute aggregates for files.
+   */
+  @Xml.name("MinuteMetrics") minuteMetrics?: StorageServiceProperties.minuteMetrics;
+
+  /**
+   * Protocol settings
+   */
+  @Xml.name("ProtocolSettings") protocol?: StorageServiceProperties.protocol;
+
+  /**
+   * The set of CORS rules.
+   */
+  @Xml.name("Cors") cors?: CorsRule[];
+}
+
+
 @@alternateType(AccessPolicy.start, utcDateTime, "csharp");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
 @@alternateType(MetadataHeaders.metadata, Record<string>, "csharp");
 @@alternateType(FileProperty.eTag, string, "csharp");
+@@alternateType(StorageServiceProperties, StorageServicePropertiesCsharp, "csharp");
+@@alternateType(ShareStats.shareUsageBytes, int64, "csharp");
 
+@@clientName(StorageServicePropertiesCsharp, "StorageServiceProperties", "csharp");
 @@clientName(Storage.File, "ShareClient", "csharp");
-@@clientName(AccessPolicy.start, "StartsOn", "csharp");
-@@clientName(AccessPolicy.expiry, "ExpiresOn", "csharp");
+@@clientName(AccessPolicy.start, "PolicyStartsOn", "csharp");
+@@clientName(AccessPolicy.expiry, "PolicyExpiresOn", "csharp");
+@@clientName(AccessPolicy.permission, "Permissions", "csharp");
 @@clientName(Directory, "DirectoryRestClient", "csharp");
 @@clientName(File, "FileRestClient", "csharp");
 @@clientName(Service, "ServiceRestClient", "csharp");
 @@clientName(Share, "ShareRestClient", "csharp");
 @@clientName(StorageErrorCode, "ShareErrorCode", "csharp");
 @@clientName(PermissionCopyModeType, "PermissionCopyMode", "csharp");
+@@clientName(FileRangeWriteType, "ShareFileRangeWriteType", "csharp");
+@@clientName(LeaseDurationType, "ShareLeaseDuration", "csharp");
+@@clientName(LeaseStateType, "ShareLeaseState", "csharp");
+@@clientName(LeaseStatusType, "ShareLeaseStatus", "csharp");
+
 @@access(FileRangeWriteFromUrlType, Access.internal, "csharp");
+@@access(ListSharesIncludeType, Access.internal, "csharp");
+@@access(ListFilesIncludeType, Access.internal, "csharp");
+@@access(DeleteSnapshotsOptionType, Access.internal, "csharp");
+@@access(AccessRight, Access.internal, "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.File.MetadataHeaders.metadata,
