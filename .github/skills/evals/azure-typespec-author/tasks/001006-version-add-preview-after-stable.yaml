@@ -9,43 +9,80 @@ tags:
 inputs:
   prompt: "add a new preview version `2025-05-04-preview` to my service widget resource manager. Carry over all the features from the latest stable version"
   files:
-    - path: Microsoft.Widget/Widget/employee.tsp
-    - path: Microsoft.Widget/Widget/main.tsp
-    - path: Microsoft.Widget/Widget/shared.tsp
-    - path: Microsoft.Widget/Widget/tspconfig.yaml
-    - path: Microsoft.Widget/Widget/package.json
+    - path: 001006-version-add-preview-after-stable\employee.tsp
+    - path: 001006-version-add-preview-after-stable\main.tsp
+    - path: 001006-version-add-preview-after-stable\shared.tsp
+    - path: 001006-version-add-preview-after-stable\tspconfig.yaml
+    - path: 001006-version-add-preview-after-stable\package.json
+    - path: 001006-version-add-preview-after-stable\readme.md
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_Delete_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_Get_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Employees_Update_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Operations_List_MaximumSet_Gen.json
+    - path: 001006-version-add-preview-after-stable\examples\2024-10-01\Operations_List_MinimumSet_Gen.json
+
 expected:
   output_contains:
     - "Task Type"
     - "API Version Evolution"
-  graders:
-    - type: diff
-      name: version_enum_check
-      config:
-        expected_files:
-          - path: "Microsoft.Widget/Widget/main.tsp"
-            contains:
-              - "+@previewVersion"
-              - '+v2025-05-04-preview: "2025-05-04-preview"'
-    - type: action_sequence
-      name: mcp_workflow
-      config:
-        matching_mode: in_order_match
-        expected_actions:
-          - edit
-          - azsdk_run_typespec_validation
-    - type: tool_constraint
-      name: mcp_guardrails
-      config:
-        expect_tools:
-          - edit
-          - azsdk_run_typespec_validation
-    - type: prompt
-      name: setup_check
-      config:
-        prompt: |
-          A new preview version `2025-05-04-preview` has been added to the Versions enum in main.tsp. The new version is decorated with @previewVersion and has the correct version string.
+graders:
+  # - type: diff
+  #   name: version_enum_check
+  #   config:
+  #     expected_files:
+  #       - path: "Microsoft.Widget/Widget/main.tsp"
+  #         contains:
+  #           - "+@previewVersion"
+  #           - '+v2025-05-04-preview: "2025-05-04-preview"'
+  # - type: action_sequence
+  #   name: mcp_workflow
+  #   config:
+  #     matching_mode: in_order_match
+  #     expected_actions:
+  #       - edit
+  #       - azsdk_run_typespec_validation
+  # - type: tool_constraint
+  #   name: mcp_guardrails
+  #   config:
+  #     expect_tools:
+  #       - edit
+  #       - azsdk_run_typespec_validation
+  # Deterministic checks: new version present, old stable not deleted, new examples created
+  - type: file
+    name: file_structure_check
+    config:
+      must_exist:
+        - "001006-version-add-preview-after-stable/examples/2025-05-04-preview/Employees_Get_MaximumSet_Gen.json"
+      content_patterns:
+        - path: "001006-version-add-preview-after-stable/main.tsp"
+          must_match:
+            - "2025-05-04-preview"
+            - "2024-10-01"
+  # LLM judge: verify no unintended changes and features correctly carried over
+  - type: prompt
+    name: code_quality_check
+    config:
+      prompt: |
+        Check the modified employee.tsp and main.tsp and verify:
+        1. The old stable version `2024-10-01` is still present in the Versions enum (it should NOT be deleted).
+        2. All changes are related to adding the new preview version `2025-05-04-preview`. No unintended modifications to existing features.
 
-          If all criteria are met, call set_waza_grade_pass.
-          Otherwise, call set_waza_grade_fail with your reasoning.
-        model: "gpt-4o-mini"
+        If correct, call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with your reasoning.
+      model: "gpt-4o-mini"
+      continue_session: true

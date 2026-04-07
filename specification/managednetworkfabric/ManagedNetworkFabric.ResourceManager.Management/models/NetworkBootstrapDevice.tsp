@@ -70,7 +70,7 @@ model NetworkBootstrapDeviceProperties {
   secretRotationStatus?: SecretRotationStatus[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Network Bootstrap Device Patch Parameters defines the patch parameters of the resource.")
 @added(Versions.v2025_07_15)
 model NetworkBootstrapDevicePatch extends TagsUpdate {
