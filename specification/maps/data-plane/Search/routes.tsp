@@ -162,7 +162,7 @@ interface Search {
    * ### Submit Synchronous Batch Request
    * The Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.
    * ```
-   * POST https://atlas.microsoft.com/geocode:batch?api-version=2023-06-01
+   * POST https://atlas.microsoft.com/geocode:batch?api-version={api-version}
    * ```
    * ### POST Body for Batch Request
    * To send the _geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _geocoding_ queries:
@@ -367,7 +367,7 @@ interface Search {
    * ### Submit Synchronous Batch Request
    * The Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.
    * ```
-   * POST https://atlas.microsoft.com/reverseGeocode:batch?api-version=2023-06-01
+   * POST https://atlas.microsoft.com/reverseGeocode:batch?api-version={api-version}
    * ```
    * ### POST Body for Batch Request
    * To send the _reverse geocoding_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _reverse geocoding_ queries:
