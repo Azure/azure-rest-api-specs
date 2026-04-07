@@ -32,7 +32,7 @@ model SovereignViewScope {
   ]>[];
 
   @doc("The subscription ids in scope.")
-  subscriptions: string[];
+  subscriptions: uuid[];
 }
 
 @added(Versions.Preview20260315)
