@@ -1,0 +1,454 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-01-31-preview",
+    "title": "Azure Clean Room API",
+    "description": "Azure Clean Room API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/collaborations/{collaborationName}": {
+      "put": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "Collaborations_Create",
+        "description": "Create or update a collaboration.",
+        "x-ms-examples": {
+          "Create Collaboration": {
+            "$ref": "./examples/collaborations/Collaborations_Create.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CollaborationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The collaboration to create or update.",
+            "schema": {
+              "$ref": "#/definitions/Collaboration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Collaboration"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Collaboration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "Collaborations_Get",
+        "description": "Get a collaboration.",
+        "x-ms-examples": {
+          "Get a collaboration": {
+            "$ref": "./examples/collaborations/Collaborations_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CollaborationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Collaboration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "Collaborations_Update",
+        "description": "Updates tags on a collaboration.",
+        "x-ms-examples": {
+          "Update tags on a collaboration": {
+            "$ref": "./examples/collaborations/Collaborations_Update.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CollaborationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "./commonTypes.json#/definitions/ResourceTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Collaboration"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "Collaborations_Delete",
+        "description": "Deletes a collaboration.",
+        "x-ms-examples": {
+          "Delete a collaboration": {
+            "$ref": "./examples/collaborations/Collaborations_Delete.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CollaborationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CleanRoom/collaborations": {
+      "get": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "Collaborations_ListBySubscription",
+        "description": "List collaborations in a subscription.",
+        "x-ms-examples": {
+          "List collaborations in subscription": {
+            "$ref": "./examples/collaborations/Collaborations_ListBySubscription.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CollaborationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/collaborations": {
+      "get": {
+        "tags": [
+          "Collaborations"
+        ],
+        "operationId": "Collaborations_ListByResourceGroup",
+        "description": "List collaborations in a resource group.",
+        "x-ms-examples": {
+          "List collaborations in resource group": {
+            "$ref": "./examples/collaborations/Collaborations_ListByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CollaborationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Collaboration": {
+      "description": "Defines the collaboration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/CollaborationProperties"
+        },
+        "kind": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "CollaborationsList": {
+      "description": "List of collaborations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of collaborations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of collaborations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Collaboration"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CollaborationProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "consortiumEndpoint": {
+          "description": "Gets or sets the CCF endpoint.",
+          "type": "string"
+        },
+        "consortiumServiceCertificatePem": {
+          "description": "Gets or sets the CCF public service certificate in PEM format.",
+          "type": "string"
+        },
+        "member": {
+          "description": "Gets or sets the collaboration member.",
+          "$ref": "#/definitions/CollaborationMember"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "$ref": "./commonTypes.json#/definitions/ProvisioningState"
+        }
+      },
+      "required": [
+        "consortiumEndpoint",
+        "consortiumServiceCertificatePem",
+        "member"
+      ]
+    },
+    "CollaborationMember": {
+      "description": "Configuration details of the collaboration members.",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "description": "Identifier of the member.",
+          "type": "string",
+          "readOnly": true
+        },
+        "signature": {
+          "description": "Signature of the member (member identifier signed using the member private certificate).",
+          "type": "string"
+        },
+        "certificatePem": {
+          "description": "Gets or sets the public certificate of the member in PEM format.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "signature",
+        "certificatePem"
+      ]
+    }
+  },
+  "parameters": {
+    "CollaborationNameParameter": {
+      "name": "collaborationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Name of the collaboration.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

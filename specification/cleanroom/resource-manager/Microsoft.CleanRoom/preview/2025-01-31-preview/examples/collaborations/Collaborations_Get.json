@@ -1,29 +1,27 @@
 {
   "parameters": {
     "api-version": "2025-01-31-preview",
-    "collaborationName": "ContosoCollaboration",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "testrg",
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+    "collaborationName": "ContosoCollaboration"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/collaborations/ContosoCollaboration",
         "name": "ContosoCollaboration",
         "type": "Microsoft.CleanRoom/Collaborations",
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.CleanRoom/collaborations/ContosoCollaboration",
         "location": "northeurope",
         "properties": {
           "consortiumEndpoint": "https://ContosoEndpoint/",
           "consortiumServiceCertificatePem": "Contoso certificate pem",
           "member": {
-            "certificatePem": "Contose member certificate pem",
-            "signature": "Contoso member signature"
+            "signature": "Contoso member singature",
+            "certificatePem": "Contose member certificate pem"
           },
           "provisioningState": "Succeeded"
         }
       }
     }
-  },
-  "operationId": "Collaborations_Get",
-  "title": "Get a collaboration"
+  }
 }

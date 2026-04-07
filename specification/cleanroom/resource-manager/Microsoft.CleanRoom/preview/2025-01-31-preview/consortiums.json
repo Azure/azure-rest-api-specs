@@ -1,0 +1,598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-01-31-preview",
+    "title": "Azure Clean Room API",
+    "description": "Azure Clean Room API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/consortiums/{consortiumName}": {
+      "put": {
+        "tags": [
+          "Consortiums"
+        ],
+        "operationId": "Consortiums_Create",
+        "description": "Create or update a consortium.",
+        "x-ms-examples": {
+          "Create Consortium": {
+            "$ref": "./examples/consortiums/Consortiums_Create.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsortiumNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The consortium to create or update.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "Consortiums"
+        ],
+        "operationId": "Consortiums_Get",
+        "description": "Get a consortium.",
+        "x-ms-examples": {
+          "Get a consortium": {
+            "$ref": "./examples/consortiums/Consortiums_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsortiumNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Consortiums"
+        ],
+        "operationId": "Consortiums_Update",
+        "description": "Updates tags on a consortium.",
+        "x-ms-examples": {
+          "Update tags on a consortium": {
+            "$ref": "./examples/consortiums/Consortiums_Update.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsortiumNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource properties to update.",
+            "schema": {
+              "$ref": "./commonTypes.json#/definitions/ResourceTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Consortiums"
+        ],
+        "operationId": "Consortiums_Delete",
+        "description": "Deletes a consortium.",
+        "x-ms-examples": {
+          "Delete a consortium": {
+            "$ref": "./examples/consortiums/Consortiums_Delete.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsortiumNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CleanRoom/consortiums": {
+      "get": {
+        "tags": [
+          "Consortiums"
+        ],
+        "operationId": "Consortiums_ListBySubscription",
+        "description": "List consortiums in a subscription.",
+        "x-ms-examples": {
+          "List consortiums in subscription": {
+            "$ref": "./examples/consortiums/Consortiums_ListBySubscription.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConsortiumsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/consortiums": {
+      "get": {
+        "tags": [
+          "Consortiums"
+        ],
+        "operationId": "Consortiums_ListByResourceGroup",
+        "description": "List consortiums in a resource group.",
+        "x-ms-examples": {
+          "List consortiums in resource group": {
+            "$ref": "./examples/consortiums/Consortiums_ListByResourceGroup.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConsortiumsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/consortiums/{consortiumName}/pause": {
+      "post": {
+        "tags": [
+          "Consortiums_Pause"
+        ],
+        "operationId": "Consortiums_Pause",
+        "description": "Pauses consortium.",
+        "x-ms-examples": {
+          "Pause consortium": {
+            "$ref": "./examples/consortiums/Consortiums_Pause.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsortiumNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/consortiums/{consortiumName}/resume": {
+      "post": {
+        "tags": [
+          "Consortiums_Resume"
+        ],
+        "operationId": "Consortiums_Resume",
+        "description": "Resumes consortium.",
+        "x-ms-examples": {
+          "Resume consortium": {
+            "$ref": "./examples/consortiums/Consortiums_Resume.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConsortiumNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consortium"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Consortium": {
+      "description": "Defines the consortium.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ConsortiumProperties"
+        },
+        "kind": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ConsortiumsList": {
+      "description": "List of consortiums.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of consortiums.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of consortiums",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Consortium"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConsortiumProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "consortiumType": {
+          "description": "Gets or sets the consortium type.",
+          "$ref": "#/definitions/ConsortiumType"
+        },
+        "collaborationType": {
+          "description": "Gets or sets the collaboration type.",
+          "$ref": "#/definitions/CollaborationType"
+        },
+        "endpoint": {
+          "description": "Gets or sets the endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceCertificatePem": {
+          "description": "Gets or sets the public service certificate in PEM format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "members": {
+          "description": "Gets or sets the list of members to be added to the consortium.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsortiumMember"
+          },
+          "x-ms-identifiers": []
+        },
+        "managedOnBehalfOfConfiguration": {
+          "description": "Gets or sets the managed on-behalf-of configuration.",
+          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "$ref": "./commonTypes.json#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "ConsortiumType": {
+      "type": "string",
+      "description": "Types of consortium types.",
+      "enum": [
+        "ConfidentialACI"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ConsortiumType"
+      }
+    },
+    "CollaborationType": {
+      "type": "string",
+      "description": "Types of collaboration types.",
+      "enum": [
+        "CleanRoom"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "CollaborationType"
+      }
+    },
+    "ConsortiumMember": {
+      "description": "Configuration details of the consortium member.",
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "description": "Identifier of the member.",
+          "type": "string"
+        },
+        "certificatePem": {
+          "description": "Gets or sets the public certificate of the member in PEM format.",
+          "type": "string"
+        },
+        "encryptionKeyPem": {
+          "description": "Gets or sets the public encryption key of the member in PEM format.",
+          "type": "string"
+        },
+        "isOperator": {
+          "description": "Indicates if the member is an operator.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "identifier",
+        "isOperator",
+        "certificatePem",
+        "encryptionKeyPem"
+      ]
+    }
+  },
+  "parameters": {
+    "ConsortiumNameParameter": {
+      "name": "consortiumName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Name of the consortium.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

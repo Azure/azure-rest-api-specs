@@ -1,0 +1,284 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-01-31-preview",
+    "title": "Azure Clean Room API",
+    "description": "Azure Clean Room API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/collaborations/{collaborationName}/contracts/{contractName}": {
+      "get": {
+        "tags": [
+          "Contracts"
+        ],
+        "operationId": "Contracts_Get",
+        "description": "Get a contract.",
+        "x-ms-examples": {
+          "Get a contract": {
+            "$ref": "./examples/contracts/Contracts_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CollaborationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContractNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Contract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/collaborations/{collaborationName}/contracts": {
+      "get": {
+        "tags": [
+          "Contracts"
+        ],
+        "operationId": "Contracts_ListByCollaboration",
+        "description": "List contracts in a collaboration.",
+        "x-ms-examples": {
+          "List contracts in collaboration": {
+            "$ref": "./examples/contracts/Contracts_ListByCollaboration.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CollaborationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ContractsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CleanRoom/collaborations/{collaborationName}/contracts/{contractName}/proposeTemplate": {
+      "post": {
+        "tags": [
+          "Contracts_ProposeTemplate"
+        ],
+        "operationId": "Contracts_ProposeTemplate",
+        "description": "Generates and proposes contract template.",
+        "x-ms-examples": {
+          "Generate template for a contract": {
+            "$ref": "./examples/contracts/Contracts_ProposeTemplate.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CollaborationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContractNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Contract"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contract": {
+      "description": "Defines the contract.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ContractProperties"
+        },
+        "kind": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ContractsList": {
+      "description": "List of contracts.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of contracts.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of contracts",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contract"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ContractProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "contractId": {
+          "description": "Gets or sets the contract Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deploymentPolicy": {
+          "description": "Gets or sets the deployment policy.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deploymentTemplate": {
+          "description": "Gets or sets the deployment template.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "contractId"
+      ]
+    }
+  },
+  "parameters": {
+    "CollaborationNameParameter": {
+      "name": "collaborationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Name of the collaboration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ContractNameParameter": {
+      "name": "contractName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Name of the contract.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
