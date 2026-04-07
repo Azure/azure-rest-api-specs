@@ -43,4 +43,5 @@ namespace Microsoft.AuthorizationCombinedClient;
   "AuthorizationManagementClient",
   "javascript"
 );
+@@alternateType(Microsoft.DenyAssignment.DenyAssignmentPrincipalType, string, "go");
 @@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
