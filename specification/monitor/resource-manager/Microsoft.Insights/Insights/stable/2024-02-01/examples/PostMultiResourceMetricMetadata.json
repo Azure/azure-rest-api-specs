@@ -1,0 +1,60 @@
+{
+  "operationId": "Metrics_ListAtSubscriptionScopePost",
+  "parameters": {
+    "$filter": "LUN eq '0'",
+    "api-version": "2024-02-01",
+    "metricnames": "Data Disk Max Burst IOPS",
+    "metricnamespace": "microsoft.compute/virtualmachines",
+    "region": "westus2",
+    "resulttype": "metadata",
+    "subscriptionId": "92d2a2d8-b514-432d-8cc9-a5f9272630d5",
+    "timespan": "2021-06-10T02:23:16.129Z/2021-06-12T02:23:16.129Z"
+  },
+  "title": "Post request for subscription level metric metadata",
+  "responses": {
+    "200": {
+      "body": {
+        "interval": "PT1M",
+        "namespace": "microsoft.compute/virtualmachines",
+        "resourceregion": "westus2",
+        "timespan": "2021-06-10T02:23:16Z/2021-06-12T02:23:16Z",
+        "value": [
+          {
+            "name": {
+              "localizedValue": "Data Disk Read Bytes/Sec",
+              "value": "Data Disk Read Bytes/sec"
+            },
+            "type": "Microsoft.Insights/metrics",
+            "displayDescription": "Bytes/Sec read from a single disk during monitoring period",
+            "id": "subscriptions/92d2a2d8-b514-432d-8cc9-a5f9272630d5/providers/Microsoft.Insights/metrics/Data Disk Read Bytes/sec",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "localizedValue": "lun",
+                      "value": "lun"
+                    },
+                    "value": "0"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "localizedValue": "lun",
+                      "value": "lun"
+                    },
+                    "value": "1"
+                  }
+                ]
+              }
+            ],
+            "unit": "BytesPerSecond"
+          }
+        ]
+      }
+    }
+  }
+}
