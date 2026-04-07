@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SignalRService;
 
@@ -631,6 +633,7 @@ model WebPubSubProperties {
    * When it's Enabled, network ACLs still apply.
    * When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   publicNetworkAccess?: string = "Enabled";
 
   /**
@@ -1130,8 +1133,8 @@ model WebPubSubHubProperties {
  */
 model EventHandler {
   @doc("""
-    Gets or sets the URL template for the event handler. The actual URL is calculated when the corresponding event is triggered. 
-    The template supports predefined parameters syntax: `{event}`, `{hub}`, and KeyVault reference syntax `{@Microsoft.KeyVault(SecretUri=_your_secret_identifier_)}` 
+    Gets or sets the URL template for the event handler. The actual URL is calculated when the corresponding event is triggered.
+    The template supports predefined parameters syntax: `{event}`, `{hub}`, and KeyVault reference syntax `{@Microsoft.KeyVault(SecretUri=_your_secret_identifier_)}`
     For example, if the template is `http://example.com/api/{event}`, when `connect` event is triggered, a POST request will be sent to the URL `http://example.com/chat/api/connect`.
     Note: Parameters are not allowed in the hostname of the URL, and curly brackets `{}` are reserved for parameter syntax only. If your URL path contains literal curly brackets, please URL-encode them to ensure proper handling.
     """)
@@ -1155,6 +1158,40 @@ model EventHandler {
    * Upstream auth settings. If not set, no auth is used for upstream messages.
    */
   auth?: UpstreamAuthSettings;
+
+  /**
+   * The group presence events that this event handler is concerned with. Group presence events are triggered when connections join or leave groups in the hub. If the value is null, no presence events will be sent to this event handler.
+   */
+  @added(Versions.v2025_08_01_preview)
+  groupPresenceEvents?: GroupPresenceEventFilters;
+}
+
+/**
+ * Represents presence event filters for event handler configuration.
+ */
+@added(Versions.v2025_08_01_preview)
+model GroupPresenceEventFilters {
+  /**
+   * The concerning event names. Valid values are "joined", "left". If the value is null or empty, no presence events will be sent to the event handler.
+   */
+  eventNames: GroupPresenceEventName[];
+
+  /**
+   * The group filters. Only events from these groups will be sent to the event handler. Each element is a pattern that may match multiple groups. If null or empty, events from all groups will be sent (subject to eventNames).
+   */
+  groupFilters?: string[];
+}
+
+/** Allowed event names for group presence events. */
+@added(Versions.v2025_08_01_preview)
+union GroupPresenceEventName {
+  /** Event triggered when a connection joins a group. */
+  Joined: "joined",
+
+  /** Event triggered when a connection leaves a group. */
+  Left: "left",
+
+  string,
 }
 
 /**

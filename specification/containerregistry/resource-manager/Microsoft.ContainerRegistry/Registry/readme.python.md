@@ -3,6 +3,15 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
+### Tag: package-2025-11-python
+
+``` yaml $(tag) == 'package-2025-11-python'
+input-file:
+  - stable/2025-11-01/containerregistry.json
+  - ../RegistryTasks/preview/2025-03-01-preview/containerregistry_build.json
+```
+
+
 ``` yaml $(python)
 title: ContainerRegistryManagementClient
 azure-arm: true

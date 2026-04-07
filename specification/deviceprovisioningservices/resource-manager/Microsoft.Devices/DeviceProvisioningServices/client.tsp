@@ -2,8 +2,9 @@ import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 using Http;
-using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
+using Azure.Core;
 using Microsoft.Devices;
 
 @@clientName(Microsoft.Devices, "IotDpsClient", "javascript");
@@ -15,6 +16,14 @@ using Microsoft.Devices;
 @@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
   "certificate_name1",
   "python"
+);
+@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
+  "certificateName1",
+  "go"
+);
+@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
+  "certificateName1",
+  "go"
 );
 @@clientName(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
   "CheckDeviceProvisioningServicesNameAvailability",
@@ -59,8 +68,16 @@ using Microsoft.Devices;
   "CertificateVerificationCodeResult",
   "csharp"
 );
+@@clientName(PrivateEndpoint,
+  "DeviceProvisioningServicesPrivateEndpoint",
+  "csharp"
+);
 @@alternateType(VerificationCodeResponse.etag, eTag, "csharp");
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VerificationCodeResponse,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@alternateType(VerificationCodeResponseProperties.certificate,
   unknown,
   "csharp"
@@ -92,6 +109,10 @@ using Microsoft.Devices;
   "CertificateVerificationCodeContent",
   "csharp"
 );
+@@clientName(PrivateEndpointConnection,
+  "DeviceProvisioningServicesPrivateEndpointConnection",
+  "csharp"
+);
 @@clientName(PrivateEndpointConnectionProperties,
   "DeviceProvisioningServicesPrivateEndpointConnectionProperties",
   "csharp"
@@ -100,7 +121,7 @@ using Microsoft.Devices;
   "ConnectionState",
   "csharp"
 );
-
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(GroupIdInformation,
   "DeviceProvisioningServicesPrivateLinkResource",
   "csharp"
@@ -114,9 +135,17 @@ using Microsoft.Devices;
   "csharp"
 );
 @@alternateType(ProvisioningServiceDescription.etag, eTag, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 @@clientName(IotDpsPropertiesDescription,
   "DeviceProvisioningServiceProperties",
+  "csharp"
+);
+@@clientName(IotDpsPropertiesDescription.ipFilterRules,
+  "IPFilterRules",
   "csharp"
 );
 @@clientName(IotDpsPropertiesDescription.enableDataResidency,
@@ -159,6 +188,7 @@ using Microsoft.Devices;
   "csharp"
 );
 @@clientName(IpFilterRule, "DeviceProvisioningServicesIPFilterRule", "csharp");
+@@clientName(IpFilterRule.ipMask, "IPMask", "csharp");
 @@clientName(IpFilterActionType,
   "DeviceProvisioningServicesIPFilterActionType",
   "csharp"
@@ -196,10 +226,7 @@ using Microsoft.Devices;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -215,14 +242,16 @@ op IotDpsResourceDeleteCustomized(
   "python,go,java"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(CertificateResponses.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceListKeysCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   @body body: void,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
@@ -243,10 +272,7 @@ op IotDpsResourceListKeysCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceGetOperationResultCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -272,10 +298,7 @@ op IotDpsResourceGetOperationResultCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceListKeysForKeyNameCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   @body body: void,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
@@ -300,10 +323,7 @@ op IotDpsResourceListKeysForKeyNameCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceListValidSkusCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   @body body: void,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
@@ -324,10 +344,7 @@ op IotDpsResourceListValidSkusCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op IotDpsResourceGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -347,10 +364,7 @@ op IotDpsResourceGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
@@ -400,10 +414,7 @@ op CertificateResponseDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseGenerateVerificationCodeCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -467,10 +478,7 @@ op CertificateResponseGenerateVerificationCodeCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseVerifyCertificateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<CertificateResponse>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 
@@ -534,10 +542,7 @@ op CertificateResponseVerifyCertificateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op CertificateResponseGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
 

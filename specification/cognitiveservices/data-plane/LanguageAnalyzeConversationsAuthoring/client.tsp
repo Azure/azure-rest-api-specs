@@ -6,8 +6,18 @@ using Language.Conversations.Authoring;
 using Azure.ClientGenerator.Core;
 using Versioning;
 
-@useDependency(Language.Conversations.Authoring.Versions.v2025_05_15_preview)
+@useDependency(Language.Conversations.Authoring.Versions.v2025_11_15_preview)
 namespace Language.ConversationsAuthoringClientCustomizations;
+
+// C#-specific client name customizations
+@@clientName(Language.Conversations.Authoring,
+  "ConversationAnalysisAuthoring",
+  "csharp"
+);
+@@clientName(AnalyzeConversationAuthoringUtteranceEntityEvaluationResult,
+  "UtteranceEntityEvaluationResult",
+  "csharp"
+);
 
 @@clientName(conversationAuthoringListDeployments, "listDeployments");
 @@clientName(conversationAuthoringListProjects, "listProjects");
@@ -774,7 +784,7 @@ namespace ConversationAuthoringClient {
   "python"
 )
 namespace ConversationAuthoringProjectClient {
-  @operationGroup
+  @operationGroup("python")
   @clientName("Deployment", "python")
   interface DeploymentOperations {
     getDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeployment;
@@ -792,7 +802,7 @@ namespace ConversationAuthoringProjectClient {
     getDeploymentStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentStatus;
   }
 
-  @operationGroup
+  @operationGroup("python")
   @clientName("Project", "python")
   interface ProjectOperations {
     listTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
@@ -851,7 +861,7 @@ namespace ConversationAuthoringProjectClient {
     cancelTrainingJob is Language.Conversations.Authoring.ConversationAuthoringProject.cancelTrainingJob;
   }
 
-  @operationGroup
+  @operationGroup("python")
   @clientName("ExportedModel", "python")
   interface ExportedModelOperations {
     getExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModel;
@@ -864,7 +874,7 @@ namespace ConversationAuthoringProjectClient {
     getExportedModelJobStatus is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModelJobStatus;
   }
 
-  @operationGroup
+  @operationGroup("python")
   @clientName("TrainedModel", "python")
   interface TrainedModelOperations {
     getTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getTrainedModel;

@@ -66,6 +66,20 @@ union ConnectivityStatus {
 }
 
 /**
+ * Represents the inbound connectivity status of the connected cluster.
+ */
+@added(Versions.v2026_02_01_preview)
+union InboundConnectivityState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Connected: "Connected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Disconnected: "Disconnected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Unknown: "Unknown",
+}
+
+/**
  * Property which describes the state of private link on a connected cluster resource.
  */
 union PrivateLinkState {
@@ -236,6 +250,13 @@ model ConnectedClusterProperties {
    */
   @visibility(Lifecycle.Read)
   connectivityStatus?: ConnectivityStatus;
+
+  /**
+   * Represents the health status inbound connectivity (relay connection and Kubernetes API).
+   */
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  inboundConnectivityState?: InboundConnectivityState;
 
   /**
    * Property which describes the state of private link on a connected cluster resource.
@@ -607,6 +628,7 @@ model HybridConnectionConfig {
   /**
    * Sender access token
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   token?: string;
 

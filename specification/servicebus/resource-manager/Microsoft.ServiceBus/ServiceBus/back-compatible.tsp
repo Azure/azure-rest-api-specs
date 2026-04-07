@@ -4,21 +4,26 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ServiceBus;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBNamespaceUpdateParameters.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailOver.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailoverProperties.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamespaceFailoverProperties.properties
 );
 
 @@clientLocation(SBNamespaces.get, "Namespaces");
@@ -32,16 +37,21 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBNamespaces.failover, "Namespaces");
 @@clientName(SBNamespaces.failover::parameters.body, "parameters");
 @@clientLocation(SBNamespaces.privateLinkResourcesGet, "PrivateLinkResources");
-@@clientName(SBNamespaces.privateLinkResourcesGet, "Get");
-@@clientLocation(SBNamespaces.checkNameAvailability, DisasterRecoveryConfigs);
+@@clientName(SBNamespaces.privateLinkResourcesGet, "Get", "!csharp");
+@@clientLocation(SBNamespaces.checkNameAvailability,
+  DisasterRecoveryConfigs,
+  "!csharp"
+);
 @@clientName(SBNamespaces.checkNameAvailability::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBNamespace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
@@ -49,6 +59,7 @@ using Microsoft.ServiceBus;
   "NetworkSecurityPerimeterConfiguration"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkSecurityPerimeterConfiguration.properties
 );
 
@@ -63,6 +74,7 @@ using Microsoft.ServiceBus;
 @@clientLocation(ArmDisasterRecoveries.failOver, DisasterRecoveryConfigs);
 @@clientName(ArmDisasterRecoveries.failOver::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArmDisasterRecovery.properties
 );
 
@@ -70,6 +82,7 @@ using Microsoft.ServiceBus;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MigrationConfigProperties.properties
 );
 
@@ -81,19 +94,30 @@ using Microsoft.ServiceBus;
 
 @@clientLocation(NetworkRuleSets.listNetworkRuleSets, "Namespaces");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkRuleSet.properties);
 
-@@clientLocation(SBAuthorizationRules.getAuthorizationRule, "Namespaces");
+@@clientLocation(SBAuthorizationRules.getAuthorizationRule,
+  "Namespaces",
+  "!csharp"
+);
 @@clientLocation(SBAuthorizationRules.createOrUpdateAuthorizationRule,
-  "Namespaces"
+  "Namespaces",
+  "!csharp"
 );
 @@clientName(SBAuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "parameters"
 );
-@@clientLocation(SBAuthorizationRules.deleteAuthorizationRule, "Namespaces");
-@@clientLocation(SBAuthorizationRules.listAuthorizationRules, "Namespaces");
-@@clientLocation(SBAuthorizationRules.listKeys, "Namespaces");
-@@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces");
+@@clientLocation(SBAuthorizationRules.deleteAuthorizationRule,
+  "Namespaces",
+  "!csharp"
+);
+@@clientLocation(SBAuthorizationRules.listAuthorizationRules,
+  "Namespaces",
+  "!csharp"
+);
+@@clientLocation(SBAuthorizationRules.listKeys, "Namespaces", "!csharp");
+@@clientLocation(SBAuthorizationRules.regenerateKeys, "Namespaces", "!csharp");
 @@clientName(SBAuthorizationRules.regenerateKeys::parameters.body,
   "parameters"
 );
@@ -106,6 +130,7 @@ using Microsoft.ServiceBus;
 );
 @@clientName(Topics.regenerateKeys::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBAuthorizationRule.properties
 );
 
@@ -115,6 +140,7 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBQueues.delete, Queues);
 @@clientLocation(SBQueues.listByNamespace, Queues);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBQueue.properties);
 
 @@clientLocation(SBTopics.get, Topics);
@@ -123,10 +149,12 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBTopics.delete, Topics);
 @@clientLocation(SBTopics.listByNamespace, Topics);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBTopic.properties);
 
 @@clientName(Rules.createOrUpdate::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Rule.properties);
 
 @@clientLocation(SBSubscriptions.get, "Subscriptions");
@@ -135,6 +163,7 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBSubscriptions.delete, "Subscriptions");
 @@clientLocation(SBSubscriptions.listByTopic, "Subscriptions");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SBSubscription.properties);
 
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");
@@ -147,3 +176,8 @@ using Microsoft.ServiceBus;
 
 @@clientName(UserAssignedIdentity.principalId, "PrincipalId");
 @@clientName(UserAssignedIdentity.clientId, "ClientId");
+
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "python,java"
+);

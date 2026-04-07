@@ -609,7 +609,8 @@ model BackupVault {
    * Storage Settings
    */
   @identifiers(#[])
-  storageSettings: StorageSetting[];
+  @madeOptional(Versions.v2026_03_01)
+  storageSettings?: StorageSetting[];
 
   /**
    * Is vault protected by resource guard
@@ -2338,7 +2339,7 @@ model AzureBackupFindRestorableTimeRangesRequest {
 /**
  * List Restore Ranges Response
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition is used here to reuse common resource model."
 model AzureBackupFindRestorableTimeRangesResponseResource extends DppResource {
   /**
    * AzureBackupFindRestorableTimeRangesResponseResource properties
@@ -2389,6 +2390,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   blobSasKey?: string;
 
@@ -2401,6 +2403,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the ExcelFile blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   excelFileBlobSasKey?: string;
 }
@@ -3036,6 +3039,91 @@ model NamespacedNameResource {
 }
 
 /**
+ * The settings for Blob Backup Auto Protection.
+ */
+@added(Versions.v2026_03_01)
+@discriminator("objectType")
+model BlobBackupAutoProtectionSettings {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: string;
+
+  /**
+   * Flag to enable whether auto protection.
+   */
+  enabled: boolean;
+}
+
+/**
+ * Rule mode (Only Exclude supported for now).
+ */
+@added(Versions.v2026_03_01)
+union BlobBackupRuleMode {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Exclude: "Exclude",
+}
+
+/**
+ * Pattern type. Only Prefix supported for now.
+ */
+@added(Versions.v2026_03_01)
+union BlobBackupPatternType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Prefix: "Prefix",
+}
+
+/**
+ * Indicates a Blob Backup Auto Protection Rule.
+ */
+@added(Versions.v2026_03_01)
+model BlobBackupAutoProtectionRule {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: string;
+
+  /**
+   * Exclude removes candidates (after inclusion)
+   */
+  mode: BlobBackupRuleMode;
+
+  /**
+   * Pattern type: Prefix, only pattern type supported for now.
+   */
+  type: BlobBackupPatternType;
+
+  /**
+   * The string pattern to evaluate against container names. For now this accepts literal strings only (no wildcards or regex).
+   */
+  pattern: string;
+}
+
+/**
+ * Parameters to be used for Blob Backup Rule Based Auto Protection settings.
+ */
+@added(Versions.v2026_03_01)
+model BlobBackupRuleBasedAutoProtectionSettings
+  extends BlobBackupAutoProtectionSettings {
+  /*
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "BlobBackupRuleBasedAutoProtectionSettings";
+
+  /**
+   * Rules are evaluated in the order provided. Inclusion adds candidates; exclusion removes candidates.
+   * If no rules are present, all containers are considered eligible when enabled = true.
+   */
+  @identifiers(#[])
+  rules?: BlobBackupAutoProtectionRule[];
+}
+
+/**
  * Parameters to be used during configuration of backup of blobs
  */
 model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
@@ -3048,12 +3136,37 @@ model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
   objectType: "BlobBackupDatasourceParameters";
 }
 
+/**
+ * Paramters to be used during configuration of backup of blobs using AutoProtection settings
+ */
+@added(Versions.v2026_03_01)
+model BlobBackupDatasourceParametersForAutoProtection
+  extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParametersForAutoProtection;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "BlobBackupDatasourceParametersForAutoProtection";
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BlobBackupDatasourceCommonParameters {
   /**
    * List of containers to be backed up during configuration of backup of blobs
    */
   containersList: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01)
+model BlobBackupDatasourceCommonParametersForAutoProtection {
+  /**
+   * AutoProtection settings
+   */
+  @added(Versions.v2026_03_01)
+  autoProtectionSettings: BlobBackupRuleBasedAutoProtectionSettings;
 }
 
 /**
@@ -3066,6 +3179,21 @@ model AdlsBlobBackupDatasourceParameters extends BackupDatasourceParameters {
    * Type of the specific object - used for deserializing
    */
   objectType: "AdlsBlobBackupDatasourceParameters";
+}
+
+/**
+ * Parameters to be used during configuration of backup of azure data lake storage account blobs using AutoProtection settings
+ */
+@added(Versions.v2026_03_01)
+model AdlsBlobBackupDatasourceParametersForAutoProtection
+  extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParametersForAutoProtection;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "AdlsBlobBackupDatasourceParametersForAutoProtection";
 }
 
 /**
@@ -3158,12 +3286,41 @@ model BackupPolicy extends BaseBackupPolicy {
  */
 model BackupSchedule {
   /**
-   * Repeating time interval which only support the following ISO 8601 format [R/startDateTime/Duration]. Example: R/2007-03-01T13:00:00Z/P1Y2M10DT2H30M
+   * Repeating time intervals that define the backup schedule.
+   *
+   * Each value must follow the format: `R/YYYY-MM-DDThh:mm:ss[.fff][Z|(+/-)hh:mm]/Duration`
+   *
+   * Only the exact formats listed below are supported. Other ISO 8601 variations are not accepted.
+   *
+   * Supported time formats:
+   * - `Thh:mm:ss.fff` (with milliseconds)
+   * - `Thh:mm:ss` (with seconds)
+   * - `Thh:mm` (hours and minutes only)
+   *
+   * A timezone indicator (`Z`, `+hh:mm`, or `-hh:mm`) may be appended to any of the above.
+   *
+   * Unsupported formats include compact notation such as `T1430`, `T143045`, or `T14.5`.
+   *
+   * Examples:
+   * - `R/2023-10-15T14:30:00Z/P1W`
+   * - `R/2023-10-15T14:30:45.123+05:30/P1D`
+   * - `R/2023-10-15T14:30Z/P1D`
    */
   repeatingTimeIntervals: string[];
 
   /**
-   * Time zone for a schedule. Example: Pacific Standard Time
+   * Time Zone for a schedule.
+   *
+   * Supported timezone indicators include:
+   * - 'Z' for UTC
+   * - '+00:00'
+   * - '+05:30'
+   * - '-08:00'
+   *
+   * Examples:
+   * - 2023-10-15T14:30:45Z
+   * - 2023-10-15T14:30:45.123+05:30
+   * - 2023-10-15T14:30-08:00
    */
   timeZone?: string;
 }

@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "parameters": {
+      "properties": {
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "offer": "windowsserver",
+              "publisher": "microsoftwindowsserver",
+              "sku": "2022-datacenter-smalldisk"
+            },
+            "nodeAgentSkuId": "batch.node.windows amd64",
+            "osDisk": {
+              "caching": "ReadWrite",
+              "diskSizeGB": 100,
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS"
+              },
+              "writeAcceleratorEnabled": false
+            }
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 1,
+            "targetLowPriorityNodes": 0
+          }
+        },
+        "vmSize": "Standard_d2s_v3"
+      }
+    },
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "properties": {
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2023-08-24T02:12:27.7527697Z",
+          "creationTime": "2023-08-24T02:12:27.7527697Z",
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0,
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "offer": "windowsserver",
+                "publisher": "microsoftwindowsserver",
+                "sku": "2022-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "osDisk": {
+                "caching": "ReadWrite",
+                "diskSizeGB": 100,
+                "managedDisk": {
+                  "storageAccountType": "StandardSSD_LRS"
+                },
+                "writeAcceleratorEnabled": false
+              }
+            }
+          },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2023-08-24T02:12:27.7527697Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2023-08-24T02:12:27.7527697Z",
+          "resizeOperationStatus": {
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2023-08-24T02:12:27.7527697Z",
+            "targetDedicatedNodes": 1
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "resizeTimeout": "PT15M",
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0
+            }
+          },
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "taskSlotsPerNode": 1,
+          "vmSize": "STANDARD_D2_V3"
+        }
+      },
+      "headers": {
+        "ETag": "W/\"0x8DB51F14DC1A8AD\""
+      }
+    }
+  },
+  "operationId": "Pool_Create",
+  "title": "CreatePool - VirtualMachineConfiguration OSDisk"
+}

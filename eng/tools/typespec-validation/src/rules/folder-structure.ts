@@ -3,10 +3,10 @@ import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
 import { simpleGit } from "simple-git";
-import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { fileExists, normalizePath, readTspConfig } from "../utils.js";
+import { parse } from "../tsp-config.js";
+import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -15,6 +15,18 @@ export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
   async execute(folder: string): Promise<RuleResult> {
+    const suppressions = (await getSuppressions(folder)).filter((s) =>
+      s.rules?.includes(this.name),
+    );
+
+    const suppressAll = suppressions.find(
+      (s) => s.subRules === undefined || s.subRules.length === 0,
+    );
+
+    if (suppressAll) {
+      return { success: true, stdOutput: `suppressed: ${suppressAll.reason}` };
+    }
+
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -25,6 +37,20 @@ export class FolderStructureRule implements Rule {
     // must be using "folder structure v2".  Otherwise, it must be using v1.
     const structureVersion =
       relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
+
+    if (structureVersion === 1) {
+      const suppressMustUseV2 = suppressions.find((s) => s.subRules?.includes("MustUseV2"));
+
+      if (suppressMustUseV2) {
+        stdOutput += `Folder '${folder}' is not using "folder structure v2", but was suppressed.\n`;
+      } else {
+        return {
+          success: false,
+          stdOutput: stdOutput,
+          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://github.com/Azure/azure-rest-api-specs/wiki/Folder-Structure \n`,
+        };
+      }
+    }
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await fileExists(folder))) {
@@ -97,7 +123,7 @@ export class FolderStructureRule implements Rule {
 
       if (tspConfigExists) {
         const configText = await readTspConfig(folder);
-        const config = yamlParse(configText);
+        const config = parse(configText);
         const rpFolder =
           config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
         stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
@@ -136,7 +162,7 @@ export class FolderStructureRule implements Rule {
           success = false;
         }
 
-        const rpNamespaceRegex = /^[A-Za-z0-9\.]+$/;
+        const rpNamespaceRegex = /^[A-Za-z0-9.]+$/;
         const rpNamespaceFolder = folderStruct[folderStruct.length - 2];
 
         if (!rpNamespaceRegex.test(rpNamespaceFolder)) {

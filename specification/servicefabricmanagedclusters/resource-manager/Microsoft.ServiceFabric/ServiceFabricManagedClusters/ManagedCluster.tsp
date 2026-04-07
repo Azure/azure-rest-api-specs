@@ -64,10 +64,15 @@ interface ManagedClusters {
   /**
    * Update the tags of of a Service Fabric managed cluster resource with the specified name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     ManagedCluster,
-    PatchModel = ManagedClusterUpdateParameters
+    PatchModel = ManagedClusterUpdateParameters,
+    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+      @bodyRoot
+      _: ManagedCluster;
+    })
   >;
 
   /**
@@ -91,6 +96,7 @@ interface ManagedClusters {
   /**
    * Gets a fault simulation by the simulationId.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
@@ -101,6 +107,7 @@ interface ManagedClusters {
   /**
    * Gets the list of recent fault simulations for the cluster.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -112,6 +119,7 @@ interface ManagedClusters {
   /**
    * Starts a fault simulation on the cluster.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
@@ -124,6 +132,7 @@ interface ManagedClusters {
   /**
    * Stops a fault simulation on the cluster.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
@@ -447,6 +456,12 @@ model ManagedClusterProperties {
    */
   @added(Versions.v2025_06_01_preview)
   enableOutboundOnlyNodeTypes?: boolean;
+
+  /**
+   * Determines whether to skip the assignment of the managed network security group (SF-NSG) to the cluster subnet when using a bring-your-own virtual network (BYOVNET) configuration. The default value is false.
+   */
+  @added(Versions.v2026_02_01)
+  skipManagedNsgAssignment?: boolean;
 }
 
 /**

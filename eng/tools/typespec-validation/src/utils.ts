@@ -1,8 +1,8 @@
 import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import debug from "debug";
-import { access, readFile } from "fs/promises";
-import defaultPath, { join, PlatformPath } from "path";
+import { access, readdir, readFile } from "fs/promises";
+import defaultPath, { basename, dirname, join, PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 import { context } from "./index.js";
@@ -32,9 +32,18 @@ export async function runNpm(
 }
 
 export async function fileExists(file: string) {
-  return access(file)
-    .then(() => true)
-    .catch(() => false);
+  try {
+    // Check if file is visible to process.  Uses case-insensitive match on Windows.
+    await access(file);
+
+    // Verify exact case match to avoid false positives on case-insensitive file systems (Windows)
+    const dir = dirname(file);
+    const base = basename(file);
+    const entries = await readdir(dir);
+    return entries.includes(base);
+  } catch {
+    return false;
+  }
 }
 
 export async function readTspConfig(folder: string) {
@@ -54,14 +63,14 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .resolve(folder)
     .split(path.sep)
     .join("/")
-    .replace(/^([a-z]):/, (_match, driveLetter) => driveLetter.toUpperCase() + ":");
+    .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
 }
 
 export async function gitDiffTopSpecFolder(folder: string) {
   const git = simpleGit(folder);
-  let topSpecFolder = folder.replace(/(^.*specification\/[^\/]*)(.*)/, "$1");
-  let stdOutput = `Running git diff on folder ${topSpecFolder}`;
-  let gitStatus = await git.status(["--porcelain", topSpecFolder]);
+  const topSpecFolder = folder.replace(/(^.*specification\/[^/]*)(.*)/, "$1");
+  const stdOutput = `Running git diff on folder ${topSpecFolder}`;
+  const gitStatus = await git.status(["--porcelain", topSpecFolder]);
 
   let success = true;
   let errorOutput: string | undefined;

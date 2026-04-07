@@ -8,15 +8,11 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
     namespace: "Azure.ResourceManager.HardwareSecurityModules"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hardwaresecuritymodules"
@@ -35,6 +31,7 @@ options:
       HardwareSecurityModulesClient: AzureDedicatedHSMResourceProvider
     flavor: "azure"
     experimental-extensible-enums: true
+    ignore-nullable-on-optional: false
     package-details:
       name: "@azure/arm-hardwaresecuritymodules"
   "@azure-tools/typespec-go":

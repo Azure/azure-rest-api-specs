@@ -3,8 +3,8 @@ language: en
 flagWords:
   - teh
 ignorePaths:
-  - .github/CODEOWNERS*
-  - .github/policies/**
+  - .gitignore
+  - .vscode/**
   - '**/examples/**'
   - '**/package-lock.json'
   - cspell.json
@@ -31,12 +31,14 @@ enableFiletypes:
   - cadl
 allowCompoundWords: true
 words:
+  - agentic
   - azext
   - byos
   - cadl
   - contoso
   - eastus
   - entra
+  - evals
   - fqdns
   - hana
   - kusto
@@ -52,4 +54,10 @@ words:
   - skus
   - vmss
   - vnet
+  - waza
   - westus
+caseSensitive: false
+overrides:
+  - filename: '/README.md'
+    words:
+      - azsdk

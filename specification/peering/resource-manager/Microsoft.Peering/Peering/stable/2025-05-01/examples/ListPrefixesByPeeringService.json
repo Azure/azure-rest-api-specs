@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringServiceName": "peeringServiceName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "peeringServicePrefixName1",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName1",
+            "properties": {
+              "learnedType": "ViaServiceProvider",
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "prefix": "192.168.1.0/24",
+              "prefixValidationState": "Verified",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "peeringServicePrefixName2",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName2",
+            "properties": {
+              "learnedType": "ViaServiceProvider",
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "prefix": "192.168.2.0/24",
+              "prefixValidationState": "Verified",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Prefixes_ListByPeeringService",
+  "title": "List all the prefixes associated with the peering service"
+}

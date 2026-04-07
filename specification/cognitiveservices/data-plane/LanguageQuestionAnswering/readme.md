@@ -1,8 +1,12 @@
-# Cognitive Services Language - Question Answering SDK
+# Cognitive Services Language - Question Answering Inference SDK
 
-This is the AutoRest configuration file the Cognitive Services Language - Question Answering SDK.
+This is the AutoRest configuration file for the Cognitive Services Language - Question Answering Inference SDK.
 
 > see https://aka.ms/autorest
+
+## SDK package updates
+
+The inference-related client and models are generated for the new .NET package `Azure.AI.Language.QuestionAnswering.Inference`. The existing `Azure.AI.Language.QuestionAnswering` package now type-forwards these types and has been bumped to the next major version.
 
 ## Releases
 
@@ -25,7 +29,7 @@ directive:
 
 ### Release 2025-05-15-preview
 
-These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2025-05-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
@@ -38,7 +42,7 @@ modelerfour:
 
 ### Release 2023-11-15-preview
 
-These settings apply only when `--tag=release_2023_11_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2023-11-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
@@ -59,9 +63,9 @@ suppressions:
 
 ### Release 2023-04-01
 
-These settings apply only when `--tag=release_2023_04_01` is specified on the command line.
+These settings apply only when `--tag=release_2023-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2023_04_01'
+``` yaml $(tag) == 'release_2023-04-01'
 input-file:
   - stable/2023-04-01/questionanswering.json
 title:
@@ -72,9 +76,9 @@ modelerfour:
 
 ### Release 2021-10-01
 
-These settings apply only when `--tag=release_2021_10_01` is specified on the command line.
+These settings apply only when `--tag=release_2021-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2021_10_01'
+``` yaml $(tag) == 'release_2021-10-01'
 input-file:
   - stable/2021-10-01/questionanswering.json
   - stable/2021-10-01/common.json

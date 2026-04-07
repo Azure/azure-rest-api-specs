@@ -2,8 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 
-using Azure.ClientGenerator.Core;
-
 namespace AttestationService;
 
 /**
@@ -197,6 +195,7 @@ model AttestOpenEnclaveRequest {
   /**
    * OpenEnclave report from the enclave to be attested
    */
+  @encode(BytesKnownEncoding.base64url)
   report?: bytes;
 
   /**
@@ -237,6 +236,7 @@ model RuntimeData {
    * quote, the SHA256 hash of the RuntimeData must match the quote's "report data"
    * attribute.
    */
+  @encode(BytesKnownEncoding.base64url)
   data?: bytes;
 
   /**
@@ -260,6 +260,7 @@ model InitTimeData {
    * attribute. For a SEV-SNP quote, the SHA256 hash of the InitTimeData must match
    * the quote's "host data" attribute.
    */
+  @encode(BytesKnownEncoding.base64url)
   data?: bytes;
 
   /**
@@ -286,6 +287,7 @@ model AttestSgxEnclaveRequest {
   /**
    * Quote of the enclave to be attested
    */
+  @encode(BytesKnownEncoding.base64url)
   quote?: bytes;
 
   /**
@@ -343,6 +345,7 @@ model TpmAttestationRequest {
   /**
    * Protocol data containing artifacts for attestation.
    */
+  @encode(BytesKnownEncoding.base64url)
   data?: bytes;
 }
 
@@ -353,6 +356,7 @@ model TpmAttestationResponse {
   /**
    * Protocol data containing attestation service response.
    */
+  @encode(BytesKnownEncoding.base64url)
   data?: bytes;
 }
 
@@ -397,6 +401,7 @@ model AttestTdxVmRequest {
   /**
    * Quote of the TDX virtual machine to be attested
    */
+  @encode(BytesKnownEncoding.base64url)
   quote?: bytes;
 
   /**
@@ -482,7 +487,6 @@ model JsonWebKeySet {
    * can choose to assign a meaning to the order for their purposes, if
    * desired.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   keys?: JsonWebKey[];
 }
 
@@ -677,7 +681,7 @@ model PolicyCertificatesModificationResult {
   /**
    * The result of the operation
    */
-  @encodedName("application/json", "x-ms-certificate-result")
+  @encodedName("application/json", "x-ms-policycertificates-result")
   certificateResolution?: CertificateModification;
 }
 
@@ -689,6 +693,7 @@ model StoredAttestationPolicy {
    * Policy text to set as a sequence of UTF-8 encoded octets.
    */
   @encodedName("application/json", "AttestationPolicy")
+  @encode(BytesKnownEncoding.base64url)
   attestationPolicy?: bytes;
 }
 
@@ -706,6 +711,7 @@ model PolicyResult {
    * The SHA256 hash of the policy object modified
    */
   @encodedName("application/json", "x-ms-policy-token-hash")
+  @encode(BytesKnownEncoding.base64url)
   policyTokenHash?: bytes;
 
   /**
@@ -806,6 +812,7 @@ model AttestationResult {
    * The SHA256 hash of the BASE64URL encoded policy text used for attestation
    */
   @encodedName("application/json", "x-ms-policy-hash")
+  @encode(BytesKnownEncoding.base64url)
   policyHash?: bytes;
 
   /**
@@ -842,6 +849,7 @@ model AttestationResult {
    * A copy of the RuntimeData specified as an input to the attest call.
    */
   @encodedName("application/json", "x-ms-sgx-ehd")
+  @encode(BytesKnownEncoding.base64url)
   enclaveHeldData?: bytes;
 
   /**
@@ -872,12 +880,14 @@ model AttestationResult {
    * DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.
    */
   @encodedName("application/json", "aas-ehd")
+  @encode(BytesKnownEncoding.base64url)
   deprecatedEnclaveHeldData?: bytes;
 
   /**
    * DEPRECATED: Private Preview version of x-ms-sgx-ehd claim.
    */
   @encodedName("application/json", "maa-ehd")
+  @encode(BytesKnownEncoding.base64url)
   deprecatedEnclaveHeldData2?: bytes;
 
   /**

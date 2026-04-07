@@ -25,7 +25,7 @@ directive:
 
 ### Release 2025-05-15-preview
 
-These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2025-05-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
@@ -38,7 +38,7 @@ modelerfour:
 
 ### Release 2024-11-15-preview
 
-These settings apply only when `--tag=release_2024_11_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2024-11-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024-11-15-preview'
 input-file:
@@ -51,7 +51,7 @@ modelerfour:
 
 ### Release 2023-11-15-preview
 
-These settings apply only when `--tag=release_2023_11_15_preview` is specified on the command line.
+These settings apply only when `--tag=release_2023-11-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
@@ -72,9 +72,9 @@ suppressions:
 
 ### Release 2023-04-01
 
-These settings apply only when `--tag=release_2023_04_01` is specified on the command line.
+These settings apply only when `--tag=release_2023-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2023_04_01'
+``` yaml $(tag) == 'release_2023-04-01'
 input-file:
   - stable/2023-04-01/analyzetext-authoring.json
 title:
@@ -86,9 +86,9 @@ modelerfour:
 
 ### Release 2022-05-01
 
-These settings apply only when `--tag=release_2022_05_01` is specified on the command line.
+These settings apply only when `--tag=release_2022-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2022_05_01'
+``` yaml $(tag) == 'release_2022-05-01'
 input-file:
   - stable/2022-05-01/analyzetext-authoring.json
   - stable/2022-05-01/common.json

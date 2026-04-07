@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @typedef {Object} ILogger
  * @property {(message:string) => void} debug

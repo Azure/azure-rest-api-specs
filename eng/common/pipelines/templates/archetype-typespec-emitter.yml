@@ -67,6 +67,11 @@ parameters:
   type: boolean
   default: false
 
+# Optional filter pattern for directory names (e.g., 'Azure.ResourceManager*' to only regenerate management SDKs)
+- name: DirectoryFilterPattern
+  type: string
+  default: ''
+
 # Paths to sparse checkout
 - name: SparseCheckoutPaths
   type: object
@@ -96,12 +101,18 @@ extends:
       pool: ${{ parameters.Pool }}
       jobs:
       - job: Build
+        variables:
+          emitterNpmrcPath: $(Agent.TempDirectory)/${{ parameters.EmitterPackagePath }}/.npmrc
         steps:
         - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
           parameters:
             Paths: ${{ parameters.SparseCheckoutPaths }}
 
         - ${{ parameters.InitializationSteps }}
+
+        - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+          parameters:
+            npmrcPath: $(emitterNpmrcPath)
 
         # Initialize-WorkingDirectory.ps1 is responsible for setting the emitterVersion output variable.
         - task: PowerShell@2
@@ -121,6 +132,8 @@ extends:
                 -OutputDirectory "$(Build.ArtifactStagingDirectory)"
                 -UseTypeSpecNext:$${{ parameters.UseTypeSpecNext }}
                 -EmitterPackagePath:${{ parameters.EmitterPackagePath }}
+          env:
+            NPM_CONFIG_USERCONFIG: $(emitterNpmrcPath)
 
         - task: PowerShell@2
           displayName: 'Run build script'
@@ -132,6 +145,8 @@ extends:
               -TargetNpmJsFeed:$${{ parameters.PublishPublic }}
               -EmitterPackagePath:${{ parameters.EmitterPackagePath }}
               -GeneratorVersion: $(initialize.emitterVersion)
+          env:
+            NPM_CONFIG_USERCONFIG: $(emitterNpmrcPath)
 
         - pwsh: |
             $sourceBranch = '$(Build.SourceBranch)'
@@ -142,12 +157,34 @@ extends:
             # Create emitter identifier from package path for disambiguation
             $emitterIdentifier = ""
             if (-not [string]::IsNullOrWhiteSpace($emitterPackagePath)) {
-              # Extract filename without extension and make it safe for branch names
-              $emitterIdentifier = [System.IO.Path]::GetFileNameWithoutExtension($emitterPackagePath)
-              # Replace any characters that aren't alphanumeric, hyphens, or underscores
-              $emitterIdentifier = $emitterIdentifier -replace '[^a-zA-Z0-9\-_]', '-'
-              # Remove any leading/trailing hyphens and convert to lowercase
+              # Resolve emitterPackagePath to absolute path (it's relative to repo root)
+              # EmitterPackagePath is a directory, so append package.json
+              $absoluteEmitterPackagePath = Join-Path '$(Build.SourcesDirectory)' $emitterPackagePath
+              $packageJsonPath = Join-Path $absoluteEmitterPackagePath 'package.json'
+              
+              # Read the package name from package.json
+              if (Test-Path $packageJsonPath) {
+                try {
+                  $packageJson = Get-Content $packageJsonPath -Raw | ConvertFrom-Json
+                  if ($packageJson.name) {
+                    $emitterIdentifier = $packageJson.name
+                  }
+                } catch {
+                  Write-Host "Warning: Could not read package name from $packageJsonPath"
+                }
+              }
+              
+              # If we still don't have an identifier, fall back to filename
+              if ([string]::IsNullOrWhiteSpace($emitterIdentifier)) {
+                Write-Host "Warning: Could not read emitter name from package.json, falling back to package path"
+                $emitterIdentifier = [System.IO.Path]::GetFileNameWithoutExtension($emitterPackagePath)
+              }
+              
+              # Clean up the identifier: remove @ prefix, replace invalid chars
+              $emitterIdentifier = $emitterIdentifier -replace '^@', ''
+              $emitterIdentifier = $emitterIdentifier -replace '[^a-zA-Z0-9\-_/]', '-'
               $emitterIdentifier = $emitterIdentifier.Trim('-').ToLower()
+              
               if (-not [string]::IsNullOrWhiteSpace($emitterIdentifier)) {
                 $emitterIdentifier = "-$emitterIdentifier"
               }
@@ -163,6 +200,8 @@ extends:
 
             Write-Host "Setting variable 'branchName' to '$branchName'"
             Write-Host "##vso[task.setvariable variable=branchName;isOutput=true]$branchName"
+            Write-Host "Setting variable 'emitterIdentifier' to '$emitterIdentifier'"
+            Write-Host "##vso[task.setvariable variable=emitterIdentifier;isOutput=true]$emitterIdentifier"
           displayName: Set branch name
           name: set_branch_name
 
@@ -208,7 +247,7 @@ extends:
                 - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
                   parameters:
                     npmrcPath: $(buildArtifactsPath)/packages/.npmrc
-                    registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/
+                    registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js/npm/registry/
         
                 # publish to devops feed
                 - pwsh: |
@@ -231,7 +270,7 @@ extends:
         
                 - ${{ if parameters.PublishPublic }}:
                   # publish to npmjs.org using ESRP
-                  - task: EsrpRelease@9
+                  - task: EsrpRelease@11
                     inputs:
                       displayName: Publish to npmjs.org
                       ConnectedServiceName: Azure SDK PME Managed Identity
@@ -259,6 +298,7 @@ extends:
           pullRequestTargetBranch: 'main'
           buildArtifactsPath: $(Pipeline.Workspace)/build_artifacts
           branchName: $[stageDependencies.Build.Build.outputs['set_branch_name.branchName']]
+          tspClientNpmrcPath: $(Agent.TempDirectory)/tsp-client/.npmrc
         pool: ${{ parameters.Pool }}
         jobs:
         - job: Initialize
@@ -273,10 +313,16 @@ extends:
           - download: current
             displayName: Download pipeline artifacts
 
+          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+            parameters:
+              npmrcPath: $(tspClientNpmrcPath)
+
           - pwsh: |
               npm ci
             displayName: Install tsp-client
             workingDirectory: $(Build.SourcesDirectory)/eng/common/tsp-client
+            env:
+              NPM_CONFIG_USERCONFIG: $(tspClientNpmrcPath)
 
           - pwsh: |
               # Resolve EmitterPackageJsonOutputPath to absolute path if it's relative
@@ -302,6 +348,8 @@ extends:
               }
             displayName: Generate emitter-package.json and emitter-package-lock files
             workingDirectory: $(Build.SourcesDirectory)/eng/common/tsp-client
+            env:
+              NPM_CONFIG_USERCONFIG: $(tspClientNpmrcPath)
 
           - ${{ parameters.InitializationSteps }}
 
@@ -328,6 +376,7 @@ extends:
                 -JobCount ${{ parameters.RegenerationJobCount }}
                 -MinimumPerJob ${{ parameters.MinimumPerJob }}
                 -OnlyTypespec ${{ parameters.OnlyGenerateTypespec }}
+                -DirectoryFilterPattern '${{ parameters.DirectoryFilterPattern }}'
               workingDirectory: $(Build.SourcesDirectory)
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
@@ -342,6 +391,7 @@ extends:
           variables:
             matrixArtifactsPath: $(Pipeline.Workspace)/matrix_artifacts
             AzureSdkRepoName: $[format('azure-sdk/{0}', split(variables['Build.Repository.Name'], '/')[1])]
+            emitterNpmrcPath: $(Agent.TempDirectory)/${{ parameters.EmitterPackagePath }}/.npmrc
           steps:
           - checkout: self
           - pwsh: |
@@ -360,6 +410,10 @@ extends:
 
           - ${{ parameters.InitializationSteps }}
 
+          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+            parameters:
+              npmrcPath: $(emitterNpmrcPath)
+
           - task: PowerShell@2
             displayName: Call regeneration script
             inputs:
@@ -369,6 +423,8 @@ extends:
                 -PackageDirectoriesFile "$(matrixArtifactsPath)/$(DirectoryList)"
               workingDirectory: $(Build.SourcesDirectory)
             continueOnError: true
+            env:
+              NPM_CONFIG_USERCONFIG: $(emitterNpmrcPath)
 
           - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
             parameters:
@@ -383,15 +439,18 @@ extends:
           displayName: Create PR
           dependsOn: 
           - Generate
+          condition: succeededOrFailed()
           variables:
             generateJobResult: $[dependencies.Generate.result]
             emitterVersion: $[stageDependencies.Build.Build.outputs['initialize.emitterVersion']]
+            emitterIdentifier: $[stageDependencies.Build.Build.outputs['set_branch_name.emitterIdentifier']]
           steps:
           - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
 
           - pwsh: |
               $generateJobResult = '$(generateJobResult)'
               $emitterVersion = '$(emitterVersion)'
+              $emitterIdentifier = '$(emitterIdentifier)'
               $collectionUri = '$(System.CollectionUri)'
               $project = '$(System.TeamProject)'
               $definitionName = '$(Build.DefinitionName)'
@@ -402,6 +461,12 @@ extends:
               $buildId = '$(Build.BuildId)'
               $buildNumber = '$(Build.BuildNumber)'
               $preRelease = '${{ parameters.BuildPrereleaseVersion }}' -eq 'true'
+              
+              # Use emitterIdentifier for PR title (remove leading dash if present)
+              $emitterName = "TypeSpec emitter"
+              if (-not [string]::IsNullOrWhiteSpace($emitterIdentifier)) {
+                $emitterName = $emitterIdentifier.TrimStart('-')
+              }
               
               $prBody = "Generated by $definitionName build [$buildNumber]($collectionUri/$project/_build/results?buildId=$buildId)<br/>"
 
@@ -419,9 +484,9 @@ extends:
                 $prTitle = "Scheduled code regeneration test"
               } else {
                 if ($preRelease) {
-                  $prTitle = "Update TypeSpec emitter version to prerelease $emitterVersion"
+                  $prTitle = "Update $emitterName version to prerelease $emitterVersion"
                 } else {
-                  $prTitle = "Update TypeSpec emitter version to $emitterVersion"
+                  $prTitle = "Update $emitterName version to $emitterVersion"
                 }
 
                 if ($generateJobResult -ne 'Succeeded') {
@@ -446,7 +511,8 @@ extends:
                 Write-Error "Build.Repository.Name not in the expected {Owner}/{Name} format"
               }
 
-              $openAsDraft = -not ($reason -eq 'IndividualCI' -and $sourceBranch -eq 'refs/heads/main')
+              # Open PR as draft if generation failed, or if it's not an IndividualCI build from main
+              $openAsDraft = ($generateJobResult -ne 'Succeeded') -or (-not ($reason -eq 'IndividualCI' -and $sourceBranch -eq 'refs/heads/main'))
               Write-Host "Setting OpenAsDraftBool = $openAsDraft"
               Write-Host "##vso[task.setvariable variable=OpenAsDraft]$openAsDraft"
               if ($openAsDraft) {
@@ -489,6 +555,7 @@ extends:
             matrix: ${{ parameters.TestMatrix }}
           variables:
             buildArtifactsPath: $(Pipeline.Workspace)/build_artifacts
+            emitterNpmrcPath: $(Agent.TempDirectory)/${{ parameters.EmitterPackagePath }}/.npmrc
           steps:
           - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
             parameters:
@@ -500,6 +567,10 @@ extends:
 
           - ${{ parameters.InitializationSteps }}
 
+          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+            parameters:
+              npmrcPath: $(emitterNpmrcPath)
+
           - task: PowerShell@2
             displayName: 'Run initialize script'
             inputs:
@@ -508,6 +579,8 @@ extends:
               arguments: > 
                 -BuildArtifactsPath '$(buildArtifactsPath)/lock-files'
                 -EmitterPackagePath: ${{ parameters.EmitterPackagePath }}
+            env:
+              NPM_CONFIG_USERCONFIG: $(emitterNpmrcPath)
 
           - task: PowerShell@2
             displayName: 'Run test script'
@@ -518,6 +591,8 @@ extends:
                 $(TestArguments)
                 -OutputDirectory "$(Build.ArtifactStagingDirectory)"
                 -EmitterPackagePath: ${{ parameters.EmitterPackagePath }}
+            env:
+              NPM_CONFIG_USERCONFIG: $(emitterNpmrcPath)
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:

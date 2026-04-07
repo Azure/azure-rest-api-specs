@@ -23,22 +23,19 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu, windows]
-        node-version: [20, 22]
-        exclude:
+        include:
           - os: ubuntu
-            node-version: 22
-          - os: windows
             node-version: 20
+          - os: windows
+            node-version: 24
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
       - if: runner.os == 'Windows'
         run: git config --global core.longpaths true
-        shell: pwsh
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           sparse-checkout: |
             .github
@@ -52,28 +49,17 @@ jobs:
 
       - name: Build
         run: npm run build
-        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - name: Test
+        run: npm run test:ci
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Lint
         run: npm run lint
         if: inputs.lint == true
-        shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
 
       - name: Check Formatting
         run: npm run format:check:ci
-        shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
-
-      - name: Test
-        run: npm run test:ci
-        shell: pwsh
-        working-directory: ./eng/tools/${{ inputs.package }}
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-coverage-report-${{ matrix.os }}-${{ matrix.node-version }}
-          path: ./eng/tools/${{ inputs.package }}/coverage
-          if-no-files-found: ignore

@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "routeTargetAddress": {
+          "privateIPAddress": "10.0.1.4",
+          "privateIPAllocationMethod": "Static",
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+          }
+        },
+        "virtualNetwork": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sg",
+        "type": "Microsoft.Network/serviceGateways",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceGateways/sg",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-00000000",
+          "routeTargetAddress": {
+            "privateIPAddress": "10.0.1.4",
+            "privateIPAllocationMethod": "Static",
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+            }
+          },
+          "virtualNetwork": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sg",
+        "type": "Microsoft.Network/serviceGateways",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceGateways/sg",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-00000000",
+          "routeTargetAddress": {
+            "privateIPAddress": "10.0.1.4",
+            "privateIPAllocationMethod": "Static",
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+            }
+          },
+          "virtualNetwork": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ServiceGateways_CreateOrUpdate",
+  "title": "Create service gateway"
+}

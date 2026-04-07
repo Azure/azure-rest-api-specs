@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "clientApplicationId": "testAppId",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "name": "link1",
+            "type": "Microsoft.ApiManagement/service/clientApplications/productLinks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId/productLinks/link1",
+            "properties": {
+              "productId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/starter"
+            }
+          },
+          {
+            "name": "link2",
+            "type": "Microsoft.ApiManagement/service/clientApplications/productLinks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId/productLinks/link2",
+            "properties": {
+              "productId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/unlimited"
+            }
+          },
+          {
+            "name": "link3",
+            "type": "Microsoft.ApiManagement/service/clientApplications/productLinks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId/productLinks/link3",
+            "properties": {
+              "productId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/premium"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ClientApplicationProductLink_ListByClientApplications",
+  "title": "ApiManagementListProducts"
+}

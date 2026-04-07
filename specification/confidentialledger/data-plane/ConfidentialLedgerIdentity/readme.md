@@ -17,6 +17,18 @@ openapi-type: data-plane
 tag: package-2024-12-09-preview
 ```
 
+### Tag: package-2022-05-13-identity
+
+These settings apply only when `--tag=package-2022-05-13-identity` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05-13-identity'
+input-file:
+  - stable/2022-05-13/identityservice.json
+directive:
+  - suppress: HostParametersValidation
+    reason: Existing API, change would potentially be breaking.
+```
+
 ### Tag: package-2024-12-09-preview
 
 These settings apply only when `--tag=package-2024-12-09-preview` is specified on the command line.

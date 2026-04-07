@@ -5,9 +5,9 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "."
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-file: "{version-status}/{version}/servicebus.json"
     examples-dir: "{project-root}/examples"
@@ -19,14 +19,16 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicebus-generated"
-    namespace: "com.azure.resourcemanager.servicebus.generated"
-    service-name: "Service Bus" # human-readable service name, whitespace allowed
-    premium: false
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicebus"
+    namespace: "com.azure.resourcemanager.servicebus"
+    service-name: "Service Bus"
+    premium: true
     enable-sync-stack: false
     rename-model:
       EncryptionKeySource: KeySource
     use-object-for-unknown: true
+    client-side-validations: true
+    customization-class: customization/src/main/java/ServiceBusCustomization.java
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-servicebus"
@@ -44,6 +46,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ServiceBus"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

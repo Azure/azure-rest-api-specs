@@ -3,7 +3,6 @@ namespace Microsoft.AVS;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -81,6 +80,7 @@ model AddonProperties {
 
 @doc("The properties of a Site Recovery Manager (SRM) addon")
 model AddonSrmProperties extends AddonProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The Site Recovery Manager (SRM) license")
   licenseKey?: string;
 

@@ -30,6 +30,60 @@ openapi-type: arm
 tag: package-2025-05-01
 ```
 
+### Tag: package-2026-03-01-preview
+
+These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-preview'
+input-file:
+  - Microsoft.ComputeSchedule/preview/2026-03-01-preview/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionFlexPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionFlexPayload.properties.resourceOverrides.items
+  - code: PostResponseCodes
+    reason: ScheduledActions Disable and Enable endpoints are synchronous POST returning 200 with no body (OkResponse). These LRO rules do not apply. Keeping 200 for backward compatibility with existing API versions.
+    from: computeschedule.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/disable"].post
+  - code: PostResponseCodes
+    reason: ScheduledActions Disable and Enable endpoints are synchronous POST returning 200 with no body (OkResponse). These LRO rules do not apply. Keeping 200 for backward compatibility with existing API versions.
+    from: computeschedule.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/enable"].post
+
+```
+
+### Tag: package-2026-01-01-preview
+
+These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-preview'
+input-file:
+  - Microsoft.ComputeSchedule/preview/2026-01-01-preview/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+
+```
+
 ### Tag: package-2025-04-15-preview
 
 These settings apply only when `--tag=package-2025-04-15-preview` is specified on the command line.

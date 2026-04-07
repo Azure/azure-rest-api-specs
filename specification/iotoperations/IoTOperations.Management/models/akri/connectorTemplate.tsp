@@ -8,8 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.IoTOperations;
 
@@ -61,6 +59,7 @@ model AkriConnectorTemplateProperties {
   @added(Versions.`2025-10-01`)
   connectorMetadataRef?: string;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -236,9 +235,11 @@ model AkriConnectorTemplateHelmAuthSecretRef {
   secretRef: string;
 
   /** The key of the password in the secret. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   passwordKey: string;
 
   /** The key of the username in the secret. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   usernameKey: string;
 }
 

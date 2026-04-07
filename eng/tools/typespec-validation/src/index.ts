@@ -12,7 +12,7 @@ import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js"
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
 // Context argument may add new properties or override checkingAllSpecs
-export var context: Record<string, any> = { checkingAllSpecs: false };
+export let context: Record<string, unknown> = { checkingAllSpecs: false };
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -30,7 +30,7 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
 
   if (parsedArgs.positionals[1]) {
-    context = { ...context, ...JSON.parse(parsedArgs.positionals[1]) };
+    context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
   }
 
   const absolutePath = normalizePath(folder);

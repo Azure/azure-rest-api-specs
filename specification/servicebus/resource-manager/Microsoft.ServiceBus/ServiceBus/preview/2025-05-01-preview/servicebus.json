@@ -427,14 +427,24 @@
               "$ref": "#/definitions/SBNamespace"
             }
           },
-          "201": {
-            "description": "Resource 'SBNamespace' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SBNamespace"
-            }
-          },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -447,7 +457,12 @@
           "NameSpaceUpdate": {
             "$ref": "./examples/NameSpaces/SBNameSpaceUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SBNamespace"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Namespaces_Delete",
@@ -510,6 +525,60 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
+      "get": {
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "tags": [
+          "SBAuthorizationRules"
+        ],
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListAll": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
@@ -823,60 +892,6 @@
           "NameSpaceAuthorizationRuleRegenerateKey": {
             "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenerateKey.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/authorizationRules": {
-      "get": {
-        "operationId": "Namespaces_ListAuthorizationRules",
-        "tags": [
-          "SBAuthorizationRules"
-        ],
-        "description": "Gets the authorization rules for a namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SBAuthorizationRuleListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameSpaceAuthorizationRuleListAll": {
-            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1409,7 +1424,7 @@
             "description": "Parameters required to create an Alias(Disaster Recovery configuration)",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/FailoverProperties"
+              "$ref": "#/definitions/NamespaceFailoverProperties"
             }
           }
         ],
@@ -4998,17 +5013,6 @@
         }
       }
     },
-    "FailoverProperties": {
-      "type": "object",
-      "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FailoverPropertiesProperties",
-          "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "FailoverPropertiesProperties": {
       "type": "object",
       "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
@@ -5319,6 +5323,17 @@
         "ignoreMissingVnetServiceEndpoint": {
           "type": "boolean",
           "description": "Value that indicates whether to ignore missing VNet Service Endpoint"
+        }
+      }
+    },
+    "NamespaceFailoverProperties": {
+      "type": "object",
+      "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FailoverPropertiesProperties",
+          "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -7040,11 +7055,12 @@
     },
     "TlsVersion": {
       "type": "string",
-      "description": "The minimum TLS version for the cluster to support, e.g. '1.2'",
+      "description": "The minimum TLS version for the cluster to support, e.g. '1.3'",
       "enum": [
         "1.0",
         "1.1",
-        "1.2"
+        "1.2",
+        "1.3"
       ],
       "x-ms-enum": {
         "name": "TlsVersion",
@@ -7061,6 +7077,10 @@
           {
             "name": "1.2",
             "value": "1.2"
+          },
+          {
+            "name": "1.3",
+            "value": "1.3"
           }
         ]
       }

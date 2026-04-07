@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "createServiceGroupRequest": {
+      "properties": {
+        "displayName": "ServiceGroup 1 Name",
+        "parent": {
+          "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+        }
+      }
+    },
+    "serviceGroupName": "ServiceGroup1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "properties": {
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "properties": {
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "CreateOrUpdateServiceGroup",
+  "title": "PutServiceGroup"
+}

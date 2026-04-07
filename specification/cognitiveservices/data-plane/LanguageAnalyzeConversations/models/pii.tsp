@@ -35,15 +35,15 @@ model Entity {
   confidenceScore: float64;
 
   /** Exact mask text to mask the PII entity */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   mask?: string;
 
   /** Offset of the mask text */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskOffset?: int32;
 
   /** Length of the mask text */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   maskLength?: int32;
 }
 
@@ -125,12 +125,12 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
   excludePiiCategories?: Array<ConversationPiiCategoriesExclude>;
 
   /** Optional parameter determine what type of redaction to use. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
 }
 
 /** Kinds of redaction policies supported. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 union RedactionPolicyKind {
   string,
 
@@ -145,7 +145,7 @@ union RedactionPolicyKind {
 }
 
 /** The abstract base class for RedactionPolicy. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
@@ -153,7 +153,7 @@ model BaseRedactionPolicy {
 }
 
 /** Represents the policy of masking with a redaction character */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -163,14 +163,14 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not masking found PII. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of masking PII with the entity type. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntityMaskTypePolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
@@ -180,27 +180,7 @@ model EntityMaskTypePolicyType extends BaseRedactionPolicy {
 @added(Versions.v2024_05_01)
 union ConversationPiiCategories {
   string,
-
-  /** Address category */
-  Address: "Address",
-
-  /** Credit card category */
-  CreditCard: "CreditCard",
-
-  /** Email category */
-  Email: "Email",
-
-  /** Person category */
-  Person: "Person",
-
-  /** Numeric identifier category */
-  NumericIdentifier: "NumericIdentifier",
-
-  /** Phone category */
-  Phone: "Phone",
-
-  /** US social security number category */
-  USSocialSecurityNumber: "USSocialSecurityNumber",
+  ConversationPiiCategoriesExclude,
 
   /** All categories */
   All: "All",
@@ -234,6 +214,90 @@ union ConversationPiiCategoriesExclude {
 
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
+
+  /** Driver's license number category */
+  @added(Versions.v2025_11_15_preview)
+  DriversLicenseNumber: "DriversLicenseNumber",
+
+  /** Passport number category */
+  @added(Versions.v2025_11_15_preview)
+  PassportNumber: "PassportNumber",
+
+  /** Person type category */
+  @added(Versions.v2025_11_15_preview)
+  PersonType: "PersonType",
+
+  /** Organization category */
+  @added(Versions.v2025_11_15_preview)
+  Organization: "Organization",
+
+  /** ABA routing number category */
+  @added(Versions.v2025_11_15_preview)
+  ABARoutingNumber: "ABARoutingNumber",
+
+  /** Bank account number category */
+  @added(Versions.v2025_11_15_preview)
+  BankAccountNumber: "BankAccountNumber",
+
+  /** Date of birth category */
+  @added(Versions.v2025_11_15_preview)
+  DateOfBirth: "DateOfBirth",
+
+  /** International Bank Account Number category */
+  @added(Versions.v2025_11_15_preview)
+  InternationalBankingAccountNumber: "InternationalBankingAccountNumber",
+
+  /** SWIFT code category */
+  @added(Versions.v2025_11_15_preview)
+  SWIFTCode: "SWIFTCode",
+
+  /** Vehicle identification number category */
+  @added(Versions.v2025_11_15_preview)
+  VehicleIdentificationNumber: "VehicleIdentificationNumber",
+
+  /** Age category */
+  @added(Versions.v2025_11_15_preview)
+  Age: "Age",
+
+  /** Date category */
+  @added(Versions.v2025_11_15_preview)
+  Date: "Date",
+
+  /** Zip code category */
+  @added(Versions.v2025_11_15_preview)
+  ZipCode: "ZipCode",
+
+  /** Government issued ID category */
+  @added(Versions.v2025_11_15_preview)
+  GovernmentIssuedId: "GovernmentIssuedId",
+
+  /** Card verification value category */
+  @added(Versions.v2025_11_15_preview)
+  CVV: "CVV",
+
+  /** Health card number category */
+  @added(Versions.v2025_11_15_preview)
+  HealthCardNumber: "HealthCardNumber",
+
+  /** CA Social insurance number category */
+  @added(Versions.v2025_11_15_preview)
+  CASocialInsuranceNumber: "CASocialInsuranceNumber",
+
+  /** US Medicare beneficiary ID category */
+  @added(Versions.v2025_11_15_preview)
+  USMedicareBeneficiaryId: "USMedicareBeneficiaryId",
+
+  /** Github account category */
+  @added(Versions.v2025_11_15_preview)
+  GithubAccount: "GithubAccount",
+
+  /** Location category */
+  @added(Versions.v2025_11_15_preview)
+  Location: "Location",
+
+  /** GPE category */
+  @added(Versions.v2025_11_15_preview)
+  GPE: "GPE",
 }
 
 /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */

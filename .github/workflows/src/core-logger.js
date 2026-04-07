@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @typedef {import('../../shared/src/logger.js').ILogger} ILogger
  */

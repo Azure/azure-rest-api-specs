@@ -54,7 +54,7 @@ interface NodeTypes {
   >;
 
   /**
-   * Update the configuration of a node type of a given managed cluster, only updating tags.
+   * Update the configuration of a node type of a given managed cluster, only updating tags or capacity.
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -139,6 +139,7 @@ interface NodeTypes {
   /**
    * Starts a fault simulation on the node type.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -151,6 +152,7 @@ interface NodeTypes {
   /**
    * Stops a fault simulation on the node type.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     NodeType,
@@ -163,6 +165,7 @@ interface NodeTypes {
   /**
    * Gets a fault simulation by the simulationId.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     NodeType,
@@ -173,6 +176,7 @@ interface NodeTypes {
   /**
    * Gets the list of recent fault simulations for the node type.
    */
+  @removed(Versions.v2026_02_01)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -545,6 +549,12 @@ model NodeTypeProperties {
    */
   @added(Versions.v2025_06_01_preview)
   isOutboundOnly?: boolean;
+
+  /**
+   * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
+   */
+  @added(Versions.v2026_02_01)
+  enableResilientEphemeralOsDisk?: boolean;
 }
 
 /**
@@ -880,8 +890,8 @@ model VMSSExtension {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Backwards compatibility with existing flatten"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility with existing flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: VMSSExtensionProperties;
 }
 /**

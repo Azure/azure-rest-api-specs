@@ -25,6 +25,9 @@ parameters:
   - name: CreatePullRequest
     type: boolean
     default: false
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
   - name: SpecBatchTypes
     type: string
     default: ''
@@ -33,8 +36,10 @@ parameters:
     default: 0
 
 stages:
-- stage: Build
-  displayName: 'SDK Generation'
+- stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
+  displayName: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'SDK Generation', format('Batch SDK Generation for ({0})', parameters.SpecBatchTypes)) }}
+  # Explicitly set to no dependencies so multiple instances of this template can run in parallel when called in a loop
+  dependsOn: []
   jobs:
   - job:
     timeoutInMinutes: 2400
@@ -144,12 +149,6 @@ stages:
                   Exit 1
               }
 
-              # Set repo owner to 'azure-sdk' when customized branch is provided
-              $sdkRepoOwner = 'azure-sdk'
-              Write-Host "##vso[task.setvariable variable=SdkRepoOwner]$sdkRepoOwner"
-              Write-Host "SdkRepoOwner variable set to: $sdkRepoOwner"
-              $sdkRepoUrl = "https://github.com/azure-sdk/$(SdkRepoName)"
-
               # Check if branch exists remotely
               Write-Host "Checking if branch '$SdkRepoBranch' exists in remote repository '$sdkRepoUrl'..."
               $branchExists = git ls-remote --heads $sdkRepoUrl "refs/heads/$SdkRepoBranch"
@@ -201,11 +200,16 @@ stages:
           versionSpec: $(NodeVersion)
         displayName: 'Install Node.js'
 
+      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+        parameters:
+          npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
+
       - task: UsePythonVersion@0
         inputs:
           versionSpec: $(PythonVersion)
 
       - script: |
+          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
           sdk_gen_info="Configurations: "
 
@@ -256,6 +260,10 @@ stages:
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
         displayName: 'Generate SDK'
+        ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          continueOnError: true
+        env:
+          NPM_CONFIG_USERCONFIG: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
@@ -272,10 +280,10 @@ stages:
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - pwsh: |
             $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
-
-            # use the user provided branch name when SdkRepoOwner is set as 'azure-sdk'
-            if ('$(SdkRepoOwner)' -eq 'azure-sdk') {
-              $sdkPrBranchName = '${{ parameters.SdkRepoBranch }}'
+            $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
+            # use the user provided branch name
+            if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
+              $sdkPrBranchName = $sdkRepoBranch
             }
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
@@ -299,12 +307,21 @@ stages:
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
-            BaseRepoOwner: azure-sdk
+            BaseRepoOwner: $(SdkRepoOwner)
             CommitMsg: $(GeneratedSDKInformation)
             TargetRepoOwner: azure
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+
+        - ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          - pwsh: |
+              $currentTitle = "$(PrTitle)"
+              $updatedTitle = "Failed-$currentTitle"
+              Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
+              Write-Host "Updated PR Title to: '$updatedTitle'"
+            displayName: "Set PR title prefix on failures"
+            condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
         - task: PowerShell@2
           displayName: Create pull request
@@ -317,7 +334,7 @@ stages:
               -RepoOwner "azure"
               -RepoName "$(SdkRepoName)"
               -BaseBranch "main"
-              -PROwner "azure-sdk"
+              -PROwner "$(SdkRepoOwner)"
               -PRBranch "$(SdkPullRequestSourceBranch)"
               -AuthToken "$(azuresdk-github-pat)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"

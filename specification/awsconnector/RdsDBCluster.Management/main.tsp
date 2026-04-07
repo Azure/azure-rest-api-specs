@@ -160,6 +160,7 @@ model AwsRdsDBClusterProperties {
   @doc("A value that indicates whether to manage the master user password with AWS Secrets Manager.")
   manageMasterUserPassword?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The master password for the DB instance.")
   masterUserPassword?: string;
 

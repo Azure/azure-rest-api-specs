@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringService": {
+      "location": "eastus",
+      "properties": {
+        "peeringServiceLocation": "state1",
+        "peeringServiceProvider": "serviceProvider1",
+        "providerBackupPeeringLocation": "peeringLocation2",
+        "providerPrimaryPeeringLocation": "peeringLocation1"
+      }
+    },
+    "peeringServiceName": "peeringServiceName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "peeringServiceName",
+        "type": "Microsoft.Peering/peeringServices",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName",
+        "location": "eastus",
+        "properties": {
+          "peeringServiceLocation": "state1",
+          "peeringServiceProvider": "serviceProvider1",
+          "providerBackupPeeringLocation": "peeringLocation2",
+          "providerPrimaryPeeringLocation": "peeringLocation1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "peeringServiceName",
+        "type": "Microsoft.Peering/peeringServices",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName",
+        "location": "eastus",
+        "properties": {
+          "peeringServiceLocation": "state1",
+          "peeringServiceProvider": "serviceProvider1",
+          "providerBackupPeeringLocation": "peeringLocation2",
+          "providerPrimaryPeeringLocation": "peeringLocation1",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "PeeringServices_CreateOrUpdate",
+  "title": "Create a  peering service"
+}

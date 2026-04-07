@@ -3,11 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.BotService;
 
@@ -194,6 +190,31 @@ union OperationResultStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union ChannelNameUnion {
+  string,
+  AlexaChannel: "AlexaChannel",
+  FacebookChannel: "FacebookChannel",
+  EmailChannel: "EmailChannel",
+  KikChannel: "KikChannel",
+  TelegramChannel: "TelegramChannel",
+  SlackChannel: "SlackChannel",
+  MsTeamsChannel: "MsTeamsChannel",
+  SkypeChannel: "SkypeChannel",
+  WebChatChannel: "WebChatChannel",
+  DirectLineChannel: "DirectLineChannel",
+  SmsChannel: "SmsChannel",
+  LineChannel: "LineChannel",
+  DirectLineSpeechChannel: "DirectLineSpeechChannel",
+  OutlookChannel: "OutlookChannel",
+  Omnichannel: "Omnichannel",
+  TelephonyChannel: "TelephonyChannel",
+  AcsChatChannel: "AcsChatChannel",
+  SearchAssistant: "SearchAssistant",
+  M365Extensions: "M365Extensions",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ChannelName {
   AlexaChannel,
   FacebookChannel,
@@ -334,11 +355,13 @@ model BotProperties {
   /**
    * The Application Insights key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   developerAppInsightKey?: string;
 
   /**
    * The Application Insights Api Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   developerAppInsightsApiKey?: string;
 
   /**
@@ -354,6 +377,7 @@ model BotProperties {
   /**
    * The LUIS Key
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   luisKey?: string;
 
   /**
@@ -397,6 +421,7 @@ model BotProperties {
   /**
    * Token used to migrate non Azure bot to azure subscription
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   migrationToken?: string;
 
@@ -998,6 +1023,7 @@ model Site {
   /**
    * Primary key. Value only returned through POST to the action Channel List API, otherwise empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   key?: string;
 
@@ -1377,11 +1403,13 @@ model QnAMakerEndpointKeysResponse {
   /**
    * Primary Access Key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   primaryEndpointKey?: string;
 
   /**
    * Secondary Access Key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secondaryEndpointKey?: string;
 
   /**
@@ -1772,6 +1800,7 @@ model EmailChannelProperties {
   /**
    * The password for the email address. Value only returned through POST to the action Channel List API, otherwise empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
@@ -1943,6 +1972,7 @@ model KikChannelProperties {
   /**
    * Kik API key. Value only returned through POST to the action Channel List API, otherwise empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   apiKey?: string;
 
   /**

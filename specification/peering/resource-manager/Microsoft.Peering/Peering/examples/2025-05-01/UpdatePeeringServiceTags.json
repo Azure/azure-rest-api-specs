@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringServiceName": "peeringServiceName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId",
+    "tags": {
+      "tags": {
+        "tag0": "value0",
+        "tag1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "peeringServiceName",
+        "type": "Microsoft.Peering/peeringServices",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName",
+        "location": "eastus",
+        "properties": {
+          "logAnalyticsWorkspaceProperties": {
+            "connectedAgents": [
+              "Agent1",
+              "Agent2"
+            ],
+            "key": "key",
+            "workspaceID": "00000000-0000-0000-0000-000000000000"
+          },
+          "peeringServiceLocation": "state1",
+          "peeringServiceProvider": "serviceProvider1",
+          "providerBackupPeeringLocation": "peeringLocation2",
+          "providerPrimaryPeeringLocation": "peeringLocation1",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tag0": "value0",
+          "tag1": "value1"
+        }
+      }
+    }
+  },
+  "operationId": "PeeringServices_Update",
+  "title": "Update peering service tags"
+}

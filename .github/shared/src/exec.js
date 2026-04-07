@@ -1,5 +1,3 @@
-// @ts-check
-
 import child_process from "child_process";
 import { dirname, join } from "path";
 import { promisify } from "util";
@@ -10,6 +8,15 @@ const execFileImpl = promisify(child_process.execFile);
  * @property {string} [cwd] Current working directory.  Default: process.cwd().
  * @property {import('./logger.js').ILogger} [logger]
  * @property {number} [maxBuffer] Max bytes allowed on stdout or stderr.  Default: 16 * 1024 * 1024.
+ */
+
+/**
+ * @typedef {Object} NpmPrefixOptions
+ * @property {string} [prefix] Prefix to pass to npm via "--prefix".
+ */
+
+/**
+ * @typedef {ExecOptions & NpmPrefixOptions} ExecNpmOptions
  */
 
 /**
@@ -38,7 +45,7 @@ export function isExecError(error) {
  * Wraps `child_process.execFile()`, adding logging and a larger default maxBuffer.
  *
  * @param {string} file
- * @param {string[]} args
+ * @param {string[]} [args]
  * @param {ExecOptions} [options]
  * @returns {Promise<ExecResult>}
  * @throws {ExecError}
@@ -77,11 +84,13 @@ export async function execFile(file, args, options = {}) {
  * Calls `execFile()` with appropriate arguments to run `npm` on all platforms
  *
  * @param {string[]} args
- * @param {ExecOptions} [options]
+ * @param {ExecNpmOptions} [options]
  * @returns {Promise<ExecResult>}
  * @throws {ExecError}
  */
 export async function execNpm(args, options = {}) {
+  const { prefix } = options;
+
   // Exclude platform-specific code from coverage
   /* v8 ignore start */
   const { file, defaultArgs } =
@@ -107,14 +116,16 @@ export async function execNpm(args, options = {}) {
       : { file: "npm", defaultArgs: [] };
   /* v8 ignore stop */
 
-  return await execFile(file, [...defaultArgs, ...args], options);
+  const prefixArgs = prefix ? ["--prefix", prefix] : [];
+
+  return await execFile(file, [...defaultArgs, ...prefixArgs, ...args], options);
 }
 
 /**
  * Calls `execNpm()` with arguments ["exec", "--no", "--"] prepended.
  *
  * @param {string[]} args
- * @param {ExecOptions} [options]
+ * @param {ExecNpmOptions} [options]
  * @returns {Promise<ExecResult>}
  * @throws {ExecError}
  */

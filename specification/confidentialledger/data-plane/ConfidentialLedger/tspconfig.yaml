@@ -8,7 +8,6 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/confidentialledger.json"
@@ -36,5 +35,6 @@ options:
       "name": "@azure-rest/azure-confidentialledger"
       description: "Microsoft Confidential Ledger"
     "flavor": "azure"
+    is-modular-library: false
     generate-metadata: true
     generate-sample-project: false

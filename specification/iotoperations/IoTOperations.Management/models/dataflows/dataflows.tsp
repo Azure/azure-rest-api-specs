@@ -51,6 +51,12 @@ model DataflowProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the dataflow.")
+  @added(Versions.`2026-03-01`)
+  status?: DataflowStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -111,6 +117,7 @@ model DataflowBuiltInTransformationSettings {
 
 @doc("Dataflow BuiltIn Transformation dataset properties")
 model DataflowBuiltInTransformationDataset {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The key of the dataset.")
   @maxLength(64)
   key: string;
@@ -258,6 +265,7 @@ model DataflowDestinationAddIfNotPresentHeaderAction
   @doc("The type of header operation to perform.")
   actionType: AddIfNotPresent;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The name of the header to add.")
   key: string;
 
@@ -272,6 +280,7 @@ model DataflowDestinationRemoveHeaderAction
   @doc("The type of header operation to perform.")
   actionType: Remove;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The name of the header to remove.")
   key: string;
 }
@@ -283,6 +292,7 @@ model DataflowDestinationAddOrReplaceHeaderAction
   @doc("The type of header operation to perform.")
   actionType: AddOrReplace;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The name of the header to add or replace.")
   key: string;
 
@@ -306,4 +316,12 @@ model DataflowSourceOperationSettings {
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
   dataSources: NonEmptyString[];
+}
+
+/** DataflowStatus status. */
+@added(Versions.`2026-03-01`)
+model DataflowStatus {
+  /** The health state of the Dataflow. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }
