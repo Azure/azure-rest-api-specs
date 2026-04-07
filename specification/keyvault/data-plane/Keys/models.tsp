@@ -17,6 +17,18 @@ union JsonWebKeyType {
   string,
 
   /**
+   * Algorithm Key Pair.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  AKP: "AKP",
+
+  /**
+   * Algorithm Key Pair with private key material stored in HSM.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  AKP_HSM: "AKP-HSM",
+
+  /**
    * Elliptic Curve.
    */
   EC: "EC",
@@ -241,6 +253,29 @@ union JsonWebKeyEncryptionAlgorithm {
 }
 
 /**
+ * The algorithm identifier for Algorithm Key Pair (AKP) keys.
+ */
+@added(KeyVault.Versions.v2026_05_01_preview)
+union AKPAlgorithm {
+  string,
+
+  /**
+   * ML-DSA-44, as defined by FIPS 204 and draft-ietf-cose-dilithium.
+   */
+  ML_DSA_44: "ML-DSA-44",
+
+  /**
+   * ML-DSA-65, as defined by FIPS 204 and draft-ietf-cose-dilithium.
+   */
+  ML_DSA_65: "ML-DSA-65",
+
+  /**
+   * ML-DSA-87, as defined by FIPS 204 and draft-ietf-cose-dilithium.
+   */
+  ML_DSA_87: "ML-DSA-87",
+}
+
+/**
  * The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
  */
 union JsonWebKeySignatureAlgorithm {
@@ -401,6 +436,12 @@ model KeyCreateParameters {
    */
   @encodedName("application/json", "release_policy")
   releasePolicy?: KeyReleasePolicy;
+
+  /**
+   * The algorithm for Algorithm Key Pair (AKP) keys. For valid values, see AKPAlgorithm.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  alg?: AKPAlgorithm;
 }
 
 /**
@@ -725,6 +766,19 @@ model JsonWebKey {
    */
   @encode("base64url")
   y?: bytes;
+
+  /**
+   * The algorithm identifier. This parameter is required when kty is AKP.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  alg?: AKPAlgorithm;
+
+  /**
+   * The public key for Algorithm Key Pair (AKP) keys.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  @encode("base64url")
+  `pub`?: bytes;
 }
 
 /**
@@ -988,10 +1042,11 @@ model KeyOperationResult {
  */
 model KeySignParameters {
   /**
-   * The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
+   * The signing/verification algorithm identifier. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
    */
   @encodedName("application/json", "alg")
-  algorithm: JsonWebKeySignatureAlgorithm;
+  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
+  algorithm?: JsonWebKeySignatureAlgorithm;
 
   /**
    * The value to operate on.
@@ -1005,10 +1060,11 @@ model KeySignParameters {
  */
 model KeyVerifyParameters {
   /**
-   * The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
+   * The signing/verification algorithm. Required for non-AKP key types. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
    */
   @encodedName("application/json", "alg")
-  algorithm: JsonWebKeySignatureAlgorithm;
+  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
+  algorithm?: JsonWebKeySignatureAlgorithm;
 
   /**
    * The digest used for signing.
@@ -1254,6 +1310,12 @@ model KeyProperties {
    */
   @encodedName("application/json", "crv")
   curve?: JsonWebKeyCurveName;
+
+  /**
+   * Algorithm Key Pair (AKP) algorithm. For valid values, see AKPAlgorithm.
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  alg?: AKPAlgorithm;
 }
 
 /**
