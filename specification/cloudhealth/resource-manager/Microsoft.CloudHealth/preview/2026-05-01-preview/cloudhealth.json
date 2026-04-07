@@ -2186,15 +2186,9 @@
           "$ref": "#/definitions/MetricAggregationType",
           "description": "Type of aggregation to apply to the metric"
         },
-        "dimension": {
-          "type": "string",
-          "description": "Optional: Dimension to split by",
-          "minLength": 1,
-          "maxLength": 256
-        },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "description": "Optional: Dimension filter to apply to the metric. OData filter syntax, e.g. \"dimension eq '*'\" or \"dimension eq 'value'\"",
           "minLength": 1,
           "maxLength": 256
         },
@@ -2823,11 +2817,11 @@
       "properties": {
         "degradedRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Degraded rule with static threshold."
+          "description": "Degraded threshold rule."
         },
         "unhealthyRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Unhealthy rule with static threshold."
+          "description": "Unhealthy threshold rule."
         }
       },
       "required": [
@@ -2982,11 +2976,11 @@
       "properties": {
         "degradedRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Degraded rule with static threshold."
+          "description": "Degraded threshold rule."
         },
         "unhealthyRule": {
           "$ref": "#/definitions/ThresholdRuleV2",
-          "description": "Unhealthy rule with static threshold."
+          "description": "Unhealthy threshold rule."
         }
       },
       "required": [
@@ -3603,15 +3597,9 @@
           "$ref": "#/definitions/MetricAggregationType",
           "description": "Type of aggregation to apply to the metric"
         },
-        "dimension": {
-          "type": "string",
-          "description": "Optional: Dimension to split by",
-          "minLength": 1,
-          "maxLength": 256
-        },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "description": "Optional: Dimension filter to apply to the metric. OData filter syntax, e.g. \"dimension eq '*'\" or \"dimension eq 'value'\"",
           "minLength": 1,
           "maxLength": 256
         }
@@ -4017,7 +4005,7 @@
         "threshold": {
           "type": "number",
           "format": "double",
-          "description": "Threshold value. Required for static operators. When operator is Dynamic, defaults to the minimum representable value if omitted."
+          "description": "Threshold value. Required for static operators. Not applicable when operator is Dynamic."
         },
         "sensitivity": {
           "$ref": "#/definitions/DynamicThresholdSensitivity",

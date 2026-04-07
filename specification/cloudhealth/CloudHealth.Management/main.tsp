@@ -320,12 +320,13 @@ model ResourceMetricSignalDefinitionProperties
   @doc("Type of aggregation to apply to the metric")
   aggregationType: MetricAggregationType;
 
+  @removed(Versions.v2026_05_01_preview)
   @doc("Optional: Dimension to split by")
   @minLength(1)
   @maxLength(256)
   dimension?: string;
 
-  @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
+  @doc("Optional: Dimension filter to apply to the metric. OData filter syntax, e.g. \"dimension eq '*'\" or \"dimension eq 'value'\"")
   @minLength(1)
   @maxLength(256)
   dimensionFilter?: string;

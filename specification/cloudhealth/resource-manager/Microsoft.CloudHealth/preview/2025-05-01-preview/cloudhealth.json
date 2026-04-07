@@ -2277,11 +2277,11 @@
         },
         "degradedRule": {
           "$ref": "#/definitions/ThresholdRule",
-          "description": "Degraded rule with static threshold."
+          "description": "Degraded threshold rule."
         },
         "unhealthyRule": {
           "$ref": "#/definitions/ThresholdRule",
-          "description": "Unhealthy rule with static threshold."
+          "description": "Unhealthy threshold rule."
         }
       }
     },
@@ -2809,7 +2809,7 @@
         },
         "dimensionFilter": {
           "type": "string",
-          "description": "Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.",
+          "description": "Optional: Dimension filter to apply to the metric. OData filter syntax, e.g. \"dimension eq '*'\" or \"dimension eq 'value'\"",
           "minLength": 1,
           "maxLength": 256
         }
