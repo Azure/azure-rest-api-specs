@@ -141,7 +141,7 @@ interface Search {
       /**
        * Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management plane Account API. For more information on using Microsoft Entra ID security in Azure Maps, see [Manage authentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).
        */
-      @header
+      @header("x-ms-client-id")
       clientId?: string;
     },
     GeocodingResponse & {
@@ -207,7 +207,7 @@ interface Search {
       /**
        * Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management plane Account API. For more information on using Microsoft Entra ID security in Azure Maps, see [Manage authentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).
        */
-      @header
+      @header("x-ms-client-id")
       clientId?: string;
 
       /**
@@ -246,7 +246,7 @@ interface Search {
       /**
        * Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management plane Account API. For more information on using Microsoft Entra ID security in Azure Maps, see [Manage authentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).
        */
-      @header
+      @header("x-ms-client-id")
       clientId?: string;
 
       /**
@@ -308,7 +308,7 @@ interface Search {
       /**
        * Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management plane Account API. For more information on using Microsoft Entra ID security in Azure Maps, see [Manage authentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).
        */
-      @header
+      @header("x-ms-client-id")
       clientId?: string;
 
       /**
@@ -409,7 +409,7 @@ interface Search {
       /**
        * Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management plane Account API. For more information on using Microsoft Entra ID security in Azure Maps, see [Manage authentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).
        */
-      @header
+      @header("x-ms-client-id")
       clientId?: string;
 
       /**
@@ -448,7 +448,7 @@ interface Search {
       /**
        * Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from the Azure Maps management plane Account API. For more information on using Microsoft Entra ID security in Azure Maps, see [Manage authentication in Azure Maps](/azure/azure-maps/how-to-manage-authentication).
        */
-      @header
+      @header("x-ms-client-id")
       clientId?: string;
 
       /**
