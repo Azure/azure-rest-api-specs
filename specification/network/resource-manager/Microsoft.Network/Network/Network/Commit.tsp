@@ -111,10 +111,7 @@ interface Commits {
   /**
    * Creates or updates a commit.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Commit,
-    Error = CloudError
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Commit, Error = CloudError>;
 
   /**
    * Deletes a commit.
