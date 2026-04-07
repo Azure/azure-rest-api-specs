@@ -38,29 +38,11 @@ input-file:
 - stable/2020-05-01/hubmigrate.json
 ```
 
-### Tag: package-hubmigrate-2020-05
-
-These settings apply only when `--tag=package-hubmigrate-2020-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-hubmigrate-2020-05'
-input-file:
-- stable/2020-05-01/hubmigrate.json
-```
-
 ### Tag: package-2023-01
 
 These settings apply only when `--tag=package-2023-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2023-01'
-input-file:
-- stable/2023-01-01/hubmigrate.json
-```
-
-### Tag: package-hubmigrate-2023-01
-
-These settings apply only when `--tag=package-hubmigrate-2023-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-hubmigrate-2023-01'
 input-file:
 - stable/2023-01-01/hubmigrate.json
 ```

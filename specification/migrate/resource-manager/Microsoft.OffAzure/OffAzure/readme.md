@@ -85,29 +85,11 @@ input-file:
 - stable/2020-01-01/migrate.json
 ```
 
-### Tag: package-migrate-2020-01
-
-These settings apply only when `--tag=package-migrate-2020-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-migrate-2020-01'
-input-file:
-- stable/2020-01-01/migrate.json
-```
-
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-07'
-input-file:
-- stable/2020-07-07/migrate.json
-```
-
-### Tag: package-migrate-2020-07
-
-These settings apply only when `--tag=package-migrate-2020-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-migrate-2020-07'
 input-file:
 - stable/2020-07-07/migrate.json
 ```

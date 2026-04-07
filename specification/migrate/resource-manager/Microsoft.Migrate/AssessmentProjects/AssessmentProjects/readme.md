@@ -111,32 +111,11 @@ input-file:
   - preview/2023-04-01-preview/migrate.json
 ```
 
-### Tag: package-migrate-2023-04
-
-These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
-
-```yaml $(tag) == 'package-migrate-2023-04'
-input-file:
-  - preview/2023-04-01-preview/migrate.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: Migrate feature is widely adopted and requires additionalProperties for these swagger properties.
-```
-
 ### Tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-03'
-input-file:
-  - stable/2023-03-15/migrate.json
-```
-
-### Tag: package-migrate-2023-03
-
-These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
-
-```yaml $(tag) == 'package-migrate-2023-03'
 input-file:
   - stable/2023-03-15/migrate.json
 ```
@@ -150,15 +129,6 @@ input-file:
 - stable/2019-10-01/migrate.json
 ```
 
-### Tag: package-migrate-2019-10
-
-These settings apply only when `--tag=package-migrate-2019-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-migrate-2019-10'
-input-file:
-- stable/2019-10-01/migrate.json
-```
-
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -168,29 +138,11 @@ input-file:
 - stable/2018-02-02/migrate.json
 ```
 
-### Tag: package-migrate-2018-02
-
-These settings apply only when `--tag=package-migrate-2018-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-migrate-2018-02'
-input-file:
-- stable/2018-02-02/migrate.json
-```
-
 ### Tag: package-preview-2017-11
 
 These settings apply only when `--tag=package-preview-2017-11` is specified on the command line.
 
 ``` yaml $(tag) == 'package-preview-2017-11'
-input-file:
-- preview/2017-11-11-preview/migrate.json
-```
-
-### Tag: package-migrate-2017-11
-
-These settings apply only when `--tag=package-migrate-2017-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-migrate-2017-11'
 input-file:
 - preview/2017-11-11-preview/migrate.json
 ```
