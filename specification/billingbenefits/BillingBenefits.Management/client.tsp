@@ -267,5 +267,11 @@ using Microsoft.BillingBenefits;
 @@clientName(Term.P3Y, "P3_Y", "python");
 @@clientName(Term.P5Y, "P5_Y", "python");
 
-@@clientName(DiscountsOperationGroup.scopeList, "listDiscountByScope", "csharp");
-@@clientName(ConditionalCreditsOperationGroup.scopeList, "listConditionalCreditByScope", "csharp");
+@@clientName(DiscountsOperationGroup.scopeList,
+  "listDiscountByScope",
+  "csharp"
+);
+@@clientName(ConditionalCreditsOperationGroup.scopeList,
+  "listConditionalCreditByScope",
+  "csharp"
+);
