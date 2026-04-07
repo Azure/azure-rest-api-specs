@@ -15,7 +15,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
-@removed(Versions.v2026_03_01)
 @doc("Schema Reference Properties")
 model SchemaReferenceProperties {
   @doc("Schema Id of schema reference")
@@ -26,14 +25,12 @@ model SchemaReferenceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@removed(Versions.v2026_03_01)
 @doc("Schema Reference Resource")
 model SchemaReference is ExtensionResource<SchemaReferenceProperties> {
   ...ResourceNameParameter<SchemaReference, NamePattern = "^default$">;
   ...EntityTagProperty;
 }
 
-@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface SchemaReferences {
   @doc("Get a Schema Reference Resource")
