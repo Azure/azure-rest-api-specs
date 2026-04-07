@@ -66,7 +66,7 @@ model DrillProperties {
   chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
 
   @doc("Chaos Experiment properties.")
-  chaosExperimentProperties: ChaosExperimentPropertiesOfDrill;
+  chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
   @doc("Execution state of the Drill. Whether it is currently running or not.")
   @visibility(Lifecycle.Read)
@@ -310,16 +310,16 @@ model RecoveryPlanPropertiesOfDrill {
 @doc("Chaos Experiment properties.")
 model ChaosExperimentPropertiesOfDrill {
   @doc("Subscription for chaosExperiment resource.")
-  subscription: string;
+  subscription?: string;
 
   @doc("Region for chaosExperiment resource.")
-  region: string;
+  region?: string;
 
   @doc("Identity to use for Chaos Experiment operations.")
-  identity: AssociatedIdentity;
+  identity?: AssociatedIdentity;
 
   @doc("Identity to be used by the Chaos Experiment for invoking faults on resources.")
-  chaosExperimentIdentityForFaults: AssociatedIdentity;
+  chaosExperimentIdentityForFaults?: AssociatedIdentity;
 
   @doc("Chaos Experiment resource created for this Drill")
   @visibility(Lifecycle.Read)

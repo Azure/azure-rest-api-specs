@@ -386,7 +386,7 @@ model ExternalNetworkBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for ExternalNetwork BFD Administrative State response"
 @doc("External Network Administrative State response")
 @added(Versions.v2024_06_15_preview)
 model ExternalNetworkBfdAdministrativeStateResponse
