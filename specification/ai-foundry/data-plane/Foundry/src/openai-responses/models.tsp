@@ -323,6 +323,27 @@ namespace Azure.AI.Projects {
     reason?: string;
   }
 
+  @doc("A representation of a span of completion text as used by Azure OpenAI content filter results.")
+  model AzureContentFilterCompletionTextSpan {
+    @doc("Offset of the UTF32 code point which begins the span.")
+    completion_start_offset: int32;
+
+    @doc("Offset of the first UTF32 code point which is excluded from the span.")
+    completion_end_offset: int32;
+  }
+
+  @doc("A content filter detection result with completion text span details.")
+  model AzureContentFilterCompletionTextSpanDetectionResult {
+    @doc("Whether the content was filtered.")
+    filtered: boolean;
+
+    @doc("Whether the content category was detected.")
+    detected: boolean;
+
+    @doc("Detailed information about the detected completion text spans.")
+    details: AzureContentFilterCompletionTextSpan[];
+  }
+
   @doc("A content filter detection result that includes citation information for protected material.")
   model AzureContentFilterDetectionWithCitationResult {
     @doc("Whether the content was filtered.")
@@ -341,7 +362,7 @@ namespace Azure.AI.Projects {
     license?: string;
 
     @doc("The URL associated with the license.")
-    url?: string;
+    URL?: url;
   }
 
   @doc("Result details for an individual PII subcategory.")
@@ -382,6 +403,12 @@ namespace Azure.AI.Projects {
     @doc("Severity result for self-harm content.")
     self_harm?: AzureContentFilterSeverityResult;
 
+    @doc("Detection result for profanity.")
+    profanity?: AzureContentFilterDetectionResult;
+
+    @doc("Results for configured custom blocklists.")
+    custom_blocklists?: AzureContentFilterBlocklistResult;
+
     @doc("Detection result for jailbreak attempts.")
     jailbreak?: AzureContentFilterDetectionResult;
 
@@ -394,17 +421,14 @@ namespace Azure.AI.Projects {
     @doc("Detection result for protected material code with citation.")
     protected_material_code?: AzureContentFilterDetectionWithCitationResult;
 
-    @doc("Detection result for profanity.")
-    profanity?: AzureContentFilterDetectionResult;
-
-    @doc("Results for configured custom blocklists.")
-    custom_blocklists?: AzureContentFilterBlocklistResult;
-
-    @doc("Detection result for indirect attacks.")
-    indirect_attack?: AzureContentFilterDetectionResult;
+    @doc("Detection result for ungrounded material with completion text span details.")
+    ungrounded_material?: AzureContentFilterCompletionTextSpanDetectionResult;
 
     @doc("Detection result for Personally Identifiable Information.")
     personally_identifiable_information?: AzureContentFilterPersonallyIdentifiableInformationResult;
+
+    @doc("Detection result for indirect attacks.")
+    indirect_attack?: AzureContentFilterDetectionResult;
 
     @doc("Error details if content filtering evaluation failed.")
     error?: AzureContentFilterError;
@@ -419,30 +443,13 @@ namespace Azure.AI.Projects {
     message: string;
   }
 
-  @doc("The source type of the content filter evaluation.")
-  union FilterSourceType {
-    string,
-
-    @doc("Content filter applied to the prompt input.")
-    prompt: "prompt",
-
-    @doc("Content filter applied before a tool call is executed.")
-    pre_tool_call: "pre_tool_call",
-
-    @doc("Content filter applied after a tool call is executed.")
-    post_tool_call: "post_tool_call",
-
-    @doc("Content filter applied to the model response output.")
-    response: "response",
-  }
-
   @doc("A content filter evaluation result for a specific source in the response.")
   model ContentFilterResult {
     @doc("Whether the content was blocked by the content filter.")
     blocked: boolean;
 
-    @doc("The source type of the content filter evaluation.")
-    source_type: FilterSourceType;
+    @doc("The source type of the content filter evaluation (e.g., 'prompt', 'response', 'pre_tool_call', 'post_tool_call').")
+    source_type: string;
 
     @doc("The content filter results for this evaluation.")
     content_filter_results: AzureContentFilterResultsForResponses;
