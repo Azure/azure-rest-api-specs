@@ -476,6 +476,114 @@ using Microsoft.AzureStackHCI;
   "EndOn",
   "csharp"
 );
+
+// ==================== DateTimeOffset property renames (On suffix convention) ====================
+// Only for NEW models not in GA 1.2.1 — GA models keep original names to avoid breaking changes
+@@clientName(Microsoft.AzureStackHCI.CollectLogJobProperties.fromDate,
+  "CollectionStartOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.CollectLogJobProperties.toDate,
+  "CollectionEndOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.CollectLogJobProperties.lastLogGenerated,
+  "LastLogGeneratedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeDeviceJobProperties.startTimeUtc,
+  "StartOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeDeviceJobProperties.endTimeUtc,
+  "EndOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciCollectLogJobProperties.fromDate,
+  "CollectionStartOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciCollectLogJobProperties.toDate,
+  "CollectionEndOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciCollectLogJobProperties.lastLogGenerated,
+  "LastLogGeneratedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceJobProperties.startTimeUtc,
+  "StartOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceJobProperties.endTimeUtc,
+  "EndOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.HciRemoteSupportJobProperties.expirationTimestamp,
+  "ExpireOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.RemoteSupportJobNodeSettings.createdAt,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.RemoteSupportJobNodeSettings.updatedAt,
+  "UpdatedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ReportedProperties.lastSyncTimestamp,
+  "LastSyncedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineProperties.lastSyncTimestamp,
+  "LastSyncedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineReportedProperties.lastUpdated,
+  "LastUpdatedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineJobProperties.startTimeUtc,
+  "StartOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineJobProperties.endTimeUtc,
+  "EndOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineRemoteSupportJobProperties.expirationTimestamp,
+  "ExpireOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineRemoteSupportNodeSettings.createdAt,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineRemoteSupportNodeSettings.updatedAt,
+  "UpdatedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineCollectLogJobProperties.fromDate,
+  "CollectionStartOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineCollectLogJobProperties.toDate,
+  "CollectionEndOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.EdgeMachineCollectLogJobProperties.lastLogGenerated,
+  "LastLogGeneratedOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ClusterJobProperties.startTimeUtc,
+  "StartOn",
+  "csharp"
+);
+@@clientName(Microsoft.AzureStackHCI.ClusterJobProperties.endTimeUtc,
+  "EndOn",
+  "csharp"
+);
+
 @@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.hvciProtection,
   "IsHvciProtectionEnabled",
   "csharp"
