@@ -1,0 +1,51 @@
+{
+  "operationId": "KnowledgeSources_Get",
+  "title": "SearchServiceGetKnowledgeSourceWeb",
+  "parameters": {
+    "endpoint": "https://exampleservice.search.windows.net",
+    "sourceName": "ks-example-index",
+    "api-version": "2026-04-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-example-index",
+        "kind": "web",
+        "description": "Description of the knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "webParameters": {
+          "domains": {
+            "allowedDomains": [
+              {
+                "address": "example.com",
+                "includeSubpages": true
+              },
+              {
+                "address": "another-example.com"
+              }
+            ],
+            "blockedDomains": [
+              {
+                "address": "blocked.com"
+              },
+              {
+                "address": "spam.com",
+                "includeSubpages": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
