@@ -60,9 +60,6 @@ interface InstanceMonitors {
   /** Create or replace the instance monitor. Enables the Observability capability for the WVI. */
   create is ArmResourceCreateOrReplaceAsync<InstanceMonitor>;
 
-  /** Update the instance monitor. Allows the PATCH operation for InstanceMonitor. */
-  update is ArmResourcePatchAsync<InstanceMonitor, InstanceMonitorProperties>;
-
   /** Delete the instance monitor. Disables the Observability capability for the WVI. */
   delete is ArmResourceDeleteWithoutOkAsync<InstanceMonitor>;
 

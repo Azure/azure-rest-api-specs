@@ -1814,78 +1814,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "InstanceMonitors_Update",
-        "tags": [
-          "InstanceMonitors"
-        ],
-        "description": "Update the instance monitor. Allows the PATCH operation for InstanceMonitor.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "virtualInstanceName",
-            "in": "path",
-            "description": "The name of the Virtual Instance resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,64}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InstanceMonitorUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/InstanceMonitor"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update an Instance Monitor": {
-            "$ref": "./examples/InstanceMonitors_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      },
       "delete": {
         "operationId": "InstanceMonitors_Delete",
         "tags": [
@@ -2851,21 +2779,6 @@
           "description": "Location to create the AHM.\nDefaults to the WVI's location."
         }
       }
-    },
-    "InstanceMonitorUpdate": {
-      "type": "object",
-      "description": "Instance Monitor resource.\nThis is a singleton child proxy resource under VirtualInstance that enables/disables Observability for a given WVI.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/InstanceMonitorProperties",
-          "description": "Instance monitor properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "JobConfigurationType": {
       "type": "string",
