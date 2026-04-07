@@ -20363,6 +20363,12 @@
           "format": "date-time",
           "description": "Generation time in UTC of the key in ISO-8601 format. If the value is missing from the object, it means that the last key regeneration was triggered before 2022-06-18.",
           "readOnly": true
+        },
+        "approximateLastUsageTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Approximate time in UTC of the most recent usage of the key in ISO-8601 format.\nIf the value is missing from the object, it means there is no recorded data plane\nusage for this key.",
+          "readOnly": true
         }
       }
     },
@@ -24052,6 +24058,10 @@
         "enableAllVersionsAndDeletesChangeFeed": {
           "type": "boolean",
           "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
+        },
+        "enforceHierarchicalPartitionKeyIdLastLevel": {
+          "type": "boolean",
+          "description": "Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account."
         }
       },
       "required": [
@@ -24334,6 +24344,10 @@
           "type": "integer",
           "format": "int64",
           "description": "When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region.  READ ONLY."
+        },
+        "enforceHierarchicalPartitionKeyIdLastLevel": {
+          "type": "boolean",
+          "description": "Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account."
         }
       }
     },
@@ -24485,6 +24499,10 @@
         "keyKind": {
           "$ref": "#/definitions/KeyKind",
           "description": "The access key to regenerate."
+        },
+        "skipAccountKeysLastUsageCheck": {
+          "type": "boolean",
+          "description": "Optional flag indicating whether to skip account keys last usage check."
         }
       },
       "required": [
@@ -24685,6 +24703,10 @@
         "enableAllVersionsAndDeletesChangeFeed": {
           "type": "boolean",
           "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
+        },
+        "enforceHierarchicalPartitionKeyIdLastLevel": {
+          "type": "boolean",
+          "description": "Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account."
         }
       }
     },

@@ -1762,6 +1762,11 @@ model DatabaseAccountGetProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   throughputPoolMaxConsumableRUs?: int64;
+
+  /**
+   * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
+   */
+  enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
 /**
@@ -2229,6 +2234,16 @@ model AccountKeyMetadata {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   generationTime?: utcDateTime;
+
+  /**
+   * Approximate time in UTC of the most recent usage of the key in ISO-8601 format.
+   * If the value is missing from the object, it means there is no recorded data plane
+   * usage for this key.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_04_01_preview)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  approximateLastUsageTime?: utcDateTime;
 }
 
 /**
@@ -2526,6 +2541,11 @@ model DatabaseAccountUpdateProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
+
+  /**
+   * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
+   */
+  enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
 /**
@@ -2748,6 +2768,11 @@ model DatabaseAccountCreateUpdateProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
+
+  /**
+   * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
+   */
+  enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
 }
 
 /**
@@ -2876,6 +2901,12 @@ model DatabaseAccountRegenerateKeyParameters {
    * The access key to regenerate.
    */
   keyKind: KeyKind;
+
+  /**
+   * Optional flag indicating whether to skip account keys last usage check.
+   */
+  @added(Versions.v2026_04_01_preview)
+  skipAccountKeysLastUsageCheck?: boolean;
 }
 
 /**
