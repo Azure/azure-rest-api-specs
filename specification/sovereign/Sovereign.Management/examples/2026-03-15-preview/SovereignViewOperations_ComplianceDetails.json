@@ -8,7 +8,26 @@
     "sovereignViewName": "ExampleSV",
     "body": {
       "top": 50,
-      "skipToken": "token-1"
+      "skipToken": "token-1",
+      "policyInitiatives": [
+        {
+          "initiativeId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/providers/Microsoft.Authorization/policySetDefinitions/ExamplePolicySet",
+          "state": "Compliant"
+        }
+      ],
+      "filters": [
+        {
+          "field": "location",
+          "operator": "In",
+          "value": ["northeurope"]
+        }
+      ],
+      "sorts": [
+        {
+          "field": "resourceId",
+          "order": "Asc"
+        }
+      ]
     }
   },
   "responses": {
@@ -16,6 +35,7 @@
       "body": {
         "nextToken": "token-2",
         "lastEvaluated": "2026-03-15T12:30:00Z",
+        "totalResources": 2,
         "resources": [
           {
             "resourceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/ExampleResourceGroup/providers/Microsoft.Compute/virtualMachines/example-vm-01",
@@ -23,10 +43,7 @@
             "complianceDetails": [
               {
                 "policyInitiativeId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/providers/Microsoft.Authorization/policySetDefinitions/ExamplePolicySet",
-                "isCompliant": true,
-                "reasons": [
-                  "All checks passed"
-                ]
+                "policyState": "Compliant"
               }
             ]
           },
@@ -36,10 +53,7 @@
             "complianceDetails": [
               {
                 "policyInitiativeId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/providers/Microsoft.Authorization/policySetDefinitions/ExamplePolicySet",
-                "isCompliant": false,
-                "reasons": [
-                  "Secure transfer not enabled"
-                ]
+                "policyState": "NonCompliant"
               }
             ]
           }

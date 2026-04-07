@@ -3488,6 +3488,48 @@
         }
       }
     },
+    "PolicyComplianceState": {
+      "type": "string",
+      "description": "Supported compliance states for the policy initiatives.",
+      "enum": [
+        "Compliant",
+        "NonCompliant",
+        "Exempt",
+        "Conflict",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyComplianceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "The resource is compliant with respect to the given policy."
+          },
+          {
+            "name": "NonCompliant",
+            "value": "NonCompliant",
+            "description": "The resource is not compliant with respect to the given policy."
+          },
+          {
+            "name": "Exempt",
+            "value": "Exempt",
+            "description": "The resource is exempt from the given policy."
+          },
+          {
+            "name": "Conflict",
+            "value": "Conflict",
+            "description": "There is a conflict with the given policy."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The compliance state of the resource is unknown."
+          }
+        ]
+      }
+    },
     "PolicyInitiativeAssignmentProperties": {
       "type": "object",
       "description": "Details of policy assignments",
@@ -3593,22 +3635,14 @@
             ]
           }
         },
-        "isCompliant": {
-          "type": "boolean",
+        "policyState": {
+          "$ref": "#/definitions/PolicyComplianceState",
           "description": "The compliance state of the resource for the policy initiative."
-        },
-        "reasons": {
-          "type": "array",
-          "description": "The reasons for the compliance state.",
-          "items": {
-            "type": "string"
-          }
         }
       },
       "required": [
         "policyInitiativeId",
-        "isCompliant",
-        "reasons"
+        "policyState"
       ]
     },
     "SovereignViewComplianceDetailResource": {
@@ -3644,6 +3678,75 @@
         "complianceDetails"
       ]
     },
+    "SovereignViewComplianceDetailsFilterOperators": {
+      "type": "string",
+      "description": "Supported filter operators for Sovereign View Compliance details.",
+      "enum": [
+        "In"
+      ],
+      "x-ms-enum": {
+        "name": "SovereignViewComplianceDetailsFilterOperators",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "In filter operator. Returns results where the field value is in the provided list of values."
+          }
+        ]
+      }
+    },
+    "SovereignViewComplianceDetailsFilters": {
+      "type": "object",
+      "description": "The filters to apply when querying for compliance details.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The field to filter on."
+        },
+        "operator": {
+          "$ref": "#/definitions/SovereignViewComplianceDetailsFilterOperators",
+          "description": "The operator to apply for the filter."
+        },
+        "value": {
+          "type": "array",
+          "description": "The values to filter on.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "field",
+        "operator",
+        "value"
+      ]
+    },
+    "SovereignViewComplianceDetailsPolicyInitiativeFilter": {
+      "type": "object",
+      "description": "The filter for compliance details based on policy initiatives and their states.",
+      "properties": {
+        "initiativeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified id of the policy initiative.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Authorization/policySetDefinitions"
+              }
+            ]
+          }
+        },
+        "state": {
+          "$ref": "#/definitions/PolicyComplianceState",
+          "description": "The compliance state to optionally filter on."
+        }
+      },
+      "required": [
+        "initiativeId"
+      ]
+    },
     "SovereignViewComplianceDetailsRequest": {
       "type": "object",
       "description": "The request for the sovereign view compliance details action.",
@@ -3656,6 +3759,31 @@
         "skipToken": {
           "type": "string",
           "description": "The continuation token returned by the service for the next page."
+        },
+        "policyInitiatives": {
+          "type": "array",
+          "description": "The filters for policy initiatives and their states to apply when querying for compliance details.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDetailsPolicyInitiativeFilter"
+          },
+          "x-ms-identifiers": [
+            "initiativeId"
+          ]
+        },
+        "filters": {
+          "type": "array",
+          "description": "The filters to apply when querying for compliance details.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDetailsFilters"
+          },
+          "x-ms-identifiers": [
+            "field",
+            "operator"
+          ]
+        },
+        "sort": {
+          "$ref": "#/definitions/SovereignViewComplianceDetailsSort",
+          "description": "The sorting to apply when querying for compliance details."
         }
       },
       "required": [
@@ -3675,6 +3803,11 @@
           "format": "date-time",
           "description": "The time when compliance was last evaluated, in RFC3339 format."
         },
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of resources for the sovereign view."
+        },
         "resources": {
           "type": "array",
           "description": "The list of compliance detail resources.",
@@ -3688,10 +3821,53 @@
       },
       "required": [
         "lastEvaluated",
+        "totalResources",
         "resources"
       ]
     },
-    "SovereignViewComplianceDimensionSummary": {
+    "SovereignViewComplianceDetailsSort": {
+      "type": "object",
+      "description": "The sorting for compliance details.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The field to sort on."
+        },
+        "direction": {
+          "$ref": "#/definitions/SovereignViewComplianceDetailsSortDirections",
+          "description": "The direction to sort in."
+        }
+      },
+      "required": [
+        "field",
+        "direction"
+      ]
+    },
+    "SovereignViewComplianceDetailsSortDirections": {
+      "type": "string",
+      "description": "Supported sort directions for Sovereign View Compliance details.",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "SovereignViewComplianceDetailsSortDirections",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Asc",
+            "value": "asc",
+            "description": "Ascending sort direction."
+          },
+          {
+            "name": "Desc",
+            "value": "desc",
+            "description": "Descending sort direction."
+          }
+        ]
+      }
+    },
+    "SovereignViewComplianceInitiativeSummary": {
       "type": "object",
       "description": "The compliance summary for a specific dimension (policy initiative) in the sovereign view compliance summary action.",
       "properties": {
@@ -3811,11 +3987,11 @@
           "$ref": "#/definitions/SovereignViewComplianceOverallSummary",
           "description": "The overall summary of compliance across all resources in scope."
         },
-        "dimensionSummaries": {
+        "policyInitiativeSummaries": {
           "type": "array",
-          "description": "The list of compliance summaries for each dimension (policy initiative) in scope.",
+          "description": "The list of compliance summaries for the policy initiatives in scope.",
           "items": {
-            "$ref": "#/definitions/SovereignViewComplianceDimensionSummary"
+            "$ref": "#/definitions/SovereignViewComplianceInitiativeSummary"
           },
           "x-ms-identifiers": [
             "policyInitiativeId"
@@ -3826,7 +4002,7 @@
         "resourceId",
         "lastEvaluated",
         "overallSummary",
-        "dimensionSummaries"
+        "policyInitiativeSummaries"
       ]
     },
     "SovereignViewPolicyInitiativeDetail": {

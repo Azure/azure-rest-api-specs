@@ -73,9 +73,9 @@ model SovereignViewComplianceSummaryResponse {
   @doc("The overall summary of compliance across all resources in scope.")
   overallSummary: SovereignViewComplianceOverallSummary;
 
-  @doc("The list of compliance summaries for each dimension (policy initiative) in scope.")
+  @doc("The list of compliance summaries for the policy initiatives in scope.")
   @identifiers(#["policyInitiativeId"])
-  dimensionSummaries: SovereignViewComplianceDimensionSummary[];
+  policyInitiativeSummaries: SovereignViewComplianceInitiativeSummary[];
 }
 
 @added(Versions.Preview20260315)
@@ -105,7 +105,7 @@ model SovereignViewComplianceOverallSummary {
 
 @added(Versions.Preview20260315)
 @doc("The compliance summary for a specific dimension (policy initiative) in the sovereign view compliance summary action.")
-model SovereignViewComplianceDimensionSummary { // Consider renaming this to SovereignViewCompliancePolicyInitiativeSummary
+model SovereignViewComplianceInitiativeSummary {
   @doc("The fully qualified id of the policy initiative.")
   policyInitiativeId: armResourceIdentifier<[
     {
@@ -135,6 +135,93 @@ model SovereignViewComplianceDetailsRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pagination tokens are not sensitive in this API."
   @doc("The continuation token returned by the service for the next page.")
   skipToken?: string;
+
+  @doc("The filters for policy initiatives and their states to apply when querying for compliance details.")
+  @identifiers(#["initiativeId"])
+  policyInitiatives?: SovereignViewComplianceDetailsPolicyInitiativeFilter[];
+
+  @doc("The filters to apply when querying for compliance details.")
+  @identifiers(#["field", "operator"])
+  filters?: SovereignViewComplianceDetailsFilters[];
+
+  @doc("The sorting to apply when querying for compliance details.")
+  sort?: SovereignViewComplianceDetailsSort;
+}
+
+@added(Versions.Preview20260315)
+@doc("The filter for compliance details based on policy initiatives and their states.")
+model SovereignViewComplianceDetailsPolicyInitiativeFilter {
+  @doc("The fully qualified id of the policy initiative.")
+  initiativeId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Authorization/policySetDefinitions";
+    }
+  ]>;
+
+  @doc("The compliance state to optionally filter on.")
+  state?: PolicyComplianceState;
+}
+
+@doc("Supported compliance states for the policy initiatives.")
+union PolicyComplianceState {
+  @doc("The resource is compliant with respect to the given policy.")
+  Compliant: "Compliant",
+
+  @doc("The resource is not compliant with respect to the given policy.")
+  NonCompliant: "NonCompliant",
+
+  @doc("The resource is exempt from the given policy.")
+  Exempt: "Exempt",
+
+  @doc("There is a conflict with the given policy.")
+  Conflict: "Conflict",
+
+  @doc("The compliance state of the resource is unknown.")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.Preview20260315)
+@doc("The filters to apply when querying for compliance details.")
+model SovereignViewComplianceDetailsFilters {
+  @doc("The field to filter on.")
+  field: string;
+
+  @doc("The operator to apply for the filter.")
+  operator: SovereignViewComplianceDetailsFilterOperators;
+
+  @doc("The values to filter on.")
+  value: string[];
+}
+
+@doc("Supported filter operators for Sovereign View Compliance details.")
+union SovereignViewComplianceDetailsFilterOperators {
+  @doc("In filter operator. Returns results where the field value is in the provided list of values.")
+  In: "In",
+
+  string,
+}
+
+@added(Versions.Preview20260315)
+@doc("The sorting for compliance details.")
+model SovereignViewComplianceDetailsSort {
+  @doc("The field to sort on.")
+  field: string;
+
+  @doc("The direction to sort in.")
+  direction: SovereignViewComplianceDetailsSortDirections;
+}
+
+@doc("Supported sort directions for Sovereign View Compliance details.")
+union SovereignViewComplianceDetailsSortDirections {
+  @doc("Ascending sort direction.")
+  Asc: "asc",
+
+  @doc("Descending sort direction.")
+  Desc: "desc",
+
+  string,
 }
 
 @added(Versions.Preview20260315)
@@ -146,6 +233,9 @@ model SovereignViewComplianceDetailsResponse {
 
   @doc("The time when compliance was last evaluated, in RFC3339 format.")
   lastEvaluated: utcDateTime;
+
+  @doc("Total number of resources for the sovereign view.")
+  totalResources: int32;
 
   @doc("The list of compliance detail resources.")
   @identifiers(#["resourceId"])
@@ -177,8 +267,5 @@ model SovereignViewComplianceDetail {
   ]>;
 
   @doc("The compliance state of the resource for the policy initiative.")
-  isCompliant: boolean;
-
-  @doc("The reasons for the compliance state.")
-  reasons: string[];
+  policyState: PolicyComplianceState;
 }
