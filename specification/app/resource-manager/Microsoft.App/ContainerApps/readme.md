@@ -56,32 +56,32 @@ These settings apply only when `--tag=package-preview-2026-04-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-04-01-preview'
 input-file:
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ArtifactApps.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/Artifacts.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/AuthConfigs.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/AvailableWorkloadProfiles.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/BillingMeters.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/CommonDefinitions.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ConnectedEnvironments.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ConnectedEnvironmentsCertificates.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ConnectedEnvironmentsDaprComponents.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ConnectedEnvironmentsStorages.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ContainerApps.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ContainerAppsRevisions.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/Diagnostics.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/Global.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/JavaComponents.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/Jobs.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/LogicAppsExtension.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ManagedEnvironments.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ManagedEnvironmentsDaprComponents.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ManagedEnvironmentsHttpRouteConfig.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ManagedEnvironmentsMaintenanceConfigurations.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ManagedEnvironmentsStorages.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/SessionPools.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/SourceControls.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/Subscriptions.json
-  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/Usages.json
+  - preview/2026-04-01-preview/ArtifactApps.json
+  - preview/2026-04-01-preview/Artifacts.json
+  - preview/2026-04-01-preview/AuthConfigs.json
+  - preview/2026-04-01-preview/AvailableWorkloadProfiles.json
+  - preview/2026-04-01-preview/BillingMeters.json
+  - preview/2026-04-01-preview/CommonDefinitions.json
+  - preview/2026-04-01-preview/ConnectedEnvironments.json
+  - preview/2026-04-01-preview/ConnectedEnvironmentsCertificates.json
+  - preview/2026-04-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - preview/2026-04-01-preview/ConnectedEnvironmentsStorages.json
+  - preview/2026-04-01-preview/ContainerApps.json
+  - preview/2026-04-01-preview/ContainerAppsRevisions.json
+  - preview/2026-04-01-preview/Diagnostics.json
+  - preview/2026-04-01-preview/Global.json
+  - preview/2026-04-01-preview/JavaComponents.json
+  - preview/2026-04-01-preview/Jobs.json
+  - preview/2026-04-01-preview/LogicAppsExtension.json
+  - preview/2026-04-01-preview/ManagedEnvironments.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsDaprComponents.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - preview/2026-04-01-preview/ManagedEnvironmentsStorages.json
+  - preview/2026-04-01-preview/SessionPools.json
+  - preview/2026-04-01-preview/SourceControls.json
+  - preview/2026-04-01-preview/Subscriptions.json
+  - preview/2026-04-01-preview/Usages.json
 ```
 
 ### Tag: package-preview-2025-10-02-preview
