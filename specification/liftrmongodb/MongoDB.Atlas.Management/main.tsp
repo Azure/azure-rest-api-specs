@@ -159,7 +159,6 @@ model ProjectProperties {
   @visibility(Lifecycle.Read)
   projectId?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "projectName in properties is needed for LIST responses to return the project name alongside projectId"
   @doc("Atlas project name.")
   @visibility(Lifecycle.Read)
   projectName?: string;
@@ -278,7 +277,6 @@ model TierRegions {
 @doc("Properties specific to a MongoDB Atlas Cluster.")
 @added(MongoDB.Atlas.Versions.v2026_03_01_preview)
 model ClusterProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "clusterName in properties is needed for LIST responses to return the cluster name"
   @doc("Name of the MongoDB Atlas Cluster.")
   @visibility(Lifecycle.Read)
   clusterName?: string;
