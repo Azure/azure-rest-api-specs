@@ -64,10 +64,6 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].put
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys/default"].put
-  - suppress: ResourceHasXMsResourceEnabled
-    reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
-    from: trafficmanager.json
-    where: $.definitions.Resource
   - suppress: UnSupportedPatchProperties
     reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
     from: trafficmanager.json
