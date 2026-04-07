@@ -114,16 +114,19 @@ model ManagedClusterPropertiesForSnapshot {
   /**
    * The current kubernetes version.
    */
+  @visibility(Lifecycle.Read)
   kubernetesVersion?: string;
 
   /**
    * The current managed cluster sku.
    */
+  @visibility(Lifecycle.Read)
   sku?: ManagedClusterSKU;
 
   /**
    * Whether the cluster has enabled Kubernetes Role-Based Access Control or not.
    */
+  @visibility(Lifecycle.Read)
   enableRbac?: boolean;
 
   /**
