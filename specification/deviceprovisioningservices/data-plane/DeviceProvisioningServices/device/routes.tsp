@@ -81,11 +81,11 @@ interface RuntimeRegistrationOperationGroup {
   /**
    * Registers the devices.
    */
-  @removed(Versions.v2025_07_01_preview)
-  @sharedRoute
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  @removed(Versions.v2025_07_01_preview)
+  @sharedRoute
   @extension("x-ms-long-running-operation", true)
   @summary("Registers the devices.")
   @operationId("RuntimeRegistration_RegisterDevice")
@@ -117,11 +117,11 @@ interface RuntimeRegistrationOperationGroup {
   /**
    * Registers the devices and optionally issue operational certificates for IoT devices.
    */
-  @added(Versions.v2025_07_01_preview)
-  @sharedRoute
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  @added(Versions.v2025_07_01_preview)
+  @sharedRoute
   @extension("x-ms-long-running-operation", true)
   @summary("Registers the devices and optionally issue operational certificates for IoT devices.")
   @operationId("RuntimeRegistration_RegisterDeviceAndIssueCertificate")
