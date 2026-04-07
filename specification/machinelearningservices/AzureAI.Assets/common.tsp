@@ -51,6 +51,18 @@ model PutAssetLROResponse {
   assetId: string;
 }
 
+@doc("Accelerator configuration for a model instance.")
+model AcceleratorMap {
+  @doc("The type of accelerator (e.g. GPU, FPGA).")
+  acceleratorType: string;
+
+  @doc("Number of accelerators allocated per model instance.")
+  numberOfAcceleratorsPerModelInstance: int32;
+
+  @doc("Whether this is the default accelerator configuration.")
+  `default`?: boolean = false;
+}
+
 @doc("Settings for probe configuration.")
 model ProbeSettings {
   @doc("The initial delay before starting probes.")
