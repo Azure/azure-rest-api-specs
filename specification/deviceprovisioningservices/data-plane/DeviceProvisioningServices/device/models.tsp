@@ -219,8 +219,8 @@ model DeviceRegistrationResult {
   /**
    * Any object
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "payload is an open JSON object per API contract"
+  @visibility(Lifecycle.Read)
   payload?: Record<unknown>;
 
   /**
