@@ -7,7 +7,10 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2025_11_01_preview)
+@TypeSpec.Versioning.useDependency(
+  Search.Versions.v2026_04_01,
+  Search.Versions.v2025_11_01_preview
+)
 namespace Customizations;
 
 @client({
@@ -3150,6 +3153,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.SynchronizationState,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
   "com.azure.search.documents.knowledgebases",
   "java"
 );

@@ -5,28 +5,14 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Maps, "AzureMapsManagementClient", "javascript,python");
 
-// Preserve legacy Java/JS names for renamed encryption identity models.
+// Preserve legacy Java names for renamed encryption identity models.
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
-  "java,javascript"
+  "java,javascript,python"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
-  "java,javascript"
-);
-
-// Python: restore legacy swagger model names for backward compatibility
-@@clientName(Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
-  "EncryptionCustomerManagedKeyEncryption",
-  "python"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
-  "EncryptionCustomerManagedKeyEncryptionKeyIdentity",
-  "python"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
-  "EncryptionCustomerManagedKeyEncryptionKeyIdentityType",
-  "python"
+  "java,javascript,python"
 );
 
 // C# backward-compatible renames to match existing GA SDK surface.
