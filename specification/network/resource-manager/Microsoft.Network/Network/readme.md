@@ -60,7 +60,9 @@ input-file:
 suppressions:
   - code: ParametersInPointGet
     from: loadBalancer.json
-    reason: Want to add extra parameter for GET Load Balancer operation. This parameter "detailLevel" is extremely important so customers can query big resources, without having a huge performance impact on our RP infrastructure.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}'].get
+    reason: "detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:

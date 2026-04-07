@@ -221,20 +221,20 @@
           {
             "name": "detailLevel",
             "in": "query",
-            "description": "Controls verbosity of the returned load balancer resource. When set to 'reduced', read-only reference collections may be omitted.",
+            "description": "Controls verbosity of the returned load balancer resource. When set to 'Reduced', read-only back-reference collections (e.g., rules referencing frontendIPConfigurations) are omitted from the response.",
             "required": false,
             "type": "string",
             "enum": [
-              "reduced"
+              "Reduced"
             ],
             "x-ms-enum": {
               "name": "LoadBalancerDetailLevel",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "reduced",
-                  "value": "reduced",
-                  "description": "When set to 'reduced', read-only reference collections may be omitted."
+                  "name": "Reduced",
+                  "value": "Reduced",
+                  "description": "When set to 'Reduced', read-only reference collections may be omitted."
                 }
               ]
             }

@@ -55,7 +55,7 @@ interface LoadBalancers {
       $expand?: string;
 
       /**
-       * Controls verbosity of the returned load balancer resource. When set to 'reduced', read-only reference collections may be omitted.
+       * Controls verbosity of the returned load balancer resource. When set to 'Reduced', read-only back-reference collections (e.g., rules referencing frontendIPConfigurations) are omitted from the response.
        */
       @added(Versions.v2025_07_01)
       @query("detailLevel")

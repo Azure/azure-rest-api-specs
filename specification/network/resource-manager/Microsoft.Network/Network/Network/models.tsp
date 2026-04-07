@@ -2017,8 +2017,8 @@ union IpAllocationType {
 union LoadBalancerDetailLevel {
   string,
 
-  /** When set to 'reduced', read-only reference collections may be omitted. */
-  reduced: "reduced",
+  /** When set to 'Reduced', read-only reference collections may be omitted. */
+  Reduced: "Reduced",
 }
 
 /**
