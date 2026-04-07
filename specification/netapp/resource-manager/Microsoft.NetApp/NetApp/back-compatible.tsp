@@ -14,9 +14,6 @@ using Microsoft.NetApp;
 @@flattenProperty(NetAppAccountPatch.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@flattenProperty(NetAppAccountPatch.propertiesStable, "!javascript");
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(GetKeyVaultStatusResponse.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"

@@ -166,8 +166,7 @@ model EntraIdAkvConfig {
  * NetApp account properties for PATCH operations
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
+@added(Versions.v2026_01_01)
 model AccountPropertiesPatch {
   /**
    * Active Directories
@@ -178,6 +177,9 @@ model AccountPropertiesPatch {
   /**
    * Entra ID configuration for the account.
    */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   entraIdConfig?: EntraIdConfigPatch;
 
   /**
@@ -193,13 +195,11 @@ model AccountPropertiesPatch {
   nfsV4IDDomain?: VfsV4IDDomain | null;
 
   /**
-   * MultiAD Status for the account
-   */
-  multiAdStatus?: MultiAdStatus;
-
-  /**
    * LDAP Configuration for the account.
    */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   ldapConfiguration?: LdapConfigurationPatch;
 }
 
@@ -637,19 +637,7 @@ model NetAppAccountPatch {
   /**
    * NetApp Account properties
    */
-  @removed(Versions.v2025_12_15_preview)
-  @renamedFrom(Versions.v2025_12_15_preview, "properties")
-  @added(Versions.v2026_01_01)
-  @removed(Versions.v2026_01_15_preview)
-  @renamedFrom(Versions.v2026_01_15_preview, "properties")
-  propertiesStable?: AccountProperties;
-
-  /**
-   * NetApp Account properties
-   */
-  @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
+  @typeChangedFrom(Versions.v2025_12_15_preview, AccountProperties)
   properties?: AccountPropertiesPatch;
 
   /**

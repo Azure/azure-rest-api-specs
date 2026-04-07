@@ -9536,6 +9536,31 @@
         }
       }
     },
+    "AccountPropertiesPatch": {
+      "type": "object",
+      "description": "NetApp account properties for PATCH operations",
+      "properties": {
+        "activeDirectories": {
+          "type": "array",
+          "description": "Active Directories",
+          "items": {
+            "$ref": "#/definitions/ActiveDirectory"
+          },
+          "x-ms-identifiers": [
+            "activeDirectoryId"
+          ]
+        },
+        "encryption": {
+          "$ref": "#/definitions/AccountEncryption",
+          "description": "Encryption settings"
+        },
+        "nfsV4IDDomain": {
+          "$ref": "#/definitions/VfsV4IDDomain",
+          "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
+          "x-nullable": true
+        }
+      }
+    },
     "ActiveDirectory": {
       "type": "object",
       "description": "Active Directory",
@@ -12602,7 +12627,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/AccountProperties",
+          "$ref": "#/definitions/AccountPropertiesPatch",
           "description": "NetApp Account properties",
           "x-ms-client-flatten": true
         },
