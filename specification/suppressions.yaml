@@ -618,6 +618,14 @@
     - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
 
 - tool: TypeSpecValidation
+  reason: Suppress until Java SDK is migrated to generate from TypeSpec
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+  paths:
+    - storage/Microsoft.QueueStorage/tspconfig.yaml
+
+- tool: TypeSpecValidation
   reason: Suppress until Go needs to generate SDK
   rules: [SdkTspConfigValidation]
   sub-rules:
