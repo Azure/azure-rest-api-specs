@@ -1,0 +1,60 @@
+{
+  "operationId": "AcceleratorDeployments_Update",
+  "title": "UpdateAcceleratorDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "myAcceleratorDeployment",
+    "api-version": "2026-03-15-preview",
+    "properties": {
+      "sku": {
+        "name": "GlobalManagedCompute",
+        "capacity": 2
+      },
+      "tags": {
+        "environment": "production"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/acceleratorDeployments/myAcceleratorDeployment",
+        "name": "myAcceleratorDeployment",
+        "type": "Microsoft.CognitiveServices/accounts/acceleratorDeployments",
+        "sku": {
+          "name": "GlobalManagedCompute",
+          "capacity": 2
+        },
+        "etag": "\"00000000-0000-0000-0000-000000000001\"",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "model": "azureml://registries/azureml/models/Llama-3.1-8B-Instruct/versions/3",
+          "deploymentTemplate": "azureml://registries/azureml/deploymenttemplates/Llama-3.1-8B-Instruct/versions/3",
+          "acceleratorType": "H100_80GB",
+          "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+          "acceleratorsPerInstance": 8,
+          "totalAccelerators": 16,
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Deployment updated successfully.",
+            "lastOperationTimestamp": "2026-03-15T13:00:00Z"
+          },
+          "routes": {
+            "chatCompletionsScoringPath": "/acceleratorDeployments/myAcceleratorDeployment/chat/completions",
+            "swagger": "/acceleratorDeployments/myAcceleratorDeployment/swagger.json",
+            "messagesApiScoringPath": "/acceleratorDeployments/myAcceleratorDeployment/messages"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  }
+}
