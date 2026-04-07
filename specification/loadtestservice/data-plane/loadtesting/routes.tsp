@@ -563,12 +563,20 @@ interface TestProfileRunAdministration {
 @tag("Trigger")
 @added(APIVersions.v2024_07_01_preview)
 interface TriggerAdministration {
+  @summary("Get trigger details by trigger Id.")
+  @doc("Get trigger details by trigger Id.")
   getTrigger is StandardResourceOperations.ResourceRead<Trigger>;
 
+  @summary("Create a new trigger or update an existing trigger.")
+  @doc("Create a new trigger or update an existing trigger by providing the trigger Id.")
   createOrUpdateTrigger is StandardResourceOperations.ResourceCreateOrUpdate<Trigger>;
 
+  @summary("Delete a trigger by its trigger Id.")
+  @doc("Delete a trigger by its trigger Id.")
   deleteTrigger is StandardResourceOperations.ResourceDelete<Trigger>;
 
+  @summary("Get all triggers for the given filters.")
+  @doc("Get all triggers for the given filters.")
   listTrigger is StandardResourceOperations.ResourceList<
     Trigger,
     ListQueryParametersTrait<ListTriggerQueryParams>
@@ -577,15 +585,23 @@ interface TriggerAdministration {
 
 @tag("NotificationRule")
 interface NotificationRuleAdministration {
+  @summary("Get notification rule details by notification rule Id.")
+  @doc("Get notification rule details by notification rule Id.")
   @added(APIVersions.v2024_12_01_preview)
   getNotificationRule is StandardResourceOperations.ResourceRead<NotificationRule>;
 
+  @summary("Create a new notification rule or update an existing notification rule.")
+  @doc("Create a new notification rule or update an existing notification rule by providing the notification rule Id.")
   @added(APIVersions.v2024_12_01_preview)
   createOrUpdateNotificationRule is StandardResourceOperations.ResourceCreateOrUpdate<NotificationRule>;
 
+  @summary("Delete a notification rule by its notification rule Id.")
+  @doc("Delete a notification rule by its notification rule Id.")
   @added(APIVersions.v2024_12_01_preview)
   deleteNotificationRule is StandardResourceOperations.ResourceDelete<NotificationRule>;
 
+  @summary("Get all notification rules for the given filters.")
+  @doc("Get all notification rules for the given filters.")
   @added(APIVersions.v2024_12_01_preview)
   listNotificationRule is StandardResourceOperations.ResourceList<
     NotificationRule,
