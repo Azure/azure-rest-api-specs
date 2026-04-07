@@ -210,11 +210,11 @@ stages:
       # [Step 1] Observe state immediately after treeless clone: git tag and git ls-tree behavior
       - pwsh: |
           Write-Host "=== [Diag 1] SdkRepoDirectory: $(SdkRepoDirectory) ==="
-          $pkgDir = "$(SdkRepoDirectory)/sdk/purview/arm-purview"
+          $pkgDir = "$(SdkRepoDirectory)/sdk/commerce/arm-commerce"
           if (-not (Test-Path $pkgDir)) {
             Write-Host "##[warning]Directory does not exist: $pkgDir"
-            Write-Host "Listing $(SdkRepoDirectory)/sdk/purview if it exists:"
-            Get-ChildItem "$(SdkRepoDirectory)/sdk/purview" -ErrorAction SilentlyContinue
+            Write-Host "Listing $(SdkRepoDirectory)/sdk/commerce/arm-commerce if it exists:"
+            Get-ChildItem "$(SdkRepoDirectory)/sdk/commerce/arm-commerce" -ErrorAction SilentlyContinue
             exit 0
           }
           Push-Location $pkgDir
@@ -225,11 +225,11 @@ stages:
           Write-Host "`n=== [Diag 1] Tag count and samples ==="
           $tags = git tag -l
           Write-Host "Tag count: $($tags.Count)"
-          $purviewTags = $tags | Where-Object { $_ -match 'arm-purview' }
-          Write-Host "arm-purview tags: $($purviewTags.Count)"
-          $purviewTags
+          $commerceTags = $tags | Where-Object { $_ -match 'arm-commerce' }
+          Write-Host "arm-commerce tags: $($commerceTags.Count)"
+          $commerceTags
 
-          $testTag = '@azure/arm-purview_1.1.0'
+          $testTag = '@azure/arm-commerce_3.0.0'
           Write-Host "`n=== [Diag 1] Check tag object type for $testTag ==="
           $tagSha = git rev-parse "refs/tags/$testTag"
           if ($LASTEXITCODE -eq 0) {
@@ -245,15 +245,15 @@ stages:
           Pop-Location
 
           # --- Azure/azure-sdk-for-js public repo comparison ---
-          $azurePkgDir = "$(publicSdkRepoDirectory)/sdk/purview/arm-purview"
+          $azurePkgDir = "$(publicSdkRepoDirectory)/sdk/commerce/arm-commerce"
           Write-Host "`n=== [Diag 1][Azure/azure-sdk-for-js] CWD: $azurePkgDir ==="
           Push-Location $azurePkgDir
           git config remote.origin.partialclonefilter
           $tags2 = git tag -l
           Write-Host "Tag count: $($tags2.Count)"
-          $purviewTags2 = $tags2 | Where-Object { $_ -match 'arm-purview' }
-          Write-Host "[Azure/azure-sdk-for-js] arm-purview tags: $($purviewTags2.Count)"
-          $purviewTags2
+          $commerceTags2 = $tags2 | Where-Object { $_ -match 'arm-commerce' }
+          Write-Host "[Azure/azure-sdk-for-js] arm-commerce tags: $($commerceTags2.Count)"
+          $commerceTags2
           $tagSha2 = git rev-parse "refs/tags/$testTag"
           if ($LASTEXITCODE -eq 0) {
             Write-Host "[Azure/azure-sdk-for-js] Tag SHA: $tagSha2"
@@ -270,10 +270,10 @@ stages:
 
       # [Step 2] Try git fetch --tags as a lightweight fix, then retry git ls-tree
       - pwsh: |
-          $testTag = '@azure/arm-purview_1.1.0'
+          $testTag = '@azure/arm-commerce_3.0.0'
 
-          Write-Host "=== [Diag 2][$(SdkRepoOwner)/azure-sdk-for-js] CWD: $(SdkRepoDirectory)/sdk/purview/arm-purview ==="
-          Push-Location "$(SdkRepoDirectory)/sdk/purview/arm-purview"
+          Write-Host "=== [Diag 2][$(SdkRepoOwner)/azure-sdk-for-js] CWD: $(SdkRepoDirectory)/sdk/commerce/arm-commerce ==="
+          Push-Location "$(SdkRepoDirectory)/sdk/commerce/arm-commerce"
           git fetch --tags
           Write-Host "git fetch --tags exit code: $LASTEXITCODE"
           git ls-tree -d "$testTag" src/api 2>&1
@@ -281,7 +281,7 @@ stages:
           Pop-Location
 
           # --- Azure/azure-sdk-for-js public repo comparison ---
-          $azurePkgDir = "$(publicSdkRepoDirectory)/sdk/purview/arm-purview"
+          $azurePkgDir = "$(publicSdkRepoDirectory)/sdk/commerce/arm-commerce"
           Write-Host "`n=== [Diag 2][Azure/azure-sdk-for-js] CWD: $azurePkgDir ==="
           Push-Location $azurePkgDir
           git fetch --tags
@@ -294,7 +294,7 @@ stages:
 
       # [Step 3] Full re-clone (no --filter), verify git ls-tree is stable
       - pwsh: |
-          $testTag = '@azure/arm-purview_1.1.0'
+          $testTag = '@azure/arm-commerce_3.0.0'
 
           Write-Host "=== [Diag 3][$(SdkRepoOwner)/azure-sdk-for-js] Full re-clone ==="
           Remove-Item -Recurse -Force "$(SdkRepoDirectory)"
@@ -304,7 +304,7 @@ stages:
           Write-Host "Clone exit code: $LASTEXITCODE"
           git config gc.auto 0
           Pop-Location
-          $pkgDir = "$(SdkRepoDirectory)/sdk/purview/arm-purview"
+          $pkgDir = "$(SdkRepoDirectory)/sdk/commerce/arm-commerce"
           Write-Host "CWD: $pkgDir"
           Push-Location $pkgDir
           git config remote.origin.partialclonefilter 2>&1
@@ -322,7 +322,7 @@ stages:
           Write-Host "[Azure/azure-sdk-for-js] Clone exit code: $LASTEXITCODE"
           git config gc.auto 0
           Pop-Location
-          $azurePkgDir = "$azureDir/sdk/purview/arm-purview"
+          $azurePkgDir = "$azureDir/sdk/commerce/arm-commerce"
           Write-Host "[Azure/azure-sdk-for-js] CWD: $azurePkgDir"
           Push-Location $azurePkgDir
           git config remote.origin.partialclonefilter 2>&1
