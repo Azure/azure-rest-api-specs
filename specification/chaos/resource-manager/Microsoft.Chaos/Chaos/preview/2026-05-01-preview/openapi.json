@@ -64,6 +64,12 @@
       "name": "PrivateEndpointConnections"
     },
     {
+      "name": "Actions"
+    },
+    {
+      "name": "ActionVersions"
+    },
+    {
       "name": "TargetTypes"
     },
     {
@@ -178,6 +184,214 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/actions": {
+      "get": {
+        "operationId": "Actions_List",
+        "tags": [
+          "Actions"
+        ],
+        "description": "Get a list of Action resources for a given location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "String that sets the continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Actions for westus2 location.": {
+            "$ref": "./examples/Actions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}": {
+      "get": {
+        "operationId": "Actions_Get",
+        "tags": [
+          "Actions"
+        ],
+        "description": "Get an Action resource for a given location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "String that represents an Action resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Action for westus2 location": {
+            "$ref": "./examples/Actions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}/versions": {
+      "get": {
+        "operationId": "ActionVersions_List",
+        "tags": [
+          "ActionVersions"
+        ],
+        "description": "Get a list of Action Version resources for a given location and action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "String that represents an Action resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-]+$"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "String that sets the continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Action Versions for a given action.": {
+            "$ref": "./examples/ActionVersions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}/versions/{versionName}": {
+      "get": {
+        "operationId": "ActionVersions_Get",
+        "tags": [
+          "ActionVersions"
+        ],
+        "description": "Get an Action Version resource for a given location and action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "actionName",
+            "in": "path",
+            "description": "String that represents an Action resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-]+$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "String that represents an Action Version resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\.]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an Action Version for westus2 location": {
+            "$ref": "./examples/ActionVersions_Get.json"
+          }
         }
       }
     },
@@ -4127,6 +4341,25 @@
     }
   },
   "definitions": {
+    "Action": {
+      "type": "object",
+      "description": "Model that represents an Action resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActionProperties",
+          "description": "The properties of the action resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ActionDependency": {
       "type": "object",
       "description": "Model that represents an action dependency.",
@@ -4163,6 +4396,36 @@
             "name": "Action",
             "value": "Action",
             "description": "Action dependency type."
+          }
+        ]
+      }
+    },
+    "ActionKind": {
+      "type": "string",
+      "description": "Union of action types.",
+      "enum": [
+        "Discrete",
+        "Continuous",
+        "Cancelable"
+      ],
+      "x-ms-enum": {
+        "name": "ActionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Discrete",
+            "value": "Discrete",
+            "description": "Discrete action type."
+          },
+          {
+            "name": "Continuous",
+            "value": "Continuous",
+            "description": "Continuous action type."
+          },
+          {
+            "name": "Cancelable",
+            "value": "Cancelable",
+            "description": "Cancelable action type."
           }
         ]
       }
@@ -4215,6 +4478,88 @@
         ]
       }
     },
+    "ActionListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Action resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Action items on this page",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ActionProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of an Action resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name of the action.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what this action does.",
+          "readOnly": true
+        },
+        "urn": {
+          "type": "string",
+          "description": "Legacy URN of the action (e.g., \"urn:csci:microsoft:compute:Shutdown/1.0\").",
+          "readOnly": true
+        },
+        "actionName": {
+          "type": "string",
+          "description": "The short name of the action (e.g., \"Shutdown\").",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the action (e.g., \"1.0.0\").",
+          "readOnly": true
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionKind",
+          "description": "The type of the action.",
+          "readOnly": true
+        },
+        "supportedTargetTypes": {
+          "type": "array",
+          "description": "List of target types supported by this action.",
+          "items": {
+            "$ref": "#/definitions/ActionSupportedTargetType"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "targetType"
+          ]
+        },
+        "parametersSchema": {
+          "type": "object",
+          "description": "JSON Schema describing the parameters for this action.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "recommendedRoles": {
+          "type": "array",
+          "description": "Recommended Azure RBAC role definition GUIDs for this action.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "ActionStatus": {
       "type": "object",
       "description": "Model that represents the an action and its status.",
@@ -4254,6 +4599,124 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "ActionSupportedTargetType": {
+      "type": "object",
+      "description": "Model that represents a target type supported by an action.",
+      "properties": {
+        "targetType": {
+          "type": "string",
+          "description": "The ARM resource type (e.g., \"Microsoft.Compute/virtualMachines\")."
+        },
+        "requiredPermissions": {
+          "type": "array",
+          "description": "List of ARM permissions required for this target type.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ActionVersion": {
+      "type": "object",
+      "description": "Model that represents an Action Version resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActionVersionProperties",
+          "description": "The properties of the action version resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ActionVersionListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Action Version resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ActionVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/ActionVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ActionVersionProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of an Action Version resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name of the action.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what this action does.",
+          "readOnly": true
+        },
+        "urn": {
+          "type": "string",
+          "description": "Legacy URN of the action (e.g., \"urn:csci:microsoft:compute:Shutdown/1.0\").",
+          "readOnly": true
+        },
+        "actionName": {
+          "type": "string",
+          "description": "The short name of the action (e.g., \"Shutdown\").",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the action (e.g., \"1.0.0\").",
+          "readOnly": true
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionKind",
+          "description": "The type of the action.",
+          "readOnly": true
+        },
+        "supportedTargetTypes": {
+          "type": "array",
+          "description": "List of target types supported by this action version.",
+          "items": {
+            "$ref": "#/definitions/ActionSupportedTargetType"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "targetType"
+          ]
+        },
+        "parametersSchema": {
+          "type": "object",
+          "description": "JSON Schema describing the parameters for this action version.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "recommendedRoles": {
+          "type": "array",
+          "description": "Recommended Azure RBAC role definition GUIDs for this action version.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -6202,6 +6665,10 @@
         "urn": {
           "type": "string",
           "description": "Unique resource name identifying the action type."
+        },
+        "actionResourceId": {
+          "type": "string",
+          "description": "ARM resource ID of the action proxy resource (e.g., /subscriptions/{subId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName})."
         },
         "targetTypes": {
           "type": "array",

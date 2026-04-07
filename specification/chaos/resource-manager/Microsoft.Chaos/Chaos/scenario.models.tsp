@@ -148,6 +148,11 @@ model ScenarioAction {
   urn: string;
 
   /**
+   * ARM resource ID of the action proxy resource (e.g., /subscriptions/{subId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}).
+   */
+  actionResourceId?: string;
+
+  /**
    * Azure resource types this action targets (e.g., Microsoft.Compute/virtualMachineScaleSets).
    */
   @minItems(1)

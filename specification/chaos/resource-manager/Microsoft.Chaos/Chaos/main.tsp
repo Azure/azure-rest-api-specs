@@ -14,6 +14,7 @@ import "./experiment.tsp";
 import "./experimentExecution.tsp";
 import "./privateAccess.tsp";
 import "./privateEndpointConnection.tsp";
+import "./action.tsp";
 import "./target.tsp";
 import "./targetType.tsp";
 import "./operationStatus.tsp";

@@ -50,6 +50,10 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@clientName(ScenarioParameter, "ChaosScenarioParameterInfo", "csharp");
+@@clientName(Action, "ChaosAction", "csharp");
+@@clientName(ActionVersion, "ChaosActionVersion", "csharp");
+@@clientName(ActionKind, "ChaosActionKind", "csharp");
+@@clientName(ActionSupportedTargetType, "ChaosActionSupportedTargetType", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExperimentExecutionDetails,
@@ -102,6 +106,16 @@ using Microsoft.Chaos;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecutionDetails.properties,
+  "!javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Action.properties,
+  "!javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ActionVersion.properties,
   "!javascript"
 );
 
