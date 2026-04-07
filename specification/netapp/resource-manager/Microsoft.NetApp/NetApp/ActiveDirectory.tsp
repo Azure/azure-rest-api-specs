@@ -82,7 +82,7 @@ model ActiveDirectoryConfigCommonProperties {
 
   /** The Active Directory site the service will limit Domain Controller discovery to */
   @maxLength(63)
-  site?: string;
+  site: string;
 
   /** Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier */
   backupOperators?: string[];
