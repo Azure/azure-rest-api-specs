@@ -20707,14 +20707,19 @@ model GatewayEffectiveRoute {
    * The type of the next hop.
    */
   @visibility(Lifecycle.Read)
-  nextHopType?: GatewayEffectiveRouteNextHopType;
+  nextHopType?: EffectiveRouteNextHopType;
 }
 
 /**
  * The type of the next hop for a gateway effective route.
  */
-union GatewayEffectiveRouteNextHopType {
+union EffectiveRouteNextHopType {
   string,
+
+  /**
+   * Unknown
+   */
+  Unknown: "Unknown",
 
   /** Tunnel next hop type. */
   Tunnel: "Tunnel",
