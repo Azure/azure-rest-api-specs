@@ -1,0 +1,34 @@
+{
+  "title": "Update an Instance Monitor",
+  "operationId": "InstanceMonitors_Update",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "40449e6d-a5d2-40f1-a151-0b76f21a48c0",
+    "resourceGroupName": "my-rg",
+    "virtualInstanceName": "my-wvi",
+    "properties": {
+      "properties": {
+        "healthModelLocation": "westus2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/my-rg/providers/Microsoft.Workloads/virtualInstances/my-wvi/instanceMonitors/default",
+        "name": "default",
+        "type": "Microsoft.Workloads/virtualInstances/instanceMonitors",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "healthModelLocation": "westus2",
+          "healthModelId": "/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/my-rg/providers/Microsoft.CloudHealth/healthModels/my-ahm"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/40449e6d-a5d2-40f1-a151-0b76f21a48c0/resourceGroups/my-rg/providers/Microsoft.Workloads/virtualInstances/my-wvi/instanceMonitors/default/operationResults/abc123?api-version=2026-02-01-preview"
+      }
+    }
+  }
+}
