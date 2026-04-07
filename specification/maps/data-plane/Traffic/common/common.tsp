@@ -1,3 +1,6 @@
+import "@typespec/rest";
+import "@typespec/http";
+
 /**
  * The status state of the request.
  */
@@ -375,6 +378,8 @@ model GeoJsonObject {
   /**
    * Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
    */
+  @minItems(4)
+  @maxItems(4)
   bbox?: float64[];
 }
 
@@ -388,7 +393,7 @@ model GeoJsonPointData {
    * _Altitude/Elevation_ is an optional third element. Please refer to [RFC
    * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.
    */
-  coordinates?: float64[];
+  coordinates: float64[];
 }
 
 /**
