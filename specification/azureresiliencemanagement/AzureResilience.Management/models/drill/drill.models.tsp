@@ -55,18 +55,18 @@ model DrillProperties {
   healthModelProperties?: HealthModelPropertiesOfDrill;
 
   @doc("ROPlan properties.")
-  recoveryPlanProperties: RecoveryPlanPropertiesOfDrill;
+  recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
   @added(Versions.v2026_03_01_preview)
-  drillAssetProperties: AssetPropertiesOfDrill;
+  drillAssetProperties?: AssetPropertiesOfDrill;
 
   @doc("Chaos Resource properties.")
   @added(Versions.v2026_03_01_preview)
-  chaosResourceProperties: ChaosResourcePropertiesOfDrill;
+  chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
 
   @doc("Chaos Experiment properties.")
-  chaosExperimentProperties: ChaosExperimentPropertiesOfDrill;
+  chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
   @doc("Execution state of the Drill. Whether it is currently running or not.")
   @visibility(Lifecycle.Read)
@@ -220,7 +220,7 @@ model HealthModelPropertiesOfDrill {
 model MonitoringPropertiesOfDrill {
   @doc("Identity to use for Drill monitoring operations.")
   @added(Versions.v2026_03_01_preview)
-  identity: AssociatedIdentity;
+  identity?: AssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
   @visibility(Lifecycle.Read)
@@ -381,6 +381,14 @@ model AttentionReason {
   @doc("Permissions needed by the Drill MSI to run the chaos experiment.")
   rbacNeededForDrillOnExperiment?: string[];
 
+  @doc("Drill object does not have the necessary RBAC to run the chaos resource.")
+  @added(Versions.v2026_03_01_preview)
+  drillRbacOnChaosResource?: RBACState;
+
+  @doc("Permissions needed by the Drill MSI to run the chaos resource.")
+  @added(Versions.v2026_03_01_preview)
+  rbacNeededForDrillOnChaosResource?: string[];
+
   @doc("Drill object does not have the necessary RBAC to run the Recovery Plan.")
   drillRbacOnRecoveryPlan?: RBACState;
 
@@ -411,11 +419,23 @@ model AttentionReason {
   @doc("RBAC required by Experiment MSI not setup on the target resources.")
   faultRbacOnTargets?: RBACState;
 
+  @doc("RBAC required by Chaos Resource MSI not setup on the target resources.")
+  @added(Versions.v2026_03_01_preview)
+  faultRbacOnTargetResources?: RBACState;
+
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
 
   @doc("One or more Target or Capability object is deleted.")
   targets?: ExtensionObjectState;
+
+  @doc("Chaos resource for faulting exists or not.")
+  @added(Versions.v2026_03_01_preview)
+  chaosResource?: ExtensionObjectState;
+
+  @doc("Reason for Chaos Resource Creation failure")
+  @added(Versions.v2026_03_01_preview)
+  chaosResourceCreationFailureReasons?: string[];
 
   @doc("Resources associated in Recovery Plan and Drill are out of sync.")
   recoveryPlanAndDrillResourcesState?: RelativeResourceCompositionState;
@@ -428,6 +448,10 @@ model AttentionReason {
 
   @doc("User MSI associated with chaos experiment object is deleted.")
   chaosExperimentUserMsi?: ExtensionObjectState;
+
+  @doc("User MSI associated with chaos resource object is deleted.")
+  @added(Versions.v2026_03_01_preview)
+  chaosResourceUserMsi?: ExtensionObjectState;
 
   @doc("Included resource in Drill.")
   includedResourceInDrill?: ExtensionObjectState;
@@ -458,7 +482,7 @@ model AttentionReason {
   @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnDrillResources?: string[];
 
-  @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.")
+  @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos resource.")
   @added(Versions.v2026_03_01_preview)
   missingRequiredResourceProviders?: string[];
 }
@@ -581,6 +605,11 @@ model FailedDrillResource {
   @visibility(Lifecycle.Read)
   targetAndCapabilityAssignmentError?: ErrorDetails;
 
+  @doc("Target resource RBAC assignment error.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  targetResourceAssignmentError?: ErrorDetails;
+
   @doc("RBAC assignment error.")
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
@@ -594,12 +623,16 @@ model DrillPatchProperties {
   @doc("Recovery Plan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
+  @doc("Properties for internal resources that are created for the Drill.")
+  @added(Versions.v2026_03_01_preview)
+  drillAssetProperties?: AssetPropertiesOfDrill;
+
   @doc("Chaos Experiment properties.")
   chaosExperimentProperties?: ChaosExperimentPropertiesOfDrill;
 
   @doc("Chaos Resource properties.")
   @added(Versions.v2026_03_01_preview)
-  chaosResourceProperties: ChaosResourcePropertiesOfDrill;
+  chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
 
   @doc("HealthModel properties.")
   healthModelProperties?: HealthModelPropertiesOfDrill;
@@ -636,30 +669,35 @@ model DrillsQualifiedResource {
   @visibility(Lifecycle.Read)
   resourceId: armResourceIdentifier;
 
+  @doc("Drill Resource ID of the Azure resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  drillResourceId?: armResourceIdentifier;
+
   @doc("Active Resource location and zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation: string[];
+  activeLocations?: string[];
 
   @doc("Recovery Resource location and zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryLocation: string[];
+  recoveryLocations?: string[];
 
   @doc("Active Resource location and physical zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activePhysicalLocation: string[];
+  activePhysicalZones?: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryPhysicalLocation: string[];
+  recoveryPhysicalZones?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  drillInclusionState: DrillResourceInclusionState;
+  drillInclusionState?: DrillResourceInclusionState;
 
   @doc("A state that indicates the resource status with respect to the recovery orchestration plan.")
   @added(Versions.v2026_03_01_preview)
@@ -669,18 +707,18 @@ model DrillsQualifiedResource {
   @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  protectionStatus: ResourceProtectionStatus;
+  protectionStatus?: ResourceProtectionStatus;
 
   @doc("A setting that indicates the protection solution selected.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  selectedProtectionSolutionType: ResourceProtectionSolutionType;
+  selectedProtectionSolutionType?: ResourceProtectionSolutionType;
 
   @doc("A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  resourceProtectionSolutions: ResourceProtectionSolutionSettings[];
+  resourceProtectionSolutions?: ResourceProtectionSolutionSettings[];
 
   @doc("Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.")
   @added(Versions.v2026_03_01_preview)
@@ -690,12 +728,17 @@ model DrillsQualifiedResource {
   @doc("Fault State of the Drill resource")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  faultState: DrillResourceFaultState;
+  faultState?: DrillResourceFaultState;
 
   @doc("Fault Properties")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  faultProperties: FaultProperties;
+  faultProperties?: FaultProperties;
+
+  @doc("Resource Protection Solution Display Name")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceProtectionSolutionDisplayName?: string;
 }
 
 @doc("Details of qualification for an operation.")

@@ -39,5 +39,8 @@ interface NetworkDeviceSkus {
   get is ArmResourceRead<NetworkDeviceSku>;
 
   @doc("List Network Device SKUs for the given subscription.")
-  listBySubscription is ArmResourceListByParent<NetworkDeviceSku>;
+  listBySubscription is ArmResourceListByParent<
+    NetworkDeviceSku,
+    Response = NetworkDeviceSkusListResult
+  >;
 }

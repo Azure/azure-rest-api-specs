@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../common/common.tsp";
@@ -12,6 +13,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -29,6 +31,40 @@ model RecoveryJobResourceProperties extends JobResourceProperties {
   @doc("A setting that indicates the protection solution selected.")
   @visibility(Lifecycle.Read)
   protectionSolutionType?: ResourceProtectionSolutionType;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("The recovery action settings.")
+  @visibility(Lifecycle.Read)
+  recoveryGroupActionSettings?: RecoveryGroupActionSettings;
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Settings for a recovery group action.")
+model RecoveryGroupActionSettings {
+  @added(Versions.v2026_03_01_preview)
+  @doc("The action task associated with this job resource.")
+  @visibility(Lifecycle.Read)
+  actionTask?: ActionTask;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Sequence number for the action.")
+  @visibility(Lifecycle.Read)
+  actionSequence?: int32;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Type of the recovery group action.")
+  @visibility(Lifecycle.Read)
+  recoveryGroupActionType?: RecoveryGroupActionType;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Name of the action.")
+  @visibility(Lifecycle.Read)
+  actionName?: string;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("User description of the action.")
+  @visibility(Lifecycle.Read)
+  actionDescription?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

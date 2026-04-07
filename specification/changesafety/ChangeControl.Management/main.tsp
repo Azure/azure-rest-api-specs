@@ -8,6 +8,7 @@ import "./changestate.tsp";
 import "./stageprogression.tsp";
 import "./changerecord.tsp";
 import "./changerecordstageprogression.tsp";
+import "./changeactivityevent.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;

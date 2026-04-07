@@ -6,11 +6,10 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Network Monitor Properties defines the properties of the resource.")
 @added(Versions.v2024_06_15_preview)
-model NetworkMonitorProperties {
-  ...AnnotationResource;
-
+model NetworkMonitorProperties extends AnnotationResource {
   @doc("BMP Configurations for the Network Fabric.")
   bmpConfiguration?: BmpConfigurationProperties;
 
@@ -226,11 +225,10 @@ model BmpConfigurationPatchProperties {
   monitoredAddressFamilies?: BmpMonitoredAddressFamily[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Network Monitor Patch resource definition.")
 @added(Versions.v2024_06_15_preview)
-model NetworkMonitorPatch {
-  ...TagsUpdate;
-
+model NetworkMonitorPatch extends TagsUpdate {
   @doc("Network Monitor Patch properties.")
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "properties")

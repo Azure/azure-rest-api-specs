@@ -47,6 +47,14 @@ suppressions:
       from: VirtualInstance.json
       where: $.definitions.WorkloadComponentProperties.properties.metadata
       reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: AvoidAdditionalProperties
+      from: VirtualInstance.json
+      where: $.definitions.UpdateVirtualInstanceProperties.properties.metadata
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
+    - code: AvoidAdditionalProperties
+      from: VirtualInstance.json
+      where: $.definitions.UpdateWorkloadComponentProperties.properties.metadata
+      reason: The set of key-value pairs depend on the type of the workload (kind of the resource) and is not user-defined. Service will use this field to perform workload-specific validations and provide custom functionality based on the type of the workload.
     - code: PatchBodyParametersSchema
       from: VirtualInstance.json
       where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/virtualInstances/{virtualInstanceName}/components/{componentName}"].patch.parameters[5].schema.properties.properties

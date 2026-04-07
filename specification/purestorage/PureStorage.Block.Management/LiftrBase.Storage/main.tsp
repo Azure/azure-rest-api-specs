@@ -18,10 +18,10 @@ namespace LiftrBase.Storage;
 
 @doc("Supported versions for LiftrBase.Storage resource model")
 enum Versions {
-  @doc("Dependent on LiftrBase.Versions.v1_preview")
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v1_preview: "2023-06-01-preview",
+  v1_preview: "2024-10-01-preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"

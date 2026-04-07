@@ -57,10 +57,16 @@ interface NetworkFabricControllers {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkFabricController>;
 
   @doc("Lists all the NetworkFabricControllers thats available in the resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkFabricController>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkFabricController,
+    Response = NetworkFabricControllersListResult
+  >;
 
   @doc("Lists all the NetworkFabricControllers by subscription.")
-  listBySubscription is ArmListBySubscription<NetworkFabricController>;
+  listBySubscription is ArmListBySubscription<
+    NetworkFabricController,
+    Response = NetworkFabricControllersListResult
+  >;
 }
 
 @@doc(NetworkFabricControllers.create::parameters.resource, "Request payload.");

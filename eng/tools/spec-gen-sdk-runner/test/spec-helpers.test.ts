@@ -65,38 +65,38 @@ describe("detectChangedSpecConfigFiles", () => {
     vi.clearAllMocks();
   });
 
-  test("case with empty change files", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([]);
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+  test("case with empty change files", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([]);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
     expect(result).toEqual([]);
   });
 
-  test("case with changed files but none under specification folder", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with changed files but none under specification folder", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "eng/tools/script1.js",
       "documentation/README.md",
       "profile/2020-09-01-hybrid.json",
     ]);
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
     expect(result).toEqual([]);
   });
 
-  test("case with changed files only under scenarios folder", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with changed files only under scenarios folder", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/storage/scenarios/test1.json",
       "specification/compute/scenarios/test2.json",
     ]);
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
     expect(result).toEqual([]);
   });
 
-  test("case with readme files", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with readme files", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
       "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/widgets.json",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(2);
     expect(normalizeResultItem(result[0])).toEqual({
@@ -113,14 +113,14 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with tsp files", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with tsp files", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",
       "specification/contosowidgetmanager/Contoso.Management/client.tsp",
       "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(2);
     expect(normalizeResultItem(result[0])).toEqual({
@@ -136,14 +136,14 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with shared files", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with shared files", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp",
       "specification/contosowidgetmanager/Contoso.Management/client.tsp",
       "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(2);
     expect(normalizeResultItem(result[0])).toEqual({
@@ -159,8 +159,8 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with readme, tsp, shared files", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with readme, tsp, shared files", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
       "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/widgets.json",
       "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp",
@@ -168,7 +168,7 @@ describe("detectChangedSpecConfigFiles", () => {
       "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(2);
     expect(normalizeResultItem(result[0])).toEqual({
@@ -190,14 +190,14 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with V2 folder structure - resource-manager", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with V2 folder structure - resource-manager", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       "specification/service1/resource-manager/readme.md",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(1);
     const normalizedResult = normalizeResultItem(result[0]);
@@ -215,14 +215,14 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with V2 folder structure - data-plane", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with V2 folder structure - data-plane", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/service1/data-plane/widget/tspconfig.yaml",
       "specification/service1/data-plane/widget/main.tsp",
       "specification/service1/data-plane/readme.md",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(1);
     const normalizedResult = normalizeResultItem(result[0]);
@@ -238,15 +238,15 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with V2 folder structure - nested subfolders", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with V2 folder structure - nested subfolders", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/examples/2021-11-01/create.json",
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/stable/2021-11-01/servicecontrol.json",
       "specification/service1/resource-manager/Microsoft.Service1/readme.md",
       "specification/service1/resource-manager/readme.md",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(1);
     const normalizedResult = normalizeResultItem(result[0]);
@@ -264,8 +264,8 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with V2 folder structure mixed with old structure", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with V2 folder structure mixed with old structure", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       // V2 folder structure
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
@@ -276,7 +276,7 @@ describe("detectChangedSpecConfigFiles", () => {
       "specification/contosowidgetmanager/data-plane/readme.md",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(2);
 
@@ -306,8 +306,8 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with multiple V2 folder structures", () => {
-    vi.mocked(getChangedFiles).mockReturnValue([
+  test("case with multiple V2 folder structures", async () => {
+    vi.mocked(getChangedFiles).mockResolvedValue([
       // First service
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
@@ -318,7 +318,7 @@ describe("detectChangedSpecConfigFiles", () => {
       "specification/service2/data-plane/readme.md",
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(2);
 
@@ -347,15 +347,15 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
-  test("case with V2 folder structure - cross-platform path separators", () => {
+  test("case with V2 folder structure - cross-platform path separators", async () => {
     // Mock getChangedFiles to return paths with both forward and backslashes
-    vi.mocked(getChangedFiles).mockReturnValue([
+    vi.mocked(getChangedFiles).mockResolvedValue([
       String.raw`specification\service1\resource-manager\Microsoft.Service1\WidgetManagement\tspconfig.yaml`,
       "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/main.tsp",
       String.raw`specification\service1\resource-manager\readme.md`,
     ]);
 
-    const result = detectChangedSpecConfigFiles(mockCommandInput);
+    const result = await detectChangedSpecConfigFiles(mockCommandInput);
 
     expect(result).toHaveLength(1);
     const normalizedResult = normalizeResultItem(result[0]);

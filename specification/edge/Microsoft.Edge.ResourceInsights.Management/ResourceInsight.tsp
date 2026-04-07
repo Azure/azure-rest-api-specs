@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "@typespec/versioning";
 import "@typespec/rest";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Edge;
@@ -49,6 +51,18 @@ union ConnectivityStatusEnum {
 
   @doc("The device needs attention")
   NeedsAttention: "NeedsAttention",
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("The device is in Disconnected state and replaces NotRecentlyConnected")
+  Disconnected: "Disconnected",
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("The device is in transition")
+  InProgress: "InProgress",
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("The device is pending initial setup completion")
+  FinishSetup: "FinishSetup",
 }
 
 @doc("Update status enum")

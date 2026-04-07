@@ -38,7 +38,7 @@ model RecoveryResourceProperties {
   @added(Versions.v2026_03_01_preview)
   @doc("Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
-  physicalZones?: string[];
+  resourcePhysicalZones?: string[];
 
   @doc("A state that indicates the resource status with respect to the recovery orchestration plan.")
   inclusionState?: ResourceInclusionState;

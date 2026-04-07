@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/softwareplan"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SoftwarePlan"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.SoftwarePlan"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-softwareplan"
+    package-name: "azure-mgmt-softwareplan"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+    namespace: azure.mgmt.softwareplan
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-softwareplan"
+    namespace: "com.azure.resourcemanager.softwareplan"
+    service-name: "SoftwarePlan"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-softwareplan"
+    experimental-extensible-enums: true
+    is-modular-library: true
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-softwareplan"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/softwareplan"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsoftwareplan"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsoftwareplan"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    generate-samples: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

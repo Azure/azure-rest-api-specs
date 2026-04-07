@@ -12,6 +12,8 @@ import "./versions.tsp";
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SaaSHub;
 
@@ -35,9 +37,53 @@ interface ProviderLevelActions {
   ): ArmResponse<Microsoft.SaaSHub.CanCreateResult> | ErrorResponse;
 
   /**
+   * Evaluates customer eligibility for promotions on one or more products.
+   * Only available starting in API version 2026-03-31-preview.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @route("/providers/Microsoft.SaaSHub/validatePromotions")
+  @post
+  @tag("ProviderLevelActions")
+  validatePromotions(
+    ...ApiVersionParameter,
+
+    /**
+     * Request parameters containing products to evaluate for promotion eligibility.
+     */
+    @bodyRoot
+    body: Microsoft.SaaSHub.ValidatePromotionsRequest,
+  ): ArmResponse<Microsoft.SaaSHub.ValidatePromotionsResponse> | ErrorResponse;
+
+  /**
+   * Evaluates whether customers qualify for future price concessions when purchasing Microsoft 365 products.
+   * On each evaluated product, hydrates the catalog product SKU for the constraints and checks whether
+   * the sum of new and existing resources would meet the requirements for concessions.
+   * Only available starting in API version 2026-03-31-preview.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @route("/providers/Microsoft.SaaSHub/validateFuturePriceEligibility")
+  @post
+  @tag("ProviderLevelActions")
+  validateFuturePriceEligibility(
+    ...ApiVersionParameter,
+
+    /**
+     * Request parameters containing products to evaluate for future price eligibility.
+     */
+    @bodyRoot
+    body: Microsoft.SaaSHub.ValidateFuturePriceEligibilityRequest,
+  ): ArmResponse<Microsoft.SaaSHub.ValidateFuturePriceEligibilityResponse> | ErrorResponse;
+
+  /**
    * Gets coterm end dates for multiple resources at tenant level.
    * Only available in API version 2025-07-01-preview.
    */
+  @renamedFrom(
+    SaaSHubVersions.v2025_07_01_preview,
+    "tenantLevelGetCotermEndDates"
+  )
+  @removed(SaaSHubVersions.v2026_03_31_preview)
+  @sharedRoute
   @route("/providers/Microsoft.SaaSHub/tenantLevelCoterminousDates")
   @post
   @tag("ProviderLevelActions")
@@ -52,8 +98,27 @@ interface ProviderLevelActions {
   ): ArmResponse<Microsoft.SaaSHub.CotermResponseItem[]> | ErrorResponse;
 
   /**
+   * Gets coterm end dates for multiple resources at tenant level.
+   * Only available starting in API version 2026-03-31-preview.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @sharedRoute
+  @route("/providers/Microsoft.SaaSHub/tenantLevelCoterminousDates")
+  @post
+  @tag("ProviderLevelActions")
+  tenantLevelGetCotermEndDatesBulk(
+    ...ApiVersionParameter,
+
+    /**
+     * Request parameters that are provided to the GetCotermEndDates operation.
+     */
+    @bodyRoot
+    body: Microsoft.SaaSHub.CotermEndDatesRequest,
+  ): ArmResponse<Microsoft.SaaSHub.CotermResponseItemBulkResponse> | ErrorResponse;
+
+  /**
    * Evaluates whether multiple transaction requests can be processed at tenant level.
-   * Only available in API version 2025-07-01-preview.
+   * Only available starting in API version 2025-07-01-preview.
    */
   @route("/providers/Microsoft.SaaSHub/tenantLevelCanTransact")
   @post
@@ -70,10 +135,11 @@ interface ProviderLevelActions {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Resource group level provider actions don't follow standard ARM resource patterns"
+@removed(SaaSHubVersions.v2026_03_31_preview)
 interface ResourceGroupLevelProviderActions {
   /**
    * Evaluates whether the request payload can create a new cloud service resource.
-   * Only available in API version 2025-07-01-preview.
+   * Only available starting in API version 2025-07-01-preview.
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaSHub/canCreate")
   @tag("ResourceGroupLevelProviderActions")

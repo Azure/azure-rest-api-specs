@@ -1,0 +1,912 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Edge",
+    "version": "2026-04-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SiteKeys"
+    },
+    {
+      "name": "SiteKeysBySubscription"
+    },
+    {
+      "name": "SiteKeysByServiceGroup"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/siteKeys": {
+      "get": {
+        "operationId": "SiteKeysByServiceGroup_List",
+        "tags": [
+          "SiteKeysByServiceGroup"
+        ],
+        "description": "List SiteKey resources by scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "servicegroupName",
+            "in": "path",
+            "description": "The name of the service group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByServiceGroup_List": {
+            "$ref": "./examples/SiteKeysByServiceGroup_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/siteKeys/{siteKeyName}": {
+      "get": {
+        "operationId": "SiteKeysByServiceGroup_Get",
+        "tags": [
+          "SiteKeysByServiceGroup"
+        ],
+        "description": "Get a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "servicegroupName",
+            "in": "path",
+            "description": "The name of the service group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByServiceGroup_Get": {
+            "$ref": "./examples/SiteKeysByServiceGroup_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SiteKeysByServiceGroup_CreateOrUpdate",
+        "tags": [
+          "SiteKeysByServiceGroup"
+        ],
+        "description": "Create a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "servicegroupName",
+            "in": "path",
+            "description": "The name of the service group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SiteKey' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "201": {
+            "description": "Resource 'SiteKey' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByServiceGroup_CreateOrUpdate": {
+            "$ref": "./examples/SiteKeysByServiceGroup_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SiteKeysByServiceGroup_Delete",
+        "tags": [
+          "SiteKeysByServiceGroup"
+        ],
+        "description": "Delete a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "servicegroupName",
+            "in": "path",
+            "description": "The name of the service group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByServiceGroup_Delete": {
+            "$ref": "./examples/SiteKeysByServiceGroup_Delete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/siteKeys/{siteKeyName}/download": {
+      "post": {
+        "operationId": "SiteKeysByServiceGroup_Download",
+        "tags": [
+          "SiteKeysByServiceGroup"
+        ],
+        "description": "Download SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "servicegroupName",
+            "in": "path",
+            "description": "The name of the service group",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadSiteKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByServiceGroup_Download": {
+            "$ref": "./examples/SiteKeysByServiceGroup_Download.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/siteKeys": {
+      "get": {
+        "operationId": "SiteKeysBySubscription_List",
+        "tags": [
+          "SiteKeysBySubscription"
+        ],
+        "description": "List SiteKey resources by scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysBySubscription_List": {
+            "$ref": "./examples/SiteKeysBySubscription_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/siteKeys/{siteKeyName}": {
+      "get": {
+        "operationId": "SiteKeysBySubscription_Get",
+        "tags": [
+          "SiteKeysBySubscription"
+        ],
+        "description": "Get a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysBySubscription_Get": {
+            "$ref": "./examples/SiteKeysBySubscription_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SiteKeysBySubscription_CreateOrUpdate",
+        "tags": [
+          "SiteKeysBySubscription"
+        ],
+        "description": "Create a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SiteKey' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "201": {
+            "description": "Resource 'SiteKey' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysBySubscription_CreateOrUpdate": {
+            "$ref": "./examples/SiteKeysBySubscription_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SiteKeysBySubscription_Delete",
+        "tags": [
+          "SiteKeysBySubscription"
+        ],
+        "description": "Delete a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysBySubscription_Delete": {
+            "$ref": "./examples/SiteKeysBySubscription_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/siteKeys/{siteKeyName}/download": {
+      "post": {
+        "operationId": "SiteKeysBySubscription_Download",
+        "tags": [
+          "SiteKeysBySubscription"
+        ],
+        "description": "Download SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadSiteKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysBySubscription_Download": {
+            "$ref": "./examples/SiteKeysBySubscription_Download.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/siteKeys": {
+      "get": {
+        "operationId": "SiteKeys_List",
+        "tags": [
+          "SiteKeys"
+        ],
+        "description": "List SiteKey resources by scope",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByResourceGroup_List": {
+            "$ref": "./examples/SiteKeysByResourceGroup_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/siteKeys/{siteKeyName}": {
+      "get": {
+        "operationId": "SiteKeys_Get",
+        "tags": [
+          "SiteKeys"
+        ],
+        "description": "Get a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByResourceGroup_Get": {
+            "$ref": "./examples/SiteKeysByResourceGroup_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SiteKeys_CreateOrUpdate",
+        "tags": [
+          "SiteKeys"
+        ],
+        "description": "Create a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SiteKey' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "201": {
+            "description": "Resource 'SiteKey' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SiteKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByResourceGroup_CreateOrUpdate": {
+            "$ref": "./examples/SiteKeysByResourceGroup_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SiteKeys_Delete",
+        "tags": [
+          "SiteKeys"
+        ],
+        "description": "Delete a SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByResourceGroup_Delete": {
+            "$ref": "./examples/SiteKeysByResourceGroup_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/siteKeys/{siteKeyName}/download": {
+      "post": {
+        "operationId": "SiteKeys_Download",
+        "tags": [
+          "SiteKeys"
+        ],
+        "description": "Download SiteKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteKeyName",
+            "in": "path",
+            "description": "The name of the SiteKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadSiteKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SiteKeysByResourceGroup_Download": {
+            "$ref": "./examples/SiteKeysByResourceGroup_Download.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DownloadSiteKeyResponse": {
+      "type": "object",
+      "description": "Response payload for downloading SiteKey material.",
+      "properties": {
+        "tokenResponse": {
+          "$ref": "#/definitions/TokenResponse",
+          "description": "The downloaded token response"
+        }
+      }
+    },
+    "SiteKey": {
+      "type": "object",
+      "description": "SiteKey resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteKeyProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SiteKeyListResult": {
+      "type": "object",
+      "description": "The response of a SiteKey list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SiteKey items on this page",
+          "items": {
+            "$ref": "#/definitions/SiteKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SiteKeyProperties": {
+      "type": "object",
+      "description": "Site Key properties",
+      "properties": {
+        "siteResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the Site this SiteKey is linked to",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/Sites"
+              }
+            ]
+          }
+        },
+        "tokenExpiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Token expiry date",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "generatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date when the site key was generated",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "siteResourceId"
+      ]
+    },
+    "TokenResponse": {
+      "type": "object",
+      "description": "Downloaded Msi Token Response",
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password",
+          "description": "The downloaded token",
+          "x-ms-secret": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -151,4 +151,10 @@ interface ApprovalWorkflowInstances {
     ApprovalWorkflowInstance,
     ApprovalStageExecutionInput
   >;
+  @doc("Synchronize approved policy records with policy resource status.")
+  @action("syncPolicyStatus")
+  syncPolicyStatus is ArmResourceActionNoContentSync<
+    ApprovalWorkflowInstance,
+    void
+  >;
 }

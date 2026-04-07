@@ -102,7 +102,7 @@
             "description": "Name of the SLI that is given by the user.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
+            "pattern": "^[a-zA-Z0-9_()~-]{3,64}$"
           }
         ],
         "responses": {
@@ -144,7 +144,7 @@
             "description": "Name of the SLI that is given by the user.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
+            "pattern": "^[a-zA-Z0-9_()~-]{3,64}$"
           },
           {
             "name": "resource",
@@ -201,7 +201,7 @@
             "description": "Name of the SLI that is given by the user.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
+            "pattern": "^[a-zA-Z0-9_()~-]{3,64}$"
           }
         ],
         "responses": {
@@ -557,22 +557,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "max",
+            "name": "Max",
             "value": "max",
             "description": "Maximum value."
           },
           {
-            "name": "min",
+            "name": "Min",
             "value": "min",
             "description": "Minimum value."
           },
           {
-            "name": "avg",
+            "name": "Avg",
             "value": "avg",
             "description": "Average value."
           },
           {
-            "name": "sum",
+            "name": "Sum",
             "value": "sum",
             "description": "Summation."
           }
@@ -593,22 +593,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "max",
+            "name": "Max",
             "value": "max",
             "description": "Maximum value."
           },
           {
-            "name": "min",
+            "name": "Min",
             "value": "min",
             "description": "Minimum value."
           },
           {
-            "name": "avg",
+            "name": "Avg",
             "value": "avg",
             "description": "Average value."
           },
           {
-            "name": "sum",
+            "name": "Sum",
             "value": "sum",
             "description": "Summation."
           }
@@ -622,7 +622,7 @@
         "serviceGroupName": {
           "type": "string",
           "description": "The name of the service group.",
-          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          "pattern": "^[A-Za-z0-9._()~-]{1,250}$"
         },
         "apiVersion": {
           "type": "string",
@@ -839,6 +839,7 @@
         },
         "streamingRuleLastUpdatedTimestamp": {
           "type": "string",
+          "format": "date-time",
           "description": "The streaming rule last updated timestamp associated with the Sli resource.",
           "readOnly": true
         },
@@ -855,12 +856,8 @@
         "description",
         "category",
         "evaluationType",
-        "executionState",
         "destinationAmwAccounts",
-        "destinationMetrics",
         "baselineProperties",
-        "streamingRuleId",
-        "streamingRuleLastUpdatedTimestamp",
         "enableAlert",
         "sliProperties"
       ]
@@ -888,7 +885,7 @@
     },
     "SpatialAggregationType": {
       "type": "string",
-      "description": "Defines the available aggregation types.",
+      "description": "Defines the available spatial aggregation types for aggregating measurements across multiple time series.",
       "enum": [
         "Average",
         "Min",
@@ -948,7 +945,7 @@
     },
     "TemporalAggregationType": {
       "type": "string",
-      "description": "Defines the available aggregation types.",
+      "description": "Defines the available temporal aggregation types for aggregating measurements over a specific time window within the same time series.",
       "enum": [
         "Average",
         "Min",
@@ -1075,7 +1072,7 @@
       "description": "The name of the service group.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "pattern": "^[A-Za-z0-9._()~-]{1,250}$",
       "x-ms-parameter-location": "method"
     }
   }

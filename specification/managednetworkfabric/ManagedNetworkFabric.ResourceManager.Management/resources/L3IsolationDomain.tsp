@@ -58,10 +58,16 @@ interface L3IsolationDomains {
   delete is ArmResourceDeleteWithoutOkAsync<L3IsolationDomain>;
 
   @doc("Displays L3IsolationDomains list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<L3IsolationDomain>;
+  listByResourceGroup is ArmResourceListByParent<
+    L3IsolationDomain,
+    Response = L3IsolationDomainsListResult
+  >;
 
   @doc("Displays L3IsolationDomains list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<L3IsolationDomain>;
+  listBySubscription is ArmListBySubscription<
+    L3IsolationDomain,
+    Response = L3IsolationDomainsListResult
+  >;
 
   @doc("Enables racks for this Isolation Domain.")
   @action("updateAdministrativeState")
@@ -84,11 +90,25 @@ interface L3IsolationDomains {
     UpdateAdministrativeStateResponse
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    L3IsolationDomain,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Validates the configuration of the resources.")
   validateConfiguration is ArmResourceActionAsync<
     L3IsolationDomain,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 
   @doc("Commits the configuration of the given resources.")
@@ -107,5 +127,11 @@ interface L3IsolationDomains {
   "Request payload."
 );
 @@doc(L3IsolationDomains.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(L3IsolationDomains.validateConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(L3IsolationDomains.validateConfiguration::parameters.body,
   "Request payload."
 );

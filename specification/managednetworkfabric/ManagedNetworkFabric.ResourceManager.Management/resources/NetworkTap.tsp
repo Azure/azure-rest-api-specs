@@ -52,10 +52,16 @@ interface NetworkTaps {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkTap>;
 
   @doc("Displays Network Taps list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<NetworkTap>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkTap,
+    Response = NetworkTapsListResult
+  >;
 
   @doc("Displays Network Taps list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<NetworkTap>;
+  listBySubscription is ArmListBySubscription<
+    NetworkTap,
+    Response = NetworkTapsListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
   @action("updateAdministrativeState")

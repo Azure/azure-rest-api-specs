@@ -35,7 +35,8 @@ interface Images {
 
   @doc("List by parent")
   @added(Microsoft.Edge.Versions.v2025_05_01)
-  listAll is ArmResourceListByParent<
+  @renamedFrom(Microsoft.Edge.Versions.v2026_04_01, "listAll")
+  listByDisconnectedOperation is ArmResourceListByParent<
     Image,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<Image> & {
       ...FilterQueryParameter;

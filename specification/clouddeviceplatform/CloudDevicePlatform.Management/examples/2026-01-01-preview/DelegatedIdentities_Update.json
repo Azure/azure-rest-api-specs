@@ -1,0 +1,35 @@
+{
+  "operationId": "DelegatedIdentities_Update",
+  "title": "DelegatedIdentities_Update",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "delegatedIdentityName": "myIdentity",
+    "properties": {
+      "tags": {
+        "tagName": "tag value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudDevicePlatform/delegatedIdentities/myIdentity",
+        "location": "westus",
+        "type": "Microsoft.CloudDevicePlatform/delegatedIdentities",
+        "tags": {
+          "tagName": "tag value"
+        },
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  }
+}

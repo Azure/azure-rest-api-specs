@@ -207,11 +207,18 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zoneId?: Ocid;
 
-  @doc("The hostname for the cloud VM cluster.")
+  @removed(Versions.v20260201_preview)
+  @doc("The hostname for the cloud VM cluster. Hostname and domain combined length cannot exceed 112 characters.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(23)
   hostname: string;
+
+  @added(Versions.v20260201_preview)
+  @doc("The hostname for the cloud VM cluster.")
+  @encodedName("application/json", "hostname")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  hostnameV2: string;
 
   @doc("The domain name for the cloud VM cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -232,6 +239,20 @@ model CloudVmClusterProperties {
   @doc("The percentage assigned to DATA storage (user data and database files). The remaining percentage is assigned to RECO storage (database redo logs, archive logs, and recovery manager backups). Accepted values are 35, 40, 60 and 80. The default is 80 percent assigned to DATA storage. See [Storage Configuration](/Content/Database/Concepts/exaoverview.htm#Exadata) in the Exadata documentation for details on the impact of the configuration settings on storage. ")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dataStoragePercentage?: int32;
+
+  @added(Versions.v20260201_preview)
+  @doc("The percentage assigned to RECO storage (database redo logs, archive logs, and recovery manager backups). See [Storage Configuration](/Content/Database/Concepts/exaoverview.htm#Exadata) in the Exadata documentation for details on the impact of the configuration settings on storage.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minValue(0)
+  @maxValue(100)
+  recoStoragePercentage?: int32;
+
+  @added(Versions.v20260201_preview)
+  @doc("The percentage assigned to SPARSE storage (Exadata snapshots). See [Storage Configuration](/Content/Database/Concepts/exaoverview.htm#Exadata) in the Exadata documentation for details on the impact of the configuration settings on storage.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @minValue(0)
+  @maxValue(100)
+  sparseStoragePercentage?: int32;
 
   @doc("If true, database backup on local Exadata storage is configured for the cloud VM cluster. If false, database backup on local Exadata storage is not available in the cloud VM cluster. ")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -269,11 +290,18 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Read)
   vipIds?: string[];
 
+  @removed(Versions.v20260201_preview)
   @doc("The FQDN of the DNS record for the SCAN IP addresses that are associated with the cloud VM cluster. ")
   @visibility(Lifecycle.Read)
   @minLength(1)
   @maxLength(72)
   scanDnsName?: string;
+
+  @added(Versions.v20260201_preview)
+  @doc("The FQDN of the DNS record for the SCAN IP addresses that are associated with the cloud VM cluster. ")
+  @encodedName("application/json", "scanDnsName")
+  @visibility(Lifecycle.Read)
+  scanDnsNameV2?: string;
 
   @doc("The TCP Single Client Access Name (SCAN) port. The default port is 1521.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -378,6 +406,11 @@ model CloudVmClusterProperties {
   @doc("Specifies whether the type of storage management for the VM cluster is ASM or Exascale.")
   @visibility(Lifecycle.Read)
   storageManagementType?: ExadataVmClusterStorageManagementType;
+
+  @added(Versions.v20251201_preview)
+  @doc("Indicates if the Accelerated Networking feature is enabled or disabled for provisioning an Exadata VM cluster. The default value is: false.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isAcceleratedNetworkEnabled?: boolean = false;
 }
 
 @doc("Add/Remove (Virtual Machine) DbNode model")

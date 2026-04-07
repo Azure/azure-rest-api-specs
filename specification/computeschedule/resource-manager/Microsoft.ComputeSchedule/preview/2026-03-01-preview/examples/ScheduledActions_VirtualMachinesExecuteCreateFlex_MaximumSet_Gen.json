@@ -1,0 +1,88 @@
+{
+  "title": "ScheduledActions_VirtualMachinesExecuteCreateFlex_MaximumSet",
+  "operationId": "ScheduledActions_VirtualMachinesExecuteCreateFlex",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "locationparameter": "eastus",
+    "requestBody": {
+      "resourceConfigParameters": {
+        "baseProfile": {},
+        "resourceOverrides": [
+          {}
+        ],
+        "resourceCount": 2,
+        "resourcePrefix": "myvm",
+        "flexProperties": {
+          "vmSizeProfiles": [
+            {
+              "name": "Standard_D2ads_v5",
+              "rank": 0
+            },
+            {
+              "name": "Standard_E2ads_v5",
+              "rank": 1
+            }
+          ],
+          "osType": "Windows",
+          "priorityProfile": {
+            "type": "regular",
+            "allocationStrategy": "LowestPrice"
+          },
+          "zoneAllocationPolicy": {
+            "distributionStrategy": "BestEffortSingleZone",
+            "zonePreferences": [
+              {
+                "zone": "1",
+                "rank": 0
+              },
+              {
+                "zone": "2",
+                "rank": 1
+              }
+            ]
+          }
+        }
+      },
+      "executionParameters": {
+        "optimizationPreference": "Cost",
+        "retryPolicy": {
+          "retryCount": 3,
+          "retryWindowInMinutes": 30
+        }
+      },
+      "correlationid": "01234567-89ab-cdef-0123-456789abcdef"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "description": "CreateFlex operation submitted",
+        "type": "virtualMachines",
+        "location": "eastus",
+        "results": [
+          {
+            "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myvm-0",
+            "errorCode": "",
+            "errorDetails": "",
+            "operation": {
+              "operationId": "op-001",
+              "resourceId": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myvm-0",
+              "opType": "Unknown",
+              "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+              "deadline": "2026-03-01T00:00:00.000Z",
+              "deadlineType": "Unknown",
+              "state": "Executing",
+              "timeZone": "UTC",
+              "completedAt": "2026-03-01T00:00:00.000Z",
+              "retryPolicy": {
+                "retryCount": 3,
+                "retryWindowInMinutes": 30
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

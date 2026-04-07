@@ -1,0 +1,62 @@
+{
+  "title": "Query Assessment Survey",
+  "operationId": "Query_AssessmentSurvey",
+  "parameters": {
+    "subscriptionId": "0afefe50-734e-4610-8a82-a144af49dea",
+    "resourceGroupName": "rgName",
+    "servicesHubConnectorName": "servicesHubResourceName1",
+    "api-version": "2025-12-12-preview",
+    "requestBody": {
+      "properties": {
+        "logAnalyticsSubscriptionId": "81ab0d0a-f14d-4add-bc17-f04ae2c00cd8",
+        "logAnalyticsResourceGroupName": "ama-bugbash",
+        "logAnalyticsWorkspaceName": "ama-workspace1",
+        "logAnalyticsWorkspaceId": "b6a53407-643f-4602-8a86-c4f3560a6185",
+        "tenantId": "c6a53407-643f-4602-8a86-c4f3560a6186",
+        "connectorSubscriptionId": "550e8400-e29b-41d4-a716-446655440000"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "onDemandAssessments": [
+            {
+              "id": "ODAWinSvr",
+              "name": "Windows Server ODA"
+            },
+            {
+              "id": "Azure ODA",
+              "name": "Azure Active Directory ODA"
+            }
+          ],
+          "offlineAssessments": [
+            {
+              "id": "OffLine1",
+              "name": "Offline Name 1"
+            },
+            {
+              "id": "OffLine2",
+              "name": "Offline Name 2"
+            }
+          ],
+          "surveys": [
+            {
+              "id": "SQLSecSurvey",
+              "name": "SQL Server Security Survey",
+              "surveyId": "550e8400-e29b-41d4-a716-446655440001",
+              "externalId": "SV_1235"
+            },
+            {
+              "id": "ExOpsSurvey",
+              "name": "Exchange Server Operational Survey",
+              "surveyId": "550e8400-e29b-41d4-a716-446655440002",
+              "externalId": "SV_1234"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

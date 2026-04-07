@@ -29,6 +29,11 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_10_01_preview: "2025-10-01-preview",
+
+  @doc("Dependent on LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v2_preview)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_02_17_preview: "2026-02-17-preview",
 }
 
 /**
@@ -158,6 +163,12 @@ model FileSystemResourceUpdateProperties {
    * Delegated subnet id for Vnet injection
    */
   delegatedSubnetId?: string;
+
+  /**
+   *Pre-Provisioned Performance of the Resource
+   */
+  @added(Versions.v2026_02_17_preview)
+  performanceTier?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"

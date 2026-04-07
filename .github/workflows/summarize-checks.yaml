@@ -36,7 +36,7 @@ jobs:
   run-summarize-checks:
     if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
     name: "Summarize Checks"
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
 
     steps:
       # *** IMPORTANT ***
@@ -77,7 +77,7 @@ jobs:
       # May be used by downstream workflows
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-checks.outputs.summary }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: job-summary
           path: ${{ steps.summarize-checks.outputs.summary }}

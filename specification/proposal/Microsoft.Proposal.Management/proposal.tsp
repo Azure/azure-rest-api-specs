@@ -33,9 +33,14 @@ model ProposalResourceProperties {
   @doc("The proposal status.")
   status?: ProposalStatus;
 
-  @doc("The list of line items associated with the proposal.")
-  @identifiers(#["productCode"])
-  lineItems?: LineItem[];
+  @doc("The date and time when the proposal was created.")
+  createdAt?: utcDateTime;
+
+  @doc("The quote identifier associated with the proposal.")
+  quoteId?: string;
+
+  @doc("The deal identifier associated with the proposal.")
+  dealId?: string;
 }
 
 @armResourceOperations(ProposalResource)

@@ -27,7 +27,7 @@ These are the global settings for the SaaSHub.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-07-01-preview
+tag: package-2026-03-31-preview
 ```
 
 ### Tag: package-2023-01-01-preview
@@ -67,6 +67,20 @@ title: SaaSHubResourcesClient
 description: SaaSHub Resource Client
 input-file:
   - Microsoft.SaaSHub/preview/2025-07-01-preview/openapi.json
+suppressions:
+  - code: TenantLevelAPIsNotAllowed
+    reason: Microsoft.SaaSHub/saasResource is tenant level resource/API and is approved by ARM team
+```
+
+### Tag: package-2026-03-31-preview
+
+These settings apply only when `--tag=package-2026-03-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-31-preview'
+title: SaaSHubResourcesClient
+description: SaaSHub Resource Client
+input-file:
+  - Microsoft.SaaSHub/preview/2026-03-31-preview/openapi.json
 suppressions:
   - code: TenantLevelAPIsNotAllowed
     reason: Microsoft.SaaSHub/saasResource is tenant level resource/API and is approved by ARM team

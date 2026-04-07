@@ -1,0 +1,47 @@
+{
+  "title": "ScheduledActions_VirtualMachinesCancelOperations_MaximumSet",
+  "operationId": "ScheduledActions_VirtualMachinesCancelOperations",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "locationparameter": "nivsvluajruxhmsfgmxjnl",
+    "requestBody": {
+      "operationIds": [
+        "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      ],
+      "correlationid": "vonkhcpujeafz"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVm",
+            "errorCode": "ResourceNotFound",
+            "errorDetails": "The specified resource was not found.",
+            "operation": {
+              "operationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVm",
+              "opType": "Unknown",
+              "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+              "deadline": "2025-04-17T00:23:55.772Z",
+              "deadlineType": "Unknown",
+              "state": "Unknown",
+              "timeZone": "UTC",
+              "resourceOperationError": {
+                "errorCode": "OperationFailed",
+                "errorDetails": "The operation failed to complete."
+              },
+              "completedAt": "2025-04-17T00:23:55.772Z",
+              "retryPolicy": {
+                "retryCount": 17,
+                "retryWindowInMinutes": 29
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

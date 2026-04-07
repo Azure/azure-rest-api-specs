@@ -2,8 +2,6 @@ import "@typespec/http";
 import "./sap-common-models.tsp";
 
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
 
 namespace Microsoft.Workloads;
 

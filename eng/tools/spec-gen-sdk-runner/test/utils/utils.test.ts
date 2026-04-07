@@ -20,7 +20,11 @@ describe("Utils", () => {
     test("finds all tspconfig.yaml files recursively", () => {
       const searchPath = path.normalize(`${repoRoot}/specification/contosowidgetmanager`);
       const results = findFilesRecursive(searchPath, "tspconfig.yaml");
-      expect(results).toHaveLength(2);
+      // 8 tspconfig.yaml files:
+      // Contoso.Management, Contoso.WidgetManager,
+      // resource-manager/Microsoft.Contoso/Service1, Service1/SubService1, Service1/SubService2,
+      // data-plane/DataPlaneService, data-plane/DataPlaneService/DataPlaneSubService, NestedService
+      expect(results).toHaveLength(8);
       expect(results).toContain(
         path.normalize("specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml"),
       );
@@ -42,7 +46,7 @@ describe("Utils", () => {
         `${repoRoot}/specification/contosowidgetmanager`,
         "TSPCONFIG.YAML",
       );
-      expect(results).toHaveLength(2);
+      expect(results).toHaveLength(8);
     });
   });
 

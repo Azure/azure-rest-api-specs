@@ -27,7 +27,16 @@ These are the global settings for the arccontainerstorage.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-10-01-preview
+tag: package-2026-03-01-preview
+```
+
+### Tag: package-preview-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-preview'
+input-file:
+  - Microsoft.ArcContainerStorage/preview/2026-03-01-preview/arccontainerstorage.json
 ```
 
 ### Tag: package-preview-2024-10-01
@@ -46,3 +55,4 @@ suppressions:
    from: arccontainerstorage.json
    reason: Descriminator requires accountType
    where: $.paths["/{resourceUri}/providers/Microsoft.ArcContainerStorage/edgeVolumes/{edgeVolumeName}/mirrorSubvolumes/{mirrorSubvolumeName}"].patch.parameters[4].schema.properties.properties
+```

@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "targetProducts": [
+        {
+          "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+          "productContext": {
+            "market": "US",
+            "nationalCloud": "Public",
+            "pricingAudience": "Direct-Commercial"
+          },
+          "itemTrackingId": "CUSTOM_LINE_123",
+          "resourceTokens": [
+            {
+              "type": "availabilityToken",
+              "value": "availabilityTokenValue"
+            },
+            {
+              "type": "billingToken",
+              "value": "billingTokenValue"
+            }
+          ]
+        }
+      ],
+      "copurchasedProducts": [
+        {
+          "productCode": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
+          "productContext": {
+            "market": "US",
+            "nationalCloud": "Public",
+            "pricingAudience": "Direct-Commercial"
+          },
+          "quantity": 100,
+          "startDate": "2026-01-01T00:00:00Z",
+          "hasDiscount": true,
+          "seatCap": 500,
+          "itemTrackingId": "COPURCHASE_LINE_456",
+          "resourceTokens": [
+            {
+              "type": "availabilityToken",
+              "value": "availabilityTokenValue"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "requestMetadata": {
+              "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+              "pricingAudience": "Direct-Commercial",
+              "itemTrackingId": "CUSTOM_LINE_123"
+            },
+            "qualifyingCoterminousResources": [
+              {
+                "termEndDate": "2026-12-31T23:59:59Z",
+                "futurePriceConcessionTypes": [
+                  "FuturePriceNotToExceedCap",
+                  "FuturePercentNotToExceedCap"
+                ],
+                "minimumQuantityRequired": 50,
+                "totalQuantity": 100,
+                "isEligible": "Eligible",
+                "qualifyingResources": [
+                  {
+                    "productCode": "6ba7b811-9dad-11d1-80b4-00c04fd430c8",
+                    "resourceId": "/providers/Microsoft.SaaSHub/saasResources/copurchased-resource-456",
+                    "quantity": 100,
+                    "isCopurchased": true,
+                    "itemTrackingId": "COPURCHASE_LINE_456"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_ValidateFuturePriceEligibility",
+  "title": "Validate Future Price Eligibility - With Product Context and Resource Tokens"
+}

@@ -77,6 +77,12 @@ union ConnectorType {
   @doc("DeltaChangeFeed source connector.")
   DeltaChangeFeedSource: "DeltaChangeFeedSource",
 
+  @doc("IoTHub source connector.")
+  IoTHubSource: "IoTHubSource",
+
+  @doc("General source connector.")
+  GeneralConnectorSource: "GeneralConnectorSource",
+
   string,
 }
 

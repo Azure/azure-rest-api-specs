@@ -55,3 +55,6 @@ interface WorkloadComponents {
 @@doc(WorkloadComponents.create::parameters.resource,
   "Request body to create the Workload Component resource."
 );
+@@doc(WorkloadComponents.update::parameters.properties,
+  "Request body to update the Workload Component resource."
+);

@@ -21,6 +21,7 @@ import "./VirtualNetworks.tsp";
 import "./VirtualNetworkSubnets.tsp";
 import "./PublicIPAddresses.tsp";
 import "./NatGateways.tsp";
+import "./InboundRules.tsp";
 import "./LoadBalancers.tsp";
 import "./Operations.tsp";
 

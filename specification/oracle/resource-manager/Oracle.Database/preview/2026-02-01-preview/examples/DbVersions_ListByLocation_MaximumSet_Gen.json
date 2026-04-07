@@ -1,0 +1,44 @@
+{
+  "title": "DbVersions_ListByLocation_MaximumSet",
+  "operationId": "DbVersions_ListByLocation",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus",
+    "dbSystemShape": "VM.Standard.x86",
+    "dbSystemId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/dbSystems/db1",
+    "storageManagement": "LVM",
+    "isUpgradeSupported": true,
+    "isDatabaseSoftwareImageSupported": true,
+    "shapeFamily": "EXADATA"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "version": "alpha",
+              "isLatestForMajorVersion": true,
+              "isPreviewDbVersion": true,
+              "isUpgradeSupported": true,
+              "supportsPdb": true
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/autonomousDatabases/databasedb1",
+            "name": "plan1",
+            "type": "bslmqsvz",
+            "systemData": {
+              "createdBy": "bvxk",
+              "createdByType": "User",
+              "createdAt": "2026-03-10T03:38:19.396Z",
+              "lastModifiedBy": "value1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-10T03:38:19.396Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

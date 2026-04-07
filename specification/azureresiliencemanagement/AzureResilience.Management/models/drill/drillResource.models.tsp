@@ -41,7 +41,7 @@ model DrillResourceProperties {
   @doc("Active location and zones of the Azure resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation?: string[];
+  activeLocations?: string[];
 
   @doc("List of recovery locations and zones of the Azure resource.")
   @added(Versions.v2026_03_01_preview)
@@ -51,12 +51,12 @@ model DrillResourceProperties {
   @doc("Active Resource location and physical zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activePhysicalLocation: string[];
+  activePhysicalZones?: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryPhysicalLocation: string[];
+  recoveryPhysicalZones?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
   inclusionState?: DrillResourceInclusionState;
@@ -113,6 +113,11 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   targetAndCapabilityAssignmentError?: ErrorDetails;
 
+  @doc("Last Target Resource RBAC assignment error, if any.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  targetResourceAssignmentError?: ErrorDetails;
+
   @doc("Last RBAC assignment error, if any.")
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
@@ -131,6 +136,10 @@ model DrillResourceProperties {
 model DrillResourceAttentionReason {
   @doc("Experiment MSI does not have the desired RBAC on the resource.")
   faultRbacOnTarget?: RBACState;
+
+  @doc("Chaos Resource MSI does not have the desired RBAC on the resource.")
+  @added(Versions.v2026_03_01_preview)
+  faultRbacOnTargetResource?: RBACState;
 
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;

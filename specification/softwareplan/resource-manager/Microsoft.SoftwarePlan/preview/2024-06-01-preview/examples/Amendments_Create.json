@@ -1,0 +1,38 @@
+{
+  "title": "Amendments_Create",
+  "operationId": "Amendments_Create",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "billingAccountName": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31",
+    "resource": {
+      "properties": {
+        "quoteId": "quoteId123",
+        "upn": "amendmentupn1",
+        "amendmentType": "trueUp",
+        "amendmentDescription": "Annual true up for FY25",
+        "startDate": "2025-01-01",
+        "endDate": "2028-01-01"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-05-31/providers/Microsoft.SoftwarePlan/amendments/xxxxxxx-351d-4694-9392-03acc5870eb1",
+        "name": "xxxxxxx-351d-4694-9392-03acc5870eb1",
+        "type": "Microsoft.SoftwarePlan/amendments",
+        "properties": {
+          "amendmentType": "trueUp",
+          "amendmentDescription": "Annual true up for FY25",
+          "startDate": "2025-01-01",
+          "endDate": "2028-01-01",
+          "isActive": true
+        },
+        "systemData": {
+          "createdBy": "system",
+          "createdAt": "2024-10-25T07:46:52.9446004Z"
+        }
+      }
+    }
+  }
+}

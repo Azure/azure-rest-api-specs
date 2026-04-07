@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./SaasResourceModels.tsp";
 import "./SharedModels.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SaaSHub;
 /**
@@ -39,7 +41,7 @@ interface SaasResources {
   /**
    * Updates the properties of a SaaSHub Saas resource.
    */
-  @Http.patch(#{ implicitOptionality: true })
+  @Http.patch(#{ implicitOptionality: true }) // added on September 10, 2025 on RPSaaSMaster as part of the TypeSpec 1.4.0 upgrade (commit b9094b1f8122)
   update is ArmCustomPatchAsync<
     SaasResource,
     SaasResource,
@@ -98,6 +100,18 @@ interface SaasResources {
   cancel is ArmResourceActionAsync<
     SaasResource,
     void,
+    SaasResource,
+    BaseParameters = ApiVersionParameter
+  >;
+
+  /**
+   * Transfers a SaasResource to another partner tenant.
+   * Only available starting in API version 2026-03-31-preview.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  transferToPartner is ArmResourceActionAsync<
+    SaasResource,
+    Microsoft.SaaSHub.TransferToPartnerRequest,
     SaasResource,
     BaseParameters = ApiVersionParameter
   >;

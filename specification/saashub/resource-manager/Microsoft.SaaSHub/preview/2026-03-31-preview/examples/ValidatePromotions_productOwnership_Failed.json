@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "products": [
+        {
+          "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+          "quantity": 25,
+          "evaluationType": "Immediate"
+        }
+      ],
+      "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "requestMetadata": {
+              "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+              "quantity": 25,
+              "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8"
+            },
+            "eligibilityResults": [
+              {
+                "isEligible": "Ineligible",
+                "ineligibilityReasons": [
+                  "productOwnershipConstraintsNotMet"
+                ],
+                "eligibilityConstraints": [
+                  {
+                    "constraintType": "productOwnership",
+                    "isEligible": "Ineligible",
+                    "productsWhichMustAlreadyBeOwned": [
+                      [
+                        "e98fa6d5-439f-4a52-8f28-33a084cfdf6a",
+                        "f1a7c2e4-8b5d-4e1f-9a3c-7d2b5e8f1a4c"
+                      ],
+                      [
+                        "a2b3c4d5-e6f7-4890-a1b2-c3d4e5f6a7b8"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_ValidatePromotions",
+  "title": "Validate Promotions - productOwnership Constraint Failed"
+}

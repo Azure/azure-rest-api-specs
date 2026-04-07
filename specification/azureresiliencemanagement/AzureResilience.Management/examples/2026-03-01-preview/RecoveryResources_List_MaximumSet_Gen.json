@@ -4,7 +4,7 @@
   "parameters": {
     "serviceGroupName": "sampleServiceGroupName",
     "api-version": "2026-03-01-preview",
-    "recoveryPlanName": "samplePlanName"
+    "recoveryPlanName": "plan1"
   },
   "responses": {
     "200": {
@@ -22,10 +22,6 @@
                 "ResourceInNotProtectedState"
               ],
               "recoveryGroupId": "11111111-1111-1111-1111-123456789012",
-              "physicalZones": [
-                "1",
-                "2"
-              ],
               "associatedIdentity": {
                 "type": "UserAssigned",
                 "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
@@ -59,15 +55,22 @@
                   "isAutoFailover": true,
                   "failoverState": "None",
                   "testFailoverState": "None",
-                  "physicalZones": [
-                    "1"
+                  "activeLocations": [
+                    "westus-zone1"
+                  ],
+                  "activePhysicalZones": [
+                    "westus-az1"
                   ]
                 }
               ],
               "selectedProtectionSolutionType": "AzureNative",
               "selectedProtectionSolutionSetting": {
                 "protectionSolutionType": "ResourceBaseProtectionSolutionSetting"
-              }
+              },
+              "resourceLocation": "eastus",
+              "resourcePhysicalZones": [
+                "eastus2-zone1"
+              ]
             },
             "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryResources/12345678-9012-3456-7890-123456789012",
             "name": "12345678-9012-3456-7890-123456789012",

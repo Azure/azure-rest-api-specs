@@ -6,15 +6,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-changeSafety
-namespace: azure.mgmt.changeSafety
+package-name: azure-mgmt-applink
+namespace: azure.mgmt.applink
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/changeSafety/azure-mgmt-changeSafety/azure/mgmt/changeSafety
+output-folder: $(python-sdks-folder)/applink/azure-mgmt-applink/azure/mgmt/applink
 ```
 
 ``` yaml $(python)

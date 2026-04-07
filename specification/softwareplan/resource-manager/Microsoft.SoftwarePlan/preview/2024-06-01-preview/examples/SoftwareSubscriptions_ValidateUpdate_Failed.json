@@ -1,0 +1,31 @@
+{
+  "title": "SoftwareSubscriptions_ValidateUpdate_Failed",
+  "operationId": "SoftwareSubscriptions_ValidateUpdate",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "testResourceGroup",
+    "softwareSubscriptionName": "software-sub-001",
+    "body": {
+      "properties": {
+        "renewal": {
+          "productCode": "99908978-5FDA-49EF-9EAB-E7983DBA90A2"
+        },
+        "autoRenew": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "validationResult": "Failed",
+        "validationFailures": [
+          {
+            "reasonCode": "InvalidProductCode",
+            "reason": "Product code is not valid for renewal of this software subscription."
+          }
+        ]
+      }
+    }
+  }
+}
