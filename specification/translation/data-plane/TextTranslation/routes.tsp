@@ -41,6 +41,16 @@ op CustomGetOperation<TParams, TResponse, TError = ErrorResponse>(
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
+@useAuth(
+  NoAuth | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.authorizationCode,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
+    }
+  ]>
+)
 op getSupportedLanguages is CustomGetOperation<
   GetSupportedLanguagesParameters,
   GetSupportedLanguagesResult,
