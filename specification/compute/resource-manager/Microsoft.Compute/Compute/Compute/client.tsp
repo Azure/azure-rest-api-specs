@@ -497,9 +497,13 @@ using Compute;
 
 // RestorePointCollection → RestorePointGroup (old: RestorePointGroupResource, RestorePointGroupData)
 @@clientName(RestorePointCollection, "RestorePointGroup", "csharp");
+@@clientName(RestorePointCollectionSourceProperties,
+  "RestorePointGroupSource",
+  "csharp"
+);
 
-// SshPublicKeyResource → SshPublicKey (old: SshPublicKeyResource, SshPublicKeyData, SshPublicKeyCollection)
-@@clientName(SshPublicKeyResource, "SshPublicKey", "csharp");
+// NOTE: Cannot rename SshPublicKeyResource to SshPublicKey because model SshPublicKey already exists in models.tsp
+// The resource will remain as SshPublicKeyResourceResource — needs SDK-side [CodeGenType] customization
 
 // VirtualMachineScaleSetVMRunCommands interface → Vm casing (old: VirtualMachineScaleSetVmRunCommandResource)
 @@clientName(VirtualMachineScaleSetVMRunCommands,
