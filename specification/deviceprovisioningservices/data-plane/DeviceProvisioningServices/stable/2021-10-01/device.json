@@ -41,6 +41,7 @@
           {
             "name": "idScope",
             "in": "path",
+            "description": "The scope of the DPS instance.",
             "required": true,
             "type": "string"
           },
@@ -110,6 +111,7 @@
           {
             "name": "idScope",
             "in": "path",
+            "description": "The scope of the DPS instance.",
             "required": true,
             "type": "string"
           }
@@ -181,6 +183,7 @@
           {
             "name": "idScope",
             "in": "path",
+            "description": "The scope of the DPS instance.",
             "required": true,
             "type": "string"
           },
@@ -424,13 +427,16 @@
       "properties": {
         "errorCode": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Numeric error code."
         },
         "trackingId": {
-          "type": "string"
+          "type": "string",
+          "description": "Error tracking ID."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Error message."
         },
         "info": {
           "type": "object",
@@ -441,7 +447,8 @@
         },
         "timestampUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Error timestamp (UTC)."
         }
       }
     },
@@ -472,7 +479,8 @@
       "description": "200 OK response for LRO operations returning RegistrationOperationStatus.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/RegistrationOperationStatus"
+          "$ref": "#/definitions/RegistrationOperationStatus",
+          "description": "The registration operation status."
         }
       },
       "required": [
@@ -484,7 +492,8 @@
       "description": "202 Accepted response for LRO operations returning RegistrationOperationStatus.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/RegistrationOperationStatus"
+          "$ref": "#/definitions/RegistrationOperationStatus",
+          "description": "The registration operation status."
         }
       },
       "required": [
@@ -496,7 +505,8 @@
       "description": "Registration result returned when using SymmetricKey attestation.",
       "properties": {
         "enrollmentGroupId": {
-          "type": "string"
+          "type": "string",
+          "description": "Enrollment group ID."
         }
       }
     },
@@ -505,10 +515,12 @@
       "description": "Attestation via TPM.",
       "properties": {
         "endorsementKey": {
-          "type": "string"
+          "type": "string",
+          "description": "TPM endorsement key."
         },
         "storageRootKey": {
-          "type": "string"
+          "type": "string",
+          "description": "TPM storage root key."
         }
       },
       "required": [
@@ -530,31 +542,39 @@
       "description": "X509 certificate info.",
       "properties": {
         "subjectName": {
-          "type": "string"
+          "type": "string",
+          "description": "Certificate subject name."
         },
         "sha1Thumbprint": {
-          "type": "string"
+          "type": "string",
+          "description": "SHA-1 thumbprint of the certificate."
         },
         "sha256Thumbprint": {
-          "type": "string"
+          "type": "string",
+          "description": "SHA-256 thumbprint of the certificate."
         },
         "issuerName": {
-          "type": "string"
+          "type": "string",
+          "description": "Certificate issuer name."
         },
         "notBeforeUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Certificate validity start date (UTC)."
         },
         "notAfterUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Certificate expiry date (UTC)."
         },
         "serialNumber": {
-          "type": "string"
+          "type": "string",
+          "description": "Certificate serial number."
         },
         "version": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Certificate version."
         }
       },
       "required": [
@@ -577,7 +597,8 @@
           "description": "X509 certificate info."
         },
         "enrollmentGroupId": {
-          "type": "string"
+          "type": "string",
+          "description": "Enrollment group ID."
         },
         "signingCertificateInfo": {
           "$ref": "#/definitions/X509CertificateInfo",

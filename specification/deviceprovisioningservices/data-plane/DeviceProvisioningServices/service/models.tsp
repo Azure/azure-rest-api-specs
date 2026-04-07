@@ -373,6 +373,7 @@ model DeviceRegistrationState {
    * Custom allocation payload returned from the webhook to the device.
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "payload is an open JSON object per API contract"
   payload?: Record<unknown>;
 }
 
@@ -443,7 +444,10 @@ model AttestationMechanism {
  * Attestation via TPM.
  */
 model TpmAttestation {
+  /** TPM endorsement key. */
   endorsementKey: string;
+
+  /** TPM storage root key. */
   storageRootKey?: string;
 }
 
@@ -486,6 +490,7 @@ model X509Certificates {
  * Certificate and Certificate info
  */
 model X509CertificateWithInfo {
+  /** PEM-formatted certificate string. */
   certificate?: string;
 
   /**
@@ -498,21 +503,40 @@ model X509CertificateWithInfo {
  * X509 certificate info.
  */
 model X509CertificateInfo {
+  /** Subject name of the certificate. */
   subjectName: string;
+
+  /** SHA-1 thumbprint of the certificate. */
   sha1Thumbprint: string;
+
+  /** SHA-256 thumbprint of the certificate. */
   sha256Thumbprint: string;
+
+  /** Issuer name of the certificate. */
   issuerName: string;
+
+  /** Certificate validity start (UTC). */
   notBeforeUtc: utcDateTime;
+
+  /** Certificate validity end (UTC). */
   notAfterUtc: utcDateTime;
+
+  /** Serial number of the certificate. */
   serialNumber: string;
+
+  /** Version of the certificate. */
   version: int32;
 }
 
 /**
  * Primary and secondary CA references.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: X509CA is an established acronym"
 model X509CAReferences {
+  /** Primary CA reference. */
   primary?: string;
+
+  /** Secondary CA reference. */
   secondary?: string;
 }
 
@@ -617,8 +641,13 @@ model ProvisioningServiceErrorDetails {
   @doc("The error code for specific error that occurred.")
   xMsErrorCode?: string;
 
+  /** Error code for the operation. */
   errorCode?: int32;
+
+  /** Tracking ID for the error. */
   trackingId?: string;
+
+  /** Human-readable error message. */
   message?: string;
 
   /**
@@ -626,6 +655,7 @@ model ProvisioningServiceErrorDetails {
    */
   info?: Record<string>;
 
+  /** UTC timestamp of the error. */
   timestampUtc?: utcDateTime;
 }
 
@@ -741,7 +771,9 @@ model EnrollmentGroup {
   customAllocationDefinition?: CustomAllocationDefinition;
 }
 
+/** Query specification for enrollment queries. */
 model QuerySpecification {
+  /** OData query string. */
   query: string;
 }
 

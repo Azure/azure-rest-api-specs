@@ -15,6 +15,9 @@ interface RuntimeRegistrationOperationGroup {
   /**
    * Gets the registration operation status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   @extension("x-ms-long-running-operation", true)
   @summary("Gets the registration operation status.")
   @operationId("RuntimeRegistration_OperationStatusLookup")
@@ -34,6 +37,7 @@ interface RuntimeRegistrationOperationGroup {
       @path
       operationId: string;
 
+      /** The scope of the DPS instance. */
       @path
       idScope: string;
     },
@@ -45,6 +49,8 @@ interface RuntimeRegistrationOperationGroup {
   /**
    * Gets the device registration status.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   @summary("Gets the device registration status.")
   @operationId("RuntimeRegistration_DeviceRegistrationStatusLookup")
   @route("/{idScope}/registrations/{registrationId}")
@@ -57,6 +63,7 @@ interface RuntimeRegistrationOperationGroup {
       @path
       registrationId: string;
 
+      /** The scope of the DPS instance. */
       @path
       idScope: string;
 
@@ -76,6 +83,9 @@ interface RuntimeRegistrationOperationGroup {
    */
   @removed(Versions.v2025_07_01_preview)
   @sharedRoute
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   @extension("x-ms-long-running-operation", true)
   @summary("Registers the devices.")
   @operationId("RuntimeRegistration_RegisterDevice")
@@ -89,6 +99,7 @@ interface RuntimeRegistrationOperationGroup {
       @path
       registrationId: string;
 
+      /** The scope of the DPS instance. */
       @path
       idScope: string;
 
@@ -108,6 +119,9 @@ interface RuntimeRegistrationOperationGroup {
    */
   @added(Versions.v2025_07_01_preview)
   @sharedRoute
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   @extension("x-ms-long-running-operation", true)
   @summary("Registers the devices and optionally issue operational certificates for IoT devices.")
   @operationId("RuntimeRegistration_RegisterDeviceAndIssueCertificate")
@@ -121,6 +135,7 @@ interface RuntimeRegistrationOperationGroup {
       @path
       registrationId: string;
 
+      /** The scope of the DPS instance. */
       @path
       idScope: string;
 

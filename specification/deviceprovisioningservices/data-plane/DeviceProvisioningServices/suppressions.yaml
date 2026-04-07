@@ -1,1 +1,20 @@
-suppressions: []
+- tool: TypeSpecValidation
+  paths:
+    - "."
+    - ./device
+    - ./service
+  rules: [FolderStructure]
+  reason: >
+    DPS data-plane has two distinct API surfaces (device registration and service management)
+    that require two separate TypeSpec projects under DeviceProvisioningServices.
+    Each must remain at sub-folder depth (device/ and service/) rather than being merged
+    into a single top-level TypeSpec project.
+- tool: TypeSpecValidation
+  paths:
+    - ./tspconfig.yaml
+  rules: [SdkTspConfigValidation]
+  reason: >
+    DPS data-plane uses a sub-folder TypeSpec structure (device/ and service/ sub-projects).
+    The root tspconfig.yaml is a stub required only for tsv compatibility (FlavorAzure and
+    LinterRuleset rules). SDK generation is configured in device/tspconfig.yaml and
+    service/tspconfig.yaml; SdkTspConfigValidation on the root stub is not applicable.

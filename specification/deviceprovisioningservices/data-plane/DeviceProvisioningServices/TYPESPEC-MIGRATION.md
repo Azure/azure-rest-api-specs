@@ -402,6 +402,15 @@ The error model is **structurally identical** between original and new (minor pr
 | Old SDK LRO polling (202 + Location + retry-after) | ✅ | All headers preserved |
 | Old SDK error handling (errorCode, message, trackingId) | ✅ | ProvisioningServiceErrorDetails identical |
 
+### Minor Stable-vs-Preview Alignment
+
+The original hand-authored `2025-07-01-preview` swagger added `minLength: 1` constraints on 8 fields
+(`registrationId`, `enrollmentGroupId`, `webhookUrl`, `apiVersion`, `errorStatus`) that were missing from the
+original `2021-10-01` stable swagger. Because TypeSpec generates both versions from a single model source,
+these constraints are now consistently present in **both** the stable and preview swaggers. This is a
+**non-breaking improvement** — the service has always rejected empty-string values for these fields; the
+constraint now makes that behavior explicit in the spec.
+
 ---
 
 ## API Versions
