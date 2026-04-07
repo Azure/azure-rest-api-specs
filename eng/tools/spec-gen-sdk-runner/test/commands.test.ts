@@ -432,7 +432,7 @@ describe("generateSdkForSpecPr", () => {
       // mock implementation intentionally left blank
     });
 
-    const statusCode = await generateSdkForSpecPr();
+    const { statusCode } = await generateSdkForSpecPr();
 
     expect(statusCode).toBe(0);
     // Verify hasTypeSpecProjects is false because executionResult is "notEnabled"
@@ -492,7 +492,7 @@ describe("generateSdkForSpecPr", () => {
       // mock implementation intentionally left blank
     });
 
-    const statusCode = await generateSdkForSpecPr();
+    const { statusCode } = await generateSdkForSpecPr();
 
     expect(statusCode).toBe(0);
     // Verify hasTypeSpecProjects is true because executionResult is "succeeded"
