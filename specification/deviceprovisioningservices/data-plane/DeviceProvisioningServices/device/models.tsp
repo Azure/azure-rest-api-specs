@@ -265,11 +265,8 @@ model X509CertificateInfo {
   sha1Thumbprint: string;
   sha256Thumbprint: string;
   issuerName: string;
-
   notBeforeUtc: utcDateTime;
-
   notAfterUtc: utcDateTime;
-
   serialNumber: string;
   version: int32;
 }
