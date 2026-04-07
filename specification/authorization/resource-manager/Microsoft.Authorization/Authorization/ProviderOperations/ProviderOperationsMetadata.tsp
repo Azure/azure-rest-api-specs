@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -58,13 +58,7 @@ interface ProviderOperationsMetadataOperationGroup {
   get is ArmResourceRead<
     ProviderOperationsMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * Specifies whether to expand the values.
-       */
-      @query("$expand")
-      $expand?: string = "resourceTypes";
-    }
+    Parameters = ProviderOperationsMetadataGetParameters
   >;
 
   /**
@@ -74,16 +68,26 @@ interface ProviderOperationsMetadataOperationGroup {
   list is ArmResourceListByParent<
     ProviderOperationsMetadata,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      /**
-       * Specifies whether to expand the values.
-       */
-      @query("$expand")
-      $expand?: string = "resourceTypes";
-    }
+    Parameters = ProviderOperationsMetadataListParameters
   >;
 }
 
 @@doc(ProviderOperationsMetadata.name,
   "The namespace of the resource provider."
 );
+
+alias ProviderOperationsMetadataGetParameters = {
+  /**
+   * Specifies whether to expand the values.
+   */
+  @query("$expand")
+  $expand?: string = "resourceTypes";
+};
+
+alias ProviderOperationsMetadataListParameters = {
+  /**
+   * Specifies whether to expand the values.
+   */
+  @query("$expand")
+  $expand?: string = "resourceTypes";
+};
