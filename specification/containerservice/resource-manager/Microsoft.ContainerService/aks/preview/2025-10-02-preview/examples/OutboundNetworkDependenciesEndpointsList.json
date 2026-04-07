@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "resourceName": "clustername1"
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -48,9 +48,9 @@
                 "domainName": "*.data.mcr.microsoft.com",
                 "endpointDetails": [
                   {
+                    "description": "mcr cdn",
                     "port": 443,
-                    "protocol": "Https",
-                    "description": "mcr cdn"
+                    "protocol": "Https"
                   }
                 ]
               }
@@ -238,5 +238,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "ManagedClusters_ListOutboundNetworkDependenciesEndpoints",
+  "title": "List OutboundNetworkDependenciesEndpoints by Managed Cluster"
 }

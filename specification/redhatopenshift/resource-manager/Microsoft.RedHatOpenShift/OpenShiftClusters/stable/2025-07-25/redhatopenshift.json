@@ -1,0 +1,1519 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Red Hat OpenShift Client",
+    "version": "2025-07-25",
+    "description": "Rest API for Azure Red Hat OpenShift 4",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OpenShiftVersions"
+    },
+    {
+      "name": "PlatformWorkloadIdentityRoleSets"
+    },
+    {
+      "name": "OpenShiftClusters"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.RedHatOpenShift/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the available RP operations.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/openShiftVersions": {
+      "get": {
+        "operationId": "OpenShiftVersions_List",
+        "tags": [
+          "OpenShiftVersions"
+        ],
+        "summary": "Lists all OpenShift versions available to install in the specified location.",
+        "description": "The operation returns the installable OpenShift versions as a string.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftVersionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all OpenShift versions available to install in the specified location.": {
+            "$ref": "./examples/OpenShiftVersions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/openShiftVersions/{openShiftVersion}": {
+      "get": {
+        "operationId": "OpenShiftVersions_Get",
+        "tags": [
+          "OpenShiftVersions"
+        ],
+        "summary": "Gets an available OpenShift version to install in the specified location.",
+        "description": "This operation returns installable OpenShift version as a string.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "openShiftVersion",
+            "in": "path",
+            "description": "The desired version value of the OpenShiftVersion resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^(\\d+)\\.(\\d+)\\.(\\d+)(.*)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an available OpenShift version to install in the specified location.": {
+            "$ref": "./examples/OpenShiftVersions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/platformWorkloadIdentityRoleSets": {
+      "get": {
+        "operationId": "PlatformWorkloadIdentityRoleSets_List",
+        "tags": [
+          "PlatformWorkloadIdentityRoleSets"
+        ],
+        "summary": "Lists a mapping of OpenShift versions to identity requirements, which include operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.",
+        "description": "This operation returns a list of Platform Workload Identity Role Sets as a string",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformWorkloadIdentityRoleSetList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists a mapping of OpenShift versions to identity requirements, which include operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.": {
+            "$ref": "./examples/PlatformWorkloadIdentityRoleSets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/platformWorkloadIdentityRoleSets/{openShiftMinorVersion}": {
+      "get": {
+        "operationId": "PlatformWorkloadIdentityRoleSet_Get",
+        "tags": [
+          "PlatformWorkloadIdentityRoleSets"
+        ],
+        "summary": "Gets a mapping of an OpenShift version to identity requirements, which includes operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.",
+        "description": "This operation returns Platform Workload Identity Role Set as a string",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "openShiftMinorVersion",
+            "in": "path",
+            "description": "The desired version value of the PlatformWorkloadIdentityRoleSet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^(\\d+)\\.(\\d+)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PlatformWorkloadIdentityRoleSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a mapping of an OpenShift version to identity requirements, which includes operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.": {
+            "$ref": "./examples/PlatformWorkloadIdentityRoleSet_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/openShiftClusters": {
+      "get": {
+        "operationId": "OpenShiftClusters_List",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Lists OpenShift clusters in the specified subscription.",
+        "description": "The operation returns properties of each OpenShift cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftClusterList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists OpenShift clusters in the specified subscription.": {
+            "$ref": "./examples/OpenShiftClusters_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftClusters": {
+      "get": {
+        "operationId": "OpenShiftClusters_ListByResourceGroup",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Lists OpenShift clusters in the specified subscription and resource group.",
+        "description": "The operation returns properties of each OpenShift cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftClusterList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists OpenShift clusters in the specified subscription and resource group.": {
+            "$ref": "./examples/OpenShiftClusters_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftClusters/{resourceName}": {
+      "get": {
+        "operationId": "OpenShiftClusters_Get",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Gets a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a OpenShift cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a OpenShift cluster with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/OpenShiftClusters_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OpenShiftClusters_CreateOrUpdate",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a OpenShift cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The OpenShift cluster resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenShiftCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OpenShiftCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'OpenShiftCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftCluster"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/OpenShiftClusters_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OpenShiftCluster"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OpenShiftClusters_Update",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "description": "The operation returns properties of a OpenShift cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The OpenShift cluster resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenShiftClusterUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'OpenShiftCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftCluster"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/OpenShiftClusters_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/OpenShiftCluster"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OpenShiftClusters_Delete",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Deletes a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "description": "The operation returns nothing.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a OpenShift cluster with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/OpenShiftClusters_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftClusters/{resourceName}/listAdminCredentials": {
+      "post": {
+        "operationId": "OpenShiftClusters_ListAdminCredentials",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Lists admin kubeconfig of an OpenShift cluster with the specified subscription, resource group and resource name.",
+        "description": "The operation returns the admin kubeconfig.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftClusterAdminKubeconfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists admin kubeconfig of an OpenShift cluster with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/OpenShiftClusters_ListAdminCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/openShiftClusters/{resourceName}/listCredentials": {
+      "post": {
+        "operationId": "OpenShiftClusters_ListCredentials",
+        "tags": [
+          "OpenShiftClusters"
+        ],
+        "summary": "Lists credentials of an OpenShift cluster with the specified subscription, resource group and resource name.",
+        "description": "The operation returns the credentials.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the OpenShift cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OpenShiftClusterCredentials"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists credentials of an OpenShift cluster with the specified subscription, resource group and resource name.": {
+            "$ref": "./examples/OpenShiftClusters_ListCredentials.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "APIServerProfile": {
+      "type": "object",
+      "description": "APIServerProfile represents an API server profile.",
+      "properties": {
+        "visibility": {
+          "$ref": "#/definitions/Visibility",
+          "description": "API server visibility."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL to access the cluster API server.",
+          "readOnly": true
+        },
+        "ip": {
+          "type": "string",
+          "description": "The IP of the cluster API server.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "CloudError represents a cloud error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "An error response from the service."
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "CloudErrorBody represents the body of a cloud error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClusterProfile": {
+      "type": "object",
+      "description": "ClusterProfile represents a cluster profile.",
+      "properties": {
+        "pullSecret": {
+          "type": "string",
+          "description": "The pull secret for the cluster."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain for the cluster."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the cluster."
+        },
+        "resourceGroupId": {
+          "type": "string",
+          "description": "The ID of the cluster resource group."
+        },
+        "fipsValidatedModules": {
+          "$ref": "#/definitions/FipsValidatedModules",
+          "description": "If FIPS validated crypto modules are used"
+        },
+        "oidcIssuer": {
+          "type": "string",
+          "description": "The URL of the managed OIDC issuer in a workload identity cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConsoleProfile": {
+      "type": "object",
+      "description": "ConsoleProfile represents a console profile.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to access the cluster console.",
+          "readOnly": true
+        }
+      }
+    },
+    "Display": {
+      "type": "object",
+      "description": "Display represents the display details of an operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Friendly name of the resource provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource type on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation type: read, write, delete, listKeys/action, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Friendly name of the operation."
+        }
+      }
+    },
+    "EffectiveOutboundIP": {
+      "type": "object",
+      "description": "EffectiveOutboundIP represents an effective outbound IP resource of the cluster public load balancer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified Azure resource id of an IP address resource."
+        }
+      }
+    },
+    "EncryptionAtHost": {
+      "type": "string",
+      "description": "EncryptionAtHost represents encryption at host state",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionAtHost",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          }
+        ]
+      }
+    },
+    "FipsValidatedModules": {
+      "type": "string",
+      "description": "FipsValidatedModules determines if FIPS is used.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "FipsValidatedModules",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          }
+        ]
+      }
+    },
+    "IngressProfile": {
+      "type": "object",
+      "description": "IngressProfile represents an ingress profile.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The ingress profile name."
+        },
+        "visibility": {
+          "$ref": "#/definitions/Visibility",
+          "description": "Ingress visibility."
+        },
+        "ip": {
+          "type": "string",
+          "description": "The IP of the ingress.",
+          "readOnly": true
+        }
+      }
+    },
+    "LoadBalancerProfile": {
+      "type": "object",
+      "description": "LoadBalancerProfile represents the profile of the cluster public load balancer.",
+      "properties": {
+        "managedOutboundIps": {
+          "$ref": "#/definitions/ManagedOutboundIPs",
+          "description": "The desired managed outbound IPs for the cluster public load balancer."
+        },
+        "effectiveOutboundIps": {
+          "type": "array",
+          "description": "The list of effective outbound IP addresses of the public load balancer.",
+          "items": {
+            "$ref": "#/definitions/EffectiveOutboundIP"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ManagedOutboundIPs": {
+      "type": "object",
+      "description": "ManagedOutboundIPs represents the desired managed outbound IPs for the cluster public load balancer.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count represents the desired number of IPv4 outbound IPs created and managed by Azure for the cluster public load balancer.  Allowed values are in the range of 1 - 20.  The default value is 1."
+        }
+      }
+    },
+    "MasterProfile": {
+      "type": "object",
+      "description": "MasterProfile represents a master profile.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The size of the master VMs."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The Azure resource ID of the master subnet."
+        },
+        "encryptionAtHost": {
+          "$ref": "#/definitions/EncryptionAtHost",
+          "description": "Whether master virtual machines are encrypted at host."
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "The resource ID of an associated DiskEncryptionSet, if applicable."
+        }
+      }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "NetworkProfile represents a network profile.",
+      "properties": {
+        "podCidr": {
+          "type": "string",
+          "description": "The CIDR used for OpenShift/Kubernetes Pods."
+        },
+        "serviceCidr": {
+          "type": "string",
+          "description": "The CIDR used for OpenShift/Kubernetes Services."
+        },
+        "outboundType": {
+          "$ref": "#/definitions/OutboundType",
+          "description": "The OutboundType used for egress traffic."
+        },
+        "loadBalancerProfile": {
+          "$ref": "#/definitions/LoadBalancerProfile",
+          "description": "The cluster load balancer profile."
+        },
+        "preconfiguredNSG": {
+          "$ref": "#/definitions/PreconfiguredNSG",
+          "description": "Specifies whether subnets are pre-attached with an NSG"
+        }
+      }
+    },
+    "OpenShiftCluster": {
+      "type": "object",
+      "description": "OpenShiftCluster represents an Azure Red Hat OpenShift cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OpenShiftClusterProperties",
+          "description": "The cluster properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OpenShiftClusterAdminKubeconfig": {
+      "type": "object",
+      "description": "OpenShiftClusterAdminKubeconfig represents an OpenShift cluster's admin kubeconfig.",
+      "properties": {
+        "kubeconfig": {
+          "type": "string",
+          "format": "password",
+          "description": "The base64-encoded kubeconfig file.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OpenShiftClusterCredentials": {
+      "type": "object",
+      "description": "OpenShiftClusterCredentials represents an OpenShift cluster's credentials.",
+      "properties": {
+        "kubeadminUsername": {
+          "type": "string",
+          "description": "The username for the kubeadmin user."
+        },
+        "kubeadminPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The password for the kubeadmin user.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OpenShiftClusterList": {
+      "type": "object",
+      "description": "OpenShiftClusterList represents a list of OpenShift clusters.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OpenShiftCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/OpenShiftCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OpenShiftClusterProperties": {
+      "type": "object",
+      "description": "OpenShiftClusterProperties represents an OpenShift cluster's properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The cluster provisioning state."
+        },
+        "clusterProfile": {
+          "$ref": "#/definitions/ClusterProfile",
+          "description": "The cluster profile."
+        },
+        "consoleProfile": {
+          "$ref": "#/definitions/ConsoleProfile",
+          "description": "The console profile."
+        },
+        "servicePrincipalProfile": {
+          "$ref": "#/definitions/ServicePrincipalProfile",
+          "description": "The cluster service principal profile."
+        },
+        "platformWorkloadIdentityProfile": {
+          "$ref": "#/definitions/PlatformWorkloadIdentityProfile",
+          "description": "The workload identity profile."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "The cluster network profile."
+        },
+        "masterProfile": {
+          "$ref": "#/definitions/MasterProfile",
+          "description": "The cluster master profile."
+        },
+        "workerProfiles": {
+          "type": "array",
+          "description": "The cluster worker profiles.",
+          "items": {
+            "$ref": "#/definitions/WorkerProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "workerProfilesStatus": {
+          "type": "array",
+          "description": "The cluster worker profiles status.",
+          "items": {
+            "$ref": "#/definitions/WorkerProfile"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "apiserverProfile": {
+          "$ref": "#/definitions/APIServerProfile",
+          "description": "The cluster API server profile."
+        },
+        "ingressProfiles": {
+          "type": "array",
+          "description": "The cluster ingress profiles.",
+          "items": {
+            "$ref": "#/definitions/IngressProfile"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OpenShiftClusterUpdate": {
+      "type": "object",
+      "description": "OpenShiftCluster represents an Azure Red Hat OpenShift cluster.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OpenShiftClusterProperties",
+          "description": "The cluster properties.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Identity stores information about the cluster MSI(s) in a workload identity cluster."
+        }
+      }
+    },
+    "OpenShiftVersion": {
+      "type": "object",
+      "description": "OpenShiftVersion represents an OpenShift version that can be installed.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OpenShiftVersionProperties",
+          "description": "The properties for the OpenShiftVersion resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OpenShiftVersionList": {
+      "type": "object",
+      "description": "OpenShiftVersionList represents a List of available versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OpenShiftVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/OpenShiftVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OpenShiftVersionProperties": {
+      "type": "object",
+      "description": "OpenShiftVersionProperties represents the properties of an OpenShiftVersion.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version represents the version to create the cluster at."
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Operation represents an RP operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "The object that describes the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Sources of requests to this operation.  Comma separated list with valid values user or system, e.g. \"user,system\"."
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "OperationList represents an RP operation list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OutboundType": {
+      "type": "string",
+      "description": "The outbound routing strategy used to provide your cluster egress to the internet.",
+      "enum": [
+        "Loadbalancer",
+        "UserDefinedRouting"
+      ],
+      "x-ms-enum": {
+        "name": "OutboundType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Loadbalancer",
+            "value": "Loadbalancer",
+            "description": "Loadbalancer"
+          },
+          {
+            "name": "UserDefinedRouting",
+            "value": "UserDefinedRouting",
+            "description": "UserDefinedRouting"
+          }
+        ]
+      }
+    },
+    "PlatformWorkloadIdentity": {
+      "type": "object",
+      "description": "PlatformWorkloadIdentity stores information representing a single workload identity.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource ID of the PlatformWorkloadIdentity resource"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The ClientID of the PlatformWorkloadIdentity resource",
+          "readOnly": true
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The ObjectID of the PlatformWorkloadIdentity resource",
+          "readOnly": true
+        }
+      }
+    },
+    "PlatformWorkloadIdentityProfile": {
+      "type": "object",
+      "description": "PlatformWorkloadIdentityProfile encapsulates all information that is specific to workload identity clusters.",
+      "properties": {
+        "upgradeableTo": {
+          "type": "string",
+          "description": "UpgradeableTo stores a single OpenShift version a workload identity cluster can be upgraded to"
+        },
+        "platformWorkloadIdentities": {
+          "type": "object",
+          "description": "Dictionary of <PlatformWorkloadIdentity>",
+          "additionalProperties": {
+            "$ref": "#/definitions/PlatformWorkloadIdentity"
+          }
+        }
+      }
+    },
+    "PlatformWorkloadIdentityRole": {
+      "type": "object",
+      "description": "PlatformWorkloadIdentityRole represents a mapping from a particular OCP operator to the built-in role that should be assigned to that operator's corresponding managed identity.",
+      "properties": {
+        "operatorName": {
+          "type": "string",
+          "description": "OperatorName represents the name of the operator that this role is for."
+        },
+        "roleDefinitionName": {
+          "type": "string",
+          "description": "RoleDefinitionName represents the name of the role."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "RoleDefinitionID represents the resource ID of the role definition."
+        }
+      }
+    },
+    "PlatformWorkloadIdentityRoleSet": {
+      "type": "object",
+      "description": "PlatformWorkloadIdentityRoleSet represents a mapping from the names of OCP operators to the built-in roles that should be assigned to those operator's corresponding managed identities for a particular OCP version.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlatformWorkloadIdentityRoleSetProperties",
+          "description": "The properties for the PlatformWorkloadIdentityRoleSet resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PlatformWorkloadIdentityRoleSetList": {
+      "type": "object",
+      "description": "PlatformWorkloadIdentityRoleSetList represents a List of role sets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PlatformWorkloadIdentityRoleSet items on this page",
+          "items": {
+            "$ref": "#/definitions/PlatformWorkloadIdentityRoleSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PlatformWorkloadIdentityRoleSetProperties": {
+      "type": "object",
+      "description": "PlatformWorkloadIdentityRoleSetProperties represents the properties of a PlatformWorkloadIdentityRoleSet resource.",
+      "properties": {
+        "openShiftVersion": {
+          "type": "string",
+          "description": "OpenShiftVersion represents the version associated with this set of roles."
+        },
+        "platformWorkloadIdentityRoles": {
+          "type": "array",
+          "description": "PlatformWorkloadIdentityRoles represents the set of roles associated with this version.",
+          "items": {
+            "$ref": "#/definitions/PlatformWorkloadIdentityRole"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PreconfiguredNSG": {
+      "type": "string",
+      "description": "PreconfiguredNSG represents whether customers want to use their own NSG attached to the subnets",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "PreconfiguredNSG",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "ProvisioningState represents a provisioning state.",
+      "enum": [
+        "AdminUpdating",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AdminUpdating",
+            "value": "AdminUpdating",
+            "description": "AdminUpdating"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          }
+        ]
+      }
+    },
+    "ServicePrincipalProfile": {
+      "type": "object",
+      "description": "ServicePrincipalProfile represents a service principal profile.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client ID used for the cluster."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "The client secret used for the cluster."
+        }
+      }
+    },
+    "Visibility": {
+      "type": "string",
+      "description": "Visibility represents visibility.",
+      "enum": [
+        "Private",
+        "Public"
+      ],
+      "x-ms-enum": {
+        "name": "Visibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Private",
+            "value": "Private",
+            "description": "Private"
+          },
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "Public"
+          }
+        ]
+      }
+    },
+    "WorkerProfile": {
+      "type": "object",
+      "description": "WorkerProfile represents a worker profile.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The worker profile name."
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The size of the worker VMs."
+        },
+        "diskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The disk size of the worker VMs."
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The Azure resource ID of the worker subnet."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of worker VMs."
+        },
+        "encryptionAtHost": {
+          "$ref": "#/definitions/EncryptionAtHost",
+          "description": "Whether master virtual machines are encrypted at host."
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "The resource ID of an associated DiskEncryptionSet, if applicable."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -9,15 +9,8 @@ options:
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/edgeorder.json"
-    azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.EdgeOrder"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-edgeorder"
     namespace: "azure.mgmt.edgeorder"
@@ -45,6 +38,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    # use-legacy-resource-detection: false
+    namespace: "Azure.ResourceManager.EdgeOrder"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -1,0 +1,539 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "version": "2015-05-01",
+    "description": "Azure Application Insights client for saved items.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}": {
+      "get": {
+        "operationId": "AnalyticsItems_List",
+        "description": "Gets a list of Analytics Items defined within an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scopePath",
+            "in": "path",
+            "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "analyticsItems",
+              "myanalyticsItems"
+            ],
+            "x-ms-enum": {
+              "name": "ItemScopePath",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "analyticsItems",
+                  "value": "analyticsItems",
+                  "description": "analyticsItems"
+                },
+                {
+                  "name": "myanalyticsItems",
+                  "value": "myanalyticsItems",
+                  "description": "myanalyticsItems"
+                }
+              ]
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+            "required": false,
+            "type": "string",
+            "default": "shared",
+            "enum": [
+              "shared",
+              "user"
+            ],
+            "x-ms-enum": {
+              "name": "ItemScope",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "shared",
+                  "value": "shared",
+                  "description": "shared"
+                },
+                {
+                  "name": "user",
+                  "value": "user",
+                  "description": "user"
+                }
+              ]
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Enum indicating the type of the Analytics item.",
+            "required": false,
+            "type": "string",
+            "default": "none",
+            "enum": [
+              "none",
+              "query",
+              "function",
+              "folder",
+              "recent"
+            ],
+            "x-ms-enum": {
+              "name": "ItemTypeParameter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "none",
+                  "value": "none",
+                  "description": "none"
+                },
+                {
+                  "name": "query",
+                  "value": "query",
+                  "description": "query"
+                },
+                {
+                  "name": "function",
+                  "value": "function",
+                  "description": "function"
+                },
+                {
+                  "name": "folder",
+                  "value": "folder",
+                  "description": "folder"
+                },
+                {
+                  "name": "recent",
+                  "value": "recent",
+                  "description": "recent"
+                }
+              ]
+            }
+          },
+          {
+            "name": "includeContent",
+            "in": "query",
+            "description": "Flag indicating whether or not to return the content of each applicable item. If false, only return the item information.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItem"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsItemList": {
+            "$ref": "./examples/AnalyticsItemList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}/item": {
+      "get": {
+        "operationId": "AnalyticsItems_Get",
+        "description": "Gets a specific Analytics Items defined within an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scopePath",
+            "in": "path",
+            "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "analyticsItems",
+              "myanalyticsItems"
+            ],
+            "x-ms-enum": {
+              "name": "ItemScopePath",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "analyticsItems",
+                  "value": "analyticsItems",
+                  "description": "analyticsItems"
+                },
+                {
+                  "name": "myanalyticsItems",
+                  "value": "myanalyticsItems",
+                  "description": "myanalyticsItems"
+                }
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The Id of a specific item defined in the Application Insights component",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The name of a specific item defined in the Application Insights component",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItem"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsItemGet": {
+            "$ref": "./examples/AnalyticsItemGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AnalyticsItems_Put",
+        "description": "Adds or Updates a specific Analytics Item within an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scopePath",
+            "in": "path",
+            "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "analyticsItems",
+              "myanalyticsItems"
+            ],
+            "x-ms-enum": {
+              "name": "ItemScopePath",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "analyticsItems",
+                  "value": "analyticsItems",
+                  "description": "analyticsItems"
+                },
+                {
+                  "name": "myanalyticsItems",
+                  "value": "myanalyticsItems",
+                  "description": "myanalyticsItems"
+                }
+              ]
+            }
+          },
+          {
+            "name": "overrideItem",
+            "in": "query",
+            "description": "Flag indicating whether or not to force save an item. This allows overriding an item if it already exists.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "itemProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to create a new item and add it to an Application Insights component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItem"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsItemPut": {
+            "$ref": "./examples/AnalyticsItemPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AnalyticsItems_Delete",
+        "description": "Deletes a specific Analytics Items defined within an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scopePath",
+            "in": "path",
+            "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "analyticsItems",
+              "myanalyticsItems"
+            ],
+            "x-ms-enum": {
+              "name": "ItemScopePath",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "analyticsItems",
+                  "value": "analyticsItems",
+                  "description": "analyticsItems"
+                },
+                {
+                  "name": "myanalyticsItems",
+                  "value": "myanalyticsItems",
+                  "description": "myanalyticsItems"
+                }
+              ]
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The Id of a specific item defined in the Application Insights component",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The name of a specific item defined in the Application Insights component",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsItemDelete": {
+            "$ref": "./examples/AnalyticsItemDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsComponentAnalyticsItem": {
+      "type": "object",
+      "description": "Properties that define an Analytics item that is associated to an Application Insights component.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Internally assigned unique id of the item definition."
+        },
+        "Name": {
+          "type": "string",
+          "description": "The user-defined name of the item."
+        },
+        "Content": {
+          "type": "string",
+          "description": "The content of this item"
+        },
+        "Version": {
+          "type": "string",
+          "description": "This instance's version of the data model. This can change as new features are added.",
+          "readOnly": true
+        },
+        "Scope": {
+          "$ref": "#/definitions/ItemScope",
+          "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component."
+        },
+        "Type": {
+          "$ref": "#/definitions/ItemType",
+          "description": "Enum indicating the type of the Analytics item."
+        },
+        "TimeCreated": {
+          "type": "string",
+          "description": "Date and time in UTC when this item was created.",
+          "readOnly": true
+        },
+        "TimeModified": {
+          "type": "string",
+          "description": "Date and time in UTC of the last modification that was made to this item.",
+          "readOnly": true
+        },
+        "Properties": {
+          "$ref": "#/definitions/ApplicationInsightsComponentAnalyticsItemProperties",
+          "description": "A set of properties that can be defined in the context of a specific item type. Each type may have its own properties."
+        }
+      }
+    },
+    "ApplicationInsightsComponentAnalyticsItemProperties": {
+      "type": "object",
+      "description": "A set of properties that can be defined in the context of a specific item type. Each type may have its own properties.",
+      "properties": {
+        "functionAlias": {
+          "type": "string",
+          "description": "A function alias, used when the type of the item is Function"
+        }
+      }
+    },
+    "ItemScope": {
+      "type": "string",
+      "description": "Enum indicating if this item definition is owned by a specific user or is shared between all users with access to the Application Insights component.",
+      "enum": [
+        "shared",
+        "user"
+      ],
+      "x-ms-enum": {
+        "name": "ItemScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "shared",
+            "value": "shared",
+            "description": "shared"
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "user"
+          }
+        ]
+      }
+    },
+    "ItemType": {
+      "type": "string",
+      "description": "Enum indicating the type of the Analytics item.",
+      "enum": [
+        "none",
+        "query",
+        "recent",
+        "function"
+      ],
+      "x-ms-enum": {
+        "name": "ItemType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "none"
+          },
+          {
+            "name": "query",
+            "value": "query",
+            "description": "query"
+          },
+          {
+            "name": "recent",
+            "value": "recent",
+            "description": "recent"
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "function"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

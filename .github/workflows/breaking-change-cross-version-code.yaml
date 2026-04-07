@@ -26,6 +26,10 @@ jobs:
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
+        with:
+          # openapi-diff-runner must use Node <= 22, since url.parse() is deprecated in Node 24
+          # https://github.com/Azure/azure-rest-api-specs/issues/40552
+          node-version: "22.x"
 
       - name: Setup .NET 6 SDK
         uses: actions/setup-dotnet@v5
@@ -69,7 +73,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.breaking-change-cross-version-analyze-code.outputs.summary }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: job-summary
           path: ${{ steps.breaking-change-cross-version-analyze-code.outputs.summary }}

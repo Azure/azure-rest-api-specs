@@ -16,7 +16,7 @@ jobs:
       github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
       contains(github.event.check_run.name, 'SDK Validation')
     name: SDK Breaking Change Labels
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@v6
         with:
@@ -26,9 +26,9 @@ jobs:
       # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
       - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Azure Login with Workload Identity Federation
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
-          client-id: "936c56f0-298b-467f-b702-3ad5bf4b15c1"
+          client-id: "205398f1-715f-40a7-8d52-856097f28281"
           tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
           allow-no-subscriptions: true
 

@@ -85,6 +85,7 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "java");
 @@clientName(EndpointResources, "Endpoints", "java");
+@@clientName(AADProfileProperties, "AadProfileProperties", "java");
 
 @@clientName(Microsoft.HybridConnectivity,
   "HybridConnectivityManagementAPI",
@@ -112,10 +113,20 @@ namespace Microsoft.HybridConnectivity;
   "csharp"
 );
 @@clientName(HostType, "PublicCloudHostType", "csharp");
+@@clientName(GenerateAwsTemplateRequest,
+  "GenerateAwsTemplateContent",
+  "csharp"
+);
 @@alternateType(GenerateAwsTemplateRequest.connectorId,
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(ListCredentialsRequest, "ListCredentialsContent", "csharp");
+@@clientName(ListIngressGatewayCredentialsRequest,
+  "ListIngressGatewayCredentialsContent",
+  "csharp"
+);
+@@clientName(ManagedProxyRequest, "ManagedProxyContent", "csharp");
 @@clientName(HostType.AWS, "Aws", "csharp");
 @@clientName(InventoryProperties, "PublicCloudInventoryProperties", "csharp");
 @@alternateType(InventoryProperties.azureResourceId,
@@ -164,5 +175,11 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(GenerateAwsTemplateResponse,
   "GenerateAwsTemplateResult",
+  "csharp"
+);
+
+@@clientName(GenerateAwsTemplate.post, "PostGenerateAwsTemplate", "csharp");
+@@clientName(TrackedResourceUpdate,
+  "HybridConnectivityTrackedResourcePatch",
   "csharp"
 );

@@ -1,0 +1,454 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Groups RP APIs",
+    "version": "2024-02-01-preview",
+    "description": "The Groups RP provides Service Groups as a construct to group multiple resources, resource groups, subscriptions and other service groups into an organizational hierarchy and centrally manage access control, policies, alerting and reporting for those resources",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ServiceGroups"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}": {
+      "get": {
+        "operationId": "ServiceGroups_Get",
+        "tags": [
+          "ServiceGroups"
+        ],
+        "description": "Get the details of the serviceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "ServiceGroup Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrUpdateServiceGroup",
+        "tags": [
+          "ServiceGroups"
+        ],
+        "description": "Create or Update a serviceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "ServiceGroup Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          },
+          {
+            "name": "createServiceGroupRequest",
+            "in": "body",
+            "description": "ServiceGroup creation parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServiceGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServiceGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Put.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ServiceGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UpdateServiceGroup",
+        "tags": [
+          "ServiceGroups"
+        ],
+        "description": "Update a serviceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "ServiceGroup Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          },
+          {
+            "name": "updateServiceGroupRequest",
+            "in": "body",
+            "description": "ServiceGroup update parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServiceGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DeleteServiceGroup",
+        "tags": [
+          "ServiceGroups"
+        ],
+        "description": "Delete a ServiceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "ServiceGroup Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteServiceGroup": {
+            "$ref": "./examples/ServiceGroup_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/listAncestors": {
+      "post": {
+        "operationId": "ServiceGroups_ListAncestors",
+        "tags": [
+          "ServiceGroups"
+        ],
+        "description": "Get the details of the serviceGroup's ancestors",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "ServiceGroup Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupCollectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListServiceGroupAncestors": {
+            "$ref": "./examples/ServiceGroup_ListAncestors.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ParentServiceGroupProperties": {
+      "type": "object",
+      "description": "The details of the parent serviceGroup.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified ID of the parent serviceGroup.  For example, '/providers/Microsoft.Management/serviceGroups/TestServiceGroup'",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Management/serviceGroups"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the serviceGroup. For example, Running",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          }
+        ]
+      }
+    },
+    "ServiceGroup": {
+      "type": "object",
+      "description": "The serviceGroup details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceGroupProperties",
+          "description": "ServiceGroup creation request body parameters."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of the serviceGroup.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "The serviceGroup tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServiceGroupCollectionResponse": {
+      "type": "object",
+      "description": "Response holding an array of service groups and a nextLink that supports pagination",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServiceGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceGroupProperties": {
+      "type": "object",
+      "description": "ServiceGroup creation request body parameters.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the serviceGroup. For example, Running",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the serviceGroup. For example, ServiceGroupTest1"
+        },
+        "parent": {
+          "$ref": "#/definitions/ParentServiceGroupProperties",
+          "description": "The details of the parent serviceGroup."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

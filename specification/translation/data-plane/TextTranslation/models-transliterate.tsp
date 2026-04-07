@@ -36,7 +36,7 @@ model TransliterateParameters {
   toScript: string;
 }
 
-@doc("Request body for the transliterate API.")
+@doc("Request data for transliterate.")
 @added(APIVersion.v2025_10_01_preview)
 model TransliterateBody {
   @doc("Array of the input text elements to transliterate.")
@@ -60,6 +60,7 @@ model TransliterateResult {
   ...CommonResultHeaders;
 
   @doc("Array of transliterated texts")
+  @visibility(Lifecycle.Read)
   value: TransliteratedText[];
 }
 

@@ -28,7 +28,7 @@ union CreatedByType {
 }
 
 /**
- * The minimum TLS version for the cluster to support, e.g. '1.2'
+ * The minimum TLS version for the cluster to support, e.g. '1.3'
  */
 union TlsVersion {
   string,
@@ -38,6 +38,8 @@ union TlsVersion {
   `1.1`: "1.1",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `1.2`: "1.2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `1.3`: "1.3",
 }
 
 /**
@@ -1233,8 +1235,7 @@ model ArmDisasterRecoveryProperties {
 /**
  * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
  */
-#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailOverProperties, see if they can be combined"
-model FailoverProperties {
+model NamespaceFailoverProperties {
   /**
    * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
    */

@@ -1,23 +1,19 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "location": "location1",
-    "mode": "istio"
+    "mode": "istio",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/location1/meshRevisionProfiles/istio",
-        "type": "Microsoft.ContainerService/locations/meshRevisionProfiles",
         "name": "istio",
+        "type": "Microsoft.ContainerService/locations/meshRevisionProfiles",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/location1/meshRevisionProfiles/istio",
         "properties": {
           "meshRevisions": [
             {
-              "revision": "asm-1-17",
-              "upgrades": [
-                "1-18"
-              ],
               "compatibleWith": [
                 {
                   "name": "kubernetes",
@@ -28,11 +24,13 @@
                     "1.26"
                   ]
                 }
+              ],
+              "revision": "asm-1-17",
+              "upgrades": [
+                "1-18"
               ]
             },
             {
-              "revision": "asm-1-18",
-              "upgrades": [],
               "compatibleWith": [
                 {
                   "name": "kubernetes",
@@ -43,11 +41,15 @@
                     "1.27"
                   ]
                 }
-              ]
+              ],
+              "revision": "asm-1-18",
+              "upgrades": []
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "ManagedClusters_GetMeshRevisionProfile",
+  "title": "Get a mesh revision profile for a mesh mode"
 }

@@ -144,7 +144,16 @@ interface ScheduledActions {
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** VirtualMachinesExecuteCreateFlex: Execute create operation for a batch of virtual machines with flex properties, this operation is triggered as soon as Computeschedule receives it. */
+  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+  virtualMachinesExecuteCreateFlex is ArmProviderActionSync<
+    Request = ExecuteCreateFlexRequest,
+    Response = ArmResponse<CreateFlexResourceOperationResponse>,
+    Scope = Extension.Subscription,
+    Parameters = LocationParameter
+  >;
+
+  /** [PRIVATE PREVIEW]: VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   virtualMachinesExecuteCreate is ArmProviderActionSync<
     Request = ExecuteCreateRequest,
@@ -153,7 +162,7 @@ interface ScheduledActions {
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** [PRIVATE PREVIEW]: VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   virtualMachinesExecuteDelete is ArmProviderActionSync<
     Request = ExecuteDeleteRequest,

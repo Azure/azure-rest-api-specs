@@ -6,18 +6,12 @@ emit:
 output-dir: "{project-root}"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "./resource-manager"
     emit-common-types-schema: "never"
     emitter-output-dir: "{output-dir}"
     output-file: "{version-status}/{version}/nodecustomization.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     use-read-only-status-schema: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.ContainerServiceNodeCustomization"
   "@azure-tools/typespec-java":
     namespace: "com.azure.resourcemanager.containerservice.nodecustom"
     package-dir: "azure-resourcemanager-containerservice-nodecustom"

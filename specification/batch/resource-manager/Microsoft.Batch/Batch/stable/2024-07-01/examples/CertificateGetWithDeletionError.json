@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "certificateName": "sha1-0a0e4f50d51beadeac1d35afc5116098e7902e6e",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sha1-0a0e4f50d51beadeac1d35afc5116098e7902e6e",
+        "type": "Microsoft.Batch/batchAccounts/certificates",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/samplecct/certificates/sha1-0a0e4f50d51beadeac1d35afc5116098e7902e6e",
+        "properties": {
+          "format": "Pfx",
+          "deleteCertificateError": {
+            "code": "NodesReferencingCertificate",
+            "message": "The specified certificate is being used by the below mentioned node(s)\nRequestId:2dc78afc-b15b-42d2-8c85-39cb61a0799e\nTime:2017-08-28T10:22:52.8633406Z",
+            "target": "BatchAccount",
+            "details": [
+              {
+                "code": "Nodes",
+                "message": "node1, node3"
+              }
+            ]
+          },
+          "previousProvisioningState": "Deleting",
+          "previousProvisioningStateTransitionTime": "2017-07-21T00:15:25.5625498Z",
+          "provisioningState": "Failed",
+          "provisioningStateTransitionTime": "2017-07-21T01:47:38.4420202Z",
+          "publicData": "MIICrjCCAZagAwI...",
+          "thumbprint": "0a0e4f50d51beadeac1d35afc5116098e7902e6e",
+          "thumbprintAlgorithm": "sha1"
+        }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDD5118668F7\""
+      }
+    }
+  },
+  "operationId": "Certificate_Get",
+  "title": "Get Certificate with Deletion Error"
+}

@@ -3,7 +3,10 @@
 
 import "@typespec/http";
 import "@typespec/versioning";
-import "./routes.tsp";
+import "./typespec/routes.tsp";
+import "./typespec/accesstokens.tsp";
+import "./typespec/testruns.tsp";
+import "./typespec/browsersessions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -16,7 +19,7 @@ using TypeSpec.Versioning;
       Playwright Service API endpoint (protocol and hostname) formatted as https://{region}.api.playwright.microsoft.com.
       The region corresponds to your Azure Playwright workspace location. You can find this value in your Azure Playwright workspace properties under `dataplaneUri`.
       """)
-    endpoint: string,
+    endpoint: url,
   }
 )
 @useAuth(
@@ -51,4 +54,10 @@ enum Versions {
 
   @doc("Stable version 2025-09-01 with general availability features.")
   v2025_09_01: "2025-09-01",
+
+  @doc("Preview version 2026-01-01-preview with experimental features.")
+  v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("Preview version 2026-04-01-preview with experimental features.")
+  v2026_04_01_preview: "2026-04-01-preview",
 }
