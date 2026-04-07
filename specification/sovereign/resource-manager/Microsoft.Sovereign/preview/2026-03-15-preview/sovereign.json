@@ -2114,15 +2114,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SovereignViewComplianceSummaryRequest"
-            }
           }
         ],
         "responses": {
@@ -3632,18 +3623,6 @@
             "allowedResources": []
           }
         },
-        "subscription": {
-          "type": "string",
-          "description": "The subscription id of the resource."
-        },
-        "resourceGroup": {
-          "type": "string",
-          "description": "The resource group name of the resource."
-        },
-        "resourceName": {
-          "type": "string",
-          "description": "The name of the resource."
-        },
         "location": {
           "type": "string",
           "description": "The location of the resource."
@@ -3661,9 +3640,6 @@
       },
       "required": [
         "resourceId",
-        "subscription",
-        "resourceGroup",
-        "resourceName",
         "location",
         "complianceDetails"
       ]
@@ -3679,7 +3655,7 @@
         },
         "skipToken": {
           "type": "string",
-          "description": "The skip token for pagination."
+          "description": "The continuation token returned by the service for the next page."
         }
       },
       "required": [
@@ -3692,7 +3668,7 @@
       "properties": {
         "nextToken": {
           "type": "string",
-          "description": "The skip token for pagination."
+          "description": "The continuation token returned by the service for the next page."
         },
         "lastEvaluated": {
           "type": "string",
@@ -3721,7 +3697,15 @@
       "properties": {
         "policyInitiativeId": {
           "type": "string",
-          "description": "The name of the policy initiative associated with this dimension."
+          "format": "arm-id",
+          "description": "The fully qualified id of the policy initiative.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Authorization/policySetDefinitions"
+              }
+            ]
+          }
         },
         "totalResources": {
           "type": "integer",
@@ -3737,13 +3721,19 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of non-compliant resources for the sovereign view."
+        },
+        "othersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of resources in other compliance states for the sovereign view."
         }
       },
       "required": [
         "policyInitiativeId",
         "totalResources",
         "compliantCount",
-        "nonCompliantCount"
+        "nonCompliantCount",
+        "othersCount"
       ]
     },
     "SovereignViewComplianceOverallSummary": {
@@ -3779,6 +3769,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of non-compliant resources for the sovereign view."
+        },
+        "othersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of resources in other compliance states for the sovereign view."
         }
       },
       "required": [
@@ -3787,20 +3782,8 @@
         "totalResourceGroups",
         "totalResources",
         "compliantCount",
-        "nonCompliantCount"
-      ]
-    },
-    "SovereignViewComplianceSummaryRequest": {
-      "type": "object",
-      "description": "The request for the sovereign view compliance summary action.",
-      "properties": {
-        "dimension": {
-          "type": "string",
-          "description": "The dimension to summarize compliance for."
-        }
-      },
-      "required": [
-        "dimension"
+        "nonCompliantCount",
+        "othersCount"
       ]
     },
     "SovereignViewComplianceSummaryResponse": {
@@ -3844,39 +3827,6 @@
         "lastEvaluated",
         "overallSummary",
         "dimensionSummaries"
-      ]
-    },
-    "SovereignViewConfigureScope": {
-      "type": "object",
-      "description": "The scope for the sovereign view configure action.",
-      "properties": {
-        "managementGroups": {
-          "type": "array",
-          "description": "The resource identifiers of the management groups in scope.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Management/managementGroups"
-                }
-              ]
-            }
-          }
-        },
-        "subscriptions": {
-          "type": "array",
-          "description": "The subscription ids in scope.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "managementGroups",
-        "subscriptions"
       ]
     },
     "SovereignViewPolicyInitiativeDetail": {
@@ -3958,19 +3908,8 @@
       "type": "object",
       "description": "The properties of the sovereign view resource type.",
       "properties": {
-        "enabledDimensions": {
-          "type": "array",
-          "description": "The dimensions enabled for the sovereign view.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "scope": {
-          "$ref": "#/definitions/SovereignViewConfigureScope",
+          "$ref": "#/definitions/SovereignViewScope",
           "description": "The scope to apply for configuration.",
           "x-ms-mutability": [
             "read",
@@ -3998,7 +3937,6 @@
         }
       },
       "required": [
-        "enabledDimensions",
         "scope",
         "policyInitiatives"
       ]
@@ -4015,6 +3953,39 @@
           }
         }
       }
+    },
+    "SovereignViewScope": {
+      "type": "object",
+      "description": "The scope for the sovereign view in terms of the resources it would evaluate.",
+      "properties": {
+        "managementGroups": {
+          "type": "array",
+          "description": "The resource identifiers of the management groups in scope.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Management/managementGroups"
+                }
+              ]
+            }
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "The subscription ids in scope.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "managementGroups",
+        "subscriptions"
+      ]
     },
     "Tags": {
       "type": "object",

@@ -178,7 +178,7 @@ interface SovereignViewOperations {
   @armResourceAction(SovereignViewResource)
   complianceSummary is ArmResourceActionSync<
     SovereignViewResource,
-    SovereignViewComplianceSummaryRequest,
+    void,
     SovereignViewComplianceSummaryResponse
   >;
 

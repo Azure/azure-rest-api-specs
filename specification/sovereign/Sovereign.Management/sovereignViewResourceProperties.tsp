@@ -7,13 +7,9 @@ namespace Microsoft.Sovereign;
 @added(Versions.Preview20260315)
 @doc("The properties of the sovereign view resource type.")
 model SovereignViewResourceProperties {
-  @doc("The dimensions enabled for the sovereign view.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  enabledDimensions: string[];
-
   @doc("The scope to apply for configuration.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  scope: SovereignViewConfigureScope;
+  scope: SovereignViewScope;
 
   @doc("The policy initiatives selected for the sovereign view.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -26,8 +22,8 @@ model SovereignViewResourceProperties {
 }
 
 @added(Versions.Preview20260315)
-@doc("The scope for the sovereign view configure action.")
-model SovereignViewConfigureScope {
+@doc("The scope for the sovereign view in terms of the resources it would evaluate.")
+model SovereignViewScope {
   @doc("The resource identifiers of the management groups in scope.")
   managementGroups: armResourceIdentifier<[
     {
@@ -59,13 +55,6 @@ model SovereignViewPolicyInitiativeDetail {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters vary based on the selected policy initiatives."
   @doc("The parameters for the assignment of policy initiatives.")
   assignmentParameters: Record<unknown>;
-}
-
-@added(Versions.Preview20260315)
-@doc("The request for the sovereign view compliance summary action.")
-model SovereignViewComplianceSummaryRequest {
-  @doc("The dimension to summarize compliance for.")
-  dimension: string;
 }
 
 @added(Versions.Preview20260315)
@@ -109,13 +98,20 @@ model SovereignViewComplianceOverallSummary {
 
   @doc("Number of non-compliant resources for the sovereign view.")
   nonCompliantCount: int32;
+
+  @doc("Number of resources in other compliance states for the sovereign view.")
+  othersCount: int32;
 }
 
 @added(Versions.Preview20260315)
 @doc("The compliance summary for a specific dimension (policy initiative) in the sovereign view compliance summary action.")
-model SovereignViewComplianceDimensionSummary {
-  @doc("The name of the policy initiative associated with this dimension.")
-  policyInitiativeId: string;
+model SovereignViewComplianceDimensionSummary { // Consider renaming this to SovereignViewCompliancePolicyInitiativeSummary
+  @doc("The fully qualified id of the policy initiative.")
+  policyInitiativeId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Authorization/policySetDefinitions";
+    }
+  ]>;
 
   @doc("Total number of resources for the sovereign view.")
   totalResources: int32;
@@ -125,6 +121,9 @@ model SovereignViewComplianceDimensionSummary {
 
   @doc("Number of non-compliant resources for the sovereign view.")
   nonCompliantCount: int32;
+
+  @doc("Number of resources in other compliance states for the sovereign view.")
+  othersCount: int32;
 }
 
 @added(Versions.Preview20260315)
@@ -134,7 +133,7 @@ model SovereignViewComplianceDetailsRequest {
   top: int32;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pagination tokens are not sensitive in this API."
-  @doc("The skip token for pagination.")
+  @doc("The continuation token returned by the service for the next page.")
   skipToken?: string;
 }
 
@@ -142,7 +141,7 @@ model SovereignViewComplianceDetailsRequest {
 @doc("The response for the sovereign view compliance details action.")
 model SovereignViewComplianceDetailsResponse {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pagination tokens are not sensitive in this API."
-  @doc("The skip token for pagination.")
+  @doc("The continuation token returned by the service for the next page.")
   nextToken?: string;
 
   @doc("The time when compliance was last evaluated, in RFC3339 format.")
@@ -158,15 +157,6 @@ model SovereignViewComplianceDetailsResponse {
 model SovereignViewComplianceDetailResource {
   @doc("The resource identifier.")
   resourceId: armResourceIdentifier<[]>;
-
-  @doc("The subscription id of the resource.")
-  subscription: string;
-
-  @doc("The resource group name of the resource.")
-  resourceGroup: string;
-
-  @doc("The name of the resource.")
-  resourceName: string;
 
   @doc("The location of the resource.")
   location: string;
