@@ -32,6 +32,7 @@ model Commit extends ChildResource {
   @path
   @key("commitName")
   @segment("commits")
+  @pattern("^[a-zA-Z0-9_.-]*$")
   name: string;
 
   /**
@@ -121,7 +122,7 @@ interface Commits {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete returns 202/204 for async deletion, matching the pattern used by other Network Manager child resources (e.g., AdminRuleCollection, NetworkManagerRoutingConfiguration)"
   delete is ArmResourceDeleteWithoutOkAsync<
     Commit,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

@@ -1034,7 +1034,8 @@
             "in": "path",
             "description": "The name of the commit.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           }
         ],
         "responses": {
@@ -1086,7 +1087,8 @@
             "in": "path",
             "description": "The name of the commit.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           },
           {
             "name": "resource",
@@ -1169,13 +1171,11 @@
             "in": "path",
             "description": "The name of the commit.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
