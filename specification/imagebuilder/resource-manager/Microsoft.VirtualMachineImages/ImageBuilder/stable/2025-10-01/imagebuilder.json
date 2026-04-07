@@ -215,7 +215,17 @@
             }
           },
           "202": {
-            "description": "The operation will be completed asynchronously."
+            "description": "The operation will be completed asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to query for the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to query for the result of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
