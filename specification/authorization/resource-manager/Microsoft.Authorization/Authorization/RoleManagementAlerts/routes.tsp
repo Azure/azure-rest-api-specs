@@ -25,10 +25,9 @@ interface AlertsOperationGroup {
   @autoRoute
   @action("roleManagementAlerts/refresh")
   refreshAll is ArmProviderActionAsync<
-    Response = ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: AlertOperationResult;
-    },
+    Response = AlertOperationResult | ArmAcceptedLroResponse<
+      LroHeaders = ArmLroLocationHeader<FinalResult = AlertOperationResult>
+    >,
     Scope = ExtensionActionScope,
     Error = CloudError
   >;
