@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2026-04-01-preview
+tag: package-2026-01-01
 ```
 
 ### Suppression
