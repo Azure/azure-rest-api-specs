@@ -128,14 +128,14 @@ model QueryResponse<T> {
 ```
 
 #### 4. `TwinCollection` Free-form Dictionary
-Changed from `Record<string>` (which emits `additionalProperties: {type:"string"}`) to `Record<unknown>` (which emits `additionalProperties: {}`), matching the original `additionalProperties: {type:"object"}` semantics:
+Changed from `Record<string>` (which emits `additionalProperties: {type:"string"}`) to `Record<{}>` (which emits `additionalProperties: {type:"object"}`), matching the original `additionalProperties: {type:"object"}` semantics exactly:
 
 ```typespec
 model TwinCollection {
   version?: int64;
   count?: int32;
   metadata?: TwinCollectionMetadata;
-  ...Record<unknown>;   // Allows any JSON value as twin property
+  ...Record<{}>;   // Object-valued twin properties — matches original additionalProperties:{type:"object"}
 }
 ```
 
@@ -306,7 +306,7 @@ These headers were missing from the original Swagger but were already sent by th
 
 | Field | Original | New | SDK impact |
 |-------|----------|-----|-----------|
-| `TwinCollection` | `additionalProperties: {type:"object"}` | `additionalProperties: {}` | None — both produce `Dictionary<string, object>` |
+| `TwinCollection` | `additionalProperties: {type:"object"}` | `additionalProperties: {type:"object"}` | None — identical |
 | `payload` (3 fields) | `{type:"object"}` (no additionalProperties) | `{type:"object", additionalProperties:{}}` | None — semantically equivalent |
 
 ### Preview Bug Fix: `registrationState.readOnly`

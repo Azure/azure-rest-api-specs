@@ -160,7 +160,7 @@ interface IndividualEnrollmentOperationGroup {
   @route("/enrollments")
   @post
   runBulkOperation is Azure.Core.Foundations.Operation<
-    BulkEnrollmentOperation,
+    { @bodyRoot bulkOperation: BulkEnrollmentOperation },
     BulkEnrollmentOperationResult,
     {},
     ProvisioningServiceErrorDetails
@@ -306,7 +306,7 @@ interface EnrollmentGroupOperationGroup {
   @route("/enrollmentGroups")
   @post
   runBulkOperation is Azure.Core.Foundations.Operation<
-    BulkEnrollmentGroupOperation,
+    { @bodyRoot bulkOperation: BulkEnrollmentGroupOperation },
     BulkEnrollmentGroupOperationResult,
     {},
     ProvisioningServiceErrorDetails
