@@ -116,8 +116,6 @@ interface ResourceGroups {
   /**
    * Get all the resources for a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Resources_ListByResourceGroup")
   @tag("ResourceGroups")
   @list
   @get
@@ -152,8 +150,8 @@ interface ResourceGroups {
   /**
    * The resources to be moved must be in the same source resource group in the source subscription being used. The target resource group may be in a different subscription. When moving resources, both the source group and the target group are locked for the duration of the operation. Write and delete operations are blocked on the groups until the move completes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Resources_MoveResources")
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @tag("Resources")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "resourceGroupName",
@@ -170,8 +168,8 @@ interface ResourceGroups {
   /**
    * This operation checks whether the specified resources can be moved to the target. The resources to be moved must be in the same source resource group in the source subscription being used. The target resource group may be in a different subscription. If validation succeeds, it returns HTTP response code 204 (no content). If validation fails, it returns HTTP response code 409 (Conflict) with an error message. Retrieve the URL in the Location header value to check the result of the long-running operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Resources_ValidateMoveResources")
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @tag("Resources")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "resourceGroupName",

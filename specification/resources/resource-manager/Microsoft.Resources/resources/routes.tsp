@@ -31,8 +31,6 @@ interface ProvidersOperationGroup {
   /**
    * Unregisters a subscription from a resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Providers_Unregister")
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/unregister")
   @post
@@ -47,8 +45,6 @@ interface ProvidersOperationGroup {
   /**
    * Registers a management group with a resource provider. Use this operation to register a resource provider with resource types that can be deployed at the management group scope. It does not recursively register subscriptions within the management group. Instead, you must register subscriptions individually.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Providers_RegisterAtManagementGroupScope")
   @tag("Providers")
   @route("/providers/Microsoft.Management/managementGroups/{groupId}/providers/{resourceProviderNamespace}/register")
   @post
@@ -60,6 +56,7 @@ interface ProvidersOperationGroup {
     @path
     resourceProviderNamespace: string,
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing parameter from original swagger"
     @path
     @minLength(1)
     @maxLength(90)
@@ -68,8 +65,6 @@ interface ProvidersOperationGroup {
   /**
    * Get the provider permissions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Providers_ProviderPermissions")
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/providerPermissions")
   @get
@@ -84,8 +79,6 @@ interface ProvidersOperationGroup {
   /**
    * Registers a subscription with a resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Providers_Register")
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/register")
   @post
@@ -104,8 +97,7 @@ interface ProvidersOperationGroup {
   /**
    * Gets all resource providers for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Providers_List")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers")
   @list
@@ -125,8 +117,7 @@ interface ProvidersOperationGroup {
   /**
    * Gets the specified resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Providers_Get")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}")
   @get
@@ -151,8 +142,6 @@ interface ProvidersOperationGroup {
   /**
    * Gets the specified resource provider at the tenant level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Providers_GetAtTenantScope")
   @tag("Providers")
   @route("/providers/{resourceProviderNamespace}")
   @get
@@ -178,8 +167,6 @@ interface ProviderResourceTypesOperationGroup {
   /**
    * List the resource types for a specified resource provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProviderResourceTypes_List")
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/resourceTypes")
   @get
@@ -202,8 +189,6 @@ interface ResourcesOperationGroup {
   /**
    * Get all the resources in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Resources_List")
   @tag("Resources")
   @route("/subscriptions/{subscriptionId}/resources")
   @get
@@ -231,10 +216,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows deleting a value from the list of predefined values for an existing predefined tag name. The value being deleted must not be in use as a tag value for the given tag name for any resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   @tag("Tags")
   @summary("Deletes a predefined tag value for a predefined tag name.")
-  @operationId("Tags_DeleteValue")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}/tagValues/{tagValue}")
   @delete
   deleteValue(
@@ -258,10 +242,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   @tag("Tags")
   @summary("Creates a predefined value for a predefined tag name.")
-  @operationId("Tags_CreateOrUpdateValue")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}/tagValues/{tagValue}")
   @put
   createOrUpdateValue(
@@ -285,10 +268,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   @tag("Tags")
   @summary("Creates a predefined tag name.")
-  @operationId("Tags_CreateOrUpdate")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}")
   @put
   createOrUpdate(
@@ -306,10 +288,9 @@ interface TagsOperationGroup {
   /**
    * This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   @tag("Tags")
   @summary("Deletes a predefined tag name.")
-  @operationId("Tags_Delete")
   @route("/subscriptions/{subscriptionId}/tagNames/{tagName}")
   @delete
   delete(
@@ -327,10 +308,9 @@ interface TagsOperationGroup {
   /**
    * This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "non-standard operations"
   @tag("Tags")
   @summary("Gets a summary of tag usage under the subscription.")
-  @operationId("Tags_List")
   @route("/subscriptions/{subscriptionId}/tagNames")
   @get
   @list

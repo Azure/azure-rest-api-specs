@@ -260,6 +260,7 @@ model OperationDisplay {
 /**
  * An error response for a resource management request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @error
 @Legacy.armExternalType
 model CloudError {
@@ -883,6 +884,7 @@ model ResourceGroupExportResult {
   /**
    * The template content. Used if outputFormat is empty or set to 'Json'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   template?: unknown;
 
   /**
@@ -924,6 +926,7 @@ model TagValue {
   /**
    * The tag value.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   tagValue?: string;
 
   /**
@@ -986,6 +989,7 @@ model Tags {
   /**
    * Dictionary of <string>
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }

@@ -14,6 +14,8 @@ namespace Microsoft.Resources;
 /**
  * Resource information.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model GenericResource is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = ResourceGroup,
@@ -25,43 +27,51 @@ model GenericResource is Azure.ResourceManager.ProxyResource<{}> {
   /**
    * The plan of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   plan?: Plan;
 
   /**
    * The kind of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @pattern("^[-\\w\\._,\\(\\)]+$")
   kind?: string;
 
   /**
    * ID of the resource that manages this resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   managedBy?: string;
 
   /**
    * The SKU of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: Sku;
 
   /**
    * The identity of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: Identity;
 
   /**
    * Resource location
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: string;
 
   /**
    * Resource extended location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation?: ExtendedLocation;
 
   /**
    * Resource tags
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
@@ -69,6 +79,7 @@ model GenericResource is Azure.ResourceManager.ProxyResource<{}> {
 alias genericOps = Azure.ResourceManager.Legacy.RoutedOperations<
   ApiVersionParameter,
   {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing parameter from original swagger"
     @path(#{ allowReserved: true }) @key resourceId: string;
   },
   CloudError
@@ -89,6 +100,7 @@ interface Resources {
   /**
    * Create a resource by ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   createOrUpdateById is genericOps.CreateOrUpdateAsync<
     GenericResource,
     Response = ArmResourceUpdatedResponse<GenericResource> | ArmResourceCreatedResponse<
@@ -164,6 +176,7 @@ interface SpecificResources {
   /**
    * Creates a resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @tag("Resources")
   createOrUpdate is specificResourcesOps.CreateOrUpdateAsync<
     GenericResource,
