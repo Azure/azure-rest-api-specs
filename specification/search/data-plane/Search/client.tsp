@@ -298,10 +298,18 @@ namespace SearchIndexerClient {
   }
 }
 
+/** Client initialization options for KnowledgeBaseRetrievalClient. */
+model KnowledgeBaseRetrievalClientOptions {
+  /** The name of the knowledge base. */
+  @paramAlias("knowledgeBaseName")
+  knowledgeBaseName: string;
+}
+
 @client({
   name: "KnowledgeBaseRetrievalClient",
   service: Search,
 })
+@clientInitialization(KnowledgeBaseRetrievalClientOptions)
 @clientNamespace("Azure.Search.Documents.KnowledgeBases")
 @clientNamespace("com.azure.search.documents.knowledgebases", "java")
 namespace KnowledgeBaseRetrievalClient {
@@ -3183,7 +3191,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(Search.SearchServiceCounters, "ServiceCounters", "javascript");
 @@clientName(Search.SearchServiceLimits, "ServiceLimits", "javascript");
 @@clientName(Search.SearchAlias.eTag, "etag", "javascript");
-@@clientName(Search.RankingOrder.RerankerScore, "ReRankerScore", "javascript");
+@@clientName(Search.KnowledgeBase.eTag, "etag", "javascript");
+@@clientName(Search.RankingOrder.RerankerScore, "RerankerScore", "javascript");
 @@clientName(Search.ChatCompletionResponseFormat.jsonSchemaProperties,
   "chatCompletionSchemaProperties",
   "javascript"
