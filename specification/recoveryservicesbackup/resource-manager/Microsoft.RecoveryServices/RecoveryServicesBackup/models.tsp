@@ -8699,16 +8699,19 @@ model CrossTenantVaultMapping {
   /**
    * Tenant ID of the source vault for cross-tenant mapping.
    */
+  @visibility(Lifecycle.Read)
   sourceTenantId?: string;
 
   /**
    * Name of the mapping.
    */
+  @visibility(Lifecycle.Read)
   mappingName?: string;
 
   /**
    * Timestamp when the mapping was created.
    */
+  @visibility(Lifecycle.Read)
   createdTime?: utcDateTime;
 
   /**

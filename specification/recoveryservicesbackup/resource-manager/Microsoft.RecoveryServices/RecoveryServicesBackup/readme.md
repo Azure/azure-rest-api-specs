@@ -568,9 +568,6 @@ directive:
     where: 
      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
-  - suppress: ResourceNameRestriction
-    from: bms.json
-    reason: vaultName parameter is inherited from parent VaultResource with NamePattern="" for backward compatibility across all API versions. Adding a pattern would be a breaking change affecting the entire specification.
   - suppress: AllTrackedResourcesMustHaveDelete
     from: bms.json
     where: $.definitions.ProtectedItemResource
