@@ -14,15 +14,15 @@ namespace Microsoft.Resources;
 /**
  * Resource information.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
-model GenericResource is Azure.ResourceManager.ProxyResource<{}> {
-  ...ResourceNameParameter<
-    Resource = ResourceGroup,
-    KeyName = "resourceName",
-    SegmentName = "resourceNames",
-    NamePattern = ""
-  >;
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model GenericResource extends Foundations.ProxyResource {
+  /**
+   * The resource properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  properties?: unknown;
 
   /**
    * The plan of the resource.
