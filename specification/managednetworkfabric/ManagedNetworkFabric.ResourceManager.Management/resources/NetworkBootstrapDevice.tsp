@@ -24,8 +24,10 @@ model NetworkBootstrapDevice
   @visibility(Lifecycle.Read)
   name: string;
 
+  /** The NetworkBootstrapDevice properties */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The NetworkBootstrapDevice properties")
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: NetworkBootstrapDeviceProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"

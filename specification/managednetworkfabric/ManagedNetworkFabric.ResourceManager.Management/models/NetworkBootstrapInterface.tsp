@@ -59,7 +59,9 @@ model NetworkBootstrapInterfaceProperties extends AnnotationResource {
 
 @doc("The NetworkBootstrapInterfacePatch resource definition.")
 model NetworkBootstrapInterfacePatch {
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Network Bootstrap Interface Patch properties.")
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkBootstrapInterfacePatchProperties;
 }
 
