@@ -777,6 +777,51 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// ----- CSharp mgmt emitter requirement rule -----
+const CSHARP_MGMT_EMITTER = "@azure-typespec/http-client-csharp-mgmt";
+const LEGACY_CSHARP_EMITTER = "@azure-tools/typespec-csharp";
+
+export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleBase {
+  constructor() {
+    super("emit", CSHARP_MGMT_EMITTER);
+  }
+
+  protected skip(_config: any, folder: string): SkipResult {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const emit: string[] | undefined = config?.emit;
+    const options: Record<string, any> | undefined = config?.options;
+
+    const hasNewMgmtEmitter =
+      emit?.includes(CSHARP_MGMT_EMITTER) || options?.[CSHARP_MGMT_EMITTER] !== undefined;
+
+    if (hasNewMgmtEmitter) {
+      return { success: true };
+    }
+
+    const hasLegacyEmitter =
+      emit?.includes(LEGACY_CSHARP_EMITTER) || options?.[LEGACY_CSHARP_EMITTER] !== undefined;
+
+    if (hasLegacyEmitter) {
+      return this.createFailedResult(
+        `Management plane TypeSpec projects must use "${CSHARP_MGMT_EMITTER}" instead of "${LEGACY_CSHARP_EMITTER}" for .NET SDK generation`,
+        `Please replace "${LEGACY_CSHARP_EMITTER}" with "${CSHARP_MGMT_EMITTER}" in your tspconfig.yaml`,
+      );
+    }
+
+    return this.createFailedResult(
+      `Management plane TypeSpec projects must configure "${CSHARP_MGMT_EMITTER}" for .NET SDK generation`,
+      `Please add "${CSHARP_MGMT_EMITTER}" to the "emit" array or "options" in your tspconfig.yaml`,
+    );
+  }
+
+  public getPathOfKeyToValidate(): string {
+    return `emit.${CSHARP_MGMT_EMITTER}`;
+  }
+}
+
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -785,6 +830,7 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
  */
 export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
+  new TspConfigCsharpMgmtEmitterRequiredSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),

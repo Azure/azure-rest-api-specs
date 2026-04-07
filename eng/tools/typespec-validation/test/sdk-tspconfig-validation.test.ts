@@ -13,6 +13,7 @@ import {
   TspConfigCsharpDpEmitterOutputDirSubRule,
   TspConfigCsharpDpNamespaceSubRule,
   TspConfigCsharpMgmtEmitterOutputDirSubRule,
+  TspConfigCsharpMgmtEmitterRequiredSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoDpContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
@@ -612,6 +613,83 @@ const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
 );
 
+// Test cases for CSharp mgmt emitter requirement rule
+const csharpMgmtEmitterRequiredTestCases: Case[] = [
+  {
+    description:
+      "Mgmt emitter required: pass when @azure-typespec/http-client-csharp-mgmt is in emit array",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-typespec/http-client-csharp-mgmt"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+  },
+  {
+    description:
+      "Mgmt emitter required: pass when @azure-typespec/http-client-csharp-mgmt is in options",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Compute"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+  },
+  {
+    description:
+      "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is used instead",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
+`,
+    success: false,
+    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+  },
+  {
+    description:
+      "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in options",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.ResourceManager.Compute"
+`,
+    success: false,
+    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+  },
+  {
+    description: "Mgmt emitter required: fail when no .NET emitter is configured",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+`,
+    success: false,
+    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+  },
+  {
+    description: "Mgmt emitter required: skip for data-plane folder",
+    folder: "contosowidgetmanager/Contoso.WidgetManager/",
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+  },
+];
+
 // Test cases for emitter-output-dir with namespace variable resolution
 const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
   {
@@ -923,6 +1001,8 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpEmitterOutputTestCases,
+    // csharp mgmt emitter requirement
+    ...csharpMgmtEmitterRequiredTestCases,
     // variable resolution in emitter-output-dir
     ...emitterOutputDirWithNamespaceVariableTestCases,
   ];
