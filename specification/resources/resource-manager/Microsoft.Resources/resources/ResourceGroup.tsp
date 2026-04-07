@@ -35,19 +35,20 @@ interface ResourceGroups {
   /**
    * Gets a resource group.
    */
-  get is ArmResourceRead<ResourceGroup, Provider = {}>;
+  get is ArmResourceRead<ResourceGroup, Provider = {}, Error = CloudError>;
 
   /**
    * Checks whether a resource group exists.
    */
-  checkExistence is ArmResourceCheckExistence<ResourceGroup, Provider = {}>;
+  checkExistence is ArmResourceCheckExistence<ResourceGroup, Provider = {}, Error = CloudError>;
 
   /**
    * Creates or updates a resource group.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ResourceGroup,
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 
   /**
@@ -57,7 +58,8 @@ interface ResourceGroups {
   update is ArmCustomPatchSync<
     ResourceGroup,
     PatchModel = ResourceGroupPatchable,
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 
   /**
@@ -74,7 +76,8 @@ interface ResourceGroups {
       forceDeletionTypes?: string;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse,
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 
   /**
@@ -96,7 +99,8 @@ interface ResourceGroups {
       @query("$top")
       $top?: int32;
     },
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 
   /**
@@ -130,7 +134,8 @@ interface ResourceGroups {
       @query("$top")
       $top?: int32;
     },
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 
   /**
@@ -146,7 +151,8 @@ interface ResourceGroups {
     ResourceGroup,
     ResourcesMoveInfo,
     NoContentResponse,
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 
   /**
@@ -162,7 +168,8 @@ interface ResourceGroups {
     ResourceGroup,
     ResourcesMoveInfo,
     NoContentResponse,
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 
   /**
@@ -172,7 +179,8 @@ interface ResourceGroups {
     ResourceGroup,
     ExportTemplateRequest,
     ArmResponse<ResourceGroupExportResult>,
-    Provider = {}
+    Provider = {},
+    Error = CloudError
   >;
 }
 
@@ -193,12 +201,6 @@ interface ResourceGroups {
 );
 @@doc(ResourceGroups.validateMoveResources::parameters.body,
   "Parameters for moving resources."
-);
-// @@doc(ResourceGroups.resourcesCreateOrUpdate::parameters.body,
-//   "Parameters for creating or updating the resource."
-// );
-@@doc(ResourceGroups.resourcesUpdate::parameters.body,
-  "Parameters for updating the resource."
 );
 @@doc(ResourceGroups.exportTemplate::parameters.body,
   "Parameters for exporting the template."

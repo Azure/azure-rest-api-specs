@@ -44,4 +44,21 @@ enum Versions {
   v2025_04_01: "2025-04-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+interface Operations {
+  @tag("Operations")
+  @autoRoute
+  @Azure.ResourceManager.Private.armUpdateProviderNamespace
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  @list
+  list(
+    ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<OperationListResult> | CloudError;
+}

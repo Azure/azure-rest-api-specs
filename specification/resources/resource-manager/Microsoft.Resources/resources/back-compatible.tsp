@@ -18,23 +18,18 @@ using Microsoft.Resources;
 @@clientName(ResourceGroups.validateMoveResources::parameters.body,
   "parameters"
 );
-// @@clientLocation(ResourceGroups.resourcesCreateOrUpdate, "Resources");
-// @@clientName(ResourceGroups.resourcesCreateOrUpdate, "CreateOrUpdate");
-// @@clientName(ResourceGroups.resourcesCreateOrUpdate::parameters.body,
-//   "parameters"
-// );
-@@clientLocation(ResourceGroups.resourcesUpdate, "Resources");
-@@clientName(ResourceGroups.resourcesUpdate, "Update");
-@@clientName(ResourceGroups.resourcesUpdate::parameters.body, "parameters");
 @@clientName(ResourceGroups.exportTemplate::parameters.body, "parameters");
+
+@@clientName(Resources.createOrUpdateById::parameters.resource, "parameters");
+@@clientName(Resources.updateById::parameters.properties, "parameters");
 
 // @@clientLocation(TagsResources.getAtScope, "Tags");
 // @@clientLocation(TagsResources.createOrUpdateAtScope, "Tags");
-// @@clientName(TagsResources.createOrUpdateAtScope::parameters.resource,
-//   "parameters"
-// );
+@@clientName(TagsResources.createOrUpdateAtScope::parameters.resource,
+  "parameters"
+);
 // @@clientLocation(TagsResources.updateAtScope, "Tags");
-// @@clientName(TagsResources.updateAtScope::parameters.properties, "parameters");
+@@clientName(TagsResources.updateAtScope::parameters.properties, "parameters");
 // @@clientLocation(TagsResources.deleteAtScope, "Tags");
 
 @@clientLocation(ProvidersOperationGroup.listAtTenantScope, "Providers");

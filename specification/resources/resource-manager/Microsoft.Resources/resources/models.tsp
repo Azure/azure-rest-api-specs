@@ -265,7 +265,7 @@ model CloudError {
   /**
    * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
 /**
@@ -892,7 +892,7 @@ model ResourceGroupExportResult {
   /**
    * The template export error.
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
 /**

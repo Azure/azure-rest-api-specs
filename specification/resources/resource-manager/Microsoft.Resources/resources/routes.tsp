@@ -25,7 +25,7 @@ interface ProvidersOperationGroup {
     /** The properties to include in the results. */
     @query("$expand")
     $expand?: string,
-  ): ArmResponse<ProviderListResult> | ErrorResponse;
+  ): ArmResponse<ProviderListResult> | CloudError;
 
   /**
    * Unregisters a subscription from a resource provider.
@@ -41,7 +41,7 @@ interface ProvidersOperationGroup {
     /** The namespace of the resource provider to unregister. */
     @path
     resourceProviderNamespace: string,
-  ): ArmResponse<Provider> | ErrorResponse;
+  ): ArmResponse<Provider> | CloudError;
   /**
    * Registers a management group with a resource provider. Use this operation to register a resource provider with resource types that can be deployed at the management group scope. It does not recursively register subscriptions within the management group. Instead, you must register subscriptions individually.
    */
@@ -61,7 +61,7 @@ interface ProvidersOperationGroup {
     @minLength(1)
     @maxLength(90)
     groupId: string,
-  ): OkResponse | ErrorResponse;
+  ): OkResponse | CloudError;
   /**
    * Get the provider permissions.
    */
@@ -76,7 +76,7 @@ interface ProvidersOperationGroup {
     /** The namespace of the resource provider. */
     @path
     resourceProviderNamespace: string,
-  ): ArmResponse<ProviderPermissionListResult> | ErrorResponse;
+  ): ArmResponse<ProviderPermissionListResult> | CloudError;
   /**
    * Registers a subscription with a resource provider.
    */
@@ -95,13 +95,14 @@ interface ProvidersOperationGroup {
     /** The third party consent for S2S. */
     @body
     properties?: ProviderRegistrationRequest,
-  ): ArmResponse<Provider> | ErrorResponse;
+  ): ArmResponse<Provider> | CloudError;
   /**
    * Gets all resource providers for a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Providers_List")
   @route("/subscriptions/{subscriptionId}/providers")
+  @list
   @get
   list(
     ...ApiVersionParameter,
@@ -113,7 +114,7 @@ interface ProvidersOperationGroup {
     $expand?: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<ProviderListResult> | ErrorResponse;
+  ): ArmResponse<ProviderListResult> | CloudError;
 
   /**
    * Gets the specified resource provider.
@@ -138,7 +139,7 @@ interface ProvidersOperationGroup {
     resourceProviderNamespace: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<Provider> | ErrorResponse;
+  ): ArmResponse<Provider> | CloudError;
 
   /**
    * Gets the specified resource provider at the tenant level.
@@ -161,7 +162,7 @@ interface ProvidersOperationGroup {
      */
     @path
     resourceProviderNamespace: string,
-  ): ArmResponse<Provider> | ErrorResponse;
+  ): ArmResponse<Provider> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -184,7 +185,7 @@ interface ProviderResourceTypesOperationGroup {
     /** The namespace of the resource provider. */
     @path
     resourceProviderNamespace: string,
-  ): ArmResponse<ProviderResourceTypeListResult> | ErrorResponse;
+  ): ArmResponse<ProviderResourceTypeListResult> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -211,7 +212,7 @@ interface ResourcesOperationGroup {
     /** The number of recommendations per page if a paged version of this API is being used. */
     @query("$top")
     $top?: int32,
-  ): ArmResponse<ResourceListResult> | ErrorResponse;
+  ): ArmResponse<ResourceListResult> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -240,7 +241,7 @@ interface TagsOperationGroup {
     tagValue: string,
 
     ...SubscriptionIdParameter,
-  ): OkResponse | ErrorResponse;
+  ): OkResponse | CloudError;
 
   /**
    * This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.
@@ -266,7 +267,7 @@ interface TagsOperationGroup {
     tagValue: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<TagValue> | ErrorResponse;
+  ): ArmResponse<TagValue> | CloudError;
 
   /**
    * This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.
@@ -286,7 +287,7 @@ interface TagsOperationGroup {
     tagName: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<TagDetails> | ErrorResponse;
+  ): ArmResponse<TagDetails> | CloudError;
 
   /**
    * This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.
@@ -306,7 +307,7 @@ interface TagsOperationGroup {
     tagName: string,
 
     ...SubscriptionIdParameter,
-  ): OkResponse | ErrorResponse;
+  ): OkResponse | CloudError;
 
   /**
    * This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.
@@ -319,5 +320,5 @@ interface TagsOperationGroup {
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
-  ): ArmResponse<TagsListResult> | ErrorResponse;
+  ): ArmResponse<TagsListResult> | CloudError;
 }

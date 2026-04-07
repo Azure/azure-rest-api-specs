@@ -70,7 +70,8 @@ alias genericOps = Azure.ResourceManager.Legacy.RoutedOperations<
   ApiVersionParameter,
   {
     @path(#{ allowReserved: true }) @key resourceId: string;
-  }
+  },
+  CloudError
 >;
 
 @armResourceOperations
@@ -144,7 +145,8 @@ alias specificResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @key
     resourceName: string;
-  }
+  },
+  CloudError
 >;
 
 @armResourceOperations
