@@ -1,0 +1,69 @@
+{
+  "title": "CodeScanReports_ListByResourceGroup_MaximumSet",
+  "operationId": "CodeScanReports_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-05-12-preview",
+    "subscriptionId": "4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B",
+    "resourceGroupName": "rgcodescansites",
+    "codeScanSiteName": "myCodeScanSite"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "configurations": {
+                "connectionArmId": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.Web/connections/myConnection",
+                "issueId": "issue-123",
+                "externalWebAppName": "my-webapp",
+                "reportFramework": "Java",
+                "azureTargets": [
+                  "AKS"
+                ],
+                "migrateWorkloadArmId": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.Migrate/migrateProjects/myProject/webApps/myWebApp",
+                "migrateWorkloadType": "WebApplication",
+                "processedRepos": [
+                  {
+                    "repoName": "my-java-app",
+                    "lastUpdatedOn": "2026-04-01T00:00:00Z"
+                  }
+                ]
+              },
+              "reportDetails": {
+                "reportId": "myReport01",
+                "reportType": "AppCAT",
+                "reportName": "My Application Report",
+                "reportFormat": "JSON",
+                "status": "Available",
+                "reportSource": "Zip",
+                "reportSource": "Zip"
+              },
+              "reportRecommendations": [
+                {
+                  "migrateGartnerR": "Rehost",
+                  "effortInHr": 40,
+                  "cloudSuitability": "Suitable",
+                  "azureTarget": "AKS"
+                }
+              ]
+            },
+            "id": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.ApplicationMigration/codeScanSites/myCodeScanSite/codeScanReports/myReport01",
+            "name": "myReport01",
+            "type": "Microsoft.ApplicationMigration/codeScanSites/codeScanReports",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-01T00:00:00Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-07T00:00:00Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/nextpage"
+      }
+    }
+  }
+}

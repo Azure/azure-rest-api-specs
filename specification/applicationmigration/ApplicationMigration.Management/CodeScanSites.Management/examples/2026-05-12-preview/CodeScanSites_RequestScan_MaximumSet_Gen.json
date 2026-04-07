@@ -1,0 +1,25 @@
+{
+  "title": "CodeScanSites_RequestScan_MaximumSet",
+  "operationId": "CodeScanSites_RequestScan",
+  "parameters": {
+    "api-version": "2026-05-12-preview",
+    "subscriptionId": "4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B",
+    "resourceGroupName": "rgcodescansites",
+    "codeScanSiteName": "myCodeScanSite",
+    "body": {
+      "applicationIds": [
+        "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.Migrate/migrateProjects/myProject/webApps/myWebApp"
+      ],
+      "webAppIds": [
+        "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.Web/sites/myWebApp"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configUri": "https://mystorage.blob.core.windows.net/configs/scan-config.json?sv=2021-06-08&sig=examplesignature"
+      }
+    }
+  }
+}

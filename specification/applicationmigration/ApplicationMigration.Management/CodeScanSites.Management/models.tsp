@@ -1,4 +1,5 @@
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApplicationMigration;
 
@@ -189,6 +190,21 @@ union CloudSuitability {
 
   @doc("Unknown Readiness for Azure.")
   ReadinessUnknown: "ReadinessUnknown",
+
+  string,
+}
+
+@added(CodeScanSitesApiVersions.v2026_05_12_preview)
+@doc("The source of the code scan report.")
+union ReportSource {
+  @doc("Indicates that the report was uploaded as a ZIP file.")
+  Zip: "Zip",
+
+  @doc("Indicates that the report was uploaded to a GHCP issue.")
+  GHCPIssue: "GHCPIssue",
+
+  @doc("Indicates that the report was generated and uploaded by GHCP Modernize Scan.")
+  GHCPModernizeScan: "GHCPModernizeScan",
 
   string,
 }
