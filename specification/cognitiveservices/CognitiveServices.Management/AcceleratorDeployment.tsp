@@ -70,7 +70,7 @@ interface AcceleratorDeployments {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AcceleratorDeployment,
-    PatchModel = AcceleratorDeploymentPatch
+    PatchModel = PatchResourceTagsAndSku
   >;
 
   /**
