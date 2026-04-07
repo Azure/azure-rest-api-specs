@@ -1,0 +1,49 @@
+{
+  "operationId": "Resources",
+  "description": "A query requesting a first page with of results. Please note id field is required in the response to return the pages in stable sorted fashion.",
+  "parameters": {
+    "api-version": "2024-04-01",
+    "query": {
+      "options": {
+        "$skip": 0,
+        "$top": 3
+      },
+      "query": "Resources | where name contains 'test' | project id, name, type, location",
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ]
+    }
+  },
+  "title": "First page query",
+  "responses": {
+    "200": {
+      "body": {
+        "$skipToken": "eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==",
+        "count": 3,
+        "data": [
+          {
+            "name": "yetanothertest_OsDisk_1_f396cbcb625a457bb69fe2abf5975820",
+            "type": "microsoft.compute/disks",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Compute/disks/yetanothertest_OsDisk_1_f396cbcb625a457bb69fe2abf5975820",
+            "location": "eastus"
+          },
+          {
+            "name": "TestAA",
+            "type": "microsoft.automation/automationaccounts",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/TestAA",
+            "location": "westcentralus"
+          },
+          {
+            "name": "TestRB",
+            "type": "microsoft.automation/automationaccounts/runbooks",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/TestAA/runbooks/TestRB",
+            "location": "westcentralus"
+          }
+        ],
+        "facets": [],
+        "resultTruncated": "false",
+        "totalRecords": 386
+      }
+    }
+  }
+}

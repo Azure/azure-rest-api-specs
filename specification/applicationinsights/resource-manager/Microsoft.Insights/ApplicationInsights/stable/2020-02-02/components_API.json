@@ -1,0 +1,907 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "version": "2020-02-02",
+    "description": "Azure Application Insights client for Components",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/components": {
+      "get": {
+        "operationId": "Components_List",
+        "description": "Gets a list of all Application Insights components within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentsList.json": {
+            "$ref": "./examples/ComponentsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components": {
+      "get": {
+        "operationId": "Components_ListByResourceGroup",
+        "description": "Gets a list of Application Insights components within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentListByResourceGroup": {
+            "$ref": "./examples/ComponentsListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}": {
+      "get": {
+        "operationId": "Components_Get",
+        "description": "Returns an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentGet": {
+            "$ref": "./examples/ComponentsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Components_CreateOrUpdate",
+        "description": "Creates (or updates) an Application Insights component. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "InsightProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to create an Application Insights component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApplicationInsightsComponent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCreate": {
+            "$ref": "./examples/ComponentsCreate.json"
+          },
+          "ComponentUpdate": {
+            "$ref": "./examples/ComponentsUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Components_UpdateTags",
+        "description": "Updates an existing component's tags. To update other fields use the CreateOrUpdate method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ComponentTags",
+            "in": "body",
+            "description": "Updated tag information to set into the component instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsCommonTypes.TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentUpdateTagsOnly": {
+            "$ref": "./examples/ComponentsUpdateTagsOnly.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Components_Delete",
+        "description": "Deletes an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentsDelete": {
+            "$ref": "./examples/ComponentsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/operations/{purgeId}": {
+      "get": {
+        "operationId": "Components_GetPurgeStatus",
+        "description": "Get status for an ongoing purge operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "purgeId",
+            "in": "path",
+            "description": "In a purge status request, this is the Id of the operation the status of which is returned.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPurgeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentPurge": {
+            "$ref": "./examples/ComponentsPurgeStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/purge": {
+      "post": {
+        "operationId": "Components_Purge",
+        "description": "Purges data in an Application Insights component by a set of user-defined filters.\n\nIn order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.\nNote: this operation is intended for Classic resources, for  workspace-based Application Insights resource please run purge operation (directly on the workspace)(https://docs.microsoft.com/en-us/rest/api/loganalytics/workspace-purge/purge) , scoped to specific resource id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Describes the body of a request to purge data in a single table of an Application Insights component",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComponentPurgeBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ComponentPurgeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseComponents"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentPurge": {
+            "$ref": "./examples/ComponentsPurge.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationInsightsCommonTypes.TagsResource": {
+      "type": "object",
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a WebTest instance.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationInsightsComponent": {
+      "type": "object",
+      "description": "An Application Insights component definition.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of application that this component refers to, used to customize UI. This value is a freeform string, values should typically be one of the following: web, ios, other, store, java, phone."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationInsightsComponentProperties",
+          "description": "Properties that define an Application Insights component resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComponentsResource"
+        }
+      ]
+    },
+    "ApplicationInsightsComponentListResult": {
+      "type": "object",
+      "description": "The response of a ApplicationInsightsComponent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationInsightsComponent items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationInsightsComponent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationInsightsComponentProperties": {
+      "type": "object",
+      "description": "Properties that define an Application Insights component resource.",
+      "properties": {
+        "ApplicationId": {
+          "type": "string",
+          "description": "The unique ID of your application. This field mirrors the 'Name' field and cannot be changed.",
+          "readOnly": true
+        },
+        "AppId": {
+          "type": "string",
+          "description": "Application Insights Unique ID for your Application.",
+          "readOnly": true
+        },
+        "Name": {
+          "type": "string",
+          "description": "Application name.",
+          "readOnly": true
+        },
+        "Application_Type": {
+          "type": "string",
+          "description": "Type of application being monitored.",
+          "default": "web",
+          "enum": [
+            "web",
+            "other"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "web",
+                "value": "web",
+                "description": "web"
+              },
+              {
+                "name": "other",
+                "value": "other",
+                "description": "other"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "Flow_Type": {
+          "type": "string",
+          "description": "Used by the Application Insights system to determine what kind of flow this component was created by. This is to be set to 'Bluefield' when creating/updating a component via the REST API.",
+          "default": "Bluefield",
+          "enum": [
+            "Bluefield"
+          ],
+          "x-ms-enum": {
+            "name": "FlowType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Bluefield",
+                "value": "Bluefield",
+                "description": "Bluefield"
+              }
+            ]
+          }
+        },
+        "Request_Source": {
+          "type": "string",
+          "description": "Describes what tool created this Application Insights component. Customers using this API should set this to the default 'rest'.",
+          "default": "rest",
+          "enum": [
+            "rest"
+          ],
+          "x-ms-enum": {
+            "name": "RequestSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "rest",
+                "value": "rest",
+                "description": "rest"
+              }
+            ]
+          }
+        },
+        "InstrumentationKey": {
+          "type": "string",
+          "description": "Application Insights Instrumentation key. A read-only value that applications can use to identify the destination for all telemetry sent to Azure Application Insights. This value will be supplied upon construction of each new Application Insights component.",
+          "readOnly": true
+        },
+        "CreationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation Date for the Application Insights component, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "TenantId": {
+          "type": "string",
+          "description": "Azure Tenant Id.",
+          "readOnly": true
+        },
+        "HockeyAppId": {
+          "type": "string",
+          "description": "The unique application ID created when a new application is added to HockeyApp, used for communications with HockeyApp.",
+          "externalDocs": {
+            "url": "https://aka.ms/ewjuel"
+          }
+        },
+        "HockeyAppToken": {
+          "type": "string",
+          "description": "Token used to authenticate communications with between Application Insights and HockeyApp.",
+          "readOnly": true,
+          "externalDocs": {
+            "url": "https://aka.ms/sls76s"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this component: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Succeeded, Deploying, Canceled, and Failed.",
+          "readOnly": true
+        },
+        "SamplingPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Percentage of the data produced by the application being monitored that is being sampled for Application Insights telemetry.",
+          "externalDocs": {
+            "url": "https://aka.ms/sl0yqd"
+          }
+        },
+        "ConnectionString": {
+          "type": "string",
+          "description": "Application Insights component connection string.",
+          "readOnly": true
+        },
+        "RetentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in days."
+        },
+        "DisableIpMasking": {
+          "type": "boolean",
+          "description": "Disable IP masking."
+        },
+        "ImmediatePurgeDataOn30Days": {
+          "type": "boolean",
+          "description": "Purge data immediately after 30 days."
+        },
+        "WorkspaceResourceId": {
+          "type": "string",
+          "description": "Resource Id of the log analytics workspace which the data will be ingested to. This property is required to create an application with this API version. Applications from older versions will not have this property."
+        },
+        "LaMigrationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date which the component got migrated to LA, in ISO 8601 format.",
+          "readOnly": true
+        },
+        "PrivateLinkScopedResources": {
+          "type": "array",
+          "description": "List of linked private link scope resources.",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkScopedResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "ScopeId"
+          ]
+        },
+        "publicNetworkAccessForIngestion": {
+          "type": "string",
+          "description": "The network access type for accessing Application Insights ingestion.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables connectivity to Application Insights through public DNS."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables public connectivity to Application Insights through public DNS."
+              }
+            ]
+          }
+        },
+        "publicNetworkAccessForQuery": {
+          "type": "string",
+          "description": "The network access type for accessing Application Insights query.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enables connectivity to Application Insights through public DNS."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disables public connectivity to Application Insights through public DNS."
+              }
+            ]
+          }
+        },
+        "IngestionMode": {
+          "type": "string",
+          "description": "Indicates the flow of the ingestion.",
+          "default": "LogAnalytics",
+          "enum": [
+            "ApplicationInsights",
+            "ApplicationInsightsWithDiagnosticSettings",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ApplicationInsights",
+                "value": "ApplicationInsights",
+                "description": "ApplicationInsights"
+              },
+              {
+                "name": "ApplicationInsightsWithDiagnosticSettings",
+                "value": "ApplicationInsightsWithDiagnosticSettings",
+                "description": "ApplicationInsightsWithDiagnosticSettings"
+              },
+              {
+                "name": "LogAnalytics",
+                "value": "LogAnalytics",
+                "description": "LogAnalytics"
+              }
+            ]
+          }
+        },
+        "DisableLocalAuth": {
+          "type": "boolean",
+          "description": "Disable Non-AAD based Auth."
+        },
+        "ForceCustomerStorageForProfiler": {
+          "type": "boolean",
+          "description": "Force users to create their own storage account for profiler and debugger."
+        }
+      },
+      "required": [
+        "Application_Type"
+      ]
+    },
+    "ComponentPurgeBody": {
+      "type": "object",
+      "description": "Describes the body of a purge request for an App Insights component",
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": "Table from which to purge data."
+        },
+        "filters": {
+          "type": "array",
+          "description": "The set of columns and filters (queries) to run over them to purge the resulting data.",
+          "items": {
+            "$ref": "#/definitions/ComponentPurgeBodyFilters"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "table",
+        "filters"
+      ]
+    },
+    "ComponentPurgeBodyFilters": {
+      "type": "object",
+      "description": "User-defined filters to return data which will be purged from the table.",
+      "properties": {
+        "column": {
+          "type": "string",
+          "description": "The column of the table over which the given query should run"
+        },
+        "operator": {
+          "type": "string",
+          "description": "A query operator to evaluate over the provided column and value(s). Supported operators are ==, =~, in, in~, >, >=, <, <=, between, and have the same behavior as they would in a KQL query."
+        },
+        "value": {
+          "description": "the value for the operator to function over. This can be a number (e.g., > 100), a string (timestamp >= '2017-09-01') or array of values."
+        },
+        "key": {
+          "type": "string",
+          "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension."
+        }
+      }
+    },
+    "ComponentPurgeResponse": {
+      "type": "object",
+      "description": "Response containing operationId for a specific purge action.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Id to use when querying for status for a particular purge operation."
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "ComponentPurgeStatusResponse": {
+      "type": "object",
+      "description": "Response containing status for a specific purge operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PurgeState",
+          "description": "Status of the operation represented by the requested Id."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "ComponentsResource": {
+      "type": "object",
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource Id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ErrorResponseComponents": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseComponentsError",
+          "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message."
+        }
+      }
+    },
+    "ErrorResponseComponentsError": {
+      "type": "object",
+      "description": "Error response indicates Insights service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkScopedResource": {
+      "type": "object",
+      "description": "The private link scope resource reference.",
+      "properties": {
+        "ResourceId": {
+          "type": "string",
+          "description": "The full resource Id of the private link scope resource."
+        },
+        "ScopeId": {
+          "type": "string",
+          "description": "The private link scope unique Identifier."
+        }
+      }
+    },
+    "PurgeState": {
+      "type": "string",
+      "description": "Status of the operation represented by the requested Id.",
+      "enum": [
+        "pending",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "PurgeState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "pending",
+            "value": "pending",
+            "description": "pending"
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "completed"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -21,3 +21,16 @@
 - tool: TypeSpecRequirement
   path: ./operations/stable/2024-11-01/**/*.json
   reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  reason: operations has no sdk generation then tspconfig.yaml does not have language emitter settings, so typespec validation would fail.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-typespec/http-client-csharp.*
+    - parameters.service-dir.default
+  paths:
+    - ./operations/**/tspconfig.yaml

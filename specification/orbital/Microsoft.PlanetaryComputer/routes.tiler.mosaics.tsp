@@ -8,6 +8,78 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
+
+// Common signature aliases for client overrides
+alias getMosaicsTileCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getMosaicsTileJsonCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
+alias getMosaicsWmtsCapabilitiesCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
 interface MosaicsTiles {
   /**
    * Create map tile.
@@ -17,7 +89,7 @@ interface MosaicsTiles {
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       /**
        * Search Id (pgSTAC Search Hash)
@@ -29,7 +101,7 @@ interface MosaicsTiles {
 
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
 
       /**
@@ -37,7 +109,7 @@ interface MosaicsTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
@@ -56,7 +128,7 @@ interface MosaicsTiles {
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
@@ -69,48 +141,16 @@ interface MosaicsTileMatrixSets {
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
-       */
-      @path
-      scale: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
-
+      ...TerrainAlgorithmQueryParameters;
+      ...getMosaicsTileCustomizedCommonSignatures;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
@@ -119,7 +159,7 @@ interface MosaicsTileJsonOperations {
    * Return TileJSON document for a searchId.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson")
+  @summary("TileJson")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tilejson.json")
   @get
@@ -140,14 +180,14 @@ interface MosaicsTileJsonOperations {
        * Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad').
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -166,7 +206,7 @@ interface MosaicsTileJsonOperations {
        */
       @query("buffer")
       @minValueExclusive(0)
-      buffer?: float64;
+      buffer?: float32;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -178,7 +218,7 @@ interface MosaicsTileJsonOperations {
        * STAC Collection ID
        */
       @query("collection")
-      collection?: string;
+      collectionId?: string;
 
       /**
        * Resampling method
@@ -193,13 +233,13 @@ interface MosaicsTileJsonOperations {
       pixelSelection?: PixelSelection = PixelSelection.first;
 
       /**
-       * Algorithm name
+       * Terrain algorithm name
        */
       @query("algorithm")
-      algorithm?: Algorithm;
+      algorithm?: TerrainAlgorithm;
 
       /**
-       * Algorithm parameter
+       * Terrain algorithm parameters
        */
       @query("algorithm_params")
       algorithmParams?: string;
@@ -229,7 +269,7 @@ interface MosaicsTileJsonOperations {
       @query("return_mask")
       returnMask?: boolean = true;
     },
-    TileJsonResponse
+    TileJsonMetadata
   >;
 }
 
@@ -238,32 +278,16 @@ interface MosaicsTileMatrixSetsTileJson {
    * Return TileJSON document for a searchId.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson Tilematrixsetid As Path")
+  @summary("TileJson Tilematrixsetid As Path")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/tilejson.json")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
+      ...TerrainAlgorithmQueryParameters;
+      ...getMosaicsTileJsonCustomizedCommonSignatures;
       ...ZoomQueryParameters;
 
       /**
@@ -271,7 +295,7 @@ interface MosaicsTileMatrixSetsTileJson {
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -283,7 +307,7 @@ interface MosaicsTileMatrixSetsTileJson {
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonResponse
+    TileJsonMetadata
   >;
 }
 
@@ -298,6 +322,9 @@ interface MosaicsWmtsMosaics {
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
       /**
        * Search Id (pgSTAC Search Hash)
        */
@@ -311,13 +338,13 @@ interface MosaicsWmtsMosaics {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -327,8 +354,10 @@ interface MosaicsWmtsMosaics {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesXmlResponse | NoContentResponse
+    WmtsCapabilitiesXmlResponse
   >;
 }
 
@@ -343,27 +372,15 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+      ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures;
 
       /**
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -373,8 +390,10 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesXmlResponse | NoContentResponse
+    WmtsCapabilitiesXmlResponse
   >;
 }
 
@@ -389,7 +408,7 @@ interface MosaicsRegisterSearch {
   @post
   register is Azure.Core.Foundations.Operation<
     RegisterMosaic,
-    RegisterResponse
+    TilerMosaicSearchRegistrationResponse
   >;
 }
 
@@ -412,7 +431,7 @@ interface MosaicsInfoSearch {
       @pattern(".*")
       searchId: string;
     },
-    TitilerPgstacModelInfo
+    TilerStacSearchRegistration
   >;
 }
 
@@ -443,9 +462,9 @@ interface MosaicsAssetsForTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
-    ApplicationJsonResponse | NoContentResponse
+    ApplicationJsonResponse
   >;
 }
 
@@ -478,9 +497,17 @@ interface MosaicsAssetsForTileMatrixSets {
       @pattern(".*")
       tileMatrixSetId: string;
 
+      /**
+       * STAC Collection Identifier
+       */
+      @query("collection")
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
       ...ZxyPathParameters;
     },
-    ApplicationJsonResponse | NoContentResponse
+    TilerAssetGeoJson[]
   >;
 }
 
@@ -491,9 +518,9 @@ interface MosaicsAssetsForPoints {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Assets For Point")
   @tag("Tiles for STAC Collections Mosaics")
-  @route("/data/mosaic/{searchId}/{lon},{lat}/assets")
+  @route("/data/mosaic/{searchId}/{longitude},{latitude}/assets")
   @get
-  getLonLatAssets is Azure.Core.Foundations.Operation<
+  getPointAssets is Azure.Core.Foundations.Operation<
     {
       /**
        * Search Id (pgSTAC Search Hash)
@@ -509,20 +536,20 @@ interface MosaicsAssetsForPoints {
        * Longitude
        */
       @path
-      lon: float32;
+      longitude: float32;
 
       /**
        * Latitude
        */
       @path
-      lat: float32;
+      latitude: float32;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
     },
-    ApplicationJsonResponse | NoContentResponse
+    StacItemPointAsset[]
   >;
 }
