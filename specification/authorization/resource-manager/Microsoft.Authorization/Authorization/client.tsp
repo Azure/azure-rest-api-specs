@@ -45,3 +45,5 @@ namespace Microsoft.AuthorizationCombinedClient;
 );
 @@alternateType(Microsoft.DenyAssignment.DenyAssignmentPrincipalType, string, "go");
 @@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
+@@clientName(Microsoft.Authorization.CommonUserType, "UserType", "python");
+@@clientName(Microsoft.Authorization.UserType, "CommonUserType", "python");
