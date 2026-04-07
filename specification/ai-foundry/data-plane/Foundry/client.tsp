@@ -217,11 +217,14 @@ using Azure.AI.Projects;
 // Toolboxes sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Toolboxes.createToolboxVersion, "create");
+@@clientName(Toolboxes.createToolboxVersion, "create_version");
 @@clientName(Toolboxes.updateToolbox, "update");
 @@clientName(Toolboxes.getToolbox, "get");
+@@clientName(Toolboxes.getToolboxVersion, "get_version");
 @@clientName(Toolboxes.listToolboxes, "list");
+@@clientName(Toolboxes.listToolboxVersions, "list_versions");
 @@clientName(Toolboxes.deleteToolbox, "delete");
+@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
