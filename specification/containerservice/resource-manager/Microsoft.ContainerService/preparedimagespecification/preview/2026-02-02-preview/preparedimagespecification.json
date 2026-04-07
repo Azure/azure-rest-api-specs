@@ -217,7 +217,7 @@
         "tags": [
           "PreparedImageSpecifications"
         ],
-        "description": "Create or update a prepared image specification resource. This will create a new version.",
+        "description": "Create or update a prepared image specification resource. A new version is created only when the resource content changes.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -356,20 +356,6 @@
               "$ref": "#/definitions/PreparedImageSpecification"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -381,11 +367,7 @@
           "PreparedImageSpecifications_Update": {
             "$ref": "./examples/PreparedImageSpecifications_Update.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "PreparedImageSpecifications_Delete",
