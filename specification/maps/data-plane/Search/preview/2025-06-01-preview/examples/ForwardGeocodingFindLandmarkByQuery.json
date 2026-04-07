@@ -1,47 +1,39 @@
 {
   "parameters": {
-    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
-    "query": "empire state building"
+    "query": "empire state building",
+    "AzureKey": "[subscription-key]"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
       "body": {
         "type": "FeatureCollection",
         "features": [
           {
             "type": "Feature",
-            "bbox": [
-              -73.98590850830078,
-              40.74833679199219,
-              -73.98571014404297,
-              40.74853515625
-            ],
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -73.98580932617188,
-                40.748435974121094
-              ]
-            },
             "properties": {
-              "type": "PointOfInterest",
               "address": {
+                "countryRegion": {
+                  "name": "United States"
+                },
                 "adminDistricts": [
                   {
                     "shortName": "NY"
                   }
                 ],
-                "countryRegion": {
-                  "name": "United States"
-                },
                 "formattedAddress": "Empire State Building, NY",
                 "locality": "New York"
               },
+              "type": "PointOfInterest",
               "confidence": "High",
+              "matchCodes": [
+                "Ambiguous"
+              ],
               "geocodePoints": [
                 {
-                  "calculationMethod": "Rooftop",
                   "geometry": {
                     "type": "Point",
                     "coordinates": [
@@ -49,34 +41,34 @@
                       40.748435974121094
                     ]
                   },
+                  "calculationMethod": "Rooftop",
                   "usageTypes": [
                     "Display"
                   ]
                 }
-              ],
-              "matchCodes": [
-                "Ambiguous"
               ]
-            }
-          },
-          {
-            "type": "Feature",
-            "bbox": [
-              -73.98710632324219,
-              40.747314453125,
-              -73.98412322998047,
-              40.74958038330078
-            ],
+            },
             "geometry": {
               "type": "Point",
               "coordinates": [
-                -73.98500061035156,
-                40.74815368652344
+                -73.98580932617188,
+                40.748435974121094
               ]
             },
+            "bbox": [
+              -73.98590850830078,
+              40.74833679199219,
+              -73.98571014404297,
+              40.74853515625
+            ]
+          },
+          {
+            "type": "Feature",
             "properties": {
-              "type": "LandmarkBuilding",
               "address": {
+                "countryRegion": {
+                  "name": "United States"
+                },
                 "adminDistricts": [
                   {
                     "shortName": "NY"
@@ -85,16 +77,16 @@
                     "shortName": "New York County"
                   }
                 ],
-                "countryRegion": {
-                  "name": "United States"
-                },
                 "formattedAddress": "Empire State Building, NY",
                 "locality": "Manhattan"
               },
+              "type": "LandmarkBuilding",
               "confidence": "High",
+              "matchCodes": [
+                "Ambiguous"
+              ],
               "geocodePoints": [
                 {
-                  "calculationMethod": "Rooftop",
                   "geometry": {
                     "type": "Point",
                     "coordinates": [
@@ -102,23 +94,29 @@
                       40.74815368652344
                     ]
                   },
+                  "calculationMethod": "Rooftop",
                   "usageTypes": [
                     "Display"
                   ]
                 }
-              ],
-              "matchCodes": [
-                "Ambiguous"
               ]
-            }
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -73.98500061035156,
+                40.74815368652344
+              ]
+            },
+            "bbox": [
+              -73.98710632324219,
+              40.747314453125,
+              -73.98412322998047,
+              40.74958038330078
+            ]
           }
         ]
-      },
-      "headers": {
-        "Content-Type": "application/geo+json"
       }
     }
-  },
-  "operationId": "Search_GetGeocoding",
-  "title": "Search landmark Empire State Building by query"
+  }
 }

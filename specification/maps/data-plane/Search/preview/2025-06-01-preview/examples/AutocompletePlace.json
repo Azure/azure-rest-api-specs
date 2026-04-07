@@ -1,13 +1,16 @@
 {
   "parameters": {
-    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
-    "coordinates": "-122.581711,37.896980",
     "query": "Muir Woods",
-    "resultTypeGroups": "Place"
+    "coordinates": "-122.581711,37.896980",
+    "resultTypeGroups": "Place",
+    "AzureKey": "[subscription-key]"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
       "body": {
         "type": "FeatureCollection",
         "features": [
@@ -15,7 +18,7 @@
             "type": "Feature",
             "geometry": null,
             "properties": {
-              "name": "Muir Woods",
+              "typeGroup": "Place",
               "type": "Forest",
               "address": {
                 "adminDistricts": [
@@ -27,20 +30,22 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
                 "formattedAddress": "Wisconsin"
               },
-              "typeGroup": "Place"
+              "name": "Muir Woods"
             }
           },
           {
             "type": "Feature",
             "geometry": null,
             "properties": {
+              "typeGroup": "Place",
               "type": "PopulatedPlace",
               "address": {
+                "locality": "Muir Woods",
                 "adminDistricts": [
                   {
                     "name": "Georgia"
@@ -50,21 +55,19 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
-                "formattedAddress": "Muir Woods, Georgia 30349, United States",
-                "locality": "Muir Woods",
-                "postalCode": "30349"
-              },
-              "typeGroup": "Place"
+                "postalCode": "30349",
+                "formattedAddress": "Muir Woods, Georgia 30349, United States"
+              }
             }
           },
           {
             "type": "Feature",
             "geometry": null,
             "properties": {
-              "name": "Muir Woods National Monument",
+              "typeGroup": "Place",
               "type": "Park",
               "address": {
                 "adminDistricts": [
@@ -76,21 +79,16 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
                 "formattedAddress": "California"
               },
-              "typeGroup": "Place"
+              "name": "Muir Woods National Monument"
             }
           }
         ]
-      },
-      "headers": {
-        "Content-Type": "application/geo+json"
       }
     }
-  },
-  "operationId": "Search_GetGeocodeAutocomplete",
-  "title": "Autocomplete API call to search for 'Muir Woods', filtered by place resultTypeGroups"
+  }
 }

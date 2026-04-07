@@ -1,14 +1,17 @@
 {
   "parameters": {
-    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
-    "coordinates": "-113.301894,49.201888",
     "query": "Muir Woods",
+    "coordinates": "-113.301894,49.201888",
     "resultTypeGroups": "Address",
-    "resultTypes": "RoadBlock"
+    "resultTypes": "RoadBlock",
+    "AzureKey": "[subscription-key]"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
       "body": {
         "type": "FeatureCollection",
         "features": [
@@ -16,9 +19,12 @@
             "type": "Feature",
             "geometry": null,
             "properties": {
+              "typeGroup": "Address",
               "type": "RoadBlock",
               "address": {
+                "streetName": "Muir St",
                 "addressLine": " Muir St",
+                "locality": "Grosse Pointe Farms",
                 "adminDistricts": [
                   {
                     "name": "Michigan"
@@ -28,24 +34,16 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
-                "formattedAddress": "Muir St, Grosse Pointe Farms, Michigan 48236, United States",
-                "locality": "Grosse Pointe Farms",
                 "postalCode": "48236",
-                "streetName": "Muir St"
-              },
-              "typeGroup": "Address"
+                "formattedAddress": "Muir St, Grosse Pointe Farms, Michigan 48236, United States"
+              }
             }
           }
         ]
-      },
-      "headers": {
-        "Content-Type": "application/geo+json"
       }
     }
-  },
-  "operationId": "Search_GetGeocodeAutocomplete",
-  "title": "Autocomplete API call to search for 'Muir Woods', filtered by roadblock resultTypes, address resultTypeGroups"
+  }
 }

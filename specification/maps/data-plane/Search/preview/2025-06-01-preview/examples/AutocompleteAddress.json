@@ -1,13 +1,16 @@
 {
   "parameters": {
-    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
-    "coordinates": "-113.301894,49.201888",
     "query": "Muir Woods",
-    "resultTypeGroups": "Address"
+    "coordinates": "-113.301894,49.201888",
+    "resultTypeGroups": "Address",
+    "AzureKey": "[subscription-key]"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
       "body": {
         "type": "FeatureCollection",
         "features": [
@@ -15,9 +18,12 @@
             "type": "Feature",
             "geometry": null,
             "properties": {
+              "typeGroup": "Address",
               "type": "Address",
               "address": {
+                "streetName": "Muir Woods Rd",
                 "addressLine": " Muir Woods Rd",
+                "locality": "Sausalito",
                 "adminDistricts": [
                   {
                     "name": "California"
@@ -27,24 +33,24 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
-                "formattedAddress": "Muir Woods Rd, Sausalito, California 94965, United States",
-                "locality": "Sausalito",
                 "postalCode": "94965",
-                "streetName": "Muir Woods Rd"
-              },
-              "typeGroup": "Address"
+                "formattedAddress": "Muir Woods Rd, Sausalito, California 94965, United States"
+              }
             }
           },
           {
             "type": "Feature",
             "geometry": null,
             "properties": {
+              "typeGroup": "Address",
               "type": "RoadBlock",
               "address": {
+                "streetName": "Muir St",
                 "addressLine": " Muir St",
+                "locality": "Grosse Pointe Farms",
                 "adminDistricts": [
                   {
                     "name": "Michigan"
@@ -54,24 +60,16 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
-                "formattedAddress": "Muir St, Grosse Pointe Farms, Michigan 48236, United States",
-                "locality": "Grosse Pointe Farms",
                 "postalCode": "48236",
-                "streetName": "Muir St"
-              },
-              "typeGroup": "Address"
+                "formattedAddress": "Muir St, Grosse Pointe Farms, Michigan 48236, United States"
+              }
             }
           }
         ]
-      },
-      "headers": {
-        "Content-Type": "application/geo+json"
       }
     }
-  },
-  "operationId": "Search_GetGeocodeAutocomplete",
-  "title": "Autocomplete API call to search for 'Muir Woods', filtered by address resultTypeGroups"
+  }
 }

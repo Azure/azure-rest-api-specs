@@ -3,13 +3,16 @@
     "api-version": "2025-06-01-preview",
     "coordinates": [
       -122.204141,
-      47.61256
+      47.612560
     ],
     "resolution": "small",
     "resultType": "locality"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
       "body": {
         "type": "Feature",
         "geometry": {
@@ -613,20 +616,15 @@
         "properties": {
           "name": "Bellevue",
           "copyright": "© 2022 Microsoft and its suppliers. This API and any results cannot be used or accessed without Microsoft's express written permission.",
-          "copyrightUrl": "https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/",
+          "copyrightURL": "https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/",
           "geometriesCopyright": [
             {
-              "copyright": "TomTom",
-              "sourceName": "TOM"
+              "sourceName": "TOM",
+              "copyright": "TomTom"
             }
           ]
         }
-      },
-      "headers": {
-        "Content-Type": "application/geo+json"
       }
     }
-  },
-  "operationId": "Search_GetPolygon",
-  "title": "Get polygon for a city at coordinates -122.204141,47.612560"
+  }
 }

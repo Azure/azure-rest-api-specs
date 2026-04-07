@@ -1,12 +1,15 @@
 {
   "parameters": {
-    "AzureKey": "[subscription-key]",
     "api-version": "2025-06-01-preview",
+    "query": "1 Microsoft",
     "coordinates": "-113.301894,49.201888",
-    "query": "1 Microsoft"
+    "AzureKey": "[subscription-key]"
   },
   "responses": {
     "200": {
+      "headers": {
+        "Content-Type": "application/geo+json"
+      },
       "body": {
         "type": "FeatureCollection",
         "features": [
@@ -14,9 +17,13 @@
             "type": "Feature",
             "geometry": null,
             "properties": {
+              "typeGroup": "Address",
               "type": "Address",
               "address": {
+                "streetNumber": "1",
+                "streetName": "Microsoft Way",
                 "addressLine": "1 Microsoft Way",
+                "locality": "Redmond",
                 "adminDistricts": [
                   {
                     "name": "Washington"
@@ -26,25 +33,22 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
-                "formattedAddress": "1 Microsoft Way, Redmond, Washington 98052, United States",
-                "locality": "Redmond",
                 "postalCode": "98052",
-                "streetName": "Microsoft Way",
-                "streetNumber": "1"
-              },
-              "typeGroup": "Address"
+                "formattedAddress": "1 Microsoft Way, Redmond, Washington 98052, United States"
+              }
             }
           },
           {
             "type": "Feature",
             "geometry": null,
             "properties": {
-              "name": "Microsoft-Advanta C",
+              "typeGroup": "Place",
               "type": "LandmarkBuilding",
               "address": {
+                "locality": "Bellevue",
                 "adminDistricts": [
                   {
                     "name": "Washington"
@@ -54,22 +58,16 @@
                   }
                 ],
                 "countryRegion": {
-                  "name": "United States",
-                  "ISO": "US"
+                  "ISO": "US",
+                  "name": "United States"
                 },
-                "formattedAddress": "Bellevue, Washington, United States",
-                "locality": "Bellevue"
+                "formattedAddress": "Bellevue, Washington, United States"
               },
-              "typeGroup": "Place"
+              "name": "Microsoft-Advanta C"
             }
           }
         ]
-      },
-      "headers": {
-        "Content-Type": "application/geo+json"
       }
     }
-  },
-  "operationId": "Search_GetGeocodeAutocomplete",
-  "title": "Autocomplete API call to search for '1 Microsoft'"
+  }
 }
