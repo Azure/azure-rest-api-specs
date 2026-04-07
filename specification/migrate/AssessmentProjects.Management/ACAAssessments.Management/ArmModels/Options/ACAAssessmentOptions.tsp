@@ -35,8 +35,8 @@ model ContainerAppsAssessmentOptionsProperties {
 
 @doc("A class that represents the outbound edges from a given node.")
 model ContainerAppsAssessmentOptionsOutboundEdgeGroup {
-  @doc("Gets or sets the Workload Profile SKU categories.")
-  categories: ContainerAppsWorkloadProfileSku[];
+  @doc("Gets or sets the Workload Profile SKUs.")
+  sku: ContainerAppsWorkloadProfileSku[];
 
   @doc("Gets or sets the Workload Profile Types.")
   workloadProfileTypes: ContainerAppsWorkloadProfileType[];

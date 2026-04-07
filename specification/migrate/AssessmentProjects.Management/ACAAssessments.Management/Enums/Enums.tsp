@@ -30,6 +30,9 @@ union PricingTier {
 
 @doc("Workload Profile Type for Azure Container Apps.")
 union ContainerAppsWorkloadProfileType {
+  @doc("Any workload profile type.")
+  Any: "Any",
+
   @doc("Consumption workload profile — up to 4 vCPUs, 8 GiB memory.")
   Consumption: "Consumption",
 

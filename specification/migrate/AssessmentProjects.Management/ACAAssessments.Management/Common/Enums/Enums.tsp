@@ -46,26 +46,6 @@ union AssessmentSizingCriterion {
   string,
 }
 
-@doc("Cloud Suitability for Azure.")
-union CloudSuitability {
-  @doc("Unknown. Indicates missing data.")
-  Unknown: "Unknown",
-
-  @doc("Not Suitable for Azure.")
-  NotSuitable: "NotSuitable",
-
-  @doc("Suitable for Azure.")
-  Suitable: "Suitable",
-
-  @doc("Conditionally Suitable for Azure.")
-  ConditionallySuitable: "ConditionallySuitable",
-
-  @doc("Unknown Readiness for Azure.")
-  ReadinessUnknown: "ReadinessUnknown",
-
-  string,
-}
-
 @doc("The status of the current operation.")
 union ProvisioningState {
   @doc("Resource provisioning Successful.")
@@ -198,17 +178,6 @@ union SavingsOptions {
   string,
 }
 
-@doc("Premium Disk Support")
-union PremiumDiskSupport {
-  @doc("Premium Disk Supported")
-  PremiumDiskSupported: "PremiumDiskSupported",
-
-  @doc("Premium Disk Not Supported")
-  PremiumDiskNotSupported: "PremiumDiskNotSupported",
-
-  string,
-}
-
 @doc("Web Server Type.")
 union WebServerType {
   @doc("Unknown. Indicates Missing Data.")
@@ -219,49 +188,6 @@ union WebServerType {
 
   @doc("Java Web App.")
   Tomcat: "Tomcat",
-
-  string,
-}
-
-@doc("Web App Type.")
-union WebAppType {
-  @doc("Unknown. Indicates Missing Data.")
-  Unknown: "Unknown",
-
-  @doc("ASP.NET Web App.")
-  ASPNET: "ASP.Net",
-
-  @doc("Java Web App.")
-  Java: "Java",
-
-  string,
-}
-
-@doc("Wep App Tier.")
-union AzureWebAppTier {
-  @doc("Unknown. Indicates Missing Data.")
-  Unknown: "Unknown",
-
-  @doc("Free Tier.")
-  Free: "Free",
-
-  @doc("Shared Tier.")
-  Shared: "Shared",
-
-  @doc("Basic Tier.")
-  Basic: "Basic",
-
-  @doc("Standard Tier.")
-  Standard: "Standard",
-
-  @doc("Premium Tier.")
-  Premium: "Premium",
-
-  @doc("PremiumV2 Tier.")
-  PremiumV2: "PremiumV2",
-
-  @doc("Isolated Tier.")
-  Isolated: "Isolated",
 
   string,
 }
