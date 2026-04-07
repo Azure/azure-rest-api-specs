@@ -46,13 +46,13 @@
       "name": "ResourceGroups"
     },
     {
-      "name": "Tags"
-    },
-    {
       "name": "Resources"
     },
     {
-      "name": "SpecificResources"
+      "name": "Tags"
+    },
+    {
+      "name": "Providers"
     }
   ],
   "paths": {
@@ -558,6 +558,9 @@
     "/providers": {
       "get": {
         "operationId": "Providers_ListAtTenantScope",
+        "tags": [
+          "Providers"
+        ],
         "description": "Gets all resource providers for the tenant.",
         "parameters": [
           {
@@ -593,6 +596,9 @@
     "/providers/{resourceProviderNamespace}": {
       "get": {
         "operationId": "Providers_GetAtTenantScope",
+        "tags": [
+          "Providers"
+        ],
         "description": "Gets the specified resource provider at the tenant level.",
         "parameters": [
           {
@@ -637,6 +643,9 @@
     "/providers/Microsoft.Management/managementGroups/{groupId}/providers/{resourceProviderNamespace}/register": {
       "post": {
         "operationId": "Providers_RegisterAtManagementGroupScope",
+        "tags": [
+          "Providers"
+        ],
         "description": "Registers a management group with a resource provider. Use this operation to register a resource provider with resource types that can be deployed at the management group scope. It does not recursively register subscriptions within the management group. Instead, you must register subscriptions individually.",
         "parameters": [
           {
@@ -705,6 +714,9 @@
     "/subscriptions/{subscriptionId}/providers": {
       "get": {
         "operationId": "Providers_List",
+        "tags": [
+          "Providers"
+        ],
         "description": "Gets all resource providers for a subscription.",
         "parameters": [
           {
@@ -748,6 +760,9 @@
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}": {
       "get": {
         "operationId": "Providers_Get",
+        "tags": [
+          "Providers"
+        ],
         "description": "Gets the specified resource provider.",
         "parameters": [
           {
@@ -795,6 +810,9 @@
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/providerPermissions": {
       "get": {
         "operationId": "Providers_ProviderPermissions",
+        "tags": [
+          "Providers"
+        ],
         "description": "Get the provider permissions.",
         "parameters": [
           {
@@ -835,6 +853,9 @@
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/register": {
       "post": {
         "operationId": "Providers_Register",
+        "tags": [
+          "Providers"
+        ],
         "description": "Registers a subscription with a resource provider.",
         "parameters": [
           {
@@ -879,6 +900,9 @@
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/resourceTypes": {
       "get": {
         "operationId": "ProviderResourceTypes_List",
+        "tags": [
+          "Providers"
+        ],
         "description": "List the resource types for a specified resource provider.",
         "parameters": [
           {
@@ -926,6 +950,9 @@
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/unregister": {
       "post": {
         "operationId": "Providers_Unregister",
+        "tags": [
+          "Providers"
+        ],
         "description": "Unregisters a subscription from a resource provider.",
         "parameters": [
           {
@@ -1289,7 +1316,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CResourceGroupExportResult%3E"
+          "final-state-schema": "#/definitions/ResourceGroupExportResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -1298,7 +1325,7 @@
       "post": {
         "operationId": "Resources_MoveResources",
         "tags": [
-          "ResourceGroups"
+          "Resources"
         ],
         "description": "The resources to be moved must be in the same source resource group in the source subscription being used. The target resource group may be in a different subscription. When moving resources, both the source group and the target group are locked for the duration of the operation. Write and delete operations are blocked on the groups until the move completes.",
         "parameters": [
@@ -1430,7 +1457,7 @@
       "post": {
         "operationId": "Resources_ValidateMoveResources",
         "tags": [
-          "ResourceGroups"
+          "Resources"
         ],
         "description": "This operation checks whether the specified resources can be moved to the target. The resources to be moved must be in the same source resource group in the source subscription being used. The target resource group may be in a different subscription. If validation succeeds, it returns HTTP response code 204 (no content). If validation fails, it returns HTTP response code 409 (Conflict) with an error message. Retrieve the URL in the Location header value to check the result of the long-running operation.",
         "parameters": [
@@ -1545,7 +1572,7 @@
       "get": {
         "operationId": "Resources_Get",
         "tags": [
-          "SpecificResources"
+          "Resources"
         ],
         "description": "Gets a resource.",
         "parameters": [
@@ -1614,7 +1641,7 @@
       "put": {
         "operationId": "Resources_CreateOrUpdate",
         "tags": [
-          "SpecificResources"
+          "Resources"
         ],
         "description": "Creates a resource.",
         "parameters": [
@@ -1665,7 +1692,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -1687,10 +1714,20 @@
               "$ref": "#/definitions/GenericResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1706,7 +1743,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/GenericResource"
         },
         "x-ms-long-running-operation": true
@@ -1714,7 +1751,7 @@
       "patch": {
         "operationId": "Resources_Update",
         "tags": [
-          "SpecificResources"
+          "Resources"
         ],
         "description": "Updates a resource.",
         "parameters": [
@@ -1765,7 +1802,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -1781,18 +1818,37 @@
               "$ref": "#/definitions/GenericResource"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GenericResource"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Resources_Delete",
         "tags": [
-          "SpecificResources"
+          "Resources"
         ],
         "description": "Deletes a resource.",
         "parameters": [
@@ -1844,6 +1900,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -1876,7 +1935,7 @@
       "head": {
         "operationId": "Resources_CheckExistence",
         "tags": [
-          "SpecificResources"
+          "Resources"
         ],
         "description": "Checks whether a resource exists.",
         "parameters": [
@@ -1946,6 +2005,9 @@
     "/subscriptions/{subscriptionId}/resources": {
       "get": {
         "operationId": "Resources_List",
+        "tags": [
+          "Resources"
+        ],
         "description": "Get all the resources in a subscription.",
         "parameters": [
           {
@@ -1990,12 +2052,18 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/tagNames": {
       "get": {
         "operationId": "Tags_List",
+        "tags": [
+          "Tags"
+        ],
         "summary": "Gets a summary of tag usage under the subscription.",
         "description": "This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.",
         "parameters": [
@@ -2019,12 +2087,18 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/tagNames/{tagName}": {
       "put": {
         "operationId": "Tags_CreateOrUpdate",
+        "tags": [
+          "Tags"
+        ],
         "summary": "Creates a predefined tag name.",
         "description": "This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.",
         "parameters": [
@@ -2049,6 +2123,19 @@
               "$ref": "#/definitions/TagDetails"
             }
           },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagDetails"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2059,6 +2146,9 @@
       },
       "delete": {
         "operationId": "Tags_Delete",
+        "tags": [
+          "Tags"
+        ],
         "summary": "Deletes a predefined tag name.",
         "description": "This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.",
         "parameters": [
@@ -2080,6 +2170,9 @@
           "200": {
             "description": "The request has succeeded."
           },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2092,6 +2185,9 @@
     "/subscriptions/{subscriptionId}/tagNames/{tagName}/tagValues/{tagValue}": {
       "put": {
         "operationId": "Tags_CreateOrUpdateValue",
+        "tags": [
+          "Tags"
+        ],
         "summary": "Creates a predefined value for a predefined tag name.",
         "description": "This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.",
         "parameters": [
@@ -2123,6 +2219,19 @@
               "$ref": "#/definitions/TagValue"
             }
           },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TagValue"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2133,6 +2242,9 @@
       },
       "delete": {
         "operationId": "Tags_DeleteValue",
+        "tags": [
+          "Tags"
+        ],
         "summary": "Deletes a predefined tag value for a predefined tag name.",
         "description": "This operation allows deleting a value from the list of predefined values for an existing predefined tag name. The value being deleted must not be in use as a tag value for the given tag name for any resource.",
         "parameters": [
@@ -2160,6 +2272,9 @@
         "responses": {
           "200": {
             "description": "The request has succeeded."
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2419,28 +2534,16 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<ResourceGroupExportResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/ResourceGroupExportResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "CloudError": {
       "type": "object",
       "description": "An error response for a resource management request.",
       "properties": {
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
           "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)"
         }
-      }
+      },
+      "x-ms-external": true
     },
     "ExportTemplateOutputFormat": {
       "type": "string",

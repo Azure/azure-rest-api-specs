@@ -30,21 +30,28 @@ model ResourceGroup
   managedBy?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ResourceGroups {
   /**
    * Gets a resource group.
    */
+  @tag("ResourceGroups")
   get is ArmResourceRead<ResourceGroup, Provider = {}, Error = CloudError>;
 
   /**
    * Checks whether a resource group exists.
    */
-  checkExistence is ArmResourceCheckExistence<ResourceGroup, Provider = {}, Error = CloudError>;
+  @tag("ResourceGroups")
+  checkExistence is ArmResourceCheckExistence<
+    ResourceGroup,
+    Provider = {},
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates a resource group.
    */
+  @tag("ResourceGroups")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ResourceGroup,
     Provider = {},
@@ -55,6 +62,7 @@ interface ResourceGroups {
    * Resource groups can be updated through a simple PATCH operation to a group address. The format of the request is the same as that for creating a resource group. If a field is unspecified, the current value is retained.
    */
   @patch(#{ implicitOptionality: false })
+  @tag("ResourceGroups")
   update is ArmCustomPatchSync<
     ResourceGroup,
     PatchModel = ResourceGroupPatchable,
@@ -66,6 +74,7 @@ interface ResourceGroups {
    * When you delete a resource group, all of its resources are also deleted. Deleting a resource group deletes all of its template deployments and currently stored operations.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("ResourceGroups")
   delete is ArmResourceDeleteWithoutOkAsync<
     ResourceGroup,
     Parameters = {
@@ -84,6 +93,7 @@ interface ResourceGroups {
    * Gets all the resource groups for a subscription.
    */
   @segment("resourcegroups")
+  @tag("ResourceGroups")
   list is ArmResourceListByParent<
     ResourceGroup,
     Parameters = {
@@ -108,6 +118,7 @@ interface ResourceGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Resources_ListByResourceGroup")
+  @tag("ResourceGroups")
   @list
   @get
   @action("resources")
@@ -143,6 +154,7 @@ interface ResourceGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Resources_MoveResources")
+  @tag("Resources")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "resourceGroupName",
     "sourceResourceGroupName"
@@ -160,6 +172,7 @@ interface ResourceGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Resources_ValidateMoveResources")
+  @tag("Resources")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "resourceGroupName",
     "sourceResourceGroupName"
@@ -175,10 +188,11 @@ interface ResourceGroups {
   /**
    * Captures the specified resource group as a template.
    */
+  @tag("ResourceGroups")
   exportTemplate is ArmResourceActionAsync<
     ResourceGroup,
     ExportTemplateRequest,
-    ArmResponse<ResourceGroupExportResult>,
+    ResourceGroupExportResult,
     Provider = {},
     Error = CloudError
   >;

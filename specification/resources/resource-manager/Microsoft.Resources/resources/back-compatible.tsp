@@ -22,6 +22,10 @@ using Microsoft.Resources;
 
 @@clientName(Resources.createOrUpdateById::parameters.resource, "parameters");
 @@clientName(Resources.updateById::parameters.properties, "parameters");
+@@clientName(SpecificResources.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(SpecificResources.update::parameters.properties, "parameters");
 
 // @@clientLocation(TagsResources.getAtScope, "Tags");
 // @@clientLocation(TagsResources.createOrUpdateAtScope, "Tags");

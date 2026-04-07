@@ -149,25 +149,36 @@ alias specificResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   CloudError
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SpecificResources {
   /** Checks whether a resource exists. */
+  @tag("Resources")
   checkExistence is specificResourcesOps.CheckExistence<GenericResource>;
 
   /**
    * Gets a resource.
    */
+  @tag("Resources")
   get is specificResourcesOps.Read<GenericResource>;
 
   /**
    * Creates a resource.
    */
-  createOrUpdate is specificResourcesOps.CreateOrUpdateAsync<GenericResource>;
+  @tag("Resources")
+  createOrUpdate is specificResourcesOps.CreateOrUpdateAsync<
+    GenericResource,
+    Response = ArmResourceUpdatedResponse<GenericResource> | ArmResourceCreatedResponse<
+      GenericResource,
+      ArmLroLocationHeader<FinalResult = GenericResource> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedResponse
+  >;
 
   /**
    * Updates a resource.
    */
-  update is specificResourcesOps.CustomPatchSync<
+  @tag("Resources")
+  update is specificResourcesOps.CustomPatchAsync<
     GenericResource,
     GenericResource
   >;
@@ -175,5 +186,9 @@ interface SpecificResources {
   /**
    * Deletes a resource.
    */
-  delete is specificResourcesOps.DeleteWithoutOkAsync<GenericResource>;
+  @tag("Resources")
+  delete is specificResourcesOps.DeleteWithoutOkAsync<
+    GenericResource,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 }
