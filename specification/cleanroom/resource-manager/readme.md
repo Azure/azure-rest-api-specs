@@ -55,11 +55,6 @@ These settings apply only when `--tag=package-2025-01-31-preview` is specified o
 ```yaml $(tag) == 'package-2025-01-31-preview'
 input-file:
   - Microsoft.CleanRoom/preview/2025-01-31-preview/openapi.json
-  - Microsoft.CleanRoom/preview/2025-01-31-preview/collaborations.json
-  - Microsoft.CleanRoom/preview/2025-01-31-preview/commonTypes.json
-  - Microsoft.CleanRoom/preview/2025-01-31-preview/consortiums.json
-  - Microsoft.CleanRoom/preview/2025-01-31-preview/contracts.json
-  - Microsoft.CleanRoom/preview/2025-01-31-preview/operations.json
 ```
 
 ### Tag: package-2022-12-31-preview
