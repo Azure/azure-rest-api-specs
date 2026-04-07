@@ -11,22 +11,16 @@ model ModelVersion {
   @doc("System related metadata")
   systemData?: Record<string>;
 
-  @doc("Catalog information for the model")
-  catalogInfo: ModelCatalogInformation;
+  @doc("URI of the model artifact in blob storage")
+  blobUri?: string;
 
   @doc("Derived model information")
   derivedModelInformation?: DerivedModelInformation;
 
+  @doc("Deployment templates allowed for this model")
+  allowedDeploymentTemplates?: string[];
+
   ...AssetBase;
-}
-
-@doc("Catalog information for the model")
-model ModelCatalogInformation {
-  @doc("The id of the publisher of the asset")
-  publisherId: string;
-
-  @doc("The license the asset is under")
-  license: string;
 }
 
 @doc("Derived model information")

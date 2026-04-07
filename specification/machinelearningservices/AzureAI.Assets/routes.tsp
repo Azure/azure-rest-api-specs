@@ -422,3 +422,121 @@ interface Prompts {
     PagedPrompt
   >;
 }
+
+interface FoundryModels {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get a specific version of a Foundry model.")
+  @route("/registries/{registryName}/models/{name}/versions/{version}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the AzureML registry.")
+      @path
+      registryName: string;
+
+      @doc("Name of the Foundry model.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      name: string;
+
+      @doc("Version of the Foundry model.")
+      @path
+      version: string;
+
+      @doc("Asset resource tenant ID.")
+      @query
+      assetResourceTenantId?: string;
+    },
+    FoundryModel
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+  @doc("Creates a Foundry model version.")
+  @route("/registries/{registryName}/models/{name}/versions/{version}")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the AzureML registry.")
+      @path
+      registryName: string;
+
+      @doc("Name of the Foundry model.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      name: string;
+
+      @doc("Version of the Foundry model.")
+      @path
+      version: string;
+
+      @doc("Properties of a Foundry Model Version.")
+      @bodyRoot
+      body: FoundryModel;
+    },
+    LongRunningNullResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Delete a specific version of a Foundry model.")
+  @route("/registries/{registryName}/models/{name}/versions/{version}")
+  @delete
+  delete is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the AzureML registry.")
+      @path
+      registryName: string;
+
+      @doc("Name of the Foundry model.")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
+      @path
+      name: string;
+
+      @doc("Version of the Foundry model.")
+      @path
+      version: string;
+    },
+    TypeSpec.Http.Response<200> | TypeSpec.Http.Response<204>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to use same model in both list calls."
+  @doc("List Foundry models in a registry.")
+  @route("/registries/{registryName}/models")
+  @get
+  @list
+  list is Azure.Core.Foundations.Operation<
+    {
+      @doc("The name of the AzureML registry.")
+      @path
+      registryName: string;
+
+      @doc("Filter by model name.")
+      @query
+      name?: string;
+
+      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
+      @query
+      tags?: string;
+
+      @doc("Continuation token for pagination.")
+      @query
+      continuationToken?: string;
+
+      @doc("Continuation token for pagination (from header).")
+      @header
+      continuationTokenFromHeader?: string;
+
+      @doc("Maximum number of items to return.")
+      @query
+      count?: int32;
+
+      @doc("View type for including/excluding (for example) archived entities.")
+      @query
+      listViewType?: string = "ActiveOnly";
+    },
+    PagedFoundryModel
+  >;
+}

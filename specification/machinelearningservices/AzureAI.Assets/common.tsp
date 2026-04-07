@@ -92,3 +92,18 @@ model ProbeSettings {
   @doc("The HTTP method for the probe request.")
   httpMethod: string;
 }
+
+@doc("Catalog information for a Foundry model.")
+model ModelCatalogInformation {
+  @doc("The id of the publisher of the model.")
+  publisherId?: string;
+
+  @doc("The license the model is under.")
+  license?: string;
+}
+
+@doc("Information about a model derived from another model.")
+model DerivedModelInformation {
+  @doc("The name of the base model this model was derived from.")
+  baseModel?: string;
+}
