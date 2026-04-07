@@ -62,10 +62,11 @@ interface Alerts {
     Extension.ScopeParameter,
     Alert,
     void,
-    ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: AlertOperationResult;
-    },
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AlertOperationResult>> &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @bodyRoot
+        _: AlertOperationResult;
+      },
     Error = CloudError
   >;
 }

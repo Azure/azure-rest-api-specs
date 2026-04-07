@@ -712,7 +712,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AlertOperationResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -738,11 +739,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AlertOperationResult"
-            },
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -768,7 +772,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AlertOperationResult"
         },
         "x-ms-long-running-operation": true
       }

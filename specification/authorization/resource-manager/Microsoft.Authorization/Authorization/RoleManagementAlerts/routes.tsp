@@ -25,9 +25,9 @@ interface AlertsOperationGroup {
   @autoRoute
   @action("roleManagementAlerts/refresh")
   refreshAll is ArmProviderActionAsync<
-    Response = AlertOperationResult | ArmAcceptedLroResponse<
-      LroHeaders = ArmLroLocationHeader<FinalResult = AlertOperationResult>
-    >,
+    Response = AlertOperationResult | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = AlertOperationResult> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Scope = ExtensionActionScope,
     Error = CloudError
   >;
