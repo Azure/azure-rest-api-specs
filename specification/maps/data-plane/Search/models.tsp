@@ -317,7 +317,6 @@ union AutocompleteResultTypeGroupsEnum {
 /**
  * Type of suggestion
  */
-@added(Versions.v2026_01_01)
 union AutocompleteResultTypeEnum {
   string,
 
@@ -1215,7 +1214,6 @@ model ReverseGeocodingBatchRequestItem {
 /**
  * This object is returned from a successful autocomplete call.
  */
-@added(Versions.v2026_01_01)
 model AutocompleteResponse {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
@@ -1234,7 +1232,6 @@ model AutocompleteResponse {
 /**
  * Features of Autocomplete Result
  */
-@added(Versions.v2026_01_01)
 model AutocompleteFeature {
   /**
    * Specifies the `GeoJSON` type. The only supported object type is Feature. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
@@ -1255,7 +1252,6 @@ model AutocompleteFeature {
 /**
  * Properties of Autocomplete Result
  */
-@added(Versions.v2026_01_01)
 model AutocompleteProperties {
   /**
    * Address or Place

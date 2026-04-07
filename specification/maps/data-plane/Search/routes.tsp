@@ -440,7 +440,6 @@ interface Search {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
-  @added(Versions.v2026_01_01)
   @summary("Use to get ranked list of suggested entities based on a user's location and a partial query.")
   @route("/geocode:autocomplete")
   @get
