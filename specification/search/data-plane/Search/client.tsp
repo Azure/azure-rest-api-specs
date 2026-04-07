@@ -504,7 +504,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchDocumentsResult, Access.internal, "csharp");
 @@access(SearchDocumentsResult, Access.internal, "python");
 @@access(Search.SearchDocumentsResult.nextLink, Access.internal, "java");
-@@access(Search.SearchDocumentsResult.nextPageParameters, Access.internal, "java");
+@@access(Search.SearchDocumentsResult.nextPageParameters,
+  Access.internal,
+  "java"
+);
 @@access(DebugInfo, Access.internal, "python");
 @@access(DebugInfo, Access.internal, "java");
 @@access(AutocompleteMode, Access.public, "python");
