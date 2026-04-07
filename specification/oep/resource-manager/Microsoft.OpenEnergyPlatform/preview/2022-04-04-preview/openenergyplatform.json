@@ -371,6 +371,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -429,32 +432,18 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
-            "required": true,
+            "description": "add partition action payload",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
+          "202": {
+            "description": "The data partitions will be created asynchronously",
             "schema": {
               "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -463,11 +452,7 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/listPartitions": {
@@ -549,32 +534,18 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
-            "required": true,
+            "description": "remove partition action payload",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
+          "202": {
+            "description": "The data partitions will be deleted asynchronously",
             "schema": {
               "$ref": "#/definitions/DataPartitionAddOrRemoveRequest"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -583,11 +554,7 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     }
   },
