@@ -233,14 +233,6 @@ model AccessControlListActionPatch is AccessControlListAction;
 @doc("The Access Control Lists patch resource definition.")
 model AccessControlListPatch extends TagsUpdate {
   @doc("Access Control Lists patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: AccessControlListPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Access Control Lists patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AccessControlListPatchProperties;
 }
 
