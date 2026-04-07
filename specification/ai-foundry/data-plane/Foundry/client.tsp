@@ -217,11 +217,53 @@ using Azure.AI.Projects;
 // Toolboxes sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Toolboxes.createToolboxVersion, "create");
+@@clientName(Toolboxes.createToolboxVersion, "create_version");
 @@clientName(Toolboxes.updateToolbox, "update");
 @@clientName(Toolboxes.getToolbox, "get");
+@@clientName(Toolboxes.getToolboxVersion, "get_version");
 @@clientName(Toolboxes.listToolboxes, "list");
+@@clientName(Toolboxes.listToolboxVersions, "list_versions");
 @@clientName(Toolboxes.deleteToolbox, "delete");
+@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
+
+// --------------------------------------------------------------------------------
+// Skills sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Skills.createSkill, "create");
+@@clientName(Skills.createSkillFromPackage, "create_from_package");
+@@clientName(Skills.getSkill, "get");
+@@clientName(Skills.downloadSkill, "download");
+@@clientName(Skills.listSkills, "list");
+@@clientName(Skills.updateSkill, "update");
+@@clientName(Skills.deleteSkill, "delete");
+
+// --------------------------------------------------------------------------------
+// AgentInvocations sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentInvocations.getAgentInvocationOpenApiSpec, "get_open_api_spec");
+@@clientName(AgentInvocations.createAgentInvocation, "create");
+@@clientName(AgentInvocations.getAgentInvocation, "get");
+@@clientName(AgentInvocations.cancelAgentInvocation, "cancel");
+
+// --------------------------------------------------------------------------------
+// AgentSessionFiles sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentSessionFiles.uploadSessionFile, "upload");
+@@clientName(AgentSessionFiles.downloadSessionFile, "download");
+@@clientName(AgentSessionFiles.listSessionFiles, "list");
+@@clientName(AgentSessionFiles.deleteSessionFile, "delete");
+
+// --------------------------------------------------------------------------------
+// ManagedAgentIdentityBlueprints sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update");
+@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get");
+@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete");
+@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
