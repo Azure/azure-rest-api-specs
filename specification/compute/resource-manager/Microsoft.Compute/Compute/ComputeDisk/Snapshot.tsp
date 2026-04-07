@@ -117,6 +117,26 @@ interface Snapshots {
     OkResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Updates the immutability policy of a snapshot.
+   */
+  @action("updateImmutabilityPolicy")
+  updateImmutabilityPolicy is ComputeResourceActionAsync<
+    Snapshot,
+    ImmutabilityPolicyData,
+    Snapshot
+  >;
+
+  /**
+   * Updates the immutability policy lock of a snapshot.
+   */
+  @action("updateImmutabilityPolicyLock")
+  updateImmutabilityPolicyLock is ComputeResourceActionAsync<
+    Snapshot,
+    ImmutabilityPolicyData,
+    Snapshot
+  >;
 }
 
 @@doc(Snapshot.name,
@@ -131,4 +151,10 @@ interface Snapshots {
 );
 @@doc(Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
+);
+@@doc(Snapshots.updateImmutabilityPolicy::parameters.body,
+  "Immutability policy data supplied in the body of the update immutability policy operation."
+);
+@@doc(Snapshots.updateImmutabilityPolicyLock::parameters.body,
+  "Immutability policy data supplied in the body of the update immutability policy lock operation."
 );
