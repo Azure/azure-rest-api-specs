@@ -12,33 +12,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Security;
 
 /**
- * Aggregative state based on the standard's supported controls states
- */
-union State {
-  string,
-
-  /**
-   * All supported regulatory compliance controls in the given standard have a passed state
-   */
-  Passed: "Passed",
-
-  /**
-   * At least one supported regulatory compliance control in the given standard has a state of failed
-   */
-  Failed: "Failed",
-
-  /**
-   * All supported regulatory compliance controls in the given standard have a state of skipped
-   */
-  Skipped: "Skipped",
-
-  /**
-   * No supported regulatory compliance data for the given standard
-   */
-  Unsupported: "Unsupported",
-}
-
-/**
  * List of regulatory compliance standards response
  */
 model RegulatoryComplianceStandardList

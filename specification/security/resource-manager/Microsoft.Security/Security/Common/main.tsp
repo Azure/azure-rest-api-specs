@@ -180,3 +180,108 @@ union SettingName {
    */
   current: "current",
 }
+
+/**
+ * The current provisioning state of the resource. Indicates the status of the last operation performed on the resource.
+ */
+union ProvisioningState {
+  string,
+
+  /**
+   * The resource has been successfully provisioned and is ready for use.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The resource is being created. This is a transitional state.
+   */
+  Creating: "Creating",
+
+  /**
+   * The resource is being updated. This is a transitional state.
+   */
+  Updating: "Updating",
+
+  /**
+   * The resource is being deleted. This is a transitional state.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The last operation on the resource failed. Check the error details for more information.
+   */
+  Failed: "Failed",
+
+  /**
+   * The operation was canceled before completion.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * InProgress
+   */
+  InProgress: "InProgress",
+}
+
+/**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Application
+   */
+  Application: "Application",
+
+  /**
+   * ManagedIdentity
+   */
+  ManagedIdentity: "ManagedIdentity",
+
+  /**
+   * Key
+   */
+  Key: "Key",
+}
+/**
+ * Aggregative state based on the standard's supported controls states
+ */
+union State {
+  string,
+
+  /**
+   * All supported regulatory compliance controls in the given standard have a passed state
+   */
+  Passed: "Passed",
+
+  /**
+   * At least one supported regulatory compliance control in the given standard has a state of failed
+   */
+  Failed: "Failed",
+
+  /**
+   * All supported regulatory compliance controls in the given standard have a state of skipped
+   */
+  Skipped: "Skipped",
+
+  /**
+   * No supported regulatory compliance data for the given standard
+   */
+  Unsupported: "Unsupported",
+
+  /**
+   * Send notification on new alerts to the subscription's admins
+   */
+  On: "On",
+
+  /**
+   * Don't send notification on new alerts to the subscription's admins
+   */
+  Off: "Off",
+}

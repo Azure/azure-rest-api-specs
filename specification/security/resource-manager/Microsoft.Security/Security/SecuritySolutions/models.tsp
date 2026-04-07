@@ -140,29 +140,6 @@ union StatusReason {
 }
 
 /**
- * The security family provisioning State
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union ProvisioningState {
-  string,
-
-  /**
-   * Succeeded
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Failed
-   */
-  Failed: "Failed",
-
-  /**
-   * Updating
-   */
-  Updating: "Updating",
-}
-
-/**
  * The provisioningState of the vulnerability assessment capability on the VM
  */
 union ServerVulnerabilityAssessmentPropertiesProvisioningState {
@@ -507,17 +484,6 @@ model JitNetworkAccessRequestPort {
    * The port which is mapped to this port's `number` in the Azure Firewall, if applicable
    */
   mappedPort?: int32;
-}
-
-/**
- * Describes an Azure resource with kind
- */
-model Kind {
-  /**
-   * Kind of the resource
-   */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kind?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

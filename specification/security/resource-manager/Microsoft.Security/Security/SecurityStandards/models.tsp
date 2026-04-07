@@ -197,33 +197,6 @@ union SecurityIssue {
 }
 
 /**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Application
-   */
-  Application: "Application",
-
-  /**
-   * ManagedIdentity
-   */
-  ManagedIdentity: "ManagedIdentity",
-
-  /**
-   * Key
-   */
-  Key: "Key",
-}
-
-/**
  * Page of a Standard list
  */
 model SecurityStandardList {

@@ -180,23 +180,6 @@ union SourceType {
 }
 
 /**
- * Defines whether to send email notifications from AMicrosoft Defender for Cloud to persons with specific RBAC roles on the subscription.
- */
-union State {
-  string,
-
-  /**
-   * Send notification on new alerts to the subscription's admins
-   */
-  On: "On",
-
-  /**
-   * Don't send notification on new alerts to the subscription's admins
-   */
-  Off: "Off",
-}
-
-/**
  * A possible role to configure sending security notification alerts to
  */
 union SecurityContactRole {

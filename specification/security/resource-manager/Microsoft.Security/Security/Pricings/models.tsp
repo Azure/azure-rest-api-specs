@@ -217,21 +217,6 @@ model Extension {
 }
 
 /**
- * A status describing the success/failure of the extension's enablement/disablement operation.
- */
-model OperationStatus {
-  /**
-   * The operation status code.
-   */
-  code?: Code;
-
-  /**
-   * Additional information regarding the success/failure of the operation.
-   */
-  message?: string;
-}
-
-/**
  * List of pricing configurations response.
  */
 model PricingList {

@@ -11,33 +11,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Security;
 
 /**
- * Gets the provisioning state of the API collection.
- */
-union ProvisioningState {
-  string,
-
-  /**
-   * Succeeded
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Failed
-   */
-  Failed: "Failed",
-
-  /**
-   * Canceled
-   */
-  Canceled: "Canceled",
-
-  /**
-   * InProgress
-   */
-  InProgress: "InProgress",
-}
-
-/**
  * Page of a list of API collections as represented by Microsoft Defender for APIs.
  */
 model ApiCollectionList {

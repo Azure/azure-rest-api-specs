@@ -12,33 +12,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Security;
 
 /**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Application
-   */
-  Application: "Application",
-
-  /**
-   * ManagedIdentity
-   */
-  ManagedIdentity: "ManagedIdentity",
-
-  /**
-   * Key
-   */
-  Key: "Key",
-}
-
-/**
  * The cloud that the standard is supported on.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

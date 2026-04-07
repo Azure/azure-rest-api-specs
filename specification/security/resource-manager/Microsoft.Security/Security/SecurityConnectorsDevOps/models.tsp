@@ -12,33 +12,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Security;
 
 /**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Application
-   */
-  Application: "Application",
-
-  /**
-   * ManagedIdentity
-   */
-  ManagedIdentity: "ManagedIdentity",
-
-  /**
-   * Key
-   */
-  Key: "Key",
-}
-
-/**
  * The provisioning state of the resource.
  *
  * Pending - Provisioning pending.
