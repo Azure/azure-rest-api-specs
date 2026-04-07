@@ -260,6 +260,8 @@ interface Search {
       /**
        * A point on the earth specified as a longitude and latitude. Example: &coordinates=lon,lat
        */
+      @minItems(2)
+      @maxItems(2)
       @query("coordinates")
       coordinates: float64[];
 
@@ -322,6 +324,8 @@ interface Search {
       /**
        * The coordinates of the location that you want to reverse geocode. Example: &coordinates=lon,lat
        */
+      @minItems(2)
+      @maxItems(2)
       @query("coordinates")
       coordinates: float64[];
 

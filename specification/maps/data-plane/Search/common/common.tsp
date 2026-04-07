@@ -378,6 +378,8 @@ model GeoJsonObject {
   /**
    * Bounding box. Projection used - EPSG:3857. Please refer to [RFC 7946](https://datatracker.ietf.org/doc/html/rfc7946#section-5) for details.
    */
+  @minItems(4)
+  @maxItems(4)
   bbox?: float64[];
 }
 
