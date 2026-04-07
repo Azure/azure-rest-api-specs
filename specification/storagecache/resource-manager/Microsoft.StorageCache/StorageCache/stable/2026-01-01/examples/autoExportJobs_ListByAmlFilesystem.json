@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "resourceGroupName": "scgroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "amlFilesystemName": "fs1",
     "api-version": "2026-01-01",
-    "amlFilesystemName": "fs1"
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -11,63 +11,65 @@
         "value": [
           {
             "name": "job1",
-            "location": "eastus",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoExportJob/job1",
             "type": "Microsoft.StorageCache/amlFilesystem/autoExportJob",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoExportJob/job1",
+            "location": "eastus",
             "properties": {
               "adminStatus": "Enable",
-              "provisioningState": "Succeeded",
               "autoExportPrefixes": [
                 "/"
               ],
+              "provisioningState": "Succeeded",
               "status": {
+                "currentIterationFilesDiscovered": 10,
+                "currentIterationFilesExported": 5,
+                "currentIterationFilesFailed": 1,
+                "currentIterationMiBDiscovered": 4000,
+                "currentIterationMiBExported": 500,
+                "exportIterationCount": 100,
+                "lastStartedTimeUTC": "2024-04-21T17:25:43.511Z",
+                "lastSuccessfulIterationCompletionTimeUTC": "2024-04-21T19:28:43.511Z",
                 "state": "InProgress",
                 "statusMessage": "Auto Export is in progress",
                 "totalFilesExported": 1000000,
-                "totalMiBExported": 10000,
                 "totalFilesFailed": 5,
-                "exportIterationCount": 100,
-                "lastSuccessfulIterationCompletionTimeUTC": "2024-04-21T19:28:43.511Z",
-                "currentIterationFilesDiscovered": 10,
-                "currentIterationMiBDiscovered": 4000,
-                "currentIterationFilesExported": 5,
-                "currentIterationMiBExported": 500,
-                "currentIterationFilesFailed": 1,
-                "lastStartedTimeUTC": "2024-04-21T17:25:43.511Z"
+                "totalMiBExported": 10000
               }
             }
           },
           {
             "name": "job2",
-            "location": "eastus",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoExportJob/job2",
             "type": "Microsoft.StorageCache/amlFilesystem/autoExportJob",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoExportJob/job2",
+            "location": "eastus",
             "properties": {
               "adminStatus": "Disable",
-              "provisioningState": "Succeeded",
               "autoExportPrefixes": [
                 "/dir1"
               ],
+              "provisioningState": "Succeeded",
               "status": {
+                "currentIterationFilesDiscovered": 10,
+                "currentIterationFilesExported": 5,
+                "currentIterationFilesFailed": 1,
+                "currentIterationMiBDiscovered": 4000,
+                "currentIterationMiBExported": 500,
+                "exportIterationCount": 100,
+                "lastCompletionTimeUTC": "2024-04-21T20:25:43.511Z",
+                "lastStartedTimeUTC": "2024-04-21T17:25:43.511Z",
+                "lastSuccessfulIterationCompletionTimeUTC": "2024-04-21T19:28:43.511Z",
                 "state": "Disabled",
                 "statusMessage": "Auto Export job is disabled",
                 "totalFilesExported": 1000000,
-                "totalMiBExported": 10000,
                 "totalFilesFailed": 5,
-                "exportIterationCount": 100,
-                "lastSuccessfulIterationCompletionTimeUTC": "2024-04-21T19:28:43.511Z",
-                "currentIterationFilesDiscovered": 10,
-                "currentIterationMiBDiscovered": 4000,
-                "currentIterationFilesExported": 5,
-                "currentIterationMiBExported": 500,
-                "currentIterationFilesFailed": 1,
-                "lastStartedTimeUTC": "2024-04-21T17:25:43.511Z",
-                "lastCompletionTimeUTC": "2024-04-21T20:25:43.511Z"
+                "totalMiBExported": 10000
               }
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "autoExportJobs_ListByAmlFilesystem",
+  "title": "autoExportJobs_ListByAmlFilesystem"
 }

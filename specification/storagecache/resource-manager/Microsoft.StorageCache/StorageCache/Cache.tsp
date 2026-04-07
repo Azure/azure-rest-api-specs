@@ -137,7 +137,7 @@ interface Caches {
   startPrimingJob is ArmResourceActionAsyncBase<
     Cache,
     PrimingJob,
-    ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cache>,
     OptionalRequestBody = true
@@ -197,7 +197,7 @@ interface Caches {
   spaceAllocation is ArmResourceActionAsyncBase<
     Cache,
     StorageTargetSpaceAllocation[],
-    ArmAcceptedLroResponse<ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cache>,
     OptionalRequestBody = true

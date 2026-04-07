@@ -6,92 +6,105 @@ import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-
 namespace Microsoft.StorageCache;
 
-
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 /**
-* Check that subnets will be valid for AML file system create calls.
-*/
+ * Check that subnets will be valid for AML file system create calls.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("checkAmlFSSubnets")
 @autoRoute
-checkAmlFSSubnets is ArmProviderActionSync<Request = AmlFilesystemSubnetInfo,Response = void,Scope = SubscriptionActionScope>
+op checkAmlFSSubnets is ArmProviderActionSync<
+  Request = AmlFilesystemSubnetInfo,
+  Response = void,
+  Scope = SubscriptionActionScope
+>;
 /**
-* Get the number of available IP addresses needed for the AML file system information provided.
-*/
+ * Get the number of available IP addresses needed for the AML file system information provided.
+ */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("getRequiredAmlFSSubnetsSize")
 @autoRoute
-getRequiredAmlFSSubnetsSize is ArmProviderActionSync<Request = RequiredAmlFilesystemSubnetsSizeInfo,Response = RequiredAmlFilesystemSubnetsSize,Scope = SubscriptionActionScope>
+op getRequiredAmlFSSubnetsSize is ArmProviderActionSync<
+  Request = RequiredAmlFilesystemSubnetsSizeInfo,
+  Response = RequiredAmlFilesystemSubnetsSize,
+  Scope = SubscriptionActionScope
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface SkusOperationGroup {
-/**
-* Get the list of StorageCache.Cache SKUs available to this subscription.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("Skus_List")
-@autoRoute
-@get
-@action("skus")
-list is ArmProviderActionSync<Response = ResourceSkusResult,Scope = SubscriptionActionScope>
+  /**
+   * Get the list of StorageCache.Cache SKUs available to this subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Skus_List")
+  @autoRoute
+  @get
+  @action("skus")
+  list is ArmProviderActionSync<
+    Response = ResourceSkusResult,
+    Scope = SubscriptionActionScope
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface UsageModelsOperationGroup {
-/**
-* Get the list of cache usage models available to this subscription.
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("UsageModels_List")
-@autoRoute
-@get
-@action("usageModels")
-list is ArmProviderActionSync<Response = UsageModelsResult,Scope = SubscriptionActionScope>
+  /**
+   * Get the list of cache usage models available to this subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("UsageModels_List")
+  @autoRoute
+  @get
+  @action("usageModels")
+  list is ArmProviderActionSync<
+    Response = UsageModelsResult,
+    Scope = SubscriptionActionScope
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AscOperationsOperationGroup {
-/**
-* Gets the status of an asynchronous operation for the Azure HPC Cache
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("AscOperations_Get")
-@route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}")
-@get op `get`(
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-...LocationResourceParameter,
-/**
-* The ID of an ongoing async operation.
-*/
-@minLength(1)
-@path
-"operationId": string
-        ): ArmResponse<AscOperation> | ErrorResponse;
+  /**
+   * Gets the status of an asynchronous operation for the Azure HPC Cache
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AscOperations_Get")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
 
-
-
+    /**
+     * The ID of an ongoing async operation.
+     */
+    @minLength(1)
+    @path
+    operationId: string,
+  ): ArmResponse<AscOperation> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AscUsagesOperationGroup {
-/**
-* Gets the quantity used and quota limit for resources
-*/
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-@operationId("AscUsages_List")
-@autoRoute
-@get
-@action("usages")
-list is ArmProviderActionSync<Response = ResourceUsagesListResult,Scope = SubscriptionActionScope,Parameters = LocationParameter>
+  /**
+   * Gets the quantity used and quota limit for resources
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AscUsages_List")
+  @autoRoute
+  @get
+  @action("usages")
+  list is ArmProviderActionSync<
+    Response = ResourceUsagesListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
+  >;
 }

@@ -2702,21 +2702,6 @@ model CacheIdentity {
   UserAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model UserAssignedIdentitiesValue {
-  /**
-   * The principal ID of the user-assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client ID of the user-assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
-}
-
 /**
  * Properties of the cache.
  */

@@ -1,11 +1,11 @@
 {
   "parameters": {
+    "accept-language": [
+      "en-US"
+    ],
     "api-version": "2026-01-01",
     "x-ms-client-request-id": [
       "7e655b68-e491-4cb6-90c3-6a5b10b7bd17"
-    ],
-    "accept-language": [
-      "en-US"
     ]
   },
   "responses": {
@@ -29,43 +29,43 @@
             }
           },
           {
-            "origin": "system",
             "name": "Microsoft.StorageCache/caches/providers/Microsoft.Insights/metricDefinitions/read",
-            "isDataAction": false,
             "display": {
+              "description": "Reads Cache Metric Definitions.",
               "operation": "Get Cache Metric Definitions",
               "provider": "Microsoft Azure HPC Cache",
-              "resource": "StorageCache Metric Definitions",
-              "description": "Reads Cache Metric Definitions."
+              "resource": "StorageCache Metric Definitions"
             },
+            "isDataAction": false,
+            "origin": "system",
             "properties": {
               "serviceSpecification": {
                 "metricSpecifications": [
                   {
                     "name": "ClientIOPS",
-                    "displayName": "Total Client IOPS",
-                    "displayDescription": "The rate of client file operations processed by the Cache.",
-                    "unit": "Count",
                     "aggregationType": "Average",
+                    "displayDescription": "The rate of client file operations processed by the Cache.",
+                    "displayName": "Total Client IOPS",
+                    "metricClass": "Transactions",
                     "supportedAggregationTypes": [
                       "Minimum",
                       "Maximum",
                       "Average"
                     ],
-                    "metricClass": "Transactions"
+                    "unit": "Count"
                   },
                   {
                     "name": "ClientLatency",
-                    "displayName": "Average Client Latency",
-                    "displayDescription": "Average latency of client file operations to the Cache.",
-                    "unit": "Milliseconds",
                     "aggregationType": "Average",
+                    "displayDescription": "Average latency of client file operations to the Cache.",
+                    "displayName": "Average Client Latency",
+                    "metricClass": "Latency",
                     "supportedAggregationTypes": [
                       "Minimum",
                       "Maximum",
                       "Average"
                     ],
-                    "metricClass": "Latency"
+                    "unit": "Milliseconds"
                   }
                 ]
               }
@@ -74,5 +74,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Operations_List",
+  "title": "Operations_List"
 }
