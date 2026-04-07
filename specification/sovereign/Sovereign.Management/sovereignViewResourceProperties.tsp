@@ -162,6 +162,7 @@ model SovereignViewComplianceDetailsPolicyInitiativeFilter {
   state?: PolicyComplianceState;
 }
 
+@added(Versions.Preview20260315)
 @doc("Supported compliance states for the policy initiatives.")
 union PolicyComplianceState {
   @doc("The resource is compliant with respect to the given policy.")
@@ -195,6 +196,7 @@ model SovereignViewComplianceDetailsFilters {
   value: string[];
 }
 
+@added(Versions.Preview20260315)
 @doc("Supported filter operators for Sovereign View Compliance details.")
 union SovereignViewComplianceDetailsFilterOperators {
   @doc("In filter operator. Returns results where the field value is in the provided list of values.")
@@ -213,6 +215,7 @@ model SovereignViewComplianceDetailsSort {
   direction: SovereignViewComplianceDetailsSortDirections;
 }
 
+@added(Versions.Preview20260315)
 @doc("Supported sort directions for Sovereign View Compliance details.")
 union SovereignViewComplianceDetailsSortDirections {
   @doc("Ascending sort direction.")
