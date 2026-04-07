@@ -88,10 +88,16 @@ using Microsoft.Sql;
 @@clientName(AvailabilityZoneType.`2`, "Two", "go,javascript");
 @@clientName(AvailabilityZoneType.`3`, "Three", "go,javascript");
 
-@@alternateType(BlobAuditingPolicyName, "default", "go");
-@@alternateType(CurrentSensitivityLabelSource, "current", "go");
-@@alternateType(RecommendedSensitivityLabelSource, "recommended", "go");
-@@alternateType(VulnerabilityAssessmentSystemDatabaseName, "master", "go");
+@@alternateType(BlobAuditingPolicyName, "default", "go,javascript");
+@@alternateType(CurrentSensitivityLabelSource, "current", "go,javascript");
+@@alternateType(RecommendedSensitivityLabelSource,
+  "recommended",
+  "go,javascript"
+);
+@@alternateType(VulnerabilityAssessmentSystemDatabaseName,
+  "master",
+  "go,javascript"
+);
 @@alternateType(CheckNameAvailabilityResourceType,
   "Microsoft.Sql/servers",
   "go"
