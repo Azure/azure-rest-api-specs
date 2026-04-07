@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
@@ -9,9 +10,11 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.OpenEnergyPlatform;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Identity is a valid ARM envelope property for managed identity support"
 @doc("Energy service resource.")
 model EnergyService is TrackedResource<EnergyServiceProperties> {
   @doc("The resource name.")
@@ -20,6 +23,10 @@ model EnergyService is TrackedResource<EnergyServiceProperties> {
   @segment("energyServices")
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*$")
   name: string;
+
+  @doc("The managed service identity of the resource.")
+  @added(Versions.v2022_04_04_preview)
+  identity?: ManagedServiceIdentity;
 }
 
 @armResourceOperations
