@@ -75,6 +75,7 @@ interface DataGenerationJobs {
   @route("data_generation/jobs/{jobId}")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   delete is deleteJobPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
+    DataGenerationJob
   >;
 }

@@ -206,23 +206,23 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
   AgentsPagedResult<TJob>
 >;
 
-/** Cancel a running job. Returns the updated job. */
+/** Cancel a running job. Returns 202 with the updated job. */
 @post op cancelJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
   {
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  TJob
+  AcceptedResponse & TJob
 >;
 
-/** Delete a job. Returns 204 No Content. */
+/** Delete a job. Returns 202 with the updated job. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
-@delete op deleteJob is FoundryDataPlaneOperation<
+@delete op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
   {
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  NoContentResponse
+  AcceptedResponse & TJob
 >;
 
 // ---- Preview operation templates ----
@@ -268,7 +268,7 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
   AgentsPagedResult<TJob>
 >;
 
-/** Cancel a running job (preview). Includes optional Foundry-Features header. */
+/** Cancel a running job (preview). Returns 202 with the updated job. */
 @post op cancelJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
   TJob extends TypeSpec.Reflection.Model,
@@ -278,18 +278,19 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  TJob
+  AcceptedResponse & TJob
 >;
 
-/** Delete a job (preview). Includes optional Foundry-Features header. */
+/** Delete a job (preview). Returns 202 with the updated job. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete op deleteJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  TJob extends TypeSpec.Reflection.Model,
 > is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  NoContentResponse
+  AcceptedResponse & TJob
 >;
