@@ -116,6 +116,7 @@ namespace FaceAdministrationClient {
     largePersonGroupId: collectionId;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/require-client-suffix" "legacy"
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup
   @clientInitialization(LargeFaceListClientOptions, "csharp,java")
@@ -154,6 +155,7 @@ namespace FaceAdministrationClient {
     getFaces is FaceListOperations.getLargeFaceListFaces;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/require-client-suffix" "legacy"
   #suppress "@azure-tools/typespec-client-generator-core/client-service" "TCGC bug"
   @operationGroup
   @clientInitialization(LargePersonGroupClientOptions, "csharp,java")
