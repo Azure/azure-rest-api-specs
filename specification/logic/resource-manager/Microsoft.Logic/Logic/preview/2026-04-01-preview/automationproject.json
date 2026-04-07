@@ -44,6 +44,9 @@
     },
     {
       "name": "AutomationProjects"
+    },
+    {
+      "name": "Applications"
     }
   ],
   "paths": {
@@ -427,9 +430,383 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects/{automationProjectName}/applications": {
+      "get": {
+        "operationId": "Applications_ListByParent",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Gets a list of applications registered under the automation project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Applications by Automation Project": {
+            "$ref": "./examples/Applications_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects/{automationProjectName}/applications/{applicationName}": {
+      "get": {
+        "operationId": "Applications_Get",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Gets an application registered under the automation project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The application name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Application": {
+            "$ref": "./examples/Applications_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Applications_CreateOrUpdate",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Creates or updates an application registration under the automation project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The application name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The application definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Application' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "201": {
+            "description": "Resource 'Application' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Application": {
+            "$ref": "./examples/Applications_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Application"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Applications_Delete",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Deletes an application registration from the automation project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The application name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Application": {
+            "$ref": "./examples/Applications_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
+    "Application": {
+      "type": "object",
+      "description": "The application resource. An application represents a ContainerApp of kind 'workflowapp'\nthat is registered under an automation project. Applications are managed by their\nparent automation project for lifecycle operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "The application properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationListResult": {
+      "type": "object",
+      "description": "The response of a Application list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Application items on this page",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "The properties of the application resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ApplicationProvisioningState",
+          "description": "Gets the provisioning state of the application.",
+          "readOnly": true
+        },
+        "appResourceId": {
+          "type": "string",
+          "description": "The ARM resource identifier of the ContainerApp associated with this application."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the application."
+        }
+      }
+    },
+    "ApplicationProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the application resource.",
+      "enum": [
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The application is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The application is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The application is being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The application has been successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The application provisioning has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The application provisioning was canceled."
+          }
+        ]
+      }
+    },
     "AutomationProject": {
       "type": "object",
       "description": "The automation project resource. An automation project is a logical grouping that owns and manages\nmultiple ContainerApps of kind 'workflowapp' via the managedBy relationship.\nThe automation project is the single entry point for lifecycle management of its auto apps.",

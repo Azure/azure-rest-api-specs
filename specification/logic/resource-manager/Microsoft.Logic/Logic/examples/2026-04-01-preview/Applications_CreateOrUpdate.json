@@ -1,0 +1,63 @@
+{
+  "operationId": "Applications_CreateOrUpdate",
+  "title": "Create or Update Application",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "automationProjectName": "myAutomationProject",
+    "applicationName": "myApplication",
+    "api-version": "2026-04-01-preview",
+    "resource": {
+      "properties": {
+        "appResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myApplication",
+        "location": "eastus"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/automationProjects/myAutomationProject/applications/myApplication",
+        "name": "myApplication",
+        "type": "Microsoft.Logic/automationProjects/applications",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "appResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myApplication",
+          "location": "eastus"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Logic/locations/eastus/operationStatuses/create-app-op-id?api-version=2026-04-01-preview",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Logic/automationProjects/myAutomationProject/applications/myApplication",
+        "name": "myApplication",
+        "type": "Microsoft.Logic/automationProjects/applications",
+        "properties": {
+          "provisioningState": "Provisioning",
+          "appResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myApplication",
+          "location": "eastus"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
