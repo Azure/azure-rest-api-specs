@@ -101,17 +101,6 @@ suppressions:
     reason: ScheduledActions Disable and Enable endpoints are synchronous POST returning 200 with no body (OkResponse). These LRO rules do not apply. Keeping 200 for backward compatibility with existing API versions.
     from: computeschedule.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/enable"].post
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for settings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: The property correlationid is part of the existing API contract and cannot be renamed without a breaking change.
-    from: computeschedule.json
 
 ```
 
@@ -131,18 +120,6 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computeschedule.json
     where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for settings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: The property correlationid is part of the existing API contract and cannot be renamed without a breaking change.
-    from: computeschedule.json
-  
 
 ```
 
@@ -162,17 +139,6 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computeschedule.json
     where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for settings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: The property correlationid is part of the existing API contract and cannot be renamed without a breaking change.
-    from: computeschedule.json
 
 ```
 
@@ -192,17 +158,6 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computeschedule.json
     where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for settings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: The property correlationid is part of the existing API contract and cannot be renamed without a breaking change.
-    from: computeschedule.json
 
 ```
 
@@ -213,18 +168,6 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 ```yaml $(tag) == 'package-2024-10-01'
 input-file:
   - Microsoft.ComputeSchedule/stable/2024-10-01/computeschedule.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for settings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: The property correlationid is part of the existing API contract and cannot be renamed without a breaking change.
-    from: computeschedule.json
 ```
 
 
@@ -235,18 +178,6 @@ These settings apply only when `--tag=package-2024-08-15-preview` is specified o
 ```yaml $(tag) == 'package-2024-08-15-preview'
 input-file:
   - Microsoft.ComputeSchedule/preview/2024-08-15-preview/computeschedule.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for settings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
-  - code: AvoidAdditionalProperties
-    reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
-    from: computeschedule.json
-    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: The property correlationid is part of the existing API contract and cannot be renamed without a breaking change.
-    from: computeschedule.json
 ```
 
 ---
