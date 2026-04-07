@@ -47,8 +47,8 @@ interface Roles {
   @Azure.Core.useFinalStateVia("location")
   delete is ArmResourceDeleteWithoutOkAsync<
     Role,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Role> &
-      ArmLroLocationHeader<FinalResult = Role>
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
