@@ -437,7 +437,8 @@ alias ListPoolUsageMetricsOptionalParameters = {
     start time of the last aggregation interval currently available.
     """)
   @query
-  @clientName("starttime", "csharp,python,go")
+  @clientName("starttime", "csharp,javascript,go")
+  @clientName("start_time", "python")
   startTime?: utcDateTime;
 
   @doc("""
@@ -446,6 +447,7 @@ alias ListPoolUsageMetricsOptionalParameters = {
     last aggregation interval currently available.
     """)
   @query
+  @clientName("end_time", "python")
   endtime?: utcDateTime;
 
   @doc("""
