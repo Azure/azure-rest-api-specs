@@ -54,6 +54,9 @@ union ManagedIdentityType {
 
   @doc("Both system and user assigned managed identities.")
   `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
+
+  @doc("Both user and system assigned managed identities (alternate ordering).")
+  `UserAssigned,SystemAssigned`: "UserAssigned,SystemAssigned",
 }
 
 @doc("User assigned identity properties.")
@@ -150,7 +153,7 @@ model EnergyServiceProperties {
 @doc("The data partition name.")
 model DataPartitionNames {
   @doc("The name of the data partition.")
-  name?: string;
+  name: string;
 }
 
 @doc("The resource model definition used for updating a tracked ARM resource.")
@@ -178,7 +181,7 @@ model EnergyServicePropertiesPatch {
 @doc("Defines the partition add or remove action properties.")
 model DataPartitionAddOrRemoveRequest {
   @doc("The data partition name.")
-  name?: DataPartitionNames;
+  name: DataPartitionNames;
 }
 
 @doc("Defines the properties of an individual data partition.")

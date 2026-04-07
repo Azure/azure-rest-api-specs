@@ -321,9 +321,9 @@
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$"
           },
           {
-            "name": "properties",
+            "name": "resource",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The resource properties to update.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EnergyResourceUpdate"
@@ -452,7 +452,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/listPartitions": {
@@ -554,7 +558,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -567,7 +575,10 @@
           "$ref": "#/definitions/DataPartitionNames",
           "description": "The data partition name."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "DataPartitionNames": {
       "type": "object",
@@ -577,7 +588,10 @@
           "type": "string",
           "description": "The name of the data partition."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "DataPartitionProperties": {
       "type": "object",
