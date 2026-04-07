@@ -156,6 +156,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/ImageTemplate"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL for checking the status of the asynchronous operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -376,6 +382,10 @@
                 "description": "The URL for checking the status of the asynchronous operation.",
                 "type": "string"
               },
+              "Location": {
+                "description": "The URL to query for the result of the asynchronous operation.",
+                "type": "string"
+              },
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before querying the operation status.",
                 "type": "integer",
@@ -434,6 +444,10 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "URI to poll for the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to query for the result of the asynchronous operation.",
                 "type": "string"
               }
             }
@@ -678,6 +692,10 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Trigger"
+            },
+            "Azure-AsyncOperation": {
+              "description": "The URL for checking the status of the asynchronous operation.",
+              "type": "string"
             }
           },
           "default": {
