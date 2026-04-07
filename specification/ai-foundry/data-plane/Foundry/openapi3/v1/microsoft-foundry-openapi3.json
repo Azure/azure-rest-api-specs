@@ -8486,7 +8486,7 @@
           "200": {
             "description": "The response body for downloading a skill package.",
             "content": {
-              "application/gzip": {
+              "application/zip": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -8518,7 +8518,7 @@
     "/skills:import": {
       "post": {
         "operationId": "Skills_createSkillFromPackage",
-        "description": "Creates a skill from a gzip package.",
+        "description": "Creates a skill from a zip package.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8571,14 +8571,14 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/gzip": {
+            "application/zip": {
               "schema": {
                 "type": "string",
                 "format": "binary"
               }
             }
           },
-          "description": "The gzip package used to create the skill."
+          "description": "The zip package used to create the skill."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -36780,7 +36780,7 @@
           },
           "has_blob": {
             "type": "boolean",
-            "description": "Whether the skill was created from a gzip blob package."
+            "description": "Whether the skill was created from a zip blob package."
           },
           "name": {
             "type": "string",

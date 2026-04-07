@@ -25,9 +25,9 @@ alias CreateSkillRequest = {
 alias CreateSkillFromPackageRequest = {
   @doc("The content type of the incoming skill package payload.")
   @header("Content-Type")
-  content_type: "application/gzip";
+  content_type: "application/zip";
 
-  @doc("The gzip package used to create the skill.")
+  @doc("The zip package used to create the skill.")
   @body
   body: bytes;
 };
@@ -75,7 +75,7 @@ model SkillObject {
   @doc("The unique identifier of the skill.")
   skill_id: string;
 
-  @doc("Whether the skill was created from a gzip blob package.")
+  @doc("Whether the skill was created from a zip blob package.")
   has_blob: boolean;
 
   @doc("The unique name of the skill.")
@@ -102,9 +102,9 @@ model DeleteSkillResponse {
 model DownloadSkillResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")
-  content_type: "application/gzip";
+  content_type: "application/zip";
 
-  @doc("The gzip skill package content.")
+  @doc("The zip skill package content.")
   @body
   body: bytes;
 }
