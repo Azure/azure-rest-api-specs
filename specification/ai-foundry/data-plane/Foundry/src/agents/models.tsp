@@ -11,6 +11,7 @@ const AllConditionalAgentDefinitionPreviews = #{
     AgentDefinitionOptInKeys.hosted_agents_v1_preview,
     AgentDefinitionOptInKeys.container_agents_v1_preview,
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
+    AgentDefinitionOptInKeys.code_agents_v1_preview
   ],
 };
 
