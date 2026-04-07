@@ -5550,6 +5550,9 @@
           "Create a scale set with automatic repairs enabled": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithAutomaticRepairs.json"
           },
+          "Create a scale set with automatic sku migration policy": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithAutomaticSkuMigrationPolicy.json"
+          },
           "Create a scale set with boot diagnostics.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithBootDiagnostics.json"
           },
@@ -12560,6 +12563,16 @@
         }
       }
     },
+    "AutomaticSkuMigrationPolicy": {
+      "type": "object",
+      "description": "Specifies the automatic sku migration policy",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether automatic sku migration should be enabled on the virtual machine scale set. The default value is false."
+        }
+      }
+    },
     "AutomaticZoneRebalancingPolicy": {
       "type": "object",
       "description": "The configuration parameters used while performing automatic AZ balancing.",
@@ -17595,6 +17608,10 @@
         "allocationStrategy": {
           "$ref": "#/definitions/AllocationStrategy",
           "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated."
+        },
+        "automaticSkuMigrationPolicy": {
+          "$ref": "#/definitions/AutomaticSkuMigrationPolicy",
+          "description": "Specifies the automatic sku migration policy"
         }
       }
     },
