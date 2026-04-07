@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "properties": {
+        "quantity": 25
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "MinimumAddOnLicensesNotIncluded",
+        "reason": "Minimum add on licenses were not included",
+        "updateScenario": "ChangeQuantity",
+        "additionalInfo": {
+          "refundableQuantity": null,
+          "coTerm": null,
+          "addOn": {
+            "isEligible": "Ineligible",
+            "ineligibilityReasons": [
+              "MinimumAddOnLicensesNotIncluded"
+            ],
+            "eligibilityConstraints": [
+              {
+                "constraintType": "MinimumAddOnPercentageQuantityOfBase",
+                "isEligible": "Eligible"
+              }
+            ]
+          },
+          "promotion": null,
+          "futurePrice": null
+        }
+      }
+    }
+  },
+  "operationId": "SaasResources_CanUpdate",
+  "title": "Update AddOn - Failed"
+}

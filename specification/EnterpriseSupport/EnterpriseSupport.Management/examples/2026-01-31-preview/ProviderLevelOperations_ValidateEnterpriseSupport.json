@@ -1,0 +1,61 @@
+{
+  "operationId": "ProviderLevelOperations_ValidateEnterpriseSupport",
+  "title": "ValidateEnterpriseSupportEligibility",
+  "parameters": {
+    "api-version": "2026-01-31-preview",
+    "body": {
+      "lineItems": [
+        {
+          "scope": "/providers/Microsoft.Billing/billingAccounts/ba1",
+          "upn": "base-upn",
+          "quantity": 1,
+          "market": "US",
+          "serviceStartDate": "2026-02-01T00:00:00.000Z"
+        },
+        {
+          "scope": "/providers/Microsoft.Billing/billingAccounts/ba1/billingProfiles/bg1",
+          "upn": "base-upn",
+          "quantity": 1,
+          "market": "US",
+          "serviceStartDate": "2026-02-01T00:00:00.000Z"
+        },
+        {
+          "scope": "/providers/Microsoft.Billing/billingAccounts/ba1/billingProfiles/bg1",
+          "upn": "addon-upn",
+          "quantity": 1,
+          "market": "US",
+          "serviceStartDate": "2026-02-01T00:00:00.000Z"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "lineItems": [
+          {
+            "scope": "/providers/Microsoft.Billing/billingAccounts/ba1",
+            "upn": "base-upn",
+            "quantity": 1,
+            "isEligible": "undetermined",
+            "reason": "billing profile info is missing to determine eligibility"
+          },
+          {
+            "scope": "/providers/Microsoft.Billing/billingAccounts/ba1/billingProfiles/bg1",
+            "upn": "base-upn",
+            "quantity": 1,
+            "isEligible": "ineligible",
+            "reason": "Customer already has support base",
+            "reasonCode": 1
+          },
+          {
+            "scope": "/providers/Microsoft.Billing/billingAccounts/ba1/billingProfiles/bg1",
+            "upn": "addon-upn",
+            "quantity": 1,
+            "isEligible": "eligible"
+          }
+        ]
+      }
+    }
+  }
+}

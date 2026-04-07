@@ -14,19 +14,19 @@ namespace LiftrBase;
 @doc("Supported versions for LiftrBase resource model")
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  v1_preview: "2023-06-01-preview",
+  v1_preview: "2024-10-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  v2_preview: "2024-06-01-preview",
+  v2_preview: "2024-11-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  v3_preview: "2024-08-01-preview",
+  v1_stable: "2024-11-01",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  v4_preview: "2024-10-01-preview",
+  v2026_01_01_preview: "2026-01-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  v5_preview: "2024-11-01-preview",
+  v2026_03_01_preview: "2026-03-01-preview",
 }
 
 @doc("Marketplace subscription status")
@@ -59,15 +59,14 @@ model MarketplaceDetails {
   subscriptionStatus?: MarketplaceSubscriptionStatus;
 
   @doc("Offer details of the marketplace subscription")
-  offerDetails: OfferDetails;
-}
+  @madeOptional(Versions.v2026_03_01_preview)
+  offerDetails?: OfferDetails;
 
-@removed(Versions.v4_preview)
-@added(Versions.v2_preview)
-@doc("Marketplace plan details")
-model MarketplacePlanUpdate {
-  @doc("The plan id to change to.")
-  planId: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
+  @added(Versions.v2026_03_01_preview)
+  @doc("ARM ID of the Marketplace SaaS resource. Only used in Create operations.")
+  @visibility(Lifecycle.Create)
+  saaSResourceId?: string;
 }
 
 @doc("Offer details for the marketplace that is selected by the user")
@@ -162,7 +161,8 @@ model BaseResourceProperties<TUserDetailsExtraProperties extends Model = UserDet
   marketplace: MarketplaceDetails;
 
   @doc("User details")
-  user: UserDetails<TUserDetailsExtraProperties>;
+  @madeOptional(Versions.v2026_03_01_preview)
+  user?: UserDetails<TUserDetailsExtraProperties>;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)

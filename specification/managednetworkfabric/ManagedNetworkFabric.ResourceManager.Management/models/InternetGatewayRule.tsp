@@ -3,10 +3,9 @@ import "./common.tsp";
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Internet Gateway Rule Properties defines the resource properties.")
-model InternetGatewayRuleProperties {
-  ...AnnotationResource;
-
+model InternetGatewayRuleProperties extends AnnotationResource {
   @doc("Rules for the InternetGateways")
   ruleProperties: RuleProperties;
 

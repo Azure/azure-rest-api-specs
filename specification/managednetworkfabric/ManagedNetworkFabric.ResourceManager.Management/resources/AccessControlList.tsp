@@ -49,10 +49,16 @@ interface AccessControlLists {
   delete is ArmResourceDeleteWithoutOkAsync<AccessControlList>;
 
   @doc("Implements AccessControlLists list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<AccessControlList>;
+  listByResourceGroup is ArmResourceListByParent<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements AccessControlLists list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<AccessControlList>;
+  listBySubscription is ArmListBySubscription<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
   @action("updateAdministrativeState")
@@ -82,11 +88,25 @@ interface AccessControlLists {
     CommonPostActionResponseForStateUpdate
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Implements the operation to the underlying resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    AccessControlList,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Implements the operation to the underlying resources.")
   validateConfiguration is ArmResourceActionAsync<
     AccessControlList,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 }
 
@@ -98,5 +118,11 @@ interface AccessControlLists {
   "Request payload."
 );
 @@doc(AccessControlLists.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(AccessControlLists.validateConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(AccessControlLists.validateConfiguration::parameters.body,
   "Request payload."
 );

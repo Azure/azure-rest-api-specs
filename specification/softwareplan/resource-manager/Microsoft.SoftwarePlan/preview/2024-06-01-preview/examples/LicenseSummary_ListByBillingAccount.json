@@ -1,0 +1,32 @@
+{
+  "title": "LicenseSummary_ListByBillingAccount",
+  "operationId": "LicenseSummary_ListByBillingAccount",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "billingAccountName": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01/providers/Microsoft.SoftwarePlan/licenseSummary/xxxx-xxxx-xxx-xxx:CFQ7TTC0LFLX:2024",
+            "name": "xxxx-xxxx-xxx-xxx:CFQ7TTC0LFLX:2024",
+            "type": "Microsoft.SoftwarePlan/LicenseSummary",
+            "properties": {
+              "billingAccountName": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01",
+              "billingProfileName": "xxxx-xxxx-xxx-xxx",
+              "productName": "Windows Server",
+              "productId": "CFQ7TTC0LFLX",
+              "productVersion": "2024",
+              "licenseQuantity": 10,
+              "softwareAssuranceQuantity": 5,
+              "lastRefreshedAt": "2025-07-21T18:08:26.140Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2019-04-01/providers/Microsoft.SoftwarePlan/softwareSubscriptions?api-version=2024-06-01-preview&skipToken=nextPageToken"
+      }
+    }
+  }
+}

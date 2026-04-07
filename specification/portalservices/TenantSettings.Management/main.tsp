@@ -32,4 +32,7 @@ enum Versions {
 
   @doc("Azure Portal Services tenant settings management API version 2025-11-01.")
   v2025_11_01: "2025-11-01",
+
+  @doc("Azure Portal Services tenant settings management API version 2026-02-01-preview.")
+  v2026_02_01_preview: "2026-02-01-preview",
 }

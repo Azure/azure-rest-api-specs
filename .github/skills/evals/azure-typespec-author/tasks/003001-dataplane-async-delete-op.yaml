@@ -1,0 +1,19 @@
+id: 003001-dataplane-async-delete-op
+name: "LRO: Dataplane async delete operation"
+description: |
+  Test adding an async delete operation for a data-plane service resource.
+  Based on benchmark case 003001-dataplane-async-delete-op.
+tags:
+  - lro
+  - operations
+  - dataplane
+inputs:
+  prompt: "Add an async delete operation for StacItems"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

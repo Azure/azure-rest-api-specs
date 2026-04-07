@@ -11,11 +11,14 @@ namespace Microsoft.HybridContainerService;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 /**
- * Network policy used for building Kubernetes network. Possible values include: 'calico'.
+ * Network policy used for building Kubernetes network. Possible values include: 'calico', 'cilium'.
  */
 union NetworkPolicy {
   /** Use the calico policy */
   calico: "calico",
+
+  /** Use the cilium policy */
+  cilium: "cilium",
 
   string,
 }
@@ -53,40 +56,6 @@ union OSSKU {
    * Use Windows2022 as the OS for node images.
    */
   Windows2022: "Windows2022",
-}
-
-/**
- * Provisioning state of the resource
- */
-union ResourceProvisioningState {
-  string,
-
-  /** Operation successful */
-  Succeeded: "Succeeded",
-
-  /** Operation failed */
-  Failed: "Failed",
-
-  /** Operation cancelled */
-  Canceled: "Canceled",
-
-  /** Operation is pending */
-  Pending: "Pending",
-
-  /** Resource is being created */
-  Creating: "Creating",
-
-  /** Resource is being delete */
-  Deleting: "Deleting",
-
-  /** Update in progress */
-  Updating: "Updating",
-
-  /** Upgrade in progress */
-  Upgrading: "Upgrading",
-
-  /** Operation accepted */
-  Accepted: "Accepted",
 }
 
 /**
@@ -238,6 +207,9 @@ union ProvisioningState {
    */
   Updating: "Updating",
 
+  /** Upgrade in progress */
+  Upgrading: "Upgrading",
+
   /**
    * Accepted state.
    */
@@ -313,7 +285,7 @@ model ProvisionedClusterProperties {
    * The status of the latest long running operation for the provisioned cluster.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * The observed status of the provisioned cluster.
@@ -349,7 +321,7 @@ model LinuxProfilePropertiesSsh {
   /**
    * The list of SSH public keys used to authenticate with VMs. A maximum of 1 key may be specified.
    */
-  @Azure.ResourceManager.identifiers(#["keyData"])
+  @identifiers(#["keyData"])
   publicKeys?: LinuxProfilePropertiesSshPublicKeysItem[];
 }
 
@@ -641,12 +613,80 @@ model ProvisionedClusterPropertiesStatus {
    * The current state of the provisioned cluster.
    */
   @visibility(Lifecycle.Read)
-  currentState?: ResourceProvisioningState;
+  currentState?: ProvisioningState;
+
+  /**
+   * The status of cluster features.
+   */
+  @visibility(Lifecycle.Read)
+  featuresStatus?: FeaturesStatus;
 
   /**
    * Error messages during a provisioned cluster operation or steady state.
    */
   errorMessage?: string;
+}
+
+/**
+ * The status profile of specific features on the provisioned cluster.
+ */
+model FeaturesStatus {
+  /**
+   * The status of workload identity key rotation
+   */
+  keyRotationStatus?: KeyRotationStatus;
+}
+
+/**
+ * The status of workload identity key rotation.
+ */
+model KeyRotationStatus {
+  /**
+   * Timestamp when the new key was added to the system.
+   */
+  keyAdditionAt?: string;
+
+  /**
+   * Timestamp when the next scheduled key rotation will occur.
+   */
+  nextScheduledRotation?: string;
+
+  /**
+   * Timestamp for when old public key is rotated out. This breaks static tokens, which must be rotated before this deadline.
+   */
+  previousKeyExpiresAt?: string;
+
+  /**
+   * Timestamp when the new key is activated and becomes the primary key.
+   */
+  newKeyActivatedAt?: string;
+
+  /**
+   * The current state of the key rotation operation. Possible values include: 'Pending', 'Failed', 'Success'.
+   */
+  state?: KeyRotationState;
+}
+
+/**
+ * The state of a key rotation operation.
+ */
+union KeyRotationState {
+  string,
+
+  /**
+   * Key rotation is pending.
+   */
+  Pending: "Pending",
+
+  /**
+   * Key rotation has failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * Key rotation completed successfully.
+   */
+  Success: "Success",
 }
 
 /**
@@ -842,7 +882,7 @@ model ProvisionedClusterUpgradeProfileProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * The list of available kubernetes version upgrades for the control plane.
@@ -869,7 +909,7 @@ model ProvisionedClusterPoolUpgradeProfile {
   /**
    * List of available kubernetes versions for upgrade.
    */
-  @Azure.ResourceManager.identifiers(#["kubernetesVersion", "isPreview"])
+  @identifiers(#["kubernetesVersion", "isPreview"])
   upgrades?: ProvisionedClusterPoolUpgradeProfileProperties[];
 }
 
@@ -908,7 +948,7 @@ model HybridIdentityMetadataProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -928,7 +968,7 @@ model AgentPoolProvisioningStatus {
    * The status of the latest long running operation for the agent pool.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * The observed status of the agent pool.
@@ -944,7 +984,7 @@ model AgentPoolProvisioningStatusStatus {
    * The current state of the agent pool.
    */
   @visibility(Lifecycle.Read)
-  currentState?: ResourceProvisioningState;
+  currentState?: ProvisioningState;
 
   /**
    * Error messages during an agent pool operation or steady state.
@@ -988,7 +1028,7 @@ model ListCredentialResponse {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  status?: ResourceProvisioningState;
+  status?: ProvisioningState;
 
   /**
    * Error listing the kubeconfig credential response.
@@ -1024,7 +1064,7 @@ model ListCredentialResponseProperties {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["name", "value"])
+  @identifiers(#["name", "value"])
   kubeconfigs?: CredentialResult[];
 }
 
@@ -1053,7 +1093,7 @@ model KubernetesVersionProfileProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * List of supported Kubernetes versions
@@ -1138,7 +1178,7 @@ model VmSkuProfileProperties {
    * Provisioning state of the resource
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /**
    * List of supported VM SKUs.
@@ -1161,7 +1201,7 @@ model VmSkuProperties {
    * The list of name-value pairs to describe VM SKU capabilities like MemoryGB, vCPUs, etc.
    */
   @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["name", "value"])
+  @identifiers(#["name", "value"])
   capabilities?: VmSkuCapabilities[];
 
   /**
@@ -1212,13 +1252,13 @@ model VirtualNetworkProperties {
   /**
    * Range of IP Addresses for Kubernetes API Server and services if using HA Proxy load balancer
    */
-  @Azure.ResourceManager.identifiers(#["startIP", "endIP"])
+  @identifiers(#["startIP", "endIP"])
   vipPool?: VirtualNetworkPropertiesVipPoolItem[];
 
   /**
    * Range of IP Addresses for Kubernetes node VMs
    */
-  @Azure.ResourceManager.identifiers(#["startIP", "endIP"])
+  @identifiers(#["startIP", "endIP"])
   vmipPool?: VirtualNetworkPropertiesVmipPoolItem[];
 
   /**

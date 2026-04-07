@@ -37,6 +37,9 @@ model SchemaRequestProperties {
 
   @doc("Schema Format")
   format: SchemaFormat;
+
+  @doc("networkProperties config.")
+  networkProperties?: Models.Network.NetworkProperties;
 }
 
 @doc("Response item of Schema")

@@ -1,0 +1,28 @@
+{
+  "title": "TenantLevelValidateSoftwareSubscriptionCreate_Success",
+  "operationId": "TenantLevelValidateSoftwareSubscriptionCreate",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "billingAccountName": "12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2024-06-01",
+    "body": {
+      "properties": {
+        "productCode": "99908978-5FDA-49EF-9EAB-E7983DBA90A2",
+        "quantity": 1,
+        "autoRenew": "Disabled",
+        "displayName": "Visual Studio Enterprise subscription",
+        "startAt": "2024-01-01T00:00:00Z",
+        "endDate": "2024-12-31T23:59:59Z",
+        "cotermBillingSubscriptionId": "/providers/Microsoft.Billing/billingAccounts/12345678-1234-1234-1234-123456789012:12345678-1234-1234-1234-123456789012_2024-06-01/billingSubscriptions/12345678-1234-1234-1234-123456789012",
+        "parentSoftwareSubscriptionId": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.SoftwarePlan/softwareSubscriptions/visualstudio-enterprise-001"
+      },
+      "location": "Global"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "validationResult": "Passed"
+      }
+    }
+  }
+}

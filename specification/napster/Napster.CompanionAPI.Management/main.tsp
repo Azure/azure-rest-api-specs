@@ -25,7 +25,7 @@ namespace Napster.CompanionAPI {
   enum Versions {
     /** 2025-12-24-preview version */
     @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-    @useDependency(LiftrBase.Versions.v2_preview)
+    @useDependency(LiftrBase.Versions.v3_preview)
     v2025_12_24_preview: "2025-12-24-preview",
   }
 
@@ -34,6 +34,8 @@ namespace Napster.CompanionAPI {
     /** The name of the application. */
     @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
     @doc("Application name")
+    @minLength(2)
+    @maxLength(40)
     application: string;
   }
 
@@ -93,9 +95,9 @@ namespace Napster.CompanionAPI {
     saasGuid: string;
 
     /**
-     * Publisher Id for NewRelic resource
+     * Publisher Id for Napster resource
      */
-    publisherId: string;
+    publisherId?: string;
   }
 
   /**
@@ -143,9 +145,9 @@ namespace Napster.CompanionAPI {
     @list
     listBySubscription is ArmListBySubscription<OrganizationResource>;
     /**
-     * Links a new SaaS to the newrelic organization of the underlying monitor.
+     * Links a new SaaS to the Napster organization of the underlying monitor.
      */
-    @summary("Links a new SaaS to the newrelic organization of the underlying monitor.")
+    @summary("Links a new SaaS to the Napster organization of the underlying monitor.")
     @Azure.Core.useFinalStateVia("azure-async-operation")
     linkSaaS is ArmResourceActionAsync<
       OrganizationResource,
@@ -156,7 +158,7 @@ namespace Napster.CompanionAPI {
     >;
 
     /**
-     * Returns the latest SaaS linked to the newrelic organization of the underlying monitor.
+     * Returns the latest SaaS linked to the Napster organization of the underlying monitor.
      */
     latestLinkedSaaS is ArmResourceActionSync<
       OrganizationResource,
@@ -173,7 +175,7 @@ namespace Napster.CompanionAPI {
      */
     @autoRoute
     @action("activateSaaS")
-    activateResource is ArmProviderActionSync<
+    activateResource is ArmProviderActionAsync<
       Request = ActivateSaaSParameterRequest,
       Response = SaaSResourceDetailsResponse,
       Scope = SubscriptionActionScope,

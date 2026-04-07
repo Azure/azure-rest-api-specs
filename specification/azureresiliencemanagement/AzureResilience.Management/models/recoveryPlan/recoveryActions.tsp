@@ -114,7 +114,8 @@ model TestFailoverCleanupRequest {
 @added(Versions.v2026_03_01_preview)
 @doc("Request body for providing user input for a recovery action.")
 model RecoveryActionRequest {
+  @added(Versions.v2026_03_01_preview)
   @doc("User-provided input for the action.")
-  @maxLength(1024)
+  @maxLength(100)
   description?: string;
 }

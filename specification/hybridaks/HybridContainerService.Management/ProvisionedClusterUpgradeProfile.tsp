@@ -34,4 +34,12 @@ interface ProvisionedClusterUpgradeProfiles {
     ProvisionedClusterUpgradeProfile,
     BaseParameters = ConnectedClusterResourceUriParameters
   >;
+
+  /**
+   * Lists the upgrade profiles of a ProvisionedCluster resource associated with the ConnectedCluster
+   */
+  listUpgradeProfile is ArmResourceListByParent<
+    ProvisionedClusterUpgradeProfile,
+    BaseParameters = ConnectedClusterResourceUriParameters
+  >;
 }

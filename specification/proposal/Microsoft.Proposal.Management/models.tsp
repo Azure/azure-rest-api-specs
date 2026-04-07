@@ -62,44 +62,13 @@ union ProposalStatus {
   Ended: "Ended",
 }
 
-@doc("The line items to purchase in the proposal.")
-model LineItem {
-  @doc("The product code of the line item as a UUID that uniquely identifies this line item within the proposal.")
-  productCode: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The resource URI of the line item.")
-  resourceUri?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The status of the line item.")
-  status?: LineItemStatus;
-
-  @visibility(Lifecycle.Read)
-  @doc("The error code if any error occurs during processing the line item.")
-  errorCode?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The error message if any error occurs during processing the line item.")
-  errorMessage?: string;
-}
-
-@doc("The status of the line item in the proposal.")
+@doc("The status of the line item.")
 union LineItemStatus {
   string,
 
-  @doc("NotDeployed - Initial status when a line item is created.")
-  NotDeployed: "NotDeployed",
+  @doc("Pending - The line item is pending processing.")
+  Pending: "Pending",
 
-  @doc("Success - status when a line item is successfully deployed.")
-  Success: "Success",
-
-  @doc("InProgress - status when a line item deployment is in progress.")
-  InProgress: "InProgress",
-
-  @doc("Canceled - status when a line item deployment is canceled.")
-  Canceled: "Canceled",
-
-  @doc("Failed - status when a line item deployment has failed.")
-  Failed: "Failed",
+  @doc("Completed - The line item has been successfully completed.")
+  Completed: "Completed",
 }

@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./PostgresqlModels.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -11,6 +12,12 @@ namespace Microsoft.DataMigration;
 
 @doc("Properties of the MigrationService resource.")
 model MigrationServiceProperties {
+  @doc("Source database engine type")
+  sourceEngine: MigrationServiceSourceEngine;
+
+  @doc("Target database engine type")
+  targetEngine: MigrationServiceTargetEngine;
+
   @doc("The provisioning state of the migration service.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;

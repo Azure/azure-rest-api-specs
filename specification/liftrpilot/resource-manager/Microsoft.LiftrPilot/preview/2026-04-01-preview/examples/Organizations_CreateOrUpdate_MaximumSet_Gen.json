@@ -1,0 +1,169 @@
+{
+  "title": "Organizations_CreateOrUpdate_MaximumSet",
+  "operationId": "Organizations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "E607A593-DCCC-45BE-89AE-C83A7A87859B",
+    "resourceGroupName": "rgpilot",
+    "organizationName": "contosoOrg",
+    "resource": {
+      "properties": {
+        "marketplace": {
+          "subscriptionId": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+          "subscriptionStatus": "PendingFulfillmentStart",
+          "offerDetails": {
+            "publisherId": "contoso",
+            "offerId": "contoso-pilot-offer",
+            "planId": "contoso-pilot-plan",
+            "planName": "Contoso Pilot Plan",
+            "termUnit": "P1M",
+            "termId": "term-001"
+          }
+        },
+        "user": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "emailAddress": "john.doe@example.com",
+          "upn": "john.doe@contoso.com",
+          "phoneNumber": "+1-425-555-1234"
+        },
+        "isMoboFlowEnabled": true
+      },
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {
+          "key7461": {}
+        }
+      },
+      "tags": {
+        "environment": "test"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "marketplace": {
+            "subscriptionId": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+            "subscriptionStatus": "PendingFulfillmentStart",
+            "offerDetails": {
+              "publisherId": "contoso",
+              "offerId": "contoso-pilot-offer",
+              "planId": "contoso-pilot-plan",
+              "planName": "Contoso Pilot Plan",
+              "termUnit": "P1M",
+              "termId": "term-001"
+            }
+          },
+          "user": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "emailAddress": "john.doe@example.com",
+            "upn": "john.doe@contoso.com",
+            "phoneNumber": "+1-425-555-1234"
+          },
+          "provisioningState": "Succeeded",
+          "managedOnBehalfOfConfiguration": {
+            "moboBrokerResources": [
+              {
+                "id": "/subscriptions/e607a593-dccc-45be-89ae-c83a7a87859b/resourceGroups/rgpilot/providers/Microsoft.ManagedServices/brokerResources/broker1"
+              }
+            ]
+          },
+          "isMoboFlowEnabled": true
+        },
+        "identity": {
+          "principalId": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+          "tenantId": "7e2504e0-4f89-11d3-9a0c-0305e82c3301",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key7461": {
+              "principalId": "4f2504e0-4f89-11d3-9a0c-0305e82c3301",
+              "clientId": "5f2504e0-4f89-11d3-9a0c-0305e82c3301"
+            }
+          }
+        },
+        "tags": {
+          "environment": "test"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/e607a593-dccc-45be-89ae-c83a7a87859b/resourceGroups/rgpilot/providers/Microsoft.LiftrPilot/organizations/contosoOrg",
+        "name": "contosoOrg",
+        "type": "Microsoft.LiftrPilot/organizations",
+        "systemData": {
+          "createdBy": "john.doe@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T07:50:44.164Z",
+          "lastModifiedBy": "john.doe@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-01T07:50:44.164Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "marketplace": {
+            "subscriptionId": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+            "subscriptionStatus": "PendingFulfillmentStart",
+            "offerDetails": {
+              "publisherId": "contoso",
+              "offerId": "contoso-pilot-offer",
+              "planId": "contoso-pilot-plan",
+              "planName": "Contoso Pilot Plan",
+              "termUnit": "P1M",
+              "termId": "term-001"
+            }
+          },
+          "user": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "emailAddress": "john.doe@example.com",
+            "upn": "john.doe@contoso.com",
+            "phoneNumber": "+1-425-555-1234"
+          },
+          "provisioningState": "Succeeded",
+          "managedOnBehalfOfConfiguration": {
+            "moboBrokerResources": [
+              {
+                "id": "/subscriptions/e607a593-dccc-45be-89ae-c83a7a87859b/resourceGroups/rgpilot/providers/Microsoft.ManagedServices/brokerResources/broker1"
+              }
+            ]
+          },
+          "isMoboFlowEnabled": true
+        },
+        "identity": {
+          "principalId": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+          "tenantId": "7e2504e0-4f89-11d3-9a0c-0305e82c3301",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key7461": {
+              "principalId": "4f2504e0-4f89-11d3-9a0c-0305e82c3301",
+              "clientId": "5f2504e0-4f89-11d3-9a0c-0305e82c3301"
+            }
+          }
+        },
+        "tags": {
+          "environment": "test"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/e607a593-dccc-45be-89ae-c83a7a87859b/resourceGroups/rgpilot/providers/Microsoft.LiftrPilot/organizations/contosoOrg",
+        "name": "contosoOrg",
+        "type": "Microsoft.LiftrPilot/organizations",
+        "systemData": {
+          "createdBy": "john.doe@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T07:50:44.164Z",
+          "lastModifiedBy": "john.doe@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-01T07:50:44.164Z"
+        }
+      }
+    }
+  }
+}

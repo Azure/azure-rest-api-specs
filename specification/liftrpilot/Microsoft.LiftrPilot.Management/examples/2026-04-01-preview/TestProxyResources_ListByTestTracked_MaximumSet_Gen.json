@@ -1,0 +1,49 @@
+{
+  "title": "TestProxyResources_ListByTestTracked_MaximumSet",
+  "operationId": "TestProxyResources_ListByTestTracked",
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "E607A593-DCCC-45BE-89AE-C83A7A87859B",
+    "resourceGroupName": "rgpilot",
+    "testTrackedResourceName": "testResource1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "partnerProperties": {
+                "region": "eastus",
+                "subdomain": "contoso"
+              },
+              "singleSignOnProperties": {
+                "type": "Saml",
+                "state": "Initial",
+                "enterpriseAppId": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+                "url": "https://login.microsoftonline.com/contoso.com",
+                "aadDomains": [
+                  "contoso.com"
+                ]
+              },
+              "description": "Test proxy resource for Contoso Pilot",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/e607a593-dccc-45be-89ae-c83a7a87859b/resourceGroups/rgpilot/providers/Microsoft.LiftrPilot/testTrackedResources/testResource1/testProxyResources/testProxy1",
+            "name": "testProxy1",
+            "type": "Microsoft.LiftrPilot/testTrackedResources/testProxyResources",
+            "systemData": {
+              "createdBy": "john.doe@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-01T07:50:44.164Z",
+              "lastModifiedBy": "john.doe@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-01T07:50:44.164Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/nextpage"
+      }
+    }
+  }
+}

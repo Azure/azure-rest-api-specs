@@ -54,6 +54,18 @@ union FabricPrivateLinksAction {
   Disable: "Disable",
 }
 
+/** State of the public network access. */
+@added(Versions.v2025_11_01_preview)
+union PublicNetworkAccess {
+  string,
+
+  /** The public network access is enabled. */
+  Enabled: "Enabled",
+
+  /** The public network access is disabled. */
+  Disabled: "Disabled",
+}
+
 @doc("Details of the Message Catalog.")
 model MessagingCatalogProperties {
   @doc("A unique absolute URL for an catalog.")
@@ -97,6 +109,15 @@ model MessagingCatalogProperties {
   @doc("The provisioning state of the application rule collection resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** List of private endpoint connections. */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_11_01_preview)
+  privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /** Gets or sets allow or disallow public network access to resource. */
+  @added(Versions.v2025_11_01_preview)
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @doc("Additional metadata about the entity.")

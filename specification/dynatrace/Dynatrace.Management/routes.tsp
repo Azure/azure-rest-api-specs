@@ -49,7 +49,7 @@ interface SaaSOperationGroup {
   @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
   @autoRoute
   @action("activateSaaS")
-  activateSaaS is ArmProviderActionAsync<
+  activateSaaS is ArmProviderActionSync<
     Request = ActivateSaaSParameterRequest,
     Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,

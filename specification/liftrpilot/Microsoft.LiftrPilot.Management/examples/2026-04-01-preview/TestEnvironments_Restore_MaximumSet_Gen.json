@@ -1,0 +1,29 @@
+{
+  "title": "TestEnvironments_Restore_MaximumSet",
+  "operationId": "TestEnvironments_Restore",
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "3f2504e0-4f89-11d3-9a0c-0305e82c3301",
+    "resourceGroupName": "rg-pilot",
+    "testTrackedResourceName": "testResource1",
+    "testProxyResourceName": "testProxy1",
+    "testChildPureProxyResourceName": "testChildProxy1",
+    "testWorkspaceName": "testWorkspace1",
+    "testEnvironmentName": "testEnv1",
+    "request": {
+      "inPlaceRestore": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "taskId": 23
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

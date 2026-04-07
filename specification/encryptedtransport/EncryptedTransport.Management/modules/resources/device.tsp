@@ -13,7 +13,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
 
 namespace Microsoft.EncryptedTransport;
 
@@ -32,30 +31,13 @@ model Device is TrackedResource<DeviceProperties> {
 @doc("Device Properties")
 model DeviceProperties {
   @doc("The serial number that identifies the end-user device. This must be unique at the account scope.")
-  @added(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
   @pattern("^[a-zA-Z0-9]{3,24}$")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   serialNumber: string;
 
-  @doc("(Deprecated due to visibility change) The serial number that identifies the end-user device. This must be unique at the account scope.")
-  @renamedFrom(
-    Microsoft.EncryptedTransport.Versions.v2025_10_01_preview,
-    "serialNumber"
-  )
-  @removed(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
-  @pattern("^[a-zA-Z0-9]{3,24}$")
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  oldSerialNumber: string;
-
   @doc("Reference to an existing device profile.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   deviceProfileId: DeviceProfileId;
-
-  @doc("The MAC address for the end user device.")
-  @pattern("^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$")
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @removed(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
-  macAddress: string;
 
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)

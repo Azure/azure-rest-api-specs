@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./configurationstate.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ArcContainerStorage;
 
@@ -39,6 +40,10 @@ model EdgeStorageConfigurationProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
+  @added(Versions.v2026_03_01_preview)
+  @doc("Object containing optional storage proxy configuration")
+  storageProxySettings?: StorageProxySettings;
+
   @doc("Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.")
   @visibility(Lifecycle.Read)
   status?: EdgeStorageConfigurationStatus;
@@ -57,6 +62,18 @@ model WorkloadIdentity {
 
   @doc("The tenant ID for the workload identity.")
   tenantId: UUIDType;
+}
+
+//
+// Storage Proxy
+//
+@added(Versions.v2026_03_01_preview)
+@doc("Configuration that will direct local storage network traffic to go to an existing proxy endpoint")
+model StorageProxySettings {
+  @doc("The https proxy endpoint")
+  @minLength(3)
+  @maxLength(1024)
+  httpsProxy: string;
 }
 
 //

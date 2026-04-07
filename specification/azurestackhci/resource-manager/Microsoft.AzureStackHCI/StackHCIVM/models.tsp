@@ -1537,6 +1537,43 @@ model InboundNATRuleProperties {
   publicIPAddress: PublicIPAddressArmReference;
 }
 
+@added(Versions.v2026_04_01_preview)
+@doc("Inbound rule properties - extends InboundNATRuleProperties with additional status tracking")
+model InboundRuleProperties {
+  ...InboundNATRuleProperties;
+
+  @doc("Provisioning state of the inbound rule")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Inbound Rule")
+  @visibility(Lifecycle.Read)
+  status?: InboundRuleStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The observed state of inbound rule")
+model InboundRuleStatus {
+  @doc("InboundRule provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("InboundRule provisioning status")
+  provisioningStatus?: InboundRuleStatusProvisioningStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Provisioning status of Inbound Rule")
+model InboundRuleStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the inbound rule")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the inbound rule [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("Inbound nat rule properties")
@@ -1564,7 +1601,8 @@ model NatGatewayProperties {
   subnets?: VirtualNetworkSubnetArmReference[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
-  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet. Removed in 2026-04-01-preview; use InboundRule Child resource instead.")
+  @removed(Versions.v2026_04_01_preview)
   @identifiers(#[])
   inboundNATRules?: InboundNATRule[];
 

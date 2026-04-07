@@ -1,0 +1,49 @@
+parameters:
+  "service-dir":
+    default: sdk/placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/CosmicRP.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Cosmic"
+    clear-output-folder: true
+    model-namespace: true
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Cosmic"
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cosmic"
+    namespace: "azure.mgmt.cosmic"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cosmic"
+    namespace: "com.azure.resourcemanager.cosmic"
+    service-name: "cosmic"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-cosmic"
+    experimental-extensible-enums: true
+    flavor: azure
+    package-details:
+      name: "@azure/arm-cosmic"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/cosmic"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcosmic"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcosmic"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: azure
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

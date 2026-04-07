@@ -27,7 +27,26 @@ These are the global settings for the hardware.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2025-12-04-preview
+tag: package-2026-02-26-preview
+```
+
+### Tag: package-2026-02-26-preview
+
+These settings apply only when `--tag=package-2026-02-26-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-26-preview'
+input-file:
+  - Microsoft.Hardware/preview/2026-02-26-preview/hardware.json
+suppressions:
+  - code: AllTrackedResourcesMustHaveDelete
+    where: $.definitions.ReturnOrder
+    reason: This is a false positive because we have a delete method defined, but it is not being detected and falsely flagged as missing delete. Here is the tracking issue - https://github.com/Azure/azure-openapi-validator/issues/799.
+  - code: TrackedResourcePatchOperation
+    where: $.definitions.ReturnOrder
+    reason: This is a false positive because we have a patch method defined.
+  - code: TrackedResourcePatchOperation
+    where: $.definitions.Order
+    reason: This is a false positive because we have a patch method defined.
 ```
 
 ### Tag: package-2025-12-04-preview

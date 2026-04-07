@@ -29,7 +29,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A Connector is a tracked ARM resource modeled as a sub-resource of a Storage Account")
 @parentResource(StorageAccount)
-model Connector is TrackedResource<ConnectorProperties> {
+model Connector is TrackedResource<ConnectorProperties, false> {
   @doc("The name of the storage connector")
   @pattern("^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$")
   @key("connectorName")
@@ -66,7 +66,7 @@ interface Connectors {
 @doc("A DataShare is a tracked ARM resource modeled as a sub-resource of a Storage Account")
 @parentResource(StorageAccount)
 @added(Versions.v2025_07_01_preview)
-model DataShare is TrackedResource<DataShareProperties> {
+model DataShare is TrackedResource<DataShareProperties, false> {
   @doc("The name of the Storage Data Share")
   @pattern("^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$")
   @key("dataShareName")

@@ -4553,7 +4553,7 @@
         "storageAccountId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The associated azure storage account ID.",
+          "description": "The associated Azure Storage Account ID.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4584,7 +4584,7 @@
         "storageAccountId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The associated azure storage account ID.",
+          "description": "The associated Azure Storage Account ID.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4697,7 +4697,7 @@
     },
     "Credential": {
       "type": "object",
-      "description": "An abstract representation of data store kind.",
+      "description": "An abstract representation of credential kind.",
       "properties": {
         "name": {
           "type": "string",
@@ -4709,7 +4709,7 @@
         },
         "kind": {
           "$ref": "#/definitions/CredentialType",
-          "description": "The data store kind.",
+          "description": "The credential kind.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4734,7 +4734,7 @@
     },
     "CredentialType": {
       "type": "string",
-      "description": "The kind of the credential used for RBAC against the data store.",
+      "description": "The kind of the credential used for RBAC against the store.",
       "enum": [
         "ManagedIdentity",
         "KeyVaultSecret"
@@ -5099,12 +5099,12 @@
     },
     "KeyVaultSecretCredential": {
       "type": "object",
-      "description": "SAS token credential properties",
+      "description": "Secret credential properties",
       "properties": {
         "secretName": {
           "type": "string",
           "format": "password",
-          "description": "The shared access token.",
+          "description": "The secret name.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -5374,7 +5374,7 @@
         "subnetId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The subnet.",
+          "description": "The node pool subnet.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5389,7 +5389,7 @@
         },
         "vmSize": {
           "$ref": "#/definitions/VmSize",
-          "description": "The Size of the underlying Azure VM.",
+          "description": "The size of the underlying Azure VM.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5898,7 +5898,7 @@
         "subnetId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM resource ID of the subnet. The subnetId should match the vnetId of supercomputers which will be used for running the tools that use the shared storage.",
+          "description": "The Azure resource ID of the subnet. The subnetId should match the vnetId of supercomputers which will be used for running the tools that use the shared storage.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -5935,7 +5935,7 @@
         "subnetId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM resource ID of the subnet. The subnetId should match the vnetId of supercomputers which will be used for running the tools that use the shared storage.",
+          "description": "The Azure resource ID of the subnet. The subnetId should match the vnetId of supercomputers which will be used for running the tools that use the shared storage.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -6021,7 +6021,7 @@
         },
         "workloadIdentities": {
           "type": "object",
-          "description": "User assigned identity IDs to be used by workloads as federated credentials running on supercomputer.",
+          "description": "User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.",
           "additionalProperties": {
             "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
@@ -6044,7 +6044,7 @@
       "properties": {
         "workloadIdentities": {
           "type": "object",
-          "description": "User assigned identity IDs to be used by workloads as federated credentials running on supercomputer.",
+          "description": "User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.",
           "additionalProperties": {
             "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
@@ -6105,7 +6105,7 @@
         },
         "systemSku": {
           "$ref": "#/definitions/SystemSku",
-          "description": "The SKU to use for the system nodepool.",
+          "description": "The SKU to use for the system node pool.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6179,9 +6179,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Standard_D4s_v6",
+            "name": "Standard_D4s_v6_legacy",
             "value": "Standard_D4s_v6 basic compute VM (default)",
-            "description": "Standard_D4s_v6 SKU"
+            "description": "Standard_D4s_v6 basic compute VM (default)"
           },
           {
             "name": "Standard_D4s_v5",
@@ -6487,7 +6487,7 @@
     },
     "WithProvisioningState": {
       "type": "object",
-      "description": "For tracking he status of the last operation.",
+      "description": "For tracking the status of the last operation.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -6503,7 +6503,7 @@
         "storageAccountId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The associated azure storage account ID.",
+          "description": "The associated Azure Storage Account ID.",
           "x-ms-mutability": [
             "read",
             "create"

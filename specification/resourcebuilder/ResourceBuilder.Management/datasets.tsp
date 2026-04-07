@@ -20,6 +20,35 @@ model Dataset is ProxyResource<DatasetProperties> {
   @path
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,63}$")
   name: string;
+
+  /**
+   * Dataset kind discriminator. Determines which properties are valid for this dataset.
+   * - Custom: Custom user-defined dataset.
+   * - ArmResource: ARM (Azure Resource Manager) managed resource dataset.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a valid top-level property for Dataset resource"
+  kind?: DatasetKind;
+
+  /**
+   * Gets or sets tags of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
+  tags?: Record<string>;
+}
+
+/** Dataset kind discriminator */
+union DatasetKind {
+  /** Custom user-defined dataset. */
+  Custom: "Custom",
+
+  /** ARM (Azure Resource Manager) managed resource dataset. */
+  ArmResource: "ArmResource",
+
+  /** ARM (Azure Resource Manager) relationship dataset. */
+  ArmRelationship: "ArmRelationship",
+
+  string,
 }
 
 /** Dataset properties */
@@ -28,11 +57,23 @@ model DatasetProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
-  /** Dataset schema definition. */
+  /** Custom Dataset schema definition. */
   schema?: DatasetColumn[];
+
+  /** ArmResource ArmResourceDatasetSchema object. */
+  armResourceSchema?: ArmResourceDatasetSchema;
+
+  /** ArmRelationship ArmRelationshipDatasetSchema object. */
+  armRelationshipSchema?: ArmRelationshipDatasetSchema;
 
   /** Azure regions where the dataset exists. */
   locations?: string[];
+
+  /** Reference to an existing data connection resource that provides the source connection for this dataset. */
+  connection?: DataConnectionReference;
+
+  /** Path (e.g. blob prefix) within the target specified by the connection. Applicable only for StorageAccount kind connections. */
+  path?: string;
 }
 
 /** Dataset column */
@@ -45,6 +86,18 @@ model DatasetColumn {
 
   /** Description of the column. */
   description?: string;
+}
+
+/** ARM resource dataset schema. */
+model ArmResourceDatasetSchema {
+  /** The type of the ARM resource. */
+  type: string;
+}
+
+/** ARM relationship dataset schema. */
+model ArmRelationshipDatasetSchema {
+  /** The type of the ARM relationship. */
+  type: string;
 }
 
 /** Dataset column type */

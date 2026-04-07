@@ -286,6 +286,12 @@ union ReleaseType {
    */
   Update: "Update",
 
+  /**
+   * Release is an extension pack.
+   */
+  @added(Microsoft.Edge.Versions.v2026_04_01)
+  ExtensionPack: "ExtensionPack",
+
   string,
 }
 
@@ -509,7 +515,14 @@ model BillingConfiguration {
   @doc("The current billing configuration")
   current: BillingPeriod;
 
+  @renamedFrom(Microsoft.Edge.Versions.v2026_04_01, "upcoming")
+  @removed(Microsoft.Edge.Versions.v2026_04_01)
   @doc("The upcoming billing configuration")
   @visibility(Lifecycle.Update, Lifecycle.Read)
+  oldUpcoming?: BillingPeriod;
+
+  @added(Microsoft.Edge.Versions.v2026_04_01)
+  @doc("The upcoming billing configuration")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   upcoming?: BillingPeriod;
 }

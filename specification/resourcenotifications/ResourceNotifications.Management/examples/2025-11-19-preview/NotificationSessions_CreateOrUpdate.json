@@ -1,0 +1,60 @@
+{
+  "title": "Create a notification session",
+  "operationId": "NotificationsSessions_CreateOrUpdate",
+  "description": "This example demonstrates creating a new notification session with a user-friendly name.",
+  "parameters": {
+    "api-version": "2025-11-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "locationName": "westus2",
+    "notificationSessionName": "MyTestSession",
+    "resource": {
+      "properties": {
+        "description": "Test creation of notification session",
+        "maxDurationMinutes": 1440,
+        "configuration": "{\"retryPolicy\": \"exponential\", \"maxRetries\": 3}"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
+        "name": "MyTestSession",
+        "type": "Microsoft.ResourceNotifications/notificationSessions",
+        "properties": {
+          "notificationSessionId": "1c90dad3-5936-4d9a-8c7e-ce6ed53ccea",
+          "description": "Test creation of notification session",
+          "status": "Active",
+          "maxDurationMinutes": 1440,
+          "startTime": "2025-03-27T14:30:00.000Z",
+          "configuration": "{\"retryPolicy\": \"exponential\", \"maxRetries\": 3}",
+          "provisioningState": "Succeeded",
+          "createdAt": "2025-03-27T14:30:00.000Z",
+          "updatedAt": "2025-03-27T14:30:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceNotifications/locations/westus2/operationStatuses/11111111-2222-3333-4444-555555555555?api-version=2025-11-19-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceNotifications/locations/westus2/notificationSessions/MyTestSession",
+        "name": "MyTestSession",
+        "type": "Microsoft.ResourceNotifications/notificationSessions",
+        "properties": {
+          "notificationSessionId": "1c90dad3-5936-4d9a-8c7e-ce6ed53ccea",
+          "description": "Test creation of notification session",
+          "status": "Active",
+          "maxDurationMinutes": 1440,
+          "startTime": "2025-03-27T14:30:00.000Z",
+          "configuration": "{\"retryPolicy\": \"exponential\", \"maxRetries\": 3}",
+          "provisioningState": "Accepted",
+          "createdAt": "2025-03-27T14:30:00.000Z",
+          "updatedAt": "2025-03-27T14:30:00.000Z"
+        }
+      }
+    }
+  }
+}

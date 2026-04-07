@@ -57,10 +57,16 @@ interface L2IsolationDomains {
   delete is ArmResourceDeleteWithoutOkAsync<L2IsolationDomain>;
 
   @doc("Displays L2IsolationDomains list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<L2IsolationDomain>;
+  listByResourceGroup is ArmResourceListByParent<
+    L2IsolationDomain,
+    Response = L2IsolationDomainsListResult
+  >;
 
   @doc("Displays L2IsolationDomains list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<L2IsolationDomain>;
+  listBySubscription is ArmListBySubscription<
+    L2IsolationDomain,
+    Response = L2IsolationDomainsListResult
+  >;
 
   @doc("Enables isolation domain across the fabric or on specified racks.")
   @action("updateAdministrativeState")
@@ -83,11 +89,25 @@ interface L2IsolationDomains {
     UpdateAdministrativeStateResponse
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    L2IsolationDomain,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Validates the configuration of the resources.")
   validateConfiguration is ArmResourceActionAsync<
     L2IsolationDomain,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 
   @doc("Commits the configuration of the given resources.")
@@ -106,5 +126,11 @@ interface L2IsolationDomains {
   "Request payload."
 );
 @@doc(L2IsolationDomains.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(L2IsolationDomains.validateConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(L2IsolationDomains.validateConfiguration::parameters.body,
   "Request payload."
 );

@@ -671,6 +671,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/queryAssessmentSurvey": {
+      "post": {
+        "tags": [
+          "ServicesHubAssessmentSurvey"
+        ],
+        "summary": "Query the Assessment and Survey for the Log Analytics workspace.",
+        "operationId": "Query_AssessmentSurvey",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "services hub get assessment survey payload object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServicesHubGetAssessmentSurveyPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServicesHubAssessmentSurveyResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assessment and Survey": {
+            "$ref": "./examples/QueryServicesHubAssessmentSurvey.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/connectorSpaces": {
       "get": {
         "tags": [
@@ -1145,6 +1196,57 @@
         "x-ms-examples": {
           "Download the Survey Report": {
             "$ref": "./examples/DownloadSurveyReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getOfflineDownloadUrl": {
+      "post": {
+        "operationId": "Get_OfflineDownloadUrl",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Get the offline download URL.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OfflineDownloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OfflineDownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the offline download URL": {
+            "$ref": "./examples/OfflineDownloadReport.json"
           }
         }
       }
@@ -1809,6 +1911,47 @@
         }
       }
     },
+    "ServicesHubGetAssessmentSurveyPayload": {
+      "type": "object",
+      "description": "Services Hub Get Assessment and Survey Payload",
+      "properties": {
+        "properties": {
+          "description": "Services Hub Get Assessment and Survey Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubGetAssessmentSurveyPayloadProperties"
+        }
+      }
+    },
+    "ServicesHubGetAssessmentSurveyPayloadProperties": {
+      "type": "object",
+      "description": "Services Hub Get Assessment and Survey Payload Properties",
+      "properties": {
+        "connectorSubscriptionId": {
+          "type": "string",
+          "description": "Connector subscriptionId."
+        },
+        "logAnalyticsSubscriptionId": {
+          "type": "string",
+          "description": "Log Analytics Subscription Id."
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Log Analytics Workspace Id."
+        },
+        "logAnalyticsWorkspaceName": {
+          "type": "string",
+          "description": "Log Analytics Workspace Name."
+        },
+        "logAnalyticsResourceGroupName": {
+          "type": "string",
+          "description": "Log Analytics Resource Group Name."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Id of the tenant in which Log Analytics Workspace is present."
+        }
+      }
+    },
     "ServicesHubAMASolutionStatusResult": {
       "type": "object",
       "description": "Services Hub AMA SolutionStatus Result.",
@@ -1839,6 +1982,44 @@
         "errorMessage": {
           "type": "string",
           "description": "Error Message from Get AMA Status API call in Azure Function."
+        }
+      }
+    },
+    "ServicesHubAssessmentSurveyResult": {
+      "type": "object",
+      "description": "Defines the list of available Assessment List and SurveyList",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServicesHubAssessmentSurveyResultProperties",
+          "description": "Defines the properties."
+        }
+      }
+    },
+    "ServicesHubAssessmentSurveyResultProperties": {
+      "type": "object",
+      "description": "Defines the properties of ServicesHubAssessmentSurveyResult",
+      "properties": {
+        "onDemandAssessments": {
+          "type": "array",
+          "description": "On-Demand Assessment cards list.",
+          "items": {
+            "$ref": "#/definitions/OnDemandAssessment"
+          }
+        },
+        "offlineAssessments": {
+          "type": "array",
+          "description": "Offline Assessment cards list.",
+          "items": {
+            "$ref": "#/definitions/OfflineAssessment"
+          }
+        },
+        "surveys": {
+          "type": "array",
+          "description": "Survey cards list.",
+          "items": {
+            "$ref": "#/definitions/Survey"
+          }
         }
       }
     },
@@ -2157,6 +2338,63 @@
         }
       }
     },
+    "OfflineDownloadPayload": {
+      "type": "object",
+      "description": "Defines the payload for offline download of Assessment Report.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfflineDownloadPayloadProperties",
+          "description": "Defines properties."
+        }
+      }
+    },
+    "OfflineDownloadPayloadProperties": {
+      "type": "object",
+      "description": "Defines the properties for offline download of Assessment Report.",
+      "properties": {
+        "assessmentName": {
+          "type": "string",
+          "description": "Defines the name of the assessment."
+        }
+      },
+      "required": [
+        "assessmentName"
+      ]
+    },
+    "OfflineDownloadResult": {
+      "type": "object",
+      "description": "Defines the Result for offline download of Assessment Report.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OfflineDownloadResultProperties",
+          "description": "Defines properties."
+        }
+      }
+    },
+    "OfflineDownloadResultProperties": {
+      "type": "object",
+      "description": "Defines the properties for offline download of Assessment Report.",
+      "properties": {
+        "fileName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Defines the name of the file."
+        },
+        "downloadUrl": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to download the file."
+        },
+        "expiresAt": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time for the download URL in format: YYYY-MM-DDTHH:MM:SSZ"
+        }
+      }
+    },
     "ReportType": {
       "type": "string",
       "description": "Type of Report to be downloaded: ppt or excel.",
@@ -2286,6 +2524,34 @@
           "items": {
             "$ref": "#/definitions/AnalyzedSurvey"
           }
+        }
+      }
+    },
+    "OnDemandAssessment": {
+      "type": "object",
+      "description": "List of On-Demand Assessment Services",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "On-Demand Assessment Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Internal Name of the On-Demand Assessment."
+        }
+      }
+    },
+    "OfflineAssessment": {
+      "type": "object",
+      "description": "List of Offline Assessment Services",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Offline Assessment Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Internal Name of the Offline Assessment."
         }
       }
     }

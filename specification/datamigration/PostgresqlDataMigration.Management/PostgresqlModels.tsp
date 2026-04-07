@@ -1,9 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
-using TypeSpec.Http;
 
 namespace Microsoft.DataMigration;
 
@@ -16,6 +15,53 @@ union MigrationMode {
 
   @doc("Online migration mode")
   Online: "online",
+}
+
+@doc("The source database engine type for migration service.")
+union MigrationServiceSourceEngine {
+  string,
+
+  @doc("Oracle database engine")
+  Oracle: "Oracle",
+
+  @doc("PostgreSQL database engine")
+  PostgreSQL: "PostgreSQL",
+}
+
+@doc("The target database engine type for migration service.")
+union MigrationServiceTargetEngine {
+  string,
+
+  @doc("Azure Database for PostgreSQL")
+  AzureDatabaseForPostgreSQL: "Azure Database for PostgreSQL",
+}
+
+@doc("The source platform type for database migration.")
+union MigrationSourceType {
+  string,
+
+  @doc("Amazon Web Services")
+  AWS: "AWS",
+
+  @doc("Google Cloud Platform")
+  GCP: "GCP",
+
+  @doc("Oracle Cloud")
+  Oracle: "Oracle",
+
+  @doc("On-premises")
+  OnPrem: "OnPrem",
+}
+
+@doc("The target platform type for database migration.")
+union MigrationTargetType {
+  string,
+
+  @doc("Azure PostgreSQL Flexible Server")
+  AzurePostgreSQLFlexibleServer: "AzurePostgreSQLFlexibleServer",
+
+  @doc("Azure PostgreSQL Horizon DB")
+  AzurePostgreSQLHorizonDb: "AzurePostgreSQLHorizonDb",
 }
 
 @doc("The source database engine type.")
@@ -174,21 +220,15 @@ union ConnectionStatus {
   Failed: "Failed",
 }
 
-@doc("The validation status.")
-union ValidationStatus {
+@doc("The connection endpoint type.")
+union ConnectionType {
   string,
 
-  @doc("Validation succeeded")
-  Succeeded: "Succeeded",
+  @doc("Source connection")
+  Source: "Source",
 
-  @doc("Validation failed")
-  Failed: "Failed",
-
-  @doc("Validation in progress")
-  InProgress: "InProgress",
-
-  @doc("Validation pending")
-  Pending: "Pending",
+  @doc("Target connection")
+  Target: "Target",
 }
 
 @doc("The migration phase.")
@@ -223,6 +263,45 @@ union ErrorSeverity {
 
   @doc("Information")
   Info: "Info",
+}
+
+@doc("The readiness state of validation.")
+union ValidationState {
+  string,
+
+  @doc("The validation is currently in progress.")
+  InProgress: "InProgress",
+
+  @doc("The validation has completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("The validation has failed.")
+  Failed: "Failed",
+}
+
+@doc("The readiness status of a check.")
+union ValidationStatus {
+  string,
+
+  @doc("The check completed successfully without issues.")
+  Succeeded: "Succeeded",
+
+  @doc("The check failed with errors.")
+  Failed: "Failed",
+
+  @doc("The check completed with warnings.")
+  Warning: "Warning",
+}
+
+@doc("Diagnostic severity level.")
+union DiagnosticSeverity {
+  string,
+
+  @doc("Warning level diagnostic")
+  Warning: "Warning",
+
+  @doc("Error level diagnostic")
+  Error: "Error",
 }
 
 @doc("SSL configuration for database connection.")
@@ -268,11 +347,16 @@ model ConnectionEndpoint {
   ssl: SslConfiguration;
 }
 
+@doc("Connection endpoint for connectivity testing with type indicator.")
+model CheckConnectivityEndpoint {
+  ...ConnectionEndpoint;
+
+  @doc("Connection endpoint type")
+  type: ConnectionType;
+}
+
 @doc("Source database configuration.")
 model SourceConfiguration {
-  @doc("Database engine type")
-  engine: SourceDatabaseEngine;
-
   @doc("Server resource ID")
   serverResourceId?: string;
 
@@ -283,9 +367,6 @@ model SourceConfiguration {
 
 @doc("Target database configuration.")
 model TargetConfiguration {
-  @doc("Database engine type")
-  engine: TargetDatabaseEngine;
-
   @doc("Server resource ID")
   serverResourceId?: string;
 
@@ -386,9 +467,6 @@ model DatabaseMigrationStatus {
   @doc("Migration status")
   migrationStatus: MigrationState;
 
-  @doc("Validation status")
-  validationStatus: ValidationStatus;
-
   @doc("Migration progress")
   migrationProgress: MigrationProgress;
 
@@ -418,6 +496,52 @@ model MigrationStatus {
   lastUpdatedAt: utcDateTime;
 }
 
+@doc("Diagnostic information for validation result.")
+model ValidationDiagnostics {
+  @doc("Diagnostic code")
+  code: string;
+
+  @doc("Diagnostic message")
+  message: string;
+
+  @doc("Severity of the diagnostic")
+  severity: DiagnosticSeverity;
+
+  @doc("Diagnostic hint to help resolve issues")
+  diagnosticHint: string;
+}
+
+@doc("Validation result for a pre-migration check.")
+model ValidationResult {
+  @doc("Status of the validation check")
+  status: ValidationStatus;
+
+  @doc("Diagnostics information")
+  diagnostics?: ValidationDiagnostics;
+}
+
+@doc("Summary of a pre-migration validation.")
+model PreMigrationValidationSummary {
+  @doc("Name of the validation")
+  validationName: string;
+
+  @doc("State of this specific validation")
+  state: ValidationState;
+
+  @doc("Detailed validation result for this check")
+  validationResult?: ValidationResult;
+}
+
+@doc("Pre-migration validation status.")
+model PreMigrationValidationStatus {
+  @doc("Overall state of the pre-migration validation")
+  state: ValidationState;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "validationName is the identifier"
+  @doc("List of pre-migration validation summaries")
+  preMigrationValidationSummaries?: PreMigrationValidationSummary[];
+}
+
 @doc("Properties of the DatabaseMigration resource.")
 model DatabaseMigrationProperties {
   @doc("Migration name")
@@ -431,6 +555,14 @@ model DatabaseMigrationProperties {
   @doc("Migration mode")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   migrationMode: MigrationMode;
+
+  @doc("Migration source type")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  sourceType: MigrationSourceType;
+
+  @doc("Migration target type")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  targetType: MigrationTargetType;
 
   @doc("Source database configuration")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -467,6 +599,10 @@ model DatabaseMigrationProperties {
   @visibility(Lifecycle.Read)
   migrationStatus?: MigrationStatus;
 
+  @doc("Pre-migration validation status")
+  @visibility(Lifecycle.Read)
+  preMigrationValidations?: PreMigrationValidationStatus;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "databaseName is the identifier"
   @doc("List of database migration statuses")
   @visibility(Lifecycle.Read)
@@ -483,11 +619,9 @@ model DatabaseMigrationProperties {
 
 @doc("Request body for testing connectivity.")
 model TestConnectivityRequest {
-  @doc("Source database configuration")
-  source: SourceConfiguration;
-
-  @doc("Target database configuration")
-  target: TargetConfiguration;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
+  @doc("Connection endpoints to test")
+  connectionEndpoints: CheckConnectivityEndpoint[];
 
   @doc("Compute profile configuration")
   computeProfile: ComputeProfile;
@@ -509,12 +643,8 @@ model ConnectionTestResult {
 @doc("Properties of the connectivity test response.")
 model ConnectivityTestProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
-  @doc("Source connection test results")
-  source: ConnectionTestResult[];
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
-  @doc("Target connection test results")
-  target: ConnectionTestResult[];
+  @doc("Connection test results")
+  connectionTestResults: ConnectionTestResult[];
 }
 
 @doc("Response for testing connectivity.")

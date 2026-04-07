@@ -1,0 +1,106 @@
+{
+  "title": "ClusterJobs_Get_GpuCreatePartitionJob",
+  "operationId": "ClusterJobs_Get",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "gpuCreatePartition"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "GpuCreatePartition",
+          "deploymentMode": "Deploy",
+          "partitionCount": 4,
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Partition Creation Validation",
+                  "description": "Validate GPU partition creation requirements.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:12:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "GPU Resource Validation",
+                      "description": "Check GPU resources and partition limits",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:10:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    },
+                    {
+                      "fullStepIndex": "0.2",
+                      "name": "Partition Count Validation",
+                      "description": "Validate requested partition count",
+                      "startTimeUtc": "2023-06-09T00:10:15",
+                      "endTimeUtc": "2023-06-09T00:12:30",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Partition Creation Deployment",
+                  "description": "Create GPU partitions for virtualization.",
+                  "startTimeUtc": "2023-06-09T00:12:50",
+                  "endTimeUtc": "2023-06-09T00:20:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Partition Initialization",
+                      "description": "Initialize GPU partitions",
+                      "startTimeUtc": "2023-06-09T00:12:55",
+                      "endTimeUtc": "2023-06-09T00:18:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    },
+                    {
+                      "fullStepIndex": "0.2",
+                      "name": "Partition Configuration",
+                      "description": "Configure created partitions",
+                      "startTimeUtc": "2023-06-09T00:18:15",
+                      "endTimeUtc": "2023-06-09T00:20:30",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded",
+          "jobId": "job-67890-gpu-partition",
+          "startTimeUtc": "2023-06-09T00:08:19Z",
+          "endTimeUtc": "2023-06-09T00:20:47Z"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/gpuCreatePartition",
+        "name": "gpuCreatePartition",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-07-01T17:02:21.168Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-01T17:02:21.168Z"
+        }
+      }
+    }
+  }
+}

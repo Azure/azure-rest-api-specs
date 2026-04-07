@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 import "./proposal.tsp";
 import "./product.tsp";
+import "./lineitem.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

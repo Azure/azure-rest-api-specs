@@ -1408,13 +1408,17 @@
       "type": "object",
       "description": "Encrypted Transport Account Properties",
       "properties": {
-        "wifiPsks": {
+        "wifiProfiles": {
           "type": "array",
-          "description": "List of Wi-Fi Pre-Shared Keys as printable ASCII secure strings",
+          "description": "List of wifi ssid and pre-shared key pairs as printable ASCII secure strings",
           "items": {
-            "$ref": "#/definitions/WifiPsk"
+            "$ref": "#/definitions/WifiProfile"
           },
+          "x-ms-identifiers": [
+            "ssid"
+          ],
           "x-ms-mutability": [
+            "read",
             "update",
             "create"
           ]
@@ -1442,7 +1446,7 @@
         }
       },
       "required": [
-        "wifiPsks",
+        "wifiProfiles",
         "subnetId",
         "privateIpAddress"
       ]
@@ -1451,13 +1455,17 @@
       "type": "object",
       "description": "Encrypted Transport Account Properties",
       "properties": {
-        "wifiPsks": {
+        "wifiProfiles": {
           "type": "array",
-          "description": "List of Wi-Fi Pre-Shared Keys as printable ASCII secure strings",
+          "description": "List of wifi ssid and pre-shared key pairs as printable ASCII secure strings",
           "items": {
-            "$ref": "#/definitions/WifiPsk"
+            "$ref": "#/definitions/WifiProfile"
           },
+          "x-ms-identifiers": [
+            "ssid"
+          ],
           "x-ms-mutability": [
+            "read",
             "update",
             "create"
           ]
@@ -1560,12 +1568,39 @@
         ]
       }
     },
+    "WifiProfile": {
+      "type": "object",
+      "description": "Wifi network info",
+      "properties": {
+        "ssid": {
+          "$ref": "#/definitions/WifiSSID",
+          "description": "The wifi network's SSID"
+        },
+        "psk": {
+          "$ref": "#/definitions/WifiPsk",
+          "description": "The wifi network's PSK",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "ssid"
+      ]
+    },
     "WifiPsk": {
       "type": "string",
       "format": "password",
       "description": "Secure string wifi PSK",
-      "pattern": "^[ -~ ]{8,64}$",
+      "pattern": "^[ -~ ]{8,63}$",
       "x-ms-secret": true
+    },
+    "WifiSSID": {
+      "type": "string",
+      "description": "UTF-8 string wifi SSID",
+      "minLength": 1,
+      "maxLength": 32
     }
   },
   "parameters": {}

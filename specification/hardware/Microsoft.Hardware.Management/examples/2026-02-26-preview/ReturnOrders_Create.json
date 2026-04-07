@@ -1,0 +1,157 @@
+{
+  "title": "ReturnOrders_Create",
+  "operationId": "ReturnOrders_Create",
+  "parameters": {
+    "api-version": "2026-02-26-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "name": "return1",
+    "resource": {
+      "location": "NorthEurope",
+      "properties": {
+        "customerOrder": {
+          "id": "Customer_ORDER_Number",
+          "createdDateTime": "2022-06-06T17:18:21.373+00:00"
+        },
+        "returnLines": [
+          {
+            "id": 1,
+            "referenceOrderId": "order1",
+            "referenceOrderLineId": 1,
+            "senderAddress": {
+              "type": "BusinessLocation",
+              "id": "054321456"
+            },
+            "quantity": {
+              "pending": 2
+            },
+            "product": {
+              "type": "UPN",
+              "id": "1234567890"
+            },
+            "returnReasons": [
+              {
+                "reasonCode": "Defective",
+                "additionalComments": "Device not working properly",
+                "serialNumbers": [
+                  "SN123456",
+                  "SN123457"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Hardware/returns/return1",
+        "name": "return1",
+        "location": "NorthEurope",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "status": "Pending",
+          "customerOrder": {
+            "id": "Customer_ORDER_Number",
+            "createdDateTime": "2022-06-06T17:18:21.373+00:00"
+          },
+          "returnLines": [
+            {
+              "id": 1,
+              "referenceOrderId": "order1",
+              "referenceOrderLineId": 1,
+              "senderAddress": {
+                "type": "BusinessLocation",
+                "id": "054321456"
+              },
+              "status": "Pending",
+              "quantity": {
+                "pending": 2,
+                "inProgress": 0,
+                "fulfilled": 0,
+                "cancelled": 0,
+                "returned": 0
+              },
+              "product": {
+                "type": "UPN",
+                "id": "1234567890"
+              },
+              "returnReasons": [
+                {
+                  "reasonCode": "Defective",
+                  "additionalComments": "Device not working properly",
+                  "serialNumbers": [
+                    "SN123456",
+                    "SN123457"
+                  ]
+                }
+              ],
+              "estimatedRefundAmount": {
+                "unitAmount": 1273.98
+              }
+            }
+          ],
+          "rmaId": "RMA-12345",
+          "returnLabel": "Generated"
+        }
+      }
+    },
+    "201": {
+      "description": "",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Hardware/returns/return1",
+        "name": "return1",
+        "location": "NorthEurope",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "status": "Pending",
+          "customerOrder": {
+            "id": "Customer_ORDER_Number",
+            "createdDateTime": "2022-06-06T17:18:21.373+00:00"
+          },
+          "returnLines": [
+            {
+              "id": 1,
+              "referenceOrderId": "order1",
+              "referenceOrderLineId": 1,
+              "senderAddress": {
+                "type": "BusinessLocation",
+                "id": "054321456"
+              },
+              "status": "Pending",
+              "quantity": {
+                "pending": 2,
+                "inProgress": 0,
+                "fulfilled": 0,
+                "cancelled": 0,
+                "returned": 0
+              },
+              "product": {
+                "type": "UPN",
+                "id": "1234567890"
+              },
+              "returnReasons": [
+                {
+                  "reasonCode": "Defective",
+                  "additionalComments": "Device not working properly",
+                  "serialNumbers": [
+                    "SN123456",
+                    "SN123457"
+                  ]
+                }
+              ],
+              "estimatedRefundAmount": {
+                "unitAmount": 1273.98
+              }
+            }
+          ],
+          "rmaId": "RMA-12345",
+          "returnLabel": "Generated"
+        }
+      }
+    }
+  }
+}

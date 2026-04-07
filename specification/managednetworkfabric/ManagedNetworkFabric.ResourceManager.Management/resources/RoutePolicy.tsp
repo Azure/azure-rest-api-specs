@@ -48,10 +48,16 @@ interface RoutePolicies {
   delete is ArmResourceDeleteWithoutOkAsync<RoutePolicy>;
 
   @doc("Implements RoutePolicies list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<RoutePolicy>;
+  listByResourceGroup is ArmResourceListByParent<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
 
   @doc("Implements RoutePolicies list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<RoutePolicy>;
+  listBySubscription is ArmListBySubscription<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
 
   @doc("Updated the admin state for this Route Policy.")
   @action("updateAdministrativeState")
@@ -74,13 +80,26 @@ interface RoutePolicies {
     UpdateAdministrativeStateResponse
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
   @doc("Validates the configuration of the resources.")
-  validateConfiguration is ArmResourceActionAsync<
+  validateConfigurationDeprecated is ArmResourceActionAsync<
     RoutePolicy,
     void,
     ValidateConfigurationResponse
   >;
 
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfiguration is ArmResourceActionAsync<
+    RoutePolicy,
+    void,
+    ValidateConfigurationResponseV2
+  >;
   @doc("Commits the configuration of the given resources.")
   commitConfiguration is ArmResourceActionAsync<
     RoutePolicy,
@@ -98,4 +117,10 @@ interface RoutePolicies {
 );
 @@doc(RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
+);
+@@doc(RoutePolicies.validateConfigurationDeprecated::parameters.body,
+  "Validate configuration properties."
+);
+@@doc(RoutePolicies.validateConfiguration::parameters.body,
+  "Validate configuration properties."
 );

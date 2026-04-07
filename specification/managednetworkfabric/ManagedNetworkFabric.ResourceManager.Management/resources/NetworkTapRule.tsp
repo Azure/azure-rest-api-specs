@@ -51,10 +51,16 @@ interface NetworkTapRules {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkTapRule>;
 
   @doc("List all the Network Tap Rule resources in the given resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkTapRule>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkTapRule,
+    Response = NetworkTapRulesListResult
+  >;
 
   @doc("List all the Network Tap Rule resources in the given subscription.")
-  listBySubscription is ArmListBySubscription<NetworkTapRule>;
+  listBySubscription is ArmListBySubscription<
+    NetworkTapRule,
+    Response = NetworkTapRulesListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
   updateAdministrativeState is ArmResourceActionAsync<
@@ -84,11 +90,25 @@ interface NetworkTapRules {
     NetworkTapRuleResyncResponse
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Implements the operation to the underlying resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    NetworkTapRule,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Implements the operation to the underlying resources.")
   validateConfiguration is ArmResourceActionAsync<
     NetworkTapRule,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 }
 
@@ -98,4 +118,10 @@ interface NetworkTapRules {
 );
 @@doc(NetworkTapRules.updateAdministrativeState::parameters.body,
   "Request payload."
+);
+@@doc(NetworkTapRules.validateConfigurationDeprecated::parameters.body,
+  "Validate configuration properties."
+);
+@@doc(NetworkTapRules.validateConfiguration::parameters.body,
+  "Validate configuration properties."
 );

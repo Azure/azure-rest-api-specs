@@ -16,4 +16,9 @@ enum SaaSHubVersions {
    * The 2025-07-01-preview API version.
    */
   v2025_07_01_preview: "2025-07-01-preview",
+
+  /**
+   * The 2026-03-31-preview API version.
+   */
+  v2026_03_31_preview: "2026-03-31-preview",
 }

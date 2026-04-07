@@ -1,0 +1,93 @@
+id: 001005-version-add-preview-after-preview
+name: "Versioning: Add preview after preview"
+description: |
+  Test adding a new preview version when the latest version is already a preview.
+  Based on benchmark case 001005-version-add-preview-after-preview.
+tags:
+  - versioning
+inputs:
+  prompt: "Add a new preview version `2025-05-04-preview` to my service widget resource manager. Exclude Feature: `age` property with default value 21. Carry other features."
+  files:
+    - path: 001005-version-add-preview-after-preview\employee.tsp
+    - path: 001005-version-add-preview-after-preview\main.tsp
+    - path: 001005-version-add-preview-after-preview\shared.tsp
+    - path: 001005-version-add-preview-after-preview\tspconfig.yaml
+    - path: 001005-version-add-preview-after-preview\package.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_Delete_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_Get_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Employees_Update_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Operations_List_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2024-10-01-preview\Operations_List_MinimumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+    - path: 001005-version-add-preview-after-preview\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+
+expected:
+  output_contains:
+    - "Task Type"
+    - "API Version Evolution"
+graders:
+  # - type: diff
+  #   name: version_enum_check
+  #   config:
+  #     expected_files:
+  #       - path: "001005-version-add-preview-after-preview/main.tsp"
+  #         contains:
+  #           - "+@previewVersion"
+  #           - '+v2025-05-04-preview: "2025-05-04-preview"'
+  # - type: action_sequence
+  #   name: mcp_workflow
+  #   config:
+  #     matching_mode: in_order_match
+  #     expected_actions:
+  #       - edit
+  #       - azsdk_run_typespec_validation
+  # - type: tool_constraint
+  #   name: mcp_guardrails
+  #   config:
+  #     expect_tools:
+  #       - edit
+  #       - azsdk_run_typespec_validation
+  # Deterministic checks: version string, deleted properties, examples folder existence
+  - type: file
+    name: file_structure_check
+    config:
+      must_exist:
+        - "001005-version-add-preview-after-preview/examples/2025-05-04-preview/Employees_Get_MaximumSet_Gen.json"
+      must_not_exist:
+        - "001005-version-add-preview-after-preview/examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json"
+      content_patterns:
+        - path: "001005-version-add-preview-after-preview/main.tsp"
+          must_match:
+            - "2025-05-04-preview"
+          must_not_match:
+            - "2024-10-01-preview"
+        - path: "001005-version-add-preview-after-preview/employee.tsp"
+          must_not_match:
+            - "oldAge"
+            - "= 21"
+            - "2024-10-01-preview"
+  # LLM judge: verify @added decorator removed from age and other features carried over correctly
+  - type: prompt
+    name: decorator_check
+    config:
+      prompt: |
+        Check the modified employee.tsp and verify:
+        The age property should NOT have an @added decorator and should NOT have a default value of 21.
+        Other features (workLocation, assets, profile, city) should be properly carried over,
+        with their versioning decorators updated to reference `2025-05-04-preview` where needed.
+
+        If correct, call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with your reasoning.
+      model: "gpt-4o-mini"
+      continue_session: true

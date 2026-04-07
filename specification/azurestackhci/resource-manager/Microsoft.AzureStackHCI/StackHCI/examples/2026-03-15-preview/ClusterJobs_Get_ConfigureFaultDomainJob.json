@@ -1,0 +1,130 @@
+{
+  "title": "ClusterJobs_Get_ConfigureFaultDomainJob",
+  "operationId": "ClusterJobs_Get",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "configurefaultdomain",
+    "api-version": "2026-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/user-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/configurefaultdomain",
+        "name": "configurefaultdomain",
+        "type": "Microsoft.azurestackhci/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "ConfigureFaultDomain",
+          "deploymentMode": "Deploy",
+          "faultDomainCount": 4,
+          "faultDomainPrefix": "Rack",
+          "nodeAssignment": [
+            {
+              "faultDomainName": "Rack1",
+              "nodes": [
+                "ASRR1N42R13U17",
+                "ASRR1N42R13U18"
+              ]
+            },
+            {
+              "faultDomainName": "Rack2",
+              "nodes": [
+                "ASRR1N42R13U19",
+                "ASRR1N42R13U20"
+              ]
+            },
+            {
+              "faultDomainName": "Rack3",
+              "nodes": [
+                "ASRR1N42R13U21",
+                "ASRR1N42R13U22"
+              ]
+            },
+            {
+              "faultDomainName": "Rack4",
+              "nodes": [
+                "ASRR1N42R13U23",
+                "ASRR1N42R13U24"
+              ]
+            }
+          ],
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Fault Domain Configuration",
+                  "description": "Configure Fault Domains.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Fault Domain Configuration",
+                  "description": "Configure Fault Domains.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "NotSpecified"
+        }
+      }
+    }
+  }
+}

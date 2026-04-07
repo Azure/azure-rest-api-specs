@@ -372,42 +372,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Legacy.ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No managed identity."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "System and user assigned managed identity."
-          }
-        ]
-      }
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -449,7 +413,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentitywithdelegation.json#/definitions/ManagedServiceIdentityWithDelegation",
-          "description": "The set of delegated resources. The delegated resources dictionary keys will be source resource internal ids"
+          "description": "The identity of the resource."
         }
       },
       "allOf": [
@@ -502,42 +466,10 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentitywithdelegation.json#/definitions/ManagedServiceIdentityWithDelegation",
           "description": "Updatable managed service identity"
         }
       }
-    },
-    "Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate": {
-      "type": "object",
-      "description": "Model defining updatable properties of a ManagedServiceIdentityWithDelegation",
-      "properties": {
-        "delegatedResources": {
-          "type": "object",
-          "description": "The set of delegated resources. The delegated resources dictionary keys will be source resource internal ids",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentitywithdelegation.json#/definitions/DelegatedResource"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "description": "The template for adding optional properties.",
-          "properties": {
-            "type": {
-              "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityType",
-              "description": "The type of managed identity assigned to this resource."
-            },
-            "userAssignedIdentities": {
-              "type": "object",
-              "description": "The identities assigned to this resource by the user.",
-              "additionalProperties": {
-                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
-              }
-            }
-          }
-        }
-      ]
     }
   },
   "parameters": {}

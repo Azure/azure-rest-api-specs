@@ -9,14 +9,14 @@ const core = createMockCore();
 const managedLabels = Object.freeze({
   armSignedOff: "ARMSignedOff",
   autoSignedOffIncrementalTsp: "ARMAutoSignedOff-IncrementalTSP",
-  autoSignedOffTrivialTest: "ARMAutoSignedOff-Trivial-Test",
+  autoSignedOffTrivial: "ARMAutoSignedOff-Trivial",
 });
 
 function createNoneLabelActions() {
   return {
     [managedLabels.armSignedOff]: LabelAction.None,
     [managedLabels.autoSignedOffIncrementalTsp]: LabelAction.None,
-    [managedLabels.autoSignedOffTrivialTest]: LabelAction.None,
+    [managedLabels.autoSignedOffTrivial]: LabelAction.None,
   };
 }
 
@@ -44,7 +44,7 @@ function createRemoveManagedLabelsResult(headSha, issueNumber) {
       ...createNoneLabelActions(),
       [managedLabels.armSignedOff]: LabelAction.Remove,
       [managedLabels.autoSignedOffIncrementalTsp]: LabelAction.Remove,
-      [managedLabels.autoSignedOffTrivialTest]: LabelAction.Remove,
+      [managedLabels.autoSignedOffTrivial]: LabelAction.Remove,
     },
   };
 }
@@ -63,11 +63,11 @@ function createSuccessResult({ headSha, issueNumber, incrementalTypeSpec, isTriv
     issueNumber,
     labelActions: {
       ...createNoneLabelActions(),
-      [managedLabels.armSignedOff]: incrementalTypeSpec ? LabelAction.Add : LabelAction.None,
+      [managedLabels.armSignedOff]: LabelAction.Add,
       [managedLabels.autoSignedOffIncrementalTsp]: incrementalTypeSpec
         ? LabelAction.Add
         : LabelAction.Remove,
-      [managedLabels.autoSignedOffTrivialTest]: isTrivial ? LabelAction.Add : LabelAction.Remove,
+      [managedLabels.autoSignedOffTrivial]: isTrivial ? LabelAction.Add : LabelAction.Remove,
     },
   };
 }
@@ -161,24 +161,6 @@ describe("getLabelActionImpl", () => {
     const github = createMockGithub({ incrementalTypeSpec: false });
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }],
-    });
-
-    await expect(
-      getLabelActionImpl({
-        owner: "TestOwner",
-        repo: "TestRepo",
-        issue_number: 123,
-        head_sha: "abc123",
-        github: github,
-        core: core,
-      }),
-    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
-  });
-
-  it("removes ARMAutoSignedOff-Trivial-Test if analysis no longer trivial", async () => {
-    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: false });
-    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: managedLabels.autoSignedOffTrivialTest }],
     });
 
     await expect(
@@ -496,7 +478,7 @@ describe("getLabelActionImpl", () => {
     );
   });
 
-  it("adds trivial test label when PR qualifies only by trivial changes", async () => {
+  it("adds trivial label when PR qualifies only by trivial changes", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: true });
 
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
@@ -559,5 +541,223 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
+  });
+
+  it("adds ARMSignedOff and trivial label when PR qualifies by trivial changes only", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: true });
+
+    // PR already has ARMSignedOff (manually added) and ARMReview, but no auto-signoff labels
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMSignedOff" }, { name: "ARMReview" }],
+    });
+
+    // All required checks pass
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        {
+          context: "Swagger LintDiff",
+          state: CommitStatusState.SUCCESS,
+        },
+        {
+          context: "Swagger Avocado",
+          state: CommitStatusState.SUCCESS,
+        },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // ARMSignedOff should be added since trivial qualifies
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    // Trivial label should be added
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Add);
+    // Incremental TSP label should be removed (not applicable)
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
+  });
+
+  it("removes ARMSignedOff when trivial label present and no longer qualifies", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: false });
+
+    // PR has ARMSignedOff (auto-added via trivial) + trivial label (from previous run)
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [
+        { name: "ARMSignedOff" },
+        { name: managedLabels.autoSignedOffTrivial },
+        { name: "ARMReview" },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // ARMSignedOff was auto-added (Trivial present), so remove it
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Remove);
+    // Trivial label should be removed (no longer qualifies)
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
+    // Incremental TSP should also be removed
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
+  });
+
+  it("removes all auto-signoff labels when IncrementalTSP was present and no longer qualifies", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: false });
+
+    // PR had auto-added ARMSignedOff via IncrementalTSP
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [
+        { name: "ARMSignedOff" },
+        { name: managedLabels.autoSignedOffIncrementalTsp },
+        { name: "ARMReview" },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // ARMSignedOff was auto-added (IncrementalTSP present), so remove it
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Remove);
+    // Both auto-signoff labels should be removed
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
+  });
+
+  it("transitions from trivial to incremental typespec correctly", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: true, isTrivial: false });
+
+    // PR previously had trivial label, now qualifies via incremental typespec
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: managedLabels.autoSignedOffTrivial }, { name: "ARMReview" }],
+    });
+
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
+        { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // Now qualifies via incremental typespec, so add ARMSignedOff
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Add);
+    // Trivial label should be removed (not applicable)
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
+  });
+
+  it("transitions from incremental typespec to trivial correctly", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: true });
+
+    // PR previously had incremental typespec labels, now qualifies only via trivial
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [
+        { name: "ARMSignedOff" },
+        { name: managedLabels.autoSignedOffIncrementalTsp },
+        { name: "ARMReview" },
+      ],
+    });
+
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
+        { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // IncrementalTSP was present, but now qualifies via trivial, so ARMSignedOff should be added
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    // Incremental TSP label should be removed
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
+    // Trivial label should be added
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Add);
+  });
+
+  it("adds both labels when PR qualifies for both incremental typespec and trivial", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: true, isTrivial: true });
+
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }],
+    });
+
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
+        { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
+      ],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // Incremental typespec takes precedence for ARMSignedOff
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Add);
+    // Trivial label should also be added
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Add);
+  });
+
+  it("removes all auto-signoff labels when only Trivial present and no longer qualifies", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: false });
+
+    // PR only has trivial label (no ARMSignedOff, no IncrementalTSP)
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: managedLabels.autoSignedOffTrivial }, { name: "ARMReview" }],
+    });
+
+    const result = await getLabelActionImpl({
+      owner: "TestOwner",
+      repo: "TestRepo",
+      issue_number: 123,
+      head_sha: "abc123",
+      github: github,
+      core: core,
+    });
+
+    // Trivial was present, so ARMSignedOff was auto-added, remove all
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Remove);
+    // Trivial label should be removed
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
+    // Incremental TSP should also be removed
+    expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
   });
 });
