@@ -57,21 +57,6 @@ directive:
     reason: This will cause breaking changes in .NET SDK
     from: trafficmanager.json
     where: $.definitions.UserMetricsModel
-  - suppress: XmsResourceInPutResponse
-    reason: Pre-existing issue - legacy custom Resource model does not set x-ms-azure-resource
-    from: trafficmanager.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].put
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].put
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys/default"].put
-  - suppress: UnSupportedPatchProperties
-    reason: Pre-existing issue - legacy resource model includes id, name, type in patch body
-    from: trafficmanager.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].patch.parameters[4]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}"].patch.parameters[6]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].patch.parameters[2]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}"].patch.parameters[4]
 ```
 
 ### Tag: package-preview-2024-04

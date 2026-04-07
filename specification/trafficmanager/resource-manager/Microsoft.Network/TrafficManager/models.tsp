@@ -306,16 +306,19 @@ model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
    */
+  @visibility(Lifecycle.Read)
   id?: armResourceIdentifier;
 
   /**
    * The name of the resource
    */
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
    */
+  @visibility(Lifecycle.Read)
   type?: string;
 }
 
