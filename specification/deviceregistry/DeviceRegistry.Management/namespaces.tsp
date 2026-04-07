@@ -143,18 +143,22 @@ model NamespaceProvisioning {
   dpsResourceId?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
 @added(Versions.v2026_11_01_preview)
 @doc("Request body for the bulk import operation on a Namespace resource.")
 model NamespaceBulkImportRequest {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
 @added(Versions.v2026_11_01_preview)
 @doc("Response for the bulk import operation on a Namespace resource.")
 model NamespaceBulkImportResponse {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
 @added(Versions.v2026_11_01_preview)
 @doc("Request body for the bulk export operation on a Namespace resource.")
 model NamespaceBulkExportRequest {}
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
 @added(Versions.v2026_11_01_preview)
 @doc("Response for the bulk export operation on a Namespace resource.")
 model NamespaceBulkExportResponse {}

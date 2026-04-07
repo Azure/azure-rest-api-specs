@@ -10,4 +10,13 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
-  paths: [DeviceRegistry.Management/tspconfig.yaml]
+  paths:
+    - DeviceRegistry.Management/tspconfig.yaml
+    - data-plane/DeviceRegistry/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: RPSaaS v1 folder structure, not yet converted to v2
+  paths:
+    - DeviceRegistry.Management

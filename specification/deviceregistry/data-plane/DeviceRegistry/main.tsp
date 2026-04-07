@@ -25,9 +25,7 @@ using Azure.Core.Traits;
     }
   ]>
 )
-@service(#{
-  title: "Azure Device Registry Service",
-})
+@service(#{ title: "Azure Device Registry Service" })
 @server(
   "{endpoint}/deviceregistry",
   "Azure Device Registry data-plane APIs",
@@ -51,4 +49,3 @@ enum Versions {
 alias ResourceOperations = Azure.Core.ResourceOperations<NoConditionalRequests &
   NoRepeatableRequests &
   NoClientRequestId>;
-

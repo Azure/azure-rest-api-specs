@@ -206,6 +206,8 @@ interface Devices {
   >;
 
   /** Bulk import devices into a namespace. Used by DPS during provisioning. */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
   @added(Versions.v2026_11_02_preview)
   importDevices is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
@@ -214,6 +216,8 @@ interface Devices {
   >;
 
   /** Bulk update devices in a namespace. Used by DPS during reprovisioning. */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
   @added(Versions.v2026_11_02_preview)
   updateDevices is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
@@ -222,6 +226,8 @@ interface Devices {
   >;
 
   /** Bulk export all device details from a namespace. */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
   @added(Versions.v2026_11_02_preview)
   exportDevices is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
@@ -262,6 +268,8 @@ interface Devices {
   >;
 
   /** Invoke a direct method action on a device. */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling operation will be added in a future version."
   @added(Versions.v2026_11_02_preview)
   executeAction is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
