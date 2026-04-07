@@ -60,7 +60,4 @@ directive:
   - suppress: GuidUsage
     from: preparedimagespecification.json
     reason: Managed identity objectId and clientId properties are standard Azure resource GUIDs.
-  - suppress: LatestVersionOfCommonTypesMustBeUsed
-    from: preparedimagespecification.json
-    reason: Using common-types v5 which is the version supported by the TypeSpec ARM library.
 ```

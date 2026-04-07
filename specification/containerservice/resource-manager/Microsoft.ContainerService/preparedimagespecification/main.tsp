@@ -16,6 +16,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("Azure Kubernetes Prepared Image Specification api versions.")
 enum Versions {
   @doc("Azure Kubernetes Prepared Image Specification api version 2026-02-02-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_02_02_preview: "2026-02-02-preview",
 }
