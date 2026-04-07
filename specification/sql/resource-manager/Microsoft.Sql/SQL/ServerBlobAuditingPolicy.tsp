@@ -38,13 +38,7 @@ alias ServerBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperati
     @key
     serverName: string;
   },
-  {
-    /** The name of the blob auditing policy. */
-    @path
-    @segment("auditingSettings")
-    @key
-    blobAuditingPolicyName: BlobAuditingPolicyName;
-  }
+  BlobAuditingPolicyNameParameter
 >;
 
 @armResourceOperations(#{ omitTags: true })

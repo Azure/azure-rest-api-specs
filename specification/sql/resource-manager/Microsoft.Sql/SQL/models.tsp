@@ -10,6 +10,46 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Sql;
 
+alias SystemDatabaseNameParameter = {
+  /**
+   * The vulnerability assessment system database name.
+   */
+  @query("systemDatabaseName")
+  systemDatabaseName: VulnerabilityAssessmentSystemDatabaseName;
+};
+
+alias BlobExtendedAuditingPolicyNameParameter = {
+  /** The name of the blob auditing policy. */
+  @path
+  @segment("extendedAuditingSettings")
+  @key
+  blobAuditingPolicyName: BlobAuditingPolicyName;
+};
+
+alias BlobAuditingPolicyNameParameter = {
+  /** The name of the blob auditing policy. */
+  @path
+  @segment("auditingSettings")
+  @key
+  blobAuditingPolicyName: BlobAuditingPolicyName;
+};
+
+alias CurrentSensitivityLabelSourceParameter = {
+  /** The source of the sensitivity label. */
+  @path
+  @segment("sensitivityLabels")
+  @key
+  sensitivityLabelSource: CurrentSensitivityLabelSource;
+};
+
+alias RecommendedSensitivityLabelSourceParameter = {
+  /** The source of the sensitivity label. */
+  @path
+  @segment("sensitivityLabels")
+  @key
+  sensitivityLabelSource: RecommendedSensitivityLabelSource;
+};
+
 /**
  * The differential backup interval in hours. This is how many interval hours between each differential backup will be supported. This is only applicable to live databases but not dropped databases.
  */
