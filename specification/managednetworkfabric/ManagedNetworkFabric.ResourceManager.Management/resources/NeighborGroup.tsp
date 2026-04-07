@@ -20,15 +20,7 @@ model NeighborGroup extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NeighborGroup Properties */
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated: NeighborGroupProperties;
-
-  /** The NeighborGroup Properties */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @doc("The NeighborGroup Properties")
   properties: NeighborGroupProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
