@@ -22,7 +22,6 @@ import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
-import "./src/agents-invocations/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/managed-blueprints/routes.tsp";
 
@@ -237,15 +236,6 @@ using Azure.AI.Projects;
 @@clientName(Skills.listSkills, "list");
 @@clientName(Skills.updateSkill, "update");
 @@clientName(Skills.deleteSkill, "delete");
-
-// --------------------------------------------------------------------------------
-// AgentInvocations sub-client
-// --------------------------------------------------------------------------------
-
-@@clientName(AgentInvocations.getAgentInvocationOpenApiSpec, "get_open_api_spec");
-@@clientName(AgentInvocations.createAgentInvocation, "create");
-@@clientName(AgentInvocations.getAgentInvocation, "get");
-@@clientName(AgentInvocations.cancelAgentInvocation, "cancel");
 
 // --------------------------------------------------------------------------------
 // AgentSessionFiles sub-client
