@@ -2375,16 +2375,6 @@ enum BlobDeleteType {
   Permanent: "Permanent",
 }
 
-/** The type of blob deletions. */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
-enum BlobDeleteTypeGo {
-  /** Permanently delete the blob. */
-  Permanent: "Permanent",
-
-  /** Deprecated */
-  None: "None",
-}
-
 /** The delete snapshots option type. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum DeleteSnapshotsOptionType {

@@ -260,6 +260,15 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
 
 // GO SPECIFICATION
+/** The type of blob deletions. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobDeleteTypeGo {
+  /** Permanently delete the blob. */
+  Permanent: "Permanent",
+
+  /** Deprecated */
+  None: "None",
+}
 /** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum EncryptionAlgorithmTypeGo {
@@ -319,6 +328,7 @@ enum ImmutabilityPolicySetting {
 model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@alternateType(BlobDeleteType, BlobDeleteTypeGo, "go");
 @@alternateType(BlobItem.name, string, "go");
 @@alternateType(BlobItem.metadata, Record<string>, "go");
 @@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "go");
