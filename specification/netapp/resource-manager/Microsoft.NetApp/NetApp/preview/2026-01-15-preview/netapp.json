@@ -13419,6 +13419,7 @@
         }
       },
       "required": [
+        "site",
         "domain",
         "secretPassword"
       ]
@@ -13590,8 +13591,7 @@
       "description": "Application Type",
       "enum": [
         "SAP-HANA",
-        "ORACLE",
-        "CUSTOM"
+        "ORACLE"
       ],
       "x-ms-enum": {
         "name": "ApplicationType",
@@ -13604,11 +13604,6 @@
           {
             "name": "ORACLE",
             "value": "ORACLE"
-          },
-          {
-            "name": "CUSTOM",
-            "value": "CUSTOM",
-            "description": "Custom application type allows min 2 and max 12 data volumes in a volume group."
           }
         ]
       }
@@ -14609,7 +14604,7 @@
       "type": "object",
       "description": "Cache resource properties",
       "properties": {
-        "filepath": {
+        "filePath": {
           "type": "string",
           "description": "The file path of the Cache.",
           "minLength": 1,
@@ -14792,7 +14787,7 @@
         }
       },
       "required": [
-        "filepath",
+        "filePath",
         "size",
         "cacheSubnetResourceId",
         "peeringSubnetResourceId",
