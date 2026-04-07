@@ -70,6 +70,9 @@ alias HybridIdentityMetadataOps = Azure.ResourceManager.Legacy.LegacyOperations<
      */
     @path
     @segment("machines")
+    @minLength(1)
+    @maxLength(54)
+    @pattern("^[a-zA-Z0-9-_\\.]{1,54}$")
     machineName: string;
   },
   {
@@ -78,6 +81,7 @@ alias HybridIdentityMetadataOps = Azure.ResourceManager.Legacy.LegacyOperations<
      */
     @path
     @segment("hybridIdentityMetadata")
+    @pattern("^[a-zA-Z0-9-_\\.]{1,54}$")
     metadataName: string;
   }
 >;
@@ -222,6 +226,8 @@ interface Machines {
    */
   @summary("Implements GET HybridIdentityMetadata in a machine.")
   @action("hybridIdentityMetadata")
+  @list
+  @get
   listByMachines is ArmResourceActionSync<
     Machine,
     void,

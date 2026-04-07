@@ -15,7 +15,6 @@
         "tags": [
           "licenseProfiles"
         ],
-        "description": "Retrieves information about the view of a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -64,7 +63,6 @@
         "tags": [
           "licenseProfiles"
         ],
-        "description": "The operation to create or update a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -138,7 +136,6 @@
         "tags": [
           "licenseProfiles"
         ],
-        "description": "The operation to update a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -209,7 +206,6 @@
         "tags": [
           "licenseProfiles"
         ],
-        "description": "The operation to delete a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -271,7 +267,6 @@
         "tags": [
           "LicenseProfiles"
         ],
-        "description": "Retrieves information about the view of a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -308,7 +303,6 @@
         "tags": [
           "LicenseProfiles"
         ],
-        "description": "The operation to create or update a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -341,6 +335,11 @@
               "$ref": "#/definitions/LicenseProfile"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -366,7 +365,6 @@
         "tags": [
           "LicenseProfiles"
         ],
-        "description": "The operation to update a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -396,6 +394,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -421,7 +424,6 @@
         "tags": [
           "LicenseProfiles"
         ],
-        "description": "The operation to delete a license profile.",
         "parameters": [
           {
             "name": "machineName",
@@ -437,6 +439,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -565,10 +572,6 @@
           "GET Agent Versions": {
             "$ref": "./examples/AgentVersions_Get.json"
           }
-        },
-        "description": {
-          "__old": "Gets all Agent Versions along with the download link currently present.",
-          "__new": "Gets all agent versions based on location and publisher"
         }
       }
     },
@@ -577,7 +580,6 @@
         "tags__deleted": [
           "AgentVersions"
         ],
-        "description__deleted": "Gets an Agent Version along with the download link currently present.",
         "x-ms-examples__deleted": {
           "GET Agent Versions": {
             "$ref": "./examples/AgentVersion_GetLatest.json"
@@ -1179,20 +1181,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions": {
-      "get": {
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/MachineExtensionsListResult",
-                "__new": "#/definitions/MachineExtensionListResult"
-              }
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}": {
       "put": {
         "responses": {
@@ -1210,9 +1198,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1244,79 +1235,22 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata": {
-      "get__deleted": {
-        "operationId": "HybridIdentityMetadata_ListByMachines",
-        "tags": [
-          "HybridIdentityMetadata"
-        ],
-        "summary": "Implements GET HybridIdentityMetadata in a machine.",
-        "description": "Returns the list of HybridIdentityMetadata of the given machine.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HybridIdentityMetadataList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
+      "get": {
+        "x-ms-examples__deleted": {
           "HybridIdentityMetadataListByVirtualMachines": {
             "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachines.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "HybridIdentityMetadata_ListByMachines",
         "tags": [
-          "Machines"
-        ],
-        "summary": "Implements GET HybridIdentityMetadata in a machine.",
-        "description": "Returns the list of HybridIdentityMetadata of the given machine.",
-        "parameters": [
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/HybridIdentityMetadataList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
+          [
+            "-",
+            "HybridIdentityMetadata"
+          ],
+          [
+            "+",
+            "Machines"
+          ]
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}": {
@@ -1334,35 +1268,6 @@
           [
             "+",
             "Machines"
-          ]
-        ],
-        "parameters": [
-          [
-            "-",
-            {
-              "name": "machineName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 54,
-              "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "machineName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "~",
-            {
-              "pattern__deleted": "^[a-zA-Z0-9-_\\.]{1,54}$"
-            }
           ]
         ]
       }
@@ -1482,20 +1387,6 @@
             "+",
             "NetworkConfigurationsOperationGroup"
           ]
-        ],
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "resource"
-              }
-            }
-          ]
         ]
       },
       "patch": {
@@ -1512,20 +1403,6 @@
           [
             "+",
             "NetworkConfigurationsOperationGroup"
-          ]
-        ],
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "properties"
-              }
-            }
           ]
         ]
       }
@@ -1547,17 +1424,7 @@
           [
             " "
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/MachineRunCommandsListResult",
-                "__new": "#/definitions/MachineRunCommandListResult"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}": {
@@ -1580,6 +1447,9 @@
         ]
       },
       "put": {
+        "x-ms-long-running-operation-options__deleted": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           [
             "~",
@@ -1602,21 +1472,21 @@
         "responses": {
           "201": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "The URL of the resource used to check the status of the asynchronous operation."
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "The URI to poll for completion status.",
                   "__new": "A link to the status monitor"
                 }
+              },
+              "Location": {
+                "description": {
+                  "__old": "The URL of the resource used to check the status of the asynchronous operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
               }
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/MachineRunCommand"
         }
       },
       "patch": {
@@ -1624,10 +1494,6 @@
           "Update a Run Command": {
             "$ref": "./examples/runCommand/RunCommands_Update.json"
           }
-        },
-        "description": {
-          "__old": "The operation to update the run command.",
-          "__new": "The operation to update a run command."
         },
         "parameters": [
           [
@@ -1645,21 +1511,18 @@
             " "
           ],
           [
-            "~",
-            {
-              "name": {
-                "__old": "runCommandProperties",
-                "__new": "properties"
-              }
-            }
+            " "
           ]
         ],
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1691,9 +1554,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1875,7 +1741,6 @@
   "definitions": {
     "DetectedProperties__deleted": {
       "type": "object",
-      "description": "Detected properties from the machine.",
       "additionalProperties": {
         "type": "string"
       },
@@ -1883,7 +1748,6 @@
     },
     "ExtensionTarget__deleted": {
       "type": "object",
-      "description": "Describes the Machine Extension Target Properties",
       "additionalProperties": {
         "$ref": "#/definitions/ExtensionTargetProperties",
         "type": "object"
@@ -1952,49 +1816,11 @@
         "value"
       ]
     },
-    "MachineExtensionsListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/MachineExtension"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "MachineRunCommandsListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/MachineRunCommand"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "OperationListResult__deleted": {
       "type": "object",
-      "description": "The List Compute Operation operation response.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of compute operations",
           "items": {
             "$ref": "#/definitions/OperationValue"
           },
@@ -2004,77 +1830,62 @@
     },
     "OperationValue__deleted": {
       "type": "object",
-      "description": "Describes the properties of a Compute Operation value.",
       "properties": {
         "origin": {
           "type": "string",
-          "description": "The origin of the compute operation.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the compute operation.",
           "readOnly": true
         },
         "display": {
-          "$ref": "#/definitions/OperationValueDisplay",
-          "description": "Display properties"
+          "$ref": "#/definitions/OperationValueDisplay"
         },
         "isDataAction": {
           "type": "boolean",
-          "description": "This property indicates if the operation is an action or a data action",
           "readOnly": true
         }
       }
     },
     "OperationValueDisplay__deleted": {
       "type": "object",
-      "description": "Describes the properties of a Hybrid Compute Operation Value Display.",
       "properties": {
         "operation": {
           "type": "string",
-          "description": "The display name of the compute operation.",
           "readOnly": true
         },
         "resource": {
           "type": "string",
-          "description": "The display name of the resource the operation applies to.",
           "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "The description of the operation.",
           "readOnly": true
         },
         "provider": {
           "type": "string",
-          "description": "The resource provider for the operation.",
           "readOnly": true
         }
       }
     },
     "PrivateLinkScopesResource__deleted": {
       "type": "object",
-      "description": "An azure resource object",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Azure resource Id",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Azure resource name",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Azure resource type",
           "readOnly": true
         },
         "location": {
           "type": "string",
-          "description": "Resource location",
           "x-ms-mutability": [
             "create",
             "read"
@@ -2082,7 +1893,6 @@
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags",
           "additionalProperties": {
             "type": "string"
           }
@@ -2093,16 +1903,13 @@
       ]
     },
     "TargetVersion__deleted": {
-      "type": "string",
-      "description": "Extension Upgrade Target Version."
+      "type": "string"
     },
     "Azure.ResourceManager.ArmResponse<MachineAssessPatchesResult>__added": {
       "type": "object",
-      "description": "Azure operation completed successfully.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/MachineAssessPatchesResult",
-          "description": "The body type of the operation request or response."
+          "$ref": "#/definitions/MachineAssessPatchesResult"
         }
       },
       "required": [
@@ -2111,11 +1918,9 @@
     },
     "Azure.ResourceManager.ArmResponse<MachineInstallPatchesResult>__added": {
       "type": "object",
-      "description": "Azure operation completed successfully.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/MachineInstallPatchesResult",
-          "description": "The body type of the operation request or response."
+          "$ref": "#/definitions/MachineInstallPatchesResult"
         }
       },
       "required": [
@@ -2124,11 +1929,9 @@
     },
     "Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>__added": {
       "type": "object",
-      "description": "Azure operation completed successfully.",
       "properties": {
         "body": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult",
-          "description": "The body type of the operation request or response."
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
         }
       },
       "required": [
@@ -2202,14 +2005,12 @@
       "type": "object",
       "properties": {
         "softwareAssuranceCustomer": {
-          "type": "boolean",
-          "description": "Specifies if this machine is licensed as part of a Software Assurance agreement."
+          "type": "boolean"
         }
       }
     },
     "LicenseProfileProperties__added": {
       "type": "object",
-      "description": "Describe the properties of a license profile.",
       "properties": {
         "softwareAssurance": {
           "$ref": "#/definitions/LicenseProfilePropertiesSoftwareAssurance",
@@ -2217,17 +2018,14 @@
         },
         "esuProfile": {
           "$ref": "#/definitions/LicenseProfileArmEsuProperties",
-          "description": "Hybrid Compute ESU Profile properties",
           "x-ms-client-flatten": true
         },
         "productProfile": {
           "$ref": "#/definitions/LicenseProfileArmProductProfileProperties",
-          "description": "Hybrid Compute Product Profile properties",
           "x-ms-client-flatten": true
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state, which only appears in the response.",
           "enum": [
             "Creating",
             "Updating",
@@ -2250,14 +2048,12 @@
       "type": "object",
       "properties": {
         "softwareAssuranceCustomer": {
-          "type": "boolean",
-          "description": "Specifies if this machine is licensed as part of a Software Assurance agreement."
+          "type": "boolean"
         }
       }
     },
     "LicenseProfileUpdateProperties__added": {
       "type": "object",
-      "description": "Describe the Update properties of a license profile.",
       "properties": {
         "softwareAssurance": {
           "$ref": "#/definitions/LicenseProfileUpdatePropertiesSoftwareAssurance",
@@ -2265,12 +2061,10 @@
         },
         "esuProfile": {
           "$ref": "#/definitions/EsuProfileUpdateProperties",
-          "description": "Hybrid Compute ESU Profile Update properties",
           "x-ms-client-flatten": true
         },
         "productProfile": {
           "$ref": "#/definitions/ProductProfileUpdateProperties",
-          "description": "Hybrid Compute Product Profile Update properties",
           "x-ms-client-flatten": true
         }
       }
@@ -2279,8 +2073,7 @@
       "type": "object",
       "properties": {
         "softwareAssuranceCustomer": {
-          "type": "boolean",
-          "description": "Specifies if this machine is licensed as part of a Software Assurance agreement."
+          "type": "boolean"
         }
       }
     },
@@ -2289,7 +2082,6 @@
       "properties": {
         "state": {
           "type": "string",
-          "description": "Describes the state of the license.",
           "enum": [
             "Activated",
             "Deactivated"
@@ -2301,7 +2093,6 @@
         },
         "target": {
           "type": "string",
-          "description": "Describes the license target server.",
           "enum": [
             "Windows Server 2012",
             "Windows Server 2012 R2"
@@ -2313,7 +2104,6 @@
         },
         "edition": {
           "type": "string",
-          "description": "Describes the edition of the license. The values are either Standard or Datacenter.",
           "enum": [
             "Standard",
             "Datacenter"
@@ -2325,7 +2115,6 @@
         },
         "type": {
           "type": "string",
-          "description": "Describes the license core type (pCore or vCore).",
           "enum": [
             "pCore",
             "vCore"
@@ -2337,22 +2126,18 @@
         },
         "processors": {
           "type": "integer",
-          "format": "int32",
-          "description": "Describes the number of processors."
+          "format": "int32"
         }
       }
     },
     "MachineExtensionInstanceViewStatus__added": {
       "type": "object",
-      "description": "Instance view status.",
       "properties": {
         "code": {
-          "type": "string",
-          "description": "The status code."
+          "type": "string"
         },
         "level": {
           "type": "string",
-          "description": "The level code.",
           "enum": [
             "Info",
             "Warning",
@@ -2364,91 +2149,40 @@
           }
         },
         "displayStatus": {
-          "type": "string",
-          "description": "The short localizable label for the status."
+          "type": "string"
         },
         "message": {
-          "type": "string",
-          "description": "The detailed status message, including for alerts and error messages."
+          "type": "string"
         },
         "time": {
           "type": "string",
-          "format": "date-time",
-          "description": "The time of the status."
+          "format": "date-time"
         }
       }
     },
-    "MachineExtensionListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/MachineExtension"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "MachineRunCommandListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/MachineRunCommand"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "OSProfileLinuxConfiguration__added": {
       "type": "object",
-      "description": "Specifies the linux configuration for update management.",
       "properties": {
         "patchSettings": {
           "$ref": "#/definitions/PatchSettings",
-          "description": "Specifies the patch settings.",
           "x-ms-client-flatten": true
         }
       }
     },
     "OSProfileWindowsConfiguration__added": {
       "type": "object",
-      "description": "Specifies the windows configuration for update management.",
       "properties": {
         "patchSettings": {
           "$ref": "#/definitions/PatchSettings",
-          "description": "Specifies the patch settings.",
           "x-ms-client-flatten": true
         }
       }
     },
     "PatchSettingsStatus__added": {
       "type": "object",
-      "description": "Status of the hotpatch capability enrollment or disenrollment.",
       "properties": {
         "hotpatchEnablementStatus": {
           "type": "string",
-          "description": "Status of hotpatch enablement or disablement.",
           "enum": [
             "Unknown",
             "PendingEvaluation",
@@ -2463,14 +2197,12 @@
         },
         "error": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
-          "description": "The errors that were encountered during the hotpatch capability enrollment or disenrollment.",
           "readOnly": true
         }
       }
     },
     "TypeSpec.Http.OkResponse__added": {
-      "type": "object",
-      "description": "The request has succeeded."
+      "type": "object"
     },
     "AgentConfiguration": {
       "readOnly__deleted": true,
@@ -2524,16 +2256,6 @@
         }
       }
     },
-    "ExtensionTargetProperties": {
-      "properties": {
-        "targetVersion": {
-          "description": {
-            "__old": "Extension Upgrade Target Version.",
-            "__new": "Properties for the specified Extension to Upgrade."
-          }
-        }
-      }
-    },
     "ExtensionTypeListResult": {
       "required__added": [
         "value"
@@ -2545,10 +2267,7 @@
       }
     },
     "ExtensionValueListResult": {
-      "description": {
-        "__old": "The List Extension Metadata response.",
-        "__new": "[Placeholder] Discription for page model"
-      },
+      "description__added": "[Placeholder] Discription for page model",
       "properties": {
         "nextLink__added": {
           "type": "string",
@@ -2556,10 +2275,7 @@
           "description": "[Placeholder] Discription for nextLink property"
         },
         "value": {
-          "description": {
-            "__old": "The list of extension metadata",
-            "__new": "[Placeholder] Discription for value property"
-          }
+          "description__added": "[Placeholder] Discription for value property"
         }
       }
     },
@@ -2596,7 +2312,6 @@
       "properties": {
         "systemData__deleted": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
       },
@@ -2615,10 +2330,6 @@
     "HybridComputePrivateLinkScopeProperties": {
       "properties": {
         "publicNetworkAccess": {
-          "description": {
-            "__old": "The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).",
-            "__new": "Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints."
-          },
           "enum": [
             [
               " "
@@ -2637,8 +2348,7 @@
     "HybridIdentityMetadata": {
       "properties": {
         "systemData__deleted": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data."
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -2649,13 +2359,6 @@
           }
         ]
       ]
-    },
-    "HybridIdentityMetadataProperties": {
-      "properties": {
-        "identity": {
-          "description__added": "Identity for the resource."
-        }
-      }
     },
     "IpAddress": {
       "readOnly__deleted": true,
@@ -2711,9 +2414,6 @@
             }
           },
           "$ref__added": "#/definitions/LicenseProfileMachineInstanceViewSoftwareAssurance"
-        },
-        "esuProfile": {
-          "description__added": "Properties for the Machine ESU profile."
         }
       }
     },
@@ -2790,9 +2490,6 @@
     },
     "Machine": {
       "properties": {
-        "identity": {
-          "description__added": "Identity for the resource."
-        },
         "kind": {
           "x-ms-enum": {
             "name": {
@@ -2861,6 +2558,11 @@
         }
       }
     },
+    "MachineExtensionsListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "MachineInstallPatchesParameters": {
       "properties": {
         "maximumDuration": {
@@ -2868,21 +2570,8 @@
         }
       }
     },
-    "MachineInstallPatchesResult": {
-      "properties": {
-        "status": {
-          "description": {
-            "__old": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", \"Unknown\" or \"CompletedWithWarnings.\"",
-            "__new": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\""
-          }
-        }
-      }
-    },
     "MachineProperties": {
       "properties": {
-        "locationData": {
-          "description__added": "Metadata pertaining to the geographic location of the resource."
-        },
         "agentConfiguration": {
           "readOnly__added": true
         },
@@ -2927,32 +2616,16 @@
         },
         "runAsPassword": {
           "x-ms-secret__deleted": true
-        },
-        "outputBlobUri": {
-          "description": {
-            "__old": "Specifies the Azure storage blob where script output stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter. ",
-            "__new": "Specifies the Azure storage blob where script output stream will be uploaded. Use a SAS URI with read, append, create, write access OR use managed identity to provide the VM access to the blob. Refer outputBlobManagedIdentity parameter."
-          }
-        },
-        "outputBlobManagedIdentity": {
-          "description": {
-            "__old": "User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged ",
-            "__new": "User-assigned managed identity that has access to outputBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged"
-          }
-        },
-        "errorBlobManagedIdentity": {
-          "description": {
-            "__old": "User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged ",
-            "__new": "User-assigned managed identity that has access to errorBlobUri storage blob. Use an empty object in case of system-assigned identity. Make sure managed identity has been given access to blob's container with 'Storage Blob Data Contributor' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged"
-          }
         }
       }
     },
+    "MachineRunCommandsListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "MachineUpdate": {
       "properties": {
-        "identity": {
-          "description__added": "Identity for the resource."
-        },
         "kind": {
           "x-ms-enum": {
             "name": {
@@ -2965,24 +2638,11 @@
     },
     "MachineUpdateProperties": {
       "properties": {
-        "locationData": {
-          "description__added": "Metadata pertaining to the geographic location of the resource."
-        },
-        "osProfile": {
-          "description__added": "Specifies the operating system settings for the hybrid machine."
-        },
         "parentClusterResourceId": {
           "format__added": "arm-id"
         },
         "privateLinkScopeResourceId": {
           "format__added": "arm-id"
-        }
-      }
-    },
-    "NetworkConfiguration": {
-      "properties": {
-        "properties": {
-          "description__added": "Network configuration properties"
         }
       }
     },
@@ -3001,17 +2661,14 @@
       "properties": {
         "id__deleted": {
           "type": "string",
-          "description": "Azure resource Id",
           "readOnly": true
         },
         "name__deleted": {
           "type": "string",
-          "description": "Azure resource name",
           "readOnly": true
         },
         "type__deleted": {
           "type": "string",
-          "description": "Azure resource type",
           "readOnly": true
         }
       }
@@ -3083,7 +2740,6 @@
       "properties": {
         "systemData__deleted": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
       }
@@ -3102,7 +2758,6 @@
       "properties": {
         "systemData__deleted": {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
       }
@@ -3120,10 +2775,6 @@
     "PrivateLinkScopeValidationDetails": {
       "properties": {
         "publicNetworkAccess": {
-          "description": {
-            "__old": "The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).",
-            "__new": "Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints."
-          },
           "enum": [
             [
               " "
@@ -3141,12 +2792,6 @@
     },
     "Processor": {
       "readOnly__deleted": true
-    },
-    "RunCommandManagedIdentity": {
-      "description": {
-        "__old": " Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.",
-        "__new": "Contains clientId or objectId (use only one, not both) of a user-assigned managed identity that has access to storage blob used in Run Command. Use an empty RunCommandManagedIdentity object in case of system-assigned identity. Make sure the Azure storage blob exists in case of scriptUri, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment with scriptUri blob and 'Storage Blob Data Contributor' for Append blobs(outputBlobUri, errorBlobUri). In case of user assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
-      }
     },
     "ServiceExtension": {
       "properties": {
@@ -3180,27 +2825,11 @@
       }
     },
     "ServiceExtensionType": {
-      "description__deleted": "The name of the Azure Arc Extension.",
       "x-ms-enum__deleted": {
         "name": "ServiceExtensionType",
         "modelAsString": true
       },
       "x-nullable__added": false
-    },
-    "Settings": {
-      "description__added": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "description__added": "Settings properties"
-        }
-      }
-    },
-    "SettingsProperties": {
-      "properties": {
-        "gatewayProperties": {
-          "description__added": "Settings Gateway properties"
-        }
-      }
     },
     "StorageProfile": {
       "readOnly__deleted": true

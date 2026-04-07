@@ -35,7 +35,11 @@ interface MachineRunCommands {
   /**
    * The operation to create or update a run command.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<MachineRunCommand>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    MachineRunCommand,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MachineRunCommand> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to update a run command.
@@ -43,13 +47,19 @@ interface MachineRunCommands {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MachineRunCommand,
-    PatchModel = MachineRunCommandUpdate
+    PatchModel = MachineRunCommandUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MachineRunCommand> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * The operation to delete a run command.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<MachineRunCommand>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    MachineRunCommand,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmCombinedLroHeaders<FinalResult = MachineRunCommand>
+  >;
 
   /**
    * The operation to get all the run commands of a non-Azure machine.
@@ -62,7 +72,8 @@ interface MachineRunCommands {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = MachineRunCommandsListResult
   >;
 }
 

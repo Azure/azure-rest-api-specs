@@ -163,3 +163,12 @@ using Microsoft.HybridCompute;
 @@clientName(LicensesOperationGroup.validateLicense::parameters.body,
   "parameters"
 );
+@@clientName(NetworkConfigurationsOperationGroup.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(NetworkConfigurationsOperationGroup.update::parameters.properties,
+  "parameters"
+);
+@@clientName(MachineRunCommands.update::parameters.properties,
+  "runCommandProperties"
+);

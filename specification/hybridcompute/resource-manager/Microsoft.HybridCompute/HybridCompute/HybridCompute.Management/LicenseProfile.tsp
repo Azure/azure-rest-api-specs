@@ -38,7 +38,7 @@ interface LicenseProfiles {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LicenseProfile,
-    LroHeaders = ArmLroLocationHeader<FinalResult = LicenseProfile> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = LicenseProfile> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -48,13 +48,18 @@ interface LicenseProfiles {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     LicenseProfile,
-    PatchModel = LicenseProfileUpdate
+    PatchModel = LicenseProfileUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = LicenseProfile> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * The operation to delete a license profile.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<LicenseProfile>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    LicenseProfile,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * The operation to get all license profiles of a non-Azure machine

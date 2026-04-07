@@ -3840,3 +3840,7 @@ model KeyDetails {
 }
 
 model GatewaysListResult is Azure.Core.Page<Gateway>;
+
+model MachineExtensionsListResult is Azure.Core.Page<MachineExtension>;
+
+model MachineRunCommandsListResult is Azure.Core.Page<MachineRunCommand>;

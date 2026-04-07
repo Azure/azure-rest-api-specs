@@ -49,7 +49,9 @@ interface MachineExtensions {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MachineExtension,
-    PatchModel = MachineExtensionUpdate
+    PatchModel = MachineExtensionUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MachineExtension> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -58,7 +60,8 @@ interface MachineExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     MachineExtension,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -72,7 +75,8 @@ interface MachineExtensions {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = MachineExtensionsListResult
   >;
 }
 

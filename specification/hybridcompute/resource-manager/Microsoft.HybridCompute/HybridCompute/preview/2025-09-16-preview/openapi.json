@@ -2073,9 +2073,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MachineExtensionListResult"
+              "$ref": "#/definitions/MachineExtensionsListResult"
             }
           },
           "default": {
@@ -2284,6 +2284,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2387,7 +2392,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata": {
-      "post": {
+      "get": {
         "operationId": "HybridIdentityMetadata_ListByMachines",
         "tags": [
           "Machines"
@@ -2428,6 +2433,9 @@
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2454,14 +2462,18 @@
             "in": "path",
             "description": "The name of the hybrid machine.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
           },
           {
             "name": "metadataName",
             "in": "path",
             "description": "The id of the HybridIdentityMetadata to get.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
           }
         ],
         "responses": {
@@ -2703,6 +2715,11 @@
               "$ref": "#/definitions/LicenseProfile"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2778,6 +2795,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2838,6 +2860,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3036,7 +3063,7 @@
             "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -3092,7 +3119,7 @@
             "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -3154,9 +3181,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/MachineRunCommandListResult"
+              "$ref": "#/definitions/MachineRunCommandsListResult"
             }
           },
           "default": {
@@ -3291,7 +3318,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3313,7 +3345,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/MachineRunCommand"
         },
         "x-ms-long-running-operation": true
@@ -3353,7 +3385,7 @@
             "pattern": "[a-zA-Z0-9-_\\.]+"
           },
           {
-            "name": "properties",
+            "name": "runCommandProperties",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -3372,6 +3404,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3435,6 +3472,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3462,7 +3504,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MachineRunCommand"
         },
         "x-ms-long-running-operation": true
       }
@@ -6679,27 +6722,6 @@
         }
       }
     },
-    "MachineExtensionListResult": {
-      "type": "object",
-      "description": "The response of a MachineExtension list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MachineExtension items on this page",
-          "items": {
-            "$ref": "#/definitions/MachineExtension"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MachineExtensionProperties": {
       "type": "object",
       "description": "Describes the properties of a Machine Extension.",
@@ -6817,6 +6839,27 @@
           }
         }
       }
+    },
+    "MachineExtensionsListResult": {
+      "type": "object",
+      "description": "Paged collection of MachineExtension items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MachineExtension items on this page",
+          "items": {
+            "$ref": "#/definitions/MachineExtension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "MachineInstallPatchesParameters": {
       "type": "object",
@@ -7210,27 +7253,6 @@
         }
       }
     },
-    "MachineRunCommandListResult": {
-      "type": "object",
-      "description": "The response of a MachineRunCommand list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The MachineRunCommand items on this page",
-          "items": {
-            "$ref": "#/definitions/MachineRunCommand"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "MachineRunCommandProperties": {
       "type": "object",
       "description": "Describes the properties of a run command.",
@@ -7333,6 +7355,27 @@
         {
           "$ref": "#/definitions/ResourceUpdate"
         }
+      ]
+    },
+    "MachineRunCommandsListResult": {
+      "type": "object",
+      "description": "Paged collection of MachineRunCommand items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MachineRunCommand items on this page",
+          "items": {
+            "$ref": "#/definitions/MachineRunCommand"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "MachineUpdate": {
