@@ -479,7 +479,7 @@ const MicrosoftCommunicationRouterWorkerUpdatedExample: AcsRouterWorkerUpdatedEv
 
 const MicrosoftCommunicationAdvancedMessageDeliveryStatusUpdatedExample: AcsMessageDeliveryStatusUpdatedEventData = #{
   messageId: "d59f9468-0a5c-4022-8200-d7bf6fb78bc5",
-  toBSUID: "1345679879",
+  toBSUId: "1345679879",
   status: "delivered",
   channelType: "whatsapp",
   from: "12375679879",
@@ -491,7 +491,7 @@ const MicrosoftCommunicationAdvancedMessageDeliveryStatusUpdatedExample: AcsMess
 const MicrosoftCommunicationAdvancedMessageReceivedExample: AcsMessageReceivedEventData = #{
   content: "Come on guys, lets go for lunch together.",
   messageId: "messageId",
-  fromBSUID: "12375679879",
+  fromBSUId: "12375679879",
   channelType: "whatsapp",
   messageType: "messageType",
   media: #{

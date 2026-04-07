@@ -1285,7 +1285,11 @@
         },
         "onBehalfOfCallee": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The communication identifier of the user on behalf of whom the call is made."
+          "description": "The communication identifier of the callee for the \"on behalf of\" call."
+        },
+        "onBehalfOf": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier on behalf of whom the call is made."
         },
         "correlationId": {
           "type": "string",
@@ -1445,6 +1449,11 @@
           "type": "string",
           "description": "The message id"
         },
+        "toBSUID": {
+          "type": "string",
+          "description": "Optional. The BSUID of the recipient.",
+          "x-ms-client-name": "toBSUId"
+        },
         "status": {
           "$ref": "#/definitions/AcsMessageDeliveryStatus",
           "description": "The updated message status"
@@ -1600,6 +1609,11 @@
         "messageId": {
           "type": "string",
           "description": "Optional. Message ID. Format is Guid as string."
+        },
+        "fromBSUID": {
+          "type": "string",
+          "description": "Optional. The BSUID of the sender.",
+          "x-ms-client-name": "fromBSUId"
         },
         "channelType": {
           "$ref": "#/definitions/AcsMessageChannelKind",
