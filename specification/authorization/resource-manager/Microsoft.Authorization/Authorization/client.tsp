@@ -47,3 +47,14 @@ namespace Microsoft.AuthorizationCombinedClient;
 @@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
 @@clientName(Microsoft.Authorization.CommonUserType, "UserType", "python");
 @@clientName(Microsoft.Authorization.UserType, "CommonUserType", "python");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.ProviderOperations.ProviderOperationsMetadataGetParameters.$expand,
+  "resourceTypes",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.ProviderOperations.ProviderOperationsMetadataListParameters.$expand,
+  "resourceTypes",
+  "python"
+);
