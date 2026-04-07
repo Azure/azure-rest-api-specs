@@ -96,33 +96,3 @@ using Microsoft.Sql;
   "Microsoft.Sql/servers",
   "go"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(DataMaskingPoliciesParentParameters.dataMaskingPolicyName,
-  "default",
-  "javascript"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(CurrentSensitivityLabelSourceParameter.sensitivityLabelSource,
-  "current",
-  "javascript"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(RecommendedSensitivityLabelSourceParameter.sensitivityLabelSource,
-  "recommended",
-  "javascript"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BlobAuditingPolicyNameParameter.blobAuditingPolicyName,
-  "default",
-  "javascript"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(BlobExtendedAuditingPolicyNameParameter.blobAuditingPolicyName,
-  "default",
-  "javascript"
-);

@@ -44,7 +44,13 @@ alias ExtendedDatabaseBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.Leg
     @key
     databaseName: string;
   },
-  BlobExtendedAuditingPolicyNameParameter
+  {
+    /** The name of the blob auditing policy. */
+    @path
+    @segment("extendedAuditingSettings")
+    @key
+    blobAuditingPolicyName: BlobAuditingPolicyName;
+  }
 >;
 
 @armResourceOperations(#{ omitTags: true })
