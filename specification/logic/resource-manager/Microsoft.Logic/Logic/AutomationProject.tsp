@@ -19,7 +19,7 @@ model AutomationProject is TrackedResource<AutomationProjectProperties> {
     Resource = AutomationProject,
     KeyName = "automationProjectName",
     SegmentName = "automationProjects",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,62}[a-zA-Z0-9]$"
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
   >;
 
   /**
@@ -67,7 +67,7 @@ interface AutomationProjects {
 
 @@doc(AutomationProject.name, "The automation project name.");
 @@minLength(AutomationProject.name, 2);
-@@maxLength(AutomationProject.name, 64);
+@@maxLength(AutomationProject.name, 32);
 @@doc(AutomationProject.properties, "The automation project properties.");
 @@doc(AutomationProjects.createOrUpdate::parameters.resource,
   "The automation project definition."
