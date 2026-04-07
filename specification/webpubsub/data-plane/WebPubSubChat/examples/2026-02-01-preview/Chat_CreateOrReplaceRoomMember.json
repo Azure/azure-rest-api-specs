@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "hub": "chat_hub",
+    "roomId": "room1",
+    "userId": "user1",
+    "resource": {
+      "roleName": "room.member"
+    },
+    "if-match": "etag1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "userId": "user1",
+        "roleName": "room.member",
+        "etag": "etag2"
+      }
+    },
+    "201": {
+      "body": {
+        "userId": "user1",
+        "roleName": "room.member",
+        "etag": "etag3"
+      }
+    }
+  },
+  "operationId": "Chat_CreateOrReplaceRoomMember",
+  "title": "Chat_CreateOrReplaceRoomMember"
+}

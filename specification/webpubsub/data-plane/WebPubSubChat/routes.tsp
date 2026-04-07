@@ -3,8 +3,20 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
+
+using Azure.Core.Traits;
 
 namespace WebPubSubChat;
+
+alias Operations = Azure.Core.ResourceOperations<Azure.Core.Traits.NoConditionalRequests &
+  Azure.Core.Traits.NoRepeatableRequests &
+  Azure.Core.Traits.NoClientRequestId>;
+
+alias ConditionalOperations = Azure.Core.ResourceOperations<Azure.Core.Traits.SupportsConditionalRequests &
+  Azure.Core.Traits.NoRepeatableRequests &
+  Azure.Core.Traits.NoClientRequestId>;
 
 /**
  * Chat operations.
@@ -13,595 +25,126 @@ namespace WebPubSubChat;
 interface Chat {
   // --- Conversations ---
 
-  /**
-   * Get conversation information.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Get conversation information. */
   @summary("Get conversation information.")
-  @route("/api/hubs/{hub}/chat/conversations/{conversationId}")
-  @get
-  getConversation is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Conversation identifier.
-       */
-      @minLength(1)
-      @path
-      conversationId: string;
-    },
-    ChatConversationInfo
-  >;
+  getConversation is Operations.ResourceRead<ChatConversation>;
 
   // --- Messages ---
 
-  /**
-   * Query messages in a conversation.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
-  @summary("Query messages in a conversation.")
-  @route("/api/hubs/{hub}/chat/conversations/{conversationId}/messages")
-  @get
-  @list
-  listMessages is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Conversation identifier.
-       */
+  /** Query messages in a conversation from latest to earliest. */
+  @summary("Query messages in a conversation from latest to earliest.")
+  listMessages is Operations.ResourceList<
+    ChatMessage,
+    ListQueryParametersTrait<{
+      /** Latest message ID (exclusive) for pagination. */
+      @query
+      @pattern("^\\d+$")
       @minLength(1)
-      @path
-      conversationId: string;
+      @maxLength(128)
+      latestMessageId?: string;
 
-      /**
-       * Last message ID for pagination.
-       */
+      /** Earliest message ID (exclusive) for pagination. */
       @query
-      lastMessageId?: string;
+      @pattern("^\\d+$")
+      @minLength(1)
+      @maxLength(128)
+      earliestMessageId?: string;
 
-      /**
-       * First message ID for pagination.
-       */
-      @query
-      firstMessageId?: string;
-
-      /**
-       * Maximum number of messages to return.
-       */
-      @query
-      @pageSize
-      pageSize?: int32;
-    },
-    QueryChatMessageResponse
+      ...MaxPageSizeQueryParameter;
+    }>
   >;
 
-  /**
-   * Delete a message.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Delete a message. */
   @summary("Delete a message.")
-  @route("/api/hubs/{hub}/chat/conversations/{conversationId}/messages/{messageId}")
-  @delete
-  deleteMessage is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  deleteMessage is ConditionalOperations.ResourceDelete<ChatMessage>;
 
-      /**
-       * Conversation identifier.
-       */
-      @minLength(1)
-      @path
-      conversationId: string;
-
-      /**
-       * Message identifier.
-       */
-      @minLength(1)
-      @path
-      messageId: string;
-    },
-    void
-  >;
-
-  /**
-   * Update a message.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Update a message. */
   @summary("Update a message.")
-  @route("/api/hubs/{hub}/chat/conversations/{conversationId}/messages/{messageId}")
-  @patch(#{ implicitOptionality: true })
-  updateMessage is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Conversation identifier.
-       */
-      @minLength(1)
-      @path
-      conversationId: string;
-
-      /**
-       * Message identifier.
-       */
-      @minLength(1)
-      @path
-      messageId: string;
-
-      /**
-       * Update message request body.
-       */
-      @header("Content-Type")
-      contentType: "application/json";
-
-      /**
-       * Update message request.
-       */
-      @bodyRoot
-      request: UpdateChatMessageRequest;
-    },
-    ChatMessageInfo
-  >;
+  updateMessage is ConditionalOperations.ResourceUpdate<ChatMessage>;
 
   // --- Roles ---
 
-  /**
-   * Query roles in a hub.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Query roles in a hub. */
   @summary("Query roles in a hub.")
-  @route("/api/hubs/{hub}/chat/roles")
-  @get
-  @list
-  listRoles is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  listRoles is Operations.ResourceList<
+    ChatRole,
+    ListQueryParametersTrait<{
+      ...MaxPageSizeQueryParameter;
 
-      /**
-       * Continuation token for pagination.
-       */
+      /** Continuation token for pagination. */
       @query
       @continuationToken
+      @minLength(1)
       continuationToken?: string;
-
-      /**
-       * Maximum number of roles to return.
-       */
-      @query
-      maxCount?: int32;
-    },
-    QueryChatRolesResponse
+    }>
   >;
 
-  /**
-   * Get role information.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Get role information. */
   @summary("Get role information.")
-  @route("/api/hubs/{hub}/chat/roles/{role}")
-  @get
-  getRole is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  getRole is Operations.ResourceRead<ChatRole>;
 
-      /**
-       * Role name.
-       */
-      @pattern("^[a-z0-9_.-]{1,64}$")
-      @path
-      role: string;
-    },
-    ChatRoleInfo
-  >;
+  /** Create or replace a role. */
+  @summary("Create or replace a role.")
+  createOrReplaceRole is ConditionalOperations.ResourceCreateOrReplace<ChatRole>;
 
-  /**
-   * Create or update a role.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
-  @summary("Create or update a role.")
-  @route("/api/hubs/{hub}/chat/roles/{role}")
-  @put
-  createOrUpdateRole is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Role name.
-       */
-      @pattern("^[a-z0-9_.-]{1,64}$")
-      @path
-      role: string;
-
-      /**
-       * Create or update role request.
-       */
-      @bodyRoot
-      request: CreateOrUpdateChatRoleInfoRequest;
-    },
-    void
-  >;
-
-  /**
-   * Delete a role.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Delete a role. */
   @summary("Delete a role.")
-  @route("/api/hubs/{hub}/chat/roles/{role}")
-  @delete
-  deleteRole is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Role name.
-       */
-      @pattern("^[a-z0-9_.-]{1,64}$")
-      @path
-      role: string;
-    },
-    void
-  >;
+  deleteRole is ConditionalOperations.ResourceDelete<ChatRole>;
 
   // --- Rooms ---
 
-  /**
-   * Create a new room.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Create a new room with a service-generated ID. */
   @summary("Create a new room.")
-  @route("/api/hubs/{hub}/chat/rooms")
-  @post
-  createRoom is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  createRoom is Operations.ResourceCreateWithServiceProvidedName<ChatRoom>;
 
-      /**
-       * Create room request.
-       */
-      @bodyRoot
-      request: CreateChatRoomRequest;
-    },
-    ChatRoomInfo
-  >;
+  /** Create or replace a room with a client-specified ID. */
+  @summary("Create or replace a room.")
+  createOrReplaceRoom is ConditionalOperations.ResourceCreateOrReplace<ChatRoom>;
 
-  /**
-   * Get room information.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Get room information. */
   @summary("Get room information.")
-  @route("/api/hubs/{hub}/chat/rooms/{roomId}")
-  @get
-  getRoom is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  getRoom is Operations.ResourceRead<ChatRoom>;
 
-      /**
-       * Room identifier.
-       */
-      @minLength(1)
-      @path
-      roomId: string;
-    },
-    ChatRoomInfo
-  >;
-
-  /**
-   * Update room information.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
-  @summary("Update room information.")
-  @route("/api/hubs/{hub}/chat/rooms/{roomId}")
-  @patch(#{ implicitOptionality: true })
-  updateRoom is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Room identifier.
-       */
-      @minLength(1)
-      @path
-      roomId: string;
-
-      /**
-       * Update room request content type.
-       */
-      @header("Content-Type")
-      contentType: "application/json";
-
-      /**
-       * Update room request.
-       */
-      @bodyRoot
-      request: UpdateChatRoomRequest;
-    },
-    ChatRoomInfo
-  >;
-
-  /**
-   * Delete a room.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Delete a room. */
   @summary("Delete a room.")
-  @route("/api/hubs/{hub}/chat/rooms/{roomId}")
-  @delete
-  deleteRoom is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Room identifier.
-       */
-      @minLength(1)
-      @path
-      roomId: string;
-    },
-    void
-  >;
+  deleteRoom is ConditionalOperations.ResourceDelete<ChatRoom>;
 
   // --- Room Members ---
 
-  /**
-   * Get room members.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Get room members. */
   @summary("Get room members.")
-  @route("/api/hubs/{hub}/chat/rooms/{roomId}/members")
-  @get
-  getRoomMembers is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  listRoomMembers is Operations.ResourceList<
+    ChatRoomMember,
+    ListQueryParametersTrait<{
+      ...MaxPageSizeQueryParameter;
 
-      /**
-       * Room identifier.
-       */
+      /** Continuation token for pagination. */
+      @query
+      @continuationToken
       @minLength(1)
-      @path
-      roomId: string;
-    },
-    ChatRoomMember[]
+      continuationToken?: string;
+    }>
   >;
 
-  /**
-   * Add or update a room member.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
-  @summary("Add or update a room member.")
-  @route("/api/hubs/{hub}/chat/rooms/{roomId}/members/{userId}")
-  @put
-  addOrUpdateRoomMember is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  /** Create or replace a room member. */
+  @summary("Create or replace a room member.")
+  createOrReplaceRoomMember is ConditionalOperations.ResourceCreateOrReplace<ChatRoomMember>;
 
-      /**
-       * Room identifier.
-       */
-      @minLength(1)
-      @path
-      roomId: string;
-
-      /**
-       * User identifier.
-       */
-      @minLength(1)
-      @path
-      userId: string;
-
-      /**
-       * Update room member request.
-       */
-      @bodyRoot
-      request: UpdateChatRoomMemberRequest;
-    },
-    void
-  >;
-
-  /**
-   * Delete a room member.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Delete a room member. */
   @summary("Delete a room member.")
-  @route("/api/hubs/{hub}/chat/rooms/{roomId}/members/{userId}")
-  @delete
-  deleteRoomMember is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * Room identifier.
-       */
-      @minLength(1)
-      @path
-      roomId: string;
-
-      /**
-       * User identifier.
-       */
-      @minLength(1)
-      @path
-      userId: string;
-    },
-    void
-  >;
+  deleteRoomMember is ConditionalOperations.ResourceDelete<ChatRoomMember>;
 
   // --- Users ---
 
-  /**
-   * Get a user's profile.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Get a user's profile. */
   @summary("Get a user's profile.")
-  @route("/api/hubs/{hub}/chat/users/{userId}")
-  @get
-  getUser is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
+  getUser is Operations.ResourceRead<ChatUserProfile>;
 
-      /**
-       * User identifier.
-       */
-      @minLength(1)
-      @path
-      userId: string;
-    },
-    ChatUserProfile
-  >;
+  /** Create or replace a user. */
+  @summary("Create or replace a user.")
+  createOrReplaceUser is ConditionalOperations.ResourceCreateOrReplace<ChatUserProfile>;
 
-  /**
-   * Add or update a user.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
-  @summary("Add or update a user.")
-  @route("/api/hubs/{hub}/chat/users/{userId}")
-  @put
-  addOrUpdateUser is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * User identifier.
-       */
-      @minLength(1)
-      @path
-      userId: string;
-
-      /**
-       * User profile.
-       */
-      @bodyRoot
-      profile: ChatUserProfile;
-    },
-    void
-  >;
-
-  /**
-   * Delete a user.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom data-plane operation"
+  /** Delete a user. */
   @summary("Delete a user.")
-  @route("/api/hubs/{hub}/chat/users/{userId}")
-  @delete
-  deleteUser is Azure.Core.Foundations.Operation<
-    {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
-      @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
-      @path
-      hub: string;
-
-      /**
-       * User identifier.
-       */
-      @minLength(1)
-      @path
-      userId: string;
-    },
-    void
-  >;
+  deleteUser is ConditionalOperations.ResourceDelete<ChatUserProfile>;
 }
