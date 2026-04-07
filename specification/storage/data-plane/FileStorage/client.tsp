@@ -63,8 +63,33 @@ interface ServiceClient extends Storage.File.Service {}
 )
 interface ShareClient extends Storage.File.Share {}
 
-@@alternateType(Storage.File.AccessPolicy.start, utcDateTime, "go");
-@@alternateType(Storage.File.AccessPolicy.expiry, utcDateTime, "go");
+/** Represents an array of signed identifiers */
+@clientName("SignedIdentifiers", "go")
+model SignedIdentifiersGo is Array<SignedIdentifier>;
+@@alternateType(AccessPolicy.start, utcDateTime, "go");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@alternateType(DirectoryItem.name, string, "go");
+@@alternateType(FileItem.name, string, "go");
+@@alternateType(ListFilesAndDirectoriesSegmentResponse.prefix, string, "go");
+@@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
+@@clientName(CorsRule, "CORSRule", "go");
+@@clientName(DirectoryItem, "Directory", "go");
+@@clientName(FileItem, "File", "go");
+@@clientName(EnableSmbDirectoryLeaseHeader.enableSmbDirectoryLease, "EnableSMBDirectoryLease", "go");
+@@clientName(EtagResponseHeader.etag, "ETag", "go");
+@@clientName(FilesAndDirectoriesListSegment.directoryItems, "Directories", "go");
+@@clientName(FilesAndDirectoriesListSegment.fileItems, "Files", "go");
+@@clientName(ListSharesResponse.shareItems, "Shares", "go");
+@@clientName(Metrics.includeApis, "includeAPIs", "go");
+@@clientName(ShareItemInternal, "Share", "go");
+@@clientName(SharePropertiesInternal, "ShareProperties", "go");
+@@clientName(SharePropertiesInternal.enableSmbDirectoryLease, "EnableSMBDirectoryLease", "go");
+@@clientName(ShareProtocolSettings, "ProtocolSettings", "go");
+@@clientName(ShareSmbSettings, "SMBSettings", "go");
+@@clientName(SmbMultichannel, "SMBMultichannel", "go");
+@@clientName(StorageServiceProperties.cors, "CORS", "go");
+@@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
+@@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
 
 @@alternateType(Storage.File.AccessPolicy.start, string, "javascript,python");
 @@alternateType(Storage.File.AccessPolicy.expiry, string, "javascript,python");

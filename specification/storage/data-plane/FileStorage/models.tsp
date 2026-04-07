@@ -2084,7 +2084,7 @@ alias ShareRootSquashRequestHeader = {
 alias ShareProvisionedIopsRequestHeader = {
   /** Optional. Specifies the provisioned IOPS of the share. */
   @header("x-ms-share-provisioned-iops")
-  @alternateType(int64, "csharp")
+  @alternateType(int64, "csharp,go")
   shareProvisionedIops?: int32;
 };
 
@@ -2092,7 +2092,7 @@ alias ShareProvisionedIopsRequestHeader = {
 alias ShareProvisionedBandwidthRequestHeader = {
   /** Optional. Specifies the provisioned bandwidth of the share, in MiBps. */
   @header("x-ms-share-provisioned-bandwidth-mibps")
-  @alternateType(int64, "csharp")
+  @alternateType(int64, "csharp,go")
   shareProvisionedBandwidthMibps?: int32;
 };
 

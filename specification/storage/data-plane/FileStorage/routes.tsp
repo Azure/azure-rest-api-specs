@@ -256,6 +256,7 @@ interface Share {
 
       /** The provisioned bandwidth for the share. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
+      @clientName("ProvisionedBandwidthMiBps", "go")
       provisionedBandwidthMibps?: int32;
 
       ...LeaseResponseHeaders;
@@ -294,6 +295,7 @@ interface Share {
 
       /** Whether SMB directory lease is enabled. */
       @header("x-ms-enable-smb-directory-lease")
+      @clientName("EnableSMBDirectoryLease", "go")
       enableSmbDirectoryLease?: boolean;
     }
   >;
@@ -1235,7 +1237,9 @@ interface File {
       ...TimeoutParameter;
 
       /** Specify the CRC64 hash of the source content. */
-      @header("x-ms-source-content-crc64") sourceContentCrc64?: string;
+      @header("x-ms-source-content-crc64") 
+      @alternateType(bytes, "go")
+      sourceContentCrc64?: string;
 
       /** Specify the CRC64 hash value to check for source content integrity. */
       @header("x-ms-source-if-match-crc64") sourceIfMatchCrc64?: string;
