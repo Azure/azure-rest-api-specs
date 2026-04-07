@@ -9,6 +9,8 @@ namespace Azure.AI.Projects;
 alias ListModelVersionsParameters = {};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
+@added(Versions.PuPr)
+@removed(Versions.v1)
 @tag("Models")
 interface Models
   extends ReadableVersionedOperations<
