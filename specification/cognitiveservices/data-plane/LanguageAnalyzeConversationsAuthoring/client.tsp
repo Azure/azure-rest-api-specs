@@ -774,6 +774,7 @@ namespace ConversationAuthoringClient {
   "python"
 )
 namespace ConversationAuthoringProjectClient {
+  #suppress "@azure-tools/typespec-client-generator-core/require-client-suffix" "legacy"
   @operationGroup
   @clientName("Deployment", "python")
   interface DeploymentOperations {
@@ -792,6 +793,7 @@ namespace ConversationAuthoringProjectClient {
     getDeploymentStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentStatus;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/require-client-suffix" "legacy"
   @operationGroup
   @clientName("Project", "python")
   interface ProjectOperations {
@@ -851,6 +853,7 @@ namespace ConversationAuthoringProjectClient {
     cancelTrainingJob is Language.Conversations.Authoring.ConversationAuthoringProject.cancelTrainingJob;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/require-client-suffix" "legacy"
   @operationGroup
   @clientName("ExportedModel", "python")
   interface ExportedModelOperations {
@@ -864,6 +867,7 @@ namespace ConversationAuthoringProjectClient {
     getExportedModelJobStatus is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModelJobStatus;
   }
 
+  #suppress "@azure-tools/typespec-client-generator-core/require-client-suffix" "legacy"
   @operationGroup
   @clientName("TrainedModel", "python")
   interface TrainedModelOperations {
