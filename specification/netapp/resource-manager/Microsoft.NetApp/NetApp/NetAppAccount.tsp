@@ -166,7 +166,8 @@ model EntraIdAkvConfig {
  * NetApp account properties for PATCH operations
  */
 @added(Versions.v2025_12_15_preview)
-@added(Versions.v2026_01_01)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
 model AccountPropertiesPatch {
   /**
    * Active Directories
@@ -637,7 +638,19 @@ model NetAppAccountPatch {
   /**
    * NetApp Account properties
    */
-  @typeChangedFrom(Versions.v2025_12_15_preview, AccountProperties)
+  @removed(Versions.v2025_12_15_preview)
+  @renamedFrom(Versions.v2025_12_15_preview, "properties")
+  @added(Versions.v2026_01_01)
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "properties")
+  propertiesStable?: AccountProperties;
+
+  /**
+   * NetApp Account properties
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
   properties?: AccountPropertiesPatch;
 
   /**
