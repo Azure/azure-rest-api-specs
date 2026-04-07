@@ -53,8 +53,6 @@ using Microsoft.AzureStackHCI;
   "remoteSupportRequest"
 );
 @@clientLocation(Clusters.listByCluster, Offers);
-// Rename generated operation back to the old shipped name
-@@clientName(Clusters.listByCluster, "GetHciClusterOffers", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Cluster.properties);
 
