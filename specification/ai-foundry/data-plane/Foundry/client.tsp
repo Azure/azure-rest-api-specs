@@ -227,6 +227,19 @@ using Azure.AI.Projects;
 @@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
 
 // --------------------------------------------------------------------------------
+// Skills sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Skills.createSkill, "create");
+@@clientName(Skills.createSkillFromPackage, "create_from_package");
+@@clientName(Skills.getSkill, "get");
+@@clientName(Skills.downloadSkill, "download");
+@@clientName(Skills.listSkills, "list");
+@@clientName(Skills.updateSkill, "update");
+@@clientName(Skills.deleteSkill, "delete");
+
+
+// --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
 
