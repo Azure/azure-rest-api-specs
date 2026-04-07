@@ -56,6 +56,8 @@ These settings apply only when `--tag=package-preview-2026-04-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-04-01-preview'
 input-file:
+  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/ArtifactApps.json
+  - Microsoft.App/ContainerApps/preview/2026-04-01-preview/Artifacts.json
   - Microsoft.App/ContainerApps/preview/2026-04-01-preview/AuthConfigs.json
   - Microsoft.App/ContainerApps/preview/2026-04-01-preview/AvailableWorkloadProfiles.json
   - Microsoft.App/ContainerApps/preview/2026-04-01-preview/BillingMeters.json

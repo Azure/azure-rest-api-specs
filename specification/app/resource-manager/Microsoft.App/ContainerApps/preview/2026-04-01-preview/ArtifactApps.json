@@ -1,0 +1,443 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerApps API Client",
+    "version": "2026-04-01-preview"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "ArtifactAppNameParameter": {
+      "name": "artifactAppName",
+      "in": "path",
+      "description": "Name of the Artifact App.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/artifactApps": {
+      "get": {
+        "tags": [
+          "ArtifactApps"
+        ],
+        "summary": "Get the Artifact Apps in a given subscription.",
+        "operationId": "ArtifactApps_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArtifactAppCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Artifact Apps by subscription": {
+            "$ref": "./examples/ArtifactApps_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/artifactApps": {
+      "get": {
+        "tags": [
+          "ArtifactApps"
+        ],
+        "summary": "Get the Artifact Apps in a given resource group.",
+        "operationId": "ArtifactApps_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArtifactAppCollection"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Artifact Apps by resource group": {
+            "$ref": "./examples/ArtifactApps_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/artifactApps/{artifactAppName}": {
+      "get": {
+        "tags": [
+          "ArtifactApps"
+        ],
+        "summary": "Get the properties of an Artifact App.",
+        "operationId": "ArtifactApps_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactAppNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactApp"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Artifact App": {
+            "$ref": "./examples/ArtifactApps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ArtifactApps"
+        ],
+        "summary": "Create or update an Artifact App.",
+        "description": "Create or update an Artifact App with the given properties.",
+        "operationId": "ArtifactApps_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactAppNameParameter"
+          },
+          {
+            "name": "artifactAppEnvelope",
+            "in": "body",
+            "description": "Properties used to create an Artifact App.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactApp"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactApp"
+            }
+          },
+          "201": {
+            "description": "Artifact App creation has started.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactApp"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or Update Artifact App": {
+            "$ref": "./examples/ArtifactApps_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ArtifactApps"
+        ],
+        "summary": "Update properties of an Artifact App.",
+        "description": "Patches an Artifact App using JSON merge patch.",
+        "operationId": "ArtifactApps_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactAppNameParameter"
+          },
+          {
+            "name": "artifactAppEnvelope",
+            "in": "body",
+            "description": "Properties of an Artifact App that need to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactAppUpdate"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactApp"
+            }
+          },
+          "202": {
+            "description": "Artifact App update has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update Artifact App": {
+            "$ref": "./examples/ArtifactApps_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArtifactApps"
+        ],
+        "summary": "Delete an Artifact App.",
+        "description": "Delete the Artifact App with the given name.",
+        "operationId": "ArtifactApps_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactAppNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Artifact App delete has been started.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Artifact App does not exist."
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Artifact App": {
+            "$ref": "./examples/ArtifactApps_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArtifactApp": {
+      "description": "An Artifact App resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Artifact App resource specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/ArtifactAppProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArtifactAppUpdate": {
+      "description": "An Artifact App resource update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "description": "Artifact App resource specific properties.",
+          "type": "object",
+          "$ref": "#/definitions/ArtifactAppProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArtifactAppProperties": {
+      "description": "Artifact App resource specific properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Artifact App.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ArtifactAppProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Description of the Artifact App.",
+          "type": "string"
+        },
+        "artifactId": {
+          "description": "The resource ID of the associated Artifact.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "targetEnvironmentId": {
+          "description": "The resource ID of the target managed environment.",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "status": {
+          "description": "Current status of the Artifact App.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ArtifactAppCollection": {
+      "description": "Artifact App collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactApp"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
