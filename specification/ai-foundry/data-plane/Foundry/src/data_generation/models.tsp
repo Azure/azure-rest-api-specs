@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../servicepatterns.tsp";
 
 namespace Azure.AI.Projects;
 
@@ -25,28 +26,8 @@ model DataGenerationModelOptions {
   `model`: string;
 }
 
-@doc("Status values for data generation job.")
-union DataGenerationJobStatus {
-  string,
-
-  @doc("Job has been queued and is waiting to start.")
-  queued: "queued",
-
-  @doc("Job is currently running.")
-  running: "running",
-
-  @doc("Job completed successfully.")
-  succeeded: "succeeded",
-
-  @doc("Job failed.")
-  failed: "failed",
-
-  @doc("Job was cancelled.")
-  cancelled: "cancelled",
-}
-
-@doc("Data Generation Job resource.")
-model DataGenerationJob {
+@doc("Caller-supplied inputs for a data generation job.")
+model DataGenerationInputs {
   @doc("The display name of the data generation job.")
   name: string;
 
@@ -58,26 +39,22 @@ model DataGenerationJob {
 
   @doc("The scenario of the data generation job. Either for fine-tuning or evaluation.")
   scenario: DataGenerationJobScenario;
+}
 
-  @doc("The job identifier.")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  @doc("The current status of the job.")
-  @visibility(Lifecycle.Read)
-  status: DataGenerationJobStatus;
-
+@doc("Result produced by a successful data generation job.")
+model DataGenerationResult {
   @doc("The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
   outputs?: Array<DataGenerationJobOutput>;
 
-  @doc("The number of samples actually generated. This field is populated only after the job has succeeded.")
-  @visibility(Lifecycle.Read)
+  @doc("The number of samples actually generated.")
   generated_samples?: int32;
 
   @doc("The token usage information for the data generation job.")
-  @visibility(Lifecycle.Read)
   token_usage?: TokenUsage;
+}
 
+@doc("Data Generation Job resource.")
+model DataGenerationJob is JobLike<DataGenerationResult, DataGenerationInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: int64;
@@ -85,10 +62,6 @@ model DataGenerationJob {
   @doc("The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   finished_at?: int64;
-
-  @doc("Error information set only when status is 'failed'.")
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
 }
 
 @doc("Output information for a data generation job.")
