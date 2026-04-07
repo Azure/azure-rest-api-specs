@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "accountName": "softdeleted-cosmosdb-1",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationResults/purge-operation-id?api-version=2026-04-01-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationResults/purge-operation-id?api-version=2026-04-01-preview"
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "The soft-deleted database account cannot be purged yet. Minimum retention period has not elapsed."
+        }
+      }
+    }
+  },
+  "operationId": "SoftDeletedDatabaseAccounts_Delete",
+  "title": "CosmosDBSoftDeletedDatabaseAccountPurge"
+}

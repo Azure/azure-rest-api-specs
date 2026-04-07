@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "location": "West US"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/westus/softDeletedDatabaseAccounts/a1b2c3d4-5678-90ab-cdef-1234567890ab",
+            "name": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts",
+            "properties": {
+              "accountName": "softdeleted-cosmosdb-1",
+              "softDeletionMetadata": {
+                "isSoftDeleted": true,
+                "softDeletionStartTimestamp": 1729000530,
+                "softDeletionResourceExpirationTimestamp": 1731592530
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/locations/westus/softDeletedDatabaseAccounts/b2c3d4e5-6789-01bc-def2-234567890abc",
+            "name": "b2c3d4e5-6789-01bc-def2-234567890abc",
+            "type": "Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts",
+            "properties": {
+              "accountName": "softdeleted-cosmosdb-2",
+              "softDeletionMetadata": {
+                "isSoftDeleted": true,
+                "softDeletionStartTimestamp": 1728655215,
+                "softDeletionResourceExpirationTimestamp": 1731247215
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SoftDeletedDatabaseAccounts_ListByResourceGroupAndLocation",
+  "title": "CosmosDBSoftDeletedDatabaseAccountListByResourceGroupAndLocation"
+}

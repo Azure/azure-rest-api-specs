@@ -61,6 +61,7 @@ import "./FleetResource.tsp";
 import "./FleetAnalyticsResource.tsp";
 import "./FleetspaceResource.tsp";
 import "./FleetspaceAccountResource.tsp";
+import "./SoftDeletedResources.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

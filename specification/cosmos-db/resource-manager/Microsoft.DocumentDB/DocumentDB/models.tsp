@@ -475,6 +475,27 @@ union AnalyticalStorageSchemaType {
 }
 
 /**
+ * Configuration for soft delete on the Cosmos DB account.
+ */
+@added(Versions.v2026_04_01_preview)
+model SoftDeleteConfiguration {
+  /**
+   * Flag to indicate whether soft delete is enabled on the account.
+   */
+  softDeletionEnabled?: boolean | null;
+
+  /**
+   * Minimum number of minutes before a soft deleted resource can be permanently deleted.
+   */
+  minMinutesBeforePermanentDeletionAllowed?: int32 | null;
+
+  /**
+   * Soft delete retention period in minutes for resources.
+   */
+  softDeleteRetentionPeriodInMinutes?: int32 | null;
+}
+
+/**
  * Enum to indicate the mode of account creation.
  */
 union CreateMode {
@@ -1752,6 +1773,12 @@ model DatabaseAccountGetProperties {
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
   /**
+   * The configuration for soft delete on the Cosmos DB account.
+   */
+  @added(Versions.v2026_04_01_preview)
+  softDeleteConfiguration?: SoftDeleteConfiguration;
+
+  /**
    * Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2543,6 +2570,12 @@ model DatabaseAccountUpdateProperties {
   enableAllVersionsAndDeletesChangeFeed?: boolean;
 
   /**
+   * The configuration for soft delete on the Cosmos DB account.
+   */
+  @added(Versions.v2026_04_01_preview)
+  softDeleteConfiguration?: SoftDeleteConfiguration;
+
+  /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
    */
   enforceHierarchicalPartitionKeyIdLastLevel?: boolean;
@@ -2768,6 +2801,12 @@ model DatabaseAccountCreateUpdateProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
+
+  /**
+   * The configuration for soft delete on the Cosmos DB account.
+   */
+  @added(Versions.v2026_04_01_preview)
+  softDeleteConfiguration?: SoftDeleteConfiguration;
 
   /**
    * Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account.
