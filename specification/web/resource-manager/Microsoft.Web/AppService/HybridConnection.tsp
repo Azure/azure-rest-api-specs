@@ -61,7 +61,8 @@ interface HybridConnectionOps
       }
     > {}
 
-@armResourceOperations
+@tag("AppServicePlans")
+@armResourceOperations(#{ omitTags: true })
 interface HybridConnections {
   /**
    * Description for Retrieve a Hybrid Connection in use in an App Service plan.
@@ -137,7 +138,8 @@ interface HybridConnectionOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HybridConnectionOperationGroup {
   /**
    * Description for Retrieves a specific Service Bus Hybrid Connection used by this Web App.
@@ -218,7 +220,8 @@ interface HybridConnectionSlotOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HybridConnectionSlotOperationGroup {
   /**
    * Description for Retrieves a specific Service Bus Hybrid Connection used by this Web App.
