@@ -1479,14 +1479,14 @@
       },
       "description": "Provisioning state of the resource"
     },
-    "onBuildError": {
+    "OnBuildError": {
       "type": "string",
       "enum": [
         "cleanup",
         "abort"
       ],
       "x-ms-enum": {
-        "name": "onBuildError",
+        "name": "OnBuildError",
         "modelAsString": true
       },
       "description": "Error handling behavior upon build failure"
@@ -1724,12 +1724,12 @@
           "description": "Error handling options upon a build failure",
           "properties": {
             "onCustomizerError": {
-              "$ref": "#/definitions/onBuildError",
+              "$ref": "#/definitions/OnBuildError",
               "default": "cleanup",
               "description": "If there is a customizer error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a customizer error and this field is set to 'abort', the build VM will be preserved."
             },
             "onValidationError": {
-              "$ref": "#/definitions/onBuildError",
+              "$ref": "#/definitions/OnBuildError",
               "default": "cleanup",
               "description": "If there is a validation error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a validation error and this field is set to 'abort', the build VM will be preserved."
             }
