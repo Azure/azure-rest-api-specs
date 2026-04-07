@@ -13,10 +13,12 @@
       },
       "properties": {
         "capacity": {
-          "instanceCount": 5
-        },
-        "networking": {
-          "snatPortsPerNode": 4096
+          "locations": [
+            {
+              "name": "eastus",
+              "totalInstanceCount": 10
+            }
+          ]
         }
       }
     }
@@ -25,123 +27,146 @@
     "200": {
       "body": {
         "properties": {
-          "topology": [
-            {
-              "partitionName": "primary",
-              "regions": [
-                "eastus",
-                "westus"
-              ]
-            }
-          ],
-          "capacity": {
-            "instanceCount": 5,
-            "partitionOverrides": [
+          "platformRing": "prod",
+          "topology": {
+            "locations": [
               {
-                "partitionName": "primary",
-                "instanceCount": 3,
-                "regionOverrides": [
+                "name": "eastus",
+                "snatPortsPerNode": 2048,
+                "ingressPublicIps": [
                   {
-                    "region": "eastus",
-                    "instanceCount": 5
+                    "ipTagType": "RoutingPreference",
+                    "ipTagValue": "Internet",
+                    "names": [
+                      "ingress-pip-1"
+                    ],
+                    "ipVersion": "IPv4"
+                  }
+                ],
+                "egressPublicIps": {
+                  "ipTagType": "RoutingPreference",
+                  "ipTagValue": "Internet",
+                  "ipCapacity": "16",
+                  "ipVersion": "IPv4"
+                },
+                "partitions": [
+                  {
+                    "name": "primary"
+                  }
+                ]
+              },
+              {
+                "name": "westus",
+                "partitions": [
+                  {
+                    "name": "primary"
                   }
                 ]
               }
             ]
           },
+          "capacity": {
+            "locations": [
+              {
+                "name": "eastus",
+                "totalInstanceCount": 10,
+                "partitions": [
+                  {
+                    "name": "primary",
+                    "instanceCount": 5
+                  }
+                ]
+              },
+              {
+                "name": "westus",
+                "totalInstanceCount": 3
+              }
+            ]
+          },
           "resourcePolicy": {
-            "resourcePolicy": {
-              "vmFamily": "Standard_D",
-              "osType": "Linux",
-              "gpus": 0,
-              "gpuDriverType": "CUDA",
+            "ringDefault": {
               "podResources": [
                 {
-                  "serviceName": "frontend",
-                  "replicas": 3,
                   "cores": "0.5",
                   "memory": "512Mi",
                   "coresLimit": "1",
                   "memoryLimit": "1Gi",
-                  "rollingUpdateReplicaPercentage": 10,
-                  "gpus": "0"
+                  "replicas": 3,
+                  "rollingUpdateReplicaPercentage": 10
                 }
-              ]
+              ],
+              "os": "Linux",
+              "ipVersion": "IPv4"
             },
             "regionOverrides": [
               {
-                "region": "eastus",
-                "resourcePolicy": {
-                  "vmFamily": "Standard_E",
-                  "osType": "Linux",
-                  "gpus": 1,
-                  "gpuDriverType": "CUDA"
-                }
+                "name": "eastus",
+                "regionDefault": {
+                  "ipVersion": "IPv4"
+                },
+                "partitions": [
+                  {
+                    "name": "primary",
+                    "partitionDefault": {
+                      "os": "Linux",
+                      "podResources": [
+                        {
+                          "cores": "1",
+                          "memory": "1Gi",
+                          "coresLimit": "2",
+                          "memoryLimit": "2Gi",
+                          "replicas": 5,
+                          "rollingUpdateReplicaPercentage": 10
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             ]
-          },
-          "networking": {
-            "ingressPublicIps": [
-              {
-                "ipTagType": "RoutingPreference",
-                "ipTagValue": "Internet",
-                "names": [
-                  "ingress-pip-1"
-                ],
-                "ipVersion": "IPv4"
-              }
-            ],
-            "egressPublicIps": {
-              "ipTagType": "RoutingPreference",
-              "ipTagValue": "Internet",
-              "ipCapacity": "16",
-              "ipVersion": "IPv4"
-            },
-            "snatPortsPerNode": 4096,
-            "instanceLevelPublicIp": {
-              "prefixLength": 31,
-              "ipTagType": "RoutingPreference",
-              "ipTagValue": "Internet",
-              "ipVersion": "IPv4"
-            }
           },
           "status": {
             "realizationState": "Succeeded",
             "realizations": [
               {
+                "id": "realization-eastus-001",
                 "region": "eastus",
-                "realizationId": "realization-eastus-001",
-                "provisioningState": "Succeeded",
-                "healthState": "Healthy",
+                "state": "Succeeded",
                 "partitions": [
                   {
-                    "name": "primary",
-                    "realizationState": "Succeeded"
+                    "name": "primary"
                   }
                 ],
                 "instances": [
                   {
-                    "instanceId": "instance-eastus-primary-a",
+                    "id": "instance-eastus-primary-a",
                     "partition": "primary",
-                    "clusterResourceId": "/subscriptions/5C4A0939-B396-4DCB-A217-BBC6A736791F/resourceGroups/rgCosmicRP/providers/Microsoft.ContainerService/managedClusters/cluster-eastus-1",
-                    "provisioningState": "Succeeded",
-                    "migrationState": "NoMigrationNeeded"
+                    "routingPartition": "primary",
+                    "clusterResourceId": "/subscriptions/5C4A0939-B396-4DCB-A217-BBC6A736791F/resourceGroups/rgCosmicRP/providers/Microsoft.ContainerService/managedClusters/cluster-eastus-1"
                   }
-                ]
+                ],
+                "networking": {
+                  "name": "eastus",
+                  "snatPortsPerNode": 2048,
+                  "ingressPublicIps": [
+                    {
+                      "ipTagType": "RoutingPreference",
+                      "ipTagValue": "Internet",
+                      "names": [
+                        "ingress-pip-1"
+                      ],
+                      "ipVersion": "IPv4"
+                    }
+                  ],
+                  "egressPublicIps": {
+                    "ipTagType": "RoutingPreference",
+                    "ipTagValue": "Internet",
+                    "ipCapacity": "16",
+                    "ipVersion": "IPv4"
+                  }
+                }
               }
-            ],
-            "conditions": [
-              {
-                "type": "Ready",
-                "conditionStatus": "True",
-                "reason": "AllInstancesReady",
-                "message": "All instances are running and healthy.",
-                "lastHeartbeatTime": "2025-12-31T14:00:00.000Z",
-                "lastTransitionTime": "2025-12-31T13:55:00.000Z"
-              }
-            ],
-            "expectedCompletionTime": "2025-12-31T14:30:00.000Z",
-            "statusDescription": "Environment is fully deployed and healthy."
+            ]
           },
           "provisioningState": "Succeeded"
         },

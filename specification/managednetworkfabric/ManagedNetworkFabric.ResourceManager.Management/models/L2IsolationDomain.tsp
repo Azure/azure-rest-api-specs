@@ -5,7 +5,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("L2Isolation Domain Properties defines the properties of the resource.")
 model L2IsolationDomainProperties extends AnnotationResource {
   @doc("ARM Resource ID of the Network Fabric.")
@@ -55,18 +55,10 @@ model L2IsolationDomainProperties extends AnnotationResource {
   administrativeState?: AdministrativeState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The L2 Isolation Domain patch resource definition.")
 model L2IsolationDomainPatch extends TagsUpdate {
-  @doc("Resource properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: L2IsolationDomainPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("L2 Isolation Domain resource patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: L2IsolationDomainPatchProperties;
 
   @added(Versions.v2025_07_15)
@@ -74,7 +66,7 @@ model L2IsolationDomainPatch extends TagsUpdate {
   identity?: ManagedServiceIdentityPatch;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("L2 Isolation Domain Patch Properties defines the patchable properties of the resource.")
 @withoutDefaultValues
 model L2IsolationDomainPatchProperties extends AnnotationResource {

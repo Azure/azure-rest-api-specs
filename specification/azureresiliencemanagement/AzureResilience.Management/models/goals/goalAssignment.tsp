@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
@@ -7,6 +8,7 @@ import "../../main.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
@@ -55,5 +57,8 @@ model GoalAssignment is ProxyResource<GoalAssignmentProperties> {
 
   // Adding suppressions because in-build ManagedServiceIdentityProperty has used Record which need suppression.
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
-  ...ManagedServiceIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Removing identity in v2026, keeping for backward compat in v2025"
+  @doc("The managed service identities assigned to this resource.")
+  @removed(Versions.v2026_03_01_preview)
+  identity?: CommonTypes.ManagedServiceIdentity;
 }

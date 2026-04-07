@@ -78,18 +78,10 @@ model NeighborGroupDestination {
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
 model NeighborGroupDestinationPatch is NeighborGroupDestination;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Neighbor Group Patch definition.")
 model NeighborGroupPatch extends TagsUpdate {
   @doc("Neighbor Group Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NeighborGroupPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Neighbor Group Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NeighborGroupPatchProperties;
 
   @added(Versions.v2025_07_15)

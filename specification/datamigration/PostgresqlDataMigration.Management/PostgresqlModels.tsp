@@ -17,6 +17,53 @@ union MigrationMode {
   Online: "online",
 }
 
+@doc("The source database engine type for migration service.")
+union MigrationServiceSourceEngine {
+  string,
+
+  @doc("Oracle database engine")
+  Oracle: "Oracle",
+
+  @doc("PostgreSQL database engine")
+  PostgreSQL: "PostgreSQL",
+}
+
+@doc("The target database engine type for migration service.")
+union MigrationServiceTargetEngine {
+  string,
+
+  @doc("Azure Database for PostgreSQL")
+  AzureDatabaseForPostgreSQL: "Azure Database for PostgreSQL",
+}
+
+@doc("The source platform type for database migration.")
+union MigrationSourceType {
+  string,
+
+  @doc("Amazon Web Services")
+  AWS: "AWS",
+
+  @doc("Google Cloud Platform")
+  GCP: "GCP",
+
+  @doc("Oracle Cloud")
+  Oracle: "Oracle",
+
+  @doc("On-premises")
+  OnPrem: "OnPrem",
+}
+
+@doc("The target platform type for database migration.")
+union MigrationTargetType {
+  string,
+
+  @doc("Azure PostgreSQL Flexible Server")
+  AzurePostgreSQLFlexibleServer: "AzurePostgreSQLFlexibleServer",
+
+  @doc("Azure PostgreSQL Horizon DB")
+  AzurePostgreSQLHorizonDb: "AzurePostgreSQLHorizonDb",
+}
+
 @doc("The source database engine type.")
 union SourceDatabaseEngine {
   string,
@@ -173,6 +220,17 @@ union ConnectionStatus {
   Failed: "Failed",
 }
 
+@doc("The connection endpoint type.")
+union ConnectionType {
+  string,
+
+  @doc("Source connection")
+  Source: "Source",
+
+  @doc("Target connection")
+  Target: "Target",
+}
+
 @doc("The migration phase.")
 union MigrationPhase {
   string,
@@ -289,11 +347,16 @@ model ConnectionEndpoint {
   ssl: SslConfiguration;
 }
 
+@doc("Connection endpoint for connectivity testing with type indicator.")
+model CheckConnectivityEndpoint {
+  ...ConnectionEndpoint;
+
+  @doc("Connection endpoint type")
+  type: ConnectionType;
+}
+
 @doc("Source database configuration.")
 model SourceConfiguration {
-  @doc("Database engine type")
-  engine: SourceDatabaseEngine;
-
   @doc("Server resource ID")
   serverResourceId?: string;
 
@@ -304,9 +367,6 @@ model SourceConfiguration {
 
 @doc("Target database configuration.")
 model TargetConfiguration {
-  @doc("Database engine type")
-  engine: TargetDatabaseEngine;
-
   @doc("Server resource ID")
   serverResourceId?: string;
 
@@ -496,6 +556,14 @@ model DatabaseMigrationProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   migrationMode: MigrationMode;
 
+  @doc("Migration source type")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  sourceType: MigrationSourceType;
+
+  @doc("Migration target type")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  targetType: MigrationTargetType;
+
   @doc("Source database configuration")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   source: SourceConfiguration;
@@ -551,11 +619,9 @@ model DatabaseMigrationProperties {
 
 @doc("Request body for testing connectivity.")
 model TestConnectivityRequest {
-  @doc("Source database configuration")
-  source: SourceConfiguration;
-
-  @doc("Target database configuration")
-  target: TargetConfiguration;
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
+  @doc("Connection endpoints to test")
+  connectionEndpoints: CheckConnectivityEndpoint[];
 
   @doc("Compute profile configuration")
   computeProfile: ComputeProfile;
@@ -577,12 +643,8 @@ model ConnectionTestResult {
 @doc("Properties of the connectivity test response.")
 model ConnectivityTestProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
-  @doc("Source connection test results")
-  source: ConnectionTestResult[];
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "connectionName is the identifier"
-  @doc("Target connection test results")
-  target: ConnectionTestResult[];
+  @doc("Connection test results")
+  connectionTestResults: ConnectionTestResult[];
 }
 
 @doc("Response for testing connectivity.")

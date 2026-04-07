@@ -142,7 +142,7 @@ model Layer2ConfigurationPatch {
   ]>[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common ProxyResource"
 @doc("The Network To Network Interconnect resource patch definition.")
 model NetworkToNetworkInterconnectPatch extends ProxyResourceBase {
   @doc("Resource properties.")
@@ -223,7 +223,7 @@ model NetworkToNetworkInterconnectPatchProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common Layer3 IpPrefix properties"
 @doc("Common properties for Layer3Configuration.")
 @withOptionalProperties
 model OptionBLayer3ConfigurationPatchProperties
@@ -269,7 +269,7 @@ model OptionBLayer3ConfigurationPatchProperties
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common Layer3 IP Prefix properties"
 @doc("OptionB Layer3 Configuration properties.")
 model OptionBLayer3Configuration extends Layer3IpPrefixProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -382,7 +382,7 @@ model NniBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response"
 @doc("NNI Bidirectional Forwarding Detection (BFD) Administrative State response.")
 @added(Versions.v2024_06_15_preview)
 model NniBfdAdministrativeStateResponse extends CommonErrorResponse {

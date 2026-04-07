@@ -34,6 +34,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v4_preview: "2026-05-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v5_preview: "2026-06-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -309,6 +313,23 @@ union BackUpType {
 
   @doc("Both incremental and full backups")
   Both: "BOTH",
+
+  string,
+}
+
+@doc("The level of backup")
+union BackupLevel {
+  @doc("Full backup level")
+  Full: "FULL",
+
+  @doc("Incremental backup level")
+  Incremental: "INCREMENTAL",
+
+  @doc("Differential backup level")
+  Differential: "DIFFERENTIAL",
+
+  @doc("Synthetic full backup level")
+  SyntheticFull: "SYNTHETIC_FULL",
 
   string,
 }
@@ -657,9 +678,16 @@ model StopBackupProtectionGroupRequest {
 
 @doc("The properties of BackupProtectionGroupRequest")
 model BackupProtectionGroupRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "identifiers not applicable across version type change"
   @doc("The vm list details.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  vmList: VmList;
+  @typeChangedFrom(Versions.v5_preview, VmList)
+  vmList: VmListItem[];
+
+  @added(Versions.v5_preview)
+  @doc("The backup options for the VM backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backupOptions: BackupOptions;
 }
 
 @doc("Backup job response for a Protection Group")
@@ -673,21 +701,29 @@ model BackupProtectionGroupResponse {
   jobIds: string[];
 }
 
-@doc("The VM list for backup")
+@doc("The VM list item for backup")
+model VmListItem {
+  @doc("The GUID of the VM to backup")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  vmGuid: string;
+}
+
+@doc("The VM list wrapper for backup request")
 model VmList {
   @doc("The list of VM GUIDs to backup")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @Azure.ResourceManager.identifiers(#[])
   vmGuid: VmGuid[];
 
+  @removed(Versions.v5_preview)
   @doc("The backup options for the VM backup")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   backupOptions: BackupOptions;
 }
 
-@doc("The VM GUID for backup")
+@doc("The VM GUID identifier")
 model VmGuid {
-  @doc("The id of the VM")
+  @doc("The identifier of the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   id: string;
 }
@@ -696,7 +732,9 @@ model VmGuid {
 model BackupOptions {
   @doc("Indicates whether to stop backup or not for the VM")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupLevel: string;
+  @madeOptional(Versions.v5_preview)
+  @typeChangedFrom(Versions.v5_preview, string)
+  backupLevel?: BackupLevel;
 
   @doc("The name of the backup job to be shown in Commvault")
   @visibility(Lifecycle.Read, Lifecycle.Create)

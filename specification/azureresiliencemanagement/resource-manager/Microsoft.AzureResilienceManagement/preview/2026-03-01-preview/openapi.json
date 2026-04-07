@@ -6265,13 +6265,7 @@
           "minimum": 0,
           "readOnly": true
         }
-      },
-      "required": [
-        "subscription",
-        "region",
-        "identity",
-        "chaosExperimentIdentityForFaults"
-      ]
+      }
     },
     "ChaosExperimentPropertiesOfDrillUpdate": {
       "type": "object",
@@ -6990,7 +6984,6 @@
       },
       "discriminator": "drillType",
       "required": [
-        "chaosExperimentProperties",
         "drillType"
       ]
     },
@@ -8479,10 +8472,6 @@
         "properties": {
           "$ref": "#/definitions/GoalAssignmentProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -8597,10 +8586,6 @@
         "properties": {
           "$ref": "#/definitions/GoalAssignmentPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
