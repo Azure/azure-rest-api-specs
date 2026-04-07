@@ -25,10 +25,12 @@ interface ResourceSkusOperationGroup {
   @tag("GET")
   @autoRoute
   @get
+  @list
   @action("skus")
   listSkus is ArmProviderActionSync<
     Response = ResourceSkusResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = ApiError
   >;
 }
 
@@ -47,7 +49,8 @@ interface ServicesOperationGroup {
     Request = NameAvailabilityRequest,
     Response = NameAvailabilityResponse,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = ApiError
   >;
 }
 
@@ -63,10 +66,12 @@ interface UsagesOperationGroup {
   @tag("GET")
   @autoRoute
   @get
+  @list
   @action("usages")
   list is ArmProviderActionSync<
     Response = QuotaList,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = ApiError
   >;
 }

@@ -151,3 +151,7 @@ using Microsoft.DataMigration;
 @@clientLocation(ServicesOperationGroup.checkNameAvailability, "Services");
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");
+
+@@clientName(ServicesOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);

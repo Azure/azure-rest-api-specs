@@ -53,13 +53,14 @@ alias DatabaseMigrationSqlVmOps = Azure.ResourceManager.Legacy.ExtensionOperatio
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseMigrationSqlVms {
   /**
    * Retrieve the specified database migration for a given SQL VM.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlVm_Get")
+  @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlVmOps.Read<
     DatabaseMigrationSqlVm,
     Parameters = {
@@ -84,6 +85,7 @@ interface DatabaseMigrationSqlVms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlVm_CreateOrUpdate")
+  @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlVmOps.CreateOrUpdateAsync<
     DatabaseMigrationSqlVm,
     LroHeaders = ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlVm> &
@@ -95,6 +97,7 @@ interface DatabaseMigrationSqlVms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlVm_Delete")
+  @tag("DatabaseMigrationsSqlVm")
   delete is DatabaseMigrationSqlVmOps.DeleteWithoutOkAsync<
     DatabaseMigrationSqlVm,
     Parameters = {
@@ -104,7 +107,8 @@ interface DatabaseMigrationSqlVms {
       @query("force")
       force?: boolean;
     },
-    Response = ArmResponse<DatabaseMigrationSqlVm> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmResponse<DatabaseMigrationSqlVm> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlVm> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -112,10 +116,12 @@ interface DatabaseMigrationSqlVms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlVm_cancel")
+  @tag("DatabaseMigrations")
   cancel is DatabaseMigrationSqlVmOps.ActionAsync<
     DatabaseMigrationSqlVm,
     MigrationOperationInput,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -123,10 +129,12 @@ interface DatabaseMigrationSqlVms {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlVm_cutover")
+  @tag("DatabaseMigrations")
   cutover is DatabaseMigrationSqlVmOps.ActionAsync<
     DatabaseMigrationSqlVm,
     MigrationOperationInput,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 }
 

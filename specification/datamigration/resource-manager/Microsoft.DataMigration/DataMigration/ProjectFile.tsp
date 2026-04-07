@@ -31,6 +31,41 @@ model ProjectFile
   etag?: string;
 }
 
+alias ProjectFileOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** Name of the resource group */
+    @path
+    @segment("resourceGroups")
+    @key
+    groupName: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the service */
+    @path
+    @segment("services")
+    @key
+    serviceName: string;
+
+    /** Name of the project */
+    @path
+    @segment("projects")
+    @key
+    projectName: string;
+  },
+  {
+    /** Name of the File */
+    @path
+    @segment("files")
+    @key
+    fileName: string;
+  },
+  ApiError
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface ProjectFiles {
   /**
@@ -38,64 +73,70 @@ interface ProjectFiles {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Files_Get")
+  @summary("Get file information")
   @tag("File resource")
   @tag("Standard operation")
   @tag("GET")
-  get is ArmResourceRead<ProjectFile>;
+  get is ProjectFileOps.Read<ProjectFile>;
 
   /**
    * The PUT method creates a new file or updates an existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Files_CreateOrUpdate")
+  @summary("Create a file resource")
   @tag("Fie resource")
   @tag("Standard operation")
   @tag("PUT")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ProjectFile>;
+  createOrUpdate is ProjectFileOps.CreateOrUpdateSync<ProjectFile>;
 
   /**
    * This method updates an existing file.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Files_Update")
+  @summary("Update a file")
   @tag("File resource")
   @tag("Standard operation")
   @tag("PATCH")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<ProjectFile, PatchModel = ProjectFile>;
+  update is ProjectFileOps.CustomPatchSync<
+    ProjectFile,
+    PatchModel = ProjectFile
+  >;
 
   /**
    * This method deletes a file.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Files_Delete")
+  @summary("Delete file")
   @tag("File resource")
   @tag("Standard operation")
   @tag("DELETE")
-  delete is ArmResourceDeleteSync<ProjectFile>;
+  delete is ProjectFileOps.DeleteSync<ProjectFile>;
 
   /**
    * The project resource is a nested resource representing a stored migration project. This method returns a list of files owned by a project resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Files_List")
+  @summary("Get files in a project")
   @tag("File resource")
   @tag("Standard operation")
   @tag("GET")
-  list is ArmResourceListByParent<
-    ProjectFile,
-    Response = ArmResponse<FileList>
-  >;
+  list is ProjectFileOps.List<ProjectFile, Response = ArmResponse<FileList>>;
 
   /**
    * This method is used for requesting storage information using which contents of the file can be downloaded.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Files_Read")
+  @summary("Request storage information for downloading the file content")
   @tag("File resource")
   @tag("Standard operation")
   @tag("POST")
-  read is ArmResourceActionSync<
+  read is ProjectFileOps.ActionSync<
     ProjectFile,
     void,
     ArmResponse<FileStorageInfo>
@@ -106,11 +147,12 @@ interface ProjectFiles {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Files_ReadWrite")
+  @summary("Request information for reading and writing file content.")
   @tag("File resource")
   @tag("Standard operation")
   @tag("POST")
   @action("readwrite")
-  readWrite is ArmResourceActionSync<
+  readWrite is ProjectFileOps.ActionSync<
     ProjectFile,
     void,
     ArmResponse<FileStorageInfo>

@@ -53,13 +53,14 @@ alias DatabaseMigrationSqlMiOps = Azure.ResourceManager.Legacy.ExtensionOperatio
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseMigrationSqlMis {
   /**
    * Retrieve the specified database migration for a given SQL Managed Instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlMi_Get")
+  @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlMiOps.Read<
     DatabaseMigrationSqlMi,
     Parameters = {
@@ -84,6 +85,7 @@ interface DatabaseMigrationSqlMis {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlMi_CreateOrUpdate")
+  @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlMiOps.CreateOrUpdateAsync<
     DatabaseMigrationSqlMi,
     LroHeaders = ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
@@ -95,6 +97,7 @@ interface DatabaseMigrationSqlMis {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlMi_Delete")
+  @tag("DatabaseMigrations")
   delete is DatabaseMigrationSqlMiOps.DeleteWithoutOkAsync<
     DatabaseMigrationSqlMi,
     Parameters = {
@@ -104,7 +107,8 @@ interface DatabaseMigrationSqlMis {
       @query("force")
       force?: boolean;
     },
-    Response = ArmResponse<DatabaseMigrationSqlMi> | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmResponse<DatabaseMigrationSqlMi> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlMi> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -112,10 +116,12 @@ interface DatabaseMigrationSqlMis {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlMi_cancel")
+  @tag("DatabaseMigrations")
   cancel is DatabaseMigrationSqlMiOps.ActionAsync<
     DatabaseMigrationSqlMi,
     MigrationOperationInput,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -123,10 +129,12 @@ interface DatabaseMigrationSqlMis {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlMi_cutover")
+  @tag("DatabaseMigrations")
   cutover is DatabaseMigrationSqlMiOps.ActionAsync<
     DatabaseMigrationSqlMi,
     MigrationOperationInput,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 }
 

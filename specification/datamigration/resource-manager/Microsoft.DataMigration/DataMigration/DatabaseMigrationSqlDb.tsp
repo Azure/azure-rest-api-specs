@@ -53,13 +53,14 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseMigrationSqlDbs {
   /**
    * Retrieve the Database Migration resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlDb_Get")
+  @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlDbOps.Read<
     DatabaseMigrationSqlDb,
     Parameters = {
@@ -84,6 +85,7 @@ interface DatabaseMigrationSqlDbs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlDb_CreateOrUpdate")
+  @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlDbOps.CreateOrUpdateAsync<
     DatabaseMigrationSqlDb,
     LroHeaders = ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlDb> &
@@ -96,6 +98,7 @@ interface DatabaseMigrationSqlDbs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("DatabaseMigrationsSqlDb_Delete")
+  @tag("DatabaseMigrations")
   delete is DatabaseMigrationSqlDbOps.DeleteWithoutOkAsync<
     DatabaseMigrationSqlDb,
     Parameters = {
@@ -113,10 +116,12 @@ interface DatabaseMigrationSqlDbs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlDb_cancel")
+  @tag("DatabaseMigrations")
   cancel is DatabaseMigrationSqlDbOps.ActionAsync<
     DatabaseMigrationSqlDb,
     MigrationOperationInput,
-    OkResponse
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
   >;
 
   /**
@@ -124,6 +129,7 @@ interface DatabaseMigrationSqlDbs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlDb_retry")
+  @tag("DatabaseMigrations")
   retry is DatabaseMigrationSqlDbOps.ActionAsync<
     DatabaseMigrationSqlDb,
     MigrationOperationInput,

@@ -32,7 +32,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Data Migration Client
+ * The SQL Migration management API provides a RESTful set of web APIs that allow users to migrate their SQL Server databases to Azure SQL.
  */
 @armProviderNamespace
 @service(#{ title: "DataMigrationManagementClient" })
@@ -50,4 +50,5 @@ enum Versions {
   v2025_09_01_preview: "2025-09-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<OperationListResult> {}

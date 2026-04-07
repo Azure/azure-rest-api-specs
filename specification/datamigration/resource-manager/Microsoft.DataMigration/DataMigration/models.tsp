@@ -2087,6 +2087,7 @@ model DatabaseMigrationPropertiesCosmosDbMongo
   /**
    * List of Mongo Collections to be migrated.
    */
+  @identifiers(#[])
   collectionList?: MongoMigrationCollection[];
 
   kind: "MongoToCosmosDbMongo";
@@ -2573,6 +2574,7 @@ model MigrationStatusDetails {
    * Backup sets that are currently active.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   activeBackupSets?: SqlBackupSetInfo[];
 
   /**
@@ -2645,12 +2647,14 @@ model SqlBackupSetInfo {
   /**
    * First LSN of the backup set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   firstLSN?: string;
 
   /**
    * Last LSN of the backup set.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   lastLSN?: string;
 
@@ -2664,6 +2668,7 @@ model SqlBackupSetInfo {
    * List of files in the backup set.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   listOfBackupFiles?: SqlBackupFileInfo[];
 
   /**
@@ -2900,6 +2905,8 @@ model DatabaseMigrationPropertiesSqlVm extends DatabaseMigrationProperties {
   kind: "SqlVm";
 }
 
+model OperationListResult is Azure.Core.Page<OperationsDefinition>;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OperationsDefinition {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -3045,6 +3052,11 @@ model SqlMigrationServiceUpdate {
 }
 
 /**
+ * A list of SQL Migration Service.
+ */
+model SqlMigrationListResult is Azure.Core.Page<SqlMigrationService>;
+
+/**
  * An authentication key.
  */
 model AuthenticationKeys {
@@ -3087,7 +3099,8 @@ model RegenAuthKeys {
 /**
  * Details of node to be deleted.
  */
-model DeleteNode {
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+model deleteNode {
   /**
    * The name of node to delete.
    */
@@ -3127,6 +3140,7 @@ model IntegrationRuntimeMonitoringData {
    * Integration Runtime node monitoring data.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   nodes?: NodeMonitoringData[];
 }
 
@@ -3148,6 +3162,7 @@ model NodeMonitoringData {
   /**
    * Available memory (MB) on the integration runtime node.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   availableMemoryInMB?: int32;
 
@@ -3255,18 +3270,21 @@ model ResourceSku {
    * Metadata for retrieving price info.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   costs?: ResourceSkuCosts[];
 
   /**
    * A name value pair to describe the capability.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   capabilities?: ResourceSkuCapabilities[];
 
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   restrictions?: ResourceSkuRestrictions[];
 }
 
@@ -3306,6 +3324,7 @@ model ResourceSkuCosts {
   /**
    * Used for querying price from commerce.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   meterID?: string;
 
@@ -3382,6 +3401,7 @@ model ApiError {
 /**
  * Error information in OData format.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ODataError {
   /**
    * The machine-readable description of the error, such as 'InvalidRequest' or 'InternalServerError'
@@ -3396,6 +3416,7 @@ model ODataError {
   /**
    * Inner errors that caused this error
    */
+  @identifiers(#[])
   details?: ODataError[];
 }
 
@@ -3590,6 +3611,7 @@ model ProjectTaskProperties {
    * Array of errors. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   errors?: ODataError[];
 
   /**
@@ -3602,6 +3624,7 @@ model ProjectTaskProperties {
    * Array of command properties.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   commands?: CommandProperties[];
 
   /**
@@ -3625,6 +3648,7 @@ model CommandProperties {
    * Array of errors. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   errors?: ODataError[];
 
   /**
@@ -3741,6 +3765,7 @@ model ProjectProperties {
   /**
    * List of DatabaseInfo
    */
+  @identifiers(#[])
   databasesInfo?: DatabaseInfo[];
 
   /**
@@ -3967,6 +3992,7 @@ model MigrateSyncCompleteCommandOutput {
    * List of errors that happened during the command execution
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   errors?: ReportableException[];
 }
 
@@ -4008,6 +4034,7 @@ model ReportableException {
 /**
  * Properties for the command that completes online migration for an Azure SQL Database Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateMISyncCompleteCommandProperties extends CommandProperties {
   /**
    * Command input
@@ -4029,6 +4056,7 @@ model MigrateMISyncCompleteCommandProperties extends CommandProperties {
 /**
  * Input for command that completes online migration for an Azure SQL Database Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateMISyncCompleteCommandInput {
   /**
    * Name of managed instance database
@@ -4039,10 +4067,12 @@ model MigrateMISyncCompleteCommandInput {
 /**
  * Output for command that completes online migration for an Azure SQL Database Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateMISyncCompleteCommandOutput {
   /**
    * List of errors that happened during the command execution
    */
+  @identifiers(#[])
   errors?: ReportableException[];
 }
 
@@ -4086,6 +4116,7 @@ model MongoDbConnectionInfo extends ConnectionInfo {
   trustServerCertificate?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   enforceSSL?: boolean;
 
   /**
@@ -4357,6 +4388,7 @@ model BackupSetInfo {
   /**
    * List of files in the backup set
    */
+  @identifiers(#[])
   listOfBackupFiles?: BackupFileInfo[];
 
   /**
@@ -4549,6 +4581,7 @@ model ConnectToSourceSqlServerTaskOutputTaskLevel
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 
   /**
@@ -4571,6 +4604,7 @@ model ConnectToSourceSqlServerTaskOutputDatabaseLevel
   /**
    * Size of the file in megabytes
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   sizeMB?: float64;
 
@@ -4578,6 +4612,7 @@ model ConnectToSourceSqlServerTaskOutputDatabaseLevel
    * The list of database files
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   databaseFiles?: DatabaseFileInfo[];
 
   /**
@@ -4635,6 +4670,7 @@ model DatabaseFileInfo {
   /**
    * Size of the file in megabytes
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   sizeMB?: float64;
 }
 
@@ -4736,6 +4772,7 @@ model ConnectToSourceSqlServerTaskOutputAgentJobLevel
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 
   /**
@@ -4792,6 +4829,7 @@ model ConnectToSourcePostgreSqlSyncTaskOutput {
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -4847,6 +4885,7 @@ model ConnectToTargetAzureDbForMySqlTaskOutput {
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -4897,6 +4936,7 @@ model ConnectToTargetSqlDbTaskOutput {
 /**
  * Input for the task that validates connection to Azure SQL Database Managed Instance online scenario.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ConnectToTargetSqlMISyncTaskInput {
   /**
    * Connection information for Azure SQL Database Managed Instance
@@ -4912,6 +4952,7 @@ model ConnectToTargetSqlMISyncTaskInput {
 /**
  * Output for the task that validates connection to Azure SQL Database Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ConnectToTargetSqlMISyncTaskOutput {
   /**
    * Target server version
@@ -4929,12 +4970,14 @@ model ConnectToTargetSqlMISyncTaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
 /**
  * Input for the task that validates connection to Azure SQL Database Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ConnectToTargetSqlMITaskInput {
   /**
    * Connection information for target SQL Server
@@ -4960,6 +5003,7 @@ model ConnectToTargetSqlMITaskInput {
 /**
  * Output for the task that validates connection to Azure SQL Database Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ConnectToTargetSqlMITaskOutput {
   /**
    * Result identifier
@@ -4995,6 +5039,7 @@ model ConnectToTargetSqlMITaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -5060,6 +5105,7 @@ model ConnectToTargetAzureDbForPostgreSqlSyncTaskOutput {
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -5098,6 +5144,7 @@ model GetUserTablesMySqlTaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -5135,6 +5182,7 @@ model GetTdeCertificatesSqlTaskInput {
   /**
    * List containing certificate names and corresponding password to use for encrypting the exported certificate.
    */
+  @identifiers(#[])
   selectedCertificates: SelectedCertificateInput[];
 }
 
@@ -5187,6 +5235,7 @@ model GetTdeCertificatesSqlTaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -5241,6 +5290,7 @@ model GetUserTablesSqlSyncTaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -5284,6 +5334,7 @@ model GetUserTablesSqlTaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -5300,6 +5351,7 @@ model MigrateSchemaSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateSchemaSqlServerSqlDbTaskOutput[];
 
   /**
@@ -5331,6 +5383,7 @@ model MigrateSchemaSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateSchemaSqlServerSqlDbDatabaseInput[];
 
   /**
@@ -5598,6 +5651,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateMySqlAzureDbForMySqlSyncDatabaseInput[];
 }
 
@@ -5922,6 +5976,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError
   /**
    * List of error events.
    */
+  @identifiers(#[])
   events?: SyncMigrationDatabaseErrorEvent[];
 
   /**
@@ -5960,6 +6015,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput[];
 
   /**
@@ -6026,6 +6082,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput {
   /**
    * Tables selected for migration
    */
+  @identifiers(#[])
   selectedTables?: MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseTableInput[];
 }
 
@@ -6330,6 +6387,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError
   /**
    * List of error events
    */
+  @identifiers(#[])
   events?: SyncMigrationDatabaseErrorEvent[];
 
   /**
@@ -6349,6 +6407,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError
   /**
    * List of error events.
    */
+  @identifiers(#[])
   events?: SyncMigrationDatabaseErrorEvent[];
 
   /**
@@ -6365,6 +6424,7 @@ model MigrateSqlServerSqlDbSyncTaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateSqlServerSqlDbSyncDatabaseInput[];
 
   /**
@@ -6730,6 +6790,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputDatabaseError
   /**
    * List of error events.
    */
+  @identifiers(#[])
   events?: SyncMigrationDatabaseErrorEvent[];
 
   /**
@@ -6746,6 +6807,7 @@ model MigrateSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateSqlServerSqlDbDatabaseInput[];
 
   /**
@@ -6910,6 +6972,7 @@ model MigrateSqlServerSqlDbTaskOutputMigrationLevel
    * Migration exceptions and warnings.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -7092,6 +7155,7 @@ model MigrateSqlServerSqlDbTaskOutputDatabaseLevel
    * Migration exceptions and warnings.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -7194,6 +7258,7 @@ model DatabaseSummaryResult extends DataItemMigrationSummaryResult {
   /**
    * Size of the database in megabytes
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   sizeMB?: float64;
 }
@@ -7526,6 +7591,7 @@ model WaitStatistics {
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMISyncTaskInput extends SqlServerSqlMISyncTaskInput {
   /**
    * Number of database migrations to start in parallel
@@ -7536,10 +7602,12 @@ model MigrateSqlServerSqlMISyncTaskInput extends SqlServerSqlMISyncTaskInput {
 /**
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model SqlServerSqlMISyncTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateSqlServerSqlMIDatabaseInput[];
 
   /**
@@ -7571,6 +7639,7 @@ model SqlServerSqlMISyncTaskInput {
 /**
  * Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMIDatabaseInput {
   /**
    * Name of the database
@@ -7601,6 +7670,7 @@ model MigrateSqlServerSqlMIDatabaseInput {
 /**
  * Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance using Log Replay Service.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @discriminator("resultType")
 model MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7616,6 +7686,7 @@ model MigrateSqlServerSqlMISyncTaskOutput {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMISyncTaskOutputMigrationLevel
   extends MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7693,6 +7764,7 @@ model MigrateSqlServerSqlMISyncTaskOutputMigrationLevel
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel
   extends MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7737,6 +7809,7 @@ model MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel
    * Backup sets that are currently active (Either being uploaded or getting restored)
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   activeBackupSets?: BackupSetInfo[];
 
   /**
@@ -7761,6 +7834,7 @@ model MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel
    * Migration exceptions and warnings
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -7770,6 +7844,7 @@ model MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMISyncTaskOutputError
   extends MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7788,10 +7863,12 @@ model MigrateSqlServerSqlMISyncTaskOutputError
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMITaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateSqlServerSqlMIDatabaseInput[];
 
   /**
@@ -7848,6 +7925,7 @@ model BlobShare {
 /**
  * Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @discriminator("resultType")
 model MigrateSqlServerSqlMITaskOutput {
   /**
@@ -7863,6 +7941,7 @@ model MigrateSqlServerSqlMITaskOutput {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMITaskOutputMigrationLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -7919,6 +7998,7 @@ model MigrateSqlServerSqlMITaskOutputMigrationLevel
    * List of orphaned users.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   orphanedUsersInfo?: OrphanedUserInfo[];
 
   /**
@@ -7955,6 +8035,7 @@ model MigrateSqlServerSqlMITaskOutputMigrationLevel
    * Migration exceptions and warnings.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -7964,6 +8045,7 @@ model MigrateSqlServerSqlMITaskOutputMigrationLevel
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMITaskOutputDatabaseLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -7975,6 +8057,7 @@ model MigrateSqlServerSqlMITaskOutputDatabaseLevel
   /**
    * Size of the database in megabytes
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   sizeMB?: float64;
 
@@ -8014,6 +8097,7 @@ model MigrateSqlServerSqlMITaskOutputDatabaseLevel
    * Migration exceptions and warnings
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -8023,6 +8107,7 @@ model MigrateSqlServerSqlMITaskOutputDatabaseLevel
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMITaskOutputAgentJobLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8067,6 +8152,7 @@ model MigrateSqlServerSqlMITaskOutputAgentJobLevel
    * Migration errors and warnings per job
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -8076,6 +8162,7 @@ model MigrateSqlServerSqlMITaskOutputAgentJobLevel
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMITaskOutputLoginLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8120,6 +8207,7 @@ model MigrateSqlServerSqlMITaskOutputLoginLevel
    * Login migration errors and warnings per login
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -8129,6 +8217,7 @@ model MigrateSqlServerSqlMITaskOutputLoginLevel
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMITaskOutputError
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8247,6 +8336,7 @@ model MigrateSsisTaskOutputMigrationLevel extends MigrateSsisTaskOutput {
    * Migration exceptions and warnings.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -8311,6 +8401,7 @@ model MigrateSsisTaskOutputProjectLevel extends MigrateSsisTaskOutput {
    * Migration exceptions and warnings
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -8351,6 +8442,7 @@ model MongoDbClusterInfo {
   /**
    * A list of non-system databases in the cluster
    */
+  @identifiers(#[])
   databases: MongoDbDatabaseInfo[];
 
   /**
@@ -8377,6 +8469,7 @@ model MongoDbDatabaseInfo extends MongoDbObjectInfo {
   /**
    * A list of supported collections in a MongoDB database
    */
+  @identifiers(#[])
   collections: MongoDbCollectionInfo[];
 
   /**
@@ -8433,6 +8526,7 @@ model MongoDbShardKeyInfo {
   /**
    * The fields within the shard key
    */
+  @identifiers(#[])
   fields: MongoDbShardKeyField[];
 
   /**
@@ -8615,6 +8709,7 @@ model MongoDbCollectionSettings {
   /**
    * The RUs that should be configured on a CosmosDB target, or null to use the default. This has no effect on non-CosmosDB targets.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   targetRUs?: int32;
 }
 
@@ -8625,6 +8720,7 @@ model MongoDbShardKeySetting {
   /**
    * The fields within the shard key
    */
+  @identifiers(#[])
   fields: MongoDbShardKeyField[];
 
   /**
@@ -8662,6 +8758,7 @@ model MongoDbDatabaseSettings {
   /**
    * The RUs that should be configured on a CosmosDB target, or null to use the default, or 0 if throughput should not be provisioned for the database. This has no effect on non-CosmosDB targets.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   targetRUs?: int32;
 }
 
@@ -8698,6 +8795,7 @@ model MongoDbMigrationSettings {
   /**
    * The RU limit on a CosmosDB target that collections will be temporarily increased to (if lower) during the initial copy of a migration, from 10,000 to 1,000,000, or 0 to use the default boost (which is generally the maximum), or null to not boost the RUs. This setting has no effect on non-CosmosDB targets.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   boostRUs?: int32;
 
   /**
@@ -8814,6 +8912,7 @@ model ConnectToSourceOracleSyncTaskOutput {
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -8853,11 +8952,13 @@ model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutput {
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 
   /**
    * Mapping of schemas per database
    */
+  @identifiers(#[])
   databaseSchemaMap?: ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutputDatabaseSchemaMapItem[];
 }
 
@@ -8898,12 +8999,14 @@ model GetUserTablesOracleTaskOutput {
    * List of valid tables found for this schema
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   tables?: DatabaseTable[];
 
   /**
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -8936,12 +9039,14 @@ model GetUserTablesPostgreSqlTaskOutput {
    * List of valid tables found for this database
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   tables?: DatabaseTable[];
 
   /**
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -8953,6 +9058,7 @@ model ValidateOracleAzureDbPostgreSqlSyncTaskOutput {
    * Errors associated with a selected database object
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -8963,6 +9069,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateOracleAzureDbPostgreSqlSyncDatabaseInput[];
 
   /**
@@ -9307,6 +9414,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseError
   /**
    * List of error events.
    */
+  @identifiers(#[])
   events?: SyncMigrationDatabaseErrorEvent[];
 
   /**
@@ -9318,6 +9426,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseError
 /**
  * Information about an Oracle OCI driver.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model OracleOCIDriverInfo {
   /**
    * The name of the driver package
@@ -9359,6 +9468,7 @@ model OracleOCIDriverInfo {
 /**
  * Input for the service task to check for OCI drivers.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model CheckOCIDriverTaskInput {
   /**
    * Version of the source server to check against.  Optional.
@@ -9369,6 +9479,7 @@ model CheckOCIDriverTaskInput {
 /**
  * Output for the service task to check for OCI drivers.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model CheckOCIDriverTaskOutput {
   /**
    * Information about the installed driver if found and valid.
@@ -9379,12 +9490,14 @@ model CheckOCIDriverTaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
 /**
  * Input for the service task to upload an OCI driver.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model UploadOCIDriverTaskInput {
   /**
    * File share information for the OCI driver archive.
@@ -9395,6 +9508,7 @@ model UploadOCIDriverTaskInput {
 /**
  * Output for the service task to upload an OCI driver.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model UploadOCIDriverTaskOutput {
   /**
    * The name of the driver package that was validated and uploaded.
@@ -9406,12 +9520,14 @@ model UploadOCIDriverTaskOutput {
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
 /**
  * Input for the service task to install an OCI driver.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model InstallOCIDriverTaskInput {
   /**
    * Name of the uploaded driver package to install.
@@ -9422,11 +9538,13 @@ model InstallOCIDriverTaskInput {
 /**
  * Output for the service task to install an OCI driver.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model InstallOCIDriverTaskOutput {
   /**
    * Validation errors
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -9478,6 +9596,7 @@ model ServiceOperationList is Azure.Core.Page<ServiceOperation>;
 /**
  * Properties for the task that checks for OCI drivers.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model CheckOCIDriverTaskProperties extends ProjectTaskProperties {
   /**
    * Input for the service task to check for OCI drivers.
@@ -9488,6 +9607,7 @@ model CheckOCIDriverTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: CheckOCIDriverTaskOutput[];
 
   /**
@@ -9499,6 +9619,7 @@ model CheckOCIDriverTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that uploads an OCI driver.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model UploadOCIDriverTaskProperties extends ProjectTaskProperties {
   /**
    * Input for the service task to upload an OCI driver.
@@ -9509,6 +9630,7 @@ model UploadOCIDriverTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: UploadOCIDriverTaskOutput[];
 
   /**
@@ -9520,6 +9642,7 @@ model UploadOCIDriverTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that installs an OCI driver.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model InstallOCIDriverTaskProperties extends ProjectTaskProperties {
   /**
    * Input for the service task to install an OCI driver.
@@ -9530,6 +9653,7 @@ model InstallOCIDriverTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: InstallOCIDriverTaskOutput[];
 
   /**
@@ -9551,6 +9675,7 @@ model ConnectToMongoDbTaskProperties extends ProjectTaskProperties {
    * An array containing a single MongoDbClusterInfo object
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MongoDbClusterInfo[];
 
   /**
@@ -9572,6 +9697,7 @@ model ConnectToSourceSqlServerTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToSourceSqlServerTaskOutput[];
 
   /**
@@ -9598,6 +9724,7 @@ model ConnectToSourceSqlServerSyncTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToSourceSqlServerTaskOutput[];
 
   /**
@@ -9620,6 +9747,7 @@ model ConnectToSourcePostgreSqlSyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToSourcePostgreSqlSyncTaskOutput[];
 
   /**
@@ -9641,6 +9769,7 @@ model ConnectToSourceMySqlTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToSourceNonSqlTaskOutput[];
 
   /**
@@ -9681,6 +9810,7 @@ model ConnectToSourceNonSqlTaskOutput {
    * Validation errors associated with the task
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -9738,6 +9868,7 @@ model ConnectToSourceOracleSyncTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToSourceOracleSyncTaskOutput[];
 
   /**
@@ -9759,6 +9890,7 @@ model ConnectToTargetSqlDbTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToTargetSqlDbTaskOutput[];
 
   /**
@@ -9785,6 +9917,7 @@ model ConnectToTargetSqlSqlDbSyncTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToTargetSqlDbTaskOutput[];
 
   /**
@@ -9807,6 +9940,7 @@ model ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToTargetAzureDbForPostgreSqlSyncTaskOutput[];
 
   /**
@@ -9829,6 +9963,7 @@ model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutput[];
 
   /**
@@ -9850,6 +9985,7 @@ model GetUserTablesSqlTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: GetUserTablesSqlTaskOutput[];
 
   /**
@@ -9876,6 +10012,7 @@ model GetUserTablesSqlSyncTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: GetUserTablesSqlSyncTaskOutput[];
 
   /**
@@ -9897,6 +10034,7 @@ model GetUserTablesOracleTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: GetUserTablesOracleTaskOutput[];
 
   /**
@@ -9918,6 +10056,7 @@ model GetUserTablesPostgreSqlTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: GetUserTablesPostgreSqlTaskOutput[];
 
   /**
@@ -9939,6 +10078,7 @@ model GetUserTablesMySqlTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: GetUserTablesMySqlTaskOutput[];
 
   /**
@@ -9950,6 +10090,7 @@ model GetUserTablesMySqlTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to Azure SQL Database Managed Instance
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ConnectToTargetSqlMITaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -9960,6 +10101,7 @@ model ConnectToTargetSqlMITaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToTargetSqlMITaskOutput[];
 
   /**
@@ -9971,6 +10113,7 @@ model ConnectToTargetSqlMITaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to Azure SQL Database Managed Instance
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ConnectToTargetSqlMISyncTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -9981,6 +10124,7 @@ model ConnectToTargetSqlMISyncTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToTargetSqlMISyncTaskOutput[];
 
   /**
@@ -10003,6 +10147,7 @@ model ConnectToTargetAzureDbForMySqlTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ConnectToTargetAzureDbForMySqlTaskOutput[];
 
   /**
@@ -10022,6 +10167,7 @@ model MigrateMongoDbTaskProperties extends ProjectTaskProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MongoDbProgress[];
 
   /**
@@ -10033,6 +10179,7 @@ model MigrateMongoDbTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMITaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10043,6 +10190,7 @@ model MigrateSqlServerSqlMITaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateSqlServerSqlMITaskOutput[];
 
   /**
@@ -10074,6 +10222,7 @@ model MigrateSqlServerSqlMITaskProperties extends ProjectTaskProperties {
 /**
  * Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance sync scenario
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model MigrateSqlServerSqlMISyncTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10084,6 +10233,7 @@ model MigrateSqlServerSqlMISyncTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateSqlServerSqlMISyncTaskOutput[];
 
   /**
@@ -10110,6 +10260,7 @@ model MigrateSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateSqlServerSqlDbTaskOutput[];
 
   /**
@@ -10146,6 +10297,7 @@ model MigrateSqlServerSqlDbSyncTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateSqlServerSqlDbSyncTaskOutput[];
 
   /**
@@ -10168,6 +10320,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateMySqlAzureDbForMySqlSyncTaskOutput[];
 
   /**
@@ -10190,6 +10343,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateMySqlAzureDbForMySqlOfflineTaskOutput[];
 
   /**
@@ -10225,6 +10379,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateMySqlAzureDbForMySqlOfflineDatabaseInput[];
 
   /**
@@ -10302,6 +10457,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput[];
 
   /**
@@ -10339,6 +10495,7 @@ model MigrateOracleAzureDbForPostgreSqlSyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateOracleAzureDbPostgreSqlSyncTaskOutput[];
 
   /**
@@ -10361,6 +10518,7 @@ model ValidateMigrationInputSqlServerSqlDbSyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ValidateSyncMigrationInputSqlServerTaskOutput[];
 
   /**
@@ -10386,6 +10544,7 @@ model ValidateSyncMigrationInputSqlServerTaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateSqlServerSqlDbSyncDatabaseInput[];
 }
 
@@ -10409,12 +10568,14 @@ model ValidateSyncMigrationInputSqlServerTaskOutput {
    * Errors associated with a selected database object
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
 /**
  * Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ValidateMigrationInputSqlServerSqlMITaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10426,6 +10587,7 @@ model ValidateMigrationInputSqlServerSqlMITaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ValidateMigrationInputSqlServerSqlMITaskOutput[];
 
   /**
@@ -10437,6 +10599,7 @@ model ValidateMigrationInputSqlServerSqlMITaskProperties
 /**
  * Input for task that validates migration input for SQL to Azure SQL Managed Instance
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ValidateMigrationInputSqlServerSqlMITaskInput {
   /**
    * Information for connecting to source
@@ -10451,6 +10614,7 @@ model ValidateMigrationInputSqlServerSqlMITaskInput {
   /**
    * Databases to migrate
    */
+  @identifiers(#[])
   selectedDatabases: MigrateSqlServerSqlMIDatabaseInput[];
 
   /**
@@ -10477,6 +10641,7 @@ model ValidateMigrationInputSqlServerSqlMITaskInput {
 /**
  * Output for task that validates migration input for SQL to Azure SQL Managed Instance migrations
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ValidateMigrationInputSqlServerSqlMITaskOutput {
   /**
    * Result identifier
@@ -10494,30 +10659,35 @@ model ValidateMigrationInputSqlServerSqlMITaskOutput {
    * Errors associated with the RestoreDatabaseName
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   restoreDatabaseNameErrors?: ReportableException[];
 
   /**
    * Errors associated with the BackupFolder path
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   backupFolderErrors?: ReportableException[];
 
   /**
    * Errors associated with backup share user name and password credentials
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   backupShareCredentialsErrors?: ReportableException[];
 
   /**
    * Errors associated with the storage account provided.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   backupStorageAccountErrors?: ReportableException[];
 
   /**
    * Errors associated with existing backup files.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   existingBackupErrors?: ReportableException[];
 
   /**
@@ -10583,6 +10753,7 @@ model DatabaseBackupInfo {
 /**
  * Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance sync scenario
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ValidateMigrationInputSqlServerSqlMISyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10594,6 +10765,7 @@ model ValidateMigrationInputSqlServerSqlMISyncTaskProperties
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ValidateMigrationInputSqlServerSqlMISyncTaskOutput[];
 
   /**
@@ -10606,12 +10778,14 @@ model ValidateMigrationInputSqlServerSqlMISyncTaskProperties
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ValidateMigrationInputSqlServerSqlMISyncTaskInput
   extends SqlServerSqlMISyncTaskInput {}
 
 /**
  * Output for task that validates migration input for Azure SQL Database Managed Instance online migration
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model ValidateMigrationInputSqlServerSqlMISyncTaskOutput {
   /**
    * Database identifier
@@ -10629,6 +10803,7 @@ model ValidateMigrationInputSqlServerSqlMISyncTaskOutput {
    * Errors associated with a selected database object
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   validationErrors?: ReportableException[];
 }
 
@@ -10645,6 +10820,7 @@ model ValidateMongoDbTaskProperties extends ProjectTaskProperties {
    * An array containing a single MongoDbMigrationProgress object
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MongoDbMigrationProgress[];
 
   /**
@@ -10667,6 +10843,7 @@ model ValidateOracleAzureDbForPostgreSqlSyncTaskProperties
    * An array containing a single validation error response object
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: ValidateOracleAzureDbPostgreSqlSyncTaskOutput[];
 
   /**
@@ -10688,6 +10865,7 @@ model GetTdeCertificatesSqlTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: GetTdeCertificatesSqlTaskOutput[];
 
   /**
@@ -10709,6 +10887,7 @@ model MigrateSsisTaskProperties extends ProjectTaskProperties {
    * Task output. This is ignored if submitted.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   output?: MigrateSsisTaskOutput[];
 
   /**
@@ -10885,6 +11064,7 @@ model DataMigrationProjectMetadata {
    * List of tables selected for migration
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   selectedMigrationTables?: MigrationTableMetadata[];
 }
 
@@ -10947,6 +11127,7 @@ model NonSqlMigrationTaskInput {
   /**
    * Metadata of the tables selected for migration
    */
+  @identifiers(#[])
   selectedTables: NonSqlDataMigrationTable[];
 }
 
@@ -11059,6 +11240,7 @@ model NonSqlDataMigrationTableResult {
    * List of errors, if any, during migration
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   errors?: DataMigrationError[];
 }
 
@@ -11100,6 +11282,7 @@ model MigrateSqlServerSqlServerDatabaseInput {
   /**
    * The list of database files
    */
+  @identifiers(#[])
   databaseFiles?: DatabaseFileInput[];
 }
 
@@ -11153,6 +11336,7 @@ model StartMigrationScenarioServerRoleResult {
    * Migration exceptions and warnings.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 }
 
@@ -11241,6 +11425,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel
    * Migration exceptions and warnings.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**
@@ -11337,6 +11522,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel
    * Migration exceptions and warnings.
    */
   @visibility(Lifecycle.Read)
+  @identifiers(#[])
   exceptionsAndWarnings?: ReportableException[];
 
   /**

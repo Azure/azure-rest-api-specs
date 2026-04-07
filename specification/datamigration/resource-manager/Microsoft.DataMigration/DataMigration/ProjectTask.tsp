@@ -62,7 +62,8 @@ alias ProjectTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("tasks")
     @key
     taskName: string;
-  }
+  },
+  ApiError
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -72,6 +73,7 @@ interface ProjectTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_Get")
+  @summary("Get task information")
   @tag("Task resource")
   @tag("Standard operation")
   @tag("GET")
@@ -91,6 +93,7 @@ interface ProjectTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_CreateOrUpdate")
+  @summary("Create or update task")
   @tag("Task resource")
   @tag("Standard operation")
   @tag("PUT")
@@ -101,6 +104,7 @@ interface ProjectTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_Update")
+  @summary("Create or update task")
   @tag("Task resource")
   @tag("Standard operation")
   @tag("PATCH")
@@ -115,6 +119,7 @@ interface ProjectTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_Delete")
+  @summary("Delete task")
   @tag("Task resource")
   @tag("Standard operation")
   @tag("DELETE")
@@ -134,6 +139,7 @@ interface ProjectTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_List")
+  @summary("Get tasks in a service")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("GET")
@@ -154,6 +160,7 @@ interface ProjectTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_Cancel")
+  @summary("Cancel a task")
   @tag("Task resource")
   @tag("Custom operation")
   @tag("POST")
@@ -168,6 +175,7 @@ interface ProjectTasks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Tasks_Command")
+  @summary("Execute a command on a task")
   @tag("Task resource")
   @tag("Custom operation")
   @tag("POST")
@@ -202,7 +210,8 @@ alias ServiceTaskOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("serviceTasks")
     @key
     taskName: string;
-  }
+  },
+  ApiError
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -213,6 +222,7 @@ interface ServiceTasks {
   @tag("Service Task resource")
   @tag("Standard operation")
   @tag("GET")
+  @summary("Get service task information")
   get is ServiceTaskOps.Read<
     ProjectTask,
     Parameters = {
@@ -230,6 +240,7 @@ interface ServiceTasks {
   @tag("Service Task resource")
   @tag("Standard operation")
   @tag("PUT")
+  @summary("Create or update service task")
   createOrUpdate is ServiceTaskOps.CreateOrUpdateSync<ProjectTask>;
 
   /**
@@ -238,6 +249,7 @@ interface ServiceTasks {
   @tag("Service Task resource")
   @tag("Standard operation")
   @tag("PATCH")
+  @summary("Create or update service task")
   @patch(#{ implicitOptionality: false })
   update is ServiceTaskOps.CustomPatchSync<
     ProjectTask,
@@ -250,6 +262,7 @@ interface ServiceTasks {
   @tag("Service Task resource")
   @tag("Standard operation")
   @tag("DELETE")
+  @summary("Delete service task")
   delete is ServiceTaskOps.DeleteSync<
     ProjectTask,
     Parameters = {
@@ -267,6 +280,7 @@ interface ServiceTasks {
   @tag("Service resource")
   @tag("Standard operation")
   @tag("GET")
+  @summary("Get service level tasks for a service")
   list is ServiceTaskOps.List<
     ProjectTask,
     Parameters = {
@@ -285,6 +299,7 @@ interface ServiceTasks {
   @tag("Service Task resource")
   @tag("Custom operation")
   @tag("POST")
+  @summary("Cancel a service task")
   cancel is ServiceTaskOps.ActionSync<
     ProjectTask,
     void,

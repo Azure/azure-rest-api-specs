@@ -46,7 +46,8 @@ interface SqlMigrationServices {
   update is ArmCustomPatchAsync<
     SqlMigrationService,
     PatchModel = SqlMigrationServiceUpdate,
-    Response = ArmResponse<SqlMigrationService> | ArmResourceCreatedResponse<SqlMigrationService>
+    Response = ArmResponse<SqlMigrationService> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlMigrationService> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmResourceCreatedResponse<SqlMigrationService>
   >;
 
   /**
@@ -61,12 +62,18 @@ interface SqlMigrationServices {
   /**
    * Retrieve all SQL migration services in the resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<SqlMigrationService>;
+  listByResourceGroup is ArmResourceListByParent<
+    SqlMigrationService,
+    Response = ArmResponse<SqlMigrationListResult>
+  >;
 
   /**
    * Retrieve all SQL migration services in the subscriptions.
    */
-  listBySubscription is ArmListBySubscription<SqlMigrationService>;
+  listBySubscription is ArmListBySubscription<
+    SqlMigrationService,
+    Response = ArmResponse<SqlMigrationListResult>
+  >;
 
   /**
    * Retrieve the List of Authentication Keys for Self Hosted Integration Runtime.
@@ -97,8 +104,8 @@ interface SqlMigrationServices {
   @operationId("SqlMigrationServices_deleteNode")
   deleteNode is ArmResourceActionSync<
     SqlMigrationService,
-    DeleteNode,
-    ArmResponse<DeleteNode>
+    deleteNode,
+    ArmResponse<deleteNode>
   >;
 
   /**

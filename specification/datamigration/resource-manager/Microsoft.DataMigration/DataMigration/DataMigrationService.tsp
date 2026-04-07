@@ -41,6 +41,29 @@ model DataMigrationService
   sku?: ServiceSku;
 }
 
+alias DataMigrationServiceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** Name of the resource group */
+    @path
+    @segment("resourceGroups")
+    @key
+    groupName: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** Name of the service */
+    @path
+    @segment("services")
+    @key
+    serviceName: string;
+  },
+  ApiError
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface DataMigrationServices {
   /**
@@ -48,10 +71,11 @@ interface DataMigrationServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_Get")
+  @summary("Get DMS (classic) Service Instance")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("GET")
-  get is ArmResourceRead<DataMigrationService>;
+  get is DataMigrationServiceOps.Read<DataMigrationService>;
 
   /**
    * The services resource is the top-level resource that represents the Azure Database Migration Service (classic). The PUT method creates a new service or updates an existing one. When a service is updated, existing child resources (i.e. tasks) are unaffected. Services currently support a single kind, "vm", which refers to a VM-based service, although other kinds may be added in the future. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request ("ServiceIsBusy"). The provider will reply when successful with 200 OK or 201 Created. Long-running operations use the provisioningState property.
@@ -59,10 +83,11 @@ interface DataMigrationServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Services_CreateOrUpdate")
+  @summary("Create or update DMS (classic) Instance")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("PUT")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is DataMigrationServiceOps.CreateOrUpdateAsync<
     DataMigrationService,
     Response = ArmResourceUpdatedResponse<DataMigrationService> | ArmResourceCreatedResponse<
       DataMigrationService,
@@ -76,11 +101,12 @@ interface DataMigrationServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_Update")
+  @summary("Create or update DMS (classic) Service Instance")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("PATCH")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is DataMigrationServiceOps.CustomPatchAsync<
     DataMigrationService,
     PatchModel = DataMigrationService
   >;
@@ -91,10 +117,11 @@ interface DataMigrationServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Services_Delete")
+  @summary("Delete DMS (classic) Service Instance")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("DELETE")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is DataMigrationServiceOps.DeleteWithoutOkAsync<
     DataMigrationService,
     Parameters = {
       /**
@@ -111,10 +138,11 @@ interface DataMigrationServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_ListByResourceGroup")
+  @summary("Get services in resource group")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("GET")
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is DataMigrationServiceOps.List<
     DataMigrationService,
     Response = ArmResponse<DataMigrationServiceList>
   >;
@@ -124,12 +152,14 @@ interface DataMigrationServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_List")
+  @summary("Get services in subscription")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("GET")
   list is ArmListBySubscription<
     DataMigrationService,
-    Response = ArmResponse<DataMigrationServiceList>
+    Response = ArmResponse<DataMigrationServiceList>,
+    Error = ApiError
   >;
 
   /**
@@ -137,10 +167,11 @@ interface DataMigrationServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_CheckStatus")
+  @summary("Check service health status")
   @tag("Service resource")
   @tag("Custom operation")
   @tag("POST")
-  checkStatus is ArmResourceActionSync<
+  checkStatus is DataMigrationServiceOps.ActionSync<
     DataMigrationService,
     void,
     ArmResponse<DataMigrationServiceStatusResponse>
@@ -151,33 +182,46 @@ interface DataMigrationServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_Start")
+  @summary("Start service")
   @tag("Service resource")
   @tag("Custom operation")
   @tag("POST")
-  start is ArmResourceActionAsync<DataMigrationService, void, OkResponse>;
+  start is DataMigrationServiceOps.ActionAsync<
+    DataMigrationService,
+    void,
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
+  >;
 
   /**
    * The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This action stops the service and the service cannot be used for data migration. The service owner won't be billed when the service is stopped.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_Stop")
+  @summary("Stop service")
   @tag("Service resource")
   @tag("Custom operation")
   @tag("POST")
-  stop is ArmResourceActionAsync<DataMigrationService, void, OkResponse>;
+  stop is DataMigrationServiceOps.ActionAsync<
+    DataMigrationService,
+    void,
+    void,
+    Response = OkResponse | ArmAcceptedLroResponse
+  >;
 
   /**
    * The services resource is the top-level resource that represents the Database Migration Service (classic). The skus action returns the list of SKUs that a service resource can be updated to.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_ListSkus")
+  @summary("Get compatible SKUs")
   @tag("Service resource")
   @tag("Standard operation")
   @tag("GET")
   @list
   @get
   @action("skus")
-  listSkus is ArmResourceActionSync<
+  listSkus is DataMigrationServiceOps.ActionSync<
     DataMigrationService,
     void,
     ArmResponse<ServiceSkuList>
@@ -188,10 +232,11 @@ interface DataMigrationServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Services_CheckChildrenNameAvailability")
+  @summary("Check nested resource name validity and availability")
   @tag("Custom operation")
   @tag("POST")
   @action("checkNameAvailability")
-  checkChildrenNameAvailability is ArmResourceActionSync<
+  checkChildrenNameAvailability is DataMigrationServiceOps.ActionSync<
     DataMigrationService,
     NameAvailabilityRequest,
     ArmResponse<NameAvailabilityResponse>

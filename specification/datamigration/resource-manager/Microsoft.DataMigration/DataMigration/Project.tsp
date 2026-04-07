@@ -31,40 +31,81 @@ model Project
   etag?: string;
 }
 
+alias ProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** Name of the resource group */
+    @path
+    @segment("resourceGroups")
+    @key
+    groupName: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the service */
+    @path
+    @segment("services")
+    @key
+    serviceName: string;
+  },
+  {
+    /** Name of the project */
+    @path
+    @segment("projects")
+    @key
+    projectName: string;
+  },
+  ApiError
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface Projects {
   /**
    * The project resource is a nested resource representing a stored migration project. The GET method retrieves information about a project.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Projects_Get")
+  @summary("Get project information")
   @tag("Project resource")
   @tag("Standard operation")
   @tag("GET")
-  get is ArmResourceRead<Project>;
+  get is ProjectOps.Read<Project>;
 
   /**
    * The project resource is a nested resource representing a stored migration project. The PUT method creates a new project or updates an existing one.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Projects_CreateOrUpdate")
+  @summary("Create or update project")
   @tag("Project resource")
   @tag("Standard operation")
   @tag("PUT")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<Project>;
+  createOrUpdate is ProjectOps.CreateOrUpdateSync<Project>;
 
   /**
    * The project resource is a nested resource representing a stored migration project. The PATCH method updates an existing project.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Projects_Update")
+  @summary("Update project")
   @tag("Project resource")
   @tag("Standard operation")
   @tag("PATCH")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<Project, PatchModel = Project>;
+  update is ProjectOps.CustomPatchSync<Project, PatchModel = Project>;
 
   /**
    * The project resource is a nested resource representing a stored migration project. The DELETE method deletes a project.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Projects_Delete")
+  @summary("Delete project")
   @tag("Project resource")
   @tag("Standard operation")
   @tag("DELETE")
-  delete is ArmResourceDeleteSync<
+  delete is ProjectOps.DeleteSync<
     Project,
     Parameters = {
       /**
@@ -78,10 +119,13 @@ interface Projects {
   /**
    * The project resource is a nested resource representing a stored migration project. This method returns a list of projects owned by a service resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Projects_List")
+  @summary("Get projects in a service")
   @tag("Project resource")
   @tag("Standard operation")
   @tag("GET")
-  list is ArmResourceListByParent<Project, Response = ArmResponse<ProjectList>>;
+  list is ProjectOps.List<Project, Response = ArmResponse<ProjectList>>;
 }
 
 @@doc(Project.name, "Name of the project");
