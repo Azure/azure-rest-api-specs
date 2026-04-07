@@ -66,12 +66,18 @@ interface Licenses {
   /**
    * The operation to get all licenses of a non-Azure machine
    */
-  listByResourceGroup is ArmResourceListByParent<License>;
+  listByResourceGroup is ArmResourceListByParent<
+    License,
+    Response = LicensesListResult
+  >;
 
   /**
    * The operation to get all licenses of a non-Azure machine
    */
-  listBySubscription is ArmListBySubscription<License>;
+  listBySubscription is ArmListBySubscription<
+    License,
+    Response = LicensesListResult
+  >;
 }
 
 @@doc(License.name, "The name of the license.");

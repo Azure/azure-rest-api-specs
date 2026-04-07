@@ -541,6 +541,9 @@
     },
     "/providers/microsoft.HybridCompute/operations": {
       "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           [
             "-",
@@ -550,17 +553,7 @@
             "+",
             "Operations"
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OperationListResult",
-                "__new": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/providers/microsoft.HybridCompute/osType/{osType}/agentVersions": {
@@ -598,17 +591,7 @@
             "+",
             "Gateways"
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/GatewaysListResult",
-                "__new": "#/definitions/GatewayListResult"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/licenses": {
@@ -622,17 +605,7 @@
             "+",
             "Licenses"
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/LicensesListResult",
-                "__new": "#/definitions/LicenseListResult"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}": {
@@ -810,17 +783,7 @@
             "+",
             "Gateways"
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/GatewaysListResult",
-                "__new": "#/definitions/GatewayListResult"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}": {
@@ -922,17 +885,7 @@
             "+",
             "Licenses"
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/LicensesListResult",
-                "__new": "#/definitions/LicenseListResult"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}": {
@@ -1309,17 +1262,7 @@
             "+",
             "LicenseProfiles"
           ]
-        ],
-        "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/LicenseProfilesListResult",
-                "__new": "#/definitions/LicenseProfileListResult"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/networkProfile": {
@@ -1587,9 +1530,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1632,9 +1578,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1690,9 +1639,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1722,9 +1674,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -1751,122 +1706,6 @@
       "additionalProperties": {
         "$ref": "#/definitions/ExtensionTargetProperties",
         "type": "object"
-      }
-    },
-    "GatewaysListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Gateway"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LicenseProfilesListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/LicenseProfile"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LicensesListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/License"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "OperationListResult__deleted": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationValue"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "OperationValue__deleted": {
-      "type": "object",
-      "properties": {
-        "origin": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "$ref": "#/definitions/OperationValueDisplay"
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationValueDisplay__deleted": {
-      "type": "object",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "readOnly": true
-        },
-        "resource": {
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true
-        },
-        "provider": {
-          "type": "string",
-          "readOnly": true
-        }
       }
     },
     "PrivateLinkScopesResource__deleted": {
@@ -1904,102 +1743,6 @@
     },
     "TargetVersion__deleted": {
       "type": "string"
-    },
-    "Azure.ResourceManager.ArmResponse<MachineAssessPatchesResult>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/MachineAssessPatchesResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<MachineInstallPatchesResult>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/MachineInstallPatchesResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>__added": {
-      "type": "object",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "GatewayListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Gateway"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LicenseListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/License"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "LicenseProfileListResult__added": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/LicenseProfile"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "LicenseProfileMachineInstanceViewSoftwareAssurance__added": {
       "type": "object",
@@ -2201,9 +1944,6 @@
         }
       }
     },
-    "TypeSpec.Http.OkResponse__added": {
-      "type": "object"
-    },
     "AgentConfiguration": {
       "readOnly__deleted": true,
       "properties": {
@@ -2237,9 +1977,7 @@
       ],
       "properties": {
         "value": {
-          "x-ms-identifiers__deleted": [
-            "agentVersion"
-          ]
+          "readOnly__added": true
         }
       }
     },
@@ -2249,22 +1987,12 @@
     "ExtensionPublisherListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "ExtensionTypeListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "ExtensionValueListResult": {
       "description__added": "[Placeholder] Discription for page model",
@@ -2282,12 +2010,7 @@
     "ExtensionValueListResultV2": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "ExtensionValueV2": {
       "allOf": [
@@ -2326,24 +2049,6 @@
           }
         ]
       ]
-    },
-    "HybridComputePrivateLinkScopeProperties": {
-      "properties": {
-        "publicNetworkAccess": {
-          "enum": [
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "+",
-              "SecuredByPerimeter"
-            ]
-          ]
-        }
-      }
     },
     "HybridIdentityMetadata": {
       "properties": {
@@ -2474,20 +2179,6 @@
         }
       }
     },
-    "LinuxParameters": {
-      "properties": {
-        "classificationsToInclude": {
-          "items": {
-            "x-ms-enum": {
-              "name": {
-                "__old": "VMGuestPatchClassification_Linux",
-                "__new": "VMGuestPatchClassificationLinux"
-              }
-            }
-          }
-        }
-      }
-    },
     "Machine": {
       "properties": {
         "kind": {
@@ -2563,13 +2254,6 @@
         "value"
       ]
     },
-    "MachineInstallPatchesParameters": {
-      "properties": {
-        "maximumDuration": {
-          "format__added": "duration"
-        }
-      }
-    },
     "MachineProperties": {
       "properties": {
         "agentConfiguration": {
@@ -2611,11 +2295,8 @@
     },
     "MachineRunCommandProperties": {
       "properties": {
-        "asyncExecution": {
-          "default__deleted": false
-        },
         "runAsPassword": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -2647,10 +2328,20 @@
       }
     },
     "NetworkInterface": {
-      "readOnly__deleted": true
+      "readOnly__deleted": true,
+      "properties": {
+        "ipAddresses": {
+          "readOnly__added": true
+        }
+      }
     },
     "NetworkProfile": {
-      "readOnly__deleted": true
+      "readOnly__deleted": true,
+      "properties": {
+        "networkInterfaces": {
+          "readOnly__added": true
+        }
+      }
     },
     "NetworkSecurityPerimeterConfiguration": {
       "allOf__added": [
@@ -2772,24 +2463,6 @@
         }
       }
     },
-    "PrivateLinkScopeValidationDetails": {
-      "properties": {
-        "publicNetworkAccess": {
-          "enum": [
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "+",
-              "SecuredByPerimeter"
-            ]
-          ]
-        }
-      }
-    },
     "Processor": {
       "readOnly__deleted": true
     },
@@ -2801,26 +2474,6 @@
             "modelAsString": true
           },
           "x-nullable__added": false
-        },
-        "serviceExtensionPublicNetworkAccess": {
-          "enum": [
-            [
-              "-",
-              "Enabled"
-            ],
-            [
-              "-",
-              "Disabled"
-            ],
-            [
-              "+",
-              "enabled"
-            ],
-            [
-              "+",
-              "disabled"
-            ]
-          ]
         }
       }
     },
@@ -2832,24 +2485,15 @@
       "x-nullable__added": false
     },
     "StorageProfile": {
-      "readOnly__deleted": true
+      "readOnly__deleted": true,
+      "properties": {
+        "disks": {
+          "readOnly__added": true
+        }
+      }
     },
     "Subnet": {
       "readOnly__deleted": true
-    },
-    "WindowsParameters": {
-      "properties": {
-        "classificationsToInclude": {
-          "items": {
-            "x-ms-enum": {
-              "name": {
-                "__old": "VMGuestPatchClassification_Windows",
-                "__new": "VMGuestPatchClassificationWindows"
-              }
-            }
-          }
-        }
-      }
     }
   }
 }

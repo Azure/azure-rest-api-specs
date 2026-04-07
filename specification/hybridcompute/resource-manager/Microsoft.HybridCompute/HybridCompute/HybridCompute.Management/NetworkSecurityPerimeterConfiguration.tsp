@@ -44,7 +44,9 @@ interface NetworkSecurityPerimeterConfigurations {
   reconcileForPrivateLinkScope is ArmResourceActionAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>
+    ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmCombinedLroHeaders<FinalResult = NetworkSecurityPerimeterConfigurationReconcileResult>
   >;
 }
 

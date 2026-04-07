@@ -64,7 +64,10 @@ interface LicenseProfiles {
   /**
    * The operation to get all license profiles of a non-Azure machine
    */
-  list is ArmResourceListByParent<LicenseProfile>;
+  list is ArmResourceListByParent<
+    LicenseProfile,
+    Response = LicenseProfilesListResult
+  >;
 }
 
 @@doc(LicenseProfile.name, "");

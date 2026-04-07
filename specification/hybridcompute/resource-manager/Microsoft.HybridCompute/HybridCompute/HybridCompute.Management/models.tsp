@@ -727,7 +727,7 @@ union VMGuestPatchRebootSetting {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-union VMGuestPatchClassificationWindows {
+union VMGuestPatchClassification_Windows {
   string,
 
   /**
@@ -772,7 +772,7 @@ union VMGuestPatchClassificationWindows {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-union VMGuestPatchClassificationLinux {
+union VMGuestPatchClassification_Linux {
   string,
 
   /**
@@ -897,11 +897,6 @@ union PublicNetworkAccessType {
    * Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link.
    */
   Disabled: "Disabled",
-
-  /**
-   * Azure Arc agent communication with Azure Arc services over public (internet) is enforced by Network Security Perimeter (NSP)
-   */
-  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
@@ -920,12 +915,12 @@ union ServiceExtensionPublicNetworkAccess {
   /**
    * Allows Azure Arc Extension agents to communicate with Azure Arc services over both public (internet) and private endpoints.
    */
-  enabled: "enabled",
+  Enabled: "Enabled",
 
   /**
    * Does not allow Azure Arc Extension agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link.
    */
-  disabled: "disabled",
+  Disabled: "Disabled",
 }
 
 /**
@@ -1551,6 +1546,7 @@ model StorageProfile {
   /**
    * The disks on the machine.
    */
+  @visibility(Lifecycle.Read)
   disks?: Disk[];
 }
 
@@ -2035,6 +2031,7 @@ model NetworkProfile {
    * The list of network interfaces.
    */
   @identifiers(#[])
+  @visibility(Lifecycle.Read)
   networkInterfaces?: NetworkInterface[];
 }
 
@@ -2061,6 +2058,7 @@ model NetworkInterface {
    * The list of IP addresses in this interface.
    */
   @identifiers(#[])
+  @visibility(Lifecycle.Read)
   ipAddresses?: IpAddress[];
 }
 
@@ -2481,7 +2479,7 @@ model MachineInstallPatchesParameters {
   /**
    * Specifies the maximum amount of time that the operation will run. It must be an ISO 8601-compliant duration string such as PT4H (4 hours)
    */
-  maximumDuration: duration;
+  maximumDuration: string;
 
   /**
    * Defines when it is acceptable to reboot a VM during a software update operation.
@@ -2506,7 +2504,7 @@ model WindowsParameters {
   /**
    * The update classifications to select when installing patches for Windows.
    */
-  classificationsToInclude?: VMGuestPatchClassificationWindows[];
+  classificationsToInclude?: VMGuestPatchClassification_Windows[];
 
   /**
    * Kbs to include in the patch operation
@@ -2547,7 +2545,7 @@ model LinuxParameters {
   /**
    * The update classifications to select when installing patches for Linux.
    */
-  classificationsToInclude?: VMGuestPatchClassificationLinux[];
+  classificationsToInclude?: VMGuestPatchClassification_Linux[];
 
   /**
    * packages to include in the patch operation. Format: packageName_packageVersion
@@ -2857,6 +2855,18 @@ model ExtensionPublisher {
 }
 
 /**
+ * The List of Operations.
+ */
+model OperationListResult {
+  /**
+   * The list of operations.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: OperationValue[];
+}
+
+/**
  * Describes the properties of a Compute Operation value.
  */
 model OperationValue {
@@ -2937,7 +2947,7 @@ model MachineRunCommandProperties {
   /**
    * Optional. If set to true, provisioning will complete as soon as script starts and will not wait for script to complete.
    */
-  asyncExecution?: boolean;
+  asyncExecution?: boolean = false;
 
   /**
    * Specifies the user account on the machine when executing the run command.
@@ -2947,6 +2957,7 @@ model MachineRunCommandProperties {
   /**
    * Specifies the user account password on the machine when executing the run command.
    */
+  @secret
   runAsPassword?: string;
 
   /**
@@ -3844,3 +3855,13 @@ model GatewaysListResult is Azure.Core.Page<Gateway>;
 model MachineExtensionsListResult is Azure.Core.Page<MachineExtension>;
 
 model MachineRunCommandsListResult is Azure.Core.Page<MachineRunCommand>;
+
+model LicensesListResult is Azure.Core.Page<License>;
+
+model LicenseProfilesListResult is Azure.Core.Page<LicenseProfile>;
+
+@@visibility(AgentVersionsList.value, Lifecycle.Read);
+@@identifiers(AgentVersionsList.value, #["agentVersion"]);
+@@visibility(ExtensionPublisherListResult.value, Lifecycle.Read);
+@@visibility(ExtensionTypeListResult.value, Lifecycle.Read);
+@@visibility(ExtensionValueListResultV2.value, Lifecycle.Read);

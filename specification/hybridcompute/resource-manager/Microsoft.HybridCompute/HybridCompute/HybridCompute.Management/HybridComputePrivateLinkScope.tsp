@@ -58,7 +58,8 @@ interface HybridComputePrivateLinkScopes {
   @operationId("PrivateLinkScopes_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HybridComputePrivateLinkScope,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = HybridComputePrivateLinkScope> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

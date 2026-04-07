@@ -292,9 +292,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -308,9 +308,6 @@
           "List Hybrid Compute Provider Operations": {
             "$ref": "./examples/Operations_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -400,9 +397,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GatewayListResult"
+              "$ref": "#/definitions/GatewaysListResult"
             }
           },
           "default": {
@@ -439,9 +436,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LicenseListResult"
+              "$ref": "#/definitions/LicensesListResult"
             }
           },
           "default": {
@@ -1020,9 +1017,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GatewayListResult"
+              "$ref": "#/definitions/GatewaysListResult"
             }
           },
           "default": {
@@ -1310,9 +1307,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LicenseListResult"
+              "$ref": "#/definitions/LicensesListResult"
             }
           },
           "default": {
@@ -2031,7 +2028,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMachineAssessPatchesResult%3E"
+          "final-state-schema": "#/definitions/MachineAssessPatchesResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -2561,7 +2558,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CMachineInstallPatchesResult%3E"
+          "final-state-schema": "#/definitions/MachineInstallPatchesResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -2596,9 +2593,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/LicenseProfileListResult"
+              "$ref": "#/definitions/LicenseProfilesListResult"
             }
           },
           "default": {
@@ -3554,6 +3551,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3579,7 +3581,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-schema": "#/definitions/MachineExtensionUpgrade"
         },
         "x-ms-long-running-operation": true
       }
@@ -3821,6 +3823,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3848,7 +3855,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/HybridComputePrivateLinkScope"
         },
         "x-ms-long-running-operation": true
       }
@@ -4002,6 +4010,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4027,7 +4040,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CNetworkSecurityPerimeterConfigurationReconcileResult%3E"
+          "final-state-schema": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -4253,6 +4266,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4280,7 +4298,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
       }
@@ -4632,7 +4651,11 @@
           "description": "The AgentVersion items on this page",
           "items": {
             "$ref": "#/definitions/AgentVersion"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "agentVersion"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -4781,45 +4804,6 @@
           "readOnly": true
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<MachineAssessPatchesResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/MachineAssessPatchesResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<MachineInstallPatchesResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/MachineInstallPatchesResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<NetworkSecurityPerimeterConfigurationReconcileResult>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "CloudMetadata": {
       "type": "object",
@@ -5094,7 +5078,8 @@
           "description": "The ExtensionPublisher items on this page",
           "items": {
             "$ref": "#/definitions/ExtensionPublisher"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5139,7 +5124,8 @@
           "description": "The ExtensionType items on this page",
           "items": {
             "$ref": "#/definitions/ExtensionType"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5197,7 +5183,8 @@
           "description": "The ExtensionValueV2 items on this page",
           "items": {
             "$ref": "#/definitions/ExtensionValueV2"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -5374,27 +5361,6 @@
         }
       ]
     },
-    "GatewayListResult": {
-      "type": "object",
-      "description": "The response of a Gateway list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Gateway items on this page",
-          "items": {
-            "$ref": "#/definitions/Gateway"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "GatewayProperties": {
       "type": "object",
       "description": "Describes the properties of a Gateway Profile.",
@@ -5473,6 +5439,27 @@
           }
         }
       }
+    },
+    "GatewaysListResult": {
+      "type": "object",
+      "description": "Paged collection of Gateway items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Gateway items on this page",
+          "items": {
+            "$ref": "#/definitions/Gateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "HardwareProfile": {
       "type": "object",
@@ -5588,8 +5575,7 @@
           "default": "Disabled",
           "enum": [
             "Enabled",
-            "Disabled",
-            "SecuredByPerimeter"
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccessType",
@@ -5604,11 +5590,6 @@
                 "name": "Disabled",
                 "value": "Disabled",
                 "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
-              },
-              {
-                "name": "SecuredByPerimeter",
-                "value": "SecuredByPerimeter",
-                "description": "Azure Arc agent communication with Azure Arc services over public (internet) is enforced by Network Security Perimeter (NSP)"
               }
             ]
           }
@@ -5938,27 +5919,6 @@
         ]
       }
     },
-    "LicenseListResult": {
-      "type": "object",
-      "description": "The response of a License list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The License items on this page",
-          "items": {
-            "$ref": "#/definitions/License"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "LicenseProfile": {
       "type": "object",
       "description": "Describes a license profile in a hybrid machine.",
@@ -6066,27 +6026,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "LicenseProfileListResult": {
-      "type": "object",
-      "description": "The response of a LicenseProfile list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The LicenseProfile items on this page",
-          "items": {
-            "$ref": "#/definitions/LicenseProfile"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "LicenseProfileMachineInstanceView": {
       "type": "object",
@@ -6342,6 +6281,27 @@
         }
       }
     },
+    "LicenseProfilesListResult": {
+      "type": "object",
+      "description": "Paged collection of LicenseProfile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LicenseProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/LicenseProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LicenseProperties": {
       "type": "object",
       "description": "Describes the properties of a License Profile.",
@@ -6541,6 +6501,27 @@
         }
       }
     },
+    "LicensesListResult": {
+      "type": "object",
+      "description": "Paged collection of License items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The License items on this page",
+          "items": {
+            "$ref": "#/definitions/License"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LinuxParameters": {
       "type": "object",
       "description": "Input for InstallPatches on a Linux VM, as directly received by the API",
@@ -6549,7 +6530,7 @@
           "type": "array",
           "description": "The update classifications to select when installing patches for Linux.",
           "items": {
-            "$ref": "#/definitions/VMGuestPatchClassificationLinux"
+            "$ref": "#/definitions/VMGuestPatchClassification_Linux"
           }
         },
         "packageNameMasksToInclude": {
@@ -6867,7 +6848,6 @@
       "properties": {
         "maximumDuration": {
           "type": "string",
-          "format": "duration",
           "description": "Specifies the maximum amount of time that the operation will run. It must be an ISO 8601-compliant duration string such as PT4H (4 hours)"
         },
         "rebootSetting": {
@@ -7283,7 +7263,8 @@
         },
         "asyncExecution": {
           "type": "boolean",
-          "description": "Optional. If set to true, provisioning will complete as soon as script starts and will not wait for script to complete."
+          "description": "Optional. If set to true, provisioning will complete as soon as script starts and will not wait for script to complete.",
+          "default": false
         },
         "runAsUser": {
           "type": "string",
@@ -7291,7 +7272,9 @@
         },
         "runAsPassword": {
           "type": "string",
-          "description": "Specifies the user account password on the machine when executing the run command."
+          "format": "password",
+          "description": "Specifies the user account password on the machine when executing the run command.",
+          "x-ms-secret": true
         },
         "timeoutInSeconds": {
           "type": "integer",
@@ -7519,6 +7502,7 @@
           "items": {
             "$ref": "#/definitions/IpAddress"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       }
@@ -7533,6 +7517,7 @@
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       }
@@ -7716,6 +7701,71 @@
           "$ref": "#/definitions/PatchSettings",
           "description": "Specifies the patch settings.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "The List of Operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of operations.",
+          "items": {
+            "$ref": "#/definitions/OperationValue"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OperationValue": {
+      "type": "object",
+      "description": "Describes the properties of a Compute Operation value.",
+      "properties": {
+        "origin": {
+          "type": "string",
+          "description": "The origin of the compute operation.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the compute operation.",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationValueDisplay",
+          "description": "Display properties"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "This property indicates if the operation is an action or a data action",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationValueDisplay": {
+      "type": "object",
+      "description": "Describes the properties of a Hybrid Compute Operation Value Display.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The display name of the compute operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The display name of the resource the operation applies to.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the operation.",
+          "readOnly": true
+        },
+        "provider": {
+          "type": "string",
+          "description": "The resource provider for the operation.",
+          "readOnly": true
         }
       }
     },
@@ -8106,8 +8156,7 @@
           "default": "Disabled",
           "enum": [
             "Enabled",
-            "Disabled",
-            "SecuredByPerimeter"
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccessType",
@@ -8122,11 +8171,6 @@
                 "name": "Disabled",
                 "value": "Disabled",
                 "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
-              },
-              {
-                "name": "SecuredByPerimeter",
-                "value": "SecuredByPerimeter",
-                "description": "Azure Arc agent communication with Azure Arc services over public (internet) is enforced by Network Security Perimeter (NSP)"
               }
             ]
           }
@@ -8543,21 +8587,21 @@
       "type": "string",
       "description": "The network access policy to determine if the specified Azure Arc Extension can use public Azure Arc Extension service endpoints.",
       "enum": [
-        "enabled",
-        "disabled"
+        "Enabled",
+        "Disabled"
       ],
       "x-ms-enum": {
         "name": "ServiceExtensionPublicNetworkAccess",
         "modelAsString": true,
         "values": [
           {
-            "name": "enabled",
-            "value": "enabled",
+            "name": "Enabled",
+            "value": "Enabled",
             "description": "Allows Azure Arc Extension agents to communicate with Azure Arc services over both public (internet) and private endpoints."
           },
           {
-            "name": "disabled",
-            "value": "disabled",
+            "name": "Disabled",
+            "value": "Disabled",
             "description": "Does not allow Azure Arc Extension agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
           }
         ]
@@ -8732,7 +8776,8 @@
           "description": "The disks on the machine.",
           "items": {
             "$ref": "#/definitions/Disk"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -8759,11 +8804,7 @@
         }
       }
     },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
-    },
-    "VMGuestPatchClassificationLinux": {
+    "VMGuestPatchClassification_Linux": {
       "type": "string",
       "enum": [
         "Critical",
@@ -8771,7 +8812,7 @@
         "Other"
       ],
       "x-ms-enum": {
-        "name": "VMGuestPatchClassificationLinux",
+        "name": "VMGuestPatchClassification_Linux",
         "modelAsString": true,
         "values": [
           {
@@ -8792,7 +8833,7 @@
         ]
       }
     },
-    "VMGuestPatchClassificationWindows": {
+    "VMGuestPatchClassification_Windows": {
       "type": "string",
       "enum": [
         "Critical",
@@ -8805,7 +8846,7 @@
         "Updates"
       ],
       "x-ms-enum": {
-        "name": "VMGuestPatchClassificationWindows",
+        "name": "VMGuestPatchClassification_Windows",
         "modelAsString": true,
         "values": [
           {
@@ -8950,7 +8991,7 @@
           "type": "array",
           "description": "The update classifications to select when installing patches for Windows.",
           "items": {
-            "$ref": "#/definitions/VMGuestPatchClassificationWindows"
+            "$ref": "#/definitions/VMGuestPatchClassification_Windows"
           }
         },
         "kbNumbersToInclude": {

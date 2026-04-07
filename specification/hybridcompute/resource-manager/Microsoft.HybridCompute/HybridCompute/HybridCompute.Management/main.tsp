@@ -53,6 +53,7 @@ enum Versions {
   v2025_09_16_preview: "2025-09-16-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<OperationListResult> {}
 
 @@doc(Operations.list, "Gets a list of hybrid compute operations.");

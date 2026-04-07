@@ -158,7 +158,7 @@ interface Machines {
   assessPatches is MachineOps.ActionAsync<
     Machine,
     void,
-    ArmResponse<MachineAssessPatchesResult>
+    MachineAssessPatchesResult
   >;
 
   /**
@@ -167,7 +167,7 @@ interface Machines {
   installPatches is MachineOps.ActionAsync<
     Machine,
     MachineInstallPatchesParameters,
-    ArmResponse<MachineInstallPatchesResult>
+    MachineInstallPatchesResult
   >;
 
   /**
@@ -178,7 +178,9 @@ interface Machines {
   upgradeExtensions is ArmResourceActionAsync<
     Machine,
     MachineExtensionUpgrade,
-    OkResponse
+    OkResponse,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmCombinedLroHeaders<FinalResult = MachineExtensionUpgrade>
   >;
 
   /**

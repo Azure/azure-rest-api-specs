@@ -56,12 +56,18 @@ interface Gateways {
   /**
    * The operation to get all gateways of a non-Azure machine
    */
-  listByResourceGroup is ArmResourceListByParent<Gateway>;
+  listByResourceGroup is ArmResourceListByParent<
+    Gateway,
+    Response = GatewaysListResult
+  >;
 
   /**
    * The operation to get all gateways of a non-Azure machine
    */
-  listBySubscription is ArmListBySubscription<Gateway>;
+  listBySubscription is ArmListBySubscription<
+    Gateway,
+    Response = GatewaysListResult
+  >;
 }
 
 @@doc(Gateway.name, "The name of the Gateway.");
