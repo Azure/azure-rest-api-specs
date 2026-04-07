@@ -22,7 +22,7 @@ namespace PolicyInsightsManagementClient;
 
 @@clientName(PolicyInsightsManagementClient,
   "PolicyInsightsClient",
-  "javascript,python"
+  "javascript,python,java"
 );
 
 /**
