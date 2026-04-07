@@ -238,6 +238,32 @@ using Azure.AI.Projects;
 @@clientName(Skills.updateSkill, "update");
 @@clientName(Skills.deleteSkill, "delete");
 
+// --------------------------------------------------------------------------------
+// AgentInvocations sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentInvocations.getAgentInvocationOpenApiSpec, "get_open_api_spec");
+@@clientName(AgentInvocations.createAgentInvocation, "create");
+@@clientName(AgentInvocations.getAgentInvocation, "get");
+@@clientName(AgentInvocations.cancelAgentInvocation, "cancel");
+
+// --------------------------------------------------------------------------------
+// AgentSessionFiles sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentSessionFiles.uploadSessionFile, "upload");
+@@clientName(AgentSessionFiles.downloadSessionFile, "download");
+@@clientName(AgentSessionFiles.listSessionFiles, "list");
+@@clientName(AgentSessionFiles.deleteSessionFile, "delete");
+
+// --------------------------------------------------------------------------------
+// ManagedAgentIdentityBlueprints sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update");
+@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get");
+@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete");
+@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
