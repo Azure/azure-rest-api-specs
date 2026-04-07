@@ -22,3 +22,8 @@ using Microsoft.CleanRoom;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConsortiumViewContract.properties,
   "autorest"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AddCollaboratorInput.collaborator,
+  "autorest"
+);
