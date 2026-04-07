@@ -27,14 +27,14 @@ using Microsoft.Resources;
 );
 @@clientName(SpecificResources.update::parameters.properties, "parameters");
 
-// @@clientLocation(TagsResources.getAtScope, "Tags");
-// @@clientLocation(TagsResources.createOrUpdateAtScope, "Tags");
+@@clientLocation(TagsResources.getAtScope, "Tags");
+@@clientLocation(TagsResources.createOrUpdateAtScope, "Tags");
 @@clientName(TagsResources.createOrUpdateAtScope::parameters.resource,
   "parameters"
 );
-// @@clientLocation(TagsResources.updateAtScope, "Tags");
+@@clientLocation(TagsResources.updateAtScope, "Tags");
 @@clientName(TagsResources.updateAtScope::parameters.properties, "parameters");
-// @@clientLocation(TagsResources.deleteAtScope, "Tags");
+@@clientLocation(TagsResources.deleteAtScope, "Tags");
 
 @@clientLocation(ProvidersOperationGroup.listAtTenantScope, "Providers");
 @@clientLocation(ProvidersOperationGroup.unregister, "Providers");

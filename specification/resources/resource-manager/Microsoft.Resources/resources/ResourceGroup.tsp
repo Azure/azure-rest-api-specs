@@ -161,6 +161,7 @@ interface ResourceGroups {
     ResourceGroup,
     ResourcesMoveInfo,
     NoContentResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void>,
     Provider = {},
     Error = CloudError
   >;
@@ -179,6 +180,7 @@ interface ResourceGroups {
     ResourceGroup,
     ResourcesMoveInfo,
     NoContentResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void>,
     Provider = {},
     Error = CloudError
   >;

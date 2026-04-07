@@ -267,7 +267,32 @@ model CloudError {
   /**
    * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: ErrorResponse;
+}
+
+/** Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.) */
+model ErrorResponse {
+  /** The error code. */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /** The error message. */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /** The error target. */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /** The error details. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["message", "target"])
+  details?: ErrorResponse[];
+
+  /** The error additional info. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  additionalInfo?: ErrorAdditionalInfo[];
 }
 
 /**
