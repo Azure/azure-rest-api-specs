@@ -451,3 +451,10 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
   },
   AcceptedResponse & TJob
 >;
+
+// ============================================================================
+// Types and traits shared by multiple service patterns
+// ============================================================================
+
+@encode(DateTimeKnownEncoding.unixTimestamp, int32)
+scalar FoundryTimestamp extends utcDateTime;
