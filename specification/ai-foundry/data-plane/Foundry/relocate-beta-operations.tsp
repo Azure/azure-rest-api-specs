@@ -88,20 +88,6 @@ interface Skills {}
 @@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
 
-interface AgentInvocations {}
-@@clientLocation(Azure.AI.Projects.AgentInvocations.getAgentInvocationOpenApiSpec,
-  AgentInvocations
-);
-@@clientLocation(Azure.AI.Projects.AgentInvocations.createAgentInvocation,
-  AgentInvocations
-);
-@@clientLocation(Azure.AI.Projects.AgentInvocations.getAgentInvocation,
-  AgentInvocations
-);
-@@clientLocation(Azure.AI.Projects.AgentInvocations.cancelAgentInvocation,
-  AgentInvocations
-);
-
 interface AgentSessionFiles {}
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile,
   AgentSessionFiles
