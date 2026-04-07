@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.useDependency(
-  DocumentTranslation.Versions.v2024_11_01_preview
+  DocumentTranslation.Versions.v2025_12_01_preview
 )
 namespace ClientCustomizations;
 
@@ -172,8 +172,23 @@ interface SingleDocumentTranslationClient {
   "python"
 );
 
+@@clientName(DocumentTranslation.DocumentStatus.imageCharged,
+  "images_charged",
+  "python"
+);
+
+@@clientName(DocumentTranslation.DocumentStatus.imageCharacterDetected,
+  "image_characters_detected",
+  "python"
+);
+
 @@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
   "total_characters_charged",
+  "python"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.totalImageCharged,
+  "total_images_charged",
   "python"
 );
 
@@ -271,5 +286,10 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
   "totalCharactersChargedCount",
+  "java"
+);
+
+@@clientName(DocumentTranslation.StatusSummary.totalImageCharged,
+  "totalImagesChargedCount",
   "java"
 );

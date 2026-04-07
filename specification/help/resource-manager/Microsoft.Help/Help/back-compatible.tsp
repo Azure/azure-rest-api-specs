@@ -106,10 +106,11 @@ using Microsoft.Help;
 @@clientLocation(DiscoverySolutionOperationGroup.list, "DiscoverySolution");
 @@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutions,
   "DiscoverySolutionNLP",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
-  "DiscoverySolutionNLP"
+  "DiscoverySolutionNLP",
+  "!java"
 );
 @@clientLocation(DiagnosticResources.get, "Diagnostics", "!csharp");
 @@clientLocation(DiagnosticResources.create, "Diagnostics", "!csharp");

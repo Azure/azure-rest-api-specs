@@ -1,5 +1,6 @@
 import "./common.tsp";
 using TypeSpec.Versioning;
+using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ManagedNetworkFabric;
 
@@ -53,10 +54,9 @@ model RoutePolicyPatchableProperties {
   statements?: RoutePolicyStatementPatchProperties[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Route Policy Statement properties.")
-model RoutePolicyStatementProperties {
-  ...AnnotationResource;
-
+model RoutePolicyStatementProperties extends AnnotationResource {
   @doc("Sequence to insert to/delete from existing route.")
   @maxValue(4294967295)
   @minValue(1)
@@ -69,10 +69,9 @@ model RoutePolicyStatementProperties {
   action: StatementActionProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Route Policy Statement properties.")
-model RoutePolicyStatementPatchProperties {
-  ...AnnotationResource;
-
+model RoutePolicyStatementPatchProperties extends AnnotationResource {
   @doc("Sequence to insert to/delete from existing route.")
   @maxValue(4294967295)
   @minValue(1)
@@ -192,10 +191,9 @@ model ActionIpExtendedCommunityProperties {
 model ActionIpExtendedCommunityPatchProperties
   is ActionIpExtendedCommunityProperties;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Route Policy patch resource definition.")
-model RoutePolicyPatch {
-  ...TagsUpdate;
-
+model RoutePolicyPatch extends TagsUpdate {
   @doc("The RoutePolicy patchable properties.")
   properties?: RoutePolicyPatchableProperties;
 }
