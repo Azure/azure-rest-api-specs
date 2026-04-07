@@ -128,7 +128,7 @@ interface RuntimeRegistrationOperationGroup {
        * Device registration request.
        */
       @bodyRoot
-      body: DeviceRegistration;
+      deviceRegistration: DeviceRegistration;
     },
     RegistrationOperationStatus200 | RegistrationOperationStatus202,
     {},

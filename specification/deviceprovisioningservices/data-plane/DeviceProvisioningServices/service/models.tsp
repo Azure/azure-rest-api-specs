@@ -194,6 +194,7 @@ model IndividualEnrollment {
    * characters plus certain special characters : . _ -. No special characters
    * allowed at start or end.
    */
+  @minLength(1)
   registrationId: string;
 
   /**
@@ -379,7 +380,7 @@ model DeviceRegistrationState {
  * Represents a collection of properties within a Twin
  */
 model TwinCollection {
-  ...Record<unknown>;
+  ...Record<{}>;
 
   /**
    * Version of the TwinCollection
@@ -597,6 +598,7 @@ model CustomAllocationDefinition {
   /**
    * The webhook URL used for allocation requests.
    */
+  @minLength(1)
   webhookUrl: string;
 
   /**
@@ -604,6 +606,7 @@ model CustomAllocationDefinition {
    * IndividualEnrollment) sent in the custom allocation request. Minimum supported
    * version: "2018-09-01-preview".
    */
+  @minLength(1)
   apiVersion: string;
 }
 
@@ -657,6 +660,7 @@ model EnrollmentGroup {
   /**
    * Enrollment Group ID.
    */
+  @minLength(1)
   enrollmentGroupId: string;
 
   /**
@@ -784,6 +788,7 @@ model BulkEnrollmentOperationError {
    * characters plus certain special characters : . _ -. No special characters
    * allowed at start or end.
    */
+  @minLength(1)
   registrationId: string;
 
   /**
@@ -794,6 +799,7 @@ model BulkEnrollmentOperationError {
   /**
    * Error status.
    */
+  @minLength(1)
   errorStatus: string;
 }
 
@@ -834,6 +840,7 @@ model BulkEnrollmentGroupOperationError {
   /**
    * Enrollment group id.
    */
+  @minLength(1)
   enrollmentGroupId: string;
 
   /**
@@ -844,5 +851,6 @@ model BulkEnrollmentGroupOperationError {
   /**
    * Error status.
    */
+  @minLength(1)
   errorStatus: string;
 }
