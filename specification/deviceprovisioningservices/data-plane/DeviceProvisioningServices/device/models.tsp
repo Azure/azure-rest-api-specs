@@ -79,7 +79,10 @@ union AssignedDeviceSubstatus {
  * 200 OK response for LRO operations returning RegistrationOperationStatus.
  */
 model RegistrationOperationStatus200 {
+  /** HTTP 200 status code. */
   @statusCode _: 200;
+
+  /** The registration operation status. */
   @body body: RegistrationOperationStatus;
 }
 
@@ -87,6 +90,7 @@ model RegistrationOperationStatus200 {
  * 202 Accepted response for LRO operations returning RegistrationOperationStatus.
  */
 model RegistrationOperationStatus202 {
+  /** HTTP 202 status code. */
   @statusCode _: 202;
 
   /** The retry interval in seconds. */
@@ -97,6 +101,7 @@ model RegistrationOperationStatus202 {
   @header("Location")
   location?: string;
 
+  /** The registration operation status. */
   @body body: RegistrationOperationStatus;
 }
 
@@ -215,6 +220,7 @@ model DeviceRegistrationResult {
    * Any object
    */
   @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "payload is an open JSON object per API contract"
   payload?: Record<unknown>;
 
   /**
@@ -249,6 +255,7 @@ model X509RegistrationResult {
    */
   certificateInfo?: X509CertificateInfo;
 
+  /** Enrollment group ID. */
   enrollmentGroupId?: string;
 
   /**
@@ -261,13 +268,28 @@ model X509RegistrationResult {
  * X509 certificate info.
  */
 model X509CertificateInfo {
+  /** Certificate subject name. */
   subjectName: string;
+
+  /** SHA-1 thumbprint of the certificate. */
   sha1Thumbprint: string;
+
+  /** SHA-256 thumbprint of the certificate. */
   sha256Thumbprint: string;
+
+  /** Certificate issuer name. */
   issuerName: string;
+
+  /** Certificate validity start date (UTC). */
   notBeforeUtc: utcDateTime;
+
+  /** Certificate expiry date (UTC). */
   notAfterUtc: utcDateTime;
+
+  /** Certificate serial number. */
   serialNumber: string;
+
+  /** Certificate version. */
   version: int32;
 }
 
@@ -275,6 +297,7 @@ model X509CertificateInfo {
  * Registration result returned when using SymmetricKey attestation.
  */
 model SymmetricKeyRegistrationResult {
+  /** Enrollment group ID. */
   enrollmentGroupId?: string;
 }
 
@@ -288,8 +311,13 @@ model ProvisioningServiceErrorDetails {
   @doc("The error code for specific error that occurred.")
   xMsErrorCode?: string;
 
+  /** Numeric error code. */
   errorCode?: int32;
+
+  /** Error tracking ID. */
   trackingId?: string;
+
+  /** Error message. */
   message?: string;
 
   /**
@@ -297,6 +325,7 @@ model ProvisioningServiceErrorDetails {
    */
   info?: Record<string>;
 
+  /** Error timestamp (UTC). */
   timestampUtc?: utcDateTime;
 }
 
@@ -329,6 +358,7 @@ model DeviceRegistration {
   /**
    * Any object
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "payload is an open JSON object per API contract"
   payload?: Record<unknown>;
 }
 
@@ -336,6 +366,9 @@ model DeviceRegistration {
  * Attestation via TPM.
  */
 model TpmAttestation {
+  /** TPM endorsement key. */
   endorsementKey: string;
+
+  /** TPM storage root key. */
   storageRootKey?: string;
 }

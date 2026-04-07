@@ -46,6 +46,7 @@
           {
             "name": "bulkOperation",
             "in": "body",
+            "description": "The bulk enrollment group operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BulkEnrollmentGroupOperation"
@@ -382,6 +383,7 @@
           {
             "name": "bulkOperation",
             "in": "body",
+            "description": "The bulk enrollment operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/BulkEnrollmentOperation"
@@ -1570,13 +1572,16 @@
       "properties": {
         "errorCode": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Error code for the operation."
         },
         "trackingId": {
-          "type": "string"
+          "type": "string",
+          "description": "Tracking ID for the error."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Human-readable error message."
         },
         "info": {
           "type": "object",
@@ -1587,7 +1592,8 @@
         },
         "timestampUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "UTC timestamp of the error."
         }
       }
     },
@@ -1617,9 +1623,11 @@
     },
     "QuerySpecification": {
       "type": "object",
+      "description": "Query specification for enrollment queries.",
       "properties": {
         "query": {
-          "type": "string"
+          "type": "string",
+          "description": "OData query string."
         }
       },
       "required": [
@@ -1665,10 +1673,12 @@
       "description": "Attestation via TPM.",
       "properties": {
         "endorsementKey": {
-          "type": "string"
+          "type": "string",
+          "description": "TPM endorsement key."
         },
         "storageRootKey": {
-          "type": "string"
+          "type": "string",
+          "description": "TPM storage root key."
         }
       },
       "required": [
@@ -1721,10 +1731,12 @@
       "description": "Primary and secondary CA references.",
       "properties": {
         "primary": {
-          "type": "string"
+          "type": "string",
+          "description": "Primary CA reference."
         },
         "secondary": {
-          "type": "string"
+          "type": "string",
+          "description": "Secondary CA reference."
         }
       }
     },
@@ -1733,31 +1745,39 @@
       "description": "X509 certificate info.",
       "properties": {
         "subjectName": {
-          "type": "string"
+          "type": "string",
+          "description": "Subject name of the certificate."
         },
         "sha1Thumbprint": {
-          "type": "string"
+          "type": "string",
+          "description": "SHA-1 thumbprint of the certificate."
         },
         "sha256Thumbprint": {
-          "type": "string"
+          "type": "string",
+          "description": "SHA-256 thumbprint of the certificate."
         },
         "issuerName": {
-          "type": "string"
+          "type": "string",
+          "description": "Issuer name of the certificate."
         },
         "notBeforeUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Certificate validity start (UTC)."
         },
         "notAfterUtc": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "Certificate validity end (UTC)."
         },
         "serialNumber": {
-          "type": "string"
+          "type": "string",
+          "description": "Serial number of the certificate."
         },
         "version": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Version of the certificate."
         }
       },
       "required": [
@@ -1776,7 +1796,8 @@
       "description": "Certificate and Certificate info",
       "properties": {
         "certificate": {
-          "type": "string"
+          "type": "string",
+          "description": "PEM-formatted certificate string."
         },
         "info": {
           "$ref": "#/definitions/X509CertificateInfo",

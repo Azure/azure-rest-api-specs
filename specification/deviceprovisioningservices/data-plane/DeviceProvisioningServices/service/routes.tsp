@@ -13,7 +13,10 @@ interface IndividualEnrollmentOperationGroup {
   /**
    * Get a device enrollment record.
    */
-  @summary("Get a device enrollment record.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Get a device enrollment record.")
   @operationId("IndividualEnrollment_Get")
   @route("/enrollments/{id}")
   @get
@@ -36,7 +39,10 @@ interface IndividualEnrollmentOperationGroup {
   /**
    * Create or update a device enrollment record.
    */
-  @summary("Create or update a device enrollment record.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Create or update a device enrollment record.")
   @operationId("IndividualEnrollment_CreateOrUpdate")
   @route("/enrollments/{id}")
   @put
@@ -54,6 +60,7 @@ interface IndividualEnrollmentOperationGroup {
       /**
        * The ETag of the enrollment record.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
       @header
       `If-Match`?: string;
 
@@ -71,7 +78,10 @@ interface IndividualEnrollmentOperationGroup {
   /**
    * Delete a device enrollment record.
    */
-  @summary("Delete a device enrollment record.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Delete a device enrollment record.")
   @operationId("IndividualEnrollment_Delete")
   @route("/enrollments/{id}")
   @delete
@@ -89,6 +99,7 @@ interface IndividualEnrollmentOperationGroup {
       /**
        * The ETag of the enrollment record.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
       @header
       `If-Match`?: string;
     },
@@ -100,7 +111,10 @@ interface IndividualEnrollmentOperationGroup {
   /**
    * Query the device enrollment records.
    */
-  @summary("Query the device enrollment records.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Query the device enrollment records.")
   @operationId("IndividualEnrollment_Query")
   @route("/enrollments/query")
   @post
@@ -109,12 +123,14 @@ interface IndividualEnrollmentOperationGroup {
       /**
        * Page size
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-max-item-count is a standard Azure header"
       @header
       `x-ms-max-item-count`?: int32;
 
       /**
        * Continuation token
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-continuation is a standard Azure header"
       @header
       `x-ms-continuation`?: string;
 
@@ -132,7 +148,10 @@ interface IndividualEnrollmentOperationGroup {
   /**
    * Get the attestation mechanism in the device enrollment record.
    */
-  @summary("Get the attestation mechanism in the device enrollment record.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Get the attestation mechanism in the device enrollment record.")
   @operationId("IndividualEnrollment_GetAttestationMechanism")
   @route("/enrollments/{id}/attestationmechanism")
   @post
@@ -155,12 +174,16 @@ interface IndividualEnrollmentOperationGroup {
   /**
    * Bulk device enrollment operation with maximum of 10 enrollments.
    */
-  @summary("Bulk device enrollment operation with maximum of 10 enrollments.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Bulk device enrollment operation with maximum of 10 enrollments.")
   @operationId("IndividualEnrollment_RunBulkOperation")
   @route("/enrollments")
   @post
   runBulkOperation is Azure.Core.Foundations.Operation<
     {
+      /** The bulk enrollment operation. */
       @bodyRoot bulkOperation: BulkEnrollmentOperation;
     },
     BulkEnrollmentOperationResult,
@@ -173,7 +196,10 @@ interface EnrollmentGroupOperationGroup {
   /**
    * Get a device enrollment group.
    */
-  @summary("Get a device enrollment group.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Get a device enrollment group.")
   @operationId("EnrollmentGroup_Get")
   @route("/enrollmentGroups/{id}")
   @get
@@ -193,7 +219,10 @@ interface EnrollmentGroupOperationGroup {
   /**
    * Create or update a device enrollment group.
    */
-  @summary("Create or update a device enrollment group.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Create or update a device enrollment group.")
   @operationId("EnrollmentGroup_CreateOrUpdate")
   @route("/enrollmentGroups/{id}")
   @put
@@ -208,6 +237,7 @@ interface EnrollmentGroupOperationGroup {
       /**
        * The ETag of the enrollment record.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
       @header
       `If-Match`?: string;
 
@@ -225,7 +255,10 @@ interface EnrollmentGroupOperationGroup {
   /**
    * Delete a device enrollment group.
    */
-  @summary("Delete a device enrollment group.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Delete a device enrollment group.")
   @operationId("EnrollmentGroup_Delete")
   @route("/enrollmentGroups/{id}")
   @delete
@@ -240,6 +273,7 @@ interface EnrollmentGroupOperationGroup {
       /**
        * The ETag of the enrollment group record.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
       @header
       `If-Match`?: string;
     },
@@ -251,7 +285,10 @@ interface EnrollmentGroupOperationGroup {
   /**
    * Query the device enrollment groups.
    */
-  @summary("Query the device enrollment groups.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Query the device enrollment groups.")
   @operationId("EnrollmentGroup_Query")
   @route("/enrollmentGroups/query")
   @post
@@ -260,12 +297,14 @@ interface EnrollmentGroupOperationGroup {
       /**
        * Page size
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-max-item-count is a standard Azure header"
       @header
       `x-ms-max-item-count`?: int32;
 
       /**
        * Continuation token
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-continuation is a standard Azure header"
       @header
       `x-ms-continuation`?: string;
 
@@ -283,7 +322,10 @@ interface EnrollmentGroupOperationGroup {
   /**
    * Get the attestation mechanism in the device enrollment group record.
    */
-  @summary("Get the attestation mechanism in the device enrollment group record.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Get the attestation mechanism in the device enrollment group record.")
   @operationId("EnrollmentGroup_GetAttestationMechanism")
   @route("/enrollmentGroups/{id}/attestationmechanism")
   @post
@@ -303,12 +345,16 @@ interface EnrollmentGroupOperationGroup {
   /**
    * Bulk device enrollment group operation with maximum of 10 groups.
    */
-  @summary("Bulk device enrollment group operation with maximum of 10 groups.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Bulk device enrollment group operation with maximum of 10 groups.")
   @operationId("EnrollmentGroup_RunBulkOperation")
   @route("/enrollmentGroups")
   @post
   runBulkOperation is Azure.Core.Foundations.Operation<
     {
+      /** The bulk enrollment group operation. */
       @bodyRoot bulkOperation: BulkEnrollmentGroupOperation;
     },
     BulkEnrollmentGroupOperationResult,
@@ -321,7 +367,10 @@ interface DeviceRegistrationStateOperationGroup {
   /**
    * Gets the device registration state.
    */
-  @summary("Gets the device registration state.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Gets the device registration state.")
   @operationId("DeviceRegistrationState_Get")
   @route("/registrations/{id}")
   @get
@@ -341,7 +390,10 @@ interface DeviceRegistrationStateOperationGroup {
   /**
    * Deletes the device registration
    */
-  @summary("Deletes the device registration")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Deletes the device registration")
   @operationId("DeviceRegistrationState_Delete")
   @route("/registrations/{id}")
   @delete
@@ -356,6 +408,7 @@ interface DeviceRegistrationStateOperationGroup {
       /**
        * The ETag of the registration status record.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: HTTP header name is a standard HTTP header"
       @header
       `If-Match`?: string;
     },
@@ -367,7 +420,10 @@ interface DeviceRegistrationStateOperationGroup {
   /**
    * Gets the registration state of devices in this enrollmentGroup.
    */
-  @summary("Gets the registration state of devices in this enrollmentGroup.")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+    @summary("Gets the registration state of devices in this enrollmentGroup.")
   @operationId("DeviceRegistrationState_Query")
   @route("/registrations/{id}/query")
   @post
@@ -382,12 +438,14 @@ interface DeviceRegistrationStateOperationGroup {
       /**
        * pageSize
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-max-item-count is a standard Azure header"
       @header
       `x-ms-max-item-count`?: int32;
 
       /**
        * continuation token
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-continuation is a standard Azure header"
       @header
       `x-ms-continuation`?: string;
     },
