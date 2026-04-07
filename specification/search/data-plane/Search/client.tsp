@@ -495,7 +495,10 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@access(SearchDocumentsResult, Access.internal, "csharp");
 @@access(SearchDocumentsResult, Access.internal, "python");
+@@access(Search.SearchDocumentsResult.nextLink, Access.internal, "java");
+@@access(Search.SearchDocumentsResult.nextPageParameters, Access.internal, "java");
 @@access(DebugInfo, Access.internal, "python");
+@@access(DebugInfo, Access.internal, "java");
 @@access(AutocompleteMode, Access.public, "python");
 @@access(IndexActionType, Access.public, "python");
 @@access(QueryAnswerType, Access.public, "python");
@@ -3198,7 +3201,7 @@ namespace KnowledgeBaseRetrievalClient {
   "python"
 );
 @@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
-  "VIT_LARGE",
+  "OPEN_AI_CLIP_IMAGE_TEXT_EMBEDDINGS_VIT_LARGE_PATCH14_336",
   "java"
 );
 @@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
@@ -3206,7 +3209,7 @@ namespace KnowledgeBaseRetrievalClient {
   "python"
 );
 @@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
-  "VIT_BASE",
+  "FACEBOOK_DINO_V2_IMAGE_EMBEDDINGS_VIT_BASE",
   "java"
 );
 @@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
@@ -3214,15 +3217,15 @@ namespace KnowledgeBaseRetrievalClient {
   "python"
 );
 @@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
-  "VIT_GIANT",
+  "FACEBOOK_DINO_V2_IMAGE_EMBEDDINGS_VIT_GIANT",
   "java"
 );
 @@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3English,
-  "V3_ENGLISH",
+  "COHERE_EMBED_V3_ENGLISH",
   "java"
 );
 @@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3Multilingual,
-  "V3_MULTILINGUAL",
+  "COHERE_EMBED_V3_MULTILINGUAL",
   "java"
 );
 @@alternateType(Search.SearchOptions.select, string, "javascript");
@@ -3281,7 +3284,7 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBases"
 );
 
-@@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
+@@clientName(Search.KnowledgeBaseRetrievalResponse,
   "KnowledgeBaseRetrievalResult",
   "java"
 );
@@ -3409,11 +3412,19 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebases",
   "java"
 );
+@@alternateType(Search.KnowledgeSourceStatistics.averageSynchronizationDuration,
+  duration,
+  "java"
+);
 @@clientNamespace(Search.KnowledgeSourceStatus,
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeSourceStatus,
   "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@alternateType(Search.KnowledgeSourceStatus.synchronizationInterval,
+  duration,
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalIntent,
