@@ -1,0 +1,370 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Device Registry Service",
+    "version": "2026-11-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/deviceregistry",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Device Registry endpoints (protocol and hostname).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://deviceregistry.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://deviceregistry.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Devices"
+    },
+    {
+      "name": "Groups"
+    }
+  ],
+  "paths": {
+    "/namespaces/{namespaceUuid}/devices:getDeviceByUuid": {
+      "post": {
+        "operationId": "Devices_GetDeviceByUuid",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Look up a device by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetDeviceByUuidRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a device by UUID": {
+            "$ref": "./examples/Devices_GetDeviceByUuid.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/groups:getGroupByUuid": {
+      "post": {
+        "operationId": "Groups_GetGroupByUuid",
+        "tags": [
+          "Groups"
+        ],
+        "description": "Look up a group by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetGroupByUuidRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a group by UUID": {
+            "$ref": "./examples/Groups_GetGroupByUuid.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "ConnectivityStatus": {
+      "type": "string",
+      "description": "The connectivity status of a device.",
+      "enum": [
+        "Connected",
+        "Disconnected",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectivityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "The device is connected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "The device is disconnected."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The connectivity status of the device is unknown."
+          }
+        ]
+      }
+    },
+    "Device": {
+      "type": "object",
+      "description": "A device resource.",
+      "properties": {
+        "deviceName": {
+          "type": "string",
+          "description": "The name of the device.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceName"
+      ]
+    },
+    "GetConnectivityStatusResult": {
+      "type": "object",
+      "description": "Result of querying the connectivity status of a device.",
+      "properties": {
+        "connectivityStatus": {
+          "$ref": "#/definitions/ConnectivityStatus",
+          "description": "The connectivity status of the device."
+        }
+      },
+      "required": [
+        "connectivityStatus"
+      ]
+    },
+    "GetDeviceByUuidRequest": {
+      "type": "object",
+      "description": "Request body for looking up a device by its UUID.",
+      "properties": {
+        "deviceUuid": {
+          "type": "string",
+          "description": "The unique identifier of the device."
+        }
+      },
+      "required": [
+        "deviceUuid"
+      ]
+    },
+    "GetEnqueuedMessagesResult": {
+      "type": "object",
+      "description": "Result of querying enqueued C2D messages for a device.",
+      "properties": {
+        "enqueuedMessageCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of cloud-to-device messages currently queued for the device."
+        }
+      },
+      "required": [
+        "enqueuedMessageCount"
+      ]
+    },
+    "GetGroupByUuidRequest": {
+      "type": "object",
+      "description": "Request body for looking up a group by its UUID.",
+      "properties": {
+        "groupUuid": {
+          "type": "string",
+          "description": "The unique identifier of the group."
+        }
+      },
+      "required": [
+        "groupUuid"
+      ]
+    },
+    "Group": {
+      "type": "object",
+      "description": "A group resource.",
+      "properties": {
+        "groupUuid": {
+          "type": "string",
+          "description": "The unique identifier of the group.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "groupUuid"
+      ]
+    },
+    "Namespace": {
+      "type": "object",
+      "description": "A device registry namespace.",
+      "properties": {
+        "namespaceUuid": {
+          "type": "string",
+          "description": "The unique identifier of the namespace.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "namespaceUuid"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

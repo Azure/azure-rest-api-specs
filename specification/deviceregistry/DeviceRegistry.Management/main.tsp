@@ -18,6 +18,10 @@ import "./ns_assets.tsp";
 import "./ns_discoveredAssets.tsp";
 import "./ns_assetEndpointProfiles.tsp";
 import "./ns_discoveredAssetEndpointProfiles.tsp";
+import "./groups.tsp";
+import "./jobs.tsp";
+import "./jobRuns.tsp";
+import "./newDevices.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -58,6 +62,14 @@ enum Versions {
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-02-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_02_01_preview: "2026-02-01-preview",
+
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-01-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_11_01_preview: "2026-11-01-preview",
+
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-02-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_11_02_preview: "2026-11-02-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

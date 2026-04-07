@@ -51,6 +51,11 @@ model NamespaceProperties {
   @visibility(Lifecycle.Read)
   uuid?: string;
 
+  @added(Versions.v2026_11_01_preview)
+  @doc("The data-plane endpoint used to perform operations in this namespace.")
+  @visibility(Lifecycle.Read)
+  dataEndpoint?: string;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
@@ -59,6 +64,11 @@ model NamespaceProperties {
   @doc("Assigned and unassigned management endpoints.")
   @added(Versions.v2026_02_01_preview)
   management?: Management;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The DPS instance that provisions devices in this namespace.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  provisioning?: NamespaceProvisioning;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -82,6 +92,10 @@ model MessagingEndpoint {
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The provisioning configuration for this messaging endpoint.")
+  provisioning?: MessagingEndpointProvisioning;
 }
 
 @added(Versions.v2026_02_01_preview)
@@ -99,6 +113,51 @@ model ManagementEndpoint {
   @doc("The messaging endpoint Azure resource Id.")
   resourceId: string;
 }
+
+@added(Versions.v2026_11_01_preview)
+@doc("The provisioning configuration for a messaging endpoint.")
+model MessagingEndpointProvisioning {
+  @doc("The availability status of the messaging endpoint.")
+  availability?: MessagingEndpointAvailability;
+
+  @doc("The allocation weight for this messaging endpoint.")
+  allocationWeight?: int32;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The availability status of a messaging endpoint.")
+union MessagingEndpointAvailability {
+  string,
+
+  @doc("The messaging endpoint is available.")
+  Available: "Available",
+
+  @doc("The messaging endpoint is disabled.")
+  Disabled: "Disabled",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The DPS provisioning configuration for the namespace.")
+model NamespaceProvisioning {
+  @doc("The Azure resource ID of the DPS instance that provisions devices in this namespace.")
+  dpsResourceId?: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Request body for the bulk import operation on a Namespace resource.")
+model NamespaceBulkImportRequest {}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Response for the bulk import operation on a Namespace resource.")
+model NamespaceBulkImportResponse {}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Request body for the bulk export operation on a Namespace resource.")
+model NamespaceBulkExportRequest {}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Response for the bulk export operation on a Namespace resource.")
+model NamespaceBulkExportResponse {}
 
 @added(Versions.v2025_07_01_preview)
 @doc("Request body for the migrate resources operation in to Namespace resource.")
@@ -168,6 +227,28 @@ interface Namespaces {
     Namespace,
     NamespaceMigrateRequest,
     NamespaceMigrateResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @doc("Bulk import devices into the namespace from a provided storage account.")
+  @added(Versions.v2026_11_01_preview)
+  bulkImport is ArmResourceActionAsync<
+    Namespace,
+    NamespaceBulkImportRequest,
+    NamespaceBulkImportResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @doc("Bulk export device metadata from the namespace into a storage account.")
+  @added(Versions.v2026_11_01_preview)
+  bulkExport is ArmResourceActionAsync<
+    Namespace,
+    NamespaceBulkExportRequest,
+    NamespaceBulkExportResponse,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader

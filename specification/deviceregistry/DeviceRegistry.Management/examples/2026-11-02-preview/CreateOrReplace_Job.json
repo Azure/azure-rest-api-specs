@@ -1,0 +1,93 @@
+{
+  "title": "CreateOrReplace_Job",
+  "operationId": "Jobs_CreateOrReplace",
+  "description": "Create or replace a job.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "namespace-1",
+    "jobName": "adr-job-01",
+    "resource": {
+      "location": "North Europe",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "scheduling": {
+          "schedulingType": "once",
+          "startTime": "2026-11-01T12:00:00Z"
+        },
+        "jobType": "Action",
+        "target": {
+          "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1"
+        },
+        "definition": {
+          "action": {
+            "actionName": "reboot",
+            "actionGroup": "",
+            "payload": {},
+            "responseTimeout": "3600s",
+            "connectTimeout": "60s"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-01",
+        "name": "adr-job-01",
+        "type": "Microsoft.DeviceRegistry/namespaces/jobs",
+        "location": "North Europe",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2024-10-01T21:39:27.7050447Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2024-10-01T21:39:27.7050447Z"
+        },
+        "identity": {
+          "principalId": "4a06b859-8c07-4d9f-822d-3348a09f72c2",
+          "tenantId": "0006f47a-0000-0000-0000-99be82dea000",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
+          "scheduling": {
+            "schedulingType": "once",
+            "startTime": "2026-11-01T12:00:00Z"
+          },
+          "jobType": "Action",
+          "target": {
+            "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1"
+          },
+          "definition": {
+            "action": {
+              "actionName": "reboot",
+              "actionGroup": "",
+              "payload": {},
+              "responseTimeout": "3600s",
+              "connectTimeout": "60s"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-01",
+        "name": "adr-job-01",
+        "type": "Microsoft.DeviceRegistry/namespaces/jobs",
+        "location": "North Europe",
+        "properties": {
+          "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

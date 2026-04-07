@@ -1,0 +1,68 @@
+{
+  "title": "CreateOrReplace_Group",
+  "operationId": "Groups_CreateOrReplace",
+  "description": "Create or replace a group.",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-3",
+    "groupName": "my-group-1",
+    "resource": {
+      "location": "West Europe",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "description": "This group contains all temperature sensors in building 1",
+        "displayName": "Building 1 Temperature Sensors",
+        "refreshMode": "Manual",
+        "groupType": "Device",
+        "query": "where properties.attributes.deviceType == 'sensor' and properties.attributes.sensorType == 'temperature'"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-3/groups/my-group-1",
+        "name": "my-group-1",
+        "type": "Microsoft.DeviceRegistry/namespaces/groups",
+        "location": "West Europe",
+        "identity": {
+          "principalId": "4a06b859-8c07-4d9f-822d-3348a09f72c2",
+          "tenantId": "0006f47a-0000-0000-0000-99be82dea000",
+          "type": "SystemAssigned"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "uuid": "cfbef47a-6971-4c90-a7a9-99be82dea167",
+          "description": "This group contains all temperature sensors in building 1",
+          "displayName": "Building 1 Temperature Sensors",
+          "refreshMode": "Manual",
+          "groupType": "Device",
+          "query": "where properties.attributes.deviceType == 'sensor' and properties.attributes.sensorType == 'temperature'",
+          "membershipState": "Ready",
+          "lastMembershipRefreshTime": "2024-10-01T00:36:43.2516899Z",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-3/groups/my-group-1",
+        "name": "my-group-1",
+        "type": "Microsoft.DeviceRegistry/namespaces/groups",
+        "location": "West Europe",
+        "properties": {
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

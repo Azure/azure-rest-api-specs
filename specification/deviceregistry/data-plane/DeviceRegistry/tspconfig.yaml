@@ -1,0 +1,32 @@
+parameters:  
+  "service-dir":
+    default: "sdk/deviceregistry"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    output-file: "{emitter-output-dir}/{version-status}/{version}/deviceregistry.json"
+  "@azure-tools/typespec-python":    
+    emitter-output-dir: "{output-dir}/{service-dir}/microsoft-deviceregistry"
+    namespace: "microsoft.deviceregistry"
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Microsoft.DeviceRegistry"
+    namespace: "Microsoft.DeviceRegistry"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/microsoft-deviceregistry-rest"
+    package-details:
+      name: "@azure-rest/microsoft-deviceregistry"
+      description: "Microsoft.DeviceRegistry Service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/microsoft-deviceregistry"
+    namespace: com.microsoft.deviceregistry
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

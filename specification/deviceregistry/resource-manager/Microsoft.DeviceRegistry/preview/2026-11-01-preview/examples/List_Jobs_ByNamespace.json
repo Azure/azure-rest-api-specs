@@ -1,0 +1,30 @@
+{
+  "title": "List_Jobs_ByNamespace",
+  "operationId": "Jobs_ListByResourceGroup",
+  "description": "List all jobs under a namespace.",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "namespace-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-01",
+            "name": "adr-job-01",
+            "type": "Microsoft.DeviceRegistry/namespaces/jobs",
+            "location": "North Europe",
+            "properties": {
+              "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
+              "jobType": "Action",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

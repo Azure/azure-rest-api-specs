@@ -1,0 +1,21 @@
+{
+  "operationId": "Devices_ImportDevices",
+  "title": "Bulk import devices into a namespace",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "body": {}
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://westus.api.deviceregistry.contoso.com/deviceregistry/namespaces/a1b2c3d4-5678-90ab-cdef-1234567890ab/devices/operations/op-1234"
+      },
+      "body": {
+        "id": "op-1234",
+        "status": "InProgress"
+      }
+    }
+  }
+}

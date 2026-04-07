@@ -1,0 +1,39 @@
+{
+  "title": "List_JobRuns_ByJob",
+  "operationId": "JobRuns_ListByResourceGroup",
+  "description": "List all runs for a job.",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "namespace-1",
+    "jobName": "adr-job-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-01/runs/run-01",
+            "name": "run-01",
+            "type": "Microsoft.DeviceRegistry/namespaces/jobs/runs",
+            "properties": {
+              "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
+              "status": "Succeeded",
+              "startTime": "2026-11-01T12:00:00Z",
+              "endTime": "2026-11-01T12:15:00Z",
+              "results": {
+                "total": 1500,
+                "succeeded": 1478,
+                "failed": 22,
+                "running": 0,
+                "pending": 0
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
