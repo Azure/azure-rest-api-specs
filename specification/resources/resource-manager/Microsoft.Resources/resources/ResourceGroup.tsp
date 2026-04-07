@@ -19,7 +19,7 @@ model ResourceGroup
   ...ResourceNameParameter<
     Resource = ResourceGroup,
     KeyName = "resourceGroupName",
-    SegmentName = "resourceGroups",
+    SegmentName = "resourcegroups",
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
 
@@ -62,6 +62,7 @@ interface ResourceGroups {
    * Resource groups can be updated through a simple PATCH operation to a group address. The format of the request is the same as that for creating a resource group. If a field is unspecified, the current value is retained.
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Updates a resource group.")
   @tag("ResourceGroups")
   update is ArmCustomPatchSync<
     ResourceGroup,
@@ -74,6 +75,7 @@ interface ResourceGroups {
    * When you delete a resource group, all of its resources are also deleted. Deleting a resource group deletes all of its template deployments and currently stored operations.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Deletes a resource group.")
   @tag("ResourceGroups")
   delete is ArmResourceDeleteWithoutOkAsync<
     ResourceGroup,
@@ -152,6 +154,7 @@ interface ResourceGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  @summary("Moves resources from one resource group to another resource group.")
   @tag("Resources")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "resourceGroupName",
@@ -171,6 +174,7 @@ interface ResourceGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  @summary("Validates whether resources can be moved from one resource group to another resource group.")
   @tag("Resources")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "resourceGroupName",
