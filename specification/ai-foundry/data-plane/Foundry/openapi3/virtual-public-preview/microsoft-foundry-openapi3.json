@@ -18278,8 +18278,7 @@
           "kind",
           "container_protocol_versions",
           "cpu",
-          "memory",
-          "session_persistent_volume"
+          "memory"
         ],
         "properties": {
           "kind": {
@@ -18346,39 +18345,18 @@
             ],
             "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
           },
-          "session_persistent_volume": {
+          "session_config": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/SessionPersistentVolumeConfig"
+                "$ref": "#/components/schemas/SessionConfig"
               }
             ],
-            "description": "Configuration for a session's persistent filesystem volume."
-          },
-          "session_version_upgrade_policy": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SessionVersionUpgradePolicy"
-              }
-            ],
-            "description": "How to change the version of existing sessions after they are created. Defaults to automatically upgrading to the version set in the agent endpoint.",
-            "default": "auto_upgrade"
-          },
-          "session_max_lifespan": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum session lifespan. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days (`P30D`).",
-            "default": 2592000
-          },
-          "session_idle_timeout": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Idle session timeout. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.",
-            "default": 7200
+            "description": "Configuration for sessions."
           },
           "graceful_termination_period": {
             "type": "integer",
             "format": "int32",
-            "description": "Graceful termination period. This is the time between sending SIGTERM and SIGKILL to the agent process.",
+            "description": "Graceful termination period in seconds. This is the time between sending SIGTERM and SIGKILL to the agent process.",
             "default": 30
           }
         },
@@ -41085,6 +41063,50 @@
         ],
         "description": "Type of the task."
       },
+      "SessionConfig": {
+        "type": "object",
+        "properties": {
+          "persistent_volume": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionPersistentVolumeConfig"
+              }
+            ],
+            "description": "Configuration for a per-session durable filesystem volume.",
+            "default": {
+              "enabled": true,
+              "capacity": "5Gi"
+            }
+          },
+          "version_upgrade_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionVersionUpgradePolicy"
+              }
+            ],
+            "description": "How to agent versions of sessions should change. Defaults to automatically upgrading to the version set in the agent endpoint.",
+            "default": "auto_upgrade"
+          },
+          "max_lifespan": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum session lifespan in seconds. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days.",
+            "default": 2592000
+          },
+          "idle_timeout": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Idle session timeout in seconds. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.",
+            "default": 7200
+          }
+        },
+        "description": "Configure the behavior and lifecycle of sessions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "SessionDirectoryEntry": {
         "type": "object",
         "required": [
@@ -41216,7 +41238,7 @@
             ]
           }
         ],
-        "description": "The policy for upgrading a session's version.",
+        "description": "The policy for upgrading an existing session's version.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "HostedAgents=V1Preview"

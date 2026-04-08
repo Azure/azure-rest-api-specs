@@ -408,6 +408,7 @@ model WorkflowAgentDefinition extends AgentDefinition {
 }
 
 @doc("The policy for upgrading an existing session's version.")
+@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -423,6 +424,7 @@ union SessionVersionUpgradePolicy {
 }
 
 @doc("Configuration for a persistent filesystem volume attached to each hosted agent session.")
+@removed(Versions.v1)
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
@@ -434,6 +436,31 @@ model SessionPersistentVolumeConfig {
   @doc("Capacity of the volume in bytes.")
   @example("2Gi")
   capacity?: string = "5Gi";
+}
+
+@doc("Configure the behavior and lifecycle of sessions.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model SessionConfig {
+  @doc("Configuration for a per-session durable filesystem volume.")
+  persistent_volume?: SessionPersistentVolumeConfig = #{
+    enabled: true,
+    capacity: "5Gi"
+  };
+
+  @doc("How to agent versions of sessions should change. Defaults to automatically upgrading to the version set in the agent endpoint.")
+  version_upgrade_policy?: SessionVersionUpgradePolicy = SessionVersionUpgradePolicy.auto_upgrade;
+
+  @doc("Maximum session lifespan in seconds. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  max_lifespan?: duration = duration.fromISO("P30D");
+
+  @doc("Idle session timeout in seconds. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout?: duration = duration.fromISO("PT2H");
 }
 
 @doc("The hosted agent definition.")
@@ -482,25 +509,11 @@ model HostedAgentDefinition extends AgentDefinition {
   telemetry_config?: TelemetryConfig;
 
   @removed(Versions.v1)
-  @doc("Configuration for a session's persistent filesystem volume.")
-  session_persistent_volume: SessionPersistentVolumeConfig;
+  @doc("Configuration for sessions.")
+  session_config?: SessionConfig;
 
   @removed(Versions.v1)
-  @doc("How to change the version of existing sessions after they are created. Defaults to automatically upgrading to the version set in the agent endpoint.")
-  session_version_upgrade_policy?: SessionVersionUpgradePolicy = SessionVersionUpgradePolicy.auto_upgrade;
-
-  @removed(Versions.v1)
-  @doc("Maximum session lifespan. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days (`P30D`).")
-  @encode(DurationKnownEncoding.seconds, int32)
-  session_max_lifespan?: duration = duration.fromISO("P30D");
-
-  @removed(Versions.v1)
-  @doc("Idle session timeout. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  session_idle_timeout?: duration = duration.fromISO("PT2H");
-
-  @removed(Versions.v1)
-  @doc("Graceful termination period. This is the time between sending SIGTERM and SIGKILL to the agent process.")
+  @doc("Graceful termination period in seconds. This is the time between sending SIGTERM and SIGKILL to the agent process.")
   @encode(DurationKnownEncoding.seconds, int32)
   graceful_termination_period?: duration = duration.fromISO("PT30S");
 }
