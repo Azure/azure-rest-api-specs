@@ -784,7 +784,7 @@ namespace ConversationAuthoringClient {
   "python"
 )
 namespace ConversationAuthoringProjectClient {
-  @operationGroup
+  @operationGroup("python")
   @clientName("Deployment", "python")
   interface DeploymentOperations {
     getDeployment is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeployment;
@@ -802,7 +802,7 @@ namespace ConversationAuthoringProjectClient {
     getDeploymentStatus is Language.Conversations.Authoring.ConversationAuthoringDeployment.getDeploymentStatus;
   }
 
-  @operationGroup
+  @operationGroup("python")
   @clientName("Project", "python")
   interface ProjectOperations {
     listTrainedModels is Language.Conversations.Authoring.conversationAuthoringListTrainedModels;
@@ -861,7 +861,7 @@ namespace ConversationAuthoringProjectClient {
     cancelTrainingJob is Language.Conversations.Authoring.ConversationAuthoringProject.cancelTrainingJob;
   }
 
-  @operationGroup
+  @operationGroup("python")
   @clientName("ExportedModel", "python")
   interface ExportedModelOperations {
     getExportedModel is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModel;
@@ -874,7 +874,7 @@ namespace ConversationAuthoringProjectClient {
     getExportedModelJobStatus is Language.Conversations.Authoring.ConversationAuthoringExportedModel.getExportedModelJobStatus;
   }
 
-  @operationGroup
+  @operationGroup("python")
   @clientName("TrainedModel", "python")
   interface TrainedModelOperations {
     getTrainedModel is Language.Conversations.Authoring.ConversationAuthoringTrainedModel.getTrainedModel;
