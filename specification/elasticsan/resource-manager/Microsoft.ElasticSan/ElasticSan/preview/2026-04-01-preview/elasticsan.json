@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ElasticSanManagement",
-    "version": "2025-09-01",
+    "version": "2026-04-01-preview",
     "description": "Elastic SAN is a fully integrated solution that simplifies deploying, scaling, managing, and configuring a storage area network (SAN). It also offers built-in cloud capabilities like high availability. Elastic SAN works with many types of compute resources, such as Azure Virtual Machines, Azure VMware Solution, and Azure Kubernetes Service.",
     "x-typespec-generated": [
       {
@@ -39,6 +39,9 @@
     }
   },
   "tags": [
+    {
+      "name": "Restore Volumes"
+    },
     {
       "name": "Operations"
     },
@@ -863,6 +866,31 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+          },
+          {
+            "name": "x-ms-access-soft-deleted-resources",
+            "in": "header",
+            "description": "Optional, returns only soft deleted volume groups if set to true. If set to false or if not specified, returns only active volume groups.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-access-soft-deleted-resources",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "true",
+                  "value": "true"
+                },
+                {
+                  "name": "false",
+                  "value": "false"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -1749,6 +1777,31 @@
             "minLength": 3,
             "maxLength": 63,
             "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+          },
+          {
+            "name": "x-ms-access-soft-deleted-resources",
+            "in": "header",
+            "description": "Optional, returns only soft deleted volumes if set to true. If set to false or if not specified, returns only active volumes.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "x-ms-access-soft-deleted-resources",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "true",
+                  "value": "true"
+                },
+                {
+                  "name": "false",
+                  "value": "false"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -2141,6 +2194,26 @@
                 }
               ]
             }
+          },
+          {
+            "name": "deleteType",
+            "in": "query",
+            "description": "Optional. Specifies that the delete operation should be a permanent delete for the soft deleted volume. The value of deleteType can only be 'permanent'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "permanent"
+            ],
+            "x-ms-enum": {
+              "name": "DeleteType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "permanent",
+                  "value": "permanent"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -2177,6 +2250,96 @@
           },
           "Volumes_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}/restore": {
+      "post": {
+        "operationId": "RestoreVolume",
+        "tags": [
+          "Restore Volumes"
+        ],
+        "description": "Restore Soft Deleted Volumes. The volume name is obtained by using the API to list soft deleted volumes by volume group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "elasticSanName",
+            "in": "path",
+            "description": "The name of the ElasticSan.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+          },
+          {
+            "name": "volumeGroupName",
+            "in": "path",
+            "description": "The name of the VolumeGroup.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9]+((-|_)[a-z0-9A-Z]+)*$"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The name of the Volume.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]+(-[a-z0-9A-Z]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RestoreVolume_MaximumSet_Gen": {
+            "$ref": "./examples/RestoreVolume_MaximumSet_Gen.json"
+          },
+          "RestoreVolume_MinimumSet_Gen": {
+            "$ref": "./examples/RestoreVolume_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2222,6 +2385,21 @@
           "$ref": "#/definitions/ScaleUpProperties",
           "description": "Scale up settings on Elastic San Appliance.",
           "x-ms-client-name": "ScaleUpProperties"
+        }
+      }
+    },
+    "DeleteRetentionPolicy": {
+      "type": "object",
+      "description": "Response for Delete Retention Policy object",
+      "properties": {
+        "policyState": {
+          "$ref": "#/definitions/PolicyState"
+        },
+        "retentionPeriodDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days to retain the resources after deletion.",
+          "minimum": 0
         }
       }
     },
@@ -2679,6 +2857,27 @@
         ]
       }
     },
+    "PolicyState": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
     "PreValidationResponse": {
       "type": "object",
       "description": "response object for pre validation api",
@@ -2895,7 +3094,8 @@
         "Updating",
         "Deleting",
         "Deleted",
-        "Restoring"
+        "Restoring",
+        "SoftDeleting"
       ],
       "x-ms-enum": {
         "name": "ProvisioningStates",
@@ -2940,6 +3140,10 @@
           {
             "name": "Restoring",
             "value": "Restoring"
+          },
+          {
+            "name": "SoftDeleting",
+            "value": "SoftDeleting"
           }
         ]
       }
@@ -3462,6 +3666,10 @@
         "enableEncryptionInTransit": {
           "type": "boolean",
           "description": "A boolean indicating whether or not Encryption in Transit is enabled"
+        },
+        "deleteRetentionPolicy": {
+          "$ref": "#/definitions/DeleteRetentionPolicy",
+          "description": "The retention policy for the soft deleted volume group and its associated resources."
         }
       }
     },
@@ -3506,6 +3714,10 @@
         "enforceDataIntegrityCheckForIscsi": {
           "type": "boolean",
           "description": "A boolean indicating whether or not Data Integrity Check is enabled"
+        },
+        "deleteRetentionPolicy": {
+          "$ref": "#/definitions/DeleteRetentionPolicy",
+          "description": "The retention policy for the soft deleted volume group and its associated resources"
         }
       }
     },

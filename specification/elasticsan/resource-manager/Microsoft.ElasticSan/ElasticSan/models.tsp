@@ -658,6 +658,11 @@ model VolumeGroupProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
+   * A boolean indicating whether or not Encryption in Transit is enabled
+   */
+  enableEncryptionInTransit?: boolean;
+
+  /**
    * The retention policy for the soft deleted volume group and its associated resources.
    */
   @removed(Versions.v2025_09_01)

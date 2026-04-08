@@ -42,7 +42,7 @@ enum Versions {
   /**
    * The 2024-07-01-preview API version.
    */
-  v2024_07_01_preview: "2024-07-01-preview",
+  v2024_07_01_preview: "2026-04-01-preview",
 
   /**
    * The 2025-09-01 stable API version.
