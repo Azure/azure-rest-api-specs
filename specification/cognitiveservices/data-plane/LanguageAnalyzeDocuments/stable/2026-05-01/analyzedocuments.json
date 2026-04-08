@@ -686,7 +686,7 @@
           "$ref": "#/definitions/DocumentLocation",
           "description": "Location of the input document."
         },
-        "target": {
+        "targets": {
           "type": "array",
           "description": "Array of document results generated after the analysis.",
           "items": {
@@ -698,7 +698,7 @@
         "id",
         "warnings",
         "source",
-        "target"
+        "targets"
       ]
     },
     "DocumentLocation": {
@@ -708,11 +708,16 @@
         "kind": {
           "$ref": "#/definitions/DocumentLocationKind",
           "description": "The kind of the document location."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the document."
         }
       },
       "discriminator": "kind",
       "required": [
-        "kind"
+        "kind",
+        "location"
       ]
     },
     "DocumentLocationKind": {

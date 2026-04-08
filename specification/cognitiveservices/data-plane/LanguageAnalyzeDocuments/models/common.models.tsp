@@ -407,7 +407,7 @@ model DocumentAnalysisDocumentResult is DocumentResult {
   source: DocumentLocation;
 
   /** Array of document results generated after the analysis. */
-  target: Array<DocumentLocation>;
+  targets: Array<DocumentLocation>;
 }
 
 /** Contains the error object with errors encountered for the processed document. */
@@ -471,6 +471,10 @@ model MultiLanguageInput {
 model DocumentLocation {
   /** The kind of the document location. */
   kind: DocumentLocationKind;
+
+  @added(Versions.v2026_05_01)
+  /** The location of the document. */
+  location: string;
 }
 
 /** Enumeration of supported document locations. */
