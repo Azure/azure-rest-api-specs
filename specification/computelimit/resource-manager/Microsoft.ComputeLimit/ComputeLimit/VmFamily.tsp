@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -37,5 +38,12 @@ interface VmFamilies {
   get is ArmResourceRead<VmFamily>;
 
   /** Lists all VM families for the subscription at the specified location. */
-  list is ArmResourceListAtScope<VmFamily>;
+  list is ArmResourceListAtScope<
+    VmFamily,
+    Parameters = {
+      /** The filter to apply to the list operation. Filter can be applied to the 'category' property. Example: $filter=category eq 'generalPurposeCategory'. */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
 }
