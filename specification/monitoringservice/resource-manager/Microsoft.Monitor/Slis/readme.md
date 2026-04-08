@@ -46,6 +46,10 @@ directive:
     from: openapi.json
 
   - suppress: TenantLevelAPIsNotAllowed
+    where:
+      - $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis"]
+      - $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis/{sliName}"]
+      - $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/sliSignalPreview"]
     reason: SLIs scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
     from: openapi.json
 
