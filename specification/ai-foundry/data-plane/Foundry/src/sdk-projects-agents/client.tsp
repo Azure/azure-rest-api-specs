@@ -36,6 +36,8 @@ namespace Azure.AI.Projects {
   @@clientName(AgentObject, "ProjectsAgentRecord");
   @@clientName(AgentKind, "ProjectsAgentKind");
   @@clientName(AgentProtocol, "ProjectsAgentProtocol");
+  @@clientName(AgentSessionResource, "AgentSession");
+  @@access(AgentSessionResource, Access.public);
 
   @@clientName(BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
