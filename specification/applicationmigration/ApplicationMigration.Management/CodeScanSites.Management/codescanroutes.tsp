@@ -58,10 +58,13 @@ interface CodeScanSites {
   >;
 
   @added(CodeScanSitesApiVersions.v2026_05_12_preview)
-  requestScan is ArmResourceActionSync<
+  requestScan is ArmResourceActionAsync<
     CodeScanSite,
     ScanRequest,
-    ConfigUriResponse
+    ConfigUriOperationStatusResponse,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ConfigUriOperationStatusResponse> &
+      ArmLroLocationHeader<FinalResult = ConfigUriOperationStatusResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

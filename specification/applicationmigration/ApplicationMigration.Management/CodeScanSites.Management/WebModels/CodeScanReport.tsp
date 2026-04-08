@@ -146,6 +146,13 @@ model ConfigUriResponse {
 }
 
 @added(CodeScanSitesApiVersions.v2026_05_12_preview)
+@doc("The Operation status response model for the configuration file URI generation.")
+model ConfigUriOperationStatusResponse {
+  @doc("The response of the operation for generating the configuration file URI.")
+  properties: ConfigUriResponse;
+}
+
+@added(CodeScanSitesApiVersions.v2026_05_12_preview)
 @doc("The request model for fetching SAS URI by report paths.")
 model SasUriByReportPathsRequest {
   @doc("The list of report paths for which SAS URI is requested.")
