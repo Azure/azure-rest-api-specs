@@ -20184,10 +20184,11 @@
         ],
         "properties": {
           "systemData": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemDataV3"
+              }
+            ],
             "description": "System related metadata"
           },
           "blobUri": {
@@ -41791,6 +41792,30 @@
             "$ref": "#/components/schemas/ItemGenerationParams"
           }
         ]
+      },
+      "SystemDataV3": {
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of resource creation"
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Identity that created the resource"
+          },
+          "createdByType": {
+            "type": "string",
+            "description": "Type of identity that created the resource"
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of last resource modification"
+          }
+        },
+        "description": "System metadata for a resource"
       },
       "SystemMessage": {
         "type": "object",

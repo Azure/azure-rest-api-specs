@@ -12,7 +12,7 @@ namespace Azure.AI.Projects;
 @Rest.resource("models")
 model ModelVersion {
   @doc("System related metadata")
-  systemData?: Record<string>;
+  systemData?: SystemDataV3;
 
   @doc("URI of the model artifact in blob storage")
   blobUri?: string;
@@ -21,6 +21,23 @@ model ModelVersion {
   derivedModelInformation?: DerivedModelInformation;
 
   ...AssetBase;
+}
+
+@added(Versions.PuPr)
+@removed(Versions.v1)
+@doc("System metadata for a resource")
+model SystemDataV3 {
+  @doc("Timestamp of resource creation")
+  createdAt?: utcDateTime;
+
+  @doc("Identity that created the resource")
+  createdBy?: string;
+
+  @doc("Type of identity that created the resource")
+  createdByType?: string;
+
+  @doc("Timestamp of last resource modification")
+  lastModifiedAt?: utcDateTime;
 }
 
 @added(Versions.PuPr)
