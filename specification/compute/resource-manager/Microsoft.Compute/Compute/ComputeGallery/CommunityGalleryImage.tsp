@@ -5,18 +5,13 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./CommunityGallery.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using Common;
 
 namespace ComputeGallery;
 /**
  * Specifies information about the gallery image definition that you want to create or update.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-@parentResource(CommunityGallery)
 model CommunityGalleryImage
   is ProxyResourceCommunity<CommunityGalleryImageProperties> {
   ...Azure.ResourceManager.Legacy.ResourceNameParameter<
@@ -27,20 +22,48 @@ model CommunityGalleryImage
   >;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Not an ARM resource - deprecated custom resource"
 interface CommunityGalleryImages {
   /**
    * Get a community gallery image.
    */
-  get is ComputeResourceRead<CommunityGalleryImage>;
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images/{galleryImageName}")
+  @get
+  @tag("CommunityGalleryImages")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    /** The name of the Azure region. */
+    ...Azure.ResourceManager.LocationResourceParameter,
+
+    /** The public name of the community gallery. */
+    @path
+    publicGalleryName: string,
+
+    /** The name of the community gallery image definition. */
+    @path
+    galleryImageName: string,
+  ): ArmResponse<CommunityGalleryImage> | Common.CloudError;
 
   /**
    * List community gallery images inside a gallery.
    */
-  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
-    CommunityGalleryImage,
-    Response = CommunityGalleryImageList
-  >;
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/images")
+  @get
+  @list
+  @tag("CommunityGalleryImages")
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    /** The name of the Azure region. */
+    ...Azure.ResourceManager.LocationResourceParameter,
+
+    /** The public name of the community gallery. */
+    @path
+    publicGalleryName: string,
+  ): ArmResponse<CommunityGalleryImageList> | Common.CloudError;
 }
 
 @@doc(CommunityGalleryImage.name,

@@ -93,3 +93,31 @@ using ComputeGallery;
   "ImageIdentifier",
   "csharp"
 );
+
+// Rename raw gallery operations to match old SDK method names
+@@clientName(SharedGalleries.get, "GetSharedGallery", "csharp");
+@@clientName(SharedGalleries.list, "GetSharedGalleries", "csharp");
+@@clientName(SharedGalleryImages.get, "GetSharedGalleryImage", "csharp");
+@@clientName(SharedGalleryImages.list, "GetSharedGalleryImages", "csharp");
+@@clientName(SharedGalleryImageVersions.get,
+  "GetSharedGalleryImageVersion",
+  "csharp"
+);
+@@clientName(SharedGalleryImageVersions.list,
+  "GetSharedGalleryImageVersions",
+  "csharp"
+);
+@@clientName(CommunityGalleries.get, "GetCommunityGallery", "csharp");
+@@clientName(CommunityGalleryImages.get, "GetCommunityGalleryImage", "csharp");
+@@clientName(CommunityGalleryImages.list,
+  "GetCommunityGalleryImages",
+  "csharp"
+);
+@@clientName(CommunityGalleryImageVersions.get,
+  "GetCommunityGalleryImageVersion",
+  "csharp"
+);
+@@clientName(CommunityGalleryImageVersions.list,
+  "GetCommunityGalleryImageVersions",
+  "csharp"
+);
