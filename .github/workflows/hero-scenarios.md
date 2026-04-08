@@ -1,6 +1,6 @@
 ---
 on:
-  pull_request_target:
+  pull_request:
     types: [labeled]
 labels: [hero-scenarios-needed]
 if: github.event.label.name == 'hero-scenarios-needed'
