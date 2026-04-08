@@ -71,7 +71,7 @@ alias ScopeAccessReviewDefaultSettingOps = Azure.ResourceManager.Legacy.Extensio
     ...ApiVersionParameter;
 
     /** The scope of the resource. */
-    @path
+    @path(#{ allowReserved: true })
     @segment("")
     @key
     scope: string;
