@@ -361,17 +361,17 @@ op queryJobStatus<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOpe
   AgentsPagedResult<TJob>
 >;
 
-/** Cancel a running job. Returns 202 with the updated job. */
+/** Cancel a running job. Returns 200 with the updated job. */
 @post
 op cancelJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
   {
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  AcceptedResponse & TJob
+  OkResponse & TJob
 >;
 
-/** Delete a job. Returns 202 with the updated job. */
+/** Delete a job. Returns 200 with the updated job. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
 op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
@@ -379,7 +379,7 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  AcceptedResponse & TJob
+  OkResponse & TJob
 >;
 
 // ---- Preview operation templates ----
@@ -425,7 +425,7 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
   AgentsPagedResult<TJob>
 >;
 
-/** Cancel a running job (preview). Returns 202 with the updated job. */
+/** Cancel a running job (preview). Returns 200 with the updated job. */
 @post op cancelJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
   TJob extends TypeSpec.Reflection.Model
@@ -435,10 +435,10 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  AcceptedResponse & TJob
+  OkResponse & TJob
 >;
 
-/** Delete a job (preview). Returns 202 with the updated job. */
+/** Delete a job (preview). Returns 200 with the updated job. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete op deleteJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
@@ -449,7 +449,7 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  AcceptedResponse & TJob
+  OkResponse & TJob
 >;
 
 // ============================================================================
