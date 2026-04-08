@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 
 @service(#{ title: "Text Translation" })
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+  NoAuth | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.authorizationCode,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
