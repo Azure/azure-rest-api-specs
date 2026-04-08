@@ -14,21 +14,20 @@ namespace Microsoft.ServiceFabric;
 /**
  * An application type version resource for the specified application type name resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(ApplicationTypeResource)
-model ApplicationTypeVersionResource is TrackedResource<ApplicationTypeVersionResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = ApplicationTypeVersionResource,
-    KeyName = "version",
-    SegmentName = "versions",
-    NamePattern = ""
-  >;
+model ApplicationTypeVersionResource extends ProxyResource {
+  properties?: ApplicationTypeVersionResourceProperties;
 
-  /**
-   * Azure resource etag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
   @visibility(Lifecycle.Read)
-  etag?: string;
+  @path
+  @key("version")
+  @segment("versions")
+  name: string;
 }
 
 @armResourceOperations(#{ omitTags: true })
