@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./WorkspaceConnectionPropertiesV2BasicResource.tsp";
 
@@ -9,9 +10,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * EndpointDeploymentResourcePropertiesBasicResource is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<
@@ -26,6 +33,11 @@ model EndpointDeploymentResourcePropertiesBasicResource
   >;
 }
 
+/**
+ * EndpointDeploymentResourcePropertiesBasicResourceOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -59,6 +71,11 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
       }
     > {}
 
+/**
+ * EndpointDeploymentResourcePropertiesBasicResources is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -103,6 +120,12 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>
   >;
 }
+
+/**
+ * EndpointDeploymentOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -136,6 +159,11 @@ interface EndpointDeploymentOps
       }
     > {}
 
+/**
+ * EndpointDeployment is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface EndpointDeployment {
   /**
@@ -147,7 +175,7 @@ interface EndpointDeployment {
   /**
    * Create or update endpoint deployment resource with the specified parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,

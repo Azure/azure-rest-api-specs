@@ -360,6 +360,11 @@ model NamespaceAssetStatus {
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   managementGroups?: NamespaceAssetStatusManagementGroup[];
+
+  @doc("The details about the runtime health state of the asset.")
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  healthState?: HealthState;
 }
 
 @doc("Defines the asset status dataset properties.")

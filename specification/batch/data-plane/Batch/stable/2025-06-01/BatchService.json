@@ -7677,7 +7677,7 @@
           "Nodes"
         ],
         "summary": "Gets the settings required for remote login to a Compute Node.",
-        "description": "Before you can remotely login to a Compute Node using the remote login settings, \nyou must create a user Account on the Compute Node.",
+        "description": "Before you can remotely login to a Compute Node using the remote login settings, you must create a user Account on the Compute Node and configure access ports for SSH and RDP. For more information, see https://learn.microsoft.com/azure/batch/pool-endpoint-configuration",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7996,7 +7996,7 @@
           "Nodes"
         ],
         "summary": "Adds a user Account to the specified Compute Node.",
-        "description": "You can add a user Account to a Compute Node only when it is in the idle or\nrunning state.",
+        "description": "You can add a user Account to a Compute Node only when it is in the idle or \nrunning state. Before you can remotely login to a Compute Node you must configure access ports for SSH and RDP. For more information, see https://learn.microsoft.com/azure/batch/pool-endpoint-configuration\n",
         "consumes": [
           "application/json; odata=minimalmetadata"
         ],
@@ -8229,7 +8229,7 @@
           "Nodes"
         ],
         "summary": "Deletes a user Account from the specified Compute Node.",
-        "description": "You can delete a user Account to a Compute Node only when it is in the idle or\nrunning state.",
+        "description": "You can delete a user Account to a Compute Node only when it is in the idle or\nrunning state. Before you can remotely login to a Compute Node you must configure \naccess ports for SSH and RDP. For more information, see https://learn.microsoft.com/azure/batch/pool-endpoint-configuration",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -9204,7 +9204,7 @@
         },
         "enableAutomaticOSUpgrade": {
           "type": "boolean",
-          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchservice/pool/add?tabs=HTTP#windowsconfiguration) cannot be set to true.",
+          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchservice/pools/create-pool#windowsconfiguration) cannot be set to true.",
           "x-ms-client-name": "enableAutomaticOsUpgrade"
         },
         "useRollingUpgradePolicy": {
@@ -9872,7 +9872,7 @@
         "maxWallClockTime": {
           "type": "string",
           "format": "duration",
-          "description": "The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run."
+          "description": "The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run. The time duration is specified in ISO 8601 format."
         },
         "maxTaskRetryCount": {
           "type": "integer",
@@ -10510,12 +10510,12 @@
         "maxWallClockTime": {
           "type": "string",
           "format": "duration",
-          "description": "The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "retentionTime": {
           "type": "string",
           "format": "duration",
-          "description": "The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
+          "description": "The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. The time duration is specified in ISO 8601 format."
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
@@ -10633,12 +10633,12 @@
         "maxWallClockTime": {
           "type": "string",
           "format": "duration",
-          "description": "The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "retentionTime": {
           "type": "string",
           "format": "duration",
-          "description": "The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
+          "description": "The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. The time duration is specified in ISO 8601 format."
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
@@ -10761,12 +10761,12 @@
         "startWindow": {
           "type": "string",
           "format": "duration",
-          "description": "The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "recurrenceInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         }
       }
     },
@@ -10906,19 +10906,19 @@
         "userCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.",
+          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule. The time duration is specified in ISO 8601 format.",
           "x-ms-client-name": "userCpuTime"
         },
         "kernelCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.",
+          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule. The time duration is specified in ISO 8601 format.",
           "x-ms-client-name": "kernelCpuTime"
         },
         "wallClockTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries."
+          "description": "The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format."
         },
         "readIOps": {
           "type": "string",
@@ -10965,7 +10965,7 @@
         "waitTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics."
+          "description": "The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics. The time duration is specified in ISO 8601 format."
         }
       },
       "required": [
@@ -11265,19 +11265,19 @@
         "userCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.",
+          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job. The time duration is specified in ISO 8601 format.",
           "x-ms-client-name": "userCpuTime"
         },
         "kernelCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.",
+          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job. The time duration is specified in ISO 8601 format.",
           "x-ms-client-name": "kernelCpuTime"
         },
         "wallClockTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries."
+          "description": "The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format."
         },
         "readIOps": {
           "type": "string",
@@ -11324,7 +11324,7 @@
         "waitTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics."
+          "description": "The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics. The time duration is specified in ISO 8601 format."
         }
       },
       "required": [
@@ -12153,7 +12153,7 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "nodeDeallocationOption": {
           "$ref": "#/definitions/BatchNodeDeallocationOption",
@@ -12460,7 +12460,7 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes.",
+          "description": "The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.",
           "readOnly": true
         },
         "resizeErrors": {
@@ -12508,7 +12508,7 @@
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true.",
+          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true. The time duration is specified in ISO 8601 format.",
           "readOnly": true
         },
         "autoScaleRun": {
@@ -12625,7 +12625,7 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -12648,7 +12648,7 @@
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "enableInterNodeCommunication": {
           "type": "boolean",
@@ -12720,7 +12720,7 @@
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued."
+          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued. The time duration is specified in ISO 8601 format."
         }
       }
     },
@@ -12995,7 +12995,7 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The timeout for allocation of Nodes to the Pool or removal of Compute Nodes from the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The timeout for allocation of Nodes to the Pool or removal of Compute Nodes from the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "nodeDeallocationOption": {
           "$ref": "#/definitions/BatchNodeDeallocationOption",
@@ -13120,7 +13120,7 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -13143,7 +13143,7 @@
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "enableInterNodeCommunication": {
           "type": "boolean",
@@ -13222,7 +13222,7 @@
         "resizeTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -13245,7 +13245,7 @@
         "autoScaleEvaluationInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
+          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format."
         },
         "enableInterNodeCommunication": {
           "type": "boolean",
@@ -13477,7 +13477,7 @@
         "dedicatedCoreTime": {
           "type": "string",
           "format": "duration",
-          "description": "The aggregated wall-clock time of the dedicated Compute Node cores being part of the Pool."
+          "description": "The aggregated wall-clock time of the dedicated Compute Node cores being part of the Pool. The time duration is specified in ISO 8601 format."
         }
       },
       "required": [
@@ -14018,12 +14018,12 @@
         "maxWallClockTime": {
           "type": "string",
           "format": "duration",
-          "description": "The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run."
+          "description": "The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run. The time duration is specified in ISO 8601 format."
         },
         "retentionTime": {
           "type": "string",
           "format": "duration",
-          "description": "The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
+          "description": "The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. The time duration is specified in ISO 8601 format."
         },
         "maxTaskRetryCount": {
           "type": "integer",
@@ -14719,19 +14719,19 @@
         "userCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.",
+          "description": "The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task. The time duration is specified in ISO 8601 format.",
           "x-ms-client-name": "userCpuTime"
         },
         "kernelCPUTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.",
+          "description": "The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task. The time duration is specified in ISO 8601 format.",
           "x-ms-client-name": "kernelCpuTime"
         },
         "wallClockTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries."
+          "description": "The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format."
         },
         "readIOps": {
           "type": "string",
@@ -14760,7 +14760,7 @@
         "waitTime": {
           "type": "string",
           "format": "duration",
-          "description": "The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.)."
+          "description": "The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). The time duration is specified in ISO 8601 format."
         }
       },
       "required": [
@@ -15087,10 +15087,6 @@
         "managedDisk": {
           "$ref": "#/definitions/ManagedDisk",
           "description": "The managed disk parameters."
-        },
-        "storageAccountType": {
-          "$ref": "#/definitions/StorageAccountType",
-          "description": "The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\"."
         }
       },
       "required": [
@@ -16171,7 +16167,7 @@
         "pauseTimeBetweenBatches": {
           "type": "string",
           "format": "duration",
-          "description": "The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.."
+          "description": "The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration is specified in ISO 8601 format."
         },
         "prioritizeUnhealthyInstances": {
           "type": "boolean",

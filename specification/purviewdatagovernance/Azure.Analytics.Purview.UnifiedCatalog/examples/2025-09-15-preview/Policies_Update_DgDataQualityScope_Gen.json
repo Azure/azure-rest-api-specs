@@ -1,0 +1,526 @@
+{
+  "title": "Update_DgDataQualityScope",
+  "operationId": "Policies_Update",
+  "parameters": {
+    "api-version": "2025-09-15-preview",
+    "policyId": "48e3bf96-847d-4fb3-84ea-d1a23c0815c5",
+    "request": {
+      "name": "dgpolicy_dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+      "id": "48e3bf96-847d-4fb3-84ea-d1a23c0815c5",
+      "version": 0,
+      "properties": {
+        "description": "",
+        "decisionRules": [
+          {
+            "kind": "decisionrule",
+            "effect": "Permit",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "resource.purview.datagovernancepath",
+                  "attributeValueIncludes": "79e7043b-2d89-4454-9f07-1d8ceb3f0399/41b722b4-7604-4f94-bbec-37880fe3226c/41b722b4-7604-4f94-bbec-37880fe3226c"
+                },
+                {
+                  "fromRule": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ]
+            ]
+          }
+        ],
+        "attributeRules": [
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_scope-administrator",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_scope-administrator"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-product-owner",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-product-owner"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-steward",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-steward"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-quality-steward",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-steward"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-quality-reader",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-reader"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-quality-metadata-reader",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-metadata-reader"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-profile-steward",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-steward"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "attributeName": "principal.microsoft.id",
+                  "attributeValueIncludedIn": [
+                    "6a8b34a1-9cbb-4187-b540-12368421a640"
+                  ]
+                },
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-profile-reader",
+                  "attributeName": "derived.purview.role",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-reader"
+                }
+              ]
+            ]
+          },
+          {
+            "kind": "attributerule",
+            "id": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+            "name": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+            "dnfCondition": [
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ],
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ],
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ],
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ],
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ],
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ],
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ],
+              [
+                {
+                  "fromRule": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+                  "attributeName": "derived.purview.permission",
+                  "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c"
+                }
+              ]
+            ]
+          }
+        ],
+        "entity": {
+          "type": "DGDataQualityScopeReference",
+          "referenceName": "41b722b4-7604-4f94-bbec-37880fe3226c"
+        },
+        "parentEntityName": "79e7043b-2d89-4454-9f07-1d8ceb3f0399/41b722b4-7604-4f94-bbec-37880fe3226c"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "dgpolicy_dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+        "id": "48e3bf96-847d-4fb3-84ea-d1a23c0815c5",
+        "version": 0,
+        "properties": {
+          "description": "",
+          "decisionRules": [
+            {
+              "kind": "decisionrule",
+              "effect": "Permit",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "resource.purview.datagovernancepath",
+                    "attributeValueIncludes": "79e7043b-2d89-4454-9f07-1d8ceb3f0399/41b722b4-7604-4f94-bbec-37880fe3226c/41b722b4-7604-4f94-bbec-37880fe3226c"
+                  },
+                  {
+                    "fromRule": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ]
+              ]
+            }
+          ],
+          "attributeRules": [
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_scope-administrator",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_scope-administrator"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-product-owner",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-product-owner"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-steward",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-steward"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-quality-steward",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-steward"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-quality-reader",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-reader"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-quality-metadata-reader",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-metadata-reader"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-profile-steward",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-steward"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "attributeName": "principal.microsoft.id",
+                    "attributeValueIncludedIn": [
+                      "6a8b34a1-9cbb-4187-b540-12368421a640"
+                    ]
+                  },
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-profile-reader",
+                    "attributeName": "derived.purview.role",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-reader"
+                  }
+                ]
+              ]
+            },
+            {
+              "kind": "attributerule",
+              "id": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+              "name": "permission_dg:dgdataqualityscope_41b722b4-7604-4f94-bbec-37880fe3226c",
+              "dnfCondition": [
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_scope-administrator:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ],
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-product-owner:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ],
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-steward:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ],
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-steward:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ],
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-reader:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ],
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-quality-metadata-reader:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ],
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-steward:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ],
+                [
+                  {
+                    "fromRule": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c",
+                    "attributeName": "derived.purview.permission",
+                    "attributeValueIncludes": "purviewdatagovernancerole_builtin_data-profile-reader:41b722b4-7604-4f94-bbec-37880fe3226c"
+                  }
+                ]
+              ]
+            }
+          ],
+          "entity": {
+            "type": "DGDataQualityScopeReference",
+            "referenceName": "41b722b4-7604-4f94-bbec-37880fe3226c"
+          },
+          "parentEntityName": "79e7043b-2d89-4454-9f07-1d8ceb3f0399/41b722b4-7604-4f94-bbec-37880fe3226c"
+        }
+      }
+    }
+  }
+}

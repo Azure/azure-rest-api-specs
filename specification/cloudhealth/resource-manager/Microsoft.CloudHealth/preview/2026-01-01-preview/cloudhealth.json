@@ -2310,7 +2310,31 @@
         "azureResourceId"
       ]
     },
-    "DependenciesSignalGroup": {
+    "DependenciesAggregationUnit": {
+      "type": "string",
+      "description": "Unit type for dependency aggregation thresholds.",
+      "enum": [
+        "Absolute",
+        "Percentage"
+      ],
+      "x-ms-enum": {
+        "name": "DependenciesAggregationUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Absolute",
+            "value": "Absolute",
+            "description": "Threshold is an absolute count of entities."
+          },
+          {
+            "name": "Percentage",
+            "value": "Percentage",
+            "description": "Threshold is a percentage of entities (0-100)."
+          }
+        ]
+      }
+    },
+    "DependenciesSignalGroupV2": {
       "type": "object",
       "description": "Properties for dependent entities, i.e. child entities",
       "properties": {
@@ -2320,7 +2344,8 @@
           "default": "WorstOf",
           "enum": [
             "WorstOf",
-            "Thresholds"
+            "MinHealthy",
+            "MaxNotHealthy"
           ],
           "x-ms-enum": {
             "name": "DependenciesAggregationType",
@@ -2332,20 +2357,38 @@
                 "description": "Default behavior: Worst child health state is propagated."
               },
               {
-                "name": "Thresholds",
-                "value": "Thresholds",
-                "description": "Based on configurable thresholds."
+                "name": "MinHealthy",
+                "value": "MinHealthy",
+                "description": "Healthy if the count/percentage of healthy children meets the threshold."
+              },
+              {
+                "name": "MaxNotHealthy",
+                "value": "MaxNotHealthy",
+                "description": "Healthy if the count/percentage of not-healthy children stays below the threshold."
               }
             ]
           }
         },
         "degradedThreshold": {
-          "type": "string",
-          "description": "Degraded threshold for aggregating the propagated health state of child dependencies. Can be either an absolute number that is greater than 0, or a percentage between 1-100%. The entity will be considered degraded when the number of not healthy child dependents (unhealthy, degraded, unknown) is equal to or above the threshold value. Must only be set when AggregationType is 'Thresholds'."
+          "type": "number",
+          "format": "double",
+          "description": "Degraded threshold for aggregation. For MinHealthy: parent is degraded when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is degraded when not-healthy count/percentage reaches or exceeds this value. Optional — if not set, there is no degraded state (transitions directly from Healthy to Unhealthy).",
+          "minimum": 0
         },
         "unhealthyThreshold": {
-          "type": "string",
-          "description": "Unhealthy threshold for aggregating the propagated health state of child dependencies. Can be either an absolute number that is greater than 0, or a percentage between 1-100%. The entity will be considered unhealthy when the number of not healthy child dependents (unhealthy, degraded, unknown) is equal to or above the threshold value. Must only be set when AggregationType is 'Thresholds'."
+          "type": "number",
+          "format": "double",
+          "description": "Unhealthy threshold for aggregation. For MinHealthy: parent is unhealthy when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is unhealthy when not-healthy count/percentage reaches or exceeds this value. Required when aggregationType is MinHealthy or MaxNotHealthy.",
+          "minimum": 0
+        },
+        "unit": {
+          "$ref": "#/definitions/DependenciesAggregationUnit",
+          "description": "Unit type for the aggregation thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy."
+        },
+        "ignoreUnknown": {
+          "type": "boolean",
+          "description": "If true, children with Unknown health state are excluded from aggregation calculations. Defaults to true.",
+          "default": true
         }
       },
       "required": [
@@ -2464,12 +2507,6 @@
         "specification": {
           "$ref": "#/definitions/DiscoveryRuleSpecification",
           "description": "Specification of the discovery rule defining how entities are discovered."
-        },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the discovery rule was (soft-)deleted.",
-          "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/DiscoveryError",
@@ -2677,13 +2714,6 @@
           "minLength": 1,
           "maxLength": 260
         },
-        "kind": {
-          "type": "string",
-          "description": "Entity kind",
-          "default": "Default",
-          "minLength": 1,
-          "maxLength": 260
-        },
         "canvasPosition": {
           "$ref": "#/definitions/EntityCoordinates",
           "description": "Positioning of the entity on the model canvas"
@@ -2746,12 +2776,6 @@
           "description": "Discovered by which discovery rule. If set, the entity cannot be deleted manually.",
           "readOnly": true
         },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the entity was (soft-)deleted",
-          "readOnly": true
-        },
         "healthState": {
           "$ref": "#/definitions/HealthState",
           "description": "Health state of this entity",
@@ -2779,6 +2803,39 @@
       "required": [
         "unhealthyRule"
       ]
+    },
+    "ExternalSignal": {
+      "type": "object",
+      "description": "An externally submitted signal instance assigned to an entity.",
+      "properties": {
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules for the external signal as submitted."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignalInstanceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "External"
+    },
+    "ExternalSignalGroup": {
+      "type": "object",
+      "description": "A grouping of externally submitted signals.",
+      "properties": {
+        "signals": {
+          "type": "array",
+          "description": "Signals assigned to this signal group.",
+          "items": {
+            "$ref": "#/definitions/ExternalSignal"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "HealthModel": {
       "type": "object",
@@ -2828,10 +2885,6 @@
           "$ref": "#/definitions/HealthModelProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        },
-        "discovery": {
-          "$ref": "#/definitions/ModelDiscoverySettings",
-          "description": "Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model."
         }
       }
     },
@@ -2890,20 +2943,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/HealthModelUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "HealthModelUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the HealthModel.",
-      "properties": {
-        "discovery": {
-          "$ref": "#/definitions/ModelDiscoverySettingsUpdate",
-          "description": "Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model."
         }
       }
     },
@@ -2945,7 +2984,7 @@
           "$ref": "#/definitions/HealthReportEvaluationRule",
           "description": "Evaluation rules that were used to determine the reported health state"
         },
-        "expiresIn": {
+        "expiresInMinutes": {
           "type": "integer",
           "format": "int32",
           "description": "Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.",
@@ -3286,46 +3325,6 @@
         ]
       }
     },
-    "ModelDiscoverySettings": {
-      "type": "object",
-      "description": "Settings for automatically discovering entities for the health model.",
-      "properties": {
-        "scope": {
-          "$ref": "#/definitions/string4096",
-          "description": "The scope from which entities should be automatically discovered. For example, the resource id of a Service Group."
-        },
-        "addRecommendedSignals": {
-          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
-          "description": "Whether to add all recommended signals to the discovered entities."
-        },
-        "identity": {
-          "$ref": "#/definitions/string4096",
-          "description": "Which Managed Identity of the health model to use for discovery. Defaults to SystemAssigned, if not set. Can be set to 'SystemAssigned' or to the resource id of a user-assigned managed identity which is linked to the health model."
-        }
-      },
-      "required": [
-        "scope",
-        "addRecommendedSignals"
-      ]
-    },
-    "ModelDiscoverySettingsUpdate": {
-      "type": "object",
-      "description": "Settings for automatically discovering entities for the health model.",
-      "properties": {
-        "scope": {
-          "$ref": "#/definitions/string4096",
-          "description": "The scope from which entities should be automatically discovered. For example, the resource id of a Service Group."
-        },
-        "addRecommendedSignals": {
-          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
-          "description": "Whether to add all recommended signals to the discovered entities."
-        },
-        "identity": {
-          "$ref": "#/definitions/string4096",
-          "description": "Which Managed Identity of the health model to use for discovery. Defaults to SystemAssigned, if not set. Can be set to 'SystemAssigned' or to the resource id of a user-assigned managed identity which is linked to the health model."
-        }
-      }
-    },
     "PrometheusMetricsSignal": {
       "type": "object",
       "description": "A Prometheus Metrics Query signal instance assigned to an entity.",
@@ -3519,12 +3518,6 @@
         "discoveredBy": {
           "$ref": "#/definitions/discoveryRuleName",
           "description": "Discovered by which discovery rule. If set, the relationship cannot be deleted manually.",
-          "readOnly": true
-        },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the relationship was (soft-)deleted",
           "readOnly": true
         }
       },
@@ -3726,12 +3719,6 @@
         "evaluationRules": {
           "$ref": "#/definitions/EvaluationRule",
           "description": "Evaluation rules for the signal definition"
-        },
-        "deletionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date when the signal definition was (soft-)deleted",
-          "readOnly": true
         }
       },
       "discriminator": "signalKind",
@@ -3757,8 +3744,13 @@
           "description": "Azure Monitor Workspace Signal Group"
         },
         "dependencies": {
-          "$ref": "#/definitions/DependenciesSignalGroup",
+          "$ref": "#/definitions/DependenciesSignalGroupV2",
           "description": "Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity."
+        },
+        "external": {
+          "$ref": "#/definitions/ExternalSignalGroup",
+          "description": "List of signals which have been externally submitted for this entity.",
+          "readOnly": true
         }
       }
     },
@@ -3876,7 +3868,8 @@
       "enum": [
         "AzureResourceMetric",
         "LogAnalyticsQuery",
-        "PrometheusMetricsQuery"
+        "PrometheusMetricsQuery",
+        "External"
       ],
       "x-ms-enum": {
         "name": "SignalKind",
@@ -3893,6 +3886,10 @@
           {
             "name": "PrometheusMetricsQuery",
             "value": "PrometheusMetricsQuery"
+          },
+          {
+            "name": "ExternalSignal",
+            "value": "External"
           }
         ]
       }

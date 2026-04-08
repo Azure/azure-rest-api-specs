@@ -17,7 +17,7 @@ import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.js";
  * @typedef {{
  *   "ARMSignedOff": LabelAction,
  *   "ARMAutoSignedOff-IncrementalTSP": LabelAction,
- *   "ARMAutoSignedOff-Trivial-Test": LabelAction,
+ *   "ARMAutoSignedOff-Trivial": LabelAction,
  * }} ManagedLabelActions
  */
 
@@ -26,7 +26,7 @@ function createNoneLabelActions() {
   return {
     [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.None,
     [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: LabelAction.None,
-    [ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmAutoSignedOffTrivial]: LabelAction.None,
   };
 }
 
@@ -99,12 +99,14 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   });
   const labelNames = labels.map((label) => label.name);
 
-  // Check if any auto sign-off labels are currently present
-  // Only proceed with auto sign-off logic if auto labels exist or we're about to add them
+  // Check if any auto sign-off labels are currently present.
+  // Used to determine whether ARMSignedOff was auto-added (vs manually added)
+  // and whether removal is needed when the PR no longer qualifies.
   const hasAutoSignedOffLabels =
+    // need to consider the legacy label
     labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOff) ||
     labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP) ||
-    labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest);
+    labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffTrivial);
   core.info(`Labels: ${inspect(labelNames)}`);
   core.info(`Has auto signed-off labels: ${hasAutoSignedOffLabels}`);
 
@@ -136,13 +138,14 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       return noneResult;
     }
 
+    // Auto sign-off labels are present, so ARMSignedOff was auto-added. Remove all.
     return {
       ...noneResult,
       labelActions: {
         ...noneLabelActions,
         [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.Remove,
         [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: LabelAction.Remove,
-        [ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest]: LabelAction.Remove,
+        [ArmAutoSignoffLabel.ArmAutoSignedOffTrivial]: LabelAction.Remove,
       },
     };
   };
@@ -216,18 +219,10 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     requiredStatuses.every((status) => status.state === CommitStatusState.SUCCESS)
   ) {
     core.info("All requirements met for auto-signoff");
-    const autoIncrementalTSP = armAnalysisResult.incrementalTypeSpec;
-    const autoTrivialTest = armAnalysisResult.isTrivial;
-
-    // Add ARMSignOff label only when the PR is identified as an incremental typespec
-    // As the trivial changes sign-off is being released in test mode
-    const armSignOffAction = autoIncrementalTSP
+    const autoIncrementalTSPAction = armAnalysisResult.incrementalTypeSpec
       ? LabelAction.Add
-      : hasAutoSignedOffLabels
-        ? LabelAction.Remove
-        : LabelAction.None;
-    const autoIncrementalTSPAction = autoIncrementalTSP ? LabelAction.Add : LabelAction.Remove;
-    const testTrivialAction = autoTrivialTest ? LabelAction.Add : LabelAction.Remove;
+      : LabelAction.Remove;
+    const trivialAction = armAnalysisResult.isTrivial ? LabelAction.Add : LabelAction.Remove;
 
     // Keep labels in sync with current analysis results.
     // When a label is not desired, emit Remove so it gets cleaned up if previously set.
@@ -235,9 +230,9 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       ...baseResult,
       labelActions: {
         ...noneLabelActions,
-        [ArmAutoSignoffLabel.ArmSignedOff]: armSignOffAction,
+        [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.Add,
         [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: autoIncrementalTSPAction,
-        [ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest]: testTrivialAction,
+        [ArmAutoSignoffLabel.ArmAutoSignedOffTrivial]: trivialAction,
       },
     };
   }
