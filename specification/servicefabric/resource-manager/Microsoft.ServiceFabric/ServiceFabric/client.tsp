@@ -31,20 +31,21 @@ using Microsoft.ServiceFabric;
 );
 
 // C# renames to preserve backward compatibility with autorest-generated SDK
-// NOTE: Resource type renames are SKIPPED for now due to a generator bug where
-// @@clientName on resource models extending custom @customAzureResource ProxyResource
-// causes the generator to produce empty stub Resource classes (missing ResourceType,
-// Data, constructors, and all operations). This is a known issue to revisit once
-// the generator is fixed. The old API used "ServiceFabric" prefix on all resource
-// types (e.g., ServiceFabricClusterResource, ServiceFabricApplicationResource).
-// See: https://github.com/Azure/azure-sdk-for-net/issues/55604
-//
-// @@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
-// @@clientName(Microsoft.ServiceFabric.ApplicationResource, "ServiceFabricApplication", "csharp");
-// @@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
-// @@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
-// @@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
+// NOTE: Resource classes for custom @customAzureResource ProxyResource models are
+// generated as empty stubs. We use CodeGenSuppress + custom code on the SDK side
+// to provide full implementations.
+@@clientName(Microsoft.ServiceFabric.Cluster, "ServiceFabricCluster", "csharp");
+@@clientName(Microsoft.ServiceFabric.ApplicationResource, "ServiceFabricApplication", "csharp");
+@@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
+@@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
+@@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
 // @@clientName(Microsoft.ServiceFabric.VMSizeResource, "ServiceFabricVmSizeResource", "csharp");
+
+// Mark ClusterVersions list operations as pageable (old API had Pageable<ClusterCodeVersionsResult>)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment, "csharp");
 
 // Model type renames
 @@clientName(Microsoft.ServiceFabric.AzureActiveDirectory, "ClusterAadSetting", "csharp");
