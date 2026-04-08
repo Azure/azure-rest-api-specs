@@ -28,7 +28,7 @@ interface AutoscaleSettingResources {
   /**
    * Gets an autoscale setting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutoscaleSettings_Get")
   @tag("AutoscaleSettings")
   get is ArmResourceRead<
@@ -39,7 +39,7 @@ interface AutoscaleSettingResources {
   /**
    * Creates or updates an autoscale setting.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutoscaleSettings_CreateOrUpdate")
   @tag("AutoscaleSettings")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -50,7 +50,7 @@ interface AutoscaleSettingResources {
   /**
    * Updates an existing AutoscaleSettingsResource. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutoscaleSettings_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -62,7 +62,7 @@ interface AutoscaleSettingResources {
   /**
    * Deletes and autoscale setting
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutoscaleSettings_Delete")
   @tag("AutoscaleSettings")
   delete is ArmResourceDeleteSync<
@@ -73,7 +73,7 @@ interface AutoscaleSettingResources {
   /**
    * Lists the autoscale settings for a resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutoscaleSettings_ListByResourceGroup")
   @tag("AutoscaleSettings")
   listByResourceGroup is ArmResourceListByParent<
@@ -85,7 +85,7 @@ interface AutoscaleSettingResources {
   /**
    * Lists the autoscale settings for a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutoscaleSettings_ListBySubscription")
   @tag("AutoscaleSettings")
   listBySubscription is ArmListBySubscription<
@@ -97,7 +97,7 @@ interface AutoscaleSettingResources {
   /**
    * get predictive autoscale metric future data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PredictiveMetric_Get")
   @get
   @action("predictiveMetrics")

@@ -24,12 +24,13 @@ using TypeSpec.Versioning;
 /**
  * Monitor Management Client
  */
-@armProviderNamespace
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armProviderNamespace("microsoft.insights")
 @service(#{ title: "MonitorManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace microsoft.insights;
+namespace Microsoft.Insights;
 
 /**
  * The available API versions.

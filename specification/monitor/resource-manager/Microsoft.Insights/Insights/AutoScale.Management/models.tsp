@@ -57,7 +57,7 @@ union CreatedByType {
 /**
  * the metric statistic type. How the metrics from multiple instances are combined.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum MetricStatisticType {
   /**
    * Average
@@ -85,7 +85,7 @@ enum MetricStatisticType {
   Count,
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum OperationType {
   /**
    * Scale
@@ -96,7 +96,7 @@ enum OperationType {
 /**
  * time aggregation type. How the data that is collected should be combined over time. The default value is Average.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum TimeAggregationType {
   /**
    * Average
@@ -132,7 +132,7 @@ enum TimeAggregationType {
 /**
  * the operator that is used to compare the metric data and the threshold.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ComparisonOperationType {
   /**
    * Equals
@@ -168,7 +168,7 @@ enum ComparisonOperationType {
 /**
  * the scale direction. Whether the scaling action increases or decreases the number of instances.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ScaleDirection {
   /**
    * None
@@ -189,7 +189,7 @@ enum ScaleDirection {
 /**
  * the type of action that should occur when the scale rule fires.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ScaleType {
   /**
    * ChangeCount
@@ -215,7 +215,7 @@ enum ScaleType {
 /**
  * the recurrence frequency. How often the schedule profile should take effect. This value must be Week, meaning each week will have the same set of profiles. For example, to set a daily schedule, set **schedule** to every day of the week. The frequency property specifies that the schedule is repeated weekly.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RecurrenceFrequency {
   /**
    * None
@@ -261,7 +261,7 @@ enum RecurrenceFrequency {
 /**
  * the predictive autoscale mode
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum PredictiveAutoscalePolicyScaleMode {
   /**
    * Disabled
@@ -288,7 +288,7 @@ model AutoscaleSettingResourceCollection
 /**
  * A setting that contains all of the configuration for the automatic scaling of a resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutoscaleSetting {
   /**
    * the collection of automatic scaling profiles that specify different scaling parameters for different time periods. A maximum of 20 profiles can be specified.
@@ -625,7 +625,7 @@ model WebhookNotification {
   /**
    * a property bag of settings. This value can be empty.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: Record<string>;
 }
 
@@ -675,7 +675,7 @@ model Resource {
   /**
    * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -734,7 +734,7 @@ model AutoscaleSettingResourcePatch {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**

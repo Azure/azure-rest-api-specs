@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
 /**
  * API for Azure Activity Log Alert rules CRUD operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Azure Activity Log Alerts API" })
 @versioned(Versions)

@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Monitor client to create/update/delete metric based alerts.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "MonitorManagementClient" })
 @versioned(Versions)

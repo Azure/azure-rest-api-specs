@@ -19,13 +19,13 @@ using Microsoft.Insights;
   "PrivateLinkScopes"
 );
 @@clientLocation(AzureMonitorPrivateLinkScopes.list, "PrivateLinkScopes");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AzureMonitorPrivateLinkScope.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(ScopedResources.get, "PrivateLinkScopedResources");
@@ -35,7 +35,7 @@ using Microsoft.Insights;
 @@clientLocation(ScopedResources.listByPrivateLinkScope,
   "PrivateLinkScopedResources"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ScopedResource.properties);
 
 @@clientLocation(PrivateLinkScopeOperationStatusOperationGroup.get,

@@ -33,8 +33,8 @@ union BaselineSensitivity {
   High: "High",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResultType {
   /**
    * Data
@@ -203,11 +203,11 @@ model BaselineMetadata {
  */
 @error
 model ErrorResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: ErrorResponseError;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ErrorResponseError {
   /**
    * Unlocalized string which can be used to programmatically identify the error.
@@ -227,11 +227,13 @@ model ErrorResponseError {
   /**
    * An array of additional nested error response info objects, as described by this contract.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: ErrorDetail[];
 
   /**
    * An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalInfo?: ErrorResponseErrorAdditionalInfoItem[];
 }
 
@@ -257,10 +259,11 @@ model ErrorDetail {
   /**
    * An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalInfo?: ErrorDetailAdditionalInfoItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ErrorDetailAdditionalInfoItem {
   /**
    * The type of additional information.
@@ -270,11 +273,11 @@ model ErrorDetailAdditionalInfoItem {
   /**
    * The additional information specific to the type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ErrorResponseErrorAdditionalInfoItem {
   /**
    * The type of additional information.
@@ -284,6 +287,6 @@ model ErrorResponseErrorAdditionalInfoItem {
   /**
    * The additional information specific to the type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: Record<unknown>;
 }

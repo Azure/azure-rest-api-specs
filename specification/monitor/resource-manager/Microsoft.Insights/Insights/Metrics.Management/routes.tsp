@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Insights;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface MetricDefinitionsOperationGroup {
   /**
    * Lists the metric definitions for the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricDefinitions_ListAtSubscriptionScope")
   @autoRoute
   @get
@@ -46,7 +46,7 @@ interface MetricDefinitionsOperationGroup {
   /**
    * Lists the metric definitions for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricDefinitions_List")
   @autoRoute
   @get
@@ -66,38 +66,42 @@ interface MetricDefinitionsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface MetricNamespacesOperationGroup {
   /**
    * Lists the metric namespaces for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MetricNamespaces_List")
-  @autoRoute
   @get
   @action("metricNamespaces")
   @tag("metricNamespaces")
   @list
-  list is ArmProviderActionSync<
-    Response = MetricNamespaceCollection,
-    Scope = ExtensionResourceActionScope,
-    Parameters = {
-      /**
-       * The ISO 8601 conform Date start time from which to query for metric namespaces.
-       */
-      @query("startTime")
-      startTime?: string;
-    },
-    Error = ErrorResponse
-  >;
+  @route("/{+resourceUri}/providers/microsoft.insights/metricNamespaces")
+  list(
+    ...ApiVersionParameter,
+
+    /**
+     * The identifier of the resource.
+     */
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
+    resourceUri: string,
+
+    /**
+     * The ISO 8601 conform Date start time from which to query for metric namespaces.
+     */
+    @query("startTime")
+    startTime?: string,
+  ): MetricNamespaceCollection | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface MetricsOperationGroup {
   /**
    * **Lists the metric data for a subscription**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Metrics_ListAtSubscriptionScope")
   @autoRoute
   @get
@@ -176,12 +180,14 @@ interface MetricsOperationGroup {
       /**
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
       /**
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 
@@ -196,7 +202,7 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric data for a subscription**. Parameters can be specified on either query params or the body. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Metrics_ListAtSubscriptionScopePost")
   @autoRoute
   @action("metrics")
@@ -275,12 +281,14 @@ interface MetricsOperationGroup {
       /**
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
       /**
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 
@@ -296,7 +304,7 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric values for a resource**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Metrics_List")
   @autoRoute
   @get
@@ -369,12 +377,14 @@ interface MetricsOperationGroup {
       /**
        * When set to true, if the timespan passed in is not supported by this metric, the API will return the result using the closest supported timespan. When set to false, an error is returned for invalid timespan parameters. Defaults to false.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("AutoAdjustTimegrain")
       AutoAdjustTimegrain?: boolean;
 
       /**
        * When set to false, invalid filter parameter values will be ignored. When set to true, an error is returned for invalid filter parameters. Defaults to true.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("ValidateDimensions")
       ValidateDimensions?: boolean;
 

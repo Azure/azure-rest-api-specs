@@ -268,7 +268,7 @@ union KnownColumnDefinitionType {
   dynamic: "dynamic",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownPerfCounterDataSourceStreams {
   string,
 
@@ -283,7 +283,7 @@ union KnownPerfCounterDataSourceStreams {
   `Microsoft-InsightsMetrics`: "Microsoft-InsightsMetrics",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownPerformanceCountersOTelDataSourceStreams {
   string,
 
@@ -293,7 +293,7 @@ union KnownPerformanceCountersOTelDataSourceStreams {
   `Microsoft-OtelPerfMetrics`: "Microsoft-OtelPerfMetrics",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownWindowsEventLogDataSourceStreams {
   string,
 
@@ -308,7 +308,7 @@ union KnownWindowsEventLogDataSourceStreams {
   `Microsoft-Event`: "Microsoft-Event",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownSyslogDataSourceStreams {
   string,
 
@@ -318,7 +318,7 @@ union KnownSyslogDataSourceStreams {
   `Microsoft-Syslog`: "Microsoft-Syslog",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownSyslogDataSourceFacilityNames {
   string,
 
@@ -458,7 +458,7 @@ union KnownSyslogDataSourceFacilityNames {
   uucp: "uucp",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownSyslogDataSourceLogLevels {
   string,
 
@@ -508,7 +508,7 @@ union KnownSyslogDataSourceLogLevels {
   Asterisk: "*",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownExtensionDataSourceStreams {
   string,
 
@@ -607,7 +607,7 @@ union KnownLogFileTextSettingsRecordStartTimestampFormat {
   `yyyy-MM-ddTHH:mm:ssK`: "yyyy-MM-ddTHH:mm:ssK",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownWindowsFirewallLogsDataSourceProfileFilter {
   string,
 
@@ -627,7 +627,7 @@ union KnownWindowsFirewallLogsDataSourceProfileFilter {
   Public: "Public",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownPrometheusForwarderDataSourceStreams {
   string,
 
@@ -637,7 +637,7 @@ union KnownPrometheusForwarderDataSourceStreams {
   `Microsoft-PrometheusMetrics`: "Microsoft-PrometheusMetrics",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownOtelLogsDataSourceStreams {
   string,
 
@@ -647,7 +647,7 @@ union KnownOtelLogsDataSourceStreams {
   `Microsoft-OTel-Logs`: "Microsoft-OTel-Logs",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownOtelTracesDataSourceStreams {
   string,
 
@@ -716,7 +716,7 @@ union KnownEtwProviderDataSourceLogLevel {
   Verbose: "Verbose",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownOtelLogsDirectDataSourceStreams {
   string,
 
@@ -726,7 +726,7 @@ union KnownOtelLogsDirectDataSourceStreams {
   `Microsoft-OTel-Logs`: "Microsoft-OTel-Logs",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownOtelTracesDirectDataSourceStreams {
   string,
 
@@ -746,7 +746,7 @@ union KnownOtelTracesDirectDataSourceStreams {
   `Microsoft-OTel-Traces-Resources`: "Microsoft-OTel-Traces-Resources",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KnownDataFlowStreams {
   string,
 
@@ -830,7 +830,7 @@ union KnownDataCollectionRuleResourceKind {
   Windows: "Windows",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union IdentityType {
   string,
 
@@ -855,9 +855,10 @@ union IdentityType {
   `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointResourceProperties extends DataCollectionEndpoint {}
 
 /**
@@ -903,6 +904,7 @@ model DataCollectionEndpoint {
   /**
    * List of Azure Monitor Private Link Scope Resources to which this data collection endpoint resource is associated. This property is READ-ONLY.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   privateLinkScopedResources?: PrivateLinkScopedResource[];
 
@@ -922,7 +924,8 @@ model DataCollectionEndpoint {
 /**
  * The endpoint used by clients to access their configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointConfigurationAccess
   extends ConfigurationAccessEndpointSpec {}
 
@@ -940,7 +943,8 @@ model ConfigurationAccessEndpointSpec {
 /**
  * The endpoint used by clients to ingest logs.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointLogsIngestion extends LogsIngestionEndpointSpec {}
 
 /**
@@ -957,7 +961,8 @@ model LogsIngestionEndpointSpec {
 /**
  * The endpoint used by clients to ingest metrics.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointMetricsIngestion
   extends MetricsIngestionEndpointSpec {}
 
@@ -975,7 +980,8 @@ model MetricsIngestionEndpointSpec {
 /**
  * Network access control rules for the endpoints.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointNetworkAcls extends NetworkRuleSet {}
 
 /**
@@ -988,7 +994,7 @@ model NetworkRuleSet {
   publicNetworkAccess?: KnownPublicNetworkAccessOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkScopedResource {
   /**
    * The resourceId of the Azure Monitor Private Link Scope Scoped Resource through which this DCE is associated with a Azure Monitor Private Link Scope.
@@ -1004,11 +1010,12 @@ model PrivateLinkScopedResource {
 /**
  * Metadata for the resource. This property can only be updated by Log Analytics Control Plane for Data Collection Endpoint with Log Analytics Destination.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointFailoverConfiguration
   extends FailoverConfigurationSpec {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailoverConfigurationSpec {
   /**
    * Active location where data flow will occur.
@@ -1018,10 +1025,11 @@ model FailoverConfigurationSpec {
   /**
    * Locations that are configured for failover.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   locations?: LocationSpec[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocationSpec {
   /**
    * Name of location.
@@ -1037,7 +1045,8 @@ model LocationSpec {
 /**
  * Metadata for the resource. This property can only be updated by Log Analytics Control Plane for Data Collection Endpoint with Log Analytics Destination.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointMetadata extends Metadata {}
 
 /**
@@ -1066,21 +1075,24 @@ model Metadata {
 /**
  * The SKU of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointResourceSku
   extends Azure.ResourceManager.CommonTypes.Sku {}
 
 /**
  * Managed service identity of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointResourceIdentity
   extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionEndpointResourceSystemData extends SystemData {}
 
 /**
@@ -1097,11 +1109,12 @@ model ErrorResponseCommonV2 {
 /**
  * Definition of ARM tracked top level resource properties for update operation.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceForUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1113,13 +1126,15 @@ model ResourceForUpdate {
 /**
  * Managed Service Identity.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceForUpdateIdentity
   extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleAssociationProxyOnlyResourceProperties
   extends DataCollectionRuleAssociation {}
 
@@ -1158,19 +1173,22 @@ model DataCollectionRuleAssociation {
 /**
  * Metadata about the resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleAssociationMetadata extends Metadata {}
 
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleAssociationProxyOnlyResourceSystemData
   extends SystemData {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleResourceProperties extends DataCollectionRule {}
 
 /**
@@ -1218,7 +1236,7 @@ model DataCollectionRule {
   /**
    * Declaration of custom streams used in this rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   streamDeclarations?: Record<StreamDeclaration>;
 
   /**
@@ -1241,6 +1259,7 @@ model DataCollectionRule {
   /**
    * The specification of data flows.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dataFlows?: DataFlow[];
 
   /**
@@ -1259,13 +1278,15 @@ model DataCollectionRule {
 /**
  * Metadata about the resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleMetadata extends Metadata {}
 
 /**
  * Defines the ingestion endpoints to send data to via this rule.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleEndpoints extends EndpointsSpec {}
 
 /**
@@ -1288,7 +1309,8 @@ model EndpointsSpec {
 /**
  * Defines all the references that may be used in other sections of the DCR
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleReferences extends ReferencesSpec {}
 
 /**
@@ -1309,7 +1331,8 @@ model ReferencesSpec {
 /**
  * All the enrichment data sources referenced in data flows
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReferencesSpecEnrichmentData extends EnrichmentData {}
 
 /**
@@ -1322,7 +1345,7 @@ model EnrichmentData {
   storageBlobs?: StorageBlob[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageBlob {
   /**
    * Resource Id of the storage account that hosts the blob
@@ -1345,7 +1368,7 @@ model StorageBlob {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationInsights {
   /**
    * Id of the application insights resource
@@ -1361,7 +1384,8 @@ model ApplicationInsights {
 /**
  * Agent settings used to modify agent behavior on a given host
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleAgentSettings extends AgentSettingsSpec {}
 
 /**
@@ -1419,7 +1443,8 @@ model ColumnDefinition {
  * The specification of data sources.
  *  This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleDataSources extends DataSourcesSpec {}
 
 /**
@@ -1434,6 +1459,7 @@ model DataSourcesSpec {
   /**
    * The list of Open Telemetry performance counter data source configurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   performanceCountersOTel?: PerformanceCountersOTelDataSource[];
 
   /**
@@ -1541,6 +1567,7 @@ model PerfCounterDataSource {
  * Definition of which Open Telemetry performance counters will be collected and how they will be collected by this data collection rule.
  * Collected from both Windows and Linux machines where the counter is present.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PerformanceCountersOTelDataSource {
   /**
    * List of streams that this data source will be sent to.
@@ -1645,6 +1672,7 @@ model ExtensionDataSource {
   /**
    * The extension settings. The format is specific for particular extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionSettings?: unknown;
 
   /**
@@ -1699,7 +1727,8 @@ model LogFilesDataSource {
 /**
  * The log files specific settings.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LogFilesDataSourceSettings extends LogFileSettings {}
 
 /**
@@ -1715,7 +1744,8 @@ model LogFileSettings {
 /**
  * Text settings
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LogFileSettingsText extends LogFileTextSettings {}
 
 /**
@@ -1789,12 +1819,14 @@ model PrometheusForwarderDataSource {
    * Currently only one label is supported: 'microsoft_metrics_include_label'.
    * Label values are matched case-insensitively.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   labelIncludeFilter?: Record<string>;
 
   /**
    * Custom VM Scrape Config that defines scrape jobs
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customVMScrapeConfig?: unknown[];
 
   /**
@@ -1823,10 +1855,11 @@ model PlatformTelemetryDataSource {
 /**
  * Specifications of pull based data sources
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataSourcesSpecDataImports extends DataImportSources {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataImportSources {
   /**
    * Definition of Event Hub configuration.
@@ -1837,10 +1870,11 @@ model DataImportSources {
 /**
  * Definition of Event Hub configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataImportSourcesEventHub extends EventHubDataSource {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventHubDataSource {
   /**
    * A friendly name for the data source.
@@ -1898,7 +1932,8 @@ model OtelLogsDataSource {
 /**
  * Specifies the routing policy based on OTLP payload resource attributes to route subset of the payload according to matching resource attribute.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OtelLogsDataSourceResourceAttributeRouting
   extends OtelDataSourceResourceAttributeRouting {}
 
@@ -1957,7 +1992,8 @@ model OtelTracesDataSource {
 /**
  * Specifies the routing policy based on OTLP payload resource attributes to route subset of the payload according to matching resource attribute.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OtelTracesDataSourceResourceAttributeRouting
   extends OtelDataSourceResourceAttributeRouting {}
 
@@ -1995,7 +2031,8 @@ model OtelMetricsDataSource {
 /**
  * Specifies the routing policy based on OTLP payload resource attributes to route subset of the payload according to matching resource attribute.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OtelMetricsDataSourceResourceAttributeRouting
   extends OtelDataSourceResourceAttributeRouting {}
 
@@ -2044,7 +2081,8 @@ model EtwProviderDataSource {
  * The specification of direct data sources.
  *  This property is optional and can be omitted.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleDirectDataSources extends DirectDataSourcesSpec {}
 
 /**
@@ -2093,7 +2131,7 @@ model OtelMetricsDirectDataSource {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OtelLogsDirectDataSource {
   /**
    * List of streams that this data source will be sent to.
@@ -2157,7 +2195,8 @@ model OtelTracesDirectDataSource {
 /**
  * The specification of destinations.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleDestinations extends DestinationsSpec {}
 
 /**
@@ -2262,7 +2301,8 @@ model MonitoringAccountDestination {
 /**
  * Azure Monitor Metrics destination.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DestinationsSpecAzureMonitorMetrics
   extends AzureMonitorMetricsDestination {}
 
@@ -2277,7 +2317,7 @@ model AzureMonitorMetricsDestination {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventHubDestination {
   /**
    * The resource ID of the event hub.
@@ -2291,7 +2331,7 @@ model EventHubDestination {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventHubDirectDestination {
   /**
    * The resource ID of the event hub.
@@ -2305,7 +2345,7 @@ model EventHubDirectDestination {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageBlobDestination {
   /**
    * The container name of the Storage Blob.
@@ -2324,7 +2364,7 @@ model StorageBlobDestination {
   name?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageTableDestination {
   /**
    * The name of the Storage Table.
@@ -2439,43 +2479,49 @@ model DataFlow {
 /**
  * The specification for ingestion limits
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleIngestionQuotas extends IngestionQuotas {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IngestionQuotas {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   logs?: IngestionQuotasLogs;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IngestionQuotasLogs extends LogsQuotaSpec {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LogsQuotaSpec {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxSizePerMinuteInGB?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxRequestsPerMinute?: string;
 }
 
 /**
  * The SKU of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleResourceSku
   extends Azure.ResourceManager.CommonTypes.Sku {}
 
 /**
  * Managed service identity of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleResourceIdentity
   extends Azure.ResourceManager.CommonTypes.ManagedServiceIdentity {}
 
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataCollectionRuleResourceSystemData extends SystemData {}

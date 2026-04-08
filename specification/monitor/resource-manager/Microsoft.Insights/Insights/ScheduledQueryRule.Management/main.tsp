@@ -24,6 +24,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Monitor client to create/update/delete Scheduled Query Rules.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Scheduled Query Rules API" })
 @versioned(Versions)

@@ -14,7 +14,7 @@ namespace Microsoft.Insights;
 /**
  * the event level
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum EventLevel {
   /**
    * Critical
@@ -60,7 +60,7 @@ model EventData {
   /**
    * key value pairs to identify ARM permissions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   claims?: Record<string>;
 
@@ -165,7 +165,7 @@ model EventData {
   /**
    * the set of <Key, Value> pairs (usually a Dictionary<String, String>) that includes details about the event.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: Record<string>;
 

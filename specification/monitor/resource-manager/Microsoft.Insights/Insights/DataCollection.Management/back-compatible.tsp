@@ -30,7 +30,7 @@ using Microsoft.Insights;
 @@clientLocation(DataCollectionEndpointResources.listByDataCollectionEndpoint,
   "DataCollectionRuleAssociations"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataCollectionEndpointResource.properties);
 
 @@clientLocation(DataCollectionRuleAssociationProxyOnlyResources.get,
@@ -48,7 +48,7 @@ using Microsoft.Insights;
 @@clientLocation(DataCollectionRuleAssociationProxyOnlyResources.listByResource,
   "DataCollectionRuleAssociations"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataCollectionRuleAssociationProxyOnlyResource.properties
 );
 
@@ -67,5 +67,8 @@ using Microsoft.Insights;
 @@clientLocation(DataCollectionRuleResources.listByRule,
   "DataCollectionRuleAssociations"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataCollectionRuleResource.properties);
+@@doc(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+  "Resource entity tag (ETag)."
+);

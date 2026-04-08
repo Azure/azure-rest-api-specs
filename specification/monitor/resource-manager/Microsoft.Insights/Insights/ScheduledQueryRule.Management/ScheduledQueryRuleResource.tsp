@@ -25,27 +25,31 @@ model ScheduledQueryRuleResource
   /**
    * The identity of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
    * The geo-location where the resource lives
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: string;
 
   /**
    * Indicates the type of scheduled query rule. The default is LogAlert.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: Kind;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
@@ -54,7 +58,7 @@ interface ScheduledQueryRuleResources {
   /**
    * Retrieve an scheduled query rule definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledQueryRules_Get")
   @tag("ScheduledQueryRules")
   get is ArmResourceRead<ScheduledQueryRuleResource, Error = ErrorContract>;
@@ -62,7 +66,7 @@ interface ScheduledQueryRuleResources {
   /**
    * Creates or updates a scheduled query rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledQueryRules_CreateOrUpdate")
   @tag("ScheduledQueryRules")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -73,7 +77,7 @@ interface ScheduledQueryRuleResources {
   /**
    * Update a scheduled query rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledQueryRules_Update")
   @patch(#{ implicitOptionality: false })
   @tag("ScheduledQueryRules")
@@ -86,7 +90,7 @@ interface ScheduledQueryRuleResources {
   /**
    * Deletes a scheduled query rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledQueryRules_Delete")
   @tag("ScheduledQueryRules")
   delete is ArmResourceDeleteSync<
@@ -97,7 +101,7 @@ interface ScheduledQueryRuleResources {
   /**
    * Retrieve scheduled query rule definitions in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledQueryRules_ListByResourceGroup")
   @tag("ScheduledQueryRules")
   listByResourceGroup is ArmResourceListByParent<
@@ -109,7 +113,7 @@ interface ScheduledQueryRuleResources {
   /**
    * Retrieve a scheduled query rule definitions in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ScheduledQueryRules_ListBySubscription")
   @tag("ScheduledQueryRules")
   listBySubscription is ArmListBySubscription<

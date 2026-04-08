@@ -102,52 +102,6 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.Insights/metricNamespaces": {
-      "get": {
-        "operationId": "MetricNamespaces_List",
-        "tags": [
-          "metricNamespaces"
-        ],
-        "description": "Lists the metric namespaces for the resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "startTime",
-            "in": "query",
-            "description": "The ISO 8601 conform Date start time from which to query for metric namespaces.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/MetricNamespaceCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Metric Namespaces without filter": {
-            "$ref": "./examples/GetMetricNamespaces.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.Insights/metrics": {
       "get": {
         "operationId": "Metrics_List",
@@ -292,6 +246,57 @@
           "Get Metric with error": {
             "$ref": "./examples/GetMetricError.json"
           }
+        }
+      }
+    },
+    "/{resourceUri}/providers/microsoft.insights/metricNamespaces": {
+      "get": {
+        "operationId": "MetricNamespaces_List",
+        "tags": [
+          "metricNamespaces"
+        ],
+        "description": "Lists the metric namespaces for the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "The ISO 8601 conform Date start time from which to query for metric namespaces.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MetricNamespaceCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Metric Namespaces without filter": {
+            "$ref": "./examples/GetMetricNamespaces.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },

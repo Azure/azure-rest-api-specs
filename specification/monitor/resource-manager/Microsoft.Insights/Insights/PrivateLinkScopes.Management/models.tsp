@@ -194,7 +194,7 @@ model TagsResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -216,12 +216,14 @@ model OperationStatus {
    * Start time of the job in standard ISO8601 format.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: utcDateTime | null;
 
   /**
    * End time of the job in standard ISO8601 format.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endTime?: utcDateTime | null;
 
   /**
@@ -232,6 +234,7 @@ model OperationStatus {
   /**
    * The error detail of the operation if any.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
 }
 

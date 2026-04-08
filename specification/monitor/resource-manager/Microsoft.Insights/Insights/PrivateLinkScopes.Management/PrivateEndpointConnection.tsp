@@ -30,7 +30,7 @@ interface PrivateEndpointConnections {
   /**
    * Approve or reject a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is PrivateEndpointOperations.CreateOrReplaceAsync<
     AzureMonitorPrivateLinkScope,
     PrivateEndpointConnection,
@@ -41,7 +41,7 @@ interface PrivateEndpointConnections {
   /**
    * Deletes a private endpoint connection with a given name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is PrivateEndpointOperations.DeleteAsync<
     AzureMonitorPrivateLinkScope,
     PrivateEndpointConnection,
@@ -51,6 +51,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private endpoint connections on a private link scope.
    */
+  #suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByPrivateLinkScope is PrivateEndpointOperations.ListByParent<
     AzureMonitorPrivateLinkScope,
     PrivateEndpointConnection,

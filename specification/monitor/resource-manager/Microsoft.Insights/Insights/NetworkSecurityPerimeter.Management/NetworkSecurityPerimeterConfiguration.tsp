@@ -52,14 +52,16 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a specified NSP configuration for specified action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ActionGroups_GetNSP")
   getNSP is NetworkSecurityPerimeterConfigurationOps.Read<CommonTypes.NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Gets a list of NSP configurations for specified action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ActionGroups_ListNSP")
   listNSP is NetworkSecurityPerimeterConfigurationOps.List<
     CommonTypes.NetworkSecurityPerimeterConfiguration,
@@ -69,7 +71,8 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Reconciles a specified NSP configuration for specified action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ActionGroups_ReconcileNSP")
   @action("reconcile")
   reconcileNSP is NetworkSecurityPerimeterConfigurationOps.ActionSync<
@@ -110,6 +113,7 @@ interface DataCollectionEndpoints {
   /**
    * Gets the specified NSP configuration for the specified data collection endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
   @summary("Gets the specified NSP configuration for the specified data collection endpoint.")
   getNSP is DataCollectionEndpointOps.Read<CommonTypes.NetworkSecurityPerimeterConfiguration>;
@@ -117,6 +121,7 @@ interface DataCollectionEndpoints {
   /**
    * Gets a list of NSP configurations for the specified data collection endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
   @summary("Gets a list of NSP configurations for the specified data collection endpoint.")
   listNSP is DataCollectionEndpointOps.List<
@@ -127,6 +132,7 @@ interface DataCollectionEndpoints {
   /**
    * Reconciles the specified NSP configuration for the specified data collection endpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("reconcile")
   @tag("NetworkSecurityPerimeterConfigurations")
   @summary("Reconciles the specified NSP configuration for the specified data collection endpoint.")
@@ -168,12 +174,14 @@ interface ScheduledQueryRule {
   /**
    * Gets a network security perimeter configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
   getNSP is ScheduledQueryRuleOps.Read<CommonTypes.NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Gets a list of NSP configurations for specified scheduled query rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterConfigurations")
   listNSP is ScheduledQueryRuleOps.List<
     CommonTypes.NetworkSecurityPerimeterConfiguration,
@@ -183,6 +191,7 @@ interface ScheduledQueryRule {
   /**
    * Reconcile network security perimeter configuration for ScheduledQueryRule resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("reconcile")
   @tag("NetworkSecurityPerimeterConfigurations")
   reconcileNSP is ScheduledQueryRuleOps.ActionSync<

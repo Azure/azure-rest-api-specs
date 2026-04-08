@@ -25,21 +25,22 @@ model DataCollectionRuleResource
   /**
    * The kind of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: KnownDataCollectionRuleResourceKind;
 
   /**
    * The SKU of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: DataCollectionRuleResourceSku;
 
   /**
    * Managed service identity of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: DataCollectionRuleResourceIdentity;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
@@ -48,9 +49,10 @@ interface DataCollectionRuleResources {
   /**
    * Returns the specified data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataCollectionRules_Get")
   @tag("DataCollectionRules")
+  @summary("Returns the specified data collection rule.")
   get is ArmResourceRead<
     DataCollectionRuleResource,
     Error = ErrorResponseCommonV2
@@ -59,9 +61,10 @@ interface DataCollectionRuleResources {
   /**
    * Creates or updates a data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataCollectionRules_Create")
   @tag("DataCollectionRules")
+  @summary("Creates or updates a data collection rule.")
   create is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     DataCollectionRuleResource,
     OptionalRequestBody = true,
@@ -71,10 +74,11 @@ interface DataCollectionRuleResources {
   /**
    * Updates part of a data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataCollectionRules_Update")
   @patch(#{ implicitOptionality: false })
   @tag("DataCollectionRules")
+  @summary("Updates part of a data collection rule.")
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     DataCollectionRuleResource,
     PatchModel = ResourceForUpdate,
@@ -85,9 +89,10 @@ interface DataCollectionRuleResources {
   /**
    * Deletes a data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataCollectionRules_Delete")
   @tag("DataCollectionRules")
+  @summary("Deletes a data collection rule.")
   delete is ArmResourceDeleteSync<
     DataCollectionRuleResource,
     Parameters = {
@@ -103,9 +108,10 @@ interface DataCollectionRuleResources {
   /**
    * Lists all data collection rules in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataCollectionRules_ListByResourceGroup")
   @tag("DataCollectionRules")
+  @summary("Lists all data collection rules in the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
     DataCollectionRuleResource,
     Error = ErrorResponseCommonV2
@@ -114,9 +120,10 @@ interface DataCollectionRuleResources {
   /**
    * Lists all data collection rules in the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataCollectionRules_ListBySubscription")
   @tag("DataCollectionRules")
+  @summary("Lists all data collection rules in the specified subscription.")
   listBySubscription is ArmListBySubscription<
     DataCollectionRuleResource,
     Error = ErrorResponseCommonV2
@@ -125,12 +132,13 @@ interface DataCollectionRuleResources {
   /**
    * Lists associations for the specified data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DataCollectionRuleAssociations_ListByRule")
   @list
   @get
   @action("associations")
   @tag("DataCollectionRuleAssociations")
+  @summary("Lists associations for the specified data collection rule.")
   listByRule is ArmResourceActionSync<
     DataCollectionRuleResource,
     void,

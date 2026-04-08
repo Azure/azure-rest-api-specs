@@ -166,7 +166,7 @@ union DynamicThresholdSensitivity {
 /**
  * Type of managed service identity. Previously undocumented values might be returned
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum IdentityType {
   /**
    * SystemAssigned
@@ -205,7 +205,7 @@ model MetricAlertResourceCollection {
 /**
  * An alert rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MetricAlertProperties {
   /**
    * The description of the metric alert that will be included in the alert email.
@@ -284,13 +284,13 @@ model MetricAlertProperties {
   /**
    * The properties of an alert payload.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customProperties?: Record<string>;
 
   /**
    * The properties of an action properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   actionProperties?: Record<string>;
 }
 
@@ -304,10 +304,11 @@ model MetricAlertCriteria {
   /**
    * Specifies the type of the alert criteria. Previously undocumented values might be returned
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `odata.type`: Odatatype;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResolveConfiguration {
   /**
    * Indicates whether the alert should be auto resolved
@@ -332,7 +333,7 @@ model MetricAlertAction {
   /**
    * This field allows specifying custom properties, which would be appended to the alert payload sent as input to the webhook.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   webHookProperties?: Record<string>;
 }
 
@@ -367,7 +368,7 @@ model Resource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -400,7 +401,7 @@ model Identity {
   /**
    * The list of user identities associated with the resource. The user identity dictionary key references will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserIdentityProperties>;
 }
 
@@ -426,11 +427,11 @@ model UserIdentityProperties {
  */
 @error
 model ErrorResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: ErrorResponseError;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ErrorResponseError {
   /**
    * Unlocalized string which can be used to programmatically identify the error.
@@ -450,11 +451,13 @@ model ErrorResponseError {
   /**
    * An array of additional nested error response info objects, as described by this contract.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: ErrorDetail[];
 
   /**
    * An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalInfo?: ErrorResponseErrorAdditionalInfoItem[];
 }
 
@@ -480,10 +483,11 @@ model ErrorDetail {
   /**
    * An array of objects with 'type' and 'info' properties. The schema of 'info' is service-specific and dependent on the 'type' string.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalInfo?: ErrorDetailAdditionalInfoItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ErrorDetailAdditionalInfoItem {
   /**
    * The type of additional information.
@@ -493,11 +497,11 @@ model ErrorDetailAdditionalInfoItem {
   /**
    * The additional information specific to the type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ErrorResponseErrorAdditionalInfoItem {
   /**
    * The type of additional information.
@@ -507,7 +511,7 @@ model ErrorResponseErrorAdditionalInfoItem {
   /**
    * The additional information specific to the type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: Record<unknown>;
 }
 
@@ -518,7 +522,7 @@ model MetricAlertResourcePatch {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -613,13 +617,13 @@ model MetricAlertPropertiesPatch {
   /**
    * The properties of an alert payload.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customProperties?: Record<string>;
 
   /**
    * The properties of an action properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   actionProperties?: Record<string>;
 }
 
@@ -667,7 +671,7 @@ model MetricAlertStatusProperties {
   /**
    * An object describing the type of the dimensions.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dimensions?: Record<string>;
 
   /**
@@ -696,6 +700,7 @@ model MetricAlertSingleResourceMultipleMetricCriteria
   /**
    * Specifies the type of the alert criteria. Previously undocumented values might be returned
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `odata.type`: "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria";
 }
 
@@ -805,6 +810,7 @@ model WebtestLocationAvailabilityCriteria extends MetricAlertCriteria {
   /**
    * Specifies the type of the alert criteria. Previously undocumented values might be returned
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `odata.type`: "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria";
 }
 
@@ -822,6 +828,7 @@ model MetricAlertMultipleResourceMultipleMetricCriteria
   /**
    * Specifies the type of the alert criteria. Previously undocumented values might be returned
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `odata.type`: "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria";
 }
 
@@ -874,6 +881,7 @@ model DynamicThresholdFailingPeriods {
 /**
  * Specifies the PromQL criteria for the metric alert resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PromQLCriteria extends MetricAlertCriteria {
   /**
    * Configuration for failing periods in query-based alerts.
@@ -889,6 +897,7 @@ model PromQLCriteria extends MetricAlertCriteria {
   /**
    * Specifies the type of the alert criteria. Previously undocumented values might be returned
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `odata.type`: "Microsoft.Azure.Monitor.PromQLCriteria";
 }
 
@@ -905,6 +914,7 @@ model QueryFailingPeriods {
 /**
  * The types of conditions for a multi query metric alert.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("criterionType")
 model MultiPromQLCriteria {
   /**
@@ -926,6 +936,7 @@ model MultiPromQLCriteria {
 /**
  * The criterion for static prom query.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StaticPromQLCriteria extends MultiPromQLCriteria {
   /**
    * Specifies the type of threshold criteria. Previously undocumented values might be returned
@@ -936,6 +947,7 @@ model StaticPromQLCriteria extends MultiPromQLCriteria {
 /**
  * The criterion for dynamic prom query.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DynamicPromQLCriteria extends MultiPromQLCriteria {
   /**
    * The operator used to compare the metric value against the threshold. Previously undocumented values might be returned

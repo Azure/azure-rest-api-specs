@@ -23,7 +23,8 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Metching legacy API"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "privateLinkResourceName",
     "groupName"
@@ -33,7 +34,9 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Metching legacy API"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/legacy-type-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "privateLinkResourceName",
     "groupName"
