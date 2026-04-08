@@ -4664,6 +4664,10 @@ union KnowledgeSourceKind {
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   RemoteSharePoint: "remoteSharePoint",
+
+  /** A knowledge source that reads data from work IQ */
+  @added(Versions.v2026_05_01_preview)
+  WorkIQ: "workIQ",
 }
 
 /** Knowledge Source targeting a search index. */
@@ -4843,6 +4847,13 @@ model RemoteSharePointKnowledgeSourceParameters {
 
   /** Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online. */
   containerTypeId?: string;
+}
+
+/** Configuration for WorkIQ knowledge source. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model WorkIQKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.WorkIQ;
 }
 
 /** Result from listing knowledge sources. */

@@ -233,6 +233,14 @@ model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   filterExpressionAddOn?: string;
 }
 
+/** Specifies runtime parameters for a WorkIQ knowledge source */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model WorkIQKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.WorkIQ;
+}
+
 /** An intended query to execute without model query planning. */
 @discriminator("type")
 model KnowledgeRetrievalIntent {
@@ -333,6 +341,10 @@ union KnowledgeBaseActivityRecordType {
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
+
+  /** WorkIQ retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  workIQ: "workIQ",
 
   /** LLM query planning activity. */
   @added(Versions.v2026_05_01_preview)
@@ -522,6 +534,29 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
   filterExpressionAddOn?: string;
 }
 
+/** Represents a WorkIQ retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.workIQ;
+
+  /** The WorkIQ arguments for the retrieval activity. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  workIQArguments?: KnowledgeBaseWorkIQActivityArguments;
+}
+
+/** Represents the arguments the WorkIQ retrieval activity was run with. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQActivityArguments {
+  /** The search string used to query the WorkIQ knowledge source. */
+  search?: string;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
@@ -593,6 +628,10 @@ union KnowledgeBaseReferenceType {
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
+
+  /** Work IQ document reference. */
+  @added(Versions.v2026_05_01_preview)
+  workIQ: "workIQ",
 }
 
 /** Base type for references. */
@@ -623,6 +662,10 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
 
   /** The document key for the reference. */
   docKey?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents an Azure Blob Storage document reference. */
@@ -633,6 +676,10 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
 
   /** The blob URL for the reference. */
   blobUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents an indexed SharePoint document reference. */
@@ -645,6 +692,10 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
 
   /** The document URL for the reference. */
   docUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents an indexed OneLake document reference. */
@@ -655,6 +706,10 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
 
   /** The document URL for the reference. */
   docUrl?: string;
+
+  /** The sensitivity label information for the reference. */
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Represents a web document reference. */
@@ -686,8 +741,20 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   @removed(Versions.v2026_04_01)
   searchSensitivityLabelInfoRemoved?: SharePointSensitivityLabelInfo;
 
-  /** Information about the sensitivity label applied to the document. */
+  /** The sensitivity label information for the reference. */
   @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+}
+
+/** Represents a WorkIQ document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.workIQ;
+
+  /** The sensitivity label information for the reference. */
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
