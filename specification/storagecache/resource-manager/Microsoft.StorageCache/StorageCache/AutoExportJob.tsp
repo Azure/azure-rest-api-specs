@@ -30,7 +30,7 @@ interface AutoExportJobs {
   /**
    * Returns an auto export job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoExportJobs_Get")
   @tag("autoExportJobs")
   get is ArmResourceRead<AutoExportJob, Error = CloudError>;
@@ -38,7 +38,7 @@ interface AutoExportJobs {
   /**
    * Create or update an auto export job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoExportJobs_CreateOrUpdate")
   @tag("autoExportJob")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -49,7 +49,7 @@ interface AutoExportJobs {
   /**
    * Update an auto export job instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoExportJobs_Update")
   @tag("autoExportJob")
   @patch(#{ implicitOptionality: false })
@@ -65,7 +65,7 @@ interface AutoExportJobs {
   /**
    * Schedules an auto export job for deletion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoExportJobs_Delete")
   @tag("autoExportJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -78,7 +78,7 @@ interface AutoExportJobs {
   /**
    * Returns all the auto export jobs the user has access to under an AML File System.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoExportJobs_ListByAmlFilesystem")
   @tag("autoExportJob")
   listByAmlFilesystem is ArmResourceListByParent<

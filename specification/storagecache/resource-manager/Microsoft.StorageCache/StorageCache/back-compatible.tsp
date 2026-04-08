@@ -3,34 +3,34 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.StorageCache;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AmlFilesystemUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoExportJobProperties.status);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoExportJobUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportJobProperties.status);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportJobUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoImportJobProperties.status);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoImportJobUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpansionJobProperties.status);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApiOperation.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AscOperation.properties);
 
 @@clientName(CacheIdentity.UserAssignedIdentities, "userAssignedIdentities");
@@ -48,7 +48,7 @@ using Microsoft.StorageCache;
 @@clientLocation(AmlFilesystems.archive, "amlFilesystems");
 @@clientName(AmlFilesystems.archive::parameters.body, "archiveInfo");
 @@clientLocation(AmlFilesystems.cancelArchive, "amlFilesystems");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AmlFilesystem.properties);
 
 @@clientLocation(AutoExportJobs.get, "autoExportJobs");
@@ -60,7 +60,7 @@ using Microsoft.StorageCache;
 @@clientName(AutoExportJobs.update::parameters.properties, "autoExportJob");
 @@clientLocation(AutoExportJobs.delete, "autoExportJobs");
 @@clientLocation(AutoExportJobs.listByAmlFilesystem, "autoExportJobs");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoExportJob.properties);
 
 @@clientLocation(ImportJobs.get, "importJobs");
@@ -70,7 +70,7 @@ using Microsoft.StorageCache;
 @@clientName(ImportJobs.update::parameters.properties, "importJob");
 @@clientLocation(ImportJobs.delete, "importJobs");
 @@clientLocation(ImportJobs.listByAmlFilesystem, "importJobs");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportJob.properties);
 
 @@clientLocation(AutoImportJobs.get, "autoImportJobs");
@@ -82,7 +82,7 @@ using Microsoft.StorageCache;
 @@clientName(AutoImportJobs.update::parameters.properties, "autoImportJob");
 @@clientLocation(AutoImportJobs.delete, "autoImportJobs");
 @@clientLocation(AutoImportJobs.listByAmlFilesystem, "autoImportJobs");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoImportJob.properties);
 
 @@clientLocation(ExpansionJobs.get, "expansionJobs");
@@ -92,7 +92,7 @@ using Microsoft.StorageCache;
 @@clientName(ExpansionJobs.update::parameters.properties, "expansionJob");
 @@clientLocation(ExpansionJobs.delete, "expansionJobs");
 @@clientLocation(ExpansionJobs.listByAmlFilesystem, "expansionJobs");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpansionJob.properties);
 
 @@clientName(Caches.createOrUpdate::parameters.resource, "cache");
@@ -102,7 +102,7 @@ using Microsoft.StorageCache;
 @@clientName(Caches.pausePrimingJob::parameters.body, "primingJobId");
 @@clientName(Caches.resumePrimingJob::parameters.body, "primingJobId");
 @@clientName(Caches.spaceAllocation::parameters.body, "spaceAllocation");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Cache.properties);
 
 @@clientName(StorageTargets.createOrUpdate::parameters.resource,
@@ -112,7 +112,7 @@ using Microsoft.StorageCache;
 @@clientLocation(StorageTargets.suspend, "StorageTarget");
 @@clientLocation(StorageTargets.resume, "StorageTarget");
 @@clientLocation(StorageTargets.invalidate, "StorageTarget");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageTarget.properties);
 
 @@clientName(checkAmlFSSubnets, "checkAmlFSSubnets");
@@ -129,3 +129,4 @@ using Microsoft.StorageCache;
 @@clientName(getRequiredAmlFSSubnetsSize::parameters.body,
   "requiredAMLFilesystemSubnetsSizeInfo"
 );
+

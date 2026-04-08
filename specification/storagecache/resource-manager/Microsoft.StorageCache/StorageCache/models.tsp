@@ -687,7 +687,7 @@ union FilesystemSubnetStatusType {
   Invalid: "Invalid",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MetricAggregationType {
   string,
 
@@ -1064,7 +1064,7 @@ union OperationalStateType {
 /**
  * The type of identity used for the resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AmlFilesystemIdentityType {
   /**
    * UserAssigned
@@ -1080,7 +1080,7 @@ enum AmlFilesystemIdentityType {
 /**
  * Day of the week on which the maintenance window will occur.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum MaintenanceDayOfWeekType {
   /**
    * Monday
@@ -1121,7 +1121,7 @@ enum MaintenanceDayOfWeekType {
 /**
  * The type of identity used for the cache
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CacheIdentityType {
   /**
    * SystemAssigned
@@ -1168,11 +1168,11 @@ model AmlFilesystemIdentity {
   /**
    * A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UserAssignedIdentitiesValue {
   /**
    * The principal ID of the user-assigned identity.
@@ -1248,7 +1248,7 @@ model AmlFilesystemProperties {
   /**
    * Throughput provisioned in MB per sec, calculated as storageCapacityTiB * per-unit storage throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   throughputProvisionedMBps?: int32;
 
@@ -1392,7 +1392,7 @@ model AmlFilesystemPropertiesMaintenanceWindow {
   /**
    * The time of day (in UTC) to start the maintenance window.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pattern("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
   timeOfDayUTC?: string;
 }
@@ -1516,13 +1516,13 @@ model AmlFilesystemRootSquashSettings {
   /**
    * User ID to squash to.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   squashUID?: int64;
 
   /**
    * Group ID to squash to.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   squashGID?: int64;
 
   /**
@@ -1574,12 +1574,12 @@ model CloudErrorBody {
 /**
  * An AML file system update instance.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AmlFilesystemUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1620,7 +1620,7 @@ model AmlFilesystemUpdatePropertiesMaintenanceWindow {
   /**
    * The time of day (in UTC) to start the maintenance window.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pattern("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
   timeOfDayUTC?: string;
 }
@@ -1694,7 +1694,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Total data (in MiB) exported since the start of the export. This is accumulative, some files may be counted repeatedly.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   totalMiBExported?: int64;
 
@@ -1713,7 +1713,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Time (in UTC) of the last successfully completed export iteration. Look at logging container for details.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSuccessfulIterationCompletionTimeUTC?: utcDateTime;
@@ -1727,7 +1727,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Data (in MiB) discovered for export in current iteration. It may increase while more export items are found.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   currentIterationMiBDiscovered?: int64;
 
@@ -1740,7 +1740,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Data (in MiB) that have been exported in current iteration.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   currentIterationMiBExported?: int64;
 
@@ -1753,7 +1753,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * The time (in UTC) the latest auto export job started.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStartedTimeUTC?: utcDateTime;
@@ -1761,7 +1761,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * The time (in UTC) of the last completed auto export job.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastCompletionTimeUTC?: utcDateTime;
@@ -1774,14 +1774,14 @@ model AutoExportJobUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AutoExportJobUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutoExportJobUpdateProperties {
   /**
    * The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.
@@ -1940,14 +1940,14 @@ model ImportJobUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ImportJobUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ImportJobUpdateProperties {
   /**
    * The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job.
@@ -2118,7 +2118,7 @@ model AutoImportJobPropertiesStatus {
   /**
    * The time (in UTC) the latest auto import job started.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStartedTimeUTC?: utcDateTime;
@@ -2126,7 +2126,7 @@ model AutoImportJobPropertiesStatus {
   /**
    * The time (in UTC) of the last completed auto import job.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastCompletionTimeUTC?: utcDateTime;
@@ -2224,14 +2224,14 @@ model AutoImportJobUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AutoImportJobUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutoImportJobUpdateProperties {
   /**
    * The administrative status of the auto import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto import job. By default it is set to 'Enable'.
@@ -2295,7 +2295,7 @@ model ExpansionJobPropertiesStatus {
   /**
    * The time (in UTC) the expansion job started.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTimeUTC?: utcDateTime;
@@ -2303,7 +2303,7 @@ model ExpansionJobPropertiesStatus {
   /**
    * The time (in UTC) when the expansion job completed. Only populated when job reaches a terminal state.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   completionTimeUTC?: utcDateTime;
@@ -2316,7 +2316,7 @@ model ExpansionJobUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -2789,7 +2789,7 @@ model AscOperationProperties {
   /**
    * Additional operation-specific output.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   output?: Record<unknown>;
 }
 
@@ -2883,8 +2883,8 @@ model CacheIdentity {
   /**
    * A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
@@ -2895,7 +2895,7 @@ model CacheProperties {
   /**
    * The size of this Cache, in GB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   cacheSizeGB?: int32;
 
@@ -2963,7 +2963,7 @@ model CacheProperties {
   /**
    * Specifies the priming jobs defined in the cache.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   primingJobs?: PrimingJob[];
 
   /**
@@ -3178,13 +3178,13 @@ model NfsAccessRule {
   /**
    * UID value that replaces 0 when rootSquash is true. 65534 will be used if not provided.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   anonymousUID?: string;
 
   /**
    * GID value that replaces 0 when rootSquash is true. This will use the value of anonymousUID if not provided.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   anonymousGID?: string;
 }
 
@@ -3257,7 +3257,7 @@ model CacheActiveDirectorySettingsCredentials {
   /**
    * Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   password?: string;
 }
@@ -3279,13 +3279,13 @@ model CacheUsernameDownloadSettings {
   /**
    * The URI of the file containing group information (in /etc/group file format). This field must be populated when 'usernameSource' is set to 'File'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   groupFileURI?: string;
 
   /**
    * The URI of the file containing user information (in /etc/passwd file format). This field must be populated when 'usernameSource' is set to 'File'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userFileURI?: string;
 
   /**
@@ -3296,7 +3296,7 @@ model CacheUsernameDownloadSettings {
   /**
    * The base distinguished name for the LDAP domain.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ldapBaseDN?: string;
 
   /**
@@ -3317,7 +3317,7 @@ model CacheUsernameDownloadSettings {
   /**
    * The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to true.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   caCertificateURI?: string;
 
   /**
@@ -3571,7 +3571,7 @@ model UnknownTarget {
   /**
    * Dictionary of string->string pairs containing information about the Storage Target.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   attributes?: Record<string>;
 }
 
@@ -3647,3 +3647,4 @@ model PrimingJobIdParameter {
   @pattern("^[-0-9a-zA-Z_]{1,80}$")
   primingJobId: string;
 }
+

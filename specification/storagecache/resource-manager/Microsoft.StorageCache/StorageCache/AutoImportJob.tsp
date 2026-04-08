@@ -30,7 +30,7 @@ interface AutoImportJobs {
   /**
    * Returns an auto import job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoImportJobs_Get")
   @tag("autoImportJobs")
   get is ArmResourceRead<AutoImportJob, Error = CloudError>;
@@ -38,7 +38,7 @@ interface AutoImportJobs {
   /**
    * Create or update an auto import job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoImportJobs_CreateOrUpdate")
   @tag("autoImportJobs")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -49,7 +49,7 @@ interface AutoImportJobs {
   /**
    * Update an auto import job instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoImportJobs_Update")
   @tag("autoImportJobs")
   @patch(#{ implicitOptionality: false })
@@ -65,7 +65,7 @@ interface AutoImportJobs {
   /**
    * Schedules an auto import job for deletion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoImportJobs_Delete")
   @tag("autoImportJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -78,7 +78,7 @@ interface AutoImportJobs {
   /**
    * Returns all the auto import jobs the user has access to under an AML File System.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoImportJobs_ListByAmlFilesystem")
   @tag("autoImportJobs")
   listByAmlFilesystem is ArmResourceListByParent<

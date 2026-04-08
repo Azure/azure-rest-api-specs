@@ -29,7 +29,7 @@ interface ImportJobs {
   /**
    * Returns an import job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("importJobs_Get")
   @tag("importJobs")
   get is ArmResourceRead<ImportJob, Error = CloudError>;
@@ -37,7 +37,7 @@ interface ImportJobs {
   /**
    * Create or update an import job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("importJobs_CreateOrUpdate")
   @tag("importJobs")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -48,7 +48,7 @@ interface ImportJobs {
   /**
    * Update an import job instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("importJobs_Update")
   @tag("importJobs")
   @patch(#{ implicitOptionality: false })
@@ -64,7 +64,7 @@ interface ImportJobs {
   /**
    * Schedules an import job for deletion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("importJobs_Delete")
   @tag("importJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -77,7 +77,7 @@ interface ImportJobs {
   /**
    * Returns all import jobs the user has access to under an AML File System.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("importJobs_ListByAmlFilesystem")
   @tag("importJobs")
   listByAmlFilesystem is ArmResourceListByParent<

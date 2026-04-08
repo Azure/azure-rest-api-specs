@@ -16,9 +16,9 @@ namespace Microsoft.StorageCache;
 /**
  * Check that subnets will be valid for AML file system create calls.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @operationId("checkAmlFSSubnets")
 @tag("amlFilesystems")
 @autoRoute
@@ -33,8 +33,8 @@ op checkAmlFSSubnets is ArmProviderActionSync<
 /**
  * Get the number of available IP addresses needed for the AML file system information provided.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @operationId("getRequiredAmlFSSubnetsSize")
 @tag("amlFilesystems")
 @autoRoute
@@ -46,7 +46,7 @@ op getRequiredAmlFSSubnetsSize is ArmProviderActionSync<
   OptionalRequestBody = true
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SkusOperationGroup {
   /**
    * Get the list of StorageCache.Cache SKUs available to this subscription.
@@ -63,7 +63,7 @@ interface SkusOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsageModelsOperationGroup {
   /**
    * Get the list of cache usage models available to this subscription.
@@ -80,7 +80,7 @@ interface UsageModelsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AscOperationsOperationGroup {
   /**
    * Gets the status of an asynchronous operation for the Azure HPC Cache
@@ -102,7 +102,7 @@ interface AscOperationsOperationGroup {
   ): ArmResponse<AscOperation> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AscUsagesOperationGroup {
   /**
    * Gets the quantity used and quota limit for resources

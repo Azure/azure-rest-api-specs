@@ -30,7 +30,7 @@ interface ExpansionJobs {
   /**
    * Returns an expansion job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("expansionJobs_Get")
   @tag("expansionJobs")
   get is ArmResourceRead<ExpansionJob, Error = CloudError>;
@@ -38,7 +38,7 @@ interface ExpansionJobs {
   /**
    * Create or update an expansion job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("expansionJobs_CreateOrUpdate")
   @tag("expansionJobs")
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -55,7 +55,7 @@ interface ExpansionJobs {
   /**
    * Update an expansion job instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("expansionJobs_Update")
   @tag("expansionJobs")
@@ -71,7 +71,7 @@ interface ExpansionJobs {
   /**
    * Schedules an expansion job for deletion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("expansionJobs_Delete")
   @tag("expansionJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -84,7 +84,7 @@ interface ExpansionJobs {
   /**
    * Returns all the expansion jobs the user has access to under an AML File System.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("expansionJobs_ListByAmlFilesystem")
   @tag("expansionJobs")
   listByAmlFilesystem is ArmResourceListByParent<

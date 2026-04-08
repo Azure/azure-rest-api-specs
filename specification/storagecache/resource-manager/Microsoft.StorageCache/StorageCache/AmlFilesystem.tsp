@@ -25,13 +25,13 @@ model AmlFilesystem
   /**
    * The managed identity used by the AML file system, if configured.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: AmlFilesystemIdentity;
 
   /**
    * SKU for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: SkuName;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
@@ -43,7 +43,7 @@ interface AmlFilesystems {
   /**
    * Returns an AML file system.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("amlFilesystems_Get")
   @tag("amlFilesystems")
   get is ArmResourceRead<AmlFilesystem, Error = CloudError>;
@@ -51,7 +51,7 @@ interface AmlFilesystems {
   /**
    * Create or update an AML file system.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("amlFilesystems_CreateOrUpdate")
   @tag("amlFilesystems")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -62,7 +62,7 @@ interface AmlFilesystems {
   /**
    * Update an AML file system instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("amlFilesystems_Update")
   @tag("amlFilesystems")
@@ -78,8 +78,8 @@ interface AmlFilesystems {
   /**
    * Schedules an AML file system for deletion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("amlFilesystems_Delete")
   @tag("amlFilesystems")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -92,7 +92,7 @@ interface AmlFilesystems {
   /**
    * Returns all AML file systems the user has access to under a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("amlFilesystems_ListByResourceGroup")
   @tag("amlFilesystems")
   listByResourceGroup is ArmResourceListByParent<
@@ -104,7 +104,7 @@ interface AmlFilesystems {
   /**
    * Returns all AML file systems the user has access to under a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("amlFilesystems_List")
   @tag("amlFilesystems")
   list is ArmListBySubscription<
@@ -116,7 +116,7 @@ interface AmlFilesystems {
   /**
    * Archive data from the AML file system.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("amlFilesystems_Archive")
   @tag("amlFilesystems")
   archive is ArmResourceActionSync<
@@ -130,7 +130,7 @@ interface AmlFilesystems {
   /**
    * Cancel archiving data from the AML file system.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("amlFilesystems_CancelArchive")
   @tag("amlFilesystems")
   cancelArchive is ArmResourceActionSync<
