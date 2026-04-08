@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "api-version": "2026-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "maintenanceEventId": "9YBX-M00",
+              "maintenanceType": "PlannedMaintenance",
+              "status": "Planned",
+              "startTime": "2026-04-02T07:23:00Z",
+              "endTime": "2026-04-02T08:23:00Z",
+              "estimatedDowntime": "PT3600S",
+              "deferrable": true,
+              "deferralDeadline": "2026-04-16T07:23:00Z",
+              "lastUpdatedTime": "2026-03-26T07:23:15.9626227Z",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/maintenanceEvents/9YBX-M00",
+            "name": "9YBX-M00",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/maintenanceEvents"
+          },
+          {
+            "properties": {
+              "maintenanceEventId": "8PBF-KL0",
+              "maintenanceType": "PlannedMaintenance",
+              "description": "This notification is for upcoming scheduled maintenance ...",
+              "status": "Planned",
+              "startTime": "2026-03-31T08:30:00Z",
+              "endTime": "2026-03-31T09:29:00Z",
+              "estimatedDowntime": "PT3540S",
+              "deferrable": true,
+              "deferralDeadline": "2026-04-18T18:31:00Z",
+              "rescheduledFrom": "2026-04-04T18:31:00Z",
+              "lastUpdatedTime": "2026-03-26T12:10:55.6707567Z",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/maintenanceEvents/8PBF-KL0",
+            "name": "8PBF-KL0",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/maintenanceEvents"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MaintenanceEvents_ListByServer",
+  "title": "List ongoing and scheduled maintenance events for a server."
+}

@@ -80,6 +80,9 @@
     },
     {
       "name": "VirtualEndpoints"
+    },
+    {
+      "name": "MaintenanceEvents"
     }
   ],
   "paths": {
@@ -2701,6 +2704,294 @@
             "$ref": "./examples/BackupsLongTermRetentionCheckPrerequisites.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/maintenanceEvents": {
+      "get": {
+        "operationId": "MaintenanceEvents_List",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Lists all maintenance events for a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          },
+          {
+            "name": "maintenanceStatus",
+            "in": "query",
+            "description": "Filter maintenance events by status.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Upcoming",
+              "Past"
+            ],
+            "x-ms-enum": {
+              "name": "MaintenanceEventStatusFilter",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Upcoming",
+                  "value": "Upcoming",
+                  "description": "Return events that are scheduled or in progress (Planned, InProgress, Suspended)."
+                },
+                {
+                  "name": "Past",
+                  "value": "Past",
+                  "description": "Return events that have completed (Succeeded, Failed, Canceled, TimedOut)."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEventResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/maintenanceEvents/{maintenanceEventId}": {
+      "get": {
+        "operationId": "MaintenanceEvents_Get",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Gets information about a maintenance event for a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          },
+          {
+            "name": "maintenanceEventId",
+            "in": "path",
+            "description": "The name of the MaintenanceEventResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEventResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a maintenance event for a server.": {
+            "$ref": "./examples/MaintenanceEventsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/maintenanceEvents/{maintenanceEventId}/applyNow": {
+      "post": {
+        "operationId": "MaintenanceEvents_ApplyNow",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Applies the maintenance event immediately.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          },
+          {
+            "name": "maintenanceEventId",
+            "in": "path",
+            "description": "The name of the MaintenanceEventResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apply maintenance immediately for a server.": {
+            "$ref": "./examples/MaintenanceEventsApplyNow.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/maintenanceEvents/{maintenanceEventId}/reschedule": {
+      "post": {
+        "operationId": "MaintenanceEvents_Reschedule",
+        "tags": [
+          "MaintenanceEvents"
+        ],
+        "description": "Reschedules a maintenance event to a new date and time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          },
+          {
+            "name": "maintenanceEventId",
+            "in": "path",
+            "description": "The name of the MaintenanceEventResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceEventRescheduleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reschedule a maintenance event to a new date and time.": {
+            "$ref": "./examples/MaintenanceEventsReschedule.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/migrateNetwork": {
@@ -6450,6 +6741,169 @@
         "value"
       ]
     },
+    "MaintenanceEventRescheduleRequest": {
+      "type": "object",
+      "description": "Parameters to reschedule a maintenance event.",
+      "properties": {
+        "postponeToDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "New start time in RFC3339 format."
+        }
+      },
+      "required": [
+        "postponeToDateTime"
+      ]
+    },
+    "MaintenanceEventResource": {
+      "type": "object",
+      "description": "Maintenance event resource for a PostgreSQL flexible server.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceEventResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MaintenanceEventResourceListResult": {
+      "type": "object",
+      "description": "The response of a MaintenanceEventResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MaintenanceEventResource items on this page",
+          "items": {
+            "$ref": "#/definitions/MaintenanceEventResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MaintenanceEventResourceProperties": {
+      "type": "object",
+      "description": "Properties of a maintenance event resource.",
+      "properties": {
+        "maintenanceEventId": {
+          "type": "string",
+          "description": "The unique identifier of the maintenance event (e.g. 'op_123456789').",
+          "readOnly": true
+        },
+        "maintenanceType": {
+          "type": "string",
+          "description": "The maintenance type (e.g., 'Planned Maintenance').",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The human-readable description of the maintenance event.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/MaintenanceEventStatus",
+          "description": "The customer-facing status of the maintenance event.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled start time of the maintenance event (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The scheduled end time of the maintenance event (UTC).",
+          "readOnly": true
+        },
+        "estimatedDowntime": {
+          "type": "string",
+          "description": "The estimated downtime as an ISO 8601 duration string (e.g., 'PT60S' = 60 seconds).",
+          "readOnly": true
+        },
+        "deferrable": {
+          "type": "boolean",
+          "description": "A value indicating whether this maintenance event can be rescheduled by the customer.",
+          "readOnly": true
+        },
+        "deferralDeadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The latest date/time this maintenance event can be postponed to (UTC). Present only when deferrable is true.",
+          "readOnly": true
+        },
+        "rescheduledFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The original scheduled start time before this event was rescheduled. Null if the event has never been rescheduled.",
+          "readOnly": true
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this maintenance event record was last updated (UTC).",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the maintenance event.",
+          "readOnly": true
+        }
+      }
+    },
+    "MaintenanceEventStatus": {
+      "type": "string",
+      "description": "The status of a maintenance event.",
+      "enum": [
+        "Planned",
+        "InProgress",
+        "Complete",
+        "Rescheduled",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceEventStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Planned",
+            "value": "Planned",
+            "description": "The maintenance event is scheduled and has not yet started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The maintenance event is currently in progress."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The maintenance event has completed successfully."
+          },
+          {
+            "name": "Rescheduled",
+            "value": "Rescheduled",
+            "description": "The maintenance event has been rescheduled (postponed) by the customer."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The maintenance event was canceled, failed, or timed out."
+          }
+        ]
+      }
+    },
     "MaintenanceWindow": {
       "type": "object",
       "description": "Maintenance window properties of a server.",
@@ -7904,6 +8358,48 @@
       "required": [
         "value"
       ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning completed successfully"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning was canceled"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Provisioning is in progress"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Provisioning is in progress"
+          }
+        ]
+      }
     },
     "QuotaUsage": {
       "type": "object",

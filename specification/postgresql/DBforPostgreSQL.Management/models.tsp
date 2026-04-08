@@ -3705,6 +3705,155 @@ model MigrateNetworkStatus {
   state?: NetworkMigrationState;
 }
 
+@doc("The status of a maintenance event.")
+@added(Versions.v2026_04_01)
+union MaintenanceEventStatus {
+  string,
+
+  @doc("The maintenance event is scheduled and has not yet started.")
+  Planned: "Planned",
+
+  @doc("The maintenance event is currently in progress.")
+  InProgress: "InProgress",
+
+  @doc("The maintenance event has completed successfully.")
+  Complete: "Complete",
+
+  @doc("The maintenance event has been rescheduled (postponed) by the customer.")
+  Rescheduled: "Rescheduled",
+
+  @doc("The maintenance event was canceled, failed, or timed out.")
+  Canceled: "Canceled",
+}
+
+@doc("Properties of a maintenance event resource.")
+@added(Versions.v2026_04_01)
+model MaintenanceEventResourceProperties {
+  @doc("The unique identifier of the maintenance event (e.g. 'op_123456789').")
+  @visibility(Lifecycle.Read)
+  maintenanceEventId?: string;
+
+  @doc("The maintenance type (e.g., 'Planned Maintenance').")
+  @visibility(Lifecycle.Read)
+  maintenanceType?: string;
+
+  @doc("The human-readable description of the maintenance event.")
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  @doc("The customer-facing status of the maintenance event.")
+  @visibility(Lifecycle.Read)
+  status?: MaintenanceEventStatus;
+
+  @doc("The scheduled start time of the maintenance event (UTC).")
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  @doc("The scheduled end time of the maintenance event (UTC).")
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  @doc("The estimated downtime as an ISO 8601 duration string (e.g., 'PT60S' = 60 seconds).")
+  @visibility(Lifecycle.Read)
+  estimatedDowntime?: string;
+
+  @doc("A value indicating whether this maintenance event can be rescheduled by the customer.")
+  @visibility(Lifecycle.Read)
+  deferrable?: boolean;
+
+  @doc("The latest date/time this maintenance event can be postponed to (UTC). Present only when deferrable is true.")
+  @visibility(Lifecycle.Read)
+  deferralDeadline?: utcDateTime;
+
+  @doc("The original scheduled start time before this event was rescheduled. Null if the event has never been rescheduled.")
+  @visibility(Lifecycle.Read)
+  rescheduledFrom?: utcDateTime;
+
+  @doc("The time this maintenance event record was last updated (UTC).")
+  @visibility(Lifecycle.Read)
+  lastUpdatedTime?: utcDateTime;
+
+  @doc("The provisioning state of the maintenance event.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@doc("The provisioning state.")
+union ProvisioningState {
+  string,
+
+  /** Provisioning completed successfully */
+  Succeeded: "Succeeded",
+
+  /** Provisioning failed */
+  Failed: "Failed",
+
+  /** Provisioning was canceled */
+  Canceled: "Canceled",
+
+  /** Provisioning is in progress */
+  InProgress: "InProgress",
+
+  /** Provisioning is in progress */
+  Provisioning: "Provisioning",
+}
+
+@doc("Maintenance event resource for a PostgreSQL flexible server.")
+@parentResource(Server)
+@added(Versions.v2026_04_01)
+model MaintenanceEventResource
+  is Azure.ResourceManager.ProxyResource<MaintenanceEventResourceProperties> {
+  ...ResourceNameParameter<
+    MaintenanceEventResource,
+    KeyName = "maintenanceEventId",
+    SegmentName = "maintenanceEvents"
+  >;
+}
+
+@doc("Filter for maintenance event status.")
+@added(Versions.v2026_04_01)
+union MaintenanceEventStatusFilter {
+  string,
+
+  @doc("Return events that are scheduled or in progress (Planned, InProgress, Suspended).")
+  Upcoming: "Upcoming",
+
+  @doc("Return events that have completed (Succeeded, Failed, Canceled, TimedOut).")
+  Past: "Past",
+}
+
+@doc("Parameters to reschedule a maintenance event.")
+@added(Versions.v2026_04_01)
+model MaintenanceEventRescheduleRequest {
+  @doc("New start time in RFC3339 format.")
+  postponeToDateTime: utcDateTime;
+}
+
+@doc("Result of a maintenance event management operation.")
+@added(Versions.v2026_04_01)
+model MaintenanceEventOperationResult {
+  @doc("The unique identifier of the maintenance event.")
+  maintenanceEventId?: string;
+
+  @doc("Resource identifier of the server.")
+  serverId?: string;
+
+  @doc("Current status of the maintenance event operation.")
+  status?: string;
+
+  @doc("Planned start time after reschedule.")
+  plannedStartTime?: utcDateTime;
+
+  @doc("Planned end time after reschedule.")
+  plannedEndTime?: utcDateTime;
+
+  @doc("Whether the maintenance was applied immediately.")
+  appliedNow?: boolean;
+
+  @doc("Time this operation result was last updated.")
+  lastUpdatedTime?: utcDateTime;
+}
+
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
 @@visibility(CapabilityList.value, Lifecycle.Read);
 @@visibility(MigrationList.value, Lifecycle.Read);

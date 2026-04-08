@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DBforPostgreSQL;
 
@@ -132,5 +133,43 @@ interface VirtualNetworkSubnetUsageOperationGroup {
       @segment("locations")
       locationName: string;
     }
+  >;
+}
+
+@doc("Maintenance event operations for PostgreSQL flexible servers.")
+@armResourceOperations
+@added(Versions.v2026_04_01)
+interface MaintenanceEvents {
+  @doc("Gets information about a maintenance event for a flexible server.")
+  get is ArmResourceRead<MaintenanceEventResource>;
+
+  @doc("Lists all maintenance events for a flexible server.")
+  list is ArmResourceListByParent<
+    MaintenanceEventResource,
+    Parameters = {
+      @doc("Filter maintenance events by status.")
+      @query("maintenanceStatus")
+      maintenanceStatus?: MaintenanceEventStatusFilter;
+    }
+  >;
+
+  @doc("Reschedules a maintenance event to a new date and time.")
+  @added(Versions.v2026_04_01)
+  reschedule is ArmResourceActionAsyncBase<
+    MaintenanceEventResource,
+    MaintenanceEventRescheduleRequest,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
+  >;
+
+  @doc("Applies the maintenance event immediately.")
+  @added(Versions.v2026_04_01)
+  applyNow is ArmResourceActionAsyncBase<
+    MaintenanceEventResource,
+    void,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
 }
