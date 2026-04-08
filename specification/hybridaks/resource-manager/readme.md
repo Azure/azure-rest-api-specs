@@ -34,9 +34,6 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.KubernetesVersionProperties.properties.patchVersions
     reason: "patchVersions is a map of patch version info, following AKS behavior."
-
-  - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason: "storageSpaces API was deprecated and removed after 2022-09-01-preview."
 ```
 
 ### Basic Information
@@ -57,10 +54,6 @@ These settings apply only when `--tag=package-preview-2026-04` is specified on t
 ```yaml $(tag) == 'package-preview-2026-04'
 input-file:
   - Microsoft.HybridContainerService/preview/2026-04-01-preview/openapi.json
-suppressions:
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    reason: "storageSpaces API was deprecated and removed after 2022-09-01-preview."
-behavior since 2022-09-01-preview."
 ```
 
 
