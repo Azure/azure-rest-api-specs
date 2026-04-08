@@ -40,7 +40,8 @@ op getRequiredAmlFSSubnetsSize is ArmProviderActionSync<
   Request = RequiredAmlFilesystemSubnetsSizeInfo,
   Response = RequiredAmlFilesystemSubnetsSize,
   Scope = SubscriptionActionScope,
-  Error = CloudError
+  Error = CloudError,
+  OptionalRequestBody = true
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

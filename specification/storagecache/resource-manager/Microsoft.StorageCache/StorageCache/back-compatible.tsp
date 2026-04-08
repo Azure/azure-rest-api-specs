@@ -126,3 +126,6 @@ using Microsoft.StorageCache;
 
 @@clientLocation(AscUsagesOperationGroup.list, "AscUsages");
 @@clientName(checkAmlFSSubnets::parameters.body, "amlFilesystemSubnetInfo");
+@@clientName(getRequiredAmlFSSubnetsSize::parameters.body,
+  "requiredAMLFilesystemSubnetsSizeInfo"
+);
