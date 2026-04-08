@@ -61,7 +61,8 @@ interface VnetGatewayOps
       }
     > {}
 
-@armResourceOperations
+@tag("AppServicePlans")
+@armResourceOperations(#{ omitTags: true })
 interface VnetGateways {
   /**
    * Description for Get a Virtual Network gateway.
@@ -119,7 +120,8 @@ interface VnetGatewayOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface VnetGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
@@ -184,7 +186,8 @@ interface VnetConnectionGatewayOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.

@@ -24,7 +24,16 @@ These are the global settings.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-08-15
+tag: package-2026-03-20
+```
+
+### Tag: package-2026-03-20
+
+These settings apply only when `--tag=package-2026-03-20` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-20'
+input-file:
+  - stable/2026-03-20/ComputeLimit.json
 ```
 
 ### Tag: package-2025-08-15
