@@ -4025,7 +4025,16 @@
           "type": "array",
           "description": "The policy assignment ids created for the policy initiative.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Authorization/policyassignments"
+                }
+              ]
+            }
           }
         },
         "policyVersion": {

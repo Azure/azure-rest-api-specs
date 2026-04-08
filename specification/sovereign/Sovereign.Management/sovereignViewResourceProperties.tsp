@@ -46,7 +46,11 @@ model SovereignViewPolicyInitiativeDetail {
   ]>;
 
   @doc("The policy assignment ids created for the policy initiative.")
-  policyAssignmentIds?: string[];
+  policyAssignmentIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Authorization/policyassignments";
+    }
+  ]>[];
 
   @doc("The version of the policy initiative.")
   policyVersion: string;

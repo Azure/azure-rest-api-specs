@@ -93,10 +93,6 @@ suppressions:
     from: sovereign.json
     where: $.definitions.SovereignViewComplianceDetailResource.properties.location
     reason: This location is that of the ARM resource for which we are reporting compliance. We are not responsible for the location of this resource.
-  - code: EnumInsteadOfBoolean
-    from: sovereign.json
-    where: $.definitions.SovereignViewComplianceDetail.properties.isCompliant
-    reason: The property isCompliant clearly states the meaning of the boolean and is not ambiguous.
 
 ```
 ---
