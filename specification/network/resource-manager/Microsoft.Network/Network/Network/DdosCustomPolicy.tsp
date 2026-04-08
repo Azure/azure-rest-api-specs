@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -80,12 +81,14 @@ interface DdosCustomPolicies {
   /**
    * Gets all the DDoS custom policies in a resource group.
    */
+  @added(Versions.v2025_07_01)
   @tag("ddosCustomPolicies")
   list is ArmResourceListByParent<DdosCustomPolicy, Error = CloudError>;
 
   /**
    * Gets all the DDoS custom policies in a subscription.
    */
+  @added(Versions.v2025_07_01)
   @tag("ddosCustomPolicies")
   listAll is ArmListBySubscription<DdosCustomPolicy, Error = CloudError>;
 }
