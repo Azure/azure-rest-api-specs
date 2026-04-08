@@ -9122,24 +9122,6 @@ model A2AVmManagedDiskUpdateDetails {
    * The target disk name for test failover operation.
    */
   tfoDiskName?: string;
-
-  /**
-   * The network access policy for the recovery managed disk.
-   */
-  @added(Versions.v2026_02_01)
-  recoveryNetworkAccessPolicy?: DiskNetworkAccessPolicy;
-
-  /**
-   * The recovery disk access Arm Id.
-   */
-  @added(Versions.v2026_02_01)
-  recoveryDiskAccessId?: string;
-
-  /**
-   * The public network access setting for the recovery managed disk.
-   */
-  @added(Versions.v2026_02_01)
-  recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
 }
 
 /**
