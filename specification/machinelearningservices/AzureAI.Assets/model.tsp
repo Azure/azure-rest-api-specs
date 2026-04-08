@@ -136,33 +136,6 @@ model PagedPrompt {
   nextLink?: ResourceLocation<Prompt>;
 }
 
-@doc("Foundry model resource definition")
-model FoundryModel is AssetVersion {
-  @doc("URI of the model artifact in blob storage.")
-  blobUri?: string;
-
-  @doc("Catalog information for the model.")
-  catalogInfo?: ModelCatalogInformation;
-
-  @doc("Information about a model derived from another model.")
-  derivedModelInformation?: DerivedModelInformation;
-
-  @doc("List of deployment template names allowed for deploying this model.")
-  allowedDeploymentTemplates?: string[];
-}
-
-@doc("Paged collection of FoundryModel items.")
-model PagedFoundryModel {
-  @doc("The list of Foundry Models.")
-  @Azure.ResourceManager.identifiers(#[])
-  @pageItems
-  value: FoundryModel[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<FoundryModel>;
-}
-
 @doc("Next version definition.")
 model VersionInfo {
   @doc("Next version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.")

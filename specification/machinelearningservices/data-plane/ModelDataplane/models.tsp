@@ -726,6 +726,24 @@ model Model {
 
   /** The asset identifier. */
   assetId?: string;
+
+  /** Default deployment template for the model. */
+  defaultDeploymentTemplate?: ModelDeploymentTemplateDetails;
+
+  /** List of allowed deployment templates for the model. */
+  allowedDeploymentTemplates?: ModelDeploymentTemplateReferenceDetails[];
+}
+
+/** Details of a default deployment template reference. */
+model ModelDeploymentTemplateDetails {
+  /** The asset ID of the deployment template. */
+  assetId?: string;
+}
+
+/** Reference details for an allowed deployment template. */
+model ModelDeploymentTemplateReferenceDetails {
+  /** The asset reference ID of the deployment template. */
+  assetId?: string;
 }
 
 /** A service response. */

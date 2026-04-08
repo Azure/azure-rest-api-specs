@@ -20,9 +20,6 @@ model ModelVersion {
   @doc("Derived model information")
   derivedModelInformation?: DerivedModelInformation;
 
-  @doc("Deployment templates allowed for this model")
-  allowedDeploymentTemplates?: string[];
-
   ...AssetBase;
 }
 
