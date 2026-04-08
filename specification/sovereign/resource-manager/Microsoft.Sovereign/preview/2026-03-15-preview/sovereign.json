@@ -2169,6 +2169,11 @@
         ]
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -4163,7 +4168,7 @@
           "type": "array",
           "description": "The subscription ids in scope.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         }
       },
