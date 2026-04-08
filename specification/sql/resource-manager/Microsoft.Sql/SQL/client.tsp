@@ -102,3 +102,7 @@ using Microsoft.Sql;
   "Microsoft.Sql/servers",
   "go"
 );
+@@clientName(SqlVulnerabilityAssessmentScanRecordListResult,
+  "VulnerabilityAssessmentScanRecordForSQLListResult ",
+  "go"
+);
