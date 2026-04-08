@@ -265,7 +265,7 @@
       "get": {
         "operationId": "LicenseProfiles_Get",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -301,7 +301,7 @@
       "put": {
         "operationId": "LicenseProfiles_CreateOrUpdate",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -363,7 +363,7 @@
       "patch": {
         "operationId": "LicenseProfiles_Update",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -422,7 +422,7 @@
       "delete": {
         "operationId": "LicenseProfiles_Delete",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -470,9 +470,6 @@
     },
     "/providers/microsoft.HybridCompute/locations/{location}/publishers": {
       "get": {
-        "tags__deleted": [
-          "extensions"
-        ],
         "parameters": [
           [
             "~",
@@ -490,9 +487,6 @@
     },
     "/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes": {
       "get": {
-        "tags__deleted": [
-          "extensions"
-        ],
         "parameters": [
           [
             "~",
@@ -507,34 +501,6 @@
           ],
           [
             " "
-          ]
-        ]
-      }
-    },
-    "/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "extensions"
-          ],
-          [
-            "+",
-            "ExtensionValueV2s"
-          ]
-        ]
-      }
-    },
-    "/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "extensions"
-          ],
-          [
-            "+",
-            "ExtensionValueV2s"
           ]
         ]
       }
@@ -558,9 +524,6 @@
     },
     "/providers/microsoft.HybridCompute/osType/{osType}/agentVersions": {
       "get": {
-        "tags__deleted": [
-          "AgentVersions"
-        ],
         "x-ms-examples__deleted": {
           "GET Agent Versions": {
             "$ref": "./examples/AgentVersions_Get.json"
@@ -570,42 +533,11 @@
     },
     "/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}": {
       "get": {
-        "tags__deleted": [
-          "AgentVersions"
-        ],
         "x-ms-examples__deleted": {
           "GET Agent Versions": {
             "$ref": "./examples/AgentVersion_GetLatest.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/gateways": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "gateways"
-          ],
-          [
-            "+",
-            "Gateways"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/licenses": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "licenses"
-          ],
-          [
-            "+",
-            "Licenses"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}": {
@@ -630,16 +562,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "extensions"
-          ],
-          [
-            "+",
-            "ExtensionValues"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -658,16 +580,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "extensions"
-          ],
-          [
-            "+",
-            "ExtensionValues"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -687,32 +599,8 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/machines": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/privateLinkScopes": {
-      "get": {
-        "tags__added": [
-          "HybridComputePrivateLinkScopes"
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense": {
       "post": {
-        "tags__deleted": [
-          "licenses"
-        ],
         "responses": {
           "200": {
             "headers__added": {
@@ -734,82 +622,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{baseProvider}/{baseResourceType}/{baseResourceName}/providers/microsoft.HybridCompute/settings/{settingsResourceName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "Settings"
-          ],
-          [
-            "+",
-            "SettingsOperationGroup"
-          ]
-        ]
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "Settings"
-          ],
-          [
-            "+",
-            "SettingsOperationGroup"
-          ]
-        ]
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "Settings"
-          ],
-          [
-            "+",
-            "SettingsOperationGroup"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "gateways"
-          ],
-          [
-            "+",
-            "Gateways"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/gateways/{gatewayName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "gateways"
-          ],
-          [
-            "+",
-            "Gateways"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "gateways"
-          ],
-          [
-            "+",
-            "Gateways"
-          ]
-        ],
         "responses": {
           "201": {
             "headers": {
@@ -830,29 +644,7 @@
           }
         }
       },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "gateways"
-          ],
-          [
-            "+",
-            "Gateways"
-          ]
-        ]
-      },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "gateways"
-          ],
-          [
-            "+",
-            "Gateways"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -874,44 +666,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "licenses"
-          ],
-          [
-            "+",
-            "Licenses"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/licenses/{licenseName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "licenses"
-          ],
-          [
-            "+",
-            "Licenses"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "licenses"
-          ],
-          [
-            "+",
-            "Licenses"
-          ]
-        ],
         "responses": {
           "200": {
             "headers__added": {
@@ -924,16 +680,6 @@
         }
       },
       "patch": {
-        "tags": [
-          [
-            "-",
-            "licenses"
-          ],
-          [
-            "+",
-            "Licenses"
-          ]
-        ],
         "responses": {
           "200": {
             "headers__added": {
@@ -946,16 +692,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "licenses"
-          ],
-          [
-            "+",
-            "Licenses"
-          ]
-        ],
         "responses": {
           "200": {
             "headers__added": {
@@ -968,44 +704,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ]
-      },
       "put": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -1031,29 +731,7 @@
           ]
         ]
       },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ]
-      },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1077,16 +755,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/addExtensions": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "MachineExtensions Setup"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1110,16 +778,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/assessPatches": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1193,17 +851,7 @@
           "HybridIdentityMetadataListByVirtualMachines": {
             "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachines.json"
           }
-        },
-        "tags": [
-          [
-            "-",
-            "HybridIdentityMetadata"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}": {
@@ -1212,31 +860,11 @@
           "GetHybridIdentityMetadata": {
             "$ref": "./examples/HybridIdentityMetadata_Get.json"
           }
-        },
-        "tags": [
-          [
-            "-",
-            "HybridIdentityMetadata"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{name}/installPatches": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "machines"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1251,39 +879,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "licenseProfiles"
-          ],
-          [
-            "+",
-            "LicenseProfiles"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/networkProfile": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "MachineNetworkProfile"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ]
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current": {
       "get": {
-        "tags__added": [
-          "Machines"
-        ],
         "parameters": [
           [
             "~",
@@ -1300,17 +897,7 @@
           "NetworkConfigurationsGet": {
             "$ref": "./examples/networkConfiguration/NetworkConfigurationsGet.json"
           }
-        },
-        "tags": [
-          [
-            "-",
-            "NetworkConfigurations"
-          ],
-          [
-            "+",
-            "NetworkConfigurationsOperationGroup"
-          ]
-        ]
+        }
       },
       "put": {
         "x-ms-examples__deleted": {
@@ -1320,34 +907,14 @@
           "NetworkConfigurationsUpdate": {
             "$ref": "./examples/networkConfiguration/NetworkConfigurationsUpdate.json"
           }
-        },
-        "tags": [
-          [
-            "-",
-            "NetworkConfigurations"
-          ],
-          [
-            "+",
-            "NetworkConfigurationsOperationGroup"
-          ]
-        ]
+        }
       },
       "patch": {
         "x-ms-examples__deleted": {
           "NetworkConfigurationsPatch": {
             "$ref": "./examples/networkConfiguration/NetworkConfigurationsPatch.json"
           }
-        },
-        "tags": [
-          [
-            "-",
-            "NetworkConfigurations"
-          ],
-          [
-            "+",
-            "NetworkConfigurationsOperationGroup"
-          ]
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands": {
@@ -1517,16 +1084,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/upgradeExtensions": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "MachineExtensions Upgrade"
-          ],
-          [
-            "+",
-            "Machines"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1546,35 +1103,10 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes": {
-      "get": {
-        "tags__added": [
-          "HybridComputePrivateLinkScopes"
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}": {
-      "get": {
-        "tags__added": [
-          "HybridComputePrivateLinkScopes"
-        ]
-      },
-      "put": {
-        "tags__added": [
-          "HybridComputePrivateLinkScopes"
-        ]
-      },
-      "patch": {
-        "tags__added": [
-          "HybridComputePrivateLinkScopes"
-        ]
-      },
       "delete": {
-        "tags__added": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1594,48 +1126,10 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterConfiguration"
-          ],
-          [
-            "+",
-            "NetworkSecurityPerimeterConfigurations"
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterConfiguration"
-          ],
-          [
-            "+",
-            "NetworkSecurityPerimeterConfigurations"
-          ]
-        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}/networkSecurityPerimeterConfigurations/{perimeterName}/reconcile": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterConfiguration"
-          ],
-          [
-            "+",
-            "NetworkSecurityPerimeterConfigurations"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {

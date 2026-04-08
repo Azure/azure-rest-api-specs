@@ -24,24 +24,7 @@ Change Type: added
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default__added']` | added | `{"get":{"operationId":"LicenseProfiles_Get","tags":["LicenseProfiles"],"parameters":[{"name":"machin...` |
-
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/providers/microsoft.HybridCompute/locations/{location}/publishers'].get.tags__deleted` | deleted | `["extensions"]` |
-| `paths['/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes'].get.tags__deleted` | deleted | `["extensions"]` |
-| `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions'].get.tags__deleted` | deleted | `["AgentVersions"]` |
-| `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}'].get.tags__deleted` | deleted | `["AgentVersions"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/privateLinkScopes'].get.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense'].post.tags__deleted` | deleted | `["licenses"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current'].get.tags__added` | added | `["Machines"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes'].get.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].delete.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].get.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].patch.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}'].put.tags__added` | added | `["HybridComputePrivateLinkScopes"]` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default__added']` | added | `{"get":{"operationId":"LicenseProfiles_Get","tags":["licenseProfiles"],"parameters":[{"name":"machin...` |
 
 ### Changes for `name`
 

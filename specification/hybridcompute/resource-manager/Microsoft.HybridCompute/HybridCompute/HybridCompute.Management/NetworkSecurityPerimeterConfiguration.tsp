@@ -25,21 +25,24 @@ model NetworkSecurityPerimeterConfiguration
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets the network security perimeter configuration for a private link scope.
    */
+  @tag("NetworkSecurityPerimeterConfiguration")
   getByPrivateLinkScope is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Lists the network security perimeter configurations for a private link scope.
    */
+  @tag("NetworkSecurityPerimeterConfiguration")
   listByPrivateLinkScope is ArmResourceListByParent<NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Forces the network security perimeter configuration to refresh for a private link scope.
    */
+  @tag("NetworkSecurityPerimeterConfiguration")
   @action("reconcile")
   reconcileForPrivateLinkScope is ArmResourceActionAsync<
     NetworkSecurityPerimeterConfiguration,

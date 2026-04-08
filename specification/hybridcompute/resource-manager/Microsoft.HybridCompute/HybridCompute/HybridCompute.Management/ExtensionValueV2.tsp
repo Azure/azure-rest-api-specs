@@ -61,13 +61,14 @@ alias ExtensionValueV2Ops = Legacy.ExtensionOperations<
     version: string;
   }
 >;
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExtensionValueV2s {
   /**
    * Gets an Extension Metadata based on location, publisher, extensionType and version
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionMetadataV2_Get")
+  @tag("extensions")
   get is ExtensionValueV2Ops.Read<ExtensionValueV2>;
 
   /**
@@ -75,6 +76,7 @@ interface ExtensionValueV2s {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionMetadataV2_List")
+  @tag("extensions")
   list is ExtensionValueV2Ops.List<
     ExtensionValueV2,
     Response = ArmResponse<ExtensionValueListResultV2>

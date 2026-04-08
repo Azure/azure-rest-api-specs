@@ -22,16 +22,18 @@ model Gateway is Azure.ResourceManager.TrackedResource<GatewayProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Gateways {
   /**
    * Retrieves information about the view of a gateway.
    */
+  @tag("gateways")
   get is ArmResourceRead<Gateway>;
 
   /**
    * The operation to create or update a gateway.
    */
+  @tag("gateways")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Gateway,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Gateway> &
@@ -41,12 +43,14 @@ interface Gateways {
   /**
    * The operation to update a gateway.
    */
+  @tag("gateways")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Gateway, PatchModel = GatewayUpdate>;
 
   /**
    * The operation to delete a gateway.
    */
+  @tag("gateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     Gateway,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
@@ -56,6 +60,7 @@ interface Gateways {
   /**
    * The operation to get all gateways of a non-Azure machine
    */
+  @tag("gateways")
   listByResourceGroup is ArmResourceListByParent<
     Gateway,
     Response = GatewaysListResult
@@ -64,6 +69,7 @@ interface Gateways {
   /**
    * The operation to get all gateways of a non-Azure machine
    */
+  @tag("gateways")
   listBySubscription is ArmListBySubscription<
     Gateway,
     Response = GatewaysListResult

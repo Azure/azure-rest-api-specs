@@ -20,6 +20,7 @@ interface LicensesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Licenses_ValidateLicense")
+  @tag("licenses")
   @autoRoute
   validateLicense is ArmProviderActionAsync<
     Request = License,
@@ -36,6 +37,7 @@ interface ExtensionTypeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionType_List")
+  @tag("extensions")
   @autoRoute
   @list
   @get
@@ -62,6 +64,7 @@ interface ExtensionPublisherOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionPublisher_List")
+  @tag("extensions")
   @autoRoute
   @list
   @get
@@ -101,6 +104,7 @@ interface AgentVersionsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentVersion_List")
+  @tag("AgentVersions")
   @autoRoute
   @list
   @get
@@ -119,6 +123,7 @@ interface AgentVersionsOperationGroup {
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentVersion_Get")
+  @tag("AgentVersions")
   @route("/providers/Microsoft.HybridCompute/osType/{osType}/agentVersions/{version}")
   @get
   get(
@@ -170,13 +175,14 @@ alias NetworkConfigurationsOps = Azure.ResourceManager.Legacy.ExtensionOperation
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface NetworkConfigurationsOperationGroup {
   /**
    * Returns a NetworkConfiguration for the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkConfigurations_Get")
+  @tag("NetworkConfigurations")
   get is NetworkConfigurationsOps.Read<NetworkConfiguration>;
 
   /**
@@ -184,6 +190,7 @@ interface NetworkConfigurationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkConfigurations_CreateOrUpdate")
+  @tag("NetworkConfigurations")
   createOrUpdate is NetworkConfigurationsOps.CreateOrUpdateSync<NetworkConfiguration>;
 
   /**
@@ -191,6 +198,7 @@ interface NetworkConfigurationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkConfigurations_Update")
+  @tag("NetworkConfigurations")
   update is NetworkConfigurationsOps.CustomPatchSync<
     NetworkConfiguration,
     PatchModel = NetworkConfiguration

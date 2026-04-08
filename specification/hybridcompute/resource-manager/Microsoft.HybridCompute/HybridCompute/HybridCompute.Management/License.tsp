@@ -22,17 +22,19 @@ model License is Azure.ResourceManager.TrackedResource<LicenseProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Licenses {
   /**
    * Retrieves information about the view of a license.
    */
+  @tag("licenses")
   get is ArmResourceRead<License>;
 
   /**
    * The operation to create or update a license.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("licenses")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     License,
     Response = ArmResourceUpdatedResponse<License> &
@@ -43,6 +45,7 @@ interface Licenses {
   /**
    * The operation to update a license.
    */
+  @tag("licenses")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     License,
@@ -56,6 +59,7 @@ interface Licenses {
    * The operation to delete a license.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("licenses")
   delete is ArmResourceDeleteWithoutOkAsync<
     License,
     Response = (ArmDeletedResponse &
@@ -66,6 +70,7 @@ interface Licenses {
   /**
    * The operation to get all licenses of a non-Azure machine
    */
+  @tag("licenses")
   listByResourceGroup is ArmResourceListByParent<
     License,
     Response = LicensesListResult
@@ -74,6 +79,7 @@ interface Licenses {
   /**
    * The operation to get all licenses of a non-Azure machine
    */
+  @tag("licenses")
   listBySubscription is ArmListBySubscription<
     License,
     Response = LicensesListResult

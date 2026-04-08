@@ -69,13 +69,14 @@ alias SettingsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   "Settings"
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface SettingsOperationGroup {
   /**
    * Returns the base Settings for the target resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Settings_Get")
+  @tag("Settings")
   get is SettingsOps.Read<Settings>;
 
   /**
@@ -83,6 +84,7 @@ interface SettingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Settings_Update")
+  @tag("Settings")
   update is SettingsOps.CreateOrUpdateSync<Settings>;
 
   /**
@@ -90,6 +92,7 @@ interface SettingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Settings_Patch")
+  @tag("Settings")
   patch is SettingsOps.CustomPatchSync<Settings, PatchModel = Settings>;
 }
 

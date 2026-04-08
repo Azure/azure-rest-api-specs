@@ -26,16 +26,18 @@ model LicenseProfile
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface LicenseProfiles {
   /**
    * Retrieves information about the view of a license profile.
    */
+  @tag("licenseProfiles")
   get is ArmResourceRead<LicenseProfile>;
 
   /**
    * The operation to create or update a license profile.
    */
+  @tag("licenseProfiles")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LicenseProfile,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = LicenseProfile> &
@@ -45,6 +47,7 @@ interface LicenseProfiles {
   /**
    * The operation to update a license profile.
    */
+  @tag("licenseProfiles")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     LicenseProfile,
@@ -56,6 +59,7 @@ interface LicenseProfiles {
   /**
    * The operation to delete a license profile.
    */
+  @tag("licenseProfiles")
   delete is ArmResourceDeleteWithoutOkAsync<
     LicenseProfile,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
@@ -64,6 +68,7 @@ interface LicenseProfiles {
   /**
    * The operation to get all license profiles of a non-Azure machine
    */
+  @tag("licenseProfiles")
   list is ArmResourceListByParent<
     LicenseProfile,
     Response = LicenseProfilesListResult

@@ -86,11 +86,12 @@ alias HybridIdentityMetadataOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Machines {
   /**
    * Retrieves information about the model view or the instance view of a hybrid machine.
    */
+  @tag("machines")
   get is ArmResourceRead<
     Machine,
     Parameters = {
@@ -106,6 +107,7 @@ interface Machines {
    * The operation to create or update a hybrid machine. Please note some properties can be set only during machine creation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("machines")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Machine,
     Parameters = {
@@ -121,12 +123,14 @@ interface Machines {
   /**
    * The operation to update a hybrid machine.
    */
+  @tag("machines")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Machine, PatchModel = MachineUpdate>;
 
   /**
    * The operation to delete a hybrid machine.
    */
+  @tag("machines")
   delete is ArmResourceDeleteWithoutOkAsync<
     Machine,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
@@ -136,6 +140,7 @@ interface Machines {
   /**
    * Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.
    */
+  @tag("machines")
   listByResourceGroup is ArmResourceListByParent<
     Machine,
     Parameters = {
@@ -150,11 +155,13 @@ interface Machines {
   /**
    * Lists all the hybrid machines in the specified subscription. Use the nextLink property in the response to get the next page of hybrid machines.
    */
+  @tag("machines")
   listBySubscription is ArmListBySubscription<Machine>;
 
   /**
    * The operation to assess patches on a hybrid machine identity in Azure.
    */
+  @tag("machines")
   assessPatches is MachineOps.ActionAsync<
     Machine,
     void,
@@ -164,6 +171,7 @@ interface Machines {
   /**
    * The operation to install patches on a hybrid machine identity in Azure.
    */
+  @tag("machines")
   installPatches is MachineOps.ActionAsync<
     Machine,
     MachineInstallPatchesParameters,
@@ -175,6 +183,7 @@ interface Machines {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UpgradeExtensions")
+  @tag("MachineExtensions Upgrade")
   upgradeExtensions is ArmResourceActionAsync<
     Machine,
     MachineExtensionUpgrade,
@@ -188,6 +197,7 @@ interface Machines {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SetupExtensions")
+  @tag("MachineExtensions Setup")
   @action("addExtensions")
   setupExtensions is ArmResourceActionAsync<
     Machine,
@@ -202,6 +212,7 @@ interface Machines {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NetworkProfile_Get")
+  @tag("MachineNetworkProfile")
   @get
   @action("networkProfile")
   networkProfileGet is ArmResourceActionSync<
@@ -227,6 +238,7 @@ interface Machines {
    * Returns the list of HybridIdentityMetadata of the given machine.
    */
   @summary("Implements GET HybridIdentityMetadata in a machine.")
+  @tag("HybridIdentityMetadata")
   @action("hybridIdentityMetadata")
   @list
   @get
@@ -240,6 +252,7 @@ interface Machines {
    * Implements HybridIdentityMetadata GET method.
    */
   @summary("Gets HybridIdentityMetadata.")
+  @tag("HybridIdentityMetadata")
   getHybridIdentityMetadata is HybridIdentityMetadataOps.Read<
     Machine,
     Response = ArmResponse<HybridIdentityMetadata>

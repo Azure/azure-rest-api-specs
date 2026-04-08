@@ -43,34 +43,40 @@
       "name": "Operations"
     },
     {
-      "name": "Licenses"
+      "name": "licenses"
     },
     {
-      "name": "Machines"
+      "name": "machines"
     },
     {
-      "name": "LicenseProfiles"
+      "name": "MachineExtensions Upgrade"
+    },
+    {
+      "name": "MachineExtensions Setup"
+    },
+    {
+      "name": "MachineNetworkProfile"
+    },
+    {
+      "name": "HybridIdentityMetadata"
+    },
+    {
+      "name": "licenseProfiles"
     },
     {
       "name": "MachineExtensions"
     },
     {
-      "name": "ExtensionValues"
-    },
-    {
-      "name": "ExtensionValueV2s"
+      "name": "extensions"
     },
     {
       "name": "MachineRunCommands"
     },
     {
-      "name": "Gateways"
+      "name": "gateways"
     },
     {
-      "name": "SettingsOperationGroup"
-    },
-    {
-      "name": "HybridComputePrivateLinkScopes"
+      "name": "Settings"
     },
     {
       "name": "PrivateLinkResources"
@@ -79,16 +85,22 @@
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "NetworkSecurityPerimeterConfigurations"
+      "name": "NetworkSecurityPerimeterConfiguration"
     },
     {
-      "name": "NetworkConfigurationsOperationGroup"
+      "name": "AgentVersions"
+    },
+    {
+      "name": "NetworkConfigurations"
     }
   ],
   "paths": {
     "/providers/Microsoft.HybridCompute/locations/{location}/publishers": {
       "get": {
         "operationId": "ExtensionPublisher_List",
+        "tags": [
+          "extensions"
+        ],
         "description": "Gets all Extension publishers based on the location",
         "parameters": [
           {
@@ -125,6 +137,9 @@
     "/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes": {
       "get": {
         "operationId": "ExtensionType_List",
+        "tags": [
+          "extensions"
+        ],
         "description": "Gets all Extension types based on location and publisher",
         "parameters": [
           {
@@ -169,7 +184,7 @@
       "get": {
         "operationId": "ExtensionMetadataV2_List",
         "tags": [
-          "ExtensionValueV2s"
+          "extensions"
         ],
         "description": "Gets all Extension versions based on location, publisher, extensionType",
         "parameters": [
@@ -224,7 +239,7 @@
       "get": {
         "operationId": "ExtensionMetadataV2_Get",
         "tags": [
-          "ExtensionValueV2s"
+          "extensions"
         ],
         "description": "Gets an Extension Metadata based on location, publisher, extensionType and version",
         "parameters": [
@@ -314,6 +329,9 @@
     "/providers/Microsoft.HybridCompute/osType/{osType}/agentVersions": {
       "get": {
         "operationId": "AgentVersion_List",
+        "tags": [
+          "AgentVersions"
+        ],
         "description": "Gets all agent versions based on location and publisher",
         "parameters": [
           {
@@ -349,6 +367,9 @@
     "/providers/Microsoft.HybridCompute/osType/{osType}/agentVersions/{version}": {
       "get": {
         "operationId": "AgentVersion_Get",
+        "tags": [
+          "AgentVersions"
+        ],
         "parameters": [
           {
             "name": "osType",
@@ -384,7 +405,7 @@
       "get": {
         "operationId": "Gateways_ListBySubscription",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "description": "The operation to get all gateways of a non-Azure machine",
         "parameters": [
@@ -423,7 +444,7 @@
       "get": {
         "operationId": "Licenses_ListBySubscription",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "description": "The operation to get all licenses of a non-Azure machine",
         "parameters": [
@@ -505,7 +526,7 @@
       "get": {
         "operationId": "ExtensionMetadata_List",
         "tags": [
-          "ExtensionValues"
+          "extensions"
         ],
         "description": "Gets all Extension versions based on location, publisher, extensionType",
         "parameters": [
@@ -563,7 +584,7 @@
       "get": {
         "operationId": "ExtensionMetadata_Get",
         "tags": [
-          "ExtensionValues"
+          "extensions"
         ],
         "description": "Gets an Extension Metadata based on location, publisher, extensionType and version",
         "parameters": [
@@ -624,7 +645,7 @@
       "get": {
         "operationId": "Machines_ListBySubscription",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "Lists all the hybrid machines in the specified subscription. Use the nextLink property in the response to get the next page of hybrid machines.",
         "parameters": [
@@ -662,9 +683,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/privateLinkScopes": {
       "get": {
         "operationId": "PrivateLinkScopes_List",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "description": "Gets a list of all Azure Arc PrivateLinkScopes within a subscription.",
         "parameters": [
           {
@@ -701,6 +719,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/validateLicense": {
       "post": {
         "operationId": "Licenses_ValidateLicense",
+        "tags": [
+          "licenses"
+        ],
         "description": "The operation to validate a license.",
         "parameters": [
           {
@@ -768,7 +789,7 @@
       "get": {
         "operationId": "Settings_Get",
         "tags": [
-          "SettingsOperationGroup"
+          "Settings"
         ],
         "description": "Returns the base Settings for the target resource.",
         "parameters": [
@@ -837,7 +858,7 @@
       "put": {
         "operationId": "Settings_Update",
         "tags": [
-          "SettingsOperationGroup"
+          "Settings"
         ],
         "description": "Updates the base Settings of the target resource.",
         "parameters": [
@@ -921,7 +942,7 @@
       "patch": {
         "operationId": "Settings_Patch",
         "tags": [
-          "SettingsOperationGroup"
+          "Settings"
         ],
         "description": "Update the base Settings of the target resource.",
         "parameters": [
@@ -1001,7 +1022,7 @@
       "get": {
         "operationId": "Gateways_ListByResourceGroup",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "description": "The operation to get all gateways of a non-Azure machine",
         "parameters": [
@@ -1043,7 +1064,7 @@
       "get": {
         "operationId": "Gateways_Get",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "description": "Retrieves information about the view of a gateway.",
         "parameters": [
@@ -1088,7 +1109,7 @@
       "put": {
         "operationId": "Gateways_CreateOrUpdate",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "description": "The operation to create or update a gateway.",
         "parameters": [
@@ -1169,7 +1190,7 @@
       "patch": {
         "operationId": "Gateways_Update",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "description": "The operation to update a gateway.",
         "parameters": [
@@ -1223,7 +1244,7 @@
       "delete": {
         "operationId": "Gateways_Delete",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "description": "The operation to delete a gateway.",
         "parameters": [
@@ -1291,7 +1312,7 @@
       "get": {
         "operationId": "Licenses_ListByResourceGroup",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "description": "The operation to get all licenses of a non-Azure machine",
         "parameters": [
@@ -1333,7 +1354,7 @@
       "get": {
         "operationId": "Licenses_Get",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "description": "Retrieves information about the view of a license.",
         "parameters": [
@@ -1378,7 +1399,7 @@
       "put": {
         "operationId": "Licenses_CreateOrUpdate",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "description": "The operation to create or update a license.",
         "parameters": [
@@ -1448,7 +1469,7 @@
       "patch": {
         "operationId": "Licenses_Update",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "description": "The operation to update a license.",
         "parameters": [
@@ -1518,7 +1539,7 @@
       "delete": {
         "operationId": "Licenses_Delete",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "description": "The operation to delete a license.",
         "parameters": [
@@ -1581,7 +1602,7 @@
       "get": {
         "operationId": "Machines_ListByResourceGroup",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.",
         "parameters": [
@@ -1630,7 +1651,7 @@
       "get": {
         "operationId": "Machines_Get",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "Retrieves information about the model view or the instance view of a hybrid machine.",
         "parameters": [
@@ -1701,7 +1722,7 @@
       "put": {
         "operationId": "Machines_CreateOrUpdate",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "The operation to create or update a hybrid machine. Please note some properties can be set only during machine creation.",
         "parameters": [
@@ -1764,7 +1785,7 @@
       "patch": {
         "operationId": "Machines_Update",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "The operation to update a hybrid machine.",
         "parameters": [
@@ -1820,7 +1841,7 @@
       "delete": {
         "operationId": "Machines_Delete",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "The operation to delete a hybrid machine.",
         "parameters": [
@@ -1890,7 +1911,7 @@
       "post": {
         "operationId": "SetupExtensions",
         "tags": [
-          "Machines"
+          "MachineExtensions Setup"
         ],
         "description": "The operation to Setup Machine Extensions.",
         "parameters": [
@@ -1972,7 +1993,7 @@
       "post": {
         "operationId": "Machines_AssessPatches",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "The operation to assess patches on a hybrid machine identity in Azure.",
         "parameters": [
@@ -2392,7 +2413,7 @@
       "get": {
         "operationId": "HybridIdentityMetadata_ListByMachines",
         "tags": [
-          "Machines"
+          "HybridIdentityMetadata"
         ],
         "summary": "Implements GET HybridIdentityMetadata in a machine.",
         "description": "Returns the list of HybridIdentityMetadata of the given machine.",
@@ -2440,7 +2461,7 @@
       "get": {
         "operationId": "HybridIdentityMetadata_Get",
         "tags": [
-          "Machines"
+          "HybridIdentityMetadata"
         ],
         "summary": "Gets HybridIdentityMetadata.",
         "description": "Implements HybridIdentityMetadata GET method.",
@@ -2493,7 +2514,7 @@
       "post": {
         "operationId": "Machines_InstallPatches",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "description": "The operation to install patches on a hybrid machine identity in Azure.",
         "parameters": [
@@ -2567,7 +2588,7 @@
       "get": {
         "operationId": "LicenseProfiles_List",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "description": "The operation to get all license profiles of a non-Azure machine",
         "parameters": [
@@ -2619,7 +2640,7 @@
       "get": {
         "operationId": "LicenseProfiles_Get",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "description": "Retrieves information about the view of a license profile.",
         "parameters": [
@@ -2666,7 +2687,7 @@
       "put": {
         "operationId": "LicenseProfiles_CreateOrUpdate",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "description": "The operation to create or update a license profile.",
         "parameters": [
@@ -2749,7 +2770,7 @@
       "patch": {
         "operationId": "LicenseProfiles_Update",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "description": "The operation to update a license profile.",
         "parameters": [
@@ -2829,7 +2850,7 @@
       "delete": {
         "operationId": "LicenseProfiles_Delete",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "description": "The operation to delete a license profile.",
         "parameters": [
@@ -2898,7 +2919,7 @@
       "get": {
         "operationId": "NetworkProfile_Get",
         "tags": [
-          "Machines"
+          "MachineNetworkProfile"
         ],
         "description": "The operation to get network information of hybrid machine",
         "parameters": [
@@ -2946,9 +2967,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current": {
       "get": {
         "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
-        "tags": [
-          "Machines"
-        ],
         "description": "Returns a Azure Arc PrivateLinkScope's validation details for a given machine.",
         "parameters": [
           {
@@ -2996,7 +3014,7 @@
       "get": {
         "operationId": "NetworkConfigurations_Get",
         "tags": [
-          "NetworkConfigurationsOperationGroup"
+          "NetworkConfigurations"
         ],
         "description": "Returns a NetworkConfiguration for the target resource.",
         "parameters": [
@@ -3037,7 +3055,7 @@
       "put": {
         "operationId": "NetworkConfigurations_CreateOrUpdate",
         "tags": [
-          "NetworkConfigurationsOperationGroup"
+          "NetworkConfigurations"
         ],
         "description": "Create or update the NetworkConfiguration of the target resource.",
         "parameters": [
@@ -3093,7 +3111,7 @@
       "patch": {
         "operationId": "NetworkConfigurations_Update",
         "tags": [
-          "NetworkConfigurationsOperationGroup"
+          "NetworkConfigurations"
         ],
         "description": "Update the endpoint to the target resource.",
         "parameters": [
@@ -3511,7 +3529,7 @@
       "post": {
         "operationId": "UpgradeExtensions",
         "tags": [
-          "Machines"
+          "MachineExtensions Upgrade"
         ],
         "description": "The operation to Upgrade Machine Extensions.",
         "parameters": [
@@ -3589,9 +3607,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes": {
       "get": {
         "operationId": "PrivateLinkScopes_ListByResourceGroup",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "description": "Gets a list of Azure Arc PrivateLinkScopes within a resource group.",
         "parameters": [
           {
@@ -3631,9 +3646,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/privateLinkScopes/{scopeName}": {
       "get": {
         "operationId": "PrivateLinkScopes_Get",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "description": "Returns a Azure Arc PrivateLinkScope.",
         "parameters": [
           {
@@ -3676,9 +3688,6 @@
       },
       "put": {
         "operationId": "PrivateLinkScopes_CreateOrUpdate",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "description": "Creates (or updates) a Azure Arc PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
         "parameters": [
           {
@@ -3739,9 +3748,6 @@
       },
       "patch": {
         "operationId": "PrivateLinkScopes_UpdateTags",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "description": "Updates an existing PrivateLinkScope's tags. To update other fields use the CreateOrUpdate method.",
         "parameters": [
           {
@@ -3793,9 +3799,6 @@
       },
       "delete": {
         "operationId": "PrivateLinkScopes_Delete",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "description": "Deletes a Azure Arc PrivateLinkScope.",
         "parameters": [
           {
@@ -3865,7 +3868,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeterConfiguration"
         ],
         "description": "Lists the network security perimeter configurations for a private link scope.",
         "parameters": [
@@ -3915,7 +3918,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeterConfiguration"
         ],
         "description": "Gets the network security perimeter configuration for a private link scope.",
         "parameters": [
@@ -3970,7 +3973,7 @@
       "post": {
         "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeterConfiguration"
         ],
         "description": "Forces the network security perimeter configuration to refresh for a private link scope.",
         "parameters": [

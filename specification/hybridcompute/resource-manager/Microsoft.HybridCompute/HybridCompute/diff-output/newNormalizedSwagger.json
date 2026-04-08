@@ -15,6 +15,9 @@
     "/providers/microsoft.HybridCompute/locations/{location}/publishers": {
       "get": {
         "operationId": "ExtensionPublisher_List",
+        "tags": [
+          "extensions"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
@@ -47,6 +50,9 @@
     "/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes": {
       "get": {
         "operationId": "ExtensionType_List",
+        "tags": [
+          "extensions"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
@@ -86,7 +92,7 @@
       "get": {
         "operationId": "ExtensionMetadataV2_List",
         "tags": [
-          "ExtensionValueV2s"
+          "extensions"
         ],
         "parameters": [
           {
@@ -137,7 +143,7 @@
       "get": {
         "operationId": "ExtensionMetadataV2_Get",
         "tags": [
-          "ExtensionValueV2s"
+          "extensions"
         ],
         "parameters": [
           {
@@ -218,6 +224,9 @@
     "/providers/microsoft.HybridCompute/osType/{osType}/agentVersions": {
       "get": {
         "operationId": "AgentVersion_List",
+        "tags": [
+          "AgentVersions"
+        ],
         "parameters": [
           {
             "name": "osType",
@@ -248,6 +257,9 @@
     "/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}": {
       "get": {
         "operationId": "AgentVersion_Get",
+        "tags": [
+          "AgentVersions"
+        ],
         "parameters": [
           {
             "name": "osType",
@@ -282,7 +294,7 @@
       "get": {
         "operationId": "Gateways_ListBySubscription",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "parameters": [],
         "responses": {
@@ -313,7 +325,7 @@
       "get": {
         "operationId": "Licenses_ListBySubscription",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "parameters": [],
         "responses": {
@@ -379,7 +391,7 @@
       "get": {
         "operationId": "ExtensionMetadata_List",
         "tags": [
-          "ExtensionValues"
+          "extensions"
         ],
         "parameters": [
           {
@@ -430,7 +442,7 @@
       "get": {
         "operationId": "ExtensionMetadata_Get",
         "tags": [
-          "ExtensionValues"
+          "extensions"
         ],
         "parameters": [
           {
@@ -484,7 +496,7 @@
       "get": {
         "operationId": "Machines_ListBySubscription",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [],
         "responses": {
@@ -514,9 +526,6 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/privateLinkScopes": {
       "get": {
         "operationId": "PrivateLinkScopes_List",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -545,6 +554,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/validateLicense": {
       "post": {
         "operationId": "Licenses_ValidateLicense",
+        "tags": [
+          "licenses"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -596,7 +608,7 @@
       "get": {
         "operationId": "Settings_Get",
         "tags": [
-          "SettingsOperationGroup"
+          "Settings"
         ],
         "parameters": [
           {
@@ -651,7 +663,7 @@
       "put": {
         "operationId": "Settings_Update",
         "tags": [
-          "SettingsOperationGroup"
+          "Settings"
         ],
         "parameters": [
           {
@@ -720,7 +732,7 @@
       "patch": {
         "operationId": "Settings_Patch",
         "tags": [
-          "SettingsOperationGroup"
+          "Settings"
         ],
         "parameters": [
           {
@@ -785,7 +797,7 @@
       "get": {
         "operationId": "Gateways_ListByResourceGroup",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "parameters": [],
         "responses": {
@@ -816,7 +828,7 @@
       "get": {
         "operationId": "Gateways_Get",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "parameters": [
           {
@@ -850,7 +862,7 @@
       "put": {
         "operationId": "Gateways_CreateOrUpdate",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "parameters": [
           {
@@ -910,7 +922,7 @@
       "patch": {
         "operationId": "Gateways_Update",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "parameters": [
           {
@@ -952,7 +964,7 @@
       "delete": {
         "operationId": "Gateways_Delete",
         "tags": [
-          "Gateways"
+          "gateways"
         ],
         "parameters": [
           {
@@ -1000,7 +1012,7 @@
       "get": {
         "operationId": "Licenses_ListByResourceGroup",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "parameters": [],
         "responses": {
@@ -1031,7 +1043,7 @@
       "get": {
         "operationId": "Licenses_Get",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "parameters": [
           {
@@ -1065,7 +1077,7 @@
       "put": {
         "operationId": "Licenses_CreateOrUpdate",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "parameters": [
           {
@@ -1114,7 +1126,7 @@
       "patch": {
         "operationId": "Licenses_Update",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "parameters": [
           {
@@ -1163,7 +1175,7 @@
       "delete": {
         "operationId": "Licenses_Delete",
         "tags": [
-          "Licenses"
+          "licenses"
         ],
         "parameters": [
           {
@@ -1206,7 +1218,7 @@
       "get": {
         "operationId": "Machines_ListByResourceGroup",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [
           {
@@ -1243,7 +1255,7 @@
       "get": {
         "operationId": "Machines_Get",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [
           {
@@ -1294,7 +1306,7 @@
       "put": {
         "operationId": "Machines_CreateOrUpdate",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [
           {
@@ -1343,7 +1355,7 @@
       "patch": {
         "operationId": "Machines_Update",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [
           {
@@ -1387,7 +1399,7 @@
       "delete": {
         "operationId": "Machines_Delete",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [
           {
@@ -1437,7 +1449,7 @@
       "post": {
         "operationId": "SetupExtensions",
         "tags": [
-          "Machines"
+          "MachineExtensions Setup"
         ],
         "parameters": [
           {
@@ -1498,7 +1510,7 @@
       "post": {
         "operationId": "Machines_AssessPatches",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [
           {
@@ -1810,7 +1822,7 @@
       "get": {
         "operationId": "HybridIdentityMetadata_ListByMachines",
         "tags": [
-          "Machines"
+          "HybridIdentityMetadata"
         ],
         "parameters": [
           {
@@ -1846,7 +1858,7 @@
       "get": {
         "operationId": "HybridIdentityMetadata_Get",
         "tags": [
-          "Machines"
+          "HybridIdentityMetadata"
         ],
         "parameters": [
           {
@@ -1886,7 +1898,7 @@
       "post": {
         "operationId": "Machines_InstallPatches",
         "tags": [
-          "Machines"
+          "machines"
         ],
         "parameters": [
           {
@@ -1939,7 +1951,7 @@
       "get": {
         "operationId": "LicenseProfiles_List",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -1980,7 +1992,7 @@
       "get": {
         "operationId": "LicenseProfiles_Get",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -2016,7 +2028,7 @@
       "put": {
         "operationId": "LicenseProfiles_CreateOrUpdate",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -2078,7 +2090,7 @@
       "patch": {
         "operationId": "LicenseProfiles_Update",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -2137,7 +2149,7 @@
       "delete": {
         "operationId": "LicenseProfiles_Delete",
         "tags": [
-          "LicenseProfiles"
+          "licenseProfiles"
         ],
         "parameters": [
           {
@@ -2187,7 +2199,7 @@
       "get": {
         "operationId": "NetworkProfile_Get",
         "tags": [
-          "Machines"
+          "MachineNetworkProfile"
         ],
         "parameters": [
           {
@@ -2224,9 +2236,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/privateLinkScopes/current": {
       "get": {
         "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
-        "tags": [
-          "Machines"
-        ],
         "parameters": [
           {
             "name": "machineName",
@@ -2263,7 +2272,7 @@
       "get": {
         "operationId": "NetworkConfigurations_Get",
         "tags": [
-          "NetworkConfigurationsOperationGroup"
+          "NetworkConfigurations"
         ],
         "parameters": [
           {
@@ -2293,7 +2302,7 @@
       "put": {
         "operationId": "NetworkConfigurations_CreateOrUpdate",
         "tags": [
-          "NetworkConfigurationsOperationGroup"
+          "NetworkConfigurations"
         ],
         "parameters": [
           {
@@ -2337,7 +2346,7 @@
       "patch": {
         "operationId": "NetworkConfigurations_Update",
         "tags": [
-          "NetworkConfigurationsOperationGroup"
+          "NetworkConfigurations"
         ],
         "parameters": [
           {
@@ -2653,7 +2662,7 @@
       "post": {
         "operationId": "UpgradeExtensions",
         "tags": [
-          "Machines"
+          "MachineExtensions Upgrade"
         ],
         "parameters": [
           {
@@ -2710,9 +2719,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes": {
       "get": {
         "operationId": "PrivateLinkScopes_ListByResourceGroup",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -2741,9 +2747,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/privateLinkScopes/{scopeName}": {
       "get": {
         "operationId": "PrivateLinkScopes_Get",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "parameters": [
           {
             "name": "scopeName",
@@ -2775,9 +2778,6 @@
       },
       "put": {
         "operationId": "PrivateLinkScopes_CreateOrUpdate",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "parameters": [
           {
             "name": "scopeName",
@@ -2826,9 +2826,6 @@
       },
       "patch": {
         "operationId": "PrivateLinkScopes_UpdateTags",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "parameters": [
           {
             "name": "scopeName",
@@ -2868,9 +2865,6 @@
       },
       "delete": {
         "operationId": "PrivateLinkScopes_Delete",
-        "tags": [
-          "HybridComputePrivateLinkScopes"
-        ],
         "parameters": [
           {
             "name": "scopeName",
@@ -2920,7 +2914,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeterConfiguration"
         ],
         "parameters": [
           {
@@ -2959,7 +2953,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeterConfiguration"
         ],
         "parameters": [
           {
@@ -3002,7 +2996,7 @@
       "post": {
         "operationId": "NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope",
         "tags": [
-          "NetworkSecurityPerimeterConfigurations"
+          "NetworkSecurityPerimeterConfiguration"
         ],
         "parameters": [
           {

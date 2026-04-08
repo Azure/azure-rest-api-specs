@@ -23,7 +23,7 @@ model HybridComputePrivateLinkScope
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface HybridComputePrivateLinkScopes {
   /**
    * Returns a Azure Arc PrivateLinkScope.
