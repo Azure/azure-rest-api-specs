@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models-service.tsp";
 
@@ -21,6 +21,7 @@ interface DataSources {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
@@ -117,6 +118,7 @@ interface Indexers {
 
   /** Resync selective options from the datasource to be re-ingested by the indexer." */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @route("/indexers('{indexerName}')/search.resync")
   @post
@@ -137,6 +139,7 @@ interface Indexers {
 
   /** Resets specific documents in the datasource to be selectively re-ingested by the indexer. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @route("/indexers('{indexerName}')/search.resetdocs")
   @post
@@ -186,11 +189,13 @@ interface Indexers {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
@@ -294,11 +299,13 @@ interface Skillsets {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
@@ -378,6 +385,7 @@ interface Skillsets {
 
   /** Reset an existing skillset in a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @route("/skillsets('{skillsetName}')/search.resetskills")
   @post
@@ -891,6 +899,7 @@ op getServiceStatistics is SearchOperation<
 /** Retrieves a summary of statistics for all indexes in the search service. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 @route("/indexstats")
 @list

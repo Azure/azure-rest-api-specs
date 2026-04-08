@@ -818,26 +818,32 @@ union AzureOpenAIModelName {
   TextEmbedding3Small: "text-embedding-3-small",
 
   /** Gpt4o model. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt4o: "gpt-4o",
 
   /** Gpt4oMini model. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt4oMini: "gpt-4o-mini",
 
   /** Gpt41 model. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt41: "gpt-4.1",
 
   /** Gpt41Mini model. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt41Mini: "gpt-4.1-mini",
 
   /** Gpt41Nano model. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt41Nano: "gpt-4.1-nano",
 
   /** Gpt5 model. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   Gpt5: "gpt-5",
 
@@ -3049,6 +3055,7 @@ union IndexerPermissionOption {
 }
 
 /** A value indicating whether the field should be used as a permission filter. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union PermissionFilter {
   string,
@@ -3064,6 +3071,7 @@ union PermissionFilter {
 }
 
 /** A value indicating whether permission filtering is enabled for the index. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 union SearchIndexPermissionFilterOption {
   string,
@@ -3142,6 +3150,7 @@ model SearchIndexerDataSource {
 
   /** A specific type of the data source, in case the resource is capable of different modalities. For example, 'MongoDb' for certain 'cosmosDb' accounts. */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   subType?: string;
 
@@ -3159,6 +3168,7 @@ model SearchIndexerDataSource {
 
   /** Ingestion options with various types of permission data. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   indexerPermissionOptions?: IndexerPermissionOption[] | null;
 
@@ -3304,6 +3314,7 @@ model SearchIndexer {
 
   /** Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   cache?: SearchIndexerCache | null;
 }
@@ -3423,6 +3434,7 @@ model FieldMappingFunction {
 }
 
 /** The type of the cache. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model SearchIndexerCache {
   /** A guid for the SearchIndexerCache. */
@@ -3459,6 +3471,7 @@ model SearchIndexerStatus {
   status: IndexerStatus;
 
   /** Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   runtime: IndexerRuntime;
@@ -3476,6 +3489,7 @@ model SearchIndexerStatus {
   limits: SearchIndexerLimits;
 
   /** All of the state that defines and dictates the indexer's current execution. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   currentState?: IndexerCurrentState;
@@ -3488,11 +3502,13 @@ model IndexerExecutionResult {
   status: IndexerExecutionStatus;
 
   /** The outcome of this indexer execution. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   statusDetail?: IndexerExecutionStatusDetail;
 
   /** The mode the indexer is running in. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   mode?: IndexingMode;
@@ -3759,6 +3775,7 @@ model SearchIndexerKnowledgeStore {
 
   /** A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   parameters?: SearchIndexerKnowledgeStoreParameters;
 }
@@ -3958,11 +3975,13 @@ model SearchIndex {
 
   /** A value indicating whether permission filtering is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   permissionFilterOption?: SearchIndexPermissionFilterOption | null;
 
   /** A value indicating whether Purview is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   purviewEnabled?: boolean | null;
 
@@ -4027,11 +4046,13 @@ model SearchIndexResponse {
 
   /** A value indicating whether permission filtering is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   permissionFilterOption?: SearchIndexPermissionFilterOption | null;
 
   /** A value indicating whether Purview is enabled for the index. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   purviewEnabled?: boolean | null;
 
@@ -4071,11 +4092,13 @@ model SearchField {
 
   /** A value indicating whether the field should be used as a permission filter. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   permissionFilter?: PermissionFilter | null;
 
   /** A value indicating whether the field contains sensitivity label information. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   sensitivityLabel?: boolean | null;
 
@@ -4267,6 +4290,7 @@ model SemanticConfiguration {
   rankingOrder?: RankingOrder | null;
 
   /** Determines which semantic or query rewrite models to use during model flighting/upgrades. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   flightingOptIn?: boolean = false;
 }
@@ -4483,10 +4507,12 @@ model KnowledgeBase {
   models?: KnowledgeBaseModel[];
 
   /** The retrieval reasoning effort configuration. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
   /** The output mode for the knowledge base. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   outputMode?: KnowledgeRetrievalOutputMode;
 
@@ -4502,10 +4528,12 @@ model KnowledgeBase {
   description?: string;
 
   /** Instructions considered by the knowledge base when developing query plan. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   retrievalInstructions?: string;
 
   /** Instructions considered by the knowledge base when generating answers. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   answerInstructions?: string;
 }
@@ -4602,6 +4630,7 @@ union KnowledgeSourceKind {
   AzureBlob: "azureBlob",
 
   /** A knowledge source that reads data from indexed SharePoint. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   IndexedSharePoint: "indexedSharePoint",
 
@@ -4612,6 +4641,7 @@ union KnowledgeSourceKind {
   Web: "web",
 
   /** A knowledge source that reads data from remote SharePoint. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   RemoteSharePoint: "remoteSharePoint",
 }
@@ -4679,6 +4709,7 @@ model AzureBlobKnowledgeSourceParameters {
 }
 
 /** Configuration for SharePoint knowledge source. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.IndexedSharePoint;
@@ -4688,6 +4719,7 @@ model IndexedSharePointKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for SharePoint knowledge source. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParameters {
   /** SharePoint connection string with format: SharePointOnlineEndpoint=[SharePoint site url];ApplicationId=[Azure AD App ID];ApplicationSecret=[Azure AD App client secret];TenantId=[SharePoint site tenant id] */
@@ -4770,6 +4802,7 @@ model WebKnowledgeSourceDomain {
 }
 
 /** Configuration for remote SharePoint knowledge source. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.RemoteSharePoint;
@@ -4779,6 +4812,7 @@ model RemoteSharePointKnowledgeSource extends KnowledgeSource {
 }
 
 /** Parameters for remote SharePoint knowledge source. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParameters {
   /** Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs. */
@@ -4812,6 +4846,7 @@ model SearchServiceStatistics {
   limits: SearchServiceLimits;
 
   /** Service level indexer runtime consumption. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   indexersRuntime: ServiceIndexersRuntime;
 }
@@ -5729,6 +5764,7 @@ model WebApiVectorizerParameters {
 
 /** Clears the identity property of a datasource. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   /** Contains the parameters specific to AI Services Vision embedding vectorization. */
@@ -6251,12 +6287,14 @@ model SplitSkill extends SearchIndexerSkill {
 
   /** Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   unit?: SplitSkillUnit | null;
 
   /** Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters | null;
 
@@ -6407,6 +6445,7 @@ model WebApiSkill extends SearchIndexerSkill {
 }
 
 /** The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model AzureMachineLearningSkill extends SearchIndexerSkill {
   /** (Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed. */
@@ -6453,6 +6492,7 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 }
 
 /** Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API. */
+@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model VisionVectorizeSkill extends SearchIndexerSkill {
   /** The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified. */
@@ -6593,29 +6633,35 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   uri: string;
 
   /** The headers required to make the http request. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   httpHeaders?: WebApiHttpHeaders;
 
   /** The method for the http request. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   httpMethod?: string;
 
   /** The desired timeout for the request. Default is 30 seconds. */
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   timeout?: duration;
 
   /** The desired batch size which indicates number of documents. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   batchSize?: int32 | null;
 
   /** If set, the number of parallel calls that can be made to the Web API. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   degreeOfParallelism?: int32 | null;
 
   /** Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   authResourceId?: string | null;
 
