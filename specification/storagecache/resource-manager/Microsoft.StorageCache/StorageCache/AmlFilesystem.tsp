@@ -36,6 +36,7 @@ model AmlFilesystem
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
+@@visibility(AmlFilesystem.zones, Lifecycle.Read, Lifecycle.Create);
 
 @armResourceOperations
 interface AmlFilesystems {
@@ -57,12 +58,13 @@ interface AmlFilesystems {
    * Update an AML file system instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("amlFilesystems_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AmlFilesystem,
     PatchModel = AmlFilesystemUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = AmlFilesystem> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = AmlFilesystem> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -74,7 +76,8 @@ interface AmlFilesystems {
   @operationId("amlFilesystems_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     AmlFilesystem,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AmlFilesystem> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -82,14 +85,20 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<AmlFilesystem>;
+  listByResourceGroup is ArmResourceListByParent<
+    AmlFilesystem,
+    Response = ArmResponse<AmlFilesystemsListResult>
+  >;
 
   /**
    * Returns all AML file systems the user has access to under a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_List")
-  list is ArmListBySubscription<AmlFilesystem>;
+  list is ArmListBySubscription<
+    AmlFilesystem,
+    Response = ArmResponse<AmlFilesystemsListResult>
+  >;
 
   /**
    * Archive data from the AML file system.

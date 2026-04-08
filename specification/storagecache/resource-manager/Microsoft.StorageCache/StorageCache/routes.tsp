@@ -22,9 +22,12 @@ namespace Microsoft.StorageCache;
 @autoRoute
 op checkAmlFSSubnets is ArmProviderActionSync<
   Request = AmlFilesystemSubnetInfo,
-  Response = void,
-  Scope = SubscriptionActionScope
+  Response = OkResponse,
+  Scope = SubscriptionActionScope,
+  Error = CloudError | BadRequestResponse,
+  OptionalRequestBody = true
 >;
+
 /**
  * Get the number of available IP addresses needed for the AML file system information provided.
  */
@@ -46,6 +49,7 @@ interface SkusOperationGroup {
   @operationId("Skus_List")
   @autoRoute
   @get
+  @list
   @action("skus")
   list is ArmProviderActionSync<
     Response = ResourceSkusResult,
@@ -62,6 +66,7 @@ interface UsageModelsOperationGroup {
   @operationId("UsageModels_List")
   @autoRoute
   @get
+  @list
   @action("usageModels")
   list is ArmProviderActionSync<
     Response = UsageModelsResult,
@@ -101,6 +106,7 @@ interface AscUsagesOperationGroup {
   @operationId("AscUsages_List")
   @autoRoute
   @get
+  @list
   @action("usages")
   list is ArmProviderActionSync<
     Response = ResourceUsagesListResult,

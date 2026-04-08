@@ -125,3 +125,4 @@ using Microsoft.StorageCache;
 @@clientLocation(AscOperationsOperationGroup.get, "AscOperations");
 
 @@clientLocation(AscUsagesOperationGroup.list, "AscUsages");
+@@clientName(checkAmlFSSubnets::parameters.body, "amlFilesystemSubnetInfo");

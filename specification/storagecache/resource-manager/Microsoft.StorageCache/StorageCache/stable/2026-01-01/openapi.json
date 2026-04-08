@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "StorageCacheManagementClient",
+    "title": "Storage Cache Mgmt Client",
     "version": "2026-01-01",
-    "description": "Azure Managed Lustre provides a fully managed Lustre® file system, integrated with Blob storage, for use on demand. These operations create and manage Azure Managed Lustre file systems.",
+    "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -71,7 +71,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available Resource Provider operations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -79,15 +79,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ApiOperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -120,7 +120,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AmlFilesystemListResult"
+              "$ref": "#/definitions/AmlFilesystemsListResult"
             }
           },
           "default": {
@@ -159,7 +159,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CacheListResult"
+              "$ref": "#/definitions/CachesListResult"
             }
           },
           "default": {
@@ -191,23 +191,30 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "amlFilesystemSubnetInfo",
             "in": "body",
             "description": "The request body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/AmlFilesystemSubnetInfo"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "400": {
+            "description": "The error details provided when the checkAmlFSSubnets call fails.",
+            "schema": {
+              "$ref": "#/definitions/AmlFilesystemCheckSubnetError"
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -337,6 +344,9 @@
           "AscUsages_List": {
             "$ref": "./examples/AscResourceUsages_Get.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -370,6 +380,9 @@
           "Skus_List": {
             "$ref": "./examples/Skus_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -403,6 +416,9 @@
           "UsageModels_List": {
             "$ref": "./examples/UsageModels_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -428,7 +444,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AmlFilesystemListResult"
+              "$ref": "#/definitions/AmlFilesystemsListResult"
             }
           },
           "default": {
@@ -622,7 +638,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -683,6 +704,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -710,7 +736,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AmlFilesystem"
         },
         "x-ms-long-running-operation": true
       }
@@ -802,7 +829,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoExportJobListResult"
+              "$ref": "#/definitions/AutoExportJobsListResult"
             }
           },
           "default": {
@@ -1026,7 +1053,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1094,6 +1126,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1158,7 +1195,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AutoImportJobListResult"
+              "$ref": "#/definitions/AutoImportJobsListResult"
             }
           },
           "default": {
@@ -1382,7 +1419,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1450,6 +1492,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1560,7 +1607,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExpansionJobListResult"
+              "$ref": "#/definitions/ExpansionJobsListResult"
             }
           },
           "default": {
@@ -1699,7 +1746,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1784,7 +1836,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1852,6 +1909,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1916,7 +1978,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ImportJobListResult"
+              "$ref": "#/definitions/ImportJobsListResult"
             }
           },
           "default": {
@@ -2140,7 +2202,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2208,6 +2275,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2262,7 +2334,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CacheListResult"
+              "$ref": "#/definitions/CachesListResult"
             }
           },
           "default": {
@@ -2467,7 +2539,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2529,6 +2606,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2596,7 +2678,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2661,7 +2748,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2732,7 +2824,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2803,7 +2900,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2877,7 +2979,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2939,7 +3046,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3010,7 +3122,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3072,7 +3189,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3143,7 +3265,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3428,6 +3555,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3503,7 +3635,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3573,7 +3710,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3646,7 +3788,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3717,6 +3864,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3741,8 +3893,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3790,7 +3941,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3863,7 +4019,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3928,7 +4089,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -3982,7 +4148,11 @@
           "description": "The availability zones.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -4054,6 +4224,30 @@
           "type": "string",
           "description": "Server-defined error message for the archive operation",
           "readOnly": true
+        }
+      }
+    },
+    "AmlFilesystemCheckSubnetError": {
+      "type": "object",
+      "description": "The error details provided when the checkAmlFSSubnets call fails.",
+      "properties": {
+        "filesystemSubnet": {
+          "$ref": "#/definitions/AmlFilesystemCheckSubnetErrorFilesystemSubnet",
+          "description": "The error details for the AML file system's subnet."
+        }
+      }
+    },
+    "AmlFilesystemCheckSubnetErrorFilesystemSubnet": {
+      "type": "object",
+      "description": "The error details for the AML file system's subnet.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/FilesystemSubnetStatusType",
+          "description": "The status of the AML file system subnet check."
+        },
+        "message": {
+          "type": "string",
+          "description": "The details of the AML file system subnet check."
         }
       }
     },
@@ -4260,27 +4454,6 @@
           }
         ]
       }
-    },
-    "AmlFilesystemListResult": {
-      "type": "object",
-      "description": "The response of a AmlFilesystem list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AmlFilesystem items on this page",
-          "items": {
-            "$ref": "#/definitions/AmlFilesystem"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "AmlFilesystemProperties": {
       "type": "object",
@@ -4580,6 +4753,128 @@
         }
       }
     },
+    "AmlFilesystemsListResult": {
+      "type": "object",
+      "description": "Result of the request to list AML file systems. It contains a list of AML file systems and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of AML file systems.",
+          "items": {
+            "$ref": "#/definitions/AmlFilesystem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of AML file system list results, if there are any."
+        }
+      }
+    },
+    "ApiOperation": {
+      "type": "object",
+      "description": "REST API operation description: see https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#r3023-operationsapiimplementation",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/ApiOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "The flag that indicates whether the operation applies to data plane."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApiOperationProperties",
+          "description": "Additional details about an operation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ApiOperationDisplay": {
+      "type": "object",
+      "description": "The object that represents the operation.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "Operation type: Read, write, delete, etc."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft.StorageCache"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed: Cache, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the operation"
+        }
+      }
+    },
+    "ApiOperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Resource Provider operations supported by the Microsoft.StorageCache resource provider.",
+          "items": {
+            "$ref": "#/definitions/ApiOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "ApiOperationProperties": {
+      "type": "object",
+      "description": "Additional details about an operation.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ApiOperationPropertiesServiceSpecification",
+          "description": "Specification of the all the metrics provided for a resource type."
+        }
+      }
+    },
+    "ApiOperationPropertiesServiceSpecification": {
+      "type": "object",
+      "description": "Specification of the all the metrics provided for a resource type.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Details about operations related to metrics.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Details about operations related to logs.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "ArchiveStatusType": {
       "type": "string",
       "description": "The state of the archive operation",
@@ -4740,27 +5035,6 @@
         ]
       }
     },
-    "AutoExportJobListResult": {
-      "type": "object",
-      "description": "The response of a AutoExportJob list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AutoExportJob items on this page",
-          "items": {
-            "$ref": "#/definitions/AutoExportJob"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AutoExportJobProperties": {
       "type": "object",
       "description": "Properties of the auto export job.",
@@ -4771,8 +5045,29 @@
           "readOnly": true
         },
         "adminStatus": {
-          "$ref": "#/definitions/AutoExportJobAdminStatus",
+          "type": "string",
           "description": "The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.",
+          "default": "Enable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "AutoExportJobAdminStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Enable"
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Disable"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -4963,6 +5258,24 @@
         }
       }
     },
+    "AutoExportJobsListResult": {
+      "type": "object",
+      "description": "Result of the request to list auto export jobs. It contains a list of auto export jobs and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of auto export jobs.",
+          "items": {
+            "$ref": "#/definitions/AutoExportJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of auto export job list results, if there are any."
+        }
+      }
+    },
     "AutoExportStatusType": {
       "type": "string",
       "description": "The operational state of auto export. InProgress indicates the export is running.  Disabling indicates the user has requested to disable the export but the disabling is still in progress. Disabled indicates auto export has been disabled.  DisableFailed indicates the disabling has failed.  Failed means the export was unable to continue, due to a fatal error.",
@@ -5021,27 +5334,6 @@
         }
       ]
     },
-    "AutoImportJobListResult": {
-      "type": "object",
-      "description": "The response of a AutoImportJob list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AutoImportJob items on this page",
-          "items": {
-            "$ref": "#/definitions/AutoImportJob"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AutoImportJobProperties": {
       "type": "object",
       "description": "Properties of the auto import job.",
@@ -5088,8 +5380,41 @@
           ]
         },
         "conflictResolutionMode": {
-          "$ref": "#/definitions/ConflictResolutionMode",
+          "type": "string",
           "description": "How the auto import job will handle conflicts. For example, if the auto import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the auto import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the auto import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or is currently released. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/blob-integration#conflict-resolution-mode for a thorough explanation of these resolution modes.",
+          "default": "Skip",
+          "enum": [
+            "Fail",
+            "Skip",
+            "OverwriteIfDirty",
+            "OverwriteAlways"
+          ],
+          "x-ms-enum": {
+            "name": "ConflictResolutionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Fail",
+                "value": "Fail",
+                "description": "Fail"
+              },
+              {
+                "name": "Skip",
+                "value": "Skip",
+                "description": "Skip"
+              },
+              {
+                "name": "OverwriteIfDirty",
+                "value": "OverwriteIfDirty",
+                "description": "OverwriteIfDirty"
+              },
+              {
+                "name": "OverwriteAlways",
+                "value": "OverwriteAlways",
+                "description": "OverwriteAlways"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -5098,6 +5423,7 @@
         "enableDeletions": {
           "type": "boolean",
           "description": "Whether or not to enable deletions during auto import. This only affects overwrite-dirty.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -5460,6 +5786,24 @@
         ]
       }
     },
+    "AutoImportJobsListResult": {
+      "type": "object",
+      "description": "Result of the request to list auto import jobs. It contains a list of auto import jobs and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of auto import jobs.",
+          "items": {
+            "$ref": "#/definitions/AutoImportJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of auto import job list results, if there are any."
+        }
+      }
+    },
     "BlobNfsTarget": {
       "type": "object",
       "description": "Properties pertaining to the BlobNfsTarget.",
@@ -5615,7 +5959,9 @@
       "properties": {
         "keyEncryptionKey": {
           "$ref": "#/definitions/KeyVaultKeyReference",
-          "description": "Specifies the location of the key encryption key in key vault."
+          "format": "password",
+          "description": "Specifies the location of the key encryption key in key vault.",
+          "x-ms-secret": true
         },
         "rotationToLatestKeyVersionEnabled": {
           "type": "boolean",
@@ -5709,27 +6055,6 @@
           }
         ]
       }
-    },
-    "CacheListResult": {
-      "type": "object",
-      "description": "The response of a Cache list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Cache items on this page",
-          "items": {
-            "$ref": "#/definitions/Cache"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "CacheNetworkSettings": {
       "type": "object",
@@ -5849,16 +6174,14 @@
           "description": "Specifies the priming jobs defined in the cache.",
           "items": {
             "$ref": "#/definitions/PrimingJob"
-          },
-          "readOnly": true
+          }
         },
         "spaceAllocation": {
           "type": "array",
           "description": "Specifies the space allocation percentage for each storage target in the cache.",
           "items": {
             "$ref": "#/definitions/StorageTargetSpaceAllocation"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -5999,15 +6322,18 @@
         },
         "encryptLdapConnection": {
           "type": "boolean",
-          "description": "Whether or not the LDAP connection should be encrypted."
+          "description": "Whether or not the LDAP connection should be encrypted.",
+          "default": false
         },
         "requireValidCertificate": {
           "type": "boolean",
-          "description": "Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided."
+          "description": "Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided.",
+          "default": false
         },
         "autoDownloadCertificate": {
           "type": "boolean",
-          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true."
+          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true.",
+          "default": false
         },
         "caCertificateURI": {
           "type": "string",
@@ -6039,7 +6365,27 @@
         },
         "bindPassword": {
           "type": "string",
-          "description": "The Bind password to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+          "format": "password",
+          "description": "The Bind password to be used in the secure LDAP connection. This value is stored encrypted and not returned on response.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "CachesListResult": {
+      "type": "object",
+      "description": "Result of the request to list caches. It contains a list of caches and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of caches.",
+          "items": {
+            "$ref": "#/definitions/Cache"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of cache list results, if there are any."
         }
       }
     },
@@ -6054,6 +6400,43 @@
             "read",
             "create"
           ]
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The body of the error."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "An error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": []
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
         }
       }
     },
@@ -6072,42 +6455,6 @@
           "description": "The issue requiring attention.",
           "readOnly": true
         }
-      }
-    },
-    "ConflictResolutionMode": {
-      "type": "string",
-      "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
-      "enum": [
-        "Fail",
-        "Skip",
-        "OverwriteIfDirty",
-        "OverwriteAlways"
-      ],
-      "x-ms-enum": {
-        "name": "ConflictResolutionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Fail",
-            "value": "Fail",
-            "description": "Fail"
-          },
-          {
-            "name": "Skip",
-            "value": "Skip",
-            "description": "Skip"
-          },
-          {
-            "name": "OverwriteIfDirty",
-            "value": "OverwriteIfDirty",
-            "description": "OverwriteIfDirty"
-          },
-          {
-            "name": "OverwriteAlways",
-            "value": "OverwriteAlways",
-            "description": "OverwriteAlways"
-          }
-        ]
       }
     },
     "DomainJoinedType": {
@@ -6154,27 +6501,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
-      ]
-    },
-    "ExpansionJobListResult": {
-      "type": "object",
-      "description": "The response of a ExpansionJob list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ExpansionJob items on this page",
-          "items": {
-            "$ref": "#/definitions/ExpansionJob"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ExpansionJobProperties": {
@@ -6274,6 +6600,7 @@
           "type": "number",
           "format": "float",
           "description": "The percentage of expansion job completion.",
+          "minimum": 0,
           "maximum": 100,
           "readOnly": true
         },
@@ -6344,6 +6671,48 @@
             "type": "string"
           }
         }
+      }
+    },
+    "ExpansionJobsListResult": {
+      "type": "object",
+      "description": "Result of the request to list expansion jobs. It contains a list of expansion jobs and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of expansion jobs.",
+          "items": {
+            "$ref": "#/definitions/ExpansionJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of expansion job list results, if there are any."
+        }
+      }
+    },
+    "FilesystemSubnetStatusType": {
+      "type": "string",
+      "description": "The status of the AML file system subnet check.",
+      "enum": [
+        "Ok",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "FilesystemSubnetStatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ok",
+            "value": "Ok",
+            "description": "Ok"
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          }
+        ]
       }
     },
     "FirmwareStatusType": {
@@ -6494,27 +6863,6 @@
         ]
       }
     },
-    "ImportJobListResult": {
-      "type": "object",
-      "description": "The response of a ImportJob list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ImportJob items on this page",
-          "items": {
-            "$ref": "#/definitions/ImportJob"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ImportJobProperties": {
       "type": "object",
       "description": "Properties of the import job.",
@@ -6525,8 +6873,29 @@
           "readOnly": true
         },
         "adminStatus": {
-          "$ref": "#/definitions/ImportJobAdminStatus",
+          "type": "string",
           "description": "The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job. By default it is set to 'Active'.",
+          "default": "Active",
+          "enum": [
+            "Active",
+            "Cancel"
+          ],
+          "x-ms-enum": {
+            "name": "ImportJobAdminStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Active",
+                "value": "Active",
+                "description": "Active"
+              },
+              {
+                "name": "Cancel",
+                "value": "Cancel",
+                "description": "Cancel"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -6544,8 +6913,41 @@
           ]
         },
         "conflictResolutionMode": {
-          "$ref": "#/definitions/ConflictResolutionMode",
+          "type": "string",
           "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
+          "default": "Fail",
+          "enum": [
+            "Fail",
+            "Skip",
+            "OverwriteIfDirty",
+            "OverwriteAlways"
+          ],
+          "x-ms-enum": {
+            "name": "ConflictResolutionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Fail",
+                "value": "Fail",
+                "description": "Fail"
+              },
+              {
+                "name": "Skip",
+                "value": "Skip",
+                "description": "Skip"
+              },
+              {
+                "name": "OverwriteIfDirty",
+                "value": "OverwriteIfDirty",
+                "description": "OverwriteIfDirty"
+              },
+              {
+                "name": "OverwriteAlways",
+                "value": "OverwriteAlways",
+                "description": "OverwriteAlways"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -6555,6 +6957,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
+          "default": 0,
           "x-ms-mutability": [
             "read",
             "create"
@@ -6742,6 +7145,24 @@
         }
       }
     },
+    "ImportJobsListResult": {
+      "type": "object",
+      "description": "Result of the request to list import jobs. It contains a list of import jobs and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of import jobs.",
+          "items": {
+            "$ref": "#/definitions/ImportJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of import job list results, if there are any."
+        }
+      }
+    },
     "ImportStatusType": {
       "type": "string",
       "description": "The operational state of the import job. InProgress indicates the import is still running. Canceled indicates it has been canceled by the user. Completed indicates import finished, successfully importing all discovered blobs into the Lustre namespace. CompletedPartial indicates the import finished but some blobs either were found to be conflicting and could not be imported or other errors were encountered. Failed means the import was unable to complete due to a fatal error.",
@@ -6818,6 +7239,20 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Details about operation related to logs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the log."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name of the log."
+        }
+      }
+    },
     "MaintenanceDayOfWeekType": {
       "type": "string",
       "description": "Day of the week on which the maintenance window will occur.",
@@ -6870,6 +7305,126 @@
             "description": "Sunday"
           }
         ]
+      }
+    },
+    "MetricAggregationType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "None",
+        "Average",
+        "Minimum",
+        "Maximum",
+        "Total",
+        "Count"
+      ],
+      "x-ms-enum": {
+        "name": "MetricAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "NotSpecified"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum",
+            "description": "Minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "Maximum"
+          },
+          {
+            "name": "Total",
+            "value": "Total",
+            "description": "Total"
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count"
+          }
+        ]
+      }
+    },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension"
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of the dimension."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "To be exported to shoe box."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Details about operation related to metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit that the metric is measured in."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The type of metric aggregation."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "Support metric aggregation type.",
+          "items": {
+            "$ref": "#/definitions/MetricAggregationType"
+          }
+        },
+        "metricClass": {
+          "type": "string",
+          "description": "Type of metrics."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions of the metric",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "NamespaceJunction": {
@@ -7099,10 +7654,12 @@
         },
         "primingManifestUrl": {
           "type": "string",
+          "format": "password",
           "description": "The URL for the priming manifest file to download. This file must be readable from the HPC Cache. When the file is in Azure blob storage the URL should include a Shared Access Signature (SAS) granting read permissions on the blob.",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "primingJobId": {
           "type": "string",
@@ -7129,6 +7686,7 @@
           "type": "number",
           "format": "double",
           "description": "The current progress of the priming job, as a percentage.",
+          "minimum": 0,
           "maximum": 100,
           "readOnly": true
         }
@@ -7372,20 +7930,18 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ResourceSku items on this page",
+          "description": "The list of SKUs available for the subscription.",
           "items": {
             "$ref": "#/definitions/ResourceSku"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page of cache SKUs."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ResourceUsage": {
       "type": "object",
@@ -7395,6 +7951,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The limit (quota) for this resource.",
+          "minimum": 0,
           "readOnly": true
         },
         "unit": {
@@ -7406,6 +7963,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The current usage of this resource.",
+          "minimum": 0,
           "readOnly": true
         },
         "name": {
@@ -7435,20 +7993,22 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ResourceUsage items on this page",
+          "description": "List of usages and limits for resources controlled by the Microsoft.StorageCache resource provider.",
           "items": {
             "$ref": "#/definitions/ResourceUsage"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "URL to get the next set of resource usage list results if there are any.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "Restriction": {
       "type": "object",
@@ -7622,7 +8182,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageTarget items on this page",
+          "description": "The list of Storage Targets defined for the cache.",
           "items": {
             "$ref": "#/definitions/StorageTarget"
           }
@@ -7630,16 +8190,9 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page of Storage Targets."
         }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
+      }
     },
     "UnknownTarget": {
       "type": "object",
@@ -7688,20 +8241,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The UsageModel items on this page",
+          "description": "The list of usage models available for the subscription.",
           "items": {
             "$ref": "#/definitions/UsageModel"
-          }
+          },
+          "x-ms-identifiers": [
+            "modelName"
+          ]
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI to fetch the next page of cache usage models."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "UserAssignedIdentitiesValue": {
       "type": "object",

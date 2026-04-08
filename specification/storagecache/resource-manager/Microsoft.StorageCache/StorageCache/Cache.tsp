@@ -60,10 +60,11 @@ interface Caches {
    * Update a cache instance.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Cache,
     PatchModel = Cache,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Cache> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cache> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -74,70 +75,78 @@ interface Caches {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cache,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
    * Returns all caches the user has access to under a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Cache>;
+  listByResourceGroup is ArmResourceListByParent<
+    Cache,
+    Response = ArmResponse<CachesListResult>
+  >;
 
   /**
    * Returns all caches the user has access to under a subscription.
    */
-  list is ArmListBySubscription<Cache>;
+  list is ArmListBySubscription<
+    Cache,
+    Response = ArmResponse<CachesListResult>
+  >;
 
   /**
    * Tells a cache to write generate debug info for support to process.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   debugInfo is ArmResourceActionAsync<
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Tells a cache to write all dirty data to the Storage Target(s). During the flush, clients will see errors returned until the flush is complete.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   flush is ArmResourceActionAsync<
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Tells a Stopped state cache to transition to Active state.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   start is ArmResourceActionAsync<
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Tells an Active cache to transition to Stopped state.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   stop is ArmResourceActionAsync<
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Create a priming job. This operation is only allowed when the cache is healthy.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   startPrimingJob is ArmResourceActionAsyncBase<
     Cache,
     PrimingJob,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cache>,
     OptionalRequestBody = true
@@ -146,11 +155,12 @@ interface Caches {
   /**
    * Schedule a priming job for deletion.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   stopPrimingJob is ArmResourceActionAsync<
     Cache,
     PrimingJobIdParameter,
     NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -158,11 +168,12 @@ interface Caches {
   /**
    * Schedule a priming job to be paused.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   pausePrimingJob is ArmResourceActionAsync<
     Cache,
     PrimingJobIdParameter,
     NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -170,11 +181,12 @@ interface Caches {
   /**
    * Resumes a paused priming job.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   resumePrimingJob is ArmResourceActionAsync<
     Cache,
     PrimingJobIdParameter,
     NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -182,22 +194,23 @@ interface Caches {
   /**
    * Upgrade a cache's firmware if a new version is available. Otherwise, this operation has no effect.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("upgrade")
   upgradeFirmware is ArmResourceActionAsync<
     Cache,
     void,
     CreatedResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Update cache space allocation.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   spaceAllocation is ArmResourceActionAsyncBase<
     Cache,
     StorageTargetSpaceAllocation[],
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cache>,
     OptionalRequestBody = true

@@ -39,18 +39,27 @@ interface ExpansionJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpansionJob>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpansionJob,
+    Response = ArmResourceUpdatedResponse<ExpansionJob> | ArmResourceCreatedResponse<
+      ExpansionJob,
+      ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   /**
    * Update an expansion job instance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("expansionJobs_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ExpansionJob,
     PatchModel = ExpansionJobUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpansionJob> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -59,14 +68,21 @@ interface ExpansionJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ExpansionJob>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpansionJob,
+    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Returns all the expansion jobs the user has access to under an AML File System.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_ListByAmlFilesystem")
-  listByAmlFilesystem is ArmResourceListByParent<ExpansionJob>;
+  listByAmlFilesystem is ArmResourceListByParent<
+    ExpansionJob,
+    Response = ArmResponse<ExpansionJobsListResult>
+  >;
 }
 
 @@maxLength(ExpansionJob.name, 80);

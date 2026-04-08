@@ -47,10 +47,11 @@ interface AutoExportJobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_Update")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     AutoExportJob,
     PatchModel = AutoExportJobUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = AutoExportJob> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = AutoExportJob> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -59,14 +60,21 @@ interface AutoExportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<AutoExportJob>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AutoExportJob,
+    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Returns all the auto export jobs the user has access to under an AML File System.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_ListByAmlFilesystem")
-  listByAmlFilesystem is ArmResourceListByParent<AutoExportJob>;
+  listByAmlFilesystem is ArmResourceListByParent<
+    AutoExportJob,
+    Response = ArmResponse<AutoExportJobsListResult>
+  >;
 }
 
 @@maxLength(AutoExportJob.name, 80);

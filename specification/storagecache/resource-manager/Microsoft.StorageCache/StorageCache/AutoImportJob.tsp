@@ -47,10 +47,11 @@ interface AutoImportJobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoImportJobs_Update")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     AutoImportJob,
     PatchModel = AutoImportJobUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = AutoImportJob> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = AutoImportJob> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -59,14 +60,21 @@ interface AutoImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoImportJobs_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<AutoImportJob>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AutoImportJob,
+    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Returns all the auto import jobs the user has access to under an AML File System.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoImportJobs_ListByAmlFilesystem")
-  listByAmlFilesystem is ArmResourceListByParent<AutoImportJob>;
+  listByAmlFilesystem is ArmResourceListByParent<
+    AutoImportJob,
+    Response = ArmResponse<AutoImportJobsListResult>
+  >;
 }
 
 @@maxLength(AutoImportJob.name, 80);

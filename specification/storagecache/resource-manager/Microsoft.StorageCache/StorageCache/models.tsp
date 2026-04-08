@@ -11,6 +11,125 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.StorageCache;
 
 /**
+ * Result of the request to list import jobs. It contains a list of import jobs and a URL link to get the next set of results.
+ */
+model ImportJobsListResult {
+  /**
+   * List of import jobs.
+   */
+  @pageItems
+  value?: ImportJob[];
+
+  /**
+   * URL to get the next set of import job list results, if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Result of the request to list expansion jobs. It contains a list of expansion jobs and a URL link to get the next set of results.
+ */
+model ExpansionJobsListResult {
+  /**
+   * List of expansion jobs.
+   */
+  @pageItems
+  value?: ExpansionJob[];
+
+  /**
+   * URL to get the next set of expansion job list results, if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Result of the request to list auto import jobs. It contains a list of auto import jobs and a URL link to get the next set of results.
+ */
+model AutoImportJobsListResult {
+  /**
+   * List of auto import jobs.
+   */
+  @pageItems
+  value?: AutoImportJob[];
+
+  /**
+   * URL to get the next set of auto import job list results, if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Result of the request to list auto export jobs. It contains a list of auto export jobs and a URL link to get the next set of results.
+ */
+model AutoExportJobsListResult {
+  /**
+   * List of auto export jobs.
+   */
+  @pageItems
+  value?: AutoExportJob[];
+
+  /**
+   * URL to get the next set of auto export job list results, if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.
+ */
+model ApiOperationListResult {
+  /**
+   * List of Resource Provider operations supported by the Microsoft.StorageCache resource provider.
+   */
+  @identifiers(#[])
+  @pageItems
+  value?: ApiOperation[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Result of the request to list AML file systems. It contains a list of AML file systems and a URL link to get the next set of results.
+ */
+model AmlFilesystemsListResult {
+  /**
+   * List of AML file systems.
+   */
+  @pageItems
+  value?: AmlFilesystem[];
+
+  /**
+   * URL to get the next set of AML file system list results, if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * Result of the request to list caches. It contains a list of caches and a URL link to get the next set of results.
+ */
+model CachesListResult {
+  /**
+   * List of caches.
+   */
+  @pageItems
+  value?: Cache[];
+
+  /**
+   * URL to get the next set of cache list results, if there are any.
+   */
+  @nextLink
+  nextLink?: url;
+}
+/**
  * List of AML file system health states.
  */
 union AmlFilesystemHealthStateType {
@@ -1412,6 +1531,8 @@ model AmlFilesystemRootSquashSettings {
 /**
  * An error response.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -1522,7 +1643,7 @@ model AutoExportJobProperties {
    * The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  adminStatus?: AutoExportJobAdminStatus;
+  adminStatus?: AutoExportJobAdminStatus = AutoExportJobAdminStatus.Enable;
 
   /**
    * An array of blob paths/prefixes that get auto exported to the cluster namespace. It has '/' as the default value. Number of maximum allowed paths for now is 1.
@@ -1670,7 +1791,7 @@ model ImportJobProperties {
    * The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job. By default it is set to 'Active'.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  adminStatus?: ImportJobAdminStatus;
+  adminStatus?: ImportJobAdminStatus = ImportJobAdminStatus.Active;
 
   /**
    * An array of blob paths/prefixes that get imported into the cluster namespace. It has '/' as the default value.
@@ -1682,13 +1803,13 @@ model ImportJobProperties {
    * How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  conflictResolutionMode?: ConflictResolutionMode;
+  conflictResolutionMode?: ConflictResolutionMode = ConflictResolutionMode.Fail;
 
   /**
    * Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  maximumErrors?: int32;
+  maximumErrors?: int32 = 0;
 
   /**
    * The status of the import
@@ -1847,13 +1968,13 @@ model AutoImportJobProperties {
    * How the auto import job will handle conflicts. For example, if the auto import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the auto import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the auto import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or is currently released. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/blob-integration#conflict-resolution-mode for a thorough explanation of these resolution modes.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  conflictResolutionMode?: ConflictResolutionMode;
+  conflictResolutionMode?: ConflictResolutionMode = ConflictResolutionMode.Skip;
 
   /**
    * Whether or not to enable deletions during auto import. This only affects overwrite-dirty.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  enableDeletions?: boolean;
+  enableDeletions?: boolean = false;
 
   /**
    * Total non-conflict-oriented errors (e.g., OS errors) Import will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately on any error.
@@ -2154,6 +2275,7 @@ model ExpansionJobPropertiesStatus {
    */
   @visibility(Lifecycle.Read)
   @maxValue(100)
+  @minValue(0)
   percentComplete?: float32;
 
   /**
@@ -2217,6 +2339,10 @@ model AmlFilesystemCheckSubnetError {
    * The error details for the AML file system's subnet.
    */
   filesystemSubnet?: AmlFilesystemCheckSubnetErrorFilesystemSubnet;
+}
+
+model BadRequestResponse is AmlFilesystemCheckSubnetError {
+  ...Response<400>;
 }
 
 /**
@@ -2430,7 +2556,20 @@ model LogSpecification {
 /**
  * The response from the List Cache SKUs operation.
  */
-model ResourceSkusResult is Azure.Core.Page<ResourceSku>;
+model ResourceSkusResult {
+  /**
+   * The list of SKUs available for the subscription.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: ResourceSku[];
+
+  /**
+   * The URI to fetch the next page of cache SKUs.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * A resource SKU.
@@ -2527,7 +2666,20 @@ model Restriction {
 /**
  * A list of cache usage models.
  */
-model UsageModelsResult is Azure.Core.Page<UsageModel>;
+model UsageModelsResult {
+  /**
+   * The list of usage models available for the subscription.
+   */
+  @identifiers(#["modelName"])
+  @pageItems
+  value?: UsageModel[];
+
+  /**
+   * The URI to fetch the next page of cache usage models.
+   */
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * A usage model.
@@ -2628,7 +2780,22 @@ model AscOperationProperties {
 /**
  * Result of the request to list resource usages. It contains a list of resource usages & limits and a URL link to get the next set of results.
  */
-model ResourceUsagesListResult is Azure.Core.Page<ResourceUsage>;
+model ResourceUsagesListResult {
+  /**
+   * List of usages and limits for resources controlled by the Microsoft.StorageCache resource provider.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  value?: ResourceUsage[];
+
+  /**
+   * URL to get the next set of resource usage list results if there are any.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: url;
+}
 
 /**
  * The usage and limit (quota) for a resource.
@@ -2637,6 +2804,7 @@ model ResourceUsage {
   /**
    * The limit (quota) for this resource.
    */
+  @minValue(0)
   @visibility(Lifecycle.Read)
   limit?: int32;
 
@@ -2649,6 +2817,7 @@ model ResourceUsage {
   /**
    * The current usage of this resource.
    */
+  @minValue(0)
   @visibility(Lifecycle.Read)
   currentValue?: int32;
 
@@ -2776,13 +2945,11 @@ model CacheProperties {
   /**
    * Specifies the priming jobs defined in the cache.
    */
-  @visibility(Lifecycle.Read)
   primingJobs?: PrimingJob[];
 
   /**
    * Specifies the space allocation percentage for each storage target in the cache.
    */
-  @visibility(Lifecycle.Read)
   spaceAllocation?: StorageTargetSpaceAllocation[];
 }
 
@@ -2919,6 +3086,7 @@ model CacheEncryptionSettings {
   /**
    * Specifies the location of the key encryption key in key vault.
    */
+  @secret
   keyEncryptionKey?: KeyVaultKeyReference;
 
   /**
@@ -3109,17 +3277,17 @@ model CacheUsernameDownloadSettings {
   /**
    * Whether or not the LDAP connection should be encrypted.
    */
-  encryptLdapConnection?: boolean;
+  encryptLdapConnection?: boolean = false;
 
   /**
    * Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided.
    */
-  requireValidCertificate?: boolean;
+  requireValidCertificate?: boolean = false;
 
   /**
    * Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true.
    */
-  autoDownloadCertificate?: boolean;
+  autoDownloadCertificate?: boolean = false;
 
   /**
    * The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to true.
@@ -3151,6 +3319,7 @@ model CacheUsernameDownloadSettingsCredentials {
   /**
    * The Bind password to be used in the secure LDAP connection. This value is stored encrypted and not returned on response.
    */
+  @secret
   bindPassword?: string;
 }
 
@@ -3168,6 +3337,7 @@ model PrimingJob {
   /**
    * The URL for the priming manifest file to download. This file must be readable from the HPC Cache. When the file is in Azure blob storage the URL should include a Shared Access Signature (SAS) granting read permissions on the blob.
    */
+  @secret
   @visibility(Lifecycle.Create)
   primingManifestUrl: string;
 
@@ -3201,6 +3371,7 @@ model PrimingJob {
    */
   @visibility(Lifecycle.Read)
   @maxValue(100)
+  @minValue(0)
   primingJobPercentComplete?: float64;
 }
 
@@ -3235,8 +3406,19 @@ model CacheSku {
 /**
  * A list of Storage Targets.
  */
-model StorageTargetsResult is Azure.Core.Page<StorageTarget>;
+model StorageTargetsResult {
+  /**
+   * The list of Storage Targets defined for the cache.
+   */
+  @pageItems
+  value?: StorageTarget[];
 
+  /**
+   * The URI to fetch the next page of Storage Targets.
+   */
+  @nextLink
+  nextLink?: url;
+}
 /**
  * Properties of the Storage Target.
  */

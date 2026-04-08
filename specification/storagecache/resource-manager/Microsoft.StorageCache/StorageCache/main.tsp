@@ -29,10 +29,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Managed Lustre provides a fully managed Lustre® file system, integrated with Blob storage, for use on demand. These operations create and manage Azure Managed Lustre file systems.
+ * A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as "Storage Targets"). These operations allow you to manage Caches.
  */
 @armProviderNamespace
-@service(#{ title: "StorageCacheManagementClient" })
+@service(#{ title: "Storage Cache Mgmt Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.StorageCache;
@@ -47,4 +47,12 @@ enum Versions {
   v2026_01_01: "2026-01-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ApiOperationListResult,
+      CloudError
+    > {}
+
+@@doc(Operations.list,
+  "Lists all of the available Resource Provider operations."
+);

@@ -46,10 +46,11 @@ interface ImportJobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_Update")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     ImportJob,
     PatchModel = ImportJobUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ImportJob> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ImportJob> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -58,14 +59,21 @@ interface ImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ImportJob>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ImportJob,
+    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Returns all import jobs the user has access to under an AML File System.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_ListByAmlFilesystem")
-  listByAmlFilesystem is ArmResourceListByParent<ImportJob>;
+  listByAmlFilesystem is ArmResourceListByParent<
+    ImportJob,
+    Response = ArmResponse<ImportJobsListResult>
+  >;
 }
 
 @@maxLength(ImportJob.name, 80);

@@ -65,7 +65,8 @@ interface StorageTargets {
       @query("force")
       force?: string;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -79,69 +80,74 @@ interface StorageTargets {
   /**
    * Tells a storage target to refresh its DNS information.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   dnsRefresh is ArmResourceActionAsync<
     StorageTarget,
     void,
     OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Tells a storage target to restore its settings to their default values.
    */
-  restoreDefaults is ArmResourceActionAsync<StorageTarget, void, OkResponse>;
+  restoreDefaults is ArmResourceActionAsync<
+    StorageTarget,
+    void,
+    OkResponse,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Tells the cache to write all dirty data to the Storage Target's backend storage. Client requests to this storage target's namespace will return errors until the flush operation completes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Flush")
   flush is ArmResourceActionAsync<
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Suspends client access to a storage target.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Suspend")
   suspend is ArmResourceActionAsync<
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Resumes client access to a previously suspended storage target.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Resume")
   resume is ArmResourceActionAsync<
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Invalidate all cached data for a storage target. Cached files are discarded and fetched from the back end on the next request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Invalidate")
   invalidate is ArmResourceActionAsync<
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
