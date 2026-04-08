@@ -62,6 +62,18 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ConnectedEnvironment.properties);
 
+@@clientLocation(Certificates.get, "ConnectedEnvironmentsCertificates");
+@@clientLocation(Certificates.createOrUpdate,
+  "ConnectedEnvironmentsCertificates"
+);
+@@clientName(Certificates.createOrUpdate::parameters.resource,
+  "certificateEnvelope"
+);
+@@clientLocation(Certificates.update, "ConnectedEnvironmentsCertificates");
+@@clientName(Certificates.update::parameters.properties, "certificateEnvelope");
+@@clientLocation(Certificates.delete, "ConnectedEnvironmentsCertificates");
+@@clientLocation(Certificates.list, "ConnectedEnvironmentsCertificates");
+
 @@clientName(Certificates.getCertificates, "Get");
 @@clientName(Certificates.listCertificates, "List");
 @@clientName(Certificates.deleteCertificates, "Delete");
