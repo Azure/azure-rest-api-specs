@@ -88,30 +88,19 @@ interface Skills {}
 @@clientLocation(Azure.AI.Projects.Skills.updateSkill, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkill, Skills);
 
-interface AgentSessionFiles {}
-@@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile,
-  AgentSessionFiles
-);
-@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
-  AgentSessionFiles
-);
-@@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles,
-  AgentSessionFiles
-);
-@@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
-  AgentSessionFiles
-);
-
-interface ManagedAgentIdentityBlueprints {}
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint,
-  ManagedAgentIdentityBlueprints
-);
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint,
-  ManagedAgentIdentityBlueprints
-);
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint,
-  ManagedAgentIdentityBlueprints
-);
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints,
-  ManagedAgentIdentityBlueprints
-);
+interface Agents {}
+// Move AgentSessionFiles
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
+@@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile, Agents);
+// Move ManagedAgentIdentityBlueprints
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, Agents);
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, Agents);
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, Agents);
+@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, Agents);
+// Move some operations from Agents
+@@clientLocation(Azure.AI.Projects.Agents.createSession, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.getSession, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);

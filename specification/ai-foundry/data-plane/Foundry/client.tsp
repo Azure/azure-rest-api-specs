@@ -249,22 +249,13 @@ using Azure.AI.Projects;
 @@clientName(Skills.deleteSkill, "delete");
 
 // --------------------------------------------------------------------------------
-// AgentSessionFiles sub-client
+// ManagedAgentIdentityBlueprints operations on .beta.agents sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(AgentSessionFiles.uploadSessionFile, "upload");
-@@clientName(AgentSessionFiles.downloadSessionFile, "download");
-@@clientName(AgentSessionFiles.listSessionFiles, "list");
-@@clientName(AgentSessionFiles.deleteSessionFile, "delete");
-
-// --------------------------------------------------------------------------------
-// ManagedAgentIdentityBlueprints sub-client
-// --------------------------------------------------------------------------------
-
-@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update");
-@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get");
-@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete");
-@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list");
+@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update_managed_identity_blueprint");
+@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get_managed_identity_blueprint");
+@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete_managed_identity_blueprint");
+@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list_managed_identity_blueprints");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
