@@ -3253,6 +3253,10 @@ model SearchResourceEncryptionKey {
   /** An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If "none" is specified, the value of this property is cleared. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
+
+  /** An optional value indicating whether this key is a service-level key. Default is false. */
+  @added(Versions.v2026_05_01_preview)
+  isServiceLevelKey?: boolean = false;
 }
 
 /** Credentials of a registered application created for your search service, used for authenticated access to the encryption keys stored in Azure Key Vault. */
@@ -5868,6 +5872,10 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
   /** A URI fragment specifying the type of identity. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
+
+  /** Multi-tenant User-Assigned Managed Identity Support: The client id of the multi-tentant App that has been configured to federate with the user-assigned managed identity. */
+  @added(Versions.v2026_05_01_preview)
+  federatedIdentityClientId?: string;
 }
 
 /** Defines a data change detection policy that captures changes based on the value of a high water mark column. */
