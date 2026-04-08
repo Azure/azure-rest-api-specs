@@ -15067,19 +15067,10 @@
         },
         "frontEndIpConfiguration": {
           "type": "array",
-          "description": "The list of frontend IP configurations associated with the custom policy. This list is read-only.",
+          "description": "The list of frontend IP configurations associated with the custom policy.",
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
-          },
-          "readOnly": true
-        },
-        "publicIPAddresses": {
-          "type": "array",
-          "description": "The list of public IP addresses associated with the custom policy. This list is read-only.",
-          "items": {
-            "$ref": "./common.json#/definitions/SubResource"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -15225,10 +15216,6 @@
         "protectionMode": {
           "$ref": "./common.json#/definitions/DdosSettingsProtectionMode",
           "description": "The DDoS protection mode of the public IP"
-        },
-        "ddosCustomPolicy": {
-          "$ref": "./common.json#/definitions/SubResource",
-          "description": "The DDoS custom policy associated with the public IP."
         },
         "ddosProtectionPlan": {
           "$ref": "./common.json#/definitions/SubResource",

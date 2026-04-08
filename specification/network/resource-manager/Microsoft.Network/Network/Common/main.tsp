@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./NetworkInterface.tsp";
 import "./NetworkInterfaceIPConfiguration.tsp";
@@ -33,6 +34,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
@@ -1379,6 +1381,7 @@ model DdosSettings {
   /**
    * The DDoS custom policy associated with the public IP.
    */
+  @added(Versions.v2025_07_01)
   ddosCustomPolicy?: SubResource;
 
   /**
