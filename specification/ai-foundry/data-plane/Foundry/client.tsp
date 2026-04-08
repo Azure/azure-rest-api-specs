@@ -22,7 +22,6 @@ import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
-import "./src/agents-invocations/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
 import "./src/managed-blueprints/routes.tsp";
 
@@ -168,6 +167,17 @@ using Azure.AI.Projects;
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
+// Evaluation Taxonomies sub-client
+// --------------------------------------------------------------------------------
+
+// It indirectly consumes this from openai-evaluations, via TypeSpec model "Target"
+// In Python, like we do for a few other classes, we hand-code a TypedDict version
+// of this class add the "Pram" suffix to distinguish it from the original emitted classes from
+// the TypedDict one. Since we don't want a class named ModelSamplingParamsParm, we
+// rename the original one here.
+@@clientName(ModelSamplingParams, "ModelSamplingConfig", "python");
+
+// --------------------------------------------------------------------------------
 // Insights sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
@@ -217,11 +227,35 @@ using Azure.AI.Projects;
 // Toolboxes sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(Toolboxes.createToolboxVersion, "create");
+@@clientName(Toolboxes.createToolboxVersion, "create_version");
 @@clientName(Toolboxes.updateToolbox, "update");
 @@clientName(Toolboxes.getToolbox, "get");
+@@clientName(Toolboxes.getToolboxVersion, "get_version");
 @@clientName(Toolboxes.listToolboxes, "list");
+@@clientName(Toolboxes.listToolboxVersions, "list_versions");
 @@clientName(Toolboxes.deleteToolbox, "delete");
+@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
+
+// --------------------------------------------------------------------------------
+// Skills sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Skills.createSkill, "create");
+@@clientName(Skills.createSkillFromPackage, "create_from_package");
+@@clientName(Skills.getSkill, "get");
+@@clientName(Skills.downloadSkill, "download");
+@@clientName(Skills.listSkills, "list");
+@@clientName(Skills.updateSkill, "update");
+@@clientName(Skills.deleteSkill, "delete");
+
+// --------------------------------------------------------------------------------
+// ManagedAgentIdentityBlueprints operations on .beta.agents sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update_managed_identity_blueprint");
+@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get_managed_identity_blueprint");
+@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete_managed_identity_blueprint");
+@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list_managed_identity_blueprints");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
