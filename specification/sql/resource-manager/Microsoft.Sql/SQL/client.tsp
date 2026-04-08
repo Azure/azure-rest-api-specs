@@ -24,7 +24,7 @@ using Microsoft.Sql;
   "CommonResource",
   "javascript"
 );
-@@clientName(Microsoft.Sql, "SqlManagementClient", "java,javascript");
+@@clientName(Microsoft.Sql, "SqlManagementClient", "java,javascript,python");
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
