@@ -502,8 +502,10 @@ using Compute;
   "csharp"
 );
 
-// NOTE: Cannot rename SshPublicKeyResource to SshPublicKey because model SshPublicKey already exists in models.tsp
-// The resource will remain as SshPublicKeyResourceResource — needs SDK-side [CodeGenType] customization
+// Rename non-resource model SshPublicKey → SshPublicKeyConfiguration to free the name,
+// then rename the resource model SshPublicKeyResource → SshPublicKey
+@@clientName(Compute.SshPublicKey, "SshPublicKeyConfiguration", "csharp");
+@@clientName(SshPublicKeyResource, "SshPublicKey", "csharp");
 
 // VirtualMachineScaleSetVMRunCommands interface → Vm casing (old: VirtualMachineScaleSetVmRunCommandResource)
 @@clientName(VirtualMachineScaleSetVMRunCommands,
