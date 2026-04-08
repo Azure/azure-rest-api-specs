@@ -25,6 +25,53 @@ namespace PolicyInsightsManagementClient;
   "javascript,python,java"
 );
 
+// Section: Explicit subscriptionId parameter
+@@clientLocation(PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition
+);
+@@clientLocation(PolicyEventsListQueryResultsForPolicyDefinitionBaseParam.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition
+);
+@@clientLocation(PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
+);
+@@clientLocation(PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
+);
+@@clientLocation(PolicyStatesListQueryResultsForPolicySetDefinitionBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition
+);
+@@clientLocation(PolicyStatesSummarizeForPolicySetDefinitionBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition
+);
+@@clientLocation(PolicyStatesListQueryResultsForPolicyDefinitionBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition
+);
+@@clientLocation(PolicyStatesSummarizeForPolicyDefinitionBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition
+);
+@@clientLocation(PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
+);
+@@clientLocation(PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment
+);
+@@clientLocation(PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
+);
+@@clientLocation(PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentBaseParam.subscriptionId,
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment
+);
+@@clientLocation(ComponentPolicyStatesListQueryResultsForPolicyDefinitionBaseParam.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition
+);
+@@clientLocation(ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
+);
+@@clientLocation(ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam.subscriptionId,
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
+);
+
 /**
  * Parameter group for OData query options.
  */
@@ -232,10 +279,7 @@ op policyEventsListQueryResultsForResource(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition)
 op policyEventsListQueryResultsForPolicySetDefinition(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam,
 
   @path
   policyEventsResource: PolicyEventsResourceType,
@@ -253,10 +297,7 @@ op policyEventsListQueryResultsForPolicySetDefinition(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition)
 op policyEventsListQueryResultsForPolicyDefinition(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyEventsListQueryResultsForPolicyDefinitionBaseParam,
 
   @path
   policyEventsResource: PolicyEventsResourceType,
@@ -276,10 +317,7 @@ op policyEventsListQueryResultsForPolicyDefinition(
   PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
 )
 op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
   @path
   policyEventsResource: PolicyEventsResourceType,
@@ -299,10 +337,7 @@ op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
   PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
 )
 op policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
   @path
   resourceGroupName: string,
@@ -469,10 +504,7 @@ op policyStatesSummarizeForResource(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @override(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition)
 op policyStatesListQueryResultsForPolicySetDefinition(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesListQueryResultsForPolicySetDefinitionBaseParam,
 
   @path
   policyStatesResource: PolicyStatesResource,
@@ -490,10 +522,7 @@ op policyStatesListQueryResultsForPolicySetDefinition(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition)
 op policyStatesSummarizeForPolicySetDefinition(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesSummarizeForPolicySetDefinitionBaseParam,
 
   @path
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
@@ -511,10 +540,7 @@ op policyStatesSummarizeForPolicySetDefinition(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @override(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition)
 op policyStatesListQueryResultsForPolicyDefinition(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
 
   @path
   policyStatesResource: PolicyStatesResource,
@@ -532,10 +558,7 @@ op policyStatesListQueryResultsForPolicyDefinition(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @override(PolicyStatesOperationGroup.summarizeForPolicyDefinition)
 op policyStatesSummarizeForPolicyDefinition(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesSummarizeForPolicyDefinitionBaseParam,
 
   @path
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
@@ -555,10 +578,7 @@ op policyStatesSummarizeForPolicyDefinition(
   PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
 )
 op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
   @path
   policyStatesResource: PolicyStatesResource,
@@ -578,10 +598,7 @@ op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment
 )
 op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentBaseParam,
 
   @path
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
@@ -601,10 +618,7 @@ op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
   PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
 )
 op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
   @path
   resourceGroupName: string,
@@ -627,10 +641,7 @@ op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment
 )
 op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentBaseParam,
 
   @path
   resourceGroupName: string,
@@ -719,10 +730,7 @@ op componentPolicyStatesListQueryResultsForResource(
   ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition
 )
 op componentPolicyStatesListQueryResultsForPolicyDefinition(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...ComponentPolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
 
   @path
   authorizationNamespace: "Microsoft.Authorization",
@@ -745,10 +753,7 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
   ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
 )
 op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
   @path
   authorizationNamespace: "Microsoft.Authorization",
@@ -771,10 +776,7 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
 )
 op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
-  ...ApiVersionParameter,
-
-  @path
-  subscriptionId: string,
+  ...ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
   @path
   resourceGroupName: string,

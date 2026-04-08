@@ -75,6 +75,18 @@ interface RemediationsOperationGroup {
   ): Remediation | ErrorResponse;
 }
 
+model PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyEventsListQueryResultsForPolicyDefinitionBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyEventsOperationGroup {
   /**
@@ -405,13 +417,7 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForPolicySetDefinition(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam,
 
     /**
      * The name of the virtual resource under PolicyEvents resource type; only "default" is allowed.
@@ -495,13 +501,7 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForPolicyDefinition(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyEventsListQueryResultsForPolicyDefinitionBaseParam,
 
     /**
      * The name of the virtual resource under PolicyEvents resource type; only "default" is allowed.
@@ -585,13 +585,7 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForSubscriptionLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
     /**
      * The name of the virtual resource under PolicyEvents resource type; only "default" is allowed.
@@ -675,13 +669,7 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForResourceGroupLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
     /**
      * Resource group name.
@@ -765,6 +753,30 @@ interface PolicyEventsOperationGroup {
     SkipToken?: string,
   ): PolicyEventsQueryResults | QueryFailure;
 }
+
+model PolicyStatesListQueryResultsForPolicySetDefinitionBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyStatesSummarizeForPolicySetDefinitionBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyStatesListQueryResultsForPolicyDefinitionBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyStatesSummarizeForPolicyDefinitionBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PolicyStatesOperationGroup {
@@ -1342,13 +1354,7 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForPolicySetDefinition(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesListQueryResultsForPolicySetDefinitionBaseParam,
 
     /**
      * The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
@@ -1432,13 +1438,7 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForPolicySetDefinition(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesSummarizeForPolicySetDefinitionBaseParam,
 
     /**
      * The virtual resource under PolicyStates resource type for summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
@@ -1495,13 +1495,7 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForPolicyDefinition(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
 
     /**
      * The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
@@ -1585,13 +1579,7 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForPolicyDefinition(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesSummarizeForPolicyDefinitionBaseParam,
 
     /**
      * The virtual resource under PolicyStates resource type for summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
@@ -1648,13 +1636,7 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForSubscriptionLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
     /**
      * The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
@@ -1738,13 +1720,7 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForSubscriptionLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentBaseParam,
 
     /**
      * The virtual resource under PolicyStates resource type for summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
@@ -1801,13 +1777,7 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForResourceGroupLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
     /**
      * Resource group name.
@@ -1897,13 +1867,7 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForResourceGroupLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentBaseParam,
 
     /**
      * Resource group name.
@@ -2035,6 +1999,15 @@ interface PolicyRestrictionsOperationGroup {
     body: CheckManagementGroupRestrictionsRequest,
   ): CheckRestrictionsResult | ErrorResponse;
 }
+
+model ComponentPolicyStatesListQueryResultsForPolicyDefinitionBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
+
+model ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam
+  is Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ComponentPolicyStatesOperationGroup {
@@ -2257,13 +2230,7 @@ interface ComponentPolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForPolicyDefinition(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...ComponentPolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
 
     /**
      * The namespace for Microsoft Authorization resource provider; only "Microsoft.Authorization" is allowed.
@@ -2342,13 +2309,7 @@ interface ComponentPolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForSubscriptionLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
     /**
      * The namespace for Microsoft Authorization resource provider; only "Microsoft.Authorization" is allowed.
@@ -2427,13 +2388,7 @@ interface ComponentPolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForResourceGroupLevelPolicyAssignment(
-    ...ApiVersionParameter,
-
-    /**
-     * Azure subscription ID.
-     */
-    @path
-    subscriptionId: string,
+    ...ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
     /**
      * Resource group name.
