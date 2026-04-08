@@ -1,10 +1,112 @@
 import "../common/models.tsp";
 import "../common/service.tsp";
+import "../openai-evaluations/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
+
+/** The content item type of an eval dataset input */
+@removed(Versions.v1)
+union EvalJsonlFileContentItemType {
+  string,
+  QueryResponseInlineMessage: "azure_ai_query_response_inline_message",
+  EvaluatorMessage: "azure_ai_evaluator_messages",
+  ConversationMessage: "azure_ai_conversation_message",
+}
+
+@removed(Versions.v1)
+@discriminator("type")
+model EvalJsonlFileContentItem {
+  @doc("Type of the eval jsonl file content item.")
+  type: EvalJsonlFileContentItemType;
+}
+
+/** Query and response excepted input messsage defintion. */
+@removed(Versions.v1)
+model QueryResponseInlineMessage extends EvalJsonlFileContentItem {
+  /** The object type, which is always query_response_inline_message. */
+  type: EvalJsonlFileContentItemType.QueryResponseInlineMessage;
+
+  /** The input query string provided by the user or system. Can be image url. */
+  query: string;
+
+  /** The generated response corresponding to the input query. Can be image url. */
+  response?: string;
+
+  /** Optional contextual information that may provide additional details or background relevant to the query-response pair. */
+  context?: string;
+
+  /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
+  tools?: {}[];
+
+  /** Additional properties for the query response inline message. */
+  properties?: Record<string>;
+}
+
+/** Query and response excepted input messsage defintion. */
+@removed(Versions.v1)
+model EvaluatorMessage extends EvalJsonlFileContentItem {
+  /** The object type, which is always query_response_inline_message. */
+  type: EvalJsonlFileContentItemType.EvaluatorMessage;
+
+  /** The input query string provided by the user or system. Can be image url. */
+  query: OpenAI.Message[];
+
+  /** The generated response corresponding to the input query. Can be image url. */
+  response?: OpenAI.Message[];
+
+  /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
+  tools?: {}[];
+
+  /** Additional properties for the query response inline message. */
+  properties?: Record<string>;
+}
+
+@removed(Versions.v1)
+model ConversationMessage extends EvalJsonlFileContentItem {
+  /** The object type, which is always query_response_inline_message. */
+  type: EvalJsonlFileContentItemType.ConversationMessage;
+
+  /** The unique identifier of the conversation. */
+  id: string;
+
+  /** The list of messages in the conversation. */
+  messages: OpenAI.Message[];
+
+  /** The list of tools that are available to the agent. */
+  tools?: OpenAI.Tool[];
+
+  /** Additional properties for the conversation message. */
+  properties?: Record<string>;
+}
+
+/** Custom inference model endpoint for evaluation. */
+@removed(Versions.v1)
+model CustomInference {
+  /** The endpoint URL to be used for inferencing. */
+  endpointUrl: string;
+
+  /** The deployment id to be used for inferencing. */
+  DeploymentId: string;
+}
+
+/** OpenAI Input data source definition for eval. */
+@removed(Versions.v1)
+model SyncEvalInput {
+  /** Identifier of the evaluator. */
+  data_source: OpenAI.CreateEvalJsonlRunDataSource;
+
+  /** Evaluators to be used for the evaluation. */
+  testing_criteria: TestingCriterionAzureAIEvaluator[];
+
+  /** Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed. */
+  properties?: Record<string>;
+
+  /** Custom inference configuration. */
+  customInference?: CustomInference;
+}
 
 @doc("Evaluator Configuration")
 @removed(Versions.v1)
