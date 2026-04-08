@@ -335,10 +335,6 @@ interface BatchClient {
   "javascript"
 );
 @@clientName(Azure.Batch.VMExtension.type, "extensionType", "javascript");
-@@clientName(Azure.Batch.ListPoolUsageMetricsOptionalParameters.endtime,
-  "endTime",
-  "javascript"
-);
 @@clientName(Azure.Batch.BatchNodeDeallocateOptions.nodeDeallocateOption,
   "nodeDeallocationOption",
   "javascript"

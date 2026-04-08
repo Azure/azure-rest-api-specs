@@ -186,10 +186,10 @@ union StorageErrorCode {
   string,
 }
 
-/** Specify to include additional, optional information. */
+/** Include this parameter to specify that the queue's metadata be returned as part of the response body. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum ListQueuesIncludeType {
-  /** Include queue metadata. */
+  /** Include metadata */
   metadata: "metadata",
 }
 
@@ -253,7 +253,7 @@ model Metrics {
   @Xml.name("RetentionPolicy") retentionPolicy?: RetentionPolicy;
 }
 
-/** The CORS rules. */
+/** CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain */
 @Xml.name("CorsRule")
 model CorsRule {
   /** The allowed origins. */
@@ -296,32 +296,28 @@ model Error {
   /** The error message. */
   @Xml.name("Message") message?: string;
 
-  /** Copy source status code. */
+  /** Copy source status code */
   @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
 
-  /** Copy source error code. */
+  /** Copy source error code */
   @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
 
-  /** Copy source error message. */
+  /** Copy source error message */
   @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
 }
 
-/** Statistics for the storage queue service. */
+/** Stats for the storage service. */
 model QueueServiceStats {
   /** The geo replication stats. */
   @Xml.name("GeoReplication") geoReplication?: GeoReplication;
 }
 
-/** Geo replication information for the secondary storage location. */
+/** Geo-Replication information for the Secondary Storage Service */
 model GeoReplication {
-  /** The status of the secondary location. */
+  /** The status of the secondary location */
   @Xml.name("Status") status: GeoReplicationStatus;
 
-  /**
-   * A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available
-   * for read operations at the secondary. Primary writes after this point in time may or may not be available
-   * for reads.
-   */
+  /** A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastSyncTime")
@@ -343,7 +339,7 @@ union GeoReplicationStatus {
   string,
 }
 
-/** The list queues response. */
+/** The list queue segment response */
 @Xml.name("EnumerationResults")
 model ListQueuesResponse {
   /** The service endpoint. */
@@ -354,30 +350,32 @@ model ListQueuesResponse {
   /** The prefix of the queues. */
   @Xml.name("Prefix") prefix: string;
 
-  /** Identifies the current position in the list queues operation. */
+  /** The marker of the queues. */
   @Xml.name("Marker") marker?: string;
 
-  /** The max results. */
+  /** The max results of the queues. */
   @Xml.name("MaxResults") maxResults: int32;
 
-  /** The list of queues. */
+  /** The queue segment. */
   @pageItems
   @Xml.name("Queues")
   queueItems?: QueueItem[];
 
-  /** Identifies the portion of the list of queues to be returned with the next listing operation. */
+  /** The next marker of the queues. */
   @continuationToken
   @Xml.name("NextMarker")
   nextMarker: string;
 }
 
-/** An Azure Storage Queue. */
+/**
+ * An Azure Storage Queue.
+ */
 @Xml.name("Queue")
 model QueueItem {
   /** The name of the queue. */
   @Xml.name("Name") name: string;
 
-  /** The metadata of the queue. */
+  /** The metadata of the container. */
   @Xml.name("Metadata") metadata?: Record<string>;
 }
 
@@ -390,7 +388,7 @@ model SignedIdentifier {
   @Xml.name("AccessPolicy") accessPolicy: AccessPolicy;
 }
 
-/** The access policy. */
+/** Represents an access policy. */
 model AccessPolicy {
   /** The date-time the policy is active. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
@@ -406,187 +404,237 @@ model AccessPolicy {
   @encode("rfc3339-fixed-width")
   expiry?: utcDateTime;
 
-  /** The permissions for the policy. */
+  /** The permissions for acl the policy. */
   @Xml.name("Permission") permission?: string;
 }
 
-/** The received queue message. */
+/**
+ * The object returned in the QueueMessageList array when calling Get Messages on
+ * a Queue.
+ */
 @Xml.name("QueueMessage")
 model ReceivedMessage {
-  /** The ID of the message. */
+  /**
+   * The Id of the Message.
+   */
   @Xml.name("MessageId") messageId: string;
 
-  /** The time the message was inserted into the queue. */
+  /**
+   * The time the Message was inserted into the Queue.
+   */
   @Xml.name("InsertionTime")
   @encode("rfc7231")
   insertionTime: utcDateTime;
 
-  /** The time that the message will expire and be automatically deleted. */
+  /**
+   * The time that the Message will expire and be automatically deleted.
+   */
   @Xml.name("ExpirationTime")
   @encode("rfc7231")
   expirationTime: utcDateTime;
 
   /**
-   * An opaque value required to delete the message. If deletion fails using this
+   * This value is required to delete the Message. If deletion fails using this
    * PopReceipt then the message has been dequeued by another client.
    */
   @Xml.name("PopReceipt") popReceipt: string;
 
-  /** The time that the message will again become visible in the queue. */
+  /**
+   * The time that the message will again become visible in the Queue.
+   */
   @Xml.name("TimeNextVisible")
   @encode("rfc7231")
   timeNextVisible: utcDateTime;
 
-  /** The number of times the message has been dequeued. */
+  /**
+   * The number of times the message has been dequeued.
+   */
   @Xml.name("DequeueCount") dequeueCount: int64;
 
-  /** The content of the message. */
+  /**
+   * The content of the message
+   */
   @Xml.name("MessageText") messageText: string;
 }
 
-/** An array of signed identifiers. */
+/** Represents an array of signed identifiers */
 @Xml.name("SignedIdentifiers")
 model SignedIdentifiers {
-  /** The list of signed identifiers. */
+  /**
+   * The list of signed identifiers.
+   *
+   */
   @Xml.unwrapped
   @Xml.name("SignedIdentifier")
   items: Array<SignedIdentifier>;
 }
 
-/** The response of receive messages. */
+/**
+ * List wrapper for DequeuedMessageItem array
+ */
 @Xml.name("QueueMessagesList")
 model ReceivedMessages {
-  /** The list of received messages. */
+  /**
+   * The list of dequeued messages.
+   */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
   items: Array<ReceivedMessage>;
 }
 
-/** The response of send message. */
+/**
+ * List wrapper for EnqueuedMessage array
+ */
 @Xml.name("QueueMessagesList")
 model ListOfSentMessage {
-  /** The list of sent messages. */
+  /**
+   * The list of enqueued messages.
+   */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
   items: Array<SentMessage>;
 }
 
-/** The response of peek messages. */
+/**
+ * List wrapper for PeekedMessageItem array
+ */
 @Xml.name("QueueMessagesList")
 model PeekedMessages {
-  /** The list of peeked messages. */
+  /**
+   * The list of peeked messages.
+   */
   @Xml.unwrapped
   @Xml.name("QueueMessage")
   items: Array<PeekedMessage>;
 }
 
-/** The queue message. */
+/**
+ * A Message object which can be stored in a Queue
+ */
 model QueueMessage {
-  /** The content of the message. */
+  /**
+   * The content of the message
+   */
   @Xml.name("MessageText") messageText: string;
 }
 
-/** The sent queue message. */
+/**
+ * The object returned in the QueueMessageList array when calling Put Message on a
+ * Queue
+ */
 @Xml.name("QueueMessage")
 model SentMessage {
-  /** The ID of the message. */
+  /**
+   * The Id of the Message.
+   */
   @Xml.name("MessageId") messageId: string;
 
-  /** The time the message was inserted into the queue. */
+  /**
+   * The time the Message was inserted into the Queue.
+   */
   @Xml.name("InsertionTime")
   @encode("rfc7231")
   insertionTime: utcDateTime;
 
-  /** The time that the message will expire and be automatically deleted. */
+  /**
+   * The time that the Message will expire and be automatically deleted.
+   */
   @Xml.name("ExpirationTime")
   @encode("rfc7231")
   expirationTime: utcDateTime;
 
   /**
-   * An opaque value required to delete the message. If deletion fails using this
+   * This value is required to delete the Message. If deletion fails using this
    * PopReceipt then the message has been dequeued by another client.
    */
   @Xml.name("PopReceipt") popReceipt: string;
 
-  /** The time that the message will again become visible in the queue. */
+  /**
+   * The time that the message will again become visible in the Queue.
+   */
   @Xml.name("TimeNextVisible")
   @encode("rfc7231")
   timeNextVisible: utcDateTime;
 }
 
-/** The peeked queue message. */
+/**
+ * The object returned in the QueueMessageList array when calling Peek Messages on
+ * a Queue
+ */
 @Xml.name("QueueMessage")
 model PeekedMessage {
-  /** The ID of the message. */
+  /**
+   * The Id of the Message.
+   */
   @Xml.name("MessageId") messageId: string;
 
-  /** The time the message was inserted into the queue. */
+  /**
+   * The time the Message was inserted into the Queue.
+   */
   @Xml.name("InsertionTime")
   @encode("rfc7231")
   insertionTime: utcDateTime;
 
-  /** The time that the message will expire and be automatically deleted. */
+  /**
+   * The time that the Message will expire and be automatically deleted.
+   */
   @Xml.name("ExpirationTime")
   @encode("rfc7231")
   expirationTime: utcDateTime;
 
-  /** The number of times the message has been dequeued. */
+  /**
+   * The number of times the message has been dequeued.
+   */
   @Xml.name("DequeueCount") dequeueCount: int64;
 
-  /** The content of the message. */
+  /**
+   * The content of the Message.
+   */
   @Xml.name("MessageText") messageText: string;
 }
 
 alias MessageIdPathParameter = {
-  /** The ID of the queue message. */
+  /**
+   * The id of the queue message.
+   */
   @path
   messageId: string;
 };
 
 alias PopReceiptQueryParameter = {
   /**
-   * An opaque value required to delete the message. If deletion fails using this
-   * PopReceipt then the message has been dequeued by another client.
+   * Required. Specifies the valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation.
    */
   @query("popreceipt")
   popReceipt: string;
 };
 
-/** The request ID response header. */
 alias RequestIdResponseHeader = {
-  /** An opaque, globally-unique, server-generated string identifier for the request. */
   @access(Access.internal)
   @visibility(Lifecycle.Read)
   @header("x-ms-request-id")
+  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
   requestId?: uuid;
 };
 
 /** The timeout parameter. */
 alias TimeoutParameter = {
-  /**
-   * The timeout parameter is expressed in seconds. For more information, see
-   * <a href="https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations">Setting Timeouts for Queue Service Operations.</a>
-   */
+  @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>")
   @query
   @minValue(0)
   timeout?: int32;
 };
 
-/** The visibility timeout parameter. */
 alias VisibilityTimeoutParameter = {
-  /**
-   * Specifies the new visibility timeout value, in seconds, relative to server time. A specified value must be
-   * larger than or equal to 1 second, and cannot be larger than 7 days. The visibility timeout of a message
-   * can be set to a value later than the expiry time.
-   */
+  @doc("Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.")
   @maxValue(604800)
   @query("visibilitytimeout")
   visibilityTimeout?: int32;
 };
 
-/** The Date response header. */
+/** The Date response header */
 alias DateResponseHeader = {
-  /** UTC date/time value generated by the service that indicates the time at which the response was initiated. */
+  /** UTC date/time value generated by the service that indicates the time at which the response was initiated */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @access(Access.internal)
@@ -594,24 +642,21 @@ alias DateResponseHeader = {
   date: utcDateTime;
 };
 
-/** The approximate messages count header. */
+/** The approximate messages count header */
 alias ApproximateMessagesCountHeader = {
-  /**
-   * The approximate number of messages in the queue. This number is not lower than the actual number of
-   * messages in the queue, but could be higher.
-   */
+  /** The approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher. */
   @header("x-ms-approximate-messages-count")
   approximateMessagesCount?: int64;
 };
 
-/** The pop receipt response header. */
+/** The pop receipt response header */
 alias PopReceiptResponseHeader = {
   /** The pop receipt of the queue message. */
   @header("x-ms-popreceipt")
   popReceipt: string;
 };
 
-/** The time next visible response header. */
+/** The time next visible response header */
 alias TimeNextVisibleResponseHeader = {
   /** A UTC date/time value that represents when the message will be visible on the queue. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
@@ -620,7 +665,7 @@ alias TimeNextVisibleResponseHeader = {
   timeNextVisible: utcDateTime;
 };
 
-/** The private pop receipt response header. */
+/** The private pop receipt response header */
 alias PopReceiptResponseHeaderPrivate = {
   /** The pop receipt of the queue message. */
   @access(Access.internal)
@@ -628,7 +673,7 @@ alias PopReceiptResponseHeaderPrivate = {
   popReceipt: string;
 };
 
-/** The private time next visible response header. */
+/** The private time next visible response header */
 alias TimeNextVisibleResponseHeaderPrivate = {
   /** A UTC date/time value that represents when the message will be visible on the queue. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
@@ -655,71 +700,70 @@ alias ApiVersionHeader = {
 };
 
 alias ClientRequestIdHeader = {
-  /** An opaque, globally-unique, client-generated string identifier for the request. */
   @access(Access.internal)
   @header("x-ms-client-request-id")
+  @doc("An opaque, globally-unique, client-generated string identifier for the request.")
   clientRequestId?: uuid;
 };
 
 alias QueueMessageBodyParameter = {
   /**
-   * The queue message. The message must be in a format that can be included in
-   * an XML request with UTF-8 encoding. The encoded message can be up to 64 KB in size.
+   * A Message object which can be stored in a Queue
    */
   @bodyRoot
   queueMessage?: QueueMessage;
 };
 
-/** Key information for user delegation key. */
+/** Key information for user delegation key */
 model KeyInfo {
-  /** The date-time the key is active in ISO 8601 UTC time. */
+  /** The date-time the key is active in ISO 8601 UTC time */
   @Xml.name("Start")
   @encode("rfc3339")
   start?: utcDateTime;
 
-  /** The date-time the key expires in ISO 8601 UTC time. */
+  /** The date-time the key expires in ISO 8601 UTC time */
   @Xml.name("Expiry")
   @encode("rfc3339")
   expiry: utcDateTime;
 
-  /** The delegated user tenant ID in Entra ID. */
+  /** The delegated user tenant id in Azure AD */
   @Xml.name("DelegatedUserTid")
   delegatedUserTid?: string;
 }
 
-/** A user delegation key. */
+/** A user delegation key */
 model UserDelegationKey {
-  /** The Entra ID object ID in GUID format. */
+  /** The Azure Active Directory object ID in GUID format. */
   @Xml.name("SignedOid")
   signedOid: string;
 
-  /** The Entra ID tenant ID in GUID format. */
+  /** The Azure Active Directory tenant ID in GUID format */
   @Xml.name("SignedTid")
   signedTid: string;
 
-  /** The date-time the key is active. */
+  /** The date-time the key is active */
   @Xml.name("SignedStart")
   @encode("rfc7231")
   signedStart: utcDateTime;
 
-  /** The date-time the key expires. */
+  /** The date-time the key expires */
   @Xml.name("SignedExpiry")
   @encode("rfc7231")
   signedExpiry: utcDateTime;
 
-  /** The service that created the key. */
+  /** The service that created the key */
   @Xml.name("SignedService")
   signedService: string;
 
-  /** The service version used when creating the key. */
+  /** The version of the service that created the key */
   @Xml.name("SignedVersion")
   signedVersion: string;
 
-  /** The delegated user tenant ID in Entra ID. Return if DelegatedUserTid is specified. */
+  /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
   @Xml.name("SignedDelegatedUserTid")
   signedDelegatedUserTid?: string;
 
-  /** The key as a base64 string. */
+  /** The key as a base64 string */
   @Xml.name("Value")
   value: string;
 }

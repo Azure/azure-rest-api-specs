@@ -56,7 +56,7 @@ interface QueueClient extends Storage.Queues.Queue {}
 @@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");
 
 /** ----- This section overrides the setAccessPolicy operation for Rust to require the queueAcl body ----- */
-/** Sets the permissions for the specified queue. */
+/** sets the permissions for the specified queue. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -64,13 +64,13 @@ interface QueueClient extends Storage.Queues.Queue {}
 @route("?comp=acl")
 op setAccessPolicyRequiredQueueAcl is StorageOperationNoBody<
   {
-    /** The media type of the request. */
+    /** The media type of the requestbody */
     @header("Content-Type")
     contentType?: "application/xml";
 
     ...TimeoutParameter;
 
-    /** The access control list. */
+    /** The access control list for the queue. */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
     @bodyRoot
     queueAcl: SignedIdentifiers;
@@ -90,7 +90,7 @@ alias MetadataHeadersRequired = {
   metadata: string;
 };
 
-/** Sets user-defined metadata for the specified queue. */
+/** Operation sets one or more user-defined name-value pairs for the specified queue. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 @put
