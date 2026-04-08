@@ -147,7 +147,7 @@ union PersistenceMode {
   None: "None",
 
   /** Persist data using both AOF (Append Only File) and RDB snapshots. */
-  AOFandRDB: "AOFandRDB",
+  AofAndRdb: "AofAndRdb",
 }
 
 /**
