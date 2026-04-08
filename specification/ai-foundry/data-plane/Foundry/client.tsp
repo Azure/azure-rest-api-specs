@@ -77,6 +77,8 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
+@@clientName(AgentsCreateAgentOptionalParams, "AgentsCreateOptionalParams", "javascript");
+@@clientName(AgentsUpdateAgentOptionalParams, "AgentsUpdateOptionalParams", "javascript");
 
 // Python emitter creates enum A2_A_PREVIEW = "a2a_preview". Override it here to "A2A_PREVIEW".
 @@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
@@ -311,3 +313,4 @@ model AIProjectClientOptions {
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
+@@clientName(KnownVersions, "KnownApiVersions", "javascript");
