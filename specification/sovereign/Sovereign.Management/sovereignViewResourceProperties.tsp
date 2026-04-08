@@ -162,8 +162,8 @@ model SovereignViewComplianceDetailsPolicyInitiativeFilter {
     }
   ]>;
 
-  @doc("The compliance state to optionally filter on.")
-  state?: PolicyComplianceState;
+  @doc("The compliance states to optionally filter on.")
+  states?: PolicyComplianceState[];
 }
 
 @added(Versions.Preview20260315)

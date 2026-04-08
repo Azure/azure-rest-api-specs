@@ -3738,9 +3738,12 @@
             ]
           }
         },
-        "state": {
-          "$ref": "#/definitions/PolicyComplianceState",
-          "description": "The compliance state to optionally filter on."
+        "states": {
+          "type": "array",
+          "description": "The compliance states to optionally filter on.",
+          "items": {
+            "$ref": "#/definitions/PolicyComplianceState"
+          }
         }
       },
       "required": [
