@@ -1105,3 +1105,4 @@ using Microsoft.Sql;
   "systemdata",
   "!javaScript"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.SystemData, "systemdata", "!go");
