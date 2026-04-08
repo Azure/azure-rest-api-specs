@@ -682,11 +682,14 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
+  @removed(Versions.v2026_04_01)
   searchSensitivityLabelInfo?: SharePointSensitivityLabelInfo;
+
+  @added(Versions.v2026_05_01_preview)
+  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
-@added(Versions.v2026_05_01_preview)
 @removed(Versions.v2026_04_01)
 model SharePointSensitivityLabelInfo {
   /** The display name for the sensitivity label. */
@@ -697,6 +700,28 @@ model SharePointSensitivityLabelInfo {
 
   /** The tooltip that should be displayed for the label in a UI. */
   tooltip?: string;
+
+  /** The priority in which the sensitivity label is applied. */
+  priority?: int32;
+
+  /** The color that the UI should display for the label, if configured. */
+  color?: string;
+
+  /** Indicates whether the sensitivity label enforces encryption. */
+  isEncrypted?: boolean;
+}
+
+/** Information about the sensitivity label applied to a document */
+@added(Versions.v2026_05_01_preview)
+model PurviewSensitivityLabelInfo {
+  /** The display name for the sensitivity label. */
+  displayName?: string;
+
+  /** The ID of the sensitivity label. */
+  sensitivityLabelId?: string;
+
+  /** The tooltip that should be displayed for the label in a UI. */
+  toolTip?: string;
 
   /** The priority in which the sensitivity label is applied. */
   priority?: int32;
