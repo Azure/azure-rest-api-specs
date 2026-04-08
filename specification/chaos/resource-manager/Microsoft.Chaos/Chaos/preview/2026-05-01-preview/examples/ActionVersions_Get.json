@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "location": "westus2",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "actionName": "microsoft-compute-shutdown",
+    "versionName": "1.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1.0",
+        "type": "Microsoft.Chaos/locations/actions/versions",
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/actions/microsoft-compute-shutdown/versions/1.0",
+        "properties": {
+          "displayName": "Shutdown Virtual Machine",
+          "description": "Shuts down a virtual machine to test application resilience to infrastructure failures.",
+          "urn": "urn:csci:microsoft:compute:Shutdown/1.0",
+          "actionName": "Shutdown",
+          "version": "1.0.0",
+          "actionType": "Discrete",
+          "supportedTargetTypes": [
+            {
+              "targetType": "Microsoft.Compute/virtualMachines",
+              "requiredPermissions": [
+                "Microsoft.Compute/virtualMachines/powerOff/action",
+                "Microsoft.Compute/virtualMachines/start/action"
+              ]
+            }
+          ],
+          "parametersSchema": {
+            "type": "object",
+            "properties": {
+              "abruptShutdown": {
+                "type": "boolean",
+                "description": "Whether to perform an abrupt shutdown."
+              }
+            },
+            "required": []
+          },
+          "recommendedRoles": [
+            "9980e02c-c2be-4d73-94e8-173b1dc7cf3c"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ActionVersions_Get",
+  "title": "Get an Action Version for westus2 location"
+}
