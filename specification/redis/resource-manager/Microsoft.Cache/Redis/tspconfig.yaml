@@ -20,11 +20,16 @@ options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-redis"
     namespace: "com.azure.resourcemanager.redis"
-    service-name: "Redis" # human-readable service name, whitespace allowed
+    service-name: "Redis"
     premium: true
+    generate-tests: false
+    client-side-validations: true
     enable-sync-stack: false
-    remove-inner: OperationStatusResult
+    remove-inner:
+      - OperationStatusResult
     use-object-for-unknown: true
+    uuid-as-string: false
+    float32-as-double: false
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-rediscache"
