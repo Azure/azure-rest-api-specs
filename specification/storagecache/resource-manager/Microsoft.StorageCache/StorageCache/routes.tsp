@@ -18,6 +18,7 @@ namespace Microsoft.StorageCache;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @operationId("checkAmlFSSubnets")
 @tag("amlFilesystems")
 @autoRoute
@@ -33,6 +34,7 @@ op checkAmlFSSubnets is ArmProviderActionSync<
  * Get the number of available IP addresses needed for the AML file system information provided.
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @operationId("getRequiredAmlFSSubnetsSize")
 @tag("amlFilesystems")
 @autoRoute

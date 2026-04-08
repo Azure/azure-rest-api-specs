@@ -108,6 +108,7 @@ interface StorageTargets {
   /**
    * Tells the cache to write all dirty data to the Storage Target's backend storage. Client requests to this storage target's namespace will return errors until the flush operation completes.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Flush")
@@ -123,6 +124,7 @@ interface StorageTargets {
   /**
    * Suspends client access to a storage target.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Suspend")
@@ -138,6 +140,7 @@ interface StorageTargets {
   /**
    * Resumes client access to a previously suspended storage target.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Resume")
@@ -153,6 +156,7 @@ interface StorageTargets {
   /**
    * Invalidate all cached data for a storage target. Cached files are discarded and fetched from the back end on the next request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("StorageTarget_Invalidate")

@@ -1248,6 +1248,7 @@ model AmlFilesystemProperties {
   /**
    * Throughput provisioned in MB per sec, calculated as storageCapacityTiB * per-unit storage throughput
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   throughputProvisionedMBps?: int32;
 
@@ -1391,6 +1392,7 @@ model AmlFilesystemPropertiesMaintenanceWindow {
   /**
    * The time of day (in UTC) to start the maintenance window.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @pattern("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
   timeOfDayUTC?: string;
 }
@@ -1514,11 +1516,13 @@ model AmlFilesystemRootSquashSettings {
   /**
    * User ID to squash to.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   squashUID?: int64;
 
   /**
    * Group ID to squash to.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   squashGID?: int64;
 
   /**
@@ -1570,6 +1574,7 @@ model CloudErrorBody {
 /**
  * An AML file system update instance.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model AmlFilesystemUpdate {
   /**
    * Resource tags.
@@ -1615,6 +1620,7 @@ model AmlFilesystemUpdatePropertiesMaintenanceWindow {
   /**
    * The time of day (in UTC) to start the maintenance window.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @pattern("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")
   timeOfDayUTC?: string;
 }
@@ -1688,6 +1694,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Total data (in MiB) exported since the start of the export. This is accumulative, some files may be counted repeatedly.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   totalMiBExported?: int64;
 
@@ -1706,6 +1713,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Time (in UTC) of the last successfully completed export iteration. Look at logging container for details.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSuccessfulIterationCompletionTimeUTC?: utcDateTime;
@@ -1719,6 +1727,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Data (in MiB) discovered for export in current iteration. It may increase while more export items are found.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   currentIterationMiBDiscovered?: int64;
 
@@ -1731,6 +1740,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * Data (in MiB) that have been exported in current iteration.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   currentIterationMiBExported?: int64;
 
@@ -1743,6 +1753,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * The time (in UTC) the latest auto export job started.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStartedTimeUTC?: utcDateTime;
@@ -1750,6 +1761,7 @@ model AutoExportJobPropertiesStatus {
   /**
    * The time (in UTC) of the last completed auto export job.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastCompletionTimeUTC?: utcDateTime;
@@ -2106,6 +2118,7 @@ model AutoImportJobPropertiesStatus {
   /**
    * The time (in UTC) the latest auto import job started.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStartedTimeUTC?: utcDateTime;
@@ -2113,6 +2126,7 @@ model AutoImportJobPropertiesStatus {
   /**
    * The time (in UTC) of the last completed auto import job.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastCompletionTimeUTC?: utcDateTime;
@@ -2281,6 +2295,7 @@ model ExpansionJobPropertiesStatus {
   /**
    * The time (in UTC) the expansion job started.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTimeUTC?: utcDateTime;
@@ -2288,6 +2303,7 @@ model ExpansionJobPropertiesStatus {
   /**
    * The time (in UTC) when the expansion job completed. Only populated when job reaches a terminal state.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   completionTimeUTC?: utcDateTime;
@@ -2868,6 +2884,7 @@ model CacheIdentity {
    * A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   UserAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
 }
 
@@ -2878,6 +2895,7 @@ model CacheProperties {
   /**
    * The size of this Cache, in GB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   cacheSizeGB?: int32;
 
@@ -2945,6 +2963,7 @@ model CacheProperties {
   /**
    * Specifies the priming jobs defined in the cache.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   primingJobs?: PrimingJob[];
 
   /**
@@ -3159,11 +3178,13 @@ model NfsAccessRule {
   /**
    * UID value that replaces 0 when rootSquash is true. 65534 will be used if not provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   anonymousUID?: string;
 
   /**
    * GID value that replaces 0 when rootSquash is true. This will use the value of anonymousUID if not provided.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   anonymousGID?: string;
 }
 
@@ -3236,6 +3257,7 @@ model CacheActiveDirectorySettingsCredentials {
   /**
    * Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   password?: string;
 }
@@ -3257,11 +3279,13 @@ model CacheUsernameDownloadSettings {
   /**
    * The URI of the file containing group information (in /etc/group file format). This field must be populated when 'usernameSource' is set to 'File'.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   groupFileURI?: string;
 
   /**
    * The URI of the file containing user information (in /etc/passwd file format). This field must be populated when 'usernameSource' is set to 'File'.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   userFileURI?: string;
 
   /**
@@ -3272,6 +3296,7 @@ model CacheUsernameDownloadSettings {
   /**
    * The base distinguished name for the LDAP domain.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ldapBaseDN?: string;
 
   /**
@@ -3292,6 +3317,7 @@ model CacheUsernameDownloadSettings {
   /**
    * The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   caCertificateURI?: string;
 
   /**
