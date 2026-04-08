@@ -65,7 +65,7 @@ model DeploymentTemplate is AssetVersion {
   readinessProbe?: ProbeSettings;
 
   @doc("List of allowed instance types for the deployment.")
-  allowedInstanceType: string[];
+  allowedInstanceType?: string[];
 
   @doc("Accelerator configurations for the deployment template.")
   acceleratorMaps?: AcceleratorMap[];
@@ -77,10 +77,10 @@ model DeploymentTemplate is AssetVersion {
   instanceCount: int32;
 
   @doc("Path for scoring requests.")
-  scoringPath?: string;
+  scoringPath: string;
 
   @doc("Port for scoring requests.")
-  scoringPort?: int32;
+  scoringPort: int32;
 }
 
 @doc("Paged collection of DeploymentTemplate items.")
