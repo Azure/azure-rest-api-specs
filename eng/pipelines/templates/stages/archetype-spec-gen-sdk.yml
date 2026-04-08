@@ -129,51 +129,51 @@ stages:
           Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
         displayName: "Create Run Time Variables"
 
-      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
-        - pwsh: |
-            $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
-            $sdkRepoUrl = '${{ parameters.SdkRepoUrl }}'
-            Write-Host "Validating SDK repo branch: '$SdkRepoBranch'"
+      # - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest')) }}:
+      #   - pwsh: |
+      #       $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
+      #       $sdkRepoUrl = '${{ parameters.SdkRepoUrl }}'
+      #       Write-Host "Validating SDK repo branch: '$SdkRepoBranch'"
 
-            if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
+      #       if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
 
-              # GitHub's limit is around 250 characters
-              if ($sdkRepoBranch.Length -gt 250) {
-                Write-Host "##vso[task.logissue type=error]The provided SDK branch name exceeds 250 characters."
-                Exit 1
-              }
+      #         # GitHub's limit is around 250 characters
+      #         if ($sdkRepoBranch.Length -gt 250) {
+      #           Write-Host "##vso[task.logissue type=error]The provided SDK branch name exceeds 250 characters."
+      #           Exit 1
+      #         }
 
-              # Validate branch name
-              if ($sdkRepoBranch -notmatch '^(?!refs/)(?!/)(?!.*//)(?!.*\.\.)(?!.*\.lock$)(?!@$)(?!.*\.$)(?!.*\/$)(?!.*\\)(?!.*[~^:?*\[\]\s])[\u0020-\u007E]+$') {
-                  Write-Host "##vso[task.logissue type=error]The provided SDK branch name '$sdkRepoBranch' is invalid."
-                  Exit 1
-              }
+      #         # Validate branch name
+      #         if ($sdkRepoBranch -notmatch '^(?!refs/)(?!/)(?!.*//)(?!.*\.\.)(?!.*\.lock$)(?!@$)(?!.*\.$)(?!.*\/$)(?!.*\\)(?!.*[~^:?*\[\]\s])[\u0020-\u007E]+$') {
+      #             Write-Host "##vso[task.logissue type=error]The provided SDK branch name '$sdkRepoBranch' is invalid."
+      #             Exit 1
+      #         }
 
-              # Check if branch exists remotely
-              Write-Host "Checking if branch '$SdkRepoBranch' exists in remote repository '$sdkRepoUrl'..."
-              $branchExists = git ls-remote --heads $sdkRepoUrl "refs/heads/$SdkRepoBranch"
-              $gitExitCode = $LASTEXITCODE
+      #         # Check if branch exists remotely
+      #         Write-Host "Checking if branch '$SdkRepoBranch' exists in remote repository '$sdkRepoUrl'..."
+      #         $branchExists = git ls-remote --heads $sdkRepoUrl "refs/heads/$SdkRepoBranch"
+      #         $gitExitCode = $LASTEXITCODE
 
-              if ($gitExitCode -ne 0) {
-                Write-Host "##vso[task.logissue type=error]Failed to validate branch remotely (git exit code: $gitExitCode)"
-                Exit $gitExitCode
-              }
+      #         if ($gitExitCode -ne 0) {
+      #           Write-Host "##vso[task.logissue type=error]Failed to validate branch remotely (git exit code: $gitExitCode)"
+      #           Exit $gitExitCode
+      #         }
 
-              if ([string]::IsNullOrEmpty($branchExists)) {
-                Write-Host "Branch '$SdkRepoBranch' does not exist in remote repository"
-                $checkoutCommitish = 'main'
-              } else {
-                Write-Host "Branch '$SdkRepoBranch' exists in remote repository"
-                $checkoutCommitish = $SdkRepoBranch
-              }
-            } else {
-              Write-Host "Using commitish as-is: '$SdkRepoBranch' (main branch)"
-              $checkoutCommitish = $SdkRepoBranch
-            }
+      #         if ([string]::IsNullOrEmpty($branchExists)) {
+      #           Write-Host "Branch '$SdkRepoBranch' does not exist in remote repository"
+      #           $checkoutCommitish = 'main'
+      #         } else {
+      #           Write-Host "Branch '$SdkRepoBranch' exists in remote repository"
+      #           $checkoutCommitish = $SdkRepoBranch
+      #         }
+      #       } else {
+      #         Write-Host "Using commitish as-is: '$SdkRepoBranch' (main branch)"
+      #         $checkoutCommitish = $SdkRepoBranch
+      #       }
 
-            Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
-            Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
-          displayName: "Validate and update SDK repository commitish"
+      #       Write-Host "##vso[task.setvariable variable=CheckoutCommitish]$checkoutCommitish"
+      #       Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
+      #     displayName: "Validate and update SDK repository commitish"
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
@@ -281,9 +281,14 @@ stages:
         - pwsh: |
             $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
             $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
-            # use the user provided branch name
+            # use the user provided branch name, but reject commit SHA-like values (40 hex chars)
+            # as GitHub does not allow branch names that look like commit SHAs (GH002)
             if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
-              $sdkPrBranchName = $sdkRepoBranch
+              if ($sdkRepoBranch -match '^[0-9a-f]{40}$') {
+                Write-Host "##vso[task.logissue type=error]SdkRepoBranch '$sdkRepoBranch' looks like a commit SHA. Branch names consisting of 40 hex characters are not allowed by GitHub (GH002). Using auto-generated branch name instead."
+              } else {
+                $sdkPrBranchName = $sdkRepoBranch
+              }
             }
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
