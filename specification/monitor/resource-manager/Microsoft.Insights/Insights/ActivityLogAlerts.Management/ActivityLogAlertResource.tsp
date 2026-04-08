@@ -29,15 +29,11 @@ interface ActivityLogAlertResources {
   /**
    * Get an Activity Log Alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActivityLogAlerts_Get")
   get is ArmResourceRead<ActivityLogAlertResource, Error = ErrorResponse>;
 
   /**
    * Create a new Activity Log Alert rule or update an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActivityLogAlerts_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ActivityLogAlertResource,
     Error = ErrorResponse
@@ -46,8 +42,6 @@ interface ActivityLogAlertResources {
   /**
    * Updates 'tags' and 'enabled' fields in an existing Alert rule. This method is used to update the Alert rule tags, and to enable or disable the Alert rule. To update other fields use CreateOrUpdate operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActivityLogAlerts_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ActivityLogAlertResource,
@@ -58,8 +52,6 @@ interface ActivityLogAlertResources {
   /**
    * Delete an Activity Log Alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActivityLogAlerts_Delete")
   delete is ArmResourceDeleteSync<
     ActivityLogAlertResource,
     Error = ErrorResponse
@@ -68,8 +60,6 @@ interface ActivityLogAlertResources {
   /**
    * Get a list of all Activity Log Alert rules in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActivityLogAlerts_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ActivityLogAlertResource,
     Response = ArmResponse<AlertRuleList>,
@@ -79,8 +69,6 @@ interface ActivityLogAlertResources {
   /**
    * Get a list of all Activity Log Alert rules in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActivityLogAlerts_ListBySubscriptionId")
   listBySubscriptionId is ArmListBySubscription<
     ActivityLogAlertResource,
     Response = ArmResponse<AlertRuleList>,

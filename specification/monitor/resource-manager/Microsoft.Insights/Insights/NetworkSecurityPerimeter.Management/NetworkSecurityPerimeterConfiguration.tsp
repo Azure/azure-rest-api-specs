@@ -52,17 +52,13 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a specified NSP configuration for specified action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_GetNSP")
   getNSP is NetworkSecurityPerimeterConfigurationOps.Read<CommonTypes.NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Gets a list of NSP configurations for specified action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_ListNSP")
   listNSP is NetworkSecurityPerimeterConfigurationOps.List<
     CommonTypes.NetworkSecurityPerimeterConfiguration,
     Response = ArmResponse<CommonTypes.NetworkSecurityPerimeterConfigurationListResult>
@@ -71,9 +67,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Reconciles a specified NSP configuration for specified action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_ReconcileNSP")
   @action("reconcile")
   reconcileNSP is NetworkSecurityPerimeterConfigurationOps.ActionSync<
     CommonTypes.NetworkSecurityPerimeterConfiguration,

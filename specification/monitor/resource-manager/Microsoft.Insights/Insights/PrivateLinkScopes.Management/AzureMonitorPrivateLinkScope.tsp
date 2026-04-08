@@ -31,22 +31,16 @@ interface AzureMonitorPrivateLinkScopes {
   /**
    * Returns a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkScopes_Get")
   get is ArmResourceRead<AzureMonitorPrivateLinkScope>;
 
   /**
    * Creates (or updates) a Azure Monitor PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkScopes_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AzureMonitorPrivateLinkScope>;
 
   /**
    * Updates an existing PrivateLinkScope's tags. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkScopes_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     AzureMonitorPrivateLinkScope,
@@ -56,22 +50,16 @@ interface AzureMonitorPrivateLinkScopes {
   /**
    * Deletes a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkScopes_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<AzureMonitorPrivateLinkScope>;
 
   /**
    * Gets a list of Azure Monitor PrivateLinkScopes within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkScopes_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<AzureMonitorPrivateLinkScope>;
 
   /**
    * Gets a list of all Azure Monitor PrivateLinkScopes within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateLinkScopes_List")
   list is ArmListBySubscription<AzureMonitorPrivateLinkScope>;
 }
 

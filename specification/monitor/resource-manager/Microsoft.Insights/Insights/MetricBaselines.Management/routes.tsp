@@ -18,8 +18,6 @@ interface BaselinesOperationGroup {
   /**
    * **Lists the metric baseline values for a resource**.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Baselines_List")
   @autoRoute
   @get
   @action("metricBaselines")

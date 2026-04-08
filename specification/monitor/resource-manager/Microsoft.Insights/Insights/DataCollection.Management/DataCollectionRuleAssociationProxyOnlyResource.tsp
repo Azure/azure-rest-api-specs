@@ -55,8 +55,6 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
   /**
    * Returns the specified association.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRuleAssociations_Get")
   @tag("DataCollectionRuleAssociations")
   @summary("Returns the specified association.")
   get is Extension.Read<
@@ -68,9 +66,7 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
   /**
    * Creates or updates an association.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRuleAssociations_Create")
   @tag("DataCollectionRuleAssociations")
   @summary("Creates or updates an association.")
   create is DataCollectionRuleAssociationProxyOnlyResourcesOps.CreateOrUpdateSync<
@@ -83,8 +79,6 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
   /**
    * Deletes an association.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRuleAssociations_Delete")
   @tag("DataCollectionRuleAssociations")
   @summary("Deletes an association.")
   delete is Extension.DeleteSync<
@@ -96,8 +90,6 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
   /**
    * Lists associations for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRuleAssociations_ListByResource")
   @tag("DataCollectionRuleAssociations")
   @summary("Lists associations for the specified resource.")
   listByResource is Extension.ListByTarget<

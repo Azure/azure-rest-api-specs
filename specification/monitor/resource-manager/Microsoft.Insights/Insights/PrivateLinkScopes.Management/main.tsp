@@ -28,6 +28,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Monitor API reference for Private Links Scopes management.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "MonitorManagementClient" })
 @versioned(Versions)

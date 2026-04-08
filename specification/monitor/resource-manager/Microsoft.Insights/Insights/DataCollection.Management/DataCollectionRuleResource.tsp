@@ -49,8 +49,6 @@ interface DataCollectionRuleResources {
   /**
    * Returns the specified data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRules_Get")
   @tag("DataCollectionRules")
   @summary("Returns the specified data collection rule.")
   get is ArmResourceRead<
@@ -61,8 +59,6 @@ interface DataCollectionRuleResources {
   /**
    * Creates or updates a data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRules_Create")
   @tag("DataCollectionRules")
   @summary("Creates or updates a data collection rule.")
   create is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
@@ -74,8 +70,6 @@ interface DataCollectionRuleResources {
   /**
    * Updates part of a data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRules_Update")
   @patch(#{ implicitOptionality: false })
   @tag("DataCollectionRules")
   @summary("Updates part of a data collection rule.")
@@ -89,8 +83,6 @@ interface DataCollectionRuleResources {
   /**
    * Deletes a data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRules_Delete")
   @tag("DataCollectionRules")
   @summary("Deletes a data collection rule.")
   delete is ArmResourceDeleteSync<
@@ -108,8 +100,6 @@ interface DataCollectionRuleResources {
   /**
    * Lists all data collection rules in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRules_ListByResourceGroup")
   @tag("DataCollectionRules")
   @summary("Lists all data collection rules in the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
@@ -120,8 +110,6 @@ interface DataCollectionRuleResources {
   /**
    * Lists all data collection rules in the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRules_ListBySubscription")
   @tag("DataCollectionRules")
   @summary("Lists all data collection rules in the specified subscription.")
   listBySubscription is ArmListBySubscription<
@@ -132,8 +120,6 @@ interface DataCollectionRuleResources {
   /**
    * Lists associations for the specified data collection rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRuleAssociations_ListByRule")
   @list
   @get
   @action("associations")

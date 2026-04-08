@@ -18,9 +18,7 @@ interface AlertRuleIncidentsOperationGroup {
   /**
    * Gets an incident associated to an alert rule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AlertRuleIncidents_Get")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}/incidents/{incidentName}")
   @get
   @tag("AlertRuleIncidents")
@@ -46,8 +44,6 @@ interface AlertRuleIncidentsOperationGroup {
   /**
    * Gets a list of incidents associated to an alert rule
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("AlertRuleIncidents_ListByAlertRule")
   @autoRoute
   @get
   @action("incidents")

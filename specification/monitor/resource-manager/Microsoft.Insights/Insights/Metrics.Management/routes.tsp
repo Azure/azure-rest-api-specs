@@ -18,8 +18,6 @@ interface MetricDefinitionsOperationGroup {
   /**
    * Lists the metric definitions for the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricDefinitions_ListAtSubscriptionScope")
   @autoRoute
   @get
   @action("metricDefinitions")
@@ -46,8 +44,6 @@ interface MetricDefinitionsOperationGroup {
   /**
    * Lists the metric definitions for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricDefinitions_List")
   @autoRoute
   @get
   @action("metricDefinitions")
@@ -71,8 +67,6 @@ interface MetricNamespacesOperationGroup {
   /**
    * Lists the metric namespaces for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricNamespaces_List")
   @get
   @action("metricNamespaces")
   @tag("metricNamespaces")
@@ -101,8 +95,6 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric data for a subscription**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Metrics_ListAtSubscriptionScope")
   @autoRoute
   @get
   @action("metrics")
@@ -202,8 +194,6 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric data for a subscription**. Parameters can be specified on either query params or the body. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Metrics_ListAtSubscriptionScopePost")
   @autoRoute
   @action("metrics")
   @tag("Metrics")
@@ -304,8 +294,6 @@ interface MetricsOperationGroup {
   /**
    * **Lists the metric values for a resource**. This API used the [default ARM throttling limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/request-limits-and-throttling).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Metrics_List")
   @autoRoute
   @get
   @action("metrics")

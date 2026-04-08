@@ -29,8 +29,6 @@ interface LogProfileResources {
   /**
    * Gets the log profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LogProfiles_Get")
   @tag("LogProfiles")
   get is ArmResourceRead<
     LogProfileResource,
@@ -41,9 +39,7 @@ interface LogProfileResources {
   /**
    * Create or update a log profile in Azure Monitoring REST API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LogProfiles_CreateOrUpdate")
   @tag("LogProfiles")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     LogProfileResource,
@@ -55,8 +51,6 @@ interface LogProfileResources {
   /**
    * Updates an existing LogProfilesResource. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LogProfiles_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     LogProfileResource,
@@ -68,9 +62,7 @@ interface LogProfileResources {
   /**
    * Deletes the log profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LogProfiles_Delete")
   @tag("LogProfiles")
   delete is ArmResourceDeleteSync<
     LogProfileResource,
@@ -82,8 +74,6 @@ interface LogProfileResources {
   /**
    * List the log profiles.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LogProfiles_List")
   @tag("LogProfiles")
   list is ArmResourceListByParent<
     LogProfileResource,

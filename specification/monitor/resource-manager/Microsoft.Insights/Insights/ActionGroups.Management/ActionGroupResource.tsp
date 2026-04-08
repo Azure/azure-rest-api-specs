@@ -61,15 +61,11 @@ interface ActionGroupResources {
   /**
    * Get an action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_Get")
   get is ArmResourceRead<ActionGroupResource, Error = ErrorResponse>;
 
   /**
    * Create a new action group or update an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ActionGroupResource,
     Error = ErrorResponse
@@ -78,8 +74,6 @@ interface ActionGroupResources {
   /**
    * Updates an existing action group's tags. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ActionGroupResource,
@@ -90,15 +84,11 @@ interface ActionGroupResources {
   /**
    * Delete an action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_Delete")
   delete is ArmResourceDeleteSync<ActionGroupResource, Error = ErrorResponse>;
 
   /**
    * Get a list of all action groups in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ActionGroupResource,
     Response = ArmResponse<ActionGroupList>,
@@ -108,8 +98,6 @@ interface ActionGroupResources {
   /**
    * Get a list of all action groups in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_ListBySubscriptionId")
   listBySubscriptionId is ArmListBySubscription<
     ActionGroupResource,
     Response = ArmResponse<ActionGroupList>,
@@ -119,8 +107,6 @@ interface ActionGroupResources {
   /**
    * Send test notifications to a set of provided receivers
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_CreateNotificationsAtActionGroupResourceLevel")
   @action("createNotifications")
   createNotificationsAtActionGroupResourceLevel is ArmResourceActionAsync<
     ActionGroupResource,
@@ -132,8 +118,6 @@ interface ActionGroupResources {
   /**
    * Get the test notifications by the notification id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_GetTestNotificationsAtActionGroupResourceLevel")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/actionGroups/{actionGroupName}/notificationStatus/{notificationId}")
   getTestNotificationsAtActionGroupResourceLevel is ActionGroupResourcesOps.ActionSync<
@@ -146,9 +130,7 @@ interface ActionGroupResources {
   /**
    * Enable a receiver in an action group. This changes the receiver's status from Disabled to Enabled. This operation is only supported for Email or SMS receivers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ActionGroups_EnableReceiver")
   @action("subscribe")
   enableReceiver is ArmResourceActionSync<
     ActionGroupResource,

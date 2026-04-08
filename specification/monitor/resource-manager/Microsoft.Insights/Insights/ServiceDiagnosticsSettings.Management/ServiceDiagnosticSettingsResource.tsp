@@ -46,8 +46,6 @@ interface ServiceDiagnosticSettingsResources {
   /**
    * Gets the active diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ServiceDiagnosticSettings_Get")
   @tag("ServiceDiagnosticSettings")
   get is Extension.Read<
     Extension.ScopeParameter,
@@ -58,9 +56,7 @@ interface ServiceDiagnosticSettingsResources {
   /**
    * Create or update new diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ServiceDiagnosticSettings_CreateOrUpdate")
   @tag("ServiceDiagnosticSettings")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
@@ -72,8 +68,6 @@ interface ServiceDiagnosticSettingsResources {
   /**
    * Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method. **WARNING**: This method will be deprecated in future releases.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ServiceDiagnosticSettings_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.ScopeParameter,

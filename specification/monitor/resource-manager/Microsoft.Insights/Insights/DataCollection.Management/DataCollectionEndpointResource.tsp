@@ -49,8 +49,6 @@ interface DataCollectionEndpointResources {
   /**
    * Returns the specified data collection endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionEndpoints_Get")
   @tag("DataCollectionEndpoints")
   @summary("Returns the specified data collection endpoint.")
   get is ArmResourceRead<
@@ -61,8 +59,6 @@ interface DataCollectionEndpointResources {
   /**
    * Creates or updates a data collection endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionEndpoints_Create")
   @tag("DataCollectionEndpoints")
   @summary("Creates or updates a data collection endpoint.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -74,8 +70,6 @@ interface DataCollectionEndpointResources {
   /**
    * Updates part of a data collection endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionEndpoints_Update")
   @patch(#{ implicitOptionality: false })
   @tag("DataCollectionEndpoints")
   @summary("Updates part of a data collection endpoint.")
@@ -89,8 +83,6 @@ interface DataCollectionEndpointResources {
   /**
    * Deletes a data collection endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionEndpoints_Delete")
   @tag("DataCollectionEndpoints")
   @summary("Deletes a data collection endpoint.")
   delete is ArmResourceDeleteSync<
@@ -101,8 +93,6 @@ interface DataCollectionEndpointResources {
   /**
    * Lists all data collection endpoints in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionEndpoints_ListByResourceGroup")
   @tag("DataCollectionEndpoints")
   @summary("Lists all data collection endpoints in the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
@@ -113,8 +103,6 @@ interface DataCollectionEndpointResources {
   /**
    * Lists all data collection endpoints in the specified subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionEndpoints_ListBySubscription")
   @tag("DataCollectionEndpoints")
   @summary("Lists all data collection endpoints in the specified subscription")
   listBySubscription is ArmListBySubscription<
@@ -125,8 +113,6 @@ interface DataCollectionEndpointResources {
   /**
    * Lists associations for the specified data collection endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DataCollectionRuleAssociations_ListByDataCollectionEndpoint")
   @list
   @get
   @action("associations")

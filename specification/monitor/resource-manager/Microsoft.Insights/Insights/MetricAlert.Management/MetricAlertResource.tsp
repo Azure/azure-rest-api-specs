@@ -64,17 +64,13 @@ interface MetricAlertResources {
   /**
    * Retrieve an alert rule definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlerts_Get")
   @tag("MetricAlerts")
   get is ArmResourceRead<MetricAlertResource, Error = ErrorResponse>;
 
   /**
    * Create or update an metric alert definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlerts_CreateOrUpdate")
   @tag("MetricAlerts")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MetricAlertResource,
@@ -85,8 +81,6 @@ interface MetricAlertResources {
   /**
    * Update an metric alert definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlerts_Update")
   @patch(#{ implicitOptionality: false })
   @tag("MetricAlerts")
   update is ArmCustomPatchSync<
@@ -98,16 +92,12 @@ interface MetricAlertResources {
   /**
    * Delete an alert rule definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlerts_Delete")
   @tag("MetricAlerts")
   delete is ArmResourceDeleteSync<MetricAlertResource, Error = ErrorResponse>;
 
   /**
    * Retrieve alert rule definitions in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlerts_ListByResourceGroup")
   @tag("MetricAlerts")
   listByResourceGroup is ArmResourceListByParent<
     MetricAlertResource,
@@ -118,8 +108,6 @@ interface MetricAlertResources {
   /**
    * Retrieve alert rule definitions in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlerts_ListBySubscription")
   @tag("MetricAlerts")
   listBySubscription is ArmListBySubscription<
     MetricAlertResource,
@@ -130,8 +118,6 @@ interface MetricAlertResources {
   /**
    * Retrieve an alert rule status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlertsStatus_List")
   @list
   @get
   @action("status")
@@ -146,8 +132,6 @@ interface MetricAlertResources {
   /**
    * Retrieve an alert rule status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MetricAlertsStatus_ListByName")
   @list
   @get
   @tag("MetricAlertsStatus")

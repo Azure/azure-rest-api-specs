@@ -58,16 +58,12 @@ interface ScheduledQueryRuleResources {
   /**
    * Retrieve an scheduled query rule definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledQueryRules_Get")
   @tag("ScheduledQueryRules")
   get is ArmResourceRead<ScheduledQueryRuleResource, Error = ErrorContract>;
 
   /**
    * Creates or updates a scheduled query rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledQueryRules_CreateOrUpdate")
   @tag("ScheduledQueryRules")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ScheduledQueryRuleResource,
@@ -77,8 +73,6 @@ interface ScheduledQueryRuleResources {
   /**
    * Update a scheduled query rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledQueryRules_Update")
   @patch(#{ implicitOptionality: false })
   @tag("ScheduledQueryRules")
   update is ArmCustomPatchSync<
@@ -90,8 +84,6 @@ interface ScheduledQueryRuleResources {
   /**
    * Deletes a scheduled query rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledQueryRules_Delete")
   @tag("ScheduledQueryRules")
   delete is ArmResourceDeleteSync<
     ScheduledQueryRuleResource,
@@ -101,8 +93,6 @@ interface ScheduledQueryRuleResources {
   /**
    * Retrieve scheduled query rule definitions in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledQueryRules_ListByResourceGroup")
   @tag("ScheduledQueryRules")
   listByResourceGroup is ArmResourceListByParent<
     ScheduledQueryRuleResource,
@@ -113,8 +103,6 @@ interface ScheduledQueryRuleResources {
   /**
    * Retrieve a scheduled query rule definitions in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ScheduledQueryRules_ListBySubscription")
   @tag("ScheduledQueryRules")
   listBySubscription is ArmListBySubscription<
     ScheduledQueryRuleResource,
