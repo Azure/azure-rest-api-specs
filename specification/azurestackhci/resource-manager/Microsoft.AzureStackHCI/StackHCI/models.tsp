@@ -7212,6 +7212,12 @@ model LifecycleStatus {
    */
   @visibility(Lifecycle.Read)
   lastUpdatedUtc: utcDateTime;
+
+  /**
+   * Message to provide more details on lifecycle status, especially in case of failures.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 /**
