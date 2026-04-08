@@ -10358,7 +10358,8 @@
         "indexedOneLake",
         "web",
         "remoteSharePoint",
-        "workIQ"
+        "workIQ",
+        "mcpServer"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -10398,6 +10399,11 @@
             "name": "WorkIQ",
             "value": "workIQ",
             "description": "A knowledge source that reads data from work IQ"
+          },
+          {
+            "name": "McpServer",
+            "value": "mcpServer",
+            "description": "A knowledge source backed by an MCP (Model Context Protocol) server."
           }
         ]
       }
@@ -11799,6 +11805,351 @@
             "name": "OneToOne",
             "value": "oneToOne",
             "description": "Indicates that each markdown file will be parsed into a single search document."
+          }
+        ]
+      }
+    },
+    "McpServerAuthentication": {
+      "type": "object",
+      "description": "Authentication configuration for an MCP server knowledge source.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/McpServerAuthenticationKind",
+          "description": "The kind of authentication to use."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "McpServerAuthenticationKind": {
+      "type": "string",
+      "description": "The kind of authentication for an MCP server.",
+      "enum": [
+        "foundryConnection",
+        "storedHeaders"
+      ],
+      "x-ms-enum": {
+        "name": "McpServerAuthenticationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FoundryConnection",
+            "value": "foundryConnection",
+            "description": "Authenticate using an Azure AI Foundry connection."
+          },
+          {
+            "name": "StoredHeaders",
+            "value": "storedHeaders",
+            "description": "Authenticate using stored HTTP headers."
+          }
+        ]
+      }
+    },
+    "McpServerAutoOutputParsing": {
+      "type": "object",
+      "description": "Automatically detect the output format and parse accordingly.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpServerOutputParsing"
+        }
+      ],
+      "x-ms-discriminator-value": "auto"
+    },
+    "McpServerFoundryConnectionAuthentication": {
+      "type": "object",
+      "description": "Authentication using an Azure AI Foundry connection.",
+      "properties": {
+        "foundryConnectionParameters": {
+          "$ref": "#/definitions/McpServerFoundryConnectionParameters",
+          "description": "Parameters for Foundry connection authentication."
+        }
+      },
+      "required": [
+        "foundryConnectionParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpServerAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "foundryConnection"
+    },
+    "McpServerFoundryConnectionParameters": {
+      "type": "object",
+      "description": "Parameters for Foundry connection authentication.",
+      "properties": {
+        "connectionId": {
+          "type": "string",
+          "description": "The Azure AI Foundry connection identifier."
+        }
+      }
+    },
+    "McpServerHeaders": {
+      "type": "object",
+      "description": "A dictionary of HTTP header names and values.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "McpServerJsonOutputParsing": {
+      "type": "object",
+      "description": "Parse the output as a JSON document using the configured JSON parameters.",
+      "properties": {
+        "jsonParameters": {
+          "$ref": "#/definitions/McpServerOutputParsingJsonParameters",
+          "description": "Parameters for JSON output parsing. Required when kind is 'json'."
+        }
+      },
+      "required": [
+        "jsonParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpServerOutputParsing"
+        }
+      ],
+      "x-ms-discriminator-value": "json"
+    },
+    "McpServerKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for a knowledge source backed by an MCP (Model Context Protocol) server.",
+      "properties": {
+        "mcpServerParameters": {
+          "$ref": "#/definitions/McpServerKnowledgeSourceParameters",
+          "description": "The parameters for the MCP server knowledge source."
+        }
+      },
+      "required": [
+        "mcpServerParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "mcpServer"
+    },
+    "McpServerKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for an MCP server knowledge source.",
+      "properties": {
+        "serverURL": {
+          "type": "string",
+          "description": "The URL of the MCP server endpoint."
+        },
+        "authentication": {
+          "$ref": "#/definitions/McpServerAuthentication",
+          "description": "The authentication configuration for the MCP server."
+        },
+        "tools": {
+          "type": "array",
+          "description": "The list of tools to invoke on the MCP server.",
+          "items": {
+            "$ref": "#/definitions/McpServerTool"
+          }
+        }
+      },
+      "required": [
+        "serverURL",
+        "tools"
+      ]
+    },
+    "McpServerNoneOutputParsing": {
+      "type": "object",
+      "description": "Treat the output as a single block without any parsing.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpServerOutputParsing"
+        }
+      ],
+      "x-ms-discriminator-value": "none"
+    },
+    "McpServerOutputParsing": {
+      "type": "object",
+      "description": "Output parsing configuration for an MCP server tool.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/McpServerOutputParsingKind",
+          "description": "The kind of output parsing to apply."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "McpServerOutputParsingJsonParameters": {
+      "type": "object",
+      "description": "Parameters for JSON output parsing.",
+      "properties": {
+        "documentsPath": {
+          "type": "string",
+          "description": "The JSON path to the array of documents in the tool output."
+        },
+        "includeContext": {
+          "type": "boolean",
+          "description": "Whether to include surrounding context from the JSON output alongside extracted documents."
+        }
+      },
+      "required": [
+        "documentsPath"
+      ]
+    },
+    "McpServerOutputParsingKind": {
+      "type": "string",
+      "description": "The kind of output parsing for an MCP server tool.",
+      "enum": [
+        "auto",
+        "json",
+        "split",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "McpServerOutputParsingKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "auto",
+            "description": "Automatically detect the output format and parse accordingly."
+          },
+          {
+            "name": "Json",
+            "value": "json",
+            "description": "Parse the output as a JSON document using the configured JSON parameters."
+          },
+          {
+            "name": "Split",
+            "value": "split",
+            "description": "Split the output into pages using the configured split parameters."
+          },
+          {
+            "name": "None",
+            "value": "none",
+            "description": "Treat the output as a single block without any parsing."
+          }
+        ]
+      }
+    },
+    "McpServerOutputParsingSplitParameters": {
+      "type": "object",
+      "description": "Parameters for split output parsing.",
+      "properties": {
+        "textSplitMode": {
+          "$ref": "#/definitions/TextSplitMode",
+          "description": "The text split mode to use."
+        },
+        "maximumPageLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of characters per page."
+        },
+        "pageOverlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of characters to overlap between pages."
+        },
+        "maximumPagesToTake": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of pages to take from the output."
+        },
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/SplitSkillLanguage",
+          "description": "A value indicating which language code to use. Default is `en`."
+        }
+      }
+    },
+    "McpServerSplitOutputParsing": {
+      "type": "object",
+      "description": "Split the output into pages using the configured split parameters.",
+      "properties": {
+        "splitParameters": {
+          "$ref": "#/definitions/McpServerOutputParsingSplitParameters",
+          "description": "Parameters for split output parsing."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpServerOutputParsing"
+        }
+      ],
+      "x-ms-discriminator-value": "split"
+    },
+    "McpServerStoredHeadersAuthentication": {
+      "type": "object",
+      "description": "Authentication using stored HTTP headers.",
+      "properties": {
+        "storedHeadersParameters": {
+          "$ref": "#/definitions/McpServerStoredHeadersParameters",
+          "description": "Parameters for stored headers authentication."
+        }
+      },
+      "required": [
+        "storedHeadersParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpServerAuthentication"
+        }
+      ],
+      "x-ms-discriminator-value": "storedHeaders"
+    },
+    "McpServerStoredHeadersParameters": {
+      "type": "object",
+      "description": "Parameters for stored headers authentication.",
+      "properties": {
+        "headers": {
+          "$ref": "#/definitions/McpServerHeaders",
+          "description": "The stored HTTP headers to include in MCP server requests."
+        }
+      }
+    },
+    "McpServerTool": {
+      "type": "object",
+      "description": "Represents a single tool within an MCP server knowledge source.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP tool to invoke."
+        },
+        "outputParsing": {
+          "$ref": "#/definitions/McpServerOutputParsing",
+          "description": "Optional configuration for parsing the tool's output."
+        },
+        "inclusionMode": {
+          "$ref": "#/definitions/McpServerToolInclusionMode",
+          "description": "Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'reranked' when not specified."
+        },
+        "maxOutputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional post-parsing token cap for this tool's output. Must be greater than 0 when specified."
+        }
+      }
+    },
+    "McpServerToolInclusionMode": {
+      "type": "string",
+      "description": "Controls how parsed MCP tool results are integrated into the final result set.",
+      "enum": [
+        "reranked",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "McpServerToolInclusionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Reranked",
+            "value": "reranked",
+            "description": "Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior."
+          },
+          {
+            "name": "Always",
+            "value": "always",
+            "description": "Tool results bypass reranking and are always included in the agent context."
           }
         ]
       }

@@ -4668,6 +4668,10 @@ union KnowledgeSourceKind {
   /** A knowledge source that reads data from work IQ */
   @added(Versions.v2026_05_01_preview)
   WorkIQ: "workIQ",
+
+  /** A knowledge source backed by an MCP (Model Context Protocol) server. */
+  @added(Versions.v2026_05_01_preview)
+  McpServer: "mcpServer",
 }
 
 /** Knowledge Source targeting a search index. */
@@ -4854,6 +4858,209 @@ model RemoteSharePointKnowledgeSourceParameters {
 @added(Versions.v2026_05_01_preview)
 model WorkIQKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.WorkIQ;
+}
+
+/** Configuration for a knowledge source backed by an MCP (Model Context Protocol) server. */
+@added(Versions.v2026_05_01_preview)
+model McpServerKnowledgeSource extends KnowledgeSource {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.McpServer;
+
+  /** The parameters for the MCP server knowledge source. */
+  mcpServerParameters: McpServerKnowledgeSourceParameters;
+}
+
+/** Parameters for an MCP server knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model McpServerKnowledgeSourceParameters {
+  /** The URL of the MCP server endpoint. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "URL is a common acronym."
+  serverURL: string;
+
+  /** The authentication configuration for the MCP server. */
+  authentication?: McpServerAuthentication;
+
+  /** The list of tools to invoke on the MCP server. */
+  tools: McpServerTool[];
+}
+
+/** Authentication configuration for an MCP server knowledge source. */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+@discriminator("kind")
+@added(Versions.v2026_05_01_preview)
+model McpServerAuthentication {
+  /** The kind of authentication to use. */
+  kind: McpServerAuthenticationKind;
+}
+
+/** The kind of authentication for an MCP server. */
+@added(Versions.v2026_05_01_preview)
+union McpServerAuthenticationKind {
+  string,
+
+  /** Authenticate using an Azure AI Foundry connection. */
+  FoundryConnection: "foundryConnection",
+
+  /** Authenticate using stored HTTP headers. */
+  StoredHeaders: "storedHeaders",
+}
+
+/** Authentication using an Azure AI Foundry connection. */
+@added(Versions.v2026_05_01_preview)
+model McpServerFoundryConnectionAuthentication extends McpServerAuthentication {
+  /** The discriminator value. */
+  kind: McpServerAuthenticationKind.FoundryConnection;
+
+  /** Parameters for Foundry connection authentication. */
+  foundryConnectionParameters: McpServerFoundryConnectionParameters;
+}
+
+/** Authentication using stored HTTP headers. */
+@added(Versions.v2026_05_01_preview)
+model McpServerStoredHeadersAuthentication extends McpServerAuthentication {
+  /** The discriminator value. */
+  kind: McpServerAuthenticationKind.StoredHeaders;
+
+  /** Parameters for stored headers authentication. */
+  storedHeadersParameters: McpServerStoredHeadersParameters;
+}
+
+/** Parameters for Foundry connection authentication. */
+@added(Versions.v2026_05_01_preview)
+model McpServerFoundryConnectionParameters {
+  /** The Azure AI Foundry connection identifier. */
+  connectionId?: string;
+}
+
+/** Parameters for stored headers authentication. */
+@added(Versions.v2026_05_01_preview)
+model McpServerStoredHeadersParameters {
+  /** The stored HTTP headers to include in MCP server requests. */
+  headers?: McpServerHeaders;
+}
+
+/** A dictionary of HTTP header names and values. */
+@added(Versions.v2026_05_01_preview)
+model McpServerHeaders {
+  ...Record<string>;
+}
+
+/** Represents a single tool within an MCP server knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model McpServerTool {
+  /** The name of the MCP tool to invoke. */
+  name?: string;
+
+  /** Optional configuration for parsing the tool's output. */
+  outputParsing?: McpServerOutputParsing;
+
+  /** Controls how the parsed results from this tool are integrated into the final result set. Defaults to 'reranked' when not specified. */
+  inclusionMode?: McpServerToolInclusionMode;
+
+  /** Optional post-parsing token cap for this tool's output. Must be greater than 0 when specified. */
+  maxOutputTokens?: int32;
+}
+
+/** Controls how parsed MCP tool results are integrated into the final result set. */
+@added(Versions.v2026_05_01_preview)
+union McpServerToolInclusionMode {
+  string,
+
+  /** Tool results go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior. */
+  Reranked: "reranked",
+
+  /** Tool results bypass reranking and are always included in the agent context. */
+  Always: "always",
+}
+
+/** Output parsing configuration for an MCP server tool. */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+@discriminator("kind")
+@added(Versions.v2026_05_01_preview)
+model McpServerOutputParsing {
+  /** The kind of output parsing to apply. */
+  kind: McpServerOutputParsingKind;
+}
+
+/** The kind of output parsing for an MCP server tool. */
+@added(Versions.v2026_05_01_preview)
+union McpServerOutputParsingKind {
+  string,
+
+  /** Automatically detect the output format and parse accordingly. */
+  Auto: "auto",
+
+  /** Parse the output as a JSON document using the configured JSON parameters. */
+  Json: "json",
+
+  /** Split the output into pages using the configured split parameters. */
+  Split: "split",
+
+  /** Treat the output as a single block without any parsing. */
+  None: "none",
+}
+
+/** Automatically detect the output format and parse accordingly. */
+@added(Versions.v2026_05_01_preview)
+model McpServerAutoOutputParsing extends McpServerOutputParsing {
+  /** The discriminator value. */
+  kind: McpServerOutputParsingKind.Auto;
+}
+
+/** Parse the output as a JSON document using the configured JSON parameters. */
+@added(Versions.v2026_05_01_preview)
+model McpServerJsonOutputParsing extends McpServerOutputParsing {
+  /** The discriminator value. */
+  kind: McpServerOutputParsingKind.Json;
+
+  /** Parameters for JSON output parsing. Required when kind is 'json'. */
+  jsonParameters: McpServerOutputParsingJsonParameters;
+}
+
+/** Split the output into pages using the configured split parameters. */
+@added(Versions.v2026_05_01_preview)
+model McpServerSplitOutputParsing extends McpServerOutputParsing {
+  /** The discriminator value. */
+  kind: McpServerOutputParsingKind.Split;
+
+  /** Parameters for split output parsing. */
+  splitParameters?: McpServerOutputParsingSplitParameters;
+}
+
+/** Treat the output as a single block without any parsing. */
+@added(Versions.v2026_05_01_preview)
+model McpServerNoneOutputParsing extends McpServerOutputParsing {
+  /** The discriminator value. */
+  kind: McpServerOutputParsingKind.None;
+}
+
+/** Parameters for JSON output parsing. */
+@added(Versions.v2026_05_01_preview)
+model McpServerOutputParsingJsonParameters {
+  /** The JSON path to the array of documents in the tool output. */
+  documentsPath: string;
+
+  /** Whether to include surrounding context from the JSON output alongside extracted documents. */
+  includeContext?: boolean;
+}
+
+/** Parameters for split output parsing. */
+@added(Versions.v2026_05_01_preview)
+model McpServerOutputParsingSplitParameters {
+  /** The text split mode to use. */
+  textSplitMode?: TextSplitMode;
+
+  /** The maximum number of characters per page. */
+  maximumPageLength?: int32;
+
+  /** The number of characters to overlap between pages. */
+  pageOverlapLength?: int32;
+
+  /** The maximum number of pages to take from the output. */
+  maximumPagesToTake?: int32;
+
+  /** A value indicating which language code to use. Default is `en`. */
+  defaultLanguageCode?: SplitSkillLanguage;
 }
 
 /** Result from listing knowledge sources. */
