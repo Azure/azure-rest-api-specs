@@ -110,6 +110,7 @@ model SoftDeletedDatabaseAccountGetResult {
   /**
    * The properties of a soft-deleted database account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for swagger compatibility"
   @extension("x-ms-client-flatten", true)
   properties?: SoftDeletedDatabaseAccountProperties;
 
@@ -196,6 +197,7 @@ model SoftDeletedSqlDatabaseGetResult {
   /**
    * The properties of a soft-deleted SQL database.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for swagger compatibility"
   @extension("x-ms-client-flatten", true)
   properties?: SoftDeletedSqlDatabaseProperties;
 
@@ -292,6 +294,7 @@ model SoftDeletedSqlContainerGetResult {
   /**
    * The properties of a soft-deleted SQL container.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for swagger compatibility"
   @extension("x-ms-client-flatten", true)
   properties?: SoftDeletedSqlContainerProperties;
 
@@ -375,6 +378,7 @@ interface SoftDeletedDatabaseAccounts {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   listByLocation(
     ...Azure.ResourceManager.ApiVersionParameter,
@@ -392,6 +396,7 @@ interface SoftDeletedDatabaseAccounts {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   listByResourceGroupAndLocation(
     ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -488,6 +493,7 @@ interface SoftDeletedSqlDatabases {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases")
   @get
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   list(
     ...Azure.ResourceManager.ApiVersionParameter,
@@ -610,6 +616,7 @@ interface SoftDeletedSqlContainers {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers")
   @get
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   list(
     ...Azure.ResourceManager.ApiVersionParameter,

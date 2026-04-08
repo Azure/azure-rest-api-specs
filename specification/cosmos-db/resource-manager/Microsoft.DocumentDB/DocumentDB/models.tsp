@@ -482,16 +482,19 @@ model SoftDeleteConfiguration {
   /**
    * Flag to indicate whether soft delete is enabled on the account.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matching original swagger x-nullable behavior"
   softDeletionEnabled?: boolean | null;
 
   /**
    * Minimum number of minutes before a soft deleted resource can be permanently deleted.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matching original swagger x-nullable behavior"
   minMinutesBeforePermanentDeletionAllowed?: int32 | null;
 
   /**
    * Soft delete retention period in minutes for resources.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Matching original swagger x-nullable behavior"
   softDeleteRetentionPeriodInMinutes?: int32 | null;
 }
 
