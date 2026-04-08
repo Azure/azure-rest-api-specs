@@ -30,6 +30,13 @@ alias FilterQueryParamsTraits = {
   ...IncludeCoordinatesTrait;
 };
 
+alias InsightsGetParams = {
+  ...IncludeCoordinatesTrait;
+
+  /** The unique identifier for the insights report. */
+  @path id: string;
+};
+
 @tag("Insights")
 @route("insights")
 interface Insights {
@@ -59,12 +66,7 @@ interface Insights {
   @route("/{id}")
   get is FoundryDataPlanePreviewOperation<
     FoundryFeaturesOptInKeys.insights_v1_preview,
-    {
-      ...IncludeCoordinatesTrait;
-
-      /** The unique identifier for the insights report. */
-      @path id: string;
-    },
+    InsightsGetParams,
     Insight
   >;
 

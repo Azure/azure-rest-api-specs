@@ -15,10 +15,12 @@ in order to enable preview features on these GA routes.
 
 | Operation Group | Operation | Method | Path | Foundry-Features Header Value |
 |-----------------|-----------|--------|------|-------------------------------|
-| Agents | Create | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
+| Agents | Create | POST | `/agents` | Optional: `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview`, `AgentEndpoints=V1Preview` |
+| Agents | Update | POST | `/agents/{agent_name}` | Optional: `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview` |
+| Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `HostedAgents=V1Preview`, `WorkflowAgents=V1Preview`, `AgentEndpoints=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
+
+Note: the above table only looks at operations in the v1 version. Operations that are decorated with `@removed(Versions.v1)` are not included in the table.
 
 ## v1 Preview routes with required "Foundry-Features" HTTP header to enable preview features
 
@@ -33,6 +35,8 @@ in order to successfully complete operations using these routes.
 | Evaluators | Get Version | GET | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
 | Evaluators | Delete Version | DELETE | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
 | Evaluators | Update Version | PATCH | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
+| Evaluators | Start Pending Upload | POST | `/evaluators/{name}/versions/{version}/startPendingUpload` | Required: `Evaluations=V1Preview` |
+| Evaluators | Get Credentials | POST | `/evaluators/{name}/versions/{version}/credentials` | Required: `Evaluations=V1Preview` |
 | Insights | Generate | POST | `/insights` | Required: `Insights=V1Preview` |
 | Insights | List | GET | `/insights` |  Required: `Insights=V1Preview` |
 | Insights | Get | GET | `/insights/{id}` |  Required: `Insights=V1Preview` |
@@ -59,3 +63,10 @@ in order to successfully complete operations using these routes.
 | Memory Stores | Delete Scope Memories | POST | `/memory_stores/{name}:delete_scope` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | Search Memories | POST | `/memory_stores/{name}:search_memories` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | Update Memories | POST | `/memory_stores/{name}:update_memories` | Required: `MemoryStores=V1Preview` |
+| Toolsets | Create | POST | `/toolsets` | Required: `Toolsets=V1Preview` |
+| Toolsets | Update | POST | `/toolsets/{tool_set_name}` | Required: `Toolsets=V1Preview` |
+| Toolsets | Get | GET | `/toolsets/{tool_set_name}` | Required: `Toolsets=V1Preview` |
+| Toolsets | List | GET | `/toolsets` | Required: `Toolsets=V1Preview` |
+| Toolsets | Delete | DELETE | `/toolsets/{tool_set_name}` | Required: `Toolsets=V1Preview` |
+
+Note: the above table only looks at operations in the v1 version. Operations that are decorated with `@removed(Versions.v1)` are not included in the table.
