@@ -899,7 +899,9 @@ interface File {
       ...NfsRequestHeaders;
 
       /** Optional, NFS only. Type of the file or directory. */
-      @header("x-ms-file-file-type") nfsFileType?: NfsFileType;
+      @header("x-ms-file-file-type") 
+      @clientName("NFSFileType", "go")
+      nfsFileType?: NfsFileType;
 
       ...ContentMD5RequestHeader;
       ...FilePropertySemanticsHeader;
