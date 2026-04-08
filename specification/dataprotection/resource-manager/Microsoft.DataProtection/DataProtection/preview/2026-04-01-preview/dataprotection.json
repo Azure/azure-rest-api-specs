@@ -1741,6 +1741,15 @@
             "description": "The name of the BackupInstanceResource",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureBackupResumeProtectionRequest"
+            }
           }
         ],
         "responses": {
@@ -5142,6 +5151,23 @@
       "required": [
         "recoveryPointId",
         "rehydrationRetentionDuration"
+      ]
+    },
+    "AzureBackupResumeProtectionRequest": {
+      "type": "object",
+      "description": "Azure backup resume protection request",
+      "properties": {
+        "objectType": {
+          "type": "string"
+        },
+        "identityDetails": {
+          "$ref": "#/definitions/IdentityDetails",
+          "description": "Contains information of the Identity Details for the BI.\nIf it is null, default will be considered as System Assigned."
+        }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType"
       ]
     },
     "AzureBackupRestoreRequest": {
