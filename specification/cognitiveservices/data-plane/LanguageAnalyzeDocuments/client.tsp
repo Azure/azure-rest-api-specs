@@ -582,6 +582,6 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 @@clientName(redactionCharacter.equals,
-  "EqualsSign",
+  "EqualSign",
   "csharp"
 );
