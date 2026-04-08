@@ -2,9 +2,9 @@ import "../models/common.tsp";
 import "../models/RoutePolicy.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
@@ -20,7 +20,7 @@ model RoutePolicy extends Azure.ResourceManager.Foundations.TrackedResource {
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The RoutePolicy properties */
+  @doc("The RoutePolicy properties")
   properties: RoutePolicyProperties;
 }
 
@@ -40,16 +40,36 @@ interface RoutePolicies {
   delete is ArmResourceDeleteWithoutOkAsync<RoutePolicy>;
 
   @doc("Implements RoutePolicies list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<RoutePolicy>;
+  listByResourceGroup is ArmResourceListByParent<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
 
   @doc("Implements RoutePolicies list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<RoutePolicy>;
+  listBySubscription is ArmListBySubscription<
+    RoutePolicy,
+    Response = RoutePoliciesListResult
+  >;
 
   @doc("Updated the admin state for this Route Policy.")
-  updateAdministrativeState is ArmResourceActionAsync<
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
     RoutePolicy,
     UpdateAdministrativeState,
     CommonPostActionResponseForDeviceUpdate
+  >;
+
+  @doc("Updated the admin state for this Route Policy.")
+  @action("updateAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    RoutePolicy,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("Validates the configuration of the resources.")
@@ -73,4 +93,10 @@ interface RoutePolicies {
 );
 @@doc(RoutePolicies.updateAdministrativeState::parameters.body,
   "Request payload."
+);
+@@doc(RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(RoutePolicies.validateConfiguration::parameters.body,
+  "Validate configuration properties."
 );

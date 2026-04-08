@@ -2913,7 +2913,7 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Swagger bug. Function App on ACA is LRO."
 @@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.update, "java");
 
-@@clientName(Microsoft.Web.ErrorResponse, "WorkflowErrorResponse");
+@@clientName(Microsoft.Web.ErrorResponse, "WorkflowErrorResponse", "!go");
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
