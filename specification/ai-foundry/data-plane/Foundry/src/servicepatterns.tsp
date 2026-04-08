@@ -371,15 +371,15 @@ op cancelJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
   OkResponse & TJob
 >;
 
-/** Delete a job. Returns 200 with the updated job. */
+/** Delete a job. Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
 @delete
-op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
+op deleteJob is FoundryDataPlaneOperation<
   {
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  OkResponse & TJob
+  NoContentResponse
 >;
 
 // ---- Preview operation templates ----
@@ -438,18 +438,16 @@ op deleteJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperatio
   OkResponse & TJob
 >;
 
-/** Delete a job (preview). Returns 200 with the updated job. */
+/** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
-@delete op deleteJobPreview<
-  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  TJob extends TypeSpec.Reflection.Model
-> is FoundryDataPlanePreviewOperation<
+@delete
+op deleteJobPreview<AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */
     @path jobId: string;
   },
-  OkResponse & TJob
+  NoContentResponse
 >;
 
 // ============================================================================
