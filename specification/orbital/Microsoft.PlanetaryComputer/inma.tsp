@@ -904,11 +904,11 @@ model CollectionParameters is ApiVersionParameter {
 @doc("Odata query parameters")
 model OdataQuery {
   @doc("The number of items to return")
-  @query("top")
+  @query("$top")
   top?: int32;
 
   @doc("The number of items to skip")
-  @query("skip")
+  @query("$skip")
   skip?: int32;
 }
 
