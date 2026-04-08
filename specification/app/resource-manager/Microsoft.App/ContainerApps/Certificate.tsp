@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./ConnectedEnvironment.tsp";
+import "./ManagedEnvironment.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,7 +14,7 @@ namespace Microsoft.App;
 /**
  * Certificate used for Custom Domain bindings of Container Apps in a Managed Environment
  */
-@parentResource(ConnectedEnvironment)
+@parentResource(ManagedEnvironment)
 model Certificate
   is Azure.ResourceManager.TrackedResource<CertificateProperties> {
   ...ResourceNameParameter<
