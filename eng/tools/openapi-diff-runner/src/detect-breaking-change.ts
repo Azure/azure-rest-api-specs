@@ -19,7 +19,7 @@
  */
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
-import { appendFileSync, existsSync, readFileSync } from "node:fs";
+import { appendFileSync, existsSync } from "node:fs";
 import * as path from "node:path";
 import { logError, LogLevel, logMessage } from "./log.js";
 import { runOad } from "./run-oad.js";
@@ -308,21 +308,6 @@ export async function doBreakingChangeDetection(
 
   let oadViolationsCnt = 0;
   let errorCnt = 0;
-
-  // Skip OAD comparison for OpenAPI 3.x specs — OAD/AutoRest only supports Swagger 2.0
-  try {
-    const specContent: { openapi?: unknown } = JSON.parse(readFileSync(newSpec, "utf-8")) as {
-      openapi?: unknown;
-    };
-    if (typeof specContent.openapi === "string" && specContent.openapi.startsWith("3.")) {
-      logMessage(
-        `OpenAPI 3.x spec detected at: ${newSpec}. Skipping OAD comparison — OAD only supports Swagger 2.0.`,
-      );
-      return { oadViolationsCnt: 0, errorCnt: 0 };
-    }
-  } catch {
-    // If we cannot read/parse the spec, fall through to let OAD attempt the comparison
-  }
 
   try {
     const oadMessages = await runOad(oldSpec, newSpec);
