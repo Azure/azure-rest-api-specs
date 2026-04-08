@@ -148,7 +148,7 @@ model ScenarioAction {
   urn: string;
 
   /**
-   * ARM resource ID of the action proxy resource (e.g., /subscriptions/{subId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}).
+   * ARM resource ID of the action version proxy resource (e.g., /subscriptions/{subId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}/versions/{version}).
    */
   actionResourceId?: string;
 
