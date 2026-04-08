@@ -4910,14 +4910,16 @@
             "in": "path",
             "description": "The name of the target SQL DB instance.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$"
           },
           {
             "name": "targetDbName",
             "in": "path",
             "description": "The name of the target database.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$"
           },
           {
             "name": "migrationOperationInput",
@@ -5402,19 +5404,23 @@
       "properties": {
         "authKey1": {
           "type": "string",
+          "format": "password",
           "description": "The first authentication key.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "authKey2": {
           "type": "string",
+          "format": "password",
           "description": "The second authentication key.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -5565,7 +5571,9 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "Storage Account Key."
+          "format": "password",
+          "description": "Storage Account Key.",
+          "x-ms-secret": true
         },
         "blobContainerName": {
           "type": "string",
@@ -6010,7 +6018,8 @@
         },
         "isOfflineMigration": {
           "type": "boolean",
-          "description": "Flag for whether or not the migration is offline"
+          "description": "Flag for whether or not the migration is offline",
+          "default": false
         }
       },
       "required": [
@@ -6271,19 +6280,23 @@
         },
         "collectLogins": {
           "type": "boolean",
-          "description": "Flag for whether to collect logins from source server."
+          "description": "Flag for whether to collect logins from source server.",
+          "default": false
         },
         "collectAgentJobs": {
           "type": "boolean",
-          "description": "Flag for whether to collect agent jobs from source server."
+          "description": "Flag for whether to collect agent jobs from source server.",
+          "default": false
         },
         "collectTdeCertificateInfo": {
           "type": "boolean",
-          "description": "Flag for whether to collect TDE Certificate names from source server."
+          "description": "Flag for whether to collect TDE Certificate names from source server.",
+          "default": false
         },
         "validateSsisCatalogOnly": {
           "type": "boolean",
-          "description": "Flag for whether to validate SSIS catalog is reachable on the source server."
+          "description": "Flag for whether to validate SSIS catalog is reachable on the source server.",
+          "default": false
         },
         "encryptedKeyForSecureFields": {
           "type": "string",
@@ -6538,7 +6551,8 @@
         },
         "isOfflineMigration": {
           "type": "boolean",
-          "description": "Flag for whether or not the migration is offline"
+          "description": "Flag for whether or not the migration is offline",
+          "default": false
         }
       },
       "required": [
@@ -6943,7 +6957,8 @@
         },
         "validateSsisCatalogOnly": {
           "type": "boolean",
-          "description": "Flag for whether to validate SSIS catalog is reachable on the target SQL MI server."
+          "description": "Flag for whether to validate SSIS catalog is reachable on the target SQL MI server.",
+          "default": false
         }
       },
       "required": [

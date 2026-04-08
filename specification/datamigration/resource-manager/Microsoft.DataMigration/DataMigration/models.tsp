@@ -2461,6 +2461,8 @@ model SqlDbOfflineConfiguration {
 /**
  * Database Migration Resource properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" ""
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" ""
 @discriminator("kind")
 model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
   /**
@@ -2843,6 +2845,7 @@ model AzureBlob {
   /**
    * Storage Account Key.
    */
+  @secret
   accountKey?: string;
 
   /**
@@ -3063,12 +3066,14 @@ model AuthenticationKeys {
   /**
    * The first authentication key.
    */
+  @secret
   @visibility(Lifecycle.Read, Lifecycle.Create)
   authKey1?: string;
 
   /**
    * The second authentication key.
    */
+  @secret
   @visibility(Lifecycle.Read, Lifecycle.Create)
   authKey2?: string;
 }
@@ -4471,7 +4476,7 @@ model ConnectToSourceMySqlTaskInput {
   /**
    * Flag for whether or not the migration is offline
    */
-  isOfflineMigration?: boolean;
+  isOfflineMigration?: boolean = false;
 }
 
 /**
@@ -4496,22 +4501,22 @@ model ConnectToSourceSqlServerTaskInput {
   /**
    * Flag for whether to collect logins from source server.
    */
-  collectLogins?: boolean;
+  collectLogins?: boolean = false;
 
   /**
    * Flag for whether to collect agent jobs from source server.
    */
-  collectAgentJobs?: boolean;
+  collectAgentJobs?: boolean = false;
 
   /**
    * Flag for whether to collect TDE Certificate names from source server.
    */
-  collectTdeCertificateInfo?: boolean;
+  collectTdeCertificateInfo?: boolean = false;
 
   /**
    * Flag for whether to validate SSIS catalog is reachable on the source server.
    */
-  validateSsisCatalogOnly?: boolean;
+  validateSsisCatalogOnly?: boolean = false;
 
   /**
    * encrypted key for secure fields
@@ -4850,7 +4855,7 @@ model ConnectToTargetAzureDbForMySqlTaskInput {
   /**
    * Flag for whether or not the migration is offline
    */
-  isOfflineMigration?: boolean;
+  isOfflineMigration?: boolean = false;
 }
 
 /**
@@ -4997,7 +5002,7 @@ model ConnectToTargetSqlMITaskInput {
   /**
    * Flag for whether to validate SSIS catalog is reachable on the target SQL MI server.
    */
-  validateSsisCatalogOnly?: boolean;
+  validateSsisCatalogOnly?: boolean = false;
 }
 
 /**

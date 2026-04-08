@@ -53,6 +53,38 @@ alias DatabaseMigrationSqlDbOps = Azure.ResourceManager.Legacy.ExtensionOperatio
   }
 >;
 
+alias DatabaseMigrationSqlDbOpsWithPattern = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Sql";
+
+    /** The name of the target SQL DB instance. */
+    @path
+    @segment("servers")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
+    sqlDbInstanceName: string;
+  },
+  {},
+  {
+    ...Extension.ExtensionProviderNamespace<DatabaseMigrationSqlDb>;
+
+    /** The name of the target database. */
+    @path
+    @segment("databaseMigrations")
+    @key
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
+    targetDbName: string;
+  }
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface DatabaseMigrationSqlDbs {
   /**
@@ -127,10 +159,11 @@ interface DatabaseMigrationSqlDbs {
   /**
    * Retry on going migration for the database.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DatabaseMigrationsSqlDb_retry")
   @tag("DatabaseMigrations")
-  retry is DatabaseMigrationSqlDbOps.ActionAsync<
+  retry is DatabaseMigrationSqlDbOpsWithPattern.ActionAsync<
     DatabaseMigrationSqlDb,
     MigrationOperationInput,
     DatabaseMigrationSqlDb,
