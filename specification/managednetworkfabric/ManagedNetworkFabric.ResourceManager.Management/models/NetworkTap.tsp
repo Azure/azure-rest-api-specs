@@ -136,15 +136,7 @@ model IsolationDomainPatchProperties is IsolationDomainProperties;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The NetworkFabric resource definition.")
 model NetworkTapPatch extends TagsUpdate {
-  @doc("Resource properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NetworkTapPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("NetworkTap resource patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkTapPatchProperties;
 
   @added(Versions.v2025_07_15)
