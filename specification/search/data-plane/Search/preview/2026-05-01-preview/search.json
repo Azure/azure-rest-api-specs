@@ -5610,16 +5610,66 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ContentUnderstandingSkill"
     },
+    "ContentUnderstandingSkillChunkingMethod": {
+      "type": "string",
+      "description": "The chunking strategy used by the Content Understanding skill. Default is 'fixedSize'.",
+      "enum": [
+        "fixedSize",
+        "semantic"
+      ],
+      "x-ms-enum": {
+        "name": "ContentUnderstandingSkillChunkingMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FixedSize",
+            "value": "fixedSize",
+            "description": "Fixed-size character-based windowed chunking."
+          },
+          {
+            "name": "Semantic",
+            "value": "semantic",
+            "description": "Layout-aware, paragraph-boundary-respecting chunking."
+          }
+        ]
+      }
+    },
     "ContentUnderstandingSkillChunkingProperties": {
       "type": "object",
       "description": "Controls the cardinality for chunking the content.",
       "properties": {
+        "method": {
+          "type": "string",
+          "description": "The chunking strategy. 'fixedSize' (default) or 'semantic'.",
+          "default": "fixedSize",
+          "enum": [
+            "fixedSize",
+            "semantic"
+          ],
+          "x-ms-enum": {
+            "name": "ContentUnderstandingSkillChunkingMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FixedSize",
+                "value": "fixedSize",
+                "description": "Fixed-size character-based windowed chunking."
+              },
+              {
+                "name": "Semantic",
+                "value": "semantic",
+                "description": "Layout-aware, paragraph-boundary-respecting chunking."
+              }
+            ]
+          }
+        },
         "unit": {
           "type": "string",
           "description": "The unit of the chunk.",
           "default": "characters",
           "enum": [
-            "characters"
+            "characters",
+            "tokens"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -5628,6 +5678,11 @@
                 "name": "Characters",
                 "value": "characters",
                 "description": "Specifies chunk by characters."
+              },
+              {
+                "name": "Tokens",
+                "value": "tokens",
+                "description": "Specifies chunk by tokens."
               }
             ]
           },
@@ -5651,7 +5706,8 @@
       "type": "string",
       "description": "Controls the cardinality of the chunk unit. Default is 'characters'",
       "enum": [
-        "characters"
+        "characters",
+        "tokens"
       ],
       "x-ms-enum": {
         "name": "ContentUnderstandingSkillChunkingUnit",
@@ -5661,6 +5717,11 @@
             "name": "Characters",
             "value": "characters",
             "description": "Specifies chunk by characters."
+          },
+          {
+            "name": "Tokens",
+            "value": "tokens",
+            "description": "Specifies chunk by tokens."
           }
         ]
       }

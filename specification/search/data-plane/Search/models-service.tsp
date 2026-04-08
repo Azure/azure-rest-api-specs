@@ -6782,6 +6782,10 @@ union ContentUnderstandingSkillExtractionOptions {
 
 /** Controls the cardinality for chunking the content. */
 model ContentUnderstandingSkillChunkingProperties {
+  /** The chunking strategy. 'fixedSize' (default) or 'semantic'. */
+  @added(Versions.v2026_05_01_preview)
+  method?: ContentUnderstandingSkillChunkingMethod = ContentUnderstandingSkillChunkingMethod.FixedSize;
+
   /** The unit of the chunk. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   unit?: ContentUnderstandingSkillChunkingUnit | null = ContentUnderstandingSkillChunkingUnit.Characters;
@@ -6795,12 +6799,28 @@ model ContentUnderstandingSkillChunkingProperties {
   overlapLength?: int32 | null;
 }
 
+/** The chunking strategy used by the Content Understanding skill. Default is 'fixedSize'. */
+@added(Versions.v2026_05_01_preview)
+union ContentUnderstandingSkillChunkingMethod {
+  string,
+
+  /** Fixed-size character-based windowed chunking. */
+  FixedSize: "fixedSize",
+
+  /** Layout-aware, paragraph-boundary-respecting chunking. */
+  Semantic: "semantic",
+}
+
 /** Controls the cardinality of the chunk unit. Default is 'characters' */
 union ContentUnderstandingSkillChunkingUnit {
   string,
 
   /** Specifies chunk by characters. */
   Characters: "characters",
+
+  /** Specifies chunk by tokens. */
+  @added(Versions.v2026_05_01_preview)
+  Tokens: "tokens",
 }
 
 /** Object defining the custom schema the model will use to structure its output. */
