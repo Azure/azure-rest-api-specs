@@ -1169,11 +1169,12 @@ model AmlFilesystemIdentity {
    * A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
+  userAssignedIdentities?: Record<userAssignedIdentitiesValue>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model UserAssignedIdentitiesValue {
+model userAssignedIdentitiesValue {
   /**
    * The principal ID of the user-assigned identity.
    */
@@ -2885,7 +2886,7 @@ model CacheIdentity {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  UserAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
+  userAssignedIdentities?: Record<userAssignedIdentitiesValue>;
 }
 
 /**

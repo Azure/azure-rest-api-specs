@@ -4458,7 +4458,7 @@
           "type": "object",
           "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentitiesValue"
+            "$ref": "#/definitions/userAssignedIdentitiesValue"
           }
         }
       }
@@ -6042,13 +6042,12 @@
           "$ref": "#/definitions/CacheIdentityType",
           "description": "The type of identity used for the cache"
         },
-        "UserAssignedIdentities": {
+        "userAssignedIdentities": {
           "type": "object",
           "description": "A dictionary where each key is a user assigned identity resource ID, and each key's value is an empty dictionary.",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentitiesValue"
-          },
-          "x-ms-client-name": "userAssignedIdentities"
+            "$ref": "#/definitions/userAssignedIdentitiesValue"
+          }
         }
       }
     },
@@ -8288,21 +8287,6 @@
         }
       }
     },
-    "UserAssignedIdentitiesValue": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID of the user-assigned identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client ID of the user-assigned identity.",
-          "readOnly": true
-        }
-      }
-    },
     "UsernameDownloadedType": {
       "type": "string",
       "description": "Indicates whether or not the HPC Cache has performed the username download successfully.",
@@ -8331,6 +8315,21 @@
             "description": "Error"
           }
         ]
+      }
+    },
+    "userAssignedIdentitiesValue": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the user-assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the user-assigned identity.",
+          "readOnly": true
+        }
       }
     }
   },

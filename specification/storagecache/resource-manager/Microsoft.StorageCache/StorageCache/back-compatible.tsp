@@ -33,8 +33,6 @@ using Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AscOperation.properties);
 
-@@clientName(CacheIdentity.UserAssignedIdentities, "userAssignedIdentities");
-
 @@clientLocation(AmlFilesystems.get, "amlFilesystems");
 @@clientLocation(AmlFilesystems.createOrUpdate, "amlFilesystems");
 @@clientName(AmlFilesystems.createOrUpdate::parameters.resource,
