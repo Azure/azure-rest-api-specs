@@ -16,9 +16,9 @@ namespace Microsoft.AppConfiguration;
 /**
  * The snapshot resource.
  */
-@parentResource(ConfigurationStore)
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage"
+@parentResource(ConfigurationStore)
 model Snapshot is Azure.ResourceManager.Legacy.CustomAzureProxyResource<false> {
   ...ResourceNameParameter<
     Resource = Snapshot,
@@ -29,7 +29,6 @@ model Snapshot is Azure.ResourceManager.Legacy.CustomAzureProxyResource<false> {
 
   @madeRequired(Versions.v2025_08_01_preview)
   properties: SnapshotProperties;
-
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource 'Snapshot' must have a delete operation."
