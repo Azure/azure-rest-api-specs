@@ -1149,17 +1149,10 @@
         "description": "Lists all the soft-deleted Azure Cosmos DB database accounts available under the subscription and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "location",
@@ -1187,6 +1180,9 @@
           "CosmosDBSoftDeletedDatabaseAccountListByLocation": {
             "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountListByLocation.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -19790,16 +19786,10 @@
         "description": "Lists all the soft-deleted Azure Cosmos DB database accounts available under the given resource group and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -19809,11 +19799,7 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -19834,6 +19820,9 @@
           "CosmosDBSoftDeletedDatabaseAccountListByResourceGroupAndLocation": {
             "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountListByResourceGroupAndLocation.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -19843,23 +19832,13 @@
         "description": "Retrieves the properties of a soft-deleted Azure Cosmos DB database account by location and accountName. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -19904,16 +19883,10 @@
         "description": "Performs a soft delete action (restore or permanently delete) on a soft-deleted Azure Cosmos DB database account.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -19933,11 +19906,7 @@
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "softDeleteActionKind",
@@ -20012,23 +19981,13 @@
         "description": "Lists all the soft-deleted Azure Cosmos DB SQL databases under a soft-deleted database account. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/read' permission.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -20066,6 +20025,9 @@
           "CosmosDBSoftDeletedSqlDatabaseList": {
             "$ref": "./examples/CosmosDBSoftDeletedSqlDatabaseList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -20075,23 +20037,13 @@
         "description": "Retrieves the properties of a soft-deleted Azure Cosmos DB SQL database. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/read' permission.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -20146,16 +20098,10 @@
         "description": "Performs a soft delete action (restore or permanently delete) on a soft-deleted Azure Cosmos DB SQL database.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -20185,11 +20131,7 @@
             "pattern": "^[^/\\\\#?]+$"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "softDeleteActionKind",
@@ -20264,23 +20206,13 @@
         "description": "Lists all the soft-deleted Azure Cosmos DB SQL containers under a soft-deleted SQL database. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers/read' permission.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -20328,6 +20260,9 @@
           "CosmosDBSoftDeletedSqlContainerList": {
             "$ref": "./examples/CosmosDBSoftDeletedSqlContainerList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -20337,23 +20272,13 @@
         "description": "Retrieves the properties of a soft-deleted Azure Cosmos DB SQL container. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers/read' permission.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -20418,16 +20343,10 @@
         "description": "Performs a soft delete action (restore or permanently delete) on a soft-deleted Azure Cosmos DB SQL container.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "location",
@@ -20467,11 +20386,7 @@
             "pattern": "^[^/\\\\#?]+$"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "softDeleteActionKind",
@@ -31445,6 +31360,10 @@
             "$ref": "#/definitions/SoftDeletedDatabaseAccountGetResult"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },
@@ -31503,8 +31422,7 @@
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
-          "readOnly": true,
-          "x-ms-client-name": "rid"
+          "readOnly": true
         },
         "partitionKey": {
           "$ref": "#/definitions/ContainerPartitionKey",
@@ -31531,6 +31449,10 @@
             "$ref": "#/definitions/SoftDeletedSqlContainerGetResult"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },
@@ -31589,8 +31511,7 @@
         "_rid": {
           "type": "string",
           "description": "A system generated property. A unique identifier.",
-          "readOnly": true,
-          "x-ms-client-name": "rid"
+          "readOnly": true
         }
       },
       "required": [
@@ -31608,6 +31529,10 @@
             "$ref": "#/definitions/SoftDeletedSqlDatabaseGetResult"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },

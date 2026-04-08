@@ -147,6 +147,11 @@ model SoftDeletedDatabaseAccountsListResult {
    */
   @visibility(Lifecycle.Read)
   value?: SoftDeletedDatabaseAccountGetResult[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  nextLink?: string;
 }
 
 @added(Versions.v2026_04_01_preview)
@@ -163,8 +168,8 @@ model SoftDeletedSqlDatabaseResource {
    * A system generated property. A unique identifier.
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "_rid")
-  rid?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "_rid is a backend property"
+  _rid?: string;
 }
 
 @added(Versions.v2026_04_01_preview)
@@ -228,6 +233,11 @@ model SoftDeletedSqlDatabasesListResult {
    */
   @visibility(Lifecycle.Read)
   value?: SoftDeletedSqlDatabaseGetResult[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  nextLink?: string;
 }
 
 @added(Versions.v2026_04_01_preview)
@@ -244,8 +254,8 @@ model SoftDeletedSqlContainerResource {
    * A system generated property. A unique identifier.
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "_rid")
-  rid?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "_rid is a backend property"
+  _rid?: string;
 
   /**
    * The configuration of the partition key to be used for partitioning data into multiple partitions
@@ -319,6 +329,11 @@ model SoftDeletedSqlContainersListResult {
    */
   @visibility(Lifecycle.Read)
   value?: SoftDeletedSqlContainerGetResult[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  nextLink?: string;
 }
 
 // ──────────────────────────────────────────────
@@ -335,9 +350,9 @@ interface SoftDeletedDatabaseAccounts {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}")
   @get
   get(
-    @query("api-version") apiVersion: string,
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -360,9 +375,10 @@ interface SoftDeletedDatabaseAccounts {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
+  @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   listByLocation(
-    @query("api-version") apiVersion: string,
-    @path subscriptionId: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -376,9 +392,10 @@ interface SoftDeletedDatabaseAccounts {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
+  @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   listByResourceGroupAndLocation(
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -386,7 +403,7 @@ interface SoftDeletedDatabaseAccounts {
     @path
     location: string,
 
-    @query("api-version") apiVersion: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
   ): ArmResponse<SoftDeletedDatabaseAccountsListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
@@ -395,8 +412,8 @@ interface SoftDeletedDatabaseAccounts {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}")
   @delete
   delete(
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -413,7 +430,7 @@ interface SoftDeletedDatabaseAccounts {
     @path
     accountName: string,
 
-    @query("api-version") apiVersion: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
 
     /**
      * The kind of soft delete action to perform.
@@ -437,9 +454,9 @@ interface SoftDeletedSqlDatabases {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}")
   @get
   get(
-    @query("api-version") apiVersion: string,
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -471,10 +488,11 @@ interface SoftDeletedSqlDatabases {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases")
   @get
+  @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   list(
-    @query("api-version") apiVersion: string,
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -498,8 +516,8 @@ interface SoftDeletedSqlDatabases {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}")
   @delete
   delete(
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -525,7 +543,7 @@ interface SoftDeletedSqlDatabases {
     @path
     databaseName: string,
 
-    @query("api-version") apiVersion: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
 
     /**
      * The kind of soft delete action to perform.
@@ -549,9 +567,9 @@ interface SoftDeletedSqlContainers {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}")
   @get
   get(
-    @query("api-version") apiVersion: string,
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -592,10 +610,11 @@ interface SoftDeletedSqlContainers {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers")
   @get
+  @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   list(
-    @query("api-version") apiVersion: string,
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -628,8 +647,8 @@ interface SoftDeletedSqlContainers {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}")
   @delete
   delete(
-    @path subscriptionId: string,
-    @path resourceGroupName: string,
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
 
     /**
      * Cosmos DB region, with spaces between words and each word capitalized.
@@ -664,7 +683,7 @@ interface SoftDeletedSqlContainers {
     @path
     containerName: string,
 
-    @query("api-version") apiVersion: string,
+    ...Azure.ResourceManager.ApiVersionParameter,
 
     /**
      * The kind of soft delete action to perform.
