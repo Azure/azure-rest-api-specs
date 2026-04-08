@@ -56,7 +56,8 @@ interface SiteContainerOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteContainers {
   /**
    * Gets a site container of a site, or a deployment slot.
@@ -126,7 +127,8 @@ interface SiteContainerOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteContainerOperationGroup {
   /**
    * Gets a site container of a site, or a deployment slot.

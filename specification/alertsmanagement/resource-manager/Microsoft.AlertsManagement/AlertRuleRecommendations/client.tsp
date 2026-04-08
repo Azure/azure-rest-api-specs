@@ -7,3 +7,7 @@ using Azure.ClientGenerator.Core;
   "AlertRuleRecommendationsMgmtClient",
   "python"
 );
+@@clientName(Microsoft.AlertsManagement,
+  "AlertRuleRecommendationsManagementClient",
+  "javascript"
+);
