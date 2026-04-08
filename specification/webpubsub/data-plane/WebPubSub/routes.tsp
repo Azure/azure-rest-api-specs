@@ -37,7 +37,7 @@ namespace WebPubSubService {
       @bodyRoot
       groupsToAdd: AddToGroupsRequest;
     },
-    {}
+    OkResponse
   >;
 
   /**
@@ -151,7 +151,7 @@ namespace WebPubSubService {
       @bodyRoot
       groupsToRemove: RemoveFromGroupsRequest;
     },
-    {}
+    OkResponse
   >;
 
   /**
@@ -621,7 +621,7 @@ namespace WebPubSubService {
       @path
       connectionId: string;
     },
-    {}
+    OkResponse
   >;
 
   /**
@@ -747,7 +747,7 @@ namespace WebPubSubService {
       @query
       targetName?: string;
     },
-    {}
+    OkResponse
   >;
 
   /**
@@ -975,6 +975,6 @@ namespace WebPubSubService {
       @path
       userId: string;
     },
-    {}
+    OkResponse
   >;
 }
