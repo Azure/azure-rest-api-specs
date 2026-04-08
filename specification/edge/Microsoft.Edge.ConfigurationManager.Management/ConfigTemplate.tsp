@@ -39,6 +39,20 @@ model ConfigTemplateProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The updatable properties of the ConfigTemplate.")
+model ConfigTemplatePropertiesUpdate {
+  @doc("Description of config template")
+  description?: string;
+}
+
+@doc("The type used for update operations of the ConfigTemplate.")
+model ConfigTemplateUpdate {
+  ...ArmTagsProperty;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: ConfigTemplatePropertiesUpdate;
+}
+
 @doc("Config Template Resource. Contains configuration expressions using the predefined expression language.")
 model ConfigTemplate
   is Azure.ResourceManager.TrackedResource<ConfigTemplateProperties> {
@@ -92,13 +106,7 @@ interface ConfigTemplates {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigTemplate>;
 
   @doc("update a Config Template Resource")
-  update is ArmCustomPatchSync<
-    ConfigTemplate,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      ConfigTemplate,
-      ConfigTemplateProperties
-    >
-  >;
+  update is ArmCustomPatchSync<ConfigTemplate, ConfigTemplateUpdate>;
 
   @added(Versions.v2025_08_01)
   @doc("Apply a Config Template to a particular hierarchy node")

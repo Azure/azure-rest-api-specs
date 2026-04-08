@@ -58,6 +58,25 @@ model ContextProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The updatable properties of the Context.")
+model ContextPropertiesUpdate {
+  @doc("List of Capabilities")
+  @Azure.ResourceManager.identifiers(#[])
+  capabilities?: Capability[];
+
+  @doc("List of Hierarchies")
+  @Azure.ResourceManager.identifiers(#[])
+  hierarchies?: Hierarchy[];
+}
+
+@doc("The type used for update operations of the Context.")
+model ContextUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: ContextPropertiesUpdate;
+}
+
 @doc("Context Resource")
 model Context is Azure.ResourceManager.TrackedResource<ContextProperties> {
   @doc("The name of the Context.")
@@ -79,13 +98,7 @@ interface Contexts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Context>;
 
   @doc("update an Context Resource")
-  update is ArmCustomPatchAsync<
-    Context,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Context,
-      ContextProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<Context, ContextUpdate>;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Context>;
