@@ -1,7 +1,9 @@
 import "./main.tsp";
+import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 using Microsoft.DeviceRegistry;
 
 // Java Client configuration
@@ -161,5 +163,43 @@ using Microsoft.DeviceRegistry;
 // JavaScript Client configuration
 @@clientName(Microsoft.DeviceRegistry,
   "DeviceRegistryManagementClient",
+  "javascript"
+);
+
+// JavaScript SDK: use update-specific models for PoliciesV1.update to exclude
+// server-side read-only and create-only fields (e.g. provisioningState, keyType, subject, etc.)
+@added(Versions.v2026_03_01_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+@doc("The updatable certificate configuration forCertificateConfiguration PolicyV1.")
+model CertificateConfigurationUpdate {
+  @doc("The configuration to set up an ICA.")
+  certificateAuthorityConfiguration?: CertificateAuthorityConfiguration;
+
+  @doc("The leaf certificate configuration.")
+  leafCertificateConfiguration: LeafCertificateConfiguration;
+}
+
+@doc("The updatable properties of the PolicyV1.")
+@added(Versions.v2025_11_01_preview)
+@removed(Versions.v2026_04_01)
+model PolicyUpdateProperties {
+  @doc("The certificate configuration.")
+  certificate?: CertificateConfigurationUpdate;
+}
+
+@doc("The type used for update operations of the PolicyV1.")
+model PolicyV1Update {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
+  @doc("The resource-specific properties for this resource.")
+  properties?: PolicyUpdateProperties;
+}
+
+@@alternateType(Microsoft.DeviceRegistry.PoliciesV1.update::parameters.properties,
+  PolicyV1Update,
   "javascript"
 );
