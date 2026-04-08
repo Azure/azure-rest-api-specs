@@ -43,7 +43,13 @@ interface Diagnostics {
   @doc("Creates new or updates existing Diagnostic resource.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Diagnostic>;
   @doc("Updates existing Diagnostic resource.")
-  update is ArmResourcePatchAsync<Diagnostic, DiagnosticProperties>;
+  update is ArmCustomPatchAsync<
+    Diagnostic,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Diagnostic,
+      DiagnosticProperties
+    >
+  >;
   @doc("Deletes specified Diagnostic resource.")
   delete is ArmResourceDeleteWithoutOkAsync<Diagnostic>;
   @doc("Returns a collection of Diagnostic resources within the resource group.")

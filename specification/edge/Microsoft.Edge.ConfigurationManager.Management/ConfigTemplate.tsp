@@ -92,7 +92,13 @@ interface ConfigTemplates {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigTemplate>;
 
   @doc("update a Config Template Resource")
-  update is ArmResourcePatchSync<ConfigTemplate, ConfigTemplateProperties>;
+  update is ArmCustomPatchAsync<
+    ConfigTemplate,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      ConfigTemplate,
+      ConfigTemplateProperties
+    >
+  >;
 
   @added(Versions.v2025_08_01)
   @doc("Apply a Config Template to a particular hierarchy node")

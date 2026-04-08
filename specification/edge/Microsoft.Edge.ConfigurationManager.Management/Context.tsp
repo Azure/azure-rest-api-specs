@@ -79,7 +79,13 @@ interface Contexts {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Context>;
 
   @doc("update an Context Resource")
-  update is ArmResourcePatchAsync<Context, ContextProperties>;
+  update is ArmCustomPatchAsync<
+    Context,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Context,
+      ContextProperties
+    >
+  >;
 
   @doc("List by specified resource group")
   listByResourceGroup is ArmResourceListByParent<Context>;

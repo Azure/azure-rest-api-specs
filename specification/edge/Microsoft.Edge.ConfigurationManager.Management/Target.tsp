@@ -223,7 +223,13 @@ interface Targets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Target>;
 
   @doc("update a Target Resource")
-  update is ArmResourcePatchAsync<Target, TargetProperties>;
+  update is ArmCustomPatchAsync<
+    Target,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Target,
+      TargetProperties
+    >
+  >;
 
   @doc("Delete a Target Resource")
   delete is ArmResourceDeleteWithoutOkAsync<
