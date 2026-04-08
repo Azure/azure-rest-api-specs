@@ -14,7 +14,7 @@ namespace Customizations;
   },
   "rust,go"
 )
-interface QueueServiceClient extends Storage.Queues.Service {}
+interface QueueServiceClient extends Service {}
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
@@ -23,7 +23,7 @@ interface QueueServiceClient extends Storage.Queues.Service {}
   },
   "rust,go"
 )
-interface QueueClient extends Storage.Queues.Queue {}
+interface QueueClient extends Queue {}
 
 @@clientInitialization(QueueServiceClient,
   {
@@ -40,20 +40,20 @@ interface QueueClient extends Storage.Queues.Queue {}
 );
 
 @@clientNamespace(Storage.Queues, "Azure.Storage.Queues", "!python, !csharp");
-@@clientNamespace(Storage.Queues.Service, "Azure.Storage.Queues", "!python, !csharp");
-@@clientNamespace(Storage.Queues.Queue, "Azure.Storage.Queues", "!python, !csharp");
+@@clientNamespace(Service, "Azure.Storage.Queues", "!python, !csharp");
+@@clientNamespace(Queue, "Azure.Storage.Queues", "!python, !csharp");
 
-@@clientName(Storage.Queues.MetadataHeaders.metadata, "metadata", "rust");
-@@clientName(Storage.Queues.SentMessage, "SentMessageInternal", "rust");
+@@clientName(MetadataHeaders.metadata, "metadata", "rust");
+@@clientName(SentMessage, "SentMessageInternal", "rust");
 
-@@alternateType(Storage.Queues.ListOfSentMessage,
+@@alternateType(ListOfSentMessage,
   {
     identity: "crate::models::SentMessage",
   },
   "rust"
 );
 
-@@scope(Storage.Queues.Service.getUserDelegationKey, "!rust");
+@@scope(Service.getUserDelegationKey, "!rust");
 
 // Go customizations
 /**
@@ -108,115 +108,115 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 // JavaScript SDK renames - based on azure-sdk-for-js storage-queue swagger README
 
-@@clientName(Storage.Queues.ReceivedMessage.insertionTime,
+@@clientName(ReceivedMessage.insertionTime,
   "insertedOn",
   "javascript"
 );
-@@clientName(Storage.Queues.SentMessage.insertionTime,
+@@clientName(SentMessage.insertionTime,
   "insertedOn",
   "javascript"
 );
-@@clientName(Storage.Queues.PeekedMessage.insertionTime,
+@@clientName(PeekedMessage.insertionTime,
   "insertedOn",
   "javascript"
 );
-@@clientName(Storage.Queues.ReceivedMessage.expirationTime,
+@@clientName(ReceivedMessage.expirationTime,
   "expiresOn",
   "javascript"
 );
-@@clientName(Storage.Queues.SentMessage.expirationTime,
+@@clientName(SentMessage.expirationTime,
   "expiresOn",
   "javascript"
 );
-@@clientName(Storage.Queues.PeekedMessage.expirationTime,
+@@clientName(PeekedMessage.expirationTime,
   "expiresOn",
   "javascript"
 );
-@@clientName(Storage.Queues.ReceivedMessage.timeNextVisible,
+@@clientName(ReceivedMessage.timeNextVisible,
   "nextVisibleOn",
   "javascript"
 );
-@@clientName(Storage.Queues.SentMessage.timeNextVisible,
+@@clientName(SentMessage.timeNextVisible,
   "nextVisibleOn",
   "javascript"
 );
-@@clientName(Storage.Queues.TimeNextVisibleResponseHeader.timeNextVisible,
+@@clientName(TimeNextVisibleResponseHeader.timeNextVisible,
   "nextVisibleOn",
   "javascript"
 );
-@@clientName(Storage.Queues.TimeNextVisibleResponseHeaderPrivate.timeNextVisible,
+@@clientName(TimeNextVisibleResponseHeaderPrivate.timeNextVisible,
   "nextVisibleOn",
   "javascript"
 );
-@@alternateType(Storage.Queues.AccessPolicy.start, string, "javascript");
-@@alternateType(Storage.Queues.AccessPolicy.expiry, string, "javascript");
-@@clientName(Storage.Queues.AccessPolicy.start, "startsOn", "javascript");
-@@clientName(Storage.Queues.AccessPolicy.expiry, "expiresOn", "javascript");
-@@clientName(Storage.Queues.AccessPolicy.permission,
+@@alternateType(AccessPolicy.start, string, "javascript");
+@@alternateType(AccessPolicy.expiry, string, "javascript");
+@@clientName(AccessPolicy.start, "startsOn", "javascript");
+@@clientName(AccessPolicy.expiry, "expiresOn", "javascript");
+@@clientName(AccessPolicy.permission,
   "permissions",
   "javascript"
 );
-@@clientName(Storage.Queues.UserDelegationKey.signedOid,
+@@clientName(UserDelegationKey.signedOid,
   "signedObjectId",
   "javascript"
 );
-@@clientName(Storage.Queues.UserDelegationKey.signedTid,
+@@clientName(UserDelegationKey.signedTid,
   "signedTenantId",
   "javascript"
 );
-@@alternateType(Storage.Queues.UserDelegationKey.signedStart,
+@@alternateType(UserDelegationKey.signedStart,
   string,
   "javascript"
 );
-@@alternateType(Storage.Queues.UserDelegationKey.signedExpiry,
+@@alternateType(UserDelegationKey.signedExpiry,
   string,
   "javascript"
 );
-@@clientName(Storage.Queues.UserDelegationKey.signedStart,
+@@clientName(UserDelegationKey.signedStart,
   "signedStartsOn",
   "javascript"
 );
-@@clientName(Storage.Queues.UserDelegationKey.signedExpiry,
+@@clientName(UserDelegationKey.signedExpiry,
   "signedExpiresOn",
   "javascript"
 );
-@@clientName(Storage.Queues.QueueServiceProperties.logging,
+@@clientName(QueueServiceProperties.logging,
   "queueAnalyticsLogging",
   "javascript"
 );
-@@clientName(Storage.Queues.Logging.delete, "deleteProperty", "javascript");
-@@clientName(Storage.Queues.GeoReplication.lastSyncTime,
+@@clientName(Logging.delete, "deleteProperty", "javascript");
+@@clientName(GeoReplication.lastSyncTime,
   "lastSyncOn",
   "javascript"
 );
-@@clientName(Storage.Queues.ListQueuesResponse.maxResults,
+@@clientName(ListQueuesResponse.maxResults,
   "maxPageSize",
   "javascript"
 );
-@@clientName(Storage.Queues.ListQueuesResponse.nextMarker,
+@@clientName(ListQueuesResponse.nextMarker,
   "continuationToken",
   "javascript"
 );
-@@clientName(Storage.Queues.TimeoutParameter.timeout,
+@@clientName(TimeoutParameter.timeout,
   "timeoutInSeconds",
   "javascript"
 );
-@@clientName(Storage.Queues.Metrics.includeApis, "includeAPIs", "javascript");
-@@alternateType(Storage.Queues.KeyInfo.start, string, "javascript, python");
-@@alternateType(Storage.Queues.KeyInfo.expiry, string, "javascript, python");
-@@clientName(Storage.Queues.KeyInfo.start, "startsOn", "javascript");
-@@clientName(Storage.Queues.KeyInfo.expiry, "expiresOn", "javascript");
-@@clientOption(Storage.Queues.Error,
+@@clientName(Metrics.includeApis, "includeAPIs", "javascript");
+@@alternateType(KeyInfo.start, string, "javascript, python");
+@@alternateType(KeyInfo.expiry, string, "javascript, python");
+@@clientName(KeyInfo.start, "startsOn", "javascript");
+@@clientName(KeyInfo.expiry, "expiresOn", "javascript");
+@@clientOption(Error,
   "header",
   "x-ms-error-code:errorCode",
   "javascript"
 );
-@@clientOption(Storage.Queues.Error,
+@@clientOption(Error,
   "restErrorCodeHeader",
   "x-ms-error-code",
   "javascript"
 );
-@@clientOption(Storage.Queues.MetadataHeaders.metadata,
+@@clientOption(MetadataHeaders.metadata,
   "headerCollectionPrefix",
   "x-ms-meta",
   "javascript"
@@ -224,13 +224,13 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@clientOption(Storage.Queues, "includeRootSlash", false, "python,javascript");
 
-@@Legacy.disablePageable(Storage.Queues.Service.getQueues, "python,javascript,csharp");
+@@Legacy.disablePageable(Service.getQueues, "python,javascript,csharp");
 
-@@alternateType(Storage.Queues.UserDelegationKey.signedExpiry,
+@@alternateType(UserDelegationKey.signedExpiry,
   string,
   "python"
 );
-@@alternateType(Storage.Queues.UserDelegationKey.signedStart, string, "python");
+@@alternateType(UserDelegationKey.signedStart, string, "python");
 
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "python");
 
