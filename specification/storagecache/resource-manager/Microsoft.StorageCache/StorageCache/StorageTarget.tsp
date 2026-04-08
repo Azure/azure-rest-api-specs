@@ -37,7 +37,7 @@ interface StorageTargets {
   /**
    * Returns a Storage Target from a cache.
    */
-  get is ArmResourceRead<StorageTarget>;
+  get is ArmResourceRead<StorageTarget, Error = CloudError>;
 
   /**
    * Create or update a Storage Target. This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the cache is healthy again.
@@ -49,7 +49,8 @@ interface StorageTargets {
       StorageTarget,
       ArmLroLocationHeader<FinalResult = StorageTarget> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -66,7 +67,8 @@ interface StorageTargets {
       force?: string;
     },
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -74,7 +76,8 @@ interface StorageTargets {
    */
   listByCache is ArmResourceListByParent<
     StorageTarget,
-    Response = ArmResponse<StorageTargetsResult>
+    Response = ArmResponse<StorageTargetsResult>,
+    Error = CloudError
   >;
 
   /**
@@ -85,7 +88,9 @@ interface StorageTargets {
     StorageTarget,
     void,
     OkResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -95,7 +100,9 @@ interface StorageTargets {
     StorageTarget,
     void,
     OkResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -108,7 +115,9 @@ interface StorageTargets {
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -121,7 +130,9 @@ interface StorageTargets {
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -134,7 +145,9 @@ interface StorageTargets {
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -147,7 +160,9 @@ interface StorageTargets {
     StorageTarget,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 }
 

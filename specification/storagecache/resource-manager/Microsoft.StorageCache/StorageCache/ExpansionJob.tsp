@@ -32,7 +32,7 @@ interface ExpansionJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_Get")
-  get is ArmResourceRead<ExpansionJob>;
+  get is ArmResourceRead<ExpansionJob, Error = CloudError>;
 
   /**
    * Create or update an expansion job.
@@ -46,7 +46,8 @@ interface ExpansionJobs {
       ExpansionJob,
       ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
         Azure.Core.Foundations.RetryAfterHeader
-    >
+    >,
+    Error = CloudError
   >;
 
   /**
@@ -60,7 +61,8 @@ interface ExpansionJobs {
     ExpansionJob,
     PatchModel = ExpansionJobUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -71,7 +73,8 @@ interface ExpansionJobs {
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpansionJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -81,7 +84,8 @@ interface ExpansionJobs {
   @operationId("expansionJobs_ListByAmlFilesystem")
   listByAmlFilesystem is ArmResourceListByParent<
     ExpansionJob,
-    Response = ArmResponse<ExpansionJobsListResult>
+    Response = ArmResponse<ExpansionJobsListResult>,
+    Error = CloudError
   >;
 }
 

@@ -41,7 +41,7 @@ interface Caches {
   /**
    * Returns a cache.
    */
-  get is ArmResourceRead<Cache>;
+  get is ArmResourceRead<Cache, Error = CloudError>;
 
   /**
    * Create or update a cache.
@@ -53,7 +53,8 @@ interface Caches {
       Cache,
       ArmLroLocationHeader<FinalResult = Cache> &
         Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    > | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -66,7 +67,8 @@ interface Caches {
     PatchModel = Cache,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = Cache> &
       Azure.Core.Foundations.RetryAfterHeader,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 
   /**
@@ -76,7 +78,8 @@ interface Caches {
   delete is ArmResourceDeleteWithoutOkAsync<
     Cache,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -84,7 +87,8 @@ interface Caches {
    */
   listByResourceGroup is ArmResourceListByParent<
     Cache,
-    Response = ArmResponse<CachesListResult>
+    Response = ArmResponse<CachesListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -92,7 +96,8 @@ interface Caches {
    */
   list is ArmListBySubscription<
     Cache,
-    Response = ArmResponse<CachesListResult>
+    Response = ArmResponse<CachesListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -103,7 +108,9 @@ interface Caches {
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -114,7 +121,9 @@ interface Caches {
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -125,7 +134,9 @@ interface Caches {
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -136,7 +147,9 @@ interface Caches {
     Cache,
     void,
     OkResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -149,7 +162,8 @@ interface Caches {
     ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cache>,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 
   /**
@@ -162,7 +176,8 @@ interface Caches {
     NoContentResponse,
     LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 
   /**
@@ -175,7 +190,8 @@ interface Caches {
     NoContentResponse,
     LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 
   /**
@@ -188,7 +204,8 @@ interface Caches {
     NoContentResponse,
     LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 
   /**
@@ -200,7 +217,9 @@ interface Caches {
     Cache,
     void,
     CreatedResponse | NoContentResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -213,7 +232,8 @@ interface Caches {
     ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cache>,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 }
 

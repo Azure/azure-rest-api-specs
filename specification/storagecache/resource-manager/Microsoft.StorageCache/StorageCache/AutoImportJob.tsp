@@ -32,14 +32,17 @@ interface AutoImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoImportJobs_Get")
-  get is ArmResourceRead<AutoImportJob>;
+  get is ArmResourceRead<AutoImportJob, Error = CloudError>;
 
   /**
    * Create or update an auto import job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoImportJobs_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AutoImportJob>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    AutoImportJob,
+    Error = CloudError
+  >;
 
   /**
    * Update an auto import job instance.
@@ -52,7 +55,8 @@ interface AutoImportJobs {
     AutoImportJob,
     PatchModel = AutoImportJobUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = AutoImportJob> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -63,7 +67,8 @@ interface AutoImportJobs {
   delete is ArmResourceDeleteWithoutOkAsync<
     AutoImportJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -73,7 +78,8 @@ interface AutoImportJobs {
   @operationId("autoImportJobs_ListByAmlFilesystem")
   listByAmlFilesystem is ArmResourceListByParent<
     AutoImportJob,
-    Response = ArmResponse<AutoImportJobsListResult>
+    Response = ArmResponse<AutoImportJobsListResult>,
+    Error = CloudError
   >;
 }
 

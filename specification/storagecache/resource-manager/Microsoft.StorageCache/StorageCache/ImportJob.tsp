@@ -31,14 +31,17 @@ interface ImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_Get")
-  get is ArmResourceRead<ImportJob>;
+  get is ArmResourceRead<ImportJob, Error = CloudError>;
 
   /**
    * Create or update an import job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ImportJob>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ImportJob,
+    Error = CloudError
+  >;
 
   /**
    * Update an import job instance.
@@ -51,7 +54,8 @@ interface ImportJobs {
     ImportJob,
     PatchModel = ImportJobUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ImportJob> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -62,7 +66,8 @@ interface ImportJobs {
   delete is ArmResourceDeleteWithoutOkAsync<
     ImportJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -72,7 +77,8 @@ interface ImportJobs {
   @operationId("importJobs_ListByAmlFilesystem")
   listByAmlFilesystem is ArmResourceListByParent<
     ImportJob,
-    Response = ArmResponse<ImportJobsListResult>
+    Response = ArmResponse<ImportJobsListResult>,
+    Error = CloudError
   >;
 }
 

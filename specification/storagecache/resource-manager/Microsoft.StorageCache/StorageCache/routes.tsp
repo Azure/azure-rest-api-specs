@@ -37,7 +37,8 @@ op checkAmlFSSubnets is ArmProviderActionSync<
 op getRequiredAmlFSSubnetsSize is ArmProviderActionSync<
   Request = RequiredAmlFilesystemSubnetsSizeInfo,
   Response = RequiredAmlFilesystemSubnetsSize,
-  Scope = SubscriptionActionScope
+  Scope = SubscriptionActionScope,
+  Error = CloudError
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -53,7 +54,8 @@ interface SkusOperationGroup {
   @action("skus")
   list is ArmProviderActionSync<
     Response = ResourceSkusResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }
 
@@ -70,7 +72,8 @@ interface UsageModelsOperationGroup {
   @action("usageModels")
   list is ArmProviderActionSync<
     Response = UsageModelsResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }
 
@@ -94,7 +97,7 @@ interface AscOperationsOperationGroup {
     @minLength(1)
     @path
     operationId: string,
-  ): ArmResponse<AscOperation> | ErrorResponse;
+  ): ArmResponse<AscOperation> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -111,6 +114,7 @@ interface AscUsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = ResourceUsagesListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = CloudError
   >;
 }

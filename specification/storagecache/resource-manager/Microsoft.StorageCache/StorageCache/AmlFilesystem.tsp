@@ -45,14 +45,17 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_Get")
-  get is ArmResourceRead<AmlFilesystem>;
+  get is ArmResourceRead<AmlFilesystem, Error = CloudError>;
 
   /**
    * Create or update an AML file system.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AmlFilesystem>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    AmlFilesystem,
+    Error = CloudError
+  >;
 
   /**
    * Update an AML file system instance.
@@ -65,7 +68,8 @@ interface AmlFilesystems {
     AmlFilesystem,
     PatchModel = AmlFilesystemUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = AmlFilesystem> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -77,7 +81,8 @@ interface AmlFilesystems {
   delete is ArmResourceDeleteWithoutOkAsync<
     AmlFilesystem,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AmlFilesystem> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -87,7 +92,8 @@ interface AmlFilesystems {
   @operationId("amlFilesystems_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AmlFilesystem,
-    Response = ArmResponse<AmlFilesystemsListResult>
+    Response = ArmResponse<AmlFilesystemsListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -97,7 +103,8 @@ interface AmlFilesystems {
   @operationId("amlFilesystems_List")
   list is ArmListBySubscription<
     AmlFilesystem,
-    Response = ArmResponse<AmlFilesystemsListResult>
+    Response = ArmResponse<AmlFilesystemsListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -109,7 +116,8 @@ interface AmlFilesystems {
     AmlFilesystem,
     AmlFilesystemArchiveInfo,
     OkResponse,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CloudError
   >;
 
   /**
@@ -117,7 +125,12 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_CancelArchive")
-  cancelArchive is ArmResourceActionSync<AmlFilesystem, void, OkResponse>;
+  cancelArchive is ArmResourceActionSync<
+    AmlFilesystem,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 }
 
 @@maxLength(AmlFilesystem.name, 80);
