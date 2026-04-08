@@ -1,6 +1,6 @@
 ---
 description: Trigger SDK generation from issues and comments, monitor pipeline status, and report SDK PR links.
-timeout-minutes: 60 # Copilot job timeout
+timeout-minutes: 60 # Copilot timeout
 on:
   issues:
     types: [opened, labeled]
