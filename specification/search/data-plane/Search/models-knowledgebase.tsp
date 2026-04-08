@@ -682,9 +682,11 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   webUrl?: url;
 
   /** Information about the sensitivity label applied to the SharePoint document. */
+  @renamedFrom(Versions.v2026_04_01, "searchSensitivityLabelInfo")
   @removed(Versions.v2026_04_01)
-  searchSensitivityLabelInfo?: SharePointSensitivityLabelInfo;
+  searchSensitivityLabelInfoRemoved?: SharePointSensitivityLabelInfo;
 
+  /** Information about the sensitivity label applied to the document. */
   @added(Versions.v2026_05_01_preview)
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
