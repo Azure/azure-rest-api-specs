@@ -1,17 +1,20 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models-service.tsp";
 import "./models-shared.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Search;
 
 /** The input contract for the retrieval request. */
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
+  @removed(Versions.v2026_04_01)
   messages?: KnowledgeBaseMessage[];
 
   /** A list of intended queries to execute without model query planning. */
@@ -21,15 +24,22 @@ model KnowledgeBaseRetrievalRequest {
   maxRuntimeInSeconds?: int32;
 
   /** Limits the maximum size of the content in the output. */
+  @removed(Versions.v2026_04_01)
   maxOutputSize?: int32;
 
+  /** Limits the maximum size of the content in the output. */
+  @added(Versions.v2026_04_01)
+  maxOutputSizeInTokens?: int32;
+
   /** The retrieval reasoning effort configuration. */
+  @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
   /** Indicates retrieval results should include activity information. */
   includeActivity?: boolean;
 
   /** The output configuration for this retrieval. */
+  @removed(Versions.v2026_04_01)
   outputMode?: KnowledgeRetrievalOutputMode;
 
   /** A list of runtime parameters for the knowledge sources. */
@@ -63,6 +73,7 @@ model KnowledgeRetrievalMinimalReasoningEffort
 }
 
 /** Run knowledge retrieval with low reasoning effort. */
+@removed(Versions.v2026_04_01)
 model KnowledgeRetrievalLowReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   /** The discriminator value. */
@@ -70,6 +81,7 @@ model KnowledgeRetrievalLowReasoningEffort
 }
 
 /** Run knowledge retrieval with medium reasoning effort. */
+@removed(Versions.v2026_04_01)
 model KnowledgeRetrievalMediumReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
   /** The discriminator value. */
@@ -84,13 +96,16 @@ union KnowledgeRetrievalReasoningEffortKind {
   minimal: "minimal",
 
   /** Use low reasoning during retrieval. */
+  @removed(Versions.v2026_04_01)
   low: "low",
 
   /** Use a moderate amount of reasoning during retrieval. */
+  @removed(Versions.v2026_04_01)
   medium: "medium",
 }
 
 /** The output configuration for this retrieval. */
+@removed(Versions.v2026_04_01)
 union KnowledgeRetrievalOutputMode {
   string,
 
@@ -114,6 +129,7 @@ model KnowledgeSourceParams {
   includeReferenceSourceData?: boolean;
 
   /** Indicates that this knowledge source should bypass source selection and always be queried at retrieval time. */
+  @removed(Versions.v2026_04_01)
   alwaysQuerySource?: boolean;
 
   /** The reranker threshold all retrieved documents must meet to be included in the response. */
@@ -153,6 +169,7 @@ union IndexedSharePointContainerName {
 }
 
 /** Specifies runtime parameters for a indexed SharePoint knowledge source */
+@removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.IndexedSharePoint;
@@ -183,6 +200,7 @@ model WebKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 /** Specifies runtime parameters for a remote SharePoint knowledge source */
+@removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.RemoteSharePoint;
@@ -277,6 +295,7 @@ union KnowledgeBaseActivityRecordType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint retrieval activity. */
+  @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
   /** Indexed OneLake retrieval activity. */
@@ -286,12 +305,15 @@ union KnowledgeBaseActivityRecordType {
   web: "web",
 
   /** Remote SharePoint retrieval activity. */
+  @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
 
   /** LLM query planning activity. */
+  @removed(Versions.v2026_04_01)
   modelQueryPlanning: "modelQueryPlanning",
 
   /** LLM answer synthesis activity. */
+  @removed(Versions.v2026_04_01)
   modelAnswerSynthesis: "modelAnswerSynthesis",
 
   /** Agentic reasoning activity. */
@@ -380,6 +402,7 @@ model KnowledgeBaseAzureBlobActivityArguments {
 /** Represents a indexed SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -390,6 +413,7 @@ model KnowledgeBaseIndexedSharePointActivityRecord
 }
 
 /** Represents the arguments the indexed SharePoint retrieval activity was run with. */
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityArguments {
   /** The search string used to query indexed SharePoint contents. */
   search?: string;
@@ -446,6 +470,7 @@ model KnowledgeBaseWebActivityArguments {
 /** Represents a remote SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -456,6 +481,7 @@ model KnowledgeBaseRemoteSharePointActivityRecord
 }
 
 /** Represents the arguments the remote SharePoint retrieval activity was run with. */
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityArguments {
   /** The search string used to query the remote SharePoint knowledge source. */
   search?: string;
@@ -466,6 +492,7 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
 
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseModelQueryPlanningActivityRecord
   extends KnowledgeBaseActivityRecord {
   /** The discriminator value. */
@@ -480,6 +507,7 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 
 /** Represents an LLM answer synthesis activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseModelAnswerSynthesisActivityRecord
   extends KnowledgeBaseActivityRecord {
   /** The discriminator value. */
@@ -517,6 +545,7 @@ union KnowledgeBaseReferenceType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint document reference. */
+  @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
   /** Indexed OneLake document reference. */
@@ -526,6 +555,7 @@ union KnowledgeBaseReferenceType {
   web: "web",
 
   /** Remote SharePoint document reference. */
+  @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
 }
 
@@ -571,6 +601,7 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
 
 /** Represents an indexed SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.indexedSharePoint;
@@ -604,6 +635,7 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
 
 /** Represents a remote SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.remoteSharePoint;
@@ -616,6 +648,7 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
+@removed(Versions.v2026_04_01)
 model SharePointSensitivityLabelInfo {
   /** The display name for the sensitivity label. */
   displayName?: string;
@@ -796,6 +829,10 @@ union KnowledgeSourceSynchronizationStatus {
 
 /** Represents the status and synchronization history of a knowledge source. */
 model KnowledgeSourceStatus {
+  /** Identifies the Knowledge Source kind directly from the Status response. */
+  @added(Versions.v2026_04_01)
+  kind?: KnowledgeSourceKind;
+
   /** The current synchronization status. */
   synchronizationStatus: KnowledgeSourceSynchronizationStatus;
 
@@ -828,6 +865,28 @@ model KnowledgeSourceStatistics {
   averageItemsProcessedPerSynchronization: int32;
 }
 
+/** Represents a document-level indexing error encountered during a knowledge source synchronization run. */
+@added(Versions.v2026_04_01)
+model KnowledgeSourceSynchronizationError {
+  /** The unique identifier for the failed document or item within the synchronization run. */
+  docId?: string;
+
+  /** HTTP-like status code representing the failure category (e.g., 400). */
+  statusCode?: int32;
+
+  /** Name of the ingestion or processing component reporting the error. */
+  name?: string;
+
+  /** Human-readable, customer-visible error message. */
+  errorMessage: string;
+
+  /** Additional contextual information about the failure. */
+  details?: string;
+
+  /** A link to relevant troubleshooting documentation. */
+  documentationLink?: string;
+}
+
 /** Represents the current state of an ongoing synchronization that spans multiple indexer runs. */
 model SynchronizationState {
   /** The start time of the current synchronization. */
@@ -841,6 +900,10 @@ model SynchronizationState {
 
   /** The number of items skipped in the current synchronization. */
   itemsSkipped: int32;
+
+  /** Collection of document-level indexing errors encountered during the current synchronization run. Returned only when errors are present. */
+  @added(Versions.v2026_04_01)
+  errors?: KnowledgeSourceSynchronizationError[];
 }
 
 /** Represents the completed state of the last synchronization. */
