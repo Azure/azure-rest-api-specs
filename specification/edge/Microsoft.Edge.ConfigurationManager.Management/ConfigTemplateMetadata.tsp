@@ -23,7 +23,7 @@ model HierarchyMetadata {
   @doc("ArmId of Context")
   contextId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Private.Edge/contexts";
+      type: "Microsoft.Edge/contexts";
     }
   ]>;
 
