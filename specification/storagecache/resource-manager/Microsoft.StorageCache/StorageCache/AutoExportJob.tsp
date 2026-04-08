@@ -33,7 +33,7 @@ interface AutoExportJobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoExportJobs_Get")
   @tag("autoExportJobs")
-  get is ArmResourceRead<AutoExportJob, Error = CloudError>;
+  get is ArmResourceRead<AutoExportJob, Error = ErrorResponse>;
 
   /**
    * Create or update an auto export job.
@@ -43,7 +43,7 @@ interface AutoExportJobs {
   @tag("autoExportJob")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AutoExportJob,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -59,7 +59,7 @@ interface AutoExportJobs {
     PatchModel = AutoExportJobUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = AutoExportJob> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -72,7 +72,7 @@ interface AutoExportJobs {
     AutoExportJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**

@@ -3647,4 +3647,3 @@ model PrimingJobIdParameter {
   @pattern("^[-0-9a-zA-Z_]{1,80}$")
   primingJobId: string;
 }
-

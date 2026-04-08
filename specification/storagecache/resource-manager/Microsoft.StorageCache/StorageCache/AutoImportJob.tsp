@@ -33,7 +33,7 @@ interface AutoImportJobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("autoImportJobs_Get")
   @tag("autoImportJobs")
-  get is ArmResourceRead<AutoImportJob, Error = CloudError>;
+  get is ArmResourceRead<AutoImportJob, Error = ErrorResponse>;
 
   /**
    * Create or update an auto import job.
@@ -43,7 +43,7 @@ interface AutoImportJobs {
   @tag("autoImportJobs")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AutoImportJob,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -59,7 +59,7 @@ interface AutoImportJobs {
     PatchModel = AutoImportJobUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = AutoImportJob> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -72,7 +72,7 @@ interface AutoImportJobs {
     AutoImportJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**

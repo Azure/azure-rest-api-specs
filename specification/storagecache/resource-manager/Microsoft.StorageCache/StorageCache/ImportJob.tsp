@@ -32,7 +32,7 @@ interface ImportJobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("importJobs_Get")
   @tag("importJobs")
-  get is ArmResourceRead<ImportJob, Error = CloudError>;
+  get is ArmResourceRead<ImportJob, Error = ErrorResponse>;
 
   /**
    * Create or update an import job.
@@ -42,7 +42,7 @@ interface ImportJobs {
   @tag("importJobs")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ImportJob,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -58,7 +58,7 @@ interface ImportJobs {
     PatchModel = ImportJobUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ImportJob> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -71,7 +71,7 @@ interface ImportJobs {
     ImportJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**

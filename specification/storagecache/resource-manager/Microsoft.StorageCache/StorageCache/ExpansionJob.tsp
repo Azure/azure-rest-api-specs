@@ -49,7 +49,7 @@ interface ExpansionJobs {
       ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -65,7 +65,7 @@ interface ExpansionJobs {
     PatchModel = ExpansionJobUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = ExpansionJob> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -78,7 +78,7 @@ interface ExpansionJobs {
     ExpansionJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
