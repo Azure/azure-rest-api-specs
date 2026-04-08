@@ -25,13 +25,14 @@ model ExpansionJob
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExpansionJobs {
   /**
    * Returns an expansion job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_Get")
+  @tag("expansionJobs")
   get is ArmResourceRead<ExpansionJob, Error = CloudError>;
 
   /**
@@ -39,6 +40,7 @@ interface ExpansionJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_CreateOrUpdate")
+  @tag("expansionJobs")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpansionJob,
@@ -56,6 +58,7 @@ interface ExpansionJobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("expansionJobs_Update")
+  @tag("expansionJobs")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ExpansionJob,
@@ -70,6 +73,7 @@ interface ExpansionJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_Delete")
+  @tag("expansionJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpansionJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
@@ -82,6 +86,7 @@ interface ExpansionJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("expansionJobs_ListByAmlFilesystem")
+  @tag("expansionJobs")
   listByAmlFilesystem is ArmResourceListByParent<
     ExpansionJob,
     Response = ArmResponse<ExpansionJobsListResult>,

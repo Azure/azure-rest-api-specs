@@ -40,28 +40,43 @@
   },
   "tags": [
     {
+      "name": "amlFilesystems"
+    },
+    {
       "name": "Operations"
     },
     {
-      "name": "AmlFilesystems"
+      "name": "autoExportJobs"
     },
     {
-      "name": "AutoExportJobs"
+      "name": "autoExportJob"
     },
     {
-      "name": "ImportJobs"
+      "name": "importJobs"
     },
     {
-      "name": "AutoImportJobs"
+      "name": "autoImportJobs"
     },
     {
-      "name": "ExpansionJobs"
+      "name": "expansionJobs"
     },
     {
       "name": "Caches"
     },
     {
       "name": "StorageTargets"
+    },
+    {
+      "name": "SKUs"
+    },
+    {
+      "name": "UsageModels"
+    },
+    {
+      "name": "AscOperations"
+    },
+    {
+      "name": "AscUsages"
     }
   ],
   "paths": {
@@ -105,7 +120,7 @@
       "get": {
         "operationId": "amlFilesystems_List",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Returns all AML file systems the user has access to under a subscription.",
         "parameters": [
@@ -182,6 +197,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets": {
       "post": {
         "operationId": "checkAmlFSSubnets",
+        "tags": [
+          "amlFilesystems"
+        ],
         "description": "Check that subnets will be valid for AML file system create calls.",
         "parameters": [
           {
@@ -228,6 +246,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/getRequiredAmlFSSubnetsSize": {
       "post": {
         "operationId": "getRequiredAmlFSSubnetsSize",
+        "tags": [
+          "amlFilesystems"
+        ],
         "description": "Get the number of available IP addresses needed for the AML file system information provided.",
         "parameters": [
           {
@@ -270,6 +291,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}": {
       "get": {
         "operationId": "AscOperations_Get",
+        "tags": [
+          "AscOperations"
+        ],
         "description": "Gets the status of an asynchronous operation for the Azure HPC Cache",
         "parameters": [
           {
@@ -314,6 +338,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/usages": {
       "get": {
         "operationId": "AscUsages_List",
+        "tags": [
+          "AscUsages"
+        ],
         "description": "Gets the quantity used and quota limit for resources",
         "parameters": [
           {
@@ -353,6 +380,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/skus": {
       "get": {
         "operationId": "Skus_List",
+        "tags": [
+          "SKUs"
+        ],
         "description": "Get the list of StorageCache.Cache SKUs available to this subscription.",
         "parameters": [
           {
@@ -389,6 +419,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/usageModels": {
       "get": {
         "operationId": "UsageModels_List",
+        "tags": [
+          "UsageModels"
+        ],
         "description": "Get the list of cache usage models available to this subscription.",
         "parameters": [
           {
@@ -426,7 +459,7 @@
       "get": {
         "operationId": "amlFilesystems_ListByResourceGroup",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Returns all AML file systems the user has access to under a resource group.",
         "parameters": [
@@ -468,7 +501,7 @@
       "get": {
         "operationId": "amlFilesystems_Get",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Returns an AML file system.",
         "parameters": [
@@ -515,7 +548,7 @@
       "put": {
         "operationId": "amlFilesystems_CreateOrUpdate",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Create or update an AML file system.",
         "parameters": [
@@ -593,7 +626,7 @@
       "patch": {
         "operationId": "amlFilesystems_Update",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Update an AML file system instance.",
         "parameters": [
@@ -673,7 +706,7 @@
       "delete": {
         "operationId": "amlFilesystems_Delete",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Schedules an AML file system for deletion.",
         "parameters": [
@@ -746,7 +779,7 @@
       "post": {
         "operationId": "amlFilesystems_Archive",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Archive data from the AML file system.",
         "parameters": [
@@ -801,7 +834,7 @@
       "get": {
         "operationId": "autoExportJobs_ListByAmlFilesystem",
         "tags": [
-          "AutoExportJobs"
+          "autoExportJob"
         ],
         "description": "Returns all the auto export jobs the user has access to under an AML File System.",
         "parameters": [
@@ -853,7 +886,7 @@
       "get": {
         "operationId": "autoExportJobs_Get",
         "tags": [
-          "AutoExportJobs"
+          "autoExportJobs"
         ],
         "description": "Returns an auto export job.",
         "parameters": [
@@ -910,7 +943,7 @@
       "put": {
         "operationId": "autoExportJobs_CreateOrUpdate",
         "tags": [
-          "AutoExportJobs"
+          "autoExportJob"
         ],
         "description": "Create or update an auto export job.",
         "parameters": [
@@ -998,7 +1031,7 @@
       "patch": {
         "operationId": "autoExportJobs_Update",
         "tags": [
-          "AutoExportJobs"
+          "autoExportJob"
         ],
         "description": "Update an auto export job instance.",
         "parameters": [
@@ -1088,7 +1121,7 @@
       "delete": {
         "operationId": "autoExportJobs_Delete",
         "tags": [
-          "AutoExportJobs"
+          "autoExportJobs"
         ],
         "description": "Schedules an auto export job for deletion.",
         "parameters": [
@@ -1167,7 +1200,7 @@
       "get": {
         "operationId": "autoImportJobs_ListByAmlFilesystem",
         "tags": [
-          "AutoImportJobs"
+          "autoImportJobs"
         ],
         "description": "Returns all the auto import jobs the user has access to under an AML File System.",
         "parameters": [
@@ -1219,7 +1252,7 @@
       "get": {
         "operationId": "autoImportJobs_Get",
         "tags": [
-          "AutoImportJobs"
+          "autoImportJobs"
         ],
         "description": "Returns an auto import job.",
         "parameters": [
@@ -1276,7 +1309,7 @@
       "put": {
         "operationId": "autoImportJobs_CreateOrUpdate",
         "tags": [
-          "AutoImportJobs"
+          "autoImportJobs"
         ],
         "description": "Create or update an auto import job.",
         "parameters": [
@@ -1364,7 +1397,7 @@
       "patch": {
         "operationId": "autoImportJobs_Update",
         "tags": [
-          "AutoImportJobs"
+          "autoImportJobs"
         ],
         "description": "Update an auto import job instance.",
         "parameters": [
@@ -1454,7 +1487,7 @@
       "delete": {
         "operationId": "autoImportJobs_Delete",
         "tags": [
-          "AutoImportJobs"
+          "autoImportJobs"
         ],
         "description": "Schedules an auto import job for deletion.",
         "parameters": [
@@ -1533,7 +1566,7 @@
       "post": {
         "operationId": "amlFilesystems_CancelArchive",
         "tags": [
-          "AmlFilesystems"
+          "amlFilesystems"
         ],
         "description": "Cancel archiving data from the AML file system.",
         "parameters": [
@@ -1579,7 +1612,7 @@
       "get": {
         "operationId": "expansionJobs_ListByAmlFilesystem",
         "tags": [
-          "ExpansionJobs"
+          "expansionJobs"
         ],
         "description": "Returns all the expansion jobs the user has access to under an AML File System.",
         "parameters": [
@@ -1631,7 +1664,7 @@
       "get": {
         "operationId": "expansionJobs_Get",
         "tags": [
-          "ExpansionJobs"
+          "expansionJobs"
         ],
         "description": "Returns an expansion job.",
         "parameters": [
@@ -1688,7 +1721,7 @@
       "put": {
         "operationId": "expansionJobs_CreateOrUpdate",
         "tags": [
-          "ExpansionJobs"
+          "expansionJobs"
         ],
         "description": "Create or update an expansion job.",
         "parameters": [
@@ -1781,7 +1814,7 @@
       "patch": {
         "operationId": "expansionJobs_Update",
         "tags": [
-          "ExpansionJobs"
+          "expansionJobs"
         ],
         "description": "Update an expansion job instance.",
         "parameters": [
@@ -1871,7 +1904,7 @@
       "delete": {
         "operationId": "expansionJobs_Delete",
         "tags": [
-          "ExpansionJobs"
+          "expansionJobs"
         ],
         "description": "Schedules an expansion job for deletion.",
         "parameters": [
@@ -1950,7 +1983,7 @@
       "get": {
         "operationId": "importJobs_ListByAmlFilesystem",
         "tags": [
-          "ImportJobs"
+          "importJobs"
         ],
         "description": "Returns all import jobs the user has access to under an AML File System.",
         "parameters": [
@@ -2002,7 +2035,7 @@
       "get": {
         "operationId": "importJobs_Get",
         "tags": [
-          "ImportJobs"
+          "importJobs"
         ],
         "description": "Returns an import job.",
         "parameters": [
@@ -2059,7 +2092,7 @@
       "put": {
         "operationId": "importJobs_CreateOrUpdate",
         "tags": [
-          "ImportJobs"
+          "importJobs"
         ],
         "description": "Create or update an import job.",
         "parameters": [
@@ -2147,7 +2180,7 @@
       "patch": {
         "operationId": "importJobs_Update",
         "tags": [
-          "ImportJobs"
+          "importJobs"
         ],
         "description": "Update an import job instance.",
         "parameters": [
@@ -2237,7 +2270,7 @@
       "delete": {
         "operationId": "importJobs_Delete",
         "tags": [
-          "ImportJobs"
+          "importJobs"
         ],
         "description": "Schedules an import job for deletion.",
         "parameters": [

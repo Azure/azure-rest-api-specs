@@ -25,13 +25,14 @@ model AutoExportJob
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AutoExportJobs {
   /**
    * Returns an auto export job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_Get")
+  @tag("autoExportJobs")
   get is ArmResourceRead<AutoExportJob, Error = CloudError>;
 
   /**
@@ -39,6 +40,7 @@ interface AutoExportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_CreateOrUpdate")
+  @tag("autoExportJob")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AutoExportJob,
     Error = CloudError
@@ -49,6 +51,7 @@ interface AutoExportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_Update")
+  @tag("autoExportJob")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
@@ -64,6 +67,7 @@ interface AutoExportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_Delete")
+  @tag("autoExportJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     AutoExportJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
@@ -76,6 +80,7 @@ interface AutoExportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("autoExportJobs_ListByAmlFilesystem")
+  @tag("autoExportJob")
   listByAmlFilesystem is ArmResourceListByParent<
     AutoExportJob,
     Response = ArmResponse<AutoExportJobsListResult>,

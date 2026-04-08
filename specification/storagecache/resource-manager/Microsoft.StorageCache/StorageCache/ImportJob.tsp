@@ -24,13 +24,14 @@ model ImportJob is Azure.ResourceManager.TrackedResource<ImportJobProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ImportJobs {
   /**
    * Returns an import job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_Get")
+  @tag("importJobs")
   get is ArmResourceRead<ImportJob, Error = CloudError>;
 
   /**
@@ -38,6 +39,7 @@ interface ImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_CreateOrUpdate")
+  @tag("importJobs")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ImportJob,
     Error = CloudError
@@ -48,6 +50,7 @@ interface ImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_Update")
+  @tag("importJobs")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
@@ -63,6 +66,7 @@ interface ImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_Delete")
+  @tag("importJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     ImportJob,
     Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
@@ -75,6 +79,7 @@ interface ImportJobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("importJobs_ListByAmlFilesystem")
+  @tag("importJobs")
   listByAmlFilesystem is ArmResourceListByParent<
     ImportJob,
     Response = ArmResponse<ImportJobsListResult>,

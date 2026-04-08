@@ -38,13 +38,14 @@ model AmlFilesystem
 }
 @@visibility(AmlFilesystem.zones, Lifecycle.Read, Lifecycle.Create);
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AmlFilesystems {
   /**
    * Returns an AML file system.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_Get")
+  @tag("amlFilesystems")
   get is ArmResourceRead<AmlFilesystem, Error = CloudError>;
 
   /**
@@ -52,6 +53,7 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_CreateOrUpdate")
+  @tag("amlFilesystems")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AmlFilesystem,
     Error = CloudError
@@ -63,6 +65,7 @@ interface AmlFilesystems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("amlFilesystems_Update")
+  @tag("amlFilesystems")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AmlFilesystem,
@@ -78,6 +81,7 @@ interface AmlFilesystems {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("amlFilesystems_Delete")
+  @tag("amlFilesystems")
   delete is ArmResourceDeleteWithoutOkAsync<
     AmlFilesystem,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AmlFilesystem> &
@@ -90,6 +94,7 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_ListByResourceGroup")
+  @tag("amlFilesystems")
   listByResourceGroup is ArmResourceListByParent<
     AmlFilesystem,
     Response = ArmResponse<AmlFilesystemsListResult>,
@@ -101,6 +106,7 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_List")
+  @tag("amlFilesystems")
   list is ArmListBySubscription<
     AmlFilesystem,
     Response = ArmResponse<AmlFilesystemsListResult>,
@@ -112,6 +118,7 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_Archive")
+  @tag("amlFilesystems")
   archive is ArmResourceActionSync<
     AmlFilesystem,
     AmlFilesystemArchiveInfo,
@@ -125,6 +132,7 @@ interface AmlFilesystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("amlFilesystems_CancelArchive")
+  @tag("amlFilesystems")
   cancelArchive is ArmResourceActionSync<
     AmlFilesystem,
     void,

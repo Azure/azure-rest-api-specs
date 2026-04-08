@@ -19,6 +19,7 @@ namespace Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("checkAmlFSSubnets")
+@tag("amlFilesystems")
 @autoRoute
 op checkAmlFSSubnets is ArmProviderActionSync<
   Request = AmlFilesystemSubnetInfo,
@@ -33,6 +34,7 @@ op checkAmlFSSubnets is ArmProviderActionSync<
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 @operationId("getRequiredAmlFSSubnetsSize")
+@tag("amlFilesystems")
 @autoRoute
 op getRequiredAmlFSSubnetsSize is ArmProviderActionSync<
   Request = RequiredAmlFilesystemSubnetsSizeInfo,
@@ -48,6 +50,7 @@ interface SkusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Skus_List")
+  @tag("SKUs")
   @autoRoute
   @get
   @list
@@ -66,6 +69,7 @@ interface UsageModelsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("UsageModels_List")
+  @tag("UsageModels")
   @autoRoute
   @get
   @list
@@ -84,6 +88,7 @@ interface AscOperationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AscOperations_Get")
+  @tag("AscOperations")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}")
   @get
   get(
@@ -107,6 +112,7 @@ interface AscUsagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AscUsages_List")
+  @tag("AscUsages")
   @autoRoute
   @get
   @list
