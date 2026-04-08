@@ -510,3 +510,12 @@ using Compute;
   "VirtualMachineScaleSetVmRunCommands",
   "csharp"
 );
+
+// Mark non-pageable list operations as pageable for backward compatibility
+// These return a single-page list result but the SDK expects them to be enumerable
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(VirtualMachineExtensions.list,
+  "csharp"
+);
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(VirtualMachineScaleSetVMExtensions.list,
+  "csharp"
+);
