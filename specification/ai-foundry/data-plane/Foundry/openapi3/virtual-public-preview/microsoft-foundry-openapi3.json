@@ -13798,6 +13798,395 @@
         },
         "description": "A set of index resources used by the `azure_ai_search` tool."
       },
+      "AzureContentFilterBlocklistIdResult": {
+        "type": "object",
+        "required": [
+          "id",
+          "filtered"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the custom blocklist."
+          },
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the blocklist resulted in filtering."
+          }
+        },
+        "description": "A content filter blocklist ID result."
+      },
+      "AzureContentFilterBlocklistResult": {
+        "type": "object",
+        "required": [
+          "filtered"
+        ],
+        "properties": {
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether any blocklist resulted in filtering."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AzureContentFilterBlocklistIdResult"
+            },
+            "description": "The pairs of individual blocklist IDs and their filtering results."
+          }
+        },
+        "description": "A collection of filtering results for configured custom blocklists."
+      },
+      "AzureContentFilterCitation": {
+        "type": "object",
+        "properties": {
+          "license": {
+            "type": "string",
+            "description": "The license associated with the detection."
+          },
+          "URL": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL associated with the license."
+          }
+        },
+        "description": "Citation details for protected material detection."
+      },
+      "AzureContentFilterCompletionTextSpan": {
+        "type": "object",
+        "required": [
+          "completion_start_offset",
+          "completion_end_offset"
+        ],
+        "properties": {
+          "completion_start_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Offset of the UTF32 code point which begins the span."
+          },
+          "completion_end_offset": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Offset of the first UTF32 code point which is excluded from the span."
+          }
+        },
+        "description": "A representation of a span of completion text as used by Azure OpenAI content filter results."
+      },
+      "AzureContentFilterCompletionTextSpanDetectionResult": {
+        "type": "object",
+        "required": [
+          "filtered",
+          "detected",
+          "details"
+        ],
+        "properties": {
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content was filtered."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether the content category was detected."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AzureContentFilterCompletionTextSpan"
+            },
+            "description": "Detailed information about the detected completion text spans."
+          }
+        },
+        "description": "A content filter detection result with completion text span details."
+      },
+      "AzureContentFilterDetectionResult": {
+        "type": "object",
+        "required": [
+          "filtered",
+          "detected"
+        ],
+        "properties": {
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content was filtered."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether the content category was detected."
+          }
+        },
+        "description": "A content filter result indicating whether the content was detected and filtered."
+      },
+      "AzureContentFilterDetectionWithCitationResult": {
+        "type": "object",
+        "required": [
+          "filtered",
+          "detected"
+        ],
+        "properties": {
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content was filtered."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether the content category was detected."
+          },
+          "citation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterCitation"
+              }
+            ],
+            "description": "Citation details describing the associated license and its location."
+          }
+        },
+        "description": "A content filter detection result that includes citation information for protected material."
+      },
+      "AzureContentFilterDetectionWithReasonResult": {
+        "type": "object",
+        "required": [
+          "filtered",
+          "detected"
+        ],
+        "properties": {
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content was filtered."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether the content category was detected."
+          },
+          "reason": {
+            "type": "string",
+            "description": "A human-readable explanation of why the detection result was produced."
+          }
+        },
+        "description": "A content filter detection result that includes a reason description."
+      },
+      "AzureContentFilterError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32",
+            "description": "A machine-readable error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable error message."
+          }
+        },
+        "description": "Error details from the content filtering system."
+      },
+      "AzureContentFilterPersonallyIdentifiableInformationResult": {
+        "type": "object",
+        "required": [
+          "filtered",
+          "detected"
+        ],
+        "properties": {
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content was filtered."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether PII was detected in the content."
+          },
+          "sub_categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AzureContentFilterPiiSubCategoryResult"
+            },
+            "description": "Detailed results for individual PII subcategories."
+          }
+        },
+        "description": "A content filter detection result for Personally Identifiable Information."
+      },
+      "AzureContentFilterPiiSubCategoryResult": {
+        "type": "object",
+        "required": [
+          "sub_category",
+          "filtered",
+          "detected"
+        ],
+        "properties": {
+          "sub_category": {
+            "type": "string",
+            "description": "The PII subcategory that was evaluated."
+          },
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content was filtered for this subcategory."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether the subcategory was detected in the content."
+          }
+        },
+        "description": "Result details for an individual PII subcategory."
+      },
+      "AzureContentFilterResultsForResponses": {
+        "type": "object",
+        "properties": {
+          "sexual": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterSeverityResult"
+              }
+            ],
+            "description": "Severity result for sexual content."
+          },
+          "hate": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterSeverityResult"
+              }
+            ],
+            "description": "Severity result for hate content."
+          },
+          "violence": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterSeverityResult"
+              }
+            ],
+            "description": "Severity result for violence content."
+          },
+          "self_harm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterSeverityResult"
+              }
+            ],
+            "description": "Severity result for self-harm content."
+          },
+          "profanity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterDetectionResult"
+              }
+            ],
+            "description": "Detection result for profanity."
+          },
+          "custom_blocklists": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterBlocklistResult"
+              }
+            ],
+            "description": "Results for configured custom blocklists."
+          },
+          "jailbreak": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterDetectionResult"
+              }
+            ],
+            "description": "Detection result for jailbreak attempts."
+          },
+          "task_adherence": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterDetectionWithReasonResult"
+              }
+            ],
+            "description": "Detection result for task adherence evaluation."
+          },
+          "protected_material_text": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterDetectionResult"
+              }
+            ],
+            "description": "Detection result for protected material text."
+          },
+          "protected_material_code": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterDetectionWithCitationResult"
+              }
+            ],
+            "description": "Detection result for protected material code with citation."
+          },
+          "ungrounded_material": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterCompletionTextSpanDetectionResult"
+              }
+            ],
+            "description": "Detection result for ungrounded material with completion text span details."
+          },
+          "personally_identifiable_information": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterPersonallyIdentifiableInformationResult"
+              }
+            ],
+            "description": "Detection result for Personally Identifiable Information."
+          },
+          "indirect_attack": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterDetectionResult"
+              }
+            ],
+            "description": "Detection result for indirect attacks."
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterError"
+              }
+            ],
+            "description": "Error details if content filtering evaluation failed."
+          }
+        },
+        "description": "Content filter results for the Responses API."
+      },
+      "AzureContentFilterSeverity": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "safe",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "description": "Ratings for the intensity and risk level of harmful content."
+      },
+      "AzureContentFilterSeverityResult": {
+        "type": "object",
+        "required": [
+          "filtered",
+          "severity"
+        ],
+        "properties": {
+          "filtered": {
+            "type": "boolean",
+            "description": "Whether the content was filtered."
+          },
+          "severity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterSeverity"
+              }
+            ],
+            "description": "The severity level of the content."
+          }
+        },
+        "description": "A content filter result indicating severity level and whether content was filtered."
+      },
       "AzureFunctionBinding": {
         "type": "object",
         "required": [
@@ -15128,6 +15517,37 @@
             "ContainerAgents=V1Preview"
           ]
         }
+      },
+      "ContentFilterResult": {
+        "type": "object",
+        "required": [
+          "blocked",
+          "source_type",
+          "content_filter_results"
+        ],
+        "properties": {
+          "blocked": {
+            "type": "boolean",
+            "description": "Whether the content was blocked by the content filter."
+          },
+          "source_type": {
+            "type": "string",
+            "description": "The source type of the content filter evaluation (e.g., 'prompt', 'response', 'pre_tool_call', 'post_tool_call')."
+          },
+          "content_filter_results": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AzureContentFilterResultsForResponses"
+              }
+            ],
+            "description": "The content filter results for this evaluation."
+          },
+          "tool_call_id": {
+            "type": "string",
+            "description": "The ID of the tool call associated with this content filter result, if applicable."
+          }
+        },
+        "description": "A content filter evaluation result for a specific source in the response."
       },
       "ContinuousEvaluationRuleAction": {
         "type": "object",
@@ -35320,6 +35740,13 @@
             ],
             "nullable": true,
             "description": "The agent used for this response"
+          },
+          "content_filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentFilterResult"
+            },
+            "description": "The content filter evaluation results."
           }
         },
         "title": "The response object"
