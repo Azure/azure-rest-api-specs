@@ -133,12 +133,11 @@ model SovereignViewComplianceInitiativeSummary {
 @added(Versions.Preview20260315)
 @doc("The request for the sovereign view compliance details action.")
 model SovereignViewComplianceDetailsRequest {
-  @doc("The maximum number of resources to return.")
+  @doc("The maximum number of resources to return. Used for pagination.")
   top: int32;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pagination tokens are not sensitive in this API."
-  @doc("The continuation token returned by the service for the next page.")
-  skipToken?: string;
+  @doc("The resources to skip when the results are returned. Used for pagination.")
+  skip?: int32;
 
   @doc("The filters for policy initiatives and their states to apply when querying for compliance details.")
   @identifiers(#["initiativeId"])
@@ -234,10 +233,6 @@ union SovereignViewComplianceDetailsSortDirections {
 @added(Versions.Preview20260315)
 @doc("The response for the sovereign view compliance details action.")
 model SovereignViewComplianceDetailsResponse {
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pagination tokens are not sensitive in this API."
-  @doc("The continuation token returned by the service for the next page.")
-  nextToken?: string;
-
   @doc("The time when compliance was last evaluated, in RFC3339 format.")
   lastEvaluated: utcDateTime;
 

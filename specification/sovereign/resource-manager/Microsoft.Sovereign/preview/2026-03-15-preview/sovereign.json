@@ -3757,11 +3757,12 @@
         "top": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of resources to return."
+          "description": "The maximum number of resources to return. Used for pagination."
         },
-        "skipToken": {
-          "type": "string",
-          "description": "The continuation token returned by the service for the next page."
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The resources to skip when the results are returned. Used for pagination."
         },
         "policyInitiatives": {
           "type": "array",
@@ -3797,10 +3798,6 @@
       "type": "object",
       "description": "The response for the sovereign view compliance details action.",
       "properties": {
-        "nextToken": {
-          "type": "string",
-          "description": "The continuation token returned by the service for the next page."
-        },
         "lastEvaluated": {
           "type": "string",
           "format": "date-time",

@@ -81,14 +81,6 @@ suppressions:
     from: sovereign.json
     where: $.definitions.SovereignViewPolicyInitiativeDetail.properties.assignmentParameters
     reason: Parameters vary based on the selected policy initiatives.
-  - code: XMSSecretInResponse
-    from: sovereign.json
-    where: $.definitions.SovereignViewComplianceDetailsRequest.properties.skipToken
-    reason: SkipToken is a pagination token. It is not a secret.
-  - code: XMSSecretInResponse
-    from: sovereign.json
-    where: $.definitions.SovereignViewComplianceDetailsResponse.properties.nextToken
-    reason: NextToken is a pagination token. It is not a secret.
   - code: LocationMustHaveXmsMutability
     from: sovereign.json
     where: $.definitions.SovereignViewComplianceDetailResource.properties.location
