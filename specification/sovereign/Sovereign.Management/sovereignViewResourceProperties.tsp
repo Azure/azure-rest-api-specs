@@ -233,7 +233,7 @@ union SovereignViewComplianceDetailsSortDirections {
 @added(Versions.Preview20260315)
 @doc("The response for the sovereign view compliance details action.")
 model SovereignViewComplianceDetailsResponse {
-  @doc("The time when compliance was last evaluated, in RFC3339 format.")
+  @doc("The time when compliance was last evaluated overall, in RFC3339 format.")
   lastEvaluated: utcDateTime;
 
   @doc("Total number of resources for the sovereign view.")
@@ -270,4 +270,7 @@ model SovereignViewComplianceDetail {
 
   @doc("The compliance state of the resource for the policy initiative.")
   policyState: PolicyComplianceState;
+
+  @doc("The time when compliance was last evaluated by Azure Policy, in RFC3339 format.")
+  evaluatedAt?: utcDateTime;
 }

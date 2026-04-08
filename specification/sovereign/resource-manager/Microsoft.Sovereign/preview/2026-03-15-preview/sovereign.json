@@ -3643,6 +3643,11 @@
         "policyState": {
           "$ref": "#/definitions/PolicyComplianceState",
           "description": "The compliance state of the resource for the policy initiative."
+        },
+        "evaluatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when compliance was last evaluated by Azure Policy, in RFC3339 format."
         }
       },
       "required": [
@@ -3806,7 +3811,7 @@
         "lastEvaluated": {
           "type": "string",
           "format": "date-time",
-          "description": "The time when compliance was last evaluated, in RFC3339 format."
+          "description": "The time when compliance was last evaluated overall, in RFC3339 format."
         },
         "totalResources": {
           "type": "integer",
