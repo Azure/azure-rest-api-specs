@@ -2375,6 +2375,17 @@
         "assetId": {
           "type": "string",
           "description": "The asset identifier."
+        },
+        "defaultDeploymentTemplate": {
+          "$ref": "#/definitions/ModelDeploymentTemplateDetails",
+          "description": "Default deployment template for the model."
+        },
+        "allowedDeploymentTemplates": {
+          "type": "array",
+          "description": "List of allowed deployment templates for the model.",
+          "items": {
+            "$ref": "#/definitions/ModelDeploymentTemplateReferenceDetails"
+          }
         }
       },
       "required": [
@@ -2464,6 +2475,26 @@
       "required": [
         "modelFormat"
       ]
+    },
+    "ModelDeploymentTemplateDetails": {
+      "type": "object",
+      "description": "Details of a default deployment template reference.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset ID of the deployment template."
+        }
+      }
+    },
+    "ModelDeploymentTemplateReferenceDetails": {
+      "type": "object",
+      "description": "Reference details for an allowed deployment template.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset reference ID of the deployment template."
+        }
+      }
     },
     "ModelErrorResponse": {
       "type": "object",
