@@ -13142,7 +13142,7 @@
     },
     "AccountPropertiesPatch": {
       "type": "object",
-      "description": "NetApp account properties for PATCH operations",
+      "description": "NetApp account patch properties",
       "properties": {
         "activeDirectories": {
           "type": "array",
@@ -13154,10 +13154,6 @@
             "activeDirectoryId"
           ]
         },
-        "entraIdConfig": {
-          "$ref": "#/definitions/EntraIdConfigPatch",
-          "description": "Entra ID configuration for the account."
-        },
         "encryption": {
           "$ref": "#/definitions/AccountEncryption",
           "description": "Encryption settings"
@@ -13168,8 +13164,12 @@
           "x-nullable": true
         },
         "ldapConfiguration": {
-          "$ref": "#/definitions/LdapConfigurationPatch",
+          "$ref": "#/definitions/LdapConfiguration",
           "description": "LDAP Configuration for the account."
+        },
+        "entraIdConfig": {
+          "$ref": "#/definitions/EntraIdConfigPatch",
+          "description": "Entra ID configuration for the account."
         }
       }
     },
@@ -17613,7 +17613,7 @@
     },
     "EntraIdAkvConfigPatch": {
       "type": "object",
-      "description": "Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.",
+      "description": "Entra ID Patch configuration for the account.",
       "properties": {
         "azureKeyVaultUri": {
           "type": "string",
@@ -18260,43 +18260,6 @@
         }
       }
     },
-    "LdapConfigurationPatch": {
-      "type": "object",
-      "description": "LDAP configuration for PATCH operations (no default values)",
-      "properties": {
-        "domain": {
-          "type": "string",
-          "description": "Name of the LDAP configuration domain",
-          "maxLength": 255,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$"
-        },
-        "ldapServers": {
-          "type": "array",
-          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.ipV4Address"
-          }
-        },
-        "ldapOverTLS": {
-          "type": "boolean",
-          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
-        },
-        "serverCACertificate": {
-          "type": "string",
-          "format": "password",
-          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
-          "minLength": 1,
-          "maxLength": 10240,
-          "x-ms-secret": true
-        },
-        "certificateCNHost": {
-          "type": "string",
-          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
-          "maxLength": 255,
-          "x-nullable": true
-        }
-      }
-    },
     "LdapSearchScopeOpt": {
       "type": "object",
       "description": "LDAP search scope",
@@ -18718,28 +18681,13 @@
       "type": "object",
       "description": "NetApp account patch resource",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "id": {
-          "type": "string",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -18748,10 +18696,6 @@
           "$ref": "#/definitions/AccountPropertiesPatch",
           "description": "NetApp Account properties",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity used for the resource."
         }
       }
     },
