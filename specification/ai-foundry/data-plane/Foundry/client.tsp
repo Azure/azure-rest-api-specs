@@ -252,10 +252,18 @@ using Azure.AI.Projects;
 // ManagedAgentIdentityBlueprints operations on .beta.agents sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list_managed_identity_blueprints");
+@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint,
+  "create_or_update_managed_identity_blueprint"
+);
+@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint,
+  "get_managed_identity_blueprint"
+);
+@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint,
+  "delete_managed_identity_blueprint"
+);
+@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints,
+  "list_managed_identity_blueprints"
+);
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client

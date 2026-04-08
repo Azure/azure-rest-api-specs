@@ -11192,6 +11192,59 @@
         }
       }
     },
+    "/sync_evals:run": {
+      "post": {
+        "operationId": "SyncEvals_create",
+        "description": "Synchronize evaluation runs from connected resources.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvalRunOutputItem"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncEvalInput"
+              }
+            }
+          },
+          "description": "Creates a sync eval run."
+        }
+      }
+    },
     "/toolboxes": {
       "get": {
         "operationId": "listToolboxes",
@@ -16033,6 +16086,24 @@
           }
         ],
         "description": "Custom credential definition"
+      },
+      "CustomInference": {
+        "type": "object",
+        "required": [
+          "endpointUrl",
+          "DeploymentId"
+        ],
+        "properties": {
+          "endpointUrl": {
+            "type": "string",
+            "description": "The endpoint URL to be used for inferencing."
+          },
+          "DeploymentId": {
+            "type": "string",
+            "description": "The deployment id to be used for inferencing."
+          }
+        },
+        "description": "Custom inference model endpoint for evaluation."
       },
       "DailyRecurrenceSchedule": {
         "type": "object",
@@ -41574,6 +41645,46 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
+      },
+      "SyncEvalInput": {
+        "type": "object",
+        "required": [
+          "data_source",
+          "testing_criteria"
+        ],
+        "properties": {
+          "data_source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.CreateEvalJsonlRunDataSource"
+              }
+            ],
+            "description": "Identifier of the evaluator."
+          },
+          "testing_criteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
+            },
+            "description": "Evaluators to be used for the evaluation."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed."
+          },
+          "customInference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomInference"
+              }
+            ],
+            "description": "Custom inference configuration."
+          }
+        },
+        "description": "OpenAI Input data source definition for eval."
       },
       "SyntheticDataGenerationPreviewEvalRunDataSource": {
         "type": "object",
