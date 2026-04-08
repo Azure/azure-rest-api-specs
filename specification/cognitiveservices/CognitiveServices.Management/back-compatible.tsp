@@ -10,7 +10,9 @@ using Microsoft.CognitiveServices;
 @@clientName(Accounts.privateLinkResourcesList, "List");
 @@clientLocation(Accounts.createOrUpdate, "TestRaiExternalSafetyProvider");
 @@clientName(Accounts.createOrUpdate::parameters.resource, "safetyProvider");
-@@clientLocation(Accounts.provisionManagedNetwork, "ManagedNetworkProvisions");
+@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.provisionManagedNetwork,
+  "ManagedNetworkProvisions"
+);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "properties"
@@ -97,7 +99,7 @@ using Microsoft.CognitiveServices;
 @@clientLocation(CommitmentPlanAccountAssociations.listAssociations,
   CommitmentPlans
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator to flatten CommitmentPlanAccountAssociation.properties for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommitmentPlanAccountAssociation.properties
 );
 
@@ -107,7 +109,7 @@ using Microsoft.CognitiveServices;
 @@clientName(DefenderForAISettings.update::parameters.properties,
   "defenderForAISettings"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator to flatten DefenderForAISetting.properties for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DefenderForAISetting.properties
 );
 
@@ -177,6 +179,9 @@ using Microsoft.CognitiveServices;
   "body"
 );
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.list,
+  "ManagedNetworkSettings"
+);
+@@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.delete,
   "ManagedNetworkSettings"
 );
 @@clientLocation(ManagedNetworkSettingsPropertiesBasicResources.post,
