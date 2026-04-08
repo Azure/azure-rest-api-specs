@@ -96,12 +96,14 @@ model CollaborationProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_10_31_preview)
-  clusterEndpoint: string;
+  @madeOptional(Versions.v2026_03_31_preview)
+  clusterEndpoint?: string;
 
   /**
    * Gets or sets the consortium type.
    */
   @added(Versions.v2025_10_31_preview)
+  @removed(Versions.v2026_03_31_preview)
   consortiumType: ConsortiumType;
 
   /**
@@ -109,7 +111,8 @@ model CollaborationProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_10_31_preview)
-  consortiumArmId: Azure.Core.armResourceIdentifier;
+  @madeOptional(Versions.v2026_03_31_preview)
+  consortiumArmId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the workloads.
@@ -117,20 +120,38 @@ model CollaborationProperties {
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2025_10_31_preview)
-  workloads: Workload[];
+  @madeOptional(Versions.v2026_03_31_preview)
+  workloads?: Workload[];
 
   /**
    * Gets or sets the user identity.
    */
+  @removed(Versions.v2026_03_31_preview)
   @added(Versions.v2025_10_31_preview)
   userIdentity: UserIdentity;
+
+  /**
+   * Gets or sets the collaboration state.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_31_preview)
+  collaborationState?: CollaborationState;
+
+  /**
+   * Gets or sets the collaborators.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#[])
+  @added(Versions.v2026_03_31_preview)
+  collaborators?: Collaborator[];
 
   /**
    * Gets or sets the health of the collaboration.
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_10_31_preview)
-  health: Health;
+  @madeOptional(Versions.v2026_03_31_preview)
+  health?: Health;
 
   /**
    * Gets or sets the managed on-behalf-of configuration.
@@ -157,6 +178,64 @@ union WorkloadType {
    * Analytics workload.
    */
   Analytics: "analytics",
+}
+
+/**
+ * Collaboration states.
+ */
+@added(Versions.v2026_03_31_preview)
+union CollaborationState {
+  string,
+
+  /**
+   * Collaboration is being provisioned.
+   */
+  Provisioning: "Provisioning",
+
+  /**
+   * Collaboration has been provisioned.
+   */
+  Provisioned: "Provisioned",
+
+  /**
+   * Collaboration is being paused.
+   */
+  PauseInitiated: "PauseInitiated",
+
+  /**
+   * Collaboration has been paused.
+   */
+  Paused: "Paused",
+
+  /**
+   * Collaboration pause has failed.
+   */
+  PauseFailed: "PauseFailed",
+
+  /**
+   * Collaboration is being resumed.
+   */
+  ResumeInitiated: "ResumeInitiated",
+
+  /**
+   * Collaboration resume has failed.
+   */
+  ResumeFailed: "ResumeFailed",
+
+  /**
+   * Collaboration has been resumed.
+   */
+  Resumed: "Resumed",
+
+  /**
+   * Collaboration is being deprovisioned.
+   */
+  Deprovisioning: "Deprovisioning",
+
+  /**
+   * Collaboration has been deprovisioned.
+   */
+  Deprovisioned: "Deprovisioned",
 }
 
 /**
@@ -202,6 +281,33 @@ model UserIdentity {
 }
 
 /**
+ * Configuration details of a collaborator.
+ */
+@added(Versions.v2026_03_31_preview)
+model Collaborator {
+  /**
+   * User identifier of the collaborator. This can be specified as an email (no OID/TID should be specified) or an SPN (OID/TID required).
+   */
+  userIdentifier?: string;
+
+  /**
+   * Tenant ID of the collaborator.
+   */
+  tenantId?: string;
+
+  /**
+   * Object ID of the collaborator.
+   */
+  objectId?: string;
+
+  /**
+   * Indicates if the collaborator is the owner of the collaboration.
+   */
+  @visibility(Lifecycle.Read)
+  isCollaborationOwner?: boolean;
+}
+
+/**
  * Input model to enable a workload.
  */
 @added(Versions.v2025_10_31_preview)
@@ -218,8 +324,15 @@ model EnableWorkloadInput {
 @added(Versions.v2025_10_31_preview)
 model AddCollaboratorInput {
   /**
+   * Collaborator to be added.
+   */
+  @added(Versions.v2026_03_31_preview)
+  collaborator: Collaborator;
+
+  /**
    * Email of the collaborator to be added.
    */
+  @removed(Versions.v2026_03_31_preview)
   email: string;
 }
 
@@ -397,6 +510,7 @@ model ConsortiumProperties {
   /**
    * Gets or sets the consortium type.
    */
+  @removed(Versions.v2026_03_31_preview)
   consortiumType?: ConsortiumType;
 
   /**
@@ -428,7 +542,22 @@ model ConsortiumProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_10_31_preview)
-  health: Health;
+  @madeOptional(Versions.v2026_03_31_preview)
+  health?: Health;
+
+  /**
+   * Gets or sets the governance type.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_31_preview)
+  governanceType?: GovernanceType;
+
+  /**
+   * Gets or sets the consortium state.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_31_preview)
+  consortiumState?: ConsortiumState;
 
   /**
    * Gets or sets the managed on-behalf-of configuration.
@@ -466,6 +595,83 @@ model ConsortiumMember {
    * Indicates if the member is an operator.
    */
   isOperator: boolean;
+
+  /**
+   * Gets or sets the recovery role for non-operator members.
+   */
+  @added(Versions.v2026_03_31_preview)
+  recoveryRole?: string;
+}
+
+/**
+ * Governance types.
+ */
+@added(Versions.v2026_03_31_preview)
+union GovernanceType {
+  string,
+
+  /**
+   * Collaboration backed by CleanRoom Governance Service.
+   */
+  CGS: "CGS",
+}
+
+/**
+ * Consortium states.
+ */
+@added(Versions.v2026_03_31_preview)
+union ConsortiumState {
+  string,
+
+  /**
+   * Consortium is being provisioned.
+   */
+  Provisioning: "Provisioning",
+
+  /**
+   * Consortium has been provisioned.
+   */
+  Provisioned: "Provisioned",
+
+  /**
+   * Consortium is being paused.
+   */
+  PauseInitiated: "PauseInitiated",
+
+  /**
+   * Consortium has been paused.
+   */
+  Paused: "Paused",
+
+  /**
+   * Consortium pause has failed.
+   */
+  PauseFailed: "PauseFailed",
+
+  /**
+   * Consortium is being resumed.
+   */
+  ResumeInitiated: "ResumeInitiated",
+
+  /**
+   * Consortium resume has failed.
+   */
+  ResumeFailed: "ResumeFailed",
+
+  /**
+   * Consortium has been resumed.
+   */
+  Resumed: "Resumed",
+
+  /**
+   * Consortium is being deprovisioned.
+   */
+  Deprovisioning: "Deprovisioning",
+
+  /**
+   * Consortium has been deprovisioned.
+   */
+  Deprovisioned: "Deprovisioned",
 }
 
 /**
@@ -508,7 +714,8 @@ model ContractProperties {
    * Gets or sets the contract Id.
    */
   @visibility(Lifecycle.Read)
-  contractId: string;
+  @madeOptional(Versions.v2026_03_31_preview)
+  contractId?: string;
 
   /**
    * Gets or sets the deployment policy.

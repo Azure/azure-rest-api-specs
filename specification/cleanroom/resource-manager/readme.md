@@ -27,7 +27,16 @@ These are the global settings for the cleanroom.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2025-10-31
+tag: package-preview-2026-03-31
+```
+
+### Tag: package-preview-2026-03-31-preview
+
+These settings apply only when `--tag=package-preview-2026-03-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-31-preview'
+input-file:
+  - Microsoft.CleanRoom/preview/2026-03-31-preview/openapi.json
 ```
 
 ### Tag: package-preview-2025-10-31-preview

@@ -195,14 +195,6 @@ model ActionIpExtendedCommunityPatchProperties
 @doc("The Route Policy patch resource definition.")
 model RoutePolicyPatch extends TagsUpdate {
   @doc("The RoutePolicy patchable properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: RoutePolicyPatchableProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("The RoutePolicy patchable properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RoutePolicyPatchableProperties;
 }
 
