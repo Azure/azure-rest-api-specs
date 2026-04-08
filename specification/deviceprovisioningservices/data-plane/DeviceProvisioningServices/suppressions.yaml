@@ -12,9 +12,12 @@
 - tool: TypeSpecValidation
   paths:
     - ./tspconfig.yaml
+    - ./device
+    - ./service
   rules: [SdkTspConfigValidation]
   reason: >
     DPS data-plane uses a sub-folder TypeSpec structure (device/ and service/ sub-projects).
     The root tspconfig.yaml is a stub required only for tsv compatibility (FlavorAzure and
-    LinterRuleset rules). SDK generation is configured in device/tspconfig.yaml and
-    service/tspconfig.yaml; SdkTspConfigValidation on the root stub is not applicable.
+    LinterRuleset rules). SDK emitter configurations (Java, Python, TypeScript) for the
+    device/ and service/ sub-projects will be added in a follow-up PR as part of SDK
+    onboarding; they are not required for this TypeSpec source migration PR.
