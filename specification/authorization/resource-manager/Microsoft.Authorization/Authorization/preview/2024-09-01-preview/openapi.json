@@ -1549,36 +1549,6 @@
         ]
       }
     },
-    "CommonUserType": {
-      "type": "string",
-      "description": "The type of user.",
-      "enum": [
-        "User",
-        "Group",
-        "ServicePrincipal"
-      ],
-      "x-ms-enum": {
-        "name": "CommonUserType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "User"
-          },
-          {
-            "name": "Group",
-            "value": "Group",
-            "description": "Group"
-          },
-          {
-            "name": "ServicePrincipal",
-            "value": "ServicePrincipal",
-            "description": "ServicePrincipal"
-          }
-        ]
-      }
-    },
     "EligibleChildResource": {
       "type": "object",
       "description": "Eligible child resource",
@@ -3572,7 +3542,7 @@
       "description": "The detail of a subject.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/CommonUserType",
+          "$ref": "#/definitions/UsersOrServicePrincipalSetUserType",
           "description": "The type of user."
         },
         "id": {
@@ -3583,6 +3553,36 @@
           "type": "string",
           "description": "The display Name of the entity."
         }
+      }
+    },
+    "UsersOrServicePrincipalSetUserType": {
+      "type": "string",
+      "description": "The type of user.",
+      "enum": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "UsersOrServicePrincipalSetUserType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Group"
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "ServicePrincipal"
+          }
+        ]
       }
     }
   },

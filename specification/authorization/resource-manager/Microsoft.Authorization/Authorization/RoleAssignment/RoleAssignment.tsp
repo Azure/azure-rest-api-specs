@@ -17,14 +17,80 @@ namespace Microsoft.RoleAssignment;
 @extensionResource
 model RoleAssignment
   is Azure.ResourceManager.ExtensionResource<RoleAssignmentProperties> {
-  @path(#{ allowReserved: true })
-  @key("roleAssignmentName")
-  @segment("roleAssignments")
-  @pattern("")
-  @visibility(Lifecycle.Read)
-  @doc("The name of the role assignment. It can be any valid GUID.")
-  roleAssignmentName: string;
+  ...ResourceNameParameter<
+    Resource = RoleAssignment,
+    KeyName = "roleAssignmentName",
+    SegmentName = "roleAssignments",
+    NamePattern = ""
+  >;
 }
+
+alias RoleAssignmentsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path(#{ allowReserved: true })
+    @segment("")
+    @key
+    scope: string;
+
+    /**
+     * The provider namespace. Always "Microsoft.Authorization".
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+  },
+  {},
+  {
+    /**
+     * The name of the role assignment. It can be any valid GUID.
+     */
+    @path(#{ allowReserved: true })
+    @key
+    @segment("roleAssignments")
+    @pattern("")
+    roleAssignmentName: string;
+  }
+>;
+
+alias RoleAssignmentQuerysOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path(#{ allowReserved: true })
+    @segment("")
+    @key
+    scope: string;
+
+    /**
+     * The provider namespace. Always "Microsoft.Authorization".
+     */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Authorization";
+  },
+  {},
+  {
+    /**
+     * Tenant ID for cross-tenant request
+     */
+    @query("tenantId")
+    tenantId?: string;
+
+    /**
+     * The name of the role assignment. It can be any valid GUID.
+     */
+    @path(#{ allowReserved: true })
+    @segment("roleAssignments")
+    @pattern("")
+    roleAssignmentName: string;
+  }
+>;
 
 alias RoleAssignmentsForResourceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -87,23 +153,12 @@ interface RoleAssignments {
   /**
    * Get a role assignment by scope and name.
    */
-  get is Extension.Read<
-    Extension.ScopeParameter,
-    RoleAssignment,
-    Parameters = {
-      /**
-       * Tenant ID for cross-tenant request
-       */
-      @query("tenantId")
-      tenantId?: string;
-    }
-  >;
+  get is RoleAssignmentQuerysOps.Read<RoleAssignment>;
 
   /**
    * Create or update a role assignment by scope and name.
    */
-  create is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
-    Extension.ScopeParameter,
+  create is RoleAssignmentsOps.CreateOrUpdateSync<
     RoleAssignment,
     Request = RoleAssignmentCreateParameters
   >;
@@ -111,16 +166,8 @@ interface RoleAssignments {
   /**
    * Delete a role assignment by scope and name.
    */
-  delete is Extension.DeleteSync<
-    Extension.ScopeParameter,
+  delete is RoleAssignmentQuerysOps.DeleteSync<
     RoleAssignment,
-    Parameters = {
-      /**
-       * Tenant ID for cross-tenant request
-       */
-      @query("tenantId")
-      tenantId?: string;
-    },
     Response = ArmResponse<RoleAssignment> | ArmDeletedNoContentResponse
   >;
 
@@ -148,7 +195,8 @@ interface RoleAssignments {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    Response = RoleAssignmentListResult
   >;
 
   /**
@@ -168,7 +216,8 @@ interface RoleAssignments {
        */
       @query("tenantId")
       tenantId?: string;
-    }
+    },
+    Response = RoleAssignmentListResult
   >;
 
   /**
@@ -189,7 +238,8 @@ interface RoleAssignments {
        */
       @query("tenantId")
       tenantId?: string;
-    }
+    },
+    Response = RoleAssignmentListResult
   >;
 
   /**
@@ -209,7 +259,8 @@ interface RoleAssignments {
        */
       @query("tenantId")
       tenantId?: string;
-    }
+    },
+    Response = RoleAssignmentListResult
   >;
 }
 

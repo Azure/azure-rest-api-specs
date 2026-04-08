@@ -131,7 +131,7 @@ alias ScopeAccessReviewHistoryDefinitionOps = Azure.ResourceManager.Legacy.Exten
   {
     ...ApiVersionParameter;
 
-    /** undefined */
+    /** The scope of the resource. */
     @path
     @segment("")
     @key

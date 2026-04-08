@@ -177,7 +177,7 @@ alias ScopeAccessReviewInstanceOps = Azure.ResourceManager.Legacy.ExtensionOpera
   {
     ...ApiVersionParameter;
 
-    /** undefined */
+    /** The scope of the resource. */
     @path
     @segment("")
     @key

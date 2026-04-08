@@ -238,7 +238,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
@@ -280,19 +280,19 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "roleAssignmentName",
             "in": "path",
             "description": "The name of the role assignment. It can be any valid GUID.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "tenantId",
-            "in": "query",
-            "description": "Tenant ID for cross-tenant request",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -402,19 +402,19 @@
             "x-ms-skip-url-encoding": true
           },
           {
+            "name": "tenantId",
+            "in": "query",
+            "description": "Tenant ID for cross-tenant request",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "roleAssignmentName",
             "in": "path",
             "description": "The name of the role assignment. It can be any valid GUID.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "tenantId",
-            "in": "query",
-            "description": "Tenant ID for cross-tenant request",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -472,7 +472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
@@ -560,7 +560,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
@@ -616,7 +616,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
@@ -672,18 +672,14 @@
     },
     "RoleAssignmentListResult": {
       "type": "object",
-      "description": "The response of a RoleAssignment list operation.",
+      "description": "Role assignment list operation result.",
       "properties": {
         "value": {
           "type": "array",
           "description": "The RoleAssignment items on this page",
           "items": {
             "$ref": "#/definitions/RoleAssignment"
-          },
-          "x-ms-identifiers": [
-            "roleAssignmentName",
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
