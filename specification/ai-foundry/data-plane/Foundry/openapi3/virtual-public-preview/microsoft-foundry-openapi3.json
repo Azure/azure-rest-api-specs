@@ -12281,7 +12281,7 @@
                 "$ref": "#/components/schemas/VersionSelector"
               }
             ],
-            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent. For Hosted Agents, this only applies to new sessions. See the SessionVerionUpgradePolicy for how versioning is handled for existing sessions."
           },
           "protocols": {
             "type": "array",
@@ -12373,7 +12373,7 @@
                 "$ref": "#/components/schemas/VersionSelectorUpdate"
               }
             ],
-            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent."
+            "description": "The version selector of the agent endpoint determines how traffic is routed to different versions of the agent. For Hosted Agents, this only applies to new sessions. See the SessionVerionUpgradePolicy for how versioning is handled for existing sessions."
           },
           "protocols": {
             "type": "array",
@@ -18278,7 +18278,8 @@
           "kind",
           "container_protocol_versions",
           "cpu",
-          "memory"
+          "memory",
+          "session_persistent_volume"
         ],
         "properties": {
           "kind": {
@@ -18344,6 +18345,41 @@
               }
             ],
             "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
+          },
+          "session_persistent_volume": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionPersistentVolumeConfig"
+              }
+            ],
+            "description": "Configuration for a session's persistent filesystem volume."
+          },
+          "session_version_upgrade_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionVersionUpgradePolicy"
+              }
+            ],
+            "description": "How to change the version of existing sessions after they are created. Defaults to automatically upgrading to the version set in the agent endpoint.",
+            "default": "auto_upgrade"
+          },
+          "session_max_lifespan": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum session lifespan. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days (`P30D`).",
+            "default": 2592000
+          },
+          "session_idle_timeout": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Idle session timeout. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.",
+            "default": 7200
+          },
+          "graceful_termination_period": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Graceful termination period. This is the time between sending SIGTERM and SIGKILL to the agent process.",
+            "default": 30
           }
         },
         "allOf": [
@@ -41142,6 +41178,48 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
+          ]
+        }
+      },
+      "SessionPersistentVolumeConfig": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether to enable the persistent filesystem volume. When enabled, a unique-per-session volume will be mounted at $HOME that is preserved across the entire session's lifespan.",
+            "default": true
+          },
+          "capacity": {
+            "type": "string",
+            "description": "Capacity of the volume in bytes.",
+            "example": "2Gi",
+            "default": "5Gi"
+          }
+        },
+        "description": "Configuration for a persistent filesystem volume attached to each hosted agent session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "SessionVersionUpgradePolicy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "auto_upgrade",
+              "pin_to_version"
+            ]
+          }
+        ],
+        "description": "The policy for upgrading a session's version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
           ]
         }
       },

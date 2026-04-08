@@ -407,6 +407,35 @@ model WorkflowAgentDefinition extends AgentDefinition {
   workflow?: string;
 }
 
+@doc("The policy for upgrading an existing session's version.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union SessionVersionUpgradePolicy {
+  string,
+
+  @doc("Automatically upgrade the session to the version set in the agent endpoint.")
+  auto_upgrade: "auto_upgrade",
+
+  @doc("Pin the session to its existing version and do not upgrade.")
+  pin_to_version: "pin_to_version",
+}
+
+@doc("Configuration for a persistent filesystem volume attached to each hosted agent session.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model SessionPersistentVolumeConfig {
+  @doc("Whether to enable the persistent filesystem volume. When enabled, a unique-per-session volume will be mounted at $HOME that is preserved across the entire session's lifespan.")
+  enabled?: boolean = true;
+
+  @doc("Capacity of the volume in bytes.")
+  @example("2Gi")
+  capacity?: string = "5Gi";
+}
+
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
@@ -451,6 +480,29 @@ model HostedAgentDefinition extends AgentDefinition {
   @removed(Versions.v1)
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
   telemetry_config?: TelemetryConfig;
+
+  @removed(Versions.v1)
+  @doc("Configuration for a session's persistent filesystem volume.")
+  session_persistent_volume: SessionPersistentVolumeConfig;
+
+  @removed(Versions.v1)
+  @doc("How to change the version of existing sessions after they are created. Defaults to automatically upgrading to the version set in the agent endpoint.")
+  session_version_upgrade_policy?: SessionVersionUpgradePolicy = SessionVersionUpgradePolicy.auto_upgrade;
+
+  @removed(Versions.v1)
+  @doc("Maximum session lifespan. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days (`P30D`).")
+  @encode(DurationKnownEncoding.seconds, int32)
+  session_max_lifespan?: duration = duration.fromISO("P30D");
+
+  @removed(Versions.v1)
+  @doc("Idle session timeout. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  session_idle_timeout?: duration = duration.fromISO("PT2H");
+
+  @removed(Versions.v1)
+  @doc("Graceful termination period. This is the time between sending SIGTERM and SIGKILL to the agent process.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  graceful_termination_period?: duration = duration.fromISO("PT30S");
 }
 
 // ── Telemetry Unions ────────────────────────────────────
@@ -864,7 +916,7 @@ union IsolationKeySourceKind {
   #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
 )
 model AgentEndpoint {
-  @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
+  @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent. For Hosted Agents, this only applies to new sessions. See the SessionVerionUpgradePolicy for how versioning is handled for existing sessions.")
   version_selector?: VersionSelector;
 
   @doc("The protocols that the agent supports")
