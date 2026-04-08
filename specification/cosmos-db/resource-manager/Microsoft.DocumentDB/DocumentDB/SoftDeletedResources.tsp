@@ -135,6 +135,8 @@ model SoftDeletedDatabaseAccountGetResult {
   /**
    * The location of the resource group to which the resource belongs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability is required for ARM location property"
+  @extension("x-ms-mutability", #["read", "create"])
   location?: string;
 }
 
@@ -222,6 +224,8 @@ model SoftDeletedSqlDatabaseGetResult {
   /**
    * The location of the resource group to which the resource belongs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability is required for ARM location property"
+  @extension("x-ms-mutability", #["read", "create"])
   location?: string;
 }
 
@@ -319,6 +323,8 @@ model SoftDeletedSqlContainerGetResult {
   /**
    * The location of the resource group to which the resource belongs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability is required for ARM location property"
+  @extension("x-ms-mutability", #["read", "create"])
   location?: string;
 }
 
@@ -357,11 +363,7 @@ interface SoftDeletedDatabaseAccounts {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.
@@ -378,17 +380,14 @@ interface SoftDeletedDatabaseAccounts {
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation for soft-deleted resources"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
   @extension("x-ms-pageable", #{nextLinkName: "nextLink"})
   listByLocation(
     ...Azure.ResourceManager.ApiVersionParameter,
     ...Azure.ResourceManager.SubscriptionIdParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
   ): ArmResponse<SoftDeletedDatabaseAccountsListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
@@ -402,11 +401,7 @@ interface SoftDeletedDatabaseAccounts {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     ...Azure.ResourceManager.ApiVersionParameter,
   ): ArmResponse<SoftDeletedDatabaseAccountsListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
@@ -420,11 +415,7 @@ interface SoftDeletedDatabaseAccounts {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.
@@ -463,11 +454,7 @@ interface SoftDeletedSqlDatabases {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.
@@ -500,11 +487,7 @@ interface SoftDeletedSqlDatabases {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.
@@ -525,11 +508,7 @@ interface SoftDeletedSqlDatabases {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.
@@ -577,11 +556,7 @@ interface SoftDeletedSqlContainers {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.
@@ -623,11 +598,7 @@ interface SoftDeletedSqlContainers {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.
@@ -657,11 +628,7 @@ interface SoftDeletedSqlContainers {
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
 
-    /**
-     * Cosmos DB region, with spaces between words and each word capitalized.
-     */
-    @path
-    location: string,
+    ...Azure.ResourceManager.LocationParameter,
 
     /**
      * Cosmos DB database account name.

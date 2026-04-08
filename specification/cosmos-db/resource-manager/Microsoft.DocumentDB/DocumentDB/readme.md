@@ -1123,6 +1123,14 @@ directive:
     from: cosmos-db.json
     where: $.definitions.MaterializedViewDetails.properties._rid
     reason: _rid is a backend property
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: openapi.json
+    where: $.definitions.SoftDeletedSqlDatabaseResource.properties._rid
+    reason: _rid is a backend property
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: openapi.json
+    where: $.definitions.SoftDeletedSqlContainerResource.properties._rid
+    reason: _rid is a backend property
 ```
 
 ---
