@@ -51,6 +51,11 @@ namespace Microsoft.AuthorizationCombinedClient;
 @@clientName(Microsoft.Authorization.CommonUserType, "UserType", "python");
 @@clientName(Microsoft.Authorization.UserType, "CommonUserType", "python");
 
+@@usage(Microsoft.RoleAssignment.RoleAssignment,
+  Azure.ClientGenerator.Core.Usage.input,
+  "java"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Microsoft.ProviderOperations.ProviderOperationsMetadataGetParameters.$expand,
   "resourceTypes",
