@@ -25,11 +25,11 @@ using TypeSpec.Versioning;
  * Monitor Management Client
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "Azure Action Groups API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Insights;
+namespace Microsoft.ActionGroups;
 
 /**
  * The available API versions.

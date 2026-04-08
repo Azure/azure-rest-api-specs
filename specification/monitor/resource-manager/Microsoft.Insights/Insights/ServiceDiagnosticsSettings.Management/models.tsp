@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace Microsoft.ServiceDiagnosticsSettings;
 
 /**
  * The diagnostic settings for service.

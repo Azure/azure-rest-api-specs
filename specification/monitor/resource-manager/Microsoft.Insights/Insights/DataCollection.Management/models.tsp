@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace Microsoft.DataCollection;
 
 /**
  * The configuration to set whether network access from public internet to the endpoints are allowed.

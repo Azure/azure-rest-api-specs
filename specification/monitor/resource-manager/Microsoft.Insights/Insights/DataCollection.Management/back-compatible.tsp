@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Insights;
+using Microsoft.DataCollection;
 
 @@clientLocation(DataCollectionEndpointResources.get,
   "DataCollectionEndpoints"

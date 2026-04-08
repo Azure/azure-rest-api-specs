@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Insights;
+namespace Microsoft.MetricAlert;
 /**
  * The metric alert resource.
  */

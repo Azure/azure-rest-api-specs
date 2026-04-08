@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Insights;
+using Microsoft.PrivateLinkScopes;
 
 @@clientLocation(AzureMonitorPrivateLinkScopes.get, "PrivateLinkScopes");
 @@clientLocation(AzureMonitorPrivateLinkScopes.createOrUpdate,

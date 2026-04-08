@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace Microsoft.ActivityLogAlerts;
 
 /**
  * An Azure Activity Log Alert rule.

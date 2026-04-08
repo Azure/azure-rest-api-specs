@@ -25,12 +25,12 @@ using TypeSpec.Versioning;
  * Azure Monitor client to create/update/delete Scheduled Query Rules.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "Scheduled Query Rules API" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Insights;
+namespace Microsoft.ScheduledQueryRule;
 
 /**
  * The available API versions.

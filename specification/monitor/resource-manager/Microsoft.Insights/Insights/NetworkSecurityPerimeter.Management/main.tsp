@@ -25,11 +25,11 @@ using TypeSpec.Versioning;
  * Provides NSP operations for working with Scheduled Query Rules.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "Scheduled Query Rules API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace Microsoft.Insights;
+namespace Microsoft.NetworkSecurityPerimeter;
 
 /**
  * The available API versions.

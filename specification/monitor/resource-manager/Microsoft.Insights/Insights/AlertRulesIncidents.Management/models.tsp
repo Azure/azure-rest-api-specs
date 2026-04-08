@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace Microsoft.AlertRulesIncidents;
 
 /**
  * An alert incident indicates the activation status of an alert rule.

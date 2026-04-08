@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace Microsoft.LogProfiles;
 
 /**
  * The log profile properties.

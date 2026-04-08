@@ -27,12 +27,12 @@ using TypeSpec.Versioning;
  * Provides comprehensive operations for working with Azure Monitor data collection rules, endpoints, and associations. This API enables management of telemetry collection, transformation, and routing configurations.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "Azure Monitor Data Collection Control Plane API" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Insights;
+namespace Microsoft.DataCollection;
 
 /**
  * The available API versions.

@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace Microsoft.ScheduledQueryRule;
 
 /**
  * Indicates the type of scheduled query rule. The default is LogAlert.
