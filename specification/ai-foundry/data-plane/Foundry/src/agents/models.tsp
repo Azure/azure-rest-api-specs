@@ -438,6 +438,117 @@ model SessionPersistentVolumeConfig {
   capacity?: string = "5Gi";
 }
 
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union SessionExpirationPolicyType {
+  string,
+
+  @doc("Never expire the session.")
+  `never`: "never",
+
+  @doc("Sessions expire after a fixed lifetime.")
+  max_lifetime: "max_lifetime",
+
+  @doc("Expire a session after it is idle for a given duration.")
+  idle_timeout: "idle_timeout",
+}
+
+@doc("Expiration configuration for session.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+@discriminator("type")
+model SessionExpirationPolicy {
+  @doc("The policy type.")
+  type: SessionExpirationPolicyType;
+}
+
+@doc("Expire after a certain session lifetime.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model MaxLifetimeSessionExpirationPolicy extends SessionExpirationPolicy {
+  @doc("The policy type.")
+  type: SessionExpirationPolicyType.max_lifetime;
+
+  @doc("How long after creation the session should be expired, in seconds.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  max_lifetime: duration;
+}
+
+@doc("Expire after a period of inactivity.")
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+model IdleTimeoutSessionExpirationPolicy extends SessionExpirationPolicy {
+  @doc("The policy type.")
+  type: SessionExpirationPolicyType.idle_timeout;
+
+  @doc("How long after the last activity the session should be expired, in seconds.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout: duration;
+}
+
+const DefaultSessionExpirationPolicy: IdleTimeoutSessionExpirationPolicy = #{
+  type: SessionExpirationPolicyType.idle_timeout,
+  idle_timeout: duration.fromISO("PT30D")
+};
+
+@removed(Versions.v1)
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+union SessionSuspensionPolicyType {
+  string,
+
+  @doc("Never suspend the session.")
+  `never`: "never",
+
+  @doc("Suspend a session after it is idle for a given duration.")
+  idle_timeout: "idle_timeout",
+}
+
+@doc("Suspension configuration for session.")
+@discriminator("type")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+@removed(Versions.v1)
+model SessionSuspensionPolicy {
+  type: SessionSuspensionPolicyType;
+}
+
+@doc("Suspend after sandbox has no activity for a period of time.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
+)
+@removed(Versions.v1)
+model IdleTimeoutSessionSuspensionPolicy extends SessionSuspensionPolicy {
+  type: SessionSuspensionPolicyType.idle_timeout;
+
+  @doc("Timeout in seconds. If a sandbox shows no inbound or outbound activity for a certain period, the session will be suspended.")
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout: duration;
+}
+
+const DefaultSessionSuspensionPolicy: IdleTimeoutSessionSuspensionPolicy = #{
+  type: SessionSuspensionPolicyType.idle_timeout,
+  idle_timeout: duration.fromISO("PT2H")
+};
+
+
 @doc("Configure the behavior and lifecycle of sessions.")
 @removed(Versions.v1)
 @extension(
@@ -454,13 +565,11 @@ model SessionConfig {
   @doc("How to agent versions of sessions should change. Defaults to automatically upgrading to the version set in the agent endpoint.")
   version_upgrade_policy?: SessionVersionUpgradePolicy = SessionVersionUpgradePolicy.auto_upgrade;
 
-  @doc("Maximum session lifespan in seconds. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  max_lifespan?: duration = duration.fromISO("P30D");
+  @doc("When to suspend a session. Default is 2 hours after last activity.")
+  suspension_policy?: SessionSuspensionPolicy = DefaultSessionSuspensionPolicy;
 
-  @doc("Idle session timeout in seconds. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.")
-  @encode(DurationKnownEncoding.seconds, int32)
-  idle_timeout?: duration = duration.fromISO("PT2H");
+  @doc("When to expire a session. Default is 30 days after last activity.")
+  expiration_policy?: SessionExpirationPolicy = DefaultSessionExpirationPolicy; 
 }
 
 @doc("The hosted agent definition.")
