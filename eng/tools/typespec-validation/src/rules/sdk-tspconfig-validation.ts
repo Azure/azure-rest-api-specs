@@ -804,11 +804,9 @@ export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleB
     const hasLegacyEmitter =
       emit?.includes(LEGACY_CSHARP_EMITTER) || options?.[LEGACY_CSHARP_EMITTER] !== undefined;
 
+    // Allow existing projects that already use the legacy emitter
     if (hasLegacyEmitter) {
-      return this.createFailedResult(
-        `Management plane TypeSpec projects must use "${CSHARP_MGMT_EMITTER}" instead of "${LEGACY_CSHARP_EMITTER}" for .NET SDK generation`,
-        `Please replace "${LEGACY_CSHARP_EMITTER}" with "${CSHARP_MGMT_EMITTER}" in your tspconfig.yaml`,
-      );
+      return { success: true };
     }
 
     return this.createFailedResult(
