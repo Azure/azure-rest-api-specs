@@ -72,3 +72,8 @@ namespace Microsoft.Relationships {
 );
 
 @@clientName(Microsoft.Relationships, "RelationshipsMgmtClient", "python");
+
+@@clientName(RelationshipOrigins, "RelationshipOriginType", "csharp");
+@@alternateType(RelationshipMetadata.sourceType, armResourceType, "csharp");
+@@alternateType(RelationshipMetadata.targetType, armResourceType, "csharp");
+@@clientName(ProvisioningState, "RelationshipProvisioningState", "csharp");

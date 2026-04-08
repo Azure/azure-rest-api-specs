@@ -68,6 +68,10 @@ using TypeSpec.Versioning;
   "ExecuteVirtualMachineDeleteOperation",
   "csharp"
 );
+@@clientName(ScheduledActions.virtualMachinesExecuteCreateFlex,
+  "ExecuteVirtualMachineCreateFlexOperation",
+  "csharp"
+);
 
 @@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
 @@clientName(CreateFlexResourceOperationResponse,
@@ -108,6 +112,10 @@ using TypeSpec.Versioning;
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(CreateFlexResourceOperationResponse.type,
+  "ResourceType",
+  "csharp"
+);
 @@clientName(ExecuteDeleteRequest.correlationid,
   "correlationId",
   "csharp,javascript"
@@ -217,6 +225,22 @@ using TypeSpec.Versioning;
   "csharp"
 );
 @@clientName(ResourceType, "ScheduledActionResourceType", "csharp");
+
+@@clientName(AllocationStrategy, "ComputeScheduleAllocationStrategy", "csharp");
+@@clientName(DistributionStrategy,
+  "ComputeScheduleDistributionStrategy",
+  "csharp"
+);
+@@clientName(OsType, "ComputeScheduleOSType", "csharp");
+@@clientName(PriorityType, "ComputeSchedulePriorityType", "csharp");
+@@clientName(PriorityProfile, "ComputeSchedulePriorityProfile", "csharp");
+@@clientName(FlexProperties, "ComputeScheduleFlexProperties", "csharp");
+@@clientName(VmSizeProfile, "ComputeScheduleVmSizeProfile", "csharp");
+@@clientName(ZonePreference, "ComputeScheduleZonePreference", "csharp");
+@@clientName(ZoneAllocationPolicy,
+  "ComputeScheduleZoneAllocationPolicy",
+  "csharp"
+);
 
 @@clientName(OccurrenceExtension.listOccurrenceByVms,
   "GetAssociatedOccurrences",
