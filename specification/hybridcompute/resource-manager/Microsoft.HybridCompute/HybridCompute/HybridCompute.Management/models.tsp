@@ -2864,6 +2864,13 @@ model OperationListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: OperationValue[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: url;
 }
 
 /**

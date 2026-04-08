@@ -323,6 +323,9 @@
           "List Hybrid Compute Provider Operations": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -550,8 +553,7 @@
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           {
             "name": "publisher",
@@ -608,8 +610,7 @@
             "name": "location",
             "in": "path",
             "required": true,
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           {
             "name": "publisher",
@@ -760,6 +761,11 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2387,6 +2393,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3398,7 +3409,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
+          "final-state-via": "azure-async-operation",
           "final-state-schema": "#/definitions/MachineRunCommand"
         },
         "x-ms-long-running-operation": true
@@ -7760,6 +7771,12 @@
           "items": {
             "$ref": "#/definitions/OperationValue"
           },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL to get the next set of results.",
           "readOnly": true
         }
       }

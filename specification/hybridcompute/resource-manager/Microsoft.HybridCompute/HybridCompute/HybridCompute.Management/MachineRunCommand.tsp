@@ -35,6 +35,7 @@ interface MachineRunCommands {
   /**
    * The operation to create or update a run command.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MachineRunCommand,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = MachineRunCommand> &

@@ -25,7 +25,8 @@ interface LicensesOperationGroup {
   validateLicense is ArmProviderActionAsync<
     Request = License,
     Response = ArmResponse<License> &
-      ArmLroLocationHeader<FinalResult = License>,
+      ArmLroLocationHeader<FinalResult = License> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope
   >;
 }

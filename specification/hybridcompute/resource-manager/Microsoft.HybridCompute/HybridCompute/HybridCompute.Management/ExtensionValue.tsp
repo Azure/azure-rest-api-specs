@@ -33,7 +33,6 @@ alias ExtensionValueOps = Legacy.ExtensionOperations<
     @path
     @segment("locations")
     @key("location")
-    @minLength(1)
     location: string;
 
     @path

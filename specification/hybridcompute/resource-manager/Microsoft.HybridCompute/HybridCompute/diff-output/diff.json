@@ -507,9 +507,6 @@
     },
     "/providers/microsoft.HybridCompute/operations": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "tags": [
           [
             "-",
@@ -535,45 +532,6 @@
               "minLength__deleted": 1,
               "$ref__added": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
             }
-          ],
-          [
-            " "
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions": {
-      "get": {
-        "parameters": [
-          [
-            "~",
-            {
-              "minLength__added": 1
-            }
-          ],
-          [
-            " "
-          ],
-          [
-            " "
-          ]
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}": {
-      "get": {
-        "parameters": [
-          [
-            "~",
-            {
-              "minLength__added": 1
-            }
-          ],
-          [
-            " "
-          ],
-          [
-            " "
           ],
           [
             " "
@@ -812,9 +770,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "The URI to poll for completion status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "The URI to poll for completion status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -895,9 +856,6 @@
         ]
       },
       "put": {
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "~",
@@ -935,6 +893,9 @@
               }
             }
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/MachineRunCommand"
         }
       },
       "patch": {
@@ -1832,6 +1793,19 @@
             }
           },
           "$ref__added": "#/definitions/OSProfileLinuxConfiguration"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description__added": "[Placeholder] Discription for page model",
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description__added": "[Placeholder] Discription for value property"
         }
       }
     },
