@@ -36,7 +36,6 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 
@@ -159,7 +158,6 @@ union RouteNextHopType {
 /**
  * Whether to disable the routes learned by peering on the route table.
  */
-@added(Versions.v2025_07_01)
 union DisablePeeringRoute {
   string,
 
@@ -3082,7 +3080,6 @@ model RouteTablePropertiesFormat {
   /**
    * Whether to disable the routes learned by peering on the route table. 'None' means peering routes are enabled, 'All' means all peering routes are disabled.
    */
-  @added(Versions.v2025_07_01)
   disablePeeringRoute?: DisablePeeringRoute;
 
   /**
