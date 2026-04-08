@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -192,6 +194,23 @@ union QuotaUsageStatus {
 }
 
 /**
+ * The quota scope that determines the level at which the quota is applied.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+union QuotaScopeType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
+  Regional: "Regional",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Global quota scope"
+  Global: "Global",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "DataZone quota scope"
+  DataZone: "DataZone",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Classic quota scope"
+  Classic: "Classic",
+}
+
+/**
  * Indicates whether the deprecation date is a confirmed planned end-of-life date or an estimated deprecation date. When 'Planned', the deprecation date represents a confirmed and communicated model end-of-life date. When 'Tentative', the deprecation date is an estimated timeline that may be subject to change.
  */
 union DeprecationStatus {
@@ -355,6 +374,44 @@ union DeploymentState {
    * The deployment is paused and not accepting inference requests.
    */
   Paused: "Paused",
+}
+
+/**
+ * The routing mode that determines how requests are distributed across models.
+ */
+union RoutingMode {
+  string,
+
+  /**
+   * Route requests to minimize cost while meeting performance requirements.
+   */
+  Cost: "cost",
+
+  /**
+   * Balance cost and accuracy when routing requests across models.
+   */
+  Balanced: "balanced",
+
+  /**
+   * Route requests to maximize accuracy regardless of cost.
+   */
+  Accuracy: "accuracy",
+}
+
+/**
+ * Routing configuration for the deployment. Specifies how requests are routed across multiple models.
+ */
+model DeploymentRouting {
+  /**
+   * The routing mode that determines how requests are distributed across models.
+   */
+  mode?: RoutingMode = RoutingMode.Balanced;
+
+  /**
+   * Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.
+   */
+  @identifiers(#["name", "version"])
+  models?: DeploymentModel[];
 }
 
 /**
@@ -933,6 +990,17 @@ union RuleType {
   PrivateEndpoint: "PrivateEndpoint",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Service tag outbound rule"
   ServiceTag: "ServiceTag",
+}
+
+/**
+ * The action enum for a managed network outbound rule.
+ */
+union RuleAction {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Allow outbound traffic"
+  Allow: "Allow",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Deny outbound traffic"
+  Deny: "Deny",
 }
 
 /**
@@ -1571,6 +1639,13 @@ model AccountProperties {
   networkInjections?: NetworkInjection[];
 
   /**
+   * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
+   */
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  foundryAutoUpgrade?: FoundryAutoUpgrade;
+
+  /**
    * Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry.
    */
   allowProjectManagement?: boolean;
@@ -1584,6 +1659,53 @@ model AccountProperties {
    * Specifies the projects, by project name, that are associated with this resource.
    */
   associatedProjects?: string[];
+}
+
+/**
+ * Represents the mode for foundry auto-upgrade configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+union FoundryAutoUpgradeMode {
+  string,
+
+  /**
+   * Auto-upgrade is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Auto-upgrade is disabled (opted out).
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Represents the foundry auto-upgrade configuration for a Cognitive Services account.
+ * Customers can opt out of auto-upgrade by setting mode to Disabled.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+model FoundryAutoUpgrade {
+  /**
+   * Gets or sets the auto-upgrade mode.
+   */
+  mode?: FoundryAutoUpgradeMode;
+
+  /**
+   * Gets or sets a value indicating whether the auto-upgrade is planned by Microsoft.
+   */
+  plannedByMicrosoft?: boolean;
+
+  /**
+   * Gets or sets the status reason for the auto-upgrade configuration.
+   */
+  statusReason?: string;
+
+  /**
+   * Gets or sets the scheduled time for the auto-upgrade.
+   */
+  scheduledAt?: utcDateTime;
 }
 
 /**
@@ -2188,6 +2310,22 @@ model Usage {
    * Cognitive Services account quota usage status.
    */
   status?: QuotaUsageStatus;
+
+  /**
+   * The scope type of the quota usage.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  scopeType?: QuotaScopeType | null;
+
+  /**
+   * The scope identifier of the quota usage.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  scopeId?: string | null;
 }
 
 /**
@@ -2701,6 +2839,22 @@ model ModelSkuCapacityProperties {
    * The available capacity for deployment with a fine-tune version of this model and sku.
    */
   availableFinetuneCapacity?: float32;
+
+  /**
+   * The scope identifier for model SKU capacity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  scopeId?: string | null;
+
+  /**
+   * The scope type for model SKU capacity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable for backward compatibility"
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  scopeType?: QuotaScopeType | null;
 }
 
 /**
@@ -2977,6 +3131,11 @@ model DeploymentProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "'deploymentState' is nullable in 'DeploymentProperties' for backward compatibility with existing API behavior"
   deploymentState?: DeploymentState | null;
+
+  /**
+   * Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset.
+   */
+  routing?: DeploymentRouting;
 }
 
 /**
@@ -4330,9 +4489,15 @@ model ManagedNetworkSettings {
   /**
    * Public IP address assigned to the Azure Firewall.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'egressIpAddress' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "'firewallPublicIpAddress' is nullable in 'ManagedNetworkSettings' for backward compatibility with existing API behavior"
   @visibility(Lifecycle.Read)
-  egressIpAddress?: string | null;
+  firewallPublicIpAddress?: string | null;
+
+  /**
+   * The provisioning state of the managed network settings.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ManagedNetworkProvisioningState;
 }
 
 /**
@@ -5006,6 +5171,86 @@ model FqdnOutboundRule extends OutboundRule {
    * Type of a managed network Outbound Rule of a cognitive services account.
    */
   type: "FQDN";
+}
+
+/**
+ * Private Endpoint destination for an outbound rule.
+ */
+model PrivateEndpointOutboundRuleDestination {
+  /**
+   * The Azure resource ID of the target private endpoint service.
+   */
+  serviceResourceId?: string;
+
+  /**
+   * The subresource of the target service to connect to.
+   */
+  subresourceTarget?: string;
+}
+
+/**
+ * Private Endpoint outbound rule for the managed network of a cognitive services account.
+ */
+model PrivateEndpointOutboundRule extends OutboundRule {
+  /**
+   * Private Endpoint destination.
+   */
+  destination?: PrivateEndpointOutboundRuleDestination;
+
+  /**
+   * List of FQDNs associated with the private endpoint outbound rule.
+   */
+  fqdns?: string[];
+
+  /**
+   * Type of a managed network Outbound Rule of a cognitive services account.
+   */
+  type: "PrivateEndpoint";
+}
+
+/**
+ * Service Tag destination for an outbound rule.
+ */
+model ServiceTagOutboundRuleDestination {
+  /**
+   * Name of the Azure service tag to target.
+   */
+  serviceTag?: string;
+
+  /**
+   * Network protocol used by the service tag rule.
+   */
+  protocol?: string;
+
+  /**
+   * Destination port ranges.
+   */
+  portRanges?: string;
+
+  /**
+   * The action for the service tag outbound rule.
+   */
+  action?: RuleAction;
+
+  /**
+   * Optional address prefixes. If provided, the serviceTag property will be ignored.
+   */
+  addressPrefixes?: string[];
+}
+
+/**
+ * Service Tag outbound rule for the managed network of a cognitive services account.
+ */
+model ServiceTagOutboundRule extends OutboundRule {
+  /**
+   * Service Tag destination.
+   */
+  destination?: ServiceTagOutboundRuleDestination;
+
+  /**
+   * Type of a managed network Outbound Rule of a cognitive services account.
+   */
+  type: "ServiceTag";
 }
 
 /**

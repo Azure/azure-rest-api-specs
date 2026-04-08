@@ -527,6 +527,60 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules": {
+      "get": {
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "tags": [
+          "SBAuthorizationRules"
+        ],
+        "description": "Gets the authorization rules for a namespace.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The namespace name",
+            "required": true,
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SBAuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListAll": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}": {
       "get": {
         "operationId": "Namespaces_GetAuthorizationRule",
@@ -838,60 +892,6 @@
           "NameSpaceAuthorizationRuleRegenerateKey": {
             "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenerateKey.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/authorizationRules": {
-      "get": {
-        "operationId": "Namespaces_ListAuthorizationRules",
-        "tags": [
-          "SBAuthorizationRules"
-        ],
-        "description": "Gets the authorization rules for a namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The namespace name",
-            "required": true,
-            "type": "string",
-            "minLength": 6,
-            "maxLength": 50
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SBAuthorizationRuleListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameSpaceAuthorizationRuleListAll": {
-            "$ref": "./examples/NameSpaces/SBNameSpaceAuthorizationRuleListAll.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },

@@ -1186,20 +1186,8 @@ namespace Azure.ResourceManager.Models {
   "java"
 );
 // ManagedClusterLoadBalancerProfile
-@@clientName(ManagedClusterLoadBalancerProfile.managedOutboundIPs,
-  "managedOutboundIps",
-  "java"
-);
 @@clientName(ManagedClusterLoadBalancerProfile.outboundIPPrefixes,
   "outboundIpPrefixes",
-  "java"
-);
-@@clientName(ManagedClusterLoadBalancerProfile.outboundIPs,
-  "outboundIps",
-  "java"
-);
-@@clientName(ManagedClusterLoadBalancerProfile.effectiveOutboundIPs,
-  "effectiveOutboundIps",
   "java"
 );
 // ManagedClusterLoadBalancerProfileOutboundIPPrefixes
@@ -1207,18 +1195,9 @@ namespace Azure.ResourceManager.Models {
   "publicIpPrefixes",
   "java"
 );
-// ManagedClusterLoadBalancerProfileOutboundIPs
-@@clientName(ManagedClusterLoadBalancerProfileOutboundIPs.publicIPs,
-  "publicIps",
-  "java"
-);
 // ManagedClusterNATGatewayProfile
 @@clientName(ManagedClusterNATGatewayProfile.managedOutboundIPProfile,
   "managedOutboundIpProfile",
-  "java"
-);
-@@clientName(ManagedClusterNATGatewayProfile.effectiveOutboundIPs,
-  "effectiveOutboundIps",
   "java"
 );
 @@clientName(ManagedClusterNATGatewayProfile.outboundIPPrefixes,
@@ -1286,6 +1265,40 @@ namespace Azure.ResourceManager.Models {
   ManagedClusters,
   "java"
 );
+// LocalDNSProfile
+@@clientName(LocalDNSProfile.vnetDNSOverrides, "vnetDnsOverrides", "java");
+@@clientName(LocalDNSProfile.kubeDNSOverrides, "kubeDnsOverrides", "java");
+// ManagedClusterAgentPoolProfileProperties
+@@clientName(ManagedClusterAgentPoolProfileProperties.eTag, "etag", "java");
+@@clientName(ManagedClusterAgentPoolProfileProperties.localDNSProfile,
+  "localDnsProfile",
+  "java"
+);
+// ManagedClusterStorageProfile
+@@clientName(ManagedClusterStorageProfile.diskCSIDriver,
+  "diskCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfile.fileCSIDriver,
+  "fileCsiDriver",
+  "java"
+);
+@@clientName(ManagedClusterStorageProfile.blobCSIDriver,
+  "blobCsiDriver",
+  "java"
+);
+// ManagedClusterAPIServerAccessProfile
+@@clientName(ManagedClusterAPIServerAccessProfile.enablePrivateClusterPublicFQDN,
+  "enablePrivateClusterPublicFqdn",
+  "java"
+);
+// AgentPoolSecurityProfile
+@@clientName(AgentPoolSecurityProfile.enableVTPM, "enableVtpm", "java");
+// ManagedClusterWindowsProfile
+@@clientName(ManagedClusterWindowsProfile.enableCSIProxy,
+  "enableCsiProxy",
+  "java"
+);
 // TODO: drop the type replacement upon next major breaking change
 @@alternateType(ManagedClusterIdentity.type,
   global.ResourceIdentityType,
@@ -1311,3 +1324,20 @@ enum ResourceIdentityType {
    */
   None: "None",
 }
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4090"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4090"
+@@clientOption(ManagedCluster,
+  "resource-rbac-roles",
+  #{
+    AzureKubernetesServiceClusterAdminRole: "0ab0b1a8-8aac-4efd-b8c2-3ee1fb270be8",
+    AzureKubernetesServiceClusterMonitoringUser: "1afdec4b-e479-420e-99e7-f82237c7c5e6",
+    AzureKubernetesServiceClusterUserRole: "4abbcc35-e782-43d8-92c5-2d3f1bd2253f",
+    AzureKubernetesServiceContributorRole: "ed7f3fbd-7b88-4dd4-9017-9adb7ce333f8",
+    AzureKubernetesServiceRbacAdmin: "3498e952-d568-435e-9b2c-8d77e338d7f7",
+    AzureKubernetesServiceRbacClusterAdmin: "b1ff04bb-8a4e-4dc4-8eb5-8693973ce19b",
+    AzureKubernetesServiceRbacReader: "7f6c6a51-bcf8-42ba-9220-52d62157d7db",
+    AzureKubernetesServiceRbacWriter: "a7ffa36f-339b-4b5c-8bdf-e2c188b2c0eb",
+  },
+  "csharp"
+);
