@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./applicationModels.tsp";
+import "./automationApplicationModels.tsp";
 import "./AutomationProject.tsp";
 
 using TypeSpec.Rest;
