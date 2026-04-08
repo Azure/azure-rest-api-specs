@@ -63,9 +63,13 @@ using Microsoft.App;
 @@Legacy.flattenProperty(ConnectedEnvironment.properties);
 
 @@clientLocation(Certificates.get, "ConnectedEnvironmentsCertificates");
+@@clientLocation(Certificates.createOrUpdate,
+  "ConnectedEnvironmentsCertificates"
+);
 @@clientName(Certificates.createOrUpdate::parameters.resource,
   "certificateEnvelope"
 );
+@@clientLocation(Certificates.update, "ConnectedEnvironmentsCertificates");
 @@clientName(Certificates.update::parameters.properties, "certificateEnvelope");
 @@clientLocation(Certificates.delete, "ConnectedEnvironmentsCertificates");
 @@clientLocation(Certificates.list, "ConnectedEnvironmentsCertificates");
