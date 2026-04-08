@@ -110,7 +110,7 @@ These settings apply only when `--tag=package-2025-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-12-01-preview'
 input-file:
-  - stable/2015-07-01/openapi.json
+  - stable/2015-07-01/ClassicAdmin.json
   - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
