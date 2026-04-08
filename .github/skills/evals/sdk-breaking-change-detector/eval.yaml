@@ -1,0 +1,28 @@
+name: sdk-breaking-change-detector-eval
+description: Evaluation suite for sdk-breaking-change-detector.
+skill: sdk-breaking-change-detector
+version: "1.0"
+config:
+  trials_per_task: 1
+  timeout_seconds: 300
+  parallel: false
+  executor: copilot-sdk
+  model: gpt-5.1-codex-mini
+metrics:
+  - name: task_completion
+    weight: 1.0
+    threshold: 0.8
+    description: Did the skill complete the assigned task?
+graders:
+  - type: code
+    name: has_output
+    config:
+      assertions:
+        - "len(output) > 0"
+  - type: text
+    name: relevant_content
+    config:
+      regex_match:
+        - "(?i)(explain|describe|analyze|implement)"
+tasks:
+  - "tasks/*.yaml"
