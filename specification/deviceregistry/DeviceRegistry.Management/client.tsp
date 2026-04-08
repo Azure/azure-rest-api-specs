@@ -170,8 +170,6 @@ using Microsoft.DeviceRegistry;
 // server-side read-only and create-only fields (e.g. provisioningState, keyType, subject, etc.)
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
-@added(Versions.v2025_11_01_preview)
-@removed(Versions.v2026_04_01)
 @doc("The updatable certificate configuration forCertificateConfiguration PolicyV1.")
 model CertificateConfigurationUpdate {
   @doc("The configuration to set up an ICA.")
@@ -190,7 +188,7 @@ model PolicyUpdateProperties {
 }
 
 @doc("The type used for update operations of the PolicyV1.")
-model PolicyV1Update {
+model PolicyUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
   tags?: Record<string>;
@@ -199,7 +197,7 @@ model PolicyV1Update {
   properties?: PolicyUpdateProperties;
 }
 
-@@alternateType(Microsoft.DeviceRegistry.PoliciesV1.update::parameters.properties,
-  PolicyV1Update,
+@@alternateType(Microsoft.DeviceRegistry.Policies.update::parameters.properties,
+  PolicyUpdate,
   "javascript"
 );
