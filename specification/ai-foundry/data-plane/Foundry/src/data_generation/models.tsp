@@ -9,6 +9,9 @@ union DataGenerationJobType {
   @doc("Simple question and answers between user and agent.")
   SimpleQnA: "SimpleQnA",
 
+  @doc("Single turn conversation between user and agent. The generated data contain a query with list of messages in the conversation as context and a response (last turn) from the agent.")
+  SingleTurn: "SingleTurn",
+
   @doc("Tool calling conversation between user and agent.")
   ToolUse: "ToolUse",
 
@@ -19,7 +22,7 @@ union DataGenerationJobType {
 @doc("LLM model options for data generation jobs.")
 model DataGenerationModelOptions {
   @doc("Base model name used to generate data.")
-  model_name: string;
+  `model`: string;
 }
 
 @doc("Status values for data generation job.")
@@ -196,7 +199,7 @@ model DataGenerationJobOptions {
   @doc("Maximum number of samples to generate.")
   max_samples_count: int32;
 
-  @doc("The model options. Required only when the data source type is not Traces.")
+  @doc("The LLM model options.")
   model_options?: DataGenerationModelOptions;
 }
 
@@ -207,6 +210,12 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 
   @doc("The question types to generate. Used only for fine-tuning scenarios.")
   question_types?: Array<SimpleQnAFineTuningQuestionType>;
+}
+
+@doc("The options for a data generation job with SingleTurn type.")
+model SingleTurnDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is SingleTurn for this model.")
+  type: "SingleTurn";
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
@@ -248,7 +257,7 @@ model TracesDataGenerationJobSource extends DataGenerationJobSource {
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   end_time?: utcDateTime;
 
-  @doc("The delay to apply for ingestion when querying traces.")
+  @doc("The delay to apply for ingestion when querying traces. TODO: Do we need this?")
   @encode(DurationKnownEncoding.seconds, int32)
   ingestion_delay_seconds?: duration = duration.fromISO("PT5M");
 

@@ -10821,13 +10821,14 @@
                 "$ref": "#/components/schemas/DataGenerationModelOptions"
               }
             ],
-            "description": "The model options. Required only when the data source type is not Traces."
+            "description": "The LLM model options."
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
             "SimpleQnA": "#/components/schemas/SimpleQnADataGenerationJobOptions",
+            "SingleTurn": "#/components/schemas/SingleTurnDataGenerationJobOptions",
             "ToolUse": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions",
             "MultiTurn": "#/components/schemas/MultiTurnDataGenerationJobOptions"
           }
@@ -10959,6 +10960,7 @@
             "type": "string",
             "enum": [
               "SimpleQnA",
+              "SingleTurn",
               "ToolUse",
               "MultiTurn"
             ]
@@ -10969,10 +10971,10 @@
       "DataGenerationModelOptions": {
         "type": "object",
         "required": [
-          "model_name"
+          "model"
         ],
         "properties": {
-          "model_name": {
+          "model": {
             "type": "string",
             "description": "Base model name used to generate data."
           }
@@ -35790,6 +35792,26 @@
         ],
         "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
       },
+      "SingleTurnDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SingleTurn"
+            ],
+            "description": "The data generation job type, which is SingleTurn for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ]
+      },
       "Sku": {
         "type": "object",
         "required": [
@@ -36322,7 +36344,7 @@
           "ingestion_delay_seconds": {
             "type": "integer",
             "format": "int32",
-            "description": "The delay to apply for ingestion when querying traces.",
+            "description": "The delay to apply for ingestion when querying traces. TODO: Do we need this?",
             "default": 300
           },
           "max_traces": {
