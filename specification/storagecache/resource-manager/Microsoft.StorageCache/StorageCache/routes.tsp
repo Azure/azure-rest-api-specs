@@ -49,8 +49,6 @@ interface SkusOperationGroup {
   /**
    * Get the list of StorageCache.Cache SKUs available to this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Skus_List")
   @tag("SKUs")
   @autoRoute
   @get
@@ -68,8 +66,6 @@ interface UsageModelsOperationGroup {
   /**
    * Get the list of cache usage models available to this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UsageModels_List")
   @tag("UsageModels")
   @autoRoute
   @get
@@ -87,8 +83,6 @@ interface AscOperationsOperationGroup {
   /**
    * Gets the status of an asynchronous operation for the Azure HPC Cache
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AscOperations_Get")
   @tag("AscOperations")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}")
   @get
@@ -111,8 +105,6 @@ interface AscUsagesOperationGroup {
   /**
    * Gets the quantity used and quota limit for resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AscUsages_List")
   @tag("AscUsages")
   @autoRoute
   @get
