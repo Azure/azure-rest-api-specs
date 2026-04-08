@@ -287,9 +287,14 @@ stages:
         - pwsh: |
             $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
             $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
-            # use the user provided branch name
+            # use the user provided branch name, but reject commit SHA-like values (40 hex chars)
+            # as GitHub does not allow branch names that look like commit SHAs (GH002)
             if (($sdkRepoBranch -ne 'main') -and (-not [string]::IsNullOrWhiteSpace($sdkRepoBranch))) {
-              $sdkPrBranchName = $sdkRepoBranch
+              if ($sdkRepoBranch -match '^[0-9a-f]{40}$') {
+                Write-Host "##vso[task.logissue type=error]SdkRepoBranch '$sdkRepoBranch' looks like a commit SHA. Branch names consisting of 40 hex characters are not allowed by GitHub (GH002). Using auto-generated branch name instead."
+              } else {
+                $sdkPrBranchName = $sdkRepoBranch
+              }
             }
             Write-Host "Branch name is set to: $sdkPrBranchName"
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
