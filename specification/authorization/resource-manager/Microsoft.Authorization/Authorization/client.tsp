@@ -48,7 +48,10 @@ namespace Microsoft.AuthorizationCombinedClient;
   "go,python"
 );
 @@clientName(EligibleChildResourcesOperationGroup.get, "list", "javascript");
-@@clientName(Microsoft.Authorization.CommonUserType, "UserType", "python");
+@@clientName(Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
+  "UserType",
+  "python"
+);
 @@clientName(Microsoft.Authorization.UserType, "CommonUserType", "python");
 
 @@usage(Microsoft.RoleAssignment.RoleAssignment,
