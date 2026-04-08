@@ -89,7 +89,6 @@ suppressions:
     from: sovereign.json
     where: $.definitions.SovereignViewScope.properties.subscriptions
     reason: Subscription Ids are uuids.
-
 ```
 ---
 
