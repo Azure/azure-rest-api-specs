@@ -12,16 +12,17 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resources"
-    namespace: "azure.mgmt.resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource"
+    namespace: "azure.mgmt.resource.resources"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources"
     namespace: "com.azure.resourcemanager.resources"
-    service-name: "Resources" # human-readable service name, whitespace allowed
+    service-name: "Resource" # human-readable service name, whitespace allowed
     flavor: azure
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-resources"
     flavor: azure
