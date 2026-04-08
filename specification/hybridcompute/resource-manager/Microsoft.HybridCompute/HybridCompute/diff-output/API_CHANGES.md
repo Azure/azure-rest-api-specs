@@ -119,19 +119,6 @@ Change Type: added
 |------|------------|-------|
 | `paths['/providers/microsoft.HybridCompute/operations'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 
-### Changes for `x-ms-examples`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions'].get['x-ms-examples__deleted']` | deleted | `{"GET Agent Versions":{"$ref":"./examples/AgentVersions_Get.json"}}` |
-| `paths['/providers/microsoft.HybridCompute/osType/{osType}/agentVersions/{version}'].get['x-ms-examples__deleted']` | deleted | `{"GET Agent Versions":{"$ref":"./examples/AgentVersion_GetLatest.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata'].get['x-ms-examples__deleted']` | deleted | `{"HybridIdentityMetadataListByVirtualMachines":{"$ref":"./examples/HybridIdentityMetadata_ListByVirt...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}'].get['x-ms-examples__deleted']` | deleted | `{"GetHybridIdentityMetadata":{"$ref":"./examples/HybridIdentityMetadata_Get.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current'].get['x-ms-examples__deleted']` | deleted | `{"NetworkConfigurationsGet":{"$ref":"./examples/networkConfiguration/NetworkConfigurationsGet.json"}...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current'].patch['x-ms-examples__deleted']` | deleted | `{"NetworkConfigurationsPatch":{"$ref":"./examples/networkConfiguration/NetworkConfigurationsPatch.js...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/providers/microsoft.HybridCompute/networkConfigurations/current'].put['x-ms-examples__deleted']` | deleted | `{"NetworkConfigurationsCreate":{"$ref":"./examples/networkConfiguration/NetworkConfigurationsCreate....` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}'].patch['x-ms-examples__deleted']` | deleted | `{"Update a Run Command":{"$ref":"./examples/runCommand/RunCommands_Update.json"}}` |
-
 ### Changes for `headers`
 
 | Path | Change Type | Value |
