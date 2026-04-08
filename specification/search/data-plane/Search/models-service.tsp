@@ -853,6 +853,18 @@ union AzureOpenAIModelName {
   /** Gpt5Nano model. */
   Gpt5Nano: "gpt-5-nano",
 
+  /** Gpt51 model. */
+  @added(Versions.v2026_05_01_preview)
+  Gpt51: "gpt-5.1",
+
+  /** Gpt52 model. */
+  @added(Versions.v2026_05_01_preview)
+  Gpt52: "gpt-5.2",
+
+  /** Gpt54 model. */
+  @added(Versions.v2026_05_01_preview)
+  Gpt54: "gpt-5.4",
+
   /** Gpt54Mini model. */
   @added(Versions.v2026_04_01)
   Gpt54Mini: "gpt-5.4-mini",
@@ -4536,6 +4548,10 @@ model KnowledgeBase {
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   answerInstructions?: string;
+
+  /** Options to control Cross-Origin Resource Sharing (CORS) for the knowledge base. */
+  @added(Versions.v2026_05_01_preview)
+  corsOptions?: CorsOptions;
 }
 
 /** Result from listing knowledge bases. */
@@ -4879,6 +4895,14 @@ model SearchServiceCounters {
 
   /** Total memory consumption of all vector indexes within the service, in bytes. */
   vectorIndexSize: ResourceCounter;
+
+  /** Total number of knowledge bases. */
+  @added(Versions.v2026_05_01_preview)
+  knowledgeBasesCount: ResourceCounter;
+
+  /** Total number of knowledge sources. */
+  @added(Versions.v2026_05_01_preview)
+  knowledgeSourcesCount: ResourceCounter;
 }
 
 /** Represents a resource's usage and quota. */

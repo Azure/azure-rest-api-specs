@@ -2777,6 +2777,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchServiceCounters.synonymMaps, "synonymMapCounter");
 @@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter");
 @@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter");
+@@clientName(SearchServiceCounters.knowledgeBasesCount, "knowledgeBaseCounter");
+@@clientName(SearchServiceCounters.knowledgeSourcesCount,
+  "knowledgeSourceCounter"
+);
 @@clientName(SearchServiceLimits.maxStoragePerIndex,
   "maxStoragePerIndexInBytes"
 );

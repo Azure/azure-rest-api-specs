@@ -29,6 +29,10 @@ model KnowledgeBaseRetrievalRequest {
   @removed(Versions.v2026_04_01)
   maxOutputSize?: int32;
 
+  /** Limits the maximum number of documents in the output. */
+  @added(Versions.v2026_05_01_preview)
+  maxOutputDocuments?: int32;
+
   /** Limits the maximum size of the content in the output. */
   @added(Versions.v2026_04_01)
   maxOutputSizeInTokens?: int32;
@@ -142,8 +146,16 @@ model KnowledgeSourceParams {
   @removed(Versions.v2026_04_01)
   alwaysQuerySource?: boolean;
 
+  /** Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false. */
+  @added(Versions.v2026_05_01_preview)
+  failOnError?: boolean;
+
   /** The reranker threshold all retrieved documents must meet to be included in the response. */
   rerankerThreshold?: float32;
+
+  /** Limits the maximum number of documents returned from this knowledge source. */
+  @added(Versions.v2026_05_01_preview)
+  maxOutputDocuments?: int32;
 
   /** The type of the knowledge source. */
   kind: KnowledgeSourceKind;
