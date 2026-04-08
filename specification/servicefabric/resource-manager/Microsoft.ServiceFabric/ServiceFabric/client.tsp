@@ -148,4 +148,28 @@ using Microsoft.ServiceFabric;
 // in the namespace. Skipping for now - ClusterCodeVersionsResult base type change
 // accepted as known breaking change.
 
+// Base type overrides: old SDK had these as TrackedResourceData.
+// Spec has them as ProxyResource (location is optional), but the GA SDK ships with
+// TrackedResourceData, so we use hierarchyBuilding to restore that for C#.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationTypeResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ApplicationTypeVersionResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change base to TrackedResource for backward compatibility with GA SDK"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Microsoft.ServiceFabric.ServiceResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
 
