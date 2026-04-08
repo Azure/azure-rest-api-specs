@@ -50,6 +50,9 @@
     },
     {
       "name": "Features"
+    },
+    {
+      "name": "VmFamilies"
     }
   ],
   "paths": {
@@ -698,6 +701,95 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/vmFamilies": {
+      "get": {
+        "operationId": "VmFamilies_ListBySubscriptionLocationResource",
+        "tags": [
+          "VmFamilies"
+        ],
+        "description": "Lists all VM families for the subscription at the specified location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmFamilyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VM families": {
+            "$ref": "./examples/VmFamilies_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeLimit/locations/{location}/vmFamilies/{vmFamilyName}": {
+      "get": {
+        "operationId": "VmFamilies_Get",
+        "tags": [
+          "VmFamilies"
+        ],
+        "description": "Gets the properties of a VM family.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmFamilyName",
+            "in": "path",
+            "description": "The name of the VmFamily",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmFamily"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a VM family": {
+            "$ref": "./examples/VmFamilies_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -930,6 +1022,57 @@
           "description": "The quota units, such as Count.",
           "default": "Count",
           "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "VmFamily": {
+      "type": "object",
+      "description": "VM family resource representing a virtual machine family and its category.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VmFamilyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VmFamilyListResult": {
+      "type": "object",
+      "description": "The response of a VmFamily list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmFamily items on this page",
+          "items": {
+            "$ref": "#/definitions/VmFamily"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmFamilyProperties": {
+      "type": "object",
+      "description": "Properties of a VM family resource.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The category of the VM family (for example, GeneralPurpose, ComputeOptimized)."
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",

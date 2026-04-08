@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./GuestSubscription.tsp";
 import "./SharedLimit.tsp";
 import "./Feature.tsp";
+import "./VmFamily.tsp";
 import "./back-compat.tsp";
 
 using Azure.ResourceManager;
