@@ -63,6 +63,10 @@ suppressions:
     reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
     from: computeschedule.json
     where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: The property ultraSSDEnabled follows the established Azure Compute API naming convention where SSD is an abbreviation and cannot be renamed without a breaking change.
+    from: computeschedule.json
+    where: $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
 
 ```
 
