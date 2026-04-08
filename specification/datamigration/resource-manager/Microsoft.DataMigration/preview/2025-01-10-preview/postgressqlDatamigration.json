@@ -947,19 +947,6 @@
         }
       }
     },
-    "ComputeProfile": {
-      "type": "object",
-      "description": "Compute profile configuration.",
-      "properties": {
-        "computeSubnetResourceId": {
-          "type": "string",
-          "description": "Compute subnet resource ID"
-        }
-      },
-      "required": [
-        "computeSubnetResourceId"
-      ]
-    },
     "ConnectionEndpoint": {
       "type": "object",
       "description": "Connection endpoint for database.",
@@ -1357,15 +1344,7 @@
             "create"
           ]
         },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Compute profile",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "migrationJobsettings": {
+        "migrationJobSettings": {
           "$ref": "#/definitions/MigrationJobSettings",
           "description": "Migration job settings",
           "x-ms-mutability": [
@@ -1376,13 +1355,6 @@
         "operationType": {
           "$ref": "#/definitions/MigrationOperationType",
           "description": "The type of operation to perform on the migration"
-        },
-        "databaseNames": {
-          "type": "array",
-          "description": "List of database names to apply the operation to. If not specified, applies to all databases.",
-          "items": {
-            "type": "string"
-          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1429,8 +1401,7 @@
         "source",
         "target",
         "mappingDefinitions",
-        "computeProfile",
-        "migrationJobsettings"
+        "migrationJobSettings"
       ]
     },
     "DatabaseMigrationPropertiesUpdate": {
@@ -1440,13 +1411,6 @@
         "operationType": {
           "$ref": "#/definitions/MigrationOperationType",
           "description": "The type of operation to perform on the migration"
-        },
-        "databaseNames": {
-          "type": "array",
-          "description": "List of database names to apply the operation to. If not specified, applies to all databases.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1545,16 +1509,11 @@
         "target": {
           "$ref": "#/definitions/TargetConfiguration",
           "description": "Target database configuration"
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Compute profile configuration"
         }
       },
       "required": [
         "source",
-        "target",
-        "computeProfile"
+        "target"
       ]
     },
     "DiscoveredDatabaseObjects": {
@@ -2179,6 +2138,18 @@
         "validationResult": {
           "$ref": "#/definitions/ValidationResult",
           "description": "Detailed validation result for this check"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of the validation check"
+        },
+        "objectName": {
+          "type": "string",
+          "description": "Object name related to the validation"
+        },
+        "component": {
+          "type": "string",
+          "description": "Component related to the validation"
         }
       },
       "required": [
@@ -2419,15 +2390,10 @@
           "items": {
             "$ref": "#/definitions/CheckConnectivityEndpoint"
           }
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Compute profile configuration"
         }
       },
       "required": [
-        "connectionEndpoints",
-        "computeProfile"
+        "connectionEndpoints"
       ]
     },
     "ValidationDiagnostics": {

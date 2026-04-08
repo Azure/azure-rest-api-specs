@@ -399,12 +399,6 @@ model DatabaseMapping {
   targetConnectionName: string;
 }
 
-@doc("Compute profile configuration.")
-model ComputeProfile {
-  @doc("Compute subnet resource ID")
-  computeSubnetResourceId: string;
-}
-
 @doc("Migration job settings.")
 model MigrationJobSettings {
   @doc("Validate only flag")
@@ -530,6 +524,15 @@ model PreMigrationValidationSummary {
 
   @doc("Detailed validation result for this check")
   validationResult?: ValidationResult;
+
+  @doc("Scope of the validation check")
+  scope?: string;
+
+  @doc("Object name related to the validation")
+  objectName?: string;
+
+  @doc("Component related to the validation")
+  component?: string;
 }
 
 @doc("Pre-migration validation status.")
@@ -577,19 +580,12 @@ model DatabaseMigrationProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   mappingDefinitions: DatabaseMapping[];
 
-  @doc("Compute profile")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  computeProfile: ComputeProfile;
-
   @doc("Migration job settings")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  migrationJobsettings: MigrationJobSettings;
+  migrationJobSettings: MigrationJobSettings;
 
   @doc("The type of operation to perform on the migration")
   operationType?: MigrationOperationType;
-
-  @doc("List of database names to apply the operation to. If not specified, applies to all databases.")
-  databaseNames?: string[];
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
@@ -622,9 +618,6 @@ model TestConnectivityRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
   @doc("Connection endpoints to test")
   connectionEndpoints: CheckConnectivityEndpoint[];
-
-  @doc("Compute profile configuration")
-  computeProfile: ComputeProfile;
 }
 
 @doc("Connection test result for a single endpoint.")
@@ -663,9 +656,6 @@ model DiscoverDatabaseObjectsRequest {
 
   @doc("Target database configuration")
   target: TargetConfiguration;
-
-  @doc("Compute profile configuration")
-  computeProfile: ComputeProfile;
 }
 
 @doc("Schema information.")
