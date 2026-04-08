@@ -1023,20 +1023,6 @@
               "$ref": "#/definitions/ConfigTemplate"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1048,11 +1034,7 @@
           "ConfigTemplates_Update_MaximumSet": {
             "$ref": "./examples/ConfigTemplates_Update_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "ConfigTemplates_Delete",
@@ -10714,14 +10696,29 @@
     },
     "DiagnosticUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Diagnostic.",
+      "description": "The updatable properties of the Diagnostic.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "DiagnosticUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Diagnostic.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       }
     },
@@ -11927,14 +11924,34 @@
     },
     "SchemaUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Schema.",
+      "description": "The updatable properties of the Schema.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "SchemaUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Schema.",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of schema",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
         }
       }
     },
