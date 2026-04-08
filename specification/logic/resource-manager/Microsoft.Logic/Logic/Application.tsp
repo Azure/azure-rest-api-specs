@@ -11,7 +11,7 @@ using TypeSpec.Http;
 namespace Microsoft.Logic;
 
 /**
- * The application resource. An application represents a ContainerApp of kind 'workflowapp'
+ * The application resource. An application represents a ContainerApp of kind 'ottoapp'
  * that is registered under an automation project. Applications are managed by their
  * parent automation project for lifecycle operations.
  */
@@ -26,7 +26,7 @@ model Application is ProxyResource<ApplicationProperties> {
 }
 
 @armResourceOperations
-interface Applications {
+interface AutomationApplications {
   /**
    * Gets an application registered under the automation project.
    */
@@ -52,6 +52,6 @@ interface Applications {
 @@minLength(Application.name, 2);
 @@maxLength(Application.name, 64);
 @@doc(Application.properties, "The application properties.");
-@@doc(Applications.createOrUpdate::parameters.resource,
+@@doc(AutomationApplications.createOrUpdate::parameters.resource,
   "The application definition."
 );

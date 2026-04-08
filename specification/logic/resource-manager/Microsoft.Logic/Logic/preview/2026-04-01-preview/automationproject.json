@@ -46,7 +46,7 @@
       "name": "AutomationProjects"
     },
     {
-      "name": "Applications"
+      "name": "AutomationApplications"
     }
   ],
   "paths": {
@@ -433,9 +433,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects/{automationProjectName}/applications": {
       "get": {
-        "operationId": "Applications_ListByParent",
+        "operationId": "AutomationApplications_ListByParent",
         "tags": [
-          "Applications"
+          "AutomationApplications"
         ],
         "description": "Gets a list of applications registered under the automation project.",
         "parameters": [
@@ -475,7 +475,7 @@
         },
         "x-ms-examples": {
           "List Applications by Automation Project": {
-            "$ref": "./examples/Applications_ListByParent.json"
+            "$ref": "./examples/AutomationApplications_ListByParent.json"
           }
         },
         "x-ms-pageable": {
@@ -485,9 +485,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects/{automationProjectName}/applications/{applicationName}": {
       "get": {
-        "operationId": "Applications_Get",
+        "operationId": "AutomationApplications_Get",
         "tags": [
-          "Applications"
+          "AutomationApplications"
         ],
         "description": "Gets an application registered under the automation project.",
         "parameters": [
@@ -537,14 +537,14 @@
         },
         "x-ms-examples": {
           "Get Application": {
-            "$ref": "./examples/Applications_Get.json"
+            "$ref": "./examples/AutomationApplications_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Applications_CreateOrUpdate",
+        "operationId": "AutomationApplications_CreateOrUpdate",
         "tags": [
-          "Applications"
+          "AutomationApplications"
         ],
         "description": "Creates or updates an application registration under the automation project.",
         "parameters": [
@@ -620,7 +620,7 @@
         },
         "x-ms-examples": {
           "Create or Update Application": {
-            "$ref": "./examples/Applications_CreateOrUpdate.json"
+            "$ref": "./examples/AutomationApplications_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -630,9 +630,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Applications_Delete",
+        "operationId": "AutomationApplications_Delete",
         "tags": [
-          "Applications"
+          "AutomationApplications"
         ],
         "description": "Deletes an application registration from the automation project.",
         "parameters": [
@@ -693,7 +693,7 @@
         },
         "x-ms-examples": {
           "Delete Application": {
-            "$ref": "./examples/Applications_Delete.json"
+            "$ref": "./examples/AutomationApplications_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -706,7 +706,7 @@
   "definitions": {
     "Application": {
       "type": "object",
-      "description": "The application resource. An application represents a ContainerApp of kind 'workflowapp'\nthat is registered under an automation project. Applications are managed by their\nparent automation project for lifecycle operations.",
+      "description": "The application resource. An application represents a ContainerApp of kind 'ottoapp'\nthat is registered under an automation project. Applications are managed by their\nparent automation project for lifecycle operations.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ApplicationProperties",
