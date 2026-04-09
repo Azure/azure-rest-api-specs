@@ -13,9 +13,8 @@ using Microsoft.ServiceFabric;
   "python,java,javascript,csharp"
 );
 
-// Rename the custom ProxyResource to avoid collision with
-// Azure.ResourceManager.CommonTypes.ProxyResource which confuses the C# generator
-@@clientName(Microsoft.ServiceFabric.ProxyResource,
+// Rename the custom PatchProxyResource to avoid collision with common types
+@@clientName(Microsoft.ServiceFabric.PatchProxyResource,
   "ServiceFabricProxyResource",
   "csharp"
 );
