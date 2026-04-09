@@ -4581,13 +4581,13 @@
         "description": "This operation retrieves the details of all the failover tests performed on the ExpressRoute circuit for different peering locations",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "expressRouteCircuitName",
@@ -4630,7 +4630,7 @@
             }
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4670,13 +4670,13 @@
         "description": "This operation retrieves the details of a particular failover test performed on the circuit based on the test Guid",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "expressRouteCircuitName",
@@ -4732,7 +4732,7 @@
             }
           },
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4772,13 +4772,13 @@
         "description": "This operation starts failover simulation on the circuit for the specified link type",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "expressRouteCircuitName",
@@ -4821,7 +4821,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4837,7 +4837,8 @@
           "200": {
             "description": "Request successful. The operation start failover simulation started on virtual network gateway.",
             "schema": {
-              "type": "string"
+              "type": "object",
+              "properties": {}
             }
           },
           "default": {
@@ -4867,13 +4868,13 @@
         "description": "This operation stops an ongoing failover simulation on the circuit for the specified link type",
         "parameters": [
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "expressRouteCircuitName",
@@ -4895,7 +4896,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -4911,7 +4912,8 @@
           "200": {
             "description": "Request successful. The operation stops failover simulation on virtual network gateway.",
             "schema": {
-              "type": "string"
+              "type": "object",
+              "properties": {}
             }
           },
           "default": {
@@ -7126,11 +7128,13 @@
         },
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
@@ -7196,11 +7200,13 @@
       "properties": {
         "startTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
@@ -7353,6 +7359,7 @@
         },
         "checkTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The UTC time when the BGP status was checked. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         }
