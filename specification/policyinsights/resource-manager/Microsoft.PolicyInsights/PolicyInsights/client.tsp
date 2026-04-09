@@ -26,8 +26,11 @@ namespace PolicyInsightsManagementClient;
 );
 
 // Section: Explicit subscriptionId parameter
-@@clientLocation(PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam.subscriptionId,
-  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition
+// @@clientLocation(PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam.subscriptionId,
+//   PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition
+// );
+@@clientLocation(policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+  policyEventsListQueryResultsForPolicySetDefinition
 );
 @@clientLocation(PolicyEventsListQueryResultsForPolicyDefinitionBaseParam.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition
@@ -279,7 +282,8 @@ op policyEventsListQueryResultsForResource(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition)
 op policyEventsListQueryResultsForPolicySetDefinition(
-  ...PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam,
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
 
   @path
   policyEventsResource: PolicyEventsResourceType,

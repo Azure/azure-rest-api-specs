@@ -417,7 +417,8 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForPolicySetDefinition(
-    ...PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The name of the virtual resource under PolicyEvents resource type; only "default" is allowed.
