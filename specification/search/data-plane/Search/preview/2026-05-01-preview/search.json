@@ -9155,6 +9155,7 @@
         "workIQ",
         "modelQueryPlanning",
         "modelAnswerSynthesis",
+        "modelWebSummarization",
         "agenticReasoning"
       ],
       "x-ms-enum": {
@@ -9205,6 +9206,11 @@
             "name": "modelAnswerSynthesis",
             "value": "modelAnswerSynthesis",
             "description": "LLM answer synthesis activity."
+          },
+          {
+            "name": "modelWebSummarization",
+            "value": "modelWebSummarization",
+            "description": "LLM web summarization activity."
           },
           {
             "name": "agenticReasoning",
@@ -9585,6 +9591,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of output tokens for the LLM answer synthesis activity."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used for the LLM answer synthesis activity."
         }
       },
       "allOf": [
@@ -9625,6 +9635,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of output tokens for the LLM query planning activity."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used for the LLM query planning activity."
         }
       },
       "allOf": [
@@ -9633,6 +9647,32 @@
         }
       ],
       "x-ms-discriminator-value": "modelQueryPlanning"
+    },
+    "KnowledgeBaseModelWebSummarizationActivityRecord": {
+      "type": "object",
+      "description": "Represents an LLM web summarization activity record.",
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of input tokens for the LLM web summarization activity."
+        },
+        "outputTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of output tokens for the LLM web summarization activity."
+        },
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used for the LLM web summarization activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "modelWebSummarization"
     },
     "KnowledgeBaseReference": {
       "type": "object",

@@ -356,6 +356,10 @@ union KnowledgeBaseActivityRecordType {
   @removed(Versions.v2026_04_01)
   modelAnswerSynthesis: "modelAnswerSynthesis",
 
+  /** LLM web summarization activity. */
+  @added(Versions.v2026_05_01_preview)
+  modelWebSummarization: "modelWebSummarization",
+
   /** Agentic reasoning activity. */
   agenticReasoning: "agenticReasoning",
 }
@@ -571,6 +575,10 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 
   /** The number of output tokens for the LLM query planning activity. */
   outputTokens?: int32;
+
+  /** The name of the model used for the LLM query planning activity. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
 }
 
 /** Represents an LLM answer synthesis activity record. */
@@ -587,6 +595,29 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
 
   /** The number of output tokens for the LLM answer synthesis activity. */
   outputTokens?: int32;
+
+  /** The name of the model used for the LLM answer synthesis activity. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
+}
+
+/** Represents an LLM web summarization activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseModelWebSummarizationActivityRecord
+  extends KnowledgeBaseActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.modelWebSummarization;
+
+  /** The number of input tokens for the LLM web summarization activity. */
+  inputTokens?: int32;
+
+  /** The number of output tokens for the LLM web summarization activity. */
+  outputTokens?: int32;
+
+  /** The name of the model used for the LLM web summarization activity. */
+  @added(Versions.v2026_05_01_preview)
+  modelName?: string;
 }
 
 /** Represents an agentic reasoning activity record. */
