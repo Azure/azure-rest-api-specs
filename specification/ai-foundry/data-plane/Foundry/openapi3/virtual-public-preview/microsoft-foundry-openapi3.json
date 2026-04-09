@@ -10181,8 +10181,11 @@
             "description": "A human-readable description of the agent."
           },
           "created_at": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The Unix timestamp (seconds) when the agent was created."
           },
           "definition": {
@@ -14867,6 +14870,10 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryTimestamp": {
+        "type": "integer",
+        "format": "unixtime"
+      },
       "FunctionToolCall": {
         "type": "object",
         "required": [
@@ -15596,8 +15603,11 @@
             "description": "The unique ID of the memory item."
           },
           "updated_at": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The last update time of the memory item."
           },
           "scope": {
@@ -16076,13 +16086,19 @@
             "description": "The unique identifier of the memory store."
           },
           "created_at": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The Unix timestamp (seconds) when the memory store was created."
           },
           "updated_at": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The Unix timestamp (seconds) when the memory store was last updated."
           },
           "name": {
@@ -38045,8 +38061,11 @@
             "default": 168
           },
           "end_time": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time."
           },
           "max_traces": {
