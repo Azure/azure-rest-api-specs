@@ -79,8 +79,7 @@ interface AcceleratorDeployments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
     AcceleratorDeployment,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
