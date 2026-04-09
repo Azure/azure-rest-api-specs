@@ -658,33 +658,6 @@ union Categories {
 }
 
 /**
- * The severity level of the assessment
- */
-union Severity {
-  string,
-
-  /**
-   * Low
-   */
-  Low: "Low",
-
-  /**
-   * Medium
-   */
-  Medium: "Medium",
-
-  /**
-   * High
-   */
-  High: "High",
-
-  /**
-   * Critical
-   */
-  Critical: "Critical",
-}
-
-/**
  * The user impact of the assessment
  */
 union UserImpact {
@@ -889,28 +862,6 @@ union RiskLevel {
    * Critical
    */
   Critical: "Critical",
-}
-
-/**
- * The platform where the assessed resource resides
- */
-union Source {
-  string,
-
-  /**
-   * Resource is in Azure
-   */
-  Azure: "Azure",
-
-  /**
-   * Resource in an on premise machine connected to Azure cloud
-   */
-  OnPremise: "OnPremise",
-
-  /**
-   * SQL Resource in an on premise machine connected to Azure cloud
-   */
-  OnPremiseSql: "OnPremiseSql",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1248,17 +1199,6 @@ model SecurityAssessmentPropertiesBaseRiskPathsItemEdgeItem {
    * Source node identifier
    */
   sourceId: string;
-}
-
-/**
- * Details of the resource that was assessed
- */
-@discriminator("source")
-model ResourceDetails {
-  /**
-   * The platform where the assessed resource resides
-   */
-  source: Source;
 }
 
 /**

@@ -219,7 +219,7 @@ model SecurityStandardList {
  * Describes properties of a standard.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model StandardProperties {
+model SecurityStandardProperties {
   /**
    * Display name of the standard, equivalent to the standardId
    */
@@ -350,16 +350,6 @@ model StandardAssignmentProperties {
    * The standard assignment metadata.
    */
   metadata?: StandardAssignmentMetadata;
-}
-
-/**
- * Describe the properties of a of a standard assignments object reference
- */
-model AssignedStandardItem {
-  /**
-   * Full resourceId of the Microsoft.Security/standard object
-   */
-  id?: string;
 }
 
 /**

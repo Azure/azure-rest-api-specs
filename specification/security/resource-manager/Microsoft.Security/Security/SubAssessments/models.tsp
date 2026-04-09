@@ -34,50 +34,6 @@ union SubAssessmentStatusCode {
 }
 
 /**
- * The sub-assessment severity level
- */
-union Severity {
-  string,
-
-  /**
-   * Low
-   */
-  Low: "Low",
-
-  /**
-   * Medium
-   */
-  Medium: "Medium",
-
-  /**
-   * High
-   */
-  High: "High",
-}
-
-/**
- * The platform where the assessed resource resides
- */
-union Source {
-  string,
-
-  /**
-   * Resource is in Azure
-   */
-  Azure: "Azure",
-
-  /**
-   * Resource in an on premise machine connected to Azure cloud
-   */
-  OnPremise: "OnPremise",
-
-  /**
-   * SQL Resource in an on premise machine connected to Azure cloud
-   */
-  OnPremiseSql: "OnPremiseSql",
-}
-
-/**
  * Sub-assessment resource type
  */
 union AssessedResourceType {
@@ -206,17 +162,6 @@ model SubAssessmentStatus {
    */
   @visibility(Lifecycle.Read)
   severity?: Severity;
-}
-
-/**
- * Details of the resource that was assessed
- */
-@discriminator("source")
-model ResourceDetails {
-  /**
-   * The platform where the assessed resource resides
-   */
-  source: Source;
 }
 
 /**

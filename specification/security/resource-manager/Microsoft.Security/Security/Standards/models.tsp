@@ -141,18 +141,6 @@ model ETag {
 }
 
 /**
- * A list of key value pairs that describe the resource.
- */
-model Tags {
-  /**
-   * A list of key value pairs that describe the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
-/**
  * Page of a standard assignment list
  */
 model AssignmentList {
@@ -222,16 +210,6 @@ model AssignmentProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
-}
-
-/**
- * describe the properties of a of a security standard object reference
- */
-model AssignedStandardItem {
-  /**
-   * full resourceId of the Microsoft.Security/standard object
-   */
-  id?: string;
 }
 
 /**

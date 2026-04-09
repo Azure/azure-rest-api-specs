@@ -391,17 +391,6 @@ model AutomationUpdateModel extends Tags {
    */
   properties?: AutomationProperties;
 }
-/**
- * A list of key value pairs that describe the resource.
- */
-model Tags {
-  /**
-   * A list of key value pairs that describe the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
 
 /**
  * The security automation model state property bag.

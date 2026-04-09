@@ -13,28 +13,6 @@ namespace Microsoft.Security;
 /**
  * The status of the health report
  */
-union Source {
-  string,
-
-  /**
-   * Aws
-   */
-  Aws: "Aws",
-
-  /**
-   * Gcp
-   */
-  Gcp: "Gcp",
-
-  /**
-   * Azure
-   */
-  Azure: "Azure",
-}
-
-/**
- * The status of the health report
- */
 union StatusName {
   string,
 
