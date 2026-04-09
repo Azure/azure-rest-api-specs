@@ -34,7 +34,7 @@ model Action is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionVersion
-  is Azure.ResourceManager.ProxyResource<ActionVersionProperties, false> {
+  is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
   ...ResourceNameParameter<
     Resource = ActionVersion,
     KeyName = "versionName",
@@ -140,70 +140,6 @@ model ActionSupportedTargetType {
    * List of ARM permissions required for this target type.
    */
   requiredPermissions?: string[];
-}
-
-/**
- * Model that represents the properties of an Action Version resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
-@added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
-model ActionVersionProperties {
-  /**
-   * Canonical identifier of the action (e.g., "microsoft-compute-shutdown/1.0").
-   */
-  @visibility(Lifecycle.Read)
-  canonicalId?: string;
-
-  /**
-   * Human-readable display name of the action.
-   */
-  @visibility(Lifecycle.Read)
-  displayName?: string;
-
-  /**
-   * Description of what this action does.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  /**
-   * The short name of the action (e.g., "Shutdown").
-   */
-  @visibility(Lifecycle.Read)
-  actionName?: string;
-
-  /**
-   * The version of the action (e.g., "1.0.0").
-   */
-  @visibility(Lifecycle.Read)
-  version?: string;
-
-  /**
-   * The type of the action.
-   */
-  @visibility(Lifecycle.Read)
-  actionType?: ActionKind;
-
-  /**
-   * List of target types supported by this action version.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["targetType"])
-  supportedTargetTypes?: ActionSupportedTargetType[];
-
-  /**
-   * JSON Schema describing the parameters for this action version.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "parametersSchema is a dynamic JSON Schema object whose structure varies per action."
-  @visibility(Lifecycle.Read)
-  parametersSchema?: Record<unknown>;
-
-  /**
-   * Recommended Azure RBAC role definition GUIDs for this action version.
-   */
-  @visibility(Lifecycle.Read)
-  recommendedRoles?: string[];
 }
 
 /**

@@ -4624,7 +4624,7 @@
       "description": "Model that represents an Action Version resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ActionVersionProperties",
+          "$ref": "#/definitions/ActionProperties",
           "description": "The properties of the action version resource.",
           "x-ms-client-flatten": true
         }
@@ -4658,67 +4658,6 @@
       "required": [
         "value"
       ]
-    },
-    "ActionVersionProperties": {
-      "type": "object",
-      "description": "Model that represents the properties of an Action Version resource.",
-      "properties": {
-        "canonicalId": {
-          "type": "string",
-          "description": "Canonical identifier of the action (e.g., \"microsoft-compute-shutdown/1.0\").",
-          "readOnly": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Human-readable display name of the action.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of what this action does.",
-          "readOnly": true
-        },
-        "actionName": {
-          "type": "string",
-          "description": "The short name of the action (e.g., \"Shutdown\").",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the action (e.g., \"1.0.0\").",
-          "readOnly": true
-        },
-        "actionType": {
-          "$ref": "#/definitions/ActionKind",
-          "description": "The type of the action.",
-          "readOnly": true
-        },
-        "supportedTargetTypes": {
-          "type": "array",
-          "description": "List of target types supported by this action version.",
-          "items": {
-            "$ref": "#/definitions/ActionSupportedTargetType"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "targetType"
-          ]
-        },
-        "parametersSchema": {
-          "type": "object",
-          "description": "JSON Schema describing the parameters for this action version.",
-          "additionalProperties": {},
-          "readOnly": true
-        },
-        "recommendedRoles": {
-          "type": "array",
-          "description": "Recommended Azure RBAC role definition GUIDs for this action version.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
     },
     "Azure.Core.azureLocation": {
       "type": "string",
