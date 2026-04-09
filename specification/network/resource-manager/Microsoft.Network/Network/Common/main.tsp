@@ -1381,7 +1381,6 @@ model DdosSettings {
   /**
    * The DDoS custom policy associated with the public IP.
    */
-  @added(Versions.v2025_07_01)
   ddosCustomPolicy?: SubResource;
 
   /**
