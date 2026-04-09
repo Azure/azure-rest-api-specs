@@ -643,19 +643,19 @@ options:
   },
   {
     description:
-      "Mgmt emitter required: pass when legacy @azure-tools/typespec-csharp is in emit (existing projects allowed)",
+      "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in emit",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
   - "@azure-tools/typespec-autorest"
   - "@azure-tools/typespec-csharp"
 `,
-    success: true,
+    success: false,
     subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
   },
   {
     description:
-      "Mgmt emitter required: pass when legacy @azure-tools/typespec-csharp is in options (existing projects allowed)",
+      "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in options",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
@@ -664,17 +664,30 @@ options:
   "@azure-tools/typespec-csharp":
     namespace: "Azure.ResourceManager.Compute"
 `,
+    success: false,
+    subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
+  },
+  {
+    description:
+      "Mgmt emitter required: pass when legacy emitter is present alongside new mgmt emitter",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
+  - "@azure-typespec/http-client-csharp-mgmt"
+`,
     success: true,
     subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
   },
   {
-    description: "Mgmt emitter required: fail when no .NET emitter is configured",
+    description: "Mgmt emitter required: pass when no .NET emitter is configured",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
   - "@azure-tools/typespec-autorest"
 `,
-    success: false,
+    success: true,
     subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
   },
   {

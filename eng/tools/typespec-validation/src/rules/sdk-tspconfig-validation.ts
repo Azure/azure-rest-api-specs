@@ -794,25 +794,23 @@ export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleB
     const emit: string[] | undefined = config?.emit;
     const options: Record<string, any> | undefined = config?.options;
 
-    const hasNewMgmtEmitter =
-      emit?.includes(CSHARP_MGMT_EMITTER) || options?.[CSHARP_MGMT_EMITTER] !== undefined;
-
-    if (hasNewMgmtEmitter) {
-      return { success: true };
-    }
-
     const hasLegacyEmitter =
       emit?.includes(LEGACY_CSHARP_EMITTER) || options?.[LEGACY_CSHARP_EMITTER] !== undefined;
 
-    // Allow existing projects that already use the legacy emitter
+    // Only fail if the legacy emitter is configured — block new projects from using it
     if (hasLegacyEmitter) {
-      return { success: true };
+      const hasNewMgmtEmitter =
+        emit?.includes(CSHARP_MGMT_EMITTER) || options?.[CSHARP_MGMT_EMITTER] !== undefined;
+
+      if (!hasNewMgmtEmitter) {
+        return this.createFailedResult(
+          `Management plane TypeSpec projects must use "${CSHARP_MGMT_EMITTER}" instead of the legacy "${LEGACY_CSHARP_EMITTER}" for .NET SDK generation`,
+          `Please replace "${LEGACY_CSHARP_EMITTER}" with "${CSHARP_MGMT_EMITTER}" in your tspconfig.yaml`,
+        );
+      }
     }
 
-    return this.createFailedResult(
-      `Management plane TypeSpec projects must configure "${CSHARP_MGMT_EMITTER}" for .NET SDK generation`,
-      `Please add "${CSHARP_MGMT_EMITTER}" to the "emit" array or "options" in your tspconfig.yaml`,
-    );
+    return { success: true };
   }
 
   public getPathOfKeyToValidate(): string {
