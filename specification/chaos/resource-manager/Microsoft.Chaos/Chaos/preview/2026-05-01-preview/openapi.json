@@ -5956,7 +5956,10 @@
       "enum": [
         "NotEvaluated",
         "Recommended",
-        "NotApplicable"
+        "NotApplicable",
+        "Evaluating",
+        "EvaluationFailed",
+        "EvaluationCancelled"
       ],
       "x-ms-enum": {
         "name": "RecommendationStatus",
@@ -5976,6 +5979,21 @@
             "name": "NotApplicable",
             "value": "NotApplicable",
             "description": "The scenario recommendation status is not applicable."
+          },
+          {
+            "name": "Evaluating",
+            "value": "Evaluating",
+            "description": "The scenario recommendation status is currently being evaluated."
+          },
+          {
+            "name": "EvaluationFailed",
+            "value": "EvaluationFailed",
+            "description": "The scenario recommendation evaluation has failed."
+          },
+          {
+            "name": "EvaluationCancelled",
+            "value": "EvaluationCancelled",
+            "description": "The scenario recommendation evaluation was cancelled."
           }
         ]
       }
