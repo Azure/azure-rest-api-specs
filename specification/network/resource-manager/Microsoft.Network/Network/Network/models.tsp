@@ -10338,7 +10338,7 @@ model DdosCustomPolicyPropertiesFormat {
   detectionRules?: DdosDetectionRule[];
 
   /**
-    * The list of frontend IP configurations associated with the custom policy.
+   * The list of frontend IP configurations associated with the custom policy.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontEndIpConfiguration?: SubResource[];

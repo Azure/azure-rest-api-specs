@@ -1771,9 +1771,7 @@ using TypeSpec.Versioning;
   "swap"
 );
 
-@@added(DdosSettings.ddosCustomPolicy,
-  Microsoft.Network.Versions.v2025_07_01
-);
+@@added(DdosSettings.ddosCustomPolicy, Microsoft.Network.Versions.v2025_07_01);
 
 @@added(DdosCustomPolicyPropertiesFormat.publicIPAddresses,
   Microsoft.Network.Versions.v2025_07_01
