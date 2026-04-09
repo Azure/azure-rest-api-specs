@@ -55,6 +55,20 @@ interface CustomDomains {
   >;
 
   /**
+   * Updates an existing custom domain within an endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    CustomDomain,
+    PatchModel = CustomDomainParameters,
+    Response = ArmResponse<CustomDomain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CustomDomain>> & {
+      @bodyRoot
+      _: CustomDomain;
+    })
+  >;
+
+  /**
    * Deletes an existing custom domain within an endpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

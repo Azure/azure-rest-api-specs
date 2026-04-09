@@ -31,16 +31,23 @@ interface RuleSets {
    */
   get is ArmResourceRead<RuleSet>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates a new rule set within the specified profile.
    */
-  // create is ArmResourceCreateOrReplaceSync<RuleSet>;
   @put
   create is Azure.ResourceManager.Legacy.CustomPatchAsync<
     RuleSet,
     PatchModel = void,
     Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
+  >;
+
+  /**
+   * Updates an existing rule set within the specified profile.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    RuleSet,
+    PatchModel = RuleSetProperties
   >;
 
   /**

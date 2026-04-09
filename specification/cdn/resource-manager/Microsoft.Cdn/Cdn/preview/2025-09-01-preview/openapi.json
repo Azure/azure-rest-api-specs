@@ -4248,6 +4248,88 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "CustomDomains_Update",
+        "tags": [
+          "CustomDomains"
+        ],
+        "description": "Updates an existing custom domain within an endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customDomainName",
+            "in": "path",
+            "description": "Name of the custom domain within an endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CustomDomain"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "operationId": "CustomDomains_Delete",
         "tags": [
@@ -7950,6 +8032,64 @@
         "x-ms-examples": {
           "RuleSets_Create": {
             "$ref": "./examples/RuleSets_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "RuleSets_Update",
+        "tags": [
+          "RuleSets"
+        ],
+        "description": "Updates an existing rule set within the specified profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Standard or Azure Front Door Premium or CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 260,
+            "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
+          },
+          {
+            "name": "ruleSetName",
+            "in": "path",
+            "description": "Name of the rule set under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleSetProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RuleSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
