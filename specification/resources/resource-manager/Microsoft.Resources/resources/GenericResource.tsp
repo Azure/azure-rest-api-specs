@@ -3,7 +3,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -77,7 +79,12 @@ model GenericResource extends Foundations.ProxyResource {
 }
 
 alias genericOps = Azure.ResourceManager.Legacy.RoutedOperations<
-  ApiVersionParameter,
+  {
+    /** The API version to use for this operation. */
+    @apiVersion(false)
+    @query("api-version")
+    apiVersion: string;
+  },
   {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing parameter from original swagger"
     @path(#{ allowReserved: true }) @key resourceId: string;
@@ -126,7 +133,11 @@ interface Resources {
 
 alias specificResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
-    ...ApiVersionParameter;
+    /** The API version to use for this operation. */
+    @apiVersion(false)
+    @query("api-version")
+    apiVersion: string;
+
     ...SubscriptionIdParameter;
 
     /**

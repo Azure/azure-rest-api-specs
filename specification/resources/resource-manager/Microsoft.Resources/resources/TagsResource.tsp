@@ -45,19 +45,11 @@ interface TagsResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @tag("Tags")
   @summary("Creates or updates the entire set of tags on a resource or subscription.")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "location",
-      `final-state-schema`: "#/definitions/TagsResource",
-    }
-  )
   createOrUpdateAtScope is Extension.CreateOrReplaceAsync<
     Extension.ScopeParameter,
     TagsResource,
-    Response = ArmResourceUpdatedResponse<TagsResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = TagsResource> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<TagsResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TagsResource> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
