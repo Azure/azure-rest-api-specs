@@ -56,7 +56,8 @@ interface SiteLogsConfigOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteLogsConfigs {
   /**
    * Description for Gets the logging configuration of an app.
@@ -109,7 +110,8 @@ interface SiteLogsConfigOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteLogsConfigOperationGroup {
   /**
    * Description for Gets the logging configuration of an app.
