@@ -642,8 +642,7 @@ options:
     subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
   },
   {
-    description:
-      "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in emit",
+    description: "Mgmt emitter required: fail when legacy @azure-tools/typespec-csharp is in emit",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
@@ -668,8 +667,7 @@ options:
     subRules: [new TspConfigCsharpMgmtEmitterRequiredSubRule()],
   },
   {
-    description:
-      "Mgmt emitter required: fail when both legacy and new emitters coexist",
+    description: "Mgmt emitter required: fail when both legacy and new emitters coexist",
     folder: managementTspconfigFolder,
     tspconfigContent: `
 emit:
