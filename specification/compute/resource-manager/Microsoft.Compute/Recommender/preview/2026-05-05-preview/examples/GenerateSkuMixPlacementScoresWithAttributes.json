@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2026-05-05-preview",
+    "location": "eastus",
+    "skuMixPlacementRequest": {
+      "zones": [
+        "1",
+        "2"
+      ],
+      "capacityProfile": {
+        "capacity": 10,
+        "capacityType": "VM",
+        "priority": "Regular",
+        "allocationStrategy": "LowestPrice",
+        "osType": "Linux",
+        "zoneAllocationPolicy": {
+          "distributionStrategy": "BestEffortBalanced"
+        }
+      },
+      "instanceDescription": {
+        "type": "VMAttributes",
+        "vmAttributes": {
+          "vCpuCount": {
+            "min": 2,
+            "max": 16
+          },
+          "memoryInGiB": {
+            "min": 4,
+            "max": 64
+          },
+          "architectureTypes": [
+            "X64"
+          ],
+          "cpuManufacturers": [
+            "Intel",
+            "AMD"
+          ],
+          "vmCategories": [
+            "GeneralPurpose",
+            "ComputeOptimized"
+          ],
+          "networkInterfaceCount": {
+            "min": 1
+          },
+          "networkBandwidthInMbps": {
+            "min": 1000
+          },
+          "localStorageSupport": "Required",
+          "localStorageInGiB": {
+            "min": 50
+          },
+          "localStorageDiskTypes": [
+            "SSD"
+          ],
+          "excludedVMSizes": [
+            "Standard_D2s_v3"
+          ]
+        }
+      }
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "placementChoices": [
+          {
+            "id": "b8d23ef4-1a2b-3c4d-5e6f-789012345678",
+            "score": 7.2,
+            "skuSplit": [
+              {
+                "name": "Standard_L8s_v3",
+                "priority": "Regular",
+                "capacity": 5,
+                "zone": "1"
+              },
+              {
+                "name": "Standard_L8s_v3",
+                "priority": "Regular",
+                "capacity": 5,
+                "zone": "2"
+              }
+            ]
+          }
+        ],
+        "partialFulfillmentReason": "None"
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/skuMixPlacementScores/recommendations/generate?api-version=2026-05-05-preview",
+        "x-ms-request-id": "c4e56789-0123-4567-89ab-cdef01234567"
+      }
+    }
+  },
+  "operationId": "SkuMixPlacementScores_Post",
+  "title": "Generates SkuMixPlacement scores using VM attribute-based selection."
+}
