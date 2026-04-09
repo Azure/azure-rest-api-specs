@@ -66,14 +66,6 @@ input-file:
   - stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
   - stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
   - stable/2024-02-01/metricNamespaces_API.json
-
-suppressions:
-  - code: GuidUsage
-    reason: The IDs of investigation entities are GUIDs.
-    from: azuremonitorworkspace.json
-    where:
-     - $.definitions["Azure.Core.uuid"].format
-
 ```
 
 ### Tag: package-2026-03-01
