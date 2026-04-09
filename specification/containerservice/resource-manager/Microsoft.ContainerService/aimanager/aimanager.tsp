@@ -26,10 +26,7 @@ model AIManager is TrackedResource<AIManagerProperties> {
   name: string;
 
   ...EntityTagProperty;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
-  @doc("Managed identity.")
-  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
@@ -86,10 +83,7 @@ union AIManagerProvisioningState {
 @doc("The AI Manager resource patch model.")
 model AIManagerPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
-  @doc("Managed identity.")
-  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations

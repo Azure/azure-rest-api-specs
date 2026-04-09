@@ -861,8 +861,8 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
-          "description": "Managed identity."
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1019,8 +1019,8 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
-          "description": "Managed identity."
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -1095,16 +1095,6 @@
         ]
       },
       "readOnly": true
-    },
-    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
     },
     "CredentialResult": {
       "type": "object",
