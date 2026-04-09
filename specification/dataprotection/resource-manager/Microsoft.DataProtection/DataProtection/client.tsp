@@ -602,6 +602,7 @@ using Microsoft.DataProtection;
   "FetchSecondaryRPsRequestContent",
   "csharp"
 );
+@@clientName(ResumeProtectionRequest, "ResumeProtectionContent", "csharp");
 @@clientName(StopProtectionRequest, "StopProtectionContent", "csharp");
 @@clientName(SuspendBackupRequest, "SuspendBackupContent", "csharp");
 @@clientName(CrossRegionRestoreJobsRequest,
