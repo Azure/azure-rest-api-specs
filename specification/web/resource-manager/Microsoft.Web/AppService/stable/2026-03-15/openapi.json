@@ -39979,6 +39979,24 @@
         }
       }
     },
+    "AiIntegration": {
+      "type": "object",
+      "description": "AI integration configuration for the app.",
+      "properties": {
+        "apiSpecPath": {
+          "type": "string",
+          "description": "Relative path to the API specification file from /home in site files."
+        },
+        "mcp": {
+          "$ref": "#/definitions/McpSettings",
+          "description": "MCP configuration."
+        },
+        "siteAuth": {
+          "$ref": "#/definitions/SiteAuthInfo",
+          "description": "Standalone authentication configuration for the MCP endpoint."
+        }
+      }
+    },
     "AiGateway": {
       "type": "object",
       "description": "An AI gateway resource.",
@@ -48135,6 +48153,52 @@
         "modelAsString": false
       }
     },
+    "McpServerConfig": {
+      "type": "object",
+      "description": "Configuration for an individual MCP server.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP server."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the MCP server."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the MCP server is enabled. Defaults to true.",
+          "default": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint path for the MCP server."
+        },
+        "toolList": {
+          "type": "array",
+          "description": "The list of tools exposed by this MCP server.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "McpSettings": {
+      "type": "object",
+      "description": "MCP configuration settings.",
+      "properties": {
+        "servers": {
+          "type": "array",
+          "description": "Array of MCP server configurations. This array is replaced in its entirety on update; individual servers cannot be patched independently. An empty array signals that MCP should be disabled/deleted.",
+          "items": {
+            "$ref": "#/definitions/McpServerConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "MetricAvailability": {
       "type": "object",
       "description": "Retention policy of a resource metric.",
@@ -52145,6 +52209,35 @@
         }
       }
     },
+    "SiteAuthInfo": {
+      "type": "object",
+      "description": "External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).",
+      "properties": {
+        "jwksUri": {
+          "type": "string",
+          "description": "JWKS URL for verifying JWT signatures."
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Expected 'iss' claim."
+        },
+        "audience": {
+          "type": "string",
+          "description": "Expected 'aud' claim."
+        },
+        "wellKnownOpenIdConfiguration": {
+          "type": "string",
+          "description": "OIDC metadata URL."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "OAuth scopes for PRM.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SiteAvailabilityState": {
       "type": "string",
       "description": "Management information availability state for the app.",
@@ -53246,6 +53339,10 @@
           "$ref": "#/definitions/SiteConfig",
           "description": "Configuration of the app."
         },
+        "aiIntegration": {
+          "$ref": "#/definitions/AiIntegration",
+          "description": "AI integration configuration for the app."
+        },
         "trafficManagerHostNames": {
           "type": "array",
           "description": "Azure Traffic Manager hostnames associated with the app. Read-only.",
@@ -53543,6 +53640,10 @@
         "daprConfig": {
           "$ref": "#/definitions/DaprConfig",
           "description": "Dapr configuration of the app."
+        },
+        "aiIntegration": {
+          "$ref": "#/definitions/AiIntegration",
+          "description": "AI integration configuration for the app."
         },
         "workloadProfileName": {
           "type": "string",
