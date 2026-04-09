@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/datamigration"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,33 @@ options:
     emit-lro-options: "all"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-datamigration"
+    namespace: "azure.mgmt.datamigration"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-datamigration"
+    namespace: "com.azure.resourcemanager.datamigration"
+    service-name: "DataMigration"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-datamigration"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-datamigration"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/datamigration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatamigration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatamigration"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
