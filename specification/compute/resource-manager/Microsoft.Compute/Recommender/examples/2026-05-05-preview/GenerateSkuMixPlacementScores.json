@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2026-05-05-preview",
+    "location": "eastus",
+    "skuMixPlacementRequest": {
+      "zones": [
+        "1",
+        "2",
+        "3"
+      ],
+      "capacityProfile": {
+        "capacity": 10,
+        "capacityType": "VM",
+        "priority": "Regular",
+        "allocationStrategy": "LowestPrice",
+        "osType": "Linux",
+        "zoneAllocationPolicy": {
+          "distributionStrategy": "BestEffortBalanced"
+        }
+      },
+      "instanceDescription": {
+        "type": "VMSizes",
+        "vmSizes": [
+          {
+            "name": "Standard_D2s_v3"
+          },
+          {
+            "name": "Standard_D4s_v3"
+          },
+          {
+            "name": "Standard_D8s_v3"
+          }
+        ]
+      }
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "placementChoices": [
+          {
+            "id": "3fc69ef8-209e-4ecb-9cc4-392354af9201",
+            "score": 8.5,
+            "skuSplit": [
+              {
+                "name": "Standard_D2s_v3",
+                "priority": "Regular",
+                "capacity": 4,
+                "zone": "1"
+              },
+              {
+                "name": "Standard_D4s_v3",
+                "priority": "Regular",
+                "capacity": 3,
+                "zone": "2"
+              },
+              {
+                "name": "Standard_D2s_v3",
+                "priority": "Regular",
+                "capacity": 3,
+                "zone": "3"
+              }
+            ]
+          },
+          {
+            "id": "a7c12b3d-4e5f-6789-abcd-ef0123456789",
+            "score": 4.5,
+            "skuSplit": [
+              {
+                "name": "Standard_D8s_v3",
+                "priority": "Regular",
+                "capacity": 5,
+                "zone": "1"
+              },
+              {
+                "name": "Standard_D8s_v3",
+                "priority": "Regular",
+                "capacity": 5,
+                "zone": "2"
+              }
+            ]
+          }
+        ],
+        "partialFulfillmentReason": "None"
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/skuMixPlacementScores/recommendations/generate?api-version=2026-05-05-preview",
+        "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f"
+      }
+    }
+  },
+  "operationId": "SkuMixPlacementScores_Post",
+  "title": "Generates SkuMixPlacement scores for VM SKU mix placement with explicit VM sizes."
+}
