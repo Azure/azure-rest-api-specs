@@ -91,7 +91,7 @@ directive:
     from: authorization-AccessReviewCalls.json
     reason: Disambiguation resolution is acceptable and desired. When generating the models the _Suffix doesn't get included
   - suppress: R2015
-    from: common-types.json
+    from: openapi.json
     reason: common-types doesn't need to reference api version.
   - suppress: NoDuplicatePathsForScopeParameter
     from: authorization-DenyAssignmentCalls.json
@@ -133,7 +133,6 @@ input-file:
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
-  - preview/2024-09-01-preview/common-types.json
   - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
   - preview/2024-09-01-preview/openapi.json
   - preview/2022-08-01-preview/RoleManagementAlerts.json
