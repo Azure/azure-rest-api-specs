@@ -7,3 +7,7 @@ using Azure.ClientGenerator.Core;
   "PrometheusRuleGroupsMgmtClient",
   "python"
 );
+@@clientName(Microsoft.AlertsManagement,
+  "PrometheusRuleGroupsManagementClient",
+  "javascript"
+);
