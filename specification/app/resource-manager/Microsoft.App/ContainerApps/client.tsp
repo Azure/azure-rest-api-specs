@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.App;
 
 @@clientName(Microsoft.App, "ContainerAppsAPIClient", "javascript,python");
+@@clientName(Microsoft.App, "ContainerAppsApiClient", "java");
 @@clientLocation(Jobs.jobExecution, Microsoft.App, "python");
 
 @@clientLocation(getCustomDomainVerificationId, "ContainerAppsAPIClient", "go");
