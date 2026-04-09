@@ -1745,7 +1745,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "Request body for operation",
+            "description": "The content of the action request",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ResumeProtectionRequest"
@@ -5153,23 +5153,6 @@
         "rehydrationRetentionDuration"
       ]
     },
-    "ResumeProtectionRequest": {
-      "type": "object",
-      "description": "Azure backup resume protection request",
-      "properties": {
-        "objectType": {
-          "type": "string"
-        },
-        "identityDetails": {
-          "$ref": "#/definitions/IdentityDetails",
-          "description": "Contains information of the Identity Details for the BI.\nIf it is null, default will be considered as System Assigned."
-        }
-      },
-      "discriminator": "objectType",
-      "required": [
-        "objectType"
-      ]
-    },
     "AzureBackupRestoreRequest": {
       "type": "object",
       "description": "Azure backup restore request",
@@ -8551,6 +8534,16 @@
             "value": "AzureFiles"
           }
         ]
+      }
+    },
+    "ResumeProtectionRequest": {
+      "type": "object",
+      "description": "Request body of Resume protection when MSI is to be changed",
+      "properties": {
+        "identityDetails": {
+          "$ref": "#/definitions/IdentityDetails",
+          "description": "identity details of the MSI"
+        }
       }
     },
     "RetentionTag": {
