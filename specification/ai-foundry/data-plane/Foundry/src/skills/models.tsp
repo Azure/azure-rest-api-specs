@@ -19,7 +19,7 @@ alias CreateSkillRequest = {
   @maxLength(102400)
   instructions?: string;
 
-...MetadataPropertyForRequest;
+  ...MetadataPropertyForRequest;
 };
 
 alias CreateSkillFromPackageRequest = {
