@@ -57,9 +57,6 @@ model JobProperties {
 model JobSchedule {
   @doc("The type of scheduling.")
   schedulingType?: JobSchedulingType;
-
-  @doc("The start time for the job.")
-  startTime?: utcDateTime;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -67,8 +64,8 @@ model JobSchedule {
 union JobSchedulingType {
   string,
 
-  @doc("The job runs once.")
-  Once: "once",
+  @doc("The job runs on demand.")
+  OnDemand: "ondemand",
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -87,7 +84,7 @@ union JobTypeEnum {
 @doc("The target of a job.")
 model JobTarget {
   @doc("The Azure resource ID of the target resource.")
-  targetResourceId?: string;
+  targetResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -106,12 +103,9 @@ model JobActionDefinition {
   @doc("The name of the action to perform.")
   actionName?: string;
 
-  @doc("The action group.")
-  actionGroup?: string;
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The payload for the action.")
-  payload?: Record<unknown>;
+  payload?: Record<string>;
 
   @doc("The response timeout for the action.")
   responseTimeout?: string;
@@ -129,7 +123,17 @@ model JobStateDefinition {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The desired state.")
-  state?: Record<unknown>;
+  state?: Record<string>;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("Request body for scheduling a job.")
+model JobScheduleRequest {
+  @doc("The time at which the job should be scheduled to run.")
+  scheduledTime?: utcDateTime;
+
+  @doc("The timeout duration for the job execution (ISO 8601 duration format).")
+  timeout?: duration;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -142,5 +146,5 @@ interface Jobs {
   listByResourceGroup is ArmResourceListByParent<Job>;
 
   @doc("Schedule the job for execution.")
-  schedule is ArmResourceActionNoResponseContentAsync<Job, void>;
+  schedule is ArmResourceActionNoResponseContentAsync<Job, JobScheduleRequest>;
 }

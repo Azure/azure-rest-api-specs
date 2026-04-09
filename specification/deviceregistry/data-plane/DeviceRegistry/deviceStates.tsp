@@ -16,7 +16,6 @@ namespace Microsoft.DeviceRegistry;
 // ──────────────────────────────────────────────
 
 /** Well-known device state names. */
-@added(Versions.v2026_11_02_preview)
 union DeviceStateName {
   string,
 
@@ -28,16 +27,27 @@ union DeviceStateName {
 }
 
 /** A device state resource. */
-@added(Versions.v2026_11_02_preview)
 @resource("states")
 @parentResource(Device)
 model DeviceState {
+  ...DataPlaneResourceBase;
+
   /** The name of the state. Must be a well-known value ("default" or "update"). */
   @key("stateName")
   @visibility(Lifecycle.Read)
   stateName: DeviceStateName;
 
-  // TODO: Add state fields
+  /** The resource-specific properties for this state. */
+  properties?: DeviceStateProperties;
+}
+
+/** Properties of a device state resource. */
+model DeviceStateProperties {
+  /** The desired state values. */
+  desired?: Record<string>;
+
+  /** The reported state values. */
+  reported?: Record<string>;
 }
 
 // ──────────────────────────────────────────────
@@ -45,7 +55,6 @@ model DeviceState {
 // ──────────────────────────────────────────────
 
 /** CRUD operations on device states. */
-@added(Versions.v2026_11_02_preview)
 @tag("Device States")
 interface DeviceStates {
   /** Create or replace a device state. */

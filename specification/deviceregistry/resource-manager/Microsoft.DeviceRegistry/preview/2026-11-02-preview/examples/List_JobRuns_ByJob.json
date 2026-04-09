@@ -1,7 +1,7 @@
 {
   "title": "List_JobRuns_ByJob",
   "operationId": "JobRuns_ListByResourceGroup",
-  "description": "List all runs for a job.",
+  "description": "List job runs by job.",
   "parameters": {
     "api-version": "2026-11-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -14,14 +14,23 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-01/runs/run-01",
-            "name": "run-01",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-01/runs/c560dcd9-cd8e-413b-859c-d0ebcb94236f",
+            "name": "c560dcd9-cd8e-413b-859c-d0ebcb94236f",
             "type": "Microsoft.DeviceRegistry/namespaces/jobs/runs",
+            "systemData": {
+              "createdBy": "00003442-0000-0000-0000-494059220000",
+              "createdByType": "Application",
+              "createdAt": "2026-11-15T14:30:00Z",
+              "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2026-11-15T15:30:00Z"
+            },
             "properties": {
               "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
-              "status": "Succeeded",
-              "startTime": "2026-11-01T12:00:00Z",
-              "endTime": "2026-11-01T12:15:00Z",
+              "status": "Completed",
+              "scheduledTime": "2026-11-15T14:30:00Z",
+              "startTime": "2026-11-15T14:30:05Z",
+              "endTime": "2026-11-15T15:25:00Z",
               "results": {
                 "total": 1500,
                 "succeeded": 1478,

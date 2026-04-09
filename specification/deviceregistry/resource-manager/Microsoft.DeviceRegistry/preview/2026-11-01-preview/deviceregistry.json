@@ -4182,146 +4182,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/newDevices/{newDeviceName}/getEndpointStatus": {
-      "post": {
-        "operationId": "NewDevices_GetEndpointStatus",
-        "tags": [
-          "NewDevices"
-        ],
-        "description": "Get the endpoint status of the device.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "newDeviceName",
-            "in": "path",
-            "description": "The name of the new device.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NewDeviceEndpointStatusResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewDevice GetEndpointStatus": {
-            "$ref": "./examples/GetEndpointStatus_NewDevice.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/newDevices/{newDeviceName}/getExtendedLocationSyncStatus": {
-      "post": {
-        "operationId": "NewDevices_GetExtendedLocationSyncStatus",
-        "tags": [
-          "NewDevices"
-        ],
-        "description": "Get the extended location sync status of the device.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the namespace.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 64,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "newDeviceName",
-            "in": "path",
-            "description": "The name of the new device.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NewDeviceExtendedLocationSyncStatusResponse"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewDevice GetExtendedLocationSyncStatus": {
-            "$ref": "./examples/GetExtendedLocationSyncStatus_NewDevice.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries": {
       "get": {
         "operationId": "SchemaRegistries_ListByResourceGroup",
@@ -9795,24 +9655,6 @@
         ]
       }
     },
-    "NewDeviceCredentialPolicy": {
-      "type": "object",
-      "description": "Defines the policy used to issue device certificates.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource Id of the Policy.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.DeviceRegistry/namespaces/credentials/policies"
-              }
-            ]
-          }
-        }
-      }
-    },
     "NewDeviceEnabledStatus": {
       "type": "string",
       "description": "Indicates if the resource is enabled or disabled.",
@@ -9835,30 +9677,6 @@
             "description": "The resource is disabled."
           }
         ]
-      }
-    },
-    "NewDeviceEndpointStatusResponse": {
-      "type": "object",
-      "description": "Response for the get endpoint status operation.",
-      "properties": {
-        "endpoints": {
-          "$ref": "#/definitions/DeviceStatusEndpoints",
-          "description": "The endpoint status information."
-        }
-      }
-    },
-    "NewDeviceExtendedLocationSyncStatusResponse": {
-      "type": "object",
-      "description": "Response for the get extended location sync status operation.",
-      "properties": {
-        "cloudResource": {
-          "$ref": "#/definitions/NewDeviceSyncResourceStatus",
-          "description": "The sync status of the cloud resource."
-        },
-        "extendedLocationResource": {
-          "$ref": "#/definitions/NewDeviceSyncResourceStatus",
-          "description": "The sync status of the extended location resource."
-        }
       }
     },
     "NewDeviceListResult": {
@@ -9972,30 +9790,10 @@
           "type": "string",
           "description": "Device operating system version."
         },
-        "policy": {
-          "$ref": "#/definitions/NewDeviceCredentialPolicy",
-          "description": "Policy used to issue device certificates."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
-        }
-      }
-    },
-    "NewDeviceSyncResourceStatus": {
-      "type": "object",
-      "description": "Sync status for a resource.",
-      "properties": {
-        "version": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The version of the resource."
-        },
-        "lastTransitionTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last transition time of the resource."
         }
       }
     },

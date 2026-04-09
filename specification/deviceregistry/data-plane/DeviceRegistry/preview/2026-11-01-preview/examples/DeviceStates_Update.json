@@ -1,0 +1,64 @@
+{
+  "operationId": "DeviceStates_Update",
+  "title": "Update a device state",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-01-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "deviceName": "my-device-01",
+    "stateName": "default",
+    "resource": {
+      "properties": {
+        "desired": {
+          "firmware": "2.0.1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "stateName": "default",
+        "etag": "\"ghi789\"",
+        "properties": {
+          "desired": {
+            "firmware": "2.0.1"
+          },
+          "reported": {
+            "firmware": "2.0.0"
+          }
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-03-20T14:45:00Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "stateName": "default",
+        "etag": "\"ghi789\"",
+        "properties": {
+          "desired": {
+            "firmware": "2.0.1"
+          },
+          "reported": {
+            "firmware": "2.0.0"
+          }
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-03-20T14:45:00Z"
+        }
+      }
+    }
+  }
+}

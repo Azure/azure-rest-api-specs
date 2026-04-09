@@ -6,13 +6,33 @@
     "api-version": "2026-11-01-preview",
     "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
     "body": {
-      "groupUuid": "g1h2i3j4-5678-90ab-cdef-112233445566"
+      "groupUuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "groupUuid": "g1h2i3j4-5678-90ab-cdef-112233445566"
+        "groupUuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab",
+        "etag": "\"grp123\"",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-01-10T08:00:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-03-15T12:00:00Z"
+        },
+        "properties": {
+          "uuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab",
+          "description": "All production environment sensor devices",
+          "displayName": "Production Sensors",
+          "refreshMode": "Continuous",
+          "groupType": "Device",
+          "lastMembershipRefreshTime": "2026-03-15T12:00:00Z",
+          "membershipState": "Ready",
+          "query": "properties.manufacturer = 'Contoso' AND properties.enabled = 'Enabled'",
+          "provisioningState": "Succeeded"
+        }
       }
     }
   }

@@ -38,6 +38,10 @@ model JobRunProperties {
   @visibility(Lifecycle.Read)
   status?: JobRunStatus;
 
+  @doc("The scheduled time for the job run.")
+  @visibility(Lifecycle.Read)
+  scheduledTime?: utcDateTime;
+
   @doc("The start time of the job run.")
   @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
@@ -49,6 +53,11 @@ model JobRunProperties {
   @doc("The results summary of the job run.")
   @visibility(Lifecycle.Read)
   results?: JobRunResults;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Internal metadata used to track polling and execution state.")
+  @visibility(Lifecycle.Read)
+  internalMetadata?: Record<string>;
 
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
@@ -69,8 +78,8 @@ union JobRunStatus {
   @doc("The job run is running.")
   Running: "Running",
 
-  @doc("The job run succeeded.")
-  Succeeded: "Succeeded",
+  @doc("The job run completed successfully.")
+  Completed: "Completed",
 
   @doc("The job run failed.")
   Failed: "Failed",
@@ -96,8 +105,35 @@ model JobRunResults {
 }
 
 @added(Versions.v2026_11_02_preview)
+@doc("A single device result entry from a job run.")
+model JobRunResultItem {
+  @doc("The external device identifier.")
+  externalDeviceId?: string;
+
+  @doc("The status of the device for this job run.")
+  status?: string;
+
+  @doc("The reason for the status, typically used for failures.")
+  reason?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The response for listing job run results.")
+model JobRunResultListResponse {
+  @doc("The list of device result entries.")
+  @identifiers(#[])
+  value: JobRunResultItem[];
+
+  @doc("The link to the next page of results.")
+  nextLink?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
 @armResourceOperations
 interface JobRuns {
   get is ArmResourceRead<JobRun>;
   listByResourceGroup is ArmResourceListByParent<JobRun>;
+
+  @doc("Browse the results of a job run to find individual device statuses.")
+  results is ArmResourceActionSync<JobRun, void, JobRunResultListResponse>;
 }

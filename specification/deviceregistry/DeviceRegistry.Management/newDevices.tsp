@@ -71,9 +71,6 @@ model NewDeviceProperties {
   @doc("Device operating system version.")
   operatingSystemVersion?: string;
 
-  @doc("Policy used to issue device certificates.")
-  policy?: NewDeviceCredentialPolicy;
-
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -129,44 +126,6 @@ union NewDeviceEnabledStatus {
 }
 
 @added(Versions.v2026_11_01_preview)
-@doc("Defines the policy used to issue device certificates.")
-model NewDeviceCredentialPolicy {
-  @doc("Resource Id of the Policy.")
-  resourceId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.DeviceRegistry/namespaces/credentials/policies";
-    }
-  ]>;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("Response for the get extended location sync status operation.")
-model NewDeviceExtendedLocationSyncStatusResponse {
-  @doc("The sync status of the cloud resource.")
-  cloudResource?: NewDeviceSyncResourceStatus;
-
-  @doc("The sync status of the extended location resource.")
-  extendedLocationResource?: NewDeviceSyncResourceStatus;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("Sync status for a resource.")
-model NewDeviceSyncResourceStatus {
-  @doc("The version of the resource.")
-  version?: int64;
-
-  @doc("The last transition time of the resource.")
-  lastTransitionTime?: utcDateTime;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("Response for the get endpoint status operation.")
-model NewDeviceEndpointStatusResponse {
-  @doc("The endpoint status information.")
-  endpoints?: DeviceStatusEndpoints;
-}
-
-@added(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface NewDevices {
   get is ArmResourceRead<NewDevice>;
@@ -174,21 +133,4 @@ interface NewDevices {
   update is ArmResourcePatchAsync<NewDevice, NewDeviceProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<NewDevice>;
   listByResourceGroup is ArmResourceListByParent<NewDevice>;
-
-  @doc("Get the extended location sync status of the device.")
-  getExtendedLocationSyncStatus is ArmResourceActionAsync<
-    NewDevice,
-    void,
-    NewDeviceExtendedLocationSyncStatusResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @doc("Get the endpoint status of the device.")
-  getEndpointStatus is ArmResourceActionSync<
-    NewDevice,
-    void,
-    NewDeviceEndpointStatusResponse
-  >;
 }
