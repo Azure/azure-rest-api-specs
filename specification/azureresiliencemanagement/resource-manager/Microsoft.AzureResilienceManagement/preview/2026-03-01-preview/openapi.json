@@ -2724,6 +2724,81 @@
         }
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/recommendCapacity": {
+      "post": {
+        "operationId": "GoalAssignments_RecommendCapacity",
+        "tags": [
+          "GoalAssignments"
+        ],
+        "description": "Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "goalAssignmentName",
+            "in": "path",
+            "description": "The name of the GoalAssignment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendCapacityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RecommendCapacityResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GoalAssignments_RecommendCapacity_MaximumSet": {
+            "$ref": "./examples/GoalAssignments_RecommendCapacity_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/goalAssignments/{goalAssignmentName}/refreshGoalResources": {
       "post": {
         "operationId": "GoalAssignments_RefreshGoalResources",
@@ -6265,13 +6340,7 @@
           "minimum": 0,
           "readOnly": true
         }
-      },
-      "required": [
-        "subscription",
-        "region",
-        "identity",
-        "chaosExperimentIdentityForFaults"
-      ]
+      }
     },
     "ChaosExperimentPropertiesOfDrillUpdate": {
       "type": "object",
@@ -6990,7 +7059,6 @@
       },
       "discriminator": "drillType",
       "required": [
-        "chaosExperimentProperties",
         "drillType"
       ]
     },
@@ -8479,10 +8547,6 @@
         "properties": {
           "$ref": "#/definitions/GoalAssignmentProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -8597,10 +8661,6 @@
         "properties": {
           "$ref": "#/definitions/GoalAssignmentPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -10165,6 +10225,90 @@
           }
         ]
       }
+    },
+    "RecommendCapacityRequest": {
+      "type": "object",
+      "description": "Request body for the recommendCapacity action.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "One or more Azure ARM resource IDs whose capacities should be validated.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      },
+      "required": [
+        "resourceIds"
+      ]
+    },
+    "RecommendCapacityResourceResult": {
+      "type": "object",
+      "description": "Capacity recommendation and AI assessment for a single Azure resource.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "ARM resource type, e.g. 'Microsoft.Compute/virtualMachines'."
+        },
+        "skuName": {
+          "type": "string",
+          "description": "SKU name, e.g. 'Standard_D4s_v3'."
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure region."
+        },
+        "capacityAssessment": {
+          "type": "string",
+          "description": "AI-generated assessment of this resource's capacity fitness. Null when the AI agent is unavailable."
+        },
+        "error": {
+          "type": "string",
+          "description": "Per-item error if the resource lookup failed."
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "RecommendCapacityResult": {
+      "type": "object",
+      "description": "Result payload for a completed recommendCapacity operation.",
+      "properties": {
+        "resourceCapacities": {
+          "type": "array",
+          "description": "Per-resource capacity details and AI assessments.",
+          "items": {
+            "$ref": "#/definitions/RecommendCapacityResourceResult"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "AI-generated cross-cutting recommendations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agentError": {
+          "type": "string",
+          "description": "Populated when the AI agent call fails."
+        }
+      },
+      "required": [
+        "resourceCapacities",
+        "recommendations"
+      ]
     },
     "RecommendationsData": {
       "type": "object",

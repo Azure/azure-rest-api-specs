@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "products": [
+        {
+          "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+          "quantity": 25,
+          "evaluationType": "Immediate",
+          "itemTrackingId": "LINE_001"
+        },
+        {
+          "productCode": "8sud7a17-9dad-11d1-80b4-00c03ed430c8",
+          "quantity": 150,
+          "evaluationType": "Immediate",
+          "itemTrackingId": "LINE_002"
+        },
+        {
+          "productCode": "a1b2c3d4-e5f6-4789-0abc-def123456789",
+          "quantity": 10,
+          "evaluationType": "Immediate",
+          "itemTrackingId": "LINE_003"
+        }
+      ],
+      "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8",
+      "partnerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b816-9dad-11d1-80b4-00c04fd430c8:6ba7b817-9dad-11d1-80b4-00c04fd430c8"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "requestMetadata": {
+              "productCode": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+              "quantity": 25,
+              "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8",
+              "partnerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b816-9dad-11d1-80b4-00c04fd430c8:6ba7b817-9dad-11d1-80b4-00c04fd430c8",
+              "itemTrackingId": "LINE_001"
+            },
+            "eligibilityResults": [
+              {
+                "isEligible": "Eligible",
+                "ineligibilityReasons": [],
+                "eligibilityConstraints": [
+                  {
+                    "constraintType": "firstPurchase",
+                    "isEligible": "Eligible"
+                  },
+                  {
+                    "constraintType": "seatQuantity",
+                    "isEligible": "Eligible"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "requestMetadata": {
+              "productCode": "8sud7a17-9dad-11d1-80b4-00c03ed430c8",
+              "quantity": 150,
+              "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8",
+              "partnerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b816-9dad-11d1-80b4-00c04fd430c8:6ba7b817-9dad-11d1-80b4-00c04fd430c8",
+              "itemTrackingId": "LINE_002"
+            },
+            "eligibilityResults": [
+              {
+                "isEligible": "Ineligible",
+                "ineligibilityReasons": [
+                  "skuPurchasedPreviously",
+                  "seatQuantityConstraintsNotMet"
+                ],
+                "eligibilityConstraints": [
+                  {
+                    "constraintType": "firstPurchase",
+                    "isEligible": "Ineligible"
+                  },
+                  {
+                    "constraintType": "seatQuantity",
+                    "isEligible": "Ineligible",
+                    "minSeatQuantityConstraint": 1,
+                    "maxSeatQuantityConstraint": 100,
+                    "currentSeatQuantityPurchased": 50,
+                    "minSeatQuantityRequiredToBePurchased": 1,
+                    "maxSeatQuantityWhichCanBePurchased": 50
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "requestMetadata": {
+              "productCode": "a1b2c3d4-e5f6-4789-0abc-def123456789",
+              "quantity": 10,
+              "customerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b813-9dad-11d1-80b4-00c04fd430c8:6ba7b814-9dad-11d1-80b4-00c04fd430c8",
+              "partnerBillingScope": "/providers/Microsoft.Billing/billingAccounts/6ba7b816-9dad-11d1-80b4-00c04fd430c8:6ba7b817-9dad-11d1-80b4-00c04fd430c8",
+              "itemTrackingId": "LINE_003"
+            },
+            "eligibilityResults": [
+              {
+                "isEligible": "Eligible",
+                "ineligibilityReasons": [],
+                "eligibilityConstraints": [
+                  {
+                    "constraintType": "firstPurchase",
+                    "isEligible": "Eligible"
+                  },
+                  {
+                    "constraintType": "termDuration",
+                    "isEligible": "Eligible"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_ValidatePromotions",
+  "title": "Validate Promotions - Bulk Products with Mixed Results"
+}

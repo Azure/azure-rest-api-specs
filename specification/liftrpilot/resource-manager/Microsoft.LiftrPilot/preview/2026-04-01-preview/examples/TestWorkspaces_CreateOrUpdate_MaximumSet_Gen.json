@@ -1,0 +1,61 @@
+{
+  "title": "TestWorkspaces_CreateOrUpdate_MaximumSet",
+  "operationId": "TestWorkspaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "E607A593-DCCC-45BE-89AE-C83A7A87859B",
+    "resourceGroupName": "rgpilot",
+    "testTrackedResourceName": "testResource1",
+    "testProxyResourceName": "testProxy1",
+    "testChildPureProxyResourceName": "testChildProxy1",
+    "testWorkspaceName": "testWorkspace1",
+    "resource": {
+      "properties": {
+        "workspaceId": "workspace-001"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "workspaceId": "workspace-001",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/e607a593-dccc-45be-89ae-c83a7a87859b/resourceGroups/rgpilot/providers/Microsoft.LiftrPilot/testTrackedResources/testResource1/testProxyResources/testProxy1/testChildPureProxyResources/testChildProxy1/testWorkspaces/testWorkspace1",
+        "name": "testWorkspace1",
+        "type": "Microsoft.LiftrPilot/testTrackedResources/testProxyResources/testChildPureProxyResources/testWorkspaces",
+        "systemData": {
+          "createdBy": "john.doe@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T07:50:44.164Z",
+          "lastModifiedBy": "john.doe@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-01T07:50:44.164Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "workspaceId": "workspace-001",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/e607a593-dccc-45be-89ae-c83a7a87859b/resourceGroups/rgpilot/providers/Microsoft.LiftrPilot/testTrackedResources/testResource1/testProxyResources/testProxy1/testChildPureProxyResources/testChildProxy1/testWorkspaces/testWorkspace1",
+        "name": "testWorkspace1",
+        "type": "Microsoft.LiftrPilot/testTrackedResources/testProxyResources/testChildPureProxyResources/testWorkspaces",
+        "systemData": {
+          "createdBy": "john.doe@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T07:50:44.164Z",
+          "lastModifiedBy": "john.doe@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-01T07:50:44.164Z"
+        }
+      }
+    }
+  }
+}

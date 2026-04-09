@@ -55,6 +55,11 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2026_01_29_preview: "2026-01-29-preview",
+
+  /** 2026-04-01-preview version (new) */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2026_04_01_preview: "2026-04-01-preview",
 }
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
@@ -651,4 +656,134 @@ interface SaasOperations {
     @doc("The details for ActivateSaaSParameter request.")
     request: ActivateSaasParameterRequest,
   ): ArmResponse<ActivateSaasResponse> | ArmAcceptedLroResponse | ErrorResponse;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The properties of TestWorkspace")
+model TestWorkspaceProperties {
+  @doc("Workspace identifier")
+  workspaceId: string;
+
+  @doc("Provisioning state of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Test workspace pure proxy resource")
+@parentResource(TestChildPureProxyResource)
+model TestWorkspace is ProxyResource<TestWorkspaceProperties> {
+  @key("testWorkspaceName")
+  @pattern("^[a-zA-Z0-9]+$")
+  @segment("testWorkspaces")
+  @minLength(1)
+  @maxLength(50)
+  @doc("Name of the TestWorkspace")
+  @path
+  name: string;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Updatable properties of the TestWorkspace.")
+model TestWorkspaceUpdateProperties {
+  @doc("Workspace identifier")
+  workspaceId?: string;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The type used for update operations of the TestWorkspace.")
+model TestWorkspaceUpdate {
+  @doc("Updatable properties of the TestWorkspace")
+  properties?: TestWorkspaceUpdateProperties;
+}
+
+@added(Versions.v2026_04_01_preview)
+@armResourceOperations
+interface TestWorkspaces {
+  get is ArmResourceRead<TestWorkspace>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TestWorkspace>;
+  delete is ArmResourceDeleteWithoutOkAsync<TestWorkspace>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<TestWorkspace, TestWorkspaceUpdate>;
+  listByTestChildPureProxyResource is ArmResourceListByParent<TestWorkspace>;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The properties of TestEnvironment")
+model TestEnvironmentProperties {
+  @doc("Environment identifier")
+  environmentId: string;
+
+  @doc("Provisioning state of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Test environment pure proxy resource")
+@parentResource(TestWorkspace)
+model TestEnvironment is ProxyResource<TestEnvironmentProperties> {
+  @key("testEnvironmentName")
+  @pattern("^[a-zA-Z0-9]+$")
+  @segment("testEnvironments")
+  @minLength(1)
+  @maxLength(50)
+  @doc("Name of the TestEnvironment")
+  @path
+  name: string;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Updatable properties of the TestEnvironment.")
+model TestEnvironmentUpdateProperties {
+  @doc("Environment identifier")
+  environmentId?: string;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The type used for update operations of the TestEnvironment.")
+model TestEnvironmentUpdate {
+  @doc("Updatable properties of the TestEnvironment")
+  properties?: TestEnvironmentUpdateProperties;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The properties of RestoreTestEnvironmentRequest")
+model RestoreTestEnvironmentRequest {
+  @doc("Check whether inplace or out of place restore.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  inPlaceRestore: boolean;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Restore resource response for a Test environment resource.")
+model RestoreTestEnvironmentResponse {
+  @doc("The partner response for taskId")
+  @visibility(Lifecycle.Read)
+  taskId: int32;
+}
+
+@added(Versions.v2026_04_01_preview)
+@armResourceOperations
+interface TestEnvironments {
+  get is ArmResourceRead<TestEnvironment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TestEnvironment>;
+  delete is ArmResourceDeleteWithoutOkAsync<TestEnvironment>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<TestEnvironment, TestEnvironmentUpdate>;
+  listByTestWorkspace is ArmResourceListByParent<TestEnvironment>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
+  @doc("Restore resource for a test environment resource.")
+  @armResourceAction(TestEnvironment)
+  @action("restore")
+  @post
+  @OpenAPI.extension("x-ms-long-running-operation", true)
+  restore(
+    ...ResourceInstanceParameters<TestEnvironment>,
+
+    @bodyRoot
+    @doc("The body type of the operation request.")
+    request: RestoreTestEnvironmentRequest,
+  ): ArmResponse<RestoreTestEnvironmentResponse> | ArmAcceptedLroResponse | ErrorResponse;
 }

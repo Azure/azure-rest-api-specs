@@ -209,18 +209,10 @@ model L3ExportRoutePolicy {
 @doc("Array of ARM Resource ID of the RoutePolicies.")
 model L3ExportRoutePolicyPatch is L3ExportRoutePolicy;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The L3 Isolation Domain patch resource definition.")
 model L3IsolationDomainPatch extends TagsUpdate {
-  @doc("Resource properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: L3IsolationDomainPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("L3 Isolation Domain resource patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: L3IsolationDomainPatchProperties;
 
   @added(Versions.v2025_07_15)

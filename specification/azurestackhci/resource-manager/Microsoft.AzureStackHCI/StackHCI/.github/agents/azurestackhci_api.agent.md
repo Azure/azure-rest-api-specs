@@ -182,7 +182,6 @@ For detailed guidance, consult these files in the `.github/eng/` directory:
 - `workflow.md` — Full workflow, validation, troubleshooting
 - `repo-structure.md` — Repo structure, private vs public differences, sync process
 - `new-api-version.md` — Creating new API versions
-- `changelog-2026-03-15-preview.md` — Changes in current preview version
 
 ## Code Review Checklist
 

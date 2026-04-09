@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2026-03-31-preview",
+    "body": {
+      "properties": {
+        "quantity": 5
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "additionalInfo": {
+          "refundableQuantity": {
+            "refundableQuantities": [
+              {
+                "quantity": 3,
+                "returnWindowEndDateTime": "2023-03-12T00:00:00Z"
+              },
+              {
+                "quantity": 1,
+                "returnWindowEndDateTime": "2023-06-14T00:00:00Z"
+              }
+            ],
+            "totalRefundableQuantity": 4
+          },
+          "coTerm": null,
+          "addOn": null,
+          "promotion": null,
+          "futurePrice": null
+        },
+        "evaluateResult": "Failed",
+        "reason": "Failed to satisfy refundable quantity constraints",
+        "reasonCode": "FailedToSatisfyRefundableQuantityConstraints",
+        "updateScenario": "ChangeQuantity"
+      }
+    }
+  },
+  "operationId": "SaasResources_CanUpdate",
+  "title": "Update Failed Caused by Refundable Quantity"
+}

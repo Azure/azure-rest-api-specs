@@ -213,14 +213,6 @@ model ExternalNetworkPropertiesOptionAProperties {
 @doc("The ExternalNetwork patch resource definition.")
 model ExternalNetworkPatch {
   @doc("External Network Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: ExternalNetworkPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("External Network Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ExternalNetworkPatchProperties;
 }
 
@@ -386,7 +378,7 @@ model ExternalNetworkBfdAdministrativeStateRequest {
   administrativeState?: BfdAdministrativeState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common error response for ExternalNetwork BFD Administrative State response"
 @doc("External Network Administrative State response")
 @added(Versions.v2024_06_15_preview)
 model ExternalNetworkBfdAdministrativeStateResponse

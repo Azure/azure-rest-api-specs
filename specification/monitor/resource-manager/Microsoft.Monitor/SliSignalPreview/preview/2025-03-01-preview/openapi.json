@@ -52,12 +52,7 @@
         "description": "Returns preview data for the signal.",
         "parameters": [
           {
-            "name": "serviceGroupName",
-            "in": "path",
-            "description": "The name of the service group.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9._()~-]{1,250}$"
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -401,10 +396,10 @@
       "type": "string",
       "description": "Defines the available preview types for signal preview.",
       "enum": [
-        "goodsignal",
-        "totalsignal",
-        "signal",
-        "slo"
+        "GoodSignal",
+        "TotalSignal",
+        "Signal",
+        "Slo"
       ],
       "x-ms-enum": {
         "name": "PreviewType",
@@ -412,22 +407,22 @@
         "values": [
           {
             "name": "GoodSignal",
-            "value": "goodsignal",
+            "value": "GoodSignal",
             "description": "Preview for good signal."
           },
           {
             "name": "TotalSignal",
-            "value": "totalsignal",
+            "value": "TotalSignal",
             "description": "Preview for total signal."
           },
           {
             "name": "Signal",
-            "value": "signal",
+            "value": "Signal",
             "description": "Preview for signal."
           },
           {
             "name": "Slo",
-            "value": "slo",
+            "value": "Slo",
             "description": "Preview for SLO evaluation."
           }
         ]
@@ -518,22 +513,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "max",
+            "name": "Max",
             "value": "max",
             "description": "Maximum value."
           },
           {
-            "name": "min",
+            "name": "Min",
             "value": "min",
             "description": "Minimum value."
           },
           {
-            "name": "avg",
+            "name": "Avg",
             "value": "avg",
             "description": "Average value."
           },
           {
-            "name": "sum",
+            "name": "Sum",
             "value": "sum",
             "description": "Summation."
           }
@@ -656,41 +651,27 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "max",
+            "name": "Max",
             "value": "max",
             "description": "Maximum value."
           },
           {
-            "name": "min",
+            "name": "Min",
             "value": "min",
             "description": "Minimum value."
           },
           {
-            "name": "avg",
+            "name": "Avg",
             "value": "avg",
             "description": "Average value."
           },
           {
-            "name": "sum",
+            "name": "Sum",
             "value": "sum",
             "description": "Summation."
           }
         ]
       }
-    },
-    "ServiceGroupBaseParameters": {
-      "type": "object",
-      "description": "ServiceGroup as parameter",
-      "properties": {
-        "serviceGroupName": {
-          "type": "string",
-          "description": "The name of the service group.",
-          "pattern": "^[A-Za-z0-9._()~-]{1,250}$"
-        }
-      },
-      "required": [
-        "serviceGroupName"
-      ]
     },
     "Signal": {
       "type": "object",
@@ -835,7 +816,7 @@
     },
     "SpatialAggregationType": {
       "type": "string",
-      "description": "Defines the available aggregation types.",
+      "description": "Defines the available spatial aggregation types for aggregating measurements across multiple time series.",
       "enum": [
         "Average",
         "Min",
@@ -927,7 +908,7 @@
     },
     "TemporalAggregationType": {
       "type": "string",
-      "description": "Defines the available aggregation types.",
+      "description": "Defines the available temporal aggregation types for aggregating measurements over a specific time window within the same time series.",
       "enum": [
         "Average",
         "Min",
@@ -1090,5 +1071,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ServiceGroupBaseParameters": {
+      "name": "serviceGroupName",
+      "in": "path",
+      "description": "The name of the service group.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._()~-]{1,250}$",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
