@@ -47,8 +47,9 @@ interface SqlMigrationServices {
   update is ArmCustomPatchAsync<
     SqlMigrationService,
     PatchModel = SqlMigrationServiceUpdate,
-    Response = ArmResponse<SqlMigrationService> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlMigrationService> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmResourceCreatedResponse<SqlMigrationService>
+    Response = (ArmResponse<SqlMigrationService> &
+      ArmLroLocationHeader<FinalResult = SqlMigrationService> &
+      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<SqlMigrationService>
   >;
 
   /**
