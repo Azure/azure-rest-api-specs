@@ -5,6 +5,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../openai-evaluations/models.tsp";
+import "../evaluators/models.tsp";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
@@ -41,8 +42,8 @@ union EvaluationTaxonomyInputType {
   @doc("Policy.")
   policy: "policy",
 
-  @doc("Behavior-based taxonomy input for custom behavior definitions")
-  behavior: "behavior",
+  @doc("Scenario-based taxonomy input generated from context inputs (used when evaluator category is 'safety')")
+  scenario: "scenario",
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -70,18 +71,13 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-@doc("Input configuration for the evaluation taxonomy when the input type is behavior.")
-model BehaviorTaxonomyInput extends EvaluationTaxonomyInput {
+@doc("Input configuration for taxonomy generation from scenario evaluator context inputs (used when evaluator category is 'safety').")
+model ScenarioTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
-  type: EvaluationTaxonomyInputType.behavior;
+  type: EvaluationTaxonomyInputType.scenario;
 
-  @doc("Name of the behavior to evaluate")
-  behavior_name: string;
-
-  @doc("Detailed definition of the behavior (10-2000 characters)")
-  @minLength(10)
-  @maxLength(2000)
-  behavior_definition: string;
+  @doc("Context inputs used to generate the taxonomy (same inputs provided to the scenario evaluator)")
+  context_inputs: ContextInput[];
 }
 
 @added(Versions.v2025_11_15_preview)

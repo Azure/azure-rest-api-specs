@@ -61,8 +61,8 @@ union EvaluatorDefinitionType {
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
 
-  @doc("Behavior-based definition that auto-creates a linked taxonomy")
-  behavior: "behavior",
+  @doc("Scenario-based definition that generates evaluation artifacts (rubric catalog or taxonomy) from context inputs. When category is 'quality', generates a rubric catalog with scored criteria. When category is 'safety', generates a taxonomy with risk sub-behaviors.")
+  scenario: "scenario",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
@@ -104,26 +104,60 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   prompt_text: string;
 }
 
-@doc("Behavior-based evaluator definition that auto-creates a linked taxonomy")
+@doc("Context input for scenario-based evaluator generation")
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-model BehaviorBasedEvaluatorDefinition extends EvaluatorDefinition {
-  type: EvaluatorDefinitionType.behavior;
+model ContextInput {
+  @doc("Type of context input: agent_prompt, policy_document, trace_file, or supplementary_text")
+  type: string;
 
-  @doc("Name of the behavior to evaluate")
-  behavior_name: string;
+  @doc("Content of the context input (inline text or file reference)")
+  content: string;
+}
 
-  @doc("Detailed definition of the behavior (10-2000 characters)")
-  @minLength(10)
-  @maxLength(2000)
-  behavior_definition: string;
+@doc("A single rubric criterion with scoring descriptions")
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+model RubricCriterion {
+  @doc("Name of the criterion (e.g., 'task_adherence', 'accuracy')")
+  name: string;
 
-  @doc("ID of the auto-created linked taxonomy (read-only, set by service)")
+  @doc("Description of what this criterion measures")
+  description: string;
+
+  @doc("Relative weight of this criterion in the overall score")
+  weight: float32;
+
+  @doc("Scoring rubric: maps score levels (1-5) to descriptions")
+  scoring: Record<string>;
+
+  @doc("Applicability guidance: when to apply and when not to apply this criterion")
+  applicability_guidance?: string;
+
+  @doc("Whether this criterion is always scored on every case (true for sink criteria)")
+  always_on?: boolean;
+}
+
+@doc("Scenario-based evaluator definition that generates evaluation artifacts from context inputs. The category field on the evaluator determines the pipeline: 'quality' generates a rubric catalog, 'safety' generates a taxonomy.")
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+model ScenarioBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.scenario;
+
+  @doc("Context inputs used to generate the evaluation artifacts (agent prompt, policies, traces, supplementary text)")
+  context_inputs?: ContextInput[];
+
+  @doc("Generated evaluation spec describing what to evaluate (read-only, set by service)")
   @visibility(Lifecycle.Read)
+  spec?: string;
+
+  @doc("Generated rubric catalog with scored criteria (populated when category is 'quality')")
+  rubric_catalog?: RubricCriterion[];
+
+  @doc("ID of the generated or linked taxonomy (populated when category is 'safety')")
   taxonomy_id?: string;
 
-  @doc("Current version of the linked taxonomy (read-only, set by service)")
-  @visibility(Lifecycle.Read)
+  @doc("Version of the linked taxonomy")
   taxonomy_version?: string;
 }
 
