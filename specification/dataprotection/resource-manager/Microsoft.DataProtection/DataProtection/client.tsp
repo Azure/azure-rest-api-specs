@@ -682,6 +682,10 @@ using Microsoft.DataProtection;
   "content",
   "csharp"
 );
+@@clientName(BackupInstanceResources.resumeProtection::parameters.body,
+  "content",
+  "csharp"
+);
 @@clientName(BackupInstanceResources.stopProtection::parameters.body,
   "content",
   "csharp"
