@@ -509,12 +509,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "The Traffic Manager profile parameters supplied to the Update operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Profile"
+              "$ref": "#/definitions/ProfileUpdate"
             }
           }
         ],
@@ -795,12 +795,12 @@
             "type": "string"
           },
           {
-            "name": "parameters",
+            "name": "properties",
             "in": "body",
             "description": "The Traffic Manager endpoint parameters supplied to the Update operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointUpdate"
             }
           }
         ],
@@ -1316,6 +1316,33 @@
         ]
       }
     },
+    "EndpointUpdate": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager endpoint for update operations.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The properties of the Traffic Manager endpoint.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "GeographicHierarchyProperties": {
       "type": "object",
       "description": "Class representing the properties of the Geographic hierarchy used with the Geographic traffic routing method.",
@@ -1619,6 +1646,55 @@
         }
       }
     },
+    "ProfilePropertiesUpdate": {
+      "type": "object",
+      "description": "Class representing the Traffic Manager profile properties for update operations.",
+      "properties": {
+        "profileStatus": {
+          "$ref": "#/definitions/ProfileStatus",
+          "description": "The status of the Traffic Manager profile."
+        },
+        "trafficRoutingMethod": {
+          "$ref": "#/definitions/TrafficRoutingMethod",
+          "description": "The traffic routing method of the Traffic Manager profile."
+        },
+        "dnsConfig": {
+          "$ref": "#/definitions/DnsConfig",
+          "description": "The DNS settings of the Traffic Manager profile."
+        },
+        "monitorConfig": {
+          "$ref": "#/definitions/MonitorConfig",
+          "description": "The endpoint monitoring settings of the Traffic Manager profile."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "The list of endpoints in the Traffic Manager profile.",
+          "items": {
+            "$ref": "#/definitions/EndpointUpdate"
+          }
+        },
+        "trafficViewEnrollmentStatus": {
+          "$ref": "#/definitions/TrafficViewEnrollmentStatus",
+          "description": "Indicates whether Traffic View is 'Enabled' or 'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will increase the cost of the Traffic Manage profile."
+        },
+        "allowedEndpointRecordTypes": {
+          "type": "array",
+          "description": "The list of allowed endpoint record types.",
+          "items": {
+            "$ref": "#/definitions/AllowedEndpointRecordType"
+          }
+        },
+        "maxReturn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum number of endpoints to be returned for MultiValue routing type."
+        },
+        "recordType": {
+          "$ref": "#/definitions/RecordType",
+          "description": "When record type is set, a traffic manager profile will allow only endpoints that match this type."
+        }
+      }
+    },
     "ProfileStatus": {
       "type": "string",
       "description": "The status of the Traffic Manager profile.",
@@ -1639,6 +1715,45 @@
             "value": "Disabled"
           }
         ]
+      }
+    },
+    "ProfileUpdate": {
+      "type": "object",
+      "description": "Parameters supplied to update a Traffic Manager profile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the resource lives",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ProfilePropertiesUpdate",
+          "description": "The properties of the Traffic Manager profile.",
+          "x-ms-client-flatten": true
+        }
       }
     },
     "ProxyResource": {
