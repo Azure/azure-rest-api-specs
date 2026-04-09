@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Common;
+namespace Common;
 /**
  * A load balancing rule for a load balancer.
  */

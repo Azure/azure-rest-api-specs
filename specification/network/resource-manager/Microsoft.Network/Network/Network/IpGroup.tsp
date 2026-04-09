@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model IpGroup extends Microsoft.Common.Resource {
+model IpGroup extends Common.Resource {
   properties?: IpGroupPropertiesFormat;
 
   @visibility(Lifecycle.Read)

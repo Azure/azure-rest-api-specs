@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Common;
+namespace Common;
 
 /**
  * Virtual Network resource.

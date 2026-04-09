@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model WebApplicationFirewallPolicy extends Microsoft.Common.Resource {
+model WebApplicationFirewallPolicy extends Common.Resource {
   properties?: WebApplicationFirewallPolicyPropertiesFormat;
 
   @visibility(Lifecycle.Read)

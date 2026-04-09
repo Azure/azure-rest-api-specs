@@ -79,7 +79,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -125,7 +125,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -179,7 +179,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -240,13 +240,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.NetworkInterface"
+              "$ref": "#/definitions/Common.NetworkInterface"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -310,13 +310,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfiguration"
+              "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -376,7 +376,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -446,13 +446,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.PublicIPAddress"
+              "$ref": "#/definitions/Common.PublicIPAddress"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -516,7 +516,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.Common.CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -532,22 +532,7 @@
     }
   },
   "definitions": {
-    "ManagedServiceIdentityUserAssignedIdentities": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of user assigned identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client id of user assigned identity.",
-          "readOnly": true
-        }
-      }
-    },
-    "Microsoft.Common.AccessMode": {
+    "Common.AccessMode": {
       "type": "string",
       "description": "The access mode of the private link service.",
       "enum": [
@@ -571,7 +556,7 @@
         ]
       }
     },
-    "Microsoft.Common.AddressSpace": {
+    "Common.AddressSpace": {
       "type": "object",
       "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network.",
       "properties": {
@@ -586,12 +571,12 @@
           "type": "array",
           "description": "A list of IPAM Pools allocating IP address prefixes.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.IpamPoolPrefixAllocation"
+            "$ref": "#/definitions/Common.IpamPoolPrefixAllocation"
           }
         }
       }
     },
-    "Microsoft.Common.ApplicationGatewayBackendAddress": {
+    "Common.ApplicationGatewayBackendAddress": {
       "type": "object",
       "description": "Backend address of an application gateway.",
       "properties": {
@@ -605,12 +590,12 @@
         }
       }
     },
-    "Microsoft.Common.ApplicationGatewayBackendAddressPool": {
+    "Common.ApplicationGatewayBackendAddressPool": {
       "type": "object",
       "description": "Backend Address Pool of an application gateway.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ApplicationGatewayBackendAddressPoolPropertiesFormat",
+          "$ref": "#/definitions/Common.ApplicationGatewayBackendAddressPoolPropertiesFormat",
           "description": "Properties of the application gateway backend address pool.",
           "x-ms-client-flatten": true
         },
@@ -631,11 +616,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.ApplicationGatewayBackendAddressPoolPropertiesFormat": {
+    "Common.ApplicationGatewayBackendAddressPoolPropertiesFormat": {
       "type": "object",
       "description": "Properties of Backend Address Pool of an application gateway.",
       "properties": {
@@ -643,7 +628,7 @@
           "type": "array",
           "description": "Collection of references to IPs defined in network interfaces.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfiguration"
+            "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration"
           },
           "readOnly": true
         },
@@ -651,22 +636,22 @@
           "type": "array",
           "description": "Backend addresses.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ApplicationGatewayBackendAddress"
+            "$ref": "#/definitions/Common.ApplicationGatewayBackendAddress"
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the backend address pool resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.ApplicationGatewayIPConfiguration": {
+    "Common.ApplicationGatewayIPConfiguration": {
       "type": "object",
       "description": "IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ApplicationGatewayIPConfigurationPropertiesFormat",
+          "$ref": "#/definitions/Common.ApplicationGatewayIPConfigurationPropertiesFormat",
           "description": "Properties of the application gateway IP configuration.",
           "x-ms-client-flatten": true
         },
@@ -687,31 +672,31 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.ApplicationGatewayIPConfigurationPropertiesFormat": {
+    "Common.ApplicationGatewayIPConfigurationPropertiesFormat": {
       "type": "object",
       "description": "Properties of IP configuration of an application gateway.",
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Reference to the subnet resource. A subnet from where application gateway gets its private address."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the application gateway IP configuration resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.ApplicationSecurityGroup": {
+    "Common.ApplicationSecurityGroup": {
       "type": "object",
       "description": "An application security group in a resource group.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ApplicationSecurityGroupPropertiesFormat",
+          "$ref": "#/definitions/Common.ApplicationSecurityGroupPropertiesFormat",
           "description": "Properties of the application security group.",
           "x-ms-client-flatten": true
         },
@@ -723,11 +708,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.ApplicationSecurityGroupPropertiesFormat": {
+    "Common.ApplicationSecurityGroupPropertiesFormat": {
       "type": "object",
       "description": "Application security group properties.",
       "properties": {
@@ -737,18 +722,18 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the application security group resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.BackendAddressPool": {
+    "Common.BackendAddressPool": {
       "type": "object",
       "description": "Pool of backend IP addresses.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.BackendAddressPoolPropertiesFormat",
+          "$ref": "#/definitions/Common.BackendAddressPoolPropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -759,11 +744,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.BackendAddressPoolPropertiesFormat": {
+    "Common.BackendAddressPoolPropertiesFormat": {
       "type": "object",
       "description": "Properties of the backend address pool.",
       "properties": {
@@ -775,21 +760,21 @@
           "type": "array",
           "description": "An array of gateway load balancer tunnel interfaces.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.GatewayLoadBalancerTunnelInterface"
+            "$ref": "#/definitions/Common.GatewayLoadBalancerTunnelInterface"
           }
         },
         "loadBalancerBackendAddresses": {
           "type": "array",
           "description": "An array of backend addresses.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.LoadBalancerBackendAddress"
+            "$ref": "#/definitions/Common.LoadBalancerBackendAddress"
           }
         },
         "backendIPConfigurations": {
           "type": "array",
           "description": "An array of references to IP addresses defined in network interfaces.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfiguration"
+            "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration"
           },
           "readOnly": true
         },
@@ -797,12 +782,12 @@
           "type": "array",
           "description": "An array of references to load balancing rules that use this backend address pool.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
         "outboundRule": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to an outbound rule that uses this backend address pool.",
           "readOnly": true
         },
@@ -810,7 +795,7 @@
           "type": "array",
           "description": "An array of references to outbound rules that use this backend address pool.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
@@ -818,12 +803,12 @@
           "type": "array",
           "description": "An array of references to inbound NAT rules that use this backend address pool.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the backend address pool resource.",
           "readOnly": true
         },
@@ -833,27 +818,27 @@
           "description": "Amount of seconds Load Balancer waits for before sending RESET to client and backend address."
         },
         "virtualNetwork": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to a virtual network."
         },
         "syncMode": {
-          "$ref": "#/definitions/Microsoft.Common.SyncMode",
+          "$ref": "#/definitions/Common.SyncMode",
           "description": "Backend address synchronous mode for the backend pool"
         }
       }
     },
-    "Microsoft.Common.CloudError": {
+    "Common.CloudError": {
       "type": "object",
       "description": "An error response from the service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Microsoft.Common.CloudErrorBody",
+          "$ref": "#/definitions/Common.CloudErrorBody",
           "description": "Cloud error body."
         }
       },
       "x-ms-external": true
     },
-    "Microsoft.Common.CloudErrorBody": {
+    "Common.CloudErrorBody": {
       "type": "object",
       "description": "An error response from the service.",
       "properties": {
@@ -873,13 +858,13 @@
           "type": "array",
           "description": "A list of additional details about the error.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.CloudErrorBody"
+            "$ref": "#/definitions/Common.CloudErrorBody"
           }
         }
       },
       "x-ms-external": true
     },
-    "Microsoft.Common.CustomDnsConfigPropertiesFormat": {
+    "Common.CustomDnsConfigPropertiesFormat": {
       "type": "object",
       "description": "Contains custom Dns resolution configuration from customer.",
       "properties": {
@@ -896,21 +881,21 @@
         }
       }
     },
-    "Microsoft.Common.DdosSettings": {
+    "Common.DdosSettings": {
       "type": "object",
       "description": "Contains the DDoS protection settings of the public IP.",
       "properties": {
         "protectionMode": {
-          "$ref": "#/definitions/Microsoft.Common.DdosSettingsProtectionMode",
+          "$ref": "#/definitions/Common.DdosSettingsProtectionMode",
           "description": "The DDoS protection mode of the public IP"
         },
         "ddosProtectionPlan": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The DDoS protection plan associated with the public IP. Can only be set if ProtectionMode is Enabled"
         }
       }
     },
-    "Microsoft.Common.DdosSettingsProtectionMode": {
+    "Common.DdosSettingsProtectionMode": {
       "type": "string",
       "description": "The DDoS protection mode of the public IP",
       "enum": [
@@ -940,12 +925,12 @@
         ]
       }
     },
-    "Microsoft.Common.Delegation": {
+    "Common.Delegation": {
       "type": "object",
       "description": "Details the service to which the subnet is delegated.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ServiceDelegationPropertiesFormat",
+          "$ref": "#/definitions/Common.ServiceDelegationPropertiesFormat",
           "description": "Properties of the subnet.",
           "x-ms-client-flatten": true
         },
@@ -965,11 +950,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.DeleteOptions": {
+    "Common.DeleteOptions": {
       "type": "string",
       "description": "Specify what happens to the public IP address when the VM using it is deleted",
       "enum": [
@@ -993,7 +978,7 @@
         ]
       }
     },
-    "Microsoft.Common.DhcpOptions": {
+    "Common.DhcpOptions": {
       "type": "object",
       "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options.",
       "properties": {
@@ -1006,7 +991,7 @@
         }
       }
     },
-    "Microsoft.Common.ExtendedLocation": {
+    "Common.ExtendedLocation": {
       "type": "object",
       "description": "ExtendedLocation complex type.",
       "properties": {
@@ -1015,12 +1000,12 @@
           "description": "The name of the extended location."
         },
         "type": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocationTypes",
+          "$ref": "#/definitions/Common.ExtendedLocationTypes",
           "description": "The type of the extended location."
         }
       }
     },
-    "Microsoft.Common.ExtendedLocationTypes": {
+    "Common.ExtendedLocationTypes": {
       "type": "string",
       "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.",
       "enum": [
@@ -1038,12 +1023,12 @@
         ]
       }
     },
-    "Microsoft.Common.FlowLog": {
+    "Common.FlowLog": {
       "type": "object",
       "description": "A flow log resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.FlowLogPropertiesFormat",
+          "$ref": "#/definitions/Common.FlowLogPropertiesFormat",
           "description": "Properties of the flow log.",
           "x-ms-client-flatten": true
         },
@@ -1053,22 +1038,22 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "#/definitions/Microsoft.Common.ManagedServiceIdentity",
+          "$ref": "#/definitions/Common.ManagedServiceIdentity",
           "description": "FlowLog resource Managed Identity"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.FlowLogFormatParameters": {
+    "Common.FlowLogFormatParameters": {
       "type": "object",
       "description": "Parameters that define the flow log format.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Microsoft.Common.FlowLogFormatType",
+          "$ref": "#/definitions/Common.FlowLogFormatType",
           "description": "The file type of flow log."
         },
         "version": {
@@ -1079,7 +1064,7 @@
         }
       }
     },
-    "Microsoft.Common.FlowLogFormatType": {
+    "Common.FlowLogFormatType": {
       "type": "string",
       "description": "The file type of flow log.",
       "enum": [
@@ -1097,7 +1082,7 @@
         ]
       }
     },
-    "Microsoft.Common.FlowLogPropertiesFormat": {
+    "Common.FlowLogPropertiesFormat": {
       "type": "object",
       "description": "Parameters that define the configuration of flow log.",
       "properties": {
@@ -1127,19 +1112,19 @@
           "description": "Flag to enable/disable flow logging."
         },
         "retentionPolicy": {
-          "$ref": "#/definitions/Microsoft.Common.RetentionPolicyParameters",
+          "$ref": "#/definitions/Common.RetentionPolicyParameters",
           "description": "Parameters that define the retention policy for flow log."
         },
         "format": {
-          "$ref": "#/definitions/Microsoft.Common.FlowLogFormatParameters",
+          "$ref": "#/definitions/Common.FlowLogFormatParameters",
           "description": "Parameters that define the flow log format."
         },
         "flowAnalyticsConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.TrafficAnalyticsProperties",
+          "$ref": "#/definitions/Common.TrafficAnalyticsProperties",
           "description": "Parameters that define the configuration of traffic analytics."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the flow log.",
           "readOnly": true
         }
@@ -1149,12 +1134,12 @@
         "storageId"
       ]
     },
-    "Microsoft.Common.FrontendIPConfiguration": {
+    "Common.FrontendIPConfiguration": {
       "type": "object",
       "description": "Frontend IP address of the load balancer.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.FrontendIPConfigurationPropertiesFormat",
+          "$ref": "#/definitions/Common.FrontendIPConfigurationPropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -1172,11 +1157,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.FrontendIPConfigurationPropertiesFormat": {
+    "Common.FrontendIPConfigurationPropertiesFormat": {
       "type": "object",
       "description": "Properties of Frontend IP Configuration of the load balancer.",
       "properties": {
@@ -1184,7 +1169,7 @@
           "type": "array",
           "description": "An array of references to inbound rules that use this frontend IP.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
@@ -1192,7 +1177,7 @@
           "type": "array",
           "description": "An array of references to inbound pools that use this frontend IP.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
@@ -1200,7 +1185,7 @@
           "type": "array",
           "description": "An array of references to outbound rules that use this frontend IP.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
@@ -1208,7 +1193,7 @@
           "type": "array",
           "description": "An array of references to load balancing rules that use this frontend IP.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
@@ -1217,37 +1202,37 @@
           "description": "The private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "$ref": "#/definitions/Microsoft.Common.IPAllocationMethod",
+          "$ref": "#/definitions/Common.IPAllocationMethod",
           "description": "The Private IP allocation method."
         },
         "privateIPAddressVersion": {
-          "$ref": "#/definitions/Microsoft.Common.IPVersion",
+          "$ref": "#/definitions/Common.IPVersion",
           "description": "Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4."
         },
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.Subnet",
+          "$ref": "#/definitions/Common.Subnet",
           "description": "The reference to the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddress",
+          "$ref": "#/definitions/Common.PublicIPAddress",
           "description": "The reference to the Public IP resource."
         },
         "publicIPPrefix": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The reference to the Public IP Prefix resource."
         },
         "gatewayLoadBalancer": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The reference to gateway load balancer frontend IP."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the frontend IP configuration resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.GatewayLoadBalancerTunnelInterface": {
+    "Common.GatewayLoadBalancerTunnelInterface": {
       "type": "object",
       "description": "Gateway load balancer tunnel interface of a load balancer backend address pool.",
       "properties": {
@@ -1262,16 +1247,16 @@
           "description": "Identifier of gateway load balancer tunnel interface."
         },
         "protocol": {
-          "$ref": "#/definitions/Microsoft.Common.GatewayLoadBalancerTunnelProtocol",
+          "$ref": "#/definitions/Common.GatewayLoadBalancerTunnelProtocol",
           "description": "Protocol of gateway load balancer tunnel interface."
         },
         "type": {
-          "$ref": "#/definitions/Microsoft.Common.GatewayLoadBalancerTunnelInterfaceType",
+          "$ref": "#/definitions/Common.GatewayLoadBalancerTunnelInterfaceType",
           "description": "Traffic type of gateway load balancer tunnel interface."
         }
       }
     },
-    "Microsoft.Common.GatewayLoadBalancerTunnelInterfaceType": {
+    "Common.GatewayLoadBalancerTunnelInterfaceType": {
       "type": "string",
       "description": "Traffic type of gateway load balancer tunnel interface.",
       "enum": [
@@ -1301,7 +1286,7 @@
         ]
       }
     },
-    "Microsoft.Common.GatewayLoadBalancerTunnelProtocol": {
+    "Common.GatewayLoadBalancerTunnelProtocol": {
       "type": "string",
       "description": "Protocol of gateway load balancer tunnel interface.",
       "enum": [
@@ -1331,7 +1316,7 @@
         ]
       }
     },
-    "Microsoft.Common.IPAllocationMethod": {
+    "Common.IPAllocationMethod": {
       "type": "string",
       "description": "IP address allocation method.",
       "enum": [
@@ -1355,12 +1340,12 @@
         ]
       }
     },
-    "Microsoft.Common.IPConfiguration": {
+    "Common.IPConfiguration": {
       "type": "object",
       "description": "IP configuration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.IPConfigurationPropertiesFormat",
+          "$ref": "#/definitions/Common.IPConfigurationPropertiesFormat",
           "description": "Properties of the IP configuration.",
           "x-ms-client-flatten": true
         },
@@ -1376,16 +1361,16 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.IPConfigurationProfile": {
+    "Common.IPConfigurationProfile": {
       "type": "object",
       "description": "IP configuration profile child resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.IPConfigurationProfilePropertiesFormat",
+          "$ref": "#/definitions/Common.IPConfigurationProfilePropertiesFormat",
           "description": "Properties of the IP configuration profile.",
           "x-ms-client-flatten": true
         },
@@ -1406,26 +1391,26 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.IPConfigurationProfilePropertiesFormat": {
+    "Common.IPConfigurationProfilePropertiesFormat": {
       "type": "object",
       "description": "IP configuration profile properties.",
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.Subnet",
+          "$ref": "#/definitions/Common.Subnet",
           "description": "The reference to the subnet resource to create a container network interface ip configuration."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the IP configuration profile resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.IPConfigurationPropertiesFormat": {
+    "Common.IPConfigurationPropertiesFormat": {
       "type": "object",
       "description": "Properties of IP configuration.",
       "properties": {
@@ -1434,25 +1419,25 @@
           "description": "The private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "$ref": "#/definitions/Microsoft.Common.IPAllocationMethod",
+          "$ref": "#/definitions/Common.IPAllocationMethod",
           "description": "The private IP address allocation method."
         },
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.Subnet",
+          "$ref": "#/definitions/Common.Subnet",
           "description": "The reference to the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddress",
+          "$ref": "#/definitions/Common.PublicIPAddress",
           "description": "The reference to the public IP resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the IP configuration resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.IPVersion": {
+    "Common.IPVersion": {
       "type": "string",
       "description": "IP address version.",
       "enum": [
@@ -1476,12 +1461,12 @@
         ]
       }
     },
-    "Microsoft.Common.InboundNatPool": {
+    "Common.InboundNatPool": {
       "type": "object",
       "description": "Inbound NAT pool of the load balancer.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.InboundNatPoolPropertiesFormat",
+          "$ref": "#/definitions/Common.InboundNatPoolPropertiesFormat",
           "description": "Properties of load balancer inbound nat pool."
         },
         "name": {
@@ -1501,20 +1486,20 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.InboundNatPoolPropertiesFormat": {
+    "Common.InboundNatPoolPropertiesFormat": {
       "type": "object",
       "description": "Properties of Inbound NAT pool.",
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "protocol": {
-          "$ref": "#/definitions/Microsoft.Common.TransportProtocol",
+          "$ref": "#/definitions/Common.TransportProtocol",
           "description": "The reference to the transport protocol used by the inbound NAT pool."
         },
         "frontendPortRangeStart": {
@@ -1546,7 +1531,7 @@
           "description": "Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the inbound NAT pool resource.",
           "readOnly": true
         }
@@ -1558,12 +1543,12 @@
         "backendPort"
       ]
     },
-    "Microsoft.Common.InboundNatRule": {
+    "Common.InboundNatRule": {
       "type": "object",
       "description": "Inbound NAT rule of the load balancer.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.InboundNatRulePropertiesFormat",
+          "$ref": "#/definitions/Common.InboundNatRulePropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -1574,25 +1559,25 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.InboundNatRulePropertiesFormat": {
+    "Common.InboundNatRulePropertiesFormat": {
       "type": "object",
       "description": "Properties of the inbound NAT rule.",
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "backendIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfiguration",
+          "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration",
           "description": "A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP.",
           "readOnly": true
         },
         "protocol": {
-          "$ref": "#/definitions/Microsoft.Common.TransportProtocol",
+          "$ref": "#/definitions/Common.TransportProtocol",
           "description": "The reference to the transport protocol used by the load balancing rule."
         },
         "frontendPort": {
@@ -1629,17 +1614,17 @@
           "description": "The port range end for the external endpoint. This property is used together with BackendAddressPool and FrontendPortRangeStart. Individual inbound NAT rule port mappings will be created for each backend address from BackendAddressPool. Acceptable values range from 1 to 65534."
         },
         "backendAddressPool": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to backendAddressPool resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the inbound NAT rule resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.IpTag": {
+    "Common.IpTag": {
       "type": "object",
       "description": "Contains the IpTag associated with the object.",
       "properties": {
@@ -1653,12 +1638,12 @@
         }
       }
     },
-    "Microsoft.Common.IpamPoolPrefixAllocation": {
+    "Common.IpamPoolPrefixAllocation": {
       "type": "object",
       "description": "IpamPool prefix allocation reference.",
       "properties": {
         "pool": {
-          "$ref": "#/definitions/Microsoft.Common.IpamPoolPrefixAllocationPool",
+          "$ref": "#/definitions/Common.IpamPoolPrefixAllocationPool",
           "x-ms-client-flatten": true
         },
         "numberOfIpAddresses": {
@@ -1675,7 +1660,7 @@
         }
       }
     },
-    "Microsoft.Common.IpamPoolPrefixAllocationPool": {
+    "Common.IpamPoolPrefixAllocationPool": {
       "type": "object",
       "properties": {
         "id": {
@@ -1685,12 +1670,12 @@
         }
       }
     },
-    "Microsoft.Common.LoadBalancer": {
+    "Common.LoadBalancer": {
       "type": "object",
       "description": "LoadBalancer resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerPropertiesFormat",
+          "$ref": "#/definitions/Common.LoadBalancerPropertiesFormat",
           "description": "Properties of the load balancer."
         },
         "etag": {
@@ -1699,26 +1684,26 @@
           "readOnly": true
         },
         "extendedLocation": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocation",
+          "$ref": "#/definitions/Common.ExtendedLocation",
           "description": "The extended location of the load balancer."
         },
         "sku": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerSku",
+          "$ref": "#/definitions/Common.LoadBalancerSku",
           "description": "The load balancer SKU."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.LoadBalancerBackendAddress": {
+    "Common.LoadBalancerBackendAddress": {
       "type": "object",
       "description": "Load balancer backend addresses.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerBackendAddressPropertiesFormat",
+          "$ref": "#/definitions/Common.LoadBalancerBackendAddressPropertiesFormat",
           "description": "Properties of load balancer backend address pool.",
           "x-ms-client-flatten": true
         },
@@ -1728,7 +1713,7 @@
         }
       }
     },
-    "Microsoft.Common.LoadBalancerBackendAddressAdminState": {
+    "Common.LoadBalancerBackendAddressAdminState": {
       "type": "string",
       "description": "A list of administrative states which once set can override health probe so that Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections.",
       "enum": [
@@ -1758,16 +1743,16 @@
         ]
       }
     },
-    "Microsoft.Common.LoadBalancerBackendAddressPropertiesFormat": {
+    "Common.LoadBalancerBackendAddressPropertiesFormat": {
       "type": "object",
       "description": "Properties of the load balancer backend addresses.",
       "properties": {
         "virtualNetwork": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Reference to an existing virtual network."
         },
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Reference to an existing subnet."
         },
         "ipAddress": {
@@ -1775,29 +1760,29 @@
           "description": "IP Address belonging to the referenced virtual network."
         },
         "networkInterfaceIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Reference to IP address defined in network interfaces.",
           "readOnly": true
         },
         "loadBalancerFrontendIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Reference to the frontend ip address configuration defined in regional loadbalancer."
         },
         "inboundNatRulesPortMapping": {
           "type": "array",
           "description": "Collection of inbound NAT rule port mappings.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NatRulePortMapping"
+            "$ref": "#/definitions/Common.NatRulePortMapping"
           },
           "readOnly": true
         },
         "adminState": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerBackendAddressAdminState",
+          "$ref": "#/definitions/Common.LoadBalancerBackendAddressAdminState",
           "description": "A list of administrative states which once set can override health probe so that Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections."
         }
       }
     },
-    "Microsoft.Common.LoadBalancerOutboundRuleProtocol": {
+    "Common.LoadBalancerOutboundRuleProtocol": {
       "type": "string",
       "description": "The protocol for the outbound rule in load balancer.",
       "enum": [
@@ -1827,7 +1812,7 @@
         ]
       }
     },
-    "Microsoft.Common.LoadBalancerPropertiesFormat": {
+    "Common.LoadBalancerPropertiesFormat": {
       "type": "object",
       "description": "Properties of the load balancer.",
       "properties": {
@@ -1835,49 +1820,49 @@
           "type": "array",
           "description": "Object representing the frontend IPs to be used for the load balancer.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.FrontendIPConfiguration"
+            "$ref": "#/definitions/Common.FrontendIPConfiguration"
           }
         },
         "backendAddressPools": {
           "type": "array",
           "description": "Collection of backend address pools used by a load balancer.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.BackendAddressPool"
+            "$ref": "#/definitions/Common.BackendAddressPool"
           }
         },
         "loadBalancingRules": {
           "type": "array",
           "description": "Object collection representing the load balancing rules Gets the provisioning.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.LoadBalancingRule"
+            "$ref": "#/definitions/Common.LoadBalancingRule"
           }
         },
         "probes": {
           "type": "array",
           "description": "Collection of probe objects used in the load balancer.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.Probe"
+            "$ref": "#/definitions/Common.Probe"
           }
         },
         "inboundNatRules": {
           "type": "array",
           "description": "Collection of inbound NAT Rules used by a load balancer. Defining inbound NAT rules on your load balancer is mutually exclusive with defining an inbound NAT pool. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an Inbound NAT pool. They have to reference individual inbound NAT rules.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.InboundNatRule"
+            "$ref": "#/definitions/Common.InboundNatRule"
           }
         },
         "inboundNatPools": {
           "type": "array",
           "description": "Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound NAT rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.InboundNatPool"
+            "$ref": "#/definitions/Common.InboundNatPool"
           }
         },
         "outboundRules": {
           "type": "array",
           "description": "The outbound rules.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.OutboundRule"
+            "$ref": "#/definitions/Common.OutboundRule"
           }
         },
         "resourceGuid": {
@@ -1886,17 +1871,17 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the load balancer resource.",
           "readOnly": true
         },
         "scope": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerScope",
+          "$ref": "#/definitions/Common.LoadBalancerScope",
           "description": "Indicates the scope of the load balancer: external (Public) or internal (Private)."
         }
       }
     },
-    "Microsoft.Common.LoadBalancerScope": {
+    "Common.LoadBalancerScope": {
       "type": "string",
       "description": "Indicates the scope of the load balancer: external (Public) or internal (Private).",
       "enum": [
@@ -1920,21 +1905,21 @@
         ]
       }
     },
-    "Microsoft.Common.LoadBalancerSku": {
+    "Common.LoadBalancerSku": {
       "type": "object",
       "description": "SKU of a load balancer.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerSkuName",
+          "$ref": "#/definitions/Common.LoadBalancerSkuName",
           "description": "Name of a load balancer SKU."
         },
         "tier": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerSkuTier",
+          "$ref": "#/definitions/Common.LoadBalancerSkuTier",
           "description": "Tier of a load balancer SKU."
         }
       }
     },
-    "Microsoft.Common.LoadBalancerSkuName": {
+    "Common.LoadBalancerSkuName": {
       "type": "string",
       "description": "Name of a load balancer SKU.",
       "enum": [
@@ -1964,7 +1949,7 @@
         ]
       }
     },
-    "Microsoft.Common.LoadBalancerSkuTier": {
+    "Common.LoadBalancerSkuTier": {
       "type": "string",
       "description": "Tier of a load balancer SKU.",
       "enum": [
@@ -1988,12 +1973,12 @@
         ]
       }
     },
-    "Microsoft.Common.LoadBalancingRule": {
+    "Common.LoadBalancingRule": {
       "type": "object",
       "description": "A load balancing rule for a load balancer.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancingRulePropertiesFormat"
+          "$ref": "#/definitions/Common.LoadBalancingRulePropertiesFormat"
         },
         "etag": {
           "type": "string",
@@ -2003,39 +1988,39 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.LoadBalancingRulePropertiesFormat": {
+    "Common.LoadBalancingRulePropertiesFormat": {
       "type": "object",
       "description": "Properties of the load balancer.",
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "backendAddressPool": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "backendAddressPools": {
           "type": "array",
           "description": "An array of references to pool of DIPs.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "probe": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The reference to the load balancer probe used by the load balancing rule."
         },
         "protocol": {
-          "$ref": "#/definitions/Microsoft.Common.TransportProtocol",
+          "$ref": "#/definitions/Common.TransportProtocol",
           "description": "The reference to the transport protocol used by the load balancing rule."
         },
         "loadDistribution": {
-          "$ref": "#/definitions/Microsoft.Common.LoadDistribution",
+          "$ref": "#/definitions/Common.LoadDistribution",
           "description": "The load distribution policy for this rule."
         },
         "frontendPort": {
@@ -2070,7 +2055,7 @@
           "description": "Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the load balancing rule resource.",
           "readOnly": true
         }
@@ -2080,7 +2065,7 @@
         "frontendPort"
       ]
     },
-    "Microsoft.Common.LoadDistribution": {
+    "Common.LoadDistribution": {
       "type": "string",
       "description": "The load distribution policy for this rule.",
       "enum": [
@@ -2110,7 +2095,7 @@
         ]
       }
     },
-    "Microsoft.Common.ManagedServiceIdentity": {
+    "Common.ManagedServiceIdentity": {
       "type": "object",
       "description": "Identity for the resource.",
       "properties": {
@@ -2125,7 +2110,7 @@
           "readOnly": true
         },
         "type": {
-          "$ref": "#/definitions/Microsoft.Common.ResourceIdentityType",
+          "$ref": "#/definitions/Common.ResourceIdentityType",
           "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine."
         },
         "userAssignedIdentities": {
@@ -2137,17 +2122,17 @@
         }
       }
     },
-    "Microsoft.Common.NatGateway": {
+    "Common.NatGateway": {
       "type": "object",
       "description": "Nat Gateway resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.NatGatewayPropertiesFormat",
+          "$ref": "#/definitions/Common.NatGatewayPropertiesFormat",
           "description": "Nat Gateway properties.",
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/Microsoft.Common.NatGatewaySku",
+          "$ref": "#/definitions/Common.NatGatewaySku",
           "description": "The nat gateway SKU."
         },
         "zones": {
@@ -2165,11 +2150,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.NatGatewayPropertiesFormat": {
+    "Common.NatGatewayPropertiesFormat": {
       "type": "object",
       "description": "Nat Gateway properties.",
       "properties": {
@@ -2182,44 +2167,44 @@
           "type": "array",
           "description": "An array of public ip addresses V4 associated with the nat gateway resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "publicIpAddressesV6": {
           "type": "array",
           "description": "An array of public ip addresses V6 associated with the nat gateway resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "publicIpPrefixes": {
           "type": "array",
           "description": "An array of public ip prefixes V4 associated with the nat gateway resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "publicIpPrefixesV6": {
           "type": "array",
           "description": "An array of public ip prefixes V6 associated with the nat gateway resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "subnets": {
           "type": "array",
           "description": "An array of references to the subnets using this nat gateway resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
         "sourceVirtualNetwork": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to the source virtual network using this nat gateway resource."
         },
         "serviceGateway": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Reference to an existing service gateway."
         },
         "resourceGuid": {
@@ -2228,23 +2213,23 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the NAT gateway resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.NatGatewaySku": {
+    "Common.NatGatewaySku": {
       "type": "object",
       "description": "SKU of nat gateway.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/Microsoft.Common.NatGatewaySkuName",
+          "$ref": "#/definitions/Common.NatGatewaySkuName",
           "description": "Name of Nat Gateway SKU."
         }
       }
     },
-    "Microsoft.Common.NatGatewaySkuName": {
+    "Common.NatGatewaySkuName": {
       "type": "string",
       "description": "Name of Nat Gateway SKU.",
       "enum": [
@@ -2268,7 +2253,7 @@
         ]
       }
     },
-    "Microsoft.Common.NatRulePortMapping": {
+    "Common.NatRulePortMapping": {
       "type": "object",
       "description": "Individual port mappings for inbound NAT rule created for backend pool.",
       "properties": {
@@ -2288,17 +2273,17 @@
         }
       }
     },
-    "Microsoft.Common.NetworkInterface": {
+    "Common.NetworkInterface": {
       "type": "object",
       "description": "A network interface in a resource group.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfacePropertiesFormat",
+          "$ref": "#/definitions/Common.NetworkInterfacePropertiesFormat",
           "description": "Properties of the network interface.",
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocation",
+          "$ref": "#/definitions/Common.ExtendedLocation",
           "description": "The extended location of the network interface."
         },
         "etag": {
@@ -2309,11 +2294,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.NetworkInterfaceAuxiliaryMode": {
+    "Common.NetworkInterfaceAuxiliaryMode": {
       "type": "string",
       "description": "Auxiliary mode of Network Interface resource.",
       "enum": [
@@ -2349,7 +2334,7 @@
         ]
       }
     },
-    "Microsoft.Common.NetworkInterfaceAuxiliarySku": {
+    "Common.NetworkInterfaceAuxiliarySku": {
       "type": "string",
       "description": "Auxiliary sku of Network Interface resource.",
       "enum": [
@@ -2391,7 +2376,7 @@
         ]
       }
     },
-    "Microsoft.Common.NetworkInterfaceDnsSettings": {
+    "Common.NetworkInterfaceDnsSettings": {
       "type": "object",
       "description": "DNS settings of a network interface.",
       "properties": {
@@ -2426,12 +2411,12 @@
         }
       }
     },
-    "Microsoft.Common.NetworkInterfaceIPConfiguration": {
+    "Common.NetworkInterfaceIPConfiguration": {
       "type": "object",
       "description": "IPConfiguration in a network interface.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat",
+          "$ref": "#/definitions/Common.NetworkInterfaceIPConfigurationPropertiesFormat",
           "description": "Network interface IP configuration properties.",
           "x-ms-client-flatten": true
         },
@@ -2443,11 +2428,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties": {
+    "Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties": {
       "type": "object",
       "description": "PrivateLinkConnection properties for the network interface.",
       "properties": {
@@ -2471,40 +2456,40 @@
         }
       }
     },
-    "Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat": {
+    "Common.NetworkInterfaceIPConfigurationPropertiesFormat": {
       "type": "object",
       "description": "Properties of IP configuration.",
       "properties": {
         "gatewayLoadBalancer": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The reference to gateway load balancer frontend IP."
         },
         "virtualNetworkTaps": {
           "type": "array",
           "description": "The reference to Virtual Network Taps.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.VirtualNetworkTap"
+            "$ref": "#/definitions/Common.VirtualNetworkTap"
           }
         },
         "applicationGatewayBackendAddressPools": {
           "type": "array",
           "description": "The reference to ApplicationGatewayBackendAddressPool resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ApplicationGatewayBackendAddressPool"
+            "$ref": "#/definitions/Common.ApplicationGatewayBackendAddressPool"
           }
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "description": "The reference to LoadBalancerBackendAddressPool resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.BackendAddressPool"
+            "$ref": "#/definitions/Common.BackendAddressPool"
           }
         },
         "loadBalancerInboundNatRules": {
           "type": "array",
           "description": "A list of references of LoadBalancerInboundNatRules.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.InboundNatRule"
+            "$ref": "#/definitions/Common.InboundNatRule"
           }
         },
         "privateIPAddress": {
@@ -2520,15 +2505,15 @@
           "x-nullable": true
         },
         "privateIPAllocationMethod": {
-          "$ref": "#/definitions/Microsoft.Common.IPAllocationMethod",
+          "$ref": "#/definitions/Common.IPAllocationMethod",
           "description": "The private IP address allocation method."
         },
         "privateIPAddressVersion": {
-          "$ref": "#/definitions/Microsoft.Common.IPVersion",
+          "$ref": "#/definitions/Common.IPVersion",
           "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
         },
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.Subnet",
+          "$ref": "#/definitions/Common.Subnet",
           "description": "Subnet bound to the IP configuration."
         },
         "primary": {
@@ -2536,29 +2521,29 @@
           "description": "Whether this is a primary customer address on the network interface."
         },
         "publicIPAddress": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddress",
+          "$ref": "#/definitions/Common.PublicIPAddress",
           "description": "Public IP address bound to the IP configuration."
         },
         "applicationSecurityGroups": {
           "type": "array",
           "description": "Application security groups in which the IP configuration is included.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ApplicationSecurityGroup"
+            "$ref": "#/definitions/Common.ApplicationSecurityGroup"
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the network interface IP configuration.",
           "readOnly": true
         },
         "privateLinkConnectionProperties": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties",
+          "$ref": "#/definitions/Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties",
           "description": "PrivateLinkConnection properties for the network interface.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.NetworkInterfaceMigrationPhase": {
+    "Common.NetworkInterfaceMigrationPhase": {
       "type": "string",
       "description": "Migration phase of Network Interface resource.",
       "enum": [
@@ -2600,7 +2585,7 @@
         ]
       }
     },
-    "Microsoft.Common.NetworkInterfaceNicType": {
+    "Common.NetworkInterfaceNicType": {
       "type": "string",
       "description": "Type of Network Interface resource.",
       "enum": [
@@ -2624,21 +2609,21 @@
         ]
       }
     },
-    "Microsoft.Common.NetworkInterfacePropertiesFormat": {
+    "Common.NetworkInterfacePropertiesFormat": {
       "type": "object",
       "description": "NetworkInterface properties.",
       "properties": {
         "virtualMachine": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The reference to a virtual machine.",
           "readOnly": true
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkSecurityGroup",
+          "$ref": "#/definitions/Common.NetworkSecurityGroup",
           "description": "The reference to the NetworkSecurityGroup resource."
         },
         "privateEndpoint": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateEndpoint",
+          "$ref": "#/definitions/Common.PrivateEndpoint",
           "description": "A reference to the private endpoint to which the network interface is linked.",
           "readOnly": true
         },
@@ -2646,19 +2631,19 @@
           "type": "array",
           "description": "A list of IPConfigurations of the network interface.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfiguration"
+            "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration"
           }
         },
         "tapConfigurations": {
           "type": "array",
           "description": "A list of TapConfigurations of the network interface.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceTapConfiguration"
+            "$ref": "#/definitions/Common.NetworkInterfaceTapConfiguration"
           },
           "readOnly": true
         },
         "dnsSettings": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceDnsSettings",
+          "$ref": "#/definitions/Common.NetworkInterfaceDnsSettings",
           "description": "The DNS settings in network interface."
         },
         "macAddress": {
@@ -2702,7 +2687,7 @@
           "readOnly": true
         },
         "dscpConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to the dscp configuration to which the network interface is linked.",
           "readOnly": true
         },
@@ -2712,7 +2697,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the network interface resource.",
           "readOnly": true
         },
@@ -2721,33 +2706,33 @@
           "description": "WorkloadType of the NetworkInterface for BareMetal resources"
         },
         "nicType": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceNicType",
+          "$ref": "#/definitions/Common.NetworkInterfaceNicType",
           "description": "Type of Network Interface resource."
         },
         "privateLinkService": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkService",
+          "$ref": "#/definitions/Common.PrivateLinkService",
           "description": "Privatelinkservice of the network interface resource."
         },
         "migrationPhase": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceMigrationPhase",
+          "$ref": "#/definitions/Common.NetworkInterfaceMigrationPhase",
           "description": "Migration phase of Network Interface resource."
         },
         "auxiliaryMode": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceAuxiliaryMode",
+          "$ref": "#/definitions/Common.NetworkInterfaceAuxiliaryMode",
           "description": "Auxiliary mode of Network Interface resource."
         },
         "auxiliarySku": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceAuxiliarySku",
+          "$ref": "#/definitions/Common.NetworkInterfaceAuxiliarySku",
           "description": "Auxiliary sku of Network Interface resource."
         }
       }
     },
-    "Microsoft.Common.NetworkInterfaceTapConfiguration": {
+    "Common.NetworkInterfaceTapConfiguration": {
       "type": "object",
       "description": "Tap configuration in a Network Interface.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceTapConfigurationPropertiesFormat",
+          "$ref": "#/definitions/Common.NetworkInterfaceTapConfigurationPropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -2758,31 +2743,31 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.NetworkInterfaceTapConfigurationPropertiesFormat": {
+    "Common.NetworkInterfaceTapConfigurationPropertiesFormat": {
       "type": "object",
       "description": "Properties of Virtual Network Tap configuration.",
       "properties": {
         "virtualNetworkTap": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkTap",
+          "$ref": "#/definitions/Common.VirtualNetworkTap",
           "description": "The reference to the Virtual Network Tap resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the network interface tap configuration resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.NetworkSecurityGroup": {
+    "Common.NetworkSecurityGroup": {
       "type": "object",
       "description": "NetworkSecurityGroup resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkSecurityGroupPropertiesFormat",
+          "$ref": "#/definitions/Common.NetworkSecurityGroupPropertiesFormat",
           "description": "Properties of the network security group.",
           "x-ms-client-flatten": true
         },
@@ -2794,11 +2779,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.NetworkSecurityGroupPropertiesFormat": {
+    "Common.NetworkSecurityGroupPropertiesFormat": {
       "type": "object",
       "description": "Network Security Group resource.",
       "properties": {
@@ -2810,14 +2795,14 @@
           "type": "array",
           "description": "A collection of security rules of the network security group.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SecurityRule"
+            "$ref": "#/definitions/Common.SecurityRule"
           }
         },
         "defaultSecurityRules": {
           "type": "array",
           "description": "The default security rules of network security group.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SecurityRule"
+            "$ref": "#/definitions/Common.SecurityRule"
           },
           "readOnly": true
         },
@@ -2825,7 +2810,7 @@
           "type": "array",
           "description": "A collection of references to network interfaces.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterface"
+            "$ref": "#/definitions/Common.NetworkInterface"
           },
           "readOnly": true
         },
@@ -2833,7 +2818,7 @@
           "type": "array",
           "description": "A collection of references to subnets.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.Subnet"
+            "$ref": "#/definitions/Common.Subnet"
           },
           "readOnly": true
         },
@@ -2841,7 +2826,7 @@
           "type": "array",
           "description": "A collection of references to flow log resources.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.FlowLog"
+            "$ref": "#/definitions/Common.FlowLog"
           },
           "readOnly": true
         },
@@ -2851,18 +2836,18 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the network security group resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.NetworkWatcher": {
+    "Common.NetworkWatcher": {
       "type": "object",
       "description": "Network watcher in a resource group.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkWatcherPropertiesFormat",
+          "$ref": "#/definitions/Common.NetworkWatcherPropertiesFormat",
           "description": "Properties of the network watcher."
         },
         "etag": {
@@ -2873,27 +2858,27 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.NetworkWatcherPropertiesFormat": {
+    "Common.NetworkWatcherPropertiesFormat": {
       "type": "object",
       "description": "The network watcher properties.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the network watcher resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.OutboundRule": {
+    "Common.OutboundRule": {
       "type": "object",
       "description": "Outbound rule of the load balancer.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.OutboundRulePropertiesFormat"
+          "$ref": "#/definitions/Common.OutboundRulePropertiesFormat"
         },
         "etag": {
           "type": "string",
@@ -2903,11 +2888,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.OutboundRulePropertiesFormat": {
+    "Common.OutboundRulePropertiesFormat": {
       "type": "object",
       "description": "Outbound rule of the load balancer.",
       "properties": {
@@ -2920,20 +2905,20 @@
           "type": "array",
           "description": "The Frontend IP addresses of the load balancer.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "backendAddressPool": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the outbound rule resource.",
           "readOnly": true
         },
         "protocol": {
-          "$ref": "#/definitions/Microsoft.Common.LoadBalancerOutboundRuleProtocol",
+          "$ref": "#/definitions/Common.LoadBalancerOutboundRuleProtocol",
           "description": "The protocol for the outbound rule in load balancer."
         },
         "enableTcpReset": {
@@ -2952,17 +2937,17 @@
         "protocol"
       ]
     },
-    "Microsoft.Common.PrivateEndpoint": {
+    "Common.PrivateEndpoint": {
       "type": "object",
       "description": "Private endpoint resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateEndpointProperties",
+          "$ref": "#/definitions/Common.PrivateEndpointProperties",
           "description": "Properties of the private endpoint.",
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocation",
+          "$ref": "#/definitions/Common.ExtendedLocation",
           "description": "The extended location of the load balancer."
         },
         "etag": {
@@ -2973,16 +2958,16 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.PrivateEndpointConnection": {
+    "Common.PrivateEndpointConnection": {
       "type": "object",
       "description": "PrivateEndpointConnection resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/Common.PrivateEndpointConnectionProperties",
           "description": "Properties of the private end point connection.",
           "x-ms-client-flatten": true
         },
@@ -2994,25 +2979,25 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.PrivateEndpointConnectionProperties": {
+    "Common.PrivateEndpointConnectionProperties": {
       "type": "object",
       "description": "Properties of the PrivateEndpointConnectProperties.",
       "properties": {
         "privateEndpoint": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateEndpoint",
+          "$ref": "#/definitions/Common.PrivateEndpoint",
           "description": "The resource of private end point.",
           "readOnly": true
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceConnectionState",
+          "$ref": "#/definitions/Common.PrivateLinkServiceConnectionState",
           "description": "A collection of information about the state of the connection between service consumer and provider."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the private endpoint connection resource.",
           "readOnly": true
         },
@@ -3028,12 +3013,12 @@
         }
       }
     },
-    "Microsoft.Common.PrivateEndpointIPConfiguration": {
+    "Common.PrivateEndpointIPConfiguration": {
       "type": "object",
       "description": "An IP Configuration of the private endpoint.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateEndpointIPConfigurationProperties",
+          "$ref": "#/definitions/Common.PrivateEndpointIPConfigurationProperties",
           "description": "Properties of private endpoint IP configurations.",
           "x-ms-client-flatten": true
         },
@@ -3053,7 +3038,7 @@
         }
       }
     },
-    "Microsoft.Common.PrivateEndpointIPConfigurationProperties": {
+    "Common.PrivateEndpointIPConfigurationProperties": {
       "type": "object",
       "description": "Properties of an IP Configuration of the private endpoint.",
       "properties": {
@@ -3071,24 +3056,24 @@
         }
       }
     },
-    "Microsoft.Common.PrivateEndpointProperties": {
+    "Common.PrivateEndpointProperties": {
       "type": "object",
       "description": "Properties of the private endpoint.",
       "properties": {
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.Subnet",
+          "$ref": "#/definitions/Common.Subnet",
           "description": "The ID of the subnet from which the private IP will be allocated."
         },
         "networkInterfaces": {
           "type": "array",
           "description": "An array of references to the network interfaces created for this private endpoint.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterface"
+            "$ref": "#/definitions/Common.NetworkInterface"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the private endpoint resource.",
           "readOnly": true
         },
@@ -3127,35 +3112,35 @@
           "type": "array",
           "description": "A grouping of information about the connection to the remote resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceConnection"
+            "$ref": "#/definitions/Common.PrivateLinkServiceConnection"
           }
         },
         "manualPrivateLinkServiceConnections": {
           "type": "array",
           "description": "A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceConnection"
+            "$ref": "#/definitions/Common.PrivateLinkServiceConnection"
           }
         },
         "customDnsConfigs": {
           "type": "array",
           "description": "An array of custom dns configurations.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.CustomDnsConfigPropertiesFormat"
+            "$ref": "#/definitions/Common.CustomDnsConfigPropertiesFormat"
           }
         },
         "applicationSecurityGroups": {
           "type": "array",
           "description": "Application security groups in which the private endpoint IP configuration is included.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ApplicationSecurityGroup"
+            "$ref": "#/definitions/Common.ApplicationSecurityGroup"
           }
         },
         "ipConfigurations": {
           "type": "array",
           "description": "A list of IP configurations of the private endpoint. This will be used to map to the First Party Service's endpoints.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.PrivateEndpointIPConfiguration"
+            "$ref": "#/definitions/Common.PrivateEndpointIPConfiguration"
           }
         },
         "customNetworkInterfaceName": {
@@ -3164,7 +3149,7 @@
         }
       }
     },
-    "Microsoft.Common.PrivateEndpointVNetPolicies": {
+    "Common.PrivateEndpointVNetPolicies": {
       "type": "string",
       "description": "Private Endpoint VNet Policies.",
       "enum": [
@@ -3188,17 +3173,17 @@
         ]
       }
     },
-    "Microsoft.Common.PrivateLinkService": {
+    "Common.PrivateLinkService": {
       "type": "object",
       "description": "Private link service resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceProperties",
+          "$ref": "#/definitions/Common.PrivateLinkServiceProperties",
           "description": "Properties of the private link service.",
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocation",
+          "$ref": "#/definitions/Common.ExtendedLocation",
           "description": "The extended location of the load balancer."
         },
         "etag": {
@@ -3209,16 +3194,16 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.PrivateLinkServiceConnection": {
+    "Common.PrivateLinkServiceConnection": {
       "type": "object",
       "description": "PrivateLinkServiceConnection resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceConnectionProperties",
+          "$ref": "#/definitions/Common.PrivateLinkServiceConnectionProperties",
           "description": "Properties of the private link service connection.",
           "x-ms-client-flatten": true
         },
@@ -3239,16 +3224,16 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.PrivateLinkServiceConnectionProperties": {
+    "Common.PrivateLinkServiceConnectionProperties": {
       "type": "object",
       "description": "Properties of the PrivateLinkServiceConnection.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the private link service connection resource.",
           "readOnly": true
         },
@@ -3268,12 +3253,12 @@
           "description": "A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars."
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceConnectionState",
+          "$ref": "#/definitions/Common.PrivateLinkServiceConnectionState",
           "description": "A collection of read-only information about the state of the connection to the remote resource."
         }
       }
     },
-    "Microsoft.Common.PrivateLinkServiceConnectionState": {
+    "Common.PrivateLinkServiceConnectionState": {
       "type": "object",
       "description": "A collection of information about the state of the connection between service consumer and provider.",
       "properties": {
@@ -3291,12 +3276,12 @@
         }
       }
     },
-    "Microsoft.Common.PrivateLinkServiceIpConfiguration": {
+    "Common.PrivateLinkServiceIpConfiguration": {
       "type": "object",
       "description": "The private link service ip configuration.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceIpConfigurationProperties",
+          "$ref": "#/definitions/Common.PrivateLinkServiceIpConfigurationProperties",
           "description": "Properties of the private link service ip configuration.",
           "x-ms-client-flatten": true
         },
@@ -3317,11 +3302,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.PrivateLinkServiceIpConfigurationProperties": {
+    "Common.PrivateLinkServiceIpConfigurationProperties": {
       "type": "object",
       "description": "Properties of private link service IP configuration.",
       "properties": {
@@ -3330,11 +3315,11 @@
           "description": "The private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "$ref": "#/definitions/Microsoft.Common.IPAllocationMethod",
+          "$ref": "#/definitions/Common.IPAllocationMethod",
           "description": "The private IP address allocation method."
         },
         "subnet": {
-          "$ref": "#/definitions/Microsoft.Common.Subnet",
+          "$ref": "#/definitions/Common.Subnet",
           "description": "The reference to the subnet resource."
         },
         "primary": {
@@ -3342,17 +3327,17 @@
           "description": "Whether the ip configuration is primary or not."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the private link service IP configuration resource.",
           "readOnly": true
         },
         "privateIPAddressVersion": {
-          "$ref": "#/definitions/Microsoft.Common.IPVersion",
+          "$ref": "#/definitions/Common.IPVersion",
           "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
         }
       }
     },
-    "Microsoft.Common.PrivateLinkServiceProperties": {
+    "Common.PrivateLinkServiceProperties": {
       "type": "object",
       "description": "Properties of the private link service.",
       "properties": {
@@ -3360,14 +3345,14 @@
           "type": "array",
           "description": "An array of references to the load balancer IP configurations.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.FrontendIPConfiguration"
+            "$ref": "#/definitions/Common.FrontendIPConfiguration"
           }
         },
         "ipConfigurations": {
           "type": "array",
           "description": "An array of private link service IP configurations.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.PrivateLinkServiceIpConfiguration"
+            "$ref": "#/definitions/Common.PrivateLinkServiceIpConfiguration"
           }
         },
         "destinationIPAddress": {
@@ -3375,19 +3360,19 @@
           "description": "The destination IP address of the private link service."
         },
         "accessMode": {
-          "$ref": "#/definitions/Microsoft.Common.AccessMode",
+          "$ref": "#/definitions/Common.AccessMode",
           "description": "The access mode of the private link service."
         },
         "networkInterfaces": {
           "type": "array",
           "description": "An array of references to the network interfaces created for this private link service.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterface"
+            "$ref": "#/definitions/Common.NetworkInterface"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the private link service resource.",
           "readOnly": true
         },
@@ -3395,16 +3380,16 @@
           "type": "array",
           "description": "An array of list about connections to the private endpoint.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.PrivateEndpointConnection"
+            "$ref": "#/definitions/Common.PrivateEndpointConnection"
           },
           "readOnly": true
         },
         "visibility": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkServicePropertiesVisibility",
+          "$ref": "#/definitions/Common.PrivateLinkServicePropertiesVisibility",
           "description": "The visibility list of the private link service."
         },
         "autoApproval": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateLinkServicePropertiesAutoApproval",
+          "$ref": "#/definitions/Common.PrivateLinkServicePropertiesAutoApproval",
           "description": "The auto-approval list of the private link service."
         },
         "fqdns": {
@@ -3425,30 +3410,30 @@
         }
       }
     },
-    "Microsoft.Common.PrivateLinkServicePropertiesAutoApproval": {
+    "Common.PrivateLinkServicePropertiesAutoApproval": {
       "type": "object",
       "description": "The auto-approval list of the private link service.",
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.ResourceSet"
+          "$ref": "#/definitions/Common.ResourceSet"
         }
       ]
     },
-    "Microsoft.Common.PrivateLinkServicePropertiesVisibility": {
+    "Common.PrivateLinkServicePropertiesVisibility": {
       "type": "object",
       "description": "The visibility list of the private link service.",
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.ResourceSet"
+          "$ref": "#/definitions/Common.ResourceSet"
         }
       ]
     },
-    "Microsoft.Common.Probe": {
+    "Common.Probe": {
       "type": "object",
       "description": "A load balancer probe.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ProbePropertiesFormat"
+          "$ref": "#/definitions/Common.ProbePropertiesFormat"
         },
         "etag": {
           "type": "string",
@@ -3458,11 +3443,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.ProbeNoHealthyBackendsBehavior": {
+    "Common.ProbeNoHealthyBackendsBehavior": {
       "type": "string",
       "description": "Determines how new connections are handled by the load balancer when all backend instances are probed down.",
       "enum": [
@@ -3486,7 +3471,7 @@
         ]
       }
     },
-    "Microsoft.Common.ProbePropertiesFormat": {
+    "Common.ProbePropertiesFormat": {
       "type": "object",
       "description": "Load balancer probe resource.",
       "properties": {
@@ -3494,12 +3479,12 @@
           "type": "array",
           "description": "The load balancer rules that use this probe.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
         "protocol": {
-          "$ref": "#/definitions/Microsoft.Common.ProbeProtocol",
+          "$ref": "#/definitions/Common.ProbeProtocol",
           "description": "The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful."
         },
         "port": {
@@ -3513,7 +3498,7 @@
           "description": "The interval, in seconds, for how frequently to probe the endpoint for health status. Typically, the interval is slightly less than half the allocated timeout period (in seconds) which allows two full probes before taking the instance out of rotation. The default value is 15, the minimum value is 5."
         },
         "noHealthyBackendsBehavior": {
-          "$ref": "#/definitions/Microsoft.Common.ProbeNoHealthyBackendsBehavior",
+          "$ref": "#/definitions/Common.ProbeNoHealthyBackendsBehavior",
           "description": "Determines how new connections are handled by the load balancer when all backend instances are probed down."
         },
         "numberOfProbes": {
@@ -3531,7 +3516,7 @@
           "description": "The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the probe resource.",
           "readOnly": true
         }
@@ -3541,7 +3526,7 @@
         "port"
       ]
     },
-    "Microsoft.Common.ProbeProtocol": {
+    "Common.ProbeProtocol": {
       "type": "string",
       "description": "The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
       "enum": [
@@ -3571,7 +3556,7 @@
         ]
       }
     },
-    "Microsoft.Common.ProvisioningState": {
+    "Common.ProvisioningState": {
       "type": "string",
       "description": "Provisioning states of a resource.",
       "enum": [
@@ -3619,21 +3604,21 @@
         ]
       }
     },
-    "Microsoft.Common.PublicIPAddress": {
+    "Common.PublicIPAddress": {
       "type": "object",
       "description": "Public IP address resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddressPropertiesFormat",
+          "$ref": "#/definitions/Common.PublicIPAddressPropertiesFormat",
           "description": "Public IP address properties.",
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocation",
+          "$ref": "#/definitions/Common.ExtendedLocation",
           "description": "The extended location of the public ip address."
         },
         "sku": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddressSku",
+          "$ref": "#/definitions/Common.PublicIPAddressSku",
           "description": "The public IP address SKU."
         },
         "etag": {
@@ -3651,11 +3636,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.PublicIPAddressDnsSettings": {
+    "Common.PublicIPAddressDnsSettings": {
       "type": "object",
       "description": "Contains FQDN of the DNS record associated with the public IP address.",
       "properties": {
@@ -3664,7 +3649,7 @@
           "description": "The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
         },
         "domainNameLabelScope": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIpAddressDnsSettingsDomainNameLabelScope",
+          "$ref": "#/definitions/Common.PublicIpAddressDnsSettingsDomainNameLabelScope",
           "description": "The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN."
         },
         "fqdn": {
@@ -3677,7 +3662,7 @@
         }
       }
     },
-    "Microsoft.Common.PublicIPAddressMigrationPhase": {
+    "Common.PublicIPAddressMigrationPhase": {
       "type": "string",
       "description": "Migration phase of Public IP Address.",
       "enum": [
@@ -3719,36 +3704,36 @@
         ]
       }
     },
-    "Microsoft.Common.PublicIPAddressPropertiesFormat": {
+    "Common.PublicIPAddressPropertiesFormat": {
       "type": "object",
       "description": "Public IP address properties.",
       "properties": {
         "publicIPAllocationMethod": {
-          "$ref": "#/definitions/Microsoft.Common.IPAllocationMethod",
+          "$ref": "#/definitions/Common.IPAllocationMethod",
           "description": "The public IP address allocation method."
         },
         "publicIPAddressVersion": {
-          "$ref": "#/definitions/Microsoft.Common.IPVersion",
+          "$ref": "#/definitions/Common.IPVersion",
           "description": "The public IP address version."
         },
         "ipConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.IPConfiguration",
+          "$ref": "#/definitions/Common.IPConfiguration",
           "description": "The IP configuration associated with the public IP address.",
           "readOnly": true
         },
         "dnsSettings": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddressDnsSettings",
+          "$ref": "#/definitions/Common.PublicIPAddressDnsSettings",
           "description": "The FQDN of the DNS record associated with the public IP address."
         },
         "ddosSettings": {
-          "$ref": "#/definitions/Microsoft.Common.DdosSettings",
+          "$ref": "#/definitions/Common.DdosSettings",
           "description": "The DDoS protection custom policy associated with the public IP address."
         },
         "ipTags": {
           "type": "array",
           "description": "The list of tags associated with the public IP address.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.IpTag"
+            "$ref": "#/definitions/Common.IpTag"
           }
         },
         "ipAddress": {
@@ -3756,7 +3741,7 @@
           "description": "The IP address associated with the public IP address resource."
         },
         "publicIPPrefix": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The Public IP Prefix this Public IP Address should be allocated from."
         },
         "idleTimeoutInMinutes": {
@@ -3770,47 +3755,47 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the public IP address resource.",
           "readOnly": true
         },
         "servicePublicIPAddress": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddress",
+          "$ref": "#/definitions/Common.PublicIPAddress",
           "description": "The service public IP address of the public IP address resource."
         },
         "natGateway": {
-          "$ref": "#/definitions/Microsoft.Common.NatGateway",
+          "$ref": "#/definitions/Common.NatGateway",
           "description": "The NatGateway for the Public IP address."
         },
         "migrationPhase": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddressMigrationPhase",
+          "$ref": "#/definitions/Common.PublicIPAddressMigrationPhase",
           "description": "Migration phase of Public IP Address."
         },
         "linkedPublicIPAddress": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddress",
+          "$ref": "#/definitions/Common.PublicIPAddress",
           "description": "The linked public IP address of the public IP address resource."
         },
         "deleteOption": {
-          "$ref": "#/definitions/Microsoft.Common.DeleteOptions",
+          "$ref": "#/definitions/Common.DeleteOptions",
           "description": "Specify what happens to the public IP address when the VM using it is deleted"
         }
       }
     },
-    "Microsoft.Common.PublicIPAddressSku": {
+    "Common.PublicIPAddressSku": {
       "type": "object",
       "description": "SKU of a public IP address.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddressSkuName",
+          "$ref": "#/definitions/Common.PublicIPAddressSkuName",
           "description": "Name of a public IP address SKU."
         },
         "tier": {
-          "$ref": "#/definitions/Microsoft.Common.PublicIPAddressSkuTier",
+          "$ref": "#/definitions/Common.PublicIPAddressSkuTier",
           "description": "Tier of a public IP address SKU."
         }
       }
     },
-    "Microsoft.Common.PublicIPAddressSkuName": {
+    "Common.PublicIPAddressSkuName": {
       "type": "string",
       "description": "Name of a public IP address SKU.",
       "enum": [
@@ -3840,7 +3825,7 @@
         ]
       }
     },
-    "Microsoft.Common.PublicIPAddressSkuTier": {
+    "Common.PublicIPAddressSkuTier": {
       "type": "string",
       "description": "Tier of a public IP address SKU.",
       "enum": [
@@ -3864,7 +3849,7 @@
         ]
       }
     },
-    "Microsoft.Common.PublicIpAddressDnsSettingsDomainNameLabelScope": {
+    "Common.PublicIpAddressDnsSettingsDomainNameLabelScope": {
       "type": "string",
       "description": "The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN.",
       "enum": [
@@ -3900,7 +3885,7 @@
         ]
       }
     },
-    "Microsoft.Common.Resource": {
+    "Common.Resource": {
       "type": "object",
       "description": "Common resource representation.",
       "properties": {
@@ -3932,7 +3917,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "Microsoft.Common.ResourceIdentityType": {
+    "Common.ResourceIdentityType": {
       "type": "string",
       "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
       "enum": [
@@ -3968,12 +3953,12 @@
         ]
       }
     },
-    "Microsoft.Common.ResourceNavigationLink": {
+    "Common.ResourceNavigationLink": {
       "type": "object",
       "description": "ResourceNavigationLink resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ResourceNavigationLinkFormat",
+          "$ref": "#/definitions/Common.ResourceNavigationLinkFormat",
           "description": "Resource navigation link properties format.",
           "x-ms-client-flatten": true
         },
@@ -3999,11 +3984,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.ResourceNavigationLinkFormat": {
+    "Common.ResourceNavigationLinkFormat": {
       "type": "object",
       "description": "Properties of ResourceNavigationLink.",
       "properties": {
@@ -4016,13 +4001,13 @@
           "description": "Link to the external resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the resource navigation link resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.ResourceSet": {
+    "Common.ResourceSet": {
       "type": "object",
       "description": "The base resource set for visibility and auto-approval.",
       "properties": {
@@ -4035,7 +4020,7 @@
         }
       }
     },
-    "Microsoft.Common.RetentionPolicyParameters": {
+    "Common.RetentionPolicyParameters": {
       "type": "object",
       "description": "Parameters that define the retention policy for flow log.",
       "properties": {
@@ -4052,12 +4037,12 @@
         }
       }
     },
-    "Microsoft.Common.Route": {
+    "Common.Route": {
       "type": "object",
       "description": "Route resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.RoutePropertiesFormat",
+          "$ref": "#/definitions/Common.RoutePropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -4068,11 +4053,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.RouteNextHopType": {
+    "Common.RouteNextHopType": {
       "type": "string",
       "description": "The type of Azure hop the packet should be sent to.",
       "enum": [
@@ -4114,7 +4099,7 @@
         ]
       }
     },
-    "Microsoft.Common.RoutePropertiesFormat": {
+    "Common.RoutePropertiesFormat": {
       "type": "object",
       "description": "Route resource.",
       "properties": {
@@ -4123,7 +4108,7 @@
           "description": "The destination CIDR to which the route applies."
         },
         "nextHopType": {
-          "$ref": "#/definitions/Microsoft.Common.RouteNextHopType",
+          "$ref": "#/definitions/Common.RouteNextHopType",
           "description": "The type of Azure hop the packet should be sent to."
         },
         "nextHopIpAddress": {
@@ -4131,7 +4116,7 @@
           "description": "The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the route resource.",
           "readOnly": true
         },
@@ -4145,12 +4130,12 @@
         "nextHopType"
       ]
     },
-    "Microsoft.Common.RouteTable": {
+    "Common.RouteTable": {
       "type": "object",
       "description": "Route table resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.RouteTablePropertiesFormat",
+          "$ref": "#/definitions/Common.RouteTablePropertiesFormat",
           "description": "Properties of the route table.",
           "x-ms-client-flatten": true
         },
@@ -4162,11 +4147,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.RouteTablePropertiesFormat": {
+    "Common.RouteTablePropertiesFormat": {
       "type": "object",
       "description": "Route Table resource.",
       "properties": {
@@ -4174,14 +4159,14 @@
           "type": "array",
           "description": "Collection of routes contained within a route table.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.Route"
+            "$ref": "#/definitions/Common.Route"
           }
         },
         "subnets": {
           "type": "array",
           "description": "A collection of references to subnets.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.Subnet"
+            "$ref": "#/definitions/Common.Subnet"
           },
           "readOnly": true
         },
@@ -4190,7 +4175,7 @@
           "description": "Whether to disable the routes learned by BGP on that route table. True means disable."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the route table resource.",
           "readOnly": true
         },
@@ -4201,12 +4186,12 @@
         }
       }
     },
-    "Microsoft.Common.SecurityRule": {
+    "Common.SecurityRule": {
       "type": "object",
       "description": "Network security rule.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.SecurityRulePropertiesFormat",
+          "$ref": "#/definitions/Common.SecurityRulePropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -4217,11 +4202,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.SecurityRuleAccess": {
+    "Common.SecurityRuleAccess": {
       "type": "string",
       "description": "Whether network traffic is allowed or denied.",
       "enum": [
@@ -4245,7 +4230,7 @@
         ]
       }
     },
-    "Microsoft.Common.SecurityRuleDirection": {
+    "Common.SecurityRuleDirection": {
       "type": "string",
       "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.",
       "enum": [
@@ -4269,7 +4254,7 @@
         ]
       }
     },
-    "Microsoft.Common.SecurityRulePropertiesFormat": {
+    "Common.SecurityRulePropertiesFormat": {
       "type": "object",
       "description": "Security rule resource.",
       "properties": {
@@ -4278,7 +4263,7 @@
           "description": "A description for this rule. Restricted to 140 chars."
         },
         "protocol": {
-          "$ref": "#/definitions/Microsoft.Common.SecurityRuleProtocol",
+          "$ref": "#/definitions/Common.SecurityRuleProtocol",
           "description": "Network protocol this rule applies to."
         },
         "sourcePortRange": {
@@ -4304,7 +4289,7 @@
           "type": "array",
           "description": "The application security group specified as source.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ApplicationSecurityGroup"
+            "$ref": "#/definitions/Common.ApplicationSecurityGroup"
           }
         },
         "destinationAddressPrefix": {
@@ -4322,7 +4307,7 @@
           "type": "array",
           "description": "The application security group specified as destination.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ApplicationSecurityGroup"
+            "$ref": "#/definitions/Common.ApplicationSecurityGroup"
           }
         },
         "sourcePortRanges": {
@@ -4340,7 +4325,7 @@
           }
         },
         "access": {
-          "$ref": "#/definitions/Microsoft.Common.SecurityRuleAccess",
+          "$ref": "#/definitions/Common.SecurityRuleAccess",
           "description": "The network traffic is allowed or denied."
         },
         "priority": {
@@ -4349,11 +4334,11 @@
           "description": "The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
         },
         "direction": {
-          "$ref": "#/definitions/Microsoft.Common.SecurityRuleDirection",
+          "$ref": "#/definitions/Common.SecurityRuleDirection",
           "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the security rule resource.",
           "readOnly": true
         }
@@ -4365,7 +4350,7 @@
         "direction"
       ]
     },
-    "Microsoft.Common.SecurityRuleProtocol": {
+    "Common.SecurityRuleProtocol": {
       "type": "string",
       "description": "Network protocol this rule applies to.",
       "enum": [
@@ -4413,12 +4398,12 @@
         ]
       }
     },
-    "Microsoft.Common.ServiceAssociationLink": {
+    "Common.ServiceAssociationLink": {
       "type": "object",
       "description": "ServiceAssociationLink resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ServiceAssociationLinkPropertiesFormat",
+          "$ref": "#/definitions/Common.ServiceAssociationLinkPropertiesFormat",
           "description": "Resource navigation link properties format.",
           "x-ms-client-flatten": true
         },
@@ -4439,11 +4424,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ]
     },
-    "Microsoft.Common.ServiceAssociationLinkPropertiesFormat": {
+    "Common.ServiceAssociationLinkPropertiesFormat": {
       "type": "object",
       "description": "Properties of ServiceAssociationLink.",
       "properties": {
@@ -4456,7 +4441,7 @@
           "description": "Link to the external resource."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the service association link resource.",
           "readOnly": true
         },
@@ -4473,7 +4458,7 @@
         }
       }
     },
-    "Microsoft.Common.ServiceDelegationPropertiesFormat": {
+    "Common.ServiceDelegationPropertiesFormat": {
       "type": "object",
       "description": "Properties of a service delegation.",
       "properties": {
@@ -4490,18 +4475,18 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the service delegation resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.ServiceEndpointPolicy": {
+    "Common.ServiceEndpointPolicy": {
       "type": "object",
       "description": "Service End point policy resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ServiceEndpointPolicyPropertiesFormat",
+          "$ref": "#/definitions/Common.ServiceEndpointPolicyPropertiesFormat",
           "description": "Properties of the service end point policy.",
           "x-ms-client-flatten": true
         },
@@ -4518,16 +4503,16 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.ServiceEndpointPolicyDefinition": {
+    "Common.ServiceEndpointPolicyDefinition": {
       "type": "object",
       "description": "Service Endpoint policy definitions.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.ServiceEndpointPolicyDefinitionPropertiesFormat",
+          "$ref": "#/definitions/Common.ServiceEndpointPolicyDefinitionPropertiesFormat",
           "description": "Properties of the service endpoint policy definition.",
           "x-ms-client-flatten": true
         },
@@ -4539,11 +4524,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.ServiceEndpointPolicyDefinitionPropertiesFormat": {
+    "Common.ServiceEndpointPolicyDefinitionPropertiesFormat": {
       "type": "object",
       "description": "Service Endpoint policy definition resource.",
       "properties": {
@@ -4563,13 +4548,13 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the service endpoint policy definition resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.ServiceEndpointPolicyPropertiesFormat": {
+    "Common.ServiceEndpointPolicyPropertiesFormat": {
       "type": "object",
       "description": "Service Endpoint Policy resource.",
       "properties": {
@@ -4577,14 +4562,14 @@
           "type": "array",
           "description": "A collection of service endpoint policy definitions of the service endpoint policy.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ServiceEndpointPolicyDefinition"
+            "$ref": "#/definitions/Common.ServiceEndpointPolicyDefinition"
           }
         },
         "subnets": {
           "type": "array",
           "description": "A collection of references to subnets.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.Subnet"
+            "$ref": "#/definitions/Common.Subnet"
           },
           "readOnly": true
         },
@@ -4594,7 +4579,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the service endpoint policy resource.",
           "readOnly": true
         },
@@ -4611,7 +4596,7 @@
         }
       }
     },
-    "Microsoft.Common.ServiceEndpointPropertiesFormat": {
+    "Common.ServiceEndpointPropertiesFormat": {
       "type": "object",
       "description": "The service endpoint properties.",
       "properties": {
@@ -4620,7 +4605,7 @@
           "description": "The type of the endpoint service."
         },
         "networkIdentifier": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "SubResource as network identifier."
         },
         "locations": {
@@ -4631,13 +4616,13 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the service endpoint resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.SharingScope": {
+    "Common.SharingScope": {
       "type": "string",
       "description": "Set this property to Tenant to allow sharing subnet with other subscriptions in your AAD tenant. This property can only be set if defaultOutboundAccess is set to false, both properties can only be set if subnet is empty.",
       "enum": [
@@ -4661,7 +4646,7 @@
         ]
       }
     },
-    "Microsoft.Common.SubResource": {
+    "Common.SubResource": {
       "type": "object",
       "description": "Reference to another subresource.",
       "properties": {
@@ -4671,7 +4656,7 @@
         }
       }
     },
-    "Microsoft.Common.SubResourceModel": {
+    "Common.SubResourceModel": {
       "type": "object",
       "description": "Reference to another subresource.",
       "properties": {
@@ -4687,17 +4672,17 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
+          "$ref": "#/definitions/Common.SubResource"
         }
       ],
       "x-ms-azure-resource": true
     },
-    "Microsoft.Common.Subnet": {
+    "Common.Subnet": {
       "type": "object",
       "description": "Subnet in a virtual network resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.SubnetPropertiesFormat",
+          "$ref": "#/definitions/Common.SubnetPropertiesFormat",
           "x-ms-client-flatten": true
         },
         "etag": {
@@ -4708,11 +4693,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.SubnetPropertiesFormat": {
+    "Common.SubnetPropertiesFormat": {
       "type": "object",
       "description": "Properties of the subnet.",
       "properties": {
@@ -4728,36 +4713,36 @@
           }
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkSecurityGroup",
+          "$ref": "#/definitions/Common.NetworkSecurityGroup",
           "description": "The reference to the NetworkSecurityGroup resource."
         },
         "routeTable": {
-          "$ref": "#/definitions/Microsoft.Common.RouteTable",
+          "$ref": "#/definitions/Common.RouteTable",
           "description": "The reference to the RouteTable resource."
         },
         "natGateway": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Nat gateway associated with this subnet."
         },
         "serviceEndpoints": {
           "type": "array",
           "description": "An array of service endpoints.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ServiceEndpointPropertiesFormat"
+            "$ref": "#/definitions/Common.ServiceEndpointPropertiesFormat"
           }
         },
         "serviceEndpointPolicies": {
           "type": "array",
           "description": "An array of service endpoint policies.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ServiceEndpointPolicy"
+            "$ref": "#/definitions/Common.ServiceEndpointPolicy"
           }
         },
         "privateEndpoints": {
           "type": "array",
           "description": "An array of references to private endpoints.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.PrivateEndpoint"
+            "$ref": "#/definitions/Common.PrivateEndpoint"
           },
           "readOnly": true
         },
@@ -4765,7 +4750,7 @@
           "type": "array",
           "description": "An array of references to the network interface IP configurations using subnet.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.IPConfiguration"
+            "$ref": "#/definitions/Common.IPConfiguration"
           },
           "readOnly": true
         },
@@ -4773,7 +4758,7 @@
           "type": "array",
           "description": "Array of IP configuration profiles which reference this subnet.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.IPConfigurationProfile"
+            "$ref": "#/definitions/Common.IPConfigurationProfile"
           },
           "readOnly": true
         },
@@ -4781,14 +4766,14 @@
           "type": "array",
           "description": "Array of IpAllocation which reference this subnet.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "resourceNavigationLinks": {
           "type": "array",
           "description": "An array of references to the external resources using subnet.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ResourceNavigationLink"
+            "$ref": "#/definitions/Common.ResourceNavigationLink"
           },
           "readOnly": true
         },
@@ -4796,7 +4781,7 @@
           "type": "array",
           "description": "An array of references to services injecting into this subnet.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ServiceAssociationLink"
+            "$ref": "#/definitions/Common.ServiceAssociationLink"
           },
           "readOnly": true
         },
@@ -4804,7 +4789,7 @@
           "type": "array",
           "description": "An array of references to the delegations on the subnet.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.Delegation"
+            "$ref": "#/definitions/Common.Delegation"
           }
         },
         "purpose": {
@@ -4813,7 +4798,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the subnet resource.",
           "readOnly": true
         },
@@ -4883,11 +4868,11 @@
           "type": "array",
           "description": "Application gateway IP configurations of virtual network resource.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.ApplicationGatewayIPConfiguration"
+            "$ref": "#/definitions/Common.ApplicationGatewayIPConfiguration"
           }
         },
         "sharingScope": {
-          "$ref": "#/definitions/Microsoft.Common.SharingScope",
+          "$ref": "#/definitions/Common.SharingScope",
           "description": "Set this property to Tenant to allow sharing subnet with other subscriptions in your AAD tenant. This property can only be set if defaultOutboundAccess is set to false, both properties can only be set if subnet is empty."
         },
         "defaultOutboundAccess": {
@@ -4898,16 +4883,16 @@
           "type": "array",
           "description": "A list of IPAM Pools for allocating IP address prefixes.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.IpamPoolPrefixAllocation"
+            "$ref": "#/definitions/Common.IpamPoolPrefixAllocation"
           }
         },
         "serviceGateway": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "Reference to an existing service gateway."
         }
       }
     },
-    "Microsoft.Common.SyncMode": {
+    "Common.SyncMode": {
       "type": "string",
       "description": "Backend address synchronous mode for the backend pool",
       "enum": [
@@ -4931,7 +4916,7 @@
         ]
       }
     },
-    "Microsoft.Common.TrafficAnalyticsConfigurationProperties": {
+    "Common.TrafficAnalyticsConfigurationProperties": {
       "type": "object",
       "description": "Parameters that define the configuration of traffic analytics.",
       "properties": {
@@ -4958,17 +4943,17 @@
         }
       }
     },
-    "Microsoft.Common.TrafficAnalyticsProperties": {
+    "Common.TrafficAnalyticsProperties": {
       "type": "object",
       "description": "Parameters that define the configuration of traffic analytics.",
       "properties": {
         "networkWatcherFlowAnalyticsConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.TrafficAnalyticsConfigurationProperties",
+          "$ref": "#/definitions/Common.TrafficAnalyticsConfigurationProperties",
           "description": "Parameters that define the configuration of traffic analytics."
         }
       }
     },
-    "Microsoft.Common.TransportProtocol": {
+    "Common.TransportProtocol": {
       "type": "string",
       "description": "The transport protocol for the endpoint.",
       "enum": [
@@ -5004,16 +4989,16 @@
         ]
       }
     },
-    "Microsoft.Common.VirtualNetwork": {
+    "Common.VirtualNetwork": {
       "type": "object",
       "description": "Virtual Network resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkPropertiesFormat",
+          "$ref": "#/definitions/Common.VirtualNetworkPropertiesFormat",
           "description": "Properties of the virtual network."
         },
         "extendedLocation": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocation",
+          "$ref": "#/definitions/Common.ExtendedLocation",
           "description": "The extended location of the virtual network."
         },
         "etag": {
@@ -5024,11 +5009,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.VirtualNetworkBgpCommunities": {
+    "Common.VirtualNetworkBgpCommunities": {
       "type": "object",
       "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET.",
       "properties": {
@@ -5046,7 +5031,7 @@
         "virtualNetworkCommunity"
       ]
     },
-    "Microsoft.Common.VirtualNetworkEncryption": {
+    "Common.VirtualNetworkEncryption": {
       "type": "object",
       "description": "Indicates if encryption is enabled on virtual network and if VM without encryption is allowed in encrypted VNet.",
       "properties": {
@@ -5055,7 +5040,7 @@
           "description": "Indicates if encryption is enabled on the virtual network."
         },
         "enforcement": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkEncryptionEnforcement",
+          "$ref": "#/definitions/Common.VirtualNetworkEncryptionEnforcement",
           "description": "If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability."
         }
       },
@@ -5063,7 +5048,7 @@
         "enabled"
       ]
     },
-    "Microsoft.Common.VirtualNetworkEncryptionEnforcement": {
+    "Common.VirtualNetworkEncryptionEnforcement": {
       "type": "string",
       "description": "If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability.",
       "enum": [
@@ -5087,12 +5072,12 @@
         ]
       }
     },
-    "Microsoft.Common.VirtualNetworkPeering": {
+    "Common.VirtualNetworkPeering": {
       "type": "object",
       "description": "Peerings in a virtual network resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkPeeringPropertiesFormat"
+          "$ref": "#/definitions/Common.VirtualNetworkPeeringPropertiesFormat"
         },
         "etag": {
           "type": "string",
@@ -5102,11 +5087,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.SubResourceModel"
+          "$ref": "#/definitions/Common.SubResourceModel"
         }
       ]
     },
-    "Microsoft.Common.VirtualNetworkPeeringLevel": {
+    "Common.VirtualNetworkPeeringLevel": {
       "type": "string",
       "description": "The peering sync status of the virtual network peering.",
       "enum": [
@@ -5142,7 +5127,7 @@
         ]
       }
     },
-    "Microsoft.Common.VirtualNetworkPeeringPropertiesFormat": {
+    "Common.VirtualNetworkPeeringPropertiesFormat": {
       "type": "object",
       "description": "Properties of the virtual network peering.",
       "properties": {
@@ -5163,44 +5148,44 @@
           "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
         },
         "remoteVirtualNetwork": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The reference to the remote virtual network. The remote virtual network can be in the same or different region (preview). See here to register for the preview and learn more (https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-create-peering)."
         },
         "localAddressSpace": {
-          "$ref": "#/definitions/Microsoft.Common.AddressSpace",
+          "$ref": "#/definitions/Common.AddressSpace",
           "description": "The local address space of the local virtual network that is peered."
         },
         "localVirtualNetworkAddressSpace": {
-          "$ref": "#/definitions/Microsoft.Common.AddressSpace",
+          "$ref": "#/definitions/Common.AddressSpace",
           "description": "The current local address space of the local virtual network that is peered."
         },
         "remoteAddressSpace": {
-          "$ref": "#/definitions/Microsoft.Common.AddressSpace",
+          "$ref": "#/definitions/Common.AddressSpace",
           "description": "The reference to the address space peered with the remote virtual network."
         },
         "remoteVirtualNetworkAddressSpace": {
-          "$ref": "#/definitions/Microsoft.Common.AddressSpace",
+          "$ref": "#/definitions/Common.AddressSpace",
           "description": "The reference to the current address space of the remote virtual network."
         },
         "remoteBgpCommunities": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkBgpCommunities",
+          "$ref": "#/definitions/Common.VirtualNetworkBgpCommunities",
           "description": "The reference to the remote virtual network's Bgp Communities."
         },
         "remoteVirtualNetworkEncryption": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkEncryption",
+          "$ref": "#/definitions/Common.VirtualNetworkEncryption",
           "description": "The reference to the remote virtual network's encryption",
           "readOnly": true
         },
         "peeringState": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkPeeringState",
+          "$ref": "#/definitions/Common.VirtualNetworkPeeringState",
           "description": "The status of the virtual network peering."
         },
         "peeringSyncLevel": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkPeeringLevel",
+          "$ref": "#/definitions/Common.VirtualNetworkPeeringLevel",
           "description": "The peering sync status of the virtual network peering."
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the virtual network peering resource.",
           "readOnly": true
         },
@@ -5237,7 +5222,7 @@
         }
       }
     },
-    "Microsoft.Common.VirtualNetworkPeeringState": {
+    "Common.VirtualNetworkPeeringState": {
       "type": "string",
       "description": "The status of the virtual network peering.",
       "enum": [
@@ -5267,16 +5252,16 @@
         ]
       }
     },
-    "Microsoft.Common.VirtualNetworkPropertiesFormat": {
+    "Common.VirtualNetworkPropertiesFormat": {
       "type": "object",
       "description": "Properties of the virtual network.",
       "properties": {
         "addressSpace": {
-          "$ref": "#/definitions/Microsoft.Common.AddressSpace",
+          "$ref": "#/definitions/Common.AddressSpace",
           "description": "The AddressSpace that contains an array of IP address ranges that can be used by subnets."
         },
         "dhcpOptions": {
-          "$ref": "#/definitions/Microsoft.Common.DhcpOptions",
+          "$ref": "#/definitions/Common.DhcpOptions",
           "description": "The dhcpOptions that contains an array of DNS servers available to VMs deployed in the virtual network."
         },
         "flowTimeoutInMinutes": {
@@ -5288,14 +5273,14 @@
           "type": "array",
           "description": "A list of subnets in a Virtual Network.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.Subnet"
+            "$ref": "#/definitions/Common.Subnet"
           }
         },
         "virtualNetworkPeerings": {
           "type": "array",
           "description": "A list of peerings in a Virtual Network.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.VirtualNetworkPeering"
+            "$ref": "#/definitions/Common.VirtualNetworkPeering"
           }
         },
         "resourceGuid": {
@@ -5304,7 +5289,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the virtual network resource.",
           "readOnly": true
         },
@@ -5319,49 +5304,49 @@
           "default": false
         },
         "ddosProtectionPlan": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "The DDoS protection plan associated with the virtual network."
         },
         "bgpCommunities": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkBgpCommunities",
+          "$ref": "#/definitions/Common.VirtualNetworkBgpCommunities",
           "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET."
         },
         "encryption": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkEncryption",
+          "$ref": "#/definitions/Common.VirtualNetworkEncryption",
           "description": "Indicates if encryption is enabled on virtual network and if VM without encryption is allowed in encrypted VNet."
         },
         "ipAllocations": {
           "type": "array",
           "description": "Array of IpAllocation which reference this VNET.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.SubResource"
+            "$ref": "#/definitions/Common.SubResource"
           }
         },
         "flowLogs": {
           "type": "array",
           "description": "A collection of references to flow log resources.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.FlowLog"
+            "$ref": "#/definitions/Common.FlowLog"
           },
           "readOnly": true
         },
         "privateEndpointVNetPolicies": {
-          "$ref": "#/definitions/Microsoft.Common.PrivateEndpointVNetPolicies",
+          "$ref": "#/definitions/Common.PrivateEndpointVNetPolicies",
           "description": "Private Endpoint VNet Policies."
         },
         "defaultPublicNatGateway": {
-          "$ref": "#/definitions/Microsoft.Common.SubResource",
+          "$ref": "#/definitions/Common.SubResource",
           "description": "A reference to the default public nat gateway being used by this virtual network resource.",
           "readOnly": true
         }
       }
     },
-    "Microsoft.Common.VirtualNetworkTap": {
+    "Common.VirtualNetworkTap": {
       "type": "object",
       "description": "Virtual Network Tap resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Microsoft.Common.VirtualNetworkTapPropertiesFormat",
+          "$ref": "#/definitions/Common.VirtualNetworkTapPropertiesFormat",
           "description": "Virtual Network Tap Properties.",
           "x-ms-client-flatten": true
         },
@@ -5373,11 +5358,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Microsoft.Common.Resource"
+          "$ref": "#/definitions/Common.Resource"
         }
       ]
     },
-    "Microsoft.Common.VirtualNetworkTapPropertiesFormat": {
+    "Common.VirtualNetworkTapPropertiesFormat": {
       "type": "object",
       "description": "Virtual Network Tap properties.",
       "properties": {
@@ -5385,7 +5370,7 @@
           "type": "array",
           "description": "Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped.",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceTapConfiguration"
+            "$ref": "#/definitions/Common.NetworkInterfaceTapConfiguration"
           },
           "readOnly": true
         },
@@ -5395,22 +5380,37 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Microsoft.Common.ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the virtual network tap resource.",
           "readOnly": true
         },
         "destinationNetworkInterfaceIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfiguration",
+          "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration",
           "description": "The reference to the private IP Address of the collector nic that will receive the tap."
         },
         "destinationLoadBalancerFrontEndIPConfiguration": {
-          "$ref": "#/definitions/Microsoft.Common.FrontendIPConfiguration",
+          "$ref": "#/definitions/Common.FrontendIPConfiguration",
           "description": "The reference to the private IP address on the internal Load Balancer that will receive the tap."
         },
         "destinationPort": {
           "type": "integer",
           "format": "int32",
           "description": "The VXLAN destination port that will receive the tapped traffic."
+        }
+      }
+    },
+    "ManagedServiceIdentityUserAssignedIdentities": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
         }
       }
     },
@@ -5422,7 +5422,7 @@
           "type": "array",
           "description": "The NetworkInterfaceIPConfiguration items on this page",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterfaceIPConfiguration"
+            "$ref": "#/definitions/Common.NetworkInterfaceIPConfiguration"
           }
         },
         "nextLink": {
@@ -5443,7 +5443,7 @@
           "type": "array",
           "description": "The NetworkInterface items on this page",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.NetworkInterface"
+            "$ref": "#/definitions/Common.NetworkInterface"
           }
         },
         "nextLink": {
@@ -5464,7 +5464,7 @@
           "type": "array",
           "description": "The PublicIPAddress items on this page",
           "items": {
-            "$ref": "#/definitions/Microsoft.Common.PublicIPAddress"
+            "$ref": "#/definitions/Common.PublicIPAddress"
           }
         },
         "nextLink": {

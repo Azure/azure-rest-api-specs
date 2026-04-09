@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model FirewallPolicy extends Microsoft.Common.Resource {
+model FirewallPolicy extends Common.Resource {
   properties?: FirewallPolicyPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -39,7 +39,7 @@ model FirewallPolicy extends Microsoft.Common.Resource {
    * The identity of the firewall policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Microsoft.Common.ManagedServiceIdentity;
+  identity?: Common.ManagedServiceIdentity;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

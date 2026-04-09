@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
@@ -22,7 +22,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualNetworkAppliance extends Microsoft.Common.Resource {
+model VirtualNetworkAppliance extends Common.Resource {
   properties?: VirtualNetworkAppliancePropertiesFormat;
 
   @visibility(Lifecycle.Read)

@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -23,7 +23,7 @@ namespace Microsoft.Network;
 @singleton("default")
 @subscriptionResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ApplicationGatewayAvailableSslOptions extends Microsoft.Common.Resource {
+model ApplicationGatewayAvailableSslOptions extends Common.Resource {
   properties?: ApplicationGatewayAvailableSslOptionsPropertiesFormat;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

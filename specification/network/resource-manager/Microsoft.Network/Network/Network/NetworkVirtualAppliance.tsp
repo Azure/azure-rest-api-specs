@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model NetworkVirtualAppliance extends Microsoft.Common.Resource {
+model NetworkVirtualAppliance extends Common.Resource {
   properties?: NetworkVirtualAppliancePropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -34,7 +34,7 @@ model NetworkVirtualAppliance extends Microsoft.Common.Resource {
    * The service principal that has read access to cloud-init and config blob.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Microsoft.Common.ManagedServiceIdentity;
+  identity?: Common.ManagedServiceIdentity;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

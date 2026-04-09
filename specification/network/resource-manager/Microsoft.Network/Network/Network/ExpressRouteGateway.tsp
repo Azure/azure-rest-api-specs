@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -21,7 +21,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteGateway extends Microsoft.Common.Resource {
+model ExpressRouteGateway extends Common.Resource {
   properties?: ExpressRouteGatewayProperties;
 
   @visibility(Lifecycle.Read)

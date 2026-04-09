@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 
@@ -23,7 +23,7 @@ interface PrivateEndpointConnections {
    */
   @tag("PrivateLinkServices")
   getPrivateEndpointConnection is ArmResourceRead<
-    Microsoft.Common.PrivateEndpointConnection,
+    Common.PrivateEndpointConnection,
     Parameters = {
       /**
        * Expands referenced resources.
@@ -40,8 +40,8 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateLinkServices")
   updatePrivateEndpointConnection is ArmResourceCreateOrReplaceSync<
-    Microsoft.Common.PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<Microsoft.Common.PrivateEndpointConnection>,
+    Common.PrivateEndpointConnection,
+    Response = ArmResourceUpdatedResponse<Common.PrivateEndpointConnection>,
     Error = Error
   >;
 
@@ -51,7 +51,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PrivateLinkServices")
   deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
-    Microsoft.Common.PrivateEndpointConnection,
+    Common.PrivateEndpointConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = Error
   >;
@@ -61,18 +61,18 @@ interface PrivateEndpointConnections {
    */
   @tag("PrivateLinkServices")
   listPrivateEndpointConnections is ArmResourceListByParent<
-    Microsoft.Common.PrivateEndpointConnection,
+    Common.PrivateEndpointConnection,
     Error = Error
   >;
 }
 
-@@doc(Microsoft.Common.PrivateEndpointConnection.name,
+@@doc(Common.PrivateEndpointConnection.name,
   "The name of the private end point connection."
 );
-@@doc(Microsoft.Common.PrivateEndpointConnection.name,
+@@doc(Common.PrivateEndpointConnection.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(Microsoft.Common.PrivateEndpointConnection.properties,
+@@doc(Common.PrivateEndpointConnection.properties,
   "Properties of the private end point connection."
 );
 @@doc(PrivateEndpointConnections.updatePrivateEndpointConnection::parameters.resource,

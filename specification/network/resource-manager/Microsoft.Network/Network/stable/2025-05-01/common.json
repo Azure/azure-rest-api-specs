@@ -1999,6 +1999,1311 @@
         ]
       }
     },
+    "Common.AccessMode": {
+      "type": "string",
+      "description": "The access mode of the private link service.",
+      "enum": [
+        "Default",
+        "Restricted"
+      ],
+      "x-ms-enum": {
+        "name": "AccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Allows unrestricted access to the private link service."
+          },
+          {
+            "name": "Restricted",
+            "value": "Restricted",
+            "description": "Limits access to subscriptions which are inside visibility list only."
+          }
+        ]
+      }
+    },
+    "Common.CloudError": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Common.CloudErrorBody",
+          "description": "Cloud error body."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Common.CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/Common.CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
+    },
+    "Common.DdosSettingsProtectionMode": {
+      "type": "string",
+      "description": "The DDoS protection mode of the public IP",
+      "enum": [
+        "VirtualNetworkInherited",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DdosSettingsProtectionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VirtualNetworkInherited",
+            "value": "VirtualNetworkInherited",
+            "description": "VirtualNetworkInherited"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "Common.DeleteOptions": {
+      "type": "string",
+      "description": "Specify what happens to the public IP address when the VM using it is deleted",
+      "enum": [
+        "Delete",
+        "Detach"
+      ],
+      "x-ms-enum": {
+        "name": "DeleteOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete"
+          },
+          {
+            "name": "Detach",
+            "value": "Detach",
+            "description": "Detach"
+          }
+        ]
+      }
+    },
+    "Common.ExtendedLocation": {
+      "type": "object",
+      "description": "ExtendedLocation complex type.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/Common.ExtendedLocationTypes",
+          "description": "The type of the extended location."
+        }
+      }
+    },
+    "Common.ExtendedLocationTypes": {
+      "type": "string",
+      "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "EdgeZone"
+          }
+        ]
+      }
+    },
+    "Common.FlowLogFormatType": {
+      "type": "string",
+      "description": "The file type of flow log.",
+      "enum": [
+        "JSON"
+      ],
+      "x-ms-enum": {
+        "name": "FlowLogFormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JSON",
+            "value": "JSON",
+            "description": "JSON"
+          }
+        ]
+      }
+    },
+    "Common.GatewayLoadBalancerTunnelInterfaceType": {
+      "type": "string",
+      "description": "Traffic type of gateway load balancer tunnel interface.",
+      "enum": [
+        "None",
+        "Internal",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "GatewayLoadBalancerTunnelInterfaceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "Internal"
+          },
+          {
+            "name": "External",
+            "value": "External",
+            "description": "External"
+          }
+        ]
+      }
+    },
+    "Common.GatewayLoadBalancerTunnelProtocol": {
+      "type": "string",
+      "description": "Protocol of gateway load balancer tunnel interface.",
+      "enum": [
+        "None",
+        "Native",
+        "VXLAN"
+      ],
+      "x-ms-enum": {
+        "name": "GatewayLoadBalancerTunnelProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Native",
+            "value": "Native",
+            "description": "Native"
+          },
+          {
+            "name": "VXLAN",
+            "value": "VXLAN",
+            "description": "VXLAN"
+          }
+        ]
+      }
+    },
+    "Common.IPAllocationMethod": {
+      "type": "string",
+      "description": "IP address allocation method.",
+      "enum": [
+        "Static",
+        "Dynamic"
+      ],
+      "x-ms-enum": {
+        "name": "IPAllocationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "Static"
+          },
+          {
+            "name": "Dynamic",
+            "value": "Dynamic",
+            "description": "Dynamic"
+          }
+        ]
+      }
+    },
+    "Common.IPVersion": {
+      "type": "string",
+      "description": "IP address version.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IPVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4"
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6"
+          }
+        ]
+      }
+    },
+    "Common.LoadBalancerBackendAddressAdminState": {
+      "type": "string",
+      "description": "A list of administrative states which once set can override health probe so that Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections.",
+      "enum": [
+        "None",
+        "Up",
+        "Down"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerBackendAddressAdminState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Up",
+            "value": "Up",
+            "description": "Up"
+          },
+          {
+            "name": "Down",
+            "value": "Down",
+            "description": "Down"
+          }
+        ]
+      }
+    },
+    "Common.LoadBalancerOutboundRuleProtocol": {
+      "type": "string",
+      "description": "The protocol for the outbound rule in load balancer.",
+      "enum": [
+        "Tcp",
+        "Udp",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerOutboundRuleProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "Tcp"
+          },
+          {
+            "name": "Udp",
+            "value": "Udp",
+            "description": "Udp"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All"
+          }
+        ]
+      }
+    },
+    "Common.LoadBalancerScope": {
+      "type": "string",
+      "description": "Indicates the scope of the load balancer: external (Public) or internal (Private).",
+      "enum": [
+        "Public",
+        "Private"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "Public"
+          },
+          {
+            "name": "Private",
+            "value": "Private",
+            "description": "Private"
+          }
+        ]
+      }
+    },
+    "Common.LoadBalancerSkuName": {
+      "type": "string",
+      "description": "Name of a load balancer SKU.",
+      "enum": [
+        "Basic",
+        "Standard",
+        "Gateway"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard"
+          },
+          {
+            "name": "Gateway",
+            "value": "Gateway",
+            "description": "Gateway"
+          }
+        ]
+      }
+    },
+    "Common.LoadBalancerSkuTier": {
+      "type": "string",
+      "description": "Tier of a load balancer SKU.",
+      "enum": [
+        "Regional",
+        "Global"
+      ],
+      "x-ms-enum": {
+        "name": "LoadBalancerSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "Regional"
+          },
+          {
+            "name": "Global",
+            "value": "Global",
+            "description": "Global"
+          }
+        ]
+      }
+    },
+    "Common.LoadDistribution": {
+      "type": "string",
+      "description": "The load distribution policy for this rule.",
+      "enum": [
+        "Default",
+        "SourceIP",
+        "SourceIPProtocol"
+      ],
+      "x-ms-enum": {
+        "name": "LoadDistribution",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default"
+          },
+          {
+            "name": "SourceIP",
+            "value": "SourceIP",
+            "description": "SourceIP"
+          },
+          {
+            "name": "SourceIPProtocol",
+            "value": "SourceIPProtocol",
+            "description": "SourceIPProtocol"
+          }
+        ]
+      }
+    },
+    "Common.ManagedServiceIdentity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Common.ResourceIdentityType",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ManagedServiceIdentityUserAssignedIdentities"
+          }
+        }
+      }
+    },
+    "Common.NatGatewaySkuName": {
+      "type": "string",
+      "description": "Name of Nat Gateway SKU.",
+      "enum": [
+        "Standard",
+        "StandardV2"
+      ],
+      "x-ms-enum": {
+        "name": "NatGatewaySkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard"
+          },
+          {
+            "name": "StandardV2",
+            "value": "StandardV2",
+            "description": "StandardV2"
+          }
+        ]
+      }
+    },
+    "Common.NetworkInterfaceAuxiliaryMode": {
+      "type": "string",
+      "description": "Auxiliary mode of Network Interface resource.",
+      "enum": [
+        "None",
+        "MaxConnections",
+        "Floating",
+        "AcceleratedConnections"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkInterfaceAuxiliaryMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "MaxConnections",
+            "value": "MaxConnections",
+            "description": "MaxConnections"
+          },
+          {
+            "name": "Floating",
+            "value": "Floating",
+            "description": "Floating"
+          },
+          {
+            "name": "AcceleratedConnections",
+            "value": "AcceleratedConnections",
+            "description": "AcceleratedConnections"
+          }
+        ]
+      }
+    },
+    "Common.NetworkInterfaceAuxiliarySku": {
+      "type": "string",
+      "description": "Auxiliary sku of Network Interface resource.",
+      "enum": [
+        "None",
+        "A1",
+        "A2",
+        "A4",
+        "A8"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkInterfaceAuxiliarySku",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "A1",
+            "value": "A1",
+            "description": "A1"
+          },
+          {
+            "name": "A2",
+            "value": "A2",
+            "description": "A2"
+          },
+          {
+            "name": "A4",
+            "value": "A4",
+            "description": "A4"
+          },
+          {
+            "name": "A8",
+            "value": "A8",
+            "description": "A8"
+          }
+        ]
+      }
+    },
+    "Common.NetworkInterfaceMigrationPhase": {
+      "type": "string",
+      "description": "Migration phase of Network Interface resource.",
+      "enum": [
+        "None",
+        "Prepare",
+        "Commit",
+        "Abort",
+        "Committed"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkInterfaceMigrationPhase",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Prepare",
+            "value": "Prepare",
+            "description": "Prepare"
+          },
+          {
+            "name": "Commit",
+            "value": "Commit",
+            "description": "Commit"
+          },
+          {
+            "name": "Abort",
+            "value": "Abort",
+            "description": "Abort"
+          },
+          {
+            "name": "Committed",
+            "value": "Committed",
+            "description": "Committed"
+          }
+        ]
+      }
+    },
+    "Common.NetworkInterfaceNicType": {
+      "type": "string",
+      "description": "Type of Network Interface resource.",
+      "enum": [
+        "Standard",
+        "Elastic"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkInterfaceNicType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard"
+          },
+          {
+            "name": "Elastic",
+            "value": "Elastic",
+            "description": "Elastic"
+          }
+        ]
+      }
+    },
+    "Common.PrivateEndpointVNetPolicies": {
+      "type": "string",
+      "description": "Private Endpoint VNet Policies.",
+      "enum": [
+        "Disabled",
+        "Basic"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointVNetPolicies",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic"
+          }
+        ]
+      }
+    },
+    "Common.ProbeNoHealthyBackendsBehavior": {
+      "type": "string",
+      "description": "Determines how new connections are handled by the load balancer when all backend instances are probed down.",
+      "enum": [
+        "AllProbedDown",
+        "AllProbedUp"
+      ],
+      "x-ms-enum": {
+        "name": "ProbeNoHealthyBackendsBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllProbedDown",
+            "value": "AllProbedDown",
+            "description": "No new flows will be sent to the backend pool."
+          },
+          {
+            "name": "AllProbedUp",
+            "value": "AllProbedUp",
+            "description": "When all backend instances are probed down, incoming packets will be sent to all instances."
+          }
+        ]
+      }
+    },
+    "Common.ProbeProtocol": {
+      "type": "string",
+      "description": "The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
+      "enum": [
+        "Http",
+        "Tcp",
+        "Https"
+      ],
+      "x-ms-enum": {
+        "name": "ProbeProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "Http",
+            "description": "Http"
+          },
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "Tcp"
+          },
+          {
+            "name": "Https",
+            "value": "Https",
+            "description": "Https"
+          }
+        ]
+      }
+    },
+    "Common.ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning states of a resource.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          }
+        ]
+      }
+    },
+    "Common.PublicIPAddressMigrationPhase": {
+      "type": "string",
+      "description": "Migration phase of Public IP Address.",
+      "enum": [
+        "None",
+        "Prepare",
+        "Commit",
+        "Abort",
+        "Committed"
+      ],
+      "x-ms-enum": {
+        "name": "PublicIPAddressMigrationPhase",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Prepare",
+            "value": "Prepare",
+            "description": "Prepare"
+          },
+          {
+            "name": "Commit",
+            "value": "Commit",
+            "description": "Commit"
+          },
+          {
+            "name": "Abort",
+            "value": "Abort",
+            "description": "Abort"
+          },
+          {
+            "name": "Committed",
+            "value": "Committed",
+            "description": "Committed"
+          }
+        ]
+      }
+    },
+    "Common.PublicIPAddressSkuName": {
+      "type": "string",
+      "description": "Name of a public IP address SKU.",
+      "enum": [
+        "Basic",
+        "Standard",
+        "StandardV2"
+      ],
+      "x-ms-enum": {
+        "name": "PublicIPAddressSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic"
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard"
+          },
+          {
+            "name": "StandardV2",
+            "value": "StandardV2",
+            "description": "StandardV2"
+          }
+        ]
+      }
+    },
+    "Common.PublicIPAddressSkuTier": {
+      "type": "string",
+      "description": "Tier of a public IP address SKU.",
+      "enum": [
+        "Regional",
+        "Global"
+      ],
+      "x-ms-enum": {
+        "name": "PublicIPAddressSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "Regional"
+          },
+          {
+            "name": "Global",
+            "value": "Global",
+            "description": "Global"
+          }
+        ]
+      }
+    },
+    "Common.PublicIpAddressDnsSettingsDomainNameLabelScope": {
+      "type": "string",
+      "description": "The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN.",
+      "enum": [
+        "TenantReuse",
+        "SubscriptionReuse",
+        "ResourceGroupReuse",
+        "NoReuse"
+      ],
+      "x-ms-enum": {
+        "name": "PublicIpAddressDnsSettingsDomainNameLabelScope",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "TenantReuse",
+            "value": "TenantReuse",
+            "description": "TenantReuse"
+          },
+          {
+            "name": "SubscriptionReuse",
+            "value": "SubscriptionReuse",
+            "description": "SubscriptionReuse"
+          },
+          {
+            "name": "ResourceGroupReuse",
+            "value": "ResourceGroupReuse",
+            "description": "ResourceGroupReuse"
+          },
+          {
+            "name": "NoReuse",
+            "value": "NoReuse",
+            "description": "NoReuse"
+          }
+        ]
+      }
+    },
+    "Common.Resource": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Common.ResourceIdentityType": {
+      "type": "string",
+      "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "UserAssigned"
+          },
+          {
+            "name": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "SystemAssigned, UserAssigned"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          }
+        ]
+      }
+    },
+    "Common.RouteNextHopType": {
+      "type": "string",
+      "description": "The type of Azure hop the packet should be sent to.",
+      "enum": [
+        "VirtualNetworkGateway",
+        "VnetLocal",
+        "Internet",
+        "VirtualAppliance",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "RouteNextHopType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VirtualNetworkGateway",
+            "value": "VirtualNetworkGateway",
+            "description": "VirtualNetworkGateway"
+          },
+          {
+            "name": "VnetLocal",
+            "value": "VnetLocal",
+            "description": "VnetLocal"
+          },
+          {
+            "name": "Internet",
+            "value": "Internet",
+            "description": "Internet"
+          },
+          {
+            "name": "VirtualAppliance",
+            "value": "VirtualAppliance",
+            "description": "VirtualAppliance"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          }
+        ]
+      }
+    },
+    "Common.SecurityRuleAccess": {
+      "type": "string",
+      "description": "Whether network traffic is allowed or denied.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityRuleAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny"
+          }
+        ]
+      }
+    },
+    "Common.SecurityRuleDirection": {
+      "type": "string",
+      "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityRuleDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inbound",
+            "value": "Inbound",
+            "description": "Inbound"
+          },
+          {
+            "name": "Outbound",
+            "value": "Outbound",
+            "description": "Outbound"
+          }
+        ]
+      }
+    },
+    "Common.SecurityRuleProtocol": {
+      "type": "string",
+      "description": "Network protocol this rule applies to.",
+      "enum": [
+        "Tcp",
+        "Udp",
+        "Icmp",
+        "Esp",
+        "*",
+        "Ah"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityRuleProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "Tcp"
+          },
+          {
+            "name": "Udp",
+            "value": "Udp",
+            "description": "Udp"
+          },
+          {
+            "name": "Icmp",
+            "value": "Icmp",
+            "description": "Icmp"
+          },
+          {
+            "name": "Esp",
+            "value": "Esp",
+            "description": "Esp"
+          },
+          {
+            "name": "Asterisk",
+            "value": "*",
+            "description": "*"
+          },
+          {
+            "name": "Ah",
+            "value": "Ah",
+            "description": "Ah"
+          }
+        ]
+      }
+    },
+    "Common.SharingScope": {
+      "type": "string",
+      "description": "Set this property to Tenant to allow sharing subnet with other subscriptions in your AAD tenant. This property can only be set if defaultOutboundAccess is set to false, both properties can only be set if subnet is empty.",
+      "enum": [
+        "Tenant",
+        "DelegatedServices"
+      ],
+      "x-ms-enum": {
+        "name": "SharingScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tenant",
+            "value": "Tenant",
+            "description": "Tenant"
+          },
+          {
+            "name": "DelegatedServices",
+            "value": "DelegatedServices",
+            "description": "DelegatedServices"
+          }
+        ]
+      }
+    },
+    "Common.SubResource": {
+      "type": "object",
+      "description": "Reference to another subresource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
+    "Common.SubResourceModel": {
+      "type": "object",
+      "description": "Reference to another subresource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Common.SubResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "Common.SyncMode": {
+      "type": "string",
+      "description": "Backend address synchronous mode for the backend pool",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "SyncMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "Automatic"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual"
+          }
+        ]
+      }
+    },
+    "Common.TransportProtocol": {
+      "type": "string",
+      "description": "The transport protocol for the endpoint.",
+      "enum": [
+        "Udp",
+        "Tcp",
+        "All",
+        "Quic"
+      ],
+      "x-ms-enum": {
+        "name": "TransportProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Udp",
+            "value": "Udp",
+            "description": "Udp"
+          },
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "Tcp"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All"
+          },
+          {
+            "name": "Quic",
+            "value": "Quic",
+            "description": "Quic"
+          }
+        ]
+      }
+    },
+    "Common.VirtualNetworkEncryptionEnforcement": {
+      "type": "string",
+      "description": "If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability.",
+      "enum": [
+        "DropUnencrypted",
+        "AllowUnencrypted"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkEncryptionEnforcement",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DropUnencrypted",
+            "value": "DropUnencrypted",
+            "description": "DropUnencrypted"
+          },
+          {
+            "name": "AllowUnencrypted",
+            "value": "AllowUnencrypted",
+            "description": "AllowUnencrypted"
+          }
+        ]
+      }
+    },
+    "Common.VirtualNetworkPeeringLevel": {
+      "type": "string",
+      "description": "The peering sync status of the virtual network peering.",
+      "enum": [
+        "FullyInSync",
+        "RemoteNotInSync",
+        "LocalNotInSync",
+        "LocalAndRemoteNotInSync"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkPeeringLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FullyInSync",
+            "value": "FullyInSync",
+            "description": "FullyInSync"
+          },
+          {
+            "name": "RemoteNotInSync",
+            "value": "RemoteNotInSync",
+            "description": "RemoteNotInSync"
+          },
+          {
+            "name": "LocalNotInSync",
+            "value": "LocalNotInSync",
+            "description": "LocalNotInSync"
+          },
+          {
+            "name": "LocalAndRemoteNotInSync",
+            "value": "LocalAndRemoteNotInSync",
+            "description": "LocalAndRemoteNotInSync"
+          }
+        ]
+      }
+    },
+    "Common.VirtualNetworkPeeringState": {
+      "type": "string",
+      "description": "The status of the virtual network peering.",
+      "enum": [
+        "Initiated",
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkPeeringState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Initiated",
+            "value": "Initiated",
+            "description": "Initiated"
+          },
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Connected"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Disconnected"
+          }
+        ]
+      }
+    },
     "CommonErrorAdditionalInfo": {
       "type": "object",
       "description": "The resource management error additional info.",
@@ -4734,1311 +6039,6 @@
           "description": "The client id of user assigned identity.",
           "readOnly": true
         }
-      }
-    },
-    "Microsoft.Common.AccessMode": {
-      "type": "string",
-      "description": "The access mode of the private link service.",
-      "enum": [
-        "Default",
-        "Restricted"
-      ],
-      "x-ms-enum": {
-        "name": "AccessMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Default",
-            "value": "Default",
-            "description": "Allows unrestricted access to the private link service."
-          },
-          {
-            "name": "Restricted",
-            "value": "Restricted",
-            "description": "Limits access to subscriptions which are inside visibility list only."
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.CloudError": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Microsoft.Common.CloudErrorBody",
-          "description": "Cloud error body."
-        }
-      },
-      "x-ms-external": true
-    },
-    "Microsoft.Common.CloudErrorBody": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "description": "A list of additional details about the error.",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Common.CloudErrorBody"
-          }
-        }
-      },
-      "x-ms-external": true
-    },
-    "Microsoft.Common.DdosSettingsProtectionMode": {
-      "type": "string",
-      "description": "The DDoS protection mode of the public IP",
-      "enum": [
-        "VirtualNetworkInherited",
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DdosSettingsProtectionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "VirtualNetworkInherited",
-            "value": "VirtualNetworkInherited",
-            "description": "VirtualNetworkInherited"
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.DeleteOptions": {
-      "type": "string",
-      "description": "Specify what happens to the public IP address when the VM using it is deleted",
-      "enum": [
-        "Delete",
-        "Detach"
-      ],
-      "x-ms-enum": {
-        "name": "DeleteOptions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "Delete"
-          },
-          {
-            "name": "Detach",
-            "value": "Detach",
-            "description": "Detach"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.ExtendedLocation": {
-      "type": "object",
-      "description": "ExtendedLocation complex type.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extended location."
-        },
-        "type": {
-          "$ref": "#/definitions/Microsoft.Common.ExtendedLocationTypes",
-          "description": "The type of the extended location."
-        }
-      }
-    },
-    "Microsoft.Common.ExtendedLocationTypes": {
-      "type": "string",
-      "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Network resources.",
-      "enum": [
-        "EdgeZone"
-      ],
-      "x-ms-enum": {
-        "name": "ExtendedLocationTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EdgeZone",
-            "value": "EdgeZone",
-            "description": "EdgeZone"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.FlowLogFormatType": {
-      "type": "string",
-      "description": "The file type of flow log.",
-      "enum": [
-        "JSON"
-      ],
-      "x-ms-enum": {
-        "name": "FlowLogFormatType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "JSON",
-            "value": "JSON",
-            "description": "JSON"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.GatewayLoadBalancerTunnelInterfaceType": {
-      "type": "string",
-      "description": "Traffic type of gateway load balancer tunnel interface.",
-      "enum": [
-        "None",
-        "Internal",
-        "External"
-      ],
-      "x-ms-enum": {
-        "name": "GatewayLoadBalancerTunnelInterfaceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "Internal",
-            "value": "Internal",
-            "description": "Internal"
-          },
-          {
-            "name": "External",
-            "value": "External",
-            "description": "External"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.GatewayLoadBalancerTunnelProtocol": {
-      "type": "string",
-      "description": "Protocol of gateway load balancer tunnel interface.",
-      "enum": [
-        "None",
-        "Native",
-        "VXLAN"
-      ],
-      "x-ms-enum": {
-        "name": "GatewayLoadBalancerTunnelProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "Native",
-            "value": "Native",
-            "description": "Native"
-          },
-          {
-            "name": "VXLAN",
-            "value": "VXLAN",
-            "description": "VXLAN"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.IPAllocationMethod": {
-      "type": "string",
-      "description": "IP address allocation method.",
-      "enum": [
-        "Static",
-        "Dynamic"
-      ],
-      "x-ms-enum": {
-        "name": "IPAllocationMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Static",
-            "value": "Static",
-            "description": "Static"
-          },
-          {
-            "name": "Dynamic",
-            "value": "Dynamic",
-            "description": "Dynamic"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.IPVersion": {
-      "type": "string",
-      "description": "IP address version.",
-      "enum": [
-        "IPv4",
-        "IPv6"
-      ],
-      "x-ms-enum": {
-        "name": "IPVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "IPv4",
-            "value": "IPv4",
-            "description": "IPv4"
-          },
-          {
-            "name": "IPv6",
-            "value": "IPv6",
-            "description": "IPv6"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.LoadBalancerBackendAddressAdminState": {
-      "type": "string",
-      "description": "A list of administrative states which once set can override health probe so that Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections.",
-      "enum": [
-        "None",
-        "Up",
-        "Down"
-      ],
-      "x-ms-enum": {
-        "name": "LoadBalancerBackendAddressAdminState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "Up",
-            "value": "Up",
-            "description": "Up"
-          },
-          {
-            "name": "Down",
-            "value": "Down",
-            "description": "Down"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.LoadBalancerOutboundRuleProtocol": {
-      "type": "string",
-      "description": "The protocol for the outbound rule in load balancer.",
-      "enum": [
-        "Tcp",
-        "Udp",
-        "All"
-      ],
-      "x-ms-enum": {
-        "name": "LoadBalancerOutboundRuleProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Tcp",
-            "value": "Tcp",
-            "description": "Tcp"
-          },
-          {
-            "name": "Udp",
-            "value": "Udp",
-            "description": "Udp"
-          },
-          {
-            "name": "All",
-            "value": "All",
-            "description": "All"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.LoadBalancerScope": {
-      "type": "string",
-      "description": "Indicates the scope of the load balancer: external (Public) or internal (Private).",
-      "enum": [
-        "Public",
-        "Private"
-      ],
-      "x-ms-enum": {
-        "name": "LoadBalancerScope",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Public",
-            "value": "Public",
-            "description": "Public"
-          },
-          {
-            "name": "Private",
-            "value": "Private",
-            "description": "Private"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.LoadBalancerSkuName": {
-      "type": "string",
-      "description": "Name of a load balancer SKU.",
-      "enum": [
-        "Basic",
-        "Standard",
-        "Gateway"
-      ],
-      "x-ms-enum": {
-        "name": "LoadBalancerSkuName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic"
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard"
-          },
-          {
-            "name": "Gateway",
-            "value": "Gateway",
-            "description": "Gateway"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.LoadBalancerSkuTier": {
-      "type": "string",
-      "description": "Tier of a load balancer SKU.",
-      "enum": [
-        "Regional",
-        "Global"
-      ],
-      "x-ms-enum": {
-        "name": "LoadBalancerSkuTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regional",
-            "value": "Regional",
-            "description": "Regional"
-          },
-          {
-            "name": "Global",
-            "value": "Global",
-            "description": "Global"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.LoadDistribution": {
-      "type": "string",
-      "description": "The load distribution policy for this rule.",
-      "enum": [
-        "Default",
-        "SourceIP",
-        "SourceIPProtocol"
-      ],
-      "x-ms-enum": {
-        "name": "LoadDistribution",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Default",
-            "value": "Default",
-            "description": "Default"
-          },
-          {
-            "name": "SourceIP",
-            "value": "SourceIP",
-            "description": "SourceIP"
-          },
-          {
-            "name": "SourceIPProtocol",
-            "value": "SourceIPProtocol",
-            "description": "SourceIPProtocol"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "Identity for the resource.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant id of the system assigned identity. This property will only be provided for a system assigned identity.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Microsoft.Common.ResourceIdentityType",
-          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ManagedServiceIdentityUserAssignedIdentities"
-          }
-        }
-      }
-    },
-    "Microsoft.Common.NatGatewaySkuName": {
-      "type": "string",
-      "description": "Name of Nat Gateway SKU.",
-      "enum": [
-        "Standard",
-        "StandardV2"
-      ],
-      "x-ms-enum": {
-        "name": "NatGatewaySkuName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard"
-          },
-          {
-            "name": "StandardV2",
-            "value": "StandardV2",
-            "description": "StandardV2"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.NetworkInterfaceAuxiliaryMode": {
-      "type": "string",
-      "description": "Auxiliary mode of Network Interface resource.",
-      "enum": [
-        "None",
-        "MaxConnections",
-        "Floating",
-        "AcceleratedConnections"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkInterfaceAuxiliaryMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "MaxConnections",
-            "value": "MaxConnections",
-            "description": "MaxConnections"
-          },
-          {
-            "name": "Floating",
-            "value": "Floating",
-            "description": "Floating"
-          },
-          {
-            "name": "AcceleratedConnections",
-            "value": "AcceleratedConnections",
-            "description": "AcceleratedConnections"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.NetworkInterfaceAuxiliarySku": {
-      "type": "string",
-      "description": "Auxiliary sku of Network Interface resource.",
-      "enum": [
-        "None",
-        "A1",
-        "A2",
-        "A4",
-        "A8"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkInterfaceAuxiliarySku",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "A1",
-            "value": "A1",
-            "description": "A1"
-          },
-          {
-            "name": "A2",
-            "value": "A2",
-            "description": "A2"
-          },
-          {
-            "name": "A4",
-            "value": "A4",
-            "description": "A4"
-          },
-          {
-            "name": "A8",
-            "value": "A8",
-            "description": "A8"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.NetworkInterfaceMigrationPhase": {
-      "type": "string",
-      "description": "Migration phase of Network Interface resource.",
-      "enum": [
-        "None",
-        "Prepare",
-        "Commit",
-        "Abort",
-        "Committed"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkInterfaceMigrationPhase",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "Prepare",
-            "value": "Prepare",
-            "description": "Prepare"
-          },
-          {
-            "name": "Commit",
-            "value": "Commit",
-            "description": "Commit"
-          },
-          {
-            "name": "Abort",
-            "value": "Abort",
-            "description": "Abort"
-          },
-          {
-            "name": "Committed",
-            "value": "Committed",
-            "description": "Committed"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.NetworkInterfaceNicType": {
-      "type": "string",
-      "description": "Type of Network Interface resource.",
-      "enum": [
-        "Standard",
-        "Elastic"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkInterfaceNicType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard"
-          },
-          {
-            "name": "Elastic",
-            "value": "Elastic",
-            "description": "Elastic"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.PrivateEndpointVNetPolicies": {
-      "type": "string",
-      "description": "Private Endpoint VNet Policies.",
-      "enum": [
-        "Disabled",
-        "Basic"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointVNetPolicies",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          },
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.ProbeNoHealthyBackendsBehavior": {
-      "type": "string",
-      "description": "Determines how new connections are handled by the load balancer when all backend instances are probed down.",
-      "enum": [
-        "AllProbedDown",
-        "AllProbedUp"
-      ],
-      "x-ms-enum": {
-        "name": "ProbeNoHealthyBackendsBehavior",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AllProbedDown",
-            "value": "AllProbedDown",
-            "description": "No new flows will be sent to the backend pool."
-          },
-          {
-            "name": "AllProbedUp",
-            "value": "AllProbedUp",
-            "description": "When all backend instances are probed down, incoming packets will be sent to all instances."
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.ProbeProtocol": {
-      "type": "string",
-      "description": "The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
-      "enum": [
-        "Http",
-        "Tcp",
-        "Https"
-      ],
-      "x-ms-enum": {
-        "name": "ProbeProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Http",
-            "value": "Http",
-            "description": "Http"
-          },
-          {
-            "name": "Tcp",
-            "value": "Tcp",
-            "description": "Tcp"
-          },
-          {
-            "name": "Https",
-            "value": "Https",
-            "description": "Https"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.ProvisioningState": {
-      "type": "string",
-      "description": "Provisioning states of a resource.",
-      "enum": [
-        "Failed",
-        "Succeeded",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Canceled"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Creating"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Deleting"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.PublicIPAddressMigrationPhase": {
-      "type": "string",
-      "description": "Migration phase of Public IP Address.",
-      "enum": [
-        "None",
-        "Prepare",
-        "Commit",
-        "Abort",
-        "Committed"
-      ],
-      "x-ms-enum": {
-        "name": "PublicIPAddressMigrationPhase",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "Prepare",
-            "value": "Prepare",
-            "description": "Prepare"
-          },
-          {
-            "name": "Commit",
-            "value": "Commit",
-            "description": "Commit"
-          },
-          {
-            "name": "Abort",
-            "value": "Abort",
-            "description": "Abort"
-          },
-          {
-            "name": "Committed",
-            "value": "Committed",
-            "description": "Committed"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.PublicIPAddressSkuName": {
-      "type": "string",
-      "description": "Name of a public IP address SKU.",
-      "enum": [
-        "Basic",
-        "Standard",
-        "StandardV2"
-      ],
-      "x-ms-enum": {
-        "name": "PublicIPAddressSkuName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Basic",
-            "value": "Basic",
-            "description": "Basic"
-          },
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard"
-          },
-          {
-            "name": "StandardV2",
-            "value": "StandardV2",
-            "description": "StandardV2"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.PublicIPAddressSkuTier": {
-      "type": "string",
-      "description": "Tier of a public IP address SKU.",
-      "enum": [
-        "Regional",
-        "Global"
-      ],
-      "x-ms-enum": {
-        "name": "PublicIPAddressSkuTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regional",
-            "value": "Regional",
-            "description": "Regional"
-          },
-          {
-            "name": "Global",
-            "value": "Global",
-            "description": "Global"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.PublicIpAddressDnsSettingsDomainNameLabelScope": {
-      "type": "string",
-      "description": "The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN.",
-      "enum": [
-        "TenantReuse",
-        "SubscriptionReuse",
-        "ResourceGroupReuse",
-        "NoReuse"
-      ],
-      "x-ms-enum": {
-        "name": "PublicIpAddressDnsSettingsDomainNameLabelScope",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "TenantReuse",
-            "value": "TenantReuse",
-            "description": "TenantReuse"
-          },
-          {
-            "name": "SubscriptionReuse",
-            "value": "SubscriptionReuse",
-            "description": "SubscriptionReuse"
-          },
-          {
-            "name": "ResourceGroupReuse",
-            "value": "ResourceGroupReuse",
-            "description": "ResourceGroupReuse"
-          },
-          {
-            "name": "NoReuse",
-            "value": "NoReuse",
-            "description": "NoReuse"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.Resource": {
-      "type": "object",
-      "description": "Common resource representation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "Microsoft.Common.ResourceIdentityType": {
-      "type": "string",
-      "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceIdentityType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "SystemAssigned"
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "UserAssigned"
-          },
-          {
-            "name": "SystemAssigned, UserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "SystemAssigned, UserAssigned"
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.RouteNextHopType": {
-      "type": "string",
-      "description": "The type of Azure hop the packet should be sent to.",
-      "enum": [
-        "VirtualNetworkGateway",
-        "VnetLocal",
-        "Internet",
-        "VirtualAppliance",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "RouteNextHopType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "VirtualNetworkGateway",
-            "value": "VirtualNetworkGateway",
-            "description": "VirtualNetworkGateway"
-          },
-          {
-            "name": "VnetLocal",
-            "value": "VnetLocal",
-            "description": "VnetLocal"
-          },
-          {
-            "name": "Internet",
-            "value": "Internet",
-            "description": "Internet"
-          },
-          {
-            "name": "VirtualAppliance",
-            "value": "VirtualAppliance",
-            "description": "VirtualAppliance"
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.SecurityRuleAccess": {
-      "type": "string",
-      "description": "Whether network traffic is allowed or denied.",
-      "enum": [
-        "Allow",
-        "Deny"
-      ],
-      "x-ms-enum": {
-        "name": "SecurityRuleAccess",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Allow",
-            "value": "Allow",
-            "description": "Allow"
-          },
-          {
-            "name": "Deny",
-            "value": "Deny",
-            "description": "Deny"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.SecurityRuleDirection": {
-      "type": "string",
-      "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.",
-      "enum": [
-        "Inbound",
-        "Outbound"
-      ],
-      "x-ms-enum": {
-        "name": "SecurityRuleDirection",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Inbound",
-            "value": "Inbound",
-            "description": "Inbound"
-          },
-          {
-            "name": "Outbound",
-            "value": "Outbound",
-            "description": "Outbound"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.SecurityRuleProtocol": {
-      "type": "string",
-      "description": "Network protocol this rule applies to.",
-      "enum": [
-        "Tcp",
-        "Udp",
-        "Icmp",
-        "Esp",
-        "*",
-        "Ah"
-      ],
-      "x-ms-enum": {
-        "name": "SecurityRuleProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Tcp",
-            "value": "Tcp",
-            "description": "Tcp"
-          },
-          {
-            "name": "Udp",
-            "value": "Udp",
-            "description": "Udp"
-          },
-          {
-            "name": "Icmp",
-            "value": "Icmp",
-            "description": "Icmp"
-          },
-          {
-            "name": "Esp",
-            "value": "Esp",
-            "description": "Esp"
-          },
-          {
-            "name": "Asterisk",
-            "value": "*",
-            "description": "*"
-          },
-          {
-            "name": "Ah",
-            "value": "Ah",
-            "description": "Ah"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.SharingScope": {
-      "type": "string",
-      "description": "Set this property to Tenant to allow sharing subnet with other subscriptions in your AAD tenant. This property can only be set if defaultOutboundAccess is set to false, both properties can only be set if subnet is empty.",
-      "enum": [
-        "Tenant",
-        "DelegatedServices"
-      ],
-      "x-ms-enum": {
-        "name": "SharingScope",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Tenant",
-            "value": "Tenant",
-            "description": "Tenant"
-          },
-          {
-            "name": "DelegatedServices",
-            "value": "DelegatedServices",
-            "description": "DelegatedServices"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.SubResource": {
-      "type": "object",
-      "description": "Reference to another subresource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        }
-      }
-    },
-    "Microsoft.Common.SubResourceModel": {
-      "type": "object",
-      "description": "Reference to another subresource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Microsoft.Common.SubResource"
-        }
-      ],
-      "x-ms-azure-resource": true
-    },
-    "Microsoft.Common.SyncMode": {
-      "type": "string",
-      "description": "Backend address synchronous mode for the backend pool",
-      "enum": [
-        "Automatic",
-        "Manual"
-      ],
-      "x-ms-enum": {
-        "name": "SyncMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Automatic",
-            "value": "Automatic",
-            "description": "Automatic"
-          },
-          {
-            "name": "Manual",
-            "value": "Manual",
-            "description": "Manual"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.TransportProtocol": {
-      "type": "string",
-      "description": "The transport protocol for the endpoint.",
-      "enum": [
-        "Udp",
-        "Tcp",
-        "All",
-        "Quic"
-      ],
-      "x-ms-enum": {
-        "name": "TransportProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Udp",
-            "value": "Udp",
-            "description": "Udp"
-          },
-          {
-            "name": "Tcp",
-            "value": "Tcp",
-            "description": "Tcp"
-          },
-          {
-            "name": "All",
-            "value": "All",
-            "description": "All"
-          },
-          {
-            "name": "Quic",
-            "value": "Quic",
-            "description": "Quic"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.VirtualNetworkEncryptionEnforcement": {
-      "type": "string",
-      "description": "If the encrypted VNet allows VM that does not support encryption. This field is for future support, AllowUnencrypted is the only supported value at general availability.",
-      "enum": [
-        "DropUnencrypted",
-        "AllowUnencrypted"
-      ],
-      "x-ms-enum": {
-        "name": "VirtualNetworkEncryptionEnforcement",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DropUnencrypted",
-            "value": "DropUnencrypted",
-            "description": "DropUnencrypted"
-          },
-          {
-            "name": "AllowUnencrypted",
-            "value": "AllowUnencrypted",
-            "description": "AllowUnencrypted"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.VirtualNetworkPeeringLevel": {
-      "type": "string",
-      "description": "The peering sync status of the virtual network peering.",
-      "enum": [
-        "FullyInSync",
-        "RemoteNotInSync",
-        "LocalNotInSync",
-        "LocalAndRemoteNotInSync"
-      ],
-      "x-ms-enum": {
-        "name": "VirtualNetworkPeeringLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FullyInSync",
-            "value": "FullyInSync",
-            "description": "FullyInSync"
-          },
-          {
-            "name": "RemoteNotInSync",
-            "value": "RemoteNotInSync",
-            "description": "RemoteNotInSync"
-          },
-          {
-            "name": "LocalNotInSync",
-            "value": "LocalNotInSync",
-            "description": "LocalNotInSync"
-          },
-          {
-            "name": "LocalAndRemoteNotInSync",
-            "value": "LocalAndRemoteNotInSync",
-            "description": "LocalAndRemoteNotInSync"
-          }
-        ]
-      }
-    },
-    "Microsoft.Common.VirtualNetworkPeeringState": {
-      "type": "string",
-      "description": "The status of the virtual network peering.",
-      "enum": [
-        "Initiated",
-        "Connected",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "VirtualNetworkPeeringState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Initiated",
-            "value": "Initiated",
-            "description": "Initiated"
-          },
-          {
-            "name": "Connected",
-            "value": "Connected",
-            "description": "Connected"
-          },
-          {
-            "name": "Disconnected",
-            "value": "Disconnected",
-            "description": "Disconnected"
-          }
-        ]
       }
     },
     "NetworkIntentPolicyBasedService": {

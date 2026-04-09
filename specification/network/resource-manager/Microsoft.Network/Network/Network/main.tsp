@@ -141,7 +141,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using Microsoft.Common;
+using Common;
 /**
  * APIs to manage web application firewall rules.
  */

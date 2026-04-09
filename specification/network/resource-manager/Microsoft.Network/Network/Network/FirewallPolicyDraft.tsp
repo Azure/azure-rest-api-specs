@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -24,7 +24,7 @@ namespace Microsoft.Network;
 @singleton("default")
 @parentResource(FirewallPolicy)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model FirewallPolicyDraft extends Microsoft.Common.Resource {
+model FirewallPolicyDraft extends Common.Resource {
   properties?: FirewallPolicyDraftProperties;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

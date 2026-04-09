@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Microsoft.Common;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -23,7 +23,7 @@ namespace Microsoft.Network;
 @subscriptionResource
 @summary("ExpressRoutePorts Peering Location")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRoutePortsLocation extends Microsoft.Common.Resource {
+model ExpressRoutePortsLocation extends Common.Resource {
   properties?: ExpressRoutePortsLocationPropertiesFormat;
 
   @visibility(Lifecycle.Read)
