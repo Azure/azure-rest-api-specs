@@ -35,6 +35,16 @@ using Microsoft.Chaos;
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(PrivateAccesses.privateLinkResources, "GetPrivateLinkResources");
 
+// Flatten properties for Action resources
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Action.properties,
+  "autorest"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ActionVersion.properties,
+  "autorest"
+);
+
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties,
