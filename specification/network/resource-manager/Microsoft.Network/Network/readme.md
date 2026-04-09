@@ -4616,10 +4616,6 @@ directive:
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Express Route Circuit APIs.
   - suppress: ParametersInPost
     from: virtualWan.json
-    where:
-      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverAllTestsDetails'].post
-      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/getCircuitLinkFailoverSingleTestDetails'].post
-      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{expressRouteCircuitName}/startCircuitLinkFailoverTest'].post
     reason: New ExpressRouteCircuits failover POST operations use query parameters following existing NRP patterns.
 ```
 
