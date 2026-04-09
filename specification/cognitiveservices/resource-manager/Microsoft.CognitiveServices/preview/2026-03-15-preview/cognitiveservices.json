@@ -2137,6 +2137,10 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -9924,18 +9928,6 @@
           "type": "string",
           "description": "Resource Etag.",
           "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
       "allOf": [
@@ -10004,6 +9996,7 @@
       "properties": {
         "model": {
           "type": "string",
+          "format": "uri",
           "description": "AzureML Registry model asset URI. Required on creation; immutable after creation.\nExample: azureml://registries/{registry}/models/{model}/versions/{version}",
           "x-ms-mutability": [
             "read",
@@ -10012,6 +10005,7 @@
         },
         "deploymentTemplate": {
           "type": "string",
+          "format": "uri",
           "description": "AzureML Registry deployment template URI. Required on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
           "x-ms-mutability": [
             "read",
@@ -10031,7 +10025,6 @@
           "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },

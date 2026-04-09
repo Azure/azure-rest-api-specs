@@ -5714,14 +5714,14 @@ model AcceleratorDeploymentProperties {
    * Example: azureml://registries/{registry}/models/{model}/versions/{version}
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  `model`?: string;
+  `model`?: url;
 
   /**
    * AzureML Registry deployment template URI. Required on creation.
    * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  deploymentTemplate?: string;
+  deploymentTemplate?: url;
 
   /**
    * Accelerator type (e.g., H100_80GB). Required on creation; immutable after creation.
@@ -5732,7 +5732,7 @@ model AcceleratorDeploymentProperties {
   /**
    * Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 
   /**

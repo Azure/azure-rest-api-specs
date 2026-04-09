@@ -40,14 +40,6 @@ model AcceleratorDeployment
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'AcceleratorDeployment' to support extensible key-value pairs matching service behavior"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
 }
 
 @added(Versions.v2026_03_15_preview)
@@ -70,6 +62,14 @@ interface AcceleratorDeployments {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AcceleratorDeployment,
+    LroHeaders = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    AcceleratorDeployment,
+    string
+  > &
+    Azure.Core.Foundations.RetryAfterHeader
+    &
+    ArmAsyncOperationHeader,
     PatchModel = PatchResourceTagsAndSku
   >;
 
@@ -79,6 +79,7 @@ interface AcceleratorDeployments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
     AcceleratorDeployment,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
