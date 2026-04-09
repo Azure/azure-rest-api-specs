@@ -403,11 +403,45 @@ interface SoftDeletedDatabaseAccounts {
   ): ArmResponse<SoftDeletedDatabaseAccountsListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
-   * Performs a soft delete action (restore or permanently delete) on a soft-deleted Azure Cosmos DB database account.
+   * Restores a soft-deleted Azure Cosmos DB database account.
    */
+  @sharedRoute
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}")
   @delete
-  delete(
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
+  @operationId("SoftDeletedDatabaseAccounts_Restore")
+  restore(
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
+    ...Azure.ResourceManager.LocationParameter,
+
+    /**
+     * Cosmos DB database account name.
+     */
+    @maxLength(50)
+    @minLength(3)
+    @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @path
+    accountName: string,
+
+    ...Azure.ResourceManager.ApiVersionParameter,
+
+    /**
+     * The kind of soft delete action to perform.
+     */
+    @query("softDeleteActionKind")
+    softDeleteActionKind?: SoftDeleteActionKind,
+  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+
+  /**
+   * Permanently deletes (purges) a soft-deleted Azure Cosmos DB database account.
+   */
+  @sharedRoute
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}")
+  @delete
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
+  @operationId("SoftDeletedDatabaseAccounts_Purge")
+  purge(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
     ...Azure.ResourceManager.LocationParameter,
@@ -493,11 +527,54 @@ interface SoftDeletedSqlDatabases {
   ): ArmResponse<SoftDeletedSqlDatabasesListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
-   * Performs a soft delete action (restore or permanently delete) on a soft-deleted Azure Cosmos DB SQL database.
+   * Restores a soft-deleted Azure Cosmos DB SQL database.
    */
+  @sharedRoute
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}")
   @delete
-  delete(
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
+  @operationId("SoftDeletedSqlDatabases_Restore")
+  restore(
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
+    ...Azure.ResourceManager.LocationParameter,
+
+    /**
+     * Cosmos DB database account name.
+     */
+    @maxLength(50)
+    @minLength(3)
+    @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @path
+    accountName: string,
+
+    /**
+     * Cosmos DB SQL database name.
+     */
+    @maxLength(255)
+    @minLength(1)
+    @pattern("^[^/\\\\#?]+$")
+    @path
+    databaseName: string,
+
+    ...Azure.ResourceManager.ApiVersionParameter,
+
+    /**
+     * The kind of soft delete action to perform.
+     */
+    @query("softDeleteActionKind")
+    softDeleteActionKind?: SoftDeleteActionKind,
+  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+
+  /**
+   * Permanently deletes a soft-deleted Azure Cosmos DB SQL database.
+   */
+  @sharedRoute
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}")
+  @delete
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
+  @operationId("SoftDeletedSqlDatabases_Purge")
+  purge(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
     ...Azure.ResourceManager.LocationParameter,
@@ -610,11 +687,63 @@ interface SoftDeletedSqlContainers {
   ): ArmResponse<SoftDeletedSqlContainersListResult> | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
   /**
-   * Performs a soft delete action (restore or permanently delete) on a soft-deleted Azure Cosmos DB SQL container.
+   * Restores a soft-deleted Azure Cosmos DB SQL container to active state.
    */
+  @sharedRoute
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}")
   @delete
-  delete(
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
+  @operationId("SoftDeletedSqlContainers_Restore")
+  restore(
+    ...Azure.ResourceManager.SubscriptionIdParameter,
+    ...Azure.ResourceManager.ResourceGroupParameter,
+    ...Azure.ResourceManager.LocationParameter,
+
+    /**
+     * Cosmos DB database account name.
+     */
+    @maxLength(50)
+    @minLength(3)
+    @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @path
+    accountName: string,
+
+    /**
+     * Cosmos DB SQL database name.
+     */
+    @maxLength(255)
+    @minLength(1)
+    @pattern("^[^/\\\\#?]+$")
+    @path
+    databaseName: string,
+
+    /**
+     * Cosmos DB SQL container name.
+     */
+    @maxLength(255)
+    @minLength(1)
+    @pattern("^[^/\\\\#?]+$")
+    @path
+    containerName: string,
+
+    ...Azure.ResourceManager.ApiVersionParameter,
+
+    /**
+     * The kind of soft delete action to perform.
+     */
+    @query("softDeleteActionKind")
+    softDeleteActionKind?: SoftDeleteActionKind,
+  ): ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | Azure.ResourceManager.CommonTypes.ErrorResponse;
+
+  /**
+   * Permanently deletes a soft-deleted Azure Cosmos DB SQL container.
+   */
+  @sharedRoute
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}")
+  @delete
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
+  @operationId("SoftDeletedSqlContainers_Purge")
+  purge(
     ...Azure.ResourceManager.SubscriptionIdParameter,
     ...Azure.ResourceManager.ResourceGroupParameter,
     ...Azure.ResourceManager.LocationParameter,
