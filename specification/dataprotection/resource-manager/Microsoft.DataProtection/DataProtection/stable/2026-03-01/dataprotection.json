@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Data Protection Client",
-    "version": "2025-09-01",
+    "version": "2026-03-01",
     "description": "Open API 2.0 Specs for Azure Data Protection service",
     "x-typespec-generated": [
       {
@@ -911,6 +911,12 @@
           },
           "Get BackupInstance for ADLS Blob": {
             "$ref": "./examples/BackupInstanceOperations/GetBackupInstance_ADLSBlobBackupDatasourceParameters.json"
+          },
+          "Get BackupInstance with ADLSBlobBackupAutoProtection": {
+            "$ref": "./examples/BackupInstanceOperations/GetBackupInstance_ADLSBlobBackupAutoProtection.json"
+          },
+          "Get BackupInstance with BlobBackupAutoProtection": {
+            "$ref": "./examples/BackupInstanceOperations/GetBackupInstance_BlobBackupAutoProtection.json"
           }
         }
       },
@@ -1012,8 +1018,14 @@
           "Create BackupInstance": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance.json"
           },
+          "Create BackupInstance With ADLSBlobBackupAutoProtection": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ADLSBlobBackupAutoProtection.json"
+          },
           "Create BackupInstance With ADLSBlobBackupDatasourceParameters": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ADLSBlobBackupDatasourceParameters.json"
+          },
+          "Create BackupInstance With BlobBackupAutoProtection": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_BlobBackupAutoProtection.json"
           },
           "Create BackupInstance With KubernetesClusterBackupDatasourceParameters": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_KubernetesClusterBackupDatasourceParameters.json"
@@ -4649,6 +4661,25 @@
       ],
       "x-ms-discriminator-value": "AdlsBlobBackupDatasourceParameters"
     },
+    "AdlsBlobBackupDatasourceParametersForAutoProtection": {
+      "type": "object",
+      "description": "Parameters to be used during configuration of backup of azure data lake storage account blobs using AutoProtection settings",
+      "properties": {
+        "autoProtectionSettings": {
+          "$ref": "#/definitions/BlobBackupRuleBasedAutoProtectionSettings",
+          "description": "AutoProtection settings"
+        }
+      },
+      "required": [
+        "autoProtectionSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "AdlsBlobBackupDatasourceParametersForAutoProtection"
+    },
     "AlertsState": {
       "type": "string",
       "enum": [
@@ -5552,10 +5583,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "storageSettings"
-      ]
+      }
     },
     "BackupVaultResource": {
       "type": "object",
@@ -5686,6 +5714,53 @@
         "objectType"
       ]
     },
+    "BlobBackupAutoProtectionRule": {
+      "type": "object",
+      "description": "Indicates a Blob Backup Auto Protection Rule.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "Type of the specific object - used for deserializing"
+        },
+        "mode": {
+          "$ref": "#/definitions/BlobBackupRuleMode",
+          "description": "Exclude removes candidates (after inclusion)"
+        },
+        "type": {
+          "$ref": "#/definitions/BlobBackupPatternType",
+          "description": "Pattern type: Prefix, only pattern type supported for now."
+        },
+        "pattern": {
+          "type": "string",
+          "description": "The string pattern to evaluate against container names. For now this accepts literal strings only (no wildcards or regex)."
+        }
+      },
+      "required": [
+        "objectType",
+        "mode",
+        "type",
+        "pattern"
+      ]
+    },
+    "BlobBackupAutoProtectionSettings": {
+      "type": "object",
+      "description": "The settings for Blob Backup Auto Protection.",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "Type of the specific object - used for deserializing"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Flag to enable whether auto protection."
+        }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType",
+        "enabled"
+      ]
+    },
     "BlobBackupDatasourceParameters": {
       "type": "object",
       "description": "Parameters to be used during configuration of backup of blobs",
@@ -5707,6 +5782,79 @@
         }
       ],
       "x-ms-discriminator-value": "BlobBackupDatasourceParameters"
+    },
+    "BlobBackupDatasourceParametersForAutoProtection": {
+      "type": "object",
+      "description": "Paramters to be used during configuration of backup of blobs using AutoProtection settings",
+      "properties": {
+        "autoProtectionSettings": {
+          "$ref": "#/definitions/BlobBackupRuleBasedAutoProtectionSettings",
+          "description": "AutoProtection settings"
+        }
+      },
+      "required": [
+        "autoProtectionSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "BlobBackupDatasourceParametersForAutoProtection"
+    },
+    "BlobBackupPatternType": {
+      "type": "string",
+      "description": "Pattern type. Only Prefix supported for now.",
+      "enum": [
+        "Prefix"
+      ],
+      "x-ms-enum": {
+        "name": "BlobBackupPatternType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Prefix",
+            "value": "Prefix"
+          }
+        ]
+      }
+    },
+    "BlobBackupRuleBasedAutoProtectionSettings": {
+      "type": "object",
+      "description": "Parameters to be used for Blob Backup Rule Based Auto Protection settings.",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Rules are evaluated in the order provided. Inclusion adds candidates; exclusion removes candidates.\nIf no rules are present, all containers are considered eligible when enabled = true.",
+          "items": {
+            "$ref": "#/definitions/BlobBackupAutoProtectionRule"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobBackupAutoProtectionSettings"
+        }
+      ],
+      "x-ms-discriminator-value": "BlobBackupRuleBasedAutoProtectionSettings"
+    },
+    "BlobBackupRuleMode": {
+      "type": "string",
+      "description": "Rule mode (Only Exclude supported for now).",
+      "enum": [
+        "Exclude"
+      ],
+      "x-ms-enum": {
+        "name": "BlobBackupRuleMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Exclude",
+            "value": "Exclude"
+          }
+        ]
+      }
     },
     "CheckNameAvailabilityRequest": {
       "type": "object",
@@ -6399,7 +6547,6 @@
         }
       },
       "required": [
-        "storageSettings",
         "originalBackupVaultId",
         "originalBackupVaultName",
         "originalBackupVaultResourcePath",
