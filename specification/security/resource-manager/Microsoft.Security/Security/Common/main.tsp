@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.Security;
+namespace Microsoft.Common;
 /**
  * The error detail.
  */
