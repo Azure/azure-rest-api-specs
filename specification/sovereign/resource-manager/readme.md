@@ -87,7 +87,7 @@ suppressions:
     reason: This location is that of the ARM resource for which we are reporting compliance. We are not responsible for the location of this resource.
   - code: GuidUsage
     from: sovereign.json
-    where: $.definitions.SovereignViewScope.properties.subscriptions
+    where: $.definitions.SovereignViewScope.properties.subscriptions.items
     reason: Subscription Ids are uuids.
 ```
 ---
