@@ -117,6 +117,12 @@ model JobTaskDetail {
   @doc("List of sub-tasks associated with this job.")
   @visibility(Lifecycle.Read)
   subTasksList?: JobTaskDetail[];
+
+  @added(Versions.v2026_03_01_preview)
+  @identifiers(#[])
+  @doc("Retry details of the task.")
+  @visibility(Lifecycle.Read)
+  retryDetails?: JobRetryDetails[];
 }
 
 @doc("Additional information for job.")
