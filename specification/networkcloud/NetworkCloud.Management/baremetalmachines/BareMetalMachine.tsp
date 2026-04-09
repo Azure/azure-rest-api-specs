@@ -7,6 +7,7 @@ import "./BareMetalMachine_models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 /**
@@ -123,10 +124,26 @@ interface BareMetalMachines {
     OptionalRequestBody = true
   >;
 
+  // Note: added optional body with 2026-05-01-preview to support safeguard mode parameter.
   /**
    * Reimage the provided bare metal machine.
    */
-  reimage is ActionAsync<BareMetalMachine, void, OperationStatusResult>;
+  @renamedFrom(Versions.v2026_05_01_preview, "reimage")
+  @removed(Versions.v2026_05_01_preview)
+  @sharedRoute
+  reimageOld is ActionAsync<BareMetalMachine, void, OperationStatusResult>;
+
+  /**
+   * Reimage the provided bare metal machine.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @sharedRoute
+  reimage is ActionAsync<
+    BareMetalMachine,
+    BareMetalMachineReimageParameters,
+    OperationStatusResult,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Replace the provided bare metal machine.

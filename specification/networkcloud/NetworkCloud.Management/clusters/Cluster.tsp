@@ -142,6 +142,16 @@ interface Clusters {
   >;
 
   /**
+   * Rotate the specified cluster credential.
+   */
+  @added(Versions.v2026_05_01_preview)
+  rotateCredential is ActionAsync<
+    Cluster,
+    ClusterRotateCredentialParameters,
+    OperationStatusResult
+  >;
+
+  /**
    * Triggers the execution of a runtime protection scan to detect and remediate detected issues, in accordance with the cluster configuration.
    */
   scanRuntime is ActionAsync<

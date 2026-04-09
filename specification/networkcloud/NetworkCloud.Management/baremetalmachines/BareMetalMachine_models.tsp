@@ -97,6 +97,42 @@ union BareMetalMachineHardwareValidationResult {
 }
 
 /**
+ * The log level for the monitoring configuration status of the bare metal machine.
+ */
+@added(Versions.v2026_05_01_preview)
+union BareMetalMachineMetricsConfigurationStatusLogLevel {
+  string,
+
+  /**
+   * Logs are emitted at the default log level.
+   */
+  Default: "Default",
+
+  /**
+   * Logs are emitted at the Nexus log level.
+   */
+  Nexus: "Nexus",
+}
+
+/**
+ * The metrics level for the monitoring configuration status of the bare metal machine.
+ */
+@added(Versions.v2026_05_01_preview)
+union BareMetalMachineMetricsConfigurationStatusMetricsLevel {
+  string,
+
+  /**
+   * Metrics are emitted at the default metrics level.
+   */
+  Default: "Default",
+
+  /**
+   * Metrics are emitted at the Nexus metrics level.
+   */
+  Nexus: "Nexus",
+}
+
+/**
  * The power state derived from the baseboard management controller.
  */
 union BareMetalMachinePowerState {
@@ -160,6 +196,23 @@ union BareMetalMachineReadyState {
    * The bare metal machine is not ready to receive workloads.
    */
   False: "False",
+}
+
+/**
+ * The safeguard mode to use for the reimage action, where None indicates to bypass safeguards and All indicates to utilize all safeguards.
+ */
+union BareMetalMachineReimageSafeguardMode {
+  string,
+
+  /**
+   * Run all pre‑operation validation checks before performing the reimage. If any check fails, the request is rejected and no changes are made.
+   */
+  All: "All",
+
+  /**
+   * Skip all safeguards and perform the reimage without running pre‑operation validation checks.
+   */
+  None: "None",
 }
 
 /**
@@ -549,6 +602,13 @@ model BareMetalMachineStatus {
   machineRoles?: string[];
 
   /**
+   * The monitoring configuration status of the bare metal machine.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  monitoringConfigurationStatus?: BareMetalMachineMonitoringConfigurationStatus;
+
+  /**
    * The IPv4 address that is assigned to the bare metal machine during the cluster deployment.
    */
   @visibility(Lifecycle.Read)
@@ -602,6 +662,32 @@ model BareMetalMachineStatus {
    */
   @visibility(Lifecycle.Read)
   virtualMachinesAssociatedIds?: string[];
+}
+
+/**
+ * BareMetalMachineMonitoringConfigurationStatus represents the monitoring configuration status of the bare metal machine.
+ */
+@added(Versions.v2026_05_01_preview)
+model BareMetalMachineMonitoringConfigurationStatus {
+  /**
+   * The log level for the monitoring configuration status of the bare metal machine.
+   */
+  logLevel?: BareMetalMachineMetricsConfigurationStatusLogLevel;
+
+  /**
+   * The metrics level for the monitoring configuration status of the bare metal machine.
+   */
+  metricsLevel?: BareMetalMachineMetricsConfigurationStatusMetricsLevel;
+}
+
+/**
+ * BareMetalMachineReimageParameters represents the body of the request to reimage a bare metal machine.
+ */
+model BareMetalMachineReimageParameters {
+  /**
+   * The safeguard mode to use for the reimage action, where None indicates to bypass safeguards and All indicates to utilize all safeguards. If not specified, the default is All.
+   */
+  safeguardMode?: BareMetalMachineReimageSafeguardMode;
 }
 
 /**
