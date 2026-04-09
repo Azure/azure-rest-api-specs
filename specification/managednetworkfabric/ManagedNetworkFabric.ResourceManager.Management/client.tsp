@@ -66,16 +66,3 @@ using Microsoft.ManagedNetworkFabric;
   "peerAsn",
   "java"
 );
-
-@@clientName(Microsoft.ManagedNetworkFabric.BgpConfiguration,
-  "InternalNetworkPropertiesBgpConfiguration",
-  "javascript"
-);
-@@clientName(Microsoft.ManagedNetworkFabric.StaticRoutePatchConfiguration,
-  "InternalNetworkPropertiesStaticRouteConfiguration ",
-  "javascript"
-);
-@@clientName(Microsoft.ManagedNetworkFabric.PollingIntervalInSeconds.OneTwenty,
-  "OneHundredTwenty",
-  "javascript"
-);
