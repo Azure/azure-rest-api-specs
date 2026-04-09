@@ -4,6 +4,7 @@ import "../Common/main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 using Microsoft.Network;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NetworkSecurityGroup.properties);
@@ -73,6 +74,14 @@ using Microsoft.Network;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FrontendIPConfiguration.properties);
+
+@@removed(DdosSettings.ddosCustomPolicy,
+  Microsoft.Compute.Versions.v2018_10_01
+);
+
+@@removed(DdosCustomPolicyPropertiesFormat.publicIPAddresses,
+  Microsoft.Compute.Versions.v2018_10_01
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ApplicationGatewayBackendAddressPool.properties);
