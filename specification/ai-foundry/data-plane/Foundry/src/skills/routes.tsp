@@ -30,7 +30,7 @@ interface Skills {
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
   createSkillFromPackage is FoundryDataPlaneOperation<
     CreateSkillFromPackageRequest & SkillsPreviewHeader,
-    ResourceCreatedResponse<SkillObject>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<SkillObject>
   >;
 
   /**
