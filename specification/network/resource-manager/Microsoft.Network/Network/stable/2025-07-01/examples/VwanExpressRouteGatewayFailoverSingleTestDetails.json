@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-07-01",
-    "subscriptionId": "subid",
+    "subscriptionId": "d2ad5196-2292-4080-b209-ce4399b0a807",
     "resourceGroupName": "rg1",
     "expressRouteGatewayName": "ergw",
     "peeringLocation": "Vancouver",
@@ -14,38 +14,40 @@
       }
     },
     "200": {
-      "body": [
-        {
-          "peeringLocation": "Hong Kong",
-          "startTime": "2026-02-11T07:37:04",
-          "endTime": "2026-02-11T08:41:50",
-          "status": "Completed",
-          "attestation": false,
-          "redundantRoutes": [
-            {
-              "peeringLocations": [
-                "Atlanta",
-                "Silicon Valley"
-              ],
-              "routes": [
-                "10.0.0.0/24"
-              ]
-            }
-          ],
-          "nonRedundantRoutes": [
-            "10.10.0.0/16",
-            "10.11.0.0/24"
-          ],
-          "wasSimulationSuccessful": true,
-          "failoverConnectionDetails": [
-            {
-              "failoverConnectionName": "ExRConnection-eastus-1770632063039",
-              "failoverLocation": "Hong Kong2",
-              "isVerified": true
-            }
-          ]
-        }
-      ]
+      "body": {
+        "value": [
+          {
+            "peeringLocation": "Hong Kong",
+            "startTime": "2026-02-11T07:37:04",
+            "endTime": "2026-02-11T08:41:50",
+            "status": "Completed",
+            "attestation": false,
+            "redundantRoutes": [
+              {
+                "peeringLocations": [
+                  "Atlanta",
+                  "Silicon Valley"
+                ],
+                "routes": [
+                  "10.0.0.0/24"
+                ]
+              }
+            ],
+            "nonRedundantRoutes": [
+              "10.10.0.0/16",
+              "10.11.0.0/24"
+            ],
+            "wasSimulationSuccessful": true,
+            "failoverConnectionDetails": [
+              {
+                "failoverConnectionName": "ExRConnection-eastus-1770632063039",
+                "failoverLocation": "Hong Kong2",
+                "isVerified": true
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 }
