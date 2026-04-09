@@ -1,0 +1,50 @@
+{
+  "title": "GoalAssignments_RecommendCapacity_MaximumSet",
+  "operationId": "GoalAssignments_RecommendCapacity",
+  "parameters": {
+    "serviceGroupName": "sg1",
+    "api-version": "2026-03-01-preview",
+    "goalAssignmentName": "ga1",
+    "body": {
+      "resourceIds": [
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1",
+        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm2"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceCapacities": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1",
+            "resourceType": "Microsoft.Compute/virtualMachines",
+            "skuName": "Standard_D4s_v3",
+            "location": "eastus",
+            "capacityAssessment": "This VM uses Standard_D4s_v3 which is adequate for general-purpose workloads. Consider upgrading to D8s_v3 for compute-intensive scenarios. Deploy across availability zones for higher resiliency."
+          },
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm2",
+            "resourceType": "Microsoft.Compute/virtualMachines",
+            "skuName": "Standard_B2s",
+            "location": "eastus",
+            "capacityAssessment": "This VM uses a burstable B-series SKU with limited baseline performance. For production resiliency workloads, consider migrating to D-series or E-series for consistent performance."
+          }
+        ],
+        "recommendations": [
+          "Consider right-sizing vm1 to Standard_D8s_v3 for improved compute headroom.",
+          "Migrate vm2 from burstable B-series to dedicated D-series for consistent performance.",
+          "Deploy VMs across availability zones for higher resiliency.",
+          "Enable zone-redundant storage (ZRS) for OS and data disks."
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/sg1/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/12345678-1234-1234-1234-123456789012",
+        "Location": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/sg1/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1",
+        "Retry-After": 30
+      }
+    }
+  }
+}
