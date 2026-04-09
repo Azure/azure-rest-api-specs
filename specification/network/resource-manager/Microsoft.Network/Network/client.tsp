@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 using Azure.Core;
 using Microsoft.Network;
 using Microsoft.Compute;
-using Microsoft.Common;
+using Common;
 @client({
   name: "CombineClient",
   service: [Microsoft.Network, Microsoft.Compute],
@@ -65,10 +65,7 @@ namespace CombineClient;
 @@clientName(Microsoft.Network.QosIpRange.startIP, "startIp", "java");
 @@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
 // Mitigate ProvisioningState split: create unified union with all values
-@@clientName(Microsoft.Common.ProvisioningState,
-  "CommonProvisioningState",
-  "java"
-);
+@@clientName(Common.ProvisioningState, "CommonProvisioningState", "java");
 
 // Fix definition error on required property. Only "matchVariable" property is required.
 @@alternateType(ApplicationGatewayFirewallExclusion,
@@ -126,7 +123,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.provisioningState,
+@@alternateType(Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -158,7 +155,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ApplicationGatewayIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(Common.ApplicationGatewayIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -226,7 +223,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ApplicationSecurityGroupPropertiesFormat.provisioningState,
+@@alternateType(Common.ApplicationSecurityGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -258,7 +255,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.BackendAddressPoolPropertiesFormat.provisioningState,
+@@alternateType(Common.BackendAddressPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -378,11 +375,11 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.FlowLogPropertiesFormat.provisioningState,
+@@alternateType(Common.FlowLogPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.FrontendIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(Common.FrontendIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -398,11 +395,11 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.InboundNatPoolPropertiesFormat.provisioningState,
+@@alternateType(Common.InboundNatPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.InboundNatRulePropertiesFormat.provisioningState,
+@@alternateType(Common.InboundNatRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -414,11 +411,11 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.IPConfigurationProfilePropertiesFormat.provisioningState,
+@@alternateType(Common.IPConfigurationProfilePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.IPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(Common.IPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -426,11 +423,11 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.LoadBalancerPropertiesFormat.provisioningState,
+@@alternateType(Common.LoadBalancerPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.LoadBalancingRulePropertiesFormat.provisioningState,
+@@alternateType(Common.LoadBalancingRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -438,7 +435,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.NatGatewayPropertiesFormat.provisioningState,
+@@alternateType(Common.NatGatewayPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -446,15 +443,15 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat.provisioningState,
+@@alternateType(Common.NetworkInterfaceIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.NetworkInterfacePropertiesFormat.provisioningState,
+@@alternateType(Common.NetworkInterfacePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.NetworkInterfaceTapConfigurationPropertiesFormat.provisioningState,
+@@alternateType(Common.NetworkInterfaceTapConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -470,7 +467,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.NetworkSecurityGroupPropertiesFormat.provisioningState,
+@@alternateType(Common.NetworkSecurityGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -482,11 +479,11 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.NetworkWatcherPropertiesFormat.provisioningState,
+@@alternateType(Common.NetworkWatcherPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.OutboundRulePropertiesFormat.provisioningState,
+@@alternateType(Common.OutboundRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -510,31 +507,31 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.PrivateEndpointConnectionProperties.provisioningState,
+@@alternateType(Common.PrivateEndpointConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.PrivateEndpointProperties.provisioningState,
+@@alternateType(Common.PrivateEndpointProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.PrivateLinkServiceConnectionProperties.provisioningState,
+@@alternateType(Common.PrivateLinkServiceConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.PrivateLinkServiceIpConfigurationProperties.provisioningState,
+@@alternateType(Common.PrivateLinkServiceIpConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.PrivateLinkServiceProperties.provisioningState,
+@@alternateType(Common.PrivateLinkServiceProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ProbePropertiesFormat.provisioningState,
+@@alternateType(Common.ProbePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.PublicIPAddressPropertiesFormat.provisioningState,
+@@alternateType(Common.PublicIPAddressPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -554,7 +551,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ResourceNavigationLinkFormat.provisioningState,
+@@alternateType(Common.ResourceNavigationLinkFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -570,11 +567,11 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.RoutePropertiesFormat.provisioningState,
+@@alternateType(Common.RoutePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.RouteTablePropertiesFormat.provisioningState,
+@@alternateType(Common.RouteTablePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -598,7 +595,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.SecurityRulePropertiesFormat.provisioningState,
+@@alternateType(Common.SecurityRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -614,23 +611,23 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ServiceAssociationLinkPropertiesFormat.provisioningState,
+@@alternateType(Common.ServiceAssociationLinkPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ServiceDelegationPropertiesFormat.provisioningState,
+@@alternateType(Common.ServiceDelegationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ServiceEndpointPolicyDefinitionPropertiesFormat.provisioningState,
+@@alternateType(Common.ServiceEndpointPolicyDefinitionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ServiceEndpointPolicyPropertiesFormat.provisioningState,
+@@alternateType(Common.ServiceEndpointPolicyPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.ServiceEndpointPropertiesFormat.provisioningState,
+@@alternateType(Common.ServiceEndpointPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -650,7 +647,7 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.SubnetPropertiesFormat.provisioningState,
+@@alternateType(Common.SubnetPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -702,15 +699,15 @@ union ProvisioningStateUnion {
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.VirtualNetworkPeeringPropertiesFormat.provisioningState,
+@@alternateType(Common.VirtualNetworkPeeringPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.VirtualNetworkPropertiesFormat.provisioningState,
+@@alternateType(Common.VirtualNetworkPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
-@@alternateType(Microsoft.Common.VirtualNetworkTapPropertiesFormat.provisioningState,
+@@alternateType(Common.VirtualNetworkTapPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -774,18 +771,12 @@ union ProvisioningStateUnion {
 @@clientName(Microsoft.Network.ErrorResponse, "NetworkErrorResponse", "java");
 
 // IP → Ip naming mitigations for backward compatibility with hand-written wrapper code
-@@clientName(Microsoft.Common.PublicIPAddress, "PublicIpAddress", "java");
+@@clientName(Common.PublicIPAddress, "PublicIpAddress", "java");
 @@clientName(Microsoft.Network.PublicIPPrefix, "PublicIpPrefix", "java");
-@@clientName(Microsoft.Common.FrontendIPConfiguration,
-  "FrontendIpConfiguration",
-  "java"
-);
-@@clientName(Microsoft.Common.IPConfiguration, "IpConfiguration", "java");
-@@clientName(Microsoft.Common.IPConfigurationProfile,
-  "IpConfigurationProfile",
-  "java"
-);
-@@clientName(Microsoft.Common.NetworkInterfaceIPConfiguration,
+@@clientName(Common.FrontendIPConfiguration, "FrontendIpConfiguration", "java");
+@@clientName(Common.IPConfiguration, "IpConfiguration", "java");
+@@clientName(Common.IPConfigurationProfile, "IpConfigurationProfile", "java");
+@@clientName(Common.NetworkInterfaceIPConfiguration,
   "NetworkInterfaceIpConfiguration",
   "java"
 );
@@ -805,7 +796,7 @@ union ProvisioningStateUnion {
   "VirtualNetworkGatewayIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.ApplicationGatewayIPConfiguration,
+@@clientName(Common.ApplicationGatewayIPConfiguration,
   "ApplicationGatewayIpConfiguration",
   "java"
 );
@@ -813,15 +804,12 @@ union ProvisioningStateUnion {
   "ApplicationGatewayFrontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.IPAllocationMethod, "IpAllocationMethod", "java");
-@@clientName(Microsoft.Common.IPVersion, "IpVersion", "java");
-@@clientName(Microsoft.Common.PublicIPAddressSku, "PublicIpAddressSku", "java");
-@@clientName(Microsoft.Common.PublicIPAddressSkuName,
-  "PublicIpAddressSkuName",
-  "java"
-);
+@@clientName(Common.IPAllocationMethod, "IpAllocationMethod", "java");
+@@clientName(Common.IPVersion, "IpVersion", "java");
+@@clientName(Common.PublicIPAddressSku, "PublicIpAddressSku", "java");
+@@clientName(Common.PublicIPAddressSkuName, "PublicIpAddressSkuName", "java");
 @@clientName(Microsoft.Network.PublicIPPrefixSku, "PublicIpPrefixSku", "java");
-@@clientName(Microsoft.Common.PublicIPAddressDnsSettings,
+@@clientName(Common.PublicIPAddressDnsSettings,
   "PublicIpAddressDnsSettings",
   "java"
 );
@@ -835,71 +823,71 @@ union ProvisioningStateUnion {
 );
 
 // Property-level IP → Ip renames on PropertiesFormat models (Common)
-@@clientName(Microsoft.Common.IPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(Common.IPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.IPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(Common.IPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.FrontendIPConfigurationPropertiesFormat.privateIPAddress,
+@@clientName(Common.FrontendIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.FrontendIPConfigurationPropertiesFormat.publicIPAddress,
+@@clientName(Common.FrontendIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.backendIPConfigurations,
+@@clientName(Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.backendIPConfigurations,
   "backendIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Common.BackendAddressPoolPropertiesFormat.backendIPConfigurations,
+@@clientName(Common.BackendAddressPoolPropertiesFormat.backendIPConfigurations,
   "backendIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Common.InboundNatRulePropertiesFormat.frontendIPConfiguration,
+@@clientName(Common.InboundNatRulePropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.InboundNatPoolPropertiesFormat.frontendIPConfiguration,
+@@clientName(Common.InboundNatPoolPropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.LoadBalancingRulePropertiesFormat.frontendIPConfiguration,
+@@clientName(Common.LoadBalancingRulePropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.OutboundRulePropertiesFormat.frontendIPConfigurations,
+@@clientName(Common.OutboundRulePropertiesFormat.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Common.LoadBalancerPropertiesFormat.frontendIPConfigurations,
+@@clientName(Common.LoadBalancerPropertiesFormat.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateEndpointIPConfigurationProperties.privateIPAddress,
+@@clientName(Common.PrivateEndpointIPConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddress,
+@@clientName(Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateLinkServiceProperties.destinationIPAddress,
+@@clientName(Common.PrivateLinkServiceProperties.destinationIPAddress,
   "destinationIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.ApplicationGatewayIPConfigurationPropertiesFormat.subnet,
+@@clientName(Common.ApplicationGatewayIPConfigurationPropertiesFormat.subnet,
   "subnet",
   "java"
 );
@@ -993,11 +981,11 @@ union ProvisioningStateUnion {
   "publicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.PublicIPAddressPropertiesFormat.servicePublicIPAddress,
+@@clientName(Common.PublicIPAddressPropertiesFormat.servicePublicIPAddress,
   "servicePublicIpAddress",
   "java"
 );
-@@clientName(Microsoft.Common.PublicIPAddressPropertiesFormat.linkedPublicIPAddress,
+@@clientName(Common.PublicIPAddressPropertiesFormat.linkedPublicIPAddress,
   "linkedPublicIpAddress",
   "java"
 );
@@ -1069,59 +1057,59 @@ union ProvisioningStateUnion {
 );
 
 // More property-level IP → Ip renames
-@@clientName(Microsoft.Common.NetworkInterfacePropertiesFormat.enableIPForwarding,
+@@clientName(Common.NetworkInterfacePropertiesFormat.enableIPForwarding,
   "enableIpForwarding",
   "java"
 );
-@@clientName(Microsoft.Common.InboundNatRulePropertiesFormat.enableFloatingIP,
+@@clientName(Common.InboundNatRulePropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
-@@clientName(Microsoft.Common.InboundNatRulePropertiesFormat.backendIPConfiguration,
+@@clientName(Common.InboundNatRulePropertiesFormat.backendIPConfiguration,
   "backendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.LoadBalancingRulePropertiesFormat.enableFloatingIP,
+@@clientName(Common.LoadBalancingRulePropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
-@@clientName(Microsoft.Common.InboundNatPoolPropertiesFormat.enableFloatingIP,
+@@clientName(Common.InboundNatPoolPropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
-@@clientName(Microsoft.Common.IPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(Common.IPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Common.PublicIPAddressPropertiesFormat.publicIPAllocationMethod,
+@@clientName(Common.PublicIPAddressPropertiesFormat.publicIPAllocationMethod,
   "publicIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Common.PublicIPAddressPropertiesFormat.publicIPAddressVersion,
+@@clientName(Common.PublicIPAddressPropertiesFormat.publicIPAddressVersion,
   "publicIpAddressVersion",
   "java"
 );
-@@clientName(Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddressVersion,
+@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
-@@clientName(Microsoft.Common.FrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+@@clientName(Common.FrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Common.FrontendIPConfigurationPropertiesFormat.privateIPAddressVersion,
+@@clientName(Common.FrontendIPConfigurationPropertiesFormat.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateLinkServiceIpConfigurationProperties.privateIPAllocationMethod,
+@@clientName(Common.PrivateLinkServiceIpConfigurationProperties.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddressVersion,
+@@clientName(Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
@@ -1511,7 +1499,7 @@ op replaceAvailableResourceGroupDelegationsOperationGroupList(
 
   @body
   body: void,
-): Microsoft.Network.AvailableDelegationsResult | Microsoft.Common.CloudError;
+): Microsoft.Network.AvailableDelegationsResult | Common.CloudError;
 
 @@override(AvailableResourceGroupDelegationsOperationGroup.list,
   replaceAvailableResourceGroupDelegationsOperationGroupList,
@@ -1541,7 +1529,7 @@ op replaceprivateDnsZoneGroupsList(
 
   @body
   body: void,
-): Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult> | Microsoft.Common.CloudError;
+): Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult> | Common.CloudError;
 
 @@override(Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
   replaceprivateDnsZoneGroupsList,
@@ -1568,11 +1556,11 @@ op replaceprivateDnsZoneGroupsList(
   "AzureFirewallIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateEndpointIPConfiguration,
+@@clientName(Common.PrivateEndpointIPConfiguration,
   "PrivateEndpointIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateEndpointIPVersionType,
+@@clientName(Common.PrivateEndpointIPVersionType,
   "PrivateEndpointIpVersionType",
   "java"
 );
@@ -1580,7 +1568,7 @@ op replaceprivateDnsZoneGroupsList(
   "LoadBalancerVipSwapRequestFrontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
+@@clientName(Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
   "NetworkInterfaceIpConfigurationPrivateLinkConnectionProperties",
   "java"
 );
@@ -1596,14 +1584,11 @@ op replaceprivateDnsZoneGroupsList(
   "PreferredIpVersion",
   "java"
 );
-@@clientName(Microsoft.Common.PublicIPAddressMigrationPhase,
+@@clientName(Common.PublicIPAddressMigrationPhase,
   "PublicIpAddressMigrationPhase",
   "java"
 );
-@@clientName(Microsoft.Common.PublicIPAddressSkuTier,
-  "PublicIpAddressSkuTier",
-  "java"
-);
+@@clientName(Common.PublicIPAddressSkuTier, "PublicIpAddressSkuTier", "java");
 @@clientName(Microsoft.Network.PublicIPPrefixSkuName,
   "PublicIpPrefixSkuName",
   "java"
@@ -1679,11 +1664,11 @@ op replaceprivateDnsZoneGroupsList(
   "preferredIpVersion",
   "java"
 );
-@@clientName(Microsoft.Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
+@@clientName(Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
   "loadBalancerFrontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.LoadBalancerBackendAddressPropertiesFormat.networkInterfaceIPConfiguration,
+@@clientName(Common.LoadBalancerBackendAddressPropertiesFormat.networkInterfaceIPConfiguration,
   "networkInterfaceIpConfiguration",
   "java"
 );
@@ -1696,7 +1681,7 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 // Fluent model renames (IP→Ip, JWT→Jwt, LOA→Loa)
-@@clientName(Microsoft.Common.ApplicationGatewayIPConfigurationPropertiesFormat,
+@@clientName(Common.ApplicationGatewayIPConfigurationPropertiesFormat,
   "ApplicationGatewayIpConfigurationPropertiesFormat",
   "java"
 );
@@ -1712,7 +1697,7 @@ op replaceprivateDnsZoneGroupsList(
   "BastionHostIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Common.FrontendIPConfigurationPropertiesFormat,
+@@clientName(Common.FrontendIPConfigurationPropertiesFormat,
   "FrontendIpConfigurationPropertiesFormat",
   "java"
 );
@@ -1720,11 +1705,11 @@ op replaceprivateDnsZoneGroupsList(
   "HubIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Common.IPConfigurationProfilePropertiesFormat,
+@@clientName(Common.IPConfigurationProfilePropertiesFormat,
   "IpConfigurationProfilePropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Common.IPConfigurationPropertiesFormat,
+@@clientName(Common.IPConfigurationPropertiesFormat,
   "IpConfigurationPropertiesFormat",
   "java"
 );
@@ -1733,15 +1718,15 @@ op replaceprivateDnsZoneGroupsList(
   "LoadBalancerVipSwapRequestFrontendIpConfigurationProperties",
   "java"
 );
-@@clientName(Microsoft.Common.NetworkInterfaceIPConfigurationPropertiesFormat,
+@@clientName(Common.NetworkInterfaceIPConfigurationPropertiesFormat,
   "NetworkInterfaceIpConfigurationPropertiesFormat",
   "java"
 );
-@@clientName(Microsoft.Common.PrivateEndpointIPConfigurationProperties,
+@@clientName(Common.PrivateEndpointIPConfigurationProperties,
   "PrivateEndpointIpConfigurationProperties",
   "java"
 );
-@@clientName(Microsoft.Common.PublicIPAddressPropertiesFormat,
+@@clientName(Common.PublicIPAddressPropertiesFormat,
   "PublicIpAddressPropertiesFormat",
   "java"
 );
