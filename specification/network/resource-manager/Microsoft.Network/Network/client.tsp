@@ -813,15 +813,9 @@ union ProvisioningStateUnion {
   "ApplicationGatewayFrontendIpConfiguration",
   "java"
 );
-@@clientName(Microsoft.Common.IPAllocationMethod,
-  "IpAllocationMethod",
-  "java"
-);
+@@clientName(Microsoft.Common.IPAllocationMethod, "IpAllocationMethod", "java");
 @@clientName(Microsoft.Common.IPVersion, "IpVersion", "java");
-@@clientName(Microsoft.Common.PublicIPAddressSku,
-  "PublicIpAddressSku",
-  "java"
-);
+@@clientName(Microsoft.Common.PublicIPAddressSku, "PublicIpAddressSku", "java");
 @@clientName(Microsoft.Common.PublicIPAddressSkuName,
   "PublicIpAddressSkuName",
   "java"

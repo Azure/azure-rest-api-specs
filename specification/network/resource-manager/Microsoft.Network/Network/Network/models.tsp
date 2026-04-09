@@ -20246,7 +20246,8 @@ model VirtualNetworkGatewayListConnectionsResult
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-model VirtualNetworkGatewayConnectionListEntity extends Microsoft.Common.Resource {
+model VirtualNetworkGatewayConnectionListEntity
+  extends Microsoft.Common.Resource {
   /**
    * Properties of the virtual network gateway connection.
    */
