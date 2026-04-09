@@ -2279,7 +2279,14 @@ model AzureBackupRehydrationRequest {
 /**
  * Request body of Resume protection when MSI is to be changed
  */
+@discriminator("objectType")
 model ResumeProtectionRequest {
+  /**
+   * Type of Datasource object, used to initialize the right inherited type
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: string;
+
   /**
    * identity details of the MSI
    */

@@ -8541,7 +8541,8 @@
       "description": "Request body of Resume protection when MSI is to be changed",
       "properties": {
         "objectType": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of Datasource object, used to initialize the right inherited type"
         },
         "identityDetails": {
           "$ref": "#/definitions/IdentityDetails",
@@ -8550,8 +8551,7 @@
       },
       "discriminator": "objectType",
       "required": [
-        "objectType",
-        "identityDetails"
+        "objectType"
       ]
     },
     "RetentionTag": {
