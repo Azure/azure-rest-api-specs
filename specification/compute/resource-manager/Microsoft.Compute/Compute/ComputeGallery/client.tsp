@@ -128,3 +128,11 @@ using ComputeGallery;
 @@clientName(PirResource, "PirResourceData", "csharp");
 @@clientName(PirSharedGalleryResource, "PirSharedGalleryResourceData", "csharp");
 @@clientName(PirCommunityGalleryResource, "PirCommunityGalleryResourceData", "csharp");
+
+// Rename gallery models to *Data for backward compatibility (they were ARM resources before)
+@@clientName(SharedGallery, "SharedGalleryData", "csharp");
+@@clientName(SharedGalleryImage, "SharedGalleryImageData", "csharp");
+@@clientName(SharedGalleryImageVersion, "SharedGalleryImageVersionData", "csharp");
+@@clientName(CommunityGallery, "CommunityGalleryData", "csharp");
+@@clientName(CommunityGalleryImage, "CommunityGalleryImageData", "csharp");
+@@clientName(CommunityGalleryImageVersion, "CommunityGalleryImageVersionData", "csharp");
