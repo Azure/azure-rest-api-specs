@@ -1935,12 +1935,10 @@ model FrontendIPConfigurationPropertiesFormat {
   /**
    * The DDoS protection settings associated with the frontend IP configuration.
    */
-  @added(Versions.v2025_07_01)
   ddosSettings?: DdosFrontendIpConfigurationSettings;
 }
 
 /** DDoS protection settings for a frontend IP configuration. */
-@added(Versions.v2025_07_01)
 model DdosFrontendIpConfigurationSettings {
   /** The reference to the DDoS Custom Policy resource. */
   ddosCustomPolicy?: SubResource;
