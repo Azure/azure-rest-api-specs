@@ -989,7 +989,7 @@ union ReadReplicaPromoteOption {
   Planned: "Planned",
 
   /**
-   * Initiate the operation inmediately, without waiting for data in the read replica to be synchronized with its source server.
+   * Initiate the operation immediately, without waiting for data in the read replica to be synchronized with its source server.
    */
   Forced: "Forced",
 }
