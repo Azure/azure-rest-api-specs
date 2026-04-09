@@ -98,6 +98,8 @@ using Http;
 @@clientName(AlertsSummaryGroup.groupedby, "GroupedBy", "csharp");
 @@clientName(AlertsSummaryGroupItem.groupedby, "GroupedBy", "csharp");
 @@clientName(TriggeredRule, "AlertsManagementTriggeredRule", "csharp");
+@@clientName(Type, "AlertsManagementType", "csharp");
+@@clientName(AlertEnrichmentItem.type, "AlertEnrichmentType", "csharp");
 @@clientName(Status, "AlertsManagementStatus", "csharp");
 @@clientName(RuleType, "AlertsManagementRuleType", "csharp");
 @@clientName(ResultStatus, "AlertsManagementResultStatus", "csharp");
@@ -132,5 +134,107 @@ using Http;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AlertsSummary,
   Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+
+// ========================
+// Operation Overrides - Generate Options classes for C# SDK
+// These overrides group inline query parameters into Options models
+// so the SDK generates convenience methods with Options class parameters.
+// ========================
+
+// --- getSummary Options ---
+/** Options for the GetSummary operation. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model `Subscription-Resource-GetServiceAlertSummary-Options` {
+  /**
+   * This parameter allows the result set to be grouped by input fields. For example, groupby=severity,alertstate.
+   */
+  @query("groupby")
+  groupby: AlertsSummaryGroupByFields;
+
+  /**
+   * Include count of the SmartGroups as part of the summary. Default value is 'false'.
+   */
+  @query("includeSmartGroupsCount")
+  includeSmartGroupsCount?: boolean;
+
+  /**
+   * Filter by target resource( which is full ARM ID) Default value is select all.
+   */
+  @query("targetResource")
+  targetResource?: string;
+
+  /**
+   * Filter by target resource type. Default value is select all.
+   */
+  @query("targetResourceType")
+  targetResourceType?: string;
+
+  /**
+   * Filter by target resource group name. Default value is select all.
+   */
+  @query("targetResourceGroup")
+  targetResourceGroup?: string;
+
+  /**
+   * Filter by monitor service which generates the alert instance. Default value is select all.
+   */
+  @query("monitorService")
+  monitorService?: MonitorService;
+
+  /**
+   * Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all.
+   */
+  @query("monitorCondition")
+  monitorCondition?: MonitorCondition;
+
+  /**
+   * Filter by severity.  Default value is select all.
+   */
+  @query("severity")
+  severity?: Severity;
+
+  /**
+   * Filter by state of the alert instance. Default value is to select all.
+   */
+  @query("alertState")
+  alertState?: AlertState;
+
+  /**
+   * Filter by specific alert rule.  Default value is to select all.
+   */
+  @query("alertRule")
+  alertRule?: string;
+
+  /**
+   * Filter by time range by below listed values. Default value is 1 day.
+   */
+  @query("timeRange")
+  timeRange?: TimeRange;
+
+  /**
+   * Filter by custom time range in the format <start-time>/<end-time>  where time is in (ISO-8601 format)'. Permissible values is within 30 days from  query time. Either timeRange or customTimeRange could be used but not both. Default is none.
+   */
+  @query("customTimeRange")
+  customTimeRange?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op getSummaryCustomization(
+  body: void,
+  ...Azure.ResourceManager.ApiVersionParameter,
+
+  @path
+  scope: string,
+
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  options: `Subscription-Resource-GetServiceAlertSummary-Options`,
+): AlertsSummary;
+
+@@Azure.ClientGenerator.Core.override(AlertsOperationGroup.getSummary,
+  getSummaryCustomization,
   "csharp"
 );
