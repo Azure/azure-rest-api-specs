@@ -1729,15 +1729,6 @@
             "description": "The name of the BackupInstanceResource",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ResumeProtectionRequest"
-            }
           }
         ],
         "responses": {
@@ -8387,16 +8378,6 @@
             "value": "AzureFiles"
           }
         ]
-      }
-    },
-    "ResumeProtectionRequest": {
-      "type": "object",
-      "description": "Request body of Resume protection when MSI is to be changed",
-      "properties": {
-        "identityDetails": {
-          "$ref": "#/definitions/IdentityDetails",
-          "description": "identity details of the MSI"
-        }
       }
     },
     "RetentionTag": {
