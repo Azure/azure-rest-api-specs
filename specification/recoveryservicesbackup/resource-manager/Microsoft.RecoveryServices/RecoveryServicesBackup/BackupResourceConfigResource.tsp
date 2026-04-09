@@ -12,22 +12,26 @@ namespace Microsoft.RecoveryServices;
 /**
  * The resource storage details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @singleton("vaultstorageconfig")
 @parentResource(VaultResource)
-model BackupResourceConfigResource
-  is TrackedResourceWithOptionalLocation<BackupResourceConfig> {
+model BackupResourceConfigResource is ProxyResource<BackupResourceConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceConfigResource,
     KeyName = "backupstorageconfig",
     SegmentName = "backupstorageconfig",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
@@ -71,7 +75,11 @@ interface BackupResourceStorageConfigsNonCRR {
   bmsPrepareDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
     PrepareDataMoveRequest,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -83,7 +91,11 @@ interface BackupResourceStorageConfigsNonCRR {
   bmsTriggerDataMove is ArmResourceActionAsync<
     BackupResourceConfigResource,
     TriggerDataMoveRequest,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

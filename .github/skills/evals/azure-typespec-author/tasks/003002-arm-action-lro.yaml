@@ -1,0 +1,18 @@
+id: 003002-arm-action-lro
+name: "LRO: Add async action operation"
+description: |
+  Test adding an async long-running POST action operation with proper LRO headers.
+  Based on benchmark case 003002-arm-action-lro.
+tags:
+  - lro
+  - operations
+inputs:
+  prompt: "Add a move async operation to move employee, operation's request is MoveRequest, response is MoveResponse"
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

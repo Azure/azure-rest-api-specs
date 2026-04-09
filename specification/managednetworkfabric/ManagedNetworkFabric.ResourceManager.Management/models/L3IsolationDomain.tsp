@@ -44,12 +44,25 @@ model L3IsolationDomainProperties {
 
   @doc("VRF Limit configuration.")
   @added(Versions.v2024_06_15_preview)
+  @removed(Versions.v2025_07_15)
   routePrefixLimit?: RoutePrefixLimitProperties;
+
+  @doc("IPv4 VRF Limit configuration.")
+  @added(Versions.v2025_07_15)
+  v4routePrefixLimit?: RoutePrefixLimitProperties;
+
+  @doc("IPv6 VRF Limit configuration.")
+  @added(Versions.v2025_07_15)
+  v6routePrefixLimit?: RoutePrefixLimitProperties;
 
   @doc("Details of the last operation performed on the resource")
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
+
+  @doc("BMP Export Policy configuration.")
+  @added(Versions.v2025_07_15)
+  exportPolicyConfiguration?: BmpExportPolicyProperties;
 
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
@@ -82,11 +95,25 @@ model AggregateRoutePatchConfiguration {
   @doc("List of IPv4 Route prefixes.")
   @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "ipv4Routes")
+  ipv4RoutesDeprecated?: AggregateRoute[];
+
+  @doc("List of IPv4 Route prefixes.")
+  @Azure.ResourceManager.identifiers(#["prefix"])
+  @added(Versions.v2025_07_15)
   ipv4Routes?: AggregateRoute[];
 
   @doc("List of Ipv6Routes prefixes.")
   @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "ipv6Routes")
+  ipv6RoutesDeprecated?: AggregateRoute[];
+
+  @doc("List of Ipv6Routes prefixes.")
+  @Azure.ResourceManager.identifiers(#["prefix"])
+  @added(Versions.v2025_07_15)
   ipv6Routes?: AggregateRoute[];
 }
 
@@ -182,12 +209,15 @@ model L3ExportRoutePolicy {
 @doc("Array of ARM Resource ID of the RoutePolicies.")
 model L3ExportRoutePolicyPatch is L3ExportRoutePolicy;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The L3 Isolation Domain patch resource definition.")
-model L3IsolationDomainPatch {
-  ...TagsUpdate;
-
-  @doc("Resource properties.")
+model L3IsolationDomainPatch extends TagsUpdate {
+  @doc("L3 Isolation Domain resource patch properties.")
   properties?: L3IsolationDomainPatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("Resource properties.")
@@ -224,7 +254,20 @@ model L3IsolationDomainPatchProperties {
 
   @doc("Virtual Routing and Forwarding (VRF) Limit configuration.")
   @added(Versions.v2024_06_15_preview)
+  @removed(Versions.v2025_07_15)
   routePrefixLimit?: RoutePrefixLimitPatchProperties;
+
+  @doc("IPv4 VRF Limit configuration.")
+  @added(Versions.v2025_07_15)
+  v4routePrefixLimit?: RoutePrefixLimitPatchProperties;
+
+  @doc("IPv6 VRF Limit configuration.")
+  @added(Versions.v2025_07_15)
+  v6routePrefixLimit?: RoutePrefixLimitPatchProperties;
+
+  @doc("BMP Export Policy configuration.")
+  @added(Versions.v2025_07_15)
+  exportPolicyConfiguration?: BmpExportPolicyPatchProperties;
 }
 
 @doc("Advertise Connected Subnets. Ex: \"True\" | \"False\".")
