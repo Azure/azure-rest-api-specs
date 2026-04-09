@@ -57,11 +57,13 @@ interface Conversations {
   @doc("Deletes a Conversation.")
   delete is ResourceDelete<Conversation>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation returns a bare array per service behavior, not a paged result"
   @doc("List Conversation resources")
-  list is ResourceList<
-    Conversation,
-    QueryParametersTrait<WithQueryInvestigationName &
-      WithQueryProjectName &
-      WithQueryCreatedSince>
+  @route("/conversations")
+  @get
+  list is Azure.Core.Foundations.Operation<
+    WithQueryInvestigationName & WithQueryProjectName & WithQueryCreatedSince,
+    Conversation[]
   >;
 }

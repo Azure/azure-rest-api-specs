@@ -39,7 +39,7 @@
     },
     {
       "OAuth2Auth": [
-        "https://workspace.discovery.azure.com/.default"
+        "https://discovery.azure.com/.default"
       ]
     }
   ],
@@ -52,9 +52,9 @@
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
-      "authorizationUrl": "https://login.discovery.azure.com/common/oauth2/v2.0/authorize",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://workspace.discovery.azure.com/.default": ""
+        "https://discovery.azure.com/.default": ""
       }
     }
   },
@@ -95,7 +95,10 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedConversation"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Conversation"
+              }
             }
           },
           "default": {
@@ -115,9 +118,6 @@
           "Conversations_List_MaximumSet": {
             "$ref": "./examples/Conversations_List_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -380,7 +380,10 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedInvestigation"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Investigation"
+              }
             }
           },
           "default": {
@@ -400,9 +403,6 @@
           "Investigations_List_MaximumSet": {
             "$ref": "./examples/Investigations_List_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2624,48 +2624,6 @@
       "required": [
         "storageUri",
         "mountPath"
-      ]
-    },
-    "PagedConversation": {
-      "type": "object",
-      "description": "Paged collection of Conversation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Conversation items on this page",
-          "items": {
-            "$ref": "#/definitions/Conversation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedInvestigation": {
-      "type": "object",
-      "description": "Paged collection of Investigation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Investigation items on this page",
-          "items": {
-            "$ref": "#/definitions/Investigation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "PagedOperation": {

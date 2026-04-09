@@ -177,10 +177,20 @@ interface Investigations {
   @added(Versions.`2026-02-01-preview`)
   delete is LongRunningResourceDelete<Investigation>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation returns a bare array per service behavior, not a paged result"
   @doc("List Investigation resources")
-  list is ResourceList<
-    Investigation,
-    QueryParametersTrait<WithQueryCreatedSince>
+  @route("/projects/{projectName}/investigations")
+  @get
+  list is Azure.Core.Foundations.Operation<
+    {
+      @doc("The project name.")
+      @path
+      @maxLength(24)
+      @pattern(resourceNamePattern)
+      projectName: string;
+    } & WithQueryCreatedSince,
+    Investigation[]
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

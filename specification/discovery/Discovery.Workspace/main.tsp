@@ -20,11 +20,8 @@ using TypeSpec.Versioning;
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
-
-      // TODO: Work with backend team to determine authorizationUrl and scopes.
-      authorizationUrl: "https://login.discovery.azure.com/common/oauth2/v2.0/authorize",
-
-      scopes: ["https://workspace.discovery.azure.com/.default"],
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      scopes: ["https://discovery.azure.com/.default"],
     }
   ]>
 )
