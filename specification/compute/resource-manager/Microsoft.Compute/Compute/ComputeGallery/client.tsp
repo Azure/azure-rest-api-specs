@@ -125,3 +125,6 @@ using ComputeGallery;
 // Type renames for backward compatibility
 @@clientName(EndpointTypes, "ComputeGalleryEndpointType", "csharp");
 @@clientName(GallerySoftDeletedResource, "GallerySoftDeletedResourceDetails", "csharp");
+@@clientName(PirResource, "PirResourceData", "csharp");
+@@clientName(PirSharedGalleryResource, "PirSharedGalleryResourceData", "csharp");
+@@clientName(PirCommunityGalleryResource, "PirCommunityGalleryResourceData", "csharp");
