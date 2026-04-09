@@ -138,6 +138,14 @@ using Microsoft.BillingBenefits;
 @@clientName(SavingsPlanUpdateRequestProperties.renew, "IsRenewed", "csharp");
 @@clientName(SavingsPlanOrderAliasProperties.renew, "IsRenewed", "csharp");
 @@clientName(BenefitValidateResponseProperty.valid, "IsValid", "csharp");
+@@clientName(SellerResourceListRequestProperties.contributors,
+  "IncludeContributors",
+  "csharp"
+);
+@@clientName(SellerResourceListRequestProperties.milestones,
+  "IncludeMilestones",
+  "csharp"
+);
 @@clientName(MaccModelProperties.allowContributors,
   "IsAllowContributors",
   "csharp"
