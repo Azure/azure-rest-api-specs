@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Microsoft.Common;
 /**
  * Inbound NAT rule of the load balancer.
  */

@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Microsoft.Common;
 /**
  * IPConfiguration in a network interface.
  */

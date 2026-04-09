@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Network;
+namespace Microsoft.Common;
 /**
  * Pool of backend IP addresses.
  */

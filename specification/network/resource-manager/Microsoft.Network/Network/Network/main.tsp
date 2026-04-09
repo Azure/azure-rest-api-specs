@@ -133,6 +133,7 @@ import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -140,6 +141,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Microsoft.Common;
 /**
  * APIs to manage web application firewall rules.
  */
