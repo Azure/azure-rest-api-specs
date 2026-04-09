@@ -82,7 +82,7 @@ interface Schedules {
 
       ...SchedulesPreviewHeader;
     },
-    OkResponse<ScheduleRun>
+    OkResponse & ScheduleRun
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
