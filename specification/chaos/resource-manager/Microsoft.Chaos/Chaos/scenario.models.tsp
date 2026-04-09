@@ -345,6 +345,21 @@ union RecommendationStatus {
    * The scenario recommendation status is not applicable.
    */
   NotApplicable: "NotApplicable",
+
+  /**
+   * The scenario recommendation status is currently being evaluated.
+   */
+  Evaluating: "Evaluating",
+
+  /**
+   * The scenario recommendation evaluation has failed.
+   */
+  EvaluationFailed: "EvaluationFailed",
+
+  /**
+   * The scenario recommendation evaluation was cancelled.
+   */
+  EvaluationCancelled: "EvaluationCancelled",
 }
 
 /**
