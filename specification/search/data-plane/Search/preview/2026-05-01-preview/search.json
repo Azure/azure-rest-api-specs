@@ -4494,6 +4494,11 @@
         "value"
       ]
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureActiveDirectoryApplicationCredentials": {
       "type": "object",
       "description": "Credentials of a registered application created for your search service, used for authenticated access to the encryption keys stored in Azure Key Vault.",
@@ -15873,10 +15878,21 @@
           "description": "A value indicating whether the field should be used as a permission filter.",
           "x-nullable": true
         },
-        "sensitivityLabel": {
+        "sensitivityLabelId": {
           "type": "boolean",
-          "description": "A value indicating whether the field contains sensitivity label information.",
-          "x-nullable": true
+          "description": "A value indicating whether the field should be used for sensitivity label ID filtering. This enables document-level filtering based on Microsoft Purview sensitivity label IDs."
+        },
+        "sensitivityLabelName": {
+          "type": "boolean",
+          "description": "A value indicating whether the field contains the name of a Microsoft Purview sensitivity label applied to the document."
+        },
+        "sourceDocumentId": {
+          "type": "boolean",
+          "description": "A value indicating whether the field contains the source document identifier used for Purview audit tracking."
+        },
+        "sharepointSiteUrl": {
+          "type": "boolean",
+          "description": "A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering."
         },
         "analyzer": {
           "$ref": "#/definitions/LexicalAnalyzerName",
@@ -16130,6 +16146,10 @@
           "type": "boolean",
           "description": "A value indicating whether Purview is enabled for the index.",
           "x-nullable": true
+        },
+        "sharePointConnectorAppRegistration": {
+          "$ref": "#/definitions/SharePointConnectorAppRegistration",
+          "description": "Configures a SharePoint connector app registration for the index, enabling document-level permissions from SharePoint. If provided, the applicationId and federatedCredentialId properties are required."
         },
         "@odata.etag": {
           "type": "string",
@@ -17996,6 +18016,28 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ShaperSkill"
+    },
+    "SharePointConnectorAppRegistration": {
+      "type": "object",
+      "description": "Configures a SharePoint connector app registration for the index, enabling document-level permissions from SharePoint.",
+      "properties": {
+        "applicationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The application (client) ID of the app registration used to connect to SharePoint."
+        },
+        "federatedCredentialId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The federated credential ID configured on the app registration."
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The tenant ID of the app registration. If not specified, the tenant of the search service is used."
+        }
+      },
+      "required": [
+        "applicationId",
+        "federatedCredentialId"
+      ]
     },
     "ShingleTokenFilter": {
       "type": "object",

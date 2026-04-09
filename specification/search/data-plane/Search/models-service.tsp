@@ -4001,6 +4001,10 @@ model SearchIndex {
   @removed(Versions.v2026_04_01)
   purviewEnabled?: boolean | null;
 
+  /** Configures a SharePoint connector app registration for the index, enabling document-level permissions from SharePoint. If provided, the applicationId and federatedCredentialId properties are required. */
+  @added(Versions.v2026_05_01_preview)
+  sharePointConnectorAppRegistration?: SharePointConnectorAppRegistration;
+
   /** The ETag of the index. */
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
@@ -4114,9 +4118,24 @@ model SearchField {
 
   /** A value indicating whether the field contains sensitivity label information. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   sensitivityLabel?: boolean | null;
+
+  /** A value indicating whether the field should be used for sensitivity label ID filtering. This enables document-level filtering based on Microsoft Purview sensitivity label IDs. */
+  @added(Versions.v2026_05_01_preview)
+  sensitivityLabelId?: boolean;
+
+  /** A value indicating whether the field contains the name of a Microsoft Purview sensitivity label applied to the document. */
+  @added(Versions.v2026_05_01_preview)
+  sensitivityLabelName?: boolean;
+
+  /** A value indicating whether the field contains the source document identifier used for Purview audit tracking. */
+  @added(Versions.v2026_05_01_preview)
+  sourceDocumentId?: boolean;
+
+  /** A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering. */
+  @added(Versions.v2026_05_01_preview)
+  sharepointSiteUrl?: boolean;
 
   /** The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -5198,6 +5217,19 @@ model ServiceIndexersRuntime {
 
   /** End UTC time of the 24-hour period considered for indexer runtime usage (inclusive). */
   endingTime: utcDateTime;
+}
+
+/** Configures a SharePoint connector app registration for the index, enabling document-level permissions from SharePoint. */
+@added(Versions.v2026_05_01_preview)
+model SharePointConnectorAppRegistration {
+  /** The application (client) ID of the app registration used to connect to SharePoint. */
+  applicationId: Azure.Core.uuid;
+
+  /** The federated credential ID configured on the app registration. */
+  federatedCredentialId: Azure.Core.uuid;
+
+  /** The tenant ID of the app registration. If not specified, the tenant of the search service is used. */
+  tenantId?: Azure.Core.uuid;
 }
 
 /** Allows you to take control over the process of converting text into indexable/searchable tokens. It's a user-defined configuration consisting of a single predefined tokenizer and one or more filters. The tokenizer is responsible for breaking text into tokens, and the filters for modifying tokens emitted by the tokenizer. */
