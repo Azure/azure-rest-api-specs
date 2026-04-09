@@ -36,3 +36,18 @@ using Microsoft.Compute;
   "csharp"
 );
 @@clientName(ComputeDiagnosticBases.post, "generate", "csharp");
+@@clientName(SkuMixPlacementRequest,
+  "ComputeSkuMixPlacementGenerateContent",
+  "csharp"
+);
+@@clientName(SkuMixPlacementResponse,
+  "ComputeSkuMixPlacementGenerateResult",
+  "csharp"
+);
+@@clientName(SkuMixPlacementDeploymentChoice,
+  "ComputeSkuMixPlacementDeploymentChoice",
+  "csharp"
+);
+@@clientName(SkuMixPlacementItem, "ComputeSkuMixPlacementItem", "csharp");
+@@clientName(SkuMixPlacementBase, "ComputeSkuMixPlacementResource", "csharp");
+@@clientName(SkuMixPlacementScores.post, "generate", "csharp");
