@@ -139,23 +139,3 @@ model TrackedResourceModificationDetails {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   deploymentTime?: utcDateTime;
 }
-
-/**
- * Parameter group.
- */
-model QueryOptions {
-  /**
-   * Maximum number of records to return.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @query("$top")
-  @minValue(0)
-  Top?: int32;
-
-  /**
-   * OData filter expression.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @query("$filter")
-  Filter?: string;
-}

@@ -80,7 +80,8 @@ interface Remediations {
      */
     @bodyRoot
     resource: Remediation,
-  ): ArmResponse<Remediation> | ArmCreatedResponse<Remediation> | ErrorResponse;
+  ): ArmResponse<Remediation> | (CreatedResponse &
+    Body<Remediation>) | ErrorResponse;
 
   /**
    * Deletes an existing remediation at management group scope.
@@ -400,7 +401,8 @@ interface RemediationResourceOperations {
      */
     @bodyRoot
     resource: Remediation,
-  ): ArmResponse<Remediation> | ArmCreatedResponse<Remediation> | ErrorResponse;
+  ): ArmResponse<Remediation> | (CreatedResponse &
+    Body<Remediation>) | ErrorResponse;
 
   /**
    * Deletes an existing remediation at individual resource scope.
