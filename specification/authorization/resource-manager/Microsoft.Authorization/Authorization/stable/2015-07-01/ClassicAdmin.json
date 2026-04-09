@@ -1,0 +1,181 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2015-07-01",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ClassicAdministrators"
+    },
+    {
+      "name": "ElevateAccess"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Authorization/elevateAccess": {
+      "post": {
+        "operationId": "GlobalAdministrator_ElevateAccess",
+        "tags": [
+          "ElevateAccess"
+        ],
+        "description": "Elevates access for a Global Administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Elevate access global administrator": {
+            "$ref": "./examples/ElevateAccess.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators": {
+      "get": {
+        "operationId": "ClassicAdministrators_List",
+        "tags": [
+          "ClassicAdministrators"
+        ],
+        "description": "Gets service administrator, account administrator, and co-administrators for the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClassicAdministratorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List classic administrators": {
+            "$ref": "./examples/GetClassicAdministrators.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClassicAdministrator": {
+      "type": "object",
+      "description": "Classic Administrators",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the administrator."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the administrator."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the administrator."
+        },
+        "properties": {
+          "$ref": "#/definitions/ClassicAdministratorProperties",
+          "description": "Properties for the classic administrator.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ClassicAdministratorListResult": {
+      "type": "object",
+      "description": "The response of a ClassicAdministrator list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClassicAdministrator items on this page",
+          "items": {
+            "$ref": "#/definitions/ClassicAdministrator"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClassicAdministratorProperties": {
+      "type": "object",
+      "description": "Classic Administrator properties.",
+      "properties": {
+        "emailAddress": {
+          "type": "string",
+          "description": "The email address of the administrator."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the administrator."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
