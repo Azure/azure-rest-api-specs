@@ -6662,21 +6662,9 @@
           "description": "Unique name for the action.",
           "pattern": "^[a-zA-Z0-9-_]+$"
         },
-        "urn": {
+        "actionId": {
           "type": "string",
-          "description": "Unique resource name identifying the action type."
-        },
-        "actionResourceId": {
-          "type": "string",
-          "description": "ARM resource ID of the action version proxy resource (e.g., /subscriptions/{subId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}/versions/{version})."
-        },
-        "targetTypes": {
-          "type": "array",
-          "description": "Azure resource types this action targets (e.g., Microsoft.Compute/virtualMachineScaleSets).",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
+          "description": "Identifier of the action and version (e.g., \"microsoft-compute-shutdown/1.0\")."
         },
         "description": {
           "type": "string",
@@ -6718,8 +6706,7 @@
       },
       "required": [
         "name",
-        "urn",
-        "targetTypes",
+        "actionId",
         "duration"
       ]
     },

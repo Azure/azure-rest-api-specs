@@ -143,20 +143,9 @@ model ScenarioAction {
   name: string;
 
   /**
-   * Unique resource name identifying the action type.
+   * Identifier of the action and version (e.g., "microsoft-compute-shutdown/1.0").
    */
-  urn: string;
-
-  /**
-   * ARM resource ID of the action version proxy resource (e.g., /subscriptions/{subId}/providers/Microsoft.Chaos/locations/{location}/actions/{actionName}/versions/{version}).
-   */
-  actionResourceId?: string;
-
-  /**
-   * Azure resource types this action targets (e.g., Microsoft.Compute/virtualMachineScaleSets).
-   */
-  @minItems(1)
-  targetTypes: string[];
+  actionId: string;
 
   /**
    * Human-readable description of what this action does.
