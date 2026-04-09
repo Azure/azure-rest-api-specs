@@ -3360,7 +3360,7 @@ model RuleSetProperties extends AFDStateProperties {
    * A list of rules that are part of this rule set provided the rule set is in batch mode.
    * This property will be ignored if the rule set is not in batch mode.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["ruleName"])
+  @identifiers(#["ruleName"])
   rules?: BatchRuleProperties[];
 }
 
