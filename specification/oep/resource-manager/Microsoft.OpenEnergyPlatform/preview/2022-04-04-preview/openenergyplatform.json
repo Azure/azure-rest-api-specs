@@ -620,16 +620,6 @@
         }
       }
     },
-    "EncryptionProperties": {
-      "type": "object",
-      "description": "Customer-managed key encryption settings.",
-      "properties": {
-        "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
-          "description": "Key Vault properties for customer-managed keys."
-        }
-      }
-    },
     "EnergyResourceUpdate": {
       "type": "object",
       "description": "The resource model definition used for updating a tracked ARM resource.",
@@ -640,14 +630,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "Managed identity settings."
-        },
-        "properties": {
-          "$ref": "#/definitions/EnergyServicePropertiesPatch",
-          "description": "Resource properties to patch."
         }
       }
     },
@@ -658,10 +640,6 @@
         "properties": {
           "$ref": "#/definitions/EnergyServiceProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identity of the resource."
         }
       },
       "allOf": [
@@ -715,127 +693,12 @@
           "items": {
             "$ref": "#/definitions/DataPartitionNames"
           }
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionProperties",
-          "description": "Encryption settings for the resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/EnergyServiceSku",
-          "description": "The SKU of the resource."
-        }
-      }
-    },
-    "EnergyServicePropertiesPatch": {
-      "type": "object",
-      "description": "Patchable properties for EnergyService.",
-      "properties": {
-        "encryption": {
-          "$ref": "#/definitions/EncryptionProperties",
-          "description": "Encryption settings to patch."
-        }
-      }
-    },
-    "EnergyServiceSku": {
-      "type": "object",
-      "description": "The SKU of the energy service resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The SKU name."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "KeyVaultProperties": {
-      "type": "object",
-      "description": "Key Vault properties for encryption.",
-      "properties": {
-        "keyName": {
-          "type": "string",
-          "description": "The name of the Key Vault key."
-        },
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The URI of the Key Vault."
-        },
-        "userIdentity": {
-          "type": "string",
-          "description": "The user assigned identity resource ID to use for Key Vault access."
         }
       }
     },
     "ListPartitionsRequest": {
       "type": "object",
       "description": "Empty request body for list partitions action."
-    },
-    "ManagedIdentityType": {
-      "type": "string",
-      "description": "The type of managed identity used by the resource.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned",
-        "UserAssigned,SystemAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "System assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "User assigned managed identity."
-          },
-          {
-            "name": "SystemAssigned,UserAssigned",
-            "value": "SystemAssigned,UserAssigned",
-            "description": "Both system and user assigned managed identities."
-          },
-          {
-            "name": "UserAssigned,SystemAssigned",
-            "value": "UserAssigned,SystemAssigned",
-            "description": "Both user and system assigned managed identities (alternate ordering)."
-          }
-        ]
-      }
-    },
-    "ManagedServiceIdentity": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities).",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ManagedIdentityType",
-          "description": "The type of managed identity assigned to the resource."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The service principal ID of the system assigned identity.",
-          "readOnly": true
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID of the system assigned identity.",
-          "readOnly": true
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The set of user assigned identities associated with the resource.",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
     },
     "ProvisioningState": {
       "type": "string",
@@ -891,22 +754,6 @@
         ]
       },
       "readOnly": true
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "description": "User assigned identity properties.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID of the assigned identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client ID of the assigned identity.",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {}
