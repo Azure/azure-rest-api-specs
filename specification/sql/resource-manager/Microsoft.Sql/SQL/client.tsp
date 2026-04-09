@@ -108,3 +108,34 @@ using Microsoft.Sql;
   "VulnerabilityAssessmentScanRecordForSQLListResult ",
   "go"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(SensitivityLabelSourceAlias.sensitivityLabelSource,
+  "current",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
+  "recommended",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);

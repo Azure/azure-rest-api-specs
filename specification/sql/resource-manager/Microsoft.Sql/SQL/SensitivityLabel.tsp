@@ -95,13 +95,7 @@ interface SensitivityLabels {
   @tag("ManagedDatabaseSensitivityLabels")
   createOrUpdate is SensitivityLabelOps.CreateOrUpdateSync<
     SensitivityLabel,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: CurrentSensitivityLabelSource;
-    }
+    Parameters = SensitivityLabelSourceAlias
   >;
 
   /**
@@ -112,13 +106,7 @@ interface SensitivityLabels {
   delete is SensitivityLabelOps.DeleteSync<
     SensitivityLabel,
     Response = ArmDeletedResponse,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: CurrentSensitivityLabelSource;
-    }
+    Parameters = SensitivityLabelSourceAlias
   >;
 
   /**
@@ -130,13 +118,7 @@ interface SensitivityLabels {
     SensitivityLabel,
     void,
     Response = OkResponse,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: RecommendedSensitivityLabelSource;
-    }
+    Parameters = RecommendedSensitivityLabelSourceAlias
   >;
 
   /**
@@ -148,13 +130,7 @@ interface SensitivityLabels {
     SensitivityLabel,
     void,
     Response = OkResponse,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: RecommendedSensitivityLabelSource;
-    }
+    Parameters = RecommendedSensitivityLabelSourceAlias
   >;
 }
 alias SensitivityLabelOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -220,13 +196,7 @@ interface SensitivityLabelOperationGroup {
   @tag("SensitivityLabels")
   createOrUpdate is SensitivityLabelOperationGroupOps.CreateOrUpdateSync<
     SensitivityLabel,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: CurrentSensitivityLabelSource;
-    }
+    Parameters = SensitivityLabelSourceAlias
   >;
 
   /**
@@ -237,13 +207,7 @@ interface SensitivityLabelOperationGroup {
   delete is SensitivityLabelOperationGroupOps.DeleteSync<
     SensitivityLabel,
     Response = ArmDeletedResponse,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: CurrentSensitivityLabelSource;
-    }
+    Parameters = SensitivityLabelSourceAlias
   >;
 
   /**
@@ -255,13 +219,7 @@ interface SensitivityLabelOperationGroup {
     SensitivityLabel,
     void,
     Response = OkResponse,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: RecommendedSensitivityLabelSource;
-    }
+    Parameters = RecommendedSensitivityLabelSourceAlias
   >;
 
   /**
@@ -273,13 +231,7 @@ interface SensitivityLabelOperationGroup {
     SensitivityLabel,
     void,
     Response = OkResponse,
-    Parameters = {
-      /** The source of the sensitivity label. */
-      @path
-      @segment("sensitivityLabels")
-      @key
-      sensitivityLabelSource: RecommendedSensitivityLabelSource;
-    }
+    Parameters = RecommendedSensitivityLabelSourceAlias
   >;
 }
 
@@ -291,3 +243,19 @@ interface SensitivityLabelOperationGroup {
 @@doc(SensitivityLabelOperationGroup.createOrUpdate::parameters.resource,
   "The column sensitivity label resource."
 );
+
+alias RecommendedSensitivityLabelSourceAlias = {
+  /** The source of the sensitivity label. */
+  @path
+  @segment("sensitivityLabels")
+  @key
+  sensitivityLabelSource: RecommendedSensitivityLabelSource;
+};
+
+alias SensitivityLabelSourceAlias = {
+  /** The source of the sensitivity label. */
+  @path
+  @segment("sensitivityLabels")
+  @key
+  sensitivityLabelSource: CurrentSensitivityLabelSource;
+};
