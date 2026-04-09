@@ -159,6 +159,10 @@ model KnowledgeSourceParams {
 
   /** The type of the knowledge source. */
   kind: KnowledgeSourceKind;
+
+  /** Indicates whether image serving should be enabled for this knowledge source at retrieval time. When true, images extracted during ingestion are delivered to downstream models. */
+  @added(Versions.v2026_05_01_preview)
+  enableImageServing?: boolean;
 }
 
 /** Specifies runtime parameters for a search index knowledge source */
@@ -393,6 +397,10 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
 
   /** The count of documents retrieved that were sufficiently relevant to pass the reranker threshold. */
   count?: int32;
+
+  /** Statistics about image serving for this retrieval activity */
+  @added(Versions.v2026_05_01_preview)
+  imageServing?: ImageServingStatistics;
 }
 
 /** Represents a search index retrieval activity record. */
@@ -833,6 +841,22 @@ model PurviewSensitivityLabelInfo {
   isEncrypted?: boolean;
 }
 
+/** Statistics about image serving during a retrieval activity. */
+@added(Versions.v2026_05_01_preview)
+model ImageServingStatistics {
+  /** The number of images retrieved from the asset store. */
+  imagesRetrieved?: int32;
+
+  /** The number of images sent to the downstream model. */
+  imagesSentToModel?: int32;
+
+  /** The total size in bytes of images sent to the model. */
+  totalImageSizeBytes?: int64;
+
+  /** Indicates whether image verbalization was used instead of direct image serving. */
+  verbalizationUsed?: boolean;
+}
+
 /** The error details. */
 model KnowledgeBaseErrorDetail {
   /** The error code. */
@@ -901,6 +925,23 @@ model AIServices {
   apiKey?: string;
 }
 
+/** Configuration for an asset store used to store extracted assets such as images. */
+@added(Versions.v2026_05_01_preview)
+model AssetStore {
+  /** The connection string for the asset store. */
+  connectionString: string;
+
+  /** The name of the blob container within the asset store where extracted assets (for example, images) are stored. */
+  containerName: string;
+}
+
+/** Configuration for freshness-aware retrieval. When set, newer documents receive a ranking boost during retrieval. */
+@added(Versions.v2026_05_01_preview)
+model FreshnessPolicy {
+  /** ISO 8601 duration for the freshness boosting window (e.g. 'P90D' for 90 days). Documents newer than this duration receive a ranking boost during retrieval. */
+  boostingDuration?: string;
+}
+
 /** Optional content extraction mode. Default is 'minimal'. */
 union KnowledgeSourceContentExtractionMode {
   string,
@@ -924,6 +965,10 @@ union KnowledgeSourceIngestionPermissionOption {
 
   /** Ingest RBAC scope information alongside document content. */
   RbacScope: "rbacScope",
+
+  /** Ingest Microsoft Purview sensitivity labels alongside document content. */
+  @added(Versions.v2026_05_01_preview)
+  SensitivityLabels: "sensitivityLabels",
 }
 
 /** Consolidates all general ingestion settings for knowledge sources. */
@@ -958,6 +1003,14 @@ model KnowledgeSourceIngestionParameters {
   /** Optional AI Services configuration for content processing. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   aiServices?: AIServices | null;
+
+  /** Optional asset store configuration for storing extracted assets such as images. */
+  @added(Versions.v2026_05_01_preview)
+  assetStore?: AssetStore;
+
+  /** Optional freshness policy for biasing retrieval toward newer documents. */
+  @added(Versions.v2026_05_01_preview)
+  freshnessPolicy?: FreshnessPolicy;
 }
 
 /** Specifies the vectorization method to be used for knowledge source embedding model. */

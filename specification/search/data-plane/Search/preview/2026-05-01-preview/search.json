@@ -4368,6 +4368,24 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.AsciiFoldingTokenFilter"
     },
+    "AssetStore": {
+      "type": "object",
+      "description": "Configuration for an asset store used to store extracted assets such as images.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string for the asset store."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The name of the blob container within the asset store where extracted assets (for example, images) are stored."
+        }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ]
+    },
     "AutocompleteItem": {
       "type": "object",
       "description": "The result of Autocomplete requests.",
@@ -7196,6 +7214,16 @@
         "name"
       ]
     },
+    "FreshnessPolicy": {
+      "type": "object",
+      "description": "Configuration for freshness-aware retrieval. When set, newer documents receive a ranking boost during retrieval.",
+      "properties": {
+        "boostingDuration": {
+          "type": "string",
+          "description": "ISO 8601 duration for the freshness boosting window (e.g. 'P90D' for 90 days). Documents newer than this duration receive a ranking boost during retrieval."
+        }
+      }
+    },
     "FreshnessScoringFunction": {
       "type": "object",
       "description": "Defines a function that boosts scores based on the value of a date-time field.",
@@ -7743,6 +7771,31 @@
             "description": "Details recognized as landmarks."
           }
         ]
+      }
+    },
+    "ImageServingStatistics": {
+      "type": "object",
+      "description": "Statistics about image serving during a retrieval activity.",
+      "properties": {
+        "imagesRetrieved": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of images retrieved from the asset store."
+        },
+        "imagesSentToModel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of images sent to the downstream model."
+        },
+        "totalImageSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total size in bytes of images sent to the model."
+        },
+        "verbalizationUsed": {
+          "type": "boolean",
+          "description": "Indicates whether image verbalization was used instead of direct image serving."
+        }
       }
     },
     "IndexAction": {
@@ -9835,6 +9888,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
         }
       },
       "discriminator": "type",
@@ -10421,6 +10478,14 @@
           "$ref": "#/definitions/AIServices",
           "description": "Optional AI Services configuration for content processing.",
           "x-nullable": true
+        },
+        "assetStore": {
+          "$ref": "#/definitions/AssetStore",
+          "description": "Optional asset store configuration for storing extracted assets such as images."
+        },
+        "freshnessPolicy": {
+          "$ref": "#/definitions/FreshnessPolicy",
+          "description": "Optional freshness policy for biasing retrieval toward newer documents."
         }
       }
     },
@@ -10430,7 +10495,8 @@
       "enum": [
         "userIds",
         "groupIds",
-        "rbacScope"
+        "rbacScope",
+        "sensitivityLabels"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceIngestionPermissionOption",
@@ -10450,6 +10516,11 @@
             "name": "RbacScope",
             "value": "rbacScope",
             "description": "Ingest RBAC scope information alongside document content."
+          },
+          {
+            "name": "SensitivityLabels",
+            "value": "sensitivityLabels",
+            "description": "Ingest Microsoft Purview sensitivity labels alongside document content."
           }
         ]
       }
@@ -10551,6 +10622,10 @@
         "kind": {
           "$ref": "#/definitions/KnowledgeSourceKind",
           "description": "The type of the knowledge source."
+        },
+        "enableImageServing": {
+          "type": "boolean",
+          "description": "Indicates whether image serving should be enabled for this knowledge source at retrieval time. When true, images extracted during ingestion are delivered to downstream models."
         }
       },
       "discriminator": "kind",
@@ -10566,6 +10641,14 @@
         "name": {
           "type": "string",
           "description": "The name of the knowledge source."
+        },
+        "enableImageServing": {
+          "type": "boolean",
+          "description": "Indicates whether image serving should be enabled for this knowledge source. When true, images extracted during ingestion are delivered to downstream models at query time."
+        },
+        "enableFreshness": {
+          "type": "boolean",
+          "description": "Indicates whether freshness-aware retrieval should be enabled for this knowledge source. When true, a freshness scoring profile is applied during retrieval to bias results toward newer documents."
         }
       },
       "required": [

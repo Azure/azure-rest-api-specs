@@ -4614,6 +4614,14 @@ model KnowledgeBaseAzureOpenAIModel extends KnowledgeBaseModel {
 model KnowledgeSourceReference {
   /** The name of the knowledge source. */
   name: string;
+
+  /** Indicates whether image serving should be enabled for this knowledge source. When true, images extracted during ingestion are delivered to downstream models at query time. */
+  @added(Versions.v2026_05_01_preview)
+  enableImageServing?: boolean;
+
+  /** Indicates whether freshness-aware retrieval should be enabled for this knowledge source. When true, a freshness scoring profile is applied during retrieval to bias results toward newer documents. */
+  @added(Versions.v2026_05_01_preview)
+  enableFreshness?: boolean;
 }
 
 /** Specifies the parameters for connecting to the Azure OpenAI resource. */
