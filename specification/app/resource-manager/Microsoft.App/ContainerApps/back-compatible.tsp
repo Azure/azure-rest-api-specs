@@ -74,11 +74,11 @@ using Microsoft.App;
 @@clientLocation(Certificates.delete, "ConnectedEnvironmentsCertificates");
 @@clientLocation(Certificates.list, "ConnectedEnvironmentsCertificates");
 
-@@clientName(Certificates.getCertificates, "get");
-@@clientName(Certificates.listCertificates, "list");
-@@clientName(Certificates.deleteCertificates, "delete");
-@@clientName(Certificates.createOrUpdateCertificates, "createOrUpdate");
-@@clientName(Certificates.updateCertificates, "update");
+@@clientName(Certificates.getCertificates, "Get");
+@@clientName(Certificates.listCertificates, "List");
+@@clientName(Certificates.deleteCertificates, "Delete");
+@@clientName(Certificates.createOrUpdateCertificates, "CreateOrUpdate");
+@@clientName(Certificates.updateCertificates, "Update");
 @@clientName(Certificates.createOrUpdateCertificates::parameters.resource,
   "certificateEnvelope"
 );
