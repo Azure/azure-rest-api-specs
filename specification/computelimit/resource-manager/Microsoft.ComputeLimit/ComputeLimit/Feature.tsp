@@ -59,4 +59,13 @@ interface Features {
     void,
     Azure.ResourceManager.Foundations.OperationStatusResult
   >;
+
+  /** Disables a compute limit feature for the subscription at the specified location. */
+  @added(Versions.v2026_04_30)
+  @action("disable")
+  disable is ArmResourceActionAsync<
+    Feature,
+    void,
+    Azure.ResourceManager.Foundations.OperationStatusResult
+  >;
 }
