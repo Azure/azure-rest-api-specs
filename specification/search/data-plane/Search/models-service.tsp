@@ -4684,6 +4684,10 @@ union KnowledgeSourceKind {
   /** A knowledge source that reads data from indexed OneLake. */
   IndexedOneLake: "indexedOneLake",
 
+  /** A knowledge source that retrieves and ingests data from Azure SQL Database or SQL Managed Instance to a Search Index. */
+  @added(Versions.v2026_05_01_preview)
+  IndexedSql: "indexedSql",
+
   /** A knowledge source that reads data from the web. */
   Web: "web",
 
@@ -4826,6 +4830,65 @@ model IndexedOneLakeKnowledgeSourceParameters {
   /** Resources created by the knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
+}
+
+/** Configuration for indexed SQL knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model IndexedSqlKnowledgeSource extends KnowledgeSource {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.IndexedSql;
+
+  /** The parameters for the SQL knowledge source. */
+  indexedSqlParameters: IndexedSqlKnowledgeSourceParameters;
+}
+
+/** Parameters for indexed SQL knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model IndexedSqlKnowledgeSourceParameters {
+  /** The connection string for the Azure SQL Database or SQL Managed Instance. */
+  connectionString: string;
+
+  /** The name of the table or view to index. Can be schema-qualified (e.g., 'dbo.MyTable'). */
+  tableOrView: string;
+
+  /** Optional column name for high water mark change detection. If provided, uses HighWaterMarkChangeDetectionPolicy. */
+  highWaterMarkColumnName?: string;
+
+  /** Optional column mappings for content fields. If omitted, all columns are auto-discovered. */
+  contentColumns?: ContentColumnMapping[];
+
+  /** Optional column mappings for embedding vector fields. If omitted, no vector fields are created. */
+  embeddingColumns?: EmbeddingColumnMapping[];
+
+  /** Consolidates all general ingestion settings including embedding model, schedule, and identity. */
+  ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  /** Resources created by the knowledge source. */
+  @visibility(Lifecycle.Read)
+  createdResources?: CreatedResources;
+}
+
+/** Maps a SQL column to a search index field. */
+@added(Versions.v2026_05_01_preview)
+model ContentColumnMapping {
+  /** Target index field name. */
+  name: string;
+
+  /** SQL column name. */
+  sourceField: string;
+
+  /** Azure AI Search field type (e.g., Edm.String, Edm.Int32). */
+  searchFieldType: string;
+}
+
+/** Maps a SQL column to a vector field for embedding. */
+@added(Versions.v2026_05_01_preview)
+model EmbeddingColumnMapping {
+  /** Target vector field name in the search index. */
+  name: string;
+
+  /** SQL column used as input for embedding generation. */
+  sourceField: string;
 }
 
 /** Knowledge Source targeting web results. */

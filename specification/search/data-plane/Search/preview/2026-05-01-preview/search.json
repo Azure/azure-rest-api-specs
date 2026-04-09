@@ -5608,6 +5608,29 @@
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill"
     },
+    "ContentColumnMapping": {
+      "type": "object",
+      "description": "Maps a SQL column to a search index field.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Target index field name."
+        },
+        "sourceField": {
+          "type": "string",
+          "description": "SQL column name."
+        },
+        "searchFieldType": {
+          "type": "string",
+          "description": "Azure AI Search field type (e.g., Edm.String, Edm.Int32)."
+        }
+      },
+      "required": [
+        "name",
+        "sourceField",
+        "searchFieldType"
+      ]
+    },
     "ContentUnderstandingSkill": {
       "type": "object",
       "description": "A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval.",
@@ -6757,6 +6780,24 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.ElisionTokenFilter"
+    },
+    "EmbeddingColumnMapping": {
+      "type": "object",
+      "description": "Maps a SQL column to a vector field for embedding.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Target vector field name in the search index."
+        },
+        "sourceField": {
+          "type": "string",
+          "description": "SQL column used as input for embedding generation."
+        }
+      },
+      "required": [
+        "name",
+        "sourceField"
+      ]
     },
     "EntityCategory": {
       "type": "string",
@@ -8089,6 +8130,70 @@
         }
       ],
       "x-ms-discriminator-value": "indexedSharePoint"
+    },
+    "IndexedSqlKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for indexed SQL knowledge source.",
+      "properties": {
+        "indexedSqlParameters": {
+          "$ref": "#/definitions/IndexedSqlKnowledgeSourceParameters",
+          "description": "The parameters for the SQL knowledge source."
+        }
+      },
+      "required": [
+        "indexedSqlParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "indexedSql"
+    },
+    "IndexedSqlKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for indexed SQL knowledge source.",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "The connection string for the Azure SQL Database or SQL Managed Instance."
+        },
+        "tableOrView": {
+          "type": "string",
+          "description": "The name of the table or view to index. Can be schema-qualified (e.g., 'dbo.MyTable')."
+        },
+        "highWaterMarkColumnName": {
+          "type": "string",
+          "description": "Optional column name for high water mark change detection. If provided, uses HighWaterMarkChangeDetectionPolicy."
+        },
+        "contentColumns": {
+          "type": "array",
+          "description": "Optional column mappings for content fields. If omitted, all columns are auto-discovered.",
+          "items": {
+            "$ref": "#/definitions/ContentColumnMapping"
+          }
+        },
+        "embeddingColumns": {
+          "type": "array",
+          "description": "Optional column mappings for embedding vector fields. If omitted, no vector fields are created.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingColumnMapping"
+          }
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings including embedding model, schedule, and identity."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectionString",
+        "tableOrView"
+      ]
     },
     "IndexerCurrentState": {
       "type": "object",
@@ -10533,6 +10638,7 @@
         "azureBlob",
         "indexedSharePoint",
         "indexedOneLake",
+        "indexedSql",
         "web",
         "remoteSharePoint",
         "workIQ",
@@ -10561,6 +10667,11 @@
             "name": "IndexedOneLake",
             "value": "indexedOneLake",
             "description": "A knowledge source that reads data from indexed OneLake."
+          },
+          {
+            "name": "IndexedSql",
+            "value": "indexedSql",
+            "description": "A knowledge source that retrieves and ingests data from Azure SQL Database or SQL Managed Instance to a Search Index."
           },
           {
             "name": "Web",
