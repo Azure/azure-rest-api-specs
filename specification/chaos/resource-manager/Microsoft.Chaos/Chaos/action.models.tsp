@@ -70,6 +70,12 @@ union ActionKind {
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionProperties {
   /**
+   * Canonical identifier of the action (e.g., "microsoft-compute-shutdown/1.0").
+   */
+  @visibility(Lifecycle.Read)
+  canonicalId?: string;
+
+  /**
    * Human-readable display name of the action.
    */
   @visibility(Lifecycle.Read)
@@ -80,12 +86,6 @@ model ActionProperties {
    */
   @visibility(Lifecycle.Read)
   description?: string;
-
-  /**
-   * Legacy URN of the action (e.g., "urn:csci:microsoft:compute:Shutdown/1.0").
-   */
-  @visibility(Lifecycle.Read)
-  urn?: string;
 
   /**
    * The short name of the action (e.g., "Shutdown").
@@ -151,6 +151,12 @@ model ActionSupportedTargetType {
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionVersionProperties {
   /**
+   * Canonical identifier of the action (e.g., "microsoft-compute-shutdown/1.0").
+   */
+  @visibility(Lifecycle.Read)
+  canonicalId?: string;
+
+  /**
    * Human-readable display name of the action.
    */
   @visibility(Lifecycle.Read)
@@ -161,12 +167,6 @@ model ActionVersionProperties {
    */
   @visibility(Lifecycle.Read)
   description?: string;
-
-  /**
-   * Legacy URN of the action (e.g., "urn:csci:microsoft:compute:Shutdown/1.0").
-   */
-  @visibility(Lifecycle.Read)
-  urn?: string;
 
   /**
    * The short name of the action (e.g., "Shutdown").
