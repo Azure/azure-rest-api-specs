@@ -4146,37 +4146,6 @@ model BackupShortTermRetentionPolicyProperties {
 }
 
 /**
- * ARM proxy resource.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ProxyResource extends Resource {}
-
-/**
- * ARM resource.
- */
-model Resource {
-  /**
-   * Resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
  * Properties of a server blob auditing policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5273,7 +5242,7 @@ model PrivateEndpointConnectionRequestStatus {
  * An Import, Export, or PolybaseImport resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatabaseExtensions extends ProxyResource {
+model DatabaseExtensions extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -5373,7 +5342,7 @@ model NetworkIsolationSettings {
  * A database operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatabaseOperation extends ProxyResource {
+model DatabaseOperation extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -5947,7 +5916,7 @@ model DatabaseKey {
  * ARM tracked top level resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TrackedResource extends Resource {
+model TrackedResource extends CommonTypes.Resource {
   /**
    * Resource location.
    */
@@ -6356,7 +6325,7 @@ model ExportDatabaseDefinition {
  * An ImportExport operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ImportExportOperationResult extends ProxyResource {
+model ImportExportOperationResult extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -6554,13 +6523,7 @@ model DatabaseSqlVulnerabilityAssessmentBaselineSetProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseSqlVulnerabilityAssessmentRuleBaselineListInput
-  extends ProxyResource {
-  /**
-   * SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputResource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
-
+  extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -6600,13 +6563,7 @@ model DatabaseSqlVulnerabilityAssessmentRuleBaselineProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseSqlVulnerabilityAssessmentRuleBaselineInput
-  extends ProxyResource {
-  /**
-   * SystemData of DatabaseSqlVulnerabilityAssessmentRuleBaselineInputResource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
-
+  extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -7022,7 +6979,7 @@ model DatabaseTableProperties {
  * Usage metric of a database.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatabaseUsage extends ProxyResource {
+model DatabaseUsage extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -7209,7 +7166,8 @@ model VulnerabilityAssessmentScanError {
  * A database Vulnerability Assessment scan export resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatabaseVulnerabilityAssessmentScansExport extends ProxyResource {
+model DatabaseVulnerabilityAssessmentScansExport
+  extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -7259,7 +7217,7 @@ model DataMaskingPolicyProperties {
  * A database data masking rule.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DataMaskingRule extends ProxyResource {
+model DataMaskingRule extends CommonTypes.ProxyResource {
   /**
    * The location of the data masking rule.
    */
@@ -7640,7 +7598,7 @@ model DistributedAvailabilityGroupSetRole {
  * A elastic pool operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ElasticPoolOperation extends ProxyResource {
+model ElasticPoolOperation extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -10384,7 +10342,7 @@ model CopyLongTermRetentionBackupParametersProperties {
  * A LongTermRetentionBackup operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model LongTermRetentionBackupOperationResult extends ProxyResource {
+model LongTermRetentionBackupOperationResult extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -10758,7 +10716,7 @@ model ManagedInstanceQueryStatistics is Azure.Core.Page<QueryStatistics>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model QueryStatistics extends ProxyResource {
+model QueryStatistics extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -11375,7 +11333,7 @@ model SecurityEventCollection is Azure.Core.Page<SecurityEvent>;
  * A security event.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SecurityEvent extends ProxyResource {
+model SecurityEvent extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -11556,7 +11514,7 @@ model SensitivityLabelUpdateList {
  * A sensitivity label update operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SensitivityLabelUpdate extends ProxyResource {
+model SensitivityLabelUpdate extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -11603,7 +11561,7 @@ model RecommendedSensitivityLabelUpdateList {
  * A recommended sensitivity label update operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RecommendedSensitivityLabelUpdate extends ProxyResource {
+model RecommendedSensitivityLabelUpdate extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -12592,7 +12550,8 @@ model EndpointDetail {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RefreshExternalGovernanceStatusOperationResultMI extends ProxyResource {
+model RefreshExternalGovernanceStatusOperationResultMI
+  extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -12707,7 +12666,7 @@ model ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest {
  * A TDE certificate that can be uploaded into a server.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TdeCertificate extends ProxyResource {
+model TdeCertificate extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -13212,7 +13171,7 @@ model ReplicationLinkProperties {
  * A replication link update request.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ReplicationLinkUpdate extends ProxyResource {
+model ReplicationLinkUpdate extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -13611,7 +13570,7 @@ model ServerKeyProperties {
  * A server operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ServerOperation extends ProxyResource {
+model ServerOperation extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -14002,7 +13961,8 @@ model ImportNewDatabaseDefinition {
  * An RefreshExternalGovernanceStatus operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model RefreshExternalGovernanceStatusOperationResult extends ProxyResource {
+model RefreshExternalGovernanceStatusOperationResult
+  extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -14105,7 +14065,7 @@ model ServerInfo {
  * Usage metric of a server.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ServerUsage extends ProxyResource {
+model ServerUsage extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -14276,7 +14236,7 @@ model SubscriptionUsageProperties {
  * Synapse link workspace resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SynapseLinkWorkspace extends ProxyResource {
+model SynapseLinkWorkspace extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -14375,7 +14335,7 @@ model SyncAgentKeyProperties {
  * An Azure SQL Database sync agent linked database.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SyncAgentLinkedDatabase extends ProxyResource {
+model SyncAgentLinkedDatabase extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -14932,7 +14892,8 @@ model VirtualClusterUpdate {
  * A refresh DNS servers operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model UpdateVirtualClusterDnsServersOperation extends ProxyResource {
+model UpdateVirtualClusterDnsServersOperation
+  extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
@@ -15333,7 +15294,7 @@ model OperationListResult {
  * A Server ImportExport operation result resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ServerImportExportOperationResult extends ProxyResource {
+model ServerImportExportOperationResult extends CommonTypes.ProxyResource {
   /**
    * Resource properties.
    */
