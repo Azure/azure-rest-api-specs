@@ -112,6 +112,7 @@ model RegistrationOperationStatus {
   /**
    * Operation ID.
    */
+  @minLength(1)
   operationId: string;
 
   /**
