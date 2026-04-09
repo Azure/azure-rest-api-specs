@@ -1,4 +1,5 @@
 import "../openai-responses/models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -209,8 +210,7 @@ model AgentVersionObject {
   description?: string;
 
   @doc("The Unix timestamp (seconds) when the agent was created.")
-  @encode("unixTimestamp", int32)
-  created_at: utcDateTime;
+  created_at: FoundryTimestamp;
 
   definition: AgentDefinition;
 

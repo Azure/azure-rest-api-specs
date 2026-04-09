@@ -26,7 +26,8 @@ tags:
 paths:
   /agents:
     post:
-      operationId: Agents_createAgent_Agents_createAgentFromCode
+      operationId: Agents_createAgent
+      description: Creates the agent.
       parameters:
         - name: Foundry-Features
           in: header
@@ -41,25 +42,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: x-ms-agent-name
-          in: header
-          required: false
-          description: The unique name that identifies the agent. Max 63 chars, must start and end with alphanumeric, hyphens allowed in the middle.
-          schema:
-            type: string
-            maxLength: 63
-        - name: x-ms-code-zip-sha256
-          in: header
-          required: false
-          description: SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification.
-          schema:
-            type: string
-      description: |-
-        Creates the agent. Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.
-        The agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.
-        The SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.
-        The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
-        Maximum upload size is 250 MB.
       responses:
         '200':
           description: The request has succeeded.
@@ -73,9 +55,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-      x-ms-foundry-meta:
-        required_previews:
-          - CodeAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -84,12 +63,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CreateAgentFromCodeContent'
-            encoding:
-              metadata:
-                contentType: application/json
+      x-ms-foundry-meta:
+        conditional_previews:
+          - HostedAgents=V1Preview
+          - ContainerAgents=V1Preview
+          - WorkflowAgents=V1Preview
+          - CodeAgents=V1Preview
     get:
       operationId: Agents_listAgents
       description: Returns the list of all agents.
@@ -216,7 +195,10 @@ paths:
       tags:
         - Agents
     post:
-      operationId: Agents_updateAgent_Agents_updateAgentFromCode
+      operationId: Agents_updateAgent
+      description: |-
+        Updates the agent by adding a new version if there are any changes to the agent definition.
+        If no changes, returns the existing agent version.
       parameters:
         - name: Foundry-Features
           in: header
@@ -237,18 +219,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: x-ms-code-zip-sha256
-          in: header
-          required: false
-          description: SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification.
-          schema:
-            type: string
-      description: |-
-        Updates the agent by adding a new version if there are any changes to the agent definition.
-        If no changes, returns the existing agent version. Updates a code-based agent by uploading new code and creating a new version.
-        If the code and definition are unchanged (matched by x-ms-code-zip-sha256 header), returns the existing version.
-        The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
-        Maximum upload size is 250 MB.
       responses:
         '200':
           description: The request has succeeded.
@@ -262,9 +232,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-      x-ms-foundry-meta:
-        required_previews:
-          - CodeAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -273,12 +240,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CreateAgentVersionFromCodeContent'
-            encoding:
-              metadata:
-                contentType: application/json
     delete:
       operationId: Agents_deleteAgent
       description: Deletes an agent.
@@ -1133,7 +1094,8 @@ paths:
               $ref: '#/components/schemas/UpdateAgentFromManifestRequest'
   /agents/{agent_name}/versions:
     post:
-      operationId: Agents_createAgentVersion_Agents_createAgentVersionFromCode
+      operationId: Agents_createAgentVersion
+      description: Create a new agent version.
       parameters:
         - name: Foundry-Features
           in: header
@@ -1159,13 +1121,6 @@ paths:
           schema:
             type: string
           explode: false
-        - name: x-ms-code-zip-sha256
-          in: header
-          required: false
-          description: SHA-256 hex digest of the uploaded code zip. Used for change detection (dedup) and integrity verification.
-          schema:
-            type: string
-      description: Create a new agent version.
       responses:
         '200':
           description: The request has succeeded.
@@ -1179,9 +1134,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-      x-ms-foundry-meta:
-        required_previews:
-          - CodeAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -1190,12 +1142,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentVersionRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CreateAgentVersionFromCodeContent'
-            encoding:
-              metadata:
-                contentType: application/json
+      x-ms-foundry-meta:
+        conditional_previews:
+          - HostedAgents=V1Preview
+          - ContainerAgents=V1Preview
+          - WorkflowAgents=V1Preview
+          - CodeAgents=V1Preview
     get:
       operationId: Agents_listAgentVersions
       description: Returns the list of versions of an agent.
@@ -6451,7 +6403,7 @@ paths:
         '200':
           description: The response body for downloading a skill package.
           content:
-            application/gzip:
+            application/zip:
               schema:
                 type: string
                 format: binary
@@ -6469,7 +6421,7 @@ paths:
   /skills:import:
     post:
       operationId: Skills_createSkillFromPackage
-      description: Creates a skill from a gzip package.
+      description: Creates a skill from a zip package.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6504,11 +6456,11 @@ paths:
       requestBody:
         required: true
         content:
-          application/gzip:
+          application/zip:
             schema:
               type: string
               format: binary
-        description: The gzip package used to create the skill.
+        description: The zip package used to create the skill.
       x-ms-foundry-meta:
         conditional_previews:
           - Skills=V1Preview
@@ -7326,7 +7278,6 @@ components:
         - WorkflowAgents=V1Preview
         - ContainerAgents=V1Preview
         - AgentEndpoints=V1Preview
-        - CodeAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
     AgentEndpoint:
       type: object
@@ -7662,8 +7613,8 @@ components:
           maxLength: 512
           description: A human-readable description of the agent.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
@@ -8981,20 +8932,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/IndexUpdate'
       description: CosmosDB Vector Store Index Definition
-    CreateAgentFromCodeContent:
-      type: object
-      properties:
-        metadata:
-          allOf:
-            - $ref: '#/components/schemas/CreateAgentVersionFromCodeRequest'
-          description: JSON metadata including description and hosted definition.
-        code:
-          type: string
-          format: binary
-          description: The code zip file (max 250 MB).
-      required:
-        - metadata
-        - code
     CreateAgentFromManifestRequest:
       type: object
       required:
@@ -9116,53 +9053,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
-    CreateAgentVersionFromCodeContent:
-      type: object
-      properties:
-        metadata:
-          allOf:
-            - $ref: '#/components/schemas/CreateAgentVersionFromCodeRequest'
-          description: JSON metadata including description and hosted definition.
-        code:
-          type: string
-          format: binary
-          description: The code zip file (max 250 MB).
-      required:
-        - metadata
-        - code
-    CreateAgentVersionFromCodeRequest:
-      type: object
-      required:
-        - definition
-      properties:
-        description:
-          type: string
-          maxLength: 512
-          description: A human-readable description of the agent.
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: |-
-            Set of 16 key-value pairs that can be attached to an object. This can be
-            useful for storing additional information about the object in a structured
-            format, and querying for objects via API or the dashboard.
-
-            Keys are strings with a maximum length of 64 characters. Values are strings
-            with a maximum length of 512 characters.
-          x-oaiTypeLabel: map
-        definition:
-          allOf:
-            - $ref: '#/components/schemas/HostedAgentDefinition'
-          description: The hosted agent definition including code_configuration (runtime, entry_point), cpu, memory, and protocol_versions.
-      description: |-
-        JSON metadata for code-based agent operations (create, update, create version).
-        The agent name comes from the URL path parameter or the `x-ms-agent-name` header,
-        so it is not included in this model.
-        The content hash (SHA-256 of the zip) is carried in the `x-ms-code-zip-sha256` header.
-      x-ms-foundry-meta:
-        required_previews:
-          - CodeAgents=V1Preview
     CreateAgentVersionFromManifestRequest:
       type: object
       required:
@@ -9267,7 +9157,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
-              - $ref: '#/components/schemas/EvalGraderAzureAIEvaluator'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
           description: A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
         properties:
           type: object
@@ -9741,7 +9631,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
-              - $ref: '#/components/schemas/EvalGraderAzureAIEvaluator'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
           description: A list of testing criteria.
         created_at:
           type: integer
@@ -9840,36 +9730,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a CSV data source for evaluation runs.
-    EvalGraderAzureAIEvaluator:
-      type: object
-      required:
-        - type
-        - name
-        - evaluator_name
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_ai_evaluator
-          description: The object type, which is always `azure_ai_evaluator`.
-        name:
-          type: string
-          description: The name of the grader.
-        evaluator_name:
-          type: string
-          description: The name of the evaluator.
-        evaluator_version:
-          type: string
-          description: The version of the evaluator. Latest version if not specified.
-        initialization_parameters:
-          type: object
-          description: The initialization parameters for the evaluation. Must support structured outputs.
-        data_mapping:
-          type: object
-          additionalProperties:
-            type: string
-          description: The model to use for the evaluation. Must support structured outputs.
-      title: AzureAIEvaluatorGrader
     EvalResult:
       type: object
       required:
@@ -10877,6 +10737,10 @@ components:
           type: number
           format: float
           description: Maximum value for the metric. If not specified, it is assumed to be unbounded.
+        threshold:
+          type: number
+          format: float
+          description: Default pass/fail threshold for this metric.
         is_primary:
           type: boolean
           description: Indicates if this metric is primary when there are multiple metrics.
@@ -11162,6 +11026,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FoundryTimestamp:
+      type: integer
+      format: unixtime
     FunctionToolCall:
       type: object
       required:
@@ -11703,8 +11570,8 @@ components:
           type: string
           description: The unique ID of the memory item.
         updated_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The last update time of the memory item.
         scope:
           type: string
@@ -11990,12 +11857,12 @@ components:
           type: string
           description: The unique identifier of the memory store.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the memory store was created.
         updated_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the memory store was last updated.
         name:
           type: string
@@ -27992,7 +27859,7 @@ components:
           description: The unique identifier of the skill.
         has_blob:
           type: boolean
-          description: Whether the skill was created from a gzip blob package.
+          description: Whether the skill was created from a zip blob package.
         name:
           type: string
           maxLength: 63
@@ -28284,6 +28151,36 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
+    TestingCriterionAzureAIEvaluator:
+      type: object
+      required:
+        - type
+        - name
+        - evaluator_name
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_evaluator
+          description: The object type, which is always `azure_ai_evaluator`.
+        name:
+          type: string
+          description: The name of the grader.
+        evaluator_name:
+          type: string
+          description: The name of the evaluator.
+        evaluator_version:
+          type: string
+          description: The version of the evaluator. Latest version if not specified.
+        initialization_parameters:
+          type: object
+          description: The initialization parameters for the evaluation. Must support structured outputs.
+        data_mapping:
+          type: object
+          additionalProperties:
+            type: string
+          description: The model to use for the evaluation. Must support structured outputs.
+      title: AzureAIEvaluatorGrader
     ToolCallOutputContent:
       anyOf:
         - type: object
@@ -28425,8 +28322,8 @@ components:
                 For scheduled evaluations this is inferred from the recurrence interval.
           default: 168
         end_time:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time.
         max_traces:
           type: integer

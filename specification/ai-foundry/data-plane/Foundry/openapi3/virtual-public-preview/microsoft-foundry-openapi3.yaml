@@ -7341,7 +7341,7 @@ paths:
         '200':
           description: The response body for downloading a skill package.
           content:
-            application/gzip:
+            application/zip:
               schema:
                 type: string
                 format: binary
@@ -7359,7 +7359,7 @@ paths:
   /skills:import:
     post:
       operationId: Skills_createSkillFromPackage
-      description: Creates a skill from a gzip package.
+      description: Creates a skill from a zip package.
       parameters:
         - name: Foundry-Features
           in: header
@@ -7394,11 +7394,11 @@ paths:
       requestBody:
         required: true
         content:
-          application/gzip:
+          application/zip:
             schema:
               type: string
               format: binary
-        description: The gzip package used to create the skill.
+        description: The zip package used to create the skill.
       x-ms-foundry-meta:
         conditional_previews:
           - Skills=V1Preview
@@ -8830,8 +8830,8 @@ components:
           maxLength: 512
           description: A human-readable description of the agent.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
@@ -10568,7 +10568,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
-              - $ref: '#/components/schemas/EvalGraderAzureAIEvaluator'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
           description: A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).
         properties:
           type: object
@@ -11069,7 +11069,7 @@ components:
               - $ref: '#/components/schemas/OpenAI.EvalGraderTextSimilarity'
               - $ref: '#/components/schemas/OpenAI.EvalGraderPython'
               - $ref: '#/components/schemas/OpenAI.EvalGraderScoreModel'
-              - $ref: '#/components/schemas/EvalGraderAzureAIEvaluator'
+              - $ref: '#/components/schemas/TestingCriterionAzureAIEvaluator'
           description: A list of testing criteria.
         created_at:
           type: integer
@@ -11168,36 +11168,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: Represents a CSV data source for evaluation runs.
-    EvalGraderAzureAIEvaluator:
-      type: object
-      required:
-        - type
-        - name
-        - evaluator_name
-      properties:
-        type:
-          type: string
-          enum:
-            - azure_ai_evaluator
-          description: The object type, which is always `azure_ai_evaluator`.
-        name:
-          type: string
-          description: The name of the grader.
-        evaluator_name:
-          type: string
-          description: The name of the evaluator.
-        evaluator_version:
-          type: string
-          description: The version of the evaluator. Latest version if not specified.
-        initialization_parameters:
-          type: object
-          description: The initialization parameters for the evaluation. Must support structured outputs.
-        data_mapping:
-          type: object
-          additionalProperties:
-            type: string
-          description: The model to use for the evaluation. Must support structured outputs.
-      title: AzureAIEvaluatorGrader
     EvalResult:
       type: object
       required:
@@ -12291,6 +12261,10 @@ components:
           type: number
           format: float
           description: Maximum value for the metric. If not specified, it is assumed to be unbounded.
+        threshold:
+          type: number
+          format: float
+          description: Default pass/fail threshold for this metric.
         is_primary:
           type: boolean
           description: Indicates if this metric is primary when there are multiple metrics.
@@ -12576,6 +12550,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FoundryTimestamp:
+      type: integer
+      format: unixtime
     FunctionToolCall:
       type: object
       required:
@@ -13163,8 +13140,8 @@ components:
           type: string
           description: The unique ID of the memory item.
         updated_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The last update time of the memory item.
         scope:
           type: string
@@ -13483,12 +13460,12 @@ components:
           type: string
           description: The unique identifier of the memory store.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the memory store was created.
         updated_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the memory store was last updated.
         name:
           type: string
@@ -29543,7 +29520,7 @@ components:
           description: The unique identifier of the skill.
         has_blob:
           type: boolean
-          description: Whether the skill was created from a gzip blob package.
+          description: Whether the skill was created from a zip blob package.
         name:
           type: string
           maxLength: 63
@@ -29852,6 +29829,36 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
+    TestingCriterionAzureAIEvaluator:
+      type: object
+      required:
+        - type
+        - name
+        - evaluator_name
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_evaluator
+          description: The object type, which is always `azure_ai_evaluator`.
+        name:
+          type: string
+          description: The name of the grader.
+        evaluator_name:
+          type: string
+          description: The name of the evaluator.
+        evaluator_version:
+          type: string
+          description: The version of the evaluator. Latest version if not specified.
+        initialization_parameters:
+          type: object
+          description: The initialization parameters for the evaluation. Must support structured outputs.
+        data_mapping:
+          type: object
+          additionalProperties:
+            type: string
+          description: The model to use for the evaluation. Must support structured outputs.
+      title: AzureAIEvaluatorGrader
     ToolCallOutputContent:
       anyOf:
         - type: object
@@ -29993,8 +30000,8 @@ components:
                 For scheduled evaluations this is inferred from the recurrence interval.
           default: 168
         end_time:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/FoundryTimestamp'
           description: Unix timestamp (in seconds) marking the end of the trace query window. Defaults to the current time.
         max_traces:
           type: integer

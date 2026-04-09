@@ -3,6 +3,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -50,6 +51,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @removed(Versions.v1)
   createAgentFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -101,6 +103,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @removed(Versions.v1)
   updateAgentFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
@@ -310,6 +313,7 @@ interface Agents {
     "x-ms-foundry-meta",
     #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
   )
+  @removed(Versions.v1)
   createAgentVersionFromCode is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
