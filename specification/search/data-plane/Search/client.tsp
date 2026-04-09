@@ -21,10 +21,7 @@ namespace Customizations;
 @clientNamespace("Azure.Search.Documents")
 @clientNamespace("com.azure.search.documents", "java")
 namespace SearchClient {
-  @client({
-    name: "DocumentsClient",
-    service: Search,
-  })
+  @client
   interface Documents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -71,10 +68,7 @@ namespace SearchClient {
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
 namespace SearchIndexClient {
-  @client({
-    name: "SynonymMapsClient",
-    service: Search,
-  })
+  @client
   interface SynonymMaps {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -96,12 +90,8 @@ namespace SearchIndexClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.SynonymMaps.create;
   }
-  @client({
-    name: "IndexesClient",
-    service: Search,
-  })
+  @client
   interface Indexes {
-
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Indexes.createOrUpdate;
@@ -134,12 +124,8 @@ namespace SearchIndexClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     analyze is Search.Indexes.analyze;
   }
-  @client({
-    name: "AliasesClient",
-    service: Search,
-  })
+  @client
   interface Aliases {
-
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Aliases.createOrUpdate;
@@ -161,10 +147,7 @@ namespace SearchIndexClient {
     create is Search.Aliases.create;
   }
 
-  @client({
-    name: "KnowledgeBasesClient",
-    service: Search,
-  })
+  @client
   interface KnowledgeBases {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -187,10 +170,7 @@ namespace SearchIndexClient {
     create is Search.KnowledgeBases.create;
   }
 
-  @client({
-    name: "SourcesClient",
-    service: Search,
-  })
+  @client
   interface Sources {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -217,10 +197,7 @@ namespace SearchIndexClient {
     getStatus is Search.KnowledgeSources.getStatus;
   }
 
-  @client({
-    name: "RootClient",
-    service: Search,
-  })
+  @client
   interface Root {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -239,10 +216,7 @@ namespace SearchIndexClient {
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
 namespace SearchIndexerClient {
-  @client({
-    name: "DataSourcesClient",
-    service: Search,
-  })
+  @client
   interface DataSources {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -264,10 +238,7 @@ namespace SearchIndexerClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.DataSources.create;
   }
-  @client({
-    name: "IndexersClient",
-    service: Search,
-  })
+  @client
   interface Indexers {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -309,10 +280,7 @@ namespace SearchIndexerClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     getStatus is Search.Indexers.getStatus;
   }
-  @client({
-    name: "SkillsetsClient",
-    service: Search,
-  })
+  @client
   interface Skillsets {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -347,10 +315,7 @@ namespace SearchIndexerClient {
 @clientNamespace("Azure.Search.Documents.KnowledgeBases")
 @clientNamespace("com.azure.search.documents.knowledgebases", "java")
 namespace KnowledgeBaseRetrievalClient {
-  @client({
-    name: "KnowledgeRetrievalClient",
-    service: Search,
-  })
+  @client
   interface KnowledgeRetrieval {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
