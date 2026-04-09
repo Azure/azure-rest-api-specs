@@ -11334,7 +11334,7 @@
       "description": "The updatable properties of the Diagnostic.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiagnosticProperties",
+          "$ref": "#/definitions/DiagnosticUpdateProperties",
           "description": "The resource-specific properties for this resource."
         },
         "tags": {
@@ -11343,6 +11343,17 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "DiagnosticUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Diagnostic.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       }
     },
@@ -12987,7 +12998,7 @@
       "description": "The updatable properties of the Schema.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SchemaProperties",
+          "$ref": "#/definitions/SchemaUpdateProperties",
           "description": "The resource-specific properties for this resource."
         },
         "tags": {
@@ -12996,6 +13007,22 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "SchemaUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Schema.",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of schema",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
         }
       }
     },
@@ -13857,8 +13884,38 @@
       "description": "The updatable properties of the Solution.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionProperties",
+          "$ref": "#/definitions/SolutionUpdateProperties",
           "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SolutionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Solution.",
+      "properties": {
+        "solutionTemplateId": {
+          "type": "string",
+          "description": "Solution template Id",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the solution",
+          "readOnly": true
+        },
+        "availableSolutionTemplateVersions": {
+          "type": "array",
+          "description": "List of latest revisions for available solution template versions",
+          "items": {
+            "$ref": "#/definitions/AvailableSolutionTemplateVersion"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
         }
       }
     },
