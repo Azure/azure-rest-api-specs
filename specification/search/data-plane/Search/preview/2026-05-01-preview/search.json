@@ -16212,6 +16212,10 @@
         "semanticConfigurationName": {
           "type": "string",
           "description": "Used to specify a different semantic configuration on the target search index other than the default one."
+        },
+        "baseFilter": {
+          "type": "string",
+          "description": "A default filter condition applied to the index at retrieval time (e.g., 'State eq VA'). Can be overridden at query time via knowledge source runtime parameters."
         }
       },
       "required": [
@@ -21331,6 +21335,23 @@
         "domains": {
           "$ref": "#/definitions/WebKnowledgeSourceDomains",
           "description": "Domain allow/block configuration for web results."
+        },
+        "language": {
+          "type": "string",
+          "description": "The default language for web results. Can be overridden at query time via knowledge source runtime parameters."
+        },
+        "market": {
+          "type": "string",
+          "description": "The default market for web results. Can be overridden at query time via knowledge source runtime parameters."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default number of web results to return. Can be overridden at query time via knowledge source runtime parameters."
+        },
+        "freshness": {
+          "type": "string",
+          "description": "The default freshness filter for web results. Can be overridden at query time via knowledge source runtime parameters."
         }
       }
     },

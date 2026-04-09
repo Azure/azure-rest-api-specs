@@ -4695,6 +4695,10 @@ model SearchIndexKnowledgeSourceParameters {
 
   /** Used to specify a different semantic configuration on the target search index other than the default one. */
   semanticConfigurationName?: string;
+
+  /** A default filter condition applied to the index at retrieval time (e.g., 'State eq VA'). Can be overridden at query time via knowledge source runtime parameters. */
+  @added(Versions.v2026_05_01_preview)
+  baseFilter?: string;
 }
 
 /** Field reference for a search index. */
@@ -4809,6 +4813,22 @@ model WebKnowledgeSource extends KnowledgeSource {
 model WebKnowledgeSourceParameters {
   /** Domain allow/block configuration for web results. */
   domains?: WebKnowledgeSourceDomains;
+
+  /** The default language for web results. Can be overridden at query time via knowledge source runtime parameters. */
+  @added(Versions.v2026_05_01_preview)
+  language?: string;
+
+  /** The default market for web results. Can be overridden at query time via knowledge source runtime parameters. */
+  @added(Versions.v2026_05_01_preview)
+  market?: string;
+
+  /** The default number of web results to return. Can be overridden at query time via knowledge source runtime parameters. */
+  @added(Versions.v2026_05_01_preview)
+  count?: int32;
+
+  /** The default freshness filter for web results. Can be overridden at query time via knowledge source runtime parameters. */
+  @added(Versions.v2026_05_01_preview)
+  freshness?: string;
 }
 
 /** Domain allow/block configuration for web knowledge source. */
