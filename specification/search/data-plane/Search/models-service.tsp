@@ -4433,18 +4433,44 @@ model RescoringOptions {
 
 /** Response from a List Indexes request. If successful, it includes the full definitions of all indexes. */
 model ListIndexesResult {
+  /** The total count of indexes in the service, or null if the count was not requested. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_05_01_preview)
+  `@odata.count`?: int64;
+
   /** The indexes in the Search service. */
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchIndex[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_05_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Response from a List Indexes request. If successful, it includes the full definitions of all indexes. */
 model ListIndexesSelectedResult {
+  /** The total count of indexes in the service, or null if the count was not requested. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_05_01_preview)
+  `@odata.count`?: int64;
+
   /** The indexes in the Search service. */
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchIndexResponse[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_05_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date. */
@@ -7213,10 +7239,23 @@ model IndexStatisticsSummary {
 
 /** Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service. */
 model ListIndexStatsSummary {
+  /** The total count of index statistics in the service, or null if the count was not requested. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_05_01_preview)
+  `@odata.count`?: int64;
+
   /** The Statistics summary of all indexes in the Search service. */
   @pageItems
   @visibility(Lifecycle.Read)
   value: IndexStatisticsSummary[];
+
+  /** The URL that can be used to fetch the next set of results. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @visibility(Lifecycle.Read)
+  @nextLink
+  @added(Versions.v2026_05_01_preview)
+  `@odata.nextLink`?: string;
 }
 
 /** Controls the cardinality for chunking the content. */

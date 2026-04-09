@@ -2950,6 +2950,12 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(VectorQuery.k, "kNearestNeighbors");
 @@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
 @@clientName(SearchDocumentsResult.value, "results");
+@@clientName(ListIndexesResult.`@odata.count`, "Count");
+@@clientName(ListIndexesResult.`@odata.nextLink`, "NextLink");
+@@clientName(ListIndexesSelectedResult.`@odata.count`, "Count");
+@@clientName(ListIndexesSelectedResult.`@odata.nextLink`, "NextLink");
+@@clientName(ListIndexStatsSummary.`@odata.count`, "Count");
+@@clientName(ListIndexStatsSummary.`@odata.nextLink`, "NextLink");
 @@clientName(SearchRequest.count, "includeTotalCount");
 @@clientName(SearchRequest.highlight, "highlightFields");
 @@clientName(SearchRequest.search, "searchText");

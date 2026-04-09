@@ -517,6 +517,21 @@ interface Indexes {
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
+
+      /** The number of items to retrieve. Default is 50, maximum is 1000. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$top")
+      $top?: int32;
+
+      /** The number of items to skip. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$skip")
+      $skip?: int32;
+
+      /** A value that specifies whether to fetch the total count of items. Default is false. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$count")
+      $count?: boolean;
     },
     ListIndexesResult
   >;
@@ -532,6 +547,21 @@ interface Indexes {
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+
+      /** The number of items to retrieve. Default is 50, maximum is 1000. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$top")
+      $top?: int32;
+
+      /** The number of items to skip. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$skip")
+      $skip?: int32;
+
+      /** A value that specifies whether to fetch the total count of items. Default is false. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$count")
+      $count?: boolean;
     },
     ListIndexesSelectedResult
   >;
@@ -954,14 +984,42 @@ op getServiceStatistics is SearchOperation<
 /** Retrieves a summary of statistics for all indexes in the search service. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-@added(Versions.v2026_05_01_preview)
+@renamedFrom(Versions.v2026_04_01, "getIndexStatsSummary")
 @removed(Versions.v2026_04_01)
 @route("/indexstats")
+@sharedRoute
+@list
+@get
+op getIndexStatsSummaryRemoved is SearchOperation<
+  {
+    ...acceptHeaderMinimal;
+  },
+  ListIndexStatsSummary
+>;
+
+/** Retrieves a summary of statistics for all indexes in the search service. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+@added(Versions.v2026_05_01_preview)
+@route("/indexstats")
+@sharedRoute
 @list
 @get
 op getIndexStatsSummary is SearchOperation<
   {
     ...acceptHeaderMinimal;
+
+    /** The number of items to retrieve. Default is 50, maximum is 1000. */
+    @query("$top")
+    $top?: int32;
+
+    /** The number of items to skip. */
+    @query("$skip")
+    $skip?: int32;
+
+    /** A value that specifies whether to fetch the total count of items. Default is false. */
+    @query("$count")
+    $count?: boolean;
   },
   ListIndexStatsSummary
 >;

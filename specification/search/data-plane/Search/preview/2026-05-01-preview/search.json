@@ -1287,6 +1287,29 @@
             "x-ms-client-name": "accept"
           },
           {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of items to retrieve. Default is 50, maximum is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "A value that specifies whether to fetch the total count of items. Default is false.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -1303,6 +1326,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       },
       "post": {
@@ -2515,6 +2541,29 @@
             "x-ms-client-name": "accept"
           },
           {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of items to retrieve. Default is 50, maximum is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "A value that specifies whether to fetch the total count of items. Default is false.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -2531,6 +2580,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       }
     },
@@ -4173,6 +4225,29 @@
             "collectionFormat": "csv"
           },
           {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of items to retrieve. Default is 50, maximum is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "The number of items to skip.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "description": "A value that specifies whether to fetch the total count of items. Default is false.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -4189,6 +4264,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink"
         }
       }
     }
@@ -12230,12 +12308,23 @@
       "type": "object",
       "description": "Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.",
       "properties": {
+        "@odata.count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count of index statistics in the service, or null if the count was not requested.",
+          "readOnly": true
+        },
         "value": {
           "type": "array",
           "description": "The Statistics summary of all indexes in the Search service.",
           "items": {
             "$ref": "#/definitions/IndexStatisticsSummary"
           },
+          "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
           "readOnly": true
         }
       },
@@ -12264,12 +12353,23 @@
       "type": "object",
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes.",
       "properties": {
+        "@odata.count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count of indexes in the service, or null if the count was not requested.",
+          "readOnly": true
+        },
         "value": {
           "type": "array",
           "description": "The indexes in the Search service.",
           "items": {
             "$ref": "#/definitions/SearchIndex"
           },
+          "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
           "readOnly": true
         }
       },
@@ -12281,12 +12381,23 @@
       "type": "object",
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes.",
       "properties": {
+        "@odata.count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count of indexes in the service, or null if the count was not requested.",
+          "readOnly": true
+        },
         "value": {
           "type": "array",
           "description": "The indexes in the Search service.",
           "items": {
             "$ref": "#/definitions/SearchIndexResponse"
           },
+          "readOnly": true
+        },
+        "@odata.nextLink": {
+          "type": "string",
+          "description": "The URL that can be used to fetch the next set of results.",
           "readOnly": true
         }
       },
