@@ -5822,37 +5822,3 @@ model AcceleratorDeploymentListResult {
   @visibility(Lifecycle.Read)
   value?: AcceleratorDeployment[];
 }
-
-/**
- * The request body used to update tags, SKU, and mutable properties of an accelerator deployment.
- */
-@added(Versions.v2026_03_15_preview)
-model AcceleratorDeploymentPatch {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'AcceleratorDeploymentPatch' to support extensible key-value pairs matching service behavior"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-
-  /**
-   * The resource model definition representing SKU.
-   */
-  sku?: Sku;
-
-  /**
-   * Mutable properties of an accelerator deployment.
-   */
-  properties?: AcceleratorDeploymentMutableProperties;
-}
-
-/**
- * Mutable properties of an accelerator deployment, used for PATCH operations.
- */
-@added(Versions.v2026_03_15_preview)
-model AcceleratorDeploymentMutableProperties {
-  /**
-   * Template auto-upgrade policy.
-   */
-  versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
-}

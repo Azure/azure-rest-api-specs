@@ -9959,42 +9959,6 @@
         }
       }
     },
-    "AcceleratorDeploymentMutableProperties": {
-      "type": "object",
-      "description": "Mutable properties of an accelerator deployment, used for PATCH operations.",
-      "properties": {
-        "versionUpgradeOption": {
-          "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
-          "description": "Template auto-upgrade policy."
-        }
-      }
-    },
-    "AcceleratorDeploymentPatch": {
-      "type": "object",
-      "description": "The request body used to update tags, SKU, and mutable properties of an accelerator deployment.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The resource model definition representing SKU."
-        },
-        "properties": {
-          "$ref": "#/definitions/AcceleratorDeploymentMutableProperties",
-          "description": "Mutable properties of an accelerator deployment."
-        }
-      }
-    },
     "AcceleratorDeploymentProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services accelerator deployment.",
