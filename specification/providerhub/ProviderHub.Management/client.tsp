@@ -162,7 +162,6 @@ using Microsoft.ProviderHub;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceType.identityManagement, "csharp");
 @@access(ResourceProviderAuthentication, Access.internal, "csharp");
 
-// Step 6: Rename flattened inner properties to match old SDK names
 @@clientName(ResourceProviderAuthentication.allowedAudiences, "ProviderAuthenticationAllowedAudiences", "csharp");
 @@clientName(ResourceProviderManifestPropertiesNotificationSettings.subscriberSettings, "NotificationSubscriberSettings", "csharp");
 @@clientName(ResourceProviderManifestPropertiesResourceGroupLockOptionDuringMove.blockActionVerb, "ResourceGroupLockOptionDuringMoveBlockActionVerb", "csharp");
@@ -171,233 +170,76 @@ using Microsoft.ProviderHub;
 @@clientName(Intent.RP_CONTRACT, "RPContract", "csharp");
 @@clientName(SubscriptionLifecycleNotificationSpecifications.softDeleteTTL, "SoftDeleteTtl", "csharp");
 
-// Step 6: ApiCompat fixes — restore old type names
-
-// Group A: Enum/union renames (singular ← plural)
 @@clientName(LoggingDetails, "LoggingDetail", "csharp");
 @@clientName(LoggingDirections, "LoggingDirection", "csharp");
 @@clientName(SkipNotifications, "SkipNotification", "csharp");
 @@clientName(TemplateDeploymentPreflightNotifications, "TemplateDeploymentPreflightNotification", "csharp");
 
-// Group A: Resource type renames — restore old resource/collection class names
-// SkuResources interface = base level (resourceType/skus/{sku}) → old name ResourceTypeSku
 @@clientName(SkuResources, "ResourceTypeSku", "csharp");
-// Skus interface = nested level 1 (nestedResourceTypeFirst/skus/{sku}) → old name NestedResourceTypeFirstSku
 @@clientName(Skus, "NestedResourceTypeFirstSku", "csharp");
-// SkuResourceOperations interface = nested level 2 → old name NestedResourceTypeSecondSku
 @@clientName(SkuResourceOperations, "NestedResourceTypeSecondSku", "csharp");
-// SkuResourceOperationGroup interface = nested level 3 → old name NestedResourceTypeThirdSku
 @@clientName(SkuResourceOperationGroup, "NestedResourceTypeThirdSku", "csharp");
-// NewRegionFrontloadRelease interface → old name was RegistrationNewRegionFrontloadRelease{Collection,Resource}
 @@clientName(NewRegionFrontloadRelease, "RegistrationNewRegionFrontloadReleases", "csharp");
 
-// Group B: Guid param — AuthorizedApplication key was System.Guid in old SDK
 @@alternateType(AuthorizedApplication.name, Azure.Core.uuid, "csharp");
 
-// ManifestLevelPropertyBag is internalized by PostProcessor — keep it public
 @@access(ManifestLevelPropertyBag, Access.public, "csharp");
 
-// SkuLocationInfo.location was AzureLocation in old SDK
 @@alternateType(SkuLocationInfo.location, Azure.Core.azureLocation, "csharp");
 
-// ResourceManagementEntity.location was AzureLocation in old SDK
 @@alternateType(ResourceManagementEntity.location, Azure.Core.azureLocation, "csharp");
 
 
-// Operation renames to match old SDK method names
 @@clientName(ProviderRegistrations.deleteResources, "DeleteResourcesResourceAction", "csharp");
 @@clientName(ProviderRegistrations.newRegionFrontloadReleaseGenerateManifest, "GenerateManifestNewRegionFrontloadRelease", "csharp");
 
-// Property renames to match old SDK names
 @@clientName(IdentityManagementProperties.type, "ManagementType", "csharp");
 @@clientName(ThrottlingMetric.type, "MetricType", "csharp");
 @@clientName(TypedErrorInfo.type, "TypedErrorInfoType", "csharp");
 
-// Replacement model: DefaultRolloutSpecification
-// The spec defines empty wrapper models (e.g. DefaultRolloutSpecificationCanary extends CanaryTrafficRegionRolloutConfiguration)
-// but old autorest collapsed these wrappers and used the base types directly.
-// This replacement uses the base types to match old SDK behavior.
-model DefaultRolloutSpecificationReplacement {
-  /** The expedited rollout definition. */
-  expeditedRollout?: ExpeditedRolloutDefinition;
+@@alternateType(DefaultRolloutSpecificationExpeditedRollout, ExpeditedRolloutDefinition, "csharp");
+@@alternateType(DefaultRolloutSpecificationCanary, CanaryTrafficRegionRolloutConfiguration, "csharp");
+@@alternateType(DefaultRolloutSpecificationLowTraffic, TrafficRegionRolloutConfiguration, "csharp");
+@@alternateType(DefaultRolloutSpecificationMediumTraffic, TrafficRegionRolloutConfiguration, "csharp");
+@@alternateType(DefaultRolloutSpecificationHighTraffic, TrafficRegionRolloutConfiguration, "csharp");
+@@alternateType(DefaultRolloutSpecificationRestOfTheWorldGroupOne, TrafficRegionRolloutConfiguration, "csharp");
+@@alternateType(DefaultRolloutSpecificationRestOfTheWorldGroupTwo, TrafficRegionRolloutConfiguration, "csharp");
+@@alternateType(DefaultRolloutSpecificationProviderRegistration, ProviderRegistration, "csharp");
 
-  /** The canary traffic region configuration. */
-  canary?: CanaryTrafficRegionRolloutConfiguration;
+@@alternateType(CustomRolloutPropertiesSpecification, CustomRolloutSpecification, "csharp");
+@@alternateType(CustomRolloutPropertiesStatus, CustomRolloutStatus, "csharp");
 
-  /** The low traffic region configuration. */
-  lowTraffic?: TrafficRegionRolloutConfiguration;
+@@alternateType(DefaultRolloutPropertiesSpecification, DefaultRolloutSpecification, "csharp");
+@@alternateType(DefaultRolloutPropertiesStatus, DefaultRolloutStatus, "csharp");
 
-  /** The medium traffic region configuration. */
-  mediumTraffic?: TrafficRegionRolloutConfiguration;
+@@alternateType(CustomRolloutSpecificationCanary, TrafficRegions, "csharp");
+@@alternateType(CustomRolloutSpecificationProviderRegistration, ProviderRegistration, "csharp");
 
-  /** The high traffic region configuration. */
-  highTraffic?: TrafficRegionRolloutConfiguration;
+@@alternateType(CustomRolloutStatusManifestCheckinStatus, CheckinManifestInfo, "csharp");
 
-  /** The rest of the world group one region configuration. */
-  restOfTheWorldGroupOne?: TrafficRegionRolloutConfiguration;
+@@alternateType(DefaultRolloutStatusManifestCheckinStatus, CheckinManifestInfo, "csharp");
 
-  /** The rest of the world group two region configuration. */
-  restOfTheWorldGroupTwo?: TrafficRegionRolloutConfiguration;
+@@alternateType(ResourceTypeRegistrationPropertiesExtensionOptions, ResourceTypeExtensionOptions, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesFeaturesRule, FeaturesRule, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications, SubscriptionLifecycleNotificationSpecifications, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesIdentityManagement, IdentityManagementProperties, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesCheckNameAvailabilitySpecifications, CheckNameAvailabilitySpecifications, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesRequestHeaderOptions, RequestHeaderOptions, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesTemplateDeploymentOptions, TemplateDeploymentOptions, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesResourceMovePolicy, ResourceMovePolicy, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesResourceGraphConfiguration, ResourceGraphConfiguration, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesManagement, ResourceProviderManagement, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesTemplateDeploymentPolicy, TemplateDeploymentPolicy, "csharp");
+@@alternateType(ResourceTypeRegistrationPropertiesDstsConfiguration, DstsConfiguration, "csharp");
 
-  /** The provider registration. */
-  providerRegistration?: ProviderRegistration;
-
-  /** The resource type registrations. */
-  resourceTypeRegistrations?: ResourceTypeRegistration[];
-
-  /** The auto provisioning config. */
-  autoProvisionConfig?: DefaultRolloutSpecificationAutoProvisionConfig;
-}
-
-@@alternateType(DefaultRolloutSpecification, DefaultRolloutSpecificationReplacement, "csharp");
-@@clientName(DefaultRolloutSpecification, "DefaultRolloutSpecificationOriginal", "csharp");
-@@clientName(DefaultRolloutSpecificationReplacement, "DefaultRolloutSpecification", "csharp");
-
-// Replacement model: CustomRolloutProperties
-model CustomRolloutPropertiesReplacement {
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /** The specification. */
-  specification: CustomRolloutSpecification;
-
-  /** The status. */
-  status?: CustomRolloutStatus;
-}
-
-@@alternateType(CustomRolloutProperties, CustomRolloutPropertiesReplacement, "csharp");
-@@clientName(CustomRolloutProperties, "CustomRolloutPropertiesOriginal", "csharp");
-@@clientName(CustomRolloutPropertiesReplacement, "CustomRolloutProperties", "csharp");
-
-// Replacement model: DefaultRolloutProperties
-model DefaultRolloutPropertiesReplacement {
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /** The default rollout specification. */
-  specification?: DefaultRolloutSpecification;
-
-  /** The default rollout status. */
-  status?: DefaultRolloutStatus;
-}
-
-@@alternateType(DefaultRolloutProperties, DefaultRolloutPropertiesReplacement, "csharp");
-@@clientName(DefaultRolloutProperties, "DefaultRolloutPropertiesOriginal", "csharp");
-@@clientName(DefaultRolloutPropertiesReplacement, "DefaultRolloutProperties", "csharp");
-
-// Replacement model: CustomRolloutSpecification
-model CustomRolloutSpecificationReplacement {
-  /** The auto provisioning configuration. */
-  autoProvisionConfig?: CustomRolloutSpecificationAutoProvisionConfig;
-
-  /** The canary region configuration. */
-  canary?: TrafficRegions;
-
-  /** The list of ARM regions scoped for the release. */
-  releaseScopes?: string[];
-
-  /** Whether refreshing subscription registration is enabled or disabled. */
-  refreshSubscriptionRegistration?: boolean;
-
-  /** Whether release scope validation should be skipped. */
-  skipReleaseScopeValidation?: boolean;
-
-  /** The provider registration. */
-  providerRegistration?: ProviderRegistration;
-
-  /** The resource type registrations. */
-  resourceTypeRegistrations?: ResourceTypeRegistration[];
-}
-
-@@alternateType(CustomRolloutSpecification, CustomRolloutSpecificationReplacement, "csharp");
-@@clientName(CustomRolloutSpecification, "CustomRolloutSpecificationOriginal", "csharp");
-@@clientName(CustomRolloutSpecificationReplacement, "CustomRolloutSpecification", "csharp");
-
-// Replacement model: CustomRolloutStatus
-model CustomRolloutStatusReplacement {
-  /** The completed regions. */
-  completedRegions?: string[];
-
-  /** The failed or skipped regions. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  failedOrSkippedRegions?: Record<ExtendedErrorInfo>;
-
-  /** The manifest checkin status. */
-  manifestCheckinStatus?: CheckinManifestInfo;
-}
-
-@@alternateType(CustomRolloutStatus, CustomRolloutStatusReplacement, "csharp");
-@@clientName(CustomRolloutStatus, "CustomRolloutStatusOriginal", "csharp");
-@@clientName(CustomRolloutStatusReplacement, "CustomRolloutStatus", "csharp");
-
-// Replacement model: DefaultRolloutStatus
-model DefaultRolloutStatusReplacement extends RolloutStatusBase {
-  /** The next traffic region. */
-  nextTrafficRegion?: TrafficRegionCategory;
-
-  /** The next traffic region scheduled time. */
-  nextTrafficRegionScheduledTime?: utcDateTime;
-
-  /** The subscription reregistration result. */
-  subscriptionReregistrationResult?: SubscriptionReregistrationResult;
-
-  /** The manifest checkin status. */
-  manifestCheckinStatus?: CheckinManifestInfo;
-}
-
-@@alternateType(DefaultRolloutStatus, DefaultRolloutStatusReplacement, "csharp");
-@@clientName(DefaultRolloutStatus, "DefaultRolloutStatusOriginal", "csharp");
-@@clientName(DefaultRolloutStatusReplacement, "DefaultRolloutStatus", "csharp");
-
-// Replacement model: ResourceTypeRegistrationProperties
-// Uses OmitProperties to spread all non-wrapper properties from the original,
-// then explicitly declares the 12 wrapper properties with their base types.
-model ResourceTypeRegistrationPropertiesReplacement {
-  extensionOptions?: ResourceTypeExtensionOptions;
-  featuresRule?: FeaturesRule;
-  subscriptionLifecycleNotificationSpecifications?: SubscriptionLifecycleNotificationSpecifications;
-  identityManagement?: IdentityManagementProperties;
-  checkNameAvailabilitySpecifications?: CheckNameAvailabilitySpecifications;
-  requestHeaderOptions?: RequestHeaderOptions;
-  templateDeploymentOptions?: TemplateDeploymentOptions;
-  resourceMovePolicy?: ResourceMovePolicy;
-  resourceGraphConfiguration?: ResourceGraphConfiguration;
-  management?: ResourceProviderManagement;
-  templateDeploymentPolicy?: TemplateDeploymentPolicy;
-  dstsConfiguration?: DstsConfiguration;
-
-  ...OmitProperties<
-    ResourceTypeRegistrationProperties,
-    "extensionOptions"
-      | "featuresRule"
-      | "subscriptionLifecycleNotificationSpecifications"
-      | "identityManagement"
-      | "checkNameAvailabilitySpecifications"
-      | "requestHeaderOptions"
-      | "templateDeploymentOptions"
-      | "resourceMovePolicy"
-      | "resourceGraphConfiguration"
-      | "management"
-      | "templateDeploymentPolicy"
-      | "dstsConfiguration"
-  >;
-}
-
-@@alternateType(ResourceTypeRegistrationProperties, ResourceTypeRegistrationPropertiesReplacement, "csharp");
-@@clientName(ResourceTypeRegistrationProperties, "ResourceTypeRegistrationPropertiesOriginal", "csharp");
-@@clientName(ResourceTypeRegistrationPropertiesReplacement, "ResourceTypeRegistrationProperties", "csharp");
-
-// Experiment: directly swap wrapper with base type
 @@alternateType(LoggingRuleHiddenPropertyPaths, LoggingHiddenPropertyPath, "csharp");
 
-// Force visibility for base types that lost public references when wrappers were replaced
 @@usage(ResourceProviderAuthentication, Usage.input | Usage.output, "csharp");
 @@usage(FeaturesRule, Usage.input | Usage.output, "csharp");
 @@access(FeaturesRule, Access.public, "csharp");
 @@usage(PrivateResourceProviderConfiguration, Usage.input | Usage.output, "csharp");
 @@usage(IdentityManagement, Usage.input | Usage.output, "csharp");
 
-// Direct wrapper→base replacements for all remaining empty wrapper models
 @@alternateType(ProviderRegistrationPropertiesProviderHubMetadata, ProviderHubMetadata, "csharp");
 @@alternateType(ProviderHubMetadataProviderAuthentication, ResourceProviderAuthentication, "csharp");
 @@alternateType(ProviderHubMetadataThirdPartyProviderAuthorization, ThirdPartyProviderAuthorization, "csharp");
