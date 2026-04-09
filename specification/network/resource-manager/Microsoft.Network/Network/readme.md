@@ -4613,9 +4613,19 @@ directive:
       - $.definitions.GatewayRouteSetsInformation.properties.circuitsMetadataMap
   - suppress: AvoidAdditionalProperties
     from: virtualWan.json
+    where:
+      - $.definitions.VwanExpressRouteGatewayRouteSetsInformation.properties.circuitsMetadataMap
+      - $.definitions.VwanExpressRouteGatewayRouteSet.properties.details
     reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
   - suppress: ParametersInPost
     from: virtualWan.json
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverAllTestsDetails'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getFailoverSingleTestDetails'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/startSiteFailoverTest'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/stopSiteFailoverTest'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getResiliencyInformation'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/getRoutesInformation'].post
     reason: There are existing APIs in the file using the same format. Suppress it to avoid breaking change because it is referenced by all Express Route Gateway APIs.
 ```
 
