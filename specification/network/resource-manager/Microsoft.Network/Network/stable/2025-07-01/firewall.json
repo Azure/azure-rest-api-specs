@@ -221,6 +221,9 @@
           },
           "Get Azure Firewall With management subnet": {
             "$ref": "./examples/AzureFirewallGetWithMgmtSubnet.json"
+          },
+          "Get Azure Firewall With AFC Control Plane": {
+            "$ref": "./examples/AzureFirewallGetWithAfcControlPlane.json"
           }
         }
       },
@@ -255,6 +258,13 @@
             "schema": {
               "$ref": "#/definitions/AzureFirewall"
             }
+          },
+          {
+            "name": "createAfcControlPlane",
+            "in": "query",
+            "description": "When set to true, creates an AFC control plane for the Azure Firewall.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -306,6 +316,9 @@
           },
           "Create Azure Firewall in virtual Hub": {
             "$ref": "./examples/AzureFirewallPutInHub.json"
+          },
+          "Create Azure Firewall With AFC Control Plane": {
+            "$ref": "./examples/AzureFirewallPutWithAfcControlPlane.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1347,6 +1360,11 @@
         "autoscaleConfiguration": {
           "$ref": "#/definitions/AzureFirewallAutoscaleConfiguration",
           "description": "Properties to provide a custom autoscale configuration to this azure firewall."
+        },
+        "afcControlPlaneConfiguration": {
+          "$ref": "#/definitions/AfcControlPlaneConfiguration",
+          "description": "AFC control plane configuration for the Azure Firewall.",
+          "readOnly": true
         }
       }
     },
@@ -1494,6 +1512,17 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of Public IP addresses associated with azure firewall."
+        }
+      }
+    },
+    "AfcControlPlaneConfiguration": {
+      "type": "object",
+      "description": "AFC control plane configuration for the Azure Firewall.",
+      "properties": {
+        "serviceEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The endpoint URL of the AFC control plane associated with this Azure Firewall."
         }
       }
     },
