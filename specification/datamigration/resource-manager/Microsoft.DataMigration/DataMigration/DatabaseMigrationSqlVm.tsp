@@ -58,8 +58,6 @@ interface DatabaseMigrationSqlVms {
   /**
    * Retrieve the specified database migration for a given SQL VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseMigrationsSqlVm_Get")
   @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlVmOps.Read<
     DatabaseMigrationSqlVm,
@@ -83,8 +81,6 @@ interface DatabaseMigrationSqlVms {
   /**
    * Create a new database migration to a given SQL VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseMigrationsSqlVm_CreateOrUpdate")
   @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlVmOps.CreateOrUpdateAsync<
     DatabaseMigrationSqlVm,
@@ -95,8 +91,6 @@ interface DatabaseMigrationSqlVms {
   /**
    * Delete Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseMigrationsSqlVm_Delete")
   @tag("DatabaseMigrationsSqlVm")
   delete is DatabaseMigrationSqlVmOps.DeleteWithoutOkAsync<
     DatabaseMigrationSqlVm,

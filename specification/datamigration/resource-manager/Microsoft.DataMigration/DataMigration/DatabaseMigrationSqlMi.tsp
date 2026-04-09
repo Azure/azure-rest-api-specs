@@ -58,8 +58,6 @@ interface DatabaseMigrationSqlMis {
   /**
    * Retrieve the specified database migration for a given SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseMigrationsSqlMi_Get")
   @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlMiOps.Read<
     DatabaseMigrationSqlMi,
@@ -83,8 +81,6 @@ interface DatabaseMigrationSqlMis {
   /**
    * Create a new database migration to a given SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseMigrationsSqlMi_CreateOrUpdate")
   @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlMiOps.CreateOrUpdateAsync<
     DatabaseMigrationSqlMi,
@@ -95,8 +91,6 @@ interface DatabaseMigrationSqlMis {
   /**
    * Delete Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseMigrationsSqlMi_Delete")
   @tag("DatabaseMigrations")
   delete is DatabaseMigrationSqlMiOps.DeleteWithoutOkAsync<
     DatabaseMigrationSqlMi,

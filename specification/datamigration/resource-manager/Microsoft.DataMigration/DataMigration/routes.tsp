@@ -20,7 +20,6 @@ interface ResourceSkusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get supported SKUs")
-  @operationId("ResourceSkus_ListSkus")
   @tag("Standard operation")
   @tag("GET")
   @autoRoute
@@ -41,7 +40,6 @@ interface ServicesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Check name validity and availability")
-  @operationId("Services_CheckNameAvailability")
   @tag("Standard operation")
   @tag("POST")
   @autoRoute
@@ -61,7 +59,6 @@ interface UsagesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get resource quotas and usage information")
-  @operationId("Usages_List")
   @tag("Standard operation")
   @tag("GET")
   @autoRoute

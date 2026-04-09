@@ -71,8 +71,6 @@ interface ProjectTasks {
   /**
    * The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The GET method retrieves information about a task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Tasks_Get")
   @summary("Get task information")
   @tag("Task resource")
   @tag("Standard operation")
@@ -91,8 +89,6 @@ interface ProjectTasks {
   /**
    * The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The PUT method creates a new task or updates an existing one, although since tasks have no mutable custom properties, there is little reason to update an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Tasks_CreateOrUpdate")
   @summary("Create or update task")
   @tag("Task resource")
   @tag("Standard operation")
@@ -102,8 +98,6 @@ interface ProjectTasks {
   /**
    * The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable custom properties, there is little reason to do so.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Tasks_Update")
   @summary("Create or update task")
   @tag("Task resource")
   @tag("Standard operation")
@@ -117,8 +111,6 @@ interface ProjectTasks {
   /**
    * The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The DELETE method deletes a task, canceling it first if it's running.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Tasks_Delete")
   @summary("Delete task")
   @tag("Task resource")
   @tag("Standard operation")
@@ -137,8 +129,6 @@ interface ProjectTasks {
   /**
    * The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This method returns a list of tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Tasks_List")
   @summary("Get tasks in a service")
   @tag("Service resource")
   @tag("Standard operation")
@@ -158,8 +148,6 @@ interface ProjectTasks {
   /**
    * The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. This method cancels a task if it's currently queued or running.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Tasks_Cancel")
   @summary("Cancel a task")
   @tag("Task resource")
   @tag("Custom operation")
@@ -173,8 +161,6 @@ interface ProjectTasks {
   /**
    * The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. This method executes a command on a running task.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Tasks_Command")
   @summary("Execute a command on a task")
   @tag("Task resource")
   @tag("Custom operation")
