@@ -378,7 +378,11 @@
         "tags": [
           "AgentVersions"
         ],
+        "description": "Get a AgentVersion",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "name": "osType",
             "in": "path",
@@ -389,6 +393,7 @@
           {
             "name": "version",
             "in": "path",
+            "description": "The name of the agent version.",
             "required": true,
             "type": "string"
           }

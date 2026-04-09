@@ -110,6 +110,30 @@ interface PrivateLinkScopesOperationGroup {
   ): ArmResponse<PrivateLinkScopeValidationDetails> | ErrorResponse;
 }
 
+alias AgentVersionsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The id (Guid) of the Azure Arc PrivateLinkScope resource.
+     */
+    @path
+    @segment("osType")
+    @key
+    osType: string;
+  },
+  {},
+  {
+    /**
+     * The name of the agent version.
+     */
+    @path
+    @segment("agentVersions")
+    version: string;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface AgentVersionsOperationGroup {
   /**
@@ -134,23 +158,15 @@ interface AgentVersionsOperationGroup {
     }
   >;
 
+  /**
+   * Get a AgentVersion
+   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentVersion_Get")
   @tag("AgentVersions")
-  @route("/providers/Microsoft.HybridCompute/osType/{osType}/agentVersions/{version}")
+  @autoRoute
   @get
-  get(
-    /**
-     * The id (Guid) of the Azure Arc PrivateLinkScope resource.
-     */
-    @path
-    @segment("osType")
-    osType: string,
-
-    @path
-    @segment("agentVersions")
-    version: string,
-  ): ArmResponse<AgentVersion> | ErrorResponse;
+  get is AgentVersionsOps.Read<AgentVersion>;
 }
 
 alias NetworkConfigurationsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
