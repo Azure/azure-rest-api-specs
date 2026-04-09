@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -4711,6 +4711,10 @@ union KnowledgeSourceKind {
   /** A knowledge source that retrieves data from a Fabric Data Agent. */
   @added(Versions.v2026_05_01_preview)
   FabricDataAgent: "fabricDataAgent",
+
+  /** A knowledge source that retrieves data from Microsoft Fabric Ontology ontologies. */
+  @added(Versions.v2026_05_01_preview)
+  FabricOntology: "fabricOntology",
 }
 
 /** Knowledge Source targeting a search index. */
@@ -5256,6 +5260,26 @@ model FabricDataAgentKnowledgeSourceParameters {
 
   /** Specifies which Fabric Data Agent to access. */
   dataAgentId: string;
+}
+
+/** Configuration for Fabric Ontology knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model FabricOntologyKnowledgeSource extends KnowledgeSource {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricOntology;
+
+  /** The parameters for the Fabric Ontology knowledge source. */
+  fabricOntologyParameters: FabricOntologyKnowledgeSourceParameters;
+}
+
+/** Parameters for Fabric Ontology knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model FabricOntologyKnowledgeSourceParameters {
+  /** The Fabric workspace ID containing the ontology. */
+  workspaceId: string;
+
+  /** The ID of the ontology to use from the Fabric workspace. */
+  ontologyId: string;
 }
 
 /** Result from listing knowledge sources. */

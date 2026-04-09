@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -252,6 +252,13 @@ model FabricDataAgentKnowledgeSourceParams extends KnowledgeSourceParams {
   kind: KnowledgeSourceKind.FabricDataAgent;
 }
 
+/** Specifies runtime parameters for a Fabric Ontology knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FabricOntologyKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricOntology;
+}
+
 /** An intended query to execute without model query planning. */
 @discriminator("type")
 model KnowledgeRetrievalIntent {
@@ -360,6 +367,10 @@ union KnowledgeBaseActivityRecordType {
   /** Fabric Data Agent retrieval activity. */
   @added(Versions.v2026_05_01_preview)
   fabricDataAgent: "fabricDataAgent",
+
+  /** Fabric Ontology retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  fabricOntology: "fabricOntology",
 
   /** LLM query planning activity. */
   @added(Versions.v2026_05_01_preview)
@@ -600,6 +611,26 @@ model KnowledgeBaseFabricDataAgentActivityArguments {
   search?: string;
 }
 
+/** Represents a Fabric Ontology retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.fabricOntology;
+
+  /** The Fabric Ontology arguments for the retrieval activity. */
+  fabricOntologyArguments?: KnowledgeBaseFabricOntologyActivityArguments;
+}
+
+/** Represents the arguments the Fabric Ontology retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyActivityArguments {
+  /** The search string used to query the Fabric Ontology knowledge source. */
+  search?: string;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
@@ -706,6 +737,10 @@ union KnowledgeBaseReferenceType {
   /** Fabric Data Agent document reference. */
   @added(Versions.v2026_05_01_preview)
   fabricDataAgent: "fabricDataAgent",
+
+  /** Fabric Ontology document reference. */
+  @added(Versions.v2026_05_01_preview)
+  fabricOntology: "fabricOntology",
 }
 
 /** Base type for references. */
@@ -844,6 +879,20 @@ model KnowledgeBaseFabricDataAgentReference extends KnowledgeBaseReference {
 
   /** The Fabric Data Agent ID. */
   dataAgentId?: string;
+}
+
+/** Represents a Fabric Ontology document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricOntologyReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.fabricOntology;
+
+  /** The Fabric workspace ID. */
+  workspaceId?: string;
+
+  /** The ontology ID within the workspace. */
+  ontologyId?: string;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */

@@ -7360,6 +7360,53 @@
       ],
       "x-ms-discriminator-value": "fabricDataAgent"
     },
+    "FabricOntologyKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for Fabric Ontology knowledge source.",
+      "properties": {
+        "fabricOntologyParameters": {
+          "$ref": "#/definitions/FabricOntologyKnowledgeSourceParameters",
+          "description": "The parameters for the Fabric Ontology knowledge source."
+        }
+      },
+      "required": [
+        "fabricOntologyParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricOntology"
+    },
+    "FabricOntologyKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for Fabric Ontology knowledge source.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Fabric workspace ID containing the ontology."
+        },
+        "ontologyId": {
+          "type": "string",
+          "description": "The ID of the ontology to use from the Fabric workspace."
+        }
+      },
+      "required": [
+        "workspaceId",
+        "ontologyId"
+      ]
+    },
+    "FabricOntologyKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for a Fabric Ontology knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricOntology"
+    },
     "FacetResult": {
       "type": "object",
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.",
@@ -9547,6 +9594,7 @@
         "remoteSharePoint",
         "workIQ",
         "fabricDataAgent",
+        "fabricOntology",
         "modelQueryPlanning",
         "modelAnswerSynthesis",
         "modelWebSummarization",
@@ -9595,6 +9643,11 @@
             "name": "fabricDataAgent",
             "value": "fabricDataAgent",
             "description": "Fabric Data Agent retrieval activity."
+          },
+          {
+            "name": "fabricOntology",
+            "value": "fabricOntology",
+            "description": "Fabric Ontology retrieval activity."
           },
           {
             "name": "modelQueryPlanning",
@@ -9806,6 +9859,52 @@
         }
       ],
       "x-ms-discriminator-value": "fabricDataAgent"
+    },
+    "KnowledgeBaseFabricOntologyActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the Fabric Ontology retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query the Fabric Ontology knowledge source."
+        }
+      }
+    },
+    "KnowledgeBaseFabricOntologyActivityRecord": {
+      "type": "object",
+      "description": "Represents a Fabric Ontology retrieval activity record.",
+      "properties": {
+        "fabricOntologyArguments": {
+          "$ref": "#/definitions/KnowledgeBaseFabricOntologyActivityArguments",
+          "description": "The Fabric Ontology arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricOntology"
+    },
+    "KnowledgeBaseFabricOntologyReference": {
+      "type": "object",
+      "description": "Represents a Fabric Ontology document reference.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Fabric workspace ID."
+        },
+        "ontologyId": {
+          "type": "string",
+          "description": "The ontology ID within the workspace."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricOntology"
     },
     "KnowledgeBaseImageContent": {
       "type": "object",
@@ -10165,7 +10264,8 @@
         "web",
         "remoteSharePoint",
         "workIQ",
-        "fabricDataAgent"
+        "fabricDataAgent",
+        "fabricOntology"
       ],
       "x-ms-enum": {
         "name": "KnowledgeBaseReferenceType",
@@ -10210,6 +10310,11 @@
             "name": "fabricDataAgent",
             "value": "fabricDataAgent",
             "description": "Fabric Data Agent document reference."
+          },
+          {
+            "name": "fabricOntology",
+            "value": "fabricOntology",
+            "description": "Fabric Ontology document reference."
           }
         ]
       }
@@ -10977,7 +11082,8 @@
         "workIQ",
         "file",
         "mcpServer",
-        "fabricDataAgent"
+        "fabricDataAgent",
+        "fabricOntology"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -11037,6 +11143,11 @@
             "name": "FabricDataAgent",
             "value": "fabricDataAgent",
             "description": "A knowledge source that retrieves data from a Fabric Data Agent."
+          },
+          {
+            "name": "FabricOntology",
+            "value": "fabricOntology",
+            "description": "A knowledge source that retrieves data from Microsoft Fabric Ontology ontologies."
           }
         ]
       }
