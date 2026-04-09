@@ -434,7 +434,7 @@ model BotProperties {
    * The channel schema transformation version for the bot
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  schemaTransformationVersion?: string | null = null;
+  schemaTransformationVersion?: string | null;
 
   /**
    * The storage resourceId for the bot
@@ -1058,7 +1058,7 @@ model Site {
    * Whether this site is enabled for block user upload.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  isBlockUserUploadEnabled?: boolean | null = null;
+  isBlockUserUploadEnabled?: boolean | null;
 
   /**
    * Whether this no-storage site is disabled detailed logging for
@@ -1872,7 +1872,7 @@ model MsTeamsChannelProperties {
    * Whether this channel accepted terms
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  acceptedTerms?: boolean | null = null;
+  acceptedTerms?: boolean | null;
 }
 
 /**
