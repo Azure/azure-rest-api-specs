@@ -29,7 +29,7 @@ model MetricAlertResource
   identity?: Identity;
 }
 
-alias MetricAlertResourcesiOps = Azure.ResourceManager.Legacy.RoutedOperations<
+alias MetricAlertResourcesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   MetricAlertResourcesParentParameters,
   MetricAlertResourcesParameters,
   ResourceRoute = #{
@@ -136,7 +136,7 @@ interface MetricAlertResources {
   @get
   @tag("MetricAlertsStatus")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/status/{statusName}")
-  listByName is MetricAlertResourcesiOps.ActionSync<
+  listByName is MetricAlertResourcesOps.ActionSync<
     MetricAlertResource,
     void,
     ArmResponse<MetricAlertStatusCollection>,
