@@ -171,6 +171,15 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * The version of node image
    */
+  @renamedFrom(Versions.v2026_02_02_preview, "nodeImageVersion")
+  @removed(Versions.v2026_02_02_preview)
+  @visibility(Lifecycle.Read)
+  readOnlyNodeImageVersion?: string;
+
+  /**
+   * The version of node image
+   */
+  @added(Versions.v2026_02_02_preview)
   nodeImageVersion?: string;
 
   /**

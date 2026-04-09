@@ -31,7 +31,16 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
    * The Availability zone in which machine is located.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property intentionally at envelope level for this resource. This is a published API pattern that cannot be changed without breaking existing clients."
+  @renamedFrom(Versions.v2026_02_02_preview, "zones")
+  @removed(Versions.v2026_02_02_preview)
   @visibility(Lifecycle.Read)
+  readOnlyZones?: string[];
+
+  /**
+   * The Availability zone in which machine is located.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Property intentionally at envelope level for this resource. This is a published API pattern that cannot be changed without breaking existing clients."
+  @added(Versions.v2026_02_02_preview)
   zones?: string[];
 }
 
@@ -350,7 +359,15 @@ model MachineProperties {
   /**
    * network properties of the machine
    */
+  @renamedFrom(Versions.v2026_02_02_preview, "network")
+  @removed(Versions.v2026_02_02_preview)
   @visibility(Lifecycle.Read)
+  readOnlyNetwork?: MachineNetworkProperties;
+
+  /**
+   * network properties of the machine
+   */
+  @added(Versions.v2026_02_02_preview)
   network?: MachineNetworkProperties;
 
   /**
