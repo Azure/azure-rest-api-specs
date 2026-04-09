@@ -62,7 +62,7 @@ suppressions:
     from: loadBalancer.json
     where:
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}'].get
-    reason: "detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.
+    reason: '"detailLevel" query parameter approved for GET LoadBalancer to reduce response payload for large resources. Approved in ARM Office Hours by Gary Li on 2/13/2025.'
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
