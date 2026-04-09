@@ -14,7 +14,8 @@ namespace Microsoft.ServiceFabric;
  * The application resource.
  */
 @parentResource(Cluster)
-model ApplicationResource is Azure.ResourceManager.ProxyResource<ApplicationResourceProperties> {
+model ApplicationResource
+  is Azure.ResourceManager.ProxyResource<ApplicationResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationResource,
     KeyName = "applicationName",
@@ -25,22 +26,22 @@ model ApplicationResource is Azure.ResourceManager.ProxyResource<ApplicationReso
   /**
    * It will be deprecated in New API, resource location depends on the parent resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
   /**
    * Azure resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing property in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   tags?: Record<string>;
 
   /**
    * Azure resource etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 
@@ -394,7 +395,7 @@ model ApplicationUserAssignedIdentity {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ApplicationResourceUpdate extends ProxyResource {
+model ApplicationResourceUpdate extends PatchProxyResource {
   /**
    * The application resource properties for patch operations.
    */

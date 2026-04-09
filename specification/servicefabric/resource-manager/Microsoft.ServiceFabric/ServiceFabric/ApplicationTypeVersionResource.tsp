@@ -15,7 +15,8 @@ namespace Microsoft.ServiceFabric;
  * An application type version resource for the specified application type name resource.
  */
 @parentResource(ApplicationTypeResource)
-model ApplicationTypeVersionResource is Azure.ResourceManager.ProxyResource<ApplicationTypeVersionResourceProperties> {
+model ApplicationTypeVersionResource
+  is Azure.ResourceManager.ProxyResource<ApplicationTypeVersionResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationTypeVersionResource,
     KeyName = "version",
@@ -26,22 +27,22 @@ model ApplicationTypeVersionResource is Azure.ResourceManager.ProxyResource<Appl
   /**
    * It will be deprecated in New API, resource location depends on the parent resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
   /**
    * Azure resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing property in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Read)
   tags?: Record<string>;
 
   /**
    * Azure resource etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
