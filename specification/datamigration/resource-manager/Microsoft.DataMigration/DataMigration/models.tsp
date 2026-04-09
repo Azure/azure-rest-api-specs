@@ -7632,7 +7632,7 @@ model WaitStatistics {
   /**
    * Total wait time in millisecond(s)
    */
-  waitTimeMs?: float32;
+  waitTimeMs?: float32 = 0;
 
   /**
    * Total no. of waits
