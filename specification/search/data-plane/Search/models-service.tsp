@@ -7160,36 +7160,36 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   /** The url for the Web API. */
   uri: string;
 
+  // DEPRECATED since 2026_04_01 for any future versions; should not be used with any @added any more
   /** The headers required to make the http request. */
-  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   httpHeaders?: WebApiHttpHeaders;
 
+  // DEPRECATED since 2026_04_01 for any future versions; should not be used with any @added any more
   /** The method for the http request. */
-  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   httpMethod?: string;
 
+  // DEPRECATED since 2026_04_01 for any future versions; should not be used with any @added any more
   /** The desired timeout for the request. Default is 30 seconds. */
-  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   timeout?: duration;
 
+  // DEPRECATED since 2026_04_01 for any future versions; should not be used with any @added any more
   /** The desired batch size which indicates number of documents. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   batchSize?: int32 | null;
 
+  // DEPRECATED since 2026_04_01 for any future versions; should not be used with any @added any more
   /** If set, the number of parallel calls that can be made to the Web API. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   degreeOfParallelism?: int32 | null;
 
+  // DEPRECATED since 2026_04_01 for any future versions; should not be used with any @added any more
   /** Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   authResourceId?: string | null;
 
