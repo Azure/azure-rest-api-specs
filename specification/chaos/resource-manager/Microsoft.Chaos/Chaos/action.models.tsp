@@ -18,8 +18,7 @@ namespace Microsoft.Chaos;
 @parentResource(SubscriptionLocationResource)
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
-model Action
-  is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
+model Action is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
   ...ResourceNameParameter<
     Resource = Action,
     KeyName = "actionName",

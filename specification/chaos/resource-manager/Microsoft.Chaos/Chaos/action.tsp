@@ -72,8 +72,9 @@ interface ActionVersions {
 
 @@doc(Action.name, "String that represents an Action resource name.");
 @@doc(Action.properties, "The properties of the action resource.");
-@@doc(ActionVersion.name, "String that represents an Action Version resource name.");
-@@doc(
-  ActionVersion.properties,
+@@doc(ActionVersion.name,
+  "String that represents an Action Version resource name."
+);
+@@doc(ActionVersion.properties,
   "The properties of the action version resource."
 );
