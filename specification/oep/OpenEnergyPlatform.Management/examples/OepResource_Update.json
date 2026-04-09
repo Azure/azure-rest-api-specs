@@ -1,12 +1,27 @@
 {
   "parameters": {
-    "subscriptionId": "0000000-0000-0000-0000-000000000001",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
     "resourceGroupName": "DummyResourceGroupName",
     "resourceName": "DummyResourceName",
     "api-version": "2022-04-04-preview",
-    "properties": {
+    "resource": {
       "tags": {
-        "additionalProps1": "additional properties"
+        "environment": "production"
+      },
+      "identity": {
+        "type": "UserAssigned,SystemAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cmek-identity": {}
+        }
+      },
+      "properties": {
+        "encryption": {
+          "keyVaultProperties": {
+            "keyName": "cmek-key",
+            "keyVaultUri": "https://mykv.vault.azure.net/",
+            "userIdentity": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cmek-identity"
+          }
+        }
       }
     }
   },
@@ -16,22 +31,41 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
+          "dnsName": "DummyResourceName.oep.azure.net",
           "authAppId": "sample-id",
           "dataPartitionNames": [
             {
               "name": "dataPartition1"
-            },
-            {
-              "name": "dataPartition2"
             }
-          ]
+          ],
+          "encryption": {
+            "keyVaultProperties": {
+              "keyName": "cmek-key",
+              "keyVaultUri": "https://mykv.vault.azure.net/",
+              "userIdentity": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cmek-identity"
+            }
+          },
+          "sku": {
+            "name": "Developer"
+          }
+        },
+        "identity": {
+          "type": "UserAssigned,SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000002",
+          "tenantId": "00000000-0000-0000-0000-000000000003",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cmek-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000004",
+              "clientId": "00000000-0000-0000-0000-000000000005"
+            }
+          }
         },
         "name": "DummyResourceName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroupName/providers/Microsoft.OpenEnergyPlatform/energyServices/DummyResourceName",
         "type": "Microsoft.OpenEnergyPlatform/energyServices",
         "location": "WestUS",
         "tags": {
-          "additionalProps1": "additional properties"
+          "environment": "production"
         }
       }
     }

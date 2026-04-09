@@ -1,24 +1,27 @@
 {
   "parameters": {
     "api-version": "2022-04-04-preview",
-    "subscriptionId": "0000000-0000-0000-0000-000000000001",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
     "resourceGroupName": "DummyResourceGroupName",
     "resourceName": "DummyResourceName",
     "resource": {
       "location": "West US",
       "tags": {
-        "additionalProps1": "additional properties"
+        "environment": "production"
+      },
+      "identity": {
+        "type": "SystemAssigned"
       },
       "properties": {
         "authAppId": "sample-id",
         "dataPartitionNames": [
           {
             "name": "dataPartition1"
-          },
-          {
-            "name": "dataPartition2"
           }
-        ]
+        ],
+        "sku": {
+          "name": "Developer"
+        }
       }
     }
   },
@@ -31,18 +34,23 @@
           "dataPartitionNames": [
             {
               "name": "dataPartition1"
-            },
-            {
-              "name": "dataPartition2"
             }
-          ]
+          ],
+          "sku": {
+            "name": "Developer"
+          }
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000002",
+          "tenantId": "00000000-0000-0000-0000-000000000003"
         },
         "name": "DummyResourceName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroupName/providers/Microsoft.OpenEnergyPlatform/energyServices/DummyResourceName",
         "type": "Microsoft.OpenEnergyPlatform/energyServices",
         "location": "WestUS",
         "tags": {
-          "additionalProps1": "additional properties"
+          "environment": "production"
         }
       }
     },
@@ -54,18 +62,23 @@
           "dataPartitionNames": [
             {
               "name": "dataPartition1"
-            },
-            {
-              "name": "dataPartition2"
             }
-          ]
+          ],
+          "sku": {
+            "name": "Developer"
+          }
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000002",
+          "tenantId": "00000000-0000-0000-0000-000000000003"
         },
         "name": "DummyResourceName",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/DummyResourceGroupName/providers/Microsoft.OpenEnergyPlatform/energyServices/DummyResourceName",
         "type": "Microsoft.OpenEnergyPlatform/energyServices",
         "location": "WestUS",
         "tags": {
-          "additionalProps1": "additional properties"
+          "environment": "production"
         }
       }
     }
