@@ -127,7 +127,7 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - stable/2015-07-01/authorization-ElevateAccessCalls.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
@@ -135,15 +135,7 @@ input-file:
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - preview/2024-09-01-preview/common-types.json
   - preview/2021-12-01-preview/authorization-AccessReviewCalls.json
-  - preview/2024-09-01-preview/EligibleChildResources.json
-  - preview/2024-09-01-preview/RoleAssignmentSchedule.json
-  - preview/2024-09-01-preview/RoleAssignmentScheduleInstance.json
-  - preview/2024-09-01-preview/RoleAssignmentScheduleRequest.json
-  - preview/2024-09-01-preview/RoleEligibilitySchedule.json
-  - preview/2024-09-01-preview/RoleEligibilityScheduleInstance.json
-  - preview/2024-09-01-preview/RoleEligibilityScheduleRequest.json
-  - preview/2024-09-01-preview/RoleManagementPolicy.json
-  - preview/2024-09-01-preview/RoleManagementPolicyAssignment.json
+  - preview/2024-09-01-preview/openapi.json
   - preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
@@ -153,8 +145,7 @@ These settings apply only when `--tag=package-preview-2024-02` is specified on t
 
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
-  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
@@ -189,8 +180,7 @@ These settings apply only when `--package-2022-05-01-preview` is specified on th
 
 ```yaml $(tag) == 'package-2022-05-01-preview'
 input-file:
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
-  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
@@ -234,8 +224,7 @@ These settings apply only when `--tag=package-2022-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-04-01'
 input-file:
-  - stable/2015-07-01/authorization-ClassicAdminCalls.json
-  - stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - stable/2015-07-01/ClassicAdmin.json
   - stable/2022-04-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
