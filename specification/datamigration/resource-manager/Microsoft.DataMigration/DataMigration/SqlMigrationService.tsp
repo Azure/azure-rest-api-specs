@@ -120,7 +120,7 @@ interface SqlMigrationServices {
   listMigrations is ArmResourceActionSync<
     SqlMigrationService,
     void,
-    ArmResponse<ResourceListResult<DatabaseMigration>>
+    ArmResponse<DatabaseMigrationListResult>
   >;
 
   /**

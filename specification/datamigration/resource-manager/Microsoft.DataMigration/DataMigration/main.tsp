@@ -35,7 +35,9 @@ using TypeSpec.Versioning;
  * The SQL Migration management API provides a RESTful set of web APIs that allow users to migrate their SQL Server databases to Azure SQL.
  */
 @armProviderNamespace
-@service(#{ title: "DataMigrationManagementClient" })
+@service(#{
+  title: "Azure Database Migration Service (classic) Resource Provider",
+})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DataMigration;

@@ -102,7 +102,10 @@ interface DatabaseMigrationCosmosDbMongos {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsMongoToCosmosDbRUMongo_GetForScope")
   @tag("DatabaseMigrations")
-  getForScope is DatabaseMigrationCosmosDbMongoOps.List<DatabaseMigrationCosmosDbMongo>;
+  getForScope is DatabaseMigrationCosmosDbMongoOps.List<
+    DatabaseMigrationCosmosDbMongo,
+    Response = ArmResponse<DatabaseMigrationCosmosDbMongoListResult>
+  >;
 }
 alias DatabaseMigrationsMongoToCosmosDbvCoreMongoOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -175,7 +178,10 @@ interface DatabaseMigrationsMongoToCosmosDbvCoreMongo {
    * Get Database Migration resources for the scope.
    */
   @tag("DatabaseMigrations")
-  getForScope is DatabaseMigrationsMongoToCosmosDbvCoreMongoOps.List<DatabaseMigrationCosmosDbMongo>;
+  getForScope is DatabaseMigrationsMongoToCosmosDbvCoreMongoOps.List<
+    DatabaseMigrationCosmosDbMongo,
+    Response = ArmResponse<DatabaseMigrationCosmosDbMongoListResult>
+  >;
 }
 
 @@doc(DatabaseMigrationCosmosDbMongo.name, "Name of the migration.");

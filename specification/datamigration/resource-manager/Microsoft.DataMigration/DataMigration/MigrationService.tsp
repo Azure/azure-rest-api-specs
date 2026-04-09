@@ -56,12 +56,18 @@ interface MigrationServices {
   /**
    * Retrieve all migration services in the resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<MigrationService>;
+  listByResourceGroup is ArmResourceListByParent<
+    MigrationService,
+    Response = ArmResponse<MigrationServiceListResult>
+  >;
 
   /**
    * Retrieve all migration services in the subscriptions.
    */
-  listBySubscription is ArmListBySubscription<MigrationService>;
+  listBySubscription is ArmListBySubscription<
+    MigrationService,
+    Response = ArmResponse<MigrationServiceListResult>
+  >;
 
   /**
    * Retrieve the List of database migrations attached to the service.
@@ -73,7 +79,7 @@ interface MigrationServices {
   listMigrations is ArmResourceActionSync<
     MigrationService,
     void,
-    ArmResponse<ResourceListResult<DatabaseMigrationBase>>
+    ArmResponse<DatabaseMigrationBaseListResult>
   >;
 }
 

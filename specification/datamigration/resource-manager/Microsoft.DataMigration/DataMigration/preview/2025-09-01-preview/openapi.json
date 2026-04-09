@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DataMigrationManagementClient",
+    "title": "Azure Database Migration Service (classic) Resource Provider",
     "version": "2025-09-01-preview",
     "description": "The SQL Migration management API provides a RESTful set of web APIs that allow users to migrate their SQL Server databases to Azure SQL.",
     "x-typespec-generated": [
@@ -7574,7 +7574,8 @@
           "description": "The DatabaseMigrationBase items on this page",
           "items": {
             "$ref": "#/definitions/DatabaseMigrationBase"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7682,7 +7683,8 @@
           "description": "The DatabaseMigrationCosmosDbMongo items on this page",
           "items": {
             "$ref": "#/definitions/DatabaseMigrationCosmosDbMongo"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7703,7 +7705,8 @@
           "description": "The DatabaseMigration items on this page",
           "items": {
             "$ref": "#/definitions/DatabaseMigration"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -12666,7 +12669,8 @@
           "description": "The MigrationService items on this page",
           "items": {
             "$ref": "#/definitions/MigrationService"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -13045,11 +13049,13 @@
         },
         "connectionString": {
           "type": "string",
+          "format": "password",
           "description": "ConnectionString to connect to Mongo.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -14243,7 +14249,8 @@
           "description": "The OperationsDefinition items on this page",
           "items": {
             "$ref": "#/definitions/OperationsDefinition"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -14960,19 +14967,23 @@
         },
         "authKey1": {
           "type": "string",
+          "format": "password",
           "description": "The first authentication key.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "authKey2": {
           "type": "string",
+          "format": "password",
           "description": "The second authentication key.",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -16243,7 +16254,8 @@
           "description": "The SqlMigrationService items on this page",
           "items": {
             "$ref": "#/definitions/SqlMigrationService"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",

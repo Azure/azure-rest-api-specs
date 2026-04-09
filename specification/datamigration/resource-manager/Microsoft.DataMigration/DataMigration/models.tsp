@@ -2130,6 +2130,7 @@ model MongoConnectionInformation {
    * ConnectionString to connect to Mongo.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   connectionString?: string;
 }
 
@@ -3059,9 +3060,37 @@ model SqlMigrationServiceUpdate {
 }
 
 /**
+ * The response of a MigrationService list operation.
+ */
+model MigrationServiceListResult is Azure.Core.Page<MigrationService>;
+
+/**
+ * The response of a DatabaseMigrationBase list operation.
+ */
+model DatabaseMigrationBaseListResult is Azure.Core.Page<DatabaseMigrationBase>;
+
+/**
+ * The response of a DatabaseMigrationCosmosDbMongo list operation.
+ */
+model DatabaseMigrationCosmosDbMongoListResult
+  is Azure.Core.Page<DatabaseMigrationCosmosDbMongo>;
+
+/**
+ * The response of a DatabaseMigration list operation.
+ */
+model DatabaseMigrationListResult is Azure.Core.Page<DatabaseMigration>;
+
+/**
  * A list of SQL Migration Service.
  */
 model SqlMigrationListResult is Azure.Core.Page<SqlMigrationService>;
+
+@@visibility(OperationListResult.value, Lifecycle.Read);
+@@visibility(MigrationServiceListResult.value, Lifecycle.Read);
+@@visibility(DatabaseMigrationBaseListResult.value, Lifecycle.Read);
+@@visibility(DatabaseMigrationCosmosDbMongoListResult.value, Lifecycle.Read);
+@@visibility(DatabaseMigrationListResult.value, Lifecycle.Read);
+@@visibility(SqlMigrationListResult.value, Lifecycle.Read);
 
 /**
  * An authentication key.
@@ -3096,12 +3125,14 @@ model RegenAuthKeys {
    * The first authentication key.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @secret
   authKey1?: string;
 
   /**
    * The second authentication key.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @secret
   authKey2?: string;
 }
 
