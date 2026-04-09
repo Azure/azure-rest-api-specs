@@ -305,6 +305,9 @@ using Microsoft.DataProtection;
 @@clientName(BackupInstanceResources.suspendBackups::parameters.body,
   "parameters"
 );
+@@clientName(BackupInstanceResources.resumeProtection::parameters.body,
+  "parameters"
+);
 @@clientName(BackupInstanceResources.stopProtection::parameters.body,
   "parameters"
 );
