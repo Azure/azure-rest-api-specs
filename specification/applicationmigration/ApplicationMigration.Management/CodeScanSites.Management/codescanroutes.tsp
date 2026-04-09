@@ -58,7 +58,7 @@ interface CodeScanSites {
   >;
 
   @added(CodeScanSitesApiVersions.v2026_05_12_preview)
-  requestScan is ArmResourceActionAsync<
+  generateConfigAsync is ArmResourceActionAsync<
     CodeScanSite,
     ScanRequest,
     ConfigUriOperationStatusResponse,
