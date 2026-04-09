@@ -172,7 +172,7 @@ interface BackupInstanceResources {
    */
   resumeProtection is BackupInstanceResourceOps.ActionAsync<
     BackupInstanceResource,
-    void,
+    ResumeProtectionRequest,
     OkResponse,
     Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     OverrideErrorType = CloudError
