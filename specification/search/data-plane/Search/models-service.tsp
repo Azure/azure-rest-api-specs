@@ -4700,6 +4700,10 @@ union KnowledgeSourceKind {
   @added(Versions.v2026_05_01_preview)
   WorkIQ: "workIQ",
 
+  /** A knowledge source that supports direct file upload and indexing. */
+  @added(Versions.v2026_05_01_preview)
+  File: "file",
+
   /** A knowledge source backed by an MCP (Model Context Protocol) server. */
   @added(Versions.v2026_05_01_preview)
   McpServer: "mcpServer",
@@ -4889,6 +4893,63 @@ model EmbeddingColumnMapping {
 
   /** SQL column used as input for embedding generation. */
   sourceField: string;
+}
+
+/** Configuration for File knowledge source that supports direct file upload and indexing. */
+@added(Versions.v2026_05_01_preview)
+model FileKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.File;
+
+  /** The parameters for the File knowledge source. */
+  fileParameters: FileKnowledgeSourceParameters;
+}
+
+/** Parameters for File knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model FileKnowledgeSourceParameters {
+  /** Consolidates all general ingestion settings. Only 'minimal' content extraction mode and embeddingModel are supported for file knowledge sources. */
+  ingestionParameters?: KnowledgeSourceIngestionParameters;
+
+  /** Resources created by the file knowledge source. */
+  @visibility(Lifecycle.Read)
+  createdResources?: CreatedResources;
+}
+
+/** Metadata for a file uploaded to a File knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeSourceFile {
+  /** The unique identifier for the file. */
+  @visibility(Lifecycle.Read)
+  fileId?: string;
+
+  /** The original file name. */
+  @visibility(Lifecycle.Read)
+  fileName?: string;
+
+  /** The file size in bytes. */
+  @visibility(Lifecycle.Read)
+  fileSizeBytes?: int64;
+
+  /** The timestamp when the file was created. */
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
+  /** The timestamp when the file was last updated. */
+  @visibility(Lifecycle.Read)
+  lastUpdatedAt?: utcDateTime;
+
+  /** The error message if file processing failed, null otherwise. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @visibility(Lifecycle.Read)
+  errorMessage?: string | null;
+}
+
+/** Response from a List Files request. */
+@added(Versions.v2026_05_01_preview)
+model ListKnowledgeSourceFilesResult {
+  /** The list of files. */
+  @pageItems
+  value: KnowledgeSourceFile[];
 }
 
 /** Knowledge Source targeting web results. */

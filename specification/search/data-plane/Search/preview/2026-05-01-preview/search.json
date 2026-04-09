@@ -3202,6 +3202,160 @@
         }
       }
     },
+    "/knowledgesources('{sourceName}')/files": {
+      "get": {
+        "operationId": "KnowledgeSources_ListFiles",
+        "description": "Lists all files in a File knowledge source.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListKnowledgeSourceFilesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "KnowledgeSources_UploadFile",
+        "description": "Uploads a file to a File knowledge source for processing and indexing.",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          },
+          {
+            "name": "file",
+            "in": "body",
+            "description": "The file content to upload.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/knowledgesources('{sourceName}')/files('{fileId}')": {
+      "delete": {
+        "operationId": "KnowledgeSources_DeleteFile",
+        "description": "Deletes a file from a File knowledge source and removes all indexed content derived from it.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The unique identifier of the file to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/knowledgesources('{sourceName}')/status": {
       "get": {
         "operationId": "KnowledgeSources_GetStatus",
@@ -7255,6 +7409,40 @@
         "name"
       ]
     },
+    "FileKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for File knowledge source that supports direct file upload and indexing.",
+      "properties": {
+        "fileParameters": {
+          "$ref": "#/definitions/FileKnowledgeSourceParameters",
+          "description": "The parameters for the File knowledge source."
+        }
+      },
+      "required": [
+        "fileParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
+    "FileKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for File knowledge source.",
+      "properties": {
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings. Only 'minimal' content extraction mode and embeddingModel are supported for file knowledge sources."
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the file knowledge source.",
+          "readOnly": true
+        }
+      }
+    },
     "FreshnessPolicy": {
       "type": "object",
       "description": "Configuration for freshness-aware retrieval. When set, newer documents receive a ranking boost during retrieval.",
@@ -10517,6 +10705,46 @@
         ]
       }
     },
+    "KnowledgeSourceFile": {
+      "type": "object",
+      "description": "Metadata for a file uploaded to a File knowledge source.",
+      "properties": {
+        "fileId": {
+          "type": "string",
+          "description": "The unique identifier for the file.",
+          "readOnly": true
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The original file name.",
+          "readOnly": true
+        },
+        "fileSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The file size in bytes.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the file was created.",
+          "readOnly": true
+        },
+        "lastUpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the file was last updated.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message if file processing failed, null otherwise.",
+          "x-nullable": true,
+          "readOnly": true
+        }
+      }
+    },
     "KnowledgeSourceIngestionParameters": {
       "type": "object",
       "description": "Consolidates all general ingestion settings for knowledge sources.",
@@ -10642,6 +10870,7 @@
         "web",
         "remoteSharePoint",
         "workIQ",
+        "file",
         "mcpServer"
       ],
       "x-ms-enum": {
@@ -10687,6 +10916,11 @@
             "name": "WorkIQ",
             "value": "workIQ",
             "description": "A knowledge source that reads data from work IQ"
+          },
+          {
+            "name": "File",
+            "value": "file",
+            "description": "A knowledge source that supports direct file upload and indexing."
           },
           {
             "name": "McpServer",
@@ -11847,6 +12081,22 @@
           "description": "The knowledge bases in the service.",
           "items": {
             "$ref": "#/definitions/KnowledgeBase"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListKnowledgeSourceFilesResult": {
+      "type": "object",
+      "description": "Response from a List Files request.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of files.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSourceFile"
           }
         }
       },

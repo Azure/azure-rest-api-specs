@@ -883,6 +883,61 @@ interface KnowledgeSources {
     },
     KnowledgeSourceStatus
   >;
+
+  /** Uploads a file to a File knowledge source for processing and indexing. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_05_01_preview)
+  @route("/knowledgesources('{sourceName}')/files")
+  @post
+  uploadFile is SearchSourceOperation<
+    {
+      /** The content type of the request body. Must be application/octet-stream. */
+      @header contentType: "application/octet-stream";
+
+      /** The file content to upload. */
+      @body file: bytes;
+    },
+    KnowledgeSourceFile & {
+      /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "201";
+    }
+  >;
+
+  /** Lists all files in a File knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @route("/knowledgesources('{sourceName}')/files")
+  @list
+  @get
+  listFiles is SearchSourceOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    ListKnowledgeSourceFilesResult
+  >;
+
+  /** Deletes a file from a File knowledge source and removes all indexed content derived from it. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @route("/knowledgesources('{sourceName}')/files('{fileId}')")
+  @delete
+  deleteFile is SearchSourceOperation<
+    {
+      /** The unique identifier of the file to delete. */
+      @path fileId: string;
+
+      ...acceptHeaderMinimal;
+    },
+    {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "204" | "404";
+    }
+  >;
 }
 
 /** Gets service level statistics for a search service. */
