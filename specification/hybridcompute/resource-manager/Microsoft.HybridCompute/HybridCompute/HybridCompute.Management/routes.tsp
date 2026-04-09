@@ -13,6 +13,16 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.HybridCompute;
 
+alias LicensesOps = Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Legacy.Provider;
+  },
+  {},
+  {}
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface LicensesOperationGroup {
   /**
@@ -22,12 +32,14 @@ interface LicensesOperationGroup {
   @operationId("Licenses_ValidateLicense")
   @tag("licenses")
   @autoRoute
-  validateLicense is ArmProviderActionAsync<
+  @action("validateLicense")
+  validateLicense is LicensesOps.ActionAsync<
+    License,
     Request = License,
+    Result = void,
     Response = ArmResponse<License> &
       ArmLroLocationHeader<FinalResult = License> &
-      Azure.Core.Foundations.RetryAfterHeader,
-    Scope = SubscriptionActionScope
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

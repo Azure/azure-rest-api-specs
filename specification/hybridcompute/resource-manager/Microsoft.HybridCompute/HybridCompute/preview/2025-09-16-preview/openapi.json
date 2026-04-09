@@ -744,7 +744,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The request body",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/License"
@@ -753,24 +753,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/License"
             },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -796,7 +782,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/License"
         },
         "x-ms-long-running-operation": true
       }
