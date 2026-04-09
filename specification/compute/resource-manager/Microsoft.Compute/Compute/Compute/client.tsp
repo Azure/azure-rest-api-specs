@@ -521,3 +521,32 @@ using Compute;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(VirtualMachineScaleSetVMExtensions.list,
   "csharp"
 );
+
+// ── Type renames for backward compatibility (batch) ──
+@@clientName(PublicIPAddressSku, "ComputePublicIPAddressSku", "csharp");
+@@clientName(SecurityPostureReference, "ComputeSecurityPostureReference", "csharp");
+@@clientName(StatusLevelTypes, "ComputeStatusLevelType", "csharp");
+@@clientName(UpgradeMode, "VirtualMachineScaleSetUpgradeMode", "csharp");
+@@clientName(SettingNames, "SettingName", "csharp");
+@@clientName(ProtocolTypes, "WinRMListenerProtocolType", "csharp");
+@@clientName(InstanceViewTypes, "InstanceViewType", "csharp");
+@@clientName(MaintenanceOperationResultCodeTypes, "MaintenanceOperationResultCodeType", "csharp");
+@@clientName(OSDisk, "VirtualMachineOSDisk", "csharp");
+@@clientName(VMDiskSecurityProfile, "VirtualMachineDiskSecurityProfile", "csharp");
+@@clientName(VMSizeProperties, "VirtualMachineSizeProperties", "csharp");
+@@clientName(VirtualMachineScaleSetManagedDiskParameters, "VirtualMachineScaleSetManagedDisk", "csharp");
+@@clientName(AlternativeOption, "ImageAlternativeOption", "csharp");
+@@clientName(LogAnalyticsOperationResult, "LogAnalytics", "csharp");
+@@clientName(RunCommandResult, "VirtualMachineRunCommandResult", "csharp");
+@@clientName(ConvertToVirtualMachineScaleSetInput, "ConvertToVirtualMachineScaleSetContent", "csharp");
+@@clientName(MigrateVMToVirtualMachineScaleSetInput, "MigrateVmToVirtualMachineScaleSetContent", "csharp");
+@@clientName(OrchestrationServiceStateInput, "OrchestrationServiceStateContent", "csharp");
+@@clientName(RequestRateByIntervalInput, "RequestRateByIntervalContent", "csharp");
+@@clientName(ThrottledRequestsInput, "ThrottledRequestsContent", "csharp");
+@@clientName(VirtualMachineCaptureParameters, "VirtualMachineCaptureContent", "csharp");
+@@clientName(VirtualMachineInstallPatchesParameters, "VirtualMachineInstallPatchesContent", "csharp");
+@@clientName(VirtualMachineReimageParameters, "VirtualMachineReimageContent", "csharp");
+@@clientName(VirtualMachineScaleSetReimageParameters, "VirtualMachineScaleSetReimageContent", "csharp");
+@@clientName(VMScaleSetConvertToSinglePlacementGroupInput, "VirtualMachineScaleSetConvertToSinglePlacementGroupContent", "csharp");
+@@clientName(VMScaleSetScaleOutInput, "VirtualMachineScaleSetScaleOutContent", "csharp");
+@@clientName(SshGenerateKeyPairInputParameters, "SshGenerateKeyPairInputContent", "csharp");

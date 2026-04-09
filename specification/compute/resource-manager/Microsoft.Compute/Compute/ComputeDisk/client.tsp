@@ -48,3 +48,6 @@ using ComputeDisk;
   "ComputePrivateEndpointConnection",
   "csharp"
 );
+
+// Type rename for backward compatibility
+@@clientName(PrivateLinkResource, "ComputePrivateLinkResourceData", "csharp");

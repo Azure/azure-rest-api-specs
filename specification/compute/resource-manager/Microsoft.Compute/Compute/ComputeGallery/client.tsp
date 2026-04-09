@@ -121,3 +121,7 @@ using ComputeGallery;
   "GetCommunityGalleryImageVersions",
   "csharp"
 );
+
+// Type renames for backward compatibility
+@@clientName(EndpointTypes, "ComputeGalleryEndpointType", "csharp");
+@@clientName(GallerySoftDeletedResource, "GallerySoftDeletedResourceDetails", "csharp");

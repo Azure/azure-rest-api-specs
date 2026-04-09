@@ -62,3 +62,21 @@ namespace ComputeCombine;
   "VirtualMachineIdentityUserAssignedIdentities",
   "java"
 );
+
+// ── C# type renames for backward compatibility (migration from AutoRest) ──
+
+// Common namespace types
+@@clientName(Common.SubResource, "ComputeSubResourceData", "csharp");
+@@clientName(Common.SubResourceReadOnly, "ComputeWriteableSubResourceData", "csharp");
+
+// ComputeSku namespace types
+@@clientName(ComputeSku.ResourceSku, "ComputeResourceSku", "csharp");
+@@clientName(ComputeSku.ResourceSkuCapabilities, "ComputeResourceSkuCapabilities", "csharp");
+@@clientName(ComputeSku.ResourceSkuCapacity, "ComputeResourceSkuCapacity", "csharp");
+@@clientName(ComputeSku.ResourceSkuCapacityScaleType, "ComputeResourceSkuCapacityScaleType", "csharp");
+@@clientName(ComputeSku.ResourceSkuLocationInfo, "ComputeResourceSkuLocationInfo", "csharp");
+@@clientName(ComputeSku.ResourceSkuRestrictionInfo, "ComputeResourceSkuRestrictionInfo", "csharp");
+@@clientName(ComputeSku.ResourceSkuRestrictions, "ComputeResourceSkuRestrictions", "csharp");
+@@clientName(ComputeSku.ResourceSkuRestrictionsReasonCode, "ComputeResourceSkuRestrictionsReasonCode", "csharp");
+@@clientName(ComputeSku.ResourceSkuRestrictionsType, "ComputeResourceSkuRestrictionsType", "csharp");
+@@clientName(ComputeSku.ResourceSkuZoneDetails, "ComputeResourceSkuZoneDetails", "csharp");
