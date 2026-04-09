@@ -7928,16 +7928,6 @@
         "description"
       ]
     },
-    "ConfigTemplatePropertiesUpdate": {
-      "type": "object",
-      "description": "The updatable properties of the ConfigTemplate.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of config template"
-        }
-      }
-    },
     "ConfigTemplateUpdate": {
       "type": "object",
       "description": "The type used for update operations of the ConfigTemplate.",
@@ -7950,8 +7940,18 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/ConfigTemplatePropertiesUpdate",
+          "$ref": "#/definitions/ConfigTemplateUpdateProperties",
           "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ConfigTemplateUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ConfigTemplate.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of config template"
         }
       }
     },
@@ -8151,7 +8151,24 @@
         "hierarchies"
       ]
     },
-    "ContextPropertiesUpdate": {
+    "ContextUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Context.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ContextUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ContextUpdateProperties": {
       "type": "object",
       "description": "The updatable properties of the Context.",
       "properties": {
@@ -8170,23 +8187,6 @@
             "$ref": "#/definitions/Hierarchy"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "ContextUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Context.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ContextPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -8343,7 +8343,7 @@
       "description": "The updatable properties of the Diagnostic.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiagnosticUpdateProperties",
+          "$ref": "#/definitions/DiagnosticProperties",
           "description": "The resource-specific properties for this resource."
         },
         "tags": {
@@ -8352,17 +8352,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "DiagnosticUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Diagnostic.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
         }
       }
     },
@@ -9548,7 +9537,7 @@
       "description": "The updatable properties of the Schema.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SchemaUpdateProperties",
+          "$ref": "#/definitions/SchemaProperties",
           "description": "The resource-specific properties for this resource."
         },
         "tags": {
@@ -9557,22 +9546,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "SchemaUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Schema.",
-      "properties": {
-        "currentVersion": {
-          "type": "string",
-          "description": "Current Version of schema",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of resource",
-          "readOnly": true
         }
       }
     },
@@ -10018,7 +9991,24 @@
         "capabilities"
       ]
     },
-    "SolutionTemplatePropertiesUpdate": {
+    "SolutionTemplateUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the SolutionTemplate.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionTemplateUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SolutionTemplateUpdateProperties": {
       "type": "object",
       "description": "The updatable properties of the SolutionTemplate.",
       "properties": {
@@ -10040,23 +10030,6 @@
         "enableExternalValidation": {
           "type": "boolean",
           "description": "Flag to enable external validation"
-        }
-      }
-    },
-    "SolutionTemplateUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the SolutionTemplate.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/SolutionTemplatePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -10156,33 +10129,8 @@
       "description": "The updatable properties of the Solution.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionUpdateProperties",
+          "$ref": "#/definitions/SolutionProperties",
           "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "SolutionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Solution.",
-      "properties": {
-        "solutionTemplateId": {
-          "type": "string",
-          "description": "Solution template Id",
-          "readOnly": true
-        },
-        "availableSolutionTemplateVersions": {
-          "type": "array",
-          "description": "List of latest revisions for available solution template versions",
-          "items": {
-            "$ref": "#/definitions/AvailableSolutionTemplateVersion"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of resource",
-          "readOnly": true
         }
       }
     },
@@ -10651,57 +10599,6 @@
         "hierarchyLevel"
       ]
     },
-    "TargetPropertiesUpdate": {
-      "type": "object",
-      "description": "The updatable properties of the Target.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of target"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of target"
-        },
-        "contextId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ArmId of Context",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Edge/contexts"
-              }
-            ]
-          }
-        },
-        "targetSpecification": {
-          "type": "object",
-          "description": "target spec",
-          "additionalProperties": {}
-        },
-        "capabilities": {
-          "type": "array",
-          "description": "List of capabilities",
-          "items": {
-            "type": "string"
-          }
-        },
-        "hierarchyLevel": {
-          "type": "string",
-          "description": "Hierarchy Level"
-        },
-        "solutionScope": {
-          "type": "string",
-          "description": "Scope of the target resource",
-          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-        },
-        "state": {
-          "$ref": "#/definitions/ResourceState",
-          "description": "State of resource"
-        }
-      }
-    },
     "TargetSnapshot": {
       "type": "object",
       "description": "Target Snapshot",
@@ -10763,8 +10660,59 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/TargetPropertiesUpdate",
+          "$ref": "#/definitions/TargetUpdateProperties",
           "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "TargetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Target.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of target"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of target"
+        },
+        "contextId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ArmId of Context",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/contexts"
+              }
+            ]
+          }
+        },
+        "targetSpecification": {
+          "type": "object",
+          "description": "target spec",
+          "additionalProperties": {}
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hierarchyLevel": {
+          "type": "string",
+          "description": "Hierarchy Level"
+        },
+        "solutionScope": {
+          "type": "string",
+          "description": "Scope of the target resource",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "state": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "State of resource"
         }
       }
     },

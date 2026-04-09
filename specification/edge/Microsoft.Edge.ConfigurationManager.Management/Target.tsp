@@ -193,7 +193,7 @@ model TargetProperties {
 }
 
 @doc("The updatable properties of the Target.")
-model TargetPropertiesUpdate {
+model TargetUpdateProperties {
   @doc("Description of target")
   description?: string;
 
@@ -232,7 +232,7 @@ model TargetUpdate {
   ...ArmTagsProperty;
 
   @doc("The resource-specific properties for this resource.")
-  properties?: TargetPropertiesUpdate;
+  properties?: TargetUpdateProperties;
 }
 
 @doc("Param that indicates if the delete should be forced")

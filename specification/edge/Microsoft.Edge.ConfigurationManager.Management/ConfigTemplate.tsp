@@ -40,7 +40,7 @@ model ConfigTemplateProperties {
 }
 
 @doc("The updatable properties of the ConfigTemplate.")
-model ConfigTemplatePropertiesUpdate {
+model ConfigTemplateUpdateProperties {
   @doc("Description of config template")
   description?: string;
 }
@@ -50,7 +50,7 @@ model ConfigTemplateUpdate {
   ...ArmTagsProperty;
 
   @doc("The resource-specific properties for this resource.")
-  properties?: ConfigTemplatePropertiesUpdate;
+  properties?: ConfigTemplateUpdateProperties;
 }
 
 @doc("Config Template Resource. Contains configuration expressions using the predefined expression language.")

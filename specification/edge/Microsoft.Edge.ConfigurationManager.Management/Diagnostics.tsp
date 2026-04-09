@@ -22,16 +22,16 @@ model DiagnosticProperties {
 @doc("The updatable properties of the Diagnostic.")
 model DiagnosticUpdate {
   @doc("The resource-specific properties for this resource.")
-  properties?: DiagnosticUpdateProperties;
+  properties?: DiagnosticProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@doc("The updatable properties of the Diagnostic.")
-model DiagnosticUpdateProperties is DiagnosticProperties;
+// #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// @doc("The updatable properties of the Diagnostic.")
+// model DiagnosticUpdateProperties is DiagnosticProperties;
 
 @doc("A Diagnostic resource.")
 @resource("diagnostics")

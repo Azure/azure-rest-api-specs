@@ -47,7 +47,7 @@ model SolutionTemplateProperties {
 }
 
 @doc("The updatable properties of the SolutionTemplate.")
-model SolutionTemplatePropertiesUpdate {
+model SolutionTemplateUpdateProperties {
   @doc("Description of Solution template")
   description?: string;
 
@@ -66,7 +66,7 @@ model SolutionTemplateUpdate {
   ...ArmTagsProperty;
 
   @doc("The resource-specific properties for this resource.")
-  properties?: SolutionTemplatePropertiesUpdate;
+  properties?: SolutionTemplateUpdateProperties;
 }
 
 @doc("Solution Template Resource. Contains capabilities and operations for creating versions.")

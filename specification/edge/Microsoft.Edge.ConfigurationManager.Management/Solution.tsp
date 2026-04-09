@@ -42,11 +42,11 @@ model SolutionProperties {
 @doc("The updatable properties of the Solution.")
 model SolutionUpdate {
   @doc("The resource-specific properties for this resource.")
-  properties?: SolutionUpdateProperties;
+  properties?: SolutionProperties;
 }
 
-@doc("The updatable properties of the Solution.")
-model SolutionUpdateProperties is SolutionProperties;
+// @doc("The updatable properties of the Solution.")
+// model SolutionUpdateProperties is SolutionProperties;
 
 @doc("Solution Resource attached to a Target")
 @parentResource(Target)

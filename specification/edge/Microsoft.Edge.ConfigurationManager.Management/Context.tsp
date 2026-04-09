@@ -59,7 +59,7 @@ model ContextProperties {
 }
 
 @doc("The updatable properties of the Context.")
-model ContextPropertiesUpdate {
+model ContextUpdateProperties {
   @doc("List of Capabilities")
   @Azure.ResourceManager.identifiers(#[])
   capabilities?: Capability[];
@@ -74,7 +74,7 @@ model ContextUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   @doc("The resource-specific properties for this resource.")
-  properties?: ContextPropertiesUpdate;
+  properties?: ContextUpdateProperties;
 }
 
 @doc("Context Resource")
