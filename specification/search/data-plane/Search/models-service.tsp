@@ -4707,6 +4707,10 @@ union KnowledgeSourceKind {
   /** A knowledge source backed by an MCP (Model Context Protocol) server. */
   @added(Versions.v2026_05_01_preview)
   McpServer: "mcpServer",
+
+  /** A knowledge source that retrieves data from a Fabric Data Agent. */
+  @added(Versions.v2026_05_01_preview)
+  FabricDataAgent: "fabricDataAgent",
 }
 
 /** Knowledge Source targeting a search index. */
@@ -5232,6 +5236,26 @@ model McpServerOutputParsingSplitParameters {
 
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: SplitSkillLanguage;
+}
+
+/** Configuration for Fabric Data Agent knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model FabricDataAgentKnowledgeSource extends KnowledgeSource {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricDataAgent;
+
+  /** The parameters for the Fabric Data Agent knowledge source. */
+  fabricDataAgentParameters: FabricDataAgentKnowledgeSourceParameters;
+}
+
+/** Parameters for Fabric Data Agent knowledge source. */
+@added(Versions.v2026_05_01_preview)
+model FabricDataAgentKnowledgeSourceParameters {
+  /** Fabric workspace ID. */
+  workspaceId: string;
+
+  /** Specifies which Fabric Data Agent to access. */
+  dataAgentId: string;
 }
 
 /** Result from listing knowledge sources. */

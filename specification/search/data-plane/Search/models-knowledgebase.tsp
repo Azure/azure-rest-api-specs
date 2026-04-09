@@ -245,6 +245,13 @@ model WorkIQKnowledgeSourceParams extends KnowledgeSourceParams {
   kind: KnowledgeSourceKind.WorkIQ;
 }
 
+/** Specifies runtime parameters for a Fabric Data Agent knowledge source */
+@added(Versions.v2026_05_01_preview)
+model FabricDataAgentKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricDataAgent;
+}
+
 /** An intended query to execute without model query planning. */
 @discriminator("type")
 model KnowledgeRetrievalIntent {
@@ -349,6 +356,10 @@ union KnowledgeBaseActivityRecordType {
   /** WorkIQ retrieval activity. */
   @added(Versions.v2026_05_01_preview)
   workIQ: "workIQ",
+
+  /** Fabric Data Agent retrieval activity. */
+  @added(Versions.v2026_05_01_preview)
+  fabricDataAgent: "fabricDataAgent",
 
   /** LLM query planning activity. */
   @added(Versions.v2026_05_01_preview)
@@ -569,6 +580,26 @@ model KnowledgeBaseWorkIQActivityArguments {
   search?: string;
 }
 
+/** Represents a Fabric Data Agent retrieval activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+#suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentActivityRecord
+  extends KnowledgeBaseRetrievalActivityRecord {
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.fabricDataAgent;
+
+  /** The Fabric Data Agent arguments for the retrieval activity. */
+  fabricDataAgentArguments?: KnowledgeBaseFabricDataAgentActivityArguments;
+}
+
+/** Represents the arguments the Fabric Data Agent retrieval activity was run with. */
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentActivityArguments {
+  /** The search string used to query the Fabric Data Agent knowledge source. */
+  search?: string;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
@@ -671,6 +702,10 @@ union KnowledgeBaseReferenceType {
   /** Work IQ document reference. */
   @added(Versions.v2026_05_01_preview)
   workIQ: "workIQ",
+
+  /** Fabric Data Agent document reference. */
+  @added(Versions.v2026_05_01_preview)
+  fabricDataAgent: "fabricDataAgent",
 }
 
 /** Base type for references. */
@@ -795,6 +830,20 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
 
   /** The sensitivity label information for the reference. */
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+}
+
+/** Represents a Fabric Data Agent document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_05_01_preview)
+model KnowledgeBaseFabricDataAgentReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.fabricDataAgent;
+
+  /** The Fabric workspace ID. */
+  workspaceId?: string;
+
+  /** The Fabric Data Agent ID. */
+  dataAgentId?: string;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */

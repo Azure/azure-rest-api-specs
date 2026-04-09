@@ -7313,6 +7313,53 @@
         }
       }
     },
+    "FabricDataAgentKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for Fabric Data Agent knowledge source.",
+      "properties": {
+        "fabricDataAgentParameters": {
+          "$ref": "#/definitions/FabricDataAgentKnowledgeSourceParameters",
+          "description": "The parameters for the Fabric Data Agent knowledge source."
+        }
+      },
+      "required": [
+        "fabricDataAgentParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricDataAgent"
+    },
+    "FabricDataAgentKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for Fabric Data Agent knowledge source.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "Fabric workspace ID."
+        },
+        "dataAgentId": {
+          "type": "string",
+          "description": "Specifies which Fabric Data Agent to access."
+        }
+      },
+      "required": [
+        "workspaceId",
+        "dataAgentId"
+      ]
+    },
+    "FabricDataAgentKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for a Fabric Data Agent knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricDataAgent"
+    },
     "FacetResult": {
       "type": "object",
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.",
@@ -9499,6 +9546,7 @@
         "web",
         "remoteSharePoint",
         "workIQ",
+        "fabricDataAgent",
         "modelQueryPlanning",
         "modelAnswerSynthesis",
         "modelWebSummarization",
@@ -9542,6 +9590,11 @@
             "name": "workIQ",
             "value": "workIQ",
             "description": "WorkIQ retrieval activity."
+          },
+          {
+            "name": "fabricDataAgent",
+            "value": "fabricDataAgent",
+            "description": "Fabric Data Agent retrieval activity."
           },
           {
             "name": "modelQueryPlanning",
@@ -9707,6 +9760,52 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "KnowledgeBaseFabricDataAgentActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the Fabric Data Agent retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query the Fabric Data Agent knowledge source."
+        }
+      }
+    },
+    "KnowledgeBaseFabricDataAgentActivityRecord": {
+      "type": "object",
+      "description": "Represents a Fabric Data Agent retrieval activity record.",
+      "properties": {
+        "fabricDataAgentArguments": {
+          "$ref": "#/definitions/KnowledgeBaseFabricDataAgentActivityArguments",
+          "description": "The Fabric Data Agent arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricDataAgent"
+    },
+    "KnowledgeBaseFabricDataAgentReference": {
+      "type": "object",
+      "description": "Represents a Fabric Data Agent document reference.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Fabric workspace ID."
+        },
+        "dataAgentId": {
+          "type": "string",
+          "description": "The Fabric Data Agent ID."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricDataAgent"
     },
     "KnowledgeBaseImageContent": {
       "type": "object",
@@ -10065,7 +10164,8 @@
         "indexedOneLake",
         "web",
         "remoteSharePoint",
-        "workIQ"
+        "workIQ",
+        "fabricDataAgent"
       ],
       "x-ms-enum": {
         "name": "KnowledgeBaseReferenceType",
@@ -10105,6 +10205,11 @@
             "name": "workIQ",
             "value": "workIQ",
             "description": "Work IQ document reference."
+          },
+          {
+            "name": "fabricDataAgent",
+            "value": "fabricDataAgent",
+            "description": "Fabric Data Agent document reference."
           }
         ]
       }
@@ -10871,7 +10976,8 @@
         "remoteSharePoint",
         "workIQ",
         "file",
-        "mcpServer"
+        "mcpServer",
+        "fabricDataAgent"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -10926,6 +11032,11 @@
             "name": "McpServer",
             "value": "mcpServer",
             "description": "A knowledge source backed by an MCP (Model Context Protocol) server."
+          },
+          {
+            "name": "FabricDataAgent",
+            "value": "fabricDataAgent",
+            "description": "A knowledge source that retrieves data from a Fabric Data Agent."
           }
         ]
       }

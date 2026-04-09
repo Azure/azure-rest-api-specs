@@ -391,6 +391,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(IndexedSqlKnowledgeSource, Usage.input);
 @@access(FileKnowledgeSource, Access.public);
 @@usage(FileKnowledgeSource, Usage.input);
+@@access(FabricDataAgentKnowledgeSource, Access.public);
+@@usage(FabricDataAgentKnowledgeSource, Usage.input);
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
@@ -1808,6 +1810,20 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(Search.ListKnowledgeSourceFilesResult,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.FabricDataAgentKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.FabricDataAgentKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.FabricDataAgentKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.FabricDataAgentKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -3812,6 +3828,34 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.FabricDataAgentKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.FabricDataAgentKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseFabricDataAgentActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseFabricDataAgentActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseFabricDataAgentActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseFabricDataAgentActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseFabricDataAgentReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseFabricDataAgentReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
