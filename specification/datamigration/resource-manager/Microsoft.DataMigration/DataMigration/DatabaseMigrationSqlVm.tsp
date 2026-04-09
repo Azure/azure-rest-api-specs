@@ -58,7 +58,7 @@ interface DatabaseMigrationSqlVms {
   /**
    * Retrieve the specified database migration for a given SQL VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlVm_Get")
   @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlVmOps.Read<
@@ -67,7 +67,7 @@ interface DatabaseMigrationSqlVms {
       /**
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @query("migrationOperationId")
       migrationOperationId?: string;
@@ -83,7 +83,7 @@ interface DatabaseMigrationSqlVms {
   /**
    * Create a new database migration to a given SQL VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlVm_CreateOrUpdate")
   @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlVmOps.CreateOrUpdateAsync<
@@ -95,7 +95,7 @@ interface DatabaseMigrationSqlVms {
   /**
    * Delete Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlVm_Delete")
   @tag("DatabaseMigrationsSqlVm")
   delete is DatabaseMigrationSqlVmOps.DeleteWithoutOkAsync<
@@ -114,7 +114,7 @@ interface DatabaseMigrationSqlVms {
   /**
    * Stop in-progress database migration to SQL VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlVm_cancel")
   @tag("DatabaseMigrations")
   cancel is DatabaseMigrationSqlVmOps.ActionAsync<
@@ -127,7 +127,7 @@ interface DatabaseMigrationSqlVms {
   /**
    * Initiate cutover for in-progress online database migration to SQL VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlVm_cutover")
   @tag("DatabaseMigrations")
   cutover is DatabaseMigrationSqlVmOps.ActionAsync<

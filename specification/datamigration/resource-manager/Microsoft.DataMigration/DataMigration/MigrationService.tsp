@@ -66,7 +66,7 @@ interface MigrationServices {
   /**
    * Retrieve the List of database migrations attached to the service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MigrationServices_listMigrations")
   @list
   @get

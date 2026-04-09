@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DataMigration;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ResourceSkusOperationGroup {
   /**
    * The skus action returns the list of SKUs that DMS (classic) supports.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get supported SKUs")
   @operationId("ResourceSkus_ListSkus")
   @tag("Standard operation")
@@ -34,12 +34,12 @@ interface ResourceSkusOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServicesOperationGroup {
   /**
    * This method checks whether a proposed top-level resource name is valid and available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Check name validity and availability")
   @operationId("Services_CheckNameAvailability")
   @tag("Standard operation")
@@ -54,12 +54,12 @@ interface ServicesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsagesOperationGroup {
   /**
    * This method returns region-specific quotas and resource usage information for the Azure Database Migration Service (classic).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get resource quotas and usage information")
   @operationId("Usages_List")
   @tag("Standard operation")

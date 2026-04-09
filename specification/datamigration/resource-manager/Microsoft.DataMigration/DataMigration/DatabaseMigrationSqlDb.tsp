@@ -90,7 +90,7 @@ interface DatabaseMigrationSqlDbs {
   /**
    * Retrieve the Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlDb_Get")
   @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlDbOps.Read<
@@ -99,7 +99,7 @@ interface DatabaseMigrationSqlDbs {
       /**
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @query("migrationOperationId")
       migrationOperationId?: string;
@@ -115,7 +115,7 @@ interface DatabaseMigrationSqlDbs {
   /**
    * Create or Update Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlDb_CreateOrUpdate")
   @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlDbOps.CreateOrUpdateAsync<
@@ -127,8 +127,8 @@ interface DatabaseMigrationSqlDbs {
   /**
    * Delete Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlDb_Delete")
   @tag("DatabaseMigrations")
   delete is DatabaseMigrationSqlDbOps.DeleteWithoutOkAsync<
@@ -146,7 +146,7 @@ interface DatabaseMigrationSqlDbs {
   /**
    * Stop on going migration for the database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlDb_cancel")
   @tag("DatabaseMigrations")
   cancel is DatabaseMigrationSqlDbOps.ActionAsync<
@@ -159,8 +159,8 @@ interface DatabaseMigrationSqlDbs {
   /**
    * Retry on going migration for the database.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" ""
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlDb_retry")
   @tag("DatabaseMigrations")
   retry is DatabaseMigrationSqlDbOpsWithPattern.ActionAsync<

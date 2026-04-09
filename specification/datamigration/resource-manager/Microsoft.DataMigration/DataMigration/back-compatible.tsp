@@ -21,7 +21,7 @@ using Microsoft.DataMigration;
 @@clientName(DatabaseMigrationsMongoToCosmosDbvCoreMongo.create::parameters.resource,
   "parameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseMigrationCosmosDbMongo.properties);
 
 @@clientLocation(DatabaseMigrationSqlDbs.get, "DatabaseMigrationsSqlDb");
@@ -76,7 +76,7 @@ using Microsoft.DataMigration;
 );
 @@clientName(MigrationServices.update::parameters.properties, "parameters");
 @@clientName(MigrationServices.listMigrations, "listMigrations");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MigrationService.properties);
 
 @@clientName(SqlMigrationServices.createOrUpdate::parameters.resource,
@@ -92,7 +92,7 @@ using Microsoft.DataMigration;
 @@clientName(SqlMigrationServices.deleteNode::parameters.body, "parameters");
 @@clientName(SqlMigrationServices.listMigrations, "listMigrations");
 @@clientName(SqlMigrationServices.listMonitoringData, "listMonitoringData");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlMigrationService.properties);
 
 @@clientLocation(DataMigrationServices.get, "Services");
@@ -115,7 +115,7 @@ using Microsoft.DataMigration;
 @@clientName(DataMigrationServices.checkChildrenNameAvailability::parameters.body,
   "parameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataMigrationService.properties);
 
 @@clientLocation(ProjectTasks.get, "Tasks");
@@ -133,7 +133,7 @@ using Microsoft.DataMigration;
 
 @@clientName(Projects.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Projects.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Project.properties);
 
 @@clientLocation(ProjectFiles.get, "Files");

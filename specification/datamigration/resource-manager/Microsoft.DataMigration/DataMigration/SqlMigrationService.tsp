@@ -13,6 +13,7 @@ namespace Microsoft.DataMigration;
 /**
  * A SQL Migration Service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlMigrationService
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlMigrationServiceProperties> {
   ...ResourceNameParameter<
@@ -53,7 +54,7 @@ interface SqlMigrationServices {
   /**
    * Delete Database Migration Service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SqlMigrationService,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -78,7 +79,7 @@ interface SqlMigrationServices {
   /**
    * Retrieve the List of Authentication Keys for Self Hosted Integration Runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlMigrationServices_listAuthKeys")
   listAuthKeys is ArmResourceActionSync<
     SqlMigrationService,
@@ -89,7 +90,7 @@ interface SqlMigrationServices {
   /**
    * Regenerate a new set of Authentication Keys for Self Hosted Integration Runtime.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlMigrationServices_regenerateAuthKeys")
   regenerateAuthKeys is ArmResourceActionSync<
     SqlMigrationService,
@@ -100,7 +101,7 @@ interface SqlMigrationServices {
   /**
    * Delete the integration runtime node.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlMigrationServices_deleteNode")
   deleteNode is ArmResourceActionSync<
     SqlMigrationService,
@@ -111,7 +112,7 @@ interface SqlMigrationServices {
   /**
    * Retrieve the List of database migrations attached to the service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlMigrationServices_listMigrations")
   @list
   @get
@@ -124,7 +125,7 @@ interface SqlMigrationServices {
   /**
    * Retrieve the registered Integration Runtime nodes and their monitoring data for a given Database Migration Service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlMigrationServices_listMonitoringData")
   listMonitoringData is ArmResourceActionSync<
     SqlMigrationService,

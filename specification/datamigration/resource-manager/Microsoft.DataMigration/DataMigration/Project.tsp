@@ -14,6 +14,7 @@ namespace Microsoft.DataMigration;
 /**
  * A project resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DataMigrationService)
 model Project
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProjectProperties> {
@@ -27,7 +28,7 @@ model Project
   /**
    * HTTP strong entity tag value. This is ignored if submitted.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -65,7 +66,7 @@ interface Projects {
   /**
    * The project resource is a nested resource representing a stored migration project. The GET method retrieves information about a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Projects_Get")
   @summary("Get project information")
   @tag("Project resource")
@@ -76,7 +77,7 @@ interface Projects {
   /**
    * The project resource is a nested resource representing a stored migration project. The PUT method creates a new project or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Projects_CreateOrUpdate")
   @summary("Create or update project")
   @tag("Project resource")
@@ -87,7 +88,7 @@ interface Projects {
   /**
    * The project resource is a nested resource representing a stored migration project. The PATCH method updates an existing project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Projects_Update")
   @summary("Update project")
   @tag("Project resource")
@@ -99,7 +100,7 @@ interface Projects {
   /**
    * The project resource is a nested resource representing a stored migration project. The DELETE method deletes a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Projects_Delete")
   @summary("Delete project")
   @tag("Project resource")
@@ -119,7 +120,7 @@ interface Projects {
   /**
    * The project resource is a nested resource representing a stored migration project. This method returns a list of projects owned by a service resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Projects_List")
   @summary("Get projects in a service")
   @tag("Project resource")

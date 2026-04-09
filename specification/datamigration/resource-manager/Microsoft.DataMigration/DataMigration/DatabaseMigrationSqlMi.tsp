@@ -58,7 +58,7 @@ interface DatabaseMigrationSqlMis {
   /**
    * Retrieve the specified database migration for a given SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlMi_Get")
   @tag("DatabaseMigrations")
   get is DatabaseMigrationSqlMiOps.Read<
@@ -67,7 +67,7 @@ interface DatabaseMigrationSqlMis {
       /**
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @query("migrationOperationId")
       migrationOperationId?: string;
@@ -83,7 +83,7 @@ interface DatabaseMigrationSqlMis {
   /**
    * Create a new database migration to a given SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlMi_CreateOrUpdate")
   @tag("DatabaseMigrations")
   createOrUpdate is DatabaseMigrationSqlMiOps.CreateOrUpdateAsync<
@@ -95,7 +95,7 @@ interface DatabaseMigrationSqlMis {
   /**
    * Delete Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlMi_Delete")
   @tag("DatabaseMigrations")
   delete is DatabaseMigrationSqlMiOps.DeleteWithoutOkAsync<
@@ -114,7 +114,7 @@ interface DatabaseMigrationSqlMis {
   /**
    * Stop in-progress database migration to SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlMi_cancel")
   @tag("DatabaseMigrations")
   cancel is DatabaseMigrationSqlMiOps.ActionAsync<
@@ -127,7 +127,7 @@ interface DatabaseMigrationSqlMis {
   /**
    * Initiate cutover for in-progress online database migration to SQL Managed Instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsSqlMi_cutover")
   @tag("DatabaseMigrations")
   cutover is DatabaseMigrationSqlMiOps.ActionAsync<

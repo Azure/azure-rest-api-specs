@@ -27,7 +27,7 @@ model ProjectFile
   /**
    * HTTP strong entity tag value. This is ignored if submitted.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -71,7 +71,7 @@ interface ProjectFiles {
   /**
    * The files resource is a nested, proxy-only resource representing a file stored under the project resource. This method retrieves information about a file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Files_Get")
   @summary("Get file information")
   @tag("File resource")
@@ -82,7 +82,7 @@ interface ProjectFiles {
   /**
    * The PUT method creates a new file or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Files_CreateOrUpdate")
   @summary("Create a file resource")
   @tag("Fie resource")
@@ -93,7 +93,7 @@ interface ProjectFiles {
   /**
    * This method updates an existing file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Files_Update")
   @summary("Update a file")
   @tag("File resource")
@@ -108,7 +108,7 @@ interface ProjectFiles {
   /**
    * This method deletes a file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Files_Delete")
   @summary("Delete file")
   @tag("File resource")
@@ -119,7 +119,7 @@ interface ProjectFiles {
   /**
    * The project resource is a nested resource representing a stored migration project. This method returns a list of files owned by a project resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Files_List")
   @summary("Get files in a project")
   @tag("File resource")
@@ -130,7 +130,7 @@ interface ProjectFiles {
   /**
    * This method is used for requesting storage information using which contents of the file can be downloaded.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Files_Read")
   @summary("Request storage information for downloading the file content")
   @tag("File resource")
@@ -145,7 +145,7 @@ interface ProjectFiles {
   /**
    * This method is used for requesting information for reading and writing the file content.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Files_ReadWrite")
   @summary("Request information for reading and writing file content.")
   @tag("File resource")

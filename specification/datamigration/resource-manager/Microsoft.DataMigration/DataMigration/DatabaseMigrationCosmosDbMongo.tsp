@@ -62,7 +62,7 @@ interface DatabaseMigrationCosmosDbMongos {
   /**
    * Get Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsMongoToCosmosDbRUMongo_Get")
   @tag("DatabaseMigrations")
   get is DatabaseMigrationCosmosDbMongoOps.Read<DatabaseMigrationCosmosDbMongo>;
@@ -70,7 +70,7 @@ interface DatabaseMigrationCosmosDbMongos {
   /**
    * Create or Update Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsMongoToCosmosDbRUMongo_Create")
   @tag("DatabaseMigrations")
   create is DatabaseMigrationCosmosDbMongoOps.CreateOrUpdateAsync<
@@ -82,7 +82,7 @@ interface DatabaseMigrationCosmosDbMongos {
   /**
    * Delete Database Migration resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsMongoToCosmosDbRUMongo_Delete")
   @tag("DatabaseMigrations")
   delete is DatabaseMigrationCosmosDbMongoOps.DeleteWithoutOkAsync<
@@ -99,7 +99,7 @@ interface DatabaseMigrationCosmosDbMongos {
   /**
    * Get Database Migration resources for the scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseMigrationsMongoToCosmosDbRUMongo_GetForScope")
   @tag("DatabaseMigrations")
   getForScope is DatabaseMigrationCosmosDbMongoOps.List<DatabaseMigrationCosmosDbMongo>;

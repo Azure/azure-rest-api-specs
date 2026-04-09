@@ -42,7 +42,7 @@ union MongoMigrationStatus {
   Canceled: "Canceled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ResourceType {
   string,
 
@@ -126,7 +126,7 @@ union CreatedByType {
   Key: "Key",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union OperationOrigin {
   string,
 
@@ -195,7 +195,7 @@ union ResourceSkuRestrictionsReasonCode {
 /**
  * The resource's provisioning state
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ServiceProvisioningState {
   string,
 
@@ -669,7 +669,7 @@ union ProjectTargetPlatform {
 /**
  * The project's provisioning state
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProjectProvisioningState {
   string,
 
@@ -1880,7 +1880,7 @@ union MongoDbProgressResultType {
   Collection: "Collection",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union MongoDbMigrationState {
   string,
 
@@ -2024,7 +2024,7 @@ union ErrorType {
 /**
  * Authentication type used for accessing Azure Blob Storage.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AuthType {
   /**
    * Use an account key for authentication.
@@ -2040,7 +2040,7 @@ enum AuthType {
 /**
  * Permission group for validations. These groups will run a set of permissions for validating user activity. Select the permission group for the activity that you are performing.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ServerLevelPermissionsGroup {
   /**
    * Default
@@ -2071,7 +2071,7 @@ enum ServerLevelPermissionsGroup {
 /**
  * Database Migration Resource properties for CosmosDb for Mongo.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesCosmosDbMongo
   extends DatabaseMigrationBaseProperties {
   /**
@@ -2204,7 +2204,7 @@ model MongoMigrationProgressDetails {
  */
 @discriminator("kind")
 model DatabaseMigrationBaseProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind: ResourceType;
 
   /**
@@ -2288,7 +2288,8 @@ model ErrorInfo {
 /**
  * Database Migration Resource properties for SQL database.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesSqlDb extends DatabaseMigrationProperties {
   /**
    * Detailed migration status. Not included by default.
@@ -2461,8 +2462,8 @@ model SqlDbOfflineConfiguration {
 /**
  * Database Migration Resource properties.
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" ""
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" ""
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("kind")
 model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
   /**
@@ -2493,17 +2494,17 @@ model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
   sqlServerInstanceId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalProxyResource {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   type?: string;
 
@@ -2521,7 +2522,7 @@ model MigrationOperationInput {
   /**
    * ID tracking migration operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   migrationOperationId?: string;
 }
@@ -2529,7 +2530,8 @@ model MigrationOperationInput {
 /**
  * Database Migration Resource properties for SQL Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesSqlMi extends DatabaseMigrationProperties {
   /**
    * Detailed migration status. Not included by default.
@@ -2641,7 +2643,7 @@ model SqlBackupSetInfo {
   /**
    * Backup set id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   backupSetId?: string;
@@ -2649,14 +2651,14 @@ model SqlBackupSetInfo {
   /**
    * First LSN of the backup set.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   firstLSN?: string;
 
   /**
    * Last LSN of the backup set.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   lastLSN?: string;
 
@@ -2866,6 +2868,7 @@ model TargetLocation {
   /**
    * Storage Account Key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accountKey?: string;
 }
 
@@ -2887,7 +2890,8 @@ model OfflineConfiguration {
 /**
  * Database Migration Resource properties for SQL Virtual Machine.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesSqlVm extends DatabaseMigrationProperties {
   /**
    * Detailed migration status. Not included by default.
@@ -2910,9 +2914,9 @@ model DatabaseMigrationPropertiesSqlVm extends DatabaseMigrationProperties {
 
 model OperationListResult is Azure.Core.Page<OperationsDefinition>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationsDefinition {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: string;
 
@@ -2921,37 +2925,37 @@ model OperationsDefinition {
    */
   isDataAction?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   display?: OperationsDisplayDefinition;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   origin?: OperationOrigin;
 
   /**
    * Dictionary of <AnyObject>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   properties?: Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationsDisplayDefinition {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provider?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   resource?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   operation?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   description?: string;
 }
@@ -2980,14 +2984,14 @@ model MigrationServiceUpdate {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Database Migration Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationBase
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -3003,7 +3007,7 @@ model SqlMigrationServiceProperties {
   /**
    * Provisioning state to track the async operation status.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3014,31 +3018,31 @@ model SqlMigrationServiceProperties {
   integrationRuntimeState?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalTrackedResource {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   name?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
@@ -3050,7 +3054,7 @@ model SqlMigrationServiceUpdate {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3104,7 +3108,7 @@ model RegenAuthKeys {
 /**
  * Details of node to be deleted.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model deleteNode {
   /**
    * The name of node to delete.
@@ -3122,7 +3126,7 @@ model deleteNode {
 /**
  * Database Migration Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigration
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -3149,12 +3153,12 @@ model IntegrationRuntimeMonitoringData {
   nodes?: NodeMonitoringData[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NodeMonitoringData {
   /**
    *  Unmatched properties from the message are deserialized in this collection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   additionalProperties?: Record<unknown>;
 
@@ -3167,7 +3171,7 @@ model NodeMonitoringData {
   /**
    * Available memory (MB) on the integration runtime node.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   availableMemoryInMB?: int32;
 
@@ -3329,7 +3333,7 @@ model ResourceSkuCosts {
   /**
    * Used for querying price from commerce.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   meterID?: string;
 
@@ -3406,7 +3410,7 @@ model ApiError {
 /**
  * Error information in OData format.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ODataError {
   /**
    * The machine-readable description of the error, such as 'InvalidRequest' or 'InternalServerError'
@@ -3503,6 +3507,7 @@ model DataMigrationServiceStatusResponse {
   /**
    * Agent Configuration
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentConfiguration?: unknown;
 
   /**
@@ -3604,7 +3609,7 @@ model TaskList is Azure.Core.Page<ProjectTask>;
 /**
  * Base class for all types of DMS (classic) task properties. If task is not supported by current client, this object is returned.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("taskType")
 model ProjectTaskProperties {
   /**
@@ -3635,7 +3640,7 @@ model ProjectTaskProperties {
   /**
    * Key value pairs of client data to attach meta data information to task
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientData?: Record<string>;
 }
 
@@ -3792,6 +3797,7 @@ model AzureActiveDirectoryApp {
   /**
    * Key used to authenticate to the Azure Active Directory Application
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   appKey?: string;
 
   /**
@@ -3813,6 +3819,7 @@ model ConnectionInfo {
   /**
    * Type of connection info
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: string;
 
   /**
@@ -3823,6 +3830,7 @@ model ConnectionInfo {
   /**
    * Password credential.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 }
 
@@ -3894,7 +3902,7 @@ model FileList is Azure.Core.Page<ProjectFile>;
 /**
  * Base class for file properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProjectFileProperties {
   /**
    * Optional File extension. If submitted it should not have a leading period and must match the extension from filePath.
@@ -3937,7 +3945,7 @@ model FileStorageInfo {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   headers?: Record<string>;
 }
 
@@ -4039,7 +4047,7 @@ model ReportableException {
 /**
  * Properties for the command that completes online migration for an Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMISyncCompleteCommandProperties extends CommandProperties {
   /**
    * Command input
@@ -4061,7 +4069,7 @@ model MigrateMISyncCompleteCommandProperties extends CommandProperties {
 /**
  * Input for command that completes online migration for an Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMISyncCompleteCommandInput {
   /**
    * Name of managed instance database
@@ -4072,7 +4080,7 @@ model MigrateMISyncCompleteCommandInput {
 /**
  * Output for command that completes online migration for an Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMISyncCompleteCommandOutput {
   /**
    * List of errors that happened during the command execution
@@ -4120,8 +4128,8 @@ model MongoDbConnectionInfo extends ConnectionInfo {
    */
   trustServerCertificate?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enforceSSL?: boolean;
 
   /**
@@ -4538,6 +4546,7 @@ model ConnectToSourceSqlServerTaskOutput {
   /**
    * Type of result - database level or task level
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
@@ -4609,7 +4618,7 @@ model ConnectToSourceSqlServerTaskOutputDatabaseLevel
   /**
    * Size of the file in megabytes
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sizeMB?: float64;
 
@@ -4675,7 +4684,7 @@ model DatabaseFileInfo {
   /**
    * Size of the file in megabytes
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sizeMB?: float64;
 }
 
@@ -4941,7 +4950,7 @@ model ConnectToTargetSqlDbTaskOutput {
 /**
  * Input for the task that validates connection to Azure SQL Database Managed Instance online scenario.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetSqlMISyncTaskInput {
   /**
    * Connection information for Azure SQL Database Managed Instance
@@ -4957,7 +4966,7 @@ model ConnectToTargetSqlMISyncTaskInput {
 /**
  * Output for the task that validates connection to Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetSqlMISyncTaskOutput {
   /**
    * Target server version
@@ -4982,7 +4991,7 @@ model ConnectToTargetSqlMISyncTaskOutput {
 /**
  * Input for the task that validates connection to Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetSqlMITaskInput {
   /**
    * Connection information for target SQL Server
@@ -5008,7 +5017,7 @@ model ConnectToTargetSqlMITaskInput {
 /**
  * Output for the task that validates connection to Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetSqlMITaskOutput {
   /**
    * Result identifier
@@ -5203,6 +5212,7 @@ model FileShare {
   /**
    * Password credential used to connect to the share location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**
@@ -5223,6 +5233,7 @@ model SelectedCertificateInput {
   /**
    * Password to use for encrypting the exported certificate.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password: string;
 }
 
@@ -5383,7 +5394,7 @@ model MigrateSchemaSqlServerSqlDbTaskProperties extends ProjectTaskProperties {
 /**
  * Input for task that migrates Schema for SQL Server databases to Azure SQL databases
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
@@ -5476,10 +5487,11 @@ model MigrateSchemaSqlServerSqlDbTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel
   extends MigrateSchemaSqlServerSqlDbTaskOutput {
   /**
@@ -5532,7 +5544,7 @@ model MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel
   extends MigrateSchemaSqlServerSqlDbTaskOutput {
   /**
@@ -5603,7 +5615,7 @@ model MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlServerSqlDbTaskOutputError
   extends MigrateSchemaSqlServerSqlDbTaskOutput {
   /**
@@ -5624,7 +5636,7 @@ model MigrateSchemaSqlServerSqlDbTaskOutputError
   resultType: "SchemaErrorOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSchemaSqlTaskOutputError
   extends MigrateSchemaSqlServerSqlDbTaskOutput {
   /**
@@ -5677,25 +5689,25 @@ model MigrateMySqlAzureDbForMySqlSyncDatabaseInput {
   /**
    * Migration settings which tune the migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migrationSetting?: Record<string>;
 
   /**
    * Source settings to tune source endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceSetting?: Record<string>;
 
   /**
    * Target settings to tune target endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetSetting?: Record<string>;
 
   /**
    * Mapping of source to target tables
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableMap?: Record<string>;
 }
 
@@ -5713,10 +5725,11 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   /**
@@ -5763,7 +5776,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   /**
@@ -5864,7 +5877,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   /**
@@ -5955,7 +5968,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputError
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   /**
@@ -5970,7 +5983,7 @@ model MigrateMySqlAzureDbForMySqlSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlSyncTaskOutputDatabaseError
   extends MigrateMySqlAzureDbForMySqlSyncTaskOutput {
   /**
@@ -6069,19 +6082,19 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncDatabaseInput {
   /**
    * Migration settings which tune the migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migrationSetting?: Record<unknown>;
 
   /**
    * Source settings to tune source endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceSetting?: Record<string>;
 
   /**
    * Target settings to tune target endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetSetting?: Record<string>;
 
   /**
@@ -6115,10 +6128,11 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   /**
@@ -6188,7 +6202,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   /**
@@ -6289,7 +6303,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   /**
@@ -6380,7 +6394,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   /**
@@ -6401,7 +6415,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError
   extends MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutput {
   /**
@@ -6424,7 +6438,7 @@ model MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputDatabaseError
 /**
  * Input for the task that migrates on-prem SQL Server databases to Azure SQL Database for online migrations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
@@ -6465,25 +6479,25 @@ model MigrateSqlServerSqlDbSyncDatabaseInput {
   /**
    * Mapping of source to target tables
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableMap?: Record<string>;
 
   /**
    * Migration settings which tune the migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migrationSetting?: Record<string>;
 
   /**
    * Source settings to tune source endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceSetting?: Record<string>;
 
   /**
    * Target settings to tune target endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetSetting?: Record<string>;
 }
 
@@ -6521,10 +6535,11 @@ model MigrateSqlServerSqlDbSyncTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputMigrationLevel
   extends MigrateSqlServerSqlDbSyncTaskOutput {
   /**
@@ -6577,7 +6592,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputDatabaseLevel
   extends MigrateSqlServerSqlDbSyncTaskOutput {
   /**
@@ -6678,7 +6693,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputTableLevel
   extends MigrateSqlServerSqlDbSyncTaskOutput {
   /**
@@ -6769,7 +6784,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputError
   extends MigrateSqlServerSqlDbSyncTaskOutput {
   /**
@@ -6784,7 +6799,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbSyncTaskOutputDatabaseError
   extends MigrateSqlServerSqlDbSyncTaskOutput {
   /**
@@ -6807,7 +6822,7 @@ model MigrateSqlServerSqlDbSyncTaskOutputDatabaseError
 /**
  * Input for the task that migrates on-prem SQL Server databases to Azure SQL Database
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
@@ -6855,12 +6870,13 @@ model MigrateSqlServerSqlDbDatabaseInput {
   /**
    * Mapping of source to target tables
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableMap?: Record<string>;
 
   /**
    * Settings selected for DB schema migration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   schemaSetting?: unknown;
 
   /**
@@ -6883,10 +6899,11 @@ model MigrateSqlServerSqlDbTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputMigrationLevel
   extends MigrateSqlServerSqlDbTaskOutput {
   /**
@@ -7005,7 +7022,7 @@ model MigrationValidationResult {
   /**
    * Validation summary results for each database
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   summaryResults?: Record<MigrationValidationDatabaseSummaryResult>;
 
   /**
@@ -7079,7 +7096,7 @@ model MigrationReportResult {
   reportUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputDatabaseLevel
   extends MigrateSqlServerSqlDbTaskOutput {
   /**
@@ -7175,7 +7192,7 @@ model MigrateSqlServerSqlDbTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputTableLevel
   extends MigrateSqlServerSqlDbTaskOutput {
   /**
@@ -7240,7 +7257,7 @@ model MigrateSqlServerSqlDbTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputError
   extends MigrateSqlServerSqlDbTaskOutput {
   /**
@@ -7258,12 +7275,12 @@ model MigrateSqlServerSqlDbTaskOutputError
 /**
  * Summary of database results in the migration
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseSummaryResult extends DataItemMigrationSummaryResult {
   /**
    * Size of the database in megabytes
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sizeMB?: float64;
 }
@@ -7329,7 +7346,7 @@ model DataItemMigrationSummaryResult {
   resultPrefix?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputValidationResult
   extends MigrateSqlServerSqlDbTaskOutput {
   ...MigrationValidationResult;
@@ -7340,7 +7357,7 @@ model MigrateSqlServerSqlDbTaskOutputValidationResult
   resultType: "MigrationValidationOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlDbTaskOutputDatabaseLevelValidationResult
   extends MigrateSqlServerSqlDbTaskOutput {
   ...MigrationValidationDatabaseLevelResult;
@@ -7425,7 +7442,7 @@ model DataIntegrityValidationResult {
   /**
    * List of failed table names of source and target pair
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   failedObjects?: Record<string>;
 
   /**
@@ -7466,13 +7483,13 @@ model SchemaComparisonValidationResult {
   /**
    * Count of source database objects
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceDatabaseObjectCount?: Record<int64>;
 
   /**
    * Count of target database objects
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetDatabaseObjectCount?: Record<int64>;
 }
 
@@ -7558,7 +7575,7 @@ model ExecutionStatistics {
   /**
    * Dictionary of sql query execution wait types and the respective statistics
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   waitStats?: Record<WaitStatistics>;
 
   /**
@@ -7595,8 +7612,8 @@ model WaitStatistics {
 /**
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMISyncTaskInput extends SqlServerSqlMISyncTaskInput {
   /**
    * Number of database migrations to start in parallel
@@ -7607,7 +7624,7 @@ model MigrateSqlServerSqlMISyncTaskInput extends SqlServerSqlMISyncTaskInput {
 /**
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlServerSqlMISyncTaskInput {
   /**
    * Databases to migrate
@@ -7644,7 +7661,7 @@ model SqlServerSqlMISyncTaskInput {
 /**
  * Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMIDatabaseInput {
   /**
    * Name of the database
@@ -7675,7 +7692,7 @@ model MigrateSqlServerSqlMIDatabaseInput {
 /**
  * Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance using Log Replay Service.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("resultType")
 model MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7687,11 +7704,12 @@ model MigrateSqlServerSqlMISyncTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMISyncTaskOutputMigrationLevel
   extends MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7768,8 +7786,8 @@ model MigrateSqlServerSqlMISyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel
   extends MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7848,8 +7866,8 @@ model MigrateSqlServerSqlMISyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMISyncTaskOutputError
   extends MigrateSqlServerSqlMISyncTaskOutput {
   /**
@@ -7867,8 +7885,8 @@ model MigrateSqlServerSqlMISyncTaskOutputError
 /**
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMITaskInput extends SqlMigrationTaskInput {
   /**
    * Databases to migrate
@@ -7930,7 +7948,7 @@ model BlobShare {
 /**
  * Output for task that migrates SQL Server databases to Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("resultType")
 model MigrateSqlServerSqlMITaskOutput {
   /**
@@ -7942,11 +7960,12 @@ model MigrateSqlServerSqlMITaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMITaskOutputMigrationLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8049,8 +8068,8 @@ model MigrateSqlServerSqlMITaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMITaskOutputDatabaseLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8062,7 +8081,7 @@ model MigrateSqlServerSqlMITaskOutputDatabaseLevel
   /**
    * Size of the database in megabytes
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   sizeMB?: float64;
 
@@ -8111,8 +8130,8 @@ model MigrateSqlServerSqlMITaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMITaskOutputAgentJobLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8166,8 +8185,8 @@ model MigrateSqlServerSqlMITaskOutputAgentJobLevel
   resultType: "AgentJobLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMITaskOutputLoginLevel
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8221,8 +8240,8 @@ model MigrateSqlServerSqlMITaskOutputLoginLevel
   resultType: "LoginLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMITaskOutputError
   extends MigrateSqlServerSqlMITaskOutput {
   /**
@@ -8240,7 +8259,7 @@ model MigrateSqlServerSqlMITaskOutputError
 /**
  * Input for task that migrates SSIS packages from SQL Server to Azure SQL Database Managed Instance.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSsisTaskInput extends SqlMigrationTaskInput {
   /**
    * SSIS package migration information.
@@ -8282,10 +8301,11 @@ model MigrateSsisTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSsisTaskOutputMigrationLevel extends MigrateSsisTaskOutput {
   /**
    * Migration start time
@@ -8356,7 +8376,7 @@ model MigrateSsisTaskOutputMigrationLevel extends MigrateSsisTaskOutput {
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSsisTaskOutputProjectLevel extends MigrateSsisTaskOutput {
   /**
    * Name of the folder
@@ -8469,7 +8489,7 @@ model MongoDbClusterInfo {
 /**
  * Describes a database within a MongoDB data source
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDbDatabaseInfo extends MongoDbObjectInfo {
   /**
    * A list of supported collections in a MongoDB database
@@ -8486,7 +8506,7 @@ model MongoDbDatabaseInfo extends MongoDbObjectInfo {
 /**
  * Describes a supported collection within a MongoDB database
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDbCollectionInfo extends MongoDbObjectInfo {
   /**
    * The name of the database containing the collection
@@ -8618,7 +8638,7 @@ model MongoDbProgress {
   /**
    * The errors and warnings that have occurred for the current object. The keys are the error codes.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   errors: Record<MongoDbError>;
 
   /**
@@ -8658,7 +8678,7 @@ model MongoDbProgress {
    */
   resultType: MongoDbProgressResultType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   state: MongoDbMigrationState;
 
   /**
@@ -8714,7 +8734,7 @@ model MongoDbCollectionSettings {
   /**
    * The RUs that should be configured on a CosmosDB target, or null to use the default. This has no effect on non-CosmosDB targets.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetRUs?: int32;
 }
 
@@ -8741,7 +8761,7 @@ model MongoDbDatabaseProgress extends MongoDbProgress {
   /**
    * The progress of the collections in the database. The keys are the unqualified names of the collections
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   collections?: Record<MongoDbCollectionProgress>;
 
   /**
@@ -8757,13 +8777,13 @@ model MongoDbDatabaseSettings {
   /**
    * The collections on the source database to migrate to the target. The keys are the unqualified names of the collections.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   collections: Record<MongoDbCollectionSettings>;
 
   /**
    * The RUs that should be configured on a CosmosDB target, or null to use the default, or 0 if throughput should not be provisioned for the database. This has no effect on non-CosmosDB targets.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetRUs?: int32;
 }
 
@@ -8785,7 +8805,7 @@ model MongoDbFinishCommand extends CommandProperties {
 /**
  * Describes the input to the 'finish' MongoDB migration command
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDbFinishCommandInput extends MongoDbCommandInput {
   /**
    * If true, replication for the affected objects will be stopped immediately. If false, the migrator will finish replaying queued events before finishing the replication.
@@ -8800,13 +8820,13 @@ model MongoDbMigrationSettings {
   /**
    * The RU limit on a CosmosDB target that collections will be temporarily increased to (if lower) during the initial copy of a migration, from 10,000 to 1,000,000, or 0 to use the default boost (which is generally the maximum), or null to not boost the RUs. This setting has no effect on non-CosmosDB targets.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   boostRUs?: int32;
 
   /**
    * The databases on the source cluster to migrate to the target. The keys are the names of the databases.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databases: Record<MongoDbDatabaseSettings>;
 
   /**
@@ -8857,7 +8877,7 @@ model MongoDbMigrationProgress extends MongoDbProgress {
   /**
    * The progress of the databases in the migration. The keys are the names of the databases
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databases?: Record<MongoDbDatabaseProgress>;
 
   /**
@@ -8967,11 +8987,11 @@ model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutput {
   databaseSchemaMap?: ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutputDatabaseSchemaMapItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutputDatabaseSchemaMapItem {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   database?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   schemas?: string[];
 }
 
@@ -9110,7 +9130,7 @@ model MigrateOracleAzureDbPostgreSqlSyncDatabaseInput {
   /**
    * Mapping of source to target tables
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableMap?: Record<string>;
 
   /**
@@ -9121,19 +9141,19 @@ model MigrateOracleAzureDbPostgreSqlSyncDatabaseInput {
   /**
    * Migration settings which tune the migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migrationSetting?: Record<string>;
 
   /**
    * Source settings to tune source endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceSetting?: Record<string>;
 
   /**
    * Target settings to tune target endpoint migration behavior
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   targetSetting?: Record<string>;
 }
 
@@ -9151,10 +9171,11 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputMigrationLevel
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
@@ -9201,7 +9222,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseLevel
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
@@ -9302,7 +9323,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputTableLevel
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
@@ -9393,7 +9414,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputError
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
@@ -9408,7 +9429,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputError
   resultType: "ErrorOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseError
   extends MigrateOracleAzureDbPostgreSqlSyncTaskOutput {
   /**
@@ -9431,7 +9452,7 @@ model MigrateOracleAzureDbPostgreSqlSyncTaskOutputDatabaseError
 /**
  * Information about an Oracle OCI driver.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OracleOCIDriverInfo {
   /**
    * The name of the driver package
@@ -9473,7 +9494,7 @@ model OracleOCIDriverInfo {
 /**
  * Input for the service task to check for OCI drivers.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CheckOCIDriverTaskInput {
   /**
    * Version of the source server to check against.  Optional.
@@ -9484,7 +9505,7 @@ model CheckOCIDriverTaskInput {
 /**
  * Output for the service task to check for OCI drivers.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CheckOCIDriverTaskOutput {
   /**
    * Information about the installed driver if found and valid.
@@ -9502,7 +9523,7 @@ model CheckOCIDriverTaskOutput {
 /**
  * Input for the service task to upload an OCI driver.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UploadOCIDriverTaskInput {
   /**
    * File share information for the OCI driver archive.
@@ -9513,7 +9534,7 @@ model UploadOCIDriverTaskInput {
 /**
  * Output for the service task to upload an OCI driver.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UploadOCIDriverTaskOutput {
   /**
    * The name of the driver package that was validated and uploaded.
@@ -9532,7 +9553,7 @@ model UploadOCIDriverTaskOutput {
 /**
  * Input for the service task to install an OCI driver.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InstallOCIDriverTaskInput {
   /**
    * Name of the uploaded driver package to install.
@@ -9543,7 +9564,7 @@ model InstallOCIDriverTaskInput {
 /**
  * Output for the service task to install an OCI driver.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InstallOCIDriverTaskOutput {
   /**
    * Validation errors
@@ -9601,7 +9622,7 @@ model ServiceOperationList is Azure.Core.Page<ServiceOperation>;
 /**
  * Properties for the task that checks for OCI drivers.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CheckOCIDriverTaskProperties extends ProjectTaskProperties {
   /**
    * Input for the service task to check for OCI drivers.
@@ -9624,7 +9645,7 @@ model CheckOCIDriverTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that uploads an OCI driver.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UploadOCIDriverTaskProperties extends ProjectTaskProperties {
   /**
    * Input for the service task to upload an OCI driver.
@@ -9647,7 +9668,7 @@ model UploadOCIDriverTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that installs an OCI driver.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InstallOCIDriverTaskProperties extends ProjectTaskProperties {
   /**
    * Input for the service task to install an OCI driver.
@@ -10095,7 +10116,7 @@ model GetUserTablesMySqlTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to Azure SQL Database Managed Instance
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetSqlMITaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10118,7 +10139,7 @@ model ConnectToTargetSqlMITaskProperties extends ProjectTaskProperties {
 /**
  * Properties for the task that validates connection to Azure SQL Database Managed Instance
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectToTargetSqlMISyncTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10170,7 +10191,7 @@ model MigrateMongoDbTaskProperties extends ProjectTaskProperties {
    */
   input?: MongoDbMigrationSettings;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   output?: MongoDbProgress[];
@@ -10184,7 +10205,7 @@ model MigrateMongoDbTaskProperties extends ProjectTaskProperties {
 /**
  * Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMITaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10227,7 +10248,7 @@ model MigrateSqlServerSqlMITaskProperties extends ProjectTaskProperties {
 /**
  * Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance sync scenario
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateSqlServerSqlMISyncTaskProperties extends ProjectTaskProperties {
   /**
    * Task input
@@ -10401,7 +10422,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskInput {
   /**
    * Optional parameters for fine tuning the data transfer rate during migration
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   optionalAgentSettings?: Record<string>;
 
   /**
@@ -10427,7 +10448,7 @@ model MigrateMySqlAzureDbForMySqlOfflineDatabaseInput {
   /**
    * Mapping of source to target tables
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableMap?: Record<string>;
 }
 
@@ -10445,6 +10466,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
   /**
    * Result type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resultType: string;
 }
 
@@ -10580,7 +10602,7 @@ model ValidateSyncMigrationInputSqlServerTaskOutput {
 /**
  * Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateMigrationInputSqlServerSqlMITaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10604,7 +10626,7 @@ model ValidateMigrationInputSqlServerSqlMITaskProperties
 /**
  * Input for task that validates migration input for SQL to Azure SQL Managed Instance
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateMigrationInputSqlServerSqlMITaskInput {
   /**
    * Information for connecting to source
@@ -10646,7 +10668,7 @@ model ValidateMigrationInputSqlServerSqlMITaskInput {
 /**
  * Output for task that validates migration input for SQL to Azure SQL Managed Instance migrations
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateMigrationInputSqlServerSqlMITaskOutput {
   /**
    * Result identifier
@@ -10758,7 +10780,7 @@ model DatabaseBackupInfo {
 /**
  * Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance sync scenario
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateMigrationInputSqlServerSqlMISyncTaskProperties
   extends ProjectTaskProperties {
   /**
@@ -10782,15 +10804,16 @@ model ValidateMigrationInputSqlServerSqlMISyncTaskProperties
 /**
  * Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateMigrationInputSqlServerSqlMISyncTaskInput
   extends SqlServerSqlMISyncTaskInput {}
 
 /**
  * Output for task that validates migration input for Azure SQL Database Managed Instance online migration
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ValidateMigrationInputSqlServerSqlMISyncTaskOutput {
   /**
    * Database identifier
@@ -11345,7 +11368,7 @@ model StartMigrationScenarioServerRoleResult {
   exceptionsAndWarnings?: ReportableException[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
   /**
@@ -11446,7 +11469,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel
   resultType: "MigrationLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
   /**
@@ -11549,7 +11572,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel
   resultType: "DatabaseLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
   /**
@@ -11621,7 +11644,7 @@ model MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel
   resultType: "TableLevelOutput";
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MigrateMySqlAzureDbForMySqlOfflineTaskOutputError
   extends MigrateMySqlAzureDbForMySqlOfflineTaskOutput {
   /**
