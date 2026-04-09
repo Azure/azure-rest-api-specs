@@ -2280,6 +2280,7 @@ model AzureBackupRehydrationRequest {
  * Request body of Resume protection when MSI is to be changed
  */
 @discriminator("objectType")
+@added(Versions.v2026_04_01_preview)
 model ResumeProtectionRequest {
   /**
    * Type of Datasource object, used to initialize the right inherited type
