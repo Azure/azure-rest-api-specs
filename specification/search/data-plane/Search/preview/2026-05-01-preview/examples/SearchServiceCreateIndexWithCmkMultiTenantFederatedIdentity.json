@@ -1,0 +1,89 @@
+{
+  "operationId": "Indexes_Create",
+  "title": "SearchServiceCreateIndexWithCmkMultiTenantFederatedIdentity",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2026-04-01",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "index": {
+      "name": "docs-cmk-federated-uami",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "identity": {
+          "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+          "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-mi",
+          "federatedIdentityClientId": "f83c6b1b-4d34-47e4-bb34-9d83df58b540"
+        }
+      },
+      "fields": [
+        {
+          "name": "id",
+          "type": "Edm.String",
+          "key": true,
+          "filterable": true,
+          "sortable": false,
+          "facetable": false,
+          "searchable": true
+        },
+        {
+          "name": "content",
+          "type": "Edm.String",
+          "searchable": true,
+          "retrievable": true
+        }
+      ]
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "docs-cmk-federated-uami",
+        "defaultScoringProfile": null,
+        "fields": [
+          {
+            "name": "id",
+            "type": "Edm.String",
+            "key": true,
+            "searchable": true,
+            "filterable": true,
+            "sortable": false,
+            "facetable": false,
+            "retrievable": true
+          },
+          {
+            "name": "content",
+            "type": "Edm.String",
+            "searchable": true,
+            "retrievable": true
+          }
+        ],
+        "scoringProfiles": [],
+        "corsOptions": null,
+        "suggesters": [],
+        "analyzers": [],
+        "charFilters": [],
+        "tokenizers": [],
+        "tokenFilters": [],
+        "normalizers": [],
+        "similarity": null,
+        "semantic": null,
+
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "identity": {
+            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+            "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-mi",
+            "federatedIdentityClientId": "f83c6b1b-4d34-47e4-bb34-9d83df58b540"
+          }
+        },
+
+        "description": null
+      }
+    }
+  }
+}
