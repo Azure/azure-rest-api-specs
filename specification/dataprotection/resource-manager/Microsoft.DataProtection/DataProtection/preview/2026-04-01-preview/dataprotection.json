@@ -8540,11 +8540,19 @@
       "type": "object",
       "description": "Request body of Resume protection when MSI is to be changed",
       "properties": {
+        "objectType": {
+          "type": "string"
+        },
         "identityDetails": {
           "$ref": "#/definitions/IdentityDetails",
           "description": "identity details of the MSI"
         }
-      }
+      },
+      "discriminator": "objectType",
+      "required": [
+        "objectType",
+        "identityDetails"
+      ]
     },
     "RetentionTag": {
       "type": "object",
