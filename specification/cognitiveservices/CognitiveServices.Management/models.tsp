@@ -5836,3 +5836,258 @@ model ManagedComputeDeploymentListResult {
   @visibility(Lifecycle.Read)
   value?: ManagedComputeDeployment[];
 }
+
+/**
+ * The provisioning state of a compute resource.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+union ComputeProvisioningState {
+  string,
+
+  /** The resource provisioning request has been accepted. */
+  Accepted: "Accepted",
+
+  /** The resource has been fully provisioned. */
+  Succeeded: "Succeeded",
+
+  /** The resource provisioning has failed. */
+  Failed: "Failed",
+
+  /** The resource provisioning was canceled. */
+  Canceled: "Canceled",
+
+  /** The resource is being deleted. */
+  Deleting: "Deleting",
+
+  /** The resource is scaling. */
+  Scaling: "Scaling",
+
+  /** The resource is disabled. */
+  Disabled: "Disabled",
+
+  /** The compute resource is starting. */
+  Starting: "Starting",
+
+  /** The compute resource is stopping. */
+  Stopping: "Stopping",
+
+  /** The compute resource is restarting. */
+  Restarting: "Restarting",
+
+  /** The compute resource is stopped. */
+  Stopped: "Stopped",
+}
+
+/**
+ * VM priority for a compute pool.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+union VmPriority {
+  string,
+
+  /** Regular VM priority. */
+  Regular: "Regular",
+
+  /** Low-priority VM. */
+  LowPriority: "LowPriority",
+}
+
+/**
+ * A compute pool configuration.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+model Pool {
+  /**
+   * The name of the pool.
+   */
+  name: string;
+
+  /**
+   * The VM priority of the pool.
+   */
+  vmPriority: VmPriority;
+
+  /**
+   * The instance type (VM SKU) used in the pool.
+   */
+  instanceType: string;
+
+  /**
+   * The number of nodes in the pool.
+   */
+  nodeCount: int32;
+}
+
+/**
+ * The type of compute resource.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+union ComputeType {
+  string,
+
+  /** Cluster (AKS-backed) compute type. */
+  Cluster: "Cluster",
+
+  /** Container Instance compute type. */
+  ContainerInstance: "ContainerInstance",
+}
+
+/**
+ * Base properties for all compute resource types.
+ * The computeType discriminator determines the concrete property shape.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@discriminator("computeType")
+model ComputeProperties {
+  /**
+   * The type of compute resource.
+   */
+  computeType: ComputeType;
+
+  /**
+   * Provisioning state of the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ComputeProvisioningState;
+
+  /**
+   * Error details for the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  errors?: Azure.ResourceManager.CommonTypes.ErrorDetail[];
+
+  /**
+   * Creation time of the compute resource.
+   */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+}
+
+/**
+ * Properties for a Cluster (AKS-backed) compute resource.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+model ClusterComputeProperties extends ComputeProperties {
+  /**
+   * The type of compute resource.
+   */
+  computeType: "Cluster";
+
+  /**
+   * Pools attached to this compute cluster.
+   */
+  pools: Pool[];
+
+  /**
+   * ARM ID of the subnet used for compute.
+   */
+  subnetArmId?: string;
+}
+
+/**
+ * Properties for a Container Instance compute resource.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+model ContainerInstanceComputeProperties extends ComputeProperties {
+  /**
+   * The type of compute resource.
+   */
+  computeType: "ContainerInstance";
+
+  /**
+   * ARM resource ID of the parent cluster that hosts this container instance.
+   */
+  targetClusterId: string;
+
+  /**
+   * Container image URI (e.g., MCR or ACR image path) for the container instance.
+   */
+  imageLink: string;
+
+  /**
+   * ISO 8601 duration before the idle instance is automatically shut down (e.g., 'PT30M').
+   */
+  idleTimeBeforeShutdown?: string;
+
+  /**
+   * SSH configuration for remote access to the container instance.
+   */
+  sshSettings?: SshSettings;
+
+  /**
+   * Network connectivity endpoints assigned to the container instance.
+   */
+  @visibility(Lifecycle.Read)
+  connectivityEndpoints?: ConnectivityEndpoints;
+}
+
+/**
+ * SSH configuration for a Container Instance compute.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+model SshSettings {
+  /**
+   * The SSH public key for authenticating to the compute instance.
+   */
+  sshPublicKey?: string;
+
+  /**
+   * Whether SSH admin access is enabled.
+   */
+  adminEnabled?: boolean;
+}
+
+/**
+ * Network connectivity endpoints for a Container Instance compute.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+model ConnectivityEndpoints {
+  /**
+   * The public IP address of the compute instance.
+   */
+  @visibility(Lifecycle.Read)
+  publicIpAddress?: string;
+
+  /**
+   * The SSH port for the compute instance.
+   */
+  @visibility(Lifecycle.Read)
+  sshPort?: int32;
+}
+
+/**
+ * The list of cognitive services computes operation response.
+ */
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+model ComputeListResult {
+  /**
+   * The link used to get the next page of compute list.
+   */
+  nextLink?: string;
+
+  /**
+   * Gets the list of computes.
+   */
+  @pageItems
+  value?: Compute[];
+}

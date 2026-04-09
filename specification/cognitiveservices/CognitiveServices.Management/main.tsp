@@ -39,6 +39,7 @@ import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
 import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
+import "./Compute.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

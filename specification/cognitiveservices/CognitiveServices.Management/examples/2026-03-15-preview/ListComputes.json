@@ -1,0 +1,46 @@
+{
+  "operationId": "Computes_ListByAccount",
+  "title": "ListComputes",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myCompute",
+            "name": "myCompute",
+            "type": "Microsoft.CognitiveServices/accounts/computes",
+            "properties": {
+              "computeType": "Cluster",
+              "pools": [
+                {
+                  "name": "default",
+                  "vmPriority": "Regular",
+                  "instanceType": "Standard_DS3_v2",
+                  "nodeCount": 2
+                }
+              ],
+              "subnetArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default",
+              "provisioningState": "Succeeded",
+              "errors": [],
+              "creationTime": "2026-03-24T11:39:39.795Z"
+            },
+            "systemData": {
+              "createdBy": "xxx@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2026-03-24T11:39:39.795Z",
+              "lastModifiedBy": "xxx@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-03-24T11:39:39.795Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

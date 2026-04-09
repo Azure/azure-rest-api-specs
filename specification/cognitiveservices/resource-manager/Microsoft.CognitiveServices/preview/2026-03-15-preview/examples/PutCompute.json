@@ -1,0 +1,107 @@
+{
+  "operationId": "Computes_CreateOrUpdate",
+  "title": "PutCompute",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "computeName": "myCompute",
+    "resource": {
+      "properties": {
+        "computeType": "Cluster",
+        "pools": [
+          {
+            "name": "default",
+            "vmPriority": "Regular",
+            "instanceType": "Standard_DS3_v2",
+            "nodeCount": 2
+          }
+        ],
+        "subnetArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default"
+      },
+      "location": "eastus",
+      "identity": {
+        "type": "None"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "computeType": "Cluster",
+          "pools": [
+            {
+              "name": "default",
+              "vmPriority": "Regular",
+              "instanceType": "Standard_DS3_v2",
+              "nodeCount": 2
+            }
+          ],
+          "subnetArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default",
+          "provisioningState": "Accepted",
+          "errors": [],
+          "creationTime": "2026-03-24T11:39:39.795Z"
+        },
+        "etag": "\"00000000-0000-0000-0000-000000000000\"",
+        "location": "eastus",
+        "identity": {
+          "type": "None",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "userAssignedIdentities": {}
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myCompute",
+        "name": "myCompute",
+        "type": "Microsoft.CognitiveServices/accounts/computes",
+        "systemData": {
+          "createdBy": "xxx@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-24T11:39:39.795Z",
+          "lastModifiedBy": "xxx@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-24T11:39:39.795Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "computeType": "Cluster",
+          "pools": [
+            {
+              "name": "default",
+              "vmPriority": "Regular",
+              "instanceType": "Standard_DS3_v2",
+              "nodeCount": 2
+            }
+          ],
+          "subnetArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default",
+          "provisioningState": "Accepted",
+          "errors": [],
+          "creationTime": "2026-03-24T11:39:39.795Z"
+        },
+        "etag": "\"00000000-0000-0000-0000-000000000000\"",
+        "location": "eastus",
+        "identity": {
+          "type": "None",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "userAssignedIdentities": {}
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myCompute",
+        "name": "myCompute",
+        "type": "Microsoft.CognitiveServices/accounts/computes",
+        "systemData": {
+          "createdBy": "xxx@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-24T11:39:39.795Z",
+          "lastModifiedBy": "xxx@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-24T11:39:39.795Z"
+        }
+      }
+    }
+  }
+}
