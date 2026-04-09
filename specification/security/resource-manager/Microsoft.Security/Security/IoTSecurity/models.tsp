@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Common;
 
 namespace Microsoft.Security;
 

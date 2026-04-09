@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Common;
 
 namespace Microsoft.Security;
 

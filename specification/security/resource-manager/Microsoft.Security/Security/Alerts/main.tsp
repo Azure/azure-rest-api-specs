@@ -22,6 +22,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+
 /**
  * API spec for Microsoft.Security (Azure Security Center) alerts resource provider
  */

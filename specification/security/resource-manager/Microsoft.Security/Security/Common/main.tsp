@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.Common;
+namespace Common;
 /**
  * The error detail.
  */

@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Common;
 
 namespace Microsoft.Security;
 
