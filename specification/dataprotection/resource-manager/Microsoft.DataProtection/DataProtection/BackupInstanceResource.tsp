@@ -175,7 +175,8 @@ interface BackupInstanceResources {
     ResumeProtectionRequest,
     OkResponse,
     Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**
