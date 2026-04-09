@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 @doc("The AI Manager namespace.")
 @resource("namespaces")
 @parentResource(AIManager)
-model AIManagerNamespace is TrackedResource<AIManagerNamespaceProperties> {
+model AIManagerNamespace is ProxyResource<AIManagerNamespaceProperties> {
   @doc("The name of the AI Manager namespace resource.")
   @key("namespaceName")
   @segment("namespaces")
@@ -31,8 +31,9 @@ model AIManagerNamespace is TrackedResource<AIManagerNamespaceProperties> {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 @doc("The properties of an AI Manager namespace.")
 model AIManagerNamespaceProperties {
-  @doc("Delete options of the AI Manager namespace.")
-  deletePolicy?: DeletePolicy;
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation.")
+  provisioningState?: AIManagerNamespaceProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The labels for the namespace.")
@@ -41,10 +42,6 @@ model AIManagerNamespaceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
   @doc("The annotations for the namespace.")
   annotations?: Record<string>;
-
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
-  provisioningState?: AIManagerNamespaceProvisioningState;
 }
 
 @doc("The provisioning state of the AI Manager namespace resource.")
@@ -92,13 +89,6 @@ interface AIManagerNamespaces {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
   listByAIManager is ArmResourceListByParent<AIManagerNamespace>;
 
-  update is ArmCustomPatchSync<
-    AIManagerNamespace,
-    AIManagerNamespacePatch,
-    Azure.ResourceManager.Foundations.BaseParameters<AIManagerNamespace> &
-      IfMatchParameters<AIManagerNamespace>
-  >;
-
   @doc("Lists the credentials of an AI Manager namespace.")
   @post
   listCredential is ArmResourceActionSync<
@@ -106,11 +96,4 @@ interface AIManagerNamespaces {
     void,
     ArmResponse<CredentialResults>
   >;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
-@doc("The properties of an AI Manager namespace that can be patched.")
-model AIManagerNamespacePatch {
-  /* The ARM tags of the AI Manager namespace resource.*/
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }

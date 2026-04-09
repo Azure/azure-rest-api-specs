@@ -705,80 +705,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "AIManagerNamespaces_Update",
-        "tags": [
-          "AIManagerNamespaces"
-        ],
-        "description": "Update a AIManagerNamespace",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "aiManagerName",
-            "in": "path",
-            "description": "The name of the AI Manager resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the AI Manager namespace resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AIManagerNamespacePatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AIManagerNamespace"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Updates an AI Manager namespace resource.": {
-            "$ref": "./examples/AIManagerNamespaces_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "AIManagerNamespaces_Delete",
         "tags": [
@@ -982,7 +908,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1007,26 +933,14 @@
         "value"
       ]
     },
-    "AIManagerNamespacePatch": {
-      "type": "object",
-      "description": "The properties of an AI Manager namespace that can be patched.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "AIManagerNamespaceProperties": {
       "type": "object",
       "description": "The properties of an AI Manager namespace.",
       "properties": {
-        "deletePolicy": {
-          "$ref": "#/definitions/DeletePolicy",
-          "description": "Delete options of the AI Manager namespace."
+        "provisioningState": {
+          "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         },
         "labels": {
           "type": "object",
@@ -1041,11 +955,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/AIManagerNamespaceProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
         }
       }
     },
@@ -1119,14 +1028,14 @@
       "type": "object",
       "description": "AI Manager properties.",
       "properties": {
-        "deletePolicy": {
-          "$ref": "#/definitions/DeletePolicy",
-          "description": "Delete options of the AI Manager."
-        },
         "provisioningState": {
           "$ref": "#/definitions/AIManagerProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "deletePolicy": {
+          "$ref": "#/definitions/DeletePolicy",
+          "description": "Delete options of the AI Manager."
         },
         "clusterIds": {
           "type": "array",

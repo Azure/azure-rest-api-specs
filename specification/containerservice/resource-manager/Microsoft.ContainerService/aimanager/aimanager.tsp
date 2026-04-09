@@ -35,12 +35,12 @@ model AIManager is TrackedResource<AIManagerProperties> {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"
 @doc("AI Manager properties.")
 model AIManagerProperties {
-  @doc("Delete options of the AI Manager.")
-  deletePolicy?: DeletePolicy;
-
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: AIManagerProvisioningState;
+
+  @doc("Delete options of the AI Manager.")
+  deletePolicy?: DeletePolicy;
 
   @visibility(Lifecycle.Read)
   @doc("The underlying cluster IDs of the AI Manager.")
