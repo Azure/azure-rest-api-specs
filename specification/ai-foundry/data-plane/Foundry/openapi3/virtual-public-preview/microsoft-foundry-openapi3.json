@@ -18450,6 +18450,69 @@
         ],
         "description": "Evaluation rule action for human evaluation."
       },
+      "IdleTimeoutSessionExpirationPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "idle_timeout"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "idle_timeout"
+            ],
+            "description": "The policy type."
+          },
+          "idle_timeout": {
+            "type": "integer",
+            "format": "int32",
+            "description": "How long after the last activity the session should be expired, in seconds."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionExpirationPolicy"
+          }
+        ],
+        "description": "Expire a session after it is idle for a given duration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "IdleTimeoutSessionSuspensionPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "idle_timeout"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "idle_timeout"
+            ]
+          },
+          "idle_timeout": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Timeout in seconds. If a sandbox shows no activity for that amount of time, the session will be suspended."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionSuspensionPolicy"
+          }
+        ],
+        "description": "Suspend after sandbox after it is idle for a given duration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "Index": {
         "type": "object",
         "required": [
@@ -19072,6 +19135,38 @@
           }
         ],
         "description": "Managed Azure AI Search Index Definition"
+      },
+      "MaxLifetimeSessionExpirationPolicy": {
+        "type": "object",
+        "required": [
+          "type",
+          "max_lifetime"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "max_lifetime"
+            ],
+            "description": "The policy type."
+          },
+          "max_lifetime": {
+            "type": "integer",
+            "format": "int32",
+            "description": "How long after creation the session should be expired, in seconds."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionExpirationPolicy"
+          }
+        ],
+        "description": "Sessions expire after a fixed lifetime.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "MemoryItem": {
         "type": "object",
@@ -41087,20 +41182,30 @@
             "description": "How to agent versions of sessions should change. Defaults to automatically upgrading to the version set in the agent endpoint.",
             "default": "auto_upgrade"
           },
-          "max_lifespan": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum session lifespan in seconds. After this period, the session is terminated and deleted regardless of activity and can no longer be accessed. Defaults to 30 days.",
-            "default": 2592000
+          "suspension_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionSuspensionPolicy"
+              }
+            ],
+            "description": "When to suspend a session. Default is 2 hours after last activity.",
+            "default": {
+              "type": "idle_timeout"
+            }
           },
-          "idle_timeout": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Idle session timeout in seconds. If the sandbox receives no activity for this period the session is suspended. All durable state will be preserved for the next request, but other state will not be.",
-            "default": 7200
+          "expiration_policy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SessionExpirationPolicy"
+              }
+            ],
+            "description": "When to expire a session. Default is 30 days after last activity.",
+            "default": {
+              "type": "idle_timeout"
+            }
           }
         },
-        "description": "Configure the behavior and lifecycle of sessions.",
+        "description": "Configure the behavior and resources of a session.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "HostedAgents=V1Preview"
@@ -41158,6 +41263,43 @@
           }
         },
         "description": "Response from listing a directory in a session sandbox."
+      },
+      "SessionExpirationPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "never",
+                  "max_lifetime",
+                  "idle_timeout"
+                ]
+              }
+            ],
+            "description": "The policy type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "max_lifetime": "#/components/schemas/MaxLifetimeSessionExpirationPolicy",
+            "idle_timeout": "#/components/schemas/IdleTimeoutSessionExpirationPolicy"
+          }
+        },
+        "description": "Expiration configuration for session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
       },
       "SessionFileWriteResponse": {
         "type": "object",
@@ -41225,6 +41367,40 @@
           ]
         }
       },
+      "SessionSuspensionPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "never",
+                  "idle_timeout"
+                ]
+              }
+            ]
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "idle_timeout": "#/components/schemas/IdleTimeoutSessionSuspensionPolicy"
+          }
+        },
+        "description": "Suspension configuration for session.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
       "SessionVersionUpgradePolicy": {
         "anyOf": [
           {
@@ -41234,7 +41410,7 @@
             "type": "string",
             "enum": [
               "auto_upgrade",
-              "pin_to_version"
+              "pinned"
             ]
           }
         ],

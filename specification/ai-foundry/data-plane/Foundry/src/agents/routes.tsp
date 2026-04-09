@@ -26,6 +26,7 @@ interface Agents {
   /**
    * Creates the agent.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "AgentDefinitionOptInKeys is a closed union"
   @post
   @route("/agents")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
@@ -106,6 +107,7 @@ interface Agents {
   /**
    * Create a new agent version.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "AgentDefinitionOptInKeys is a closed union"
   @post
   @route("/agents/{agent_name}/versions")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
@@ -332,5 +334,4 @@ interface Agents {
     },
     SessionListResult
   >;
-
 }
