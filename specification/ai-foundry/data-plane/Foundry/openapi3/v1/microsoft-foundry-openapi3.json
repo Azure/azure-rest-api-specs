@@ -1128,6 +1128,18 @@
         "description": "Returns a list of data generation jobs.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -1263,6 +1275,18 @@
         "description": "Creates a data generation job.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -1277,9 +1301,16 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
               "Location": {
                 "required": true,
-                "description": "The URL to poll the created data generation job status and retrieve the job details.",
+                "description": "URL of the created job resource.",
                 "schema": {
                   "type": "string"
                 }
@@ -1316,7 +1347,7 @@
               }
             }
           },
-          "description": "Data generation job create request body"
+          "description": "The job to create."
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -1325,20 +1356,31 @@
         }
       }
     },
-    "/data_generation/jobs/{data_generation_job_id}": {
+    "/data_generation/jobs/{jobId}": {
       "get": {
         "operationId": "DataGenerationJobs_get",
         "summary": "Get info about a data generation job.",
         "description": "Gets the details of a data generation job by its ID.",
         "parameters": [
           {
-            "name": "data_generation_job_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the data generation job.",
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
-              "maxLength": 1024
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -1355,6 +1397,16 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1388,13 +1440,24 @@
         "description": "Deletes a data generation job by its ID.",
         "parameters": [
           {
-            "name": "data_generation_job_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the data generation job to delete.",
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
-              "maxLength": 1024
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to delete.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -1433,20 +1496,31 @@
         }
       }
     },
-    "/data_generation/jobs/{data_generation_job_id}/cancel": {
+    "/data_generation/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "DataGenerationJobs_cancel",
         "summary": "Cancels a data generation job.",
         "description": "Cancels a data generation job by its ID.",
         "parameters": [
           {
-            "name": "data_generation_job_id",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the data generation job to cancel.",
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
-              "maxLength": 1024
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to cancel.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -7988,6 +8062,48 @@
           "Schedules"
         ]
       }
+    },
+    "/{jobId}": {
+      "delete": {
+        "operationId": "deleteJob",
+        "description": "Delete a job. Returns 204 No Content.",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "security": [
@@ -10696,16 +10812,13 @@
         ],
         "description": "Daily recurrence schedule."
       },
-      "DataGenerationJob": {
+      "DataGenerationInputs": {
         "type": "object",
         "required": [
           "name",
           "sources",
           "options",
-          "scenario",
-          "id",
-          "status",
-          "created_at"
+          "scenario"
         ],
         "properties": {
           "name": {
@@ -10734,53 +10847,47 @@
               }
             ],
             "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
-          },
+          }
+        },
+        "description": "Caller-supplied inputs for a data generation job."
+      },
+      "DataGenerationJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "created_at"
+        ],
+        "properties": {
           "id": {
             "type": "string",
-            "description": "The job identifier.",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationResult"
+              }
+            ],
+            "description": "Result produced on success.",
             "readOnly": true
           },
           "status": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DataGenerationJobStatus"
+                "$ref": "#/components/schemas/JobStatus"
               }
             ],
-            "description": "The current status of the job.",
-            "readOnly": true
-          },
-          "outputs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataGenerationJobOutput"
-            },
-            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
-          },
-          "generated_samples": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of samples actually generated. This field is populated only after the job has succeeded.",
-            "readOnly": true
-          },
-          "token_usage": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TokenUsage"
-              }
-            ],
-            "description": "The token usage information for the data generation job.",
-            "readOnly": true
-          },
-          "created_at": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
-            "readOnly": true
-          },
-          "finished_at": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).",
+            "description": "Current lifecycle status.",
             "readOnly": true
           },
           "error": {
@@ -10789,7 +10896,25 @@
                 "$ref": "#/components/schemas/OpenAI.Error"
               }
             ],
-            "description": "Error information set only when status is 'failed'.",
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
+            "readOnly": true
+          },
+          "finished_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).",
             "readOnly": true
           }
         },
@@ -10799,7 +10924,7 @@
         "type": "object",
         "required": [
           "type",
-          "max_samples_count"
+          "max_samples"
         ],
         "properties": {
           "type": {
@@ -10810,7 +10935,7 @@
             ],
             "description": "The data generation job type."
           },
-          "max_samples_count": {
+          "max_samples": {
             "type": "integer",
             "format": "int32",
             "description": "Maximum number of samples to generate."
@@ -10933,24 +11058,6 @@
         ],
         "description": "The supported source types for a data generation job."
       },
-      "DataGenerationJobStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "queued",
-              "running",
-              "succeeded",
-              "failed",
-              "cancelled"
-            ]
-          }
-        ],
-        "description": "Status values for data generation job."
-      },
       "DataGenerationJobType": {
         "anyOf": [
           {
@@ -10980,6 +11087,32 @@
           }
         },
         "description": "LLM model options for data generation jobs."
+      },
+      "DataGenerationResult": {
+        "type": "object",
+        "properties": {
+          "outputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobOutput"
+            },
+            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
+          },
+          "generated_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of samples actually generated."
+          },
+          "token_usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenUsage"
+              }
+            ],
+            "description": "The token usage information for the data generation job."
+          }
+        },
+        "description": "Result produced by a successful data generation job."
       },
       "DataSourceConfig": {
         "type": "object",
@@ -13227,6 +13360,10 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FoundryTimestamp": {
+        "type": "integer",
+        "format": "unixtime"
+      },
       "FunctionToolCall": {
         "type": "object",
         "required": [
@@ -13825,6 +13962,24 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
+      },
+      "JobStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "queued",
+              "in_progress",
+              "succeeded",
+              "failed",
+              "canceled"
+            ]
+          }
+        ],
+        "description": "Extensible status values shared by Foundry jobs."
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -36216,19 +36371,19 @@
         "properties": {
           "prompt_tokens": {
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "description": "The number of prompt tokens used.",
             "readOnly": true
           },
           "completion_tokens": {
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "description": "The number of completion tokens generated.",
             "readOnly": true
           },
           "total_tokens": {
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "description": "Total number of tokens used.",
             "readOnly": true
           }
@@ -36333,20 +36488,20 @@
             "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
           },
           "start_time": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The start of the time window (in Unix timestamp in seconds) for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation."
           },
           "end_time": {
-            "type": "integer",
-            "format": "unixtime",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
             "description": "The end of the time window (in Unix timestamp in seconds) for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation."
-          },
-          "ingestion_delay_seconds": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The delay to apply for ingestion when querying traces. TODO: Do we need this?",
-            "default": 300
           },
           "max_traces": {
             "type": "integer",

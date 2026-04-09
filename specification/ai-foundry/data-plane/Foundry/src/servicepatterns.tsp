@@ -2,8 +2,158 @@ import "@typespec/http";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
+
+// ============================================================================
+// Foundry Data Plane Operation Infrastructure
+// ============================================================================
+
+alias FoundryDataPlaneApiVersionParameter = {
+  @doc("The API version to use for this operation.")
+  @query("api-version")
+  apiVersion: string;
+};
+
+alias FoundryDataPlaneAzureTraits = Azure.Core.Traits.SupportsClientRequestId &
+  Azure.Core.Traits.NoRepeatableRequests &
+  Azure.Core.Traits.NoConditionalRequests &
+  FoundryDataPlaneApiVersionParameter;
+
+alias FoundryAzureOperations<ExtraTraits> = Azure.Core.ResourceOperations<ExtraTraits &
+  FoundryDataPlaneAzureTraits>;
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryDataPlaneOperation<
+  Params extends Reflection.Model,
+  Response,
+  ErrorResponse = ApiErrorResponse
+>(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
+
+// ---- Feature opt-in keys & preview headers ----
+
+/** Feature opt-in keys for agent definition operations supporting hosted or workflow agents. */
+union AgentDefinitionOptInKeys {
+  hosted_agents_v1_preview: "HostedAgents=V1Preview",
+  workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
+
+  @removed(Versions.v1)
+  container_agents_v1_preview: "ContainerAgents=V1Preview",
+}
+
+union FoundryFeaturesOptInKeys {
+  evaluations_v1_preview: "Evaluations=V1Preview",
+  schedules_v1_preview: "Schedules=V1Preview",
+  red_teams_v1_preview: "RedTeams=V1Preview",
+  insights_v1_preview: "Insights=V1Preview",
+  memory_stores_v1_preview: "MemoryStores=V1Preview",
+  data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
+}
+
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+  /**
+   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+   */
+  @header("Foundry-Features")
+  foundry_features: RequiredPreviewOptInHeader;
+};
+
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> = {
+  /**
+   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+   */
+  @header("Foundry-Features")
+  foundry_features?: OptionalPreviewOptInHeader;
+};
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+op FoundryDataPlanePreviewOperation<
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
+  Params extends Reflection.Model,
+  Response,
+  ErrorResponse = ApiErrorResponse
+> is FoundryDataPlaneOperation<
+  {
+    ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>;
+    ...Params;
+  },
+  Response,
+  ErrorResponse
+>;
+
+// ============================================================================
+// Pagination
+// ============================================================================
+
+@doc("The response data for a requested list of items.")
+model AgentsPagedResult<T> {
+  /** The requested list of items. */
+  @pageItems
+  data: T[];
+
+  /** The first ID represented in this list. */
+  first_id?: string;
+
+  /** The last ID represented in this list. */
+  @continuationToken
+  last_id?: string;
+
+  /** A value indicating whether there are additional values available not captured in this list. */
+  has_more: boolean;
+}
+
+alias PageLimitQueryParameter = {
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 20.
+   */
+  @query limit?: int32 = 20;
+};
+
+union PageOrder {
+  "asc",
+  "desc",
+}
+
+alias PageOrderQueryParameter = {
+  /**
+   * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+   * for descending order.
+   */
+  @query order?: PageOrder;
+};
+
+alias PageAfterQueryParameter = {
+  /**
+   * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+   * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+   */
+  @query @continuationToken after?: string;
+};
+
+alias PageBeforeQueryParameter = {
+  /**
+   * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+   * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+   */
+  @query before?: string;
+};
+
+alias CommonPageQueryParameters = {
+  ...PageLimitQueryParameter;
+  ...PageOrderQueryParameter;
+  ...PageAfterQueryParameter;
+  ...PageBeforeQueryParameter;
+};
+
+// ============================================================================
+// Versioned Resource Operations
+// ============================================================================
 
 @doc("Defines the request parameters for the createOrUpdateVersion operations.")
 model InputParameters<
@@ -133,7 +283,11 @@ union JobStatus {
  * @template TInputs  Caller-supplied configuration (use `never` if none).
  * @template TStatus  Status union (defaults to `JobStatus`).
  */
-model JobLike<TResult = never, TInputs = never, TStatus extends string = JobStatus> {
+model JobLike<
+  TResult = never,
+  TInputs = never,
+  TStatus extends string = JobStatus
+> {
   /** Server-assigned unique identifier. */
   @visibility(Lifecycle.Read)
   id: string;
@@ -177,7 +331,8 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
 
 /** Create a new job. Returns 201 + Operation-Location + Location headers. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
-@post op postJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
+@post
+op postJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
   {
     /** The job to create. */
     @body body: TJob;
@@ -186,7 +341,8 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
 >;
 
 /** Get a job by ID with an optional Retry-After header for polling guidance. */
-@get op queryJobStatus<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
+@get
+op queryJobStatus<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
   {
     /** The ID of the job. */
     @path jobId: string;
@@ -197,7 +353,7 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
 /** List jobs with cursor-based pagination and optional filters. */
 @get @list op listJobs<
   TJob extends TypeSpec.Reflection.Model,
-  TFilterParams extends TypeSpec.Reflection.Model = {},
+  TFilterParams extends TypeSpec.Reflection.Model = {}
 > is FoundryDataPlaneOperation<
   {
     ...CommonPageQueryParameters;
@@ -206,18 +362,20 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
   AgentsPagedResult<TJob>
 >;
 
-/** Cancel a running job. Returns the updated job. */
-@post op cancelJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
+/** Cancel a running job. Returns 200 with the updated job. */
+@post
+op cancelJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
   {
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  TJob
+  OkResponse & TJob
 >;
 
 /** Delete a job. Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
-@delete op deleteJob is FoundryDataPlaneOperation<
+@delete
+op deleteJob is FoundryDataPlaneOperation<
   {
     /** The ID of the job to delete. */
     @path jobId: string;
@@ -231,7 +389,7 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @post op postJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  TJob extends TypeSpec.Reflection.Model,
+  TJob extends TypeSpec.Reflection.Model
 > is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
@@ -244,7 +402,7 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
 /** Get a job by ID (preview). Includes optional Foundry-Features header. */
 @get op queryJobStatusPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  TJob extends TypeSpec.Reflection.Model,
+  TJob extends TypeSpec.Reflection.Model
 > is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
@@ -258,7 +416,7 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
 @get @list op listJobsPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
   TJob extends TypeSpec.Reflection.Model,
-  TFilterParams extends TypeSpec.Reflection.Model = {},
+  TFilterParams extends TypeSpec.Reflection.Model = {}
 > is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
@@ -268,24 +426,23 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
   AgentsPagedResult<TJob>
 >;
 
-/** Cancel a running job (preview). Includes optional Foundry-Features header. */
+/** Cancel a running job (preview). Returns 200 with the updated job. */
 @post op cancelJobPreview<
   AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-  TJob extends TypeSpec.Reflection.Model,
+  TJob extends TypeSpec.Reflection.Model
 > is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to cancel. */
     @path jobId: string;
   },
-  TJob
+  OkResponse & TJob
 >;
 
-/** Delete a job (preview). Includes optional Foundry-Features header. */
+/** Delete a job (preview). Returns 204 No Content. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Job templates are project-standard operations"
-@delete op deleteJobPreview<
-  AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys,
-> is FoundryDataPlanePreviewOperation<
+@delete
+op deleteJobPreview<AreaPreviewLabel extends FoundryFeaturesOptInKeys | AgentDefinitionOptInKeys> is FoundryDataPlanePreviewOperation<
   AreaPreviewLabel,
   {
     /** The ID of the job to delete. */
@@ -293,3 +450,10 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
   },
   NoContentResponse
 >;
+
+// ============================================================================
+// Types and traits shared by multiple service patterns
+// ============================================================================
+
+@encode(DateTimeKnownEncoding.unixTimestamp, int32)
+scalar FoundryTimestamp extends utcDateTime;

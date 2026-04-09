@@ -57,11 +57,11 @@ model DataGenerationResult {
 model DataGenerationJob is JobLike<DataGenerationResult, DataGenerationInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
-  created_at: int64;
+  created_at: FoundryTimestamp;
 
   @doc("The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
-  finished_at?: int64;
+  finished_at?: FoundryTimestamp;
 }
 
 @doc("Output information for a data generation job.")
@@ -121,15 +121,15 @@ union DataGenerationJobOutputType {
 model TokenUsage {
   @doc("The number of prompt tokens used.")
   @visibility(Lifecycle.Read)
-  prompt_tokens?: int32;
+  prompt_tokens?: int64;
 
   @doc("The number of completion tokens generated.")
   @visibility(Lifecycle.Read)
-  completion_tokens?: int32;
+  completion_tokens?: int64;
 
   @doc("Total number of tokens used.")
   @visibility(Lifecycle.Read)
-  total_tokens?: int32;
+  total_tokens?: int64;
 }
 
 @doc("The supported scenarios for a data generation job.")
@@ -170,7 +170,7 @@ model DataGenerationJobOptions {
   type: DataGenerationJobType;
 
   @doc("Maximum number of samples to generate.")
-  max_samples_count: int32;
+  max_samples: int32;
 
   @doc("The LLM model options.")
   model_options?: DataGenerationModelOptions;
@@ -223,16 +223,10 @@ model TracesDataGenerationJobSource extends DataGenerationJobSource {
   agent_version?: string;
 
   @doc("The start of the time window (in Unix timestamp in seconds) for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation.")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  start_time: utcDateTime;
+  start_time: FoundryTimestamp;
 
   @doc("The end of the time window (in Unix timestamp in seconds) for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation.")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  end_time?: utcDateTime;
-
-  @doc("The delay to apply for ingestion when querying traces. TODO: Do we need this?")
-  @encode(DurationKnownEncoding.seconds, int32)
-  ingestion_delay_seconds?: duration = duration.fromISO("PT5M");
+  end_time?: FoundryTimestamp;
 
   @doc("Sampling limit applied to traces retrieved for data generation.")
   max_traces?: int32 = 1000;

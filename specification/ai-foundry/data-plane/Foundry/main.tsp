@@ -19,4 +19,4 @@ import "./src/openai-finetuning/routes.tsp";
 import "./src/openai-responses/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
-import "./src/data_generation/routes.tsp";
+import "./src/data_generation_jobs/routes.tsp";
