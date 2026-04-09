@@ -2277,6 +2277,16 @@ model AzureBackupRehydrationRequest {
 }
 
 /**
+ * Request body of Resume protection when MSI is to be changed
+ */
+model ResumeProtectionRequest {
+  /**
+   * identity details of the MSI
+   */
+  identityDetails?: IdentityDetails;
+}
+
+/**
  * Request body of Stop protection when MUA is Enabled
  */
 model StopProtectionRequest {
