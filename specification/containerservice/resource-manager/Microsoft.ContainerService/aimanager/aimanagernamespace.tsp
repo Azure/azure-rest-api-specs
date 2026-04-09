@@ -57,15 +57,6 @@ union AIManagerNamespaceProvisioningState {
 
   @doc("The provisioning state of a namespace being deleted.")
   Deleting: "Deleting",
-
-  @doc("The namespace has been created.")
-  Succeeded: "Succeeded",
-
-  @doc("The namespace creation failed.")
-  Failed: "Failed",
-
-  @doc("The namespace creation was canceled.")
-  Canceled: "Canceled",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"

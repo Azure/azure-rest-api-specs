@@ -24,27 +24,6 @@ alias IfMatchHeadersParameters<T extends Azure.ResourceManager.Foundations.Resou
   ...IfNoneMatchParameters<T>;
 };
 
-@doc("Provides the standard '$skiptoken' query parameter for list operations.")
-model SkipTokenQueryParameter {
-  @query("$skipToken")
-  @doc("The page-continuation token to use with a paged version of this API.")
-  skipToken?: string;
-}
-
-@doc("Provides the standard '$top' query parameter for list operations.")
-model TopQueryParameter {
-  @query("$top")
-  @doc("The number of result items to return.")
-  top?: int32;
-}
-
-@doc("Provides the standard '$filter' query parameter for list operations.")
-model FilterQueryParameter {
-  @query("$filter")
-  @doc("Filter the result list using the given expression.")
-  filter?: string;
-}
-
 @doc("The list credential result response.")
 model CredentialResults {
   @doc("Base64-encoded Kubernetes configuration file.")
@@ -61,16 +40,6 @@ model CredentialResult {
 
   @doc("Base64-encoded Kubernetes configuration file.")
   @visibility(Lifecycle.Read)
+  @secret
   value?: bytes;
-}
-
-@doc("The format of the kubeconfig credential.")
-union Format {
-  string,
-
-  @doc("Return azure auth-provider kubeconfig. This format is deprecated in v1.22 and will be fully removed in v1.26.")
-  azure: "azure",
-
-  @doc("Return exec format kubeconfig. This format requires kubelogin binary in the path.")
-  exec: "exec",
 }

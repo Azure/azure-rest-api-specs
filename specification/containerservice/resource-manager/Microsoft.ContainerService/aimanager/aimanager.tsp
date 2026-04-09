@@ -68,15 +68,6 @@ union AIManagerProvisioningState {
 
   @doc("Resource is deleting.")
   Deleting: "Deleting",
-
-  @doc("Resource has been created.")
-  Succeeded: "Succeeded",
-
-  @doc("Resource creation failed.")
-  Failed: "Failed",
-
-  @doc("Resource creation was canceled.")
-  Canceled: "Canceled",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AIManager is a valid name"

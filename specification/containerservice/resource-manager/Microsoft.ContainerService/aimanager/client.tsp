@@ -35,9 +35,3 @@ using TypeSpec.Http;
 @@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity"
 );
-
-// Property flattening for SDK backward compatibility
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.TrackedResource.properties
-);

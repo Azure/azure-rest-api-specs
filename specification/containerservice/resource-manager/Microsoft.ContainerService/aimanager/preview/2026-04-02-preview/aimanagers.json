@@ -976,17 +976,17 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The namespace has been created."
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The namespace creation failed."
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The namespace creation was canceled."
+            "description": "Resource creation was canceled."
           },
           {
             "name": "Creating",
@@ -1107,9 +1107,10 @@
         },
         "value": {
           "type": "string",
-          "format": "byte",
+          "format": "password",
           "description": "Base64-encoded Kubernetes configuration file.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
