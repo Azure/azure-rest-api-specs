@@ -41,7 +41,10 @@ using Microsoft.StorageCache;
 @@clientLocation(AmlFilesystems.update, "amlFilesystems", "!python");
 @@clientName(AmlFilesystems.update::parameters.properties, "amlFilesystem");
 @@clientLocation(AmlFilesystems.delete, "amlFilesystems", "!python");
-@@clientLocation(AmlFilesystems.listByResourceGroup, "amlFilesystems", "!python");
+@@clientLocation(AmlFilesystems.listByResourceGroup,
+  "amlFilesystems",
+  "!python"
+);
 @@clientLocation(AmlFilesystems.list, "amlFilesystems", "!python");
 @@clientLocation(AmlFilesystems.archive, "amlFilesystems", "!python");
 @@clientName(AmlFilesystems.archive::parameters.body, "archiveInfo");
@@ -57,7 +60,10 @@ using Microsoft.StorageCache;
 @@clientLocation(AutoExportJobs.update, "autoExportJobs", "!python");
 @@clientName(AutoExportJobs.update::parameters.properties, "autoExportJob");
 @@clientLocation(AutoExportJobs.delete, "autoExportJobs", "!python");
-@@clientLocation(AutoExportJobs.listByAmlFilesystem, "autoExportJobs", "!python");
+@@clientLocation(AutoExportJobs.listByAmlFilesystem,
+  "autoExportJobs",
+  "!python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoExportJob.properties);
 
@@ -79,7 +85,10 @@ using Microsoft.StorageCache;
 @@clientLocation(AutoImportJobs.update, "autoImportJobs", "!python");
 @@clientName(AutoImportJobs.update::parameters.properties, "autoImportJob");
 @@clientLocation(AutoImportJobs.delete, "autoImportJobs", "!python");
-@@clientLocation(AutoImportJobs.listByAmlFilesystem, "autoImportJobs", "!python");
+@@clientLocation(AutoImportJobs.listByAmlFilesystem,
+  "autoImportJobs",
+  "!python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoImportJob.properties);
 
