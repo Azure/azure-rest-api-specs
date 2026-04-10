@@ -172,6 +172,9 @@ model DataGenerationJobOptions {
   @doc("Maximum number of samples to generate.")
   max_samples: int32;
 
+  @doc("The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1.")
+  train_split?: float32;
+
   @doc("The LLM model options.")
   model_options?: DataGenerationModelOptions;
 }
