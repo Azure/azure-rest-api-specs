@@ -14,14 +14,21 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'Account' to maintain SDK backward compatibility"
-model Account
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
+model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
   ...ResourceNameParameter<
     Resource = Account,
     KeyName = "accountName",
     SegmentName = "accounts",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 
   /**
    * Resource Etag.
@@ -67,7 +74,8 @@ interface AccountOps
         @minLength(2)
         @maxLength(64)
         accountName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesAccount"
     > {}
 
 @armResourceOperations(#{ omitTags: true })
@@ -250,7 +258,8 @@ interface DeletedAccountOps
         @maxLength(64)
         @minLength(2)
         accountName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesDeletedAccount"
     > {}
 
 @armResourceOperations(#{ omitTags: true })
