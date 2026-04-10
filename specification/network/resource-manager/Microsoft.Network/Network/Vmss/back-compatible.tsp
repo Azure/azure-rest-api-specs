@@ -126,7 +126,3 @@ using TypeSpec.Versioning;
   Microsoft.Compute.PublicIPAddresses,
   "autorest"
 );
-
-@@removed(FrontendIPConfigurationPropertiesFormat.ddosSettings,
-  Microsoft.Compute.Versions.v2018_10_01
-);
