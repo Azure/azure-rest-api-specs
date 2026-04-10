@@ -3,6 +3,7 @@ import "./CodeScanReport.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ApplicationMigration;
@@ -34,6 +35,10 @@ model CodeScanIssueProperties {
 
   @doc("The migration targets applicable for this issue.")
   azureTargets: AzureTarget[];
+
+  @added(CodeScanSitesApiVersions.v2026_05_12_preview)
+  @doc("The name of repositories affected by this issue.")
+  repoNames?: string[];
 }
 
 @parentResource(CodeScanReport)
