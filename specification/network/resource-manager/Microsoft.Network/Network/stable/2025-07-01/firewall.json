@@ -210,6 +210,9 @@
           "Get Azure Firewall": {
             "$ref": "./examples/AzureFirewallGet.json"
           },
+          "Get Azure Firewall With AFC Control Plane": {
+            "$ref": "./examples/AzureFirewallGetWithAfcControlPlane.json"
+          },
           "Get Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallGetWithAdditionalProperties.json"
           },
@@ -246,6 +249,13 @@
             "description": "The name of the Azure Firewall.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "createAfcControlPlane",
+            "in": "query",
+            "description": "When set to true, creates an AFC control plane for the Azure Firewall.",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "parameters",
@@ -291,6 +301,9 @@
         "x-ms-examples": {
           "Create Azure Firewall": {
             "$ref": "./examples/AzureFirewallPut.json"
+          },
+          "Create Azure Firewall With AFC Control Plane": {
+            "$ref": "./examples/AzureFirewallPutWithAfcControlPlane.json"
           },
           "Create Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallPutWithAdditionalProperties.json"
@@ -1347,6 +1360,11 @@
         "autoscaleConfiguration": {
           "$ref": "#/definitions/AzureFirewallAutoscaleConfiguration",
           "description": "Properties to provide a custom autoscale configuration to this azure firewall."
+        },
+        "afcControlPlaneConfiguration": {
+          "$ref": "./common.json#/definitions/AfcControlPlaneConfiguration",
+          "description": "AFC control plane configuration for the Azure Firewall.",
+          "readOnly": true
         }
       }
     },

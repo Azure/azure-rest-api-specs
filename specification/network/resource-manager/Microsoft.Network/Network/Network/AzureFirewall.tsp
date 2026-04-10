@@ -2,9 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -60,6 +62,14 @@ interface AzureFirewalls {
   @tag("AzureFirewalls")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AzureFirewall,
+    Parameters = {
+      /**
+       * When set to true, creates an AFC control plane for the Azure Firewall.
+       */
+      @added(Versions.v2025_07_01)
+      @query("createAfcControlPlane")
+      createAfcControlPlane?: boolean;
+    },
     Error = CloudError
   >;
 
