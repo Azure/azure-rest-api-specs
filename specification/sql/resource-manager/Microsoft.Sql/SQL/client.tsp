@@ -14,14 +14,6 @@ using Microsoft.Sql;
   "java"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ProxyResource,
-  "commonProxyResource",
-  "javascript"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.Resource,
-  "CommonResource",
-  "javascript"
-);
 @@clientName(Microsoft.Sql, "SqlManagementClient", "java,javascript,python");
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
@@ -107,4 +99,59 @@ using Microsoft.Sql;
 @@clientName(SqlVulnerabilityAssessmentScanRecordListResult,
   "VulnerabilityAssessmentScanRecordForSQLListResult ",
   "go"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(SensitivityLabelSourceAlias.sensitivityLabelSource,
+  "current",
+  "python"
+);
+@@alternateType(SensitivityLabelSourceAlias.sensitivityLabelSource,
+  "current",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
+  "recommended",
+  "python"
+);
+@@alternateType(RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
+  "recommended",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
+@@Legacy.clientDefaultValue(ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
 );

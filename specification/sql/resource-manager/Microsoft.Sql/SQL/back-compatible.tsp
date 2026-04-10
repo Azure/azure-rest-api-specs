@@ -1103,5 +1103,5 @@ using Microsoft.Sql;
 @@doc(RestorableDroppedDatabase.location, "Resource location.");
 @@clientName(Azure.ResourceManager.CommonTypes.SystemData,
   "systemdata",
-  "!javaScript,!python,!java,!go"
+  "!javascript,!python,!java,!go"
 );
