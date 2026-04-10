@@ -38,6 +38,10 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v5_preview: "2026-06-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v6_preview: "2026-06-02-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -56,6 +60,45 @@ model CloudAccount is TrackedResource<CloudAccountProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+@doc("SaaS-related data properties")
+@added(Versions.v6_preview)
+model SaaSData {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+  @doc("SaaS resource id")
+  saaSResourceId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+@doc("SaaS guid for Activate and Validate SaaS Resource")
+@added(Versions.v6_preview)
+model ActivateSaaSParameterRequest {
+  @doc("SaaS guid for Activate and Validate SaaS Resource")
+  saaSGuid: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "SaaS response model"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+@doc("Marketplace SaaS resource details.")
+@added(Versions.v6_preview)
+model SaaSResourceDetailsResponse
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  @doc("Id of the Marketplace SaaS Resource")
+  saaSResourceId?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+@doc("Response of get latest linked SaaS resource operation")
+@added(Versions.v6_preview)
+model LatestLinkedSaaSResponse {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+  @doc("SaaS resource id")
+  saaSResourceId?: string;
+
+  @doc("Flag indicating if the SaaS resource is hidden")
+  isHiddenSaaS?: boolean;
+}
+
 @armResourceOperations
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
@@ -64,6 +107,27 @@ interface CloudAccounts {
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;
   listBySubscription is ArmListBySubscription<CloudAccount>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "SaaS link operation"
+  @doc("Links a new SaaS to the cloud account.")
+  @summary("Links a new SaaS to the cloud account.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @added(Versions.v6_preview)
+  linkSaaS is ArmResourceActionAsync<
+    CloudAccount,
+    SaaSData,
+    ArmResponse<CloudAccount>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = CloudAccount> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @doc("Returns the latest SaaS linked to the cloud account.")
+  @added(Versions.v6_preview)
+  latestLinkedSaaS is ArmResourceActionSync<
+    CloudAccount,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
 }
 
 @doc("Properties specific to Commvault Cloud Account resource")
@@ -71,6 +135,21 @@ model CloudAccountProperties is BaseResourceProperties {
   @doc("SSO URL for the Commvault Cloud Account")
   @visibility(Lifecycle.Read)
   ssoUrl?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "SaaS operation group"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+@added(Versions.v6_preview)
+interface SaaSOperationGroup {
+  @doc("Resolve the token to get the SaaS resource ID and activate the SaaS resource")
+  @autoRoute
+  @action("activateSaaS")
+  activateResource is ArmProviderActionAsync<
+    Request = ActivateSaaSParameterRequest,
+    Response = SaaSResourceDetailsResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
 @doc("A Commvault Storage Resource")
