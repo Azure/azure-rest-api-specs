@@ -70,7 +70,7 @@ interface AcceleratorDeployments {
     Azure.Core.Foundations.RetryAfterHeader
     &
     ArmAsyncOperationHeader,
-    PatchModel = PatchResourceTagsAndSku
+    PatchModel = PatchResourceSku
   >;
 
   /**

@@ -2123,7 +2123,7 @@
             "description": "The accelerator deployment patch properties.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchResourceTagsAndSku"
+              "$ref": "#/definitions/PatchResourceSku"
             }
           }
         ],
@@ -15302,6 +15302,16 @@
         }
       ],
       "x-ms-discriminator-value": "PAT"
+    },
+    "PatchResourceSku": {
+      "type": "object",
+      "description": "The object being used to update sku of a resource, in general used for PATCH operations.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        }
+      }
     },
     "PatchResourceTags": {
       "type": "object",

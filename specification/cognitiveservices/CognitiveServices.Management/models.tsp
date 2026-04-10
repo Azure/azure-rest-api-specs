@@ -3247,6 +3247,17 @@ model SkuResource {
 }
 
 /**
+ * The object being used to update sku of a resource, in general used for PATCH operations.
+ */
+@added(Versions.v2026_03_15_preview)
+model PatchResourceSku {
+  /**
+   * The resource model definition representing SKU
+   */
+  sku?: Sku;
+}
+
+/**
  * Properties of Cognitive Services account commitment plan.
  */
 model CommitmentPlanProperties {
