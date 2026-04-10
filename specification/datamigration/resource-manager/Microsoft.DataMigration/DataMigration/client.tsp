@@ -6,7 +6,7 @@ using Microsoft.DataMigration;
 
 @@clientName(Microsoft.DataMigration,
   "DataMigrationManagementClient",
-  "javascript"
+  "javascript,python"
 );
 
 @@clientName(ConnectToTargetSqlSqlDbSyncTaskProperties,
@@ -24,4 +24,13 @@ using Microsoft.DataMigration;
 @@clientName(DatabaseMigrationsMongoToCosmosDbvCoreMongo.getForScope,
   "listForScope",
   "javascript"
+);
+
+@@clientName(ConnectToTargetSqlSqlDbSyncTaskInput,
+  "ConnectToTargetSqlDbSyncTaskInput",
+  "python"
+);
+@@clientName(ConnectToTargetSqlSqlDbSyncTaskProperties,
+  "ConnectToTargetSqlDbSyncTaskProperties",
+  "python"
 );
