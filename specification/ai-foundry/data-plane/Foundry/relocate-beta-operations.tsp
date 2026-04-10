@@ -98,3 +98,4 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.Agents.getSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
+@@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
