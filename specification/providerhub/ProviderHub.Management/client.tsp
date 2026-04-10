@@ -363,24 +363,31 @@ using Microsoft.ProviderHub;
   "TemplateDeploymentPreflightOption",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.providerAuthentication,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.featuresRule,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.resourceProviderAuthorizationRules,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.notificationSettings,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.resourceGroupLockOptionDuringMove,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceProviderManifestProperties.responseOptions,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compat: flattenProperty required for C# SDK migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceType.identityManagement,
   "csharp"
 );
