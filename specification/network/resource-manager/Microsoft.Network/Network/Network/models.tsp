@@ -6257,6 +6257,7 @@ model ApplicationGatewaySku {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2025_07_01)
 model ApplicationGatewayManagedHsm {
   /**
    * Key identifier of a key stored in Managed HSM.
@@ -6682,6 +6683,7 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
   /**
    * Managed HSM properties of the Application Gateway resource.
    */
+  @added(Versions.v2025_07_01)
   hsm?: ApplicationGatewayManagedHsm;
 
   /**
