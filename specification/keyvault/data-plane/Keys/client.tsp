@@ -38,6 +38,8 @@ op updateKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -72,6 +74,8 @@ op getKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
   },
   KeyBundle
@@ -100,6 +104,8 @@ op encrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -136,6 +142,8 @@ op decrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -172,6 +180,8 @@ op sign is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -208,6 +218,8 @@ op verify is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -244,6 +256,8 @@ op wrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -280,6 +294,8 @@ op unwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -318,6 +334,8 @@ op secureWrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -357,6 +375,8 @@ op secureUnwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -393,6 +413,8 @@ op release is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -428,6 +450,8 @@ op getKeyAttestation is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Empty string means the latest version"
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
   },
   /**
