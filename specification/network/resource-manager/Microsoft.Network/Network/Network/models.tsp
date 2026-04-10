@@ -6255,15 +6255,14 @@ model ApplicationGatewaySku {
 /**
  * Managed HSM properties of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This model is part of the existing Application Gateway resource type and must use legacy patterns for backward compatibility"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
 @added(Versions.v2025_07_01)
 model ApplicationGatewayManagedHsm {
   /**
    * Key identifier of a key stored in Managed HSM.
    */
-  @format("uri")
-  keyId?: string;
+  keyId?: url;
 
   /**
    * Base-64 encoded value of a base-64 public certificate.
