@@ -98,6 +98,7 @@ op encrypt is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
@@ -140,6 +141,7 @@ op decrypt is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
@@ -182,6 +184,7 @@ op sign is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
@@ -224,6 +227,7 @@ op verify is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
@@ -266,6 +270,7 @@ op wrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
@@ -308,6 +313,7 @@ op unwrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
@@ -352,6 +358,7 @@ op secureWrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
@@ -397,6 +404,7 @@ op secureUnwrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
