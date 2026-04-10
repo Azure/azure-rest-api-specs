@@ -157,7 +157,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
 
   const allLabelsMatch =
     labelNames.includes("ARMReview") &&
-    !labelNames.includes("NotReadyForARMReview") &&
+    (!labelNames.includes("NotReadyForARMReview") || armAnalysisResult.incrementalTypeSpec) &&
     (!labelNames.includes("SuppressionReviewRequired") ||
       labelNames.includes("Approved-Suppression"));
 

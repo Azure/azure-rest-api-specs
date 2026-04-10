@@ -37,7 +37,9 @@ jobs:
     name: ARM Auto SignOff - Set Status
 
     # workflow_run - already filtered by triggers above
-    # pull_request_target:labeled - filter to only the input and output labels
+    # pull_request_target:labeled - filter to input/output labels and human-added BreakingChange labels
+    # Note: Bot-added labels (NotReadyForARMReview, WaitForARMFeedback) don't trigger workflows,
+    # only human-added labels do. So we trigger on BreakingChange-Approved-* labels.
     if: |
       github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request_target' &&
@@ -51,7 +53,7 @@ jobs:
         github.event.label.name == 'ARMSignedOff' ||
         github.event.label.name == 'NotReadyForARMReview' ||
         github.event.label.name == 'SuppressionReviewRequired' ||
-        github.event.label.name == 'WaitForARMFeedback'))
+        startsWith(github.event.label.name, 'BreakingChange-Approved-')))
 
     runs-on: ubuntu-slim
 
