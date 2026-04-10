@@ -10304,46 +10304,6 @@
         },
         "description": "A AI Search Index resource."
       },
-      "AgentBlueprintReference": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/AgentBlueprintReferenceType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "ManagedAgentIdentityBlueprint": "#/components/schemas/ManagedAgentIdentityBlueprintReference"
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "AgentBlueprintReferenceType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "ManagedAgentIdentityBlueprint"
-            ]
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
       "AgentCard": {
         "type": "object",
         "required": [
@@ -10815,20 +10775,6 @@
             },
             "readOnly": true
           },
-          "blueprint_reference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentBlueprintReference"
-              }
-            ],
-            "description": "The blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
-            "readOnly": true
-          },
           "agent_card": {
             "allOf": [
               {
@@ -11111,20 +11057,6 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/AgentIdentity"
-              }
-            ],
-            "description": "The blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
-            "readOnly": true
-          },
-          "blueprint_reference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentBlueprintReference"
               }
             ],
             "description": "The blueprint for the agent",
@@ -16435,35 +16367,6 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
-      },
-      "ManagedAgentIdentityBlueprintReference": {
-        "type": "object",
-        "required": [
-          "type",
-          "blueprint_id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "ManagedAgentIdentityBlueprint"
-            ]
-          },
-          "blueprint_id": {
-            "type": "string",
-            "description": "The ID of the managed blueprint"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AgentBlueprintReference"
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
