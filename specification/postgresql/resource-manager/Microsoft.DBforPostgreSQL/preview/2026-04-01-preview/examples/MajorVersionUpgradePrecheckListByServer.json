@@ -10,64 +10,74 @@
       "body": {
         "value": [
           {
-            "createTime": "2026-04-10T00:55:46.0983792Z",
-            "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-            "status": "Succeeded",
-            "precheckResult": {
-              "Action": "Precheck",
-              "UpgradeSequence": {
-                "SourceVersion": "11",
-                "TargetVersion": "15"
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/majorVersionUpgradePrecheck/pppppppp-pppp-pppp-pppp-pppppppppppp",
+            "name": "pppppppp-pppp-pppp-pppp-pppppppppppp",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/majorVersionUpgradePrecheck",
+            "properties": {
+              "createTime": "2026-04-10T00:55:46.0983792Z",
+              "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "status": "Succeeded",
+              "precheckResult": {
+                "Action": "Precheck",
+                "UpgradeSequence": {
+                  "SourceVersion": "11",
+                  "TargetVersion": "15"
+                },
+                "ErrorInfo": [
+                  {
+                    "ErrorCode": 1020,
+                    "ErrorParameters": [
+                      "test_activity_view",
+                      "public",
+                      "postgres"
+                    ]
+                  }
+                ]
               },
-              "ErrorInfo": [
+              "targetVersion": "15",
+              "policyDetails": [
                 {
-                  "ErrorCode": 1020,
-                  "ErrorParameters": [
-                    "test_activity_view",
-                    "public",
-                    "postgres"
-                  ]
+                  "policyName": "NoViewDependentObjectsPrecheckPolicy",
+                  "passed": false,
+                  "errorCode": 1020,
+                  "errorMessage": "Upgrading with views dependent upon test_activity_view is not allowed. Found dependent object public in database postgres. Please drop this view prior to reattempting the upgrade.",
+                  "policyDescription": "Confirm there are no view-dependent objects."
                 }
               ]
-            },
-            "targetVersion": "15",
-            "policyDetails": [
-              {
-                "policyName": "NoViewDependentObjectsPrecheckPolicy",
-                "passed": false,
-                "errorCode": 1020,
-                "errorMessage": "Upgrading with views dependent upon test_activity_view is not allowed. Found dependent object public in database postgres. Please drop this view prior to reattempting the upgrade.",
-                "policyDescription": "Confirm there are no view-dependent objects."
-              }
-            ]
+            }
           },
           {
-            "createTime": "2026-04-09T15:22:33.1234567Z",
-            "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-            "status": "Succeeded",
-            "precheckResult": {
-              "Action": "Precheck",
-              "UpgradeSequence": {
-                "SourceVersion": "11",
-                "TargetVersion": "14"
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/majorVersionUpgradePrecheck/cccccccc-cccc-cccc-cccc-cccccccccccc",
+            "name": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/majorVersionUpgradePrecheck",
+            "properties": {
+              "createTime": "2026-04-09T15:22:33.1234567Z",
+              "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "status": "Succeeded",
+              "precheckResult": {
+                "Action": "Precheck",
+                "UpgradeSequence": {
+                  "SourceVersion": "11",
+                  "TargetVersion": "14"
+                },
+                "ErrorInfo": []
               },
-              "ErrorInfo": []
-            },
-            "targetVersion": "14",
-            "policyDetails": [
-              {
-                "policyName": "NotSupportedExtensionPrecheckPolicy",
-                "passed": true,
-                "errorCode": 0,
-                "policyDescription": "Confirm that server extensions are supported for this upgrade path."
-              },
-              {
-                "policyName": "NoReplicationSlotsPrecheckPolicy",
-                "passed": true,
-                "errorCode": 0,
-                "policyDescription": "Confirm there are no logical replication slots."
-              }
-            ]
+              "targetVersion": "14",
+              "policyDetails": [
+                {
+                  "policyName": "NotSupportedExtensionPrecheckPolicy",
+                  "passed": true,
+                  "errorCode": 0,
+                  "policyDescription": "Confirm that server extensions are supported for this upgrade path."
+                },
+                {
+                  "policyName": "NoReplicationSlotsPrecheckPolicy",
+                  "passed": true,
+                  "errorCode": 0,
+                  "policyDescription": "Confirm there are no logical replication slots."
+                }
+              ]
+            }
           }
         ]
       }

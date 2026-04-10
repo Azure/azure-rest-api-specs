@@ -9,114 +9,119 @@
   "responses": {
     "200": {
       "body": {
-        "createTime": "2026-04-10T00:55:46.0983792Z",
-        "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-        "status": "Succeeded",
-        "precheckResult": {
-          "Action": "Precheck",
-          "UpgradeSequence": {
-            "SourceVersion": "14",
-            "TargetVersion": "18"
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/majorVersionUpgradePrecheck/pppppppp-pppp-pppp-pppp-pppppppppppp",
+        "name": "pppppppp-pppp-pppp-pppp-pppppppppppp",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/majorVersionUpgradePrecheck",
+        "properties": {
+          "createTime": "2026-04-10T00:55:46.0983792Z",
+          "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+          "status": "Succeeded",
+          "precheckResult": {
+            "Action": "Precheck",
+            "UpgradeSequence": {
+              "SourceVersion": "14",
+              "TargetVersion": "18"
+            },
+            "ErrorInfo": [
+              {
+                "ErrorCode": 1020,
+                "ErrorParameters": [
+                  "test_activity_view",
+                  "public",
+                  "postgres"
+                ]
+              }
+            ]
           },
-          "ErrorInfo": [
+          "targetVersion": "18",
+          "policyDetails": [
             {
-              "ErrorCode": 1020,
-              "ErrorParameters": [
-                "test_activity_view",
-                "public",
-                "postgres"
-              ]
+              "policyName": "NotSupportedExtensionPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm that server extensions are supported for this upgrade path."
+            },
+            {
+              "policyName": "NoReplicationSlotsPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm there are no logical replication slots."
+            },
+            {
+              "policyName": "NotSupportedRegDataTypesPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm there are no incompatible reg* (OID-referencing) data types."
+            },
+            {
+              "policyName": "NoPreparedTransactionsPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm there are no prepared transactions."
+            },
+            {
+              "policyName": "NoPendingRestartSettingsPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm there are no server settings pending restart."
+            },
+            {
+              "policyName": "NoExtensionSchemaAndSearchPathMismatchPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm required extension schemas (e.g., PostGIS) are included in the server search_path."
+            },
+            {
+              "policyName": "NoExtensionDependentObjectsPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm there are no objects that depend on extensions that aren't supported for this upgrade path."
+            },
+            {
+              "policyName": "NoViewDependentObjectsPrecheckPolicy",
+              "passed": false,
+              "errorCode": 1020,
+              "errorMessage": "Upgrading with views dependent upon test_activity_view is not allowed. Found dependent object public in database postgres. Please drop this view prior to reattempting the upgrade. Refer documentation - https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-major-version-upgrade#unsupported-server-configurations",
+              "policyDescription": "Confirm there are no view-dependent objects."
+            },
+            {
+              "policyName": "NoEventTriggersPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm there are no event triggers."
+            },
+            {
+              "policyName": "NoSharedPreloadLibraryMismatchPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm extensions in schemas are added to shared_preload_libraries."
+            },
+            {
+              "policyName": "NotCorrectObjectsOwnershipPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm initial extension owners still have access to extensions."
+            },
+            {
+              "policyName": "NoOrphanedSecurityLabelPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm there are no orphaned security labels."
+            },
+            {
+              "policyName": "NoNonExistentSchemaDependencies",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm objects do not depend on non-existent schemas."
+            },
+            {
+              "policyName": "NotSupportedSubscriptionOwnerPrecheckPolicy",
+              "passed": true,
+              "errorCode": 0,
+              "policyDescription": "Confirm logical replication subscriptions are owned by superuser."
             }
           ]
-        },
-        "targetVersion": "18",
-        "policyDetails": [
-          {
-            "policyName": "NotSupportedExtensionPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm that server extensions are supported for this upgrade path."
-          },
-          {
-            "policyName": "NoReplicationSlotsPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm there are no logical replication slots."
-          },
-          {
-            "policyName": "NotSupportedRegDataTypesPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm there are no incompatible reg* (OID-referencing) data types."
-          },
-          {
-            "policyName": "NoPreparedTransactionsPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm there are no prepared transactions."
-          },
-          {
-            "policyName": "NoPendingRestartSettingsPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm there are no server settings pending restart."
-          },
-          {
-            "policyName": "NoExtensionSchemaAndSearchPathMismatchPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm required extension schemas (e.g., PostGIS) are included in the server search_path."
-          },
-          {
-            "policyName": "NoExtensionDependentObjectsPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm there are no objects that depend on extensions that aren't supported for this upgrade path."
-          },
-          {
-            "policyName": "NoViewDependentObjectsPrecheckPolicy",
-            "passed": false,
-            "errorCode": 1020,
-            "errorMessage": "Upgrading with views dependent upon test_activity_view is not allowed. Found dependent object public in database postgres. Please drop this view prior to reattempting the upgrade. Refer documentation - https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-major-version-upgrade#unsupported-server-configurations",
-            "policyDescription": "Confirm there are no view-dependent objects."
-          },
-          {
-            "policyName": "NoEventTriggersPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm there are no event triggers."
-          },
-          {
-            "policyName": "NoSharedPreloadLibraryMismatchPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm extensions in schemas are added to shared_preload_libraries."
-          },
-          {
-            "policyName": "NotCorrectObjectsOwnershipPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm initial extension owners still have access to extensions."
-          },
-          {
-            "policyName": "NoOrphanedSecurityLabelPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm there are no orphaned security labels."
-          },
-          {
-            "policyName": "NoNonExistentSchemaDependencies",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm objects do not depend on non-existent schemas."
-          },
-          {
-            "policyName": "NotSupportedSubscriptionOwnerPrecheckPolicy",
-            "passed": true,
-            "errorCode": 0,
-            "policyDescription": "Confirm logical replication subscriptions are owned by superuser."
-          }
-        ]
+        }
       }
     }
   },
