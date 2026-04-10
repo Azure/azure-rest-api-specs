@@ -28,6 +28,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file-datalake"
     package-mode: dataplane
     flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Storage.Files.DataLake"
+    model-namespace: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
