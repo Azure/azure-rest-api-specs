@@ -870,6 +870,17 @@
           "$ref": "#/definitions/CapacityReservationUtilization",
           "description": "Unutilized capacity of the capacity reservation."
         },
+        "reservationStateInfo": {
+          "$ref": "#/definitions/ReservationStateInfo",
+          "readOnly": true,
+          "description": "The reservation state information of the capacity reservation."
+        },
+        "minimumCommitmentEndDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time at which the minimum commitment period of the capacity reservation ends."
+        },
         "statuses": {
           "type": "array",
           "items": {
@@ -880,6 +891,17 @@
         }
       },
       "description": "The instance view of a capacity reservation that provides as snapshot of the runtime properties of the capacity reservation that is managed by the platform and can change outside of control plane operations."
+    },
+    "ReservationStateInfo": {
+      "type": "object",
+      "properties": {
+        "reservationState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reservation state of the capacity reservation."
+        }
+      },
+      "description": "The reservation state information of the capacity reservation."
     },
     "CapacityReservationUtilization": {
       "type": "object",
@@ -960,9 +982,29 @@
           "type": "string",
           "format": "date-time",
           "description": "Specifies the time at which the Capacity Reservation resource was created. Minimum api-version: 2021-11-01."
+        },
+        "scheduleProfile": {
+          "$ref": "#/definitions/ScheduleProfile",
+          "description": "The schedule profile for the capacity reservation."
         }
       },
       "description": "Properties of the Capacity reservation."
+    },
+    "ScheduleProfile": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date",
+          "description": "The start date of the schedule."
+        },
+        "minimumCommitmentDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of days the capacity reservation must be committed."
+        }
+      },
+      "description": "Profile for scheduled capacity reservation."
     },
     "CapacityReservation": {
       "type": "object",
