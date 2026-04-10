@@ -81,6 +81,6 @@ interface EvaluationTaxonomies {
       @body
       body: EvaluationTaxonomy;
     },
-    OkResponse<EvaluationTaxonomy>
+    OkResponse & EvaluationTaxonomy
   >;
 }
