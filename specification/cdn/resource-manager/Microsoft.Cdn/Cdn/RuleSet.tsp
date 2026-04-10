@@ -34,26 +34,13 @@ interface RuleSets {
   /**
    * Creates a new rule set within the specified profile.
    */
-  @sharedRoute
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  create is Azure.ResourceManager.Legacy.CreateOperation<
-    ResourceInstanceParameters<
-      RuleSet,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<RuleSet>
-    >,
-    void,
-    ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>,
-    ErrorResponse
-  >;
-
-  /**
-   * Updates an existing rule set within the specified profile.
-   */
-  @sharedRoute
-  @put
-  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RuleSet,
-    PatchModel = void
+    void,
+    Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>,
+    Error = ErrorResponse
   >;
 
   /**

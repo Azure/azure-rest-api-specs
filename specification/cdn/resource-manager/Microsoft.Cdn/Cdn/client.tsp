@@ -9,11 +9,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-// Mark CustomDomains.create and RuleSets.create as ARM CreateOrUpdate operations
-// so that the SDK generator produces CreateOrUpdate methods
-@@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
-@@armResourceCreateOrUpdate(RuleSets.create, RuleSet);
-
 @@clientName(CertificateSourceParameters,
   "CertificateSourceParametersBase",
   "go"
@@ -1063,6 +1058,10 @@ using TypeSpec.OpenAPI;
 );
 @@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(RuleSets.listResourceUsage, "GetResourceUsages", "csharp");
+
+// Mark CustomDomains.create as ARM CreateOrUpdate operation
+// so that the SDK generator produces CreateOrUpdate methods
+@@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
 
 // ========================
 // LogAnalytics Operations Override - Generate Options classes for C# SDK
