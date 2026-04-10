@@ -6,8 +6,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@added(Versions.PuPr)
-@removed(Versions.v1)
+@added(Versions.v1)
 @doc("Model Version Definition")
 @Rest.resource("models")
 model ModelVersion {
@@ -23,8 +22,7 @@ model ModelVersion {
   ...AssetBase;
 }
 
-@added(Versions.PuPr)
-@removed(Versions.v1)
+@added(Versions.v1)
 @doc("System metadata for a resource")
 model SystemDataV3 {
   @doc("Timestamp of resource creation")
@@ -40,8 +38,7 @@ model SystemDataV3 {
   lastModifiedAt?: utcDateTime;
 }
 
-@added(Versions.PuPr)
-@removed(Versions.v1)
+@added(Versions.v1)
 @doc("Derived model information")
 model DerivedModelInformation {
   @doc("Base model name")

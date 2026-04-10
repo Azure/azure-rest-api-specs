@@ -45,9 +45,6 @@
       "name": "Memory Stores"
     },
     {
-      "name": "Models"
-    },
-    {
       "name": "Conversations"
     },
     {
@@ -7106,168 +7103,6 @@
             "MemoryStores=V1Preview"
           ]
         }
-      }
-    },
-    "/models": {
-      "get": {
-        "operationId": "Models_listLatest",
-        "description": "List the latest version of each ModelVersion",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedModelVersion"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ]
-      }
-    },
-    "/models/{name}/versions": {
-      "get": {
-        "operationId": "Models_listVersions",
-        "description": "List all versions of the given ModelVersion",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the resource",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedModelVersion"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ]
-      }
-    },
-    "/models/{name}/versions/{version}": {
-      "get": {
-        "operationId": "Models_getVersion",
-        "description": "Get the specific version of the ModelVersion. The service returns 404 Not Found error if the ModelVersion does not exist.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the resource",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The specific version id of the ModelVersion to retrieve.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ModelVersion"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Models"
-        ]
       }
     },
     "/openai/v1/conversations": {
@@ -16285,19 +16120,6 @@
           }
         ]
       },
-      "DerivedModelInformation": {
-        "type": "object",
-        "required": [
-          "baseModel"
-        ],
-        "properties": {
-          "baseModel": {
-            "type": "string",
-            "description": "Base model name"
-          }
-        },
-        "description": "Derived model information"
-      },
       "DeveloperMessage": {
         "type": "object",
         "required": [
@@ -20175,51 +19997,6 @@
           }
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
-      },
-      "ModelVersion": {
-        "type": "object",
-        "required": [
-          "name",
-          "version"
-        ],
-        "properties": {
-          "systemData": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SystemDataV3"
-              }
-            ],
-            "description": "System related metadata"
-          },
-          "blobUri": {
-            "type": "string",
-            "description": "URI of the model artifact in blob storage"
-          },
-          "derivedModelInformation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DerivedModelInformation"
-              }
-            ],
-            "description": "Derived model information"
-          },
-          "id": {
-            "type": "string",
-            "description": "Asset ID, a unique identifier for the asset",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the resource",
-            "readOnly": true
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the resource",
-            "readOnly": true
-          }
-        },
-        "description": "Model Version Definition"
       },
       "MonthlyRecurrenceSchedule": {
         "type": "object",
@@ -40319,27 +40096,6 @@
         },
         "description": "Paged collection of ManagedAgentIdentityBlueprint items"
       },
-      "PagedModelVersion": {
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModelVersion"
-            },
-            "description": "The ModelVersion items on this page"
-          },
-          "nextLink": {
-            "type": "string",
-            "format": "uri",
-            "description": "The link to the next page of items"
-          }
-        },
-        "description": "Paged collection of ModelVersion items"
-      },
       "PagedRedTeam": {
         "type": "object",
         "required": [
@@ -41792,30 +41548,6 @@
             "$ref": "#/components/schemas/ItemGenerationParams"
           }
         ]
-      },
-      "SystemDataV3": {
-        "type": "object",
-        "properties": {
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of resource creation"
-          },
-          "createdBy": {
-            "type": "string",
-            "description": "Identity that created the resource"
-          },
-          "createdByType": {
-            "type": "string",
-            "description": "Type of identity that created the resource"
-          },
-          "lastModifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of last resource modification"
-          }
-        },
-        "description": "System metadata for a resource"
       },
       "SystemMessage": {
         "type": "object",
