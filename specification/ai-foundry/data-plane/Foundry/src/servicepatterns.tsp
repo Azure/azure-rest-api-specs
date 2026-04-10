@@ -110,5 +110,10 @@ interface VersionedOperations<
   TInputParameters extends Reflection.Model,
   TListLatestParameters extends Reflection.Model = {},
   TListVersionsParameters extends Reflection.Model = {}
-> extends ReadableVersionedOperations<TEntityType, TListLatestParameters, TListVersionsParameters>,
+>
+  extends ReadableVersionedOperations<
+      TEntityType,
+      TListLatestParameters,
+      TListVersionsParameters
+    >,
     WritableVersionedOperations<TEntityType, TInputParameters> {}

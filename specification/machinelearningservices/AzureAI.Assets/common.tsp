@@ -60,7 +60,7 @@ model AcceleratorMap {
   numberOfAcceleratorsPerModelInstance: int32;
 
   @doc("Whether this is the default accelerator configuration.")
-  `default`?: boolean = false;
+  default?: boolean = false;
 }
 
 @doc("Settings for probe configuration.")
@@ -92,5 +92,3 @@ model ProbeSettings {
   @doc("The HTTP method for the probe request.")
   httpMethod: string;
 }
-
-
