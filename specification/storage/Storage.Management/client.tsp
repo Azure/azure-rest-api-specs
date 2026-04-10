@@ -48,7 +48,6 @@ using Microsoft.Storage;
 @@clientName(MinimumTlsVersion.TLS1_0, "Tls1_0", "csharp");
 @@clientName(MinimumTlsVersion.TLS1_1, "Tls1_1", "csharp");
 @@clientName(MinimumTlsVersion.TLS1_2, "Tls1_2", "csharp");
-@@clientName(MinimumTlsVersion.TLS1_3, "Tls1_3", "csharp");
 @@clientName(NetworkRuleSet, "StorageAccountNetworkRuleSet", "csharp");
 @@clientName(PublicAccess, "StoragePublicAccessType", "csharp");
 @@clientName(PublicNetworkAccess, "StoragePublicNetworkAccess", "csharp");
