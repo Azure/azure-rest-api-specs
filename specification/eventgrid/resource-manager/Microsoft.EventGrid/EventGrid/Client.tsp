@@ -437,11 +437,6 @@ interface Clients {
   "csharp"
 );
 @@clientName(Filter, "EventGridFilter", "csharp");
-@@clientName(PrivateEndpointConnection,
-  "EventGridPrivateEndpointConnectionData",
-  "csharp"
-);
-
 @@clientName(ResourceProvisioningState,
   "EventGridResourceProvisioningState",
   "csharp"
@@ -455,6 +450,56 @@ interface Clients {
 
 // Change PrivateEndpoint.id from string to ResourceIdentifier for backward compat
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// PrivateEndpointConnection clientName - generates EventGridPrivateEndpointConnectionData (shared data class)
+@@clientName(PrivateEndpointConnection,
+  "EventGridPrivateEndpointConnection",
+  "csharp"
+);
+
+// Per-parent PrivateEndpointConnection model naming
+@@clientName(TopicPrivateEndpointConnection,
+  "EventGridTopicPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(PartnerNamespacePrivateEndpointConnection,
+  "EventGridPartnerNamespacePrivateEndpointConnection",
+  "csharp"
+);
+
+// Flatten properties for PrivateEndpointConnection Data classes for backward compat
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TopicPrivateEndpointConnection.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PartnerNamespacePrivateEndpointConnection.properties,
+  "csharp"
+);
+
+// Per-parent NetworkSecurityPerimeterConfiguration model naming
+@@clientName(DomainNetworkSecurityPerimeterConfiguration,
+  "DomainNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(TopicNetworkSecurityPerimeterConfiguration,
+  "TopicNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+
+// Flatten properties for per-parent NSP Data classes for backward compat
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DomainNetworkSecurityPerimeterConfiguration.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TopicNetworkSecurityPerimeterConfiguration.properties,
+  "csharp"
+);
+
+// NSP usage decorators for backward compat
+@@usage(NetworkSecurityPerimeterConfiguration, Usage.input, "csharp");
+@@usage(NetworkSecurityPerimeterConfigurationProperties, Usage.input, "csharp");
 
 // GetDeliveryAttributes must return Pageable results for backward compat
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
