@@ -203,23 +203,23 @@ using TypeSpec.OpenAPI;
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "javascript");
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
   "FourHundredFive",
-  "javascript,go"
+  "javascript,go,csharp"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`406`,
   "FourHundredSix",
-  "javascript,go"
+  "javascript,go,csharp"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`403`,
   "FourHundredThree",
-  "javascript,go"
+  "javascript,go,csharp"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`429`,
   "FourHundredTwentyNine",
-  "javascript,go"
+  "javascript,go,csharp"
 );
 @@clientName(PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
   "TwoHundred",
-  "javascript,go"
+  "javascript,go,csharp"
 );
 
 // C# SDK customizations: backward-compatible renames, access/usage configurations,
@@ -329,6 +329,9 @@ using TypeSpec.OpenAPI;
 );
 @@clientName(SecretParameters, "FrontDoorSecretProperties", "csharp");
 @@clientName(SecretParameters.type, "SecretType", "csharp");
+@@clientName(SecretType.UrlSigningKey, "UriSigningKey", "csharp");
+@@clientName(TransformType.UrlDecode, "UriDecode", "csharp");
+@@clientName(TransformType.UrlEncode, "UriEncode", "csharp");
 @@clientName(EdgeNodesOperationGroup.list, "GetEdgeNodes", "csharp");
 @@clientName(ProfilesOperationGroup.canMigrate, "CanMigrateProfile", "csharp");
 @@clientName(ProfilesOperationGroup.migrate, "MigrateProfile", "csharp");
@@ -369,7 +372,10 @@ using TypeSpec.OpenAPI;
 @@clientName(ManagedRuleEnabledState, "ManagedRuleSetupState", "csharp");
 @@clientName(ActionType, "OverrideActionType", "csharp");
 @@clientName(Transform, "PreTransformCategory", "csharp");
+@@clientName(Transform.UrlDecode, "UriDecode", "csharp");
+@@clientName(Transform.UrlEncode, "UriEncode", "csharp");
 @@clientName(Algorithm, "UriSigningAlgorithm", "csharp");
+@@clientName(Algorithm.SHA256, "Sha256", "csharp");
 @@clientName(WafMetricsSeriesUnit,
   "WafMetricsResponseSeriesItemUnit",
   "csharp"
@@ -401,10 +407,21 @@ using TypeSpec.OpenAPI;
   "RequestMethodMatchConditionMatchValue",
   "csharp"
 );
+@@clientName(RequestMethodMatchValue.GET, "Get", "csharp");
+@@clientName(RequestMethodMatchValue.POST, "Post", "csharp");
+@@clientName(RequestMethodMatchValue.PUT, "Put", "csharp");
+@@clientName(RequestMethodMatchValue.DELETE, "Delete", "csharp");
+@@clientName(RequestMethodMatchValue.HEAD, "Head", "csharp");
+@@clientName(RequestMethodMatchValue.OPTIONS, "Options", "csharp");
+@@clientName(RequestMethodMatchValue.TRACE, "Trace", "csharp");
+@@clientName(WafRankingType.clientIp, "ClientIP", "csharp");
+@@clientName(WafRankingType.url, "Uri", "csharp");
 @@clientName(RequestSchemeMatchValue,
   "RequestSchemeMatchConditionMatchValue",
   "csharp"
 );
+@@clientName(RequestSchemeMatchValue.HTTP, "Http", "csharp");
+@@clientName(RequestSchemeMatchValue.HTTPS, "Https", "csharp");
 @@clientName(UrlSigningKey, "UriSigningKey", "csharp");
 @@clientName(EndpointPropertiesUpdateParametersDeliveryPolicy,
   "EndpointDeliveryPolicy",
@@ -801,6 +818,7 @@ using TypeSpec.OpenAPI;
 @@clientName(Operator, "MatchOperator", "csharp");
 @@clientName(HealthProbeRequestType.GET, "Get", "csharp");
 @@clientName(HealthProbeRequestType.HEAD, "Head", "csharp");
+@@clientName(LogRanking.url, "Uri", "csharp");
 @@clientName(ResponseBasedDetectedErrorTypes,
   "ResponseBasedDetectedErrorType",
   "csharp"
@@ -812,6 +830,10 @@ using TypeSpec.OpenAPI;
 );
 @@clientName(KeyVaultSigningKeyParametersType,
   "KeyVaultSigningKeyType",
+  "csharp"
+);
+@@clientName(KeyVaultSigningKeyParametersType.KeyVaultSigningKeyParameters,
+  "KeyVaultSigningKey",
   "csharp"
 );
 @@clientName(Sku, "CdnSku", "csharp");
