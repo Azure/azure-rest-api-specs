@@ -443,23 +443,45 @@ op calculateModelCapacityCustom(
   azureLocation,
   "csharp"
 );
+@@scope(CommitmentPlanOperationGroup.listPlansByResourceGroup, "!csharp");
 @@clientName(CommitmentPlanOperationGroup.listPlansBySubscription,
   "GetCognitiveServicesCommitmentPlans",
   "csharp"
 );
 @@clientName(Accounts.list, "GetCognitiveServicesAccounts", "csharp");
+@@clientName(Accounts.listUsages, "GetUsages", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
-@@markAsPageable(checkSkuAvailability, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
-@@markAsPageable(CommitmentPlanOperationGroup.listPlansByResourceGroup,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
-@@markAsPageable(CommitmentPlanOperationGroup.listPlansBySubscription,
-  "csharp"
-);
+@@markAsPageable(Accounts.listUsages, "csharp");
+@@clientName(Accounts.listSkus, "GetSkus", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
 @@markAsPageable(Accounts.listSkus, "csharp");
+@@clientName(Accounts.listModels, "GetModels", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
+@@markAsPageable(checkSkuAvailability, "csharp");
+@@clientName(Accounts.privateLinkResourcesList,
+  "GetPrivateLinkResources",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
+@@markAsPageable(Accounts.privateLinkResourcesList, "csharp");
+@@alternateType(AgentReferenceResourceArmPaginatedResult.value,
+  AgentReference[],
+  "csharp"
+);
+@@alternateType(AgentReferenceResourceArmPaginatedResult.nextLink,
+  string,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
+@@markAsPageable(AgentApplications.listAgents, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
+@@markAsPageable(PrivateEndpointConnections.list, "csharp");
+@@clientName(RaiBlocklists.batchAdd, "BatchAddRaiBlocklistItem", "csharp");
+@@clientName(RaiBlocklists.batchAdd::parameters.body, "content", "csharp");
+@@clientName(RaiBlocklists.batchDelete,
+  "BatchDeleteRaiBlocklistItem",
+  "csharp"
+);
 
 @@access(AbusePenalty, Access.public, "csharp");
 @@access(ApiProperties, Access.public, "csharp");

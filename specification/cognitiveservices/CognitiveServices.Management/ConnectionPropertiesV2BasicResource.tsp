@@ -71,7 +71,8 @@ interface ConnectionPropertiesV2BasicResourceOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         connectionName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesConnection"
     > {}
 
 @armResourceOperations(#{ omitTags: true })

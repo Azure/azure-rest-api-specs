@@ -145,8 +145,7 @@ interface CommitmentPlanOperationOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
         commitmentPlanName: string,
-      },
-      ResourceName = "CognitiveServicesCommitmentPlan"
+      }
     > {}
 
 @armResourceOperations(#{ omitTags: true })
