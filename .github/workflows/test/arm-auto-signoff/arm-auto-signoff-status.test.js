@@ -784,13 +784,13 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // Incremental TSP bypasses NotReadyForARMReview check
+    // NotReadyForARMReview does not block auto-signoff
     expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Add);
     expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
   });
 
-  it("blocks auto-signoff for trivial changes when NotReadyForARMReview is present", async () => {
+  it("allows auto-signoff for trivial changes even with NotReadyForARMReview label", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false, isTrivial: true });
 
     // PR has NotReadyForARMReview and only trivial changes (not incremental TSP)
@@ -798,7 +798,13 @@ describe("getLabelActionImpl", () => {
       data: [
         { name: "ARMReview" },
         { name: "NotReadyForARMReview" },
-        { name: managedLabels.autoSignedOffTrivial },
+      ],
+    });
+
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS },
+        { context: "Swagger Avocado", state: CommitStatusState.SUCCESS },
       ],
     });
 
@@ -811,9 +817,9 @@ describe("getLabelActionImpl", () => {
       core: core,
     });
 
-    // Trivial changes do NOT bypass NotReadyForARMReview, so remove labels
-    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Remove);
-    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Remove);
+    // NotReadyForARMReview does not block auto-signoff for trivial changes
+    expect(result.labelActions[managedLabels.armSignedOff]).toBe(LabelAction.Add);
+    expect(result.labelActions[managedLabels.autoSignedOffTrivial]).toBe(LabelAction.Add);
     expect(result.labelActions[managedLabels.autoSignedOffIncrementalTsp]).toBe(LabelAction.Remove);
   });
 });
