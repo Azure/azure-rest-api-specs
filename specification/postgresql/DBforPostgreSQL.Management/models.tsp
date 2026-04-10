@@ -3931,6 +3931,7 @@ union MaintenanceEventStatus {
   Canceled: "Canceled",
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Maintenance events are read-only resources that do not have a provisioning lifecycle."
 @doc("Properties of a maintenance event resource.")
 @added(Versions.v2026_04_01)
 model MaintenanceEventResourceProperties {
@@ -3977,30 +3978,6 @@ model MaintenanceEventResourceProperties {
   @doc("The time this maintenance event record was last updated (UTC).")
   @visibility(Lifecycle.Read)
   lastUpdatedTime?: utcDateTime;
-
-  @doc("The provisioning state of the maintenance event.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-@doc("The provisioning state.")
-union ProvisioningState {
-  string,
-
-  /** Provisioning completed successfully */
-  Succeeded: "Succeeded",
-
-  /** Provisioning failed */
-  Failed: "Failed",
-
-  /** Provisioning was canceled */
-  Canceled: "Canceled",
-
-  /** Provisioning is in progress */
-  InProgress: "InProgress",
-
-  /** Provisioning is in progress */
-  Provisioning: "Provisioning",
 }
 
 @doc("Maintenance event resource for a PostgreSQL flexible server.")
@@ -4032,31 +4009,6 @@ union MaintenanceEventStatusFilter {
 model MaintenanceEventRescheduleRequest {
   @doc("New start time in RFC3339 format.")
   postponeToDateTime: utcDateTime;
-}
-
-@doc("Result of a maintenance event management operation.")
-@added(Versions.v2026_04_01)
-model MaintenanceEventOperationResult {
-  @doc("The unique identifier of the maintenance event.")
-  maintenanceEventId?: string;
-
-  @doc("Resource identifier of the server.")
-  serverId?: string;
-
-  @doc("Current status of the maintenance event operation.")
-  status?: string;
-
-  @doc("Planned start time after reschedule.")
-  plannedStartTime?: utcDateTime;
-
-  @doc("Planned end time after reschedule.")
-  plannedEndTime?: utcDateTime;
-
-  @doc("Whether the maintenance was applied immediately.")
-  appliedNow?: boolean;
-
-  @doc("Time this operation result was last updated.")
-  lastUpdatedTime?: utcDateTime;
 }
 
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);

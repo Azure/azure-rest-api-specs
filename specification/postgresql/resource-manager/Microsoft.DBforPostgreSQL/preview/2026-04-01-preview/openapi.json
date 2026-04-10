@@ -2777,6 +2777,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List maintenance events filtered by status for a server.": {
+            "$ref": "./examples/MaintenanceEventsListByServerWithFilter.json"
+          },
+          "List ongoing and scheduled maintenance events for a server.": {
+            "$ref": "./examples/MaintenanceEventsListByServer.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6943,11 +6951,6 @@
           "format": "date-time",
           "description": "The time this maintenance event record was last updated (UTC).",
           "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the maintenance event.",
-          "readOnly": true
         }
       }
     },
@@ -8500,48 +8503,6 @@
       "required": [
         "value"
       ]
-    },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "InProgress",
-        "Provisioning"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Provisioning completed successfully"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Provisioning failed"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Provisioning was canceled"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "Provisioning is in progress"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "Provisioning is in progress"
-          }
-        ]
-      }
     },
     "QuotaUsage": {
       "type": "object",
