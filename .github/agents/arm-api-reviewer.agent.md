@@ -9,16 +9,19 @@ description: >-
   DO NOT USE FOR: generating SDKs, authoring new TypeSpec projects from scratch,
   or addressing CI failures - use the default agent or specialized skills for those tasks.
 tools:
-  - codebase
-  - fetch
-  - github
-  - githubRepo
+  - search/codebase
+  - web/fetch
+  - github/*
+  - web/githubRepo
   - search
-  - problems
-  - changes
-  - usages
-  - editFiles
-  - runCommands
+  - read/problems
+  - search/changes
+  - search/usages
+  - edit/editFiles
+  - execute/getTerminalOutput
+  - execute/runInTerminal
+  - read/terminalLastCommand
+  - read/terminalSelection
 ---
 
 # Azure REST API Specification Reviewer
@@ -372,7 +375,7 @@ After presenting the review findings to the human reviewer for approval:
 8. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
 9. **Report a reconciliation summary** to the human reviewer before posting:
    - Findings to **post as new comments** (with line numbers)
-   - Existing comments to **resolve and repost** (Scenario B - line shifted, same author)
+   - Existing comments to **resolve and re-post** (Scenario B - line shifted, same author)
    - Existing comments to **reply to** (Scenario C - line shifted, different author)
    - Findings **already covered** by existing comments (skipped)
    - Existing comments whose violations have been **fixed** - propose resolving (Scenario E)
@@ -437,13 +440,13 @@ Build a file inventory grouped by service, and present it to the engineer:
 Before reviewing individual files, validate the directory structure against the [Azure specification directory structure guidelines](../../documentation/directory-structure.md):
 
 1. **Organization folder** - Verify the service folder sits under `specification/<organization>/`.
-2. **ARM vs. data-plane split** - ARM specs MUST be under `resource-manager/<RPNS>/<service>/`, data-plane specs under `data-plane/<service>/`.
-3. **Resource Provider Namespace** - For ARM services, verify `<RPNS>` folder exists and uses PascalCase (e.g., `Microsoft.App`).
-4. **Service subfolder** - Verify specs are not placed directly in `resource-manager/` without the `<RPNS>/<service>` nesting (legacy pattern - flag as a violation for new services).
+2. **ARM vs. data-plane split** - ARM specs MUST be under `resource-manager/<resource-provider-namespace>/<service>/`, data-plane specs under `data-plane/<service>/`.
+3. **Resource Provider Namespace** - For ARM services, verify `<resource-provider-namespace>` folder exists and uses PascalCase (e.g., `Microsoft.App`).
+4. **Service subfolder** - Verify specs are not placed directly in `resource-manager/` without the `<resource-provider-namespace>/<service>` nesting (legacy pattern - flag as a violation for new services).
 5. **Stable/preview separation** - Generated OpenAPI MUST be in `stable/<YYYY-MM-DD>/` or `preview/<YYYY-MM-DD-preview>/` folders.
 6. **Required files** - For TypeSpec projects: `main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/` directory must exist. No `package.json` in the project directory.
 7. **Example files** - Example JSON files must be in an `examples/` subdirectory (either under the service folder for TypeSpec, or under the `<apiVersion>` folder for OpenAPI).
-8. **Naming conventions** - Folder names should be singular and lowercase (except `<RPNS>` which is PascalCase). ARM TypeSpec service folders SHOULD end with `.Management`.
+8. **Naming conventions** - Folder names should be singular and lowercase (except `<resource-provider-namespace>` which is PascalCase). ARM TypeSpec service folders SHOULD end with `.Management`.
 
 Flag any structural violations with the expected path and the actual path.
 

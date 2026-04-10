@@ -16,14 +16,14 @@ Flag every violation clearly with the file path, line number or code reference, 
 
 - ARM TypeSpec projects **MUST** be placed under:
   ```
-  specification/<organization>/resource-manager/<RPNS>/<ServiceName>/
+  specification/<organization>/resource-manager/<resource-provider-namespace>/<ServiceName>/
   ```
 - Data-plane TypeSpec projects **MUST** be placed under:
   ```
   specification/<organization>/data-plane/<ServiceName>/
   ```
 - ARM TypeSpec folder names **SHOULD** end with `.Management` (e.g., `Contoso.Management`).
-- **DO NOT** place TypeSpec projects directly under `resource-manager/` without the `<RPNS>/<ServiceName>` nesting.
+- **DO NOT** place TypeSpec projects directly under `resource-manager/` without the `<resource-provider-namespace>/<ServiceName>` nesting.
 
 ### 1.2 Required Files
 
@@ -300,7 +300,7 @@ Flag these issues when found:
 - **Duplicate `@added` decorators** — a symbol should only be introduced once with `@added`. Multiple `@added(...)` decorators on the same property suggest a copy-paste error; keep only the earliest version.
 - **`Record<unknown>` / `Record<string>` for typed data** — avoid using `Record<>` (which generates `additionalProperties`) when the shape of the data is known. Define a dedicated model with typed properties instead.
 - **Doc comment copy-paste errors** — verify that doc comments accurately describe the element they annotate (e.g., a `WorkspaceUpdate` model should not be documented as "Describes an experiment update").
-- **Spelling/typo errors in doc comments and descriptions** — flag common misspellings (e.g., `payed` → `paid`, `consoto` → `contoso`, `endpoin` → `endpoint`) as they propagate into generated SDKs and documentation.
+- **Spelling/typo errors in doc comments and descriptions** — flag common misspellings (e.g., `payed` → `paid`, `consoto` → `contoso`) as they propagate into generated SDKs and documentation.
 - **Polymorphic-format properties** — a single property that accepts multiple formats (e.g., both an integer `5` and a percentage string `"20%"`) creates ambiguity and error-prone client code. Model these as separate properties (e.g., `maxConcurrency: int32` and `maxConcurrencyPercent: string`) or use a discriminated union model.
 - **`@added` version misalignment** — when using `@added(Versions.vXXXX)` to gate a new feature, verify that the feature does not inadvertently alter descriptions or schemas of earlier API versions. If the feature is for version `2025-08-01`, it must not affect the generated OpenAPI for `2025-06-01`.
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
@@ -358,7 +358,7 @@ Flag these issues when found:
 
 When reviewing TypeSpec files, verify:
 
-- ✅ Correct directory placement (ARM under `resource-manager/<RPNS>/<Service>`, data-plane under `data-plane/<Service>`)
+- ✅ Correct directory placement (ARM under `resource-manager/<resource-provider-namespace>/<Service>`, data-plane under `data-plane/<Service>`)
 - ✅ Required files present: `main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/`
 - ✅ No `package.json` in the TypeSpec project directory
 - ✅ `@service`, `@server`, `@useAuth` decorators present and correct

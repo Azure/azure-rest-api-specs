@@ -137,7 +137,7 @@ Before executing any actions, the agent presents a **reconciliation summary**:
 ```text
 Reconciliation plan:
 • Post 3 new comments (2 blocking, 1 warning)
-• Resolve & repost 1 comment (line shifted from L42 → L58) [Scenario B]
+• Resolve & re-post 1 comment (line shifted from L42 → L58) [Scenario B]
 • Reply to 1 existing comment from @reviewer (line shifted to L120) [Scenario C]
 • Skip 4 findings — already covered by existing threads [Scenario A]
 • Propose resolving 2 comments — violations addressed in latest changes [Scenario E]
@@ -216,7 +216,7 @@ Review my changes in specification/compute/resource-manager/Microsoft.Compute/
 
 4. **Validate directory structure** — Before reviewing individual files, the
    agent checks the folder layout against Azure conventions:
-   - ARM specs under `resource-manager/<RPNS>/<service>/`
+   - ARM specs under `resource-manager/<resource-provider-namespace>/<service>/`
    - Data-plane specs under `data-plane/<service>/`
    - Stable/preview version folders named correctly (`YYYY-MM-DD` / `YYYY-MM-DD-preview`)
    - Required files present (`main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/`)

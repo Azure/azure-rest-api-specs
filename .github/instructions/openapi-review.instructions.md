@@ -368,6 +368,7 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
   - Uses `/resourceGroups/` (plural, PascalCase 'G') — not `/resourceGroup/` or `/resourcegroup/`.
   - The RP namespace casing **MUST** match the canonical casing (e.g., `Microsoft.DocumentDB` not `Microsoft.DocumentDb`).
   - The resource segments in the `id` **MUST NOT** be truncated (e.g., ending at `/providers/Microsoft.ExtendedLocation/` without the resource type and name).
+  <!-- cSpell:ignore hvirtual Nameub -->
   - Values **MUST NOT** contain stray/garbled characters (e.g., trailing single quotes `bastionhosttenant'`, corrupted names like `hvirtualHubNameub1` instead of `virtualHubName`).
 - The `name` field **MUST** match the last segment of the resource `id`.
 - The `type` field **MUST** be the ARM resource type **without** the `providers/` prefix (e.g., `Microsoft.EventGrid/extensionTopics` — not `providers/Microsoft.EventGrid/extensionTopics`).

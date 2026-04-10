@@ -28,9 +28,9 @@ ${input:scope:How should the review be scoped? Enter a folder path (e.g., specif
 
 4. **Validate directory structure** against the [Azure specification directory structure guidelines](../../documentation/directory-structure.md):
    - Organization folder under `specification/<organization>/`
-   - ARM specs under `resource-manager/<RPNS>/<service>/`, data-plane under `data-plane/<service>/`
+   - ARM specs under `resource-manager/<resource-provider-namespace>/<service>/`, data-plane under `data-plane/<service>/`
    - Resource Provider Namespace folder exists and uses PascalCase
-   - No specs placed directly in `resource-manager/` without `<RPNS>/<service>` nesting
+   - No specs placed directly in `resource-manager/` without `<resource-provider-namespace>/<service>` nesting
    - Generated OpenAPI in `stable/<YYYY-MM-DD>/` or `preview/<YYYY-MM-DD-preview>/` folders
    - Required files present for TypeSpec projects: `main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/`
    - No `package.json` in TypeSpec project directories
