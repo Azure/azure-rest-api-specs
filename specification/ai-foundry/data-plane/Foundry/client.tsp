@@ -23,7 +23,6 @@ import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
-import "./src/managed-blueprints/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -249,15 +248,6 @@ using Azure.AI.Projects;
 @@clientName(Skills.deleteSkill, "delete");
 
 // --------------------------------------------------------------------------------
-// ManagedAgentIdentityBlueprints operations on .beta.agents sub-client
-// --------------------------------------------------------------------------------
-
-@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list_managed_identity_blueprints");
-
-// --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
 
@@ -272,6 +262,15 @@ using Azure.AI.Projects;
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
+
+// --------------------------------------------------------------------------------
+// Beta Agents sub-client
+// --------------------------------------------------------------------------------
+
+// Make this method internal, since it's patched with a new one that supports either binary or file-path input
+@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
+@@usage(SessionFileWriteResponse, Usage.output);
+@@access(SessionFileWriteResponse, Access.public);
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
