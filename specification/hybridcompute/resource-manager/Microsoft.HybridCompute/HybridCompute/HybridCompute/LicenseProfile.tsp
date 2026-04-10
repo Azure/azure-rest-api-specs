@@ -26,19 +26,44 @@ model LicenseProfile
   >;
 }
 
+alias LicenseProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the hybrid machine.
+     */
+    @path
+    @pattern("[a-zA-Z0-9-_\\.]+")
+    @segment("machines")
+    machineName: string;
+  },
+  {
+    /**
+     * The name of the license profile.
+     */
+    @path
+    @segment("licenseProfiles")
+    licenseProfileName: LicenseProfileName;
+  }
+>;
+
 @armResourceOperations(#{ omitTags: true })
 interface LicenseProfiles {
   /**
    * Retrieves information about the view of a license profile.
    */
   @tag("licenseProfiles")
-  get is ArmResourceRead<LicenseProfile>;
+  get is LicenseProfileOps.Read<LicenseProfile>;
 
   /**
    * The operation to create or update a license profile.
    */
   @tag("licenseProfiles")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is LicenseProfileOps.CreateOrUpdateAsync<
     LicenseProfile,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = LicenseProfile> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -49,7 +74,7 @@ interface LicenseProfiles {
    */
   @tag("licenseProfiles")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is LicenseProfileOps.CustomPatchAsync<
     LicenseProfile,
     PatchModel = LicenseProfileUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = LicenseProfile> &
@@ -60,7 +85,7 @@ interface LicenseProfiles {
    * The operation to delete a license profile.
    */
   @tag("licenseProfiles")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is LicenseProfileOps.DeleteWithoutOkAsync<
     LicenseProfile,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;

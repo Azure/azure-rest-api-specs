@@ -2674,7 +2674,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/licenseProfiles/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/licenseProfiles/{licenseProfileName}": {
       "get": {
         "operationId": "LicenseProfiles_Get",
         "tags": [
@@ -2697,9 +2697,28 @@
             "description": "The name of the hybrid machine.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "licenseProfileName",
+            "in": "path",
+            "description": "The name of the license profile.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "LicenseProfileName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -2744,9 +2763,28 @@
             "description": "The name of the hybrid machine.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "licenseProfileName",
+            "in": "path",
+            "description": "The name of the license profile.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "LicenseProfileName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
           },
           {
             "name": "parameters",
@@ -2827,9 +2865,28 @@
             "description": "The name of the hybrid machine.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "licenseProfileName",
+            "in": "path",
+            "description": "The name of the license profile.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "LicenseProfileName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
           },
           {
             "name": "parameters",
@@ -2907,9 +2964,28 @@
             "description": "The name of the hybrid machine.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 54,
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$"
+            "pattern": "[a-zA-Z0-9-_\\.]+"
+          },
+          {
+            "name": "licenseProfileName",
+            "in": "path",
+            "description": "The name of the license profile.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "LicenseProfileName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
           }
         ],
         "responses": {

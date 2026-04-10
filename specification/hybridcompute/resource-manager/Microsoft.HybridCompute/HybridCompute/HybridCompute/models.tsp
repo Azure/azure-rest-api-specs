@@ -12,6 +12,18 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.HybridCompute;
 
 /**
+ * The name of the license profile.
+ */
+union LicenseProfileName {
+  string,
+
+  /**
+   * Default
+   */
+  Default: "Default",
+}
+
+/**
  * The provisioning state, which only appears in the response.
  */
 union ProvisioningState {
