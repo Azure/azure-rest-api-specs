@@ -102,7 +102,7 @@ op encrypt is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "The key version should be specified when encrypting and retained to use the same key version when decrypting. You can pass an empty string to use the latest version but should still retain the version used or potentially be locked out of your data after the key is rotated.",
+      "The version is required and should be recorded when encrypting so you can reliably decrypt using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for encryption, key rotation can make the data inaccessible.",
       DocumentationMode.append,
       "rust"
     )
@@ -145,7 +145,7 @@ op decrypt is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "Use the same key version used when encrypting. You can pass an empty string to use the latest version but may not retrieve the plaintext that was encrypted if using a different version after the key was rotated.",
+      "The version is required and should be recorded when encrypting so you can reliably decrypt using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for encryption, key rotation can make the data inaccessible.",
       DocumentationMode.append,
       "rust"
     )
@@ -188,7 +188,7 @@ op sign is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "The key version should be specified when signing and retained to use the same key version when verifying. You can pass an empty string to use the latest version but should still retain the version used or will not be able to verify the signature after the key is rotated.",
+      "The version is required and should be recorded when signing so you can reliably verify using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for signing, key rotation can make the data unverifiable.",
       DocumentationMode.append,
       "rust"
     )
@@ -231,7 +231,7 @@ op verify is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "Use the same key version used when signing. You can pass an empty string to use the latest version but may not validate a signature that was signed if using a different version after the key was rotated.",
+      "The version is required and should be recorded when signing so you can reliably verify using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for signing, key rotation can make the data unverifiable.",
       DocumentationMode.append,
       "rust"
     )
@@ -274,7 +274,7 @@ op wrapKey is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "The key version should be specified when wrapping a key and retained to use the same key version when unwrapping. You can pass an empty string to use the latest version but should still retain the version used or potentially be locked out of your data after the key is rotated.",
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
       DocumentationMode.append,
       "rust"
     )
@@ -317,7 +317,7 @@ op unwrapKey is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "Use the same key version used when wrapping a key. You can pass an empty string to use the latest version but may not retrieve the data encrypt key that was wrapped if using a different version after the key was rotated.",
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
       DocumentationMode.append,
       "rust"
     )
@@ -362,7 +362,7 @@ op secureWrapKey is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "The key version should be specified when wrapping a key and retained to use the same key version when unwrapping. You can pass an empty string to use the latest version but should still retain the version used or potentially be locked out of your data after the key is rotated.",
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
       DocumentationMode.append,
       "rust"
     )
@@ -408,7 +408,7 @@ op secureUnwrapKey is KeyVaultOperation<
     @path("key-version")
     @clientName("version", "go")
     @clientDoc(
-      "Use the same key version used when wrapping a key. You can pass an empty string to use the latest version but may not retrieve the data encrypt key that was wrapped if using a different version after the key was rotated.",
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
       DocumentationMode.append,
       "rust"
     )
