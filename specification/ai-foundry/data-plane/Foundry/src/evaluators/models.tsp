@@ -85,13 +85,33 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   prompt_text: string;
 }
 
-@doc("Context input for scenario-based evaluator generation")
-model ContextInput {
-  @doc("Type of context input: agent_prompt, policy_document, trace_file, or supplementary_text")
-  type: string;
+@doc("Type of context input for evaluator generation")
+union ContextInputType {
+  string,
 
-  @doc("Content of the context input (inline text or file reference)")
-  content: string;
+  @doc("Agent system prompt or instructions")
+  agent_prompt: "agent_prompt",
+
+  @doc("Policy document (business rules, compliance requirements)")
+  policy_document: "policy_document",
+
+  @doc("Trace file containing conversation logs")
+  trace_file: "trace_file",
+
+  @doc("Supplementary text (additional context)")
+  supplementary_text: "supplementary_text",
+}
+
+@doc("Context input for evaluator generation")
+model ContextInput {
+  @doc("Type of context input")
+  type: ContextInputType;
+
+  @doc("Inline text content")
+  content?: string;
+
+  @doc("File ID reference (for trace files or large documents)")
+  file_id?: string;
 }
 
 @doc("A single rubric criterion with scoring descriptions")
@@ -115,15 +135,11 @@ model RubricCriterion {
   always_on?: boolean;
 }
 
-@doc("Scenario-based evaluator definition that generates evaluation artifacts from context inputs. The category field on the evaluator determines the pipeline: 'quality' generates a rubric catalog, 'safety' generates a taxonomy.")
+@doc("Scenario-based evaluator definition — stores generated evaluation artifacts. Use the generate action to produce these artifacts before saving.")
 model ScenarioBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.scenario;
 
-  @doc("Context inputs used to generate the evaluation artifacts (agent prompt, policies, traces, supplementary text)")
-  context_inputs?: ContextInput[];
-
-  @doc("Generated evaluation spec describing what to evaluate (read-only, set by service)")
-  @visibility(Lifecycle.Read)
+  @doc("Generated evaluation spec describing what to evaluate")
   spec?: string;
 
   @doc("Generated rubric catalog with scored criteria (populated when category is 'quality')")
@@ -134,6 +150,51 @@ model ScenarioBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("Version of the linked taxonomy")
   taxonomy_version?: string;
+}
+
+@doc("Generated rubric catalog — output of the quality generation pipeline")
+model RubricCatalog {
+  @doc("Generated evaluation spec describing what to evaluate")
+  spec: string;
+
+  @doc("Array of scored rubric criteria")
+  criteria: RubricCriterion[];
+
+  @doc("Model used for generation")
+  source_model?: string;
+}
+
+@doc("Request body for evaluator generation")
+model GenerateEvaluatorRequest {
+  @doc("Context inputs to generate from (agent prompts, policies, traces, supplementary text)")
+  context_inputs: ContextInput[];
+
+  @doc("Category determines generation pipeline: 'quality' produces rubric catalog, 'safety' produces taxonomy")
+  category: EvaluatorCategory;
+
+  @doc("Optional: model deployment to use for generation (defaults to service default)")
+  model_deployment_name?: string;
+
+  @doc("Optional: existing rubric criteria to retain or refine (for iterative improvement)")
+  existing_criteria?: RubricCriterion[];
+}
+
+@doc("Response from evaluator generation — contains generated artifacts for review before saving as an evaluator version")
+model GenerateEvaluatorResponse {
+  @doc("The evaluator name this generation is for")
+  name: string;
+
+  @doc("Generated rubric catalog (populated when category is 'quality')")
+  rubric_catalog?: RubricCatalog;
+
+  @doc("ID of the generated taxonomy (populated when category is 'safety')")
+  taxonomy_id?: string;
+
+  @doc("Taxonomy version")
+  taxonomy_version?: string;
+
+  @doc("The category that was used for generation")
+  category: EvaluatorCategory;
 }
 
 @doc("Evaluator Definition")
