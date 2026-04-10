@@ -550,3 +550,52 @@ using Compute;
 @@clientName(VMScaleSetConvertToSinglePlacementGroupInput, "VirtualMachineScaleSetConvertToSinglePlacementGroupContent", "csharp");
 @@clientName(VMScaleSetScaleOutInput, "VirtualMachineScaleSetScaleOutContent", "csharp");
 @@clientName(SshGenerateKeyPairInputParameters, "SshGenerateKeyPairInputContent", "csharp");
+
+// ── Plural→singular enum renames (C# backward compat) ──
+@@clientName(CapacityReservationGroupInstanceViewTypes, "CapacityReservationGroupInstanceViewType", "csharp");
+@@clientName(CapacityReservationInstanceViewTypes, "CapacityReservationInstanceViewType", "csharp");
+@@clientName(ComponentNames, "ComponentName", "csharp");
+@@clientName(DiffDiskOptions, "DiffDiskOption", "csharp");
+@@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
+@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
+@@clientName(ExpandTypesForListVMs, "ExpandTypesForListVm", "csharp");
+@@clientName(PassNames, "PassName", "csharp");
+@@clientName(ResourceIdOptionsForGetCapacityReservationGroups, "ResourceIdOptionsForGetCapacityReservationGroup", "csharp");
+@@clientName(ScriptShellTypes, "ScriptShellType", "csharp");
+@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
+@@clientName(SecurityTypes, "SecurityType", "csharp");
+@@clientName(SshEncryptionTypes, "SshEncryptionType", "csharp");
+@@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
+@@clientName(VirtualMachineSizeTypes, "VirtualMachineSizeType", "csharp");
+
+// ── RP-prefix renames (C# backward compat) ──
+@@clientName(AllocationStrategy, "ComputeAllocationStrategy", "csharp");
+@@clientName(DeleteOptions, "ComputeDeleteOption", "csharp");
+@@clientName(NetworkInterfaceAuxiliaryMode, "ComputeNetworkInterfaceAuxiliaryMode", "csharp");
+@@clientName(NetworkInterfaceAuxiliarySku, "ComputeNetworkInterfaceAuxiliarySku", "csharp");
+@@clientName(PublicIPAddressSkuName, "ComputePublicIPAddressSkuName", "csharp");
+@@clientName(PublicIPAddressSkuTier, "ComputePublicIPAddressSkuTier", "csharp");
+
+// ── VM→Vm casing renames (C# backward compat) ──
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings, "LinuxVmGuestPatchAutomaticByPlatformSettings", "csharp");
+@@clientName(LinuxVMGuestPatchMode, "LinuxVmGuestPatchMode", "csharp");
+@@clientName(VMGuestPatchRebootBehavior, "VmGuestPatchRebootBehavior", "csharp");
+@@clientName(VMGuestPatchRebootSetting, "VmGuestPatchRebootSetting", "csharp");
+@@clientName(VMGuestPatchRebootStatus, "VmGuestPatchRebootStatus", "csharp");
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings, "WindowsVmGuestPatchAutomaticByPlatformSettings", "csharp");
+@@clientName(WindowsVMGuestPatchMode, "WindowsVmGuestPatchMode", "csharp");
+
+// ── IP→Ip casing renames (C# backward compat) ──
+@@clientName(VirtualMachineIpTag, "VirtualMachineIPTag", "csharp");
+@@clientName(VirtualMachineScaleSetIpTag, "VirtualMachineScaleSetIPTag", "csharp");
+
+// ── Other renames (C# backward compat) ──
+@@clientName(AlternativeType, "ImageAlternativeType", "csharp");
+@@clientName(RestorePointExpandOptions, "RestorePointExpand", "csharp");
+@@clientName(RestorePointCollectionExpandOptions, "RestorePointGroupExpand", "csharp");
+@@clientName(RestorePointSourceVMDataDisk, "RestorePointSourceVmDataDisk", "csharp");
+@@clientName(RestorePointSourceVMOSDisk, "RestorePointSourceVmOSDisk", "csharp");
+@@clientName(RestorePointSourceVMStorageProfile, "RestorePointSourceVmStorageProfile", "csharp");
+@@clientName(RebalanceBehavior, "VmssRebalanceBehavior", "csharp");
+@@clientName(RebalanceStrategy, "VmssRebalanceStrategy", "csharp");
+@@clientName(VmDiskTypes, "VirtualMachineDiskType", "csharp");

@@ -80,3 +80,6 @@ namespace ComputeCombine;
 @@clientName(ComputeSku.ResourceSkuRestrictionsReasonCode, "ComputeResourceSkuRestrictionsReasonCode", "csharp");
 @@clientName(ComputeSku.ResourceSkuRestrictionsType, "ComputeResourceSkuRestrictionsType", "csharp");
 @@clientName(ComputeSku.ResourceSkuZoneDetails, "ComputeResourceSkuZoneDetails", "csharp");
+
+// ── Plural→singular enum renames (C# backward compat) ──
+@@clientName(Common.OperatingSystemTypes, "OperatingSystemType", "csharp");

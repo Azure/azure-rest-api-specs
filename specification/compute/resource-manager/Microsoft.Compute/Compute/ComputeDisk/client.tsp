@@ -51,3 +51,11 @@ using ComputeDisk;
 
 // Type rename for backward compatibility
 @@clientName(PrivateLinkResource, "ComputePrivateLinkResourceData", "csharp");
+
+// ── Plural→singular enum renames (C# backward compat) ──
+@@clientName(DiskSecurityTypes, "DiskSecurityType", "csharp");
+@@clientName(DiskStorageAccountTypes, "DiskStorageAccountType", "csharp");
+@@clientName(SnapshotStorageAccountTypes, "SnapshotStorageAccountType", "csharp");
+
+// ── RP-prefix renames (C# backward compat) ──
+@@clientName(EncryptionType, "ComputeEncryptionType", "csharp");

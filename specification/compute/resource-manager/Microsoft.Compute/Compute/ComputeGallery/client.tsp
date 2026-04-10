@@ -136,3 +136,18 @@ using ComputeGallery;
 @@clientName(CommunityGallery, "CommunityGalleryData", "csharp");
 @@clientName(CommunityGalleryImage, "CommunityGalleryImageData", "csharp");
 @@clientName(CommunityGalleryImageVersion, "CommunityGalleryImageVersionData", "csharp");
+
+// ── Plural→singular enum renames (C# backward compat) ──
+@@clientName(ReplicationStatusTypes, "ReplicationStatusType", "csharp");
+@@clientName(SelectPermissions, "SelectPermission", "csharp");
+@@clientName(SharingProfileGroupTypes, "SharingProfileGroupType", "csharp");
+@@clientName(SharingUpdateOperationTypes, "SharingUpdateOperationType", "csharp");
+@@clientName(SoftDeletedArtifactTypes, "GallerySoftDeletedArtifactType", "csharp");
+
+// ── VM→Vm casing renames (C# backward compat) ──
+@@clientName(ConfidentialVMEncryptionType, "ConfidentialVmEncryptionType", "csharp");
+
+// ── Other renames (C# backward compat) ──
+@@clientName(GalleryExpandParams, "GalleryExpand", "csharp");
+@@clientName(PolicyViolationCategory, "GalleryImageVersionPolicyViolationCategory", "csharp");
+@@clientName(ReplicationState, "RegionalReplicationState", "csharp");
