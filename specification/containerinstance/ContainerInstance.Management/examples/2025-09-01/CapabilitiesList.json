@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "location": "westus",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "capabilities": {
+              "maxCpu": 4,
+              "maxGpuCount": 4,
+              "maxMemoryInGB": 14
+            },
+            "gpu": "K80",
+            "ipAddressType": "Public",
+            "location": "West US",
+            "osType": "Linux",
+            "resourceType": "containerGroups"
+          },
+          {
+            "capabilities": {
+              "maxCpu": 4,
+              "maxGpuCount": 0,
+              "maxMemoryInGB": 14
+            },
+            "gpu": "None",
+            "ipAddressType": "Public",
+            "location": "West US",
+            "osType": "Windows",
+            "resourceType": "containerGroups"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Location_ListCapabilities",
+  "title": "GetCapabilities"
+}
