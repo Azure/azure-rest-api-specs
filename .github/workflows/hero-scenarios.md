@@ -1,8 +1,33 @@
 ---
 on:
-  label_command:
-    name: hero-scenarios-needed
-    events: [pull_request]
+  pull_request_target:
+    types: [labeled]
+    forks: ["*"]
+  workflow_dispatch:
+    inputs:
+      item_number:
+        description: PR number to generate hero scenarios for
+        required: true
+        type: string
+  permissions:
+    pull-requests: write
+  steps:
+    - name: Remove trigger label
+      id: remove_label
+      if: github.event_name == 'pull_request_target' && github.event.label.name == 'hero-scenarios-needed'
+      uses: actions/github-script@v8
+      with:
+        script: |
+          try {
+            await github.rest.issues.removeLabel({
+              ...context.repo,
+              issue_number: context.payload.pull_request.number,
+              name: 'hero-scenarios-needed'
+            });
+          } catch (e) {
+            core.warning(`Could not remove label: ${e.message}`);
+          }
+if: github.event.label.name == 'hero-scenarios-needed'
 description: "Hero Scenarios: Suggest hero scenarios for API specifications"
 permissions:
   contents: read
