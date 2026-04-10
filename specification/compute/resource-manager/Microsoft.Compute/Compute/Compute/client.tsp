@@ -550,6 +550,10 @@ using Compute;
 @@clientName(VMScaleSetConvertToSinglePlacementGroupInput, "VirtualMachineScaleSetConvertToSinglePlacementGroupContent", "csharp");
 @@clientName(VMScaleSetScaleOutInput, "VirtualMachineScaleSetScaleOutContent", "csharp");
 @@clientName(SshGenerateKeyPairInputParameters, "SshGenerateKeyPairInputContent", "csharp");
+@@clientName(VirtualMachineScaleSetUpdateProperties, "VirtualMachineScaleSetPatchProperties", "csharp");
+@@clientName(ExpandTypeForListVMs, "GetVirtualMachineExpandType", "csharp");
+@@clientName(ExpandTypesForGetVMScaleSets, "VirtualMachineScaleSetGetExpand", "csharp");
+@@clientName(Modes, "HostEndpointSettingsMode", "csharp");
 
 // NOTE: AllInstancesDown and UserInitiatedRedeploy are safe-flattened by the generator.
 // They need a generator option to disable safe-flatten per-type. See issue filed below.
