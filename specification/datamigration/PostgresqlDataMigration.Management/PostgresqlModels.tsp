@@ -351,6 +351,9 @@ model ConnectionEndpoint {
 model CheckConnectivityEndpoint {
   ...ConnectionEndpoint;
 
+  @doc("Server resource ID")
+  serverResourceId?: string;
+
   @doc("Connection endpoint type")
   type: ConnectionType;
 }
