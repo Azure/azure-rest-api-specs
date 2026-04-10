@@ -178,3 +178,30 @@ using Microsoft.ContainerInstance;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// Fix missing/misnamed types in generated code
+@@clientName(HttpHeader, "ContainerHttpHeader", "csharp");
+@@clientName(InitContainerDefinition, "InitContainerDefinitionContent", "csharp");
+@@clientName(NGroupCGPropertyVolume, "NGroupContainerGroupPropertyVolume", "csharp");
+@@clientName(NGroupCGPropertyContainer, "NGroupContainerGroupPropertyContainer", "csharp");
+@@access(ContainerGroupProvisioningState, Access.public, "csharp");
+
+// Fix identity types to use ARM common ManagedServiceIdentity for backward compat
+@@alternateType(ContainerGroupProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ListResultContainerGroupProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(NGroup.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(NGroupPatch.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
+// Note: IpAddress.ip (IPAddress → string) handled via custom code
