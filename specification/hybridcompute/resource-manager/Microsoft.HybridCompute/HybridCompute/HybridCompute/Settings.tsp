@@ -74,24 +74,18 @@ interface SettingsOperationGroup {
   /**
    * Returns the base Settings for the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Settings_Get")
   @tag("Settings")
   get is SettingsOps.Read<Settings>;
 
   /**
    * Updates the base Settings of the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Settings_Update")
   @tag("Settings")
   update is SettingsOps.CreateOrUpdateSync<Settings>;
 
   /**
    * Update the base Settings of the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Settings_Patch")
   @tag("Settings")
   patch is SettingsOps.CustomPatchSync<Settings, PatchModel = Settings>;
 }

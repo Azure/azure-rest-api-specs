@@ -33,7 +33,7 @@ interface Licenses {
   /**
    * The operation to create or update a license.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("licenses")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     License,
@@ -58,7 +58,7 @@ interface Licenses {
   /**
    * The operation to delete a license.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("licenses")
   delete is ArmResourceDeleteWithoutOkAsync<
     License,

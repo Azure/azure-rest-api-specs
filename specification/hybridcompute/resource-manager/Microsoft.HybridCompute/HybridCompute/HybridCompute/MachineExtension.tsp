@@ -35,7 +35,7 @@ interface MachineExtensions {
   /**
    * The operation to create or update the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MachineExtension,
     Response = ArmResourceUpdatedResponse<MachineExtension> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MachineExtension> &
@@ -56,7 +56,7 @@ interface MachineExtensions {
   /**
    * The operation to delete the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     MachineExtension,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &

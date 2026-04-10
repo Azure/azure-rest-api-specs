@@ -28,22 +28,16 @@ interface HybridComputePrivateLinkScopes {
   /**
    * Returns a Azure Arc PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkScopes_Get")
   get is ArmResourceRead<HybridComputePrivateLinkScope>;
 
   /**
    * Creates (or updates) a Azure Arc PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkScopes_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<HybridComputePrivateLinkScope>;
 
   /**
    * Updates an existing PrivateLinkScope's tags. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkScopes_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     HybridComputePrivateLinkScope,
@@ -53,9 +47,7 @@ interface HybridComputePrivateLinkScopes {
   /**
    * Deletes a Azure Arc PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateLinkScopes_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     HybridComputePrivateLinkScope,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = HybridComputePrivateLinkScope> &
@@ -65,15 +57,11 @@ interface HybridComputePrivateLinkScopes {
   /**
    * Gets a list of Azure Arc PrivateLinkScopes within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkScopes_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<HybridComputePrivateLinkScope>;
 
   /**
    * Gets a list of all Azure Arc PrivateLinkScopes within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkScopes_List")
   list is ArmListBySubscription<HybridComputePrivateLinkScope>;
 }
 

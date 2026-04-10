@@ -24,20 +24,20 @@ model Machine is Azure.ResourceManager.TrackedResource<MachineProperties> {
   /**
    * The list of extensions affiliated to the machine
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   resources?: MachineExtension[];
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.Identity;
 
   /**
    * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: ArcKindEnum;
 }
 
@@ -106,7 +106,7 @@ interface Machines {
   /**
    * The operation to create or update a hybrid machine. Please note some properties can be set only during machine creation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("machines")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Machine,
@@ -181,7 +181,7 @@ interface Machines {
   /**
    * The operation to Upgrade Machine Extensions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("UpgradeExtensions")
   @tag("MachineExtensions Upgrade")
   upgradeExtensions is ArmResourceActionAsync<
@@ -195,7 +195,7 @@ interface Machines {
   /**
    * The operation to Setup Machine Extensions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SetupExtensions")
   @tag("MachineExtensions Setup")
   @action("addExtensions")
@@ -210,8 +210,6 @@ interface Machines {
   /**
    * The operation to get network information of hybrid machine
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetworkProfile_Get")
   @tag("MachineNetworkProfile")
   @get
   @action("networkProfile")
@@ -224,8 +222,6 @@ interface Machines {
   /**
    * Returns a Azure Arc PrivateLinkScope's validation details for a given machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkScopes_GetValidationDetailsForMachine")
   @get
   @action("privateLinkScopes/current")
   getValidationDetailsForMachine is ArmResourceActionSync<

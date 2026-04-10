@@ -23,13 +23,11 @@ alias LicensesOps = Legacy.ExtensionOperations<
   {}
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LicensesOperationGroup {
   /**
    * The operation to validate a license.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Licenses_ValidateLicense")
   @tag("licenses")
   @autoRoute
   @action("validateLicense")
@@ -43,13 +41,11 @@ interface LicensesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ExtensionTypeOperationGroup {
   /**
    * Gets all Extension types based on location and publisher
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionType_List")
   @tag("extensions")
   @autoRoute
   @list
@@ -70,13 +66,11 @@ interface ExtensionTypeOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ExtensionPublisherOperationGroup {
   /**
    * Gets all Extension publishers based on the location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionPublisher_List")
   @tag("extensions")
   @autoRoute
   @list
@@ -88,13 +82,11 @@ interface ExtensionPublisherOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PrivateLinkScopesOperationGroup {
   /**
    * Returns a Azure Arc PrivateLinkScope's validation details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateLinkScopes_GetValidationDetails")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}")
   @get
   getValidationDetails(
@@ -134,13 +126,11 @@ alias AgentVersionsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AgentVersionsOperationGroup {
   /**
    * Gets all agent versions based on location and publisher
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AgentVersion_List")
   @tag("AgentVersions")
   @autoRoute
   @list
@@ -161,8 +151,6 @@ interface AgentVersionsOperationGroup {
   /**
    * Get a AgentVersion
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AgentVersion_Get")
   @tag("AgentVersions")
   @autoRoute
   @get
@@ -203,30 +191,24 @@ alias NetworkConfigurationsOps = Azure.ResourceManager.Legacy.ExtensionOperation
   "NetworkConfigurations"
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface NetworkConfigurationsOperationGroup {
   /**
    * Returns a NetworkConfiguration for the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetworkConfigurations_Get")
   @tag("NetworkConfigurations")
   get is NetworkConfigurationsOps.Read<NetworkConfiguration>;
 
   /**
    * Create or update the NetworkConfiguration of the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetworkConfigurations_CreateOrUpdate")
   @tag("NetworkConfigurations")
   createOrUpdate is NetworkConfigurationsOps.CreateOrUpdateSync<NetworkConfiguration>;
 
   /**
    * Update the endpoint to the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetworkConfigurations_Update")
   @tag("NetworkConfigurations")
   update is NetworkConfigurationsOps.CustomPatchSync<
     NetworkConfiguration,

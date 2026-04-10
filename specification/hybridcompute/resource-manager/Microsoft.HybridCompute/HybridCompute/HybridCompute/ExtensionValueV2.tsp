@@ -70,16 +70,12 @@ interface ExtensionValueV2s {
   /**
    * Gets an Extension Metadata based on location, publisher, extensionType and version
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionMetadataV2_Get")
   @tag("extensions")
   get is ExtensionValueV2Ops.Read<ExtensionValueV2>;
 
   /**
    * Gets all Extension versions based on location, publisher, extensionType
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ExtensionMetadataV2_List")
   @tag("extensions")
   list is ExtensionValueV2Ops.List<
     ExtensionValueV2,

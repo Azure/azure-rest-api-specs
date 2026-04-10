@@ -35,7 +35,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * The Hybrid Compute Management Client.
+ * Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.
  */
 @armProviderNamespace
 @service(#{ title: "HybridComputeManagementClient" })
@@ -53,7 +53,22 @@ enum Versions {
   v2025_09_16_preview: "2025-09-16-preview",
 }
 
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<OperationListResult> {}
+interface Operations {
+  @tag("operations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  @list
+  @armResourceList(OperationListResult)
+  list(
+    ...CommonTypes.ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): OperationListResult | ErrorResponse;
+}
 
 @@doc(Operations.list, "Gets a list of hybrid compute operations.");

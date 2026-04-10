@@ -586,7 +586,7 @@ union ArcKindEnum {
   AWS: "AWS",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union InstanceViewTypes {
   string,
 
@@ -738,7 +738,7 @@ union VMGuestPatchRebootSetting {
   Always: "Always",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union VMGuestPatchClassification_Windows {
   string,
 
@@ -783,7 +783,7 @@ union VMGuestPatchClassification_Windows {
   Updates: "Updates",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union VMGuestPatchClassification_Linux {
   string,
 
@@ -1021,7 +1021,7 @@ union AccessMode {
 /**
  * The level code.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ExtensionsStatusLevelTypes {
   /**
    * Info
@@ -1113,7 +1113,7 @@ model LicenseDetails {
   volumeLicenseDetails?: VolumeLicenseDetails[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VolumeLicenseDetails {
   /**
    * Describes the program year the volume license is for.
@@ -1129,7 +1129,7 @@ model VolumeLicenseDetails {
 /**
  * Describes a License Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseUpdate extends ResourceUpdate {
   /**
    * License Update properties
@@ -1146,11 +1146,11 @@ model LicenseUpdateProperties {
    */
   licenseType?: LicenseType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   licenseDetails?: LicenseUpdatePropertiesLicenseDetails;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseUpdatePropertiesLicenseDetails {
   /**
    * Describes the state of the license.
@@ -1185,7 +1185,7 @@ model ResourceUpdate {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -1250,7 +1250,7 @@ model MachineProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1283,7 +1283,7 @@ model MachineProperties {
   /**
    * Specifies the hybrid machine unique ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @format("uuid")
   vmId?: string;
@@ -1335,7 +1335,7 @@ model MachineProperties {
   /**
    * Specifies the Arc Machine's unique SMBIOS ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   vmUuid?: string;
@@ -1399,7 +1399,7 @@ model MachineProperties {
   /**
    * Detected properties from the machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   detectedProperties?: Record<string>;
 
@@ -1643,7 +1643,7 @@ model AgentUpgrade {
   /**
    * The correlation ID associated with an agent upgrade operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   correlationId?: string;
 
@@ -1779,7 +1779,7 @@ model LicenseProfileMachineInstanceView {
   @visibility(Lifecycle.Read)
   licenseChannel?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   softwareAssurance?: LicenseProfileMachineInstanceViewSoftwareAssurance;
 
@@ -1795,7 +1795,7 @@ model LicenseProfileMachineInstanceView {
   productProfile?: LicenseProfileArmProductProfileProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseProfileMachineInstanceViewSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
@@ -1806,7 +1806,7 @@ model LicenseProfileMachineInstanceViewSoftwareAssurance {
 /**
  * Properties for the Machine ESU profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseProfileMachineInstanceViewEsuProperties
   extends LicenseProfileArmEsuPropertiesWithoutAssignedLicense {
   /**
@@ -1823,7 +1823,7 @@ model LicenseProfileMachineInstanceViewEsuProperties
 /**
  * Describes the properties of a License Profile ARM model.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseProfileArmEsuPropertiesWithoutAssignedLicense
   extends LicenseProfileStorageModelEsuProperties {
   /**
@@ -2146,19 +2146,19 @@ model MachineExtensionProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   settings?: Record<unknown>;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedSettings?: Record<unknown>;
 
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -2171,7 +2171,7 @@ model MachineExtensionProperties {
 /**
  * Describes a hybrid machine Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MachineUpdate extends ResourceUpdate {
   /**
    * Identity for the resource.
@@ -2238,7 +2238,7 @@ model MachineUpdateProperties {
  * Describe the properties of a license profile.
  */
 model LicenseProfileProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   softwareAssurance?: LicenseProfilePropertiesSoftwareAssurance;
 
   /**
@@ -2258,7 +2258,7 @@ model LicenseProfileProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseProfilePropertiesSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
@@ -2269,7 +2269,7 @@ model LicenseProfilePropertiesSoftwareAssurance {
 /**
  * Describes the properties of a License Profile ARM model.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseProfileArmEsuProperties
   extends LicenseProfileArmEsuPropertiesWithoutAssignedLicense {
   /**
@@ -2281,7 +2281,7 @@ model LicenseProfileArmEsuProperties
 /**
  * Describes a License Profile Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseProfileUpdate extends ResourceUpdate {
   /**
    * Describe the Update properties of a license profile.
@@ -2293,7 +2293,7 @@ model LicenseProfileUpdate extends ResourceUpdate {
  * Describe the Update properties of a license profile.
  */
 model LicenseProfileUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   softwareAssurance?: LicenseProfileUpdatePropertiesSoftwareAssurance;
 
   /**
@@ -2307,7 +2307,7 @@ model LicenseProfileUpdateProperties {
   productProfile?: ProductProfileUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LicenseProfileUpdatePropertiesSoftwareAssurance {
   /**
    * Specifies if this machine is licensed as part of a Software Assurance agreement.
@@ -2374,7 +2374,7 @@ model MachineAssessPatchesResult {
   /**
    * The activity ID of the operation that produced this result.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   assessmentActivityId?: string;
@@ -2674,7 +2674,7 @@ model MachineInstallPatchesResult {
 /**
  * Describes a Machine Extension Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MachineExtensionUpdate extends ResourceUpdate {
   /**
    * Describes Machine Extension Update Properties.
@@ -2719,13 +2719,13 @@ model MachineExtensionUpdateProperties {
   /**
    * Json formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   settings?: Record<unknown>;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protectedSettings?: Record<unknown>;
 }
 
@@ -2736,7 +2736,7 @@ model MachineExtensionUpgrade {
   /**
    * Describes the Extension Target Properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensionTargets?: Record<ExtensionTargetProperties>;
 }
 
@@ -2753,7 +2753,7 @@ model ExtensionTargetProperties {
 /**
  * Describes Extension Metadata properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtensionValueProperties {
   /**
    * The version of the Extension being received.
@@ -2797,8 +2797,8 @@ model ExtensionValueListResult {
 /**
  * Describes Extension Metadata properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExtensionValueV2Properties extends ExtensionValueProperties {
   /**
    * A list of locations where the extension packages can be found.
@@ -3011,7 +3011,7 @@ model MachineRunCommandProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3192,7 +3192,7 @@ model GatewayProperties {
 /**
  * Describes a License Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GatewayUpdate extends ResourceUpdate {
   /**
    * Gateway Update properties
@@ -3213,7 +3213,7 @@ model GatewayUpdateProperties {
 /**
  * Settings properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SettingsProperties {
   /**
    * Azure resource tenant Id
@@ -3241,7 +3241,7 @@ model SettingsGatewayProperties {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SetupExtensionRequest {
   /**
    * The list of extensions
@@ -3262,7 +3262,7 @@ model HybridComputePrivateLinkScopeProperties {
   /**
    * Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3330,7 +3330,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * State of the private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3418,7 +3418,7 @@ model PrivateLinkScopesResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3429,14 +3429,14 @@ model TagsResource {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Properties of a private link resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -3457,7 +3457,7 @@ model PrivateLinkResourceProperties {
   requiredZoneNames?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkScopeValidationDetails {
   /**
    * Azure resource Id
@@ -3476,7 +3476,7 @@ model PrivateLinkScopeValidationDetails {
   connectionDetails?: ConnectionDetail[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionDetail {
   /**
    * Azure resource Id
@@ -3516,7 +3516,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * Current state of this NetworkSecurityPerimeter: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -3725,7 +3725,7 @@ model HybridIdentityMetadataList is Azure.Core.Page<HybridIdentityMetadata>;
 /**
  * Defines the HybridIdentityMetadata.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HybridIdentityMetadata
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -3784,12 +3784,12 @@ model AgentVersion {
 /**
  * Describes a Machine Extension Update.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MachineRunCommandUpdate extends ResourceUpdate {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkConfiguration
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
