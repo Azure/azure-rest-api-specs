@@ -2747,6 +2747,21 @@
         }
       }
     },
+    "ApplicationGatewayManagedHsm": {
+      "type": "object",
+      "description": "Managed HSM properties of an application gateway.",
+      "properties": {
+        "keyId": {
+          "type": "string",
+          "format": "uri",
+          "description": "Key identifier of a key stored in Managed HSM."
+        },
+        "publicCertData": {
+          "type": "string",
+          "description": "Base-64 encoded value of a base-64 public certificate."
+        }
+      }
+    },
     "ApplicationGatewayOnDemandProbe": {
       "type": "object",
       "description": "Details of on demand test probe request.",
@@ -3818,20 +3833,6 @@
         "family": {
           "$ref": "./common.json#/definitions/ApplicationGatewaySkuFamily",
           "description": "Family of an application gateway SKU."
-        }
-      }
-    },
-    "ApplicationGatewayManagedHsm": {
-      "type": "object",
-      "properties": {
-        "keyId": {
-          "type": "string",
-          "description": "Key identifier of a key stored in Managed HSM.",
-          "format": "uri"
-        },
-        "publicCertData": {
-          "type": "string",
-          "description": "Base-64 encoded value of a base-64 public certificate."
         }
       }
     },
