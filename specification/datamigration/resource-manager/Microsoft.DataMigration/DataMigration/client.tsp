@@ -17,3 +17,11 @@ using Microsoft.DataMigration;
 @@alternateType(DatabaseMigrationPropertiesSqlDb.kind, ResourceType, "go");
 @@alternateType(DatabaseMigrationPropertiesSqlMi.kind, ResourceType, "go");
 @@alternateType(DatabaseMigrationPropertiesSqlVm.kind, ResourceType, "go");
+@@clientName(DatabaseMigrationCosmosDbMongos.getForScope,
+  "listForScope",
+  "javascript"
+);
+@@clientName(DatabaseMigrationsMongoToCosmosDbvCoreMongo.getForScope,
+  "listForScope",
+  "javascript"
+);
