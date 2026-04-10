@@ -5,12 +5,11 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "resource-manager"
-    emitter-output-dir: "{project-root}/../../../SampleResources"
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/sampleResources.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/sampleResources.json"
-    use-read-only-status-schema: "true"
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/placeholder
     emitter-output-dir: "{output-dir}/{service-dir}/armplaceholder"
