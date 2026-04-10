@@ -125,7 +125,7 @@ interface Evaluators {
   // POST /evaluators/{evaluatorName}/versions:generate
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Generate evaluator artifacts (rubric catalog or taxonomy) from context inputs. Returns generated artifacts for review before saving as an evaluator version via createVersion.")
+  @doc("Generate an evaluator from source materials. Returns a complete EvaluatorVersion with generated rubric criteria (quality) or taxonomy reference (safety) for review. Save via createVersion when satisfied.")
   @Rest.action("versions:generate")
   @Rest.actionSeparator("/")
   @Http.post
@@ -137,6 +137,6 @@ interface Evaluators {
       @Http.bodyRoot
       body: GenerateEvaluatorRequest;
     },
-    GenerateEvaluatorResponse
+    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 }
