@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -127,25 +128,34 @@ interface Databases {
        * The number of elements to return from the collection.
        */
       @query("$top")
+      @added(Versions.v2025_02_01_preview)
       $top?: int64;
 
       /**
        * The number of elements in the collection to skip.
        */
       @query("$skip")
+      @added(Versions.v2025_02_01_preview)
       $skip?: int64;
 
       /**
        * An OData filter expression that filters elements in the collection.
        */
       @query("$filter")
+      @added(Versions.v2025_02_01_preview)
       $filter?: string;
 
       /**
        * How the results should be ordered.
        */
       @query("$orderby")
+      @added(Versions.v2025_02_01_preview)
       $orderby?: string;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @removed(Versions.v2025_02_01_preview)
+      @query("$skipToken")
+      $skipToken?: string;
     }
   >;
 

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -118,6 +119,7 @@ interface DataMaskingPolicies {
       /**
        * The number of elements in the collection to skip.
        */
+      @added(Versions.v2025_02_01_preview)
       @query("$skip")
       $skip?: int64;
     }

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -33,6 +34,7 @@ model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
    * Sync group authentication information.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_02_01_preview)
   identity?: DataSyncParticipantIdentity;
 }
 

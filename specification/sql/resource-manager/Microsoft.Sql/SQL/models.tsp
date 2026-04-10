@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 
@@ -3188,6 +3189,45 @@ union SyncDirection {
 /**
  * The masking function that is used for the data masking rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2025_02_01_preview)
+@renamedFrom(Versions.v2025_02_01_preview, "DataMaskingFunction")
+enum LegacyDataMaskingFunction {
+  /**
+   * Default
+   */
+  Default,
+
+  /**
+   * CCN
+   */
+  CCN,
+
+  /**
+   * Email
+   */
+  Email,
+
+  /**
+   * Number
+   */
+  Number,
+
+  /**
+   * SSN
+   */
+  SSN,
+
+  /**
+   * Text
+   */
+  Text,
+}
+
+/**
+ * The masking function that is used for the data masking rule.
+ */
+@added(Versions.v2025_02_01_preview)
 union DataMaskingFunction {
   string,
 
@@ -3418,6 +3458,25 @@ union VirtualNetworkRuleState {
 /**
  * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2025_02_01_preview)
+@renamedFrom(Versions.v2025_02_01_preview, "DataMaskingRuleState")
+enum LegacyDataMaskingRuleState {
+  /**
+   * Enabled
+   */
+  Enabled,
+
+  /**
+   * Disabled
+   */
+  Disabled,
+}
+
+/**
+ * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
+ */
+@added(Versions.v2025_02_01_preview)
 union DataMaskingRuleState {
   string,
 
@@ -5872,6 +5931,7 @@ model DatabaseProperties {
   /**
    * Specifies the provisioning state for this resource
    */
+  @added(Versions.v2025_02_01_preview)
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -5910,24 +5970,6 @@ model DatabaseKey {
    */
   @visibility(Lifecycle.Read)
   keyVersion?: string;
-}
-
-/**
- * ARM tracked top level resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TrackedResource extends CommonTypes.Resource {
-  /**
-   * Resource location.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 /**
@@ -6270,6 +6312,7 @@ model DatabaseUpdateProperties {
    * Specifies the provisioning state for this resource
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_02_01_preview)
   provisioningState?: string;
 }
 
@@ -7249,6 +7292,14 @@ model DataMaskingRuleProperties {
   /**
    * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
    */
+  @removed(Versions.v2025_02_01_preview)
+  @renamedFrom(Versions.v2025_02_01_preview, "ruleState")
+  legacyRuleState?: LegacyDataMaskingRuleState;
+
+  /**
+   * The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.
+   */
+  @added(Versions.v2025_02_01_preview)
   ruleState?: DataMaskingRuleState;
 
   /**
@@ -7274,6 +7325,14 @@ model DataMaskingRuleProperties {
   /**
    * The masking function that is used for the data masking rule.
    */
+  @removed(Versions.v2025_02_01_preview)
+  @renamedFrom(Versions.v2025_02_01_preview, "maskingFunction")
+  legacyMaskingFunction: LegacyDataMaskingFunction;
+
+  /**
+   * The masking function that is used for the data masking rule.
+   */
+  @added(Versions.v2025_02_01_preview)
   maskingFunction: DataMaskingFunction;
 
   /**
@@ -7768,6 +7827,7 @@ model ElasticPoolProperties {
    * The name and tier of the current SKU.
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_02_01_preview)
   currentSku?: Sku;
 }
 
@@ -7870,6 +7930,7 @@ model ElasticPoolUpdateProperties {
    * The name and tier of the current SKU.
    */
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_02_01_preview)
   currentSku?: Sku;
 }
 
@@ -8690,12 +8751,30 @@ model JobSchedule {
    * Schedule start time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @removed(Versions.v2025_02_01_preview)
+  @renamedFrom(Versions.v2025_02_01_preview, "startTime")
+  legacyStartTime?: utcDateTime = utcDateTime.fromISO("0001-01-01T16:00:00-08:00");
+
+  /**
+   * Schedule start time.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @added(Versions.v2025_02_01_preview)
   startTime?: utcDateTime = utcDateTime.fromISO("0001-01-01T05:30:00+05:30");
 
   /**
    * Schedule end time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @removed(Versions.v2025_02_01_preview)
+  @renamedFrom(Versions.v2025_02_01_preview, "endTime")
+  legacyEndTime?: utcDateTime = utcDateTime.fromISO("9999-12-31T03:59:59-08:00");
+
+  /**
+   * Schedule end time.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @added(Versions.v2025_02_01_preview)
   endTime?: utcDateTime = utcDateTime.fromISO("9999-12-31T17:29:59+05:30");
 
   /**
@@ -11671,6 +11750,7 @@ model ManagedInstanceDtcProperties {
   /**
    * Status of FQDN of managed instance DTC. Toggling this setting might trigger a restart of the managed instance.
    */
+  @added(Versions.v2025_02_01_preview)
   fqdnEnabled?: boolean;
 
   /**
@@ -15370,6 +15450,7 @@ model ServerImportExportOperationResultProperties {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+@added(Versions.v2025_02_01_preview)
 model DataSyncParticipantIdentity {
   /**
    * The Datasync identity type
@@ -15391,6 +15472,7 @@ model DataSyncParticipantIdentity {
 /**
  * Azure Active Directory identity configuration for a resource.
  */
+@added(Versions.v2025_02_01_preview)
 model DataSyncParticipantUserAssignedIdentity {
   /**
    * The Azure Active Directory principal id.
