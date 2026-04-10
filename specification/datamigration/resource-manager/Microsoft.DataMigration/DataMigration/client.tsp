@@ -13,7 +13,3 @@ using Microsoft.DataMigration;
   "ConnectToTargetSQLDbSyncTaskProperties",
   "go"
 );
-@@alternateType(DatabaseMigrationProperties.kind, ResourceType, "go");
-@@alternateType(DatabaseMigrationPropertiesSqlDb.kind, ResourceType, "go");
-@@alternateType(DatabaseMigrationPropertiesSqlMi.kind, ResourceType, "go");
-@@alternateType(DatabaseMigrationPropertiesSqlVm.kind, ResourceType, "go");
