@@ -102,12 +102,39 @@ using Microsoft.ProviderHub;
 @@clientLocation(SkuResources.get, SkuResources, "csharp");
 @@clientLocation(SkuResources.createOrUpdate, SkuResources, "csharp");
 @@clientLocation(SkuResources.delete, SkuResources, "csharp");
-@@clientLocation(SkuResources.listByResourceTypeRegistrations, SkuResources, "csharp");
-@@clientLocation(SkuResourceOperations.getNestedResourceTypeSecond, SkuResourceOperations, "csharp");
-@@clientLocation(SkuResourceOperations.createOrUpdateNestedResourceTypeSecond, SkuResourceOperations, "csharp");
-@@clientLocation(SkuResourceOperations.deleteNestedResourceTypeSecond, SkuResourceOperations, "csharp");
-@@clientLocation(SkuResourceOperations.listByResourceTypeRegistrationsNestedResourceTypeSecond, SkuResourceOperations, "csharp");
-@@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeThird, SkuResourceOperationGroup, "csharp");
-@@clientLocation(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird, SkuResourceOperationGroup, "csharp");
-@@clientLocation(SkuResourceOperationGroup.deleteNestedResourceTypeThird, SkuResourceOperationGroup, "csharp");
-@@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeThird, SkuResourceOperationGroup, "csharp");
+@@clientLocation(SkuResources.listByResourceTypeRegistrations,
+  SkuResources,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperations.getNestedResourceTypeSecond,
+  SkuResourceOperations,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperations.createOrUpdateNestedResourceTypeSecond,
+  SkuResourceOperations,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperations.deleteNestedResourceTypeSecond,
+  SkuResourceOperations,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperations.listByResourceTypeRegistrationsNestedResourceTypeSecond,
+  SkuResourceOperations,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeThird,
+  SkuResourceOperationGroup,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird,
+  SkuResourceOperationGroup,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperationGroup.deleteNestedResourceTypeThird,
+  SkuResourceOperationGroup,
+  "csharp"
+);
+@@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeThird,
+  SkuResourceOperationGroup,
+  "csharp"
+);
