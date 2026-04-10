@@ -3,9 +3,27 @@
   "operationId": "KnowledgeBaseVersions_DeleteLatestVersion",
   "parameters": {
     "api-version": "2026-02-01-preview",
-    "knowledgeBaseName": "r"
+    "knowledgeBaseName": "20abc41a906b4f3940"
   },
   "responses": {
-    "204": {}
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/knowledgeBases/20abc41a906b4f3940/versions/@latest",
+        "status": "NotStarted",
+        "error": {
+          "code": "enxukxmmjtp",
+          "message": "pcmobbtlmugfkfmmblbge",
+          "target": "ykrpgdsbfnnmzbyfughqerlqwkwgly",
+          "details": [],
+          "innererror": {
+            "code": "hsbphucrtfqstxjpbwmfrqrr"
+          }
+        }
+      }
+    }
   }
 }

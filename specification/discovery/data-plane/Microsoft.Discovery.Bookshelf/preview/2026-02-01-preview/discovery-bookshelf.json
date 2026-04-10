@@ -114,7 +114,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "createdSince",
@@ -170,7 +170,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "versionName",
@@ -179,7 +179,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           }
         ],
         "responses": {
@@ -225,7 +225,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "versionName",
@@ -234,7 +234,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "resource",
@@ -292,7 +292,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "versionName",
@@ -301,12 +301,41 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -325,7 +354,8 @@
           "KnowledgeBaseVersions_Delete_MaximumSet": {
             "$ref": "./examples/KnowledgeBaseVersions_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/knowledgeBases/{knowledgeBaseName}/versions/{versionName}:startIndexing": {
@@ -343,7 +373,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "versionName",
@@ -352,7 +382,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
@@ -474,7 +504,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "versionName",
@@ -483,7 +513,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
@@ -605,7 +635,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "versionName",
@@ -614,7 +644,7 @@
             "required": true,
             "type": "string",
             "maxLength": 24,
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           },
           {
             "name": "operationId",
@@ -666,7 +696,8 @@
             "description": "Name of the KnowledgeBase",
             "required": true,
             "type": "string",
-            "maxLength": 24
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           }
         ],
         "responses": {
@@ -708,12 +739,23 @@
             "description": "Name of the KnowledgeBase",
             "required": true,
             "type": "string",
-            "maxLength": 24
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{1,24}$"
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBaseDeleteResponse"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of KnowledgeBaseVersion"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -731,11 +773,9 @@
         "x-ms-examples": {
           "KnowledgeBaseVersions_DeleteLatestVersion_MaximumSet": {
             "$ref": "./examples/KnowledgeBaseVersions_DeleteLatestVersion_MaximumSet_Gen.json"
-          },
-          "KnowledgeBaseVersions_DeleteLatestVersion_MinimumSet": {
-            "$ref": "./examples/KnowledgeBaseVersions_DeleteLatestVersion_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -922,7 +962,7 @@
           "type": "string",
           "description": "The knowledgeBase name.",
           "maxLength": 24,
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "pattern": "^[a-zA-Z0-9-]{1,24}$",
           "readOnly": true
         },
         "id": {
@@ -1038,6 +1078,28 @@
         "copilotInstruction"
       ]
     },
+    "KnowledgeBaseDeleteResponse": {
+      "type": "object",
+      "description": "Response body for a long-running delete operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation"
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is 'Failed'."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
     "KnowledgeBaseOperationStatus": {
       "type": "object",
       "description": "Status of a KnowledgeBase operation",
@@ -1072,7 +1134,7 @@
           "type": "string",
           "description": "The version name.",
           "maxLength": 24,
-          "pattern": "^[a-zA-Z0-9-]{3,24}$",
+          "pattern": "^[a-zA-Z0-9-]{1,24}$",
           "readOnly": true
         },
         "id": {

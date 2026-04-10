@@ -205,6 +205,9 @@ model Paged<T extends {}> is Foundations.CustomPage<T>;
 /** Regex for resource names */
 alias resourceNamePattern = "^[a-zA-Z0-9-]{3,24}$";
 
+/** Regex for knowledge base and version names (min 1 char, service enforces combined max of 24) */
+alias knowledgeBaseNamePattern = "^[a-zA-Z0-9-]{1,24}$";
+
 /** Regex for conversation names */
 alias conversationNamePattern = "^[a-zA-Z0-9-]{1,75}$";
 

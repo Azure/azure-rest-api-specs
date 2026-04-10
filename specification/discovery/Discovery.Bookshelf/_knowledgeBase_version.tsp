@@ -23,7 +23,7 @@ model KnowledgeBaseVersion {
   @visibility(Lifecycle.Read)
   @key("versionName")
   @maxLength(24)
-  @pattern(resourceNamePattern)
+  @pattern(knowledgeBaseNamePattern)
   name: string;
 
   ...BaseKnowledgeBase;
@@ -63,6 +63,18 @@ model KnowledgeBaseOperationStatus {
   result?: KnowledgeBaseVersion;
 }
 
+/** Response body for a long-running delete operation. */
+model KnowledgeBaseDeleteResponse {
+  @doc("The unique ID of the operation.")
+  id: string;
+
+  @doc("The status of the operation")
+  status: Azure.Core.Foundations.OperationState;
+
+  @doc("Error object that describes the error when status is 'Failed'.")
+  error?: Azure.Core.Foundations.Error;
+}
+
 /**
  * Operation signature to retrieve a resource operation status.
  * @template Resource The type of the resource.
@@ -100,6 +112,7 @@ interface KnowledgeBaseVersions {
       /** Name of the KnowledgeBase */
       @path
       @maxLength(24)
+      @pattern(knowledgeBaseNamePattern)
       knowledgeBaseName: string;
     },
     KnowledgeBaseVersion
@@ -138,13 +151,13 @@ interface KnowledgeBaseVersions {
     @doc("The knowledgeBase name.")
     @path
     @maxLength(24)
-    @pattern(resourceNamePattern)
+    @pattern(knowledgeBaseNamePattern)
     knowledgeBaseName: string,
 
     @doc("The version name.")
     @path
     @maxLength(24)
-    @pattern(resourceNamePattern)
+    @pattern(knowledgeBaseNamePattern)
     versionName: string,
 
     @doc("The unique ID of the operation.")
@@ -170,21 +183,57 @@ interface KnowledgeBaseVersions {
   >;
 
   @doc("Delete a KnowledgeBaseVersion.")
-  delete is ResourceDelete<KnowledgeBaseVersion>;
+  @sharedRoute
+  @removed(Versions.`2026-02-01-preview`)
+  deleteLegacy is ResourceDelete<KnowledgeBaseVersion>;
+
+  @doc("Delete a KnowledgeBaseVersion.")
+  @sharedRoute
+  @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
+  @added(Versions.`2026-02-01-preview`)
+  delete is LongRunningResourceDelete<KnowledgeBaseVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Delete the most recent version of KnowledgeBase.")
+  @sharedRoute
   @delete
   @route("/knowledgeBases/{knowledgeBaseName}/versions/@latest")
+  @removed(Versions.`2026-02-01-preview`)
+  deleteLatestVersionLegacy is Foundations.Operation<
+    {
+      /** Name of the KnowledgeBase */
+      @path
+      @maxLength(24)
+      @pattern(knowledgeBaseNamePattern)
+      knowledgeBaseName: string;
+    },
+    {
+      @statusCode _: 204;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Delete the most recent version of KnowledgeBase.")
+  @sharedRoute
+  @delete
+  @route("/knowledgeBases/{knowledgeBaseName}/versions/@latest")
+  @pollingOperation(KnowledgeBaseVersions.getOperationStatus)
+  @added(Versions.`2026-02-01-preview`)
   deleteLatestVersion is Foundations.Operation<
     {
       /** Name of the KnowledgeBase */
       @path
       @maxLength(24)
+      @pattern(knowledgeBaseNamePattern)
       knowledgeBaseName: string;
     },
     {
-      @statusCode _: 204;
+      @statusCode _: 202;
+
+      @header("Operation-Location")
+      operationLocation: ResourceLocation<KnowledgeBaseVersion>;
+
+      @body body: KnowledgeBaseDeleteResponse;
     }
   >;
 

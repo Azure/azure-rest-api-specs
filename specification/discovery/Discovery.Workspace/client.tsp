@@ -19,10 +19,6 @@ using Azure.ClientGenerator.Core;
   "DiscoveryTasksClient",
   "csharp"
 );
-@@clientName(Microsoft.Discovery.Workspace.Suggestion,
-  "DiscoveryChatSuggestion",
-  "csharp"
-);
 @@clientName(Microsoft.Discovery.Workspace.Operation,
   "WorkspaceOperation",
   "csharp"

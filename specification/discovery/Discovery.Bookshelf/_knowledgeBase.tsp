@@ -85,7 +85,7 @@ model KnowledgeBase {
   @visibility(Lifecycle.Read)
   @key("knowledgeBaseName")
   @maxLength(24)
-  @pattern(resourceNamePattern)
+  @pattern(knowledgeBaseNamePattern)
   name: string;
 
   ...BaseKnowledgeBase;

@@ -306,50 +306,6 @@
         }
       }
     },
-    "/conversations/{conversationName}/suggestions": {
-      "get": {
-        "operationId": "ConversationSuggestions_GetSuggestions",
-        "description": "Get suggestions for the specified conversation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "conversationName",
-            "in": "path",
-            "description": "The name of the conversation.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{1,75}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ConversationSuggestionsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ConversationSuggestions_GetSuggestions_MaximumSet": {
-            "$ref": "./examples/ConversationSuggestions_GetSuggestions_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/projects/{projectName}/investigations": {
       "get": {
         "operationId": "Investigations_List",
@@ -2037,36 +1993,6 @@
         }
       }
     },
-    "ConversationSuggestionsResponse": {
-      "type": "object",
-      "description": "Response model for conversation suggestions.",
-      "properties": {
-        "conversationName": {
-          "type": "string",
-          "description": "The name of the conversation these suggestions are for.",
-          "readOnly": true
-        },
-        "suggestions": {
-          "type": "array",
-          "description": "Array of suggestions for the conversation.",
-          "items": {
-            "$ref": "#/definitions/Suggestion"
-          },
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp when the suggestions were generated.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "conversationName",
-        "suggestions",
-        "createdAt"
-      ]
-    },
     "CreateConversationRequest": {
       "type": "object",
       "description": "Request body for creating a conversation.",
@@ -2277,7 +2203,7 @@
         "encodedFile": {
           "type": "string",
           "description": "File contents: Compressed using .gz then base64-encoded.",
-          "maxLength": 12000
+          "maxLength": 100000
         }
       },
       "required": [
@@ -2907,43 +2833,6 @@
       "type": "string",
       "description": "A URI that references data. There are two forms this can take:\n1. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.\n2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.",
       "pattern": "^discovery://storageassets/.*$"
-    },
-    "Suggestion": {
-      "type": "object",
-      "description": "A suggestion for prompts in a conversation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier for the suggestion (UUID format).",
-          "readOnly": true
-        },
-        "text": {
-          "type": "string",
-          "description": "The suggested prompt text that the user can use.",
-          "readOnly": true
-        },
-        "reasoning": {
-          "type": "string",
-          "description": "The reasoning or explanation for why this suggestion was generated.",
-          "readOnly": true
-        },
-        "confidence": {
-          "type": "number",
-          "format": "double",
-          "description": "The confidence score for this suggestion, typically between 0.0 and 1.0.",
-          "readOnly": true
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The ranking position of this suggestion relative to other suggestions.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "confidence",
-        "rank"
-      ]
     },
     "SupercomputerUsage": {
       "type": "object",

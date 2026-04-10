@@ -275,7 +275,7 @@ model InlineFile {
    * zipping or encoding it.
    */
   @doc("File contents: Compressed using .gz then base64-encoded.")
-  @maxLength(12000) // ~12kB - any larger threw an exception on the Batch API - commandLine too long. May be able to relax for AKS but easier to start strict.
+  @maxLength(100000) // ~100kB - relaxed for AKS backend
   encodedFile: string;
 }
 

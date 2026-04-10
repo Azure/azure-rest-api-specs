@@ -16,6 +16,7 @@ using Microsoft.Discovery.Common;
 namespace Microsoft.Discovery.Workspace;
 
 @doc("A suggestion for prompts in a conversation.")
+@removed(Versions.`2026-02-01-preview`)
 model Suggestion {
   @doc("The unique identifier for the suggestion (UUID format).")
   @visibility(Lifecycle.Read)
@@ -39,6 +40,7 @@ model Suggestion {
 }
 
 @doc("Response model for conversation suggestions.")
+@removed(Versions.`2026-02-01-preview`)
 model ConversationSuggestionsResponse {
   @doc("The name of the conversation these suggestions are for.")
   @visibility(Lifecycle.Read)
@@ -65,6 +67,7 @@ model ConversationSuggestionsResponse {
 }
 
 @doc("Operations for conversation suggestions.")
+@removed(Versions.`2026-02-01-preview`)
 interface ConversationSuggestions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get suggestions for the specified conversation.")
