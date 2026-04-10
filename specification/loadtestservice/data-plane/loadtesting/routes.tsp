@@ -577,7 +577,8 @@ interface TriggerAdministration {
 
   @summary("Get all triggers for the given filters.")
   @doc("Get all triggers for the given filters.")
-  listTrigger is StandardResourceOperations.ResourceList<
+  @renamedFrom(APIVersions.v2026_04_01, "listTrigger")
+  listTriggers is StandardResourceOperations.ResourceList<
     Trigger,
     ListQueryParametersTrait<ListTriggerQueryParams>
   >;
@@ -603,7 +604,8 @@ interface NotificationRuleAdministration {
   @summary("Get all notification rules for the given filters.")
   @doc("Get all notification rules for the given filters.")
   @added(APIVersions.v2024_12_01_preview)
-  listNotificationRule is StandardResourceOperations.ResourceList<
+  @renamedFrom(APIVersions.v2026_04_01, "listNotificationRule")
+  listNotificationRules is StandardResourceOperations.ResourceList<
     NotificationRule,
     ListQueryParametersTrait<ListNotificationRuleQueryParams>
   >;

@@ -173,12 +173,12 @@ interface AdministrationOperations {
   createOrUpdateTrigger is TriggerAdministration.createOrUpdateTrigger;
   deleteTrigger is TriggerAdministration.deleteTrigger;
   getTrigger is TriggerAdministration.getTrigger;
-  listTriggers is TriggerAdministration.listTrigger;
+  listTriggers is TriggerAdministration.listTriggers;
 
   createOrUpdateNotificationRule is NotificationRuleAdministration.createOrUpdateNotificationRule;
   deleteNotificationRule is NotificationRuleAdministration.deleteNotificationRule;
   getNotificationRule is NotificationRuleAdministration.getNotificationRule;
-  listNotificationRules is NotificationRuleAdministration.listNotificationRule;
+  listNotificationRules is NotificationRuleAdministration.listNotificationRules;
 
   @action("clone")
   cloneTest is LoadTestAdministration.cloneTest;
