@@ -242,4 +242,4 @@ model NetworkToNetworkInterconnectsList
   is Azure.Core.Page<NetworkToNetworkInterconnect>;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(NetworkFabric.properties, "javascript");
+@@Legacy.flattenProperty(NetworkFabric.propertiesDeprecated, "javascript");
