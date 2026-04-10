@@ -15,10 +15,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union NetworkPolicy {
   /** Use the calico policy */
-  Calico: "Calico",
+  calico: "calico",
 
   /** Use the cilium policy */
-  Cilium: "Cilium",
+  cilium: "cilium",
 
   string,
 }
@@ -368,7 +368,7 @@ model NetworkProfile {
   /**
    * Network policy used for building Kubernetes network. Possible values include: 'calico'.
    */
-  networkPolicy?: NetworkPolicy = NetworkPolicy.Calico;
+  networkPolicy?: NetworkPolicy = NetworkPolicy.calico;
 
   /**
    * A CIDR notation IP Address range from which to assign pod IPs.
