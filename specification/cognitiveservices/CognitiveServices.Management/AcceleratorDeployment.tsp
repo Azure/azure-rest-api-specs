@@ -63,13 +63,12 @@ interface AcceleratorDeployments {
   update is ArmCustomPatchAsync<
     AcceleratorDeployment,
     LroHeaders = ArmLroLocationHeader<
-    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-    AcceleratorDeployment,
-    string
-  > &
-    Azure.Core.Foundations.RetryAfterHeader
-    &
-    ArmAsyncOperationHeader,
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      AcceleratorDeployment,
+      string
+    > &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader,
     PatchModel = PatchResourceSku
   >;
 
@@ -79,7 +78,8 @@ interface AcceleratorDeployments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
     AcceleratorDeployment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
