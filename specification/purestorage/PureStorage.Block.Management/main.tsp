@@ -974,10 +974,10 @@ model VolumeGroupProperties {
   sourceVolumeGroupResourceId?: string;
 
   @doc("Performance parameters for the volume group")
-  performanceParameters: PerformanceParameters;
+  performanceParameters?: PerformanceParameters;
 
   @doc("Protection parameters for the volume group")
-  protectionParameters: ProtectionParameters;
+  protectionParameters?: ProtectionParameters;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
@@ -1192,13 +1192,17 @@ model LatestLinkedSaaSResponse {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
 @added(Versions.v2026_03_01_preview)
 interface SaaSOperationGroup {
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Following Azure async operation pattern for long-running activation"
   @doc("Activate the SaaS resource")
   @autoRoute
   @action("activateSaaS")
-  activateResource is ArmProviderActionSync<
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  activateResource is ArmProviderActionAsync<
     Request = ActivateSaaSRequest,
     Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }

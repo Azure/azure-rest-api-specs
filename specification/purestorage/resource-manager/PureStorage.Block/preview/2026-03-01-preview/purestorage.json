@@ -134,6 +134,25 @@
               "$ref": "#/definitions/SaaSResourceDetailsResponse"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -145,7 +164,11 @@
           "SaaSOperationGroup_ActivateResource": {
             "$ref": "./examples/SaaSOperationGroup_ActivateSaaS_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/PureStorage.Block/reservations": {
@@ -5395,11 +5418,7 @@
           "description": "Provisioning state of the resource",
           "readOnly": true
         }
-      },
-      "required": [
-        "performanceParameters",
-        "protectionParameters"
-      ]
+      }
     },
     "VolumeGroupStatus": {
       "type": "object",
