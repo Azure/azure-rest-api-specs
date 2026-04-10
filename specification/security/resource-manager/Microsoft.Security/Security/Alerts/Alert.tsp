@@ -210,8 +210,3 @@ interface AlertOperationGroup {
 
 @@doc(Alert.name, "Name of the alert object");
 @@doc(Alert.properties, "describes security alert properties.");
-
-
-
-
-
