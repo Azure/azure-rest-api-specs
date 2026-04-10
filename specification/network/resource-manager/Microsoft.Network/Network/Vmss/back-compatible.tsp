@@ -126,4 +126,3 @@ using TypeSpec.Versioning;
   Microsoft.Compute.PublicIPAddresses,
   "autorest"
 );
-
