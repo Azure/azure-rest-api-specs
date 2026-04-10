@@ -254,6 +254,8 @@ using Microsoft.AzureStackHCI;
   "LastUpdatedOn",
   "csharp"
 );
+@@clientName(UpdateSummariesProperties.lastChecked, "LastCheckedOn", "csharp");
+@@clientName(UpdateSummariesProperties.lastUpdated, "LastUpdatedOn", "csharp");
 
 @@clientName(DeploymentStep.startTimeUtc, "StartOn", "csharp");
 @@clientName(DeploymentStep.endTimeUtc, "EndOn", "csharp");
