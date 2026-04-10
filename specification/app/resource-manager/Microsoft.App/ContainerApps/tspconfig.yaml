@@ -1,0 +1,49 @@
+parameters:
+  service-dir:
+    default: "sdk/appcontainers"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/openapi.json"
+    emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appcontainers"
+    namespace: "azure.mgmt.appcontainers"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appcontainers"
+    namespace: "com.azure.resourcemanager.appcontainers"
+    service-name: "ContainerAppsApi"
+    enable-sync-stack: true
+    use-object-for-unknown: true
+    float32-as-double: false
+    flavor: azure
+    rename-model:
+      OpenIdConnectClientCredentialMethod: ClientCredentialMethod
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appcontainers"
+    compatibility-lro: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-appcontainers"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/appcontainers"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappcontainers"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappcontainers"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
