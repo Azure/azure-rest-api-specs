@@ -240,3 +240,6 @@ model InternalNetworksList is Azure.Core.Page<InternalNetwork>;
 model NetworkInterfacesList is Azure.Core.Page<NetworkInterface>;
 model NetworkToNetworkInterconnectsList
   is Azure.Core.Page<NetworkToNetworkInterconnect>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NetworkFabric.properties, "javascript");
