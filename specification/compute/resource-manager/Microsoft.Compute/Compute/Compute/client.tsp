@@ -551,9 +551,10 @@ using Compute;
 @@clientName(VMScaleSetScaleOutInput, "VirtualMachineScaleSetScaleOutContent", "csharp");
 @@clientName(SshGenerateKeyPairInputParameters, "SshGenerateKeyPairInputContent", "csharp");
 
-// Make internal types public for C# backward compat
-@@access(AllInstancesDown, Access.public, "csharp");
-@@access(UserInitiatedRedeploy, Access.public, "csharp");
+// NOTE: AllInstancesDown and UserInitiatedRedeploy are safe-flattened by the generator.
+// They need a generator option to disable safe-flatten per-type. See issue filed below.
+// TODO: @@access(AllInstancesDown, Access.public, "csharp");
+// TODO: @@access(UserInitiatedRedeploy, Access.public, "csharp");
 
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(CapacityReservationGroupInstanceViewTypes, "CapacityReservationGroupInstanceViewType", "csharp");
