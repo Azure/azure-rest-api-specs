@@ -15,10 +15,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 union NetworkPolicy {
   /** Use the calico policy */
-  calico: "calico",
+  Calico: "Calico",
 
   /** Use the cilium policy */
-  cilium: "cilium",
+  Cilium: "Cilium",
 
   string,
 }
@@ -173,19 +173,9 @@ union ProvisioningState {
   string,
 
   /**
-   * Succeeded state.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Failed state.
-   */
-  Failed: "Failed",
-
-  /**
-   * Canceled state.
-   */
-  Canceled: "Canceled",
+  * pulls in Succeeded, Failed, Canceled
+  */
+  ResourceProvisioningState,
 
   /**
    * Pending state.
@@ -378,7 +368,7 @@ model NetworkProfile {
   /**
    * Network policy used for building Kubernetes network. Possible values include: 'calico'.
    */
-  networkPolicy?: NetworkPolicy = NetworkPolicy.calico;
+  networkPolicy?: NetworkPolicy = NetworkPolicy.Calico;
 
   /**
    * A CIDR notation IP Address range from which to assign pod IPs.
@@ -843,35 +833,6 @@ model ExtendedLocation {
    * ARM Id of the extended location.
    */
   name?: string;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility(Lifecycle.Read)
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 /**
