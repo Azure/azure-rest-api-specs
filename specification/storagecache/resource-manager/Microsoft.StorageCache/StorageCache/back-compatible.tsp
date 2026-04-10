@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager.CommonTypes;
 using Microsoft.StorageCache;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -129,3 +130,5 @@ using Microsoft.StorageCache;
 @@clientName(getRequiredAmlFSSubnetsSize::parameters.body,
   "requiredAMLFilesystemSubnetsSizeInfo"
 );
+
+@@clientName(ProvisioningStateType.Canceled, "Cancelled", "go");
