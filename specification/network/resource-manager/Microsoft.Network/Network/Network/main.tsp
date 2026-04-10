@@ -166,6 +166,7 @@ enum Versions {
   /**
    * The 2025-07-01 API version.
    */
+  @useDependency(Common.Versions.v2025_07_01)
   v2025_07_01: "2025-07-01",
 }
 
