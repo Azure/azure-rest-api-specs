@@ -551,6 +551,10 @@ using Compute;
 @@clientName(VMScaleSetScaleOutInput, "VirtualMachineScaleSetScaleOutContent", "csharp");
 @@clientName(SshGenerateKeyPairInputParameters, "SshGenerateKeyPairInputContent", "csharp");
 
+// Make internal types public for C# backward compat
+@@access(AllInstancesDown, Access.public, "csharp");
+@@access(UserInitiatedRedeploy, Access.public, "csharp");
+
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(CapacityReservationGroupInstanceViewTypes, "CapacityReservationGroupInstanceViewType", "csharp");
 @@clientName(CapacityReservationInstanceViewTypes, "CapacityReservationInstanceViewType", "csharp");
