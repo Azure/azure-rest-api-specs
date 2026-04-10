@@ -1123,7 +1123,7 @@
           "format": "int32",
           "description": "Number of accelerators allocated per model instance."
         },
-        "default": {
+        "isDefault": {
           "type": "boolean",
           "description": "Whether this is the default accelerator configuration.",
           "default": false
@@ -1321,6 +1321,9 @@
         "acceleratorMaps": {
           "type": "array",
           "description": "Accelerator configurations for the deployment template.",
+          "x-ms-identifiers": [
+            "acceleratorType"
+          ],
           "items": {
             "$ref": "#/definitions/AcceleratorMap"
           }

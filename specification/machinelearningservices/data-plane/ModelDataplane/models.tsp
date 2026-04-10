@@ -731,6 +731,7 @@ model Model {
   defaultDeploymentTemplate?: ModelDeploymentTemplateDetails;
 
   /** List of allowed deployment templates for the model. */
+  @extension("x-ms-identifiers", #["assetId"])
   allowedDeploymentTemplates?: ModelDeploymentTemplateReferenceDetails[];
 }
 

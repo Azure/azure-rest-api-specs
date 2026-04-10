@@ -47,7 +47,7 @@ model AcceleratorMap {
   numberOfAcceleratorsPerModelInstance: int32;
 
   @doc("Whether this is the default accelerator configuration.")
-  default?: boolean = false;
+  isDefault?: boolean = false;
 }
 
 @doc("DeploymentTemplate resource definition")
@@ -80,6 +80,7 @@ model DeploymentTemplate is AssetVersion {
   allowedInstanceType?: string[];
 
   @doc("Accelerator configurations for the deployment template.")
+  @extension("x-ms-identifiers", #["acceleratorType"])
   acceleratorMaps?: AcceleratorMap[];
 
   @doc("Default instance type for the deployment.")
