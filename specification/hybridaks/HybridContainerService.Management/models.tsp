@@ -173,8 +173,8 @@ union ProvisioningState {
   string,
 
   /**
-  * pulls in Succeeded, Failed, Canceled
-  */
+   * pulls in Succeeded, Failed, Canceled
+   */
   ResourceProvisioningState,
 
   /**
