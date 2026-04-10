@@ -13,3 +13,11 @@ using Microsoft.DataMigration;
   "ConnectToTargetSQLDbSyncTaskProperties",
   "go"
 );
+@@clientName(DatabaseMigrationCosmosDbMongos.getForScope,
+  "listForScope",
+  "javascript"
+);
+@@clientName(DatabaseMigrationsMongoToCosmosDbvCoreMongo.getForScope,
+  "listForScope",
+  "javascript"
+);
