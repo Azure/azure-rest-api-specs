@@ -1,9 +1,8 @@
 ---
 on:
-  pull_request:
-    types: [labeled]
-labels: [hero-scenarios-needed]
-if: github.event.label.name == 'hero-scenarios-needed'
+  label_command:
+    name: hero-scenarios-needed
+    events: [pull_request]
 description: "Hero Scenarios: Suggest hero scenarios for API specifications"
 permissions:
   contents: read
