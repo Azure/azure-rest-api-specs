@@ -254,7 +254,8 @@ model ResourceProvisionPayload {
 
   @doc("Virtual machine profile array that contains VM properties that needs to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
-  resourceOverrides?: BulkVMConfiguration[];
+  @renamedFrom(Versions.`2026-04-15-preview`, "resourceOverrides")
+  virtualMachineOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
@@ -677,7 +678,8 @@ model ResourceProvisionFlexPayload {
 
   @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
-  resourceOverrides?: BulkVMConfiguration[];
+  @renamedFrom(Versions.`2026-04-15-preview`, "resourceOverrides")
+  virtualMachineOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
