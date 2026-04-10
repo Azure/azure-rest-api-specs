@@ -34,7 +34,7 @@ model Commit extends ChildResource {
   @path
   @key("commitName")
   @segment("commits")
-  @pattern("^[a-zA-Z0-9_.-]*$")
+  @pattern("^(?![.-])[a-zA-Z0-9_.-]{1,128}$")
   name: string;
 
   /**
