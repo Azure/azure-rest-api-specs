@@ -34,6 +34,3 @@ using Microsoft.DataMigration;
   "ConnectToTargetSqlDbSyncTaskProperties",
   "python"
 );
-@@alternateType(DatabaseMigrationPropertiesSqlDb.kind, ResourceType, "go");
-@@alternateType(DatabaseMigrationPropertiesSqlMi.kind, ResourceType, "go");
-@@alternateType(DatabaseMigrationPropertiesSqlVm.kind, ResourceType, "go");
