@@ -766,11 +766,7 @@ model ProfileUpdate {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Update model for PATCH operation"
-  tags?: Record<string>;
+  ...ArmTagsProperty;
 
   /**
    * The Azure Region where the resource lives
