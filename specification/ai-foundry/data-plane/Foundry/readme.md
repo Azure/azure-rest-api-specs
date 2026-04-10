@@ -6,16 +6,6 @@ This folder contains the TypeSpec for all data-plane REST APIs of the Foundry se
 
 ``` yaml
 openapi-type: data-plane
-tag: virtual-public-preview
-```
-
-### Tag: virtual-public-preview
-
-These settings apply only when `--tag=virtual-public-preview` is specified on the command line.
-
-``` yaml $(tag) == 'virtual-public-preview'
-input-file:
-  - openapi3/virtual-public-preview/microsoft-foundry-openapi3.json
 ```
 
 ## Contributing
