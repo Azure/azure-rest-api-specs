@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Security;
 /**
@@ -214,3 +216,5 @@ interface Tasks {
 
 @@doc(SecurityTask.name, "Name of the task object, will be a GUID");
 @@doc(SecurityTask.properties, "Describes properties of a task.");
+
+

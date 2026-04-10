@@ -575,7 +575,7 @@ model securitySolutionsReferenceDataList {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model securitySolutionsReferenceData {
-  ...Resource;
+  ...Azure.ResourceManager.Foundations.Resource;
   ...Location;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: securitySolutionsReferenceDataProperties;
@@ -838,3 +838,4 @@ model AadSolutionProperties {
    */
   connectivityState?: AadConnectivityState;
 }
+

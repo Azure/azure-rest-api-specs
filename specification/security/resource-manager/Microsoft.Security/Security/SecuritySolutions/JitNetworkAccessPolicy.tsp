@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -146,3 +148,5 @@ enum JitNetworkAccessPolicyInitiateType {
 @@doc(JitNetworkAccessPolicy.properties, "");
 @@doc(JitNetworkAccessPolicies.createOrUpdate::parameters.resource, "");
 @@doc(JitNetworkAccessPolicies.initiate::parameters.body, "");
+
+

@@ -436,7 +436,7 @@
       "description": "Describes the properties of an API collection.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Common.ProvisioningState",
           "description": "Gets the provisioning state of the API collection.",
           "readOnly": true
         },
@@ -501,11 +501,14 @@
         }
       }
     },
-    "ProvisioningState": {
+    "Common.ProvisioningState": {
       "type": "string",
-      "description": "Gets the provisioning state of the API collection.",
+      "description": "The current provisioning state of the resource. Indicates the status of the last operation performed on the resource.",
       "enum": [
         "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
         "Failed",
         "Canceled",
         "InProgress"
@@ -517,17 +520,32 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "The resource has been successfully provisioned and is ready for use."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created. This is a transitional state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated. This is a transitional state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted. This is a transitional state."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "The last operation on the resource failed. Check the error details for more information."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "The operation was canceled before completion."
           },
           {
             "name": "InProgress",

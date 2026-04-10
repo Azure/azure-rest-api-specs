@@ -81,7 +81,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -135,7 +135,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -214,7 +214,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -275,7 +275,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -291,19 +291,19 @@
     }
   },
   "definitions": {
-    "CloudError": {
+    "Common.CloudError": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Common.CloudErrorBody",
           "description": "The error object.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-external": true
     },
-    "CloudErrorBody": {
+    "Common.CloudErrorBody": {
       "type": "object",
       "description": "The error detail.",
       "properties": {
@@ -326,43 +326,50 @@
           "type": "array",
           "description": "The error details.",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/Common.CloudErrorBody"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
+            "$ref": "#/definitions/Common.ErrorAdditionalInfo"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "x-ms-external": true
     },
-    "Code": {
-      "type": "string",
-      "description": "The operation status code.",
-      "enum": [
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "Code",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Extension was created/updated successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Extension was not created/updated successfully. See operation status message for more details."
-          }
-        ]
+    "Common.ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "Common.OperationStatus": {
+      "type": "object",
+      "description": "A status describing the success/failure of the enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
       }
     },
     "Enforce": {
@@ -389,21 +396,6 @@
         ]
       }
     },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "description": "The resource management error additional info.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
-        },
-        "info": {
-          "description": "The additional info.",
-          "readOnly": true
-        }
-      }
-    },
     "Extension": {
       "type": "object",
       "description": "A plan's extension properties",
@@ -422,7 +414,7 @@
           "additionalProperties": {}
         },
         "operationStatus": {
-          "$ref": "#/definitions/OperationStatus",
+          "$ref": "#/definitions/Common.OperationStatus",
           "description": "Optional. A status describing the success/failure of the extension's enablement/disablement operation.",
           "readOnly": true
         }
@@ -478,20 +470,6 @@
             "description": "Indicates the extension is disabled"
           }
         ]
-      }
-    },
-    "OperationStatus": {
-      "type": "object",
-      "description": "A status describing the success/failure of the extension's enablement/disablement operation.",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/Code",
-          "description": "The operation status code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Additional information regarding the success/failure of the operation."
-        }
       }
     },
     "Pricing": {

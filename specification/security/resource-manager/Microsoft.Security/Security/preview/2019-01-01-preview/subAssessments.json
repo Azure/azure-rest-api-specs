@@ -81,7 +81,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -139,7 +139,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -180,7 +180,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -268,19 +268,19 @@
         }
       }
     },
-    "CloudError": {
+    "Common.CloudError": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Common.CloudErrorBody",
           "description": "The error object.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-external": true
     },
-    "CloudErrorBody": {
+    "Common.CloudErrorBody": {
       "type": "object",
       "description": "The error detail.",
       "properties": {
@@ -303,20 +303,129 @@
           "type": "array",
           "description": "The error details.",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/Common.CloudErrorBody"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
+            "$ref": "#/definitions/Common.ErrorAdditionalInfo"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "x-ms-external": true
+    },
+    "Common.ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "Common.ResourceDetails": {
+      "type": "object",
+      "description": "Details of the resource that was assessed",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/Common.Source",
+          "description": "The platform where the assessed resource resides"
+        }
+      },
+      "discriminator": "source",
+      "required": [
+        "source"
+      ]
+    },
+    "Common.Severity": {
+      "type": "string",
+      "description": "The severity level of the assessment",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High"
+          },
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical"
+          }
+        ]
+      }
+    },
+    "Common.Source": {
+      "type": "string",
+      "description": "The platform where the assessed resource resides",
+      "enum": [
+        "Azure",
+        "OnPremise",
+        "OnPremiseSql",
+        "Aws",
+        "Gcp"
+      ],
+      "x-ms-enum": {
+        "name": "Source",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Resource is in Azure"
+          },
+          {
+            "name": "OnPremise",
+            "value": "OnPremise",
+            "description": "Resource in an on premise machine connected to Azure cloud"
+          },
+          {
+            "name": "OnPremiseSql",
+            "value": "OnPremiseSql",
+            "description": "SQL Resource in an on premise machine connected to Azure cloud"
+          },
+          {
+            "name": "Aws",
+            "value": "Aws",
+            "description": "Aws"
+          },
+          {
+            "name": "Gcp",
+            "value": "Gcp",
+            "description": "Gcp"
+          }
+        ]
+      }
     },
     "ContainerRegistryVulnerabilityProperties": {
       "type": "object",
@@ -378,35 +487,6 @@
         }
       ],
       "x-ms-discriminator-value": "ContainerRegistryVulnerability"
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "description": "The resource management error additional info.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
-        },
-        "info": {
-          "description": "The additional info.",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceDetails": {
-      "type": "object",
-      "description": "Details of the resource that was assessed",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "The platform where the assessed resource resides"
-        }
-      },
-      "discriminator": "source",
-      "required": [
-        "source"
-      ]
     },
     "SecuritySubAssessment": {
       "type": "object",
@@ -488,7 +568,7 @@
           "readOnly": true
         },
         "resourceDetails": {
-          "$ref": "#/definitions/ResourceDetails",
+          "$ref": "#/definitions/Common.ResourceDetails",
           "description": "Details of the resource that was assessed"
         },
         "additionalData": {
@@ -553,66 +633,6 @@
       ],
       "x-ms-discriminator-value": "ServerVulnerabilityAssessment"
     },
-    "Severity": {
-      "type": "string",
-      "description": "The sub-assessment severity level",
-      "enum": [
-        "Low",
-        "Medium",
-        "High"
-      ],
-      "x-ms-enum": {
-        "name": "Severity",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Low",
-            "value": "Low",
-            "description": "Low"
-          },
-          {
-            "name": "Medium",
-            "value": "Medium",
-            "description": "Medium"
-          },
-          {
-            "name": "High",
-            "value": "High",
-            "description": "High"
-          }
-        ]
-      }
-    },
-    "Source": {
-      "type": "string",
-      "description": "The platform where the assessed resource resides",
-      "enum": [
-        "Azure",
-        "OnPremise",
-        "OnPremiseSql"
-      ],
-      "x-ms-enum": {
-        "name": "Source",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Azure",
-            "value": "Azure",
-            "description": "Resource is in Azure"
-          },
-          {
-            "name": "OnPremise",
-            "value": "OnPremise",
-            "description": "Resource in an on premise machine connected to Azure cloud"
-          },
-          {
-            "name": "OnPremiseSql",
-            "value": "OnPremiseSql",
-            "description": "SQL Resource in an on premise machine connected to Azure cloud"
-          }
-        ]
-      }
-    },
     "SqlServerVulnerabilityProperties": {
       "type": "object",
       "description": "Details of the resource that was assessed",
@@ -655,7 +675,7 @@
           "readOnly": true
         },
         "severity": {
-          "$ref": "#/definitions/Severity",
+          "$ref": "#/definitions/Common.Severity",
           "description": "The sub-assessment severity level",
           "readOnly": true
         }

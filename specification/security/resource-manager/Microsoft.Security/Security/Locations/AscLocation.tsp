@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Security;
 /**
@@ -51,3 +53,5 @@ interface AscLocations {
   "The location where ASC stores the data of the subscription. can be retrieved from Get locations"
 );
 @@doc(AscLocation.properties, "An empty set of properties");
+
+

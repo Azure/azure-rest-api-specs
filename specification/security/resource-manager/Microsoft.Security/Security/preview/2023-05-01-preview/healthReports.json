@@ -140,6 +140,48 @@
     }
   },
   "definitions": {
+    "Common.Source": {
+      "type": "string",
+      "description": "The platform where the assessed resource resides",
+      "enum": [
+        "Azure",
+        "OnPremise",
+        "OnPremiseSql",
+        "Aws",
+        "Gcp"
+      ],
+      "x-ms-enum": {
+        "name": "Source",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Resource is in Azure"
+          },
+          {
+            "name": "OnPremise",
+            "value": "OnPremise",
+            "description": "Resource in an on premise machine connected to Azure cloud"
+          },
+          {
+            "name": "OnPremiseSql",
+            "value": "OnPremiseSql",
+            "description": "SQL Resource in an on premise machine connected to Azure cloud"
+          },
+          {
+            "name": "Aws",
+            "value": "Aws",
+            "description": "Aws"
+          },
+          {
+            "name": "Gcp",
+            "value": "Gcp",
+            "description": "Gcp"
+          }
+        ]
+      }
+    },
     "HealthReport": {
       "type": "object",
       "description": "The health report resource",
@@ -225,36 +267,6 @@
           "format": "uri",
           "description": "The link to the next page of items."
         }
-      }
-    },
-    "Source": {
-      "type": "string",
-      "description": "The status of the health report",
-      "enum": [
-        "Aws",
-        "Gcp",
-        "Azure"
-      ],
-      "x-ms-enum": {
-        "name": "Source",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Aws",
-            "value": "Aws",
-            "description": "Aws"
-          },
-          {
-            "name": "Gcp",
-            "value": "Gcp",
-            "description": "Gcp"
-          },
-          {
-            "name": "Azure",
-            "value": "Azure",
-            "description": "Azure"
-          }
-        ]
       }
     },
     "StatusName": {
@@ -379,7 +391,7 @@
       "description": "The resource details of the health report",
       "properties": {
         "source": {
-          "$ref": "#/definitions/Source",
+          "$ref": "#/definitions/Common.Source",
           "description": "The status of the health report"
         },
         "id": {

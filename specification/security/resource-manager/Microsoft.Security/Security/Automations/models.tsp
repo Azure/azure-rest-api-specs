@@ -379,7 +379,7 @@ model AutomationAction {
   /**
    * The type of the action that will be triggered by the Automation
    */
-  actionType: ActionType;
+  actionType: Common.ActionType;
 }
 
 /**
@@ -566,3 +566,4 @@ model NotificationsSourceAttackPath extends NotificationsSource {
    */
   sourceType: "AttackPath";
 }
+

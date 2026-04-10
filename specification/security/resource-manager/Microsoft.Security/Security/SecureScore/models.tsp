@@ -131,7 +131,7 @@ model SecureScoreControlList {
  * Details of the security control, its score, and the health status of the relevant resources.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SecureScoreControlDetails extends Resource {
+model SecureScoreControlDetails extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Calculation result data in control level
    */
@@ -188,7 +188,7 @@ model SecureScoreControlScoreDetails {
  * Information about the security control.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SecureScoreControlDefinitionItem extends Resource {
+model SecureScoreControlDefinitionItem extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Security Control Definition Properties.
    */
@@ -298,3 +298,5 @@ model SecureScoreControlScore {
   @maxValue(1)
   percentage?: float64;
 }
+
+

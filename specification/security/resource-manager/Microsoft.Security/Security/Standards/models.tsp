@@ -100,7 +100,7 @@ model StandardComponentProperties {
  * Describes an Azure tracked resource.
  */
 model TrackedResource {
-  ...Resource;
+  ...Azure.ResourceManager.Foundations.Resource;
   ...AzureTrackedResourceLocation;
   ...AzureTrackedResourceKind;
   ...ETag;
@@ -233,3 +233,4 @@ model AssignmentPropertiesAdditionalData {
    */
   exemptionCategory?: string;
 }
+

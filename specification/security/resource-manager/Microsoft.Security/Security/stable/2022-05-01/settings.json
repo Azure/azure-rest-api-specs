@@ -69,7 +69,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -108,7 +108,8 @@
               "WDATP",
               "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
               "WDATP_UNIFIED_SOLUTION",
-              "Sentinel"
+              "Sentinel",
+              "current"
             ],
             "x-ms-enum": {
               "name": "SettingName",
@@ -138,6 +139,11 @@
                   "name": "Sentinel",
                   "value": "Sentinel",
                   "description": "Sentinel"
+                },
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "Name of the Defender for Storage Settings name."
                 }
               ]
             }
@@ -153,7 +159,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -187,7 +193,8 @@
               "WDATP",
               "WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW",
               "WDATP_UNIFIED_SOLUTION",
-              "Sentinel"
+              "Sentinel",
+              "current"
             ],
             "x-ms-enum": {
               "name": "SettingName",
@@ -217,6 +224,11 @@
                   "name": "Sentinel",
                   "value": "Sentinel",
                   "description": "Sentinel"
+                },
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "Name of the Defender for Storage Settings name."
                 }
               ]
             }
@@ -241,7 +253,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -284,19 +296,19 @@
       ],
       "x-ms-discriminator-value": "AlertSyncSettings"
     },
-    "CloudError": {
+    "Common.CloudError": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Common.CloudErrorBody",
           "description": "The error object.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-external": true
     },
-    "CloudErrorBody": {
+    "Common.CloudErrorBody": {
       "type": "object",
       "description": "The error detail.",
       "properties": {
@@ -319,20 +331,37 @@
           "type": "array",
           "description": "The error details.",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/Common.CloudErrorBody"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
+            "$ref": "#/definitions/Common.ErrorAdditionalInfo"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "x-ms-external": true
+    },
+    "Common.ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
     },
     "DataExportSettingProperties": {
       "type": "object",
@@ -349,7 +378,7 @@
     },
     "DataExportSettings": {
       "type": "object",
-      "description": "Describes an Azure resource.Represents a data export setting",
+      "description": "Represents a data export setting",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataExportSettingProperties",
@@ -363,21 +392,6 @@
         }
       ],
       "x-ms-discriminator-value": "DataExportSettings"
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "description": "The resource management error additional info.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
-        },
-        "info": {
-          "description": "The additional info.",
-          "readOnly": true
-        }
-      }
     },
     "Setting": {
       "type": "object",

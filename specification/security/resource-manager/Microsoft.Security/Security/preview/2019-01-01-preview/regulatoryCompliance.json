@@ -76,7 +76,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -122,7 +122,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -172,7 +172,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -225,7 +225,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -282,7 +282,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -342,7 +342,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -355,19 +355,19 @@
     }
   },
   "definitions": {
-    "CloudError": {
+    "Common.CloudError": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Common.CloudErrorBody",
           "description": "The error object.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-external": true
     },
-    "CloudErrorBody": {
+    "Common.CloudErrorBody": {
       "type": "object",
       "description": "The error detail.",
       "properties": {
@@ -390,22 +390,24 @@
           "type": "array",
           "description": "The error details.",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/Common.CloudErrorBody"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
+            "$ref": "#/definitions/Common.ErrorAdditionalInfo"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "x-ms-external": true
     },
-    "ErrorAdditionalInfo": {
+    "Common.ErrorAdditionalInfo": {
       "type": "object",
       "description": "The resource management error additional info.",
       "properties": {
@@ -418,6 +420,54 @@
           "description": "The additional info.",
           "readOnly": true
         }
+      }
+    },
+    "Common.State": {
+      "type": "string",
+      "description": "Aggregative state based on the standard's supported controls states",
+      "enum": [
+        "Passed",
+        "Failed",
+        "Skipped",
+        "Unsupported",
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passed",
+            "value": "Passed",
+            "description": "All supported regulatory compliance controls in the given standard have a passed state"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "At least one supported regulatory compliance control in the given standard has a state of failed"
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "All supported regulatory compliance controls in the given standard have a state of skipped"
+          },
+          {
+            "name": "Unsupported",
+            "value": "Unsupported",
+            "description": "No supported regulatory compliance data for the given standard"
+          },
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Send notification on new alerts to the subscription's admins"
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Don't send notification on new alerts to the subscription's admins"
+          }
+        ]
       }
     },
     "RegulatoryComplianceAssessment": {
@@ -477,7 +527,7 @@
           "readOnly": true
         },
         "state": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/Common.State",
           "description": "Aggregative state based on the assessment's scanned resources states"
         },
         "passedResources": {
@@ -553,7 +603,7 @@
           "readOnly": true
         },
         "state": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/Common.State",
           "description": "Aggregative state based on the control's supported assessments states"
         },
         "passedAssessments": {
@@ -618,7 +668,7 @@
       "description": "Regulatory compliance standard data",
       "properties": {
         "state": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/Common.State",
           "description": "Aggregative state based on the standard's supported controls states"
         },
         "passedControls": {
@@ -645,42 +695,6 @@
           "description": "The number of regulatory compliance controls of the given standard which are unsupported by automated assessments",
           "readOnly": true
         }
-      }
-    },
-    "State": {
-      "type": "string",
-      "description": "Aggregative state based on the standard's supported controls states",
-      "enum": [
-        "Passed",
-        "Failed",
-        "Skipped",
-        "Unsupported"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Passed",
-            "value": "Passed",
-            "description": "All supported regulatory compliance controls in the given standard have a passed state"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "At least one supported regulatory compliance control in the given standard has a state of failed"
-          },
-          {
-            "name": "Skipped",
-            "value": "Skipped",
-            "description": "All supported regulatory compliance controls in the given standard have a state of skipped"
-          },
-          {
-            "name": "Unsupported",
-            "value": "Unsupported",
-            "description": "No supported regulatory compliance data for the given standard"
-          }
-        ]
       }
     }
   },

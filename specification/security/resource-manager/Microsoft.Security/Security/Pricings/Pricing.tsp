@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Security;
 /**
@@ -74,3 +76,5 @@ interface Pricings {
 @@doc(Pricing.name, "name of the pricing configuration");
 @@doc(Pricing.properties, "Pricing data");
 @@doc(Pricings.update::parameters.resource, "Pricing object");
+
+

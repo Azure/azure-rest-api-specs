@@ -80,7 +80,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -176,7 +176,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -282,7 +282,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -385,7 +385,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -488,7 +488,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -583,7 +583,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Common.CloudError"
             }
           }
         },
@@ -627,19 +627,19 @@
         }
       }
     },
-    "CloudError": {
+    "Common.CloudError": {
       "type": "object",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Common.CloudErrorBody",
           "description": "The error object.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-external": true
     },
-    "CloudErrorBody": {
+    "Common.CloudErrorBody": {
       "type": "object",
       "description": "The error detail.",
       "properties": {
@@ -662,7 +662,7 @@
           "type": "array",
           "description": "The error details.",
           "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+            "$ref": "#/definitions/Common.CloudErrorBody"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -671,13 +671,42 @@
           "type": "array",
           "description": "The error additional info.",
           "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
+            "$ref": "#/definitions/Common.ErrorAdditionalInfo"
           },
           "readOnly": true,
           "x-ms-identifiers": []
         }
       },
       "x-ms-external": true
+    },
+    "Common.ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type.",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true
+        }
+      }
+    },
+    "Common.OperationStatus": {
+      "type": "object",
+      "description": "A status describing the success/failure of the enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
+      }
     },
     "DefenderForStorageSetting": {
       "type": "object",
@@ -731,21 +760,6 @@
         "overrideSubscriptionLevelSettings": {
           "type": "boolean",
           "description": "Indicates whether the settings defined for this storage account should override the settings defined for the subscription."
-        }
-      }
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "description": "The resource management error additional info.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
-        },
-        "info": {
-          "description": "The additional info.",
-          "readOnly": true
         }
       }
     },
@@ -889,7 +903,7 @@
           }
         },
         "operationStatus": {
-          "$ref": "#/definitions/OperationStatus",
+          "$ref": "#/definitions/Common.OperationStatus",
           "description": "Upon failure or partial success. Additional data describing Malware Scanning enable/disable operation.",
           "readOnly": true
         }
@@ -941,20 +955,6 @@
         }
       }
     },
-    "OperationStatus": {
-      "type": "object",
-      "description": "A status describing the success/failure of the enablement/disablement operation.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The operation status code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Additional information regarding the success/failure of the operation."
-        }
-      }
-    },
     "ScanSummary": {
       "type": "object",
       "description": "A summary of the scan results.",
@@ -983,7 +983,7 @@
           "description": "Indicates whether Sensitive Data Discovery should be enabled."
         },
         "operationStatus": {
-          "$ref": "#/definitions/OperationStatus",
+          "$ref": "#/definitions/Common.OperationStatus",
           "description": "Upon failure or partial success. Additional data describing Sensitive Data Discovery enable/disable operation.",
           "readOnly": true
         }

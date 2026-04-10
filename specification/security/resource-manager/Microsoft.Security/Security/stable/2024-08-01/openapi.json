@@ -722,16 +722,6 @@
         }
       }
     },
-    "AssignedStandardItem": {
-      "type": "object",
-      "description": "Describe the properties of a of a standard assignments object reference",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Full resourceId of the Microsoft.Security/standard object"
-        }
-      }
-    },
     "AttestationEvidence": {
       "type": "object",
       "description": "Describe the properties of a assignment attestation",
@@ -743,6 +733,16 @@
         "sourceUrl": {
           "type": "string",
           "description": "The source url of the evidence"
+        }
+      }
+    },
+    "Common.AssignedStandardItem": {
+      "type": "object",
+      "description": "Describe the properties of a of a standard assignments object reference",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resourceId of the Microsoft.Security/standard object"
         }
       }
     },
@@ -972,7 +972,7 @@
       "description": "Security Standard on a resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/StandardProperties",
+          "$ref": "#/definitions/SecurityStandardProperties",
           "description": "Properties of a security standard",
           "x-ms-client-flatten": true
         }
@@ -1004,6 +1004,48 @@
       "required": [
         "value"
       ]
+    },
+    "SecurityStandardProperties": {
+      "type": "object",
+      "description": "Describes properties of a standard.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the standard, equivalent to the standardId"
+        },
+        "standardType": {
+          "$ref": "#/definitions/StandardType",
+          "description": "Standard type (Custom or Default or Compliance only currently)",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the standard"
+        },
+        "assessments": {
+          "type": "array",
+          "description": "List of assessment keys to apply to standard scope.",
+          "items": {
+            "$ref": "#/definitions/PartialAssessmentProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "cloudProviders": {
+          "type": "array",
+          "description": "List of all standard supported clouds.",
+          "items": {
+            "$ref": "#/definitions/StandardSupportedCloud"
+          }
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition id associated with the standard."
+        },
+        "metadata": {
+          "$ref": "#/definitions/StandardMetadata",
+          "description": "The security standard metadata."
+        }
+      }
     },
     "SeverityEnum": {
       "type": "string",
@@ -1092,7 +1134,7 @@
           "description": "Description of the standardAssignment"
         },
         "assignedStandard": {
-          "$ref": "#/definitions/AssignedStandardItem",
+          "$ref": "#/definitions/Common.AssignedStandardItem",
           "description": "Standard item with key as applied to this standard assignment over the given scope"
         },
         "effect": {
@@ -1214,48 +1256,6 @@
           "format": "date-time",
           "description": "Standard last update date",
           "readOnly": true
-        }
-      }
-    },
-    "StandardProperties": {
-      "type": "object",
-      "description": "Describes properties of a standard.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the standard, equivalent to the standardId"
-        },
-        "standardType": {
-          "$ref": "#/definitions/StandardType",
-          "description": "Standard type (Custom or Default or Compliance only currently)",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the standard"
-        },
-        "assessments": {
-          "type": "array",
-          "description": "List of assessment keys to apply to standard scope.",
-          "items": {
-            "$ref": "#/definitions/PartialAssessmentProperties"
-          },
-          "x-ms-identifiers": []
-        },
-        "cloudProviders": {
-          "type": "array",
-          "description": "List of all standard supported clouds.",
-          "items": {
-            "$ref": "#/definitions/StandardSupportedCloud"
-          }
-        },
-        "policySetDefinitionId": {
-          "type": "string",
-          "description": "The policy set definition id associated with the standard."
-        },
-        "metadata": {
-          "$ref": "#/definitions/StandardMetadata",
-          "description": "The security standard metadata."
         }
       }
     },

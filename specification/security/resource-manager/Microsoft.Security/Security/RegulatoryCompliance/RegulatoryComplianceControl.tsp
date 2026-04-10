@@ -4,11 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./RegulatoryComplianceStandard.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Security;
 /**
@@ -63,3 +65,5 @@ interface RegulatoryComplianceControls {
 @@doc(RegulatoryComplianceControl.properties,
   "Regulatory compliance control data"
 );
+
+
