@@ -81,10 +81,6 @@ suppressions:
     from: sovereign.json
     where: $.definitions.SovereignViewPolicyInitiativeDetail.properties.assignmentParameters
     reason: Parameters vary based on the selected policy initiatives.
-  - code: LocationMustHaveXmsMutability
-    from: sovereign.json
-    where: $.definitions.SovereignViewComplianceDetailResource.properties.location
-    reason: This location is that of the ARM resource for which we are reporting compliance. We are not responsible for the location of this resource.
   - code: GuidUsage
     from: sovereign.json
     where:
