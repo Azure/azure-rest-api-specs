@@ -7723,10 +7723,6 @@
       "type": "object",
       "description": "Database Migration Resource properties.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for DatabaseMigrationProperties."
-        },
         "sourceSqlConnection": {
           "$ref": "#/definitions/SqlConnectionInformation",
           "description": "Source SQL Server connection details."
@@ -7753,10 +7749,6 @@
           ]
         }
       },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseMigrationBaseProperties"
@@ -7815,8 +7807,20 @@
           "items": {
             "type": "string"
           }
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "SqlDb"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseMigrationProperties"
@@ -7840,8 +7844,20 @@
         "offlineConfiguration": {
           "$ref": "#/definitions/OfflineConfiguration",
           "description": "Offline configuration."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "SqlMi"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseMigrationProperties"
@@ -7865,8 +7881,20 @@
         "offlineConfiguration": {
           "$ref": "#/definitions/OfflineConfiguration",
           "description": "Offline configuration."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "SqlVm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseMigrationProperties"

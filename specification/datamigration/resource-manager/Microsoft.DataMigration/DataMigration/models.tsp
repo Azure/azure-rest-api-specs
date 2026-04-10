@@ -2289,6 +2289,7 @@ model ErrorInfo {
 /**
  * Database Migration Resource properties for SQL database.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesSqlDb extends DatabaseMigrationProperties {
@@ -2463,9 +2464,6 @@ model SqlDbOfflineConfiguration {
 /**
  * Database Migration Resource properties.
  */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("kind")
 model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
   /**
    * Source SQL Server connection details.
@@ -2531,6 +2529,7 @@ model MigrationOperationInput {
 /**
  * Database Migration Resource properties for SQL Managed Instance.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesSqlMi extends DatabaseMigrationProperties {
@@ -2891,6 +2890,7 @@ model OfflineConfiguration {
 /**
  * Database Migration Resource properties for SQL Virtual Machine.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseMigrationPropertiesSqlVm extends DatabaseMigrationProperties {
