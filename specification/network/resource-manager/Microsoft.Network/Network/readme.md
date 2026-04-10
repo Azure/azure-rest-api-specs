@@ -55,13 +55,6 @@ input-file:
   - stable/2025-07-01/virtualWan.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: networkManager.json
-    reason: provisioningState is correctly marked readOnly in CommitProperties definition. The linter does not follow $ref chains to verify readOnly in referenced schemas.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].get.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["200"].schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commits/{commitName}"].put.responses["201"].schema
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
