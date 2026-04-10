@@ -33,63 +33,63 @@ using Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AscOperation.properties);
 
-@@clientLocation(AmlFilesystems.get, "amlFilesystems");
-@@clientLocation(AmlFilesystems.createOrUpdate, "amlFilesystems");
+@@clientLocation(AmlFilesystems.get, "amlFilesystems", "!python");
+@@clientLocation(AmlFilesystems.createOrUpdate, "amlFilesystems", "!python");
 @@clientName(AmlFilesystems.createOrUpdate::parameters.resource,
   "amlFilesystem"
 );
-@@clientLocation(AmlFilesystems.update, "amlFilesystems");
+@@clientLocation(AmlFilesystems.update, "amlFilesystems", "!python");
 @@clientName(AmlFilesystems.update::parameters.properties, "amlFilesystem");
-@@clientLocation(AmlFilesystems.delete, "amlFilesystems");
-@@clientLocation(AmlFilesystems.listByResourceGroup, "amlFilesystems");
-@@clientLocation(AmlFilesystems.list, "amlFilesystems");
-@@clientLocation(AmlFilesystems.archive, "amlFilesystems");
+@@clientLocation(AmlFilesystems.delete, "amlFilesystems", "!python");
+@@clientLocation(AmlFilesystems.listByResourceGroup, "amlFilesystems", "!python");
+@@clientLocation(AmlFilesystems.list, "amlFilesystems", "!python");
+@@clientLocation(AmlFilesystems.archive, "amlFilesystems", "!python");
 @@clientName(AmlFilesystems.archive::parameters.body, "archiveInfo");
-@@clientLocation(AmlFilesystems.cancelArchive, "amlFilesystems");
+@@clientLocation(AmlFilesystems.cancelArchive, "amlFilesystems", "!python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AmlFilesystem.properties);
 
-@@clientLocation(AutoExportJobs.get, "autoExportJobs");
-@@clientLocation(AutoExportJobs.createOrUpdate, "autoExportJobs");
+@@clientLocation(AutoExportJobs.get, "autoExportJobs", "!python");
+@@clientLocation(AutoExportJobs.createOrUpdate, "autoExportJobs", "!python");
 @@clientName(AutoExportJobs.createOrUpdate::parameters.resource,
   "autoExportJob"
 );
-@@clientLocation(AutoExportJobs.update, "autoExportJobs");
+@@clientLocation(AutoExportJobs.update, "autoExportJobs", "!python");
 @@clientName(AutoExportJobs.update::parameters.properties, "autoExportJob");
-@@clientLocation(AutoExportJobs.delete, "autoExportJobs");
-@@clientLocation(AutoExportJobs.listByAmlFilesystem, "autoExportJobs");
+@@clientLocation(AutoExportJobs.delete, "autoExportJobs", "!python");
+@@clientLocation(AutoExportJobs.listByAmlFilesystem, "autoExportJobs", "!python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoExportJob.properties);
 
-@@clientLocation(ImportJobs.get, "importJobs");
-@@clientLocation(ImportJobs.createOrUpdate, "importJobs");
+@@clientLocation(ImportJobs.get, "importJobs", "!python");
+@@clientLocation(ImportJobs.createOrUpdate, "importJobs", "!python");
 @@clientName(ImportJobs.createOrUpdate::parameters.resource, "importJob");
-@@clientLocation(ImportJobs.update, "importJobs");
+@@clientLocation(ImportJobs.update, "importJobs", "!python");
 @@clientName(ImportJobs.update::parameters.properties, "importJob");
-@@clientLocation(ImportJobs.delete, "importJobs");
-@@clientLocation(ImportJobs.listByAmlFilesystem, "importJobs");
+@@clientLocation(ImportJobs.delete, "importJobs", "!python");
+@@clientLocation(ImportJobs.listByAmlFilesystem, "importJobs", "!python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImportJob.properties);
 
-@@clientLocation(AutoImportJobs.get, "autoImportJobs");
-@@clientLocation(AutoImportJobs.createOrUpdate, "autoImportJobs");
+@@clientLocation(AutoImportJobs.get, "autoImportJobs", "!python");
+@@clientLocation(AutoImportJobs.createOrUpdate, "autoImportJobs", "!python");
 @@clientName(AutoImportJobs.createOrUpdate::parameters.resource,
   "autoImportJob"
 );
-@@clientLocation(AutoImportJobs.update, "autoImportJobs");
+@@clientLocation(AutoImportJobs.update, "autoImportJobs", "!python");
 @@clientName(AutoImportJobs.update::parameters.properties, "autoImportJob");
-@@clientLocation(AutoImportJobs.delete, "autoImportJobs");
-@@clientLocation(AutoImportJobs.listByAmlFilesystem, "autoImportJobs");
+@@clientLocation(AutoImportJobs.delete, "autoImportJobs", "!python");
+@@clientLocation(AutoImportJobs.listByAmlFilesystem, "autoImportJobs", "!python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AutoImportJob.properties);
 
-@@clientLocation(ExpansionJobs.get, "expansionJobs");
-@@clientLocation(ExpansionJobs.createOrUpdate, "expansionJobs");
+@@clientLocation(ExpansionJobs.get, "expansionJobs", "!python");
+@@clientLocation(ExpansionJobs.createOrUpdate, "expansionJobs", "!python");
 @@clientName(ExpansionJobs.createOrUpdate::parameters.resource, "expansionJob");
-@@clientLocation(ExpansionJobs.update, "expansionJobs");
+@@clientLocation(ExpansionJobs.update, "expansionJobs", "!python");
 @@clientName(ExpansionJobs.update::parameters.properties, "expansionJob");
-@@clientLocation(ExpansionJobs.delete, "expansionJobs");
-@@clientLocation(ExpansionJobs.listByAmlFilesystem, "expansionJobs");
+@@clientLocation(ExpansionJobs.delete, "expansionJobs", "!python");
+@@clientLocation(ExpansionJobs.listByAmlFilesystem, "expansionJobs", "!python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpansionJob.properties);
 
