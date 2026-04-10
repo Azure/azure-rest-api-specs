@@ -8,7 +8,7 @@ namespace WebPubSubService {
   /**
    * The service is healthy.
    */
-  model GetServiceStatusOkResponse{
+  model GetServiceStatusOkResponse {
     /** The response status code */
     @statusCode code: 200;
   }
@@ -21,7 +21,10 @@ namespace WebPubSubService {
   @summary("Get service health status.")
   @route("/api/health")
   @head
-  op getServiceStatus is Azure.Core.Foundations.Operation<{}, GetServiceStatusOkResponse>;
+  op getServiceStatus is Azure.Core.Foundations.Operation<
+    {},
+    GetServiceStatusOkResponse
+  >;
 
   /**
    * Add filtered connections to multiple groups.
