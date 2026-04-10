@@ -35,6 +35,7 @@ model CreateAgentVersionRequest {
     }
   )
   @doc("The blueprint reference for the agent.")
+  @removed(Versions.v1)
   blueprint_reference?: AgentBlueprintReference;
 }
 
