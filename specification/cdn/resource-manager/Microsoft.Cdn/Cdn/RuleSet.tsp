@@ -34,20 +34,26 @@ interface RuleSets {
   /**
    * Creates a new rule set within the specified profile.
    */
+  @sharedRoute
   @put
-  create is Azure.ResourceManager.Legacy.CustomPatchAsync<
-    RuleSet,
-    PatchModel = void,
-    Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
+  create is Azure.ResourceManager.Legacy.CreateOperation<
+    ResourceInstanceParameters<
+      RuleSet,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<RuleSet>
+    >,
+    void,
+    ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>,
+    ErrorResponse
   >;
 
   /**
    * Updates an existing rule set within the specified profile.
    */
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  @sharedRoute
+  @put
+  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     RuleSet,
-    PatchModel = RuleSetProperties
+    PatchModel = void
   >;
 
   /**

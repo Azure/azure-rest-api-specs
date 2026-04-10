@@ -9,6 +9,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
+// Mark CustomDomains.create and RuleSets.create as ARM CreateOrUpdate operations
+// so that the SDK generator produces CreateOrUpdate methods
+@@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
+@@armResourceCreateOrUpdate(RuleSets.create, RuleSet);
+
 @@clientName(CertificateSourceParameters,
   "CertificateSourceParametersBase",
   "go"
