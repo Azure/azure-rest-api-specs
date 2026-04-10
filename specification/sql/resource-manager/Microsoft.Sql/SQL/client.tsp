@@ -106,8 +106,16 @@ using Microsoft.Sql;
   "current",
   "python"
 );
+@@alternateType(SensitivityLabelSourceAlias.sensitivityLabelSource,
+  "current",
+  "python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Legacy.clientDefaultValue(RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
+  "recommended",
+  "python"
+);
+@@alternateType(RecommendedSensitivityLabelSourceAlias.sensitivityLabelSource,
   "recommended",
   "python"
 );
@@ -116,8 +124,16 @@ using Microsoft.Sql;
   "default",
   "python"
 );
+@@alternateType(ServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Legacy.clientDefaultValue(DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(DatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );
@@ -126,8 +142,16 @@ using Microsoft.Sql;
   "default",
   "python"
 );
+@@alternateType(ExtendedDatabaseBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "To mitigate breaking change for legacy Python SDK"
 @@Legacy.clientDefaultValue(ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
+  "default",
+  "python"
+);
+@@alternateType(ExtendedServerBlobAuditingPolicyNameAlias.blobAuditingPolicyName,
   "default",
   "python"
 );
