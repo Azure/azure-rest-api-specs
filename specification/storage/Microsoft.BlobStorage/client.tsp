@@ -143,6 +143,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
+@@alternateType(HttpRangeString,
+  {
+    identity: "crate::models::HttpRange",
+  },
+  "rust"
+);
+
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");

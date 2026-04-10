@@ -14,6 +14,9 @@ namespace Storage.Blob;
 @encode(BytesKnownEncoding.base64)
 scalar base64Bytes extends bytes;
 
+/** Represents an HTTP range string for byte range operations. */
+scalar HttpRangeString extends string;
+
 /**
  * The error response.
  *
@@ -1773,7 +1776,7 @@ alias SourceContentCrc64Parameter = {
 alias SourceRangeParameter = {
   /** Bytes of source data in the specified range. */
   @header("x-ms-source-range")
-  sourceRange?: string;
+  sourceRange?: HttpRangeString;
 };
 
 /** The source URL parameter. */
@@ -2469,7 +2472,28 @@ alias IfNoneMatchParameter = {
 alias RangeParameter = {
   /** Return only the bytes of the blob in the specified range. */
   @header("Range")
-  range?: string;
+  range?: HttpRangeString;
+};
+
+/** The required range parameter for page blob operations. */
+alias PageRangeRequiredParameter = {
+  /** Bytes of data in the specified range. */
+  @header("Range")
+  range: HttpRangeString;
+};
+
+/** The required destination range parameter for page blob from URL operations. */
+alias DestinationRangeRequiredParameter = {
+  /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+  @header("x-ms-range")
+  range: HttpRangeString;
+};
+
+/** The required source range parameter for page blob from URL operations. */
+alias SourceRangeRequiredParameter = {
+  /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+  @header("x-ms-source-range")
+  sourceRange: HttpRangeString;
 };
 
 /** The version ID parameter. */
