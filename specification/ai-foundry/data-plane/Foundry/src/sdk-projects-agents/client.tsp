@@ -204,9 +204,29 @@ namespace Azure.AI.Projects {
   @@clientName(AgentVersionObject, "ProjectsAgentVersion");
 
   // --------------------------------------------------------------------------------
+  // Hide session opertaions, containing the foundry features
+  // --------------------------------------------------------------------------------
+
+  // Hide the protocol methods and methods using feature headers
+  @@access(Agents.createSession, Access.internal);
+  @@access(Agents.getSession, Access.internal);
+  @@access(Agents.getSession, Access.internal);
+  @@access(Agents.deleteSession, Access.internal);
+
+  // --------------------------------------------------------------------------------
   // Toolboxes sub‐client
   // --------------------------------------------------------------------------------
 
   @@clientName(ToolboxObject, "ToolboxRecord");
   @@clientName(ToolboxVersionObject, "ToolboxVersion");
+
+  // --------------------------------------------------------------------------------
+  // AgentSessionFiles sub‐client
+  // --------------------------------------------------------------------------------
+
+  // Hide the protocol methods and methods using feature headers
+  @@access(AgentSessionFiles.uploadSessionFile, Access.internal);
+  @@access(AgentSessionFiles.downloadSessionFile, Access.internal);
+  @@access(AgentSessionFiles.listSessionFiles, Access.internal);
+  @@access(AgentSessionFiles.deleteSessionFile, Access.internal);
 }
