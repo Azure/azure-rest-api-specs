@@ -1,5 +1,3 @@
-# Hero Scenarios — Guidelines
-
 ## Step 0 — Identify the Spec Surface
 
 1. List the files changed in the pull request using the GitHub API.
