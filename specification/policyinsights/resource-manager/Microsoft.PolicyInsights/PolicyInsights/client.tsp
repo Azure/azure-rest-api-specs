@@ -280,6 +280,7 @@ op policyEventsListQueryResultsForResource(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@list
 @override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition)
 op policyEventsListQueryResultsForPolicySetDefinition(
   ...ApiVersionParameter,
@@ -299,6 +300,8 @@ op policyEventsListQueryResultsForPolicySetDefinition(
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@list
+@post
 @override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition)
 op policyEventsListQueryResultsForPolicyDefinition(
   ...PolicyEventsListQueryResultsForPolicyDefinitionBaseParam,
