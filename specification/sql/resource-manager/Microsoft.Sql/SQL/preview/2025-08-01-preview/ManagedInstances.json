@@ -733,6 +733,127 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topdatabases": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Get top resource consuming databases of a managed instance.",
+        "operationId": "ManagedInstances_ListTopDatabasesByManagedInstance",
+        "parameters": [
+          {
+            "$ref": "./common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "numberOfDatabases",
+            "in": "query",
+            "description": "How many 'top databases' to return. Default is 5.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values. Default value is PT1H",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "QueryTimeGrainType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "aggregationFunction",
+            "in": "query",
+            "description": "Aggregation function to be used, default value is 'sum'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "sum"
+            ],
+            "x-ms-enum": {
+              "name": "AggregationFunctionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "observationMetric",
+            "in": "query",
+            "description": "Metric to be used for ranking top queries. Default is 'cpu'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "cpu",
+              "io",
+              "logIo",
+              "duration",
+              "dtu"
+            ],
+            "x-ms-enum": {
+              "name": "MetricType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "./common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved top consuming databases for managed instance.",
+            "schema": {
+              "$ref": "#/definitions/TopDatabasesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Obtain list of instance's top resource consuming databases. Minimal request and response.": {
+            "$ref": "./examples/ManagedInstanceTopDatabasesMin.json"
+          },
+          "Obtain list of instance's top resource consuming databases. Full-blown request and response.": {
+            "$ref": "./examples/ManagedInstanceTopDatabasesMax.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries": {
       "get": {
         "tags": [
@@ -842,7 +963,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -854,9 +975,6 @@
         "x-ms-examples": {
           "Obtain list of instance's top resource consuming queries. Minimal request and response.": {
             "$ref": "./examples/ManagedInstanceTopQueriesListMin.json"
-          },
-          "Obtain list of instance's top resource consuming queries.": {
-            "$ref": "./examples/ManagedInstanceTopQueriesList.json"
           },
           "Obtain list of instance's top resource consuming queries. Full-blown request and response.": {
             "$ref": "./examples/ManagedInstanceTopQueriesListMax.json"
@@ -923,6 +1041,25 @@
     }
   },
   "definitions": {
+    "DatabaseStatisticsProperties": {
+      "description": "Properties of a database consumption statistics.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "Database name of the database in which this query was executed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "intervals": {
+          "description": "List of intervals with appropriate metric data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetricIntervalV2"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "EndpointDependency": {
       "description": "A domain name that the managed instance service needs to communicate with, along with additional details.",
       "type": "object",
@@ -1566,7 +1703,7 @@
         }
       }
     },
-    "QueryMetricInterval": {
+    "QueryMetricIntervalV2": {
       "description": "Properties of a query metrics interval.",
       "type": "object",
       "properties": {
@@ -1598,13 +1735,13 @@
           "description": "List of metric objects for this interval",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QueryMetricProperties"
+            "$ref": "#/definitions/QueryMetricPropertiesV2"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "QueryMetricProperties": {
+    "QueryMetricPropertiesV2": {
       "description": "Properties of a topquery metric in one interval.",
       "type": "object",
       "properties": {
@@ -1671,7 +1808,7 @@
         }
       }
     },
-    "QueryStatisticsProperties": {
+    "QueryStatisticsPropertiesV2": {
       "description": "Properties of a query execution statistics.",
       "type": "object",
       "properties": {
@@ -1682,6 +1819,11 @@
         },
         "queryId": {
           "description": "Unique query id (unique within one database).",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryHash": {
+          "description": "Query Hash identifies query content",
           "type": "string",
           "readOnly": true
         },
@@ -1699,7 +1841,7 @@
           "description": "List of intervals with appropriate metric data",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QueryMetricInterval"
+            "$ref": "#/definitions/QueryMetricIntervalV2"
           },
           "x-ms-identifiers": []
         }
@@ -1791,6 +1933,77 @@
         }
       }
     },
+    "TopDatabases": {
+      "type": "object",
+      "properties": {
+        "numberOfDatabases": {
+          "format": "int32",
+          "description": "Requested number of top databases.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "aggregationFunction": {
+          "description": "Aggregation function used to calculate query metrics.",
+          "type": "string",
+          "readOnly": true
+        },
+        "observationMetric": {
+          "description": "Metric used to rank databases.",
+          "type": "string",
+          "readOnly": true
+        },
+        "intervalType": {
+          "description": "Interval type (length).",
+          "enum": [
+            "PT1H",
+            "P1D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryTimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The start time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "databases": {
+          "description": "List of top resource consuming databases with appropriate metric data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseStatisticsProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TopDatabasesListResult": {
+      "description": "A list of top resource consuming databases on managed instance",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopDatabases"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "TopQueries": {
       "type": "object",
       "properties": {
@@ -1837,7 +2050,7 @@
           "description": "List of top resource consuming queries with appropriate metric data",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/QueryStatisticsProperties"
+            "$ref": "#/definitions/QueryStatisticsPropertiesV2"
           },
           "x-ms-identifiers": []
         }
