@@ -161,7 +161,8 @@ interface DatabaseMigrationSqlDbs {
     DatabaseMigrationSqlDb,
     MigrationOperationInput,
     DatabaseMigrationSqlDb,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlDb> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: DatabaseMigrationSqlDb;
     }
