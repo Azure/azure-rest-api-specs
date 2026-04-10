@@ -14,14 +14,6 @@ using Microsoft.Sql;
   "java"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ProxyResource,
-  "commonProxyResource",
-  "javascript"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.Resource,
-  "CommonResource",
-  "javascript"
-);
 @@clientName(Microsoft.Sql, "SqlManagementClient", "java,javascript,python");
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
