@@ -45,10 +45,13 @@ model SovereignViewPolicyInitiativeDetail {
     }
   ]>;
 
+  @doc("The compliance dimension associated with the policy initiative.")
+  dimension: ComplianceDimension;
+
   @doc("The policy assignment ids created for the policy initiative.")
   policyAssignmentIds?: armResourceIdentifier<[
     {
-      type: "Microsoft.Authorization/policyassignments";
+      type: "Microsoft.Authorization/policyAssignments";
     }
   ]>[];
 
@@ -59,6 +62,24 @@ model SovereignViewPolicyInitiativeDetail {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters vary based on the selected policy initiatives."
   @doc("The parameters for the assignment of policy initiatives.")
   assignmentParameters: Record<unknown>;
+}
+
+@added(Versions.Preview20260315)
+@doc("The compliance dimension to be associated with the policy initiative.")
+union ComplianceDimension {
+  @doc("Data residency compliance dimension.")
+  DataResidency: "DataResidency",
+
+  @doc("Encryption at rest compliance dimension.")
+  EncryptionAtRest: "EncryptionAtRest",
+
+  @doc("Encryption in transit compliance dimension.")
+  EncryptionInTransit: "EncryptionInTransit",
+
+  @doc("Encryption in use compliance dimension.")
+  EncryptionInUse: "EncryptionInUse",
+
+  string,
 }
 
 @added(Versions.Preview20260315)
@@ -77,9 +98,9 @@ model SovereignViewComplianceSummaryResponse {
   @doc("The overall summary of compliance across all resources in scope.")
   overallSummary: SovereignViewComplianceOverallSummary;
 
-  @doc("The list of compliance summaries for the policy initiatives in scope.")
-  @identifiers(#["policyInitiativeId"])
-  policyInitiativeSummaries: SovereignViewComplianceInitiativeSummary[];
+  @doc("The list of compliance summaries for the dimensions in scope.")
+  @identifiers(#["dimension"])
+  dimensionSummaries: SovereignViewComplianceDimensionSummary[];
 }
 
 @added(Versions.Preview20260315)
@@ -108,14 +129,10 @@ model SovereignViewComplianceOverallSummary {
 }
 
 @added(Versions.Preview20260315)
-@doc("The compliance summary for a specific dimension (policy initiative) in the sovereign view compliance summary action.")
-model SovereignViewComplianceInitiativeSummary {
-  @doc("The fully qualified id of the policy initiative.")
-  policyInitiativeId: armResourceIdentifier<[
-    {
-      type: "Microsoft.Authorization/policySetDefinitions";
-    }
-  ]>;
+@doc("The compliance summary for a specific dimension in the sovereign view compliance summary action.")
+model SovereignViewComplianceDimensionSummary {
+  @doc("The dimension representing this summary.")
+  dimension: ComplianceDimension;
 
   @doc("Total number of resources for the sovereign view.")
   totalResources: int32;
@@ -139,9 +156,9 @@ model SovereignViewComplianceDetailsRequest {
   @doc("The resources to skip when the results are returned. Used for pagination.")
   skip?: int32;
 
-  @doc("The filters for policy initiatives and their states to apply when querying for compliance details.")
-  @identifiers(#["initiativeId"])
-  policyInitiatives?: SovereignViewComplianceDetailsPolicyInitiativeFilter[];
+  @doc("The filters for compliance dimensions and their states to apply when querying for compliance details.")
+  @identifiers(#["dimension"])
+  complianceDimensions?: SovereignViewComplianceDetailsDimensionFilter[];
 
   @doc("The filters to apply when querying for compliance details.")
   @identifiers(#["field", "operator"])
@@ -149,17 +166,16 @@ model SovereignViewComplianceDetailsRequest {
 
   @doc("The sorting to apply when querying for compliance details.")
   sort?: SovereignViewComplianceDetailsSort;
+
+  @doc("The search to apply when querying for compliance details.")
+  search?: SovereignViewComplianceDetailsSearch;
 }
 
 @added(Versions.Preview20260315)
-@doc("The filter for compliance details based on policy initiatives and their states.")
-model SovereignViewComplianceDetailsPolicyInitiativeFilter {
-  @doc("The fully qualified id of the policy initiative.")
-  initiativeId: armResourceIdentifier<[
-    {
-      type: "Microsoft.Authorization/policySetDefinitions";
-    }
-  ]>;
+@doc("The filter for compliance details based on compliance dimensions and their states.")
+model SovereignViewComplianceDetailsDimensionFilter {
+  @doc("The compliance dimension to filter on.")
+  dimension: ComplianceDimension;
 
   @doc("The compliance states to optionally filter on.")
   states?: PolicyComplianceState[];
@@ -174,14 +190,8 @@ union PolicyComplianceState {
   @doc("The resource is not compliant with respect to the given policy.")
   NonCompliant: "NonCompliant",
 
-  @doc("The resource is exempt from the given policy.")
-  Exempt: "Exempt",
-
-  @doc("There is a conflict with the given policy.")
-  Conflict: "Conflict",
-
-  @doc("The compliance state of the resource is unknown.")
-  Unknown: "Unknown",
+  @doc("The resource is in a compliance state other than compliant or non-compliant.")
+  Others: "Others",
 
   string,
 }
@@ -231,6 +241,16 @@ union SovereignViewComplianceDetailsSortDirections {
 }
 
 @added(Versions.Preview20260315)
+@doc("Search field and query for Sovereign View Compliance details.")
+model SovereignViewComplianceDetailsSearch {
+  @doc("The field to search on.")
+  field: string;
+
+  @doc("The value to search for in the specified field.")
+  value: string;
+}
+
+@added(Versions.Preview20260315)
 @doc("The response for the sovereign view compliance details action.")
 model SovereignViewComplianceDetailsResponse {
   @doc("The time when compliance was last evaluated overall, in RFC3339 format.")
@@ -254,13 +274,16 @@ model SovereignViewComplianceDetailResource {
   location: string;
 
   @doc("The compliance details for the resource.")
-  @identifiers(#["policyInitiativeId"])
+  @identifiers(#["dimension", "policyInitiativeId"])
   complianceDetails: SovereignViewComplianceDetail[];
 }
 
 @added(Versions.Preview20260315)
 @doc("A compliance detail item for a resource in the sovereign view compliance details action.")
 model SovereignViewComplianceDetail {
+  @doc("The compliance dimension for the compliance detail.")
+  dimension: ComplianceDimension;
+
   @doc("The fully qualified id of the policy initiative.")
   policyInitiativeId: armResourceIdentifier<[
     {

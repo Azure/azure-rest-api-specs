@@ -2242,6 +2242,42 @@
       },
       "readOnly": true
     },
+    "ComplianceDimension": {
+      "type": "string",
+      "description": "The compliance dimension to be associated with the policy initiative.",
+      "enum": [
+        "DataResidency",
+        "EncryptionAtRest",
+        "EncryptionInTransit",
+        "EncryptionInUse"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceDimension",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataResidency",
+            "value": "DataResidency",
+            "description": "Data residency compliance dimension."
+          },
+          {
+            "name": "EncryptionAtRest",
+            "value": "EncryptionAtRest",
+            "description": "Encryption at rest compliance dimension."
+          },
+          {
+            "name": "EncryptionInTransit",
+            "value": "EncryptionInTransit",
+            "description": "Encryption in transit compliance dimension."
+          },
+          {
+            "name": "EncryptionInUse",
+            "value": "EncryptionInUse",
+            "description": "Encryption in use compliance dimension."
+          }
+        ]
+      }
+    },
     "CreateCopyRequest": {
       "type": "object",
       "description": "The request for the create copy action of landing zone configuration.",
@@ -3499,9 +3535,7 @@
       "enum": [
         "Compliant",
         "NonCompliant",
-        "Exempt",
-        "Conflict",
-        "Unknown"
+        "Others"
       ],
       "x-ms-enum": {
         "name": "PolicyComplianceState",
@@ -3518,19 +3552,9 @@
             "description": "The resource is not compliant with respect to the given policy."
           },
           {
-            "name": "Exempt",
-            "value": "Exempt",
-            "description": "The resource is exempt from the given policy."
-          },
-          {
-            "name": "Conflict",
-            "value": "Conflict",
-            "description": "There is a conflict with the given policy."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The compliance state of the resource is unknown."
+            "name": "Others",
+            "value": "Others",
+            "description": "The resource is in a compliance state other than compliant or non-compliant."
           }
         ]
       }
@@ -3628,6 +3652,10 @@
       "type": "object",
       "description": "A compliance detail item for a resource in the sovereign view compliance details action.",
       "properties": {
+        "dimension": {
+          "$ref": "#/definitions/ComplianceDimension",
+          "description": "The compliance dimension for the compliance detail."
+        },
         "policyInitiativeId": {
           "type": "string",
           "format": "arm-id",
@@ -3651,6 +3679,7 @@
         }
       },
       "required": [
+        "dimension",
         "policyInitiativeId",
         "policyState"
       ]
@@ -3678,6 +3707,7 @@
             "$ref": "#/definitions/SovereignViewComplianceDetail"
           },
           "x-ms-identifiers": [
+            "dimension",
             "policyInitiativeId"
           ]
         }
@@ -3686,6 +3716,26 @@
         "resourceId",
         "location",
         "complianceDetails"
+      ]
+    },
+    "SovereignViewComplianceDetailsDimensionFilter": {
+      "type": "object",
+      "description": "The filter for compliance details based on compliance dimensions and their states.",
+      "properties": {
+        "dimension": {
+          "$ref": "#/definitions/ComplianceDimension",
+          "description": "The compliance dimension to filter on."
+        },
+        "states": {
+          "type": "array",
+          "description": "The compliance states to optionally filter on.",
+          "items": {
+            "$ref": "#/definitions/PolicyComplianceState"
+          }
+        }
+      },
+      "required": [
+        "dimension"
       ]
     },
     "SovereignViewComplianceDetailsFilterOperators": {
@@ -3732,34 +3782,6 @@
         "value"
       ]
     },
-    "SovereignViewComplianceDetailsPolicyInitiativeFilter": {
-      "type": "object",
-      "description": "The filter for compliance details based on policy initiatives and their states.",
-      "properties": {
-        "initiativeId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The fully qualified id of the policy initiative.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Authorization/policySetDefinitions"
-              }
-            ]
-          }
-        },
-        "states": {
-          "type": "array",
-          "description": "The compliance states to optionally filter on.",
-          "items": {
-            "$ref": "#/definitions/PolicyComplianceState"
-          }
-        }
-      },
-      "required": [
-        "initiativeId"
-      ]
-    },
     "SovereignViewComplianceDetailsRequest": {
       "type": "object",
       "description": "The request for the sovereign view compliance details action.",
@@ -3774,14 +3796,14 @@
           "format": "int32",
           "description": "The resources to skip when the results are returned. Used for pagination."
         },
-        "policyInitiatives": {
+        "complianceDimensions": {
           "type": "array",
-          "description": "The filters for policy initiatives and their states to apply when querying for compliance details.",
+          "description": "The filters for compliance dimensions and their states to apply when querying for compliance details.",
           "items": {
-            "$ref": "#/definitions/SovereignViewComplianceDetailsPolicyInitiativeFilter"
+            "$ref": "#/definitions/SovereignViewComplianceDetailsDimensionFilter"
           },
           "x-ms-identifiers": [
-            "initiativeId"
+            "dimension"
           ]
         },
         "filters": {
@@ -3798,6 +3820,10 @@
         "sort": {
           "$ref": "#/definitions/SovereignViewComplianceDetailsSort",
           "description": "The sorting to apply when querying for compliance details."
+        },
+        "search": {
+          "$ref": "#/definitions/SovereignViewComplianceDetailsSearch",
+          "description": "The search to apply when querying for compliance details."
         }
       },
       "required": [
@@ -3833,6 +3859,24 @@
         "lastEvaluated",
         "totalResources",
         "resources"
+      ]
+    },
+    "SovereignViewComplianceDetailsSearch": {
+      "type": "object",
+      "description": "Search field and query for Sovereign View Compliance details.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The field to search on."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to search for in the specified field."
+        }
+      },
+      "required": [
+        "field",
+        "value"
       ]
     },
     "SovereignViewComplianceDetailsSort": {
@@ -3877,21 +3921,13 @@
         ]
       }
     },
-    "SovereignViewComplianceInitiativeSummary": {
+    "SovereignViewComplianceDimensionSummary": {
       "type": "object",
-      "description": "The compliance summary for a specific dimension (policy initiative) in the sovereign view compliance summary action.",
+      "description": "The compliance summary for a specific dimension in the sovereign view compliance summary action.",
       "properties": {
-        "policyInitiativeId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The fully qualified id of the policy initiative.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Authorization/policySetDefinitions"
-              }
-            ]
-          }
+        "dimension": {
+          "$ref": "#/definitions/ComplianceDimension",
+          "description": "The dimension representing this summary."
         },
         "totalResources": {
           "type": "integer",
@@ -3915,7 +3951,7 @@
         }
       },
       "required": [
-        "policyInitiativeId",
+        "dimension",
         "totalResources",
         "compliantCount",
         "nonCompliantCount",
@@ -3997,14 +4033,14 @@
           "$ref": "#/definitions/SovereignViewComplianceOverallSummary",
           "description": "The overall summary of compliance across all resources in scope."
         },
-        "policyInitiativeSummaries": {
+        "dimensionSummaries": {
           "type": "array",
-          "description": "The list of compliance summaries for the policy initiatives in scope.",
+          "description": "The list of compliance summaries for the dimensions in scope.",
           "items": {
-            "$ref": "#/definitions/SovereignViewComplianceInitiativeSummary"
+            "$ref": "#/definitions/SovereignViewComplianceDimensionSummary"
           },
           "x-ms-identifiers": [
-            "policyInitiativeId"
+            "dimension"
           ]
         }
       },
@@ -4012,7 +4048,7 @@
         "resourceId",
         "lastEvaluated",
         "overallSummary",
-        "policyInitiativeSummaries"
+        "dimensionSummaries"
       ]
     },
     "SovereignViewPolicyInitiativeDetail": {
@@ -4031,6 +4067,10 @@
             ]
           }
         },
+        "dimension": {
+          "$ref": "#/definitions/ComplianceDimension",
+          "description": "The compliance dimension associated with the policy initiative."
+        },
         "policyAssignmentIds": {
           "type": "array",
           "description": "The policy assignment ids created for the policy initiative.",
@@ -4041,7 +4081,7 @@
             "x-ms-arm-id-details": {
               "allowedResources": [
                 {
-                  "type": "Microsoft.Authorization/policyassignments"
+                  "type": "Microsoft.Authorization/policyAssignments"
                 }
               ]
             }
@@ -4059,6 +4099,7 @@
       },
       "required": [
         "policyInitiativeId",
+        "dimension",
         "policyVersion",
         "assignmentParameters"
       ]
