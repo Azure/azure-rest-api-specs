@@ -274,6 +274,15 @@ using Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
+// Beta Agents sub-client
+// --------------------------------------------------------------------------------
+
+// Make this method internal, since it's patched with a new one that supports either binary or file-path input
+@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
+@@usage(SessionFileWriteResponse, Usage.output);
+@@access(SessionFileWriteResponse, Access.public);
+
+// --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
