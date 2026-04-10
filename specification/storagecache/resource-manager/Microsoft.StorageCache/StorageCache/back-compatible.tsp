@@ -113,7 +113,9 @@ using Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(StorageTarget.properties);
 
+@@clientLocation(checkAmlFSSubnets, "Management", "go");
 @@clientName(checkAmlFSSubnets, "checkAmlFSSubnets");
+@@clientLocation(getRequiredAmlFSSubnetsSize, "Management", "go");
 @@clientName(getRequiredAmlFSSubnetsSize, "getRequiredAmlFSSubnetsSize");
 
 @@clientLocation(SkusOperationGroup.list, "Skus");
