@@ -127,7 +127,3 @@ using TypeSpec.Versioning;
   "autorest"
 );
 
-// Remove summarizedGatewayPrefixes from Vmss output — this property is only applicable to 2025-07-01+
-@@removed(VirtualNetworkPropertiesFormat.summarizedGatewayPrefixes,
-  Microsoft.Compute.Versions.v2018_10_01
-);
