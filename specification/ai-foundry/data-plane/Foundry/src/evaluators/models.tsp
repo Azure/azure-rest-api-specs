@@ -47,6 +47,9 @@ union EvaluatorDefinitionType {
 
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
+
+  @doc("Scenario-based definition that generates evaluation artifacts (rubric catalog or taxonomy) from context inputs. When category is 'quality', generates a rubric catalog with scored criteria. When category is 'safety', generates a taxonomy with risk sub-behaviors.")
+  scenario: "scenario",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
@@ -80,6 +83,57 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("The prompt text used for evaluation")
   prompt_text: string;
+}
+
+@doc("Context input for scenario-based evaluator generation")
+model ContextInput {
+  @doc("Type of context input: agent_prompt, policy_document, trace_file, or supplementary_text")
+  type: string;
+
+  @doc("Content of the context input (inline text or file reference)")
+  content: string;
+}
+
+@doc("A single rubric criterion with scoring descriptions")
+model RubricCriterion {
+  @doc("Name of the criterion (e.g., 'task_adherence', 'accuracy')")
+  name: string;
+
+  @doc("Description of what this criterion measures")
+  description: string;
+
+  @doc("Relative weight of this criterion in the overall score")
+  weight: float32;
+
+  @doc("Scoring rubric: maps score levels (1-5) to descriptions")
+  scoring: Record<string>;
+
+  @doc("Applicability guidance: when to apply and when not to apply this criterion")
+  applicability_guidance?: string;
+
+  @doc("Whether this criterion is always scored on every case (true for sink criteria)")
+  always_on?: boolean;
+}
+
+@doc("Scenario-based evaluator definition that generates evaluation artifacts from context inputs. The category field on the evaluator determines the pipeline: 'quality' generates a rubric catalog, 'safety' generates a taxonomy.")
+model ScenarioBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.scenario;
+
+  @doc("Context inputs used to generate the evaluation artifacts (agent prompt, policies, traces, supplementary text)")
+  context_inputs?: ContextInput[];
+
+  @doc("Generated evaluation spec describing what to evaluate (read-only, set by service)")
+  @visibility(Lifecycle.Read)
+  spec?: string;
+
+  @doc("Generated rubric catalog with scored criteria (populated when category is 'quality')")
+  rubric_catalog?: RubricCriterion[];
+
+  @doc("ID of the generated or linked taxonomy (populated when category is 'safety')")
+  taxonomy_id?: string;
+
+  @doc("Version of the linked taxonomy")
+  taxonomy_version?: string;
 }
 
 @doc("Evaluator Definition")
