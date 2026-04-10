@@ -37,7 +37,7 @@ interface PrivateLinkResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("PrivateLinks_Head")
-  head is ArmResourceCheckExistence<PrivateLinkResource>;
+  head is ArmResourceCheckExistence<PrivateLinkResource, Response = OkResponse>;
 
   /**
    * Create a private link resource. This operation creates the necessary infrastructure to enable private endpoint connections to Microsoft Defender for Cloud services. For updates to existing resources, use the PATCH operation. The operation is asynchronous and may take several minutes to complete.

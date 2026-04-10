@@ -85,5 +85,3 @@ model PrivateLinkUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
-
-

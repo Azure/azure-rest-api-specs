@@ -49,24 +49,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/privateLinks/{privateLinkName}'].head.tags__added` | added | `["PrivateLinkResources"]` |
 
-### Changes for `200`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/privateLinks/{privateLinkName}'].head.responses.200__deleted` | deleted | `{"description":"ignore"}` |
-
-### Changes for `204`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/privateLinks/{privateLinkName}'].head.responses.204__added` | added | `{"description":"ignore"}` |
-
-### Changes for `404`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Security/privateLinks/{privateLinkName}'].head.responses.404__added` | added | `{"description":"ignore"}` |
-
 ### Changes for `PrivateEndpointConnectionListResult`
 
 | Path | Change Type | Value |
