@@ -100,6 +100,11 @@ op encrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The key version should be specified when encrypting and retained to use the same key version when decrypting. You can pass an empty string to use the latest version but should still retain the version used or potentially be locked out of your data after the key is rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
@@ -137,6 +142,11 @@ op decrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "Use the same key version used when encrypting. You can pass an empty string to use the latest version but may not retrieve the plaintext that was encrypted if using a different version after the key was rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
@@ -174,6 +184,11 @@ op sign is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The key version should be specified when signing and retained to use the same key version when verifying. You can pass an empty string to use the latest version but should still retain the version used or will not be able to verify the signature after the key is rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
@@ -211,6 +226,11 @@ op verify is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "Use the same key version used when signing. You can pass an empty string to use the latest version but may not validate a signature that was signed if using a different version after the key was rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
@@ -248,6 +268,11 @@ op wrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The key version should be specified when wrapping a key and retained to use the same key version when unwrapping. You can pass an empty string to use the latest version but should still retain the version used or potentially be locked out of your data after the key is rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
@@ -285,6 +310,11 @@ op unwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "Use the same key version used when wrapping a key. You can pass an empty string to use the latest version but may not retrieve the data encrypt key that was wrapped if using a different version after the key was rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
@@ -324,6 +354,11 @@ op secureWrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The key version should be specified when wrapping a key and retained to use the same key version when unwrapping. You can pass an empty string to use the latest version but should still retain the version used or potentially be locked out of your data after the key is rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
@@ -364,6 +399,11 @@ op secureUnwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "Use the same key version used when wrapping a key. You can pass an empty string to use the latest version but may not retrieve the data encrypt key that was wrapped if using a different version after the key was rotated.",
+      DocumentationMode.append,
+      "rust"
+    )
     @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
