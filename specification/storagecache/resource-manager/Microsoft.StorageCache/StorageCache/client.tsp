@@ -88,3 +88,8 @@ using Microsoft.StorageCache;
 );
 @@clientName(NfsAccessRule.anonymousUID, "anonymousUid", "java");
 @@clientName(NfsAccessRule.anonymousGID, "anonymousGid", "java");
+@@clientName(getRequiredAmlFSSubnetsSize::parameters.body,
+  "requiredAmlFilesystemSubnetsSizeInfo",
+  "java"
+);
+
