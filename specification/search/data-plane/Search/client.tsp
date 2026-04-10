@@ -4,6 +4,7 @@ import "./main.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Search;
 
 @TypeSpec.Versioning.useDependency(
@@ -99,6 +100,10 @@ namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op listIndexes is Search.Indexes.list;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listIndexesWithSelectedProperties is Search.Indexes.listWithSelectedProperties;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -349,6 +354,120 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(RemoteSharePointKnowledgeSource, Usage.input);
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
+// .NET specific customizations
+@@access(AnalyzeResult, Access.internal, "csharp");
+@@access(AzureActiveDirectoryApplicationCredentials, Access.internal, "csharp");
+@@alternateType(AzureMachineLearningSkill.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
+@@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
+@@access(DataSourceCredentials, Access.internal, "csharp");
+@@alternateType(Search.DocumentExtractionSkill.dataToExtract,
+  BlobIndexerDataToExtract,
+  "csharp"
+);
+@@alternateType(Search.DocumentExtractionSkill.parsingMode,
+  BlobIndexerParsingMode,
+  "csharp"
+);
+@@access(EdgeNGramTokenFilterV2, Access.internal, "csharp");
+@@clientName(EdgeNGramTokenFilterV2,
+  "InternalEdgeNGramTokenFilterV2",
+  "csharp"
+);
+@@access(EdgeNGramTokenFilter, Access.internal, "csharp");
+@@clientName(EdgeNGramTokenFilter, "InternalEdgeNGramTokenFilter", "csharp");
+@@clientName(EntityRecognitionSkillV3, "EntityRecognitionSkill", "csharp");
+@@clientName(IndexerCurrentState, "IndexerState", "csharp");
+@@clientName(IndexerCurrentState.resetDatasourceDocumentIds,
+  "ResetDataSourceDocumentIds",
+  "csharp"
+);
+@@clientName(IndexingMode.IndexingAllDocs, "AllDocuments", "csharp");
+@@clientName(IndexingMode.IndexingResetDocs, "ResetDocuments", "csharp");
+@@access(KeyPhraseExtractionSkill.modelVersion, Access.internal, "csharp");
+@@alternateType(KnowledgeBase.eTag, eTag, "csharp");
+@@alternateType(KnowledgeSource.eTag, eTag, "csharp");
+@@access(LanguageDetectionSkill.modelVersion, Access.internal, "csharp");
+@@clientName(LengthTokenFilter.min, "MinLength", "csharp");
+@@clientName(LengthTokenFilter.max, "MaxLength", "csharp");
+@@access(ListDataSourcesResult, Access.internal, "csharp");
+@@access(ListIndexersResult, Access.internal, "csharp");
+@@access(ListIndexesResult, Access.internal, "csharp");
+@@access(ListIndexStatsSummary, Access.internal, "csharp");
+@@access(ListSkillsetsResult, Access.internal, "csharp");
+@@access(ListSynonymMapsResult, Access.internal, "csharp");
+@@access(LuceneStandardTokenizer, Access.internal, "csharp");
+@@clientName(LuceneStandardTokenizer,
+  "DeprecatedLuceneStandardTokenizer",
+  "csharp"
+);
+@@clientName(LuceneStandardTokenizerV2, "LuceneStandardTokenizer", "csharp");
+@@clientName(PIIDetectionSkill, "PiiDetectionSkill", "csharp");
+@@clientName(RegexFlags, "RegexFlag", "csharp");
+@@clientName(SkillNames, "ResetSkillsOptions", "csharp");
+@@alternateType(SearchIndexer.eTag, eTag, "csharp");
+@@alternateType(SearchIndexerSkillset.eTag, eTag, "csharp");
+@@clientName(SearchIndexerKnowledgeStore, "KnowledgeStore", "csharp");
+@@clientName(SearchIndexerKnowledgeStoreBlobProjectionSelector,
+  "KnowledgeStoreStorageProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreProjection,
+  "KnowledgeStoreProjection",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreFileProjectionSelector,
+  "KnowledgeStoreFileProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreObjectProjectionSelector,
+  "KnowledgeStoreObjectProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreProjectionSelector,
+  "KnowledgeStoreProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreTableProjectionSelector,
+  "KnowledgeStoreTableProjectionSelector",
+  "csharp"
+);
+@@clientName(ResourceCounter, "SearchResourceCounter", "csharp");
+@@clientName(SemanticPrioritizedFields.prioritizedContentFields,
+  "ContentFields",
+  "csharp"
+);
+@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
+  "KeywordsFields",
+  "csharp"
+);
+@@alternateType(WebApiSkill.authResourceId, armResourceIdentifier, "csharp");
+@@alternateType(WebApiVectorizerParameters.authResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@clientName(AutocompleteResult, "AutocompleteResults", "csharp");
+@@access(IndexAction, Access.internal, "csharp");
+@@access(IndexAction, Access.internal, "csharp");
+@@access(IndexBatch, Access.internal, "csharp");
+@@clientName(IndexBatch, "IndexBatch", "csharp");
+@@clientName(IndexingResult.statusCode, "Status", "csharp");
+@@clientName(DocumentKeysOrIds, "ResetDocumentOptions", "csharp");
+@@clientName(DocumentKeysOrIds.datasourceDocumentIds,
+  "DataSourceDocumentIds",
+  "csharp"
+);
+@@access(SearchDocumentsResult, Access.internal, "csharp");
+@@access(SearchResult, Access.internal, "csharp");
+@@access(SuggestDocumentsResult, Access.internal, "csharp");
+@@access(SuggestResult, Access.internal, "csharp");
+// end of .NET specific customizations
+
 @@access(SearchClient.searchGet, Access.internal);
 @@access(SearchClient.searchPost, Access.internal);
 @@clientName(SearchClient.searchPost, "search", "java");
@@ -381,6 +500,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.deleteIndex, Access.internal, "python");
 @@access(SearchIndexClient.analyze, Access.internal, "python");
 @@access(SearchIndexClient.getStatistics, Access.internal, "python");
+@@access(SearchIndexClient.listIndexes, Access.internal, "python");
+@@access(SearchIndexClient.listIndexesWithSelectedProperties,
+  Access.internal,
+  "python"
+);
 @@access(SearchIndexClient.createOrUpdateAlias, Access.internal);
 @@access(SearchIndexClient.deleteAlias, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateKnowledgeBase, Access.internal);
@@ -686,6 +810,10 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientName(Search.BlobIndexerPDFTextRotationAlgorithm,
+  "BlobIndexerPdfTextRotationAlgorithm",
+  "csharp"
+);
 @@clientNamespace(Search.IndexerExecutionEnvironment,
   "Azure.Search.Documents.Indexes"
 );
@@ -824,6 +952,8 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientName(Search.OcrSkillLanguage.`is`, "IsEnum", "python");
+@@clientName(Search.ScoringStatistics.Global, "GlobalEnum", "python");
 @@clientNamespace(Search.OcrLineEnding, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.OcrLineEnding,
   "com.azure.search.documents.indexes",
@@ -858,11 +988,26 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.SentimentSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SentimentSkillLanguage,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.SplitSkillLanguage, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SplitSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientName(Search.SplitSkillLanguage.`is`, "IsEnum", "python");
 @@clientNamespace(Search.TextSplitMode, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.TextSplitMode,
   "com.azure.search.documents.indexes",
@@ -894,6 +1039,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientName(Search.TextTranslationSkillLanguage.`is`, "IsEnum", "python");
 @@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputMode,
   "Azure.Search.Documents.Indexes"
 );
@@ -1266,6 +1412,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(Search.ListSynonymMapsResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndex, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndex,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.SearchIndexResponse, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexResponse,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2467,6 +2618,9 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchClient.count, "getDocumentCount");
 @@clientName(SearchClient.get, "getDocument");
 @@clientName(SearchIndexClient.listIndexes, "listIndexes");
+@@clientName(SearchIndexClient.listIndexesWithSelectedProperties,
+  "listIndexesWithSelectedProperties"
+);
 @@clientName(SearchIndexClient.getIndex, "getIndex");
 @@clientName(SearchIndexClient.getStatistics, "getIndexStatistics");
 @@clientName(SearchIndexClient.deleteIndex, "deleteIndex");
@@ -2535,7 +2689,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset");
 
 @@clientName(VectorQuery.k, "kNearestNeighbors");
-@@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp");
+@@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
 @@clientName(SearchDocumentsResult.value, "results");
 @@clientName(SearchRequest.count, "includeTotalCount");
 @@clientName(SearchRequest.highlight, "highlightFields");
@@ -2608,6 +2762,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchServiceLimits.maxStoragePerIndex,
   "maxStoragePerIndexInBytes"
 );
+@@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "csharp");
 @@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
 @@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
 @@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip");
@@ -2626,8 +2781,24 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(AzureOpenAIVectorizer.azureOpenAIParameters, "parameters");
 @@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl");
-@@clientName(AzureOpenAIVectorizerParameters.deploymentId, "deploymentName");
+@@clientName(AzureOpenAIVectorizerParameters.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(AzureOpenAIVectorizerParameters.deploymentId,
+  "deploymentName",
+  "!javascript"
+);
+@@clientName(AzureOpenAIVectorizerParameters.authIdentity,
+  "authenticationIdentity",
+  "csharp"
+);
+@@clientName(AzureOpenAIVectorizerParameters.deploymentId,
+  "deploymentName",
+  "csharp"
+);
 @@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters");
+@@clientName(WebApiVectorizer.customWebApiParameters, "parameters", "csharp");
 @@clientName(WebApiVectorizerParameters.uri, "url", "python");
 @@clientName(WebApiVectorizerParameters.uri, "url", "java");
 @@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
@@ -2664,6 +2835,10 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexerSkill.`@odata.type`, "odataType");
 @@clientName(SearchIndexerSkill.`@odata.type`, "odatatype", "javascript");
+@@clientName(ContentUnderstandingSkill.`@odata.type`,
+  "odatatype",
+  "javascript"
+);
 @@clientName(CognitiveServicesAccount.`@odata.type`, "odataType");
 @@clientName(CognitiveServicesAccount.`@odata.type`, "odatatype", "javascript");
 @@clientName(LexicalAnalyzer.`@odata.type`, "odataType");
@@ -2721,6 +2896,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odatatype", "javascript");
+@@clientName(Search.ChatCompletionSkill.`@odata.type`,
+  "odatatype",
+  "javascript"
+);
 @@clientName(CjkBigramTokenFilter.`@odata.type`, "odataType");
 @@clientName(CjkBigramTokenFilter.`@odata.type`, "odatatype", "javascript");
 @@clientName(CommonGramTokenFilter.`@odata.type`, "odataType");
@@ -2900,6 +3079,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
+@@clientName(ListIndexStatsSummary.value, "indexesStatistics", "javascript"); //TODO: verify casing
+@@clientName(RankingOrder.RerankerScore, "reRankerScore", "csharp");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "csharp");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "javascript");
 @@clientName(Search.ClassicSimilarityAlgorithm, "ClassicSimilarity", "csharp");
@@ -2911,8 +3092,38 @@ namespace KnowledgeBaseRetrievalClient {
   "CommonModelParameters",
   "javascript"
 );
+@@clientName(Search.ChatCompletionCommonModelParameters.modelName,
+  "model",
+  "javascript"
+);
 @@clientName(Search.SearchServiceCounters, "ServiceCounters", "javascript");
 @@clientName(Search.SearchServiceLimits, "ServiceLimits", "javascript");
+@@clientName(Search.SearchAlias.eTag, "etag", "javascript");
+@@clientName(Search.RankingOrder.RerankerScore, "ReRankerScore", "javascript");
+@@clientName(Search.ChatCompletionResponseFormat.jsonSchemaProperties,
+  "chatCompletionSchemaProperties",
+  "javascript"
+);
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsVitBasePatch32,
+  "OpenAIClipImageTextEmbeddingsVitBasePatch32",
+  "javascript"
+);
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+  "OpenAIClipImageTextEmbeddingsViTLargePatch14336",
+  "javascript"
+);
+@@alternateType(Search.SearchOptions.select, string, "javascript");
+@@alternateType(Search.SearchOptions.orderBy, string, "javascript");
+@@alternateType(Search.SearchOptions.searchFields, string, "javascript");
+@@alternateType(Search.SearchRequest.select, string, "javascript");
+@@alternateType(Search.SearchRequest.orderby, string, "javascript");
+@@alternateType(Search.SearchRequest.searchFields, string, "javascript");
+@@alternateType(Search.SuggestOptions.select, string, "javascript");
+@@alternateType(Search.SuggestOptions.orderBy, string, "javascript");
+@@alternateType(Search.SuggestOptions.searchFields, string, "javascript");
+@@alternateType(Search.SuggestRequest.select, string, "javascript");
+@@alternateType(Search.SuggestRequest.orderby, string, "javascript");
+@@alternateType(Search.SuggestRequest.searchFields, string, "javascript");
 
 // Knowledge Base types
 @@clientNamespace(Search.AIServices, "Azure.Search.Documents.KnowledgeBases");
@@ -2924,6 +3135,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.SynchronizationState,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
