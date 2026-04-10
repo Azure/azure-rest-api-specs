@@ -96,8 +96,6 @@ suppressions:
     where:
       - $.definitions.GetServiceGatewayServicesResult
 directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: The vmssNetwork.json spec at 2018-10-01 is a legacy API that is intentionally included in the default tag.
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
     transform: >
