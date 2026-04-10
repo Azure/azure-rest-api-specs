@@ -80,7 +80,6 @@ model DeploymentTemplate is AssetVersion {
   allowedInstanceType?: string[];
 
   @doc("Accelerator configurations for the deployment template.")
-  @extension("x-ms-identifiers", #["acceleratorType"])
   acceleratorMaps?: AcceleratorMap[];
 
   @doc("Default instance type for the deployment.")
