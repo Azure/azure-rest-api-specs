@@ -130,7 +130,7 @@ interface DataMaskingPolicies {
    */
   @tag("DataMaskingRules")
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}")
   dataMaskingRulesCreateOrUpdate is DataMaskingPoliciesOps.ActionSync<
     DataMaskingPolicy,
     DataMaskingRule,

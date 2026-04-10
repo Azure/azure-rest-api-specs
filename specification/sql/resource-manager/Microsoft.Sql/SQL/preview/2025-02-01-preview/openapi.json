@@ -20952,6 +20952,111 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}": {
+      "put": {
+        "operationId": "DataMaskingRules_CreateOrUpdate",
+        "tags": [
+          "DataMaskingRules"
+        ],
+        "description": "Creates or updates a database data masking rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataMaskingPolicyName",
+            "in": "path",
+            "description": "The name of the database for which the data masking policy applies.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DataMaskingPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "dataMaskingRuleName",
+            "in": "path",
+            "description": "The name of the data masking rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating a data masking rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataMaskingRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/Update data masking rule for default max.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMax.json"
+          },
+          "Create/Update data masking rule for default min.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMin.json"
+          },
+          "Create/Update data masking rule for numbers.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateNumber.json"
+          },
+          "Create/Update data masking rule for text.": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateText.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataWarehouseUserActivities": {
       "get": {
         "operationId": "DataWarehouseUserActivities_ListByDatabase",
@@ -40412,111 +40517,6 @@
           "final-state-schema": "#/definitions/UpdateVirtualClusterDnsServersOperation"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}": {
-      "put": {
-        "operationId": "DataMaskingRules_CreateOrUpdate",
-        "tags": [
-          "DataMaskingRules"
-        ],
-        "description": "Creates or updates a database data masking rule.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "dataMaskingPolicyName",
-            "in": "path",
-            "description": "The name of the database for which the data masking policy applies.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "Default"
-            ],
-            "x-ms-enum": {
-              "name": "DataMaskingPolicyName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Default",
-                  "value": "Default",
-                  "description": "Default"
-                }
-              ]
-            }
-          },
-          {
-            "name": "dataMaskingRuleName",
-            "in": "path",
-            "description": "The name of the data masking rule.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The required parameters for creating or updating a data masking rule.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataMaskingRule"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataMaskingRule"
-            }
-          },
-          "201": {
-            "description": "Resource 'DataMaskingRule' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DataMaskingRule"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create/Update data masking rule for default max.": {
-            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMax.json"
-          },
-          "Create/Update data masking rule for default min.": {
-            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMin.json"
-          },
-          "Create/Update data masking rule for numbers.": {
-            "$ref": "./examples/DataMaskingRuleCreateOrUpdateNumber.json"
-          },
-          "Create/Update data masking rule for text.": {
-            "$ref": "./examples/DataMaskingRuleCreateOrUpdateText.json"
-          }
-        }
       }
     }
   },
