@@ -19,6 +19,22 @@ model CodeScanMappingConfigurations {
 
   @doc("The migration target.")
   azureTarget: AzureTarget;
+
+  @added(CodeScanSitesApiVersions.v2026_05_12_preview)
+  @doc("The mapping method used for Code scan mapping.")
+  mappingMethod?: MappingMethod;
+}
+
+@added(CodeScanSitesApiVersions.v2026_05_12_preview)
+@doc("The mapping method for code scan report.")
+union MappingMethod {
+  @doc("Mapping by User.")
+  UserMapped: "User Mapped",
+
+  @doc("Mapping done Automatically.")
+  AutoMapped: "Auto Mapped",
+
+  string,
 }
 
 @doc("Report information for the code scan mapping.")

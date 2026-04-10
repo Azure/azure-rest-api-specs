@@ -27,6 +27,21 @@ These are the global settings for the applicationmigration
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
+tag: package-2026-05-12-preview
+```
+
+### Tag: package-2026-05-12-preview
+
+These settings apply only when `--tag=package-2026-05-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-12-preview'
+input-file:
+  - preview/2026-05-12-preview/codescansites.json
+```
+
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2025-09-09-preview
 ```
 
@@ -37,12 +52,6 @@ These settings apply only when `--tag=package-2025-09-09-preview` is specified o
 ```yaml $(tag) == 'package-2025-09-09-preview'
 input-file:
   - preview/2025-09-09-preview/codescansites.json
-```
-
-```yaml
-openapi-type: arm
-openapi-subtype: rpaas
-tag: package-2025-09-09-preview
 ```
 
 ---

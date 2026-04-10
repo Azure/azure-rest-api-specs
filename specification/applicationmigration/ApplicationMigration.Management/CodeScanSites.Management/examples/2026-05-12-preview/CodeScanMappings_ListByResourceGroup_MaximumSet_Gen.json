@@ -1,0 +1,48 @@
+{
+  "title": "CodeScanMappings_ListByResourceGroup_MaximumSet",
+  "operationId": "CodeScanMappings_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-05-12-preview",
+    "resourceUri": "subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.Web/sites/myWebApp"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "configurations": {
+                "connectionArmId": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.Web/connections/myConnection",
+                "externalAppName": "my-external-app",
+                "azureTarget": "AKS",
+                "mappingMethod": "User Mapped"
+              },
+              "reportDetails": {
+                "reportArmId": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.ApplicationMigration/codeScanSites/myCodeScanSite/codeScanReports/myReport01",
+                "reportName": "myReport01",
+                "reportType": "AppCAT",
+                "migrateGartnerR": "Rehost",
+                "effortInHr": 40,
+                "cloudSuitability": "Suitable",
+                "reportStatus": "Available"
+              }
+            },
+            "id": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.Web/sites/myWebApp/providers/Microsoft.ApplicationMigration/codeScanMappings/myMapping01",
+            "name": "myMapping01",
+            "type": "Microsoft.ApplicationMigration/codeScanMappings",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-01T00:00:00Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-07T00:00:00Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/nextpage"
+      }
+    }
+  }
+}
