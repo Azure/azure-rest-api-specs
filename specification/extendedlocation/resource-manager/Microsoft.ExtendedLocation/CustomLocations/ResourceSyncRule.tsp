@@ -69,9 +69,13 @@ interface ResourceSyncRules {
   /**
    * Gets a list of Resource Sync Rules in the specified subscription. The operation returns properties of each Resource Sync Rule
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @summary("Lists all Resource Sync Rules in a Custom Location.")
   @tag("resourceSyncRules")
-  listByCustomLocationID is ArmResourceListByParent<resourceSyncRule>;
+  listByCustomLocationID is ArmResourceListByParent<
+    resourceSyncRule,
+    Response = ArmResponse<resourceSyncRuleListResult>
+  >;
 }
 
 @@maxLength(resourceSyncRule.name, 63);

@@ -75,14 +75,20 @@ interface CustomLocations {
    */
   @summary("Gets a list of Custom Locations in the specified subscription and resource group.")
   @tag("customLocations")
-  listByResourceGroup is ArmResourceListByParent<customLocation>;
+  listByResourceGroup is ArmResourceListByParent<
+    customLocation,
+    Response = ArmResponse<customLocationListResult>
+  >;
 
   /**
    * Gets a list of Custom Locations in the specified subscription. The operation returns properties of each Custom Location
    */
   @summary("Gets a list of Custom Locations in a subscription.")
   @tag("customLocations")
-  listBySubscription is ArmListBySubscription<customLocation>;
+  listBySubscription is ArmListBySubscription<
+    customLocation,
+    Response = ArmResponse<customLocationListResult>
+  >;
 
   /**
    * Gets the list of the Enabled Resource Types.
@@ -101,6 +107,7 @@ interface CustomLocations {
   /**
    * Returns the target resource group associated with the resource sync rules of the Custom Location that match the rules passed in with the Find Target Resource Group Request.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
   @summary("Gets matching target resource group for resource sync.")
   @tag("customLocations")
   findTargetResourceGroup is ArmResourceActionSync<

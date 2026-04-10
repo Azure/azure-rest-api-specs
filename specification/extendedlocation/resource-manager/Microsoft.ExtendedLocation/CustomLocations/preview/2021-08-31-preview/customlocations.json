@@ -1034,7 +1034,8 @@
           "items": {
             "$ref": "#/definitions/matchExpressionsProperties"
           },
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-identifiers": []
         },
         "matchLabels": {
           "type": "object",
@@ -1096,24 +1097,25 @@
     },
     "customLocationListResult": {
       "type": "object",
-      "description": "The response of a customLocation list operation.",
+      "description": "The List Custom Locations operation response.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The customLocation items on this page",
-          "items": {
-            "$ref": "#/definitions/customLocation"
-          }
-        },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "description": "The list of Custom Locations.",
+          "items": {
+            "$ref": "#/definitions/customLocation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "customLocationOperation": {
       "type": "object",
@@ -1325,24 +1327,25 @@
     },
     "resourceSyncRuleListResult": {
       "type": "object",
-      "description": "The response of a resourceSyncRule list operation.",
+      "description": "The List Resource Sync Rules operation response.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The resourceSyncRule items on this page",
-          "items": {
-            "$ref": "#/definitions/resourceSyncRule"
-          }
-        },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "description": "The list of Resource Sync Rules.",
+          "items": {
+            "$ref": "#/definitions/resourceSyncRule"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "resourceSyncRuleProperties": {
       "type": "object",

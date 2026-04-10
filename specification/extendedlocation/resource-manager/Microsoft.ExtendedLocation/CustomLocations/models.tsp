@@ -68,6 +68,7 @@ union CreatedByType {
 /**
  * Custom Locations operation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model customLocationOperation {
   /**
    * Describes the properties of a Custom Locations Operation Value Display.
@@ -96,6 +97,7 @@ model customLocationOperation {
 /**
  * Describes the properties of a Custom Locations Operation Value Display.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model customLocationOperationValueDisplay {
   /**
    * The description of the operation.
@@ -189,6 +191,7 @@ model customLocationProperties {
 /**
  * This is optional input that contains the authentication that should be used to generate the namespace.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model customLocationPropertiesAuthentication {
   /**
    * The type of the Custom Locations authentication
@@ -200,6 +203,48 @@ model customLocationPropertiesAuthentication {
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   value?: string;
+}
+
+/**
+ * The List Custom Locations operation response.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+model customLocationListResult {
+  /**
+   * The URL to use for getting the next set of results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of Custom Locations.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  @pageItems
+  value?: customLocation[];
+}
+
+/**
+ * The List Resource Sync Rules operation response.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+model resourceSyncRuleListResult {
+  /**
+   * The URL to use for getting the next set of results.
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * The list of Resource Sync Rules.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  @pageItems
+  value?: resourceSyncRule[];
 }
 
 /**
@@ -348,6 +393,7 @@ model ResourceSyncRulePropertiesSelector {
   /**
    * MatchExpressions is a list of resource selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. The values set must be empty in the case of Exists and DoesNotExist.
    */
+  @identifiers(#[])
   matchExpressions?: matchExpressionsProperties[];
 
   /**
@@ -365,6 +411,7 @@ model matchExpressionsProperties {
   /**
    * Key is the label key that the selector applies to.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "For backward compatibility"
   key?: string;
 
   /**
