@@ -48,8 +48,8 @@ union EvaluatorDefinitionType {
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
 
-  @doc("Scenario-based definition that generates evaluation artifacts (rubric catalog or taxonomy) from context inputs. When category is 'quality', generates a rubric catalog with scored criteria. When category is 'safety', generates a taxonomy with risk sub-behaviors.")
-  scenario: "scenario",
+  @doc("Generated evaluator definition produced by the generate API. Stores rubric catalog (quality) or taxonomy reference (safety).")
+  generated: "generated",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
@@ -85,27 +85,27 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   prompt_text: string;
 }
 
-@doc("Type of context input for evaluator generation")
-union ContextInputType {
+@doc("Type of source material for evaluator generation")
+union SourceType {
   string,
 
-  @doc("Agent system prompt or instructions")
-  agent_prompt: "agent_prompt",
+  @doc("Agent description — the agent's purpose, behavior, and capabilities")
+  description: "description",
 
-  @doc("Policy document (business rules, compliance requirements)")
-  policy_document: "policy_document",
+  @doc("Policy document — business rules, compliance requirements, or safety policies")
+  policy: "policy",
 
-  @doc("Trace file containing conversation logs")
-  trace_file: "trace_file",
+  @doc("Conversation traces — real or synthetic conversation logs")
+  traces: "traces",
 
-  @doc("Supplementary text (additional context)")
-  supplementary_text: "supplementary_text",
+  @doc("Supplementary context — any additional information relevant to evaluation")
+  supplementary: "supplementary",
 }
 
-@doc("Context input for evaluator generation")
-model ContextInput {
-  @doc("Type of context input")
-  type: ContextInputType;
+@doc("Source material for evaluator generation")
+model Source {
+  @doc("Type of source material")
+  type: SourceType;
 
   @doc("Inline text content")
   content?: string;
@@ -135,9 +135,9 @@ model RubricCriterion {
   always_on?: boolean;
 }
 
-@doc("Scenario-based evaluator definition — stores generated evaluation artifacts. Use the generate action to produce these artifacts before saving.")
-model ScenarioBasedEvaluatorDefinition extends EvaluatorDefinition {
-  type: EvaluatorDefinitionType.scenario;
+@doc("Generated evaluator definition — stores artifacts produced by the generate API. Use the generate action to produce these artifacts, review them, then save via createVersion.")
+model GeneratedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.generated;
 
   @doc("Generated evaluation spec describing what to evaluate")
   spec?: string;
@@ -166,11 +166,11 @@ model RubricCatalog {
 
 @doc("Request body for evaluator generation")
 model GenerateEvaluatorRequest {
-  @doc("Context inputs to generate from (agent prompts, policies, traces, supplementary text)")
-  context_inputs: ContextInput[];
+  @doc("Source materials for generation (agent description, policies, traces, supplementary context)")
+  sources: Source[];
 
-  @doc("Category determines generation pipeline: 'quality' produces rubric catalog, 'safety' produces taxonomy")
-  category: EvaluatorCategory;
+  @doc("Category determines generation pipeline: 'quality' (default) produces a rubric catalog, 'safety' produces a taxonomy")
+  category?: EvaluatorCategory = EvaluatorCategory.quality;
 
   @doc("Optional: model deployment to use for generation (defaults to service default)")
   model_deployment_name?: string;
