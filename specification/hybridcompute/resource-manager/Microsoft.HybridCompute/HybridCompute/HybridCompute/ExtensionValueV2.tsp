@@ -37,17 +37,20 @@ alias ExtensionValueV2Ops = Legacy.ExtensionOperations<
     @key
     providerNamespace: "Microsoft.HybridCompute";
 
+    /** The location of the Extension being received. */
     @path
     @segment("locations")
     @key("location")
     @minLength(1)
     location: string;
 
+    /** The publisher of the Extension being received. */
     @path
     @segment("publishers")
     @key
     publisher: string;
 
+    /** The extensionType of the Extension being received. */
     @path
     @segment("extensionTypes")
     @key
@@ -55,6 +58,7 @@ alias ExtensionValueV2Ops = Legacy.ExtensionOperations<
   },
   {},
   {
+    /** The version of the Extension being received. */
     @path
     @segment("versions")
     @key

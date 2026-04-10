@@ -30,16 +30,19 @@ alias ExtensionValueOps = Legacy.ExtensionOperations<
     ...SubscriptionIdParameter;
     ...Legacy.Provider;
 
+    /** The location of the Extension being received. */
     @path
     @segment("locations")
     @key("location")
     location: string;
 
+    /** The publisher of the Extension being received. */
     @path
     @segment("publishers")
     @key
     publisher: string;
 
+    /** The extensionType of the Extension being received. */
     @path
     @segment("extensionTypes")
     @key
@@ -47,6 +50,7 @@ alias ExtensionValueOps = Legacy.ExtensionOperations<
   },
   {},
   {
+    /** The version of the Extension being received. */
     @path
     @segment("versions")
     @key

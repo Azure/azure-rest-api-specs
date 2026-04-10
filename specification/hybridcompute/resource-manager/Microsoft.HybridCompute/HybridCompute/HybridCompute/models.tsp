@@ -1097,6 +1097,7 @@ model LicenseDetails {
   /**
    * A list of volume license details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   volumeLicenseDetails?: VolumeLicenseDetails[];
 }
 
@@ -1689,6 +1690,7 @@ model OSProfile {
 /**
  * Specifies the windows configuration for update management.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OSProfileWindowsConfiguration {
   /**
    * Specifies the patch settings.
@@ -1741,6 +1743,7 @@ model PatchSettingsStatus {
 /**
  * Specifies the linux configuration for update management.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OSProfileLinuxConfiguration {
   /**
    * Specifies the patch settings.
@@ -2110,6 +2113,7 @@ model MachineExtensionProperties {
   /**
    * Specifies the type of the extension; an example is "CustomScriptExtension".
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: string;
 
   /**
@@ -3230,6 +3234,7 @@ model SetupExtensionRequest {
   /**
    * The list of extensions
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extensions?: MachineExtensionProperties[];
 }
 
@@ -3264,6 +3269,7 @@ model HybridComputePrivateLinkScopeProperties {
   /**
    * Enable private link validation for an Azure Arc Extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceExtensions?: ServiceExtension[];
 }
 
@@ -3749,6 +3755,7 @@ model AgentVersion {
   /**
    * Represents the agent version.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agentVersion?: string;
 
   /**
@@ -3766,6 +3773,7 @@ model AgentVersion {
  * Describes a Machine Extension Update.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MachineRunCommandUpdate extends ResourceUpdate {}
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
