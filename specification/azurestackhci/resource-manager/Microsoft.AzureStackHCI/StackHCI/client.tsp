@@ -663,6 +663,9 @@ using Microsoft.AzureStackHCI;
   "ExpireOn",
   "csharp"
 );
+@@clientName(Step.lastUpdatedTimeUtc, "LastUpdatedOn", "csharp");
+@@clientName(Step.startTimeUtc, "StartOn", "csharp");
+@@clientName(Step.endTimeUtc, "EndOn", "csharp");
 
 // ==================== Accessibility overrides ====================
 @@access(Microsoft.AzureStackHCI.State, Access.public, "csharp");
@@ -745,6 +748,17 @@ using Microsoft.AzureStackHCI;
   "ShouldAutoUpgradeMinorVersion",
   "csharp"
 );
+// PerNodeExtensionState: instanceView → ExtensionInstanceView (old autorest rename)
+@@clientName(Microsoft.AzureStackHCI.PerNodeExtensionState.instanceView,
+  "ExtensionInstanceView",
+  "csharp"
+);
+// ExtensionInstanceView (ArcExtensionInstanceView): type → ExtensionInstanceViewType
+// Avoids CS0542 (member named same as enclosing type after rename)
+@@clientName(Microsoft.AzureStackHCI.ExtensionInstanceView.type,
+  "ExtensionInstanceViewType",
+  "csharp"
+);
 
 // ==================== Misc fixes ====================
 // CS0542 fix: KubernetesVersionProperties.version flattens to property named
@@ -764,6 +778,10 @@ using Microsoft.AzureStackHCI;
 
 // CS0108 fix: UpdateRun.name hides ResourceData.Name
 @@clientName(Microsoft.AzureStackHCI.UpdateRun.name, "updateRunName", "csharp");
+
+// CS0108 fix: Step.name flattens to Name on HciClusterUpdateRunData, hiding ResourceData.Name
+// Old autorest flatten name was NamePropertiesProgressName
+// @@clientName(Microsoft.AzureStackHCI.Step.name, "ProgressName", "csharp");
 
 // ==================== Type overrides (uuid format) ====================
 // Old autorest.md had -|uuid format override for these string properties
