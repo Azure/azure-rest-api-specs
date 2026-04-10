@@ -38,9 +38,8 @@ interface MachineExtensions {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MachineExtension,
-    Response = ArmResourceUpdatedResponse<MachineExtension> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MachineExtension> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MachineExtension> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MachineExtension> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
