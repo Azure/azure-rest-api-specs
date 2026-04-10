@@ -994,7 +994,9 @@ model AgentCard {
 /** The status of an agent session. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
 )
 @removed(Versions.v1)
 union AgentSessionStatus {
@@ -1030,7 +1032,9 @@ union AgentSessionStatus {
 /** The type of version indicator used to determine the agent version backing a session. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
 )
 @removed(Versions.v1)
 union VersionIndicatorType {
@@ -1044,7 +1048,9 @@ union VersionIndicatorType {
 @doc("Version indicator determining which agent version backs the session.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
 )
 @removed(Versions.v1)
 @discriminator("type")
@@ -1056,7 +1062,9 @@ model VersionIndicator {
 /** Version indicator that references a specific agent version by name. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model VersionRefIndicator extends VersionIndicator {
@@ -1073,7 +1081,9 @@ model VersionRefIndicator extends VersionIndicator {
 @doc("An agent session providing a long-lived compute sandbox for hosted agent invocations.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model AgentSessionResource {
@@ -1108,7 +1118,9 @@ model AgentSessionResource {
 @doc("Request to create a new agent session.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model CreateAgentSessionRequest {
@@ -1125,7 +1137,9 @@ model CreateAgentSessionRequest {
 @doc("Paged result for session list operations.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.agent_endpoint_v1_preview],
+  }
 )
 @removed(Versions.v1)
 model SessionListResult {
