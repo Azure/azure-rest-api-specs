@@ -6,39 +6,36 @@ using Azure.ClientGenerator.Core;
 using Microsoft.AzureStackHCI;
 
 @@clientName(Microsoft.AzureStackHCI.Update, "HciUpdate", "java");
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportProperties.expirationTimeStamp,
+@@clientName(RemoteSupportProperties.expirationTimeStamp,
   "expirationTimestamp",
   "java"
 );
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportRequestProperties.expirationTimeStamp,
+@@clientName(RemoteSupportRequestProperties.expirationTimeStamp,
   "expirationTimestamp",
   "java"
 );
-@@clientName(Microsoft.AzureStackHCI.PrecheckResult.targetResourceID,
-  "targetResourceId",
-  "java"
-);
-@@clientName(Microsoft.AzureStackHCI.QosPolicyOverrides.priorityValue8021Action_SMB,
+@@clientName(PrecheckResult.targetResourceID, "targetResourceId", "java");
+@@clientName(QosPolicyOverrides.priorityValue8021Action_SMB,
   "priorityValue8021ActionSmb",
   "java"
 );
-@@clientName(Microsoft.AzureStackHCI.QosPolicyOverrides.bandwidthPercentage_SMB,
+@@clientName(QosPolicyOverrides.bandwidthPercentage_SMB,
   "bandwidthPercentageSmb",
   "java"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSettingStorageNetworks.storageAdapterIPInfo,
+@@clientName(DeploymentSettingStorageNetworks.storageAdapterIPInfo,
   "storageAdapterIpInfo",
   "java"
 );
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceStorageNetworks.storageAdapterIPInfo,
+@@clientName(HciEdgeDeviceStorageNetworks.storageAdapterIPInfo,
   "storageAdapterIpInfo",
   "java"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSettingStorageAdapterIPInfo,
+@@clientName(DeploymentSettingStorageAdapterIPInfo,
   "DeploymentSettingStorageAdapterIpInfo",
   "java"
 );
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceStorageAdapterIPInfo,
+@@clientName(HciEdgeDeviceStorageAdapterIPInfo,
   "HciEdgeDeviceStorageAdapterIpInfo",
   "java"
 );
@@ -64,602 +61,323 @@ using Microsoft.AzureStackHCI;
 // C# clientName decorators for backward compatibility with old SDK type names
 
 // ==================== Resource type renames (prepend-rp-prefix) ====================
-@@clientName(Microsoft.AzureStackHCI.Cluster, "HciCluster", "csharp");
-@@clientName(Microsoft.AzureStackHCI.Extension, "ArcExtension", "csharp");
-@@clientName(Microsoft.AzureStackHCI.EdgeDevice, "HciEdgeDevice", "csharp");
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDevice,
-  "HciArcEnabledEdgeDevice",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceProperties,
+@@clientName(Cluster, "HciCluster", "csharp");
+@@clientName(Extension, "ArcExtension", "csharp");
+@@clientName(EdgeDevice, "HciEdgeDevice", "csharp");
+@@clientName(HciEdgeDevice, "HciArcEnabledEdgeDevice", "csharp");
+@@clientName(HciEdgeDeviceProperties,
   "HciArcEnabledEdgeDeviceProperties",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSetting,
-  "HciClusterDeploymentSetting",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.Offer, "HciClusterOffer", "csharp");
-@@clientName(Microsoft.AzureStackHCI.Publisher,
-  "HciClusterPublisher",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SecuritySetting,
-  "HciClusterSecuritySetting",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.Sku, "HciSku", "csharp");
+@@clientName(DeploymentSetting, "HciClusterDeploymentSetting", "csharp");
+@@clientName(Offer, "HciClusterOffer", "csharp");
+@@clientName(Publisher, "HciClusterPublisher", "csharp");
+@@clientName(SecuritySetting, "HciClusterSecuritySetting", "csharp");
+@@clientName(Sku, "HciSku", "csharp");
 @@clientName(Microsoft.AzureStackHCI.Update, "HciClusterUpdate", "csharp");
-@@clientName(Microsoft.AzureStackHCI.UpdateRun,
-  "HciClusterUpdateRun",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.UpdateSummaries,
-  "HciClusterUpdateSummary",
-  "csharp"
-);
+@@clientName(UpdateRun, "HciClusterUpdateRun", "csharp");
+@@clientName(UpdateSummaries, "HciClusterUpdateSummary", "csharp");
 
 // ==================== Model/enum type renames ====================
 // From prepend-rp-prefix
-@@clientName(Microsoft.AzureStackHCI.ProvisioningState,
-  "HciProvisioningState",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ClusterDesiredProperties,
-  "HciClusterDesiredProperties",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ClusterNode, "HciClusterNode", "csharp");
-@@clientName(Microsoft.AzureStackHCI.ClusterReportedProperties,
+@@clientName(ProvisioningState, "HciProvisioningState", "csharp");
+@@clientName(ClusterDesiredProperties, "HciClusterDesiredProperties", "csharp");
+@@clientName(ClusterNode, "HciClusterNode", "csharp");
+@@clientName(ClusterReportedProperties,
   "HciClusterReportedProperties",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.AvailabilityType,
-  "HciAvailabilityType",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HealthState, "HciHealthState", "csharp");
-@@clientName(Microsoft.AzureStackHCI.PackageVersionInfo,
-  "HciPackageVersionInfo",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.PrecheckResult,
-  "HciPrecheckResult",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.PrecheckResultTags,
-  "HciPrecheckResultTags",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SkuMappings, "HciSkuMappings", "csharp");
-@@clientName(Microsoft.AzureStackHCI.StatusLevelTypes,
-  "HciStatusLevelType",
-  "csharp"
-);
+@@clientName(AvailabilityType, "HciAvailabilityType", "csharp");
+@@clientName(HealthState, "HciHealthState", "csharp");
+@@clientName(PackageVersionInfo, "HciPackageVersionInfo", "csharp");
+@@clientName(PrecheckResult, "HciPrecheckResult", "csharp");
+@@clientName(PrecheckResultTags, "HciPrecheckResultTags", "csharp");
+@@clientName(SkuMappings, "HciSkuMappings", "csharp");
+@@clientName(StatusLevelTypes, "HciStatusLevelType", "csharp");
 
 // From rename-mapping: Extension → Arc prefix
-@@clientName(Microsoft.AzureStackHCI.ExtensionInstanceView,
-  "ArcExtensionInstanceView",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ExtensionInstanceViewStatus,
+@@clientName(ExtensionInstanceView, "ArcExtensionInstanceView", "csharp");
+@@clientName(ExtensionInstanceViewStatus,
   "ArcExtensionInstanceViewStatus",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ExtensionManagedBy,
-  "ArcExtensionManagedBy",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ExtensionAggregateState,
-  "ArcExtensionAggregateState",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ExtensionUpgradeParameters,
+@@clientName(ExtensionManagedBy, "ArcExtensionManagedBy", "csharp");
+@@clientName(ExtensionAggregateState, "ArcExtensionAggregateState", "csharp");
+@@clientName(ExtensionUpgradeParameters,
   "ArcExtensionUpgradeContent",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ExtensionPatchParameters,
-  "ArcExtensionPatchContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DefaultExtensionDetails,
-  "ArcDefaultExtensionDetails",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.PasswordCredential,
-  "ArcPasswordCredential",
-  "csharp"
-);
+@@clientName(ExtensionPatchParameters, "ArcExtensionPatchContent", "csharp");
+@@clientName(DefaultExtensionDetails, "ArcDefaultExtensionDetails", "csharp");
+@@clientName(PasswordCredential, "ArcPasswordCredential", "csharp");
 
 // From rename-mapping: Cluster-related renames
-@@clientName(Microsoft.AzureStackHCI.Status, "HciClusterStatus", "csharp");
-@@clientName(Microsoft.AzureStackHCI.ArcIdentityResponse,
-  "ArcIdentityResult",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ClusterIdentityResponse,
-  "HciClusterIdentityResult",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DiagnosticLevel,
-  "HciClusterDiagnosticLevel",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ImdsAttestation,
-  "ImdsAttestationState",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.UploadCertificateRequest,
+@@clientName(Status, "HciClusterStatus", "csharp");
+@@clientName(ArcIdentityResponse, "ArcIdentityResult", "csharp");
+@@clientName(ClusterIdentityResponse, "HciClusterIdentityResult", "csharp");
+@@clientName(DiagnosticLevel, "HciClusterDiagnosticLevel", "csharp");
+@@clientName(ImdsAttestation, "ImdsAttestationState", "csharp");
+@@clientName(UploadCertificateRequest,
   "HciClusterCertificateContent",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ClusterPatch, "HciClusterPatch", "csharp");
-@@clientName(Microsoft.AzureStackHCI.ConnectivityStatus,
-  "HciClusterConnectivityStatus",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.OperationType,
-  "HciClusterOperationType",
-  "csharp"
-);
+@@clientName(ClusterPatch, "HciClusterPatch", "csharp");
+@@clientName(ConnectivityStatus, "HciClusterConnectivityStatus", "csharp");
+@@clientName(OperationType, "HciClusterOperationType", "csharp");
 
 // From rename-mapping: Update-related renames
-@@clientName(Microsoft.AzureStackHCI.PerNodeState, "PerNodeArcState", "csharp");
-@@clientName(Microsoft.AzureStackHCI.RebootRequirement,
-  "HciNodeRebootRequirement",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.Severity, "UpdateSeverity", "csharp");
-@@clientName(Microsoft.AzureStackHCI.State, "HciUpdateState", "csharp");
-@@clientName(Microsoft.AzureStackHCI.Step, "HciUpdateStep", "csharp");
-@@clientName(Microsoft.AzureStackHCI.UpdatePrerequisite,
-  "HciClusterUpdatePrerequisite",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.UpdateSummariesPropertiesState,
-  "HciClusterUpdateState",
-  "csharp"
-);
+@@clientName(PerNodeState, "PerNodeArcState", "csharp");
+@@clientName(RebootRequirement, "HciNodeRebootRequirement", "csharp");
+@@clientName(Severity, "UpdateSeverity", "csharp");
+@@clientName(State, "HciUpdateState", "csharp");
+@@clientName(Step, "HciUpdateStep", "csharp");
+@@clientName(UpdatePrerequisite, "HciClusterUpdatePrerequisite", "csharp");
+@@clientName(UpdateSummariesPropertiesState, "HciClusterUpdateState", "csharp");
 
 // From rename-mapping: Deployment renames
-@@clientName(Microsoft.AzureStackHCI.DeploymentConfiguration,
+@@clientName(DeploymentConfiguration,
   "HciClusterDeploymentConfiguration",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentData,
-  "HciClusterDeploymentInfo",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DeploymentMode,
-  "EceDeploymentMode",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings,
+@@clientName(DeploymentData, "HciClusterDeploymentInfo", "csharp");
+@@clientName(DeploymentMode, "EceDeploymentMode", "csharp");
+@@clientName(DeploymentSecuritySettings,
   "HciClusterDeploymentSecuritySettings",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentStep,
-  "HciClusterDeploymentStep",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DeploymentCluster,
-  "HciDeploymentCluster",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.InfrastructureNetwork,
+@@clientName(DeploymentStep, "HciClusterDeploymentStep", "csharp");
+@@clientName(DeploymentCluster, "HciDeploymentCluster", "csharp");
+@@clientName(InfrastructureNetwork,
   "DeploymentSettingInfrastructureNetwork",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.IpPools,
-  "DeploymentSettingIPPools",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.NetworkController,
-  "DeploymentSettingNetworkController",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.Observability,
-  "DeploymentSettingObservability",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.PhysicalNodes,
-  "DeploymentSettingPhysicalNodes",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.QosPolicyOverrides,
+@@clientName(IpPools, "DeploymentSettingIPPools", "csharp");
+@@clientName(NetworkController, "DeploymentSettingNetworkController", "csharp");
+@@clientName(Observability, "DeploymentSettingObservability", "csharp");
+@@clientName(PhysicalNodes, "DeploymentSettingPhysicalNodes", "csharp");
+@@clientName(QosPolicyOverrides,
   "DeploymentSettingQosPolicyOverrides",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ScaleUnits,
-  "DeploymentSettingScaleUnits",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.Storage,
-  "DeploymentSettingStorage",
-  "csharp"
-);
+@@clientName(ScaleUnits, "DeploymentSettingScaleUnits", "csharp");
+@@clientName(Storage, "DeploymentSettingStorage", "csharp");
 
 // From rename-mapping: EdgeDevice/Security renames
-@@clientName(Microsoft.AzureStackHCI.EdgeDeviceProperties,
-  "HciEdgeDeviceProperties",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DeviceConfiguration,
-  "HciEdgeDeviceConfiguration",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DeviceState,
-  "HciEdgeDeviceState",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.NicDetail,
-  "HciEdgeDeviceNicDetail",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ReportedProperties,
-  "HciEdgeDeviceReportedProperties",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SwitchDetail,
-  "HciEdgeDeviceSwitchDetail",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SwitchExtension,
-  "HciEdgeSwitchExtension",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ValidateRequest,
-  "HciEdgeDeviceValidateContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ValidateResponse,
-  "HciEdgeDeviceValidateResult",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.AccessLevel,
-  "HciClusterAccessLevel",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ComplianceAssignmentType,
+@@clientName(EdgeDeviceProperties, "HciEdgeDeviceProperties", "csharp");
+@@clientName(DeviceConfiguration, "HciEdgeDeviceConfiguration", "csharp");
+@@clientName(DeviceState, "HciEdgeDeviceState", "csharp");
+@@clientName(NicDetail, "HciEdgeDeviceNicDetail", "csharp");
+@@clientName(ReportedProperties, "HciEdgeDeviceReportedProperties", "csharp");
+@@clientName(SwitchDetail, "HciEdgeDeviceSwitchDetail", "csharp");
+@@clientName(SwitchExtension, "HciEdgeSwitchExtension", "csharp");
+@@clientName(ValidateRequest, "HciEdgeDeviceValidateContent", "csharp");
+@@clientName(ValidateResponse, "HciEdgeDeviceValidateResult", "csharp");
+@@clientName(AccessLevel, "HciClusterAccessLevel", "csharp");
+@@clientName(ComplianceAssignmentType,
   "HciClusterComplianceAssignmentType",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ComplianceStatus,
-  "HciClusterComplianceStatus",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciOsProfile, "HciOSProfile", "csharp");
+@@clientName(ComplianceStatus, "HciClusterComplianceStatus", "csharp");
+@@clientName(HciOsProfile, "HciOSProfile", "csharp");
 
 // From rename-mapping: RemoteSupport/LogCollection renames
-@@clientName(Microsoft.AzureStackHCI.LogCollectionRequestProperties,
+@@clientName(LogCollectionRequestProperties,
   "LogCollectionContentProperties",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.LogCollectionRequest,
-  "LogCollectionContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportRequestProperties,
+@@clientName(LogCollectionRequest, "LogCollectionContent", "csharp");
+@@clientName(RemoteSupportRequestProperties,
   "RemoteSupportContentProperties",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportRequest,
-  "RemoteSupportContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.EceSecrets, "EceSecret", "csharp");
-@@clientName(Microsoft.AzureStackHCI.SoftwareAssuranceChangeRequest,
+@@clientName(RemoteSupportRequest, "RemoteSupportContent", "csharp");
+@@clientName(EceSecrets, "EceSecret", "csharp");
+@@clientName(SoftwareAssuranceChangeRequest,
   "SoftwareAssuranceChangeContent",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ExtensionPatch,
-  "ArcExtensionPatch",
-  "csharp"
-);
+@@clientName(ExtensionPatch, "ArcExtensionPatch", "csharp");
 
 // ==================== Request → Content renames ====================
-@@clientName(Microsoft.AzureStackHCI.ChangeRingRequest,
-  "ChangeRingContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.CheckUpdatesRequest,
-  "CheckUpdatesContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ClaimDeviceRequest,
-  "ClaimDeviceContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DownloadRequest,
-  "DownloadContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ProvisioningRequest,
-  "ProvisioningContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ReconcileArcSettingsRequest,
+@@clientName(ChangeRingRequest, "ChangeRingContent", "csharp");
+@@clientName(CheckUpdatesRequest, "CheckUpdatesContent", "csharp");
+@@clientName(ClaimDeviceRequest, "ClaimDeviceContent", "csharp");
+@@clientName(DownloadRequest, "DownloadContent", "csharp");
+@@clientName(ProvisioningRequest, "ProvisioningContent", "csharp");
+@@clientName(ReconcileArcSettingsRequest,
   "ReconcileArcSettingsContent",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ReleaseDeviceRequest,
-  "ReleaseDeviceContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SecretsLocationsChangeRequest,
+@@clientName(ReleaseDeviceRequest, "ReleaseDeviceContent", "csharp");
+@@clientName(SecretsLocationsChangeRequest,
   "SecretsLocationsChangeContent",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ValidateOwnershipVouchersRequest,
+@@clientName(ValidateOwnershipVouchersRequest,
   "ValidateOwnershipVouchersContent",
   "csharp"
 );
 
 // ==================== Response → Result rename ====================
-@@clientName(Microsoft.AzureStackHCI.ValidateOwnershipVouchersResponse,
+@@clientName(ValidateOwnershipVouchersResponse,
   "ValidateOwnershipVouchersResult",
   "csharp"
 );
 
 // ==================== Generic type name renames (add Hci prefix) ====================
-@@clientName(Microsoft.AzureStackHCI.AssemblyInfo, "HciAssemblyInfo", "csharp");
-@@clientName(Microsoft.AzureStackHCI.HardwareProfile,
-  "HciDeploymentHardwareProfile",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.NetworkAdapter,
-  "HciNetworkAdapter",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.OsProfile,
-  "HciDeploymentOSProfile",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.UserDetails, "HciUserDetails", "csharp");
-@@clientName(Microsoft.AzureStackHCI.TimeConfiguration,
-  "HciTimeConfiguration",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.WebProxyConfiguration,
-  "HciWebProxyConfiguration",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DnsZones, "HciDnsZones", "csharp");
-@@clientName(Microsoft.AzureStackHCI.IpAddressRange,
-  "HciIPAddressRange",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.JobStatus, "HciJobStatus", "csharp");
-@@clientName(Microsoft.AzureStackHCI.SecretType, "HciSecretType", "csharp");
-@@clientName(Microsoft.AzureStackHCI.SecretsType, "HciSecretsType", "csharp");
-@@clientName(Microsoft.AzureStackHCI.StorageType, "HciStorageType", "csharp");
-@@clientName(Microsoft.AzureStackHCI.VolumeType, "HciVolumeType", "csharp");
-@@clientName(Microsoft.AzureStackHCI.DeviceDetail, "HciDeviceDetail", "csharp");
-@@clientName(Microsoft.AzureStackHCI.IdentityProvider,
-  "HciIdentityProvider",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.KubernetesVersion,
-  "HciKubernetesVersion",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.OperationDetail,
-  "HciOperationDetail",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SiteDetails, "HciSiteDetails", "csharp");
-@@clientName(Microsoft.AzureStackHCI.ProvisioningDetails,
-  "HciProvisioningDetails",
-  "csharp"
-);
+@@clientName(AssemblyInfo, "HciAssemblyInfo", "csharp");
+@@clientName(HardwareProfile, "HciDeploymentHardwareProfile", "csharp");
+@@clientName(NetworkAdapter, "HciNetworkAdapter", "csharp");
+@@clientName(OsProfile, "HciDeploymentOSProfile", "csharp");
+@@clientName(UserDetails, "HciUserDetails", "csharp");
+@@clientName(TimeConfiguration, "HciTimeConfiguration", "csharp");
+@@clientName(WebProxyConfiguration, "HciWebProxyConfiguration", "csharp");
+@@clientName(DnsZones, "HciDnsZones", "csharp");
+@@clientName(IpAddressRange, "HciIPAddressRange", "csharp");
+@@clientName(JobStatus, "HciJobStatus", "csharp");
+@@clientName(SecretType, "HciSecretType", "csharp");
+@@clientName(SecretsType, "HciSecretsType", "csharp");
+@@clientName(StorageType, "HciStorageType", "csharp");
+@@clientName(VolumeType, "HciVolumeType", "csharp");
+@@clientName(DeviceDetail, "HciDeviceDetail", "csharp");
+@@clientName(IdentityProvider, "HciIdentityProvider", "csharp");
+@@clientName(KubernetesVersion, "HciKubernetesVersion", "csharp");
+@@clientName(OperationDetail, "HciOperationDetail", "csharp");
+@@clientName(SiteDetails, "HciSiteDetails", "csharp");
+@@clientName(ProvisioningDetails, "HciProvisioningDetails", "csharp");
 
 // ==================== Property renames ====================
-@@clientName(Microsoft.AzureStackHCI.ClusterReportedProperties.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SecurityComplianceStatus.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.PackageVersionInfo.lastUpdated,
-  "LastUpdatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.SoftwareAssuranceProperties.lastUpdated,
+@@clientName(ClusterReportedProperties.lastUpdated, "LastUpdatedOn", "csharp");
+@@clientName(SecurityComplianceStatus.lastUpdated, "LastUpdatedOn", "csharp");
+@@clientName(PackageVersionInfo.lastUpdated, "LastUpdatedOn", "csharp");
+@@clientName(SoftwareAssuranceProperties.lastUpdated,
   "LastUpdatedOn",
   "csharp"
 );
 
-@@clientName(Microsoft.AzureStackHCI.DeploymentStep.startTimeUtc,
-  "StartOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.DeploymentStep.endTimeUtc,
-  "EndOn",
-  "csharp"
-);
+@@clientName(DeploymentStep.startTimeUtc, "StartOn", "csharp");
+@@clientName(DeploymentStep.endTimeUtc, "EndOn", "csharp");
 
 // ==================== DateTimeOffset property renames (On suffix convention) ====================
 // Only for NEW models not in GA 1.2.1 — GA models keep original names to avoid breaking changes
-@@clientName(Microsoft.AzureStackHCI.CollectLogJobProperties.fromDate,
-  "CollectionStartOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.CollectLogJobProperties.toDate,
-  "CollectionEndOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.CollectLogJobProperties.lastLogGenerated,
+@@clientName(CollectLogJobProperties.fromDate, "CollectionStartOn", "csharp");
+@@clientName(CollectLogJobProperties.toDate, "CollectionEndOn", "csharp");
+@@clientName(CollectLogJobProperties.lastLogGenerated,
   "LastLogGeneratedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EdgeDeviceJobProperties.startTimeUtc,
-  "StartOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.EdgeDeviceJobProperties.endTimeUtc,
-  "EndOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciCollectLogJobProperties.fromDate,
+@@clientName(EdgeDeviceJobProperties.startTimeUtc, "StartOn", "csharp");
+@@clientName(EdgeDeviceJobProperties.endTimeUtc, "EndOn", "csharp");
+@@clientName(HciCollectLogJobProperties.fromDate,
   "CollectionStartOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.HciCollectLogJobProperties.toDate,
-  "CollectionEndOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciCollectLogJobProperties.lastLogGenerated,
+@@clientName(HciCollectLogJobProperties.toDate, "CollectionEndOn", "csharp");
+@@clientName(HciCollectLogJobProperties.lastLogGenerated,
   "LastLogGeneratedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceJobProperties.startTimeUtc,
-  "StartOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceJobProperties.endTimeUtc,
-  "EndOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciRemoteSupportJobProperties.expirationTimestamp,
+@@clientName(HciEdgeDeviceJobProperties.startTimeUtc, "StartOn", "csharp");
+@@clientName(HciEdgeDeviceJobProperties.endTimeUtc, "EndOn", "csharp");
+@@clientName(HciRemoteSupportJobProperties.expirationTimestamp,
   "ExpireOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportJobNodeSettings.createdAt,
-  "CreatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportJobNodeSettings.updatedAt,
-  "UpdatedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ReportedProperties.lastSyncTimestamp,
-  "LastSyncedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineProperties.lastSyncTimestamp,
-  "LastSyncedOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineReportedProperties.lastUpdated,
+@@clientName(RemoteSupportJobNodeSettings.createdAt, "CreatedOn", "csharp");
+@@clientName(RemoteSupportJobNodeSettings.updatedAt, "UpdatedOn", "csharp");
+@@clientName(ReportedProperties.lastSyncTimestamp, "LastSyncedOn", "csharp");
+@@clientName(EdgeMachineProperties.lastSyncTimestamp, "LastSyncedOn", "csharp");
+@@clientName(EdgeMachineReportedProperties.lastUpdated,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineJobProperties.startTimeUtc,
-  "StartOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineJobProperties.endTimeUtc,
-  "EndOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineRemoteSupportJobProperties.expirationTimestamp,
+@@clientName(EdgeMachineJobProperties.startTimeUtc, "StartOn", "csharp");
+@@clientName(EdgeMachineJobProperties.endTimeUtc, "EndOn", "csharp");
+@@clientName(EdgeMachineRemoteSupportJobProperties.expirationTimestamp,
   "ExpireOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineRemoteSupportNodeSettings.createdAt,
+@@clientName(EdgeMachineRemoteSupportNodeSettings.createdAt,
   "CreatedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineRemoteSupportNodeSettings.updatedAt,
+@@clientName(EdgeMachineRemoteSupportNodeSettings.updatedAt,
   "UpdatedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineCollectLogJobProperties.fromDate,
+@@clientName(EdgeMachineCollectLogJobProperties.fromDate,
   "CollectionStartOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineCollectLogJobProperties.toDate,
+@@clientName(EdgeMachineCollectLogJobProperties.toDate,
   "CollectionEndOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EdgeMachineCollectLogJobProperties.lastLogGenerated,
+@@clientName(EdgeMachineCollectLogJobProperties.lastLogGenerated,
   "LastLogGeneratedOn",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ClusterJobProperties.startTimeUtc,
-  "StartOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ClusterJobProperties.endTimeUtc,
-  "EndOn",
-  "csharp"
-);
+@@clientName(ClusterJobProperties.startTimeUtc, "StartOn", "csharp");
+@@clientName(ClusterJobProperties.endTimeUtc, "EndOn", "csharp");
 
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.hvciProtection,
+@@clientName(DeploymentSecuritySettings.hvciProtection,
   "IsHvciProtectionEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.drtmProtection,
+@@clientName(DeploymentSecuritySettings.drtmProtection,
   "IsDrtmProtectionEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.driftControlEnforced,
+@@clientName(DeploymentSecuritySettings.driftControlEnforced,
   "IsDriftControlEnforced",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.credentialGuardEnforced,
+@@clientName(DeploymentSecuritySettings.credentialGuardEnforced,
   "IsCredentialGuardEnforced",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.smbSigningEnforced,
+@@clientName(DeploymentSecuritySettings.smbSigningEnforced,
   "IsSmbSigningEnforced",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.smbClusterEncryption,
+@@clientName(DeploymentSecuritySettings.smbClusterEncryption,
   "IsSmbClusterEncryptionEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.sideChannelMitigationEnforced,
+@@clientName(DeploymentSecuritySettings.sideChannelMitigationEnforced,
   "IsSideChannelMitigationEnforced",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.bitlockerBootVolume,
+@@clientName(DeploymentSecuritySettings.bitlockerBootVolume,
   "IsBitlockerBootVolumeEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.bitlockerDataVolumes,
+@@clientName(DeploymentSecuritySettings.bitlockerDataVolumes,
   "AreBitlockerDataVolumesEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSecuritySettings.wdacEnforced,
+@@clientName(DeploymentSecuritySettings.wdacEnforced,
   "IsWdacEnforced",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.Observability.streamingDataClient,
+@@clientName(Observability.streamingDataClient,
   "IsStreamingDataClientEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.Observability.euLocation,
-  "IsEULocation",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.Observability.episodicDataUpload,
+@@clientName(Observability.euLocation, "IsEULocation", "csharp");
+@@clientName(Observability.episodicDataUpload,
   "IsEpisodicDataUploadEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.SwitchExtension.extensionEnabled,
-  "IsExtensionEnabled",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ExtensionPatchParameters.enableAutomaticUpgrade,
+@@clientName(SwitchExtension.extensionEnabled, "IsExtensionEnabled", "csharp");
+@@clientName(ExtensionPatchParameters.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.NicDetail.ip4Address,
-  "IPv4Address",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciNicDetail.ip4Address,
-  "IPv4Address",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportProperties.expirationTimeStamp,
-  "ExpireOn",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.RemoteSupportRequestProperties.expirationTimeStamp,
+@@clientName(NicDetail.ip4Address, "IPv4Address", "csharp");
+@@clientName(HciNicDetail.ip4Address, "IPv4Address", "csharp");
+@@clientName(RemoteSupportProperties.expirationTimeStamp, "ExpireOn", "csharp");
+@@clientName(RemoteSupportRequestProperties.expirationTimeStamp,
   "ExpireOn",
   "csharp"
 );
@@ -668,102 +386,87 @@ using Microsoft.AzureStackHCI;
 @@clientName(Step.endTimeUtc, "EndOn", "csharp");
 
 // ==================== Accessibility overrides ====================
-@@access(Microsoft.AzureStackHCI.State, Access.public, "csharp");
-@@access(Microsoft.AzureStackHCI.RebootRequirement, Access.public, "csharp");
-@@access(Microsoft.AzureStackHCI.AvailabilityType, Access.public, "csharp");
-@@access(Microsoft.AzureStackHCI.Step, Access.public, "csharp");
-@@access(Microsoft.AzureStackHCI.ExtensionProfile, Access.public, "csharp");
-@@access(Microsoft.AzureStackHCI.ExtensionInstanceView,
-  Access.public,
-  "csharp"
-);
+@@access(State, Access.public, "csharp");
+@@access(RebootRequirement, Access.public, "csharp");
+@@access(AvailabilityType, Access.public, "csharp");
+@@access(Step, Access.public, "csharp");
+@@access(ExtensionProfile, Access.public, "csharp");
+@@access(ExtensionInstanceView, Access.public, "csharp");
+
+// ==================== Usage overrides ====================
+// Offer/Sku/Publisher are read-only resources (no PUT/PATCH), so the generator
+// treats their properties as output-only (no setters, no public constructor).
+// The old GA SDK had setters and public constructors, so we need input+output usage.
+@@usage(OfferProperties, Usage.input | Usage.output, "csharp");
+@@usage(SkuProperties, Usage.input | Usage.output, "csharp");
+@@usage(PublisherProperties, Usage.input | Usage.output, "csharp");
+@@usage(Offer, Usage.input | Usage.output, "csharp");
+@@usage(Publisher, Usage.input | Usage.output, "csharp");
+@@usage(EdgeDevice, Usage.input | Usage.output, "csharp");
+@@usage(Sku, Usage.input | Usage.output, "csharp");
 
 // ==================== Property casing renames (backward compat) ====================
-@@clientName(Microsoft.AzureStackHCI.DeploymentSettingHostNetwork.enableStorageAutoIp,
+@@clientName(DeploymentSettingHostNetwork.enableStorageAutoIp,
   "EnableStorageAutoIP",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceHostNetwork.enableStorageAutoIp,
+@@clientName(HciEdgeDeviceHostNetwork.enableStorageAutoIp,
   "EnableStorageAutoIP",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.PhysicalNodes.ipv4Address,
+@@clientName(PhysicalNodes.ipv4Address, "IPv4Address", "csharp");
+@@clientName(DeploymentSettingStorageAdapterIPInfo.ipv4Address,
   "IPv4Address",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.DeploymentSettingStorageAdapterIPInfo.ipv4Address,
+@@clientName(HciEdgeDeviceStorageAdapterIPInfo.ipv4Address,
   "IPv4Address",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceStorageAdapterIPInfo.ipv4Address,
-  "IPv4Address",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.QosPolicyOverrides.bandwidthPercentage_SMB,
+@@clientName(QosPolicyOverrides.bandwidthPercentage_SMB,
   "BandwidthPercentageSmb",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.QosPolicyOverrides.priorityValue8021Action_SMB,
+@@clientName(QosPolicyOverrides.priorityValue8021Action_SMB,
   "PriorityValue8021ActionSmb",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.ClusterNode.osDisplayVersion,
-  "OSDisplayVersion",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ClusterNode.osName, "OSName", "csharp");
-@@clientName(Microsoft.AzureStackHCI.ClusterNode.osVersion,
-  "OSVersion",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.InfrastructureNetwork.ipPools,
-  "IPPools",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.PrecheckResult.targetResourceID,
-  "TargetResourceId",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.HciReportedProperties.osProfile,
-  "OSProfile",
-  "csharp"
-);
+@@clientName(ClusterNode.osDisplayVersion, "OSDisplayVersion", "csharp");
+@@clientName(ClusterNode.osName, "OSName", "csharp");
+@@clientName(ClusterNode.osVersion, "OSVersion", "csharp");
+@@clientName(InfrastructureNetwork.ipPools, "IPPools", "csharp");
+@@clientName(PrecheckResult.targetResourceID, "TargetResourceId", "csharp");
+@@clientName(HciReportedProperties.osProfile, "OSProfile", "csharp");
 
 // ==================== Enum value casing renames ====================
-@@clientName(Microsoft.AzureStackHCI.EceSecrets.AzureStackLCMUserCredential,
+@@clientName(EceSecrets.AzureStackLCMUserCredential,
   "AzureStackLcmUserCredential",
   "csharp"
 );
-@@clientName(Microsoft.AzureStackHCI.EceSecrets.DefaultARBApplication,
+@@clientName(EceSecrets.DefaultARBApplication,
   "DefaultArbApplication",
   "csharp"
 );
 
 // ==================== Property name renames (backward compat) ====================
-@@clientName(Microsoft.AzureStackHCI.ExtensionParameters.type,
-  "ArcExtensionType",
-  "csharp"
-);
-@@clientName(Microsoft.AzureStackHCI.ExtensionParameters.autoUpgradeMinorVersion,
+@@clientName(ExtensionParameters.type, "ArcExtensionType", "csharp");
+@@clientName(ExtensionParameters.autoUpgradeMinorVersion,
   "ShouldAutoUpgradeMinorVersion",
   "csharp"
 );
 // PerNodeExtensionState: instanceView → ExtensionInstanceView (old autorest rename)
-@@clientName(Microsoft.AzureStackHCI.PerNodeExtensionState.instanceView,
+@@clientName(PerNodeExtensionState.instanceView,
   "ExtensionInstanceView",
   "csharp"
 );
 // ExtensionInstanceView (ArcExtensionInstanceView): type → ExtensionInstanceViewType
 // Avoids CS0542 (member named same as enclosing type after rename)
-@@clientName(Microsoft.AzureStackHCI.ExtensionInstanceView.type,
-  "ExtensionInstanceViewType",
-  "csharp"
-);
+@@clientName(ExtensionInstanceView.type, "ExtensionInstanceViewType", "csharp");
 
 // ==================== Misc fixes ====================
 // CS0542 fix: KubernetesVersionProperties.version flattens to property named
 // same as enclosing type KubernetesVersion
-@@clientName(Microsoft.AzureStackHCI.KubernetesVersionProperties.version,
+@@clientName(KubernetesVersionProperties.version,
   "kubernetesVersionValue",
   "csharp"
 );
@@ -771,107 +474,86 @@ using Microsoft.AzureStackHCI;
 // CS0102 fix: Step.lastUpdatedTimeUtc → LastUpdatedOn collides with
 // UpdateRunProperties.lastUpdatedTime → LastUpdatedOn (generator naming bug)
 // Fix: rename UpdateRunProperties.lastUpdatedTime to LastCompletedOn (matches old SDK name)
-@@clientName(Microsoft.AzureStackHCI.UpdateRunProperties.lastUpdatedTime,
-  "LastCompletedOn",
-  "csharp"
-);
+@@clientName(UpdateRunProperties.lastUpdatedTime, "LastCompletedOn", "csharp");
 
 // CS0108 fix: UpdateRun.name hides ResourceData.Name
-@@clientName(Microsoft.AzureStackHCI.UpdateRun.name, "updateRunName", "csharp");
+@@clientName(UpdateRun.name, "updateRunName", "csharp");
 
 // CS0108 fix: Step.name flattens to Name on HciClusterUpdateRunData, hiding ResourceData.Name
 // Old autorest flatten name was NamePropertiesProgressName
-// @@clientName(Microsoft.AzureStackHCI.Step.name, "ProgressName", "csharp");
+// @@clientName(Step.name, "ProgressName", "csharp");
 
 // ==================== Type overrides (uuid format) ====================
 // Old autorest.md had -|uuid format override for these string properties
-@@alternateType(Microsoft.AzureStackHCI.ClusterReportedProperties.clusterId,
-  Azure.Core.uuid,
-  "csharp"
-);
-@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.cloudId,
-  Azure.Core.uuid,
-  "csharp"
-);
+@@alternateType(ClusterReportedProperties.clusterId, Azure.Core.uuid, "csharp");
+@@alternateType(ClusterProperties.cloudId, Azure.Core.uuid, "csharp");
 // ClusterProperties identity/AAD fields
-@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadClientId,
+@@alternateType(ClusterProperties.aadClientId, Azure.Core.uuid, "csharp");
+@@alternateType(ClusterProperties.aadTenantId, Azure.Core.uuid, "csharp");
+@@alternateType(ClusterProperties.aadApplicationObjectId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadTenantId,
-  Azure.Core.uuid,
-  "csharp"
-);
-@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadApplicationObjectId,
-  Azure.Core.uuid,
-  "csharp"
-);
-@@alternateType(Microsoft.AzureStackHCI.ClusterProperties.aadServicePrincipalObjectId,
+@@alternateType(ClusterProperties.aadServicePrincipalObjectId,
   Azure.Core.uuid,
   "csharp"
 );
 // ClusterPatchProperties identity/AAD fields
-@@alternateType(Microsoft.AzureStackHCI.ClusterPatchProperties.aadClientId,
-  Azure.Core.uuid,
-  "csharp"
-);
-@@alternateType(Microsoft.AzureStackHCI.ClusterPatchProperties.aadTenantId,
-  Azure.Core.uuid,
-  "csharp"
-);
+@@alternateType(ClusterPatchProperties.aadClientId, Azure.Core.uuid, "csharp");
+@@alternateType(ClusterPatchProperties.aadTenantId, Azure.Core.uuid, "csharp");
 // ClusterIdentityResponseProperties
-@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadClientId,
+@@alternateType(ClusterIdentityResponseProperties.aadClientId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadTenantId,
+@@alternateType(ClusterIdentityResponseProperties.aadTenantId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadServicePrincipalObjectId,
+@@alternateType(ClusterIdentityResponseProperties.aadServicePrincipalObjectId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ClusterIdentityResponseProperties.aadApplicationObjectId,
+@@alternateType(ClusterIdentityResponseProperties.aadApplicationObjectId,
   Azure.Core.uuid,
   "csharp"
 );
 // ArcSettingProperties
-@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcApplicationClientId,
+@@alternateType(ArcSettingProperties.arcApplicationClientId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcApplicationTenantId,
+@@alternateType(ArcSettingProperties.arcApplicationTenantId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcServicePrincipalObjectId,
+@@alternateType(ArcSettingProperties.arcServicePrincipalObjectId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.arcApplicationObjectId,
+@@alternateType(ArcSettingProperties.arcApplicationObjectId,
   Azure.Core.uuid,
   "csharp"
 );
 // ArcIdentityResponseProperties
-@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcApplicationClientId,
+@@alternateType(ArcIdentityResponseProperties.arcApplicationClientId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcApplicationTenantId,
+@@alternateType(ArcIdentityResponseProperties.arcApplicationTenantId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcServicePrincipalObjectId,
+@@alternateType(ArcIdentityResponseProperties.arcServicePrincipalObjectId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ArcIdentityResponseProperties.arcApplicationObjectId,
+@@alternateType(ArcIdentityResponseProperties.arcApplicationObjectId,
   Azure.Core.uuid,
   "csharp"
 );
 // PerNodeState
-@@alternateType(Microsoft.AzureStackHCI.PerNodeState.arcNodeServicePrincipalObjectId,
+@@alternateType(PerNodeState.arcNodeServicePrincipalObjectId,
   Azure.Core.uuid,
   "csharp"
 );
@@ -880,29 +562,25 @@ using Microsoft.AzureStackHCI;
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.UpdateRun.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-@@alternateType(Microsoft.AzureStackHCI.UpdateSummaries.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
+@@alternateType(UpdateRun.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(UpdateSummaries.location, Azure.Core.azureLocation, "csharp");
 // Old GA had ResourceIdentifier type for these string properties
-@@alternateType(Microsoft.AzureStackHCI.RemoteSupportNodeSettings.arcResourceId,
+@@alternateType(RemoteSupportNodeSettings.arcResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.DeploymentSettingsProperties.arcNodeResourceIds,
+@@alternateType(DeploymentSettingsProperties.arcNodeResourceIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
 // Old GA had BinaryData type for connectivityProperties
-@@alternateType(Microsoft.AzureStackHCI.ArcSettingProperties.connectivityProperties,
+@@alternateType(ArcSettingProperties.connectivityProperties, unknown, "csharp");
+@@alternateType(ArcSettingsPatchProperties.connectivityProperties,
   unknown,
   "csharp"
 );
-@@alternateType(Microsoft.AzureStackHCI.ArcSettingsPatchProperties.connectivityProperties,
-  unknown,
+// Old GA had Nullable<EceDeploymentMode> — spec changed from optional to required
+@@alternateType(DeploymentSettingsProperties.deploymentMode,
+  DeploymentMode | null,
   "csharp"
 );
