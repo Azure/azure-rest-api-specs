@@ -39,18 +39,19 @@ tag: package-2020-01-01
 
 These settings apply only when `--tag=package-flexibleserver-2026-04-01-preview` is specified on the command line.
 
-````yaml $(tag) == 'package-flexibleserver-2026-04-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2026-04-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2026-04-01-preview/openapi.json
+```
 
 ### Tag: package-flexibleserver-2026-01-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2026-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2026-01-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2026-01-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2026-01-01-preview/openapi.json
-````
+```
 
 ### Tag: package-flexibleserver-2025-08-01
 
