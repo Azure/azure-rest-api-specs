@@ -56,17 +56,6 @@ input-file:
   - Microsoft.HybridContainerService/preview/2026-04-01-preview/openapi.json
 ```
 
-
-### Tag: package-preview-2025-02-01-preview
-
-These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-02-01-preview'
-input-file:
-  - Microsoft.HybridContainerService/preview/2025-02-01-preview/provisionedClusterInstances.json
-  - Microsoft.HybridContainerService/preview/2025-02-01-preview/virtualNetworks.json
-```
-
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
@@ -96,28 +85,6 @@ suppressions:
     reason: Since provisionedClusters/default resource is defined as an extension resource to the connected cluster resource, we can't really list by subscription and this rule does not apply.
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: This is a false alarm for the /default APIs, as they return a singleton resource and not a collection of resources
-```
-
-### Tag: package-preview-2022-09
-
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-09'
-input-file:
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/provisionedClusters.json
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/storageSpaces.json
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/virtualNetworks.json
-```
-
-### Tag: package-2022-05-01-preview
-
-These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-05-01-preview'
-input-file:
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/provisionedClusters.json
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/virtualNetworks.json
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/storageSpaces.json
 ```
 
 ---
