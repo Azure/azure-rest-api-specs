@@ -37,7 +37,23 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.Network;
+@TypeSpec.Versioning.versioned(Versions)
+namespace Common;
+
+/**
+ * The available API versions.
+ */
+enum Versions {
+  /**
+   * The 2018-10-01 API version.
+   */
+  v2018_10_01: "2018-10-01",
+
+  /**
+   * The 2025-05-01 API version.
+   */
+  v2025_05_01: "2025-05-01",
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
