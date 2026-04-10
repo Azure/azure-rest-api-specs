@@ -493,5 +493,52 @@ interface Clients {
 );
 
 // PrivateLinkResource per-parent model naming
-@@clientName(DomainPrivateLinkResource, "EventGridDomainPrivateLinkResource", "csharp");
-@@clientName(TopicPrivateLinkResource, "EventGridTopicPrivateLinkResource", "csharp");
+@@clientName(DomainPrivateLinkResource,
+  "EventGridDomainPrivateLinkResource",
+  "csharp"
+);
+@@clientName(TopicPrivateLinkResource,
+  "EventGridTopicPrivateLinkResource",
+  "csharp"
+);
+
+// Flatten properties for per-parent PrivateLinkResource Data classes for backward compat
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DomainPrivateLinkResource.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TopicPrivateLinkResource.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PartnerNamespacePrivateLinkResource.properties,
+  "csharp"
+);
+
+// Rename EventSubscriptionsOperationGroup subscription-level list methods to match old SDK method names
+@@clientName(EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
+  "listGlobalEventSubscriptionsDataForTopicType",
+  "csharp"
+);
+@@clientName(EventSubscriptionsOperationGroup.listRegionalBySubscription,
+  "listRegionalEventSubscriptionsData",
+  "csharp"
+);
+@@clientName(EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
+  "listRegionalEventSubscriptionsDataForTopicType",
+  "csharp"
+);
+// Rename EventSubscriptionsOperationGroup resource-group-level list methods to match old SDK method names
+@@clientName(EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
+  "listGlobalEventSubscriptionsDataByResourceGroupForTopicType",
+  "csharp"
+);
+@@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
+  "listRegionalEventSubscriptionsDataByResourceGroup",
+  "csharp"
+);
+@@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
+  "listRegionalEventSubscriptionsDataByResourceGroupForTopicType",
+  "csharp"
+);
