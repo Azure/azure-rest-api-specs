@@ -55,6 +55,11 @@ enum Versions {
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2025-07-01 API version.
+   */
+  v2025_07_01: "2025-07-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1931,6 +1936,19 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * The DDoS protection settings associated with the frontend IP configuration.
+   */
+  @added(Versions.v2025_07_01)
+  ddosSettings?: DdosFrontendIpConfigurationSettings;
+}
+
+/** DDoS protection settings for a frontend IP configuration. */
+@added(Versions.v2025_07_01)
+model DdosFrontendIpConfigurationSettings {
+  /** The reference to the DDoS Custom Policy resource. */
+  ddosCustomPolicy?: SubResource;
 }
 
 /**
