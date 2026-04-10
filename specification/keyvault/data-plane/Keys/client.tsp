@@ -100,6 +100,7 @@ op encrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -136,6 +137,7 @@ op decrypt is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -172,6 +174,7 @@ op sign is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -208,6 +211,7 @@ op verify is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -244,6 +248,7 @@ op wrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -280,6 +285,7 @@ op unwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -318,6 +324,7 @@ op secureWrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -357,6 +364,7 @@ op secureUnwrapKey is KeyVaultOperation<
      */
     @path("key-version")
     @clientName("version", "go")
+    @clientOption("allowEmpty", true, "rust")
     keyVersion: string;
 
     /**
@@ -446,6 +454,8 @@ op getKeyAttestation is KeyVaultOperation<
 @@override(KeyVault.verify, verify);
 @@override(KeyVault.wrapKey, wrapKey);
 @@override(KeyVault.unwrapKey, unwrapKey);
+@@override(KeyVault.secureWrapKey, secureWrapKey);
+@@override(KeyVault.secureUnwrapKey, secureUnwrapKey);
 @@override(KeyVault.release, release, "!rust");
 @@override(KeyVault.getKeyAttestation, getKeyAttestation, "!rust");
 
