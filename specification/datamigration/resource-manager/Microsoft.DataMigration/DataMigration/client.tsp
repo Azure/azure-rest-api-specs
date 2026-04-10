@@ -13,6 +13,10 @@ using Microsoft.DataMigration;
   "ConnectToTargetSQLDbSyncTaskProperties",
   "go"
 );
+@@clientName(ConnectToTargetSqlSqlDbSyncTaskInput,
+  "ConnectToTargetSQLDbSyncTaskInput",
+  "go"
+);
 @@clientName(DatabaseMigrationCosmosDbMongos.getForScope,
   "listForScope",
   "javascript"
