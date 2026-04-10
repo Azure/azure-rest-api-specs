@@ -39,11 +39,11 @@ interface PrivateEndpointConnections {
    * Deletes the specified private endpoint connection associated with the private link. This operation will disconnect the private endpoint and remove the connection configuration.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is PrivateEndpointOperations.DeleteAsync<
     PrivateLinkResource,
     PrivateEndpointConnection,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
