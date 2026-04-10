@@ -18060,6 +18060,58 @@
         },
         "description": "The fabric data agent tool parameters."
       },
+      "FabricIQPreviewTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "server_label"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "fabric_iq_preview"
+            ],
+            "description": "The object type, which is always `fabric_iq_preview`.",
+            "x-stainless-const": true
+          },
+          "server_label": {
+            "type": "string",
+            "description": "A label for this MCP server, used to identify it in tool calls."
+          },
+          "server_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
+          },
+          "require_approval": {
+            "anyOf": [
+              {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
+                  }
+                ],
+                "nullable": true
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "always",
+                  "never"
+                ],
+                "nullable": true
+              }
+            ],
+            "default": "always"
+          },
+          "project_connection_id": {
+            "type": "string",
+            "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          }
+        }
+      },
       "FileDatasetVersion": {
         "type": "object",
         "required": [
@@ -38690,7 +38742,8 @@
             "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
             "custom": "#/components/schemas/OpenAI.CustomToolParam",
             "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
-            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam"
+            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam",
+            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool"
           }
         },
         "description": "A tool that can be used to generate a response."
@@ -39039,7 +39092,8 @@
               "bing_grounding",
               "capture_structured_outputs",
               "openapi",
-              "memory_search"
+              "memory_search",
+              "fabric_iq_preview"
             ]
           }
         ]
