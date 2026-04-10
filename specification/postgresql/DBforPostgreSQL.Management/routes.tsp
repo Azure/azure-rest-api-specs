@@ -9,7 +9,6 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.DBforPostgreSQL;
@@ -172,4 +171,15 @@ interface MaintenanceEvents {
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
+}
+
+@doc("Major version upgrade precheck operations for PostgreSQL flexible servers.")
+@armResourceOperations
+@added(Versions.v2026_04_01)
+interface MajorVersionUpgradePrecheck {
+  @doc("Gets information about a major version upgrade precheck for a flexible server.")
+  get is ArmResourceRead<MajorVersionUpgradePrecheckResource>;
+
+  @doc("Lists major version upgrade prechecks for a flexible server.")
+  list is ArmResourceListByParent<MajorVersionUpgradePrecheckResource>;
 }

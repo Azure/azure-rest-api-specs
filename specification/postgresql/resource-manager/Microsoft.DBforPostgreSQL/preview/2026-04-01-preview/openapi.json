@@ -83,6 +83,9 @@
     },
     {
       "name": "MaintenanceEvents"
+    },
+    {
+      "name": "MajorVersionUpgradePrecheck"
     }
   ],
   "paths": {
@@ -3004,6 +3007,188 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/majorVersionUpgradePrecheck": {
+      "get": {
+        "operationId": "MajorVersionUpgradePrecheck_List",
+        "tags": [
+          "MajorVersionUpgradePrecheck"
+        ],
+        "description": "Lists major version upgrade prechecks for a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MajorVersionUpgradePrecheckResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all major version upgrade precheck validations for a server.": {
+            "$ref": "./examples/MajorVersionUpgradePrecheckListByServer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Servers_MajorVersionUpgradePrecheck",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Begin Major Version Upgrade Prechecks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MajorVersionUpgradePrecheckCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a major version upgrade precheck validation for a PostgreSQL flexible server.": {
+            "$ref": "./examples/ServersMajorVersionUpgradePrecheck.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/majorVersionUpgradePrecheck/{precheckValidationId}": {
+      "get": {
+        "operationId": "MajorVersionUpgradePrecheck_Get",
+        "tags": [
+          "MajorVersionUpgradePrecheck"
+        ],
+        "description": "Gets information about a major version upgrade precheck for a flexible server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          },
+          {
+            "name": "precheckValidationId",
+            "in": "path",
+            "description": "The name of the MajorVersionUpgradePrecheckResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MajorVersionUpgradePrecheckResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a major version upgrade precheck validation.": {
+            "$ref": "./examples/MajorVersionUpgradePrecheckGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/migrateNetwork": {
       "post": {
         "operationId": "Servers_MigrateNetworkMode",
@@ -5082,6 +5267,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureManagedDiskPerformanceTier": {
       "type": "string",
       "description": "Storage tier of a server.",
@@ -7050,6 +7240,96 @@
         }
       }
     },
+    "MajorVersionUpgradePrecheckCreateRequest": {
+      "type": "object",
+      "description": "Request model for creating a major version upgrade precheck.",
+      "properties": {
+        "targetVersion": {
+          "$ref": "#/definitions/PostgresMajorVersion",
+          "description": "The target major version to upgrade to."
+        }
+      },
+      "required": [
+        "targetVersion"
+      ]
+    },
+    "MajorVersionUpgradePrecheckResource": {
+      "type": "object",
+      "description": "Maintenance event resource for a PostgreSQL flexible server.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MajorVersionUpgradePrecheckResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MajorVersionUpgradePrecheckResourceListResult": {
+      "type": "object",
+      "description": "The response of a MajorVersionUpgradePrecheckResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MajorVersionUpgradePrecheckResource items on this page",
+          "items": {
+            "$ref": "#/definitions/MajorVersionUpgradePrecheckResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MajorVersionUpgradePrecheckResourceProperties": {
+      "type": "object",
+      "description": "Major version upgrade precheck resource with validation results.",
+      "properties": {
+        "subscriptionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The ID of the target subscription. The value must be an UUID.",
+          "minLength": 1
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the precheck was created."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the precheck validation."
+        },
+        "precheckResult": {
+          "$ref": "#/definitions/PrecheckResult",
+          "description": "The detailed result of the precheck operation."
+        },
+        "targetVersion": {
+          "$ref": "#/definitions/PostgresMajorVersion",
+          "description": "The target PostgreSQL major version for the upgrade."
+        },
+        "policyDetails": {
+          "type": "array",
+          "description": "Array of policy validation details.",
+          "items": {
+            "$ref": "#/definitions/PolicyDetail"
+          },
+          "x-ms-identifiers": [
+            "policyName"
+          ]
+        }
+      },
+      "required": [
+        "subscriptionId"
+      ]
+    },
     "MetricSpecification": {
       "type": "object",
       "description": "Metric specification for an operation.",
@@ -8314,6 +8594,33 @@
         ]
       }
     },
+    "PolicyDetail": {
+      "type": "object",
+      "description": "Policy validation details.",
+      "properties": {
+        "policyName": {
+          "type": "string",
+          "description": "The name of the policy."
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "Whether the policy validation passed."
+        },
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The error code if validation failed."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message if validation failed."
+        },
+        "policyDescription": {
+          "type": "string",
+          "description": "Description of what the policy validates."
+        }
+      }
+    },
     "PostgreSqlFlexibleServerHighAvailabilityMode": {
       "type": "string",
       "description": "Mode of high availability supported for this compute.",
@@ -8402,6 +8709,48 @@
             "description": "PostgreSQL 11."
           }
         ]
+      }
+    },
+    "PrecheckErrorInfo": {
+      "type": "object",
+      "description": "Error information from precheck validation.",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The error code."
+        },
+        "errorParameters": {
+          "type": "array",
+          "description": "The error parameters.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrecheckResult": {
+      "type": "object",
+      "description": "Precheck result details.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "The action performed."
+        },
+        "upgradeSequence": {
+          "$ref": "#/definitions/UpgradeSequence",
+          "description": "The upgrade sequence information."
+        },
+        "errorInfo": {
+          "type": "array",
+          "description": "Array of error information.",
+          "items": {
+            "$ref": "#/definitions/PrecheckErrorInfo"
+          },
+          "x-ms-identifiers": [
+            "errorCode"
+          ]
+        }
       }
     },
     "PrincipalType": {
@@ -9979,6 +10328,20 @@
           "type": "string",
           "description": "State of the tuning option.",
           "readOnly": true
+        }
+      }
+    },
+    "UpgradeSequence": {
+      "type": "object",
+      "description": "Upgrade sequence information.",
+      "properties": {
+        "sourceVersion": {
+          "$ref": "#/definitions/PostgresMajorVersion",
+          "description": "The source PostgreSQL version."
+        },
+        "targetVersion": {
+          "$ref": "#/definitions/PostgresMajorVersion",
+          "description": "The target PostgreSQL version."
         }
       }
     },

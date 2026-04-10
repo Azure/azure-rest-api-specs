@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "api-version": "2026-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "createTime": "2026-04-10T00:55:46.0983792Z",
+            "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+            "status": "Succeeded",
+            "precheckResult": {
+              "Action": "Precheck",
+              "UpgradeSequence": {
+                "SourceVersion": "11",
+                "TargetVersion": "15"
+              },
+              "ErrorInfo": [
+                {
+                  "ErrorCode": 1020,
+                  "ErrorParameters": [
+                    "test_activity_view",
+                    "public",
+                    "postgres"
+                  ]
+                }
+              ]
+            },
+            "targetVersion": "15",
+            "policyDetails": [
+              {
+                "policyName": "NoViewDependentObjectsPrecheckPolicy",
+                "passed": false,
+                "errorCode": 1020,
+                "errorMessage": "Upgrading with views dependent upon test_activity_view is not allowed. Found dependent object public in database postgres. Please drop this view prior to reattempting the upgrade.",
+                "policyDescription": "Confirm there are no view-dependent objects."
+              }
+            ]
+          },
+          {
+            "createTime": "2026-04-09T15:22:33.1234567Z",
+            "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+            "status": "Succeeded",
+            "precheckResult": {
+              "Action": "Precheck",
+              "UpgradeSequence": {
+                "SourceVersion": "11",
+                "TargetVersion": "14"
+              },
+              "ErrorInfo": []
+            },
+            "targetVersion": "14",
+            "policyDetails": [
+              {
+                "policyName": "NotSupportedExtensionPrecheckPolicy",
+                "passed": true,
+                "errorCode": 0,
+                "policyDescription": "Confirm that server extensions are supported for this upgrade path."
+              },
+              {
+                "policyName": "NoReplicationSlotsPrecheckPolicy",
+                "passed": true,
+                "errorCode": 0,
+                "policyDescription": "Confirm there are no logical replication slots."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MajorVersionUpgradePrecheck_List",
+  "title": "List all major version upgrade precheck validations for a server."
+}

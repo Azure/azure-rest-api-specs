@@ -4011,6 +4011,101 @@ model MaintenanceEventRescheduleRequest {
   postponeToDateTime: utcDateTime;
 }
 
+@doc("Error information from precheck validation.")
+@added(Versions.v2026_04_01)
+model PrecheckErrorInfo {
+  @doc("The error code.")
+  errorCode?: int32;
+
+  @doc("The error parameters.")
+  errorParameters?: string[];
+}
+
+@doc("Upgrade sequence information.")
+@added(Versions.v2026_04_01)
+model UpgradeSequence {
+  @doc("The source PostgreSQL version.")
+  sourceVersion?: PostgresMajorVersion;
+
+  @doc("The target PostgreSQL version.")
+  targetVersion?: PostgresMajorVersion;
+}
+
+@doc("Precheck result details.")
+@added(Versions.v2026_04_01)
+model PrecheckResult {
+  @doc("The action performed.")
+  action?: string;
+
+  @doc("The upgrade sequence information.")
+  upgradeSequence?: UpgradeSequence;
+
+  @doc("Array of error information.")
+  @identifiers(#["errorCode"])
+  errorInfo?: PrecheckErrorInfo[];
+}
+
+@doc("Policy validation details.")
+@added(Versions.v2026_04_01)
+model PolicyDetail {
+  @doc("The name of the policy.")
+  policyName?: string;
+
+  @doc("Whether the policy validation passed.")
+  passed?: boolean;
+
+  @doc("The error code if validation failed.")
+  errorCode?: int32;
+
+  @doc("The error message if validation failed.")
+  errorMessage?: string;
+
+  @doc("Description of what the policy validates.")
+  policyDescription?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Major Version Upgrade Precheck are read-only resources that do not have a provisioning lifecycle."
+@doc("Major version upgrade precheck resource with validation results.")
+@added(Versions.v2026_04_01)
+model MajorVersionUpgradePrecheckResourceProperties {
+  ...SubscriptionIdParameter;
+
+  @doc("The time when the precheck was created.")
+  createTime?: utcDateTime;
+
+  @doc("The status of the precheck validation.")
+  status?: string;
+
+  @doc("The detailed result of the precheck operation.")
+  precheckResult?: PrecheckResult;
+
+  @doc("The target PostgreSQL major version for the upgrade.")
+  targetVersion?: PostgresMajorVersion;
+
+  @doc("Array of policy validation details.")
+  @identifiers(#["policyName"])
+  policyDetails?: PolicyDetail[];
+}
+
+@doc("Request model for creating a major version upgrade precheck.")
+@added(Versions.v2026_04_01)
+model MajorVersionUpgradePrecheckCreateRequest {
+  @doc("The target major version to upgrade to.")
+  targetVersion: PostgresMajorVersion;
+}
+
+@doc("Maintenance event resource for a PostgreSQL flexible server.")
+@parentResource(Server)
+@added(Versions.v2026_04_01)
+model MajorVersionUpgradePrecheckResource
+  is Azure.ResourceManager.ProxyResource<MajorVersionUpgradePrecheckResourceProperties> {
+  ...ResourceNameParameter<
+    MajorVersionUpgradePrecheckResource,
+    KeyName = "precheckValidationId",
+    SegmentName = "majorVersionUpgradePrecheck"
+  >;
+}
+
 @@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);
 @@visibility(CapabilityList.value, Lifecycle.Read);
 @@visibility(MigrationList.value, Lifecycle.Read);
