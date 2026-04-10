@@ -7,5 +7,3 @@ using Azure.ClientGenerator.Core;
   "ResourceManagementClient",
   "javascript,python"
 );
-
-@@clientName(Microsoft.Resources.TagsResource, "TagResource", "java");
