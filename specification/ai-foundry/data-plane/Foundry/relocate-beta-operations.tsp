@@ -92,11 +92,6 @@ interface Agents {}
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.downloadSessionFile, Agents);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile, Agents);
-// Move ManagedAgentIdentityBlueprints
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, Agents);
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, Agents);
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, Agents);
-@@clientLocation(Azure.AI.Projects.ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, Agents);
 // Move preview operations out of root Agent into Beta Agents
 @@clientLocation(Azure.AI.Projects.Agents.patchAgentObject, Agents);
 @@clientLocation(Azure.AI.Projects.Agents.createSession, Agents);

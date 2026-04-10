@@ -23,7 +23,6 @@ import "./src/schedules/routes.tsp";
 import "./src/toolboxes/routes.tsp";
 import "./src/skills/routes.tsp";
 import "./src/agents-session-files/routes.tsp";
-import "./src/managed-blueprints/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -247,15 +246,6 @@ using Azure.AI.Projects;
 @@clientName(Skills.listSkills, "list");
 @@clientName(Skills.updateSkill, "update");
 @@clientName(Skills.deleteSkill, "delete");
-
-// --------------------------------------------------------------------------------
-// ManagedAgentIdentityBlueprints operations on .beta.agents sub-client
-// --------------------------------------------------------------------------------
-
-@@clientName(ManagedAgentIdentityBlueprints.createOrUpdateManagedAgentIdentityBlueprint, "create_or_update_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.getManagedAgentIdentityBlueprint, "get_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.deleteManagedAgentIdentityBlueprint, "delete_managed_identity_blueprint");
-@@clientName(ManagedAgentIdentityBlueprints.listManagedAgentIdentityBlueprints, "list_managed_identity_blueprints");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client

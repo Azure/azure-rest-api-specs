@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+@removed(Versions.v1)
 interface ManagedAgentIdentityBlueprints {
   @put
   @route("/managedAgentIdentityBlueprints/{blueprint_name}")
