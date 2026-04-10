@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
-using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using Storage.Blob;
 
@@ -140,6 +139,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 );
 @@alternateType(StructuredContentLengthResponseHeader.structuredContentLength,
   uint64,
+  "rust"
+);
+
+// Range alternate type for Rust - applied to the underlying scalar type
+@@alternateType(Storage.Blob.HttpRangeString,
+  {
+    identity: "crate::models::HttpRange",
+  },
   "rust"
 );
 

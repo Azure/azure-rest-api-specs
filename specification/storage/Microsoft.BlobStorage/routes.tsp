@@ -1538,11 +1538,7 @@ interface PageBlob {
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
       ...TimeoutParameter;
-
-      /** Bytes of data in the specified range. */
-      @header("Range")
-      range: string;
-
+      ...PageRangeRequiredParameter;
       ...LeaseIdOptionalParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
@@ -1589,11 +1585,7 @@ interface PageBlob {
       contentLength: 0;
 
       ...TimeoutParameter;
-
-      /** Bytes of data in the specified range. */
-      @header("Range")
-      range: string;
-
+      ...PageRangeRequiredParameter;
       ...LeaseIdOptionalParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
@@ -1629,20 +1621,12 @@ interface PageBlob {
   uploadPagesFromUrl is StorageOperationNoBody<
     {
       ...SourceUrlParameter;
-
-      /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
-      @header("x-ms-source-range")
-      sourceRange: string;
-
+      ...SourceRangeRequiredParameter;
       ...SourceContentMd5Parameter;
       ...SourceContentCrc64Parameter;
       ...ContentLengthParameter;
       ...TimeoutParameter;
-
-      /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
-      @header("x-ms-range")
-      range: string;
-
+      ...DestinationRangeRequiredParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
       ...EncryptionAlgorithmParameter;
