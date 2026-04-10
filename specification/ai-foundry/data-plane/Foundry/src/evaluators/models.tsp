@@ -144,7 +144,7 @@ model GeneratedEvaluatorDefinition extends EvaluatorDefinition {
   taxonomy_version?: string;
 }
 
-@doc("Request body for evaluator generation")
+@doc("Request body for evaluator generation. If an evaluator with this name already exists, the service automatically retrieves the latest version's criteria and uses them as context for improvement.")
 model GenerateEvaluatorRequest {
   @doc("Source materials for generation (agent description, policies, traces, supplementary context)")
   sources: Source[];
@@ -154,9 +154,6 @@ model GenerateEvaluatorRequest {
 
   @doc("Optional: model deployment to use for generation (defaults to service default)")
   model_deployment_name?: string;
-
-  @doc("Optional: existing rubric criteria to use as a starting point for regeneration. The pipeline may keep, modify, or drop criteria based on alignment with sources.")
-  existing_criteria?: RubricCriterion[];
 }
 
 @doc("Response from evaluator generation — contains generated artifacts for review before saving as an evaluator version via createVersion")
