@@ -3,7 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(python)
+```yaml $(python)
 title: PostgreSQLManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
@@ -20,7 +20,7 @@ output-folder: $(python-sdks-folder)/postgresqlflexibleservers/azure-mgmt-postgr
 These settings apply only when `--tag=package-2020-01-01 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-01-01' && $(python)
+```yaml $(tag) == 'package-2020-01-01' && $(python)
 package-name: azure-mgmt-rdbms
 namespace: azure.mgmt.rdbms.postgresql
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
@@ -31,15 +31,15 @@ directive:
   - from: swagger-document
     where: $.definitions.ServerProperties.properties.sourceServerResourceId
     transform: >
-        $['format'] = 'string';
+      $['format'] = 'string';
 
   - from: swagger-document
     where: $.definitions.Network.properties.delegatedSubnetResourceId
     transform: >
-        $['format'] = 'string';
+      $['format'] = 'string';
 
   - from: swagger-document
     where: $.definitions.Network.properties.privateDnsZoneArmResourceId
     transform: >
-        $['format'] = 'string';
+      $['format'] = 'string';
 ```
