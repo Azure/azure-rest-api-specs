@@ -206,6 +206,9 @@ using Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(NetworkMonitor.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(NetworkMonitor.properties);
+
 // Backward compatibility models for list results
 model InternetGatewayRulesListResult is Azure.Core.Page<InternetGatewayRule>;
 model InternetGatewaysListResult is Azure.Core.Page<InternetGateway>;

@@ -9,4 +9,8 @@ enum CodeScanSitesApiVersions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-09-09-preview API Version.")
   v2025_09_09_preview: "2025-09-09-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-05-12-preview API Version.")
+  v2026_05_12_preview: "2026-05-12-preview",
 }
