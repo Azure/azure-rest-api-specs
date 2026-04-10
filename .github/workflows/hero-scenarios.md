@@ -15,6 +15,8 @@ tools:
   bash: ["cat", "echo", "grep", "head", "ls", "pwd", "sort", "tail", "wc"]
   cache-memory:
   repo-memory:
+imports:
+  - ../prompts/hero-scenarios-guidelines.md
 safe-outputs:
   add-comment:
     max: 1
@@ -40,4 +42,4 @@ timeout-minutes: 10
 Review pull request #${{ github.event.pull_request.number }} and suggest
 a service README with hero scenarios based on the API surface changed.
 
-Follow the procedure in [hero-scenarios-guidelines.md](../prompts/hero-scenarios-guidelines.md).
+Follow the hero-scenarios guidelines imported above.
