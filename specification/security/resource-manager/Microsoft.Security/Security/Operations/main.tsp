@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Microsoft Defender for Cloud" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-namespace Microsoft.Security;
+namespace OperationsAPI;
 
 /**
  * The available API versions.
@@ -45,3 +45,4 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @@doc(Operations.list,
   "Exposes all available operations for discovery purposes."
 );
+

@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace MdeOnboardingAPI;
 /**
  * The resource of the configuration or data needed to onboard the machine to MDE
  */
@@ -55,5 +55,6 @@ interface MdeOnboardings {
 @@doc(MdeOnboardingData.properties,
   "Properties of the MDE configuration or data parameter needed to onboard the machine to MDE"
 );
+
 
 

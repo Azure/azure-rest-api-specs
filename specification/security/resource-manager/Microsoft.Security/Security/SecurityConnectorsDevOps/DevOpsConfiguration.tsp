@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.Security;
+namespace SecurityConnectorsDevOpsAPI;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 alias DevOpsConfigurationOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -202,3 +202,4 @@ interface DevOpsConfigurations {
 @@doc(DevOpsConfigurations.update::parameters.properties,
   "The DevOps configuration resource payload."
 );
+

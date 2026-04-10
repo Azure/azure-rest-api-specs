@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace SubAssessmentsAPI;
 /**
  * Security sub-assessment on a resource
  */
@@ -102,5 +102,6 @@ interface SecuritySubAssessments {
 @@doc(SecuritySubAssessment.properties,
   "Describes properties of an sub-assessment."
 );
+
 
 

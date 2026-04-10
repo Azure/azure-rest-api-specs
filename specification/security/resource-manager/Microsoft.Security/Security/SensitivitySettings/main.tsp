@@ -31,7 +31,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Security;
+namespace SensitivitySettingsAPI;
 
 /**
  * The available API versions.
@@ -42,3 +42,4 @@ enum Versions {
    */
   v2023_02_15_preview: "2023-02-15-preview",
 }
+

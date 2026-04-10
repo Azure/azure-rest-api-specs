@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace SecureScoreAPI;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ExpandControlsEnum {
@@ -63,7 +63,7 @@ model SecureScoresList {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecureScoreItemProperties {
   /**
-   * The initiative’s name
+   * The initiativeâ€™s name
    */
   @visibility(Lifecycle.Read)
   displayName?: string;
@@ -298,5 +298,6 @@ model SecureScoreControlScore {
   @maxValue(1)
   percentage?: float64;
 }
+
 
 

@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace TasksAPI;
 /**
  * Security task that we recommend to do in order to strengthen security
  */
@@ -216,5 +216,6 @@ interface Tasks {
 
 @@doc(SecurityTask.name, "Name of the task object, will be a GUID");
 @@doc(SecurityTask.properties, "Describes properties of a task.");
+
 
 

@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace SettingsAPI;
 // FIXME: Setting has no properties property
 /**
  * The kind of the security setting
@@ -72,5 +72,6 @@ interface Settings {
 
 @@doc(Setting.name, "The name of the setting");
 @@doc(Settings.update::parameters.resource, "Setting object");
+
 
 

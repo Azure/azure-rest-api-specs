@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace HealthReportsAPI;
 
 /**
  * The status of the health report
@@ -256,3 +256,4 @@ model issue {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issueAdditionalData?: Record<string>;
 }
+

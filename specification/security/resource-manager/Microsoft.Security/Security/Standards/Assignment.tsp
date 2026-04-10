@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace StandardsAPI;
 /**
  * Security Assignment on a resource group over a given scope
  */
@@ -92,5 +92,6 @@ interface Assignments {
 @@doc(Assignments.createOrUpdate::parameters.resource,
   "Custom standard assignment over a pre-defined scope"
 );
+
 
 

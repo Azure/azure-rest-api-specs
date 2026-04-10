@@ -37,7 +37,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Security;
+namespace SecurityConnectorsDevOpsAPI;
 
 /**
  * The available API versions.
@@ -48,3 +48,4 @@ enum Versions {
    */
   v2025_11_01_preview: "2025-11-01-preview",
 }
+

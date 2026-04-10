@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace PrivateLinksAPI;
 
 /**
  * This determines if traffic is allowed over public network. By default it is disabled.
@@ -85,3 +85,4 @@ model PrivateLinkUpdate {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
+

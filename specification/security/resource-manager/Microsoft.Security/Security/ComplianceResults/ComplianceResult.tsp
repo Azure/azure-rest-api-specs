@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace ComplianceResultsAPI;
 /**
  * a compliance result
  */
@@ -76,5 +76,6 @@ interface ComplianceResults {
   "name of the desired assessment compliance result"
 );
 @@doc(ComplianceResult.properties, "Compliance result data");
+
 
 

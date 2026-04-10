@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace SensitivitySettingsAPI;
 /**
  * Data sensitivity settings for sensitive data discovery
  */
@@ -71,5 +71,6 @@ interface GetSensitivitySettingsResponses {
 @@doc(GetSensitivitySettingsResponses.createOrUpdate::parameters.resource,
   "The data sensitivity settings to update"
 );
+
 
 

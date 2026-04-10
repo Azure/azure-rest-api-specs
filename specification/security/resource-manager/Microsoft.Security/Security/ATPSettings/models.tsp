@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace ATPSettingsAPI;
 
 /**
  * The Advanced Threat Protection settings.
@@ -21,3 +21,4 @@ model AdvancedThreatProtectionProperties {
    */
   isEnabled?: boolean;
 }
+

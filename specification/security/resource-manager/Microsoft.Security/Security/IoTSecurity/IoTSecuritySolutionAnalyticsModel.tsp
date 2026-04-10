@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -12,7 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace IoTSecurityAPI;
 /**
  * Security analytics of your IoT Security solution
  */
@@ -51,5 +51,6 @@ interface IoTSecuritySolutionAnalyticsModels {
 @@doc(IoTSecuritySolutionAnalyticsModel.properties,
   "Security Solution  Aggregated Alert data"
 );
+
 
 

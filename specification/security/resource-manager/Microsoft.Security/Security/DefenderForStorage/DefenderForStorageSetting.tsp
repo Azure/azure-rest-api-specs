@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace DefenderForStorageAPI;
 /**
  * The Defender for Storage resource.
  */
@@ -164,5 +164,6 @@ interface DefenderForStorageSettings {
 @@doc(DefenderForStorageSettings.create::parameters.resource,
   "Defender for Storage Settings"
 );
+
 
 

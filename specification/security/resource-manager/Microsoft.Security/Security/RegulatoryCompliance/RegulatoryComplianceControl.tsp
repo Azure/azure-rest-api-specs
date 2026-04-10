@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -12,7 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace RegulatoryComplianceAPI;
 /**
  * Regulatory compliance control details and state
  */
@@ -65,5 +65,6 @@ interface RegulatoryComplianceControls {
 @@doc(RegulatoryComplianceControl.properties,
   "Regulatory compliance control data"
 );
+
 
 

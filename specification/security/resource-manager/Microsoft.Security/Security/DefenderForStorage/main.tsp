@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Security;
+namespace DefenderForStorageAPI;
 
 /**
  * The available API versions.
@@ -41,3 +41,4 @@ enum Versions {
    */
   v2025_09_01_preview: "2025-09-01-preview",
 }
+

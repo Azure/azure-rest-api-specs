@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace LegacySettingsAPI;
 /**
  * Compliance of a scope
  */
@@ -51,5 +51,6 @@ interface Compliances {
 
 @@doc(Compliance.name, "name of the Compliance");
 @@doc(Compliance.properties, "Compliance data");
+
 
 

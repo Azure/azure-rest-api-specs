@@ -31,7 +31,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Security;
+namespace TasksAPI;
 
 /**
  * The available API versions.
@@ -42,3 +42,4 @@ enum Versions {
    */
   v2015_06_01_preview: "2015-06-01-preview",
 }
+

@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace IoTSecurityAPI;
 
 /**
  * The value type of the items in the list.
@@ -1044,3 +1044,4 @@ model UnauthorizedOperationsNotInAllowedRange
    */
   ruleType: "UnauthorizedOperationsNotInAllowedRange";
 }
+

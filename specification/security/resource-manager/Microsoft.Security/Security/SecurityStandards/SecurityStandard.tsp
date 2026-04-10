@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Security;
+namespace SecurityStandardsAPI;
 /**
  * Security Standard on a resource
  */
@@ -69,3 +69,4 @@ interface SecurityStandards {
 @@doc(SecurityStandards.createOrUpdate::parameters.resource,
   "Custom security standard over a pre-defined scope"
 );
+

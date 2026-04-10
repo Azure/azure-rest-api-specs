@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace ATPSettingsAPI;
 /**
  * The Advanced Threat Protection resource.
  */
@@ -89,5 +89,6 @@ interface AdvancedThreatProtectionSettings {
 @@doc(AdvancedThreatProtectionSettings.create::parameters.resource,
   "Advanced Threat Protection Settings"
 );
+
 
 

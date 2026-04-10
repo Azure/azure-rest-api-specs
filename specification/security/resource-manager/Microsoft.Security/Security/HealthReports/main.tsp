@@ -29,7 +29,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Microsoft Defender for Cloud" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace Microsoft.Security;
+namespace HealthReportsAPI;
 
 /**
  * The available API versions.
@@ -40,3 +40,4 @@ enum Versions {
    */
   v2023_05_01_preview: "2023-05-01-preview",
 }
+

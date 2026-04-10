@@ -1,4 +1,4 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+﻿// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Security;
+namespace ApiCollectionsAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ApiCollectionsOperationGroup {
@@ -29,3 +29,4 @@ interface ApiCollectionsOperationGroup {
     Scope = Azure.ResourceManager.Extension.ResourceGroup
   >;
 }
+

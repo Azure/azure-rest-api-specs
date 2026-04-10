@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace LocationsAPI;
 /**
  * The ASC location of the subscription is in the "name" field
  */
@@ -53,5 +53,6 @@ interface AscLocations {
   "The location where ASC stores the data of the subscription. can be retrieved from Get locations"
 );
 @@doc(AscLocation.properties, "An empty set of properties");
+
 
 

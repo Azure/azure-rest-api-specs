@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Security;
+namespace PrivateLinksAPI;
 /**
  * A private link resource that enables secure, private connectivity to Microsoft Defender for Cloud services. This resource manages the lifecycle of private endpoint connections and provides the necessary infrastructure for private connectivity.
  */
@@ -96,3 +96,4 @@ interface PrivateLinkResources {
 @@doc(PrivateLinkResources.update::parameters.properties,
   "private link update payload containing only the properties to be updated."
 );
+

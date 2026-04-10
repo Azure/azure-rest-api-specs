@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 using Common;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.Security;
+namespace SecuritySolutionsAPI;
 
 @parentResource(ResourceGroupLocationResource)
 model TopologyResource
@@ -56,5 +56,6 @@ interface TopologyResources {
 
 @@doc(TopologyResource.name, "Name of a topology resources collection.");
 @@doc(TopologyResource.properties, "");
+
 
 

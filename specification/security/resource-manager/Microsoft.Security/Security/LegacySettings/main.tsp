@@ -33,7 +33,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Security;
+namespace LegacySettingsAPI;
 
 /**
  * The available API versions.
@@ -44,3 +44,4 @@ enum Versions {
    */
   v2017_08_01_preview: "2017-08-01-preview",
 }
+

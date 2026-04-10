@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.Security;
+namespace PricingsAPI;
 
 /**
  * The available API versions.
@@ -41,3 +41,4 @@ enum Versions {
    */
   v2024_01_01: "2024-01-01",
 }
+

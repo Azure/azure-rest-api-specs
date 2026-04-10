@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.Security;
+namespace SecurityConnectorsDevOpsAPI;
 /**
  * GitLab Group resource.
  */
@@ -94,3 +94,4 @@ interface GitLabGroups {
 
 @@doc(GitLabGroup.name, "The GitLab group fully-qualified name.");
 @@doc(GitLabGroup.properties, "GitLab Group properties.");
+

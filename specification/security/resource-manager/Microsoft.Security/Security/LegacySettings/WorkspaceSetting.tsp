@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace LegacySettingsAPI;
 /**
  * Configures where to store the OMS agent data for workspaces under a scope
  */
@@ -90,5 +90,6 @@ interface WorkspaceSettings {
 @@doc(WorkspaceSettings.update::parameters.properties,
   "Security data setting object"
 );
+
 
 

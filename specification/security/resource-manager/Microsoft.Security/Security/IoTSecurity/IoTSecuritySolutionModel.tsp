@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace IoTSecurityAPI;
 /**
  * IoT Security solution configuration and resource information.
  */
@@ -112,5 +112,6 @@ interface IoTSecuritySolutionModels {
 @@doc(IoTSecuritySolutionModels.update::parameters.properties,
   "The security solution data"
 );
+
 
 

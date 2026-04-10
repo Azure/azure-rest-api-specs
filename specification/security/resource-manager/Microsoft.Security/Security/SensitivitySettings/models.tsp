@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace SensitivitySettingsAPI;
 
 /**
  * Microsoft information protection integration status
@@ -189,3 +189,4 @@ model GetSensitivitySettingsListResponse {
   @pageItems
   value?: GetSensitivitySettingsResponse[];
 }
+

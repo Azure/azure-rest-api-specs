@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Security;
+namespace PrivateLinksAPI;
 /**
  * The private endpoint connection resource.
  */
@@ -59,3 +59,4 @@ interface PrivateEndpointConnections {
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection resource."
 );
+

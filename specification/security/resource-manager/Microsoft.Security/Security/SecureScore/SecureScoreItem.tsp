@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace SecureScoreAPI;
 /**
  * Secure score item data model
  */
@@ -76,5 +76,6 @@ interface SecureScoreItems {
   "The initiative name. For the ASC Default initiative, use 'ascScore' as in the sample request below."
 );
 @@doc(SecureScoreItem.properties, "Secure score item");
+
 
 

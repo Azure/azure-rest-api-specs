@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace LocationsAPI;
 
 /**
  * List of locations where ASC saves your data
@@ -26,3 +26,4 @@ model AscLocationList {
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
+

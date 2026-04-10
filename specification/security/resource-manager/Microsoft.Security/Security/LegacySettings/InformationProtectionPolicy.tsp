@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace LegacySettingsAPI;
 /**
  * Information protection policy.
  */
@@ -69,5 +69,6 @@ interface InformationProtectionPolicies {
 @@doc(InformationProtectionPolicies.createOrUpdate::parameters.resource,
   "Information protection policy."
 );
+
 
 

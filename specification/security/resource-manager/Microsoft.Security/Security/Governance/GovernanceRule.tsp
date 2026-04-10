@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace GovernanceAPI;
 /**
  * Governance rule over a given scope
  */
@@ -144,5 +144,6 @@ interface GovernanceRules {
 @@doc(GovernanceRules.execute::parameters.body,
   "Execute governance rule over a given scope"
 );
+
 
 

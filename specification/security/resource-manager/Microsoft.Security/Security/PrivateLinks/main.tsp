@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "Microsoft Defender for Cloud - private links" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-namespace Microsoft.Security;
+namespace PrivateLinksAPI;
 
 /**
  * The available API versions.
@@ -41,3 +41,4 @@ enum Versions {
    */
   v2026_01_01: "2026-01-01",
 }
+

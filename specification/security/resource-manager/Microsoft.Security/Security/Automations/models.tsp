@@ -1,4 +1,4 @@
-import "@typespec/rest";
+﻿import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
 
-namespace Microsoft.Security;
+namespace AutomationsAPI;
 
 /**
  * A valid event source type.
@@ -566,4 +566,5 @@ model NotificationsSourceAttackPath extends NotificationsSource {
    */
   sourceType: "AttackPath";
 }
+
 

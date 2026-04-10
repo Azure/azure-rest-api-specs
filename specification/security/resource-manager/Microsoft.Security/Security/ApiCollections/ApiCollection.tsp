@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Security;
+namespace ApiCollectionsAPI;
 
 @minLength(1)
 @maxLength(50)
@@ -109,3 +109,4 @@ interface ApiCollections {
 @@doc(ApiCollection.properties,
   "Describes the properties of an API collection."
 );
+

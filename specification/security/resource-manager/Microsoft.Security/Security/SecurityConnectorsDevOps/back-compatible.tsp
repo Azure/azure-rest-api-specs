@@ -1,7 +1,7 @@
-import "@azure-tools/typespec-client-generator-core";
+﻿import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Security;
+using SecurityConnectorsDevOpsAPI;
 
 @@clientName(AzureDevOpsOrgs.createOrUpdate::parameters.resource,
   "azureDevOpsOrg"
@@ -49,3 +49,4 @@ using Microsoft.Security;
 
 @@clientLocation(GitLabGroups.gitLabSubgroupsList, "GitLabSubgroups");
 @@clientName(GitLabGroups.gitLabSubgroupsList, "List");
+

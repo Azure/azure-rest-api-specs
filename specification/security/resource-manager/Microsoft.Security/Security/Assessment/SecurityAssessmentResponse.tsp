@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace AssessmentAPI;
 /**
  * Security assessment on a resource - response format
  */
@@ -92,5 +92,6 @@ interface SecurityAssessmentResponses {
   "Calculated assessment on a pre-defined assessment metadata"
 );
 @@key(SecurityAssessmentResponsesScopeParameter.scope, "resourceId");
+
 
 

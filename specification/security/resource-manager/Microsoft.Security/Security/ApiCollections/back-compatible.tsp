@@ -1,7 +1,7 @@
-import "@azure-tools/typespec-client-generator-core";
+﻿import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Security;
+using ApiCollectionsAPI;
 
 @@clientLocation(ApiCollections.getByAzureApiManagementService,
   "APICollections"
@@ -20,3 +20,4 @@ using Microsoft.Security;
 @@clientLocation(ApiCollectionsOperationGroup.listByResourceGroup,
   "APICollections"
 );
+

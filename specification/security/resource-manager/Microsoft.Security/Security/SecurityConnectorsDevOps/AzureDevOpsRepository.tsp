@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-namespace Microsoft.Security;
+namespace SecurityConnectorsDevOpsAPI;
 /**
  * Azure DevOps Repository resource.
  */
@@ -122,3 +122,4 @@ interface AzureDevOpsRepositories {
 @@doc(AzureDevOpsRepositories.update::parameters.properties,
   "The Azure DevOps repository resource payload."
 );
+

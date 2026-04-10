@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.Security;
+namespace HealthReportsAPI;
 /**
  * The health report resource
  */
@@ -73,3 +73,4 @@ interface HealthReports {
   "The health report Key - Unique key for the health report type"
 );
 @@doc(HealthReport.properties, "Properties of a health report");
+

@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-azure-core";
+﻿import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Common;
 
-namespace Microsoft.Security;
+namespace PricingsAPI;
 /**
  * Microsoft Defender for Cloud is provided in two pricing tiers: free and standard. The standard tier offers advanced security capabilities, while the free tier offers basic security features.
  */
@@ -76,5 +76,6 @@ interface Pricings {
 @@doc(Pricing.name, "name of the pricing configuration");
 @@doc(Pricing.properties, "Pricing data");
 @@doc(Pricings.update::parameters.resource, "Pricing object");
+
 
 
