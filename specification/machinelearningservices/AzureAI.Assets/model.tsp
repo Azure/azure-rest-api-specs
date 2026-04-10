@@ -47,7 +47,7 @@ model AcceleratorMap {
   numberOfAcceleratorsPerModelInstance: int32;
 
   @doc("Whether this is the default accelerator configuration.")
-  isDefault?: boolean = false;
+  default?: boolean = false;
 }
 
 @doc("DeploymentTemplate resource definition")
