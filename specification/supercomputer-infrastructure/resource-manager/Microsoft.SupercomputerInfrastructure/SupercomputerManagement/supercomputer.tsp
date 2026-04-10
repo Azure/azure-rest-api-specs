@@ -33,6 +33,15 @@ union SupercomputerTier {
   /** A supercomputer in a Fairwater site. */
   Fairwater: "Fairwater",
 
+  /** A Nebius MIV50 Canary supercomputer. */
+  Offnet_Nebius_MIV50_Canary: "Offnet_Nebius_MIV50_Canary",
+
+  /** A Nebius MIV50 GB200 supercomputer. */
+  Offnet_Nebius_MIV50_GB200: "Offnet_Nebius_MIV50_GB200",
+
+  /** A Nebius MIV50 GB300 supercomputer. */
+  Offnet_Nebius_MIV50_GB300: "Offnet_Nebius_MIV50_GB300",
+
   string,
 }
 
