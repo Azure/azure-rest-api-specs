@@ -43,15 +43,9 @@ using Microsoft.ContainerInstance;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(NGroup.properties);
 
-@@clientLocation(ContainerGroupProfiles.get, CGProfile);
-@@clientLocation(ContainerGroupProfiles.createOrUpdate, CGProfile);
 @@clientName(ContainerGroupProfiles.createOrUpdate::parameters.resource,
   "ContainerGroupProfile"
 );
-@@clientLocation(ContainerGroupProfiles.update, CGProfile);
-@@clientLocation(ContainerGroupProfiles.delete, CGProfile);
-@@clientLocation(ContainerGroupProfiles.listBySubscription, "CGProfiles");
-@@clientLocation(ContainerGroupProfiles.listByResourceGroup, "CGProfiles");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerGroupProfile.properties);
 
