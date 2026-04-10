@@ -14,21 +14,19 @@
 4. If no specification surface was changed, post a single message saying
    no hero scenarios are applicable and stop.
 
-## Step 1 — Check for Existing README
+## Step 1 — Check for Existing Hero Scenarios
 
-Check whether the service already has a `README.md` with hero scenarios.
+Check whether the service already has a `hero-scenarios.md` file.
 Look in the top-level service directory (e.g.,
-`specification/loadtestservice/README.md`) and in each spec subdirectory
-(e.g., `resource-manager/Microsoft.LoadTestService/loadtesting/readme.md`,
-`data-plane/loadtesting/readme.md`).
+`specification/loadtestservice/hero-scenarios.md`) and in each spec subdirectory
+(e.g., `resource-manager/Microsoft.LoadTestService/loadtesting/hero-scenarios.md`,
+`data-plane/loadtesting/hero-scenarios.md`).
 
-- **If no README with hero scenarios exists** (or all READMEs only
-  contain AutoRest configuration), you will generate a full suggested
-  `README.md` in Step 3.
-- **If a README already exists** with substantive service documentation,
-  read it and note the existing hero scenarios. In Step 3, you will only
-  suggest new scenarios that cover API surface introduced by this PR and
-  not already covered.
+- **If no `hero-scenarios.md` exists**, you will generate a full suggested
+  `hero-scenarios.md` in Step 3.
+- **If a `hero-scenarios.md` already exists**, read it and note the existing
+  hero scenarios. In Step 3, you will only suggest new scenarios that cover
+  API surface introduced by this PR and not already covered.
 
 ## Step 2 — Analyze the API Surface
 
@@ -250,27 +248,27 @@ For each scenario, include:
 
 ## Step 4 — Post the Suggestion
 
-**If no README exists**, use `add-comment` to post a PR comment with a
-full suggested README:
+**If no `hero-scenarios.md` exists**, use `add-comment` to post a PR comment
+with a full suggested file:
 
 ```
-## 📖 Suggested README.md
+## 📖 Suggested hero-scenarios.md
 
-> **Path:** `specification/{service}/{specDir}/README.md`
+> **Path:** `specification/{service}/{specDir}/hero-scenarios.md`
 >
-> This service directory has no README documenting the service and its
-> hero scenarios. Consider adding one:
+> This service directory has no `hero-scenarios.md` documenting hero
+> scenarios. Consider adding one:
 
-<the README content as raw markdown — do NOT wrap it in a code fence>
+<the hero-scenarios.md content as raw markdown — do NOT wrap it in a code fence>
 ```
 
-The README should include:
+The file should include:
 1. **Service name and one-paragraph description** — what the service
    does, who it is for, and what problem it solves.
 2. **Hero scenarios** — the scenarios generated in Step 3.
 
-**If a README already exists**, post an inline code suggestion on the
-README file using `create-pull-request-review-comment`. Place the
+**If a `hero-scenarios.md` already exists**, post an inline code suggestion on
+the file using `create-pull-request-review-comment`. Place the
 comment at the end of the file and use a GitHub suggestion block so the
 author can apply it with one click:
 
@@ -283,6 +281,6 @@ author can apply it with one click:
 Then submit the review using `submit-pull-request-review` with event
 `COMMENT` and a one-sentence body summarizing what was suggested.
 
-If the existing README already covers all the API surface in this PR,
-submit a `COMMENT` review with a one-sentence body confirming no new
-scenarios are needed.
+If the existing `hero-scenarios.md` already covers all the API surface in
+this PR, submit a `COMMENT` review with a one-sentence body confirming no
+new scenarios are needed.
