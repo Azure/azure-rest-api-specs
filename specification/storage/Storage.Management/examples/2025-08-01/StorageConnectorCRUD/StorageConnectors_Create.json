@@ -1,0 +1,86 @@
+{
+  "operationId": "Connectors_Create",
+  "title": "CreateConnector",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2025-08-01",
+    "connectorName": "testconnector",
+    "accountName": "teststorageaccount",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "state": "Active",
+        "description": "Example connector",
+        "dataSourceType": "Azure_DataShare",
+        "source": {
+          "type": "DataShare",
+          "connection": {
+            "type": "DataShare",
+            "dataShareUri": "azds://eastus:datashare1:12345678-1234-1234-1234-123456789123"
+          },
+          "authProperties": {
+            "type": "ManagedIdentity",
+            "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/testconnector",
+        "name": "testconnector",
+        "type": "Microsoft.Storage/storageAccounts/connectors",
+        "location": "eastus",
+        "properties": {
+          "uniqueId": "12345678-1234-1234-1234-12345678912",
+          "state": "Active",
+          "creationTime": "2023-04-01T00:00:00Z",
+          "description": "Example connector",
+          "dataSourceType": "Azure_DataShare",
+          "source": {
+            "type": "DataShare",
+            "connection": {
+              "type": "DataShare",
+              "dataShareUri": "azds://eastus:datashare1:12345678-1234-1234-1234-123456789123"
+            },
+            "authProperties": {
+              "type": "ManagedIdentity",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/testconnector",
+        "name": "testconnector",
+        "type": "Microsoft.Storage/storageAccounts/connectors",
+        "location": "eastus",
+        "properties": {
+          "uniqueId": "12345678-1234-1234-1234-12345678912",
+          "state": "Active",
+          "creationTime": "2023-04-01T00:00:00Z",
+          "description": "Example connector",
+          "dataSourceType": "Azure_DataShare",
+          "source": {
+            "type": "DataShare",
+            "connection": {
+              "type": "DataShare",
+              "dataShareUri": "azds://eastus:datashare1:12345678-1234-1234-1234-123456789123"
+            },
+            "authProperties": {
+              "type": "ManagedIdentity",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

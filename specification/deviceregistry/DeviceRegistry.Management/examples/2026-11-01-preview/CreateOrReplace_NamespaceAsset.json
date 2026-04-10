@@ -104,6 +104,44 @@
             ]
           }
         ],
+        "eventGroups": [
+          {
+            "name": "default",
+            "events": [
+              {
+                "name": "event1",
+                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt5",
+                "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+                "destinations": [
+                  {
+                    "target": "Mqtt",
+                    "configuration": {
+                      "topic": "/contoso/testEvent1",
+                      "retain": "Keep",
+                      "qos": "Qos0",
+                      "ttl": 7200
+                    }
+                  }
+                ],
+                "typeRef": "event1Ref"
+              },
+              {
+                "name": "event2",
+                "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt8",
+                "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+                "destinations": [
+                  {
+                    "target": "Storage",
+                    "configuration": {
+                      "path": "/tmp/event2"
+                    }
+                  }
+                ],
+                "typeRef": "event2Ref"
+              }
+            ]
+          }
+        ],
         "streams": [
           {
             "name": "stream1",
@@ -280,6 +318,44 @@
               ]
             }
           ],
+          "eventGroups": [
+            {
+              "name": "default",
+              "events": [
+                {
+                  "name": "event1",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
+                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+                  "destinations": [
+                    {
+                      "target": "Mqtt",
+                      "configuration": {
+                        "topic": "/contoso/testEvent1",
+                        "retain": "Keep",
+                        "qos": "Qos0",
+                        "ttl": 7200
+                      }
+                    }
+                  ],
+                  "typeRef": "event1Ref"
+                },
+                {
+                  "name": "event2",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt7",
+                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+                  "destinations": [
+                    {
+                      "target": "Storage",
+                      "configuration": {
+                        "path": "/tmp/event2"
+                      }
+                    }
+                  ],
+                  "typeRef": "event2Ref"
+                }
+              ]
+            }
+          ],
           "streams": [
             {
               "name": "stream1",
@@ -341,6 +417,12 @@
             }
           ],
           "status": {
+            "healthState": {
+              "status": "Degraded",
+              "lastTransitionTime": "2025-11-03T08:10:12Z",
+              "message": "Broker experiencing backpressure. Client id with maximum queue size: client-123 (1200 messages).",
+              "reasonCode": "BrokerRateLimited"
+            },
             "config": {
               "version": 9,
               "lastTransitionTime": "2025-03-11T02:19:16.489Z",
@@ -578,6 +660,44 @@
               ]
             }
           ],
+          "eventGroups": [
+            {
+              "name": "default",
+              "events": [
+                {
+                  "name": "event1",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
+                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+                  "destinations": [
+                    {
+                      "target": "Mqtt",
+                      "configuration": {
+                        "topic": "/contoso/testEvent1",
+                        "retain": "Keep",
+                        "qos": "Qos0",
+                        "ttl": 7200
+                      }
+                    }
+                  ],
+                  "typeRef": "event1Ref"
+                },
+                {
+                  "name": "event2",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt8",
+                  "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+                  "destinations": [
+                    {
+                      "target": "Storage",
+                      "configuration": {
+                        "path": "/tmp/event2"
+                      }
+                    }
+                  ],
+                  "typeRef": "event2Ref"
+                }
+              ]
+            }
+          ],
           "streams": [
             {
               "name": "stream1",
@@ -639,6 +759,12 @@
             }
           ],
           "status": {
+            "healthState": {
+              "status": "Degraded",
+              "lastTransitionTime": "2025-11-03T08:10:12Z",
+              "message": "Broker experiencing backpressure. Client id with maximum queue size: client-123 (1200 messages).",
+              "reasonCode": "BrokerRateLimited"
+            },
             "config": {
               "version": 9,
               "lastTransitionTime": "2025-03-11T02:19:16.489Z",

@@ -1,5 +1,6 @@
 ---
 description: Trigger SDK generation from issues and comments, monitor pipeline status, and report SDK PR links.
+timeout-minutes: 60 # Copilot timeout
 on:
   issues:
     types: [opened, labeled]
@@ -30,18 +31,18 @@ permissions:
   id-token: write
 strict: false
 imports:
-  - shared-github-aw-imports\install_azsdk_cli_import.md
-  - shared-github-aw-imports\global_networks_auth_import.md
+  - shared-github-aw-imports/install_azsdk_cli_import.md
+  - shared-github-aw-imports/global_networks_auth_import.md
 env:
   AZSDK_CLI_PATH: /tmp/bin
   AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
   AZURE_TENANT_ID: 72f988bf-86f1-41af-91ab-2d7cd011db47
-  AZURE_FEDERATED_TOKEN_FILE: /tmp/azure-oidc-token
   GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
   GITHUB_ACTIONS: "true"
 tools:
   github:
     toolsets: [default, actions]
+    min-integrity: approved
 safe-outputs:
   add-comment:
     max: 15
@@ -85,43 +86,68 @@ If the triggering event does not meet its corresponding requirements, immediatel
 
 When validation succeeds, execute the following steps in order.
 
-1. Announce workflow start by commenting on the resolved issue with `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`. If the issue cannot be determined for any reason, fall back to the `messages.run-started` safe output.
+1. Identify the target issue number and collect issue context (for manual dispatch, use the supplied or default `issue_url`).
 
-2. Identify the target issue number and collect issue context (for manual dispatch, use the supplied or default `issue_url`).
-
-3. Find whether there is an open TypeSpec API spec pull request associated with this request.
+2. Find whether there is an open TypeSpec API spec pull request associated with this request.
 
 - Identify TypeSpec API spec PR from issue context.
 - Check if API spec PR is in open status or merged status.
 - If such a PR is found and if it's open, set source branch for SDK generation to exactly `refs/pull/<PR number>`.
 - If no such PR is found, use default branch context.
 
-4. Use the azsdk CLI at `azsdk` (installed earlier) to gather release plan metadata and required arguments:
+3. Use the azsdk CLI at `azsdk` (installed earlier) to gather release plan metadata and required arguments:
 
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
+- If release plan is not found then add a comment in the issue to state that release plan is not found for SDK generation and complete the workflow.
+- If get release plan is successful, then run following steps from the azure-rest-api-specs repo root.
+  - Run `npm ci`.
+  - update the release plan by executing `azsdk release-plan update --typespec-path <TypeSpec project path> --workitem-id <work-item-id> --pull-request <spec pull request url> --api-version <api-version>` from azure-rest-api-specs repo root. Use the TypeSpec project path from the issue context, the work item ID from the release plan, and the spec pull request URL identified in step 2.
 - Capture the TypeSpec project path, API version, release type, and target languages from the issue context (dispatch runs rely on the issue referenced by `issue_url`).
+- For `issue_comment` triggers, inspect the comment body for case-insensitive mentions of supported language names (`Python`, `.NET`, `JavaScript`, `Java`, `Go`). If one or more supported languages are explicitly requested, override the target language list to only those deduplicated matches. When no supported languages are mentioned, fall back to the release plan language list.
+- **Guard**: If the TypeSpec project path or release plan details (work item ID, release plan ID, API version, or release type) cannot be resolved from the issue context, do **not** proceed with SDK generation. Instead, add a comment on the issue explaining which required details are missing and call `noop`. Do not continue to step 4.
 
-5. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
+4. Trigger SDK generation by calling `azsdk spec-workflow generate-sdk` with the following options:
 
 - `--typespec-project <PATH>` (required)
 - `--api-version <VERSION>` (required)
 - `--release-type <beta|stable>` (required)
-- `--language <LANGUAGE>` (required, run once per language returned in step 4; languages: Python, .NET, JavaScript, Java, go)
+- `--language <LANGUAGE>` (required, run once per language determined in step 4 after any comment-based filtering; supported languages: Python, .NET, JavaScript, Java, Go)
 - `--workitem-id <WORK_ITEM_ID>` to tie the generation back to the release plan work item
 - Capture the pipeline/run URL emitted by the CLI for status tracking.
-
-6. Immediately add a comment with the pipeline run link/status URL or failure details (use `noop` only if no issue comment can be posted).
 
 ## Monitoring and Status Updates
 
 1. After successful trigger, monitor the release plan and check SDK generation status, SDK pull request status and SDK pull request link.
-   - Refresh release plan data every 5 minutes via `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
+
+- Refresh release plan data every 2 minutes via `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
+
 2. On each poll, determine whether SDK pull request link is available for each language.
 3. If failed, add a comment indicating failure and include pipeline link and failure summary (fallback to `noop` only when comments are unavailable).
 4. Add a final status update by commenting one line per language using the exact format `sdk pr for  <language>: <Link to sdk pull request>` (fallback to `noop` only if commenting fails).
+
+## Failure Troubleshooting Comment
+
+If any SDK generation pipeline fails for one or more languages, add a comment on the issue with the following information:
+
+1. List each language whose SDK generation pipeline failed.
+2. For each failed language, include the full, non-redacted pipeline run URL so the user can inspect logs directly.
+3. For each failed language, run the pipeline analysis command **once per language** to identify the root cause:
+   - Execute `azsdk azp analyze <build-id> -a false` where `<build-id>` is the pipeline build ID for that language.
+   - Run this command only once per failed language — do not retry or re-run the analysis for the same build.
+   - Review the analysis output and extract a concise summary of the core error (e.g. compilation error, missing dependency, TypeSpec validation failure).
+   - Include the error summary under each failed language in the issue comment so users can understand the failure without inspecting pipeline logs.
+
+4. Include the following troubleshooting guidance in the comment:
+
+   > To troubleshoot SDK generation failures locally:
+   >
+   > 1. Clone the [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repository.
+   > 2. Open the cloned repository in VS Code and use GitHub Copilot Chat with a prompt like "generate SDK locally for \<failed language\>" to troubleshoot the error.
+   > 3. Make any required TypeSpec changes to fix the SDK generation errors, then re-trigger SDK generation.
 
 ## Output Requirements
 
 - Always leave a visible status outcome when validation succeeds (triggered, failed, or completed).
 - Keep comments concise and actionable.
 - If no SDK PR links are found after completion, explicitly state that no SDK PR links were discovered and include the pipeline link for manual inspection.
+- Create a consolidated comment to show SDK pull request status and any troubleshooting and failure details in one comment.
