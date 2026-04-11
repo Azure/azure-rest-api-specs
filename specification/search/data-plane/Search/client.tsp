@@ -2893,6 +2893,16 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(WebApiVectorizer.customWebApiParameters, "parameters", "csharp");
 @@clientName(WebApiVectorizerParameters.uri, "url", "python");
 @@clientName(WebApiVectorizerParameters.uri, "url", "java");
+@@clientName(AzureOpenAIModelName.Gpt5Mini, "GPT_5_MINI", "python");
+@@clientName(AzureOpenAIModelName.Gpt5Nano, "GPT_5_NANO", "python");
+@@clientName(AzureOpenAIModelName.Gpt54Mini, "GPT_5_4_MINI", "python");
+@@clientName(AzureOpenAIModelName.Gpt54Nano, "GPT_5_4_NANO", "python");
+@@clientName(SearchIndexerDataSourceType.MySql, "MYSQL", "python");
+@@clientName(SearchIndexerDataSourceType.OneLake, "ONELAKE", "python");
+@@clientName(SearchIndexerDataSourceType.SharePoint, "SHAREPOINT", "python");
+@@clientName(KnowledgeSourceKind.IndexedOneLake, "INDEXED_ONELAKE", "python");
+@@clientName(KnowledgeBaseActivityRecordType.indexedOneLake, "INDEXED_ONELAKE", "python");
+@@clientName(KnowledgeBaseReferenceType.indexedOneLake, "INDEXED_ONELAKE", "python");
 @@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
   "resourceId"
 );
