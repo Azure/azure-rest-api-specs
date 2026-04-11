@@ -15,7 +15,7 @@ on:
     - name: Remove trigger label
       id: remove_label
       if: github.event_name == 'pull_request_target' && github.event.label.name == 'hero-scenarios-needed'
-      uses: actions/github-script@v8
+      uses: actions/github-script@v9
       with:
         script: |
           try {
