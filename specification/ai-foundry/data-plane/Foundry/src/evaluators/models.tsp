@@ -48,7 +48,7 @@ union EvaluatorDefinitionType {
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
 
-  @doc("Generated evaluator definition produced by the generate API. Stores rubric catalog (quality) or taxonomy reference (safety).")
+  @doc("Generated evaluator definition produced by the generate API. Stores rubric criteria with a general quality criterion (quality) or taxonomy reference (safety).")
   generated: "generated",
 }
 
@@ -85,8 +85,8 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   prompt_text: string;
 }
 
-@doc("The supported source types for evaluator generation, aligned with DataGenerationJobSourceType")
-union EvaluatorGenerationSourceType {
+@doc("The supported source types for evaluator generation jobs, aligned with DataGenerationJobSourceType.")
+union EvaluatorGenerationJobSourceType {
   string,
 
   @doc("Prompt source — inline text describing the agent, or agent name to fetch instructions from.")
@@ -99,16 +99,16 @@ union EvaluatorGenerationSourceType {
   File: "File",
 }
 
-@doc("Base source model for evaluator generation")
+@doc("The base source model for an evaluator generation job.")
 @discriminator("type")
-model EvaluatorGenerationSource {
+model EvaluatorGenerationJobSource {
   @doc("The type of source.")
-  type: EvaluatorGenerationSourceType;
+  type: EvaluatorGenerationJobSourceType;
 }
 
 @doc("Prompt source for evaluator generation — inline text or agent reference.")
-model PromptEvaluatorGenerationSource extends EvaluatorGenerationSource {
-  @doc("The source type, which is Prompt.")
+model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+  @doc("The source type for this job, which is Prompt.")
   type: "Prompt";
 
   @doc("The inline prompt text describing the agent's purpose, behavior, and capabilities. Required if agent_name is not specified.")
@@ -122,8 +122,8 @@ model PromptEvaluatorGenerationSource extends EvaluatorGenerationSource {
 }
 
 @doc("Traces source for evaluator generation — conversation traces from Application Insights.")
-model TracesEvaluatorGenerationSource extends EvaluatorGenerationSource {
-  @doc("The source type, which is Traces.")
+model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+  @doc("The source type for this job, which is Traces.")
   type: "Traces";
 
   @doc("The agent name to fetch traces for.")
@@ -143,35 +143,35 @@ model TracesEvaluatorGenerationSource extends EvaluatorGenerationSource {
 }
 
 @doc("File source for evaluator generation — uploaded file containing policies, rules, or supplementary context.")
-model FileEvaluatorGenerationSource extends EvaluatorGenerationSource {
-  @doc("The source type, which is File.")
+model FileEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+  @doc("The source type for this job, which is File.")
   type: "File";
 
   @doc("The ID of the uploaded file.")
   id: string;
 }
 
-@doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint")
+@doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
 model RubricCriterion {
-  @doc("Stable identifier for this criterion (service-generated, derived from description hash)")
+  @doc("Stable identifier for this criterion (service-generated, derived from description hash).")
   @visibility(Lifecycle.Read)
   rubric_id?: string;
 
-  @doc("What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow')")
+  @doc("What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
   description: string;
 
   @doc("Relative weight of this criterion (1-10). Exactly one criterion should have weight 8-10; all others should use 1-6.")
   weight: int32;
 
-  @doc("Fixed applicability override. When set (e.g., 3 for the sink criterion), the judge must use this applicability value instead of assessing relevance. Only used for the sink criterion.")
-  fixed_applicability?: int32;
+  @doc("When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). Used for the general quality criterion — a catch-all that captures quality issues outside explicit criteria. Defaults to false.")
+  always_applicable?: boolean;
 }
 
 @doc("Generated evaluator definition — stores artifacts produced by the generate API. Call the generate action first, review the output, then save via createVersion.")
 model GeneratedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.generated;
 
-  @doc("Generated rubric criteria — the scoring blueprint used by the LLM judge (populated when category is 'quality')")
+  @doc("Generated rubric criteria — the scoring blueprint used by the LLM judge. Includes explicit criteria plus a general quality criterion (always_applicable: true) that catches quality issues outside the explicit criteria. Populated when category is 'quality'.")
   rubric_criteria?: RubricCriterion[];
 
   @doc("ID of the generated or linked taxonomy (populated when category is 'safety')")
@@ -183,8 +183,8 @@ model GeneratedEvaluatorDefinition extends EvaluatorDefinition {
 
 @doc("Request body for evaluator generation. If an evaluator with this name already exists, the service automatically retrieves the latest version's criteria and uses them as context for improvement.")
 model GenerateEvaluatorRequest {
-  @doc("Source materials for generation — agent prompts, traces, or uploaded files")
-  sources: EvaluatorGenerationSource[];
+  @doc("Source materials for generation — agent prompts, traces, or uploaded files.")
+  sources: EvaluatorGenerationJobSource[];
 
   @doc("Category determines generation pipeline: 'quality' (default) produces rubric criteria, 'safety' produces a taxonomy")
   category?: EvaluatorCategory = EvaluatorCategory.quality;
