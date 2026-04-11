@@ -626,6 +626,36 @@
         "translations"
       ]
     },
+    "TranslationGender": {
+      "type": "string",
+      "description": "Desired gender for the translated text.",
+      "enum": [
+        "neutral",
+        "male",
+        "female"
+      ],
+      "x-ms-enum": {
+        "name": "TranslationGender",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Neutral",
+            "value": "neutral",
+            "description": "Neutral gender."
+          },
+          {
+            "name": "Male",
+            "value": "male",
+            "description": "Male gender."
+          },
+          {
+            "name": "Female",
+            "value": "female",
+            "description": "Female gender."
+          }
+        ]
+      }
+    },
     "TranslationLanguage": {
       "type": "object",
       "description": "The value of the translation property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag.\nA key identifies a language for which text can be translated to or translated from.",
@@ -753,18 +783,13 @@
           "description": "In the case where a custom system is being used, specifies that the service is allowed to fall back to a\ngeneral system when a custom system doesn't exist. \nIn the case where a Large Language Model is being used, specifies that the service is allowed to fall\nback to a Small Language Model if an error occurs.\nPossible values are: true (default) or false.\n\nallowFallback=false specifies that the translation should only use systems trained for the category specified \nby the request. If a translation for language X to language Y requires chaining through a pivot language E, \nthen all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \nIf no system is found with the specific category, the request will return a 400 status code. allowFallback=true \nspecifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
           "default": true
         },
-        "grade": {
-          "type": "string",
-          "description": "Defines complexity of LLM prompts to provide high accuracy translation.",
-          "default": "basic"
-        },
         "tone": {
-          "type": "string",
-          "description": "Desired tone of target translation."
+          "$ref": "#/definitions/TranslationTone",
+          "description": "Desired tone of target translation. Accepted values are formal, informal, or neutral."
         },
         "gender": {
-          "type": "string",
-          "description": "Desired gender of target translation."
+          "$ref": "#/definitions/TranslationGender",
+          "description": "Desired gender of target translation. Accepted values are female, male, or neutral."
         },
         "adaptiveDatasetId": {
           "type": "string",
@@ -825,6 +850,36 @@
         "language",
         "text"
       ]
+    },
+    "TranslationTone": {
+      "type": "string",
+      "description": "Desired tone for the translated text.",
+      "enum": [
+        "neutral",
+        "formal",
+        "informal"
+      ],
+      "x-ms-enum": {
+        "name": "TranslationTone",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Neutral",
+            "value": "neutral",
+            "description": "Neutral tone."
+          },
+          {
+            "name": "Formal",
+            "value": "formal",
+            "description": "Formal tone."
+          },
+          {
+            "name": "Informal",
+            "value": "informal",
+            "description": "Informal tone."
+          }
+        ]
+      }
     },
     "TransliterableScript": {
       "type": "object",
