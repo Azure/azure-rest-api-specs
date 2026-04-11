@@ -5725,17 +5725,17 @@ model AcceleratorDeploymentProperties {
    * Example: azureml://registries/{registry}/models/{model}/versions/{version}
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  `model`?: url;
+  `model`: url;
 
   /**
-   * AzureML Registry deployment template URI. Required on creation.
+   * AzureML Registry deployment template URI. Optional on creation.
    * Example: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   deploymentTemplate?: url;
 
   /**
-   * Accelerator type (e.g., H100_80GB). Required on creation; immutable after creation.
+   * Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   acceleratorType?: string;

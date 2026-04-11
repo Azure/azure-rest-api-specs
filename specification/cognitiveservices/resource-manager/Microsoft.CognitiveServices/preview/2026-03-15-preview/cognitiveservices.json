@@ -9975,7 +9975,7 @@
         "deploymentTemplate": {
           "type": "string",
           "format": "uri",
-          "description": "AzureML Registry deployment template URI. Required on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
+          "description": "AzureML Registry deployment template URI. Optional on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9983,7 +9983,7 @@
         },
         "acceleratorType": {
           "type": "string",
-          "description": "Accelerator type (e.g., H100_80GB). Required on creation; immutable after creation.",
+          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -10024,7 +10024,10 @@
           "description": "Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "model"
+      ]
     },
     "AcceleratorDeploymentProvisioningDetails": {
       "type": "object",
