@@ -15,7 +15,6 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services account commitment plan.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'CommitmentPlan' to maintain SDK backward compatibility"
-@parentResource(Account)
 model CommitmentPlan
   is Azure.ResourceManager.ProxyResource<CommitmentPlanProperties> {
   ...ResourceNameParameter<

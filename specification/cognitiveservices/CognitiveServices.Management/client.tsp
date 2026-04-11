@@ -443,7 +443,6 @@ op calculateModelCapacityCustom(
   azureLocation,
   "csharp"
 );
-@@scope(CommitmentPlanOperationGroup.listPlansByResourceGroup, "!csharp");
 @@clientName(CommitmentPlanOperationGroup.listPlansBySubscription,
   "GetCognitiveServicesCommitmentPlans",
   "csharp"
