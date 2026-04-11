@@ -371,6 +371,14 @@ union VirtualMachinePriorityTypes {
   Low: "Low",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Spot: "Spot",
+
+  /**
+   * SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.
+   * This is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next
+   * generation of Azure Spot VM/VMSS with more availability and longer running time compared to Azure Spot VM/VMSS.
+   */
+  @added(Versions.v2026_04_01)
+  SpotPlus: "SpotPlus",
 }
 
 /**

@@ -5560,6 +5560,12 @@
           "Create a scale set with Service Artifact Reference": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithServiceArtifactReference.json"
           },
+          "Create a scale set with SpotPlus priority (Flexible)": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSpotPlusPriorityFlex.json"
+          },
+          "Create a scale set with SpotPlus priority (Uniform)": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSpotPlusPriority.json"
+          },
           "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithUefiSettings.json"
           },
@@ -10092,6 +10098,9 @@
           },
           "Create a vm with Scheduled Events Profile": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithScheduledEventsProfile.json"
+          },
+          "Create a vm with SpotPlus priority": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSpotPlusPriority.json"
           },
           "Create a vm with a marketplace image plan.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithAMarketplaceImagePlan.json"
@@ -19554,7 +19563,8 @@
       "enum": [
         "Regular",
         "Low",
-        "Spot"
+        "Spot",
+        "SpotPlus"
       ],
       "x-ms-enum": {
         "name": "VirtualMachinePriorityTypes",
@@ -19571,6 +19581,11 @@
           {
             "name": "Spot",
             "value": "Spot"
+          },
+          {
+            "name": "SpotPlus",
+            "value": "SpotPlus",
+            "description": "SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.\nThis is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next\ngeneration of Azure Spot VM/VMSS with more availability and longer running time compared to Azure Spot VM/VMSS."
           }
         ]
       }
