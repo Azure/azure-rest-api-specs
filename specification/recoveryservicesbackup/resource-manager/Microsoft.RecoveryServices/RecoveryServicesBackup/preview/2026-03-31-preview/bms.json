@@ -139,7 +139,13 @@
       "name": "CrossTenantVaultMappings"
     },
     {
+      "name": "CrossTenantOperations"
+    },
+    {
       "name": "CrossTenant"
+    },
+    {
+      "name": "CrossTenantVaultCredentialOperations"
     },
     {
       "name": "ProtectionIntent"
@@ -406,8 +412,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappingStatus": {
       "post": {
-        "operationId": "VaultMappingStatus_Check",
+        "operationId": "CrossTenantVaultMappingStatus_Check",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Gets the mapping status of the vault for cross-tenant restore operations.\nReturns the mapping status that indicates whether the vault is properly configured for cross-tenant operations.",
@@ -571,8 +578,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
       "get": {
-        "operationId": "CrossTenantProtectedItems_Get",
+        "operationId": "ProtectedItemFromCrossTenantVault_Get",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Gets the details of a protected item from a cross-tenant vault.",
@@ -650,8 +658,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
       "get": {
-        "operationId": "CrossTenantProtectedItemOperationResults_Get",
+        "operationId": "ProtectedItemOperationResultsFromCrossTenantVault_Get",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Fetches the result of any cross-tenant operation on the backup item.",
@@ -750,8 +759,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationsStatus/{operationId}": {
       "get": {
-        "operationId": "CrossTenantProtectedItemOperationStatuses_Get",
+        "operationId": "ProtectedItemOperationStatusesFromCrossTenantVault_Get",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Fetches the status of a cross-tenant operation such as triggering a restore.\nThe status can be in progress, completed or failed.",
@@ -838,6 +848,7 @@
       "get": {
         "operationId": "CrossTenantVaultRecoveryPoints_List",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Lists recovery points from the source vault in a different tenant.",
@@ -927,6 +938,7 @@
       "post": {
         "operationId": "RestoresFromCrossTenantVault_Trigger",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Restores the specified backed up data from a source vault in a different tenant. This is an asynchronous operation.\nTo know the status of this API call, use GetProtectedItemOperationResult API.",
@@ -1037,6 +1049,7 @@
       "get": {
         "operationId": "BackupJobsFromCrossTenantVault_List",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Provides a pageable list of cross-tenant backup jobs.",
@@ -1109,6 +1122,7 @@
       "get": {
         "operationId": "JobDetailsFromCrossTenantVault_Get",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Gets extended information associated with a cross-tenant backup job.",
@@ -1172,6 +1186,7 @@
       "get": {
         "operationId": "BackupProtectedItemsFromCrossTenantVault_List",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Lists the protected items from the source vault in a different tenant.",
@@ -1244,6 +1259,7 @@
       "post": {
         "operationId": "ValidateOperationFromCrossTenantVault_Trigger",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Triggers a validate operation for cross-tenant restore scenarios.\nThis is an asynchronous operation that performs validation checks.",
@@ -1326,6 +1342,7 @@
       "post": {
         "operationId": "OperationFromCrossTenantVault_Validate",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Validates a backup operation for cross-tenant restore scenarios.\nThis API performs validation checks before executing a backup operation.",
@@ -1390,6 +1407,7 @@
       "get": {
         "operationId": "ValidateOperationResultFromCrossTenantVault_Get",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Gets the result of a specific validate operation for cross-tenant restore scenarios.",
@@ -1466,6 +1484,7 @@
       "get": {
         "operationId": "ValidateOperationStatusFromCrossTenantVault_Get",
         "tags": [
+          "CrossTenantOperations",
           "CrossTenant"
         ],
         "description": "Gets the status of a validate operation for cross-tenant restore scenarios.",
@@ -1526,7 +1545,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping": {
       "post": {
-        "operationId": "CrossTenantVaultMappings_Remove",
+        "operationId": "CrossTenantVaultMapping_Remove",
         "tags": [
           "CrossTenantVaultMappings"
         ],
@@ -1606,6 +1625,7 @@
       "post": {
         "operationId": "CrossTenantVaultCredential_Generate",
         "tags": [
+          "CrossTenantVaultCredentialOperations",
           "CrossTenant"
         ],
         "description": "Generates a vault credential certificate for cross-tenant restore scenarios.\nThis is an asynchronous operation. BMS creates a TEE job that calls IDM's certificates\nendpoint for the source vault, generating a self-signed certificate registered with AAD.",
@@ -1693,6 +1713,7 @@
       "get": {
         "operationId": "CrossTenantVaultCredentialOperationResults_Get",
         "tags": [
+          "CrossTenantVaultCredentialOperations",
           "CrossTenant"
         ],
         "description": "Gets the result of an async vault credential generation operation.\nReturns 202 Accepted while the TEE job is still in progress.\nReturns 200 OK with VaultCredentialCertificateResponse when the job completes.",
@@ -1777,6 +1798,7 @@
       "get": {
         "operationId": "CrossTenantVaultCredentialOperationStatuses_Get",
         "tags": [
+          "CrossTenantVaultCredentialOperations",
           "CrossTenant"
         ],
         "description": "Gets the status of an async vault credential generation operation.\nReturns the current status (InProgress, Completed, Failed) and any associated job details.",
@@ -6844,6 +6866,36 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
     "AzureBackupGoalFeatureSupportRequest": {
       "type": "object",
       "description": "Azure backup goal feature specific request.",
@@ -10462,6 +10514,10 @@
       "type": "object",
       "description": "Cross-tenant vault mapping properties for cross-tenant restore.\nRepresents the configuration linking a source vault to a target vault across tenants.",
       "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Optional ETag."
+        },
         "sourceVaultId": {
           "type": "string",
           "format": "arm-id",
@@ -10500,16 +10556,8 @@
           }
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the resource.",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         }
       },
@@ -10524,10 +10572,6 @@
         "properties": {
           "$ref": "#/definitions/CrossTenantVaultMapping",
           "description": "CrossTenantVaultMappingResource properties"
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Optional ETag."
         }
       },
       "allOf": [
@@ -16879,16 +16923,8 @@
           "description": "Certificate friendly name."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of the vault credential certificate.",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
           "readOnly": true
         }
       }
