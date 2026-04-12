@@ -9,6 +9,8 @@ using Microsoft.DataMigration;
   "javascript,python"
 );
 
+@@clientName(DatabaseMigrationBaseProperties.kind, "resourceType", "java");
+
 @@clientName(ConnectToTargetSqlSqlDbSyncTaskProperties,
   "ConnectToTargetSQLDbSyncTaskProperties",
   "go"
