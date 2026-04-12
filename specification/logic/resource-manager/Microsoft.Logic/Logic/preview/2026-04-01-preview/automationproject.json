@@ -749,13 +749,36 @@
           "description": "Gets the provisioning state of the application.",
           "readOnly": true
         },
+        "applicationId": {
+          "type": "string",
+          "description": "The unique application identifier. This is a server-generated GUID assigned\nwhen the application is first created.",
+          "readOnly": true
+        },
         "appResourceId": {
           "type": "string",
           "description": "The ARM resource identifier of the ContainerApp associated with this application."
         },
-        "location": {
+        "createdOn": {
           "type": "string",
-          "description": "The location of the application."
+          "format": "date-time",
+          "description": "The timestamp when the application was created.",
+          "readOnly": true
+        },
+        "updatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the application was last updated.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity (object ID) that created this application association.",
+          "readOnly": true
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "The identity (object ID) that last updated this application association.",
+          "readOnly": true
         }
       }
     },

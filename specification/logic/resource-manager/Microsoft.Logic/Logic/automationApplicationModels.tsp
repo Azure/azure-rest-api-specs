@@ -44,12 +44,38 @@ model ApplicationProperties {
   provisioningState?: ApplicationProvisioningState;
 
   /**
+   * The unique application identifier. This is a server-generated GUID assigned
+   * when the application is first created.
+   */
+  @visibility(Lifecycle.Read)
+  applicationId?: string;
+
+  /**
    * The ARM resource identifier of the ContainerApp associated with this application.
    */
   appResourceId?: string;
 
   /**
-   * The location of the application.
+   * The timestamp when the application was created.
    */
-  location?: string;
+  @visibility(Lifecycle.Read)
+  createdOn?: utcDateTime;
+
+  /**
+   * The timestamp when the application was last updated.
+   */
+  @visibility(Lifecycle.Read)
+  updatedOn?: utcDateTime;
+
+  /**
+   * The identity (object ID) that created this application association.
+   */
+  @visibility(Lifecycle.Read)
+  createdBy?: string;
+
+  /**
+   * The identity (object ID) that last updated this application association.
+   */
+  @visibility(Lifecycle.Read)
+  updatedBy?: string;
 }
