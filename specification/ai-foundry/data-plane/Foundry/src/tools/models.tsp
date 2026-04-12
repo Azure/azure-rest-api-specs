@@ -837,7 +837,7 @@ namespace Azure.AI.Projects {
     server_url?: url;
 
     /**
-     * (Optional) Whether the agent requires approval before executing actions. Default is false.
+     * (Optional) Whether the agent requires approval before executing actions. Default is always.
      */
     require_approval?: FabricIQApprovalRequirement = FabricIQApprovalRequirement.always;
   }
