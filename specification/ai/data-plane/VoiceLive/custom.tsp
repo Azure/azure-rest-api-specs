@@ -536,15 +536,27 @@ union TurnDetectionType {
 model ServerVad extends TurnDetection {
   type: TurnDetectionType.server_vad;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
@@ -554,18 +566,36 @@ model ServerVad extends TurnDetection {
 model AzureSemanticVad extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Minimum speech duration in milliseconds to trigger detection. */
   speech_duration_ms?: int32;
+
+  /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
   remove_filler_words?: boolean = false;
+
+  /** List of BCP-47 language codes for speech detection. */
   languages?: string[];
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
@@ -575,17 +605,33 @@ model AzureSemanticVad extends TurnDetection {
 model AzureSemanticVadEn extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_en;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Minimum speech duration in milliseconds to trigger detection. */
   speech_duration_ms?: int32;
+
+  /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
   remove_filler_words?: boolean = false;
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
@@ -595,18 +641,36 @@ model AzureSemanticVadEn extends TurnDetection {
 model AzureSemanticVadMultilingual extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_multilingual;
 
+  /** Activation threshold for VAD detection. Range: 0.0 to 1.0. */
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
 
+  /** Amount of audio to include before speech is detected, in milliseconds. */
   prefix_padding_ms?: int32;
+
+  /** Duration of silence required to end speech detection, in milliseconds. */
   silence_duration_ms?: int32;
+
+  /** Configuration for end-of-utterance detection. */
   end_of_utterance_detection?: EouDetection;
+
+  /** Minimum speech duration in milliseconds to trigger detection. */
   speech_duration_ms?: int32;
+
+  /** Whether to remove filler words (e.g., 'um', 'uh') from transcription. */
   remove_filler_words?: boolean = false;
+
+  /** List of BCP-47 language codes for speech detection. */
   languages?: string[];
+
+  /** Whether to automatically truncate the audio buffer when speech stops. */
   auto_truncate?: boolean = false;
+
+  /** Whether to automatically create a response when speech stops. */
   create_response?: boolean = false;
+
+  /** Whether to allow the user's speech to interrupt the assistant's response. */
   interrupt_response?: boolean = false;
 }
 
