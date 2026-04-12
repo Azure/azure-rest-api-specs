@@ -88,6 +88,17 @@ model RequestSession {
   /** Configuration for interim response generation during latency or tool calls. */
   @added(Versions.v2026_01_01_preview)
   interim_response?: InterimResponseConfig;
+
+  /** List of include options for the session (e.g., logprobs, phrases, file search results). */
+  @added(Versions.v2026_04_10)
+  include?: SessionIncludeOption[];
+
+  /**
+   * Set of up to 16 key-value pairs that can be attached to the session.
+   * Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.
+   */
+  @added(Versions.v2026_04_10)
+  metadata?: Record<string>;
 }
 
 /**
@@ -205,6 +216,10 @@ union AzureVoiceType {
 
   /** Azure personal voice. */
   azure_personal: "azure-personal",
+
+  /** Azure avatar voice sync. */
+  @added(Versions.v2026_04_10)
+  avatar_voice_sync: "avatar-voice-sync",
 }
 /** Azure custom voice configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
@@ -299,6 +314,34 @@ union PersonalVoiceModels {
 
   /** Use the Phoenix V2 model. */
   "PhoenixV2Neural",
+
+  /** Use the latest Dragon HD Omni model. */
+  "DragonHDOmniLatestNeural",
+}
+
+/** Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(DualUsage)
+model AzureAvatarVoiceSyncVoice extends AzureVoice {
+  type: AzureVoiceType.avatar_voice_sync;
+
+  /** Underlying neural model to use. */
+  `model`: PersonalVoiceModels;
+
+  /** Temperature must be between 0.0 and 1.0. */
+  @minValue(0)
+  @maxValue(1)
+  temperature?: float32;
+
+  custom_lexicon_url?: string;
+  custom_text_normalization_url?: string;
+  prefer_locales?: string[];
+  locale?: string;
+  style?: string;
+  pitch?: string;
+  rate?: string;
+  volume?: string;
 }
 
 // --- Top-level Voice union -------------------------------------------------
@@ -308,7 +351,7 @@ union PersonalVoiceModels {
 union Voice {
   OAIVoice,
   OpenAIVoice,
-  AzureVoice, // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
+  AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
 }
 
 /** Input audio format types supported. */
@@ -372,6 +415,7 @@ model AudioInputTranscriptionOptions {
     | "whisper-1"
     | "gpt-4o-transcribe"
     | "gpt-4o-mini-transcribe"
+    | "gpt-4o-transcribe-diarize"
     | "azure-speech";
 
   /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */
@@ -893,4 +937,23 @@ model Background {
 
   /** Background image URL. Cannot be set if `color` is provided. */
   image_url?: string;
+}
+
+// -----------------------------------------------------------------------
+// New types added in v2026_04_10
+// -----------------------------------------------------------------------
+
+/** Options for what additional data to include in session responses. */
+@added(Versions.v2026_04_10)
+union SessionIncludeOption {
+  string,
+
+  /** Include log probabilities for input audio transcription. */
+  item_input_audio_transcription_logprobs: "item.input_audio_transcription.logprobs",
+
+  /** Include phrase-level details for input audio transcription. */
+  item_input_audio_transcription_phrases: "item.input_audio_transcription.phrases",
+
+  /** Include file search call results. */
+  file_search_call_results: "file_search_call.results",
 }
