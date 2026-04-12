@@ -1030,6 +1030,9 @@
           "Create BackupInstance With KubernetesClusterBackupDatasourceParameters": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_KubernetesClusterBackupDatasourceParameters.json"
           },
+          "Create BackupInstance With PostgreSqlFlexibleServerBackupDatasourceParameters": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_PostgreSqlFlexibleServerBackupDatasourceParameters.json"
+          },
           "Create BackupInstance to perform critical operation With MUA": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ResourceGuardEnabled.json"
           }
@@ -5524,6 +5527,28 @@
         "repeatingTimeIntervals"
       ]
     },
+    "BackupSolutionType": {
+      "type": "string",
+      "description": "Backup solution types for PostgreSQL Flexible Server.",
+      "enum": [
+        "LogicalBackup",
+        "PhysicalBackup"
+      ],
+      "x-ms-enum": {
+        "name": "BackupSolutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LogicalBackup",
+            "value": "LogicalBackup"
+          },
+          {
+            "name": "PhysicalBackup",
+            "value": "PhysicalBackup"
+          }
+        ]
+      }
+    },
     "BackupVault": {
       "type": "object",
       "description": "Backup Vault",
@@ -7884,6 +7909,22 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "PostgreSqlFlexibleServerBackupDatasourceParameters": {
+      "type": "object",
+      "description": "Parameters to be used during configuration of backup of PostgreSQL Flexible Servers",
+      "properties": {
+        "backupSolutionType": {
+          "$ref": "#/definitions/BackupSolutionType",
+          "description": "Type of backup taken, Logical/Physical"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "PostgreSqlFlexibleServerBackupDatasourceParameters"
     },
     "ProtectionStatusDetails": {
       "type": "object",
