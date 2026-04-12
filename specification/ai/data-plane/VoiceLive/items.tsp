@@ -23,6 +23,14 @@ union ItemType {
 
   @added(Versions.v2026_01_01_preview)
   mcp_approval_response: "mcp_approval_response",
+
+  /** Web search call item. */
+  @added(Versions.v2026_04_10)
+  web_search_call: "web_search_call",
+
+  /** File search call item. */
+  @added(Versions.v2026_04_10)
+  file_search_call: "file_search_call",
 }
 
 // Base for user content parts
@@ -302,6 +310,10 @@ model OutputTokenDetails {
 
   /** Number of audio tokens generated in the output. */
   audio_tokens: int32;
+
+  /** Number of reasoning tokens generated in the output. */
+  @added(Versions.v2026_04_10)
+  reasoning_tokens?: int32;
 }
 
 /** Details of output token usage. */
@@ -449,4 +461,121 @@ model MCPApprovalResponseRequestItem extends ConversationRequestItem {
 
   /** Whether the tool call was approved. */
   approve: boolean;
+}
+
+// -----------------------------------------------------------------------
+// New item types added in v2026_04_10
+// -----------------------------------------------------------------------
+
+/** A search action source URL. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(ResponseUsage)
+model ActionSearchSource {
+  /** The type of source. Always 'url'. */
+  type: "url";
+
+  /** The URL of the source. */
+  url: string;
+}
+
+/** A web search action. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(ResponseUsage)
+model ActionSearch {
+  /** The search query. */
+  query?: string;
+
+  /** The action type. Always 'search'. */
+  type: "search";
+
+  /** The sources used in the search. */
+  sources?: ActionSearchSource[];
+}
+
+/** An open page action. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(ResponseUsage)
+model ActionOpenPage {
+  /** The action type. Always 'open_page'. */
+  type: "open_page";
+
+  /** The URL opened by the model. */
+  url: string;
+}
+
+/** A find action to search text within a page. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(ResponseUsage)
+model ActionFind {
+  /** The pattern or text to search for within the page. */
+  pattern: string;
+
+  /** The action type. Always 'find'. */
+  type: "find";
+
+  /** The URL of the page searched for the pattern. */
+  url: string;
+}
+
+/** A response item that represents a web search call. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(ResponseUsage)
+model ResponseWebSearchCallItem extends ResponseItem {
+  /** The type of the item. Always 'web_search_call'. */
+  type: ItemType.web_search_call;
+
+  /** The unique ID of the web search tool call. */
+  id?: string;
+
+  /** The status of the web search tool call. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to match source."
+  status: "in_progress" | "searching" | "completed" | "failed" | string;
+}
+
+/** A file search result entry. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(ResponseUsage)
+model FileSearchResult {
+  /** Key-value pairs for filtering file search results. */
+  attributes?: Record<string>;
+
+  /** The unique ID of the file. */
+  file_id?: string;
+
+  /** The name of the file. */
+  filename?: string;
+
+  /** The relevance score of the file search result. */
+  score?: float32;
+
+  /** The text content of the file that matched the query. */
+  text?: string;
+}
+
+/** A response item that represents a file search call. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_04_10)
+@usage(ResponseUsage)
+model ResponseFileSearchCallItem extends ResponseItem {
+  /** The type of the item. Always 'file_search_call'. */
+  type: ItemType.file_search_call;
+
+  /** The unique ID of the file search tool call. */
+  id?: string;
+
+  /** The queries used for the file search. */
+  queries?: string[];
+
+  /** The status of the file search tool call. */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to match source."
+  status: "in_progress" | "searching" | "completed" | "incomplete" | "failed" | string;
+
+  /** The results of the file search. */
+  results?: FileSearchResult[];
 }

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "VoiceLive",
-    "version": "2026-01-01-preview",
+    "version": "2026-04-10",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -21,6 +21,113 @@
   "tags": [],
   "paths": {},
   "definitions": {
+    "ActionFind": {
+      "type": "object",
+      "description": "A find action to search text within a page.",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "The pattern or text to search for within the page."
+        },
+        "type": {
+          "type": "string",
+          "description": "The action type. Always 'find'.",
+          "enum": [
+            "find"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the page searched for the pattern."
+        }
+      },
+      "required": [
+        "pattern",
+        "type",
+        "url"
+      ]
+    },
+    "ActionOpenPage": {
+      "type": "object",
+      "description": "An open page action.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The action type. Always 'open_page'.",
+          "enum": [
+            "open_page"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL opened by the model."
+        }
+      },
+      "required": [
+        "type",
+        "url"
+      ]
+    },
+    "ActionSearch": {
+      "type": "object",
+      "description": "A web search action.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The search query."
+        },
+        "type": {
+          "type": "string",
+          "description": "The action type. Always 'search'.",
+          "enum": [
+            "search"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "The sources used in the search.",
+          "items": {
+            "$ref": "#/definitions/ActionSearchSource"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ActionSearchSource": {
+      "type": "object",
+      "description": "A search action source URL.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of source. Always 'url'.",
+          "enum": [
+            "url"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the source."
+        }
+      },
+      "required": [
+        "type",
+        "url"
+      ]
+    },
     "AgentConfig": {
       "type": "object",
       "description": "Configuration for the agent.",
@@ -353,6 +460,59 @@
           }
         ]
       }
+    },
+    "AzureAvatarVoiceSyncVoice": {
+      "type": "object",
+      "description": "Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/PersonalVoiceModels",
+          "description": "Underlying neural model to use."
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "Temperature must be between 0.0 and 1.0.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "custom_lexicon_url": {
+          "type": "string"
+        },
+        "custom_text_normalization_url": {
+          "type": "string"
+        },
+        "prefer_locales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locale": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        },
+        "pitch": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "model"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVoice"
+        }
+      ],
+      "x-ms-discriminator-value": "avatar-voice-sync"
     },
     "AzureCustomVoice": {
       "type": "object",
@@ -772,7 +932,8 @@
       "enum": [
         "azure-custom",
         "azure-standard",
-        "azure-personal"
+        "azure-personal",
+        "avatar-voice-sync"
       ],
       "x-ms-enum": {
         "name": "AzureVoiceType",
@@ -792,6 +953,11 @@
             "name": "azure_personal",
             "value": "azure-personal",
             "description": "Azure personal voice."
+          },
+          {
+            "name": "avatar_voice_sync",
+            "value": "avatar-voice-sync",
+            "description": "Azure avatar voice sync."
           }
         ]
       }
@@ -1075,6 +1241,16 @@
       ],
       "x-ms-discriminator-value": "input_audio.turn.start"
     },
+    "ClientEventOutputAudioBufferClear": {
+      "type": "object",
+      "description": "Client request to clear the avatar output buffer.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "output_audio_buffer.clear"
+    },
     "ClientEventResponseCancel": {
       "type": "object",
       "description": "Send this event to cancel an in-progress response. The server will respond\nwith a `response.cancelled` event or an error if there is no response to\ncancel.",
@@ -1167,7 +1343,8 @@
         "response.create",
         "response.cancel",
         "session.avatar.connect",
-        "mcp_approval_response"
+        "mcp_approval_response",
+        "output_audio_buffer.clear"
       ],
       "x-ms-enum": {
         "name": "ClientEventType",
@@ -1240,6 +1417,11 @@
           {
             "name": "mcp_approval_response",
             "value": "mcp_approval_response"
+          },
+          {
+            "name": "output_audio_buffer_clear",
+            "value": "output_audio_buffer.clear",
+            "description": "Client request to clear the avatar output buffer."
           }
         ]
       }
@@ -1382,6 +1564,36 @@
       "required": [
         "error"
       ]
+    },
+    "FileSearchResult": {
+      "type": "object",
+      "description": "A file search result entry.",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "description": "Key-value pairs for filtering file search results.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "file_id": {
+          "type": "string",
+          "description": "The unique ID of the file."
+        },
+        "filename": {
+          "type": "string",
+          "description": "The name of the file."
+        },
+        "score": {
+          "type": "number",
+          "format": "float",
+          "description": "The relevance score of the file search result."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text content of the file that matched the query."
+        }
+      }
     },
     "FunctionCallItem": {
       "type": "object",
@@ -1702,7 +1914,9 @@
         "mcp_list_tools",
         "mcp_call",
         "mcp_approval_request",
-        "mcp_approval_response"
+        "mcp_approval_response",
+        "web_search_call",
+        "file_search_call"
       ],
       "x-ms-enum": {
         "name": "ItemType",
@@ -1735,6 +1949,16 @@
           {
             "name": "mcp_approval_response",
             "value": "mcp_approval_response"
+          },
+          {
+            "name": "web_search_call",
+            "value": "web_search_call",
+            "description": "Web search call item."
+          },
+          {
+            "name": "file_search_call",
+            "value": "file_search_call",
+            "description": "File search call item."
           }
         ]
       }
@@ -2182,6 +2406,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of audio tokens generated in the output."
+        },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of reasoning tokens generated in the output."
         }
       },
       "required": [
@@ -2522,6 +2751,20 @@
         "interim_response": {
           "$ref": "#/definitions/InterimResponseConfig",
           "description": "Configuration for interim response generation during latency or tool calls."
+        },
+        "include": {
+          "type": "array",
+          "description": "List of include options for the session (e.g., logprobs, phrases, file search results).",
+          "items": {
+            "$ref": "#/definitions/SessionIncludeOption"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to the session.\nKeys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2811,6 +3054,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "interim_response": {
+          "$ref": "#/definitions/InterimResponseConfig",
+          "description": "Configuration for interim response generation during latency or tool calls."
         }
       }
     },
@@ -2829,6 +3076,53 @@
         }
       ],
       "x-ms-discriminator-value": "failed"
+    },
+    "ResponseFileSearchCallItem": {
+      "type": "object",
+      "description": "A response item that represents a file search call.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the file search tool call."
+        },
+        "queries": {
+          "type": "array",
+          "description": "The queries used for the file search.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the file search tool call.",
+          "enum": [
+            "in_progress",
+            "searching",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "results": {
+          "type": "array",
+          "description": "The results of the file search.",
+          "items": {
+            "$ref": "#/definitions/FileSearchResult"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "file_search_call"
     },
     "ResponseFunctionCallItem": {
       "type": "object",
@@ -3275,6 +3569,20 @@
           "$ref": "#/definitions/InterimResponseConfig",
           "description": "Configuration for interim response generation during latency or tool calls."
         },
+        "include": {
+          "type": "array",
+          "description": "List of include options for the session (e.g., logprobs, phrases, file search results).",
+          "items": {
+            "$ref": "#/definitions/SessionIncludeOption"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Set of up to 16 key-value pairs that can be attached to the session.\nKeys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "agent": {
           "$ref": "#/definitions/AgentConfig",
           "description": "The agent configuration for the session, if applicable."
@@ -3349,6 +3657,38 @@
         }
       ],
       "x-ms-discriminator-value": "text"
+    },
+    "ResponseWebSearchCallItem": {
+      "type": "object",
+      "description": "A response item that represents a web search call.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the web search tool call."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the web search tool call.",
+          "enum": [
+            "in_progress",
+            "searching",
+            "completed",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "web_search_call"
     },
     "Scene": {
       "type": "object",
@@ -3469,6 +3809,20 @@
         "transcript": {
           "type": "string",
           "description": "The transcribed text."
+        },
+        "logprobs": {
+          "type": "array",
+          "description": "The log probabilities of the transcription tokens.",
+          "items": {
+            "$ref": "#/definitions/LogProbProperties"
+          }
+        },
+        "phrases": {
+          "type": "array",
+          "description": "The transcription phrases with timing information.",
+          "items": {
+            "$ref": "#/definitions/TranscriptionPhrase"
+          }
         }
       },
       "required": [
@@ -3786,6 +4140,16 @@
       ],
       "x-ms-discriminator-value": "mcp_list_tools.in_progress"
     },
+    "ServerEventOutputAudioBufferCleared": {
+      "type": "object",
+      "description": "Returned when the output audio buffer has been cleared.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "output_audio_buffer.cleared"
+    },
     "ServerEventResponseAnimationBlendshapeDelta": {
       "type": "object",
       "description": "Represents a delta update of blendshape animation frames for a specific output of a response.",
@@ -4092,6 +4456,52 @@
       ],
       "x-ms-discriminator-value": "response.audio_timestamp.done"
     },
+    "ServerEventResponseAudioTranscriptAnnotationAdded": {
+      "type": "object",
+      "description": "Returned when an audio transcript annotation is added to a response.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part in the item's content array."
+        },
+        "annotation_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the annotation."
+        },
+        "annotation": {
+          "description": "The annotation object."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "content_index",
+        "annotation_index",
+        "annotation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.audio_transcript.annotation.added"
+    },
     "ServerEventResponseAudioTranscriptDelta": {
       "type": "object",
       "description": "Returned when the model-generated transcription of audio output is updated.",
@@ -4291,6 +4701,114 @@
         }
       ],
       "x-ms-discriminator-value": "response.done"
+    },
+    "ServerEventResponseFileSearchCallCompleted": {
+      "type": "object",
+      "description": "Returned when a file search call has completed.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the file search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.file_search_call.completed"
+    },
+    "ServerEventResponseFileSearchCallInProgress": {
+      "type": "object",
+      "description": "Returned when a file search call is in progress.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the file search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.file_search_call.in_progress"
+    },
+    "ServerEventResponseFileSearchCallSearching": {
+      "type": "object",
+      "description": "Returned when a file search call is searching.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the file search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.file_search_call.searching"
     },
     "ServerEventResponseFunctionCallArgumentsDelta": {
       "type": "object",
@@ -4663,6 +5181,144 @@
       ],
       "x-ms-discriminator-value": "response.text.done"
     },
+    "ServerEventResponseVideoDelta": {
+      "type": "object",
+      "description": "Returned when avatar video frame data is streamed.",
+      "properties": {
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "codec": {
+          "type": "string",
+          "description": "The codec used for the video data."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The base64-encoded video frame data."
+        }
+      },
+      "required": [
+        "output_index",
+        "codec",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.video.delta"
+    },
+    "ServerEventResponseWebSearchCallCompleted": {
+      "type": "object",
+      "description": "Returned when a web search call has completed.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the web search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.web_search_call.completed"
+    },
+    "ServerEventResponseWebSearchCallInProgress": {
+      "type": "object",
+      "description": "Returned when a web search call is in progress.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the web search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.web_search_call.in_progress"
+    },
+    "ServerEventResponseWebSearchCallSearching": {
+      "type": "object",
+      "description": "Returned when a web search call is searching.",
+      "properties": {
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output item in the response."
+        },
+        "sequence_number": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number of the web search call."
+        }
+      },
+      "required": [
+        "response_id",
+        "item_id",
+        "output_index",
+        "sequence_number"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.web_search_call.searching"
+    },
     "ServerEventSessionAvatarConnecting": {
       "type": "object",
       "description": "Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.",
@@ -4681,6 +5337,38 @@
         }
       ],
       "x-ms-discriminator-value": "session.avatar.connecting"
+    },
+    "ServerEventSessionAvatarSwitchToIdle": {
+      "type": "object",
+      "description": "Returned when the avatar switches to idle state.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "The ID of the turn associated with the avatar state change."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.avatar.switch_to_idle"
+    },
+    "ServerEventSessionAvatarSwitchToSpeaking": {
+      "type": "object",
+      "description": "Returned when the avatar switches to speaking state.",
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "description": "The ID of the turn associated with the avatar state change."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "session.avatar.switch_to_speaking"
     },
     "ServerEventSessionCreated": {
       "type": "object",
@@ -4765,7 +5453,18 @@
         "response.mcp_call_arguments.done",
         "response.mcp_call.in_progress",
         "response.mcp_call.completed",
-        "response.mcp_call.failed"
+        "response.mcp_call.failed",
+        "session.avatar.switch_to_speaking",
+        "session.avatar.switch_to_idle",
+        "response.video.delta",
+        "response.web_search_call.searching",
+        "response.web_search_call.in_progress",
+        "response.web_search_call.completed",
+        "response.file_search_call.searching",
+        "response.file_search_call.in_progress",
+        "response.file_search_call.completed",
+        "output_audio_buffer.cleared",
+        "response.audio_transcript.annotation.added"
       ],
       "x-ms-enum": {
         "name": "ServerEventType",
@@ -4946,6 +5645,61 @@
           {
             "name": "response_mcp_call_failed",
             "value": "response.mcp_call.failed"
+          },
+          {
+            "name": "session_avatar_switch_to_speaking",
+            "value": "session.avatar.switch_to_speaking",
+            "description": "Avatar switches to speaking state."
+          },
+          {
+            "name": "session_avatar_switch_to_idle",
+            "value": "session.avatar.switch_to_idle",
+            "description": "Avatar switches to idle state."
+          },
+          {
+            "name": "response_video_delta",
+            "value": "response.video.delta",
+            "description": "Delta update for avatar video frames."
+          },
+          {
+            "name": "response_web_search_call_searching",
+            "value": "response.web_search_call.searching",
+            "description": "Web search call is searching."
+          },
+          {
+            "name": "response_web_search_call_in_progress",
+            "value": "response.web_search_call.in_progress",
+            "description": "Web search call is in progress."
+          },
+          {
+            "name": "response_web_search_call_completed",
+            "value": "response.web_search_call.completed",
+            "description": "Web search call completed."
+          },
+          {
+            "name": "response_file_search_call_searching",
+            "value": "response.file_search_call.searching",
+            "description": "File search call is searching."
+          },
+          {
+            "name": "response_file_search_call_in_progress",
+            "value": "response.file_search_call.in_progress",
+            "description": "File search call is in progress."
+          },
+          {
+            "name": "response_file_search_call_completed",
+            "value": "response.file_search_call.completed",
+            "description": "File search call completed."
+          },
+          {
+            "name": "output_audio_buffer_cleared",
+            "value": "output_audio_buffer.cleared",
+            "description": "Output audio buffer has been cleared."
+          },
+          {
+            "name": "response_audio_transcript_annotation_added",
+            "value": "response.audio_transcript.annotation.added",
+            "description": "Audio transcript annotation added."
           }
         ]
       }
@@ -5034,6 +5788,36 @@
     "SessionBase": {
       "type": "object",
       "description": "VoiceLive session object configuration."
+    },
+    "SessionIncludeOption": {
+      "type": "string",
+      "description": "Options for what additional data to include in session responses.",
+      "enum": [
+        "item.input_audio_transcription.logprobs",
+        "item.input_audio_transcription.phrases",
+        "file_search_call.results"
+      ],
+      "x-ms-enum": {
+        "name": "SessionIncludeOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "item_input_audio_transcription_logprobs",
+            "value": "item.input_audio_transcription.logprobs",
+            "description": "Include log probabilities for input audio transcription."
+          },
+          {
+            "name": "item_input_audio_transcription_phrases",
+            "value": "item.input_audio_transcription.phrases",
+            "description": "Include phrase-level details for input audio transcription."
+          },
+          {
+            "name": "file_search_call_results",
+            "value": "file_search_call.results",
+            "description": "Include file search call results."
+          }
+        ]
+      }
     },
     "StaticInterimResponseConfig": {
       "type": "object",
@@ -5196,6 +5980,72 @@
           }
         ]
       }
+    },
+    "TranscriptionPhrase": {
+      "type": "object",
+      "description": "A transcribed phrase with timing information.",
+      "properties": {
+        "offset_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Offset from the start of the audio in milliseconds."
+        },
+        "duration_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of the phrase in milliseconds."
+        },
+        "text": {
+          "type": "string",
+          "description": "The transcribed text of the phrase."
+        },
+        "words": {
+          "type": "array",
+          "description": "The individual words in the phrase with timing information.",
+          "items": {
+            "$ref": "#/definitions/TranscriptionWord"
+          }
+        },
+        "locale": {
+          "type": "string",
+          "description": "The locale of the transcription (e.g., 'en-US')."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "The confidence score of the transcription."
+        }
+      },
+      "required": [
+        "offset_milliseconds",
+        "duration_milliseconds",
+        "text"
+      ]
+    },
+    "TranscriptionWord": {
+      "type": "object",
+      "description": "A time-stamped word in the transcription.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The transcribed word text."
+        },
+        "offset_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Offset from the start of the audio in milliseconds."
+        },
+        "duration_milliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of the word in milliseconds."
+        }
+      },
+      "required": [
+        "text",
+        "offset_milliseconds",
+        "duration_milliseconds"
+      ]
     },
     "TurnDetection": {
       "type": "object",

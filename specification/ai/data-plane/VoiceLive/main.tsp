@@ -21,4 +21,7 @@ enum Versions {
   /** Version 2026-01-01-preview. */
   @previewVersion
   v2026_01_01_preview: "2026-01-01-preview",
+
+  /** Version 2026-04-10. */
+  v2026_04_10: "2026-04-10",
 }
