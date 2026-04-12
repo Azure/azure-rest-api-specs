@@ -456,44 +456,54 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "speech_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Minimum speech duration in milliseconds to trigger detection."
         },
         "remove_filler_words": {
           "type": "boolean",
+          "description": "Whether to remove filler words (e.g., 'um', 'uh') from transcription.",
           "default": false
         },
         "languages": {
           "type": "array",
+          "description": "List of BCP-47 language codes for speech detection.",
           "items": {
             "type": "string"
           }
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },
@@ -511,38 +521,47 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "speech_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Minimum speech duration in milliseconds to trigger detection."
         },
         "remove_filler_words": {
           "type": "boolean",
+          "description": "Whether to remove filler words (e.g., 'um', 'uh') from transcription.",
           "default": false
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },
@@ -560,44 +579,54 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "speech_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Minimum speech duration in milliseconds to trigger detection."
         },
         "remove_filler_words": {
           "type": "boolean",
+          "description": "Whether to remove filler words (e.g., 'um', 'uh') from transcription.",
           "default": false
         },
         "languages": {
           "type": "array",
+          "description": "List of BCP-47 language codes for speech detection.",
           "items": {
             "type": "string"
           }
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },
@@ -3994,30 +4023,37 @@
         "threshold": {
           "type": "number",
           "format": "float",
+          "description": "Activation threshold for VAD detection. Range: 0.0 to 1.0.",
           "minimum": 0,
           "maximum": 1
         },
         "prefix_padding_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Amount of audio to include before speech is detected, in milliseconds."
         },
         "silence_duration_ms": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Duration of silence required to end speech detection, in milliseconds."
         },
         "end_of_utterance_detection": {
-          "$ref": "#/definitions/EouDetection"
+          "$ref": "#/definitions/EouDetection",
+          "description": "Configuration for end-of-utterance detection."
         },
         "auto_truncate": {
           "type": "boolean",
+          "description": "Whether to automatically truncate the audio buffer when speech stops.",
           "default": false
         },
         "create_response": {
           "type": "boolean",
+          "description": "Whether to automatically create a response when speech stops.",
           "default": false
         },
         "interrupt_response": {
           "type": "boolean",
+          "description": "Whether to allow the user's speech to interrupt the assistant's response.",
           "default": false
         }
       },
