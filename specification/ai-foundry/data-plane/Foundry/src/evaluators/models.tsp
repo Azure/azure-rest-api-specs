@@ -153,14 +153,16 @@ model FileEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 
 @doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
 model RubricCriterion {
-  @doc("Stable identifier for this criterion (service-generated, derived from description hash).")
+  @doc("Stable, human-readable slug generated once from the criterion description at creation time. Preserved across subsequent description edits. Service-generated.")
   @visibility(Lifecycle.Read)
   rubric_id?: string;
 
   @doc("What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
   description: string;
 
-  @doc("Relative weight of this criterion (1-10). Exactly one criterion should have weight 8-10; all others should use 1-6.")
+  @doc("Relative weight of this criterion (1-10). The generation pipeline assigns exactly one criterion weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.")
+  @minValue(1)
+  @maxValue(10)
   weight: int32;
 
   @doc("When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). Used for the general quality criterion — a catch-all that captures quality issues outside explicit criteria. Defaults to false.")
