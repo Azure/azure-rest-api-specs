@@ -19,7 +19,7 @@ using Azure.Core;
   > | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
 )
 @server(
-  "{endpoint}/speechtotext",
+  "{endpoint}",
   "Azure Speech Services APIs for speech-to-text",
   {
     @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).")
