@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -955,6 +956,10 @@ union AzureConnectionType {
   None: "None",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VPN: "VPN",
+
+  /** Azure VNet peering connection method. The service creates and manages VNets and peers them with the customer's VNet. */
+  @added(Versions.v2026_04_13_preview)
+  AZUREVNET: "AZUREVNET",
 }
 
 /**
@@ -5894,6 +5899,13 @@ model ClusterResourceProperties {
   azureConnectionMethod?: AzureConnectionType;
 
   /**
+   * The VNet address prefix for the Cassandra-managed virtual network. Required when azureConnectionMethod is AZUREVNET.
+   */
+  @added(Versions.v2026_04_13_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  azureVirtualNetworkAddressPrefix?: string;
+
+  /**
    * If the Connection Method is Vpn, this is the Id of the private link resource that the datacenters need to connect to.
    */
   @visibility(Lifecycle.Read)
@@ -6325,6 +6337,13 @@ model DataCenterResourceProperties {
    * Ip of the VPN Endpoint for this data center.
    */
   privateEndpointIpAddress?: string;
+
+  /**
+   * The VNet address prefix for the Cassandra-managed DC virtual network. Required when azureConnectionMethod is AZUREVNET. Must be unique across all data centers in the cluster.
+   */
+  @added(Versions.v2026_04_13_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  azureVirtualNetworkAddressPrefix?: string;
 }
 
 /**

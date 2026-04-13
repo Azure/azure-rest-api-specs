@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "createUpdateCassandraTableParameters": {
+      "location": "West US",
+      "properties": {
+        "options": {},
+        "resource": {
+          "schema": {
+            "clusterKeys": [
+              {
+                "name": "columnA",
+                "orderBy": "Asc"
+              }
+            ],
+            "columns": [
+              {
+                "name": "columnA",
+                "type": "Ascii"
+              }
+            ],
+            "partitionKeys": [
+              {
+                "name": "columnA"
+              }
+            ]
+          },
+          "analyticalStorageTtl": 500,
+          "defaultTtl": 100,
+          "id": "tableName"
+        }
+      },
+      "tags": {}
+    },
+    "keyspaceName": "keyspaceName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "tableName": "tableName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "tableName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/cassandraTables/tableName",
+        "location": "West US",
+        "properties": {
+          "resource": {
+            "schema": {
+              "clusterKeys": [
+                {
+                  "name": "columnA",
+                  "orderBy": "Asc"
+                }
+              ],
+              "columns": [
+                {
+                  "name": "columnA",
+                  "type": "Ascii"
+                }
+              ],
+              "partitionKeys": [
+                {
+                  "name": "columnA"
+                }
+              ]
+            },
+            "analyticalStorageTtl": 500,
+            "defaultTtl": 100,
+            "id": "tableName"
+          }
+        },
+        "tags": {}
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview"
+      }
+    }
+  },
+  "operationId": "CassandraResources_CreateUpdateCassandraTable",
+  "title": "CosmosDBCassandraTableCreateUpdate"
+}

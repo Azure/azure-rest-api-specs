@@ -1,0 +1,168 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "body": {
+      "properties": {
+        "authenticationMethod": "None",
+        "externalGossipCertificates": [
+          {
+            "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+          }
+        ],
+        "externalSeedNodes": [
+          {
+            "ipAddress": "10.52.221.2"
+          },
+          {
+            "ipAddress": "10.52.221.3"
+          },
+          {
+            "ipAddress": "10.52.221.4"
+          }
+        ],
+        "hoursBetweenBackups": 12
+      },
+      "tags": {
+        "owner": "mike"
+      }
+    },
+    "clusterName": "cassandra-prod",
+    "resourceGroupName": "cassandra-prod-rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cassandra-prod",
+        "type": "Microsoft.DocumentDB/cassandraClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
+        "location": "West US",
+        "properties": {
+          "authenticationMethod": "Cassandra",
+          "cassandraVersion": "3.11",
+          "clientCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "clusterNameOverride": "ClusterNameIllegalForAzureResource",
+          "delegatedManagementSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
+          "externalGossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "externalSeedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            }
+          ],
+          "gossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "hoursBetweenBackups": 24,
+          "provisioningState": "Succeeded",
+          "seedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            },
+            {
+              "ipAddress": "192.168.12.2"
+            },
+            {
+              "ipAddress": "192.168.12.3"
+            },
+            {
+              "ipAddress": "192.168.12.4"
+            }
+          ]
+        },
+        "tags": {}
+      }
+    },
+    "202": {
+      "body": {
+        "name": "cassandra-prod",
+        "type": "Microsoft.DocumentDB/cassandraClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
+        "location": "West US",
+        "properties": {
+          "authenticationMethod": "Cassandra",
+          "cassandraVersion": "3.11",
+          "clientCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "clusterNameOverride": "ClusterNameIllegalForAzureResource",
+          "delegatedManagementSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
+          "externalGossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "externalSeedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            }
+          ],
+          "gossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "hoursBetweenBackups": 24,
+          "provisioningState": "Updating",
+          "seedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            },
+            {
+              "ipAddress": "192.168.12.2"
+            },
+            {
+              "ipAddress": "192.168.12.3"
+            },
+            {
+              "ipAddress": "192.168.12.4"
+            }
+          ]
+        },
+        "tags": {
+          "owner": "mike"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationsStatus/318653d0-3da5-4814-b8f6-429f2af0b2a4?api-version=2025-11-01-preview"
+      }
+    }
+  },
+  "operationId": "CassandraClusters_Update",
+  "title": "CosmosDBManagedCassandraClusterPatch"
+}
