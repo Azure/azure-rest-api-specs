@@ -48,7 +48,7 @@ interface AgentSessionFiles {
 
       @body content: bytes;
     },
-    SessionFileWriteResponse
+    ResourceCreatedResponse<SessionFileWriteResponse>
   >;
 
   /**
