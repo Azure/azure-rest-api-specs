@@ -1,0 +1,304 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.OperationalInsights;
+/**
+ * The top level Workspace resource container.
+ */
+model Workspace is Azure.ResourceManager.TrackedResource<WorkspaceProperties> {
+  ...ResourceNameParameter<
+    Resource = Workspace,
+    KeyName = "workspaceName",
+    SegmentName = "workspaces",
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+  >;
+
+  /**
+   * The identity of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: Identity;
+
+  /**
+   * The etag of the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  etag?: string;
+}
+
+@armResourceOperations
+interface Workspaces {
+  /**
+   * Gets a workspace instance.
+   */
+  get is ArmResourceRead<Workspace>;
+
+  /**
+   * Create or update a workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Workspace,
+    Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
+      Workspace,
+      ArmLroLocationHeader<FinalResult = Workspace> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Updates a workspace.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<Workspace, PatchModel = WorkspacePatch>;
+
+  /**
+   * Deletes a workspace resource. To recover the workspace, create it again with the same name, in the same subscription, resource group and location. The name is kept for 14 days and cannot be used for another workspace. To remove the workspace completely and release the name, use the force flag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Workspace,
+    Parameters = {
+      /**
+       * Deletes the workspace without the recovery option. A workspace that was deleted with this flag cannot be recovered.
+       */
+      @query("force")
+      force?: boolean;
+    },
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Gets workspaces in a resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<
+    Workspace,
+    Response = ArmResponse<WorkspaceListResult>
+  >;
+
+  /**
+   * Gets the workspaces in a subscription.
+   */
+  list is ArmListBySubscription<
+    Workspace,
+    Response = ArmResponse<WorkspaceListResult>
+  >;
+
+  /**
+   * Gets the available service tiers for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AvailableServiceTiers_ListByWorkspace")
+  @list
+  @get
+  @action("availableServiceTiers")
+  listByWorkspace is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<AvailableServiceTier[]>
+  >;
+
+  /**
+   * Delete a Log Analytics gateway.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Gateways_Delete")
+  @delete
+  @action("{gatewayId}")
+  gatewaysDelete is ArmResourceActionSync<
+    Workspace,
+    void,
+    OkResponse,
+    Parameters = {
+      /**
+       * The Log Analytics gateway Id.
+       */
+      @path
+      gatewayId: string;
+    }
+  >;
+
+  /**
+   * Disables an intelligence pack for a given workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("IntelligencePacks_Disable")
+  @action("Disable")
+  disable is ArmResourceActionSync<
+    Workspace,
+    void,
+    OkResponse,
+    Parameters = {
+      /**
+       * The name of the intelligence pack to be disabled.
+       */
+      @path
+      intelligencePackName: string;
+    }
+  >;
+
+  /**
+   * Enables an intelligence pack for a given workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("IntelligencePacks_Enable")
+  @action("Enable")
+  enable is ArmResourceActionSync<
+    Workspace,
+    void,
+    OkResponse,
+    Parameters = {
+      /**
+       * The name of the intelligence pack to be enabled.
+       */
+      @path
+      intelligencePackName: string;
+    }
+  >;
+
+  /**
+   * Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("IntelligencePacks_List")
+  @list
+  @get
+  @action("intelligencePacks")
+  intelligencePacksList is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<IntelligencePack[]>
+  >;
+
+  /**
+   * Gets a list of management groups connected to a workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ManagementGroups_List")
+  @list
+  @get
+  @action("managementGroups")
+  managementGroupsList is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<WorkspaceListManagementGroupsResult>
+  >;
+
+  /**
+   * Gets the schema for a given workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Schema_Get")
+  @list
+  @action("schema")
+  schemaGet is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<SearchGetSchemaResponse>
+  >;
+
+  /**
+   * Gets the shared keys for a workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SharedKeys_GetSharedKeys")
+  @action("sharedKeys")
+  getSharedKeys is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<SharedKeys>
+  >;
+
+  /**
+   * Regenerates the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SharedKeys_Regenerate")
+  @action("regenerateSharedKey")
+  regenerate is ArmResourceActionSync<Workspace, void, ArmResponse<SharedKeys>>;
+
+  /**
+   * Gets a list of usage metrics for a workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Usages_List")
+  @list
+  @get
+  @action("usages")
+  usagesList is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<WorkspaceListUsagesResult>
+  >;
+
+  /**
+   * Purges data in an Log Analytics workspace by a set of user-defined filters.
+   *
+   * In order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.
+   * Log Analytics only supports purge operations required for compliance with GDPR. The Log Analytics product team reserves the right to reject requests for purge operations that are not for the purpose of GDPR compliance. In the event of a dispute, please create a support ticket
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WorkspacePurge_Purge")
+  purge is ArmResourceActionSync<
+    Workspace,
+    WorkspacePurgeBody,
+    AcceptedResponse & {
+      @bodyRoot
+      _: WorkspacePurgeResponse;
+    }
+  >;
+
+  /**
+   * Gets status of an ongoing purge operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("WorkspacePurge_GetPurgeStatus")
+  @get
+  @action("{purgeId}")
+  getPurgeStatus is ArmResourceActionSync<
+    Workspace,
+    void,
+    ArmResponse<WorkspacePurgeStatusResponse>,
+    Parameters = {
+      /**
+       * In a purge status request, this is the Id of the operation the status of which is returned.
+       */
+      @path
+      purgeId: string;
+    }
+  >;
+
+  /**
+   * Deactivates failover for the specified workspace.
+   *
+   * The failback operation is asynchronous and can take up to 30 minutes to complete. The status of the operation can be checked using the operationId returned in the response.
+   */
+  failback is ArmResourceActionAsyncBase<
+    Workspace,
+    void,
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Workspace>
+  >;
+}
+
+@@maxLength(Workspace.name, 63);
+@@minLength(Workspace.name, 4);
+@@doc(Workspace.name, "The name of the workspace.");
+@@doc(Workspace.properties, "Workspace properties.");
+@@doc(Workspaces.createOrUpdate::parameters.resource,
+  "The parameters required to create or update a workspace."
+);
+@@doc(Workspaces.update::parameters.properties,
+  "The parameters required to patch a workspace."
+);
+@@doc(Workspaces.purge::parameters.body,
+  "Describes the body of a request to purge data in a single table of an Log Analytics Workspace"
+);
