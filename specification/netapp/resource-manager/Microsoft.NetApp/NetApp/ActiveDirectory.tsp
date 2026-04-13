@@ -174,22 +174,16 @@ interface ActiveDirectoryConfigs {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   get is ArmResourceRead<ActiveDirectoryConfig>;
 
   /** Create or update the specified active directory configuration */
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ActiveDirectoryConfig>;
 
   /** Patch the specified active directory configuration */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   @patch(#{ implicitOptionality: true })
@@ -207,22 +201,16 @@ interface ActiveDirectoryConfigs {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ActiveDirectoryConfig>;
 
   /** List all active directory configurations within the resource group. */
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   listByResourceGroup is ArmResourceListByParent<ActiveDirectoryConfig>;
 
   /** List all active directory configurations within the subscription */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   listBySubscription is ArmListBySubscription<ActiveDirectoryConfig>;
