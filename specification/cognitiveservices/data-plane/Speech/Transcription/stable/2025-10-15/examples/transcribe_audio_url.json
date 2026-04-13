@@ -1,12 +1,11 @@
 {
   "operationId": "Transcribe",
-  "title": "Transcribe audio file",
+  "title": "Transcribe audio from URL",
   "parameters": {
     "Endpoint": "https://westus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
     "Content-Type": "multipart/form-data",
-    "definition": "{ \"locales\":  [\"en-US\"] }",
-    "audio": "{binary}"
+    "definition": "{ \"locales\":  [\"en-US\"], \"audioUrl\": \"{audioUrl}\" }"
   },
   "responses": {
     "200": {
