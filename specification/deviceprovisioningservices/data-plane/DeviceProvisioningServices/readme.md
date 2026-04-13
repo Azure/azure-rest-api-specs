@@ -76,6 +76,67 @@ title: ProvisioningDeviceClient
 ```
 ---
 
+## Suppression
+
+``` yaml
+suppressions:
+  - code: OperationId
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API operation IDs do not follow the Create/Update naming
+      convention. Maintained for backward compatibility with existing DPS SDK clients.
+  - code: PutInOperationName
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API PUT operation IDs do not include Create/Update/Replace.
+      Maintained for backward compatibility.
+  - code: ParameterOrder
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API parameter ordering maintained for backward compatibility.
+  - code: PathParameterSchema
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API path parameter schema maintained for backward compatibility.
+  - code: LroHeaders
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API LRO response does not include standard LRO headers.
+      Maintained for backward compatibility with existing DPS device clients.
+  - code: ErrorResponse
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API uses a custom error response format predating ARM guidelines.
+      Maintained for backward compatibility.
+  - code: ErrorResponse
+    from: service.json
+    reason: >-
+      DPS service API (TypeSpec-generated) uses a custom error response format matching
+      the pre-existing DPS API contract. Maintained for backward compatibility.
+  - code: OperationIdNounConflictingModelNames
+    from: service.json
+    reason: >-
+      TypeSpec-generated DPS service API operation IDs conflict with model names per this rule.
+      This is a pre-existing API design pattern maintained for SDK compatibility.
+  - code: PaginationResponse
+    from: service.json
+    reason: >-
+      DPS service API pagination response format does not follow ARM paging guidelines.
+      This is a pre-existing API design decision maintained for backward compatibility.
+  - code: EnumInsteadOfBoolean
+    from: service.json
+    reason: >-
+      DPS service API uses boolean fields where enum is suggested. This is a pre-existing
+      API design decision maintained for backward compatibility.
+  - code: AdditionalPropertiesObject
+    from: service.json
+    reason: >-
+      DPS service API model uses additionalProperties of type object. This is a pre-existing
+      API design decision maintained for backward compatibility.
+```
+
+---
+
 # Code Generation
 
 ## C#
