@@ -65,6 +65,11 @@ union ResourceType {
    * MongoToCosmosDbMongo
    */
   MongoToCosmosDbMongo: "MongoToCosmosDbMongo",
+
+  /**
+   * DatabaseMigrationProperties
+   */
+  DatabaseMigrationProperties: "DatabaseMigrationProperties",
 }
 
 /**
