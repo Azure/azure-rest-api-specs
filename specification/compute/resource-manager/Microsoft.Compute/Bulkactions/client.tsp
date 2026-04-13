@@ -86,3 +86,23 @@ namespace Microsoft.Compute;
 @@clientName(AllInstancesDown.automaticallyApprove,
   "AllInstancesDownAutomaticallyApprove"
 );
+@@clientName(ExecuteVdiCreateRequest,
+  "BulkActionsExecuteVdiCreateRequestContent",
+  "csharp"
+);
+@@clientName(ExecuteReimageRequest,
+  "BulkActionsExecuteReimageRequestContent",
+  "csharp"
+);
+@@clientName(ReimageResourceOperationResponse,
+  "BulkActionsReimageResourceOperationResponseResult",
+  "csharp"
+);
+@@clientName(VirtualMachineReimageParameters,
+  "BulkActionsVirtualMachineReimageParametersContent",
+  "csharp"
+);
+@@clientName(OSProfileProvisioningData,
+  "BulkActionsOsProfileProvisioningContent",
+  "csharp"
+);
