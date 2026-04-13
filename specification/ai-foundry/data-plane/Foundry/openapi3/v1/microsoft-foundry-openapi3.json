@@ -4574,6 +4574,142 @@
         "tags": [
           "Models"
         ]
+      },
+      "delete": {
+        "operationId": "Models_deleteVersion",
+        "description": "Delete the specific version of the ModelVersion. The service returns 204 No Content if the ModelVersion was deleted successfully or if the ModelVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the ModelVersion to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ]
+      },
+      "patch": {
+        "operationId": "Models_createOrUpdateVersion",
+        "description": "Create a new or update an existing ModelVersion with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the ModelVersion to create or update.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelVersion"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelVersionUpdate"
+              }
+            }
+          },
+          "description": "The ModelVersion to create or update."
+        }
       }
     },
     "/openai/v1/conversations": {
@@ -12310,7 +12446,7 @@
         "properties": {
           "baseModel": {
             "type": "string",
-            "description": "Base model name"
+            "description": "Base model asset ID"
           }
         },
         "description": "Derived model information"
@@ -15664,6 +15800,43 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
+          }
+        },
+        "description": "Model Version Definition"
+      },
+      "ModelVersionUpdate": {
+        "type": "object",
+        "properties": {
+          "systemData": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemDataV3"
+              }
+            ],
+            "description": "System related metadata"
+          },
+          "blobUri": {
+            "type": "string",
+            "description": "URI of the model artifact in blob storage"
+          },
+          "derivedModelInformation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DerivedModelInformation"
+              }
+            ],
+            "description": "Derived model information"
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
         "description": "Model Version Definition"

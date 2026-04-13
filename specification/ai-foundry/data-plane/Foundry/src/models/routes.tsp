@@ -12,8 +12,9 @@ alias ListModelVersionsParameters = {};
 @added(Versions.v1)
 @tag("Models")
 interface Models
-  extends ReadableVersionedOperations<
+  extends VersionedOperations<
       ModelVersion,
+      InputParameters<ModelVersion>,
       ListModelVersionsParameters,
       ListModelVersionsParameters
     > {}

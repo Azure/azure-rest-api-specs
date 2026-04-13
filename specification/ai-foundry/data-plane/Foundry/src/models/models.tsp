@@ -41,6 +41,6 @@ model SystemDataV3 {
 @added(Versions.v1)
 @doc("Derived model information")
 model DerivedModelInformation {
-  @doc("Base model name")
+  @doc("Base model asset ID")
   baseModel: string;
 }
