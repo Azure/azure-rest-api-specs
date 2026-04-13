@@ -9,6 +9,29 @@ options:
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/webpubsubchat.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-webpubsubchatservice"
+    package-name: "azure-messaging-webpubsubchatservice"
+    package-pprint-name: "Azure Web PubSub Chat Service"
+    namespace: "azure.messaging.webpubsubservice.chat"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-webpubsub-chat"
+    package-name: "com.azure.messaging.webpubsub.chat"
+    namespace: "com.azure.messaging.webpubsub.chat"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/web-pubsub"
+    emitter-output-dir: "{output-dir}/{service-dir}/web-pubsub-chat"
+    package-details:
+      name: "@azure/web-pubsub-chat"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
 
 linter:
   extends:
