@@ -414,10 +414,10 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
-  @visibility(Lifecycle.Create)
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret extension to avoid format:password breaking change from @secret"
-  @OpenAPI.extension("x-ms-secret", true)
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Already marked with x-ms-secret extension"
+  @visibility(Lifecycle.Create)
+  @OpenAPI.extension("x-ms-secret", true)
   @doc("Link organization token")
   token?: string;
 }
