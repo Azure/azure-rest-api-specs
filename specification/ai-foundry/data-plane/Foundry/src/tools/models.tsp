@@ -827,12 +827,12 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     /**
-     * (Optional) The label of the Fabric IQ agent to connect to. If not provided, the default agent will be used.
+     * (Optional) The label of the Fabric IQ MCP server to connect to.
      */
     server_label?: string;
 
     /**
-     * (Optional) The URL of the Fabric IQ server. If not provided, the URL from the project connection will be used.
+     * (Optional) The URL of the Fabric IQ MCP server. If not provided, the URL from the project connection will be used.
      */
     server_url?: url;
 
