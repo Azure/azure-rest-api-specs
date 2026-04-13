@@ -658,7 +658,7 @@ model VolumeGroupProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
-   * A boolean indicating whether or not Encryption in Transit is enabled
+   * A boolean indicating whether or not Encryption in Transit is enabled, supported only for ISCSI protocol.
    */
   @added(Versions.v2026_04_01_preview)
   encryptionInTransit?: boolean;
