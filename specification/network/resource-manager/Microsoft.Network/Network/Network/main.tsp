@@ -66,6 +66,7 @@ import "./NetworkManagerRoutingConfiguration.tsp";
 import "./RoutingRuleCollection.tsp";
 import "./RoutingRule.tsp";
 import "./ScopeConnection.tsp";
+import "./Commit.tsp";
 import "./SecurityAdminConfiguration.tsp";
 import "./AdminRuleCollection.tsp";
 import "./BaseAdminRule.tsp";
