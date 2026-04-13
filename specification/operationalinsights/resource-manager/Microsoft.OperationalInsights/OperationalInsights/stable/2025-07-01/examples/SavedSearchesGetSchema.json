@@ -1,13 +1,13 @@
 {
   "parameters": {
-    "resourceGroupName": "mms-eus",
-    "workspaceName": "atlantisdemo",
     "api-version": "2025-07-01",
     "parameters": {
-      "top": 25,
-      "query": "*"
+      "query": "*",
+      "top": 25
     },
-    "subscriptionId": "00000000-0000-0000-0000-00000000000"
+    "resourceGroupName": "mms-eus",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "workspaceName": "atlantisdemo"
   },
   "responses": {
     "200": {
@@ -17,17 +17,16 @@
             "name": "CloudOps",
             "version": 2
           },
-          "resultType": "schema",
-          "requestTime": 28
+          "requestTime": 28,
+          "resultType": "schema"
         },
         "value": [
           {
             "name": "TenantId",
-            "displayName": "TenantId",
             "type": "Guid",
-            "indexed": true,
-            "stored": false,
+            "displayName": "TenantId",
             "facet": false,
+            "indexed": true,
             "ownerType": [
               "Alert",
               "AzureActivity",
@@ -55,10 +54,13 @@
               "Syslog",
               "Usage",
               "W3CIISLog"
-            ]
+            ],
+            "stored": false
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Schema_Get",
+  "title": "WorkspacesGetSchema"
 }

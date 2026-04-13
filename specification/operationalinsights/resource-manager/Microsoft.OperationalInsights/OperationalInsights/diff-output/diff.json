@@ -1,0 +1,4594 @@
+{
+  "info": {
+    "title": {
+      "__old": "Azure Log Analytics Network Security Perimeter APIs",
+      "__new": "OperationalInsightsManagementClient"
+    },
+    "description": {
+      "__old": "Provides NSP operations for working with Log Analytics.",
+      "__new": "Operational Insights Client"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/search__deleted": {
+      "post": {
+        "operationId": "Queries_Search",
+        "description": "Search a list of Queries defined within a Log Analytics QueryPack according to given search properties.",
+        "parameters": [
+          {
+            "name": "queryPackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "includeBody",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "QuerySearchProperties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuerySearchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQueryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuerySearch": {
+            "$ref": "./examples/QueryPackQueriesSearch.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/gateways/{gatewayId}__deleted": {
+      "delete": {
+        "operationId": "Gateways_Delete",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Delete a Log Analytics gateway.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "gatewayId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          }
+        },
+        "x-ms-examples": {
+          "DeleteGateways": {
+            "$ref": "./examples/WorkspacesGatewaysDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/disable__deleted": {
+      "post": {
+        "operationId": "IntelligencePacks_Disable",
+        "tags": [
+          "Workspaces",
+          "IntelligencePacks"
+        ],
+        "description": "Disables an intelligence pack for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          }
+        },
+        "x-ms-examples": {
+          "IntelligencePacksDisable": {
+            "$ref": "./examples/WorkspacesDisableIntelligencePack.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/enable__deleted": {
+      "post": {
+        "operationId": "IntelligencePacks_Enable",
+        "tags": [
+          "Workspaces",
+          "IntelligencePacks"
+        ],
+        "description": "Enables an intelligence pack for a given workspace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          }
+        },
+        "x-ms-examples": {
+          "IntelligencePacksEnable": {
+            "$ref": "./examples/WorkspacesEnableIntelligencePack.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations__deleted": {
+      "get": {
+        "operationId": "Workspaces_ListNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a list of NSP configurations for specified workspace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List NSP configs by Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}__deleted": {
+      "get": {
+        "operationId": "Workspaces_GetNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a network security perimeter configuration.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^.*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NSP config by name for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile__deleted": {
+      "post": {
+        "operationId": "Workspaces_ReconcileNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconcile network security perimeter configuration for Workspace resource.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^.*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reconcile NSP config for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Reconcile.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}__deleted": {
+      "get": {
+        "operationId": "WorkspacePurge_GetPurgeStatus",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets status of an ongoing purge operation.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "purgeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurgeOperation": {
+            "$ref": "./examples/WorkspacesPurgeOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs__deleted": {
+      "get": {
+        "operationId": "SummaryLogs_ListByWorkspace",
+        "tags": [
+          "SummaryRules"
+        ],
+        "description": "Gets all summary rules for the specified Log Analytics workspace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogsListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsListByWorkspace": {
+            "$ref": "./examples/SummaryLogsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}__deleted": {
+      "get": {
+        "operationId": "SummaryLogs_Get",
+        "tags": [
+          "SummaryRules"
+        ],
+        "description": "Gets Log Analytics workspace Summary rules.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsGet": {
+            "$ref": "./examples/SummaryLogsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SummaryLogs_CreateOrUpdate",
+        "tags": [
+          "SummaryRules"
+        ],
+        "description": "Creates or updates Log Analytics workspace Summary rules.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsUpsert": {
+            "$ref": "./examples/SummaryLogsUpsert.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SummaryLogs_Delete",
+        "tags": [
+          "SummaryRules"
+        ],
+        "description": "Deletes Log Analytics workspace Summary rules.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsDelete": {
+            "$ref": "./examples/SummaryLogsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin__deleted": {
+      "post": {
+        "operationId": "SummaryLogs_RetryBin",
+        "tags": [
+          "SummaryRules"
+        ],
+        "description": "Retries a failed Summary rule bin.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummaryLogsRetryBin"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsRetryBin": {
+            "$ref": "./examples/SummaryLogsRetryBin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start__deleted": {
+      "post": {
+        "operationId": "SummaryLogs_Start",
+        "tags": [
+          "SummaryRules"
+        ],
+        "description": "Starts an inactive Summary rule.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsStart": {
+            "$ref": "./examples/SummaryLogsStart.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/stop__deleted": {
+      "post": {
+        "operationId": "SummaryLogs_Stop",
+        "tags": [
+          "SummaryRules"
+        ],
+        "description": "Stops an active Summary rule.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsStop": {
+            "$ref": "./examples/SummaryLogsStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables__deleted": {
+      "get": {
+        "operationId": "Tables_ListByWorkspace",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Gets all the tables for the specified Log Analytics workspace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TablesListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesListByWorkspace": {
+            "$ref": "./examples/TablesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}__deleted": {
+      "get": {
+        "operationId": "Tables_Get",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Gets a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesGet": {
+            "$ref": "./examples/TablesGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Tables_CreateOrUpdate",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Update or Create a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/TableNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsert.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Tables_Update",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Update a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/TableNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsert.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Tables_Delete",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Delete a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "azure-asyncoperation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesDelete": {
+            "$ref": "./examples/TablesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/cancelSearch__deleted": {
+      "post": {
+        "operationId": "Tables_CancelSearch",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Cancel a log analytics workspace search results table query run.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesSearchCancel": {
+            "$ref": "./examples/TablesSearchCancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/migrate__deleted": {
+      "post": {
+        "operationId": "Tables_Migrate",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Migrate a Log Analytics table from support of the Data Collector API and Custom Fields features to support of Data Collection Rule-based Custom Logs.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/types.json#/parameters/TableNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesMigrate": {
+            "$ref": "./examples/TablesMigrate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations__added": {
+      "get": {
+        "operationId": "Workspaces_ListNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a list of NSP configurations for specified workspace.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List NSP configs by Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}__added": {
+      "get": {
+        "operationId": "Workspaces_GetNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a network security perimeter configuration.",
+        "parameters": [
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^.*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NSP config by name for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile__added": {
+      "post": {
+        "operationId": "Workspaces_ReconcileNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconcile network security perimeter configuration for Workspace resource.",
+        "parameters": [
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^.*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reconcile NSP config for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Reconcile.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/search__added": {
+      "post": {
+        "operationId": "Queries_Search",
+        "tags": [
+          "LogAnalyticsQueryPacks"
+        ],
+        "description": "Search a list of Queries defined within a Log Analytics QueryPack according to given search properties.",
+        "parameters": [
+          {
+            "name": "queryPackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "includeBody",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "QuerySearchProperties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuerySearchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQueryListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuerySearch": {
+            "$ref": "./examples/QueryPackQueriesSearch.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/summaryLogs__added": {
+      "get": {
+        "operationId": "SummaryLogs_ListByWorkspace",
+        "tags": [
+          "SummaryLogsOperationGroup"
+        ],
+        "description": "Gets all summary rules for the specified Log Analytics workspace.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogsListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsListByWorkspace": {
+            "$ref": "./examples/SummaryLogsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/summaryLogs/{summaryLogsName}__added": {
+      "get": {
+        "operationId": "SummaryLogs_Get",
+        "tags": [
+          "SummaryLogsOperationGroup"
+        ],
+        "description": "Gets Log Analytics workspace Summary rules.",
+        "parameters": [
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsGet": {
+            "$ref": "./examples/SummaryLogsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SummaryLogs_CreateOrUpdate",
+        "tags": [
+          "SummaryLogsOperationGroup"
+        ],
+        "description": "Creates or updates Log Analytics workspace Summary rules.",
+        "parameters": [
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/SummaryLogs"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsUpsert": {
+            "$ref": "./examples/SummaryLogsUpsert.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SummaryLogs"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SummaryLogs_Delete",
+        "tags": [
+          "SummaryLogsOperationGroup"
+        ],
+        "description": "Deletes Log Analytics workspace Summary rules.",
+        "parameters": [
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsDelete": {
+            "$ref": "./examples/SummaryLogsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/summaryLogs/{summaryLogsName}/retrybin__added": {
+      "post": {
+        "operationId": "SummaryLogs_RetryBin",
+        "tags": [
+          "SummaryLogsOperationGroup"
+        ],
+        "description": "Retries a failed Summary rule bin.",
+        "parameters": [
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummaryLogsRetryBin"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsRetryBin": {
+            "$ref": "./examples/SummaryLogsRetryBin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SummaryLogs"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/summaryLogs/{summaryLogsName}/start__added": {
+      "post": {
+        "operationId": "SummaryLogs_Start",
+        "tags": [
+          "SummaryLogsOperationGroup"
+        ],
+        "description": "Starts an inactive Summary rule.",
+        "parameters": [
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsStart": {
+            "$ref": "./examples/SummaryLogsStart.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/SummaryLogs"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/summaryLogs/{summaryLogsName}/stop__added": {
+      "post": {
+        "operationId": "SummaryLogs_Stop",
+        "tags": [
+          "SummaryLogsOperationGroup"
+        ],
+        "description": "Stops an active Summary rule.",
+        "parameters": [
+          {
+            "name": "summaryLogsName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[^/]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SummaryLogsStop": {
+            "$ref": "./examples/SummaryLogsStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/tables__added": {
+      "get": {
+        "operationId": "Tables_ListByWorkspace",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Gets all the tables for the specified Log Analytics workspace.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/TablesListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesListByWorkspace": {
+            "$ref": "./examples/TablesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/tables/{tableName}__added": {
+      "get": {
+        "operationId": "Tables_Get",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Gets a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesGet": {
+            "$ref": "./examples/TablesGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Tables_CreateOrUpdate",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Update or Create a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9-_]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Tables_Update",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Update a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9-_]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsert.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Table"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Tables_Delete",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Delete a Log Analytics workspace table.",
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesDelete": {
+            "$ref": "./examples/TablesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/tables/{tableName}/cancelSearch__added": {
+      "post": {
+        "operationId": "Tables_CancelSearch",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Cancel a log analytics workspace search results table query run.",
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesSearchCancel": {
+            "$ref": "./examples/TablesSearchCancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/tables/{tableName}/migrate__added": {
+      "post": {
+        "operationId": "Tables_Migrate",
+        "tags": [
+          "Tables"
+        ],
+        "description": "Migrate a Log Analytics table from support of the Data Collector API and Custom Fields features to support of Data Collection Rule-based Custom Logs.",
+        "parameters": [
+          {
+            "name": "tableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9-_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TablesMigrate": {
+            "$ref": "./examples/TablesMigrate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/{gatewayId}/{gatewayId}__added": {
+      "delete": {
+        "operationId": "Gateways_Delete",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Delete a Log Analytics gateway.",
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "gatewayId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteGateways": {
+            "$ref": "./examples/WorkspacesGatewaysDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/{purgeId}/{purgeId}__added": {
+      "get": {
+        "operationId": "WorkspacePurge_GetPurgeStatus",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Gets status of an ongoing purge operation.",
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "purgeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeStatusResponse"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacePurgeOperation": {
+            "$ref": "./examples/WorkspacesPurgeOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/{intelligencePackName}/disable__added": {
+      "post": {
+        "operationId": "IntelligencePacks_Disable",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Disables an intelligence pack for a given workspace.",
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntelligencePacksDisable": {
+            "$ref": "./examples/WorkspacesDisableIntelligencePack.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/{intelligencePackName}/enable__added": {
+      "post": {
+        "operationId": "IntelligencePacks_Enable",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Enables an intelligence pack for a given workspace.",
+        "parameters": [
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "intelligencePackName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntelligencePacksEnable": {
+            "$ref": "./examples/WorkspacesEnableIntelligencePack.json"
+          }
+        }
+      }
+    },
+    "/providers/microsoft.OperationalInsights/operations": {
+      "get": {
+        "description": {
+          "__old": "Lists all of the available OperationalInsights Rest API operations.",
+          "__new": "List the operations for the provider"
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationListResult",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/clusters": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/deletedWorkspaces": {
+      "get": {
+        "tags__deleted": [
+          "DeletedWorkspaces"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}": {
+      "get": {
+        "tags__deleted": [
+          "asyncOperations"
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/queryPacks": {
+      "get": {
+        "tags__added": [
+          "LogAnalyticsQueryPacks"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/workspaces": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "WorkspacesSubscriptionList": {
+            "$ref": "./examples/WorkspacesSubscriptionList.json"
+          }
+        },
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "minLength__deleted": 4,
+              "maxLength__deleted": 63,
+              "pattern__deleted": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "azure-asyncoperation__deleted": {
+                "type": "string"
+              },
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "responses": {
+          "202": {
+            "headers": {
+              "azure-asyncoperation__deleted": {
+                "type": "string"
+              },
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/deletedWorkspaces": {
+      "get": {
+        "tags__deleted": [
+          "DeletedWorkspaces"
+        ],
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover": {
+      "post": {
+        "tags__deleted": [
+          "Workspaces"
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter",
+                "__new": "../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+              }
+            }
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "azure-asyncoperation__deleted": {
+                "type": "string"
+              },
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204__added": {
+            "description": "ignore"
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks": {
+      "get": {
+        "tags__added": [
+          "LogAnalyticsQueryPacks"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "name": {
+                "__old": "LogAnalyticsQueryPackPayload",
+                "__new": "body"
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "201__deleted": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPack"
+            }
+          },
+          "204__added": {
+            "description": "ignore"
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}": {
+      "get": {
+        "tags__added": [
+          "LogAnalyticsQueryPacks"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags__added": [
+          "LogAnalyticsQueryPacks"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags__added": [
+          "LogAnalyticsQueryPacks"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags__added": [
+          "LogAnalyticsQueryPacks"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries": {
+      "get": {
+        "tags__added": [
+          "LogAnalyticsQueryPackQueries"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}": {
+      "get": {
+        "tags__added": [
+          "LogAnalyticsQueryPackQueries"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags__added": [
+          "LogAnalyticsQueryPackQueries"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags__added": [
+          "LogAnalyticsQueryPackQueries"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags__added": [
+          "LogAnalyticsQueryPackQueries"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces": {
+      "get": {
+        "x-ms-examples__deleted": {
+          "WorkspacesGet": {
+            "$ref": "./examples/WorkspacesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/availableServiceTiers": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "AvailableServiceTiers"
+          ],
+          [
+            "+",
+            "Workspaces"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          [
+            "-",
+            "DataExport"
+          ],
+          [
+            "+",
+            "DataExports"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports/{dataExportName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "DataExport"
+          ],
+          [
+            "+",
+            "DataExports"
+          ]
+        ],
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "DataExport"
+          ],
+          [
+            "+",
+            "DataExports"
+          ]
+        ],
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "~",
+            {
+              "name": {
+                "__old": "dataExportName",
+                "__new": "workspaceName"
+              },
+              "pattern": {
+                "__old": "^[A-Za-z][A-Za-z0-9-]+[A-Za-z0-9]$",
+                "__new": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+              }
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "dataExportName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "DataExport"
+          ],
+          [
+            "+",
+            "DataExports"
+          ]
+        ],
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "404__deleted": {
+            "description": "ignore"
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources": {
+      "get": {
+        "x-ms-odata__deleted": "#/definitions/DataSourceFilter",
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{dataSourceName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/failback": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "azure-asyncoperation__deleted": {
+                "type": "string"
+              },
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks": {
+      "get": {
+        "tags": [
+          [
+            " "
+          ],
+          [
+            "-",
+            "IntelligencePacks"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          [
+            "-",
+            "LinkedStorageAccounts"
+          ],
+          [
+            "+",
+            "LinkedStorageAccountsResources"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LinkedStorageAccounts"
+          ],
+          [
+            "+",
+            "LinkedStorageAccountsResources"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "enum__deleted": [
+                "CustomLogs",
+                "AzureWatson",
+                "Query",
+                "Ingestion",
+                "Alerts"
+              ],
+              "x-ms-enum__deleted": {
+                "name": "DataSourceType",
+                "modelAsString": false
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "LinkedStorageAccounts"
+          ],
+          [
+            "+",
+            "LinkedStorageAccountsResources"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "enum__deleted": [
+                "CustomLogs",
+                "AzureWatson",
+                "Query",
+                "Ingestion",
+                "Alerts"
+              ],
+              "x-ms-enum__deleted": {
+                "name": "DataSourceType",
+                "modelAsString": false
+              }
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "LinkedStorageAccounts"
+          ],
+          [
+            "+",
+            "LinkedStorageAccountsResources"
+          ]
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            "~",
+            {
+              "enum__deleted": [
+                "CustomLogs",
+                "AzureWatson",
+                "Query",
+                "Ingestion",
+                "Alerts"
+              ],
+              "x-ms-enum__deleted": {
+                "name": "DataSourceType",
+                "modelAsString": false
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__deleted": {
+              "x-ms-status-location": {
+                "type": "string",
+                "description": "The location from which to request the operation status."
+              }
+            }
+          },
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/schema": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/sharedKeys": {
+      "post": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/usages": {
+      "get": {
+        "x-ms-pageable__deleted": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "default__added": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataSourceFilter__deleted": {
+      "type": "object",
+      "description": "DataSource filter. Right now, only filter by kind is supported.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the DataSource.",
+          "enum": [
+            "WindowsEvent",
+            "WindowsPerformanceCounter",
+            "IISLogs",
+            "LinuxSyslog",
+            "LinuxSyslogCollection",
+            "LinuxPerformanceObject",
+            "LinuxPerformanceCollection",
+            "CustomLog",
+            "CustomLogCollection",
+            "AzureAuditLog",
+            "AzureActivityLog",
+            "GenericDataSource",
+            "ChangeTrackingCustomPath",
+            "ChangeTrackingPath",
+            "ChangeTrackingServices",
+            "ChangeTrackingDataTypeConfiguration",
+            "ChangeTrackingDefaultRegistry",
+            "ChangeTrackingRegistry",
+            "ChangeTrackingLinuxPath",
+            "LinuxChangeTrackingPath",
+            "ChangeTrackingContentLocation",
+            "WindowsTelemetry",
+            "Office365",
+            "SecurityWindowsBaselineConfiguration",
+            "SecurityCenterSecurityWindowsBaselineConfiguration",
+            "SecurityEventCollectionConfiguration",
+            "SecurityInsightsSecurityEventCollectionConfiguration",
+            "ImportComputerGroup",
+            "NetworkMonitoring",
+            "Itsm",
+            "DnsAnalytics",
+            "ApplicationInsights",
+            "SqlDataClassification"
+          ],
+          "x-ms-enum": {
+            "name": "DataSourceKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Object__deleted": {
+      "type": "object",
+      "description": "JSON object",
+      "properties": {}
+    },
+    "Operation__deleted": {
+      "type": "object",
+      "description": "Supported operation of OperationalInsights resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "type": "object",
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft OperationsManagement."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed etc."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of operation"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "WorkspaceReplicationPatProperties__deleted": {
+      "type": "object",
+      "description": "Workspace replication properties.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the replication.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether the replication is enabled or not. When true, workspace configuration and data is replicated to the specified location."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the replication.",
+          "enum": [
+            "Succeeded",
+            "EnableRequested",
+            "Enabling",
+            "DisableRequested",
+            "Disabling",
+            "RollbackRequested",
+            "RollingBack",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "WorkspaceReplicationState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time when the replication was enabled.",
+          "readOnly": true
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time when the replication was updated.",
+          "readOnly": true
+        }
+      }
+    },
+    "keyVaultProperties__deleted": {
+      "type": "object",
+      "description": "The key vault properties.",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key associated with the Log Analytics cluster."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key associated with the Log Analytics cluster."
+        },
+        "keyRsaSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Selected key minimum required size."
+        }
+      }
+    },
+    "KeyVaultProperties__added": {
+      "type": "object",
+      "description": "The key vault properties.",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key associated with the Log Analytics cluster."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key associated with the Log Analytics cluster."
+        },
+        "keyRsaSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Selected key minimum required size."
+        }
+      }
+    },
+    "LogAnalyticsQueryPackQueryPropertiesRelated__added": {
+      "type": "object",
+      "description": "The related metadata items for the function.",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "description": "The related categories for the function.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "The related resource types for the function.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "solutions": {
+          "type": "array",
+          "description": "The related Log Analytics solutions for the function.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogAnalyticsQueryPackQuerySearchPropertiesRelated__added": {
+      "type": "object",
+      "description": "The related metadata items for the function.",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "description": "The related categories for the function.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "The related resource types for the function.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "solutions": {
+          "type": "array",
+          "description": "The related Log Analytics solutions for the function.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration__added": {
+      "type": "object",
+      "description": "Network security perimeter (NSP) configuration resource",
+      "properties": {
+        "properties": {
+          "$ref": "../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Network security configuration properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkSecurityPerimeterConfigurationListResult__added": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Cluster": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          },
+          "description": {
+            "__old": "Resource's identity.",
+            "__new": "The managed service identities assigned to this resource."
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ClusterListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ClusterPatch": {
+      "properties": {
+        "identity": {
+          "$ref": {
+            "__old": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+            "__new": "../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      }
+    },
+    "ClusterPatchProperties": {
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": {
+            "__old": "#/definitions/keyVaultProperties",
+            "__new": "#/definitions/KeyVaultProperties"
+          }
+        },
+        "billingType": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "ClusterProperties": {
+      "properties": {
+        "billingType": {
+          "readOnly__deleted": false
+        },
+        "keyVaultProperties": {
+          "$ref": {
+            "__old": "#/definitions/keyVaultProperties",
+            "__new": "#/definitions/KeyVaultProperties"
+          }
+        }
+      }
+    },
+    "ClusterSku": {
+      "properties": {
+        "capacity": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
+    "DataExport": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "DataSource": {
+      "properties": {
+        "properties__deleted": {
+          "$ref": "#/definitions/Object",
+          "description": "The data source properties in raw json format, each kind of data source have it's own schema."
+        }
+      },
+      "required": [
+        [
+          " "
+        ],
+        [
+          "-",
+          "properties"
+        ]
+      ],
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "DataSourceListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LinkedService": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "LinkedStorageAccountsResource": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "LogAnalyticsQueryPack": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "LogAnalyticsQueryPackQuery": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "LogAnalyticsQueryPackQueryProperties": {
+      "properties": {
+        "displayName": {
+          "readOnly__deleted": false
+        },
+        "description": {
+          "readOnly__deleted": false
+        },
+        "body": {
+          "readOnly__deleted": false
+        },
+        "related": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "categories": {
+              "type": "array",
+              "description": "The related categories for the function.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "resourceTypes": {
+              "type": "array",
+              "description": "The related resource types for the function.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "solutions": {
+              "type": "array",
+              "description": "The related Log Analytics solutions for the function.",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "$ref__added": "#/definitions/LogAnalyticsQueryPackQueryPropertiesRelated"
+        },
+        "properties": {
+          "type__deleted": "object"
+        }
+      }
+    },
+    "LogAnalyticsQueryPackQuerySearchProperties": {
+      "properties": {
+        "related": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "categories": {
+              "type": "array",
+              "description": "The related categories for the function.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "resourceTypes": {
+              "type": "array",
+              "description": "The related resource types for the function.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "solutions": {
+              "type": "array",
+              "description": "The related Log Analytics solutions for the function.",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "$ref__added": "#/definitions/LogAnalyticsQueryPackQuerySearchPropertiesRelated"
+        }
+      }
+    },
+    "OperationStatus": {
+      "properties": {
+        "error": {
+          "type__deleted": "object",
+          "$ref": {
+            "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+            "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
+    "ResultStatistics": {
+      "properties": {
+        "progress": {
+          "multipleOf__deleted": 0.01,
+          "format__added": "float"
+        },
+        "scannedGb": {
+          "multipleOf__deleted": 0.01,
+          "format__added": "float"
+        }
+      }
+    },
+    "SavedSearch": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SavedSearchProperties": {
+      "properties": {
+        "category": {
+          "description": {
+            "__old": "The category of the saved search. This helps the user to find a saved search faster. ",
+            "__new": "The category of the saved search. This helps the user to find a saved search faster."
+          }
+        }
+      }
+    },
+    "SearchGetSchemaResponse": {
+      "properties": {
+        "metadata": {
+          "x-ms-client-name__deleted": "Metadata"
+        }
+      }
+    },
+    "SearchMetadata": {
+      "properties": {
+        "requestId": {
+          "x-ms-client-name": {
+            "__old": "SearchId",
+            "__new": "searchId"
+          }
+        }
+      }
+    },
+    "StorageInsight": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SummaryLogs": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "SummaryLogsListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "SummaryLogsProperties": {
+      "properties": {
+        "provisioningState": {
+          "description": {
+            "__old": "Summary rule is in provisioning state. If set to 'updating' or 'deleting', indicates a resource lock due to an ongoing operation, preventing any update to the Summary rule until the operation is complete.",
+            "__new": "Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded."
+          },
+          "enum": [
+            [
+              " "
+            ],
+            [
+              "+",
+              "InProgress"
+            ],
+            [
+              " "
+            ],
+            [
+              " "
+            ],
+            [
+              "-",
+              "Failed"
+            ],
+            [
+              "-",
+              "Canceled"
+            ]
+          ]
+        }
+      }
+    },
+    "Table": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          }
+        ]
+      ]
+    },
+    "Workspace": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "WorkspaceFeatures": {
+      "properties": {
+        "enableDataExport": {
+          "x-nullable__deleted": true
+        },
+        "immediatePurgeDataOn30Days": {
+          "x-nullable__deleted": true
+        },
+        "enableLogAccessUsingOnlyResourcePermissions": {
+          "x-nullable__deleted": true
+        },
+        "clusterResourceId": {
+          "x-nullable__deleted": true
+        },
+        "disableLocalAuth": {
+          "x-nullable__deleted": true
+        },
+        "unifiedSentinelBillingOnly": {
+          "x-nullable__deleted": true
+        }
+      },
+      "additionalProperties": {
+        "__old": true,
+        "__new": {}
+      }
+    },
+    "WorkspacePatch": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/AzureEntityResource",
+              "__new": "../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+            }
+          }
+        ]
+      ]
+    },
+    "WorkspaceProperties": {
+      "properties": {
+        "retentionInDays": {
+          "x-nullable__deleted": true
+        },
+        "publicNetworkAccessForIngestion": {
+          "description": {
+            "__old": "The network access type for operating on the Log Analytics Workspace. By default it is Enabled",
+            "__new": "The network access type for accessing Log Analytics ingestion."
+          }
+        },
+        "publicNetworkAccessForQuery": {
+          "description": {
+            "__old": "The network access type for operating on the Log Analytics Workspace. By default it is Enabled",
+            "__new": "The network access type for accessing Log Analytics query."
+          }
+        }
+      }
+    },
+    "WorkspaceSku": {
+      "properties": {
+        "capacityReservationLevel": {
+          "x-nullable__deleted": true
+        }
+      }
+    }
+  }
+}
