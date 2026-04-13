@@ -9115,18 +9115,18 @@ model AzureFirewallPropertiesFormat {
   autoscaleConfiguration?: AzureFirewallAutoscaleConfiguration;
 
   /**
-   * AFC control plane configuration for the Azure Firewall.
+   * AFC configuration for the Azure Firewall.
    */
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
-  afcControlPlaneConfiguration?: AfcControlPlaneConfiguration;
+  afcConfiguration?: AfcConfiguration;
 }
 
 /**
- * AFC control plane configuration for the Azure Firewall.
+ * AFC configuration for the Azure Firewall.
  */
 @added(Versions.v2025_07_01)
-model AfcControlPlaneConfiguration {
+model AfcConfiguration {
   /**
    * The endpoint URL of the AFC control plane associated with this Azure Firewall.
    */
