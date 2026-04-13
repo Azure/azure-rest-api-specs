@@ -26,6 +26,14 @@ using TypeSpec.Versioning;
     }
   ]>
 )
+@server(
+  "{endpoint}",
+  "The endpoint URL of the search service.",
+  {
+    @doc("The endpoint URL of the search service.")
+    endpoint: url,
+  }
+)
 @service(#{ title: "Azure AI Search" })
 @versioned(Versions)
 namespace Search;
@@ -34,4 +42,7 @@ namespace Search;
 enum Versions {
   /** The 2025-11-01-preview API version. */
   v2025_11_01_preview: "2025-11-01-preview",
+
+  /** The 2026-04-01 API version. */
+  v2026_04_01: "2026-04-01",
 }

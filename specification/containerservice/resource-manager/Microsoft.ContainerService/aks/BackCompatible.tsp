@@ -138,14 +138,15 @@ model AgentPoolCustomize
 );
 @@clientName(ManagedClusters.operationStatusResultGet, "Get");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(ManagedCluster.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedCluster.properties);
 
 @@clientLocation(ManagedClusterUpgradeProfiles.getUpgradeProfile,
   ManagedClusters,
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(ManagedClusterUpgradeProfile.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterUpgradeProfile.properties
+);
 
 @@clientName(ManagedClusters.privateLinkResourcesList, "List", "!csharp");
 @@clientName(ManagedClusters.post, "POST", "!csharp");
@@ -166,14 +167,15 @@ model AgentPoolCustomize
 @@clientName(AgentPools.deleteMachines::parameters.body, "machines");
 @@clientLocation(AgentPools.getByAgentPool, "OperationStatusResult", "!csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(AgentPool.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties);
 
 @@clientLocation(AgentPoolUpgradeProfiles.getUpgradeProfile,
   AgentPools,
   "!csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(AgentPoolUpgradeProfile.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPoolUpgradeProfile.properties
+);
 
 @@clientName(Machines.createOrUpdate::parameters.resource, "parameters");
 
@@ -275,7 +277,7 @@ model AgentPoolCustomize
 
 @@clientLocation(ContainerServiceOperationGroup.listNodeImageVersions,
   "ContainerService",
-  "!csharp"
+  "!csharp,!java"
 );
 
 @@clientLocation(TrustedAccessRolesOperationGroup.list,
@@ -286,4 +288,4 @@ model AgentPoolCustomize
 @@clientLocation(VmSkusOperationGroup.list, "VmSkus", "!csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(OperationValue.display);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationValue.display);

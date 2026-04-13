@@ -12,12 +12,6 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
 
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.EventHubs"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-eventhub"
     namespace: "azure.mgmt.eventhub"
@@ -25,10 +19,22 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-eventhub"
-    namespace: "com.azure.resourcemanager.eventhub"
-    service-name: "EventHub" # human-readable service name, whitespace allowed
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-eventhubs"
+    namespace: "com.azure.resourcemanager.eventhubs"
+    service-dir: "sdk/eventhubs"
+    service-name: "EventHubs"
     flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    uuid-as-string: false
+    customization-class: customization/src/main/java/EventHubsCustomization.java
+    remove-inner:
+      - NetworkSecurityPerimeterConfiguration
+    rename-model:
+      EncryptionKeySource: KeySource
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-eventhub"
     flavor: "azure"
@@ -46,9 +52,10 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-typespec/http-client-csharp-mgmt":
-    package-name: "Azure.ResourceManager.EventHub"
+    package-name: "Azure.ResourceManager.EventHubs"
     namespace: "{package-name}"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
