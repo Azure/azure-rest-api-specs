@@ -12,7 +12,7 @@ namespace Azure.Ai.Speech.Transcription;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "Support streaming input files"
 @post
-@route("transcriptions:transcribe")
+@route("/transcriptions:transcribe")
 @doc("Transcribes the provided audio stream.")
 op transcribe is Azure.Core.RpcOperation<
   {
