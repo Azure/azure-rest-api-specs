@@ -4283,3 +4283,15 @@ union VirtualNetworkPeeringLevel {
   "ManagedServiceIdentityUserAssignedIdentities",
   "!javascript"
 );
+
+/**
+ * Defines the interconnect group profile for a VM or VMSS network profile.
+ */
+@added(Versions.v2025_07_01)
+model VmInterconnectGroupProfile {
+  /** The reference to the interconnect group resource. */
+  interconnectGroup?: SubResource;
+
+  /** The list of subgroup references. */
+  subgroups?: SubResource[];
+}
