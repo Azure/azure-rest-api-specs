@@ -6095,7 +6095,7 @@
           "$ref": "#/definitions/RBACState",
           "description": "RBAC required by Experiment MSI not setup on the target resources."
         },
-        "faultRbacOnTargetResources": {
+        "rbacOnTargetResources": {
           "$ref": "#/definitions/RBACState",
           "description": "RBAC required by Chaos Resource MSI not setup on the target resources."
         },
@@ -8194,6 +8194,13 @@
         "message": {
           "type": "string",
           "description": "Error message."
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "A list of recommendations to resolve the error.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
