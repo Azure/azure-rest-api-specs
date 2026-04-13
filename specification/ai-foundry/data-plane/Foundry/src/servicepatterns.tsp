@@ -26,8 +26,9 @@ model InputParameters<
 }
 
 @Rest.autoRoute
-interface ReadableVersionedOperations<
+interface VersionedOperations<
   TEntityType extends Reflection.Model,
+  TInputParameters extends Reflection.Model,
   TListLatestParameters extends Reflection.Model = {},
   TListVersionsParameters extends Reflection.Model = {}
 > {
@@ -67,13 +68,7 @@ interface ReadableVersionedOperations<
     },
     Azure.Core.Foundations.ResourceOkResponse<TEntityType>
   >;
-}
 
-@Rest.autoRoute
-interface WritableVersionedOperations<
-  TEntityType extends Reflection.Model,
-  TInputParameters extends Reflection.Model
-> {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Suppress `Operation should be defined using a signature from the Azure.Core namespace.`"
   @doc(
     "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
@@ -103,17 +98,3 @@ interface WritableVersionedOperations<
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
   >;
 }
-
-@Rest.autoRoute
-interface VersionedOperations<
-  TEntityType extends Reflection.Model,
-  TInputParameters extends Reflection.Model,
-  TListLatestParameters extends Reflection.Model = {},
-  TListVersionsParameters extends Reflection.Model = {}
->
-  extends ReadableVersionedOperations<
-      TEntityType,
-      TListLatestParameters,
-      TListVersionsParameters
-    >,
-    WritableVersionedOperations<TEntityType, TInputParameters> {}
