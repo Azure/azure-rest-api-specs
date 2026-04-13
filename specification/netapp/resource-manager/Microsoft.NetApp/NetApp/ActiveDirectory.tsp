@@ -18,8 +18,6 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfig
   is TrackedResource<ActiveDirectoryConfigProperties> {
   ...ResourceNameParameter<
@@ -37,8 +35,6 @@ model ActiveDirectoryConfig
  * Active Directory Configuration properties
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfigProperties {
@@ -60,8 +56,6 @@ model ActiveDirectoryConfigProperties {
 
 /** Active Directory Configuration common properties */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfigCommonProperties {
@@ -102,8 +96,6 @@ model ActiveDirectoryConfigCommonProperties {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model SecretPassword {
   /** Properties provided by KeyVault. */
   keyVaultProperties?: SecretPasswordKeyVaultProperties;
@@ -114,8 +106,6 @@ model SecretPassword {
 
 /** Properties of key vault to get the secrets for password. */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model SecretPasswordKeyVaultProperties {
@@ -132,8 +122,6 @@ model SecretPasswordKeyVaultProperties {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model SecretPasswordIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
   @visibility(Lifecycle.Read)
@@ -147,8 +135,6 @@ model SecretPasswordIdentity {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model ActiveDirectoryConfigPatchProperties {
   ...ActiveDirectoryConfigCommonProperties;
 
@@ -158,8 +144,6 @@ model ActiveDirectoryConfigPatchProperties {
 
 /** Access Password from Azure KeyVault Secret to connect Active Directory on patch */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model SecretPasswordPatch {
@@ -172,8 +156,6 @@ model SecretPasswordPatch {
 
 /** Patch Properties of key vault to get the secrets for password. */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model SecretPasswordKeyVaultPatchProperties {
