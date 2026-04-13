@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "$filter": "targetRegion eq 'westus'",
+    "api-version": "2025-05-01",
+    "eventTrackingId": "BC_1-FXZ"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}",
+        "value": [
+          {
+            "name": "abc-123-ghj-456",
+            "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/abc-123-ghj-456",
+            "properties": {
+              "targetRegion": "westus",
+              "targetResourceId": "{resourceId-1}",
+              "targetResourceType": "Microsoft.Compute/VirtualMachines"
+            }
+          },
+          {
+            "name": "wer-345-tyu-789",
+            "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/wer-345-tyu-789",
+            "properties": {
+              "targetRegion": "westus",
+              "targetResourceId": "{resourceId-2}",
+              "targetResourceType": "Microsoft.Compute/VirtualMachines"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ImpactedResources_ListByTenantIdAndEventId",
+  "title": "ListEventsByTenantId"
+}

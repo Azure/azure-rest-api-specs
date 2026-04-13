@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "$expand": "recommendedactions",
+    "api-version": "2025-05-01",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}",
+        "value": [
+          {
+            "name": "current",
+            "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+            "id": "<resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current",
+            "location": "eastus",
+            "properties": {
+              "availabilityState": "Available",
+              "category": "Unplanned",
+              "context": "Platform Initiated",
+              "detailedStatus": "We have not seen any issues with your virtual machine",
+              "occuredTime": "2016-03-29T09:12:00Z",
+              "reasonChronicity": "Persistent",
+              "reasonType": "Unplanned",
+              "recentlyResolved": {
+                "resolvedTime": "2017-02-28T00:49:00Z",
+                "unavailableOccuredTime": "2017-02-28T00:48:00Z",
+                "unavailableSummary": "We are sorry your SQL database is unavailable"
+              },
+              "recommendedActions": [
+                {
+                  "action": "To start this virtualmachine, open the resource blade and click Start",
+                  "actionUrl": "<#ResourceBlade>",
+                  "actionUrlText": "resourceblade"
+                }
+              ],
+              "reportedTime": "2016-05-04T14:11:29.7598931Z",
+              "summary": "Vm is available",
+              "title": "Available"
+            }
+          },
+          {
+            "name": "current",
+            "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+            "id": "<resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current",
+            "location": "eastus",
+            "properties": {
+              "availabilityState": "Unavailable",
+              "detailedStatus": "Diskproblemsarepreventingusfromautomaticallyrecoveringyourvirtualmachine",
+              "occuredTime": "2016-03-29T09:12:00Z",
+              "reasonChronicity": "Persistent",
+              "reasonType": "Unplanned",
+              "recommendedActions": [
+                {
+                  "action": "To start this virtualmachine, open the resource blade",
+                  "actionUrl": "<#ResourceBlade>",
+                  "actionUrlText": "resourceblade"
+                },
+                {
+                  "action": "If you are experiencing problems you believe are caused by Azure, contact support",
+                  "actionUrl": "<#SupportCase>",
+                  "actionUrlText": "contactsupport"
+                }
+              ],
+              "reportedTime": "2016-05-04T14:11:29.7598931Z",
+              "resolutionETA": "2016-03-29T09:37:00Z",
+              "rootCauseAttributionTime": "2016-03-29T09:13:00Z",
+              "summary": "We are sorry, we couldn't automatically recovery our virtualmachine",
+              "title": "Unavailable"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AvailabilityStatuses_ListBySubscriptionId",
+  "title": "ListHealthBySubscriptionId"
+}
