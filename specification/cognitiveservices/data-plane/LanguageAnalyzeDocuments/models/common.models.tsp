@@ -407,8 +407,7 @@ model DocumentAnalysisDocumentResult is DocumentResult {
   source: DocumentLocation;
 
   /** Array of document results generated after the analysis. */
-  @renamedFrom(Versions.v2026_05_01, "target")
-  targets: Array<DocumentLocation>;
+  target: Array<DocumentLocation>;
 }
 
 /** Contains the error object with errors encountered for the processed document. */
