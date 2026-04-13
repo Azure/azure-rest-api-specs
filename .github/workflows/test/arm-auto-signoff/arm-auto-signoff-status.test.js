@@ -795,10 +795,7 @@ describe("getLabelActionImpl", () => {
 
     // PR has NotReadyForARMReview and only trivial changes (not incremental TSP)
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [
-        { name: "ARMReview" },
-        { name: "NotReadyForARMReview" },
-      ],
+      data: [{ name: "ARMReview" }, { name: "NotReadyForARMReview" }],
     });
 
     github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
