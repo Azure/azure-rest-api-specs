@@ -136,7 +136,7 @@ model ChatRoomMember {
 /** Represents a user profile in the chat system. */
 @resource("chat/users")
 @parentResource(Hub)
-model ChatUserProfile {
+model ChatUser {
   /** User identifier. */
   @key("userId")
   @visibility(Lifecycle.Read)

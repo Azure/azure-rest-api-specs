@@ -138,13 +138,13 @@ interface Chat {
 
   /** Get a user's profile. */
   @summary("Get a user's profile.")
-  getUser is Operations.ResourceRead<ChatUserProfile>;
+  getUser is Operations.ResourceRead<ChatUser>;
 
   /** Create or replace a user. */
   @summary("Create or replace a user.")
-  createOrReplaceUser is ConditionalOperations.ResourceCreateOrReplace<ChatUserProfile>;
+  createOrReplaceUser is ConditionalOperations.ResourceCreateOrReplace<ChatUser>;
 
   /** Delete a user. */
   @summary("Delete a user.")
-  deleteUser is ConditionalOperations.ResourceDelete<ChatUserProfile>;
+  deleteUser is ConditionalOperations.ResourceDelete<ChatUser>;
 }
