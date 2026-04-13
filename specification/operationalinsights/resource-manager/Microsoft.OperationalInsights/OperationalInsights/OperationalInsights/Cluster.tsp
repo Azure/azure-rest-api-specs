@@ -51,7 +51,12 @@ interface Clusters {
    * Updates a Log Analytics cluster.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Cluster, PatchModel = ClusterPatch>;
+  update is ArmCustomPatchAsync<
+    Cluster,
+    PatchModel = ClusterPatch,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Deletes a cluster instance.

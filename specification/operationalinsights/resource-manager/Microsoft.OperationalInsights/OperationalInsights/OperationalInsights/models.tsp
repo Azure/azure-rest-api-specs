@@ -528,6 +528,7 @@ union ColumnTypeEnum {
  */
 union ColumnDataTypeHintEnum {
   string,
+
   @doc("A string that matches the pattern of a URI, for example, scheme://username:password@host:1234/this/is/a/path?k1=v1&k2=v2#fragment")
   uri: "uri",
 
@@ -2560,6 +2561,12 @@ model WorkspaceListResult {
    */
   @pageItems
   value?: Workspace[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**

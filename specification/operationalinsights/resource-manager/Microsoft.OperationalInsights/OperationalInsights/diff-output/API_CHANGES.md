@@ -328,20 +328,6 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}'].patch.tags__added` | added | `["LogAnalyticsQueryPackQueries"]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}'].put.tags__added` | added | `["LogAnalyticsQueryPackQueries"]` |
 
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/deletedWorkspaces'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/workspaces'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/deletedWorkspaces'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/usages'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
-
 ### Changes for `name`
 
 | Path | Change Type | Value |
@@ -525,6 +511,12 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}'].put.responses.default__added` | added | `{"description":"ignore","schema":{"$ref":"../../../common-types/resource-management/v5/types.json#/d...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/usages'].get.responses.default__added` | added | `{"description":"ignore","schema":{"$ref":"../../../common-types/resource-management/v5/types.json#/d...` |
 
+### Changes for `WorkspacesSubscriptionList`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/queryPacks'].get['x-ms-examples'].WorkspacesSubscriptionList__added` | added | `{"$ref":"./examples/WorkspacesSubscriptionListForQueryPacks.json"}` |
+
 ### Changes for `x-ms-examples`
 
 | Path | Change Type | Value |
@@ -634,6 +626,13 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/failback'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 
+### Changes for `Azure-AsyncOperation`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].patch.responses.202.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.202.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
+
 ### Changes for `headers`
 
 | Path | Change Type | Value |
@@ -647,18 +646,27 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.responses.202.headers__deleted` | deleted | `{"x-ms-status-location":{"type":"string","description":"The location from which to request the opera...` |
 
-### Changes for `204`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.204__added` | added | `{"description":"ignore"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks'].put.responses.204__added` | added | `{"description":"ignore"}` |
-
 ### Changes for `201`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks'].put.responses.201__deleted` | deleted | `{"description":"ignore","schema":{"$ref":"#/definitions/LogAnalyticsQueryPack"}}` |
+
+### Changes for `204`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks'].put.responses.204__added` | added | `{"description":"ignore"}` |
+
+### Changes for `x-ms-pageable`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/usages'].get['x-ms-pageable__deleted']` | deleted | `{"nextLinkName":"nextLink"}` |
 
 ### Changes for `404`
 
@@ -723,6 +731,12 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.keyVaultProperties__deleted` | deleted | `{"type":"object","description":"The key vault properties.","properties":{"keyVaultUri":{"type":"stri...` |
+
+### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: TypeSpec.Rest.ResourceLocation, location: string, retryAfter: int32 }>`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions['Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", { azureAsyncOperation: TypeSpec.Rest.ResourceLocation, location: string, retryAfter: int32 }>__added']` | added | `{"type":"object","description":"Resource operation accepted."}` |
 
 ### Changes for `KeyVaultProperties`
 
@@ -814,6 +828,12 @@ Change Type: deleted
 | `definitions.Table.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
 | `definitions.Workspace.properties.systemData__deleted` | deleted | `{"$ref":"../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData","...` |
 
+### Changes for `nextLink`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.WorkspaceListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
+
 ## Modified Values
 
 | Path | Old Value | New Value |
@@ -840,12 +860,11 @@ Change Type: deleted
 | `definitions.Table.allOf[0].$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource` | `../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.Workspace.allOf[0].$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource` | `../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
 | `definitions.WorkspaceFeatures.additionalProperties` | `true` | `{}` |
+| `definitions.WorkspaceListResult.description` | `The list workspaces operation response.` | `[Placeholder] Discription for page model` |
+| `definitions.WorkspaceListResult.properties.value.description` | `A list of workspaces.` | `[Placeholder] Discription for value property` |
 | `definitions.WorkspacePatch.allOf[0].$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/AzureEntityResource` | `../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
 | `definitions.WorkspaceProperties.properties.publicNetworkAccessForIngestion.description` | `The network access type for operating on the Log Analytics Workspace. By default it is Enabled` | `The network access type for accessing Log Analytics ingestion.` |
 | `definitions.WorkspaceProperties.properties.publicNetworkAccessForQuery.description` | `The network access type for operating on the Log Analytics Workspace. By default it is Enabled` | `The network access type for accessing Log Analytics query.` |
-| `info.description` | `Provides NSP operations for working with Log Analytics.` | `Operational Insights Client` |
-| `info.title` | `Azure Log Analytics Network Security Perimeter APIs` | `OperationalInsightsManagementClient` |
-| `paths['/providers/microsoft.OperationalInsights/operations'].get.description` | `Lists all of the available OperationalInsights Rest API operations.` | `List the operations for the provider` |
 | `paths['/providers/microsoft.OperationalInsights/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult` |
 | `paths['/providers/microsoft.OperationalInsights/operations'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/clusters'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |

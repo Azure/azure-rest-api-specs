@@ -35,10 +35,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Operational Insights Client
+ * Provides NSP operations for working with Log Analytics.
  */
 @armProviderNamespace
-@service(#{ title: "OperationalInsightsManagementClient" })
+@service(#{ title: "Azure Log Analytics Network Security Perimeter APIs" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.OperationalInsights;
@@ -54,3 +54,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list,
+  "Lists all of the available OperationalInsights Rest API operations."
+);

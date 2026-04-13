@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "OperationalInsightsManagementClient",
+    "title": "Azure Log Analytics Network Security Perimeter APIs",
     "version": "2025-07-01",
-    "description": "Operational Insights Client",
+    "description": "Provides NSP operations for working with Log Analytics.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -89,7 +89,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available OperationalInsights Rest API operations.",
         "parameters": [
           {
             "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -188,6 +188,9 @@
           "WorkspacesSubscriptionList": {
             "$ref": "./examples/WorkspacesSubscriptionList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -266,6 +269,9 @@
         "x-ms-examples": {
           "QueryPacksList": {
             "$ref": "./examples/QueryPacksList.json"
+          },
+          "WorkspacesSubscriptionList": {
+            "$ref": "./examples/WorkspacesSubscriptionListForQueryPacks.json"
           }
         },
         "x-ms-pageable": {
@@ -301,6 +307,9 @@
               "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -505,6 +514,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -630,6 +644,9 @@
           "WorkspacesGet": {
             "$ref": "./examples/WorkspacesListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -665,6 +682,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -675,9 +697,6 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -692,7 +711,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20TypeSpec.Rest.ResourceLocation%2C%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -2326,6 +2346,9 @@
               "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4784,6 +4807,10 @@
           "readOnly": true
         }
       }
+    },
+    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: TypeSpec.Rest.ResourceLocation, location: string, retryAfter: int32 }>": {
+      "type": "object",
+      "description": "Resource operation accepted."
     },
     "BillingType": {
       "type": "string",
@@ -7873,6 +7900,10 @@
           "items": {
             "$ref": "#/definitions/Workspace"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },

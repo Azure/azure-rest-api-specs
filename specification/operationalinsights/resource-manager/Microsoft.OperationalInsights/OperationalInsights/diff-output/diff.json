@@ -1,14 +1,4 @@
 {
-  "info": {
-    "title": {
-      "__old": "Azure Log Analytics Network Security Perimeter APIs",
-      "__new": "OperationalInsightsManagementClient"
-    },
-    "description": {
-      "__old": "Provides NSP operations for working with Log Analytics.",
-      "__new": "Operational Insights Client"
-    }
-  },
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/search__deleted": {
       "post": {
@@ -1909,10 +1899,6 @@
     },
     "/providers/microsoft.OperationalInsights/operations": {
       "get": {
-        "description": {
-          "__old": "Lists all of the available OperationalInsights Rest API operations.",
-          "__new": "List the operations for the provider"
-        },
         "responses": {
           "200": {
             "schema": {
@@ -1952,9 +1938,6 @@
         "tags__deleted": [
           "DeletedWorkspaces"
         ],
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -2011,6 +1994,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "WorkspacesSubscriptionList__added": {
+            "$ref": "./examples/WorkspacesSubscriptionListForQueryPacks.json"
+          }
         }
       }
     },
@@ -2020,9 +2008,6 @@
           "WorkspacesSubscriptionList": {
             "$ref": "./examples/WorkspacesSubscriptionList.json"
           }
-        },
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
         },
         "responses": {
           "default": {
@@ -2105,6 +2090,11 @@
               "azure-asyncoperation__deleted": {
                 "type": "string"
               },
+              "Azure-AsyncOperation__added": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
               }
@@ -2146,9 +2136,6 @@
         "tags__deleted": [
           "DeletedWorkspaces"
         ],
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -2196,13 +2183,15 @@
               "azure-asyncoperation__deleted": {
                 "type": "string"
               },
+              "Azure-AsyncOperation__added": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
-          },
-          "204__added": {
-            "description": "ignore"
           },
           "default": {
             "schema": {
@@ -2411,9 +2400,6 @@
           "WorkspacesGet": {
             "$ref": "./examples/WorkspacesListByResourceGroup.json"
           }
-        },
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
         },
         "responses": {
           "default": {
@@ -3996,6 +3982,10 @@
         }
       }
     },
+    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: TypeSpec.Rest.ResourceLocation, location: string, retryAfter: int32 }>__added": {
+      "type": "object",
+      "description": "Resource operation accepted."
+    },
     "KeyVaultProperties__added": {
       "type": "object",
       "description": "The key vault properties.",
@@ -4549,6 +4539,25 @@
       "additionalProperties": {
         "__old": true,
         "__new": {}
+      }
+    },
+    "WorkspaceListResult": {
+      "description": {
+        "__old": "The list workspaces operation response.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "A list of workspaces.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
       }
     },
     "WorkspacePatch": {

@@ -64,6 +64,8 @@ interface WorkspacesOperationGroup {
   @autoRoute
   failover is ArmProviderActionAsync<
     Scope = Extension.ResourceGroup,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Parameters = {
       ...LocationParameter;
 
@@ -88,6 +90,7 @@ interface DeletedWorkspacesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedWorkspaces_List")
   @autoRoute
+  @list
   @get
   @action("deletedWorkspaces")
   list is ArmProviderActionSync<
@@ -100,6 +103,7 @@ interface DeletedWorkspacesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedWorkspaces_ListByResourceGroup")
   @autoRoute
+  @list
   @get
   @action("deletedWorkspaces")
   listByResourceGroup is ArmProviderActionSync<
