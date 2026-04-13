@@ -3,9 +3,9 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 
 namespace WebPubSubChat;
 
@@ -37,9 +37,7 @@ model ChatConversation {
   /** Parent room identifier. */
   parentRoom: string;
 
-  /** ETag for concurrency control. */
-  @visibility(Lifecycle.Read)
-  etag: string;
+  ...EtagProperty;
 }
 
 /** Represents a chat message. */
@@ -67,9 +65,7 @@ model ChatMessage {
   @visibility(Lifecycle.Read)
   createdAt: utcDateTime;
 
-  /** ETag for concurrency control. */
-  @visibility(Lifecycle.Read)
-  etag: string;
+  ...EtagProperty;
 }
 
 /**
@@ -91,9 +87,7 @@ model ChatRole {
   /** Permissions associated with the role. Do not mix user permissions and room permissions in one role. */
   permissions: string[];
 
-  /** ETag for concurrency control. */
-  @visibility(Lifecycle.Read)
-  etag: string;
+  ...EtagProperty;
 }
 
 /** Represents a chat room. */
@@ -115,9 +109,7 @@ model ChatRoom {
   @visibility(Lifecycle.Read)
   defaultConversation: string;
 
-  /** ETag for concurrency control. */
-  @visibility(Lifecycle.Read)
-  etag: string;
+  ...EtagProperty;
 }
 
 /** Represents a room member. */
@@ -138,9 +130,7 @@ model ChatRoomMember {
   @maxLength(64)
   roleName: string;
 
-  /** ETag for concurrency control. */
-  @visibility(Lifecycle.Read)
-  etag: string;
+  ...EtagProperty;
 }
 
 /** Represents a user profile in the chat system. */
@@ -167,9 +157,7 @@ model ChatUserProfile {
   @maxLength(64)
   roleName: string;
 
-  /** ETag for concurrency control. */
-  @visibility(Lifecycle.Read)
-  etag: string;
+  ...EtagProperty;
 }
 
 /** Message content body. */

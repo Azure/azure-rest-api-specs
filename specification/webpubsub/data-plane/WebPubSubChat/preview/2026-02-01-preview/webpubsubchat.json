@@ -1501,6 +1501,10 @@
         }
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "ChatConversation": {
       "type": "object",
       "description": "Represents a chat conversation.",
@@ -1518,8 +1522,8 @@
           "description": "Parent room identifier."
         },
         "etag": {
-          "type": "string",
-          "description": "ETag for concurrency control.",
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
@@ -1559,8 +1563,8 @@
           "readOnly": true
         },
         "etag": {
-          "type": "string",
-          "description": "ETag for concurrency control.",
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
@@ -1609,8 +1613,8 @@
           }
         },
         "etag": {
-          "type": "string",
-          "description": "ETag for concurrency control.",
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
@@ -1642,8 +1646,8 @@
           "readOnly": true
         },
         "etag": {
-          "type": "string",
-          "description": "ETag for concurrency control.",
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
@@ -1674,8 +1678,8 @@
           "pattern": "^room\\.[a-z0-9_-]{1,59}$"
         },
         "etag": {
-          "type": "string",
-          "description": "ETag for concurrency control.",
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
@@ -1712,8 +1716,8 @@
           "pattern": "^user\\.[a-z0-9_-]{1,59}$"
         },
         "etag": {
-          "type": "string",
-          "description": "ETag for concurrency control.",
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
           "readOnly": true
         }
       },
