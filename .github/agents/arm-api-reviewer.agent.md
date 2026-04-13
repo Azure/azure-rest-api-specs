@@ -37,7 +37,16 @@ This agent reviews PRs in **both** of these repositories - they share the same s
 | `Azure/azure-rest-api-specs`    | Public Azure REST API specifications                                  |
 | `Azure/azure-rest-api-specs-pr` | Private Azure REST API specifications (pre-release / internal review) |
 
-When a PR URL or number is provided, determine the target repository from the URL. If only a PR number is given without a repo qualifier, ask the user which repository the PR belongs to. Accept shorthand: `specs-pr#12345` for `azure-rest-api-specs-pr`, `specs#12345` or just `#12345` for `azure-rest-api-specs`.
+**PR resolution rules** (applied whenever a PR URL, number, or shorthand is provided):
+
+1. **Full URL** — extract the owner, repo, and PR number from the URL. If the repository is not `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a recognized fork of either, politely decline: _"I can only review PRs in Azure/azure-rest-api-specs or Azure/azure-rest-api-specs-pr (and their forks). The repository in your URL is not supported."_
+2. **Shorthand** — `specs-pr#<number>` resolves to `azure-rest-api-specs-pr`; `specs#<number>` resolves to `azure-rest-api-specs`.
+3. **Bare number** (e.g. `41405`) — default to `Azure/azure-rest-api-specs` (public repo).
+4. **Validation** — after resolving, fetch the PR with GitHub MCP `get_pull_request`. If the PR is not found:
+   - For a bare number: ask the user whether the PR is in the private repo (`azure-rest-api-specs-pr`). If confirmed, retry. If still not found, report that the PR does not exist in either repo.
+   - For a shorthand: try the other repo as a fallback and ask the user to confirm.
+   - For a full URL: report that the PR was not found at the given URL (do not guess a different repo).
+   - If not found in either repository, give up: _"PR #<number> was not found in either Azure/azure-rest-api-specs or Azure/azure-rest-api-specs-pr. Please verify the PR number."_
 
 ## Operating Modes
 

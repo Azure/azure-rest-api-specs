@@ -1,20 +1,30 @@
 ---
-agent: arm-api-reviewer
+agent: ARM API Reviewer
 description: "Review an Azure REST API specification PR for guideline compliance. Provide a PR URL or number."
 ---
 
 # Review Azure REST API Specification PR
 
-Review pull request ${input:prReference:Enter the PR URL or number (e.g. https://github.com/Azure/azure-rest-api-specs/pull/41405, https://github.com/Azure/azure-rest-api-specs-pr/pull/23440, 41405, or specs-pr#23440)} for compliance with Azure REST API Guidelines.
+Review pull request ${input:prReference:Enter the PR URL, number, or shorthand (e.g. 41405, specs-pr#23440, https://github.com/Azure/azure-rest-api-specs/pull/41405)} for compliance with Azure REST API Guidelines.
 
 ## Instructions
 
-1. **Resolve the PR.** Determine the target repository and PR number:
-   - Full URL (e.g. `https://github.com/Azure/azure-rest-api-specs/pull/41405` or `https://github.com/Azure/azure-rest-api-specs-pr/pull/23440`) — extract the repo and number from the URL.
-   - `specs-pr#<number>` — resolves to `https://github.com/Azure/azure-rest-api-specs-pr/pull/<number>`.
-   - `specs#<number>` or bare `<number>` — resolves to `https://github.com/Azure/azure-rest-api-specs/pull/<number>`.
-   - If ambiguous, ask the user to clarify which repository.
-   Fetch the PR details and list all changed files using the GitHub MCP server tools (`get_pull_request`, `list_pull_request_files`). Both `Azure/azure-rest-api-specs` and `Azure/azure-rest-api-specs-pr` share the same directory structure and review rules.
+1. **Resolve the PR.** Determine the target repository and PR number using the rules below. Only two repositories are supported: `Azure/azure-rest-api-specs` (public) and `Azure/azure-rest-api-specs-pr` (private). Forks of these two repositories are also accepted.
+
+   **Input formats:**
+   - **Full URL** (e.g. `https://github.com/Azure/azure-rest-api-specs/pull/41405` or `https://github.com/Azure/azure-rest-api-specs-pr/pull/23440`) — extract the owner, repo, and number from the URL. If the repository is not `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a fork of either, politely decline: _"I can only review PRs in Azure/azure-rest-api-specs or Azure/azure-rest-api-specs-pr (and their forks). The repository in your URL is not supported."_
+   - **Shorthand** — `specs-pr#<number>` resolves to `Azure/azure-rest-api-specs-pr`; `specs#<number>` resolves to `Azure/azure-rest-api-specs`.
+   - **Bare number** (e.g. `41405`) — default to `Azure/azure-rest-api-specs` (public repo).
+
+   **Validation:**
+   1. Attempt to fetch the PR from the resolved repository using GitHub MCP `get_pull_request`.
+   2. If the PR is **not found** in the resolved repository:
+      - If the input was a bare number (no URL or shorthand), ask the user: _"PR #<number> was not found in Azure/azure-rest-api-specs. Is this PR in the private repo (Azure/azure-rest-api-specs-pr)?"_ If the user confirms, retry with the private repo.
+      - If the input was a shorthand (e.g. `specs-pr#123`), try the other repo as a fallback and ask the user to confirm.
+      - If the PR is not found in either repository, report: _"PR #<number> was not found in Azure/azure-rest-api-specs or Azure/azure-rest-api-specs-pr. Please verify the PR number."_
+      - If the input was a full URL, do not guess — report that the PR was not found at the given URL.
+
+   Both repositories share the same directory structure and review rules.
 
    > **Important:** All specification files must be fetched from GitHub, not from the local workspace. Use `get_file_contents` to read files from the PR's head branch. For `azure-rest-api-specs-pr` (private repo), GitHub MCP tools with OAuth are required. If authentication has not been granted, ask the user to authorize the GitHub MCP server connection.
 

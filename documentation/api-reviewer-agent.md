@@ -24,6 +24,30 @@ It can also apply fixes directly to local files.
 2. In the agent picker at the top of the chat, select **ARM API Reviewer**.
 3. Type your request in the chat input.
 
+## Quick-Start Prompts
+
+The repository includes two pre-built prompts that launch the agent with a guided workflow.
+To use them, open the Copilot Chat panel, click the **prompt picker** (the `/` icon or the
+attachment button), and select one of the prompts below:
+
+| Prompt                     | File                                            | What it does                                                                                                                                                                              |
+| -------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Review PR**              | `.github/prompts/review-pr.prompt.md`           | Asks for a PR number, URL, or shorthand, then runs a full read-only review of the PR's specification changes against Azure REST API Guidelines.                                          |
+| **Review Local Changes**   | `.github/prompts/review-local-changes.prompt.md`| Asks you to scope the review (a folder path or "all"), then validates your uncommitted local changes for directory structure, TypeSpec, RPC, and OpenAPI compliance.                       |
+
+You can also invoke the same functionality by typing directly in the agent chat:
+
+```text
+Review PR #41405
+```
+
+```text
+Review my changes in specification/app
+```
+
+The prompts are a convenience for guided input -- the agent handles the same
+requests as free-form chat messages.
+
 ## Operating Modes
 
 The agent operates in three modes:
@@ -45,7 +69,7 @@ The agent automatically selects the mode based on your prompt:
 
 ### Reviewing a PR
 
-Provide a PR URL or number:
+Provide a PR number, URL, or shorthand:
 
 ```text
 Review PR #41405
@@ -60,6 +84,19 @@ For the private repo, use the full URL or shorthand:
 ```text
 Review specs-pr#23440
 ```
+
+**How the agent resolves PR references:**
+
+| Input                      | Resolved repository                                                                                                                                         |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bare number (e.g. `41405`) | Defaults to `Azure/azure-rest-api-specs`. If not found, asks whether the PR is in the private repo.                                                         |
+| `specs#<number>`           | `Azure/azure-rest-api-specs`                                                                                                                                |
+| `specs-pr#<number>`        | `Azure/azure-rest-api-specs-pr`                                                                                                                             |
+| Full URL                   | Extracted from the URL. Must be `Azure/azure-rest-api-specs`, `Azure/azure-rest-api-specs-pr`, or a fork. URLs pointing to other repositories are declined. |
+
+If the PR is not found in the resolved repository, the agent will ask you to
+clarify or confirm before trying the other repo. If the PR is not found in
+either repository, the agent reports the error and stops.
 
 The agent will:
 

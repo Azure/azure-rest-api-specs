@@ -1,5 +1,5 @@
 ---
-agent: arm-api-reviewer
+agent: ARM API Reviewer
 description: "Review local API specification changes for Azure guideline compliance. Validates directory structure, TypeSpec, RPC rules, and OpenAPI conventions."
 ---
 
