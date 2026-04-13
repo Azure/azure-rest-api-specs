@@ -445,6 +445,10 @@ using Microsoft.DataProtection;
   "BackupDataSourceParametersList",
   "csharp"
 );
+@@clientName(PostgreSqlFlexibleServerBackupDatasourceParameters,
+  "PostgreSqlFlexibleServerBackupDataSourceSettings",
+  "csharp"
+);
 @@clientName(ProtectionStatusDetails,
   "BackupInstanceProtectionStatusDetails",
   "csharp"

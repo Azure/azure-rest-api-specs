@@ -407,6 +407,18 @@ union AKSVolumeTypes {
 }
 
 /**
+ * Backup solution types for PostgreSQL Flexible Server.
+ */
+@added(Versions.v2026_04_01_preview)
+union BackupSolutionType {
+  string,
+  /** Logical backup type */
+  LogicalBackup: "LogicalBackup",
+  /** Physical backup type */
+  PhysicalBackup: "PhysicalBackup",
+}
+
+/**
  * backup support feature type.
  */
 union FeatureType {
@@ -3219,6 +3231,20 @@ model AdlsBlobBackupDatasourceParametersForAutoProtection
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: "AdlsBlobBackupDatasourceParametersForAutoProtection";
+}
+
+/**
+ * Parameters to be used during configuration of backup of PostgreSQL Flexible Servers
+ */
+@added(Versions.v2026_04_01_preview)
+model PostgreSqlFlexibleServerBackupDatasourceParameters
+  extends BackupDatasourceParameters {
+  /**
+   * Type of backup taken, Logical/Physical
+   */
+  backupSolutionType?: BackupSolutionType;
+
+  objectType: "PostgreSqlFlexibleServerBackupDatasourceParameters";
 }
 
 /**
