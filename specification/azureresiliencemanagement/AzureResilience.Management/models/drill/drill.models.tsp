@@ -421,7 +421,7 @@ model AttentionReason {
 
   @doc("RBAC required by Chaos Resource MSI not setup on the target resources.")
   @added(Versions.v2026_03_01_preview)
-  faultRbacOnTargetResources?: RBACState;
+  rbacOnTargetResources?: RBACState;
 
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
