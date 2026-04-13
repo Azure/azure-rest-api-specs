@@ -3632,6 +3632,9 @@
           }
         },
         "x-ms-examples": {
+          "Create or update a scenario configuration with physical zone targeting.": {
+            "$ref": "./examples/ScenarioConfigurations_CreateOrUpdate_With_Physical_Zones.json"
+          },
           "Create or update a scenario configuration.": {
             "$ref": "./examples/ScenarioConfigurations_CreateOrUpdate.json"
           }
@@ -5119,7 +5122,14 @@
         },
         "zones": {
           "type": "array",
-          "description": "Array of availability zone identifiers (\"1\", \"2\", \"3\", \"zone-redundant\").\nOnly resources whose zones intersect this list are included.\n\nNull or omitted means all zones (including non-zonal). Empty array means include nothing.",
+          "description": "Array of availability zone identifiers (\"1\", \"2\", \"3\", \"zone-redundant\").\nOnly resources whose zones intersect this list are included.\n\nNull or omitted means all zones (including non-zonal). Empty array means include nothing.\n\nMutually exclusive with `physicalZones` — set one or the other, not both.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "physicalZones": {
+          "type": "array",
+          "description": "Array of physical availability zone identifiers in `{region}-az{N}` format\n(e.g., `\"westus2-az1\"`). Only resources in the corresponding logical zone\nfor each subscription are included.\n\nAt execution time, each physical zone is resolved to per-subscription\nlogical zones via the ARM locations API. The resolved mapping is surfaced\non the scenario run response (`zoneResolution`).\n\nNull or omitted means physical zone targeting is not used.\nOnly one physical zone is supported in preview.\n\nMutually exclusive with `zones` — set one or the other, not both.",
           "items": {
             "type": "string"
           }
@@ -7013,6 +7023,11 @@
           "format": "date-time",
           "description": "When the scenario run was completed.",
           "readOnly": true
+        },
+        "zoneResolution": {
+          "$ref": "#/definitions/ZoneResolutionInfo",
+          "description": "Zone resolution information. Present when the scenario configuration\nused physical zone targeting (`physicalZones`). Contains the mode,\nrequested physical zones, and per-subscription logical zone mappings.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7864,6 +7879,62 @@
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
+      }
+    },
+    "ZoneResolutionInfo": {
+      "type": "object",
+      "description": "Information about how physical zones were resolved to logical zones\nfor each subscription during scenario execution.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/ZoneResolutionMode",
+          "description": "The zone targeting mode used for this run.\n`logical` — customer specified logical zone identifiers directly.\n`physical` — customer specified physical zone identifiers; the system\nresolved them to per-subscription logical zones at execution time.",
+          "readOnly": true
+        },
+        "requestedPhysicalZones": {
+          "type": "array",
+          "description": "The physical zone identifiers requested by the customer in the\nscenario configuration (e.g., `[\"westus2-az1\"]`).\nEmpty array when `mode` is `logical`.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "subscriptionZoneMap": {
+          "type": "object",
+          "description": "Per-subscription resolution map. Keys are subscription IDs, values\nare the logical zone identifier resolved for that subscription\n(e.g., `\"1\"`, `\"2\"`, `\"3\"`).\nEmpty when `mode` is `logical`.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "mode",
+        "requestedPhysicalZones",
+        "subscriptionZoneMap"
+      ]
+    },
+    "ZoneResolutionMode": {
+      "type": "string",
+      "description": "The zone resolution mode for a scenario run.",
+      "enum": [
+        "logical",
+        "physical"
+      ],
+      "x-ms-enum": {
+        "name": "ZoneResolutionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Logical",
+            "value": "logical",
+            "description": "Logical zone mode — customer specified logical zone identifiers directly."
+          },
+          {
+            "name": "Physical",
+            "value": "physical",
+            "description": "Physical zone mode — system resolved physical zones to per-subscription\nlogical zones at execution time."
+          }
+        ]
       }
     }
   },

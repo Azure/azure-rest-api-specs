@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "workspaceName": "exampleWorkspace",
+    "scenarioName": "12345678-1234-1234-1234-123456789012",
+    "scenarioConfigurationName": "config-physical-zone",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resource": {
+      "properties": {
+        "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
+        "exclusions": {
+          "resources": [
+            "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
+          ]
+        },
+        "parameters": [
+          {
+            "key": "duration",
+            "value": "PT10M"
+          }
+        ],
+        "filters": {
+          "locations": [
+            "westus2"
+          ],
+          "physicalZones": [
+            "westus2-az1"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012/configurations/config-physical-zone",
+        "name": "config-physical-zone",
+        "type": "Microsoft.Chaos/workspaces/scenarios/configurations",
+        "properties": {
+          "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
+          "exclusions": {
+            "resources": [
+              "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
+            ]
+          },
+          "parameters": [
+            {
+              "key": "duration",
+              "value": "PT10M"
+            }
+          ],
+          "filters": {
+            "locations": [
+              "westus2"
+            ],
+            "physicalZones": [
+              "westus2-az1"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2025-01-15T10:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-15T12:00:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012/configurations/config-physical-zone",
+        "name": "config-physical-zone",
+        "type": "Microsoft.Chaos/workspaces/scenarios/configurations",
+        "properties": {
+          "scenarioId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012",
+          "exclusions": {
+            "resources": [
+              "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/protectedVM"
+            ]
+          },
+          "parameters": [
+            {
+              "key": "duration",
+              "value": "PT10M"
+            }
+          ],
+          "filters": {
+            "locations": [
+              "westus2"
+            ],
+            "physicalZones": [
+              "westus2-az1"
+            ]
+          },
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdAt": "2025-01-15T10:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-15T10:30:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ScenarioConfigurations_CreateOrUpdate",
+  "title": "Create or update a scenario configuration with physical zone targeting."
+}

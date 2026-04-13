@@ -100,8 +100,26 @@ model ConfigurationFilters {
    * Only resources whose zones intersect this list are included.
    *
    * Null or omitted means all zones (including non-zonal). Empty array means include nothing.
+   *
+   * Mutually exclusive with `physicalZones` — set one or the other, not both.
    */
   zones?: string[];
+
+  /**
+   * Array of physical availability zone identifiers in `{region}-az{N}` format
+   * (e.g., `"westus2-az1"`). Only resources in the corresponding logical zone
+   * for each subscription are included.
+   *
+   * At execution time, each physical zone is resolved to per-subscription
+   * logical zones via the ARM locations API. The resolved mapping is surfaced
+   * on the scenario run response (`zoneResolution`).
+   *
+   * Null or omitted means physical zone targeting is not used.
+   * Only one physical zone is supported in preview.
+   *
+   * Mutually exclusive with `zones` — set one or the other, not both.
+   */
+  physicalZones?: string[];
 }
 
 @parentResource(ScenarioConfiguration)

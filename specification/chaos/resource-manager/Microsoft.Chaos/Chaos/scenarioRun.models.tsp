@@ -98,6 +98,65 @@ model ScenarioRunProperties {
    */
   @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
+
+  /**
+   * Zone resolution information. Present when the scenario configuration
+   * used physical zone targeting (`physicalZones`). Contains the mode,
+   * requested physical zones, and per-subscription logical zone mappings.
+   */
+  @visibility(Lifecycle.Read)
+  zoneResolution?: ZoneResolutionInfo;
+}
+
+/**
+ * Information about how physical zones were resolved to logical zones
+ * for each subscription during scenario execution.
+ */
+model ZoneResolutionInfo {
+  /**
+   * The zone targeting mode used for this run.
+   * `logical` — customer specified logical zone identifiers directly.
+   * `physical` — customer specified physical zone identifiers; the system
+   * resolved them to per-subscription logical zones at execution time.
+   */
+  @visibility(Lifecycle.Read)
+  mode: ZoneResolutionMode;
+
+  /**
+   * The physical zone identifiers requested by the customer in the
+   * scenario configuration (e.g., `["westus2-az1"]`).
+   * Empty array when `mode` is `logical`.
+   */
+  @visibility(Lifecycle.Read)
+  requestedPhysicalZones: string[];
+
+  /**
+   * Per-subscription resolution map. Keys are subscription IDs, values
+   * are the logical zone identifier resolved for that subscription
+   * (e.g., `"1"`, `"2"`, `"3"`).
+   * Empty when `mode` is `logical`.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "subscriptionZoneMap is a dynamic map keyed by subscription ID; explicit typing is not feasible."
+  @visibility(Lifecycle.Read)
+  subscriptionZoneMap: Record<string>;
+}
+
+/**
+ * The zone resolution mode for a scenario run.
+ */
+union ZoneResolutionMode {
+  string,
+
+  /**
+   * Logical zone mode — customer specified logical zone identifiers directly.
+   */
+  Logical: "logical",
+
+  /**
+   * Physical zone mode — system resolved physical zones to per-subscription
+   * logical zones at execution time.
+   */
+  Physical: "physical",
 }
 
 /**
