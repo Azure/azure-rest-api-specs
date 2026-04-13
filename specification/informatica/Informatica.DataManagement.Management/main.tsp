@@ -413,7 +413,7 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @secret
   @doc("Link organization token")
   token?: string;
 }
