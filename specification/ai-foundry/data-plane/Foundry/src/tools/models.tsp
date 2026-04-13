@@ -795,7 +795,7 @@ namespace Azure.AI.Projects {
     always: "always",
 
     /** Never require approval before executing actions. */
-    never: "never",
+    `never`: "never",
   }
 
   model FabricIQPreviewToolParameters {
