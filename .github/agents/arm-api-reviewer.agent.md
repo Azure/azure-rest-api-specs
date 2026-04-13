@@ -1,25 +1,13 @@
 ---
 name: ARM API Reviewer
-description: >-
-  Critical, detail-oriented reviewer for Azure REST API specifications (OpenAPI/Swagger and TypeSpec).
-  USE FOR: reviewing PRs that add or modify OpenAPI v2 JSON specs, ARM resource-manager definitions,
-  data-plane API specs, or TypeSpec projects in the azure-rest-api-specs or azure-rest-api-specs-pr repositories.
-  Validates conformance to Azure REST API Guidelines, ARM RPC rules, and repository conventions.
-  Also USE FOR: reviewing and fixing local specification files in a private branch or fork - can apply fixes directly to local files when asked.
-  DO NOT USE FOR: generating SDKs, authoring new TypeSpec projects from scratch,
-  or addressing CI failures - use the default agent or specialized skills for those tasks.
+description: Reviews Azure REST API specifications (OpenAPI, TypeSpec) for conformance to Azure REST API Guidelines, ARM RPC rules, and repository conventions. Can also fix local files.
 tools:
   - edit/editFiles
-  - execute/getTerminalOutput
   - execute/runInTerminal
   - github/*
   - read/problems
-  - read/terminalLastCommand
-  - read/terminalSelection
   - search
-  - search/changes
   - search/codebase
-  - search/usages
   - web/fetch
   - web/githubRepo
 ---
