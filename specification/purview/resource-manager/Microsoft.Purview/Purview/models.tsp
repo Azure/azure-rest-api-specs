@@ -368,7 +368,7 @@ union ManagedIdentityType {
   /**
    * Both SystemAssigned and UserAssigned identities.
    */
-  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
+  SystemAssignedUserAssigned: "SystemAssigned,UserAssigned",
 }
 
 /**
@@ -1054,7 +1054,6 @@ model TrackedResource {
   @visibility(Lifecycle.Read)
   type?: string;
 }
-
 
 /**
  * The Managed Identity of the resource
