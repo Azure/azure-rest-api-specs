@@ -308,7 +308,7 @@
             "description": "Successfully deleted the server."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 CannotDropDatabaseAKVError - The database {0} on server {1} cannot be safely dropped because it is encrypted with a customer managed key that is no longer accessible to take the last backup before drop. Please restore Azure Key Vault Access on the server and revalidate the keys to make this database accessible and then proceed with the drop. For details see https://aka.ms/tdecmkrestorability\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ServerHasActiveImmutableLtrBackups - The server cannot be dropped due to active immutable LTR backups, or an LTR policy with locked immutability.\n\n * 409 ServerHasActiveLtrBackupsAndProtectedByNsp - The server cannot be dropped because it still has active LTR backups and is currently protected by a Network Security Perimeter. To drop this server, first delete all active LTR backups or disassociate the server from Network Security Perimeter.\n\n * 409 DropLogicalServerAlreadyInProgress - Server is already being dropped.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 CannotDropDatabaseAKVError - The database {0} on server {1} cannot be safely dropped because it is encrypted with a customer managed key that is no longer accessible to take the last backup before drop. Please restore Azure Key Vault Access on the server and revalidate the keys to make this database accessible and then proceed with the drop. For details see https://aka.ms/tdecmkrestorability\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 DropLogicalServerAlreadyInProgress - Server is already being dropped.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -453,51 +453,6 @@
           },
           "Imports to a new database, using Managed Identity for the SQL server and storage account.": {
             "$ref": "./examples/ImportNewDatabaseWithManagedIdentity.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/importExportOperationResults": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "description": "Gets a list of server import export operation results.",
-        "operationId": "Servers_ListByServer",
-        "parameters": [
-          {
-            "$ref": "./common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "./common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of server import export operation results.",
-            "schema": {
-              "$ref": "#/definitions/ServerImportExportOperationListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets a list of server level import export operation results.": {
-            "$ref": "./examples/GetImportExportOperationResultsByServer.json"
           }
         }
       }
@@ -835,11 +790,11 @@
         "provisioningState": {
           "description": "State of the private endpoint connection.",
           "enum": [
-            "Created",
-            "InProgress",
-            "Succeeded",
+            "Approving",
+            "Ready",
+            "Dropping",
             "Failed",
-            "Canceled"
+            "Rejecting"
           ],
           "type": "string",
           "readOnly": true,
@@ -1035,7 +990,7 @@
         },
         "sid": {
           "format": "uuid",
-          "description": "The server administrator's SID. The SID would be the object ID for Entra groups and users, and the application (client) ID for applications.",
+          "description": "SID (object ID) of the server administrator.",
           "type": "string"
         },
         "tenantId": {
@@ -1054,29 +1009,11 @@
             "Disabled"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ExternalAdminStatus",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "ServerImportExportOperationListResult": {
-      "description": "A list of server import export operation results.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerImportExportOperationResult"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1332,6 +1269,27 @@
             "name": "ExternalGovernanceStatus",
             "modelAsString": true
           }
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Number of days this server will stay soft-deleted.",
+          "type": "integer"
+        },
+        "createMode": {
+          "description": "Create mode for server, only valid values for this are Normal and Restore.",
+          "enum": [
+            "Normal",
+            "Restore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerCreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
