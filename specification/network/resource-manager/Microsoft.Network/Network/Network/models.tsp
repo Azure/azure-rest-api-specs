@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
@@ -22914,6 +22915,12 @@ model HubVirtualNetworkConnectionProperties {
   allowRemoteVnetToUseHubVnetGateways?: boolean;
 
   /**
+   * The resource id of the ConnectionPolicy associated with this HubVirtualNetworkConnection.
+   */
+  @added(Versions.v2025_07_01)
+  connectionPolicy?: SubResource;
+
+  /**
    * Enable internet security.
    */
   enableInternetSecurity?: boolean;
@@ -26000,3 +26007,39 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+
+/**
+ * Parameters for ConnectionPolicy.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+model ConnectionPolicyProperties {
+  /**
+   * Enable internet security.
+   */
+  enableInternetSecurity?: boolean;
+
+  /**
+   * The Routing Configuration indicating the associated and propagated route tables on this connection.
+   */
+  routingConfiguration?: RoutingConfiguration;
+
+  /**
+   * The provisioning state of the ConnectionPolicy resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * List of all connections associated with this ConnectionPolicy.
+   */
+  @visibility(Lifecycle.Read)
+  associatedConnections?: string[];
+}
+
+/**
+ * List of ConnectionPolicies and a URL nextLink to get the next set of results.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;

@@ -95,6 +95,13 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
+  - code: ProvisioningStateMustBeReadOnly
+    from: virtualWan.json
+    reason: ConnectionPolicy uses a legacy ReadOnlySubResourceModel pattern. The TypeSpec autorest emitter generates readOnly as a $ref sibling, which spectral's resolver drops during resolution. This is consistent with other VirtualHub child resources (e.g., BgpConnection, RoutingIntent) which use the same pattern.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/connectionPolicies/{connectionPolicyName}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/connectionPolicies/{connectionPolicyName}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/connectionPolicies/{connectionPolicyName}"].put.responses.201.schema
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
