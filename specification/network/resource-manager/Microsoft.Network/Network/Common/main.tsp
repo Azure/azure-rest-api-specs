@@ -47,11 +47,6 @@ namespace Common;
  */
 enum Versions {
   /**
-   * The 2018-10-01 API version.
-   */
-  v2018_10_01: "2018-10-01",
-
-  /**
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",

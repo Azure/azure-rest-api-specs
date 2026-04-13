@@ -881,6 +881,16 @@
         }
       }
     },
+    "Common.DdosFrontendIpConfigurationSettings": {
+      "type": "object",
+      "description": "DDoS protection settings for a frontend IP configuration.",
+      "properties": {
+        "ddosCustomPolicy": {
+          "$ref": "#/definitions/Common.SubResource",
+          "description": "The reference to the DDoS Custom Policy resource."
+        }
+      }
+    },
     "Common.DdosSettings": {
       "type": "object",
       "description": "Contains the DDoS protection settings of the public IP.",
@@ -1229,6 +1239,10 @@
           "$ref": "#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the frontend IP configuration resource.",
           "readOnly": true
+        },
+        "ddosSettings": {
+          "$ref": "#/definitions/Common.DdosFrontendIpConfigurationSettings",
+          "description": "The DDoS protection settings associated with the frontend IP configuration."
         }
       }
     },
