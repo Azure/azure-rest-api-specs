@@ -21,6 +21,9 @@ union HciJobType {
   /** Job to repair a server in the cluster. */
   RepairServer: "RepairServer",
 
+  /** Job to configure fault domains for the cluster. */
+  ConfigureFaultDomain: "ConfigureFaultDomain",
+
   // PRIVATE PREVIEW - Arc Gateway and GPU job types
   /** Job to configure arc gateway for the cluster. */
   ConfigureArcGateway: "ConfigureArcGateway",
@@ -1726,6 +1729,64 @@ union EdgeSolutionType {
    * Edge solution for Windows based edge devices.
    */
   WindowsServer: "WindowsServer",
+}
+
+/**
+ * Lifecycle status of an Edge Machine.
+ */
+@added(Versions.v2026_03_15_preview)
+union EdgeMachineLifecycleStatus {
+  string,
+
+  /** Machine is being created. */
+  Creating: "Creating",
+
+  /** Machine is awaiting connection. */
+  AwaitingConnection: "AwaitingConnection",
+
+  /** Machine is being provisioned. */
+  Provisioning: "Provisioning",
+
+  /** Machine is ready for OS installation. */
+  ReadyForOs: "ReadyForOs",
+
+  /** Machine is installing the OS. */
+  InstallingOs: "InstallingOs",
+
+  /** Machine has been provisioned. */
+  Provisioned: "Provisioned",
+
+  /** Machine OS is being updated. */
+  UpdatingOs: "UpdatingOs",
+
+  /** Machine OS is being reset. */
+  ResettingOs: "ResettingOs",
+
+  /** Machine is being deleted. */
+  Deleting: "Deleting",
+
+  /** Machine is in a failed state. */
+  Failed: "Failed",
+}
+
+/**
+ * Status of an operation. Maps to Steps.Status / SubSteps.Status.
+ */
+@added(Versions.v2026_03_15_preview)
+union LifecycleOperationStatus {
+  string,
+
+  /** Operation has not started. */
+  NotStarted: "NotStarted",
+
+  /** Operation is in progress. */
+  InProgress: "InProgress",
+
+  /** Operation has completed successfully. */
+  Completed: "Completed",
+
+  /** Operation has failed. */
+  Failed: "Failed",
 }
 
 /**
@@ -6577,6 +6638,39 @@ model HciRepairServerJobProperties extends ClusterJobProperties {
 }
 
 ////////////////////////////////////////////////////////////////
+////////////// Fault Domain Config Job Models /////////////////
+////////////////////////////////////////////////////////////////
+
+/** Mapping of a fault domain to its assigned nodes. */
+@added(Versions.v2026_03_15_preview)
+model FaultDomainNodeAssignment {
+  /** Name of the fault domain (e.g., Rack1, Rack2). */
+  faultDomainName: string;
+
+  /** List of node names assigned to this fault domain. */
+  nodes: string[];
+}
+
+/** Properties for configuring fault domains in the cluster. */
+@added(Versions.v2026_03_15_preview)
+model HciConfigureFaultDomainJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureFaultDomain;
+
+  /** Number of fault domains to create (1-8). */
+  @minValue(1)
+  @maxValue(8)
+  faultDomainCount: int32;
+
+  /** Naming prefix for fault domains. Each fault domain is named <Prefix>1, <Prefix>2, etc. */
+  faultDomainPrefix: string;
+
+  /** Mapping of fault domain names to their assigned nodes. */
+  @Azure.ResourceManager.identifiers(#["faultDomainName"])
+  nodeAssignment: FaultDomainNodeAssignment[];
+}
+
+////////////////////////////////////////////////////////////////
 ////////// PRIVATE PREVIEW - Arc Gateway and GPU Job Models ////
 ////////////////////////////////////////////////////////////////
 
@@ -6853,6 +6947,12 @@ model EdgeMachineProperties {
   ]>;
 
   /**
+   * Lifecycle details of the resource
+   */
+  @visibility(Lifecycle.Read)
+  lifecycleDetails?: LifecycleDetails;
+
+  /**
    * Link to Arc Gateway ARM resource Id
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -7088,6 +7188,116 @@ union EdgeMachineConnectivityStatus {
    * The machine resource is connected.
    */
   Connected: "Connected",
+}
+
+/**
+ * Summary lifecycle status for a resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model LifecycleStatus {
+  /**
+   * Overall lifecycle status of the edge machine.
+   */
+  @visibility(Lifecycle.Read)
+  status: EdgeMachineLifecycleStatus;
+
+  /**
+   * Depicts what is the current ongoing stage.
+   */
+  @visibility(Lifecycle.Read)
+  stage?: string;
+
+  /**
+   * Last time the lifecycle status was updated.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdatedUtc: utcDateTime;
+
+  /**
+   * Message to provide more details on lifecycle status, especially in case of failures.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+}
+
+/**
+ * Lifecycle stage details for a resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model LifecycleStage {
+  /**
+   * Name of the stage;
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * Description of the stage.
+   */
+  @visibility(Lifecycle.Read)
+  description: string;
+
+  /**
+   * Status of the stage.
+   */
+  @visibility(Lifecycle.Read)
+  status: LifecycleOperationStatus;
+
+  /**
+   * Start time of the stage.
+   */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /**
+   * End time of the stage.
+   */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /**
+   * Last time the stage was updated.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdatedUtc?: utcDateTime;
+
+  /**
+   * Error details.
+   */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+
+  /**
+   * Recommended steps to resolve failures.
+   */
+  @visibility(Lifecycle.Read)
+  recommendedSteps?: string[];
+
+  /**
+   * Sub-stages for this stage.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  subStages?: LifecycleStage[];
+}
+
+/**
+ * Overall Lifecycle details for a resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model LifecycleDetails {
+  /**
+   * Overall lifecycle status of the edge machine.
+   */
+  @visibility(Lifecycle.Read)
+  lifecycleStatus?: LifecycleStatus;
+
+  /**
+   * List of lifecycle stages for the edge machine.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  lifecycleStages: LifecycleStage[];
 }
 
 /**

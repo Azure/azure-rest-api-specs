@@ -886,6 +886,57 @@
         }
       ]
     },
+    "CheckConnectivityEndpoint": {
+      "type": "object",
+      "description": "Connection endpoint for connectivity testing with type indicator.",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "Connection name"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host name of the database server"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number"
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "Service name (for Oracle)"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name"
+        },
+        "credentials": {
+          "$ref": "#/definitions/DatabaseCredentials",
+          "description": "Database credentials"
+        },
+        "ssl": {
+          "$ref": "#/definitions/SslConfiguration",
+          "description": "SSL configuration"
+        },
+        "serverResourceId": {
+          "type": "string",
+          "description": "Server resource ID"
+        },
+        "type": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "Connection endpoint type"
+        }
+      },
+      "required": [
+        "connectionName",
+        "hostName",
+        "port",
+        "credentials",
+        "ssl",
+        "type"
+      ]
+    },
     "CheckConnectivityResult": {
       "type": "object",
       "description": "Status response for connectivity test operation.",
@@ -899,19 +950,6 @@
           "description": "Status properties"
         }
       }
-    },
-    "ComputeProfile": {
-      "type": "object",
-      "description": "Compute profile configuration.",
-      "properties": {
-        "computeSubnetResourceId": {
-          "type": "string",
-          "description": "Compute subnet resource ID"
-        }
-      },
-      "required": [
-        "computeSubnetResourceId"
-      ]
     },
     "ConnectionEndpoint": {
       "type": "object",
@@ -1012,28 +1050,44 @@
         "errors"
       ]
     },
+    "ConnectionType": {
+      "type": "string",
+      "description": "The connection endpoint type.",
+      "enum": [
+        "Source",
+        "Target"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Source",
+            "value": "Source",
+            "description": "Source connection"
+          },
+          {
+            "name": "Target",
+            "value": "Target",
+            "description": "Target connection"
+          }
+        ]
+      }
+    },
     "ConnectivityTestProperties": {
       "type": "object",
       "description": "Properties of the connectivity test response.",
       "properties": {
-        "source": {
+        "connectionTestResults": {
           "type": "array",
-          "description": "Source connection test results",
-          "items": {
-            "$ref": "#/definitions/ConnectionTestResult"
-          }
-        },
-        "target": {
-          "type": "array",
-          "description": "Target connection test results",
+          "description": "Connection test results",
           "items": {
             "$ref": "#/definitions/ConnectionTestResult"
           }
         }
       },
       "required": [
-        "source",
-        "target"
+        "connectionTestResults"
       ]
     },
     "ConnectivityTestResult": {
@@ -1251,6 +1305,22 @@
             "create"
           ]
         },
+        "sourceType": {
+          "$ref": "#/definitions/MigrationSourceType",
+          "description": "Migration source type",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetType": {
+          "$ref": "#/definitions/MigrationTargetType",
+          "description": "Migration target type",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "source": {
           "$ref": "#/definitions/SourceConfiguration",
           "description": "Source database configuration",
@@ -1278,15 +1348,7 @@
             "create"
           ]
         },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Compute profile",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "migrationJobsettings": {
+        "migrationJobSettings": {
           "$ref": "#/definitions/MigrationJobSettings",
           "description": "Migration job settings",
           "x-ms-mutability": [
@@ -1297,13 +1359,6 @@
         "operationType": {
           "$ref": "#/definitions/MigrationOperationType",
           "description": "The type of operation to perform on the migration"
-        },
-        "databaseNames": {
-          "type": "array",
-          "description": "List of database names to apply the operation to. If not specified, applies to all databases.",
-          "items": {
-            "type": "string"
-          }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -1345,11 +1400,12 @@
         "migrationName",
         "description",
         "migrationMode",
+        "sourceType",
+        "targetType",
         "source",
         "target",
         "mappingDefinitions",
-        "computeProfile",
-        "migrationJobsettings"
+        "migrationJobSettings"
       ]
     },
     "DatabaseMigrationPropertiesUpdate": {
@@ -1359,13 +1415,6 @@
         "operationType": {
           "$ref": "#/definitions/MigrationOperationType",
           "description": "The type of operation to perform on the migration"
-        },
-        "databaseNames": {
-          "type": "array",
-          "description": "List of database names to apply the operation to. If not specified, applies to all databases.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -1464,16 +1513,11 @@
         "target": {
           "$ref": "#/definitions/TargetConfiguration",
           "description": "Target database configuration"
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Compute profile configuration"
         }
       },
       "required": [
         "source",
-        "target",
-        "computeProfile"
+        "target"
       ]
     },
     "DiscoveredDatabaseObjects": {
@@ -1750,11 +1794,79 @@
       "type": "object",
       "description": "Properties of the MigrationService resource.",
       "properties": {
+        "sourceEngine": {
+          "$ref": "#/definitions/MigrationServiceSourceEngine",
+          "description": "Source database engine type"
+        },
+        "targetEngine": {
+          "$ref": "#/definitions/MigrationServiceTargetEngine",
+          "description": "Target database engine type"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the migration service.",
           "readOnly": true
         }
+      },
+      "required": [
+        "sourceEngine",
+        "targetEngine"
+      ]
+    },
+    "MigrationServicePropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of the MigrationService resource.",
+      "properties": {
+        "sourceEngine": {
+          "$ref": "#/definitions/MigrationServiceSourceEngine",
+          "description": "Source database engine type"
+        },
+        "targetEngine": {
+          "$ref": "#/definitions/MigrationServiceTargetEngine",
+          "description": "Target database engine type"
+        }
+      }
+    },
+    "MigrationServiceSourceEngine": {
+      "type": "string",
+      "description": "The source database engine type for migration service.",
+      "enum": [
+        "Oracle",
+        "PostgreSQL"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationServiceSourceEngine",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Oracle",
+            "value": "Oracle",
+            "description": "Oracle database engine"
+          },
+          {
+            "name": "PostgreSQL",
+            "value": "PostgreSQL",
+            "description": "PostgreSQL database engine"
+          }
+        ]
+      }
+    },
+    "MigrationServiceTargetEngine": {
+      "type": "string",
+      "description": "The target database engine type for migration service.",
+      "enum": [
+        "Azure Database for PostgreSQL"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationServiceTargetEngine",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureDatabaseForPostgreSQL",
+            "value": "Azure Database for PostgreSQL",
+            "description": "Azure Database for PostgreSQL"
+          }
+        ]
       }
     },
     "MigrationServiceUpdate": {
@@ -1762,7 +1874,7 @@
       "description": "A migration service resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MigrationServiceProperties",
+          "$ref": "#/definitions/MigrationServicePropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -1771,6 +1883,42 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "MigrationSourceType": {
+      "type": "string",
+      "description": "The source platform type for database migration.",
+      "enum": [
+        "AWS",
+        "GCP",
+        "Oracle",
+        "OnPrem"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AWS",
+            "value": "AWS",
+            "description": "Amazon Web Services"
+          },
+          {
+            "name": "GCP",
+            "value": "GCP",
+            "description": "Google Cloud Platform"
+          },
+          {
+            "name": "Oracle",
+            "value": "Oracle",
+            "description": "Oracle Cloud"
+          },
+          {
+            "name": "OnPrem",
+            "value": "OnPrem",
+            "description": "On-premises"
+          }
+        ]
+      }
     },
     "MigrationState": {
       "type": "string",
@@ -1898,6 +2046,30 @@
         "lastUpdatedAt"
       ]
     },
+    "MigrationTargetType": {
+      "type": "string",
+      "description": "The target platform type for database migration.",
+      "enum": [
+        "AzurePostgreSQLFlexibleServer",
+        "AzurePostgreSQLHorizonDb"
+      ],
+      "x-ms-enum": {
+        "name": "MigrationTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzurePostgreSQLFlexibleServer",
+            "value": "AzurePostgreSQLFlexibleServer",
+            "description": "Azure PostgreSQL Flexible Server"
+          },
+          {
+            "name": "AzurePostgreSQLHorizonDb",
+            "value": "AzurePostgreSQLHorizonDb",
+            "description": "Azure PostgreSQL Horizon DB"
+          }
+        ]
+      }
+    },
     "OperationStatus": {
       "type": "string",
       "description": "Operation status enum.",
@@ -1970,6 +2142,18 @@
         "validationResult": {
           "$ref": "#/definitions/ValidationResult",
           "description": "Detailed validation result for this check"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of the validation check"
+        },
+        "objectName": {
+          "type": "string",
+          "description": "Object name related to the validation"
+        },
+        "component": {
+          "type": "string",
+          "description": "Component related to the validation"
         }
       },
       "required": [
@@ -2043,10 +2227,6 @@
       "type": "object",
       "description": "Source database configuration.",
       "properties": {
-        "engine": {
-          "$ref": "#/definitions/SourceDatabaseEngine",
-          "description": "Database engine type"
-        },
         "serverResourceId": {
           "type": "string",
           "description": "Server resource ID"
@@ -2060,7 +2240,6 @@
         }
       },
       "required": [
-        "engine",
         "connectionEndPoints"
       ]
     },
@@ -2165,10 +2344,6 @@
       "type": "object",
       "description": "Target database configuration.",
       "properties": {
-        "engine": {
-          "$ref": "#/definitions/TargetDatabaseEngine",
-          "description": "Database engine type"
-        },
         "serverResourceId": {
           "type": "string",
           "description": "Server resource ID"
@@ -2182,7 +2357,6 @@
         }
       },
       "required": [
-        "engine",
         "connectionEndPoints"
       ]
     },
@@ -2214,23 +2388,16 @@
       "type": "object",
       "description": "Request body for testing connectivity.",
       "properties": {
-        "source": {
-          "$ref": "#/definitions/SourceConfiguration",
-          "description": "Source database configuration"
-        },
-        "target": {
-          "$ref": "#/definitions/TargetConfiguration",
-          "description": "Target database configuration"
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfile",
-          "description": "Compute profile configuration"
+        "connectionEndpoints": {
+          "type": "array",
+          "description": "Connection endpoints to test",
+          "items": {
+            "$ref": "#/definitions/CheckConnectivityEndpoint"
+          }
         }
       },
       "required": [
-        "source",
-        "target",
-        "computeProfile"
+        "connectionEndpoints"
       ]
     },
     "ValidationDiagnostics": {

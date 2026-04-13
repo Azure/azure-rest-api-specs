@@ -3505,6 +3505,9 @@
           "ClusterJobs_Get_ConfigureArcGatewayJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
           },
+          "ClusterJobs_Get_ConfigureFaultDomainJob": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureFaultDomainJob.json"
+          },
           "ClusterJobs_Get_ConfigureSdnIntegrationJob": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureSdnIntegrationJob.json"
           },
@@ -3606,6 +3609,9 @@
           },
           "ClusterJobs_CreateOrUpdate_ConfigureCVMJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureFaultDomainJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureFaultDomain.json"
           },
           "ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureSdnIntegration_Enable.json"
@@ -14306,6 +14312,78 @@
         ]
       }
     },
+    "EdgeMachineLifecycleStatus": {
+      "type": "string",
+      "description": "Lifecycle status of an Edge Machine.",
+      "enum": [
+        "Creating",
+        "AwaitingConnection",
+        "Provisioning",
+        "ReadyForOs",
+        "InstallingOs",
+        "Provisioned",
+        "UpdatingOs",
+        "ResettingOs",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeMachineLifecycleStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Machine is being created."
+          },
+          {
+            "name": "AwaitingConnection",
+            "value": "AwaitingConnection",
+            "description": "Machine is awaiting connection."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Machine is being provisioned."
+          },
+          {
+            "name": "ReadyForOs",
+            "value": "ReadyForOs",
+            "description": "Machine is ready for OS installation."
+          },
+          {
+            "name": "InstallingOs",
+            "value": "InstallingOs",
+            "description": "Machine is installing the OS."
+          },
+          {
+            "name": "Provisioned",
+            "value": "Provisioned",
+            "description": "Machine has been provisioned."
+          },
+          {
+            "name": "UpdatingOs",
+            "value": "UpdatingOs",
+            "description": "Machine OS is being updated."
+          },
+          {
+            "name": "ResettingOs",
+            "value": "ResettingOs",
+            "description": "Machine OS is being reset."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Machine is being deleted."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Machine is in a failed state."
+          }
+        ]
+      }
+    },
     "EdgeMachineListResult": {
       "type": "object",
       "description": "The response of a EdgeMachine list operation.",
@@ -14733,6 +14811,11 @@
               }
             ]
           }
+        },
+        "lifecycleDetails": {
+          "$ref": "#/definitions/LifecycleDetails",
+          "description": "Lifecycle details of the resource",
+          "readOnly": true
         },
         "arcGatewayResourceId": {
           "type": "string",
@@ -15528,6 +15611,27 @@
         }
       }
     },
+    "FaultDomainNodeAssignment": {
+      "type": "object",
+      "description": "Mapping of a fault domain to its assigned nodes.",
+      "properties": {
+        "faultDomainName": {
+          "type": "string",
+          "description": "Name of the fault domain (e.g., Rack1, Rack2)."
+        },
+        "nodes": {
+          "type": "array",
+          "description": "List of node names assigned to this fault domain.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "faultDomainName",
+        "nodes"
+      ]
+    },
     "ForcePushNetworkAdapterJobProperties": {
       "type": "object",
       "description": "Properties for force push of network adapter configuration.",
@@ -15914,6 +16018,44 @@
         }
       ],
       "x-ms-discriminator-value": "ConfigureCVM"
+    },
+    "HciConfigureFaultDomainJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring fault domains in the cluster.",
+      "properties": {
+        "faultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of fault domains to create (1-8).",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "faultDomainPrefix": {
+          "type": "string",
+          "description": "Naming prefix for fault domains. Each fault domain is named <Prefix>1, <Prefix>2, etc."
+        },
+        "nodeAssignment": {
+          "type": "array",
+          "description": "Mapping of fault domain names to their assigned nodes.",
+          "items": {
+            "$ref": "#/definitions/FaultDomainNodeAssignment"
+          },
+          "x-ms-identifiers": [
+            "faultDomainName"
+          ]
+        }
+      },
+      "required": [
+        "faultDomainCount",
+        "faultDomainPrefix",
+        "nodeAssignment"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureFaultDomain"
     },
     "HciConfigureSdnIntegrationJobProperties": {
       "type": "object",
@@ -16347,6 +16489,7 @@
       "enum": [
         "AddServer",
         "RepairServer",
+        "ConfigureFaultDomain",
         "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
@@ -16368,6 +16511,11 @@
             "name": "RepairServer",
             "value": "RepairServer",
             "description": "Job to repair a server in the cluster."
+          },
+          {
+            "name": "ConfigureFaultDomain",
+            "value": "ConfigureFaultDomain",
+            "description": "Job to configure fault domains for the cluster."
           },
           {
             "name": "ConfigureArcGateway",
@@ -17209,6 +17357,166 @@
       },
       "required": [
         "version"
+      ]
+    },
+    "LifecycleDetails": {
+      "type": "object",
+      "description": "Overall Lifecycle details for a resource.",
+      "properties": {
+        "lifecycleStatus": {
+          "$ref": "#/definitions/LifecycleStatus",
+          "description": "Overall lifecycle status of the edge machine.",
+          "readOnly": true
+        },
+        "lifecycleStages": {
+          "type": "array",
+          "description": "List of lifecycle stages for the edge machine.",
+          "items": {
+            "$ref": "#/definitions/LifecycleStage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "lifecycleStages"
+      ]
+    },
+    "LifecycleOperationStatus": {
+      "type": "string",
+      "description": "Status of an operation. Maps to Steps.Status / SubSteps.Status.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Operation has not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Operation is in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operation has failed."
+          }
+        ]
+      }
+    },
+    "LifecycleStage": {
+      "type": "object",
+      "description": "Lifecycle stage details for a resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the stage;",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the stage.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/LifecycleOperationStatus",
+          "description": "Status of the stage.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the stage.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the stage.",
+          "readOnly": true
+        },
+        "lastUpdatedUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the stage was updated.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error details.",
+          "readOnly": true
+        },
+        "recommendedSteps": {
+          "type": "array",
+          "description": "Recommended steps to resolve failures.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "subStages": {
+          "type": "array",
+          "description": "Sub-stages for this stage.",
+          "items": {
+            "$ref": "#/definitions/LifecycleStage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "status"
+      ]
+    },
+    "LifecycleStatus": {
+      "type": "object",
+      "description": "Summary lifecycle status for a resource.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/EdgeMachineLifecycleStatus",
+          "description": "Overall lifecycle status of the edge machine.",
+          "readOnly": true
+        },
+        "stage": {
+          "type": "string",
+          "description": "Depicts what is the current ongoing stage.",
+          "readOnly": true
+        },
+        "lastUpdatedUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the lifecycle status was updated.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Message to provide more details on lifecycle status, especially in case of failures.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "lastUpdatedUtc"
       ]
     },
     "ListOfDevicesRequest": {

@@ -9,11 +9,7 @@
     "api-version": "2025-01-10-preview",
     "properties": {
       "properties": {
-        "operationType": "cutover",
-        "databaseNames": [
-          "HR",
-          "Finance"
-        ]
+        "operationType": "cutover"
       }
     }
   },
@@ -27,8 +23,9 @@
           "migrationName": "prod-oracle-to-azure-pg",
           "description": "Production Oracle migration to Azure PostgreSQL Flexible Server",
           "migrationMode": "online",
+          "sourceType": "Oracle",
+          "targetType": "AzurePostgreSQLFlexibleServer",
           "source": {
-            "engine": "oracle",
             "serverResourceId": null,
             "connectionEndPoints": [
               {
@@ -48,7 +45,6 @@
             ]
           },
           "target": {
-            "engine": "azure_postgres_flexible",
             "serverResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.DBforPostgreSQL/flexibleServers/myServer",
             "connectionEndPoints": [
               {
@@ -78,10 +74,7 @@
               "targetConnectionName": "targetConnection1"
             }
           ],
-          "computeProfile": {
-            "computeSubnetResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/my-rg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
-          },
-          "migrationJobsettings": {
+          "migrationJobSettings": {
             "validateOnly": false
           },
           "provisioningState": "Succeeded",

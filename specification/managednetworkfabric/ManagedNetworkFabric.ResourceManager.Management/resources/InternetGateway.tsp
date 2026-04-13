@@ -21,15 +21,8 @@ model InternetGateway
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The Internet Gateway Properties */
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated: InternetGatewayProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @doc("The Internet Gateway Properties")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: InternetGatewayProperties;
 }
 

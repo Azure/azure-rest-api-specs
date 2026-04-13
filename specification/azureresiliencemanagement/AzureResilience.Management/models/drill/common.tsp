@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -79,4 +80,8 @@ model ErrorDetails {
 
   @doc("Error message.")
   message: string;
+
+  @doc("A list of recommendations to resolve the error.")
+  @added(Versions.v2026_03_01_preview)
+  recommendations?: string[];
 }

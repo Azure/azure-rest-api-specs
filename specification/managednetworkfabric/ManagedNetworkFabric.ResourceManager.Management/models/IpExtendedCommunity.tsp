@@ -58,18 +58,10 @@ model IpExtendedCommunityRule {
   routeTargets: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The IP Extended Communities patch resource definition.")
 model IpExtendedCommunityPatch extends TagsUpdate {
   @doc("IP Extended Community patchable properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: IpExtendedCommunityPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("IP Extended Community patchable properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: IpExtendedCommunityPatchProperties;
 }
 

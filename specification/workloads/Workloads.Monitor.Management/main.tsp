@@ -15,10 +15,7 @@ import "./Alert.tsp";
 import "./Db2JobConfiguration.tsp";
 import "./ProviderInstance.tsp";
 import "./SapLandscapeMonitor.tsp";
-import "./InstanceGroupMonitor.tsp";
 import "./InstanceMonitor.tsp";
-import "./InstanceHealthDefinition.tsp";
-import "./SignalDefinitions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -42,9 +39,9 @@ namespace Microsoft.Workloads;
  */
 enum Versions {
   /**
-   * The 2024-12-01-preview API version.
+   * The 2026-02-01-preview API version.
    */
-  v2024_12_01_preview: "2024-12-01-preview",
+  v2026_02_01_preview: "2026-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

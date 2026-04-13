@@ -6,12 +6,83 @@ description: |
 tags:
   - versioning
 inputs:
-  prompt: "I want to add a new stable version `2025-01-01`."
+  prompt: "I want to add a new stable version `2025-01-01`. Exclude `workLocation` property and `WorkLocation` model. Carry other features."
   files:
-    - path: Microsoft.Widget/Widget/employee.tsp
-    - path: Microsoft.Widget/Widget/main.tsp
-    - path: Microsoft.Widget/Widget/tspconfig.yaml
+    - path: 001007-version-add-stable-after-preview\employee.tsp
+    - path: 001007-version-add-stable-after-preview\main.tsp
+    - path: 001007-version-add-stable-after-preview\shared.tsp
+    - path: 001007-version-add-stable-after-preview\tspconfig.yaml
+    - path: 001007-version-add-stable-after-preview\package.json
+    - path: 001007-version-add-stable-after-preview\readme.md
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Delete_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Get_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MinimumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Update_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Operations_List_MaximumSet_Gen.json
+    - path: 001007-version-add-stable-after-preview\examples\2024-10-01-preview\Operations_List_MinimumSet_Gen.json
+
 expected:
   output_contains:
     - "Task Type"
     - "API Version Evolution"
+graders:
+  # - type: diff
+  #   name: version_enum_check
+  #   config:
+  #     expected_files:
+  #       - path: "001007-version-add-stable-after-preview/main.tsp"
+  #         contains:
+  #           - '+v2025-05-04-preview: "2025-01-01"'
+  # - type: action_sequence
+  #   name: mcp_workflow
+  #   config:
+  #     matching_mode: in_order_match
+  #     expected_actions:
+  #       - edit
+  #       - azsdk_run_typespec_validation
+  # Deterministic checks: version and examples folder migration
+  - type: file
+    name: file_structure_check
+    config:
+      must_exist:
+        - "001007-version-add-stable-after-preview/examples/2025-01-01/Employees_Get_MaximumSet_Gen.json"
+      must_not_exist:
+        - "001007-version-add-stable-after-preview/examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json"
+      content_patterns:
+        - path: "001007-version-add-stable-after-preview/main.tsp"
+          must_match:
+            - "2025-01-01"
+          must_not_match:
+            - "2024-10-01-preview"
+        - path: "001007-version-add-stable-after-preview/employee.tsp"
+          must_not_match:
+            - "workLocation"
+            - "WorkLocation"
+            - "2024-10-01-preview"
+  # LLM judge: verify promoted preview features are correctly updated to stable decorators
+  - type: prompt
+    name: decorator_check
+    config:
+      prompt: |
+        Check the modified employee.tsp and verify:
+        Preview features that are carried over to stable should have versioning decorators
+        updated to reference `2025-01-01` where needed, with no unintended changes.
+
+        If correct, call set_waza_grade_pass.
+        Otherwise, call set_waza_grade_fail with your reasoning.
+      model: "gpt-4o-mini"
+      continue_session: true

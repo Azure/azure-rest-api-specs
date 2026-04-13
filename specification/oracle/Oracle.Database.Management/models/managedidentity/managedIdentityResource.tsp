@@ -8,6 +8,7 @@ using OpenAPI;
 
 namespace Oracle.Database;
 
+@removed(Versions.v20260201_preview)
 @added(Versions.v20260101_preview)
 @doc("ManagedIdentityResource resource definition")
 model ManagedIdentityResource
@@ -17,6 +18,7 @@ model ManagedIdentityResource
   ...ManagedServiceIdentityProperty;
 }
 
+@removed(Versions.v20260201_preview)
 @added(Versions.v20260101_preview)
 @doc("ManagedIdentityResource resource model")
 model ManagedIdentityResourceProperties {
@@ -29,6 +31,7 @@ model ManagedIdentityResourceProperties {
   provisioningState?: AzureResourceProvisioningState;
 }
 
+@removed(Versions.v20260201_preview)
 @added(Versions.v20260101_preview)
 @doc("Metadata associated with a managed identity resource.")
 model ManagedIdentityMetadata {

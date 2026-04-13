@@ -6,7 +6,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("Network Monitor Properties defines the properties of the resource.")
 @added(Versions.v2024_06_15_preview)
 model NetworkMonitorProperties extends AnnotationResource {
@@ -225,19 +225,11 @@ model BmpConfigurationPatchProperties {
   monitoredAddressFamilies?: BmpMonitoredAddressFamily[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spreading to avoid breaking changes in patch model"
 @doc("The Network Monitor Patch resource definition.")
 @added(Versions.v2024_06_15_preview)
 model NetworkMonitorPatch extends TagsUpdate {
   @doc("Network Monitor Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NetworkMonitorPatchProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Network Monitor Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkMonitorPatchProperties;
 }
 

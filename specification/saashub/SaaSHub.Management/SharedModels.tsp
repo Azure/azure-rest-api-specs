@@ -5,7 +5,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./versions.tsp";
 
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using OpenAPI;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
 using TypeSpec.Versioning;
 
 @versioned(SaaSHubVersions)
@@ -230,6 +235,14 @@ model SystemOverrides {
    */
   @visibility(Lifecycle.Read)
   productUrl?: string;
+
+  /**
+   * URL pointing to the cloud licensing information for the resource.
+   * Read-only property.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  cloudLicensingUrl?: string;
 }
 
 /**
@@ -378,16 +391,32 @@ model CanCreateResultAdditionalInfo {
 
   /**
    * Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable.
+   * @deprecated Starting with 2026-03-31-preview, use the 'coTerm' property instead.
    */
+  #deprecated "Starting with 2026-03-31-preview, use the 'coTerm' property instead."
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   coTermDates?: CoTermDateEligibilityResult[];
+
+  /**
+   * Additional information for coTerm eligibility with top-level eligibility indicator. Null when constraints passed or not applicable.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  coTerm?: CoTermEligibilityResult;
 }
 
 /**
  * Additional detail when request payload failed addOn constraints. Null when constraints passed or not applicable.
  */
 model CanCreateResultAddOnInfo {
+  /**
+   * Whether the add-on eligibility is satisfied.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  isEligible?: EligibilityResult;
+
   /**
    * AddOn ineligible reasons.
    */
@@ -442,11 +471,19 @@ model CanCreateResultPromotionInfo {
   ineligibilityReasons?: string[];
 
   /**
+   * Identifies which discount UPN each eligibility result corresponds to for CSP Growth Margin.
+   */
+  @visibility(Lifecycle.Read)
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  discountProductCode?: string;
+
+  /**
    * Promotion eligibility constraints.
    */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  eligibilityConstraints?: EligibilityConstraint[];
+  @typeChangedFrom(SaaSHubVersions.v2026_03_31_preview, EligibilityConstraint[])
+  eligibilityConstraints?: PromotionEligibilityConstraint[];
 }
 
 /**
@@ -498,8 +535,65 @@ model CanCreateResultFuturePriceQualifyingResource {
   /**
    * Qualifying resource names
    */
+  @removed(SaaSHubVersions.v2026_03_31_preview)
   @visibility(Lifecycle.Read)
   resourceName?: string;
+
+  /**
+   * ARM resource URI for the qualifying resource.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+
+  /**
+   * Upn value of the product, which can be used to resolve product Id/sku Id/availability Id/term Id.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  productCode?: string;
+
+  /**
+   * Number of seats for this qualifying resource.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  quantity?: int64;
+
+  /**
+   * Whether the qualifying resource originated from the copurchased products list.
+   * True if from copurchasedProducts, false if from existing customer resources.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  isCopurchased?: boolean;
+
+  /**
+   * Item tracking identifier from the copurchased product request.
+   * Present when isCopurchased is true, so the client can correlate back to the original request item.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  itemTrackingId?: string;
+}
+
+/**
+ * Additional information for coTerm eligibility with top-level eligibility indicator.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model CoTermEligibilityResult {
+  /**
+   * Whether the coTerm eligibility is satisfied.
+   */
+  @visibility(Lifecycle.Read)
+  isEligible?: EligibilityResult;
+
+  /**
+   * Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  coTermDates?: CoTermDateEligibilityResult[];
 }
 
 /**
@@ -618,10 +712,42 @@ model CanUpdateResultAdditionalInfo {
 
   /**
    * Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable. Relevant scenarios: coterm, scheduled conversion with coterm.
+   * @deprecated Starting with 2026-03-31-preview, use the 'coTerm' property instead.
    */
+  #deprecated "Starting with 2026-03-31-preview, use the 'coTerm' property instead."
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   coTermDates?: CoTermDateEligibilityResult[];
+
+  /**
+   * Additional information for coTerm eligibility with top-level eligibility indicator. Null when constraints passed or not applicable. Relevant scenarios: coterm, scheduled conversion with coterm.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  coTerm?: CoTermEligibilityResult;
+
+  /**
+   * Additional detail when request payload failed addOn constraints. Null when constraints passed or not applicable.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  addOn?: CanCreateResultAddOnInfo;
+
+  /**
+   * Additional detail when request payload failed promotion constraints. Null when constraints passed or not applicable.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  promotion?: CanCreateResultPromotionInfo[];
+
+  /**
+   * Additional evaluation eligibility result for qualifying co-term resources for a future price concession. Null when constraints passed or not applicable.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  futurePrice?: CanCreateResultFuturePriceInfo[];
 }
 
 /**
@@ -966,6 +1092,64 @@ model ScheduleActionLinkedResource {
    * The resource type for the linked resource.
    */
   resourceType?: string;
+
+  /**
+   * Indicates whether auto renewal is turned on, off, or on for one term only.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  autoRenew?: AutoRenew;
+
+  /**
+   * The term end date for coterm scenarios.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  termEndDate?: utcDateTime;
+
+  /**
+   * The product code for the linked resource.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  productCode?: string;
+
+  /**
+   * The resource tokens for the linked resource.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @identifiers(#["type"])
+  resourceTokens?: ResourceToken[];
+
+  /**
+   * The renewal term details for the linked resource.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  renewalTerm?: ScheduleActionLinkedResourceRenewalTerm;
+}
+
+/**
+ * Renewal term details for a scheduled action linked resource
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ScheduleActionLinkedResourceRenewalTerm {
+  /**
+   * The product code for the renewal term.
+   */
+  productCode?: string;
+
+  /**
+   * The quantity for the renewal term.
+   */
+  quantity?: int64;
+
+  /**
+   * The resource tokens for the renewal term.
+   */
+  @identifiers(#["type"])
+  resourceTokens?: ResourceToken[];
+
+  /**
+   * The end date of the renewal term.
+   */
+  endDate?: utcDateTime;
 }
 
 /**
@@ -1014,6 +1198,12 @@ model ScheduleAction {
    */
   @identifiers(#["type"])
   resourceTokens?: ResourceToken[];
+
+  /**
+   * The item tracking identifier for the schedule action.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  itemTrackingId?: string;
 }
 
 /**
@@ -1087,9 +1277,50 @@ model CotermResponseItem {
 }
 
 /**
+ * Response model for GetCotermEndDates operation. Error code is optional.
+ */
+model CotermResponseItemErrorOptional {
+  /**
+   * Target cloud resource or contract name to coterm to.
+   */
+  @visibility(Lifecycle.Read)
+  coTermTarget: string;
+
+  /**
+   * Whether the target is cloud resource or contract.
+   */
+  @visibility(Lifecycle.Read)
+  coTermTargetType: string;
+
+  /**
+   * Term end date in UTC time.
+   */
+  @visibility(Lifecycle.Read)
+  termEndDate?: utcDateTime;
+
+  /**
+   * Error code if coterm calculation failed.
+   */
+  @visibility(Lifecycle.Read)
+  errorCode?: string;
+}
+
+/**
+ * Bulk response model for TenantLevelGetCotermEndDates and GetCotermEndDates operations with pagination support.
+ */
+model CotermResponseItemBulkResponse
+  is Azure.Core.Page<CotermResponseItemErrorOptional>;
+
+/**
  * Request model for CanTransact operation.
  */
 model CanTransactSaasResourcesRequest {
+  /**
+   * The unique identifier for tracking the canTransact request item.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  itemTrackingId?: string;
+
   /**
    * The URI of the resource for the transaction evaluation.
    */
@@ -1138,6 +1369,12 @@ model TenantLevelCanTransactBulkRequest {
  * Request model for CanTransact operation with CloudServices.
  */
 model CanTransactCloudServicesRequest {
+  /**
+   * The unique identifier for tracking the canTransact request item.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  itemTrackingId?: string;
+
   /**
    * The URI of the resource for the transaction evaluation.
    */
@@ -1221,6 +1458,13 @@ union CanTransactOperationType {
  */
 @discriminator("operationType")
 model CanTransactResponse {
+  /**
+   * The unique identifier for tracking the canTransact response item.
+   */
+  @added(SaaSHubVersions.v2026_03_31_preview)
+  @visibility(Lifecycle.Read)
+  itemTrackingId?: string;
+
   /**
    * The URI of the resource that was evaluated.
    */
@@ -1308,3 +1552,1039 @@ model CanTransactCanMergeResponse extends CanTransactResponse {
  */
 model TenantLevelCanTransactBulkResponse
   is Azure.Core.Page<CanTransactResponse>;
+
+// =====================================================
+// ValidatePromotions Models (added in v2026_03_31_preview)
+// =====================================================
+
+/**
+ * Request model for ValidatePromotions operation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidatePromotionsRequest {
+  /**
+   * List of products to evaluate for promotion eligibility.
+   */
+  @identifiers(#[])
+  products: ValidatePromotionsProductRequest[];
+
+  /**
+   * Customer billing scope. Replaces customerAccountId/customerOrganizationId.
+   * Required unless productContext properties are populated.
+   * Supports multiple formats:
+   * - Partial: /providers/Microsoft.Billing/billingAccounts/{baId}
+   * - Full customer-led: /providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{profileId}/invoiceSections/{sectionId}
+   * - Full partner-led: /providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{profileId}/customers/{customerId}
+   */
+  customerBillingScope?: string;
+
+  /**
+   * Partner billing scope (same format as customerBillingScope).
+   */
+  partnerBillingScope?: string;
+}
+
+/**
+ * Product request for ValidatePromotions operation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidatePromotionsProductRequest {
+  /**
+   * GUID representing productId, skuId, termDuration, billingPlan combination.
+   */
+  productCode: string;
+
+  /**
+   * Number of seats to purchase.
+   */
+  quantity?: int64;
+
+  /**
+   * Purchase term end date in UTC time.
+   */
+  termEndDate?: utcDateTime;
+
+  /**
+   * Evaluation type for the promotion eligibility check.
+   * Valid values: "Immediate", "ScheduledChange"
+   */
+  evaluationType?: string;
+
+  /**
+   * Resource URI for ScheduledChange evaluation type.
+   * Format: /providers/Microsoft.SaaSHub/saasResources/{resourceName}
+   */
+  resourceUri?: string;
+
+  /**
+   * Custom item identifier for tracking.
+   */
+  itemTrackingId?: string;
+
+  /**
+   * Product hydration tokens for authorization and context purposes.
+   */
+  @identifiers(#["type"])
+  resourceTokens?: ResourceToken[];
+
+  /**
+   * Product context containing market information and tenant context.
+   * Required if billing scope properties are not provided.
+   */
+  productContext?: ValidatePromotionsProductContext;
+
+  /**
+   * The discounts for conditional discounts (e.g., CSP Growth Margin).
+   */
+  @identifiers(#[])
+  discounts?: Discount[];
+}
+
+/**
+ * Product context for ValidatePromotions request containing market and tenant information.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidatePromotionsProductContext {
+  /**
+   * ISO 3166 country code for the market.
+   */
+  market: string;
+
+  /**
+   * Cloud environment (e.g., "Public", "USGov", "China").
+   */
+  nationalCloud: string;
+
+  /**
+   * Pricing audience (e.g., "Direct-Commercial").
+   */
+  pricingAudience: string;
+
+  /**
+   * AAD tenant ID for the customer.
+   */
+  customerTenantId: string;
+
+  /**
+   * AAD tenant ID for the partner.
+   */
+  partnerTenantId?: string;
+}
+
+/**
+ * Response model for ValidatePromotions operation with pagination support.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidatePromotionsResponse
+  is Azure.Core.Page<ValidatePromotionsProductResult>;
+
+/**
+ * Product result for ValidatePromotions operation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidatePromotionsProductResult {
+  /**
+   * Request metadata echoed back for correlation purposes.
+   */
+  @visibility(Lifecycle.Read)
+  requestMetadata: ValidatePromotionsRequestMetadata;
+
+  /**
+   * Promotion eligibility results for this product.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  eligibilityResults: CanCreateResultPromotionInfo[];
+}
+
+/**
+ * Request metadata for ValidatePromotions response, echoed back for correlation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidatePromotionsRequestMetadata {
+  /**
+   * GUID representing productId, skuId, termDuration, billingPlan combination.
+   */
+  @visibility(Lifecycle.Read)
+  productCode: string;
+
+  /**
+   * Number of seats to purchase.
+   */
+  @visibility(Lifecycle.Read)
+  quantity?: int64;
+
+  /**
+   * Resource URI from the request.
+   */
+  @visibility(Lifecycle.Read)
+  resourceUri?: string;
+
+  /**
+   * Customer billing scope from the request.
+   */
+  @visibility(Lifecycle.Read)
+  customerBillingScope?: string;
+
+  /**
+   * Partner billing scope from the request.
+   */
+  @visibility(Lifecycle.Read)
+  partnerBillingScope?: string;
+
+  /**
+   * Custom item identifier for tracking, returned as-is from request.
+   */
+  @visibility(Lifecycle.Read)
+  itemTrackingId?: string;
+
+  /**
+   * ISO 3166 country code for the market.
+   */
+  @visibility(Lifecycle.Read)
+  market?: string;
+
+  /**
+   * Cloud environment (e.g., "Public", "USGov", "China").
+   */
+  @visibility(Lifecycle.Read)
+  nationalCloud?: string;
+
+  /**
+   * Pricing audience (e.g., "Direct-Commercial").
+   */
+  @visibility(Lifecycle.Read)
+  pricingAudience?: string;
+
+  /**
+   * AAD tenant ID for the customer.
+   */
+  @visibility(Lifecycle.Read)
+  customerTenantId?: string;
+
+  /**
+   * AAD tenant ID for the partner.
+   */
+  @visibility(Lifecycle.Read)
+  partnerTenantId?: string;
+
+  /**
+   * Purchase term end date in UTC time.
+   */
+  @visibility(Lifecycle.Read)
+  termEndDate?: utcDateTime;
+
+  /**
+   * Evaluation type for the promotion eligibility check.
+   * Valid values: "Immediate", "ScheduledChange"
+   */
+  @visibility(Lifecycle.Read)
+  evaluationType?: string;
+
+  /**
+   * The discounts for conditional discounts (e.g., CSP Growth Margin).
+   * Only one discount is expected and supported per transaction for CSP Growth Margin.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  discounts?: Discount[];
+}
+
+/**
+ * Discount containing type and value for conditional discounts (e.g., CSP Growth Margin).
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model Discount {
+  /**
+   * The type of the discount.
+   */
+  type?: string;
+
+  /**
+   * The value of the discount.
+   */
+  value?: string;
+}
+
+/**
+ * Promotion eligibility constraint with detailed evaluation results.
+ * Extends EligibilityConstraint with additional type-specific properties.
+ *
+ * Properties are grouped by constraintType:
+ * - **firstPurchase**: Uses base properties only (constraintType, isEligible, failureDetails)
+ * - **newCustomer**: Uses base properties only (constraintType, isEligible, failureDetails)
+ * - **seatQuantity**: minSeatQuantityConstraint, maxSeatQuantityConstraint, currentSeatQuantityPurchased, minSeatQuantityRequiredToBePurchased, maxSeatQuantityWhichCanBePurchased
+ * - **termDuration**: eligibleTermDurations, eligibleChargeDurations
+ * - **qualifyingSubscriptionCoterminosity**: qualifyingSubscriptionTermEndDate, purchaseTermEndDate
+ * - **productOwnership**: productsWhichMustAlreadyBeOwned
+ * - **redemptionLimit**: maxPromotionRedemptionCount, remainingPromotionRedemptionCount, previousPromotionRedemptionCount
+ * - **renewalPurchaseQuantity**: minEligibleSeatQuantity, maxEligibleSeatQuantity, renewalSeatQuantity, eligiblePurchaseLineItems
+ * - **productLifetimeOwnershipExclusion**: failureDetails (with resourceUris and condition)
+ * - **prerequisiteConstraints**: mustHaveAtLeastOne, mustHaveAny, mustHaveNone, failureDetails
+ * - **newToOfferGrowthMarginDiscount**: minNewToOfferConstraint, maxNewToOfferConstraint, currentNewToOfferPurchased, minNewToOfferRequiredToBePurchased, maxNewToOfferWhichCanBePurchased
+ * - **seatExpansionGrowthMarginDiscount**: minSeatExpansionConstraint, maxSeatExpansionConstraint, currentSeatExpansionPurchased, minSeatExpansionRequiredToBePurchased, maxSeatExpansionWhichCanBePurchased
+ * - **upsellGrowthMarginDiscount**: minRequiredRatioThreshold, maxRequiredRatioThreshold, currentRatio, currentUpsellQuantity, requiredUpsellQuantity, minUpsellQuantityRequired
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model PromotionEligibilityConstraint {
+  ...EligibilityConstraint;
+
+  // ─────────────────────────────────────────────────────────────────
+  // seatQuantity constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Minimum seat quantity constraint.
+   * Applicable when constraintType = "seatQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  minSeatQuantityConstraint?: int64;
+
+  /**
+   * Maximum seat quantity constraint.
+   * Applicable when constraintType = "seatQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  maxSeatQuantityConstraint?: int64;
+
+  /**
+   * Current seat quantity purchased.
+   * Applicable when constraintType = "seatQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  currentSeatQuantityPurchased?: int64;
+
+  /**
+   * Minimum seat quantity required to be purchased.
+   * Applicable when constraintType = "seatQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  minSeatQuantityRequiredToBePurchased?: int64;
+
+  /**
+   * Maximum seat quantity which can be purchased.
+   * Applicable when constraintType = "seatQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  maxSeatQuantityWhichCanBePurchased?: int64;
+
+  // ─────────────────────────────────────────────────────────────────
+  // termDuration constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Eligible term durations. Example: ["P1Y", "P3Y"]
+   * Applicable when constraintType = "termDuration"
+   */
+  @visibility(Lifecycle.Read)
+  eligibleTermDurations?: string[];
+
+  /**
+   * Eligible charge durations. Example: ["P1Y"]
+   * Applicable when constraintType = "termDuration"
+   */
+  @visibility(Lifecycle.Read)
+  eligibleChargeDurations?: string[];
+
+  // ─────────────────────────────────────────────────────────────────
+  // qualifyingSubscriptionCoterminosity constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Qualifying subscription term end date.
+   * Applicable when constraintType = "qualifyingSubscriptionCoterminosity"
+   */
+  @visibility(Lifecycle.Read)
+  qualifyingSubscriptionTermEndDate?: utcDateTime;
+
+  /**
+   * Purchase term end date.
+   * Applicable when constraintType = "qualifyingSubscriptionCoterminosity"
+   */
+  @visibility(Lifecycle.Read)
+  purchaseTermEndDate?: utcDateTime;
+
+  // ─────────────────────────────────────────────────────────────────
+  // productOwnership constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Products which must already be owned. Each inner array represents products grouped by productId.
+   * Applicable when constraintType = "productOwnership"
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  productsWhichMustAlreadyBeOwned?: string[][];
+
+  // ─────────────────────────────────────────────────────────────────
+  // redemptionLimit constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Maximum promotion redemption count allowed.
+   * Applicable when constraintType = "redemptionLimit"
+   */
+  @visibility(Lifecycle.Read)
+  maxPromotionRedemptionCount?: int64;
+
+  /**
+   * Remaining promotion redemption count.
+   * Applicable when constraintType = "redemptionLimit"
+   */
+  @visibility(Lifecycle.Read)
+  remainingPromotionRedemptionCount?: int64;
+
+  /**
+   * Previous promotion redemption count.
+   * Applicable when constraintType = "redemptionLimit"
+   */
+  @visibility(Lifecycle.Read)
+  previousPromotionRedemptionCount?: int64;
+
+  // ─────────────────────────────────────────────────────────────────
+  // renewalPurchaseQuantity constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Minimum eligible seat quantity for renewal.
+   * Applicable when constraintType = "renewalPurchaseQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  minEligibleSeatQuantity?: int64;
+
+  /**
+   * Maximum eligible seat quantity for renewal.
+   * Applicable when constraintType = "renewalPurchaseQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  maxEligibleSeatQuantity?: int64;
+
+  /**
+   * Renewal seat quantity.
+   * Applicable when constraintType = "renewalPurchaseQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  renewalSeatQuantity?: int64;
+
+  /**
+   * Eligible purchase line items for renewal.
+   * Applicable when constraintType = "renewalPurchaseQuantity"
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  eligiblePurchaseLineItems?: EligiblePurchaseLineItem[];
+
+  // ─────────────────────────────────────────────────────────────────
+  // prerequisiteConstraints constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * MustHaveAtLeastOne constraint group - all products in this group must be owned.
+   * Applicable when constraintType = "prerequisiteConstraints"
+   */
+  @visibility(Lifecycle.Read)
+  mustHaveAtLeastOne?: PrerequisiteConstraintGroup;
+
+  /**
+   * MustHaveAny constraint group - at least one product in this group must be owned.
+   * Applicable when constraintType = "prerequisiteConstraints"
+   */
+  @visibility(Lifecycle.Read)
+  mustHaveAny?: PrerequisiteConstraintGroup;
+
+  /**
+   * MustHaveNone constraint group - none of the products in this group should be owned.
+   * Applicable when constraintType = "prerequisiteConstraints"
+   */
+  @visibility(Lifecycle.Read)
+  mustHaveNone?: PrerequisiteConstraintGroup;
+
+  // ─────────────────────────────────────────────────────────────────
+  // newToOfferGrowthMarginDiscount constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Minimum new-to-offer quantity constraint.
+   * Applicable when constraintType = "newToOfferGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  minNewToOfferConstraint?: int64;
+
+  /**
+   * Maximum new-to-offer quantity constraint.
+   * Applicable when constraintType = "newToOfferGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  maxNewToOfferConstraint?: int64;
+
+  /**
+   * Current new-to-offer quantity purchased.
+   * Applicable when constraintType = "newToOfferGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  currentNewToOfferPurchased?: int64;
+
+  /**
+   * Minimum new-to-offer quantity required to be purchased.
+   * Applicable when constraintType = "newToOfferGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  minNewToOfferRequiredToBePurchased?: int64;
+
+  /**
+   * Maximum new-to-offer quantity which can be purchased.
+   * Applicable when constraintType = "newToOfferGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  maxNewToOfferWhichCanBePurchased?: int64;
+
+  // ─────────────────────────────────────────────────────────────────
+  // seatExpansionGrowthMarginDiscount constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Minimum seat expansion quantity constraint.
+   * Applicable when constraintType = "seatExpansionGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  minSeatExpansionConstraint?: int64;
+
+  /**
+   * Maximum seat expansion quantity constraint.
+   * Applicable when constraintType = "seatExpansionGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  maxSeatExpansionConstraint?: int64;
+
+  /**
+   * Current seat expansion quantity purchased.
+   * Applicable when constraintType = "seatExpansionGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  currentSeatExpansionPurchased?: int64;
+
+  /**
+   * Minimum seat expansion quantity required to be purchased.
+   * Applicable when constraintType = "seatExpansionGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  minSeatExpansionRequiredToBePurchased?: int64;
+
+  /**
+   * Maximum seat expansion quantity which can be purchased.
+   * Applicable when constraintType = "seatExpansionGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  maxSeatExpansionWhichCanBePurchased?: int64;
+
+  // ─────────────────────────────────────────────────────────────────
+  // upsellGrowthMarginDiscount constraint properties
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Minimum required upsell-to-base ratio threshold.
+   * Applicable when constraintType = "upsellGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  minRequiredRatioThreshold?: float64;
+
+  /**
+   * Maximum required upsell-to-base ratio threshold.
+   * Applicable when constraintType = "upsellGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  maxRequiredRatioThreshold?: float64;
+
+  /**
+   * Customer's current upsell-to-base ratio.
+   * Applicable when constraintType = "upsellGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  currentRatio?: float64;
+
+  /**
+   * Current upsell seat quantity owned by the customer.
+   * Applicable when constraintType = "upsellGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  currentUpsellQuantity?: int64;
+
+  /**
+   * Required upsell seat quantity to meet the constraint.
+   * Applicable when constraintType = "upsellGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  requiredUpsellQuantity?: int64;
+
+  /**
+   * Minimum upsell seats that must be purchased.
+   * Applicable when constraintType = "upsellGrowthMarginDiscount"
+   */
+  @visibility(Lifecycle.Read)
+  minUpsellQuantityRequired?: int64;
+
+  // ─────────────────────────────────────────────────────────────────
+  // Shared properties (applicable to multiple constraint types)
+  // ─────────────────────────────────────────────────────────────────
+
+  /**
+   * Failure details for the constraint evaluation.
+   * Applicable to all constraint types when constraint fails.
+   * For "productLifetimeOwnershipExclusion", contains resourceUris and condition details.
+   * For "prerequisiteConstraints", contains failedConstraintGroup and productCodes.
+   */
+  @visibility(Lifecycle.Read)
+  failureDetails?: ConstraintFailureDetails;
+}
+
+/**
+ * Eligible purchase line item for renewal purchase quantity constraint.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model EligiblePurchaseLineItem {
+  /**
+   * Product code for the line item.
+   */
+  @visibility(Lifecycle.Read)
+  productCode?: string;
+
+  /**
+   * Pricing audience for the line item.
+   */
+  @visibility(Lifecycle.Read)
+  pricingAudience?: string;
+
+  /**
+   * Quantity of seats for the line item.
+   */
+  @visibility(Lifecycle.Read)
+  quantity?: int64;
+
+  /**
+   * Start date for the line item.
+   */
+  @visibility(Lifecycle.Read)
+  startDate?: utcDateTime;
+
+  /**
+   * Resource URI for the line item.
+   */
+  @visibility(Lifecycle.Read)
+  resourceUri?: string;
+
+  /**
+   * Whether the line item has a discount.
+   */
+  @visibility(Lifecycle.Read)
+  hasDiscount?: boolean;
+
+  /**
+   * Seat cap for the line item.
+   */
+  @visibility(Lifecycle.Read)
+  seatCap?: int64;
+}
+
+/**
+ * Prerequisite constraint group for promotion eligibility.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model PrerequisiteConstraintGroup {
+  /**
+   * Whether the constraints in this group are met.
+   */
+  @visibility(Lifecycle.Read)
+  constraintsMet?: boolean;
+
+  /**
+   * Lookback window for the constraint evaluation.
+   */
+  @visibility(Lifecycle.Read)
+  lookbackWindow?: LookbackWindow;
+
+  /**
+   * Products in this constraint group.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  products?: PrerequisiteProduct[];
+
+  /**
+   * Cumulative seat constraint for this group.
+   */
+  @visibility(Lifecycle.Read)
+  cumulativeSeatConstraint?: CumulativeSeatConstraint;
+}
+
+/**
+ * Lookback window for prerequisite constraint evaluation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model LookbackWindow {
+  /**
+   * Type of lookback window. Valid values: "Lifetime", "Period"
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Period duration for the lookback window (e.g., "P6M"). Only applicable when type is "Period".
+   */
+  @visibility(Lifecycle.Read)
+  period?: string;
+}
+
+/**
+ * Prerequisite product for constraint evaluation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model PrerequisiteProduct {
+  /**
+   * Product codes grouped by productId/skuId.
+   */
+  @visibility(Lifecycle.Read)
+  productCodes?: string[];
+
+  /**
+   * Required minimum seats for this product.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMinSeats?: int64;
+
+  /**
+   * Required maximum seats for this product.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMaxSeats?: int64;
+
+  /**
+   * Actual seats owned by the customer.
+   */
+  @visibility(Lifecycle.Read)
+  actualSeats?: int64;
+}
+
+/**
+ * Cumulative seat constraint for prerequisite groups.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model CumulativeSeatConstraint {
+  /**
+   * Required minimum cumulative seats.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMinSeats?: int64;
+
+  /**
+   * Required maximum cumulative seats.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMaxSeats?: int64;
+
+  /**
+   * Actual cumulative seats owned by the customer.
+   */
+  @visibility(Lifecycle.Read)
+  actualCumulativeSeats?: int64;
+}
+
+/**
+ * Failure details for constraint evaluation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ConstraintFailureDetails {
+  /**
+   * Failure message describing why the constraint failed.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * List of failing items with details.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  failingItems?: ConstraintFailingItem[];
+}
+
+/**
+ * Failing item for constraint failure details.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ConstraintFailingItem {
+  /**
+   * Resource URIs associated with the failing item.
+   */
+  @visibility(Lifecycle.Read)
+  resourceUris?: string[];
+
+  /**
+   * Condition that caused the failure.
+   */
+  @visibility(Lifecycle.Read)
+  condition?: FailingItemCondition;
+
+  /**
+   * Failed constraint group name (for prerequisiteConstraints).
+   */
+  @visibility(Lifecycle.Read)
+  failedConstraintGroup?: string;
+
+  /**
+   * Product codes associated with the failing item.
+   */
+  @visibility(Lifecycle.Read)
+  productCodes?: string[];
+}
+
+/**
+ * Condition for failing item.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model FailingItemCondition {
+  /**
+   * Product code that caused the failure.
+   */
+  @visibility(Lifecycle.Read)
+  productCode?: string;
+}
+
+/**
+ * Participant in a transfer operation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model TransferParticipant {
+  /**
+   * The account identifier of the participant.
+   * Must be one of msa:{puid}, org:{tid}, org:{tid}:{oid}, or mpn:{mpnid}
+   */
+  accountId: string;
+
+  /**
+   * The profile of the participant account.
+   * Must be set to UNUSED when using accountId format mpn:{mpnid}
+   */
+  profileId?: string;
+
+  /**
+   * The role that a participant account is playing on the transfer.
+   * Possible values include IndirectReseller, AdvisoryPartner, ManagingPartner, TransactingPartner, Customer.
+   */
+  roleType?: string;
+}
+
+/**
+ * Request to transfer a SaaS resource to another partner tenant.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model TransferToPartnerRequest {
+  /**
+   * The identifier of the recipient partner (beneficiary) to transfer the resource to.
+   * Format: tid:{tenantId} for org account, or tid:{tenantId}:{objectId} for individual account.
+   */
+  beneficiaryId: string;
+
+  /**
+   * The full billing scope of the recipient partner.
+   * Format: /providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}
+   */
+  billingScope: string;
+
+  /**
+   * Optional list of participants in the transfer operation.
+   */
+  @identifiers(#[])
+  participants?: TransferParticipant[];
+}
+
+// =====================================================
+// ValidateFuturePriceEligibility Models (added in v2026_03_31_preview)
+// =====================================================
+
+/**
+ * Request model for ValidateFuturePriceEligibility operation.
+ * Evaluates whether customers qualify for future price concessions when purchasing Microsoft 365 products.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidateFuturePriceEligibilityRequest {
+  /**
+   * Products to evaluate for future price eligibility.
+   */
+  @identifiers(#[])
+  targetProducts: ValidateFuturePriceEligibilityTargetProduct[];
+
+  /**
+   * Products that may establish ownership baseline for future price eligibility.
+   * These are products being purchased in the current transaction.
+   */
+  @identifiers(#[])
+  copurchasedProducts?: ValidateFuturePriceEligibilityCopurchasedProduct[];
+
+  /**
+   * ARM billing scope for the customer.
+   * Format: /providers/Microsoft.Billing/billingAccounts/{baId}
+   * Mutually exclusive with productContext on products; provide either customerBillingScope or productContext on each product.
+   */
+  customerBillingScope?: string;
+}
+
+/**
+ * Target product for ValidateFuturePriceEligibility operation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidateFuturePriceEligibilityTargetProduct {
+  /**
+   * Upn value of the product, which can be used to resolve product Id/sku Id/availability Id/term Id.
+   */
+  productCode: string;
+
+  /**
+   * Product context containing market and cloud information.
+   * Optional; required if billingScope properties are not provided.
+   */
+  productContext?: ValidateFuturePriceEligibilityProductContext;
+
+  /**
+   * Item identifier for tracking.
+   */
+  itemTrackingId: string;
+
+  /**
+   * Optional array of resource tokens for product hydration.
+   */
+  @identifiers(#["type"])
+  resourceTokens?: ResourceToken[];
+}
+
+/**
+ * Copurchased product for ValidateFuturePriceEligibility operation.
+ * Products being purchased in the current transaction that establish ownership baseline.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidateFuturePriceEligibilityCopurchasedProduct {
+  /**
+   * Upn value of the product, which can be used to resolve product Id/sku Id/availability Id/term Id.
+   */
+  productCode: string;
+
+  /**
+   * Product context containing market and cloud information.
+   * Optional; required if billingScope properties are not provided.
+   */
+  productContext?: ValidateFuturePriceEligibilityProductContext;
+
+  /**
+   * Number of seats being purchased.
+   */
+  quantity: int64;
+
+  /**
+   * Term start date in ISO 8601 format.
+   */
+  startDate?: utcDateTime;
+
+  /**
+   * ARM resource URI for existing asset.
+   * Format: /providers/Microsoft.SaaSHub/saasResources/{resourceName}
+   */
+  resourceId?: string;
+
+  /**
+   * Whether item has discount applied.
+   */
+  hasDiscount?: boolean;
+
+  /**
+   * Seat cap for the product.
+   */
+  seatCap?: int64;
+
+  /**
+   * Item identifier for tracking.
+   */
+  itemTrackingId?: string;
+
+  /**
+   * Optional array of resource tokens for product hydration.
+   */
+  @identifiers(#["type"])
+  resourceTokens?: ResourceToken[];
+}
+
+/**
+ * Product context for ValidateFuturePriceEligibility request containing market and cloud information.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidateFuturePriceEligibilityProductContext {
+  /**
+   * ISO 3166 country code for the market.
+   */
+  market: string;
+
+  /**
+   * Cloud environment.
+   */
+  nationalCloud: string;
+
+  /**
+   * Pricing audience.
+   */
+  pricingAudience: string;
+}
+
+/**
+ * Response model for ValidateFuturePriceEligibility operation with pagination support.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidateFuturePriceEligibilityResponse
+  is Azure.Core.Page<ValidateFuturePriceEligibilityProductResult>;
+
+/**
+ * Product result for ValidateFuturePriceEligibility operation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidateFuturePriceEligibilityProductResult {
+  /**
+   * Request metadata echoed back for correlation.
+   */
+  @visibility(Lifecycle.Read)
+  requestMetadata: ValidateFuturePriceEligibilityRequestMetadata;
+
+  /**
+   * Groups of qualifying coterminous resources for future price concessions.
+   * Reuses the existing CanCreateResultFuturePriceInfo model structure.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  qualifyingCoterminousResources?: CanCreateResultFuturePriceInfo[];
+}
+
+/**
+ * Request metadata for ValidateFuturePriceEligibility response, echoed back for correlation.
+ */
+@added(SaaSHubVersions.v2026_03_31_preview)
+model ValidateFuturePriceEligibilityRequestMetadata {
+  /**
+   * Upn value of the product, which can be used to resolve product Id/sku Id/availability Id/term Id.
+   */
+  @visibility(Lifecycle.Read)
+  productCode: string;
+
+  /**
+   * Pricing audience for the product.
+   */
+  @visibility(Lifecycle.Read)
+  pricingAudience?: string;
+
+  /**
+   * Item identifier for tracking.
+   */
+  @visibility(Lifecycle.Read)
+  itemTrackingId?: string;
+
+  /**
+   * ARM billing scope for the customer, echoed from request.
+   */
+  @visibility(Lifecycle.Read)
+  customerBillingScope?: string;
+}

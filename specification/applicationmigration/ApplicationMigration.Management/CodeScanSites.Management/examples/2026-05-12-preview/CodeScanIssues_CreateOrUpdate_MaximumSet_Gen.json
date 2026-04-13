@@ -1,0 +1,111 @@
+{
+  "title": "CodeScanIssues_CreateOrUpdate_MaximumSet",
+  "operationId": "CodeScanIssues_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-05-12-preview",
+    "subscriptionId": "4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B",
+    "resourceGroupName": "rgcodescansites",
+    "codeScanSiteName": "myCodeScanSite",
+    "reportId": "myReport01",
+    "codeScanIssueId": "issue01",
+    "resource": {
+      "properties": {
+        "ruleId": "java-ee-to-azure-appservice-java-version",
+        "ruleLabel": "Java version compatibility check",
+        "issueCategory": "Issue",
+        "storyPoints": 3,
+        "referenceLinks": [
+          {
+            "url": "https://learn.microsoft.com/azure/app-service/configure-language-java",
+            "label": "Configure Java apps on Azure App Service"
+          }
+        ],
+        "occurrences": 5,
+        "azureTargets": [
+          "AKS",
+          "AzureAppService"
+        ],
+        "repoNames": [
+          "my-java-app"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleId": "java-ee-to-azure-appservice-java-version",
+          "ruleLabel": "Java version compatibility check",
+          "issueCategory": "Issue",
+          "storyPoints": 3,
+          "referenceLinks": [
+            {
+              "url": "https://learn.microsoft.com/azure/app-service/configure-language-java",
+              "label": "Configure Java apps on Azure App Service"
+            }
+          ],
+          "occurrences": 5,
+          "azureTargets": [
+            "AKS",
+            "AzureAppService"
+          ],
+          "repoNames": [
+            "my-java-app"
+          ]
+        },
+        "id": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.ApplicationMigration/codeScanSites/myCodeScanSite/codeScanReports/myReport01/codescanissues/issue01",
+        "name": "issue01",
+        "type": "Microsoft.ApplicationMigration/codeScanSites/codeScanReports/codescanissues",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T00:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-07T00:00:00Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/providers/Microsoft.ApplicationMigration/locations/eastus/operationStatuses/op01?api-version=2026-05-12-preview"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ruleId": "java-ee-to-azure-appservice-java-version",
+          "ruleLabel": "Java version compatibility check",
+          "issueCategory": "Issue",
+          "storyPoints": 3,
+          "referenceLinks": [
+            {
+              "url": "https://learn.microsoft.com/azure/app-service/configure-language-java",
+              "label": "Configure Java apps on Azure App Service"
+            }
+          ],
+          "occurrences": 5,
+          "azureTargets": [
+            "AKS",
+            "AzureAppService"
+          ],
+          "repoNames": [
+            "my-java-app"
+          ]
+        },
+        "id": "/subscriptions/4BAC2980-CDFB-44D1-ABB5-E7E46F348D8B/resourceGroups/rgcodescansites/providers/Microsoft.ApplicationMigration/codeScanSites/myCodeScanSite/codeScanReports/myReport01/codescanissues/issue01",
+        "name": "issue01",
+        "type": "Microsoft.ApplicationMigration/codeScanSites/codeScanReports/codescanissues",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-01T00:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-07T00:00:00Z"
+        }
+      }
+    }
+  }
+}

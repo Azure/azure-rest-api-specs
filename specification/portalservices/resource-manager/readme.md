@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2025-11-01` is specified on the co
 ```yaml $(tag) == 'package-2025-11-01'
 input-file:
   - Microsoft.PortalServices/settings/stable/2025-11-01/settings.json
+  - Microsoft.PortalServices/extensions/stable/2025-11-01/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: >
@@ -65,6 +66,20 @@ suppressions:
     from:
       - settings.json
     where: $.paths["/providers/Microsoft.PortalServices/settings/default"]
+  - code: AvoidAdditionalProperties
+    reason: >
+      The CompileFile and extension resource models use Record<unknown> types for flexible content payloads
+      (file contents, string sources, compile results). These are existing API contracts from preview that
+      cannot be changed without breaking compatibility.
+    from:
+      - extensions.json
+  - code: PostResponseCodes
+    reason: >
+      The CompileFile operation is a synchronous POST action that returns 200 with a result body.
+      This is an existing API contract from preview that follows a synchronous request-response pattern,
+      not a long-running operation.
+    from:
+      - extensions.json
 ```
 
 ### Tag: package-2026-02-01-preview

@@ -104,18 +104,10 @@ model NetworkDevicePatchableProperties {
   serialNumber?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
 @doc("The Network Device Patch Parameters defines the patch parameters of the resource.")
 model NetworkDevicePatchParameters extends TagsUpdate {
   @doc("Network Device Patch properties.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated?: NetworkDevicePatchParametersProperties;
-
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
-  @doc("Network Device Patch properties.")
-  @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkDevicePatchParametersProperties;
 
   @added(Versions.v2025_07_15)
@@ -139,7 +131,7 @@ model RebootProperties {
   rebootType?: RebootType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending common object for updateAdministrativeState"
 @doc("Update the administrative state on list of resources.")
 model UpdateDeviceAdministrativeState extends EnableDisableOnResources {
   @doc("Administrative state.")

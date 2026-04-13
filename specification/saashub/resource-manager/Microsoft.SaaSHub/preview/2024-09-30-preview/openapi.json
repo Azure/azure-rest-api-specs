@@ -115,7 +115,7 @@
           }
         },
         "x-ms-examples": {
-          "Get SaaSResource": {
+          "Get SaasResource": {
             "$ref": "./examples/SaasResources_Get.json"
           }
         }
@@ -182,20 +182,20 @@
           }
         },
         "x-ms-examples": {
-          "Create SaaSResource": {
-            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource.json"
-          },
           "Create SaaSResource - Microsoft Customer Agreement Enterprise scenario": {
             "$ref": "./examples/SaasResources_Create_Create_SaaS_Microsoft_Customer_Agreement_Enterprise.json"
           },
-          "Create SaaSResource With Coterminous": {
+          "Create SaasResource": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource.json"
+          },
+          "Create SaasResource With Coterminous": {
             "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_Coterminous.json"
           },
-          "Create SaaSResource With Original SaaSResource": {
-            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_Original_SaaS_Resource.json"
+          "Create SaasResource With Future Start Date": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_Future_Start_Date.json"
           },
-          "Create SaaSResource With Term Start Date": {
-            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_TermStartDate.json"
+          "Create SaasResource With Original SaasResource": {
+            "$ref": "./examples/SaasResources_Create_Create_SaaS_Resource_With_Original_SaaS_Resource.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -345,7 +345,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete SaaSResource": {
+          "Delete SaasResource": {
             "$ref": "./examples/SaasResources_Delete.json"
           }
         },
@@ -456,11 +456,11 @@
           "Merge Failed": {
             "$ref": "./examples/SaasResources_CanMerge_Merge_Failed.json"
           },
-          "Merge Failed Caused by Source SaaSResource": {
-            "$ref": "./examples/SaasResources_CanMerge_Merge_Failed_Caused_By_Source_SaaS_Resource.json"
+          "Merge Failed Caused by Source SaasResource": {
+            "$ref": "./examples/SaasResources_CanMerge_Merge_Failed_Caused_By_Source_Cloud_Service.json"
           },
-          "Merge Failed Caused by having multiple Source SaaSResource": {
-            "$ref": "./examples/SaasResources_CanMerge_Merge_Failed_Caused_By_Having_Multiple_Source_SaaS_Resource.json"
+          "Merge Failed Caused by having multiple Source SaasResource": {
+            "$ref": "./examples/SaasResources_CanMerge_Merge_Failed_Caused_By_Having_Multiple_Source_Cloud_Service.json"
           },
           "Merge Pass": {
             "$ref": "./examples/SaasResources_CanMerge_Merge_Pass.json"
@@ -583,7 +583,7 @@
           }
         },
         "x-ms-examples": {
-          "Cancel SaaSResource": {
+          "Cancel SaasResource": {
             "$ref": "./examples/SaasResources_Cancel.json"
           }
         },
@@ -653,7 +653,7 @@
           }
         },
         "x-ms-examples": {
-          "Merge SaaSResource": {
+          "Merge SaasResource": {
             "$ref": "./examples/SaasResources_Merge.json"
           }
         },
@@ -1725,7 +1725,7 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Start date of the term in UTC time."
+          "description": "Start date of the term in UTC time. When there is a value passed in for PUT scenario, it is to support future start date scenario. The time part passed in will be ignored"
         },
         "endDate": {
           "type": "string",

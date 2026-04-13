@@ -7,10 +7,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models/goals/goalTemplate.tsp";
 import "./models/goals/goalAssignment.tsp";
 import "./models/goals/goalResource.tsp";
+import "./models/goals/recommendCapacity.tsp";
 import "./models/common/common.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -70,6 +72,21 @@ interface GoalAssignments {
   @route(ServiceGroupRoute)
   delete is ArmResourceDeleteWithoutOkAsync<
     GoalAssignment,
+    ServiceGroupParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.")
+  @route(ServiceGroupRoute)
+  @TypeSpec.Rest.action("recommendCapacity")
+  @post
+  recommendCapacity is ArmResourceActionAsync<
+    GoalAssignment,
+    RecommendCapacityRequest,
+    RecommendCapacityResult,
     ServiceGroupParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
