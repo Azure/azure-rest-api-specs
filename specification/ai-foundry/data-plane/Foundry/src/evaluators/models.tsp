@@ -106,15 +106,15 @@ model EvaluatorGenerationJobSource {
   type: EvaluatorGenerationJobSourceType;
 }
 
-@doc("Prompt source for evaluator generation — inline text or agent reference.")
+@doc("Prompt source for evaluator generation — inline text, agent reference, or both. At least one of prompt or agent_name must be specified. When both are provided, agent instructions are merged with the supplementary prompt text as combined input for generation.")
 model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   @doc("The source type for this job, which is Prompt.")
   type: "Prompt";
 
-  @doc("The inline prompt text describing the agent's purpose, behavior, and capabilities. Required if agent_name is not specified.")
+  @doc("Inline prompt text describing the agent's purpose, behavior, and supplementary context. Can be combined with agent_name. At least one of prompt or agent_name is required.")
   prompt?: string;
 
-  @doc("The agent name to fetch instructions from. Required if prompt is not specified.")
+  @doc("The agent name to fetch instructions from. Can be combined with prompt for additional context. At least one of prompt or agent_name is required.")
   agent_name?: string;
 
   @doc("The agent version. If not specified, the latest version is used.")
