@@ -10,9 +10,7 @@ using ProvisioningDeviceClient;
 @@clientLocation(RuntimeRegistration.deviceRegistrationStatusLookup,
   "RuntimeRegistration"
 );
-@@clientLocation(RuntimeRegistration.registerDevice,
-  "RuntimeRegistration"
-);
+@@clientLocation(RuntimeRegistration.registerDevice, "RuntimeRegistration");
 @@clientLocation(RuntimeRegistration.registerDeviceAndIssueCertificate,
   "RuntimeRegistration"
 );
