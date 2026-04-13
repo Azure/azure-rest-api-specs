@@ -946,11 +946,19 @@ interface File {
     {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying supported status codes for download operation."
       @statusCode statusCode: 200 | 206;
-      @header("Last-Modified") lastModified: string;
+    
+      @header("Last-Modified") 
+      @alternateType(utcDateTime, "go")
+      lastModified: string;
+    
       ...MetadataHeaders;
       @header("Content-Length") contentLength: int64;
       @header("Content-Range") contentRange?: string;
-      @header("ETag") etag: Azure.Core.eTag;
+  
+      @header("ETag") 
+      @clientName("ETag", "go")
+      etag: Azure.Core.eTag;
+
       ...FileHttpContentResponseHeaders;
       @header("Accept-Ranges") acceptRanges?: string;
       ...CopyStatusResponseHeaders;
@@ -979,7 +987,10 @@ interface File {
       ...FileRequestIntentParameter;
     },
     {
-      @header("Last-Modified") lastModified: string;
+      @header("Last-Modified") 
+      @alternateType(utcDateTime, "go")
+      lastModified: string;
+
       ...MetadataHeaders;
 
       /** Dummy type header, must be "file". */
@@ -988,7 +999,11 @@ interface File {
       @header("Content-Length") contentLength: int64;
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
-      @header("ETag") etag: Azure.Core.eTag;
+
+      @header("ETag") 
+      @clientName("ETag", "go")
+      etag: Azure.Core.eTag;
+
       ...FileHttpContentResponseHeaders;
       ...CopyStatusResponseHeaders;
       ...ServerEncryptedResponseHeader;
@@ -1245,10 +1260,13 @@ interface File {
       sourceContentCrc64?: string;
 
       /** Specify the CRC64 hash value to check for source content integrity. */
-      @header("x-ms-source-if-match-crc64") sourceIfMatchCrc64?: string;
+      @header("x-ms-source-if-match-crc64") 
+      @alternateType(bytes, "go")
+      sourceIfMatchCrc64?: string;
 
       /** Specify the CRC64 hash value to check for source content mismatch. */
       @header("x-ms-source-if-none-match-crc64")
+      @alternateType(bytes, "go")
       sourceIfNoneMatchCrc64?: string;
 
       ...LeaseIdOptionalParameter;
