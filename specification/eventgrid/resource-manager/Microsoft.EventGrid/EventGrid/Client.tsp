@@ -391,8 +391,9 @@ interface Clients {
 );
 @@usage(PartnerDetails, Usage.input, "csharp");
 @@usage(EventType, Usage.input, "csharp");
-@@usage(TopicTypeProperties, Usage.input, "csharp");
-@@usage(VerifiedPartnerProperties, Usage.input, "csharp");
+// @@usage(TopicTypeProperties, Usage.input, "csharp");
+@@usage(VerifiedPartner, Usage.input, "csharp");
+@@usage(TopicTypeInfo, Usage.input, "csharp");
 @@usage(ExtensionTopic, Usage.input, "csharp");
 @@usage(DomainTopic, Usage.input, "csharp");
 @@usage(PartnerConfiguration, Usage.input, "csharp");
@@ -437,6 +438,7 @@ interface Clients {
   "csharp"
 );
 @@clientName(Filter, "EventGridFilter", "csharp");
+@@clientName(DeliveryAttributeMapping.type, "MappingType", "csharp");
 @@clientName(ResourceProvisioningState,
   "EventGridResourceProvisioningState",
   "csharp"
@@ -457,133 +459,72 @@ interface Clients {
   "csharp"
 );
 
-// Per-parent PrivateEndpointConnection model naming
-@@clientName(TopicPrivateEndpointConnection,
-  "EventGridTopicPrivateEndpointConnection",
-  "csharp"
-);
-@@clientName(PartnerNamespacePrivateEndpointConnection,
-  "EventGridPartnerNamespacePrivateEndpointConnection",
-  "csharp"
-);
-
-// Flatten properties for PrivateEndpointConnection Data classes for backward compat
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TopicPrivateEndpointConnection.properties,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PartnerNamespacePrivateEndpointConnection.properties,
-  "csharp"
-);
-
-// Per-parent NetworkSecurityPerimeterConfiguration model naming
-@@clientName(DomainNetworkSecurityPerimeterConfiguration,
-  "DomainNetworkSecurityPerimeterConfiguration",
-  "csharp"
-);
-@@clientName(TopicNetworkSecurityPerimeterConfiguration,
-  "TopicNetworkSecurityPerimeterConfiguration",
-  "csharp"
-);
-
-// Flatten properties for per-parent NSP Data classes for backward compat
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DomainNetworkSecurityPerimeterConfiguration.properties,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TopicNetworkSecurityPerimeterConfiguration.properties,
-  "csharp"
-);
-
-// NSP usage decorators for backward compat
 @@usage(NetworkSecurityPerimeterConfiguration, Usage.input, "csharp");
 @@usage(NetworkSecurityPerimeterConfigurationProperties, Usage.input, "csharp");
 
-// GetDeliveryAttributes must return Pageable results for backward compat
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(EventSubscriptions.getDeliveryAttributes,
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(TopicEventSubscriptions.getDeliveryAttributes,
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(DomainEventSubscriptions.getDeliveryAttributes,
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(EventSubscriptionOperationGroup.getDeliveryAttributes,
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(SystemTopicEventSubscriptions.getDeliveryAttributes,
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(PartnerTopicEventSubscriptions.getDeliveryAttributes,
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Subscriptions.getDeliveryAttributes,
   "csharp"
 );
 
-// PrivateLinkResource per-parent model naming
-@@clientName(DomainPrivateLinkResource,
-  "EventGridDomainPrivateLinkResource",
-  "csharp"
-);
-@@clientName(TopicPrivateLinkResource,
-  "EventGridTopicPrivateLinkResource",
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PartnerConfiguration,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );
 
-// Flatten properties for per-parent PrivateLinkResource Data classes for backward compat
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DomainPrivateLinkResource.properties,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TopicPrivateLinkResource.properties,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PartnerNamespacePrivateLinkResource.properties,
-  "csharp"
-);
-
-// Rename EventSubscriptionsOperationGroup subscription-level list methods to match old SDK method names
 @@clientName(EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
-  "listGlobalEventSubscriptionsDataForTopicType",
+  "GetGlobalEventSubscriptionsDataForTopicType",
   "csharp"
 );
 @@clientName(EventSubscriptionsOperationGroup.listRegionalBySubscription,
-  "listRegionalEventSubscriptionsData",
+  "GetRegionalEventSubscriptionsData",
   "csharp"
 );
 @@clientName(EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
-  "listRegionalEventSubscriptionsDataForTopicType",
+  "GetRegionalEventSubscriptionsDataForTopicType",
   "csharp"
 );
 // Rename EventSubscriptionsOperationGroup resource-group-level list methods to match old SDK method names
-@@clientName(EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
-  "listGlobalEventSubscriptionsDataByResourceGroupForTopicType",
-  "csharp"
-);
-@@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
-  "listRegionalEventSubscriptionsDataByResourceGroup",
-  "csharp"
-);
-@@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
-  "listRegionalEventSubscriptionsDataByResourceGroupForTopicType",
-  "csharp"
-);
+// @@clientName(EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
+//   "GetGlobalEventSubscriptionsDataForTopicType",
+//   "csharp"
+// );
+// @@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
+//   "GetRegionalEventSubscriptionsData",
+//   "csharp"
+// );
+// @@clientName(EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
+//   "GetRegionalEventSubscriptionsDataForTopicType",
+//   "csharp"
+// );

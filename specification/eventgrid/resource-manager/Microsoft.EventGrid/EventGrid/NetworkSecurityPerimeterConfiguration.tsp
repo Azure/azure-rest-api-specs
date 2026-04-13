@@ -13,85 +13,108 @@ namespace Microsoft.EventGrid;
 /**
  * Network security perimeter configuration.
  */
+@singleton("{perimeterGuid}.{associationName}")
 model NetworkSecurityPerimeterConfiguration
   is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = NetworkSecurityPerimeterConfiguration,
-    KeyName = "networkSecurityPerimeterConfigurationName",
-    SegmentName = "networkSecurityPerimeterConfigurations",
-    NamePattern = ""
-  >;
-}
-
-/**
- * Network security perimeter configuration under a Domain.
- */
-@parentResource(Domain)
-model DomainNetworkSecurityPerimeterConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
-  ...ResourceNameParameter<
-    Resource = DomainNetworkSecurityPerimeterConfiguration,
-    KeyName = "networkSecurityPerimeterConfigurationName",
+    KeyName = "networkSecurityPerimeterConfiguration",
     SegmentName = "networkSecurityPerimeterConfigurations",
     NamePattern = ""
   >;
 }
 
 @armResourceOperations
-interface DomainNetworkSecurityPerimeterConfigurations {
-  /**
-   * Get a specific network security perimeter configuration with a domain.
-   */
-  get is ArmResourceRead<DomainNetworkSecurityPerimeterConfiguration>;
+interface NetworkSecurityPerimeterConfigurationOps
+  extends Azure.ResourceManager.Legacy.RoutedOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
 
-  /**
-   * Get all network security perimeter configurations associated with a domain.
-   */
-  list is ArmResourceListByParent<DomainNetworkSecurityPerimeterConfiguration>;
+        /**
+         * The type of the resource. This can be either \\'topics\\', or \\'domains\\'.
+         */
+        @path
+        resourceType: NetworkSecurityPerimeterResourceType,
 
+        /**
+         * The name of the resource group within the user's subscription.
+         */
+        @path
+        @pattern("^[a-zA-Z0-9-]*$")
+        @minLength(3)
+        @maxLength(50)
+        resourceName: string,
+      },
+      {},
+      ResourceRoute = #{
+        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}",
+      }
+    > {}
+
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface NetworkSecurityPerimeterConfigurations {
   /**
-   * Reconcile a specific network security perimeter configuration for a given network security perimeter association with a domain.
+   * Get a specific network security perimeter configuration with a topic or domain.
    */
-  reconcile is ArmResourceActionAsync<
-    DomainNetworkSecurityPerimeterConfiguration,
-    void,
-    NetworkSecurityPerimeterConfiguration
+  @summary("Get a specific network security perimeter configuration.")
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}")
+  get is NetworkSecurityPerimeterConfigurationOps.ActionSync<
+    NetworkSecurityPerimeterConfiguration,
+    Request = void,
+    Response = ArmResponse<NetworkSecurityPerimeterConfiguration>,
+    Parameters = {
+      /**
+       * Unique identifier for perimeter
+       */
+      @path
+      perimeterGuid: string;
+
+      /**
+       * Association name to association network security perimeter resource to profile
+       */
+      @path
+      associationName: string;
+    }
   >;
-}
 
-/**
- * Network security perimeter configuration under a Topic.
- */
-@parentResource(Topic)
-model TopicNetworkSecurityPerimeterConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
-  ...ResourceNameParameter<
-    Resource = TopicNetworkSecurityPerimeterConfiguration,
-    KeyName = "networkSecurityPerimeterConfigurationName",
-    SegmentName = "networkSecurityPerimeterConfigurations",
-    NamePattern = ""
+  /**
+   * Get all network security perimeter configurations associated with a topic or domain.
+   */
+  @summary("Get all network security perimeter configurations for resource.")
+  @get
+  @list
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations")
+  list is NetworkSecurityPerimeterConfigurationOps.ActionSync<
+    NetworkSecurityPerimeterConfiguration,
+    Request = void,
+    Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>
   >;
-}
-
-@armResourceOperations
-interface TopicNetworkSecurityPerimeterConfigurations {
-  /**
-   * Get a specific network security perimeter configuration with a topic.
-   */
-  get is ArmResourceRead<TopicNetworkSecurityPerimeterConfiguration>;
 
   /**
-   * Get all network security perimeter configurations associated with a topic.
+   * Reconcile a specific network security perimeter configuration for a given network security perimeter association with a topic or domain.
    */
-  list is ArmResourceListByParent<TopicNetworkSecurityPerimeterConfiguration>;
+  @summary("Reconcile a specific network security perimeter configuration for a given network security perimeter association.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile")
+  reconcile is NetworkSecurityPerimeterConfigurationOps.ActionAsync<
+    NetworkSecurityPerimeterConfiguration,
+    Request = void,
+    Result = NetworkSecurityPerimeterConfiguration,
+    Parameters = {
+      /**
+       * Unique identifier for perimeter
+       */
+      @path
+      perimeterGuid: string;
 
-  /**
-   * Reconcile a specific network security perimeter configuration for a given network security perimeter association with a topic.
-   */
-  reconcile is ArmResourceActionAsync<
-    TopicNetworkSecurityPerimeterConfiguration,
-    void,
-    NetworkSecurityPerimeterConfiguration
+      /**
+       * Association name to association network security perimeter resource to profile
+       */
+      @path
+      associationName: string;
+    }
   >;
 }
 

@@ -11,11 +11,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.EventGrid;
 
-/**
- * Private endpoint connection resource, parented under Domain.
- * Also used as shared property type across Domain, Topic, PartnerNamespace, Namespace.
- */
-@parentResource(Domain)
 model PrivateEndpointConnection
   is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
@@ -25,97 +20,130 @@ model PrivateEndpointConnection
     NamePattern = ""
   >;
 }
-
-// Interface named "PrivateEndpointConnections" to satisfy back-compatible.tsp reference
 @armResourceOperations
-interface PrivateEndpointConnections {
-  get is ArmResourceRead<PrivateEndpointConnection>;
+interface PrivateEndpointConnectionOps
+  extends Azure.ResourceManager.Legacy.RoutedOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
 
-  @put
-  update(
-    ...ResourceInstanceParameters<PrivateEndpointConnection>,
-    @doc("The private endpoint connection object to update.")
-    @bodyRoot
-    body: PrivateEndpointConnection
-  ): ArmResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
+        /**
+         * The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.
+         */
+        @path
+        parentType: PrivateEndpointConnectionsParentType,
+
+        /**
+         * The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).
+         */
+        @path
+        parentName: string,
+      },
+      {},
+      ResourceRoute = #{
+        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}",
+      }
+    > {}
+
+@armResourceOperations(#{ allowStaticRoutes: true })
+interface PrivateEndpointConnections {
+  /**
+   * Get a specific private endpoint connection under a topic, domain, or partner namespace or namespace.
+   */
+  @summary("Get a specific private endpoint connection.")
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  get is PrivateEndpointConnectionOps.ActionSync<
     PrivateEndpointConnection,
+    Request = void,
+    Response = ArmResponse<PrivateEndpointConnection>,
+    Parameters = {
+      /**
+       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
+       */
+      @path
+      privateEndpointConnectionName: string;
+    }
+  >;
+
+  /**
+   * Update a specific private endpoint connection under a topic, domain or partner namespace.
+   */
+  @put
+  @summary("Update a specific private endpoint connection.")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  update is PrivateEndpointConnectionOps.ActionAsync<
+    PrivateEndpointConnection,
+    Request = PrivateEndpointConnection,
+    Result = void,
+    Response = ArmResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<
+      PrivateEndpointConnection,
+      LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
+    Parameters = {
+      /**
+       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
+       */
+      @path
+      privateEndpointConnectionName: string;
+    },
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  /**
+   * Delete a specific private endpoint connection under a topic, domain, or partner namespace or namespace.
+   */
+  @summary("Delete a specific private endpoint connection.")
+  @delete
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}")
+  delete is PrivateEndpointConnectionOps.ActionAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Request = void,
+    Result = void,
+    Parameters = {
+      /**
+       * The type of the parent resource. This can be either \'topics\', \'domains\', or \'partnerNamespaces\' or \'namespaces\'.
+       */
+      @path
+      privateEndpointConnectionName: string;
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  /**
+   * Get all private endpoint connections under a topic, domain, or partner namespace or namespace.
+   */
+  @summary("Lists all private endpoint connections under a resource.")
+  @get
+  @list
   listByResource is ArmResourceListByParent<
     PrivateEndpointConnection,
+    Response = ArmResponse<PrivateEndpointConnectionListResult>,
     Parameters = {
+      /**
+       * The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.
+       */
+      @path
+      parentType: PrivateEndpointConnectionsParentType;
+
+      /**
+       * The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).
+       */
+      @path
+      parentName: string;
+
+      /**
+       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+       */
       @query("$filter")
       $filter?: string;
-      @query("$top")
-      $top?: int32;
-    }
-  >;
-}
 
-@parentResource(Topic)
-model TopicPrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = TopicPrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
-}
-
-@armResourceOperations
-interface TopicPrivateEndpointConnections {
-  get is ArmResourceRead<TopicPrivateEndpointConnection>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<TopicPrivateEndpointConnection>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    TopicPrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
-  listByResource is ArmResourceListByParent<
-    TopicPrivateEndpointConnection,
-    Parameters = {
-      @query("$filter")
-      $filter?: string;
-      @query("$top")
-      $top?: int32;
-    }
-  >;
-}
-
-@parentResource(PartnerNamespace)
-model PartnerNamespacePrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PartnerNamespacePrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
-}
-
-@armResourceOperations
-interface PartnerNamespacePrivateEndpointConnections {
-  get is ArmResourceRead<PartnerNamespacePrivateEndpointConnection>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<PartnerNamespacePrivateEndpointConnection>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PartnerNamespacePrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-  >;
-  listByResource is ArmResourceListByParent<
-    PartnerNamespacePrivateEndpointConnection,
-    Parameters = {
-      @query("$filter")
-      $filter?: string;
+      /**
+       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+       */
       @query("$top")
       $top?: int32;
     }
