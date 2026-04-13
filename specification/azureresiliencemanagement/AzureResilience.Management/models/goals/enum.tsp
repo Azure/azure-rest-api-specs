@@ -129,3 +129,24 @@ model UserConfirmationForHighAvailabilityItem {
   @doc("The reason for requesting user confirmation for the high availability solution.")
   reasonForRequestingConfirmation?: ReasonForRequestingConfirmation;
 }
+
+@added(Versions.v2026_03_01_preview)
+@doc("Classification of a resource's resiliency eligibility. Determines what guidance and alternate configurations are returned.")
+union ResiliencyEligibilityCategory {
+  string,
+
+  @doc("This resource type is not yet covered by the resiliency capability catalog.")
+  Unsupported: "Unsupported",
+
+  @doc("The resource is eligible for resiliency in its current region and SKU. Review the steps field for enablement guidance.")
+  ZrEligible: "ZrEligible",
+
+  @doc("The resource's SKU supports resiliency but available capacity is limited. Consider the suggested SKUs or regions for better availability.")
+  SkuCapacityConstrained: "SkuCapacityConstrained",
+
+  @doc("The current SKU does not support resiliency in this region. Upgrade to one of the suggested SKUs to enable redundancy.")
+  SkuIneligible: "SkuIneligible",
+
+  @doc("The resource's current region does not support resiliency for this resource type. Migrate to one of the suggested regions.")
+  RegionUnsupported: "RegionUnsupported",
+}
