@@ -4,3 +4,4 @@ import "./sliProperties.tsp";
 import "./baselineProperties.tsp";
 import "./signalPreview.tsp";
 import "./kqlmQueryResult.tsp";
+import "./client.tsp";
