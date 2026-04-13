@@ -17,17 +17,6 @@ union Readiness {
   string,
 }
 
-@doc("Pricing Tier for Azure.")
-union PricingTier {
-  @doc("Standard Pricing Tier.")
-  Standard: "Standard",
-
-  @doc("Free Pricing Tier.")
-  Free: "Free",
-
-  string,
-}
-
 @doc("Workload Profile Type for Azure Container Apps.")
 union ContainerAppsWorkloadProfileType {
   @doc("Any workload profile type.")

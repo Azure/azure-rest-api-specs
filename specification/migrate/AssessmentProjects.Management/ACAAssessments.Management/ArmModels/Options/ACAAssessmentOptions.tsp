@@ -41,9 +41,6 @@ model ContainerAppsAssessmentOptionsOutboundEdgeGroup {
   @doc("Gets or sets the Workload Profile Types.")
   workloadProfileTypes: ContainerAppsWorkloadProfileType[];
 
-  @doc("Gets or sets the Pricing Tier.")
-  tiers: PricingTier[];
-
   @doc("Gets or sets the Azure Locations.")
   targetLocations: azureLocation[];
 

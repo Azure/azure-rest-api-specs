@@ -10,7 +10,4 @@ model ContainerAppsAssessmentSettings is AssessmentSettings {
 
   @doc("Gets or sets the workload profile type.")
   workloadProfileType: ContainerAppsWorkloadProfileType;
-
-  @doc("Gets or sets pricing tier.")
-  pricingTier: PricingTier;
 }

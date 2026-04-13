@@ -15,6 +15,18 @@ model RecommendationResult {
   @doc("Gets environment name.")
   @visibility(Lifecycle.Read)
   environmentName: string;
+
+  @doc("Gets the workload profile type.")
+  @visibility(Lifecycle.Read)
+  workloadProfileType: ContainerAppsWorkloadProfileType;
+
+  @doc("Gets the minimum number of replicas.")
+  @visibility(Lifecycle.Read)
+  minReplicas: int32;
+
+  @doc("Gets the maximum number of replicas.")
+  @visibility(Lifecycle.Read)
+  maxReplicas: int32;
 }
 
 @doc("Data model of Cores and Memory Compute Resource.")

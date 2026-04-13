@@ -29,6 +29,10 @@ model ContainerAppEnvironment {
   @visibility(Lifecycle.Read)
   monthlyCost?: float64;
 
+  @doc("Gets management fee monthly cost.")
+  @visibility(Lifecycle.Read)
+  managementFeeMonthlyCost?: float64;
+
   @doc("Gets the created timestamp.")
   @visibility(Lifecycle.Read)
   createdTimestamp?: utcDateTime;

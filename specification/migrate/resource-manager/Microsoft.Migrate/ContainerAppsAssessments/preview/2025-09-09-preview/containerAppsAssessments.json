@@ -1977,6 +1977,12 @@
           "description": "Gets monthly cost.",
           "readOnly": true
         },
+        "managementFeeMonthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets management fee monthly cost.",
+          "readOnly": true
+        },
         "createdTimestamp": {
           "type": "string",
           "format": "date-time",
@@ -2092,13 +2098,6 @@
             "$ref": "#/definitions/ContainerAppsWorkloadProfileType"
           }
         },
-        "tiers": {
-          "type": "array",
-          "description": "Gets or sets the Pricing Tier.",
-          "items": {
-            "$ref": "#/definitions/PricingTier"
-          }
-        },
         "targetLocations": {
           "type": "array",
           "description": "Gets or sets the Azure Locations.",
@@ -2131,7 +2130,6 @@
       "required": [
         "sku",
         "workloadProfileTypes",
-        "tiers",
         "targetLocations",
         "currencies",
         "savingsOptions",
@@ -2227,16 +2225,11 @@
         "workloadProfileType": {
           "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
           "description": "Gets or sets the workload profile type."
-        },
-        "pricingTier": {
-          "$ref": "#/definitions/PricingTier",
-          "description": "Gets or sets pricing tier."
         }
       },
       "required": [
         "sku",
-        "workloadProfileType",
-        "pricingTier"
+        "workloadProfileType"
       ]
     },
     "ContainerAppsCostDetail": {
@@ -2401,6 +2394,12 @@
           "type": "number",
           "format": "double",
           "description": "Gets monthly cost.",
+          "readOnly": true
+        },
+        "managementFeeMonthlyCost": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets management fee monthly cost.",
           "readOnly": true
         },
         "createdTimestamp": {
@@ -3421,30 +3420,6 @@
         }
       }
     },
-    "PricingTier": {
-      "type": "string",
-      "description": "Pricing Tier for Azure.",
-      "enum": [
-        "Standard",
-        "Free"
-      ],
-      "x-ms-enum": {
-        "name": "PricingTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard Pricing Tier."
-          },
-          {
-            "name": "Free",
-            "value": "Free",
-            "description": "Free Pricing Tier."
-          }
-        ]
-      }
-    },
     "PrivateEndpointConnection": {
       "type": "object",
       "description": "Private endpoint connection resource.",
@@ -3653,12 +3628,32 @@
           "type": "string",
           "description": "Gets environment name.",
           "readOnly": true
+        },
+        "workloadProfileType": {
+          "$ref": "#/definitions/ContainerAppsWorkloadProfileType",
+          "description": "Gets the workload profile type.",
+          "readOnly": true
+        },
+        "minReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the minimum number of replicas.",
+          "readOnly": true
+        },
+        "maxReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets the maximum number of replicas.",
+          "readOnly": true
         }
       },
       "required": [
         "request",
         "limit",
-        "environmentName"
+        "environmentName",
+        "workloadProfileType",
+        "minReplicas",
+        "maxReplicas"
       ]
     },
     "RecommendedFor": {
