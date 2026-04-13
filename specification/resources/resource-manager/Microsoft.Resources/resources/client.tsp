@@ -5,5 +5,5 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Resources,
   "ResourceManagementClient",
-  "javascript,python"
+  "javascript,python,java"
 );
