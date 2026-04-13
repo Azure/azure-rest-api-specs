@@ -8,6 +8,7 @@ using Azure.Core.Foundations;
 namespace Azure.Batch;
 
 @doc("OSType enums")
+@clientName("OsType", "java")
 union OSType {
   string,
 
@@ -1224,6 +1225,7 @@ model BatchJobSchedule {
   jobSpecification: BatchJobSpecification;
 
   @doc("Information about Jobs that have been and will be run under this schedule.")
+  @clientName("executionDetails", "java")
   @visibility(Lifecycle.Read)
   executionInfo: BatchJobScheduleExecutionInfo;
 
@@ -1379,6 +1381,7 @@ model BatchJobSpecification {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Tasks of Jobs created under this schedule.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
@@ -1786,6 +1789,7 @@ model BatchJobReleaseTask {
 }
 
 @doc("Specifies how a Job should be assigned to a Pool.")
+@clientName("BatchPoolDetails", "java")
 model BatchPoolInfo {
   @doc("The ID of an existing Pool. All the Tasks of the Job will run on the specified Pool. You must ensure that the Pool referenced by this property exists. If the Pool does not exist at the time the Batch service tries to schedule a Job, no Tasks for the Job will run until you create a Pool with that id. Note that the Batch service will not reject the Job request; it will simply not run Tasks until the Pool exists. You must specify either the Pool ID or the auto Pool specification, but not both.")
   poolId?: string;
@@ -2376,6 +2380,7 @@ model AzureFileShareConfiguration {
   Contains information about Jobs that have been and will be run under a Job
   Schedule.
   """)
+@clientName("BatchJobScheduleExecutionDetails", "java")
 model BatchJobScheduleExecutionInfo {
   @doc("The next time at which a Job will be created under this schedule. This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no Job will be created at nextRunTime unless the Job is enabled before then.")
   nextRunTime?: utcDateTime;
@@ -2545,6 +2550,7 @@ model BatchJob {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool settings associated with the Job.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. The default is noaction.")
@@ -2609,6 +2615,7 @@ model BatchJobCreateOptions {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Job's Tasks.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
@@ -2655,6 +2662,7 @@ model BatchJobUpdateOptions {
 }
 
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
+@clientName("BatchJobExecutionDetails", "java")
 model BatchJobExecutionInfo {
   @doc("The start time of the Job. This is the time at which the Job was created.")
   startTime: utcDateTime;
@@ -2750,6 +2758,7 @@ model BatchJobPreparationAndReleaseTaskStatus {
   Contains information about the execution of a Job Preparation Task on a Compute
   Node.
   """)
+@clientName("BatchJobPreparationTaskExecutionDetails", "java")
 model BatchJobPreparationTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2786,6 +2795,7 @@ model BatchJobPreparationTaskExecutionInfo {
 }
 
 @doc("Contains information about the container which a Task is executing.")
+@clientName("BatchTaskContainerExecutionDetails", "java")
 model BatchTaskContainerExecutionInfo {
   @doc("The ID of the container.")
   containerId?: string;
@@ -2798,6 +2808,7 @@ model BatchTaskContainerExecutionInfo {
 }
 
 @doc("Information about a Task failure.")
+@clientName("BatchTaskFailureDetails", "java")
 model BatchTaskFailureInfo {
   @doc("The category of the Task error.")
   category: BatchErrorSourceCategory;
@@ -2816,6 +2827,7 @@ model BatchTaskFailureInfo {
   Contains information about the execution of a Job Release Task on a Compute
   Node.
   """)
+@clientName("BatchJobReleaseTaskExecutionDetails", "java")
 model BatchJobReleaseTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -3504,12 +3516,14 @@ model ExitCodeRangeMapping {
   A locality hint that can be used by the Batch service to select a Compute Node
   on which to start a Task.
   """)
+@clientName("BatchAffinityDetails", "java")
 model BatchAffinityInfo {
   @doc("An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId: string;
 }
 
 @doc("Information about the execution of a Task.")
+@clientName("BatchTaskExecutionDetails", "java")
 model BatchTaskExecutionInfo {
   @doc("The time at which the Task started running. 'Running' corresponds to the running state, so if the Task specifies resource files or Packages, then the start time reflects the time at which the Task started downloading or deploying these. If the Task has been restarted or retried, this is the most recent time at which the Task started running. This property is present only for Tasks that are in the running or completed state.")
   startTime?: utcDateTime;
@@ -3543,6 +3557,7 @@ model BatchTaskExecutionInfo {
 }
 
 @doc("Information about the Compute Node on which a Task ran.")
+@clientName("BatchNodeDetails", "java")
 model BatchNodeInfo {
   @doc("An identifier for the Node on which the Task ran, which can be passed when adding a Task to request that the Task be scheduled on this Compute Node.")
   affinityId?: string;
@@ -3928,11 +3943,13 @@ model BatchNode {
   nodeAgentInfo?: BatchNodeAgentInfo;
 
   @doc("Info about the current state of the virtual machine.")
+  @clientName("virtualMachineDetails", "java")
   @visibility(Lifecycle.Read)
   virtualMachineInfo: VirtualMachineInfo;
 }
 
 @doc("Information about a Task running on a Compute Node.")
+@clientName("BatchTaskDetails", "java")
 model BatchTaskInfo {
   @doc("The URL of the Task.")
   taskUrl?: url;
@@ -3954,6 +3971,7 @@ model BatchTaskInfo {
 }
 
 @doc("Information about a StartTask running on a Compute Node.")
+@clientName("BatchStartTaskDetails", "java")
 model BatchStartTaskInfo {
   @doc("The state of the StartTask on the Compute Node.")
   state: BatchStartTaskState;
@@ -4028,6 +4046,7 @@ model InboundEndpoint {
   The Batch Compute Node agent is a program that runs on each Compute Node in the
   Pool and provides Batch capability on the Compute Node.
   """)
+@clientName("BatchNodeAgentDetails", "java")
 model BatchNodeAgentInfo {
   @doc("The version of the Batch Compute Node agent running on the Compute Node. This version number can be checked against the Compute Node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.")
   version: string;
@@ -4037,6 +4056,7 @@ model BatchNodeAgentInfo {
 }
 
 @doc("Info about the current state of the virtual machine.")
+@clientName("VirtualMachineDetails", "java")
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference?: BatchVmImageReference;
