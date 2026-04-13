@@ -226,6 +226,34 @@ suppressions:
       - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
 ```
 
+### Tag: package-2025-10-10
+
+These settings apply only when `--tag=package-2025-10-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-10'
+input-file:
+  - stable/2025-10-10/desktopvirtualization.json
+suppressions:
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
+      the related properties. The rule seems conflict with the contract.
+      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
+      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
+      There is a fix for this and is waiting for the rollout.
+    where:
+      - $.definitions.ResourceProviderOperationListResult
+```
+
 ### Tag: package-preview-2025-09-01-preview
 
 These settings apply only when `--tag=package-preview-2025-09-01-preview` is specified on the command line.
