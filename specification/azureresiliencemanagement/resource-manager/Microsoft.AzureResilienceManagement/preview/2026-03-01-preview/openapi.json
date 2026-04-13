@@ -10237,12 +10237,12 @@
     },
     "RecommendCapacityRequest": {
       "type": "object",
-      "description": "Request body for the recommendCapacity action.",
+      "description": "Request body for the recommend capacity action. Provide specific resource IDs to evaluate, or pass an empty array to let the service automatically select non-resilient resources from the goal assignment.",
       "properties": {
         "resourceIds": {
           "type": "array",
-          "description": "One or more Azure ARM resource IDs whose capacities should be validated.",
-          "minItems": 1,
+          "description": "Azure resource IDs to evaluate for resiliency. Pass an empty array to automatically discover and evaluate non-resilient resources in the service group. Maximum 50 resources per request.",
+          "maxItems": 50,
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -10256,32 +10256,64 @@
     },
     "RecommendCapacityResourceResult": {
       "type": "object",
-      "description": "Capacity recommendation and AI assessment for a single Azure resource.",
+      "description": "Resiliency assessment for a single Azure resource, including eligibility category, actionable guidance, and alternate configurations.",
       "properties": {
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "ARM resource ID."
+          "description": "Fully qualified ARM resource ID of the evaluated resource."
         },
         "resourceType": {
           "type": "string",
-          "description": "ARM resource type, e.g. 'Microsoft.Compute/virtualMachines'."
+          "description": "ARM resource type (e.g., 'Microsoft.Compute/virtualMachines', 'Microsoft.Storage/storageAccounts')."
         },
         "skuName": {
           "type": "string",
-          "description": "SKU name, e.g. 'Standard_D4s_v3'."
+          "description": "Current SKU or pricing tier of the resource (e.g., 'Standard_D4s_v3', 'Standard_LRS')."
         },
         "location": {
           "type": "string",
-          "description": "Azure region."
+          "description": "Azure region where the resource is deployed (e.g., 'eastus', 'westeurope')."
         },
         "capacityAssessment": {
           "type": "string",
-          "description": "AI-generated assessment of this resource's capacity fitness. Null when the AI agent is unavailable."
+          "description": "Human-readable assessment of this resource's resiliency posture. Contains actionable recommendations when available, or null when the AI advisor is unavailable."
         },
         "error": {
           "type": "string",
-          "description": "Per-item error if the resource lookup failed."
+          "description": "Error message if the resource could not be evaluated (e.g., resource not found or access denied). Other fields may be empty when this is set."
+        },
+        "category": {
+          "$ref": "#/definitions/ResiliencyEligibilityCategory",
+          "description": "Resiliency eligibility classification for this resource. See ResiliencyEligibilityCategory for possible values."
+        },
+        "suggestedRegions": {
+          "type": "array",
+          "description": "Alternative Azure regions that support resiliency for this resource type. Populated when the current region does not support the required redundancy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedSkus": {
+          "type": "array",
+          "description": "Alternative SKUs that support redundancy for this resource type in the current region. Populated when the current SKU is not eligible for resiliency.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "description": "Ordered list of actions to enable or improve resiliency for this resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "Links to relevant Azure documentation for configuring resiliency.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -10290,11 +10322,11 @@
     },
     "RecommendCapacityResult": {
       "type": "object",
-      "description": "Result payload for a completed recommendCapacity operation.",
+      "description": "Result of a completed recommend capacity operation, containing per-resource assessments and cross-cutting recommendations.",
       "properties": {
         "resourceCapacities": {
           "type": "array",
-          "description": "Per-resource capacity details and AI assessments.",
+          "description": "Individual resiliency assessment for each evaluated resource.",
           "items": {
             "$ref": "#/definitions/RecommendCapacityResourceResult"
           },
@@ -10304,14 +10336,14 @@
         },
         "recommendations": {
           "type": "array",
-          "description": "AI-generated cross-cutting recommendations.",
+          "description": "High-level recommendations that apply across multiple resources (e.g., regional migration patterns, common SKU upgrades).",
           "items": {
             "type": "string"
           }
         },
         "agentError": {
           "type": "string",
-          "description": "Populated when the AI agent call fails."
+          "description": "Error message from the AI advisor, if the advisory enrichment failed. The deterministic assessment results are still available even when this field is set."
         }
       },
       "required": [
@@ -11514,6 +11546,48 @@
             "name": "Healthy",
             "value": "Healthy",
             "description": "Resource is Healthy."
+          }
+        ]
+      }
+    },
+    "ResiliencyEligibilityCategory": {
+      "type": "string",
+      "description": "Classification of a resource's resiliency eligibility. Determines what guidance and alternate configurations are returned.",
+      "enum": [
+        "Unsupported",
+        "ZrEligible",
+        "SkuCapacityConstrained",
+        "SkuIneligible",
+        "RegionUnsupported"
+      ],
+      "x-ms-enum": {
+        "name": "ResiliencyEligibilityCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unsupported",
+            "value": "Unsupported",
+            "description": "This resource type is not yet covered by the resiliency capability catalog."
+          },
+          {
+            "name": "ZrEligible",
+            "value": "ZrEligible",
+            "description": "The resource is eligible for resiliency in its current region and SKU. Review the steps field for enablement guidance."
+          },
+          {
+            "name": "SkuCapacityConstrained",
+            "value": "SkuCapacityConstrained",
+            "description": "The resource's SKU supports resiliency but available capacity is limited. Consider the suggested SKUs or regions for better availability."
+          },
+          {
+            "name": "SkuIneligible",
+            "value": "SkuIneligible",
+            "description": "The current SKU does not support resiliency in this region. Upgrade to one of the suggested SKUs to enable redundancy."
+          },
+          {
+            "name": "RegionUnsupported",
+            "value": "RegionUnsupported",
+            "description": "The resource's current region does not support resiliency for this resource type. Migrate to one of the suggested regions."
           }
         ]
       }
