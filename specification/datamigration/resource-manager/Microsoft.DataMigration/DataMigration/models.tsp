@@ -2291,7 +2291,13 @@ model ErrorInfo {
  */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatabaseMigrationPropertiesSqlDb extends DatabaseMigrationProperties {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DatabaseMigrationProperties
+)
+model DatabaseMigrationPropertiesSqlDb extends DatabaseMigrationBaseProperties {
+  ...DatabaseMigrationPropertiesProperties;
+
   /**
    * Detailed migration status. Not included by default.
    */
@@ -2460,13 +2466,7 @@ model SqlDbOfflineConfiguration {
   offline?: boolean;
 }
 
-/**
- * Database Migration Resource properties.
- */
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@discriminator("kind")
-model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
+alias DatabaseMigrationPropertiesProperties = {
   /**
    * Source SQL Server connection details.
    */
@@ -2493,6 +2493,17 @@ model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sqlServerInstanceId?: string;
+};
+
+/**
+ * Database Migration Resource properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@discriminator("kind")
+model DatabaseMigrationProperties extends DatabaseMigrationBaseProperties {
+  kind: "DatabaseMigrationProperties";
+  ...DatabaseMigrationPropertiesProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2533,7 +2544,13 @@ model MigrationOperationInput {
  */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatabaseMigrationPropertiesSqlMi extends DatabaseMigrationProperties {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DatabaseMigrationProperties
+)
+model DatabaseMigrationPropertiesSqlMi extends DatabaseMigrationBaseProperties {
+  ...DatabaseMigrationPropertiesProperties;
+
   /**
    * Detailed migration status. Not included by default.
    */
@@ -2893,7 +2910,13 @@ model OfflineConfiguration {
  */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DatabaseMigrationPropertiesSqlVm extends DatabaseMigrationProperties {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DatabaseMigrationProperties
+)
+model DatabaseMigrationPropertiesSqlVm extends DatabaseMigrationBaseProperties {
+  ...DatabaseMigrationPropertiesProperties;
+
   /**
    * Detailed migration status. Not included by default.
    */

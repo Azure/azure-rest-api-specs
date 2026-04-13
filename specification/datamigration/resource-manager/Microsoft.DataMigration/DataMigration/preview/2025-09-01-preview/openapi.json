@@ -7723,10 +7723,6 @@
       "type": "object",
       "description": "Database Migration Resource properties.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for DatabaseMigrationProperties."
-        },
         "sourceSqlConnection": {
           "$ref": "#/definitions/SqlConnectionInformation",
           "description": "Source SQL Server connection details."
@@ -7754,14 +7750,12 @@
         }
       },
       "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseMigrationBaseProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "DatabaseMigrationProperties"
     },
     "DatabaseMigrationPropertiesCosmosDbMongo": {
       "type": "object",
