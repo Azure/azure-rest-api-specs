@@ -24,7 +24,7 @@ model Conversation {
   name: string;
 
   ...DataPlaneResource;
-  ...WithTitle;
+  ...WithOptionalTitle;
   ...WithInvestigationNameOptional;
   ...WithProjectNameOptional;
 }
@@ -33,6 +33,7 @@ model Conversation {
 model CreateConversationRequest {
   ...WithProjectName;
   ...WithInvestigationNameOptional;
+  ...WithOptionalTitle;
 }
 
 // TODO: Remove un-needed route prefix!

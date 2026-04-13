@@ -286,6 +286,13 @@ alias WithTitle = {
   displayName: string;
 };
 
+/** For adding optional title. */
+alias WithOptionalTitle = {
+  @doc("The title")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  displayName?: string;
+};
+
 /** For adding description. */
 alias WithDescription = {
   @doc("The description")

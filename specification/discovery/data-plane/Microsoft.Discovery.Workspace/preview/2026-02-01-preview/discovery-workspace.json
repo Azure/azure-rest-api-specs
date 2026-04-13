@@ -1958,8 +1958,7 @@
         }
       },
       "required": [
-        "name",
-        "displayName"
+        "name"
       ]
     },
     "ConversationCreateOrUpdate": {
@@ -2012,6 +2011,15 @@
             "read",
             "create"
           ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The title",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2022,7 +2030,7 @@
       "type": "object",
       "description": "Discovery engine instance.",
       "properties": {
-        "status": {
+        "discoveryEngineStatus": {
           "$ref": "#/definitions/DiscoveryEngineStatus",
           "description": "The Discovery Engine status."
         },
@@ -2069,7 +2077,7 @@
         }
       },
       "required": [
-        "status"
+        "discoveryEngineStatus"
       ]
     },
     "DiscoveryEngineStatus": {
@@ -2100,7 +2108,7 @@
       "type": "object",
       "description": "Discovery Engine Update Request. This will create the discovery engine if it does not already exist.",
       "properties": {
-        "status": {
+        "discoveryEngineStatus": {
           "$ref": "#/definitions/DiscoveryEngineStatus",
           "description": "The Discovery Engine status."
         },
@@ -2152,9 +2160,7 @@
         "additionalDetails": {
           "type": "object",
           "description": "Freeform key-value pairs for additional details.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -2437,11 +2443,11 @@
       "type": "object",
       "description": "Overview of compute usage for a nodepool.",
       "properties": {
-        "reservedCpus": {
+        "reservedCPUs": {
           "type": "string",
           "description": "CPUs in use (e.g. 1, or 500m for 500 milli-CPUs)\nacross all nodes in the nodepool."
         },
-        "allocatableCpus": {
+        "allocatableCPUs": {
           "type": "string",
           "description": "CPUs which are free to use (e.g. 1, or 500m for 500 milli-CPUs)\nacross all nodes in the nodepool."
         },
@@ -2453,22 +2459,22 @@
           "type": "string",
           "description": "Memory which is free to use (e.g. 500Mi or 1Gi)."
         },
-        "reservedGpus": {
+        "reservedGPUs": {
           "type": "string",
           "description": "GPUs which are in use."
         },
-        "allocatableGpus": {
+        "allocatableGPUs": {
           "type": "string",
           "description": "GPUs which are free to use."
         }
       },
       "required": [
-        "reservedCpus",
-        "allocatableCpus",
+        "reservedCPUs",
+        "allocatableCPUs",
         "reservedMemory",
         "allocatableMemory",
-        "reservedGpus",
-        "allocatableGpus"
+        "reservedGPUs",
+        "allocatableGPUs"
       ]
     },
     "Operation": {
@@ -2479,7 +2485,7 @@
           "type": "string",
           "description": "Operation id."
         },
-        "nodePoolId": {
+        "nodepoolId": {
           "type": "string",
           "description": "The nodepool the operation targets."
         },
@@ -2508,7 +2514,7 @@
       },
       "required": [
         "id",
-        "nodePoolId",
+        "nodepoolId",
         "status",
         "runtimeDetails",
         "createdAt"
@@ -2711,7 +2717,7 @@
       "description": "Run result",
       "properties": {
         "status": {
-          "$ref": "#/definitions/RunStatus",
+          "type": "string",
           "description": "Status of the run."
         },
         "runtimeDetails": {
@@ -2747,11 +2753,8 @@
               "type": "object"
             },
             "logs": {
-              "type": "array",
-              "description": "Logs from the tool.",
-              "items": {
-                "type": "string"
-              }
+              "type": "string",
+              "description": "Logs from the tool."
             }
           },
           "required": [
@@ -2771,7 +2774,6 @@
         }
       },
       "required": [
-        "status",
         "runtimeDetails",
         "outputData",
         "debugInfo"
@@ -2781,7 +2783,7 @@
       "type": "string",
       "description": "Enum for run status",
       "enum": [
-        "NotRunning",
+        "NotStarted",
         "Running",
         "Succeeded",
         "Canceled",
@@ -2792,9 +2794,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "NotRunning",
-            "value": "NotRunning",
-            "description": "Not Running"
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Not Started"
           },
           {
             "name": "Running",
@@ -2848,7 +2850,7 @@
           "format": "int64",
           "description": "Number of pending jobs on the supercomputer."
         },
-        "nodePools": {
+        "nodepools": {
           "type": "object",
           "description": "Nodepool utilization for each nodepool for a supercomputer.",
           "additionalProperties": {
@@ -2859,7 +2861,7 @@
       "required": [
         "activeJobs",
         "pendingJobs",
-        "nodePools"
+        "nodepools"
       ]
     },
     "Task": {
@@ -2882,10 +2884,8 @@
           ]
         },
         "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the task (higher numbers = higher priority).",
-          "minimum": 1,
+          "$ref": "#/definitions/TaskPriority",
+          "description": "The priority of the task.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3026,7 +3026,7 @@
             "create"
           ]
         },
-        "result": {
+        "taskResult": {
           "$ref": "#/definitions/TaskResult",
           "description": "Task execution result with text and storage assets.",
           "x-ms-mutability": [
@@ -3096,7 +3096,7 @@
       "type": "object",
       "description": "Task comment.",
       "properties": {
-        "createdAt": {
+        "timestamp": {
           "type": "string",
           "format": "date-time",
           "description": "When the comment was created."
@@ -3115,7 +3115,6 @@
         }
       },
       "required": [
-        "createdAt",
         "createdBy",
         "createdByType",
         "text"
@@ -3135,10 +3134,8 @@
           ]
         },
         "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the task (higher numbers = higher priority).",
-          "minimum": 1,
+          "$ref": "#/definitions/TaskPriority",
+          "description": "The priority of the task.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3244,7 +3241,7 @@
             "create"
           ]
         },
-        "result": {
+        "taskResult": {
           "$ref": "#/definitions/TaskResult",
           "description": "Task execution result with text and storage assets.",
           "x-ms-mutability": [
@@ -3273,6 +3270,36 @@
             "create"
           ]
         }
+      }
+    },
+    "TaskPriority": {
+      "type": "string",
+      "description": "Task priority level.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "TaskPriority",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low priority"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium priority"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High priority"
+          }
+        ]
       }
     },
     "TaskResult": {
@@ -3305,75 +3332,75 @@
       "type": "string",
       "description": "Task status enumeration.",
       "enum": [
-        "new",
-        "onHold",
-        "complete",
-        "removed",
-        "flaggedHuman",
-        "flaggedAi",
-        "executing",
-        "executionDone",
-        "stale",
-        "failed",
-        "incomplete"
+        "New",
+        "OnHold",
+        "Complete",
+        "Removed",
+        "FlaggedHuman",
+        "FlaggedAi",
+        "Executing",
+        "ExecutionDone",
+        "Stale",
+        "Failed",
+        "Incomplete"
       ],
       "x-ms-enum": {
         "name": "TaskStatus",
         "modelAsString": true,
         "values": [
           {
-            "name": "new",
-            "value": "new",
+            "name": "New",
+            "value": "New",
             "description": "The task is newly created"
           },
           {
-            "name": "onHold",
-            "value": "onHold",
+            "name": "OnHold",
+            "value": "OnHold",
             "description": "The task is on hold"
           },
           {
-            "name": "complete",
-            "value": "complete",
+            "name": "Complete",
+            "value": "Complete",
             "description": "The task has been completed"
           },
           {
-            "name": "removed",
-            "value": "removed",
+            "name": "Removed",
+            "value": "Removed",
             "description": "The task has been removed"
           },
           {
-            "name": "flaggedHuman",
-            "value": "flaggedHuman",
+            "name": "FlaggedHuman",
+            "value": "FlaggedHuman",
             "description": "The task has been flagged for human review"
           },
           {
-            "name": "flaggedAi",
-            "value": "flaggedAi",
+            "name": "FlaggedAi",
+            "value": "FlaggedAi",
             "description": "The task has been flagged for AI review"
           },
           {
-            "name": "executing",
-            "value": "executing",
+            "name": "Executing",
+            "value": "Executing",
             "description": "The task is currently executing"
           },
           {
-            "name": "executionDone",
-            "value": "executionDone",
+            "name": "ExecutionDone",
+            "value": "ExecutionDone",
             "description": "The task execution is done"
           },
           {
-            "name": "stale",
-            "value": "stale",
+            "name": "Stale",
+            "value": "Stale",
             "description": "The task has become stale"
           },
           {
-            "name": "failed",
-            "value": "failed",
+            "name": "Failed",
+            "value": "Failed",
             "description": "The task has failed"
           },
           {
-            "name": "incomplete",
-            "value": "incomplete",
+            "name": "Incomplete",
+            "value": "Incomplete",
             "description": "The task is incomplete"
           }
         ]

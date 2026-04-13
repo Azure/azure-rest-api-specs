@@ -51,7 +51,7 @@ model TaskResult {
 @doc("Task comment.")
 model TaskComment {
   @doc("When the comment was created.")
-  createdAt: utcDateTime;
+  timestamp?: utcDateTime;
 
   @doc("ID of the user or application who created the comment.")
   createdBy: string;
@@ -87,44 +87,59 @@ model ExecutionHistoryEntry {
   @doc("Run or message ID for full details.")
   responseMessageId?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Freeform key-value pairs for additional details.")
-  additionalDetails?: Record<string>;
+  additionalDetails?: Record<unknown>;
+}
+
+@doc("Task priority level.")
+union TaskPriority {
+  /** Low priority */
+  Low: "Low",
+
+  /** Medium priority */
+  Medium: "Medium",
+
+  /** High priority */
+  High: "High",
+
+  string,
 }
 
 @doc("Task status enumeration.")
 union TaskStatus {
   /** The task is newly created */
-  new: "new",
+  New: "New",
 
   /** The task is on hold */
-  onHold: "onHold",
+  OnHold: "OnHold",
 
   /** The task has been completed */
-  complete: "complete",
+  Complete: "Complete",
 
   /** The task has been removed */
-  removed: "removed",
+  Removed: "Removed",
 
   /** The task has been flagged for human review */
-  flaggedHuman: "flaggedHuman",
+  FlaggedHuman: "FlaggedHuman",
 
   /** The task has been flagged for AI review */
-  flaggedAi: "flaggedAi",
+  FlaggedAi: "FlaggedAi",
 
   /** The task is currently executing */
-  executing: "executing",
+  Executing: "Executing",
 
   /** The task execution is done */
-  executionDone: "executionDone",
+  ExecutionDone: "ExecutionDone",
 
   /** The task has become stale */
-  stale: "stale",
+  Stale: "Stale",
 
   /** The task has failed */
-  failed: "failed",
+  Failed: "Failed",
 
   /** The task is incomplete */
-  incomplete: "incomplete",
+  Incomplete: "Incomplete",
 
   string,
 }
@@ -143,10 +158,9 @@ model Task {
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   title?: string;
 
-  @doc("The priority of the task (higher numbers = higher priority).")
+  @doc("The priority of the task.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @minValue(1)
-  priority?: int32;
+  priority?: TaskPriority;
 
   @doc("The description of the task.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
@@ -199,7 +213,7 @@ model Task {
 
   @doc("Task execution result with text and storage assets.")
   @visibility(Lifecycle.Read, Lifecycle.Update)
-  result?: TaskResult;
+  taskResult?: TaskResult;
 
   @doc("List of storage assets related to the task.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)

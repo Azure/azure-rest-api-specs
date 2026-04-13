@@ -98,7 +98,7 @@ union WorkingMemoryEntryType {
 @doc("Discovery engine instance.")
 model DiscoveryEngine {
   @doc("The Discovery Engine status.")
-  status: DiscoveryEngineStatus;
+  discoveryEngineStatus: DiscoveryEngineStatus;
 
   @doc("The system prompt.")
   systemPrompt?: string;
@@ -143,7 +143,7 @@ alias GetDiscoveryEngineMemoryParameters = {
 @doc("Discovery Engine Update Request. This will create the discovery engine if it does not already exist.")
 model DiscoveryEngineUpdate {
   @doc("The Discovery Engine status.")
-  status?: DiscoveryEngineStatus;
+  discoveryEngineStatus?: DiscoveryEngineStatus;
 
   @doc("The system prompt.")
   systemPrompt?: string;

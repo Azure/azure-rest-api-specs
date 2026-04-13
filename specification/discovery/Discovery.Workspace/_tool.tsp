@@ -17,8 +17,8 @@ namespace Microsoft.Discovery.Workspace;
 /** Enum for run status */
 @lroStatus
 union RunStatus {
-  /** Not Running */
-  NotRunning: "NotRunning",
+  /** Not Started */
+  NotStarted: "NotStarted",
 
   /** Running */
   Running: "Running",
@@ -307,7 +307,7 @@ alias WithCompletedAt = {
 @doc("Run result")
 model RunResult {
   @doc("Status of the run.")
-  status: RunStatus;
+  status?: string;
 
   @doc("Human-readable details about the run status.")
   runtimeDetails: string;
@@ -326,7 +326,7 @@ model RunResult {
     statusInformation?: {};
 
     /** Logs from the tool. */
-    logs?: string[];
+    logs?: string;
   };
 
   /**
@@ -367,7 +367,7 @@ model Operation {
   id: string;
 
   /** The nodepool the operation targets. */
-  nodePoolId: string;
+  nodepoolId: string;
 
   /** Current status of the operation. */
   status: RunStatus;
@@ -401,18 +401,20 @@ model SupercomputerUsage {
   pendingJobs: int64;
 
   /** Nodepool utilization for each nodepool for a supercomputer. */
-  nodePools: Record<NodepoolUsage>;
+  nodepools: Record<NodepoolUsage>;
 }
 
 /** Overview of compute usage for a nodepool. */
 model NodepoolUsage {
   /** CPUs in use (e.g. 1, or 500m for 500 milli-CPUs)
    *  across all nodes in the nodepool. */
-  reservedCpus: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uses 'reservedCPUs' on the wire"
+  reservedCPUs: string;
 
   /** CPUs which are free to use (e.g. 1, or 500m for 500 milli-CPUs)
    *  across all nodes in the nodepool. */
-  allocatableCpus: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uses 'allocatableCPUs' on the wire"
+  allocatableCPUs: string;
 
   /** Memory which is in use (e.g. 500Mi or 1Gi). */
   reservedMemory: string;
@@ -421,10 +423,12 @@ model NodepoolUsage {
   allocatableMemory: string;
 
   /** GPUs which are in use. */
-  reservedGpus: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uses 'reservedGPUs' on the wire"
+  reservedGPUs: string;
 
   /** GPUs which are free to use. */
-  allocatableGpus: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uses 'allocatableGPUs' on the wire"
+  allocatableGPUs: string;
 }
 
 /** Get operations parameters. */
