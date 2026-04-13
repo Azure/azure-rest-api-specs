@@ -1,12 +1,14 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
@@ -241,4 +243,15 @@ interface VirtualMachineBulkOperations {
     @body
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
+
+  /** bulkvmoperations ping only endpoint */
+  @doc("Read-only endpoint that retrieves the bulkvmoperations")  @autoRoute
+  @get
+  bulkvmoperations(
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
+    ...Extension.Subscription,
+    ...ProviderNamespace<Extension.Subscription>,
+    ...LocationParameter,
+    ...DefaultVirtualMachines,
+  ): ArmNoContentResponse | ErrorResponse;
 }

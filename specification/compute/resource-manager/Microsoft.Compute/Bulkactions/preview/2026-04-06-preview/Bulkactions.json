@@ -82,6 +82,39 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations": {
+      "get": {
+        "operationId": "VirtualMachineBulkOperations_Bulkvmoperations",
+        "description": "Read-only endpoint that retrieves the bulkvmoperations",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{locationparameter}/virtualMachines/bulkVmOperations/cancel": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkCancel",
