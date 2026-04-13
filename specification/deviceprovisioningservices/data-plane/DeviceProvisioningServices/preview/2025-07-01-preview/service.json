@@ -1047,7 +1047,8 @@
       "properties": {
         "enrollmentGroupId": {
           "type": "string",
-          "description": "Enrollment group id."
+          "description": "Enrollment group id.",
+          "minLength": 1
         },
         "errorCode": {
           "type": "integer",
@@ -1056,7 +1057,8 @@
         },
         "errorStatus": {
           "type": "string",
-          "description": "Error status."
+          "description": "Error status.",
+          "minLength": 1
         }
       },
       "required": [
@@ -1112,7 +1114,8 @@
       "properties": {
         "registrationId": {
           "type": "string",
-          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end."
+          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end.",
+          "minLength": 1
         },
         "errorCode": {
           "type": "integer",
@@ -1121,7 +1124,8 @@
         },
         "errorStatus": {
           "type": "string",
-          "description": "Error status."
+          "description": "Error status.",
+          "minLength": 1
         }
       },
       "required": [
@@ -1156,11 +1160,13 @@
       "properties": {
         "webhookUrl": {
           "type": "string",
-          "description": "The webhook URL used for allocation requests."
+          "description": "The webhook URL used for allocation requests.",
+          "minLength": 1
         },
         "apiVersion": {
           "type": "string",
-          "description": "The API version of the provisioning service types (such as\nIndividualEnrollment) sent in the custom allocation request. Minimum supported\nversion: \"2018-09-01-preview\"."
+          "description": "The API version of the provisioning service types (such as\nIndividualEnrollment) sent in the custom allocation request. Minimum supported\nversion: \"2018-09-01-preview\".",
+          "minLength": 1
         }
       },
       "required": [
@@ -1253,7 +1259,8 @@
       "properties": {
         "enrollmentGroupId": {
           "type": "string",
-          "description": "Enrollment Group ID."
+          "description": "Enrollment Group ID.",
+          "minLength": 1
         },
         "attestation": {
           "$ref": "#/definitions/AttestationMechanism",
@@ -1389,7 +1396,8 @@
       "properties": {
         "registrationId": {
           "type": "string",
-          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end."
+          "description": "This id is used to uniquely identify a device registration of an enrollment.\nA case-insensitive string (up to 128 characters long) of alphanumeric\ncharacters plus certain special characters : . _ -. No special characters\nallowed at start or end.",
+          "minLength": 1
         },
         "deviceId": {
           "type": "string",
