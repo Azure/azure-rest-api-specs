@@ -902,9 +902,11 @@ union HighAvailabilityState {
 
   /** Standby server is being removed. */
   RemovingStandby: "RemovingStandby",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Standby server is being recreated. */
   RecreatingStandby: "RecreatingStandby",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  
+  /** Compute is being updated due to a failover. */
   ComputeUpdatingByFailover: "ComputeUpdatingByFailover",
 }
 
