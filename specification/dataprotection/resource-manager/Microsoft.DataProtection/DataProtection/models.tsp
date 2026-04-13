@@ -412,8 +412,10 @@ union AKSVolumeTypes {
 @added(Versions.v2026_04_01_preview)
 union BackupSolutionType {
   string,
+
   /** Logical backup type */
   LogicalBackup: "LogicalBackup",
+
   /** Physical backup type */
   PhysicalBackup: "PhysicalBackup",
 }
