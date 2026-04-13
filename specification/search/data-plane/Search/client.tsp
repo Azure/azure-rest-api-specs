@@ -309,7 +309,6 @@ model KnowledgeBaseRetrievalClientOptions {
   name: "KnowledgeBaseRetrievalClient",
   service: Search,
 })
-@clientInitialization(KnowledgeBaseRetrievalClientOptions)
 @clientNamespace("Azure.Search.Documents.KnowledgeBases")
 @clientNamespace("com.azure.search.documents.knowledgebases", "java")
 namespace KnowledgeBaseRetrievalClient {
@@ -319,6 +318,11 @@ namespace KnowledgeBaseRetrievalClient {
     retrieve is Search.KnowledgeRetrieval.retrieve;
   }
 }
+@@clientInitialization(KnowledgeBaseRetrievalClient,
+  {
+    parameters: KnowledgeBaseRetrievalClientOptions,
+  }
+);
 
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
@@ -381,6 +385,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
+@@protocolAPI(SearchClient.Documents.count, false, "csharp");
+@@convenientAPI(SearchClient.Documents.get, false, "csharp");
+@@protocolAPI(SearchClient.Documents.get, false, "csharp");
+@@access(KnowledgeBaseRetrievalClientOptions, Access.internal, "csharp");
+
 @@clientName(AIServicesAccountIdentity.subdomainUrl, "SubdomainUri", "csharp");
 @@alternateType(AIServicesAccountIdentity.subdomainUrl, url, "csharp");
 @@access(AnalyzeResult, Access.internal, "csharp");
@@ -2901,8 +2910,14 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerDataSourceType.OneLake, "ONELAKE", "python");
 @@clientName(SearchIndexerDataSourceType.SharePoint, "SHAREPOINT", "python");
 @@clientName(KnowledgeSourceKind.IndexedOneLake, "INDEXED_ONELAKE", "python");
-@@clientName(KnowledgeBaseActivityRecordType.indexedOneLake, "INDEXED_ONELAKE", "python");
-@@clientName(KnowledgeBaseReferenceType.indexedOneLake, "INDEXED_ONELAKE", "python");
+@@clientName(KnowledgeBaseActivityRecordType.indexedOneLake,
+  "INDEXED_ONELAKE",
+  "python"
+);
+@@clientName(KnowledgeBaseReferenceType.indexedOneLake,
+  "INDEXED_ONELAKE",
+  "python"
+);
 @@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
   "resourceId"
 );
