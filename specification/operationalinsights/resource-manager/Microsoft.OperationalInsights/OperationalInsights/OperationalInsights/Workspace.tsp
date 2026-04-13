@@ -97,7 +97,6 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailableServiceTiers_ListByWorkspace")
-  @list
   @get
   @action("availableServiceTiers")
   listByWorkspace is ArmResourceActionSync<
@@ -169,7 +168,6 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntelligencePacks_List")
-  @list
   @get
   @action("intelligencePacks")
   intelligencePacksList is ArmResourceActionSync<
