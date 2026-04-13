@@ -1,0 +1,15 @@
+name: Test GH Pool
+
+on: pull_request
+
+permissions: {}
+
+jobs:
+  test-gh-pool:
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, azsdk-pool-github-test]
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+      - name: hello
+        run: echo hello
