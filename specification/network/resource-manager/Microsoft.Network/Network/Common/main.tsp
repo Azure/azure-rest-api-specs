@@ -4288,7 +4288,7 @@ union VirtualNetworkPeeringLevel {
  * Defines the interconnect group profile for a VM or VMSS network profile.
  */
 @added(Versions.v2025_07_01)
-model VmInterconnectGroupProfile {
+model InterconnectGroupProfile {
   /** The reference to the interconnect group resource. */
   interconnectGroup?: SubResource;
 
