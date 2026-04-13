@@ -83,30 +83,42 @@ stimuli:
           dest: examples/2024-10-01-preview/Operations_List_MinimumSet_Gen.json
 
     graders:
+      # examples/2024-10-01-preview renamed to examples/2025-01-01
       - type: file-exists
         config:
           path: "examples/2025-01-01/Employees_Get_MaximumSet_Gen.json"
       - type: file-not-exists
         config:
           path: "examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json"
+      # New stable version added to enum
       - type: file-matches
         config:
           path: "main.tsp"
           pattern: "2025-01-01"
+      # Preview version removed from enum
       - type: file-not-matches
         config:
           path: "main.tsp"
           pattern: "2024-10-01-preview"
+      # Excluded @added(preview) types physically deleted
       - type: file-not-matches
         config:
           path: "employee.tsp"
           pattern: "workLocation\\?: WorkLocation;"
+      # Carried features have decorators updated to stable version
+      - type: file-matches
+        config:
+          path: "employee.tsp"
+          pattern: "@added\\(Versions\\.v2025_01_01\\)"
+      # No preview version references remain in employee.tsp
+      - type: file-not-matches
+        config:
+          path: "employee.tsp"
+          pattern: "v2024_10_01_preview"
       - type: prompt
         config:
           prompt: |
-            Check the modified employee.tsp and verify:
-            Preview features that are carried over to stable should have versioning decorators updated to `2025-01-01`.
-            The `workLocation` property and `WorkLocation` model should NOT be present.
+            Verify employee.tsp: `workLocation`/`WorkLocation` deleted; carried features' decorators reference `v2025_01_01` not preview.
           model: "claude-opus-4.6-1m"
           scoring: scale_1_5
           threshold: 0.5
@@ -120,7 +132,7 @@ scoring:
   weights:
     file-exists: 1.0
     file-not-exists: 1.0
-    file-matches: 1.0
-    file-not-matches: 2.0
+    file-matches: 2.0
+    file-not-matches: 3.0
     prompt: 1.0
   threshold: 0.7
