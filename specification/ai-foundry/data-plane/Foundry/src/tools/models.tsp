@@ -18,6 +18,7 @@ namespace Azure.AI.Projects {
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
+    fabric_iq_preview: "fabric_iq_preview",
   }
 
   // General availability tools:
@@ -786,6 +787,49 @@ namespace Azure.AI.Projects {
      * The WorkIQ tool parameters.
      */
     work_iq_preview: WorkIQPreviewToolParameters;
+  }
+
+  /** Approval requirement options for tool execution. */
+  union FabricIQApprovalRequirement {
+    /** Always require approval before executing actions. */
+    always: "always",
+
+    /** Never require approval before executing actions. */
+    never: "never",
+  }
+
+  model FabricIQPreviewToolParameters {
+    /**
+     * The ID of the FabricIQ project connection.
+     */
+    project_connection_id: string;
+
+    /**
+     * (Optional) The label of the FabricIQ MCP server to connect to.
+     */
+    server_label?: string;
+
+    /**
+     * (Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used.
+     */
+    server_url?: url;
+
+    /**
+     * (Optional) Whether the agent requires approval before executing actions. Default is always.
+     */
+    require_approval?: FabricIQApprovalRequirement = FabricIQApprovalRequirement.always;
+  }
+
+  model FabricIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'fabric_iq_preview'.
+     */
+    type: "fabric_iq_preview";
+    
+    /**
+     * The FabricIQ tool parameters.
+     */
+    fabric_iq_preview: FabricIQPreviewToolParameters;
   }
 
   /**
