@@ -2203,9 +2203,9 @@ model MongoMigrationProgressDetails {
 /**
  * Database Migration Base Resource properties.
  */
+@discriminator("kind")
 model DatabaseMigrationBaseProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
   kind: ResourceType;
 
   /**
