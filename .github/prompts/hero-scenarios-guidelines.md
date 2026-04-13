@@ -16,7 +16,8 @@
 
 ## Step 1 — Check for Existing Hero Scenarios
 
-Check whether the service already has a `hero-scenarios.md` file.
+Check whether the service already has a `hero-scenarios.md` file (the
+check should be case-insensitive — e.g., `HERO_SCENARIOS.md` counts).
 Look in the top-level service directory (e.g.,
 `specification/loadtestservice/hero-scenarios.md`) and in each spec subdirectory
 (e.g., `resource-manager/Microsoft.LoadTestService/loadtesting/hero-scenarios.md`,
@@ -267,19 +268,37 @@ The file should include:
    does, who it is for, and what problem it solves.
 2. **Hero scenarios** — the scenarios generated in Step 3.
 
-**If a `hero-scenarios.md` already exists**, post an inline code suggestion on
-the file using `create-pull-request-review-comment`. Place the
-comment at the end of the file and use a GitHub suggestion block so the
-author can apply it with one click:
+**If a `hero-scenarios.md` already exists**, check whether the file is
+part of the PR diff (i.e., listed in the changed files of the pull request).
 
-````
-```suggestion
-<the new scenario section as raw markdown>
-```
-````
+- **If the file IS in the PR diff**, post an inline code suggestion on
+  the file using `create-pull-request-review-comment`. Place the
+  comment at the end of the file and use a GitHub suggestion block so the
+  author can apply it with one click:
 
-Then submit the review using `submit-pull-request-review` with event
-`COMMENT` and a one-sentence body summarizing what was suggested.
+  ````
+  ```suggestion
+  <the new scenario section as raw markdown>
+  ```
+  ````
+
+  Then submit the review using `submit-pull-request-review` with event
+  `COMMENT` and a one-sentence body summarizing what was suggested.
+
+- **If the file is NOT in the PR diff**, use `add-comment` to post a
+  PR comment instead (review comments can only be placed on files in the
+  diff). Format it as:
+
+  ```
+  ## 📖 Suggested additions to hero-scenarios.md
+
+  > **Path:** `specification/{service}/{specDir}/hero-scenarios.md`
+  >
+  > The existing `hero-scenarios.md` does not cover the API surface in
+  > this PR. Consider adding the following scenarios:
+
+  <the new scenario section as raw markdown — do NOT wrap it in a code fence>
+  ```
 
 If the existing `hero-scenarios.md` already covers all the API surface in
 this PR, submit a `COMMENT` review with a one-sentence body confirming no
