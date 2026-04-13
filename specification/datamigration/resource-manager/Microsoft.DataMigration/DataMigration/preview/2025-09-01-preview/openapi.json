@@ -7749,11 +7749,16 @@
           ]
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseMigrationBaseProperties"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "DatabaseMigrationProperties"
     },
     "DatabaseMigrationPropertiesCosmosDbMongo": {
       "type": "object",
@@ -15369,7 +15374,8 @@
         "SqlMi",
         "SqlVm",
         "SqlDb",
-        "MongoToCosmosDbMongo"
+        "MongoToCosmosDbMongo",
+        "DatabaseMigrationProperties"
       ],
       "x-ms-enum": {
         "name": "ResourceType",
@@ -15394,6 +15400,11 @@
             "name": "MongoToCosmosDbMongo",
             "value": "MongoToCosmosDbMongo",
             "description": "MongoToCosmosDbMongo"
+          },
+          {
+            "name": "DatabaseMigrationProperties",
+            "value": "DatabaseMigrationProperties",
+            "description": "DatabaseMigrationProperties"
           }
         ]
       }
