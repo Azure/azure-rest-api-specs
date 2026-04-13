@@ -44,13 +44,6 @@ model ApplicationProperties {
   provisioningState?: ApplicationProvisioningState;
 
   /**
-   * The unique application identifier. This is a server-generated GUID assigned
-   * when the application is first created.
-   */
-  @visibility(Lifecycle.Read)
-  applicationId?: string;
-
-  /**
    * The ARM resource identifier of the ContainerApp associated with this application.
    */
   appResourceId?: string;
