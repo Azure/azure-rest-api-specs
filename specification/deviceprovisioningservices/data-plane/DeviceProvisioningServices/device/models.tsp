@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -11,6 +12,7 @@ namespace ProvisioningDeviceClient;
 /**
  * Enrollment status.
  */
+@lroStatus
 union EnrollmentStatus {
   string,
 
@@ -27,11 +29,13 @@ union EnrollmentStatus {
   /**
    * assigned
    */
+  @lroSucceeded
   assigned: "assigned",
 
   /**
    * failed
    */
+  @lroFailed
   failed: "failed",
 
   /**
@@ -176,6 +180,7 @@ model DeviceRegistrationResult {
    * Enrollment status.
    */
   @visibility(Lifecycle.Read)
+  @lroStatus
   status?: EnrollmentStatus;
 
   /**
