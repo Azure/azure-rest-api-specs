@@ -366,7 +366,11 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_UpdatePatch_AssetDQ: #{ $ref: "./examples/Rules_UpdatePatch_AssetDQ.json" } }
+    #{
+      Rules_UpdatePatch_AssetDQ: #{
+        $ref: "./examples/Rules_UpdatePatch_AssetDQ.json",
+      },
+    }
   )
   @doc("Partially updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
   op updateRulePatchForAssetDQ is RpcOperation<
@@ -904,7 +908,9 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Observation_Create_AssetDQ: #{ $ref: "./examples/Observation_Create_AssetDQ.json" },
+      Observation_Create_AssetDQ: #{
+        $ref: "./examples/Observation_Create_AssetDQ.json",
+      },
     }
   )
   @doc("Triggers a long-running observation job for a specific data asset. Data product is specified as optional query parameter.")
@@ -973,7 +979,9 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Observation_Delete_AssetDQ: #{ $ref: "./examples/Observation_Delete_AssetDQ.json" },
+      Observation_Delete_AssetDQ: #{
+        $ref: "./examples/Observation_Delete_AssetDQ.json",
+      },
     }
   )
   @doc("Deletes a specific observation associated with a data asset. Data product is specified as optional query parameter.")
@@ -1545,7 +1553,11 @@ namespace PurviewDataQuality {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-examples",
-    #{ Profile_Create_AssetDQ: #{ $ref: "./examples/Profile_Create_AssetDQ.json" } }
+    #{
+      Profile_Create_AssetDQ: #{
+        $ref: "./examples/Profile_Create_AssetDQ.json",
+      },
+    }
   )
   @doc("Creates or updates the profile for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @post
@@ -1605,7 +1617,11 @@ namespace PurviewDataQuality {
   @tag("Profiles")
   @extension(
     "x-ms-examples",
-    #{ Profile_Delete_AssetDQ: #{ $ref: "./examples/Profile_Delete_AssetDQ.json" } }
+    #{
+      Profile_Delete_AssetDQ: #{
+        $ref: "./examples/Profile_Delete_AssetDQ.json",
+      },
+    }
   )
   @doc("Deletes a specific profile run for a given data asset within a business domain. Data product is specified as optional query parameter.")
   op deleteProfileRunForAssetDQ is RpcOperation<
@@ -1800,7 +1816,11 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ AssetScores_Get_AssetDQ: #{ $ref: "./examples/AssetScores_Get_AssetDQ.json" } }
+    #{
+      AssetScores_Get_AssetDQ: #{
+        $ref: "./examples/AssetScores_Get_AssetDQ.json",
+      },
+    }
   )
   @doc("Retrieves asset scores for specified assets. Data product is specified as optional query parameter.")
   op getAssetScoresForAssetDQ is RpcOperation<
@@ -1947,7 +1967,9 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      LatestSnapshot_Get_AssetDQ: #{ $ref: "./examples/LatestSnapshot_Get_AssetDQ.json" },
+      LatestSnapshot_Get_AssetDQ: #{
+        $ref: "./examples/LatestSnapshot_Get_AssetDQ.json",
+      },
     }
   )
   @doc("Retrieves the latest data quality snapshot report for a given business domain. Data product is specified as optional query parameter.")
