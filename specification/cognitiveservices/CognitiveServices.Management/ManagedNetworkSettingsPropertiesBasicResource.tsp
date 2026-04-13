@@ -25,7 +25,6 @@ model ManagedNetworkSettingsPropertiesBasicResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedNetworkSettingsPropertiesBasicResource' does not support standalone delete – removed via parent or side-effect"
 @armResourceOperations(#{ omitTags: true })
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
@@ -63,8 +62,6 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    * Delete API for managed network settings of a cognitive services account.
    */
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_03_01)
-  @added(Versions.v2026_03_15_preview)
   @tag("ManagedNetwork")
   delete is ArmResourceDeleteWithoutOkAsync<ManagedNetworkSettingsPropertiesBasicResource>;
 
