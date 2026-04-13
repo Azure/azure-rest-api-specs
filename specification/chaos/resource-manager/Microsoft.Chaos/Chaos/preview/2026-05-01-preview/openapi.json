@@ -7897,19 +7897,42 @@
           },
           "readOnly": true
         },
-        "subscriptionZoneMap": {
-          "type": "object",
-          "description": "Per-subscription resolution map. Keys are subscription IDs, values\nare the logical zone identifier resolved for that subscription\n(e.g., `\"1\"`, `\"2\"`, `\"3\"`).\nEmpty when `mode` is `logical`.",
-          "additionalProperties": {
-            "type": "string"
+        "subscriptionZoneMappings": {
+          "type": "array",
+          "description": "Per-subscription zone resolution results. Each entry maps a subscription\nto the logical zone resolved from the requested physical zone.\nEmpty when `mode` is `logical`.",
+          "items": {
+            "$ref": "#/definitions/ZoneResolutionMapping"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "subscriptionId"
+          ]
         }
       },
       "required": [
         "mode",
         "requestedPhysicalZones",
-        "subscriptionZoneMap"
+        "subscriptionZoneMappings"
+      ]
+    },
+    "ZoneResolutionMapping": {
+      "type": "object",
+      "description": "Maps a single subscription to its resolved logical zone.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID (e.g., `\"6b052e15-03d3-4f17-b2e1-be7f07588291\"`).",
+          "readOnly": true
+        },
+        "logicalZone": {
+          "type": "string",
+          "description": "The logical availability zone resolved for this subscription\n(e.g., `\"1\"`, `\"2\"`, `\"3\"`).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "logicalZone"
       ]
     },
     "ZoneResolutionMode": {
