@@ -330,6 +330,7 @@ model OrganizationProperties {
   @doc("Company details.")
   companyDetails?: CompanyDetails;
 
+  @visibility(Lifecycle.Create)
   @doc("Link Organization")
   linkOrganization?: LinkOrganization;
 }
@@ -413,6 +414,7 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
+  @visibility(Lifecycle.Create)
   @secret
   @doc("Link organization token")
   token?: string;
