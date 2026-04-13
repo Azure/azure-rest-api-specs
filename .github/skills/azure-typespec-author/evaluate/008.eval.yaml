@@ -26,7 +26,7 @@ config:
 stimuli:
   - name: 001008-version-add-stable-after-stable
     prompt: |
-      Add a new stable version `2025-01-01` to my service. Exclude `workLocation` property and `WorkLocation` model. Carry other features.
+      Add a new stable version `2025-01-01` to my service. Carry over changes.
     environment:               # Stimulus-level env (merged with root)
       files:
         - src: fixtures/001008-version-add-stable-after-stable\employee.tsp
@@ -101,16 +101,11 @@ stimuli:
         config:
           path: "main.tsp"
           pattern: "2025-01-01"
-      - type: file-not-matches
-        config:
-          path: "employee.tsp"
-          pattern: "workLocation\\?: WorkLocation;"
       - type: prompt
         config:
           prompt: |
             Check the modified employee.tsp and verify:
             Changes are only related to introducing stable version `2025-01-01`.
-            The `workLocation` property and `WorkLocation` model should NOT be present.
           model: "claude-opus-4.6-1m"
           scoring: scale_1_5
           threshold: 0.5
@@ -122,7 +117,7 @@ stimuli:
 # How to aggregate scores
 scoring:
   weights:
-    file-exists: 1.0
-    file-matches: 1.0
+    file-exists: 2.0
+    file-matches: 3.0
     prompt: 1.0
   threshold: 0.7

@@ -26,7 +26,7 @@ config:
 stimuli:
   - name: 001007-version-add-stable-after-preview
     prompt: |
-      I want to add a new stable version `2025-01-01`. Carry over changes.
+      I want to add a new stable version `2025-01-01`. Exclude `workLocation` property and `WorkLocation` model. Carry other features.
     environment:               # Stimulus-level env (merged with root)
       files:
         - src: fixtures/001007-version-add-stable-after-preview\employee.tsp
@@ -97,11 +97,16 @@ stimuli:
         config:
           path: "main.tsp"
           pattern: "2024-10-01-preview"
+      - type: file-not-matches
+        config:
+          path: "employee.tsp"
+          pattern: "workLocation\\?: WorkLocation;"
       - type: prompt
         config:
           prompt: |
             Check the modified employee.tsp and verify:
             Preview features that are carried over to stable should have versioning decorators updated to `2025-01-01`.
+            The `workLocation` property and `WorkLocation` model should NOT be present.
           model: "claude-opus-4.6-1m"
           scoring: scale_1_5
           threshold: 0.5
@@ -116,6 +121,6 @@ scoring:
     file-exists: 1.0
     file-not-exists: 1.0
     file-matches: 1.0
-    file-not-matches: 1.0
+    file-not-matches: 2.0
     prompt: 1.0
   threshold: 0.7
