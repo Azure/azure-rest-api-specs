@@ -56,29 +56,39 @@ ${input:scope:How should the review be scoped? Enter a folder path (e.g., specif
    ```
    ## API Review: <service-name>/<api-version>
 
-   **Previous version:** <previous-version> (or "None — new service")
+   **Scope:** <folder-path> (or "all local changes")
+   **Previous version:** <previous-version> (or "None - new service")
 
    ### Directory Structure Issues
-   1. **[<Rule>]** <expected-path> vs. <actual-path> — <description and fix>
+   1. **[<Rule>]** <expected-path> vs. <actual-path> - <description and fix>
 
-   ### Blocking Issues — New (must fix)
-   1. **[NEW]** **[<Rule ID>]** `<file-path>` — line <N>
+   ### Blocking Issues - New (must fix)
+   1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
       **Issue:** <description>
       **Fix:** <exact code or JSON to apply>
 
-   ### Blocking Issues — Existing (pre-existing, should fix)
-   1. **[EXISTING]** **[<Rule ID>]** `<file-path>` — line <N>
+   ### Blocking Issues - Existing (pre-existing, should fix)
+   1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
       **Issue:** <description>
-      **Previous version:** Also present in `<previous-version-file-path>`
+      **Previous version:** Also present in `<previous-version-file-path>` - line <N>
       **Fix:** <exact code or JSON to apply>
 
-   ### Warnings — New / Existing
-   ...
+   ### Warnings - New (should fix)
+   1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N>
+      **Issue:** <description>
+      **Fix:** <suggestion>
+
+   ### Warnings - Existing (consider fixing)
+   1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N>
+      **Issue:** <description>
+      **Previous version:** Also present in `<previous-version-file-path>` - line <N>
+      **Fix:** <suggestion>
 
    ### Breaking Change Analysis
    ...
 
    ### Summary
+   - **Scope:** <folder-path> (or "all local changes")
    - Files reviewed: <count>
    - Directory structure violations: <count>
    - New blocking issues: <count>

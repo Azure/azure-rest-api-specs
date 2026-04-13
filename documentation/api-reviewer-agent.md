@@ -30,10 +30,10 @@ The repository includes two pre-built prompts that launch the agent with a guide
 To use them, open the Copilot Chat panel, click the **prompt picker** (the `/` icon or the
 attachment button), and select one of the prompts below:
 
-| Prompt                     | File                                            | What it does                                                                                                                                                                              |
-| -------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Review PR**              | `.github/prompts/review-pr.prompt.md`           | Asks for a PR number, URL, or shorthand, then runs a full read-only review of the PR's specification changes against Azure REST API Guidelines.                                          |
-| **Review Local Changes**   | `.github/prompts/review-local-changes.prompt.md`| Asks you to scope the review (a folder path or "all"), then validates your uncommitted local changes for directory structure, TypeSpec, RPC, and OpenAPI compliance.                       |
+| Prompt                   | File                                             | What it does                                                                                                                                                         |
+| ------------------------ | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Review PR**            | `.github/prompts/review-pr.prompt.md`            | Asks for a PR number, URL, or shorthand, then runs a full read-only review of the PR's specification changes against Azure REST API Guidelines.                      |
+| **Review Local Changes** | `.github/prompts/review-local-changes.prompt.md` | Asks you to scope the review (a folder path or "all"), then validates your uncommitted local changes for directory structure, TypeSpec, RPC, and OpenAPI compliance. |
 
 You can also invoke the same functionality by typing directly in the agent chat:
 
@@ -123,21 +123,21 @@ The report is organized by severity and origin:
 
 | Section                        | Meaning                                                                                                  |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| **Blocking Issues — New**      | Violations introduced in this PR. Must be fixed before merge.                                            |
-| **Blocking Issues — Existing** | Pre-existing violations carried forward from previous versions. Should be fixed but are not regressions. |
-| **Warnings — New**             | Non-blocking issues introduced in this PR. Should be fixed.                                              |
-| **Warnings — Existing**        | Pre-existing non-blocking issues. Consider fixing.                                                       |
+| **Blocking Issues - New**      | Violations introduced in this PR. Must be fixed before merge.                                            |
+| **Blocking Issues - Existing** | Pre-existing violations carried forward from previous versions. Should be fixed but are not regressions. |
+| **Warnings - New**             | Non-blocking issues introduced in this PR. Should be fixed.                                              |
+| **Warnings - Existing**        | Pre-existing non-blocking issues. Consider fixing.                                                       |
 | **Suggestions**                | Optional improvements.                                                                                   |
 | **Breaking Change Analysis**   | Summary of breaking changes vs. the previous API version.                                                |
 
 Each finding includes:
 
-- **PR URL** — shown in the report header and summary for easy navigation
-- **Rule ID** — e.g., `RPC-Put-V1-01`, `ARG001`, `TSP-2.1`
-- **File path and line number** — exact location (e.g., `L42` or `L10-L15`)
-- **JSON path** (for OpenAPI) — e.g., `$.paths['/widgets'].put.responses.200`
-- **Issue description** — what is wrong
-- **Fix suggestion** — exact code/JSON change to apply
+- **PR URL or Scope** - shown in the report header and summary. PR reviews show the PR URL; local-changes reviews show the folder path or "all local changes".
+- **Rule ID** - e.g., `RPC-Put-V1-01`, `ARG001`, `TSP-2.1`
+- **File path and line number** - exact location (e.g., `line 42` or `line 10-15`)
+- **JSON path** (for OpenAPI) - e.g., `$.paths['/widgets'].put.responses.200`
+- **Issue description** - what is wrong
+- **Fix suggestion** - exact code/JSON change to apply
 
 ### Posting Comments on a PR
 

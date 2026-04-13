@@ -59,30 +59,31 @@ Review pull request ${input:prReference:Enter the PR URL, number, or shorthand (
    ```
    ## API Review: <service-name>/<api-version>
 
-   **Previous version:** <previous-version> (or "None — new service")
+   **PR:** <PR-URL>
+   **Previous version:** <previous-version> (or "None - new service")
 
-   ### Blocking Issues — New (must fix before merge)
+   ### Blocking Issues - New (must fix before merge)
    These issues were introduced in this PR and must be resolved.
-   1. **[NEW]** **[<Rule ID>]** `<file-path>` — line <N> / JSON path `<path>`
+   1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
       **Issue:** <description>
       **Fix:** <exact code or JSON to apply>
 
-   ### Blocking Issues — Existing (pre-existing, should fix)
+   ### Blocking Issues - Existing (pre-existing, should fix)
    These issues also exist in the previous version and were not introduced by this PR.
-   1. **[EXISTING]** **[<Rule ID>]** `<file-path>` — line <N> / JSON path `<path>`
+   1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
       **Issue:** <description>
-      **Previous version:** Also present in `<previous-version-file-path>` at `<JSON path or line>`
+      **Previous version:** Also present in `<previous-version-file-path>` - line <N>
       **Fix:** <exact code or JSON to apply>
 
-   ### Warnings — New (should fix)
-   1. **[NEW]** **[<Rule ID>]** `<file-path>` — line <N>
+   ### Warnings - New (should fix)
+   1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N>
       **Issue:** <description>
       **Fix:** <suggestion>
 
-   ### Warnings — Existing (consider fixing)
-   1. **[EXISTING]** **[<Rule ID>]** `<file-path>` — line <N>
+   ### Warnings - Existing (consider fixing)
+   1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N>
       **Issue:** <description>
-      **Previous version:** Also present in `<previous-version-file-path>`
+      **Previous version:** Also present in `<previous-version-file-path>` - line <N>
       **Fix:** <suggestion>
 
    ### Suggestions (optional improvements)
@@ -96,7 +97,7 @@ Review pull request ${input:prReference:Enter the PR URL, number, or shorthand (
    ### Summary
    - **PR:** <PR-URL>
    - Files reviewed: <count>
-   - Previous version compared: <version> (or "N/A — new service")
+   - Previous version compared: <version> (or "N/A - new service")
    - **New blocking issues: <count>**
    - **Existing blocking issues: <count>**
    - New warnings: <count>

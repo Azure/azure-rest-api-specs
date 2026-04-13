@@ -308,7 +308,9 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - Every operation, parameter, property, model definition, and enum value **MUST** have a non-empty `description`.
 - Property descriptions **MUST NOT** simply repeat the property name (e.g. `"name": { "description": "name" }` is not acceptable).
-- Operation descriptions **SHOULD** start with a verb and end with a period (e.g. `"Gets the specified virtual machine."`).- PUT operation descriptions **MUST NOT** imply non-idempotent behavior. Avoid language like "Creates a new..." or "This will create a new version" — instead use "Creates or updates..." or "Creates or replaces..." to reflect PUT's idempotent, upsert semantics.- Start descriptions with a capital letter.
+- Operation descriptions **SHOULD** start with a verb and end with a period (e.g. `"Gets the specified virtual machine."`).
+- PUT operation descriptions **MUST NOT** imply non-idempotent behavior. Avoid language like "Creates a new..." or "This will create a new version" — instead use "Creates or updates..." or "Creates or replaces..." to reflect PUT's idempotent, upsert semantics.
+- Start descriptions with a capital letter.
 - Specify units for quantifiable properties (e.g. "The timeout in seconds.", "The size in megabytes.").
 - Property names for temporal or measurement values **SHOULD** encode the unit when the type alone does not make it clear (e.g., `startTimeInUTC`, `durationInMs`, `throughputMiBPerSec`, `backupTimeInMinutes`). This is especially important when not using `format: date-time` or ISO 8601 duration.
 - Avoid: "Gets or sets...", "Gets...", "Sets..." in property descriptions — describe what the property represents.

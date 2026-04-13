@@ -9,19 +9,19 @@ description: >-
   DO NOT USE FOR: generating SDKs, authoring new TypeSpec projects from scratch,
   or addressing CI failures - use the default agent or specialized skills for those tasks.
 tools:
-  - search/codebase
-  - web/fetch
-  - github/*
-  - web/githubRepo
-  - search
-  - read/problems
-  - search/changes
-  - search/usages
   - edit/editFiles
   - execute/getTerminalOutput
   - execute/runInTerminal
+  - github/*
+  - read/problems
   - read/terminalLastCommand
   - read/terminalSelection
+  - search
+  - search/changes
+  - search/codebase
+  - search/usages
+  - web/fetch
+  - web/githubRepo
 ---
 
 # Azure REST API Specification Reviewer
@@ -294,7 +294,7 @@ When a PR modifies multiple files or versions:
 
 ### Step 6: Report Findings
 
-**Line number requirement:** Before writing any finding, you MUST resolve the exact line number of the violation. Read the file content, count or search for the specific line, and cite it as `L<N>` (e.g., `L42`). For multi-line issues, cite the range `L<start>-L<end>`. Vague references like "near end of file", "around line N", or "in the middle of the file" are **forbidden** - every finding must have a verifiable line number. For OpenAPI JSON, also include the JSON path (e.g., `$.paths['/foo'].put.responses.200`).
+**Line number requirement:** Before writing any finding, you MUST resolve the exact line number of the violation. Read the file content, count or search for the specific line, and cite it as `line <N>` (e.g., `line 42`). For multi-line issues, cite the range `line <start>-<end>` (e.g., `line 10-15`). Vague references like "near end of file", "around line N", or "in the middle of the file" are **forbidden** - every finding must have a verifiable line number. For OpenAPI JSON, also include the JSON path (e.g., `$.paths['/foo'].put.responses.200`).
 
 Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[EXISTING]` based on the classification from Step 4a:
 
@@ -308,7 +308,7 @@ Organize your report as follows. Every issue **MUST** be tagged as `[NEW]` or `[
 
 These issues were **introduced in this PR** and must be resolved.
 
-1. **[NEW]** **[<Rule ID>]** `<file-path>` L`<N>` - JSON path `<path>` (if applicable)
+1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
    **Issue:** <clear description of the violation>
    **Fix:** <exact code or JSON change to apply>
 
@@ -316,22 +316,22 @@ These issues were **introduced in this PR** and must be resolved.
 
 These issues also exist in the previous version (`<previous-version>`) and were **not introduced by this PR**. They represent pre-existing technical debt.
 
-1. **[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` - JSON path `<path>` (if applicable)
+1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> / JSON path `<path>` (if applicable)
    **Issue:** <clear description of the violation>
-   **Previous version:** Also present in `<previous-version-file-path>` L`<N>`
+   **Previous version:** Also present in `<previous-version-file-path>` - line <N>
    **Fix:** <exact code or JSON change to apply>
 
 ### Warnings - New (should fix)
 
-1. **[NEW]** **[<Rule ID>]** `<file-path>` L`<N>`
+1. **[NEW]** **[<Rule ID>]** `<file-path>` - line <N>
    **Issue:** <description>
    **Fix:** <suggestion>
 
 ### Warnings - Existing (consider fixing)
 
-1. **[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>`
+1. **[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N>
    **Issue:** <description>
-   **Previous version:** Also present in `<previous-version-file-path>` L`<N>`
+   **Previous version:** Also present in `<previous-version-file-path>` - line <N>
    **Fix:** <suggestion>
 
 ### Suggestions (optional improvements)
@@ -373,7 +373,7 @@ After presenting the review findings to the human reviewer for approval:
    The code has shifted (e.g., lines were added/removed) and the existing comment now points to an outdated line, but the violation still exists at a new location. **Resolve the outdated comment** (to reduce noise) and **post a new comment at the correct line** with the updated finding. In the new comment, reference the resolved thread (e.g., "_(Updated from previous comment at \<url\> - line shifted due to code changes.)_").
 
    **Scenario C - Same finding, different line, comment was from a _different_ human reviewer:**
-   Another ARM reviewer (not this agent) posted the comment at the old line. Do **not** resolve their comment - it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "_The code referenced by this comment has moved. The same violation now appears at `<file>` L`<N>`. The issue is still unresolved._" This helps the author and reviewer find the right code without creating duplicate threads.
+   Another ARM reviewer (not this agent) posted the comment at the old line. Do **not** resolve their comment - it is their review thread and they may be tracking the conversation. Do **not** post a duplicate comment. Instead, **add a reply** to the existing thread noting the line shift: e.g., "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._" This helps the author and reviewer find the right code without creating duplicate threads.
 
    **Scenario D - No new findings beyond what existing comments already cover:**
    If every finding from the current review is already covered by an existing comment (same file, same or nearby line, same rule), **do not post any new comments**. Report to the human reviewer: "_All findings from this review are already covered by existing comments on the PR. No new comments are needed - the existing threads already highlight the required changes._" List the existing comment threads that match, **including the comment URL** for each so the reviewer can click through and verify.
@@ -383,12 +383,12 @@ After presenting the review findings to the human reviewer for approval:
    - List each addressed comment with its **clickable comment URL**, the rule it flagged, and confirmation that the code now complies. The URL lets the reviewer navigate directly to the original thread to verify the fix.
    - **Propose resolving** each addressed comment. Do **not** resolve without the engineer's explicit consent - the engineer may want to verify the fix themselves or leave the thread open for follow-up discussion.
    - If the engineer approves, resolve the comment and add a reply: "_This issue has been addressed in the latest changes. Resolving._"
-   - If the comment was from a different human reviewer, do **not** resolve it - instead, **add a reply** noting the fix: "_The violation flagged in this comment appears to have been addressed in the latest code changes at `<file>` L`<N>`. The original reviewer may want to verify and resolve._"
+   - If the comment was from a different human reviewer, do **not** resolve it - instead, **add a reply** noting the fix: "_The violation flagged in this comment appears to have been addressed in the latest code changes at `<file>` - line <N>. The original reviewer may want to verify and resolve._"
 
 4. Once approved and de-duplicated, post review comments on the PR using the GitHub tools - one comment per finding, attached to the specific file and **exact line number** where the violation occurs.
 5. Every posted comment **MUST** clearly tag the issue as `[NEW]` or `[EXISTING]` with an explanation of the classification (e.g., "This issue also exists in `2025-12-01-preview` at the same JSON path" or "Introduced in this PR - this property did not exist in the previous version").
 6. For `[NEW]` issues, include the severity level: `🔴 Blocking`, `🟡 Warning`, or `💡 Suggestion`.
-7. Use the format: ``**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` L`<N>` - <issue description>`` or ``**[EXISTING]** **[<Rule ID>]** `<file-path>` L`<N>` - <issue description>`` followed by the classification reasoning and suggested fix.
+7. Use the format: ``**[NEW] 🔴 Blocking** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` or ``**[EXISTING]** **[<Rule ID>]** `<file-path>` - line <N> - <issue description>`` followed by the classification reasoning and suggested fix.
 8. Prioritize posting **New** issues first, as these are the PR author's direct responsibility.
 9. **Report a reconciliation summary** to the human reviewer before posting:
    - Findings to **post as new comments** (with line numbers)
@@ -501,7 +501,13 @@ If no previous version exists (new service), classify all issues as **New** and 
 
 ### Step C7: Report Findings
 
-Present findings in the same structured report format as Step 6 in the PR workflow. Include:
+Present findings in the same structured report format as Step 6 in the PR workflow, with these additions for local-changes mode:
+
+- The report header uses `**Scope:** <folder-path>` (or "all local changes") instead of `**PR:**`.
+- Include a **Directory Structure Issues** section before the blocking issues section for any violations flagged in Step C4.
+- Include `Directory structure violations: <count>` in the Summary.
+
+Report contents:
 
 - Directory structure violations (flagged in Step C4)
 - TypeSpec compliance issues
