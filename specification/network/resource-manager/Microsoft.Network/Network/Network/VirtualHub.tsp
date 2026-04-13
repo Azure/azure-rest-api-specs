@@ -28,6 +28,7 @@ model VirtualHub extends TrackedResourceWithSettableIdOptionalLocation {
   @path
   @key("virtualHubName")
   @segment("virtualHubs")
+  @pattern("^[a-zA-Z0-9]([a-zA-Z0-9_.-]{0,62}[a-zA-Z0-9])?$")
   name: string;
 
   /**
