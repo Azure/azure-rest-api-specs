@@ -60,9 +60,24 @@ model FleetNamespaceProperties {
    */
   adminGroup: string;
 
+  /** List of compliance frameworks applicable to this fleet namespace. */
+  @added(Versions.v2026_03_30_preview)
+  @Azure.ResourceManager.identifiers(#["framework"])
+  compliance?: ComplianceFramework[];
+
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: FleetNamespaceProvisioningState;
+}
+
+/** Compliance framework configuration. */
+@added(Versions.v2026_03_30_preview)
+model ComplianceFramework {
+  /** The compliance framework name. */
+  framework: string;
+
+  /** The enforcement mode for the compliance framework. */
+  enforcementMode: string;
 }
 
 /** The resource provisioning state. */
