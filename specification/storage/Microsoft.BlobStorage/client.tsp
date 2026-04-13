@@ -5,6 +5,7 @@ using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 using Storage.Blob;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Customizations;
 
@@ -269,6 +270,174 @@ enum BlobDeleteTypeGo {
   /** Deprecated */
   None: "None",
 }
+/** Represents a blob prefix. */
+@clientName("BlobPrefix", "go")
+model BlobPrefixGo {
+  /** The blob name. */
+  @Xml.name("Name") name: string;
+  properties: BlobProperties;
+}
+/** The properties of a blob. */
+@Xml.name("Properties")
+@clientName("BlobProperties", "go")
+model BlobPropertiesGo {
+  /** The date-time the blob was created in RFC1123 format. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("Creation-Time")
+  creationTime?: utcDateTime;
+
+  /** The date-time the blob was last modified in RFC1123 format. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("Last-Modified")
+  lastModified: utcDateTime;
+
+  /** The blob ETag. */
+  @Xml.name("Etag") eTag: Azure.Core.eTag;
+
+  /** The content length of the blob. */
+  @Xml.name("Content-Length") contentLength?: int64;
+
+  /** The content type of the blob. */
+  @Xml.name("Content-Type") contentType?: string;
+
+  /** The content encoding of the blob. */
+  @Xml.name("Content-Encoding") contentEncoding?: string;
+
+  /** The content language of the blob. */
+  @Xml.name("Content-Language") contentLanguage?: string;
+
+  /** The content MD5 of the blob. */
+  @Xml.name("Content-MD5") contentMd5?: bytes;
+
+  /** The content disposition of the blob. */
+  @Xml.name("Content-Disposition") contentDisposition?: string;
+
+  /** The cache control of the blob. */
+  @Xml.name("Cache-Control") cacheControl?: string;
+
+  /** The sequence number of the blob. */
+  @Xml.name("x-ms-blob-sequence-number") blobSequenceNumber?: int64;
+
+  /** The blob type. */
+  @Xml.name("BlobType") blobType?: BlobType;
+
+  /** The lease status of the blob. */
+  @Xml.name("LeaseStatus") leaseStatus?: LeaseStatus;
+
+  /** The lease state of the blob. */
+  @Xml.name("LeaseState") leaseState?: LeaseState;
+
+  /** The lease duration of the blob. */
+  @Xml.name("LeaseDuration") leaseDuration?: LeaseDuration;
+
+  /** The copy ID of the blob. */
+  @Xml.name("CopyId") copyId?: string;
+
+  /** The copy status of the blob. */
+  @Xml.name("CopyStatus") copyStatus?: CopyStatus;
+
+  /** The copy source of the blob. */
+  @Xml.name("CopySource") copySource?: string;
+
+  /** The copy progress of the blob. */
+  @Xml.name("CopyProgress") copyProgress?: string;
+
+  /** The copy completion time of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("CopyCompletionTime")
+  copyCompletionTime?: utcDateTime;
+
+  /** The copy status description of the blob. */
+  @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
+
+  /** Whether the blob is encrypted on the server. */
+  @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
+
+  /** Whether the blob is incremental copy. */
+  @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
+
+  /** The name of the destination snapshot. */
+  @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
+
+  /** The time the blob was deleted. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("DeletedTime")
+  deletedTime?: utcDateTime;
+
+  /** The remaining retention days of the blob. */
+  @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
+
+  /** The access tier of the blob. */
+  @Xml.name("AccessTier") accessTier?: AccessTier;
+
+  /** Whether the access tier is inferred. */
+  @Xml.name("AccessTierInferred") accessTierInferred?: boolean;
+
+  /** The archive status of the blob. */
+  @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
+
+  /** The smart access tier of the blob. */
+  @added(Versions.v2026_06_06)
+  @Xml.name("SmartAccessTier")
+  smartAccessTier?: AccessTier;
+
+  /** Customer provided key sha256 */
+  @Xml.name("CustomerProvidedKeySha256") customerProvidedKeySha256?: string;
+
+  /** The encryption scope of the blob. */
+  @Xml.name("EncryptionScope") encryptionScope?: string;
+
+  /** The access tier change time of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("AccessTierChangeTime")
+  accessTierChangeTime?: utcDateTime;
+
+  /** The number of tags for the blob. */
+  @Xml.name("TagCount") tagCount?: int32;
+
+  /** The expire time of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("Expiry-Time")
+  expiresOn?: utcDateTime;
+
+  /** Whether the blob is sealed. */
+  @Xml.name("Sealed")
+  isSealed?: boolean;
+
+  /** The rehydrate priority of the blob. */
+  @Xml.name("RehydratePriority") rehydratePriority?: RehydratePriority;
+
+  /** The last access time of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("LastAccessTime")
+  lastAccessedOn?: utcDateTime;
+
+  /** The immutability policy until time of the blob. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @Xml.name("ImmutabilityPolicyUntilDate")
+  immutabilityPolicyExpiresOn?: utcDateTime;
+
+  /** The immutability policy mode of the blob. */
+  @Xml.name("ImmutabilityPolicyMode")
+  immutabilityPolicyMode?: ImmutabilityPolicyMode;
+
+  /** Whether the blob is under legal hold. */
+  @Xml.name("LegalHold") legalHold?: boolean;
+
+  @Xml.name("Acl") ACL?: string;
+  @Xml.name("Group") group?: string;
+  @Xml.name("Owner") owner?: string;
+  @Xml.name("Permissions") permissions?: string;
+  @Xml.name("ResourceType") resourceType?: string;
+}
 /** The algorithm used to produce the encryption key hash. Currently, the only accepted value is \"AES256\". Must be provided if the x-ms-encryption-key header is provided. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum EncryptionAlgorithmTypeGo {
@@ -332,7 +501,8 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(BlobItem.name, string, "go");
 @@alternateType(BlobItem.metadata, Record<string>, "go");
 @@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "go");
-@@alternateType(BlobPrefix.name, string, "go");
+@@alternateType(BlobPrefix, BlobPrefixGo, "go");
+@@alternateType(BlobProperties, BlobPropertiesGo, "go");
 @@alternateType(Block.name, string, "go");
 @@alternateType(BlockIdParameter.blockid, string, "go");
 @@alternateType(BlockLookupList.committed, string[], "go");
@@ -362,6 +532,8 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(UserDelegationKey.value, string, "go");
 @@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
 @@clientName(BlobContainerClient, "ContainerClient", "go");
+@@clientName(BlobCopySourceTags.Copy, "COPY", "go");
+@@clientName(BlobCopySourceTags.Replace, "REPLACE", "go");
 @@clientName(BlobServiceClient, "ServiceClient", "go");
 @@clientName(BlobDeleteTypeGo, "DeleteType", "go");
 @@clientName(BlobExpiryOptions, "ExpiryOptions", "go");
@@ -371,6 +543,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(BlobServiceProperties.cors, "CORS", "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
+@@clientName(DenyEncryptionScopeOverrideResponseHeader.preventEncryptionScopeOverride, "DenyEncryptionScopeOverride", "go");
 @@clientName(Error, "StorageError", "go");
 @@clientName(EncryptionAlgorithmTypeGo, "EncryptionAlgorithmType", "go");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "go");

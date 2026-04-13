@@ -1555,7 +1555,14 @@ alias BlobContentLengthRequired = {
 };
 
 /** The deny encryption scope override response header. */
-alias DenyEncryptionScopeOverride = {
+alias DenyEncryptionScopeOverrideParameter = {
+  /** If a blob has a lease and the lease is of infinite duration then the value of this header is set to true, otherwise it is set to false. */
+  @header("x-ms-deny-encryption-scope-override")
+  preventEncryptionScopeOverride?: boolean;
+};
+
+/** The deny encryption scope override response header. */
+alias DenyEncryptionScopeOverrideResponseHeader = {
   /** If a blob has a lease and the lease is of infinite duration then the value of this header is set to true, otherwise it is set to false. */
   @header("x-ms-deny-encryption-scope-override")
   preventEncryptionScopeOverride?: boolean;

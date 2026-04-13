@@ -263,7 +263,7 @@ interface Container {
       @header("x-ms-default-encryption-scope")
       defaultEncryptionScope?: string;
 
-      ...DenyEncryptionScopeOverride;
+      ...DenyEncryptionScopeOverrideParameter;
     },
     {
       @statusCode statusCode: 201;
@@ -303,7 +303,7 @@ interface Container {
       @header("x-ms-default-encryption-scope")
       defaultEncryptionScope?: string;
 
-      ...DenyEncryptionScopeOverride;
+      ...DenyEncryptionScopeOverrideResponseHeader;
 
       /** Indicates whether version level worm is enabled on a container */
       @header("x-ms-immutable-storage-with-versioning-enabled")
