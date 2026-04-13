@@ -822,17 +822,17 @@ namespace Azure.AI.Projects {
 
   model FabricIQPreviewToolParameters {
     /**
-     * The ID of the Fabric IQ project connection.
+     * The ID of the FabricIQ project connection.
      */
     project_connection_id: string;
 
     /**
-     * (Optional) The label of the Fabric IQ MCP server to connect to.
+     * (Optional) The label of the FabricIQ MCP server to connect to.
      */
     server_label?: string;
 
     /**
-     * (Optional) The URL of the Fabric IQ MCP server. If not provided, the URL from the project connection will be used.
+     * (Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used.
      */
     server_url?: url;
 
@@ -849,7 +849,7 @@ namespace Azure.AI.Projects {
     type: "fabric_iq_preview";
     
     /**
-     * The Fabric IQ tool parameters.
+     * The FabricIQ tool parameters.
      */
     fabric_iq_preview: FabricIQPreviewToolParameters;
   }
