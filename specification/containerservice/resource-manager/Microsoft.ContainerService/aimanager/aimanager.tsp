@@ -38,10 +38,6 @@ model AIManagerProperties {
 
   @doc("Delete options of the AI Manager.")
   deletePolicy?: DeletePolicy;
-
-  @visibility(Lifecycle.Read)
-  @doc("The underlying cluster IDs of the AI Manager.")
-  clusterIds?: string[];
 }
 
 @doc("Delete options of the AI Manager.")
