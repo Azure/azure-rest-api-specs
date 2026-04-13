@@ -53,3 +53,14 @@ using Microsoft.CloudHealth;
   "EntityDynamicThresholdSensitivity",
   "csharp"
 );
+
+@@clientName(DataAnnotationRequest, "EntityDataAnnotationRequest", "csharp");
+@@clientName(DataAnnotation, "EntityDataAnnotation", "csharp");
+@@clientName(GetDataAnnotationsRequest,
+  "EntityGetDataAnnotationsRequest",
+  "csharp"
+);
+@@clientName(GetDataAnnotationsResponse,
+  "EntityGetDataAnnotationsResponse",
+  "csharp"
+);

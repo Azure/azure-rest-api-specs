@@ -1281,7 +1281,55 @@ model HealthReportRequest {
   additionalContext?: string4096;
 }
 
-// TODO: Add DataAnnotationsRequest here.
+@added(Versions.v2026_05_01_preview)
+@doc("Request body for adding a data annotation to an entity")
+model DataAnnotationRequest {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for dynamic annotation properties"
+  @doc("Annotation properties as a dynamic key-value pair bag")
+  properties: Record<string>;
+
+  @doc("Optional description of the annotation")
+  description?: string4096;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("A single data annotation on an entity")
+model DataAnnotation {
+  @doc("Server-assigned unique identifier for the annotation")
+  @format("uuid")
+  annotationId: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for dynamic annotation properties"
+  @doc("Annotation properties as a dynamic key-value pair bag")
+  properties: Record<string>;
+
+  @doc("Optional description of the annotation")
+  description?: string4096;
+
+  @doc("Timestamp when the annotation was created")
+  createdAt: utcDateTime;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Request body for querying data annotations")
+model GetDataAnnotationsRequest {
+  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified.")
+  startAt?: utcDateTime;
+
+  @doc("End of UTC time range. Defaults to now if not specified.")
+  endAt?: utcDateTime;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Response containing data annotations for an entity")
+model GetDataAnnotationsResponse {
+  @doc("Name of the entity")
+  entityName: entityName;
+
+  @doc("List of data annotations")
+  @identifiers(#["annotationId"])
+  annotations: DataAnnotation[];
+}
 
 @added(Versions.v2026_01_01_preview)
 @doc("Evaluation rules for the health report")
@@ -1423,10 +1471,25 @@ interface Entities {
     HealthReportRequest
   >;
 
-  // TODO: Add new data annotations get and set POST here.
-  // -- Return types?
-  // Add = 'ArmResourceActionNoContentSync',
-  // Get = 'ArmResourceActionSync' (returns JSON body of annotations)
+  @added(Versions.v2026_05_01_preview)
+  @doc("Add a data annotation to an entity")
+  @post
+  @action("addDataAnnotation")
+  addDataAnnotation is ArmResourceActionSync<
+    Entity,
+    DataAnnotationRequest,
+    DataAnnotation
+  >;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Retrieve data annotations for an entity")
+  @post
+  @action("getDataAnnotations")
+  getDataAnnotations is ArmResourceActionSync<
+    Entity,
+    GetDataAnnotationsRequest,
+    GetDataAnnotationsResponse
+  >;
 }
 
 @armResourceOperations(Relationship)
