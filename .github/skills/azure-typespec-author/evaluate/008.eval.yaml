@@ -1,0 +1,128 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability               # capability | regression
+
+# Root-level environment (merged into all stimuli)
+environment:
+  skills:
+    - ../SKILL.md
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
+      cwd: ./
+      timeout: 50000
+
+# Execution configuration
+config:
+  runs: 1                      # Trials per stimulus
+  timeout: 1800                # Seconds per trial
+  model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
+  executor: copilot-sdk        # Which executor to use
+
+# Test cases
+stimuli:
+  - name: 001008-version-add-stable-after-stable
+    prompt: |
+      Add a new stable version `2025-01-01` to my service. Exclude `workLocation` property and `WorkLocation` model. Carry other features.
+    environment:               # Stimulus-level env (merged with root)
+      files:
+        - src: fixtures/001008-version-add-stable-after-stable\employee.tsp
+          dest: employee.tsp
+        - src: fixtures/001008-version-add-stable-after-stable\main.tsp
+          dest: main.tsp
+        - src: fixtures/001008-version-add-stable-after-stable\shared.tsp
+          dest: shared.tsp
+        - src: fixtures/001008-version-add-stable-after-stable\tspconfig.yaml
+          dest: tspconfig.yaml
+        - src: fixtures/001008-version-add-stable-after-stable\package.json
+          dest: package.json
+        - src: fixtures/001008-version-add-stable-after-stable\readme.md
+          dest: readme.md
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+          dest: examples/2021-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+          dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+          dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_Delete_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_Delete_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_Get_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_Get_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+          dest: examples/2024-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Employees_Update_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Employees_Update_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Operations_List_MaximumSet_Gen.json
+          dest: examples/2024-10-01/Operations_List_MaximumSet_Gen.json
+        - src: fixtures/001008-version-add-stable-after-stable\examples\2024-10-01\Operations_List_MinimumSet_Gen.json
+          dest: examples/2024-10-01/Operations_List_MinimumSet_Gen.json
+
+    graders:
+      - type: file-exists
+        config:
+          path: "examples/2024-10-01/Employees_Get_MaximumSet_Gen.json"
+      - type: file-exists
+        config:
+          path: "examples/2025-01-01/Employees_Get_MaximumSet_Gen.json"
+      - type: file-matches
+        config:
+          path: "main.tsp"
+          pattern: "2021-10-01"
+      - type: file-matches
+        config:
+          path: "main.tsp"
+          pattern: "2024-10-01"
+      - type: file-matches
+        config:
+          path: "main.tsp"
+          pattern: "2025-01-01"
+      - type: file-not-matches
+        config:
+          path: "employee.tsp"
+          pattern: "workLocation\\?: WorkLocation;"
+      - type: prompt
+        config:
+          prompt: |
+            Check the modified employee.tsp and verify:
+            Changes are only related to introducing stable version `2025-01-01`.
+            The `workLocation` property and `WorkLocation` model should NOT be present.
+          model: "claude-opus-4.6-1m"
+          scoring: scale_1_5
+          threshold: 0.5
+    constraints:
+      max_turns: 10
+      max_tokens: 5000
+      expect_tools: ["edit","azsdk_run_typespec_validation"]
+
+# How to aggregate scores
+scoring:
+  weights:
+    file-exists: 1.0
+    file-matches: 1.0
+    prompt: 1.0
+  threshold: 0.7
