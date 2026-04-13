@@ -20,8 +20,6 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model ElasticAccount is TrackedResource<ElasticAccountProperties> {
   ...ResourceNameParameter<
     Resource = ElasticAccount,
@@ -37,8 +35,6 @@ model ElasticAccount is TrackedResource<ElasticAccountProperties> {
  * NetApp elastic account properties
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ElasticAccountProperties {
@@ -58,8 +54,6 @@ model ElasticAccountProperties {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model ElasticEncryption {
   /** The encryption keySource (provider). Possible values (case-insensitive): Microsoft.NetApp, Microsoft.KeyVault */
   keySource?: KeySource;
@@ -75,8 +69,6 @@ model ElasticEncryption {
  * Properties of key vault.
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ElasticKeyVaultProperties {
@@ -107,8 +99,6 @@ model ElasticKeyVaultProperties {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 union ElasticKeyVaultStatus {
   string,
 
@@ -134,8 +124,6 @@ union ElasticKeyVaultStatus {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model ElasticEncryptionIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
   @visibility(Lifecycle.Read)
@@ -154,8 +142,6 @@ model ElasticEncryptionIdentity {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   federatedClientId?: string;
 }
 
@@ -165,22 +151,16 @@ interface ElasticAccounts {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   get is ArmResourceRead<ElasticAccount>;
 
   /** Create or update the specified NetApp Elastic Account within the resource group */
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticAccount>;
 
   /** Patch the specified NetApp Elastic Account */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   @patch(#{ implicitOptionality: true })
@@ -198,22 +178,16 @@ interface ElasticAccounts {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticAccount>;
 
   /** List and describe all NetApp elastic accounts in the resource group. */
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   listByResourceGroup is ArmResourceListByParent<ElasticAccount>;
 
   /** List and describe all NetApp elastic accounts in the subscription. */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   listBySubscription is ArmListBySubscription<ElasticAccount>;

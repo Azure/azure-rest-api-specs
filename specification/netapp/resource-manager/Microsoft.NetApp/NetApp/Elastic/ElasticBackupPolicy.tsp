@@ -20,8 +20,6 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @parentResource(ElasticAccount)
 model ElasticBackupPolicy is TrackedResource<ElasticBackupPolicyProperties> {
   ...ResourceNameParameter<
@@ -37,8 +35,6 @@ model ElasticBackupPolicy is TrackedResource<ElasticBackupPolicyProperties> {
  * Elastic Backup Policy properties
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ElasticBackupPolicyProperties {
@@ -75,8 +71,6 @@ model ElasticBackupPolicyProperties {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 union ElasticBackupPolicyState {
   string,
 
@@ -95,8 +89,6 @@ interface ElasticBackupPolicies {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   get is ArmResourceRead<ElasticBackupPolicy>;
 
   /**
@@ -105,16 +97,12 @@ interface ElasticBackupPolicies {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupPolicy>;
 
   /**
    * Patch the specified NetApp Elastic Backup Policy
    */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   update is ArmCustomPatchAsync<
@@ -131,15 +119,11 @@ interface ElasticBackupPolicies {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupPolicy>;
   /**
    * List and describe all Elastic Backup Policies in the elastic account.
    */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupPolicy>;

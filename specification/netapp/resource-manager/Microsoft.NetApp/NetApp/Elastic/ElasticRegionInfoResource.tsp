@@ -20,8 +20,6 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @parentResource(SubscriptionLocationResource)
 model ElasticRegionInfoResource
   is Azure.ResourceManager.ProxyResource<ElasticRegionInfo> {
@@ -37,8 +35,6 @@ model ElasticRegionInfoResource
  * Contains information about the logical availability zones available within a specific Azure region for a given subscription, used to determine where elastic resources can be provisioned.
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ElasticRegionInfo {
@@ -74,14 +70,10 @@ union ZoneAvailabilityStatus {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 model ElasticRegionInfosList is Azure.Core.Page<ElasticRegionInfoResource>;
 
 @armResourceOperations
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 interface ElasticRegionInfoResources {

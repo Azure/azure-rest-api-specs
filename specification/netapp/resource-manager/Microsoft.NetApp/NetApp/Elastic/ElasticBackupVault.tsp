@@ -20,8 +20,6 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @parentResource(ElasticAccount)
 model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
   ...ResourceNameParameter<
@@ -37,8 +35,6 @@ model ElasticBackupVault is TrackedResource<ElasticBackupVaultProperties> {
  * Elastic Backup Vault properties
  */
 @added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
 model ElasticBackupVaultProperties {
@@ -57,8 +53,6 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   get is ArmResourceRead<ElasticBackupVault>;
 
   /**
@@ -67,16 +61,12 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupVault>;
 
   /**
    * Patch the specified NetApp Elastic Backup Vault
    */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   update is ArmCustomPatchAsync<
@@ -95,15 +85,11 @@ interface ElasticBackupVaults {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupVault>;
   /**
    * List and describe all Elastic Backup Vaults in the elastic account.
    */
   @added(Versions.v2025_12_15_preview)
-  @removed(Versions.v2026_01_01)
-  @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupVault>;
