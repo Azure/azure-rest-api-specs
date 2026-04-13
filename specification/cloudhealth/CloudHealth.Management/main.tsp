@@ -1286,7 +1286,7 @@ model HealthReportRequest {
 model DataAnnotationRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for dynamic annotation properties"
   @doc("Annotation properties as a dynamic key-value pair bag")
-  properties: Record<string>;
+  annotationProperties: Record<string>;
 
   @doc("Optional description of the annotation")
   description?: string4096;
@@ -1296,11 +1296,11 @@ model DataAnnotationRequest {
 @doc("A single data annotation on an entity")
 model DataAnnotation {
   @doc("Server-assigned unique identifier for the annotation")
-  annotationId: uuid;
+  annotationId: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for dynamic annotation properties"
   @doc("Annotation properties as a dynamic key-value pair bag")
-  properties: Record<string>;
+  annotationProperties: Record<string>;
 
   @doc("Optional description of the annotation")
   description?: string4096;

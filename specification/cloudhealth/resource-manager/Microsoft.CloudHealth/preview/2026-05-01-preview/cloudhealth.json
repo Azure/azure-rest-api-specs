@@ -2247,11 +2247,6 @@
         "authenticationKind"
       ]
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "AzureMonitorWorkspaceResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -2442,10 +2437,10 @@
       "description": "A single data annotation on an entity",
       "properties": {
         "annotationId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Server-assigned unique identifier for the annotation"
         },
-        "properties": {
+        "annotationProperties": {
           "type": "object",
           "description": "Annotation properties as a dynamic key-value pair bag",
           "additionalProperties": {
@@ -2464,7 +2459,7 @@
       },
       "required": [
         "annotationId",
-        "properties",
+        "annotationProperties",
         "createdAt"
       ]
     },
@@ -2472,7 +2467,7 @@
       "type": "object",
       "description": "Request body for adding a data annotation to an entity",
       "properties": {
-        "properties": {
+        "annotationProperties": {
           "type": "object",
           "description": "Annotation properties as a dynamic key-value pair bag",
           "additionalProperties": {
@@ -2485,7 +2480,7 @@
         }
       },
       "required": [
-        "properties"
+        "annotationProperties"
       ]
     },
     "DependenciesAggregationUnit": {
