@@ -53,6 +53,7 @@ input-file:
   - stable/2025-07-01/virtualNetwork.json
   - stable/2025-07-01/virtualNetworkAppliance.json
   - stable/2025-07-01/virtualWan.json
+  - stable/2025-07-01/interconnectGroup.json
   - stable/2018-10-01/vmssNetwork.json
 suppressions:
   - code: ParametersInPointGet

@@ -5748,6 +5748,30 @@
         ]
       }
     },
+    "InterconnectGroupScope": {
+      "type": "string",
+      "description": "Scope of an interconnect group resource.",
+      "enum": [
+        "None",
+        "InfiniBand"
+      ],
+      "x-ms-enum": {
+        "name": "InterconnectGroupScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No interconnect group scope."
+          },
+          {
+            "name": "InfiniBand",
+            "value": "InfiniBand",
+            "description": "InfiniBand interconnect group scope."
+          }
+        ]
+      }
+    },
     "IpAllocationType": {
       "type": "string",
       "description": "IpAllocation type.",
@@ -7962,6 +7986,30 @@
             "name": "Staging",
             "value": "Staging",
             "description": "Staging"
+          }
+        ]
+      }
+    },
+    "SubgroupProfileScope": {
+      "type": "string",
+      "description": "Scope of the subgroup profile.",
+      "enum": [
+        "None",
+        "VerticalConnect"
+      ],
+      "x-ms-enum": {
+        "name": "SubgroupProfileScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No subgroup profile scope."
+          },
+          {
+            "name": "VerticalConnect",
+            "value": "VerticalConnect",
+            "description": "High-bandwidth, low-latency inter-subgroup communication."
           }
         ]
       }

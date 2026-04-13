@@ -1,0 +1,39 @@
+{
+  "title": "Update interconnect group tags",
+  "operationId": "InterconnectGroups_UpdateTags",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "interconnectGroupName": "test-ig",
+    "properties": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-ig",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/interconnectGroups/test-ig",
+        "type": "Microsoft.Network/interconnectGroups",
+        "location": "eastus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "scope": "InfiniBand",
+          "subgroupProfile": {
+            "vmSize": "Standard_ND128isr_NDR_GB200_v6",
+            "scope": "VerticalConnect",
+            "size": 18
+          }
+        }
+      }
+    }
+  }
+}

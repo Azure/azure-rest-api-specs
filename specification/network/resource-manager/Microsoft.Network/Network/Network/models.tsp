@@ -26085,3 +26085,156 @@ model VirtualNetworkApplianceIpConfigurationProperties {
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
 @@added(DisablePeeringRoute, Versions.v2025_07_01);
 @@added(RouteTablePropertiesFormat.disablePeeringRoute, Versions.v2025_07_01);
+
+/**
+ * Scope of an interconnect group resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+union InterconnectGroupScope {
+  string,
+
+  /** No interconnect group scope. */
+  None: "None",
+
+  /** InfiniBand interconnect group scope. */
+  InfiniBand: "InfiniBand",
+}
+
+/**
+ * Scope of the subgroup profile.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+union SubgroupProfileScope {
+  string,
+
+  /** No subgroup profile scope. */
+  None: "None",
+
+  /** High-bandwidth, low-latency inter-subgroup communication. */
+  VerticalConnect: "VerticalConnect",
+}
+
+/**
+ * Subgroup profile of the interconnect group resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+model SubgroupProfile {
+  /** VM size of the subgroup profile of the interconnect group resource. */
+  vmSize?: string;
+
+  /** Scope of the subgroup profile of the interconnect group resource. */
+  scope?: SubgroupProfileScope;
+
+  /** Size of the subgroup profile of the interconnect group resource. */
+  @minValue(0)
+  size?: int32;
+}
+
+/**
+ * Interconnect group properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+model InterconnectGroupPropertiesFormat {
+  /** Scope of interconnect group resource. */
+  scope?: InterconnectGroupScope;
+
+  /** A list of subgroups of the interconnect group. */
+  @visibility(Lifecycle.Read)
+  subgroups?: Subgroup[];
+
+  /** The provisioning state of the interconnect group resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** The resource GUID property of the interconnect group resource. */
+  @visibility(Lifecycle.Read)
+  resourceGuid?: string;
+
+  /** The subgroup profile of the interconnect group resource. */
+  subgroupProfile?: SubgroupProfile;
+}
+
+/**
+ * Properties of subgroup.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+model SubgroupProperties {
+  /** The unique identifier defined by downstream services. */
+  @visibility(Lifecycle.Read)
+  internalSubgroupId?: string;
+
+  /** The availability zone mapping for the subgroup. */
+  @visibility(Lifecycle.Read)
+  logicalToPhysicalAvailabilityZoneMapping?: LogicalToPhysicalAvailabilityZoneMapping;
+
+  /** The reference to an interconnect block resource. */
+  @visibility(Lifecycle.Read)
+  interconnectBlock?: SubResource;
+
+  /** A list of virtual machine references. */
+  @visibility(Lifecycle.Read)
+  virtualMachines?: SubResource[];
+
+  /** The provisioning state of the subgroup. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Logical to physical availability zone mapping.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+model LogicalToPhysicalAvailabilityZoneMapping {
+  /** The logical availability zone. */
+  logicalZone?: string;
+
+  /** The physical availability zone. */
+  physicalZone?: string;
+}
+
+/**
+ * Represents node availability information for all subgroups within an InterconnectGroup.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+model InterconnectGroupNodeAvailability {
+  /** The list of subgroup node availability entries. */
+  subgroups?: SubgroupNodeAvailabilityEntry[];
+}
+
+/**
+ * Represents the node availability information for a single subgroup.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@added(Versions.v2025_07_01)
+model SubgroupNodeAvailabilityEntry {
+  /** The subgroup name. */
+  name?: string;
+
+  /** The internal subgroup identifier assigned by downstream services. */
+  internalSubgroupId?: string;
+
+  /** The number of nodes that are in service. */
+  inServiceNodeCount?: int32;
+
+  /** The number of nodes that are currently in use. */
+  inUseNodeCount?: int32;
+
+  /** The total node count for the subgroup. */
+  count?: int32;
+}
+

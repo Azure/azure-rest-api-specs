@@ -1,0 +1,31 @@
+{
+  "title": "List all interconnect groups",
+  "operationId": "InterconnectGroups_ListAll",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-ig",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/interconnectGroups/test-ig",
+            "type": "Microsoft.Network/interconnectGroups",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "scope": "InfiniBand",
+              "subgroupProfile": {
+                "vmSize": "Standard_ND128isr_NDR_GB200_v6",
+                "scope": "VerticalConnect",
+                "size": 18
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

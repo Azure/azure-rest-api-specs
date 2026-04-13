@@ -1,0 +1,32 @@
+{
+  "title": "Get subgroup",
+  "operationId": "Subgroups_Get",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "interconnectGroupName": "test-ig",
+    "subgroupName": "subgroup0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/interconnectGroups/test-ig/subgroups/subgroup0",
+        "name": "subgroup0",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "internalSubgroupId": "00000000-0000-0000-0000-000000000001",
+          "logicalToPhysicalAvailabilityZoneMapping": {
+            "logicalZone": "1",
+            "physicalZone": "eastus-az1"
+          },
+          "virtualMachines": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

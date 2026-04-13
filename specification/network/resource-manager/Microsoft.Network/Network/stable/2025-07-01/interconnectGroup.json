@@ -1,0 +1,766 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-07-01",
+    "description": "APIs to manage web application firewall rules.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "InterconnectGroups"
+    },
+    {
+      "name": "Subgroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/interconnectGroups": {
+      "get": {
+        "operationId": "InterconnectGroups_ListAll",
+        "tags": [
+          "InterconnectGroups"
+        ],
+        "description": "Gets all interconnect groups in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all interconnect groups": {
+            "$ref": "./examples/InterconnectGroupListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups": {
+      "get": {
+        "operationId": "InterconnectGroups_List",
+        "tags": [
+          "InterconnectGroups"
+        ],
+        "description": "Gets all interconnect groups in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List interconnect groups in resource group": {
+            "$ref": "./examples/InterconnectGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}": {
+      "get": {
+        "operationId": "InterconnectGroups_Get",
+        "tags": [
+          "InterconnectGroups"
+        ],
+        "description": "Gets information about the specified interconnect group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectGroupName",
+            "in": "path",
+            "description": "The name of the interconnect group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get interconnect group": {
+            "$ref": "./examples/InterconnectGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InterconnectGroups_CreateOrUpdate",
+        "tags": [
+          "InterconnectGroups"
+        ],
+        "description": "Creates or updates an interconnect group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectGroupName",
+            "in": "path",
+            "description": "The name of the interconnect group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update interconnect group operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InterconnectGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'InterconnectGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create interconnect group": {
+            "$ref": "./examples/InterconnectGroupCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/InterconnectGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "InterconnectGroups_UpdateTags",
+        "tags": [
+          "InterconnectGroups"
+        ],
+        "description": "Updates an interconnect group tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectGroupName",
+            "in": "path",
+            "description": "The name of the interconnect group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update interconnect group tags.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update interconnect group tags": {
+            "$ref": "./examples/InterconnectGroupUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "InterconnectGroups_Delete",
+        "tags": [
+          "InterconnectGroups"
+        ],
+        "description": "Deletes the specified interconnect group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectGroupName",
+            "in": "path",
+            "description": "The name of the interconnect group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete interconnect group": {
+            "$ref": "./examples/InterconnectGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/getNodeAvailability": {
+      "post": {
+        "operationId": "InterconnectGroups_GetNodeAvailability",
+        "tags": [
+          "InterconnectGroups"
+        ],
+        "description": "Gets node availability for all subgroups in the specified interconnect group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectGroupName",
+            "in": "path",
+            "description": "The name of the interconnect group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InterconnectGroupNodeAvailability"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get interconnect group node availability": {
+            "$ref": "./examples/InterconnectGroupGetNodeAvailability.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/InterconnectGroupNodeAvailability"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups": {
+      "get": {
+        "operationId": "Subgroups_List",
+        "tags": [
+          "Subgroups"
+        ],
+        "description": "Gets all subgroups in an interconnect group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectGroupName",
+            "in": "path",
+            "description": "The name of the interconnect group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubgroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List subgroups": {
+            "$ref": "./examples/SubgroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/interconnectGroups/{interconnectGroupName}/subgroups/{subgroupName}": {
+      "get": {
+        "operationId": "Subgroups_Get",
+        "tags": [
+          "Subgroups"
+        ],
+        "description": "Gets the specified subgroup by interconnect group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "interconnectGroupName",
+            "in": "path",
+            "description": "The name of the interconnect group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "subgroupName",
+            "in": "path",
+            "description": "The name of the subgroup.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Subgroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get subgroup": {
+            "$ref": "./examples/SubgroupGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InterconnectGroup": {
+      "type": "object",
+      "description": "An interconnect group resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InterconnectGroupPropertiesFormat",
+          "description": "Properties of the interconnect group.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.Resource"
+        }
+      ]
+    },
+    "InterconnectGroupListResult": {
+      "type": "object",
+      "description": "The response of a InterconnectGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InterconnectGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/InterconnectGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InterconnectGroupNodeAvailability": {
+      "type": "object",
+      "description": "Represents node availability information for all subgroups within an InterconnectGroup.",
+      "properties": {
+        "subgroups": {
+          "type": "array",
+          "description": "The list of subgroup node availability entries.",
+          "items": {
+            "$ref": "#/definitions/SubgroupNodeAvailabilityEntry"
+          }
+        }
+      }
+    },
+    "InterconnectGroupPropertiesFormat": {
+      "type": "object",
+      "description": "Interconnect group properties.",
+      "properties": {
+        "scope": {
+          "$ref": "./common.json#/definitions/InterconnectGroupScope",
+          "description": "Scope of interconnect group resource."
+        },
+        "subgroups": {
+          "type": "array",
+          "description": "A list of subgroups of the interconnect group.",
+          "items": {
+            "$ref": "#/definitions/Subgroup"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the interconnect group resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the interconnect group resource.",
+          "readOnly": true
+        },
+        "subgroupProfile": {
+          "$ref": "#/definitions/SubgroupProfile",
+          "description": "The subgroup profile of the interconnect group resource."
+        }
+      }
+    },
+    "LogicalToPhysicalAvailabilityZoneMapping": {
+      "type": "object",
+      "description": "Logical to physical availability zone mapping.",
+      "properties": {
+        "logicalZone": {
+          "type": "string",
+          "description": "The logical availability zone."
+        },
+        "physicalZone": {
+          "type": "string",
+          "description": "The physical availability zone."
+        }
+      }
+    },
+    "Subgroup": {
+      "type": "object",
+      "description": "A subgroup in an interconnect group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubgroupProperties",
+          "description": "Properties of the subgroup.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Common.SubResourceModel"
+        }
+      ]
+    },
+    "SubgroupListResult": {
+      "type": "object",
+      "description": "The response of a Subgroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Subgroup items on this page",
+          "items": {
+            "$ref": "#/definitions/Subgroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SubgroupNodeAvailabilityEntry": {
+      "type": "object",
+      "description": "Represents the node availability information for a single subgroup.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The subgroup name."
+        },
+        "internalSubgroupId": {
+          "type": "string",
+          "description": "The internal subgroup identifier assigned by downstream services."
+        },
+        "inServiceNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes that are in service."
+        },
+        "inUseNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes that are currently in use."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total node count for the subgroup."
+        }
+      }
+    },
+    "SubgroupProfile": {
+      "type": "object",
+      "description": "Subgroup profile of the interconnect group resource.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "VM size of the subgroup profile of the interconnect group resource."
+        },
+        "scope": {
+          "$ref": "./common.json#/definitions/SubgroupProfileScope",
+          "description": "Scope of the subgroup profile of the interconnect group resource."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the subgroup profile of the interconnect group resource.",
+          "minimum": 0
+        }
+      }
+    },
+    "SubgroupProperties": {
+      "type": "object",
+      "description": "Properties of subgroup.",
+      "properties": {
+        "internalSubgroupId": {
+          "type": "string",
+          "description": "The unique identifier defined by downstream services.",
+          "readOnly": true
+        },
+        "logicalToPhysicalAvailabilityZoneMapping": {
+          "$ref": "#/definitions/LogicalToPhysicalAvailabilityZoneMapping",
+          "description": "The availability zone mapping for the subgroup.",
+          "readOnly": true
+        },
+        "interconnectBlock": {
+          "$ref": "./common.json#/definitions/Common.SubResource",
+          "description": "The reference to an interconnect block resource.",
+          "readOnly": true
+        },
+        "virtualMachines": {
+          "type": "array",
+          "description": "A list of virtual machine references.",
+          "items": {
+            "$ref": "./common.json#/definitions/Common.SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the subgroup.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
