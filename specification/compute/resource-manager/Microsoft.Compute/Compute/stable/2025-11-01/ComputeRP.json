@@ -17946,7 +17946,7 @@
     },
     "SecurityTypes": {
       "type": "string",
-      "description": "Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a non-null value starting API version 2025-11-01.",
+      "description": "Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM. Standard will be returned starting api version 2025-11-01. If not specified, Standard will be returned starting api version 2025-11-01.",
       "enum": [
         "Standard",
         "TrustedLaunch",
@@ -17959,7 +17959,7 @@
           {
             "name": "Standard",
             "value": "Standard",
-            "description": "Indicates a VM without UEFI features such as SecureBoot or vTPM; returned as the default value when securityType is not specified."
+            "description": "Indicates a VM without UEFI features such as SecureBoot or vTPM."
           },
           {
             "name": "TrustedLaunch",
