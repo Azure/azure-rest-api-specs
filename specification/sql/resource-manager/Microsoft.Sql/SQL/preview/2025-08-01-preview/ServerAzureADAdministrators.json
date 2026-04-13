@@ -315,7 +315,15 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Disable Azure Active Directory administrator.": {
+            "$ref": "./examples/AdministratorDisable.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/enable": {
@@ -375,7 +383,15 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Enable Azure Active Directory administrator.": {
+            "$ref": "./examples/AdministratorEnable.json"
+          }
+        }
       }
     }
   },
@@ -476,6 +492,7 @@
       "description": "The name of the server.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$",
       "x-ms-parameter-location": "method"
     }
   },
