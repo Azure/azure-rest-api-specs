@@ -1001,6 +1001,19 @@
         "azureADOnlyAuthentication": {
           "description": "Azure Active Directory only Authentication enabled.",
           "type": "boolean"
+        },
+        "status": {
+          "description": "The status of the external admin.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ExternalAdminStatus",
+            "modelAsString": true
+          }
         }
       }
     },
