@@ -1197,14 +1197,12 @@ interface SaaSOperationGroup {
   @autoRoute
   @action("activateSaaS")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @OpenAPI.extension("x-ms-examples", #{
-    SaaSOperationGroup_ActivateResource: #{
-      $ref: "./examples/SaaSOperationGroup_ActivateSaaS.json",
-    },
-  })
   activateResource is ArmProviderActionAsync<
     Request = ActivateSaaSRequest,
-    Response = SaaSResourceDetailsResponse,
+    Response = ArmAcceptedLroResponse<
+      "SaaS resource activation accepted",
+      ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse>
+    >,
     Scope = SubscriptionActionScope,
     Parameters = {},
     LroHeaders = ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse> &
