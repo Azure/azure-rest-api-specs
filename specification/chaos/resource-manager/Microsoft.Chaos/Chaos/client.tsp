@@ -53,7 +53,10 @@ using Microsoft.Chaos;
 @@clientName(Action, "ChaosAction", "csharp");
 @@clientName(ActionVersion, "ChaosActionVersion", "csharp");
 @@clientName(ActionKind, "ChaosActionKind", "csharp");
-@@clientName(ActionSupportedTargetType, "ChaosActionSupportedTargetType", "csharp");
+@@clientName(ActionSupportedTargetType,
+  "ChaosActionSupportedTargetType",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExperimentExecutionDetails,
