@@ -140,6 +140,7 @@ input-file:
   - stable/2025-05-01/networkSecurityPerimeter.json
   - stable/2025-05-01/networkWatcher.json
   - stable/2025-05-01/serviceGateway.json
+  - stable/2025-05-01/interconnectGroup.json
   - stable/2025-05-01/virtualNetwork.json
   - stable/2025-05-01/virtualNetworkAppliance.json
   - stable/2025-05-01/virtualWan.json
