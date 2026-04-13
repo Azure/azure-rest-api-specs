@@ -106,7 +106,7 @@ op encrypt is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -149,7 +149,7 @@ op decrypt is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -192,7 +192,7 @@ op sign is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -235,7 +235,7 @@ op verify is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -278,7 +278,7 @@ op wrapKey is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -321,7 +321,7 @@ op unwrapKey is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -366,7 +366,7 @@ op secureWrapKey is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -412,7 +412,7 @@ op secureUnwrapKey is KeyVaultOperation<
       DocumentationMode.append,
       "rust"
     )
-    @clientOption("allowEmpty", true, "rust")
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
