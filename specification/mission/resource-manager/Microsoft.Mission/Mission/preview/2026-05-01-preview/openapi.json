@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Mission",
-    "version": "2026-03-01-preview",
+    "version": "2026-05-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -4649,6 +4649,31 @@
         "transitHubResourceId": {
           "$ref": "#/definitions/TransitHubResourceId",
           "description": "Transit Hub Resource Id."
+        },
+        "direction": {
+          "type": "string",
+          "description": "The direction of traffic for this rule. Defaults to Outbound if not specified.",
+          "default": "Outbound",
+          "enum": [
+            "Outbound",
+            "Inbound"
+          ],
+          "x-ms-enum": {
+            "name": "RuleDirection",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Outbound",
+                "value": "Outbound",
+                "description": "Outbound traffic from the client enclave to the server destination (default)."
+              },
+              {
+                "name": "Inbound",
+                "value": "Inbound",
+                "description": "Inbound traffic from the server to the client enclave."
+              }
+            ]
+          }
         },
         "endpointRuleName": {
           "type": "string",

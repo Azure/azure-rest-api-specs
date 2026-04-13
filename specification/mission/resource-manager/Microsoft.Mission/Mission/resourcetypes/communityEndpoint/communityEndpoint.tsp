@@ -60,6 +60,18 @@ union DestinationType {
   ServiceTag: "ServiceTag",
 }
 
+@added(Microsoft.Mission.Versions.v2026_05_01_preview)
+@doc("The direction of traffic for a Community Endpoint rule.")
+union RuleDirection {
+  string,
+
+  @doc("Outbound traffic from the client enclave to the server destination (default).")
+  Outbound: "Outbound",
+
+  @doc("Inbound traffic from the server to the client enclave.")
+  Inbound: "Inbound",
+}
+
 @doc("Base type for destination rules.")
 model CommunityEndpointDestinationRule {
   @doc("Destination Type.")
@@ -70,6 +82,10 @@ model CommunityEndpointDestinationRule {
 
   @doc("Transit Hub Resource Id.")
   transitHubResourceId?: TransitHubResourceId;
+
+  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
+  @doc("The direction of traffic for this rule. Defaults to Outbound if not specified.")
+  direction?: RuleDirection = RuleDirection.Outbound;
 
   ...EndpointRuleBase;
 }
