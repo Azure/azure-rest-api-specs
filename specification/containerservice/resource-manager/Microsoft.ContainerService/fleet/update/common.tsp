@@ -114,7 +114,8 @@ model ScheduledStartConfiguration {
 model UpdateGroup {
   @doc("""
     Name of the group.
-    It must match a group name of an existing fleet member. 
+    It serves as an identifier and must match a group name of an existing fleet member unless
+    MemberSelector is specified. When MemberSelector is set, Name is only used as an identifier.
     """)
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
