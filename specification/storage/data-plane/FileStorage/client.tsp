@@ -68,27 +68,38 @@ interface ShareClient extends Storage.File.Share {}
 model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
+@@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
 @@alternateType(DirectoryItem.name, string, "go");
 @@alternateType(FileItem.name, string, "go");
 @@alternateType(HandleItem.path, string, "go");
 @@alternateType(ListFilesAndDirectoriesSegmentResponse.prefix, string, "go");
 @@alternateType(SignedIdentifiers, SignedIdentifiersGo, "go");
+@@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
+@@clientName(ContentCrc64ResponseHeader.contentCrc64, "XMSContentCRC64", "go");
 @@clientName(DirectoryItem, "Directory", "go");
+@@clientName(DirectoryItem.fileId, "ID", "go");
 @@clientName(EnableSmbDirectoryLeaseHeader.enableSmbDirectoryLease, "EnableSMBDirectoryLease", "go");
 @@clientName(EtagResponseHeader.etag, "ETag", "go");
 @@clientName(FileItem, "File", "go");
+@@clientName(FileItem.fileId, "ID", "go");
 @@clientName(FilesAndDirectoriesListSegment.directoryItems, "Directories", "go");
 @@clientName(FilesAndDirectoriesListSegment.fileItems, "Files", "go");
 @@clientName(HandleItem, "Handle", "go");
+@@clientName(ListHandlesResponse.handleList, "Handles", "go");
 @@clientName(ListSharesResponse.shareItems, "Shares", "go");
 @@clientName(Metrics.includeApis, "includeAPIs", "go");
 @@clientName(NfsFileType, "NFSFileType", "go");
 @@clientName(NfsResponseHeaders.nfsFileType, "NFSFileType", "go");
+@@clientName(RequestServerEncryptedResponseHeader.requestServerEncrypted, "IsServerEncrypted", "go");
+@@clientName(ServerEncryptedResponseHeader.serverEncrypted, "IsServerEncrypted", "go");
+
 @@clientName(ShareItemInternal, "Share", "go");
 @@clientName(SharePropertiesInternal, "ShareProperties", "go");
 @@clientName(SharePropertiesInternal.enableSmbDirectoryLease, "EnableSMBDirectoryLease", "go");
 @@clientName(ShareProtocolSettings, "ProtocolSettings", "go");
+@@clientName(ShareUsageResponseHeader.shareUsageBytes, "FileShareUsageBytes", "go");
+@@clientName(ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes, "FileShareSnapshotUsageBytes", "go");
 @@clientName(ShareSmbSettings, "SMBSettings", "go");
 @@clientName(SmbMultichannel, "SMBMultichannel", "go");
 @@clientName(StorageServiceProperties.cors, "CORS", "go");
@@ -252,11 +263,11 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(Storage.File.Directory.listHandles,
-  "python,javascript,csharp"
+  "python,javascript,csharp,go"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(Storage.File.File.listHandles,
-  "python,javascript,csharp"
+  "python,javascript,csharp,go"
 );
 
 // csharp customizations

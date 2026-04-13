@@ -1735,19 +1735,23 @@ alias FileSmtPropertyResponseHeaders = {
   /** Creation time for the file/directory. */
   @header("x-ms-file-creation-time")
   @encode("rfc7231")
+  @encode("iso8601")
   @alternateType(string, "python")
+  @alternateType(utcDateTime, "go")
   fileCreationTime?: utcDateTime;
 
   /** Last write time for the file/directory. */
   @header("x-ms-file-last-write-time")
   @encode("rfc7231")
   @alternateType(string, "python")
+  @alternateType(utcDateTime, "go")
   fileLastWriteTime?: utcDateTime;
 
   /** Change time for the file/directory. */
   @header("x-ms-file-change-time")
   @encode("rfc7231")
   @alternateType(string, "python")
+  @alternateType(utcDateTime, "go")
   fileChangeTime?: utcDateTime;
 
   /** The fileId of the directory/file. */
@@ -2327,7 +2331,9 @@ alias NfsTimestampResponseHeaders = {
   @header("x-ms-file-id") fileId?: string;
 
   /** The parent fileId of the file. */
-  @header("x-ms-file-parent-id") fileParentId?: string;
+  @header("x-ms-file-parent-id") 
+  @clientName("ParentID", "go")
+  fileParentId?: string;
 };
 
 /** Share provisioning response headers (quota, IOPS, bandwidth, burst). Used in setProperties and restore responses. */
