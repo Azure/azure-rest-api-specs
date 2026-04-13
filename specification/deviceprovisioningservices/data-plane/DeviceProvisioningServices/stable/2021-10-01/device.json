@@ -118,25 +118,23 @@
         ],
         "responses": {
           "200": {
-            "description": "200 OK response for LRO operations returning RegistrationOperationStatus.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RegistrationOperationStatus"
             }
           },
           "202": {
-            "description": "202 Accepted response for LRO operations returning RegistrationOperationStatus.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/RegistrationOperationStatus"
             },
             "headers": {
               "Location": {
-                "type": "string",
-                "description": "The location of the resource."
+                "type": "string"
               },
               "retry-after": {
                 "type": "integer",
-                "format": "int32",
-                "description": "The retry interval in seconds."
+                "format": "int32"
               }
             }
           },
@@ -160,8 +158,7 @@
           "RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen": {
             "$ref": "./examples/RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/{idScope}/registrations/{registrationId}/register": {
