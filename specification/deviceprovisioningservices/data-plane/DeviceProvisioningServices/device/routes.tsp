@@ -18,6 +18,7 @@ interface RuntimeRegistration {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/polling-operation-no-status-monitor" "The DPS device API uses a non-standard LRO pattern; status field is on the nested RegistrationOperationStatus body"
   @summary("Gets the registration operation status.")
   @route("/{idScope}/registrations/{registrationId}/operations/{operationId}")
   @get

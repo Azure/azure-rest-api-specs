@@ -122,6 +122,7 @@ model RegistrationOperationStatus {
   /**
    * Device enrollment status.
    */
+  @lroStatus
   status?: EnrollmentStatus;
 
   /**
