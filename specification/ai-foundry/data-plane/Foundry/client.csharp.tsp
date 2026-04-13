@@ -173,3 +173,5 @@ namespace Azure.AI.Projects;
 @@alternateType(CronTrigger.startTime, utcDateTime, "csharp");
 @@alternateType(CronTrigger.endTime, utcDateTime, "csharp");
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "csharp");
+
+@@access(OpenAI.CustomToolParam, Access.internal, "csharp");

@@ -201,6 +201,8 @@ namespace Azure.AI.Projects {
   @@access(AgentVersionObject, Access.public);
   @@clientName(AgentVersionObject, "ProjectsAgentVersion");
 
+  @@usage(OpenAI.CompoundFilter, Usage.output, "csharp");
+
   // --------------------------------------------------------------------------------
   // Toolboxes sub‐client
   // --------------------------------------------------------------------------------
