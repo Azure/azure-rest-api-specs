@@ -1281,6 +1281,8 @@ model HealthReportRequest {
   additionalContext?: string4096;
 }
 
+// TODO: Add DataAnnotationsRequest here.
+
 @added(Versions.v2026_01_01_preview)
 @doc("Evaluation rules for the health report")
 model HealthReportEvaluationRule {
@@ -1420,6 +1422,11 @@ interface Entities {
     Entity,
     HealthReportRequest
   >;
+
+  // TODO: Add new data annotations get and set POST here.
+  // -- Return types?
+  // Add = 'ArmResourceActionNoContentSync',
+  // Get = 'ArmResourceActionSync' (returns JSON body of annotations)
 }
 
 @armResourceOperations(Relationship)
