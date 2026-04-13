@@ -199,7 +199,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_Get_V2: #{ $ref: "./examples/Rules_Get_V2.json" } }
+    #{ Rules_Get_AssetDQ: #{ $ref: "./examples/Rules_Get_AssetDQ.json" } }
   )
   @doc("Retrieves all rules associated with data assets. Data product is specified as optional query parameter.")
   op getRulesForAssetDQ is RpcOperation<
@@ -237,7 +237,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rule_Get_V2: #{ $ref: "./examples/Rule_Get_V2.json" } }
+    #{ Rule_Get_AssetDQ: #{ $ref: "./examples/Rule_Get_AssetDQ.json" } }
   )
   @doc("Retrieves a specific rule associated with a data asset. Data product is specified as optional query parameter.")
   op getRuleForAssetDQ is RpcOperation<
@@ -279,7 +279,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_Delete_V2: #{ $ref: "./examples/Rules_Delete_V2.json" } }
+    #{ Rules_Delete_AssetDQ: #{ $ref: "./examples/Rules_Delete_AssetDQ.json" } }
   )
   @doc("Deletes a specific rule associated with a data asset. Data product is specified as optional query parameter.")
   op deleteRuleForAssetDQ is RpcOperation<
@@ -320,7 +320,7 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_Update_V2: #{ $ref: "./examples/Rules_Update_V2.json" } }
+    #{ Rules_Update_AssetDQ: #{ $ref: "./examples/Rules_Update_AssetDQ.json" } }
   )
   @doc("Updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
   op updateRuleForAssetDQ is RpcOperation<
@@ -366,7 +366,11 @@ namespace PurviewDataQuality {
   @tag("Rules")
   @extension(
     "x-ms-examples",
-    #{ Rules_UpdatePatch_V2: #{ $ref: "./examples/Rules_UpdatePatch_V2.json" } }
+    #{
+      Rules_UpdatePatch_AssetDQ: #{
+        $ref: "./examples/Rules_UpdatePatch_AssetDQ.json",
+      },
+    }
   )
   @doc("Partially updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
   op updateRulePatchForAssetDQ is RpcOperation<
@@ -815,7 +819,7 @@ namespace PurviewDataQuality {
   @tag("JobRunMonitoring")
   @extension(
     "x-ms-examples",
-    #{ Runs_Get_V2: #{ $ref: "./examples/Runs_Get_V2.json" } }
+    #{ Runs_Get_AssetDQ: #{ $ref: "./examples/Runs_Get_AssetDQ.json" } }
   )
   @doc("Retrieves all runs associated with a specific data asset, optionally filtered by run type. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/runs")
@@ -904,7 +908,7 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Observation_Create_V2: #{ $ref: "./examples/Observation_Create_V2.json" },
+      Observation_Create_AssetDQ: #{ $ref: "./examples/Observation_Create_AssetDQ.json" },
     }
   )
   @doc("Triggers a long-running observation job for a specific data asset. Data product is specified as optional query parameter.")
@@ -973,7 +977,7 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Observation_Delete_V2: #{ $ref: "./examples/Observation_Delete_V2.json" },
+      Observation_Delete_AssetDQ: #{ $ref: "./examples/Observation_Delete_AssetDQ.json" },
     }
   )
   @doc("Deletes a specific observation associated with a data asset. Data product is specified as optional query parameter.")
@@ -1379,8 +1383,8 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      ScopedAssetMetaData_Get_V2: #{
-        $ref: "./examples/ScopedAssetMetaData_Get_V2.json",
+      ScopedAssetMetaData_Get_AssetDQ: #{
+        $ref: "./examples/ScopedAssetMetaData_Get_AssetDQ.json",
       },
     }
   )
@@ -1417,8 +1421,8 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      ScopedAssetMetaData_Update_V2: #{
-        $ref: "./examples/ScopedAssetMetaData_Update_V2.json",
+      ScopedAssetMetaData_Update_AssetDQ: #{
+        $ref: "./examples/ScopedAssetMetaData_Update_AssetDQ.json",
       },
     }
   )
@@ -1459,8 +1463,8 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      ScopedAssetMetaData_Delete_V2: #{
-        $ref: "./examples/ScopedAssetMetaData_Delete_V2.json",
+      ScopedAssetMetaData_Delete_AssetDQ: #{
+        $ref: "./examples/ScopedAssetMetaData_Delete_AssetDQ.json",
       },
     }
   )
@@ -1545,7 +1549,7 @@ namespace PurviewDataQuality {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-examples",
-    #{ Profile_Create_V2: #{ $ref: "./examples/Profile_Create_V2.json" } }
+    #{ Profile_Create_AssetDQ: #{ $ref: "./examples/Profile_Create_AssetDQ.json" } }
   )
   @doc("Creates or updates the profile for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @post
@@ -1605,7 +1609,7 @@ namespace PurviewDataQuality {
   @tag("Profiles")
   @extension(
     "x-ms-examples",
-    #{ Profile_Delete_V2: #{ $ref: "./examples/Profile_Delete_V2.json" } }
+    #{ Profile_Delete_AssetDQ: #{ $ref: "./examples/Profile_Delete_AssetDQ.json" } }
   )
   @doc("Deletes a specific profile run for a given data asset within a business domain. Data product is specified as optional query parameter.")
   op deleteProfileRunForAssetDQ is RpcOperation<
@@ -1646,7 +1650,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Create_V2: #{ $ref: "./examples/DQAsset_Create_V2.json" } }
+    #{ DQAsset_Create_AssetDQ: #{ $ref: "./examples/DQAsset_Create_AssetDQ.json" } }
   )
   @doc("Creates a DQ asset within a business domain. Data product is specified as optional query parameter.")
   op createDQAssetForAssetDQ is RpcOperation<
@@ -1687,7 +1691,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Get_V2: #{ $ref: "./examples/DQAsset_Get_V2.json" } }
+    #{ DQAsset_Get_AssetDQ: #{ $ref: "./examples/DQAsset_Get_AssetDQ.json" } }
   )
   @doc("Retrieves a DQ asset by identifier within a business domain. Data product is specified as optional query parameter.")
   op getDQAssetForAssetDQ is RpcOperation<
@@ -1725,7 +1729,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Delete_V2: #{ $ref: "./examples/DQAsset_Delete_V2.json" } }
+    #{ DQAsset_Delete_AssetDQ: #{ $ref: "./examples/DQAsset_Delete_AssetDQ.json" } }
   )
   @doc("Deletes a DQ asset within a business domain. Data product is specified as optional query parameter.")
   op deleteDQAssetForAssetDQ is RpcOperation<
@@ -1762,7 +1766,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAssets_List_V2: #{ $ref: "./examples/DQAssets_List_V2.json" } }
+    #{ DQAssets_List_AssetDQ: #{ $ref: "./examples/DQAssets_List_AssetDQ.json" } }
   )
   @doc("Retrieves DQ assets for a business domain with pagination. Data product is specified as optional query parameter.")
   op getDQAssetsPaginationForAssetDQ is RpcOperation<
@@ -1800,7 +1804,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ AssetScores_Get_V2: #{ $ref: "./examples/AssetScores_Get_V2.json" } }
+    #{ AssetScores_Get_AssetDQ: #{ $ref: "./examples/AssetScores_Get_AssetDQ.json" } }
   )
   @doc("Retrieves asset scores for specified assets. Data product is specified as optional query parameter.")
   op getAssetScoresForAssetDQ is RpcOperation<
@@ -1838,7 +1842,7 @@ namespace PurviewDataQuality {
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
-    #{ DQAsset_Clone_V2: #{ $ref: "./examples/DQAsset_Clone_V2.json" } }
+    #{ DQAsset_Clone_AssetDQ: #{ $ref: "./examples/DQAsset_Clone_AssetDQ.json" } }
   )
   @doc("Submits a clone job for a DQ asset. Data product is specified as optional query parameter.")
   op cloneDQAssetForAssetDQ is RpcOperation<
@@ -1947,7 +1951,7 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      LatestSnapshot_Get_V2: #{ $ref: "./examples/LatestSnapshot_Get_V2.json" },
+      LatestSnapshot_Get_AssetDQ: #{ $ref: "./examples/LatestSnapshot_Get_AssetDQ.json" },
     }
   )
   @doc("Retrieves the latest data quality snapshot report for a given business domain. Data product is specified as optional query parameter.")
