@@ -14,20 +14,37 @@ namespace Microsoft.ServiceFabric;
 /**
  * An application type version resource for the specified application type name resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(ApplicationTypeResource)
-model ApplicationTypeVersionResource extends ProxyResource {
-  properties?: ApplicationTypeVersionResourceProperties;
+model ApplicationTypeVersionResource
+  is Azure.ResourceManager.ProxyResource<ApplicationTypeVersionResourceProperties> {
+  ...ResourceNameParameter<
+    Resource = ApplicationTypeVersionResource,
+    KeyName = "version",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
 
+  /**
+   * It will be deprecated in New API, resource location depends on the parent resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Azure resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Azure resource etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @path
-  @key("version")
-  @segment("versions")
-  name: string;
+  etag?: string;
 }
 
 @armResourceOperations(#{ omitTags: true })
