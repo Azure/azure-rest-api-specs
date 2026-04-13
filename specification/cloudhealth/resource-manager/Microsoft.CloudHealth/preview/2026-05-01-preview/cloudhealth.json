@@ -1216,6 +1216,134 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/addDataAnnotation": {
+      "post": {
+        "operationId": "Entities_AddDataAnnotation",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Add a data annotation to an entity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataAnnotationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataAnnotation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_AddDataAnnotation": {
+            "$ref": "./examples/Entities_AddDataAnnotation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getDataAnnotations": {
+      "post": {
+        "operationId": "Entities_GetDataAnnotations",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Retrieve data annotations for an entity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetDataAnnotationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetDataAnnotationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_GetDataAnnotations": {
+            "$ref": "./examples/Entities_GetDataAnnotations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getHistory": {
       "post": {
         "operationId": "Entities_GetHistory",
@@ -2119,6 +2247,11 @@
         "authenticationKind"
       ]
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureMonitorWorkspaceResourceId": {
       "type": "string",
       "format": "arm-id",
@@ -2302,6 +2435,57 @@
       "required": [
         "authenticationSetting",
         "azureResourceId"
+      ]
+    },
+    "DataAnnotation": {
+      "type": "object",
+      "description": "A single data annotation on an entity",
+      "properties": {
+        "annotationId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Server-assigned unique identifier for the annotation"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Annotation properties as a dynamic key-value pair bag",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "$ref": "#/definitions/string4096",
+          "description": "Optional description of the annotation"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the annotation was created"
+        }
+      },
+      "required": [
+        "annotationId",
+        "properties",
+        "createdAt"
+      ]
+    },
+    "DataAnnotationRequest": {
+      "type": "object",
+      "description": "Request body for adding a data annotation to an entity",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Annotation properties as a dynamic key-value pair bag",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "$ref": "#/definitions/string4096",
+          "description": "Optional description of the annotation"
+        }
+      },
+      "required": [
+        "properties"
       ]
     },
     "DependenciesAggregationUnit": {
@@ -2860,6 +3044,46 @@
           ]
         }
       }
+    },
+    "GetDataAnnotationsRequest": {
+      "type": "object",
+      "description": "Request body for querying data annotations",
+      "properties": {
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of UTC time range. Defaults to 24 hours ago if not specified."
+        },
+        "endAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of UTC time range. Defaults to now if not specified."
+        }
+      }
+    },
+    "GetDataAnnotationsResponse": {
+      "type": "object",
+      "description": "Response containing data annotations for an entity",
+      "properties": {
+        "entityName": {
+          "$ref": "#/definitions/entityName",
+          "description": "Name of the entity"
+        },
+        "annotations": {
+          "type": "array",
+          "description": "List of data annotations",
+          "items": {
+            "$ref": "#/definitions/DataAnnotation"
+          },
+          "x-ms-identifiers": [
+            "annotationId"
+          ]
+        }
+      },
+      "required": [
+        "entityName",
+        "annotations"
+      ]
     },
     "HealthModel": {
       "type": "object",

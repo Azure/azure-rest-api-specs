@@ -1,0 +1,43 @@
+{
+  "title": "Entities_GetDataAnnotations",
+  "operationId": "Entities_GetDataAnnotations",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "myHealthModel",
+    "entityName": "entity1",
+    "body": {
+      "startAt": "2026-04-09T00:00:00Z",
+      "endAt": "2026-04-10T23:59:59Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "entityName": "entity1",
+        "annotations": [
+          {
+            "annotationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "properties": {
+              "environment": "production",
+              "deploymentId": "deploy-2026-04-10-001",
+              "changedBy": "release-pipeline"
+            },
+            "description": "Production deployment of v2.4.1",
+            "createdAt": "2026-04-10T14:30:00Z"
+          },
+          {
+            "annotationId": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+            "properties": {
+              "incidentId": "INC-4567",
+              "severity": "high"
+            },
+            "description": "Incident reported: elevated error rates",
+            "createdAt": "2026-04-10T09:15:00Z"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Entities_AddDataAnnotation",
+  "operationId": "Entities_AddDataAnnotation",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "myHealthModel",
+    "entityName": "entity1",
+    "body": {
+      "properties": {
+        "environment": "production",
+        "deploymentId": "deploy-2026-04-10-001",
+        "changedBy": "release-pipeline"
+      },
+      "description": "Production deployment of v2.4.1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "annotationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "properties": {
+          "environment": "production",
+          "deploymentId": "deploy-2026-04-10-001",
+          "changedBy": "release-pipeline"
+        },
+        "description": "Production deployment of v2.4.1",
+        "createdAt": "2026-04-10T14:30:00Z"
+      }
+    }
+  }
+}
