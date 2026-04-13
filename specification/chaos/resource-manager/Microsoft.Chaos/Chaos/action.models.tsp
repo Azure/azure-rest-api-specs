@@ -114,9 +114,9 @@ model ActionProperties {
   /**
    * JSON Schema describing the parameters for this action.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "parametersSchema is a dynamic JSON Schema object whose structure varies per action."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "parametersSchema is a dynamic JSON Schema object whose structure varies per action."
   @visibility(Lifecycle.Read)
-  parametersSchema?: Record<unknown>;
+  parametersSchema?: {};
 
   /**
    * Recommended Azure RBAC role definition GUIDs for this action.
