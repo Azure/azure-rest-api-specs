@@ -731,18 +731,12 @@ model Model {
   defaultDeploymentTemplate?: ModelDeploymentTemplateDetails;
 
   /** List of allowed deployment templates for the model. */
-  allowedDeploymentTemplates?: ModelDeploymentTemplateReferenceDetails[];
+  allowedDeploymentTemplates?: ModelDeploymentTemplateDetails[];
 }
 
-/** Details of a default deployment template reference. */
+/** Details of a deployment template reference. */
 model ModelDeploymentTemplateDetails {
   /** The asset ID of the deployment template. */
-  assetId?: string;
-}
-
-/** Reference details for an allowed deployment template. */
-model ModelDeploymentTemplateReferenceDetails {
-  /** The asset reference ID of the deployment template. */
   assetId?: string;
 }
 

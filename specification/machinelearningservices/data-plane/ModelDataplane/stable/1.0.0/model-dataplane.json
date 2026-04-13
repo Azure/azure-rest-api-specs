@@ -2384,7 +2384,7 @@
           "type": "array",
           "description": "List of allowed deployment templates for the model.",
           "items": {
-            "$ref": "#/definitions/ModelDeploymentTemplateReferenceDetails"
+            "$ref": "#/definitions/ModelDeploymentTemplateDetails"
           }
         }
       },
@@ -2478,21 +2478,11 @@
     },
     "ModelDeploymentTemplateDetails": {
       "type": "object",
-      "description": "Details of a default deployment template reference.",
+      "description": "Details of a deployment template reference.",
       "properties": {
         "assetId": {
           "type": "string",
           "description": "The asset ID of the deployment template."
-        }
-      }
-    },
-    "ModelDeploymentTemplateReferenceDetails": {
-      "type": "object",
-      "description": "Reference details for an allowed deployment template.",
-      "properties": {
-        "assetId": {
-          "type": "string",
-          "description": "The asset reference ID of the deployment template."
         }
       }
     },
