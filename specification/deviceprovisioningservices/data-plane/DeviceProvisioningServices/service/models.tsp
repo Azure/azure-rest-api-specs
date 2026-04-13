@@ -194,6 +194,19 @@ model IndividualEnrollment {
    * characters plus certain special characters : . _ -. No special characters
    * allowed at start or end.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "registrationId")
+  registrationId_v2021_10_01: string;
+
+  /**
+   * This id is used to uniquely identify a device registration of an enrollment.
+   * A case-insensitive string (up to 128 characters long) of alphanumeric
+   * characters plus certain special characters : . _ -. No special characters
+   * allowed at start or end.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   registrationId: string;
 
   /**
@@ -618,6 +631,16 @@ model CustomAllocationDefinition {
   /**
    * The webhook URL used for allocation requests.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "webhookUrl")
+  webhookUrl_v2021_10_01: string;
+
+  /**
+   * The webhook URL used for allocation requests.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   webhookUrl: string;
 
   /**
@@ -625,6 +648,18 @@ model CustomAllocationDefinition {
    * IndividualEnrollment) sent in the custom allocation request. Minimum supported
    * version: "2018-09-01-preview".
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "apiVersion")
+  apiVersion_v2021_10_01: string;
+
+  /**
+   * The API version of the provisioning service types (such as
+   * IndividualEnrollment) sent in the custom allocation request. Minimum supported
+   * version: "2018-09-01-preview".
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   apiVersion: string;
 }
 
@@ -684,6 +719,16 @@ model EnrollmentGroup {
   /**
    * Enrollment Group ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "enrollmentGroupId")
+  enrollmentGroupId_v2021_10_01: string;
+
+  /**
+   * Enrollment Group ID.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   enrollmentGroupId: string;
 
   /**
@@ -813,6 +858,19 @@ model BulkEnrollmentOperationError {
    * characters plus certain special characters : . _ -. No special characters
    * allowed at start or end.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "registrationId")
+  registrationId_v2021_10_01: string;
+
+  /**
+   * This id is used to uniquely identify a device registration of an enrollment.
+   * A case-insensitive string (up to 128 characters long) of alphanumeric
+   * characters plus certain special characters : . _ -. No special characters
+   * allowed at start or end.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   registrationId: string;
 
   /**
@@ -823,6 +881,16 @@ model BulkEnrollmentOperationError {
   /**
    * Error status.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "errorStatus")
+  errorStatus_v2021_10_01: string;
+
+  /**
+   * Error status.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   errorStatus: string;
 }
 
@@ -863,6 +931,16 @@ model BulkEnrollmentGroupOperationError {
   /**
    * Enrollment group id.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "enrollmentGroupId")
+  enrollmentGroupId_v2021_10_01: string;
+
+  /**
+   * Enrollment group id.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   enrollmentGroupId: string;
 
   /**
@@ -873,5 +951,15 @@ model BulkEnrollmentGroupOperationError {
   /**
    * Error status.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Version-scoped property using remove/rename/add pattern for version-specific constraints"
+  @removed(Versions.v2025_07_01_preview)
+  @renamedFrom(Versions.v2025_07_01_preview, "errorStatus")
+  errorStatus_v2021_10_01: string;
+
+  /**
+   * Error status.
+   */
+  @added(Versions.v2025_07_01_preview)
+  @minLength(1)
   errorStatus: string;
 }
