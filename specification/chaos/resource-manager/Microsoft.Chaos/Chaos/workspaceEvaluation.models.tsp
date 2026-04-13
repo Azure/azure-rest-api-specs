@@ -127,6 +127,11 @@ union WorkspaceEvaluationStatus {
   Pending: "Pending",
 
   /**
+   * The evaluation has been accepted and is queued for execution.
+   */
+  Queued: "Queued",
+
+  /**
    * The evaluation is in progress.
    */
   InProgress: "InProgress",
