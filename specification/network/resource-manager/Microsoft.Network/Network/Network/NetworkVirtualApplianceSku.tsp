@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -21,7 +23,7 @@ namespace Microsoft.Network;
 @subscriptionResource
 @summary("Available NetworkVirtualApplianceSkus")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkVirtualApplianceSku extends Resource {
+model NetworkVirtualApplianceSku extends Common.Resource {
   properties?: NetworkVirtualApplianceSkuPropertiesFormat;
 
   @visibility(Lifecycle.Read)
