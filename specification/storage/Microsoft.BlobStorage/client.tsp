@@ -374,14 +374,14 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(Error, "StorageError", "go");
 @@clientName(EncryptionAlgorithmTypeGo, "EncryptionAlgorithmType", "go");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "go");
-@@clientName(ImmutabilityPolicyExpiresOnResponseHeader.immutabilityPolicyExpiresOn,
-  "ImmutabilityPolicyExpiry",
-  "go"
-);
 @@clientName(ImmutabilityPolicyExpiresOnResponseHeaderPrivate.immutabilityPolicyExpiresOn,
   "ImmutabilityPolicyExpiry",
   "go"
 );
+@@clientName(LeaseDuration, "LeaseDurationType", "go");
+@@clientName(LeaseDurationResponseHeader.duration, "LeaseDuration", "go");
+@@clientName(LeaseState, "LeaseStateType", "go");
+@@clientName(LeaseStatus, "LeaseStatusType", "go");
 @@clientName(ListBlobsIncludeItemGo, "ListBlobsIncludeItem", "go");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "go");
 @@clientName(Metrics.includeApis, "IncludeAPIs", "go");
