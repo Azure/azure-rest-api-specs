@@ -899,7 +899,7 @@ interface File {
       ...NfsRequestHeaders;
 
       /** Optional, NFS only. Type of the file or directory. */
-      @header("x-ms-file-file-type") 
+      @header("x-ms-file-file-type")
       @clientName("NFSFileType", "go")
       nfsFileType?: NfsFileType;
 
@@ -962,7 +962,8 @@ interface File {
       ...NfsResponseHeaders;
       ...LinkCountResponseHeader;
       @body content?: bytes;
-    }
+    },
+    "application/octet-stream"
   >;
 
   /**
@@ -1239,7 +1240,7 @@ interface File {
       ...TimeoutParameter;
 
       /** Specify the CRC64 hash of the source content. */
-      @header("x-ms-source-content-crc64") 
+      @header("x-ms-source-content-crc64")
       @alternateType(bytes, "go")
       sourceContentCrc64?: string;
 
