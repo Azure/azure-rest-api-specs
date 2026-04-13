@@ -152,5 +152,9 @@ interface Subgroups {
 @@doc(InterconnectGroups.updateTags::parameters.properties,
   "Parameters supplied to update interconnect group tags."
 );
-@@clientName(InterconnectGroups.createOrUpdate::parameters.resource, "parameters");
-@@clientName(InterconnectGroups.updateTags::parameters.properties, "parameters");
+@@clientName(InterconnectGroups.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(InterconnectGroups.updateTags::parameters.properties,
+  "parameters"
+);
