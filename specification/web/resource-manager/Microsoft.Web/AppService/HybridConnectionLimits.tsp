@@ -32,7 +32,8 @@ model HybridConnectionLimits
   kind?: string;
 }
 
-@armResourceOperations
+@tag("AppServicePlans")
+@armResourceOperations(#{ omitTags: true })
 interface HybridConnectionLimitsOperationGroup {
   /**
    * Description for Get the maximum number of Hybrid Connections allowed in an App Service plan.

@@ -6,16 +6,17 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
+    azure-resource-provider-folder: "Microsoft.ContainerRegistry"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/containerregistry.json"
     examples-dir: "{project-root}/examples"
-
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
   "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-name: "Azure.ResourceManager.ContainerRegistry"
     namespace: "Azure.ResourceManager.ContainerRegistry"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerregistry"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerregistry"

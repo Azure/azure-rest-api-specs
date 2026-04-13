@@ -62,7 +62,8 @@ interface SiteSourceControlOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteSourceControls {
   /**
    * Description for Gets the source control configuration of an app.
@@ -156,7 +157,8 @@ interface SiteSourceControlOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteSourceControlOperationGroup {
   /**
    * Description for Gets the source control configuration of an app.
