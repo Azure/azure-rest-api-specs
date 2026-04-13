@@ -250,7 +250,8 @@ model BulkVMConfiguration {
 model ResourceProvisionPayload {
   @doc("Virtual machine profile object that contains VM properties that are common across all VMs in this batch  (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
-  baseProfile?: BulkVMConfiguration;
+  @renamedFrom(Versions.`2026-04-15-preview`, "baseProfile")
+  virtualMachineBaseProfile?: BulkVMConfiguration;
 
   @doc("Virtual machine profile array that contains VM properties that needs to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
@@ -674,7 +675,8 @@ model FlexProperties {
 model ResourceProvisionFlexPayload {
   @doc("JSON object that contains VM properties that are common across all VMs in this batch")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
-  baseProfile?: BulkVMConfiguration;
+  @renamedFrom(Versions.`2026-04-15-preview`, "baseProfile")
+  virtualMachineBaseProfile?: BulkVMConfiguration;
 
   @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
   @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
