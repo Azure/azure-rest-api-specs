@@ -1616,7 +1616,11 @@
       "properties": {
         "token": {
           "type": "string",
-          "description": "Link organization token"
+          "description": "Link organization token",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -1805,7 +1809,10 @@
         },
         "linkOrganization": {
           "$ref": "#/definitions/LinkOrganization",
-          "description": "Link Organization"
+          "description": "Link Organization",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       }
     },
