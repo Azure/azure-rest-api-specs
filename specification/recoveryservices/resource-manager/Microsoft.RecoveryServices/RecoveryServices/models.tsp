@@ -921,7 +921,7 @@ model VaultProperties {
   /**
    * Region of choice settings for this vault.
    */
-  @added(Versions.v2026_04_01)
+  @added(Versions.v2026_02_01)
   regionOfChoiceSettings?: RegionOfChoiceSettings;
 }
 
@@ -1793,7 +1793,7 @@ model DeletedVaultUndeleteInput {
  * Region of choice settings at vault level.
  * This setting allows customers to configure their preferred region for backup operations.
  */
-@added(Versions.v2026_04_01)
+@added(Versions.v2026_02_01)
 model RegionOfChoiceSettings {
   /**
    * The status of region of choice settings - Enabled or Disabled.

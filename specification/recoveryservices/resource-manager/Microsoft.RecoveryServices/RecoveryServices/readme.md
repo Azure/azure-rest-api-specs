@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2026-04-01
+tag: package-2026-02-01
 ```
 
 ### Validations
@@ -42,13 +42,13 @@ semantic-validator: true
 message-format: json
 ```
 
-### Tag: package-2026-04-01
+### Tag: package-2026-02-01
 
-These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2026-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-04-01'
+```yaml $(tag) == 'package-2026-02-01'
 input-file:
-  - stable/2026-04-01/openapi.json
+  - stable/2026-02-01/openapi.json
 ```
 
 ### Tag: package-2026-01-01
