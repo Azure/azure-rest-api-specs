@@ -974,10 +974,10 @@ model VolumeGroupProperties {
   sourceVolumeGroupResourceId?: string;
 
   @doc("Performance parameters for the volume group")
-  performanceParameters: PerformanceParameters;
+  performanceParameters?: PerformanceParameters;
 
   @doc("Protection parameters for the volume group")
-  protectionParameters: ProtectionParameters;
+  protectionParameters?: ProtectionParameters;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
@@ -1195,7 +1195,7 @@ interface SaaSOperationGroup {
   @doc("Activate the SaaS resource")
   @autoRoute
   @action("activateSaaS")
-  activateResource is ArmProviderActionSync<
+  activateResource is ArmProviderActionAsync<
     Request = ActivateSaaSRequest,
     Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,
