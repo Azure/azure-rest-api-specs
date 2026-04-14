@@ -657,8 +657,17 @@ model GetOperationStatusResponse {
 
 @doc("Static read response for the singleton bulk VM operations proxy endpoint")
 model BulkVmOperationsReadResponse {
+  @doc("Fully qualified resource ID for the singleton bulk VM operations proxy resource")
+  @visibility(Lifecycle.Read)
+  id: string;
+
   @doc("Echoes the singleton proxy resource name")
+  @visibility(Lifecycle.Read)
   name: "bulkVmOperations";
+
+  @doc("Resource type of the singleton bulk VM operations proxy resource")
+  @visibility(Lifecycle.Read)
+  type: "Microsoft.Compute/locations/virtualMachines/bulkVmOperations";
 }
 
 // ----------- CancelOperations ---------

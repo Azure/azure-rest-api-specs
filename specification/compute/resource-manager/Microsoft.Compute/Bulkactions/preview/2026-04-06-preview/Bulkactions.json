@@ -863,6 +863,11 @@
       "type": "object",
       "description": "Static read response for the singleton bulk VM operations proxy endpoint",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the singleton bulk VM operations proxy resource",
+          "readOnly": true
+        },
         "name": {
           "type": "string",
           "description": "Echoes the singleton proxy resource name",
@@ -871,11 +876,25 @@
           ],
           "x-ms-enum": {
             "modelAsString": false
-          }
+          },
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the singleton bulk VM operations proxy resource",
+          "enum": [
+            "Microsoft.Compute/locations/virtualMachines/bulkVmOperations"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
         }
       },
       "required": [
-        "name"
+        "id",
+        "name",
+        "type"
       ]
     },
     "BulkactionVMExtension": {
