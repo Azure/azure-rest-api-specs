@@ -81,5 +81,11 @@ namespace ComputeCombine;
 @@clientName(ComputeSku.ResourceSkuRestrictionsType, "ComputeResourceSkuRestrictionsType", "csharp");
 @@clientName(ComputeSku.ResourceSkuZoneDetails, "ComputeResourceSkuZoneDetails", "csharp");
 
+// ── alternateType: SubResource.id → ResourceIdentifier for C# (migration from AutoRest) ──
+@@alternateType(Common.SubResource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(Common.OperatingSystemTypes, "OperatingSystemType", "csharp");

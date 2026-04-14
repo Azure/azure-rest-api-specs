@@ -151,3 +151,25 @@ using ComputeGallery;
 @@clientName(GalleryExpandParams, "GalleryExpand", "csharp");
 @@clientName(PolicyViolationCategory, "GalleryImageVersionPolicyViolationCategory", "csharp");
 @@clientName(ReplicationState, "RegionalReplicationState", "csharp");
+
+// ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
+
+// Wrapper model id properties → ResourceIdentifier
+@@alternateType(GalleryArtifactVersionSource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Direct string properties → ResourceIdentifier
+@@alternateType(GalleryArtifactVersionFullSource.virtualMachineId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(GalleryDiskImageSource.storageAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DiskImageEncryption.diskEncryptionSetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);

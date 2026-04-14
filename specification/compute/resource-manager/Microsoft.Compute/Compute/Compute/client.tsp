@@ -608,3 +608,33 @@ using Compute;
 @@clientName(RebalanceBehavior, "VmssRebalanceBehavior", "csharp");
 @@clientName(RebalanceStrategy, "VmssRebalanceStrategy", "csharp");
 @@clientName(VmDiskTypes, "VirtualMachineDiskType", "csharp");
+
+// ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
+
+// Wrapper model id properties → ResourceIdentifier
+@@alternateType(ApiEntityReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ServiceArtifactReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SecurityPostureReference.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SshPublicKeyGenerateKeyPairResult.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RestorePointCollectionSourceProperties.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Direct string properties → ResourceIdentifier
+@@alternateType(VirtualMachineScaleSetVMInstanceView.assignedHost,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);

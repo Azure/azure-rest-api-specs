@@ -59,3 +59,81 @@ using ComputeDisk;
 
 // ── RP-prefix renames (C# backward compat) ──
 @@clientName(EncryptionType, "ComputeEncryptionType", "csharp");
+
+// ── alternateType overrides: string → armResourceIdentifier (C# backward compat) ──
+
+// Wrapper model id properties → ResourceIdentifier
+@@alternateType(SourceVault.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ImageDiskReference.id, Azure.Core.armResourceIdentifier, "csharp");
+
+// Disk
+@@alternateType(Disk.managedBy, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(Disk.managedByExtended,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DiskProperties.diskAccessId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// DiskUpdate
+@@alternateType(DiskUpdateProperties.diskAccessId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// DiskRestorePoint
+@@alternateType(DiskRestorePointProperties.diskAccessId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DiskRestorePointProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Snapshot
+@@alternateType(SnapshotProperties.diskAccessId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// SnapshotUpdate
+@@alternateType(SnapshotUpdateProperties.diskAccessId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// CreationData
+@@alternateType(CreationData.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(CreationData.storageAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(CreationData.elasticSanResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Encryption
+@@alternateType(Encryption.diskEncryptionSetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// DiskSecurityProfile
+@@alternateType(DiskSecurityProfile.secureVMDiskEncryptionSetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// PrivateLinkResource
+@@alternateType(PrivateLinkResourceProperties.groupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
