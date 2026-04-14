@@ -11,17 +11,26 @@ namespace Microsoft.DeviceRegistry;
 // ──────────────────────────────────────────────
 
 /** Resource metadata properties (etag and systemData). */
-model ResourceMetadata {
+model DataPlaneResourceBase {
+  /** The name of the resource. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  name: string;
+
+  /** The UUID of this capability resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  uuid: string;
+
+  /** The type of the resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  type: string;
+
   /** The entity tag for the resource. */
+  @visibility(Lifecycle.Read)
   etag?: string;
 
   /** Metadata containing createdBy and modifiedBy information. */
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
-}
-
-/** Common properties shared by all data plane resources. */
-model DataPlaneResourceBase {
-  ...ResourceMetadata;
 }
 
 /** Metadata pertaining to creation and last modification of the resource. */

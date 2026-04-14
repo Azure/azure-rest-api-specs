@@ -24,21 +24,14 @@ namespace Microsoft.DeviceRegistry;
 model Group {
   ...DataPlaneResourceBase;
 
-  /** The unique identifier of the group. */
-  @key("groupUuid")
-  @visibility(Lifecycle.Read)
-  groupUuid: string;
-
   /** The resource-specific properties for this group. */
   properties?: GroupProperties;
 }
 
+@@key(Group.name, "groupName");
+
 /** Properties of a group resource. */
 model GroupProperties {
-  /** Globally unique, immutable, non-reusable ID. */
-  @visibility(Lifecycle.Read)
-  uuid?: string;
-
   /** Human-readable description of the group. */
   description?: string;
 

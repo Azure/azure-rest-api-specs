@@ -21,41 +21,13 @@ namespace Microsoft.DeviceRegistry;
 @resource("capabilities")
 @parentResource(Device)
 model DeviceCapability {
-  /** The entity tag for the resource. */
-  etag?: string;
-
-  /** The unique identifier of the capability. */
-  @key("capabilityName")
-  @visibility(Lifecycle.Read)
-  capabilityName: string;
-
-  /** The UUID of the namespace the device for this capability belongs to. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  namespaceUuid: string;
-
-  /** The UUID of the device this capability extends. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  deviceUuid: string;
-
-  /** The UUID of this capability resource. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  uuid: string;
-
-  /** The name of the capability resource. */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  name: string;
-
-  /** The type of the resource. */
-  @visibility(Lifecycle.Read)
-  type: string;
-
-  /** Metadata containing createdBy and modifiedBy information. */
-  @visibility(Lifecycle.Read)
-  systemData: SystemData;
+  ...DataPlaneResourceBase;
 
   /** The resource-specific properties for this capability. */
   properties?: DeviceCapabilityProperties;
 }
+
+@@key(DeviceCapability.name, "capabilityName");
 
 /** Properties of a device capability resource. */
 model DeviceCapabilityProperties {

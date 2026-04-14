@@ -24,23 +24,16 @@ namespace Microsoft.DeviceRegistry;
 @resource("devices")
 @parentResource(Namespace)
 model Device {
-  ...ResourceMetadata;
-
-  /** The name of the device. */
-  @key("deviceName")
-  @visibility(Lifecycle.Read)
-  deviceName: string;
+  ...DataPlaneResourceBase;
 
   /** The resource-specific properties for this device. */
   properties?: DeviceProperties;
 }
 
+@@key(Device.name, "deviceName");
+
 /** Properties of a device resource. */
 model DeviceProperties {
-  /** Globally unique, immutable, non-reusable ID. */
-  @visibility(Lifecycle.Read)
-  uuid?: string;
-
   /** Contains metadata about how this device was discovered or provisioned. */
   @visibility(Lifecycle.Read)
   origin?: DeviceOrigin;
@@ -120,7 +113,7 @@ union DeviceEnabledStatus {
 
 /** Response model for device lookup POST actions (excludes deviceName key). */
 model DeviceResponse {
-  ...ResourceMetadata;
+  ...DataPlaneResourceBase;
 
   /** The resource-specific properties for this device. */
   properties?: DeviceProperties;
@@ -158,20 +151,92 @@ model GroupReference {
 
 /** Result of querying group memberships for a device. */
 model GetGroupMembershipsResult {
-  ...ResourceMetadata;
+  ...DataPlaneResourceBase;
 
   /** The groups that this device belongs to. */
   groups: GroupReference[];
 }
 
+/** The authentication type for device provisioning. */
+union DeviceProvisioningAuthenticationType {
+  string,
+
+  /** Symmetric key authentication. */
+  SymmetricKey: "SymmetricKey",
+
+  /** X.509 certificate authentication. */
+  X509Certificate: "X509Certificate",
+
+  /** Self-signed X.509 certificate authentication. */
+  SelfSignedX509Certificate: "SelfSignedX509Certificate",
+}
+
+/** Symmetric key credentials for device provisioning. */
+model SymmetricKeyCredentials {
+  /** The primary symmetric key. */
+  primaryKey: string;
+
+  /** The secondary symmetric key. */
+  secondaryKey: string;
+}
+
+/** Self-signed certificate thumbprints for device provisioning. */
+model SelfSignedThumbprints {
+  /** The primary self-signed certificate thumbprint. */
+  primaryThumbprint: string;
+
+  /** The secondary self-signed certificate thumbprint. */
+  secondaryThumbprint: string;
+}
+
+/** Authentication configuration for device provisioning. */
+model DeviceProvisioningAuthentication {
+  /** The operational authentication type. */
+  type: DeviceProvisioningAuthenticationType;
+
+  /** Symmetric key credentials. Required when type is SymmetricKey. */
+  symmetricKey?: SymmetricKeyCredentials;
+
+  /** The certificate authority identifier. Required when type is X509Certificate. */
+  certificateAuthority?: string;
+
+  /** Self-signed certificate thumbprints. Required when type is SelfSignedX509Certificate. */
+  selfSignedThumbprints?: SelfSignedThumbprints;
+}
+
+/** Desired properties for the device twin. */
+model DeviceTwinDesiredProperties {
+  /** The desired properties to set on the device twin. */
+  desired?: Record<string>;
+}
+
+/** Initial device twin configuration for provisioning. */
+model DeviceTwin {
+  /** Tags to set on the device twin. */
+  tags?: Record<string>;
+
+  /** The device twin properties. */
+  properties?: DeviceTwinDesiredProperties;
+}
+
 /** Request body for provisioning devices in a namespace. */
 model ProvisionDevicesRequest {
-  // TODO: Add device provisioning fields
+  /** The ID to use as the IoT Hub device identity. This must be the External Device ID. */
+  externalDeviceId: string;
+
+  /** The service endpoint identifier as returned by the GetNamespace API. */
+  serviceEndpoint: string;
+
+  /** The authentication configuration for the device. */
+  authentication: DeviceProvisioningAuthentication;
+
+  /** Optional initial device twin properties to set during provisioning. */
+  deviceTwin?: DeviceTwin;
 }
 
 /** Result of a device provisioning operation. */
 model ProvisionDevicesResult {
-  ...ResourceMetadata;
+  ...DataPlaneResourceBase;
 }
 
 /** Request body for executing a direct method action on a device. */
@@ -181,7 +246,7 @@ model ExecuteActionRequest {
 
 /** Result of executing a direct method action on a device. */
 model ExecuteActionResult {
-  ...ResourceMetadata;
+  ...DataPlaneResourceBase;
 }
 
 // ──────────────────────────────────────────────

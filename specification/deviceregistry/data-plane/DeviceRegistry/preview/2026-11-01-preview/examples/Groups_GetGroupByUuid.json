@@ -1,6 +1,6 @@
 {
   "operationId": "Groups_GetGroupByUuid",
-  "title": "Look up a group by UUID",
+  "title": "Look up a group by its UUID",
   "parameters": {
     "endpoint": "https://westus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-01-preview",
@@ -12,25 +12,25 @@
   "responses": {
     "200": {
       "body": {
-        "groupUuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab",
-        "etag": "\"grp123\"",
+        "etag": "\"g1b2c3d4-0000-0800-0000-66fcb0290000\"",
         "systemData": {
-          "createdBy": "00003442-0000-0000-0000-494059220000",
-          "createdByType": "Application",
-          "createdAt": "2026-01-10T08:00:00Z",
-          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2026-03-15T12:00:00Z"
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-20T14:45:00Z"
         },
+        "uuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab",
+        "name": "my-group-01",
+        "type": "Microsoft.DeviceRegistry/namespaces/groups",
         "properties": {
-          "uuid": "g1b2c3d4-5678-90ab-cdef-1234567890ab",
-          "description": "All production environment sensor devices",
-          "displayName": "Production Sensors",
+          "description": "All factory floor sensors",
+          "displayName": "Factory Sensors",
           "refreshMode": "Continuous",
           "groupType": "Device",
-          "lastMembershipRefreshTime": "2026-03-15T12:00:00Z",
+          "query": "deviceType eq 'sensor'",
           "membershipState": "Ready",
-          "query": "properties.manufacturer = 'Contoso' AND properties.enabled = 'Enabled'",
           "provisioningState": "Succeeded"
         }
       }

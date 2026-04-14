@@ -32,14 +32,11 @@ union DeviceStateName {
 model DeviceState {
   ...DataPlaneResourceBase;
 
-  /** The name of the state. Must be a well-known value ("default" or "update"). */
-  @key("stateName")
-  @visibility(Lifecycle.Read)
-  stateName: DeviceStateName;
-
   /** The resource-specific properties for this state. */
   properties?: DeviceStateProperties;
 }
+
+@@key(DeviceState.name, "stateName");
 
 /** Properties of a device state resource. */
 model DeviceStateProperties {

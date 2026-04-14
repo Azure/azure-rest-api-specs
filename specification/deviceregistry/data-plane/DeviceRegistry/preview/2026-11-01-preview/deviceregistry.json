@@ -86,7 +86,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           }
@@ -139,7 +139,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           }
@@ -226,7 +226,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           }
@@ -282,14 +282,14 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "capabilityName",
             "in": "path",
-            "description": "The unique identifier of the capability.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           }
@@ -340,14 +340,14 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "capabilityName",
             "in": "path",
-            "description": "The unique identifier of the capability.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -416,14 +416,14 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "capabilityName",
             "in": "path",
-            "description": "The unique identifier of the capability.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -489,14 +489,14 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "capabilityName",
             "in": "path",
-            "description": "The unique identifier of the capability.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           }
@@ -546,7 +546,7 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
@@ -607,36 +607,16 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the state. Must be a well-known value (\"default\" or \"update\").",
+            "description": "The name of the resource.",
             "required": true,
-            "type": "string",
-            "enum": [
-              "default",
-              "update"
-            ],
-            "x-ms-enum": {
-              "name": "DeviceStateName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
-                }
-              ]
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -685,36 +665,16 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the state. Must be a well-known value (\"default\" or \"update\").",
+            "description": "The name of the resource.",
             "required": true,
-            "type": "string",
-            "enum": [
-              "default",
-              "update"
-            ],
-            "x-ms-enum": {
-              "name": "DeviceStateName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "name": "resource",
@@ -781,36 +741,16 @@
           {
             "name": "deviceName",
             "in": "path",
-            "description": "The name of the device.",
+            "description": "The name of the resource.",
             "required": true,
             "type": "string"
           },
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the state. Must be a well-known value (\"default\" or \"update\").",
+            "description": "The name of the resource.",
             "required": true,
-            "type": "string",
-            "enum": [
-              "default",
-              "update"
-            ],
-            "x-ms-enum": {
-              "name": "DeviceStateName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default state of a device."
-                },
-                {
-                  "name": "update",
-                  "value": "update",
-                  "description": "The update state of a device."
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "name": "resource",
@@ -906,7 +846,7 @@
           }
         },
         "x-ms-examples": {
-          "Look up a device by external identifier": {
+          "Look up a device by its external ID": {
             "$ref": "./examples/Devices_GetDeviceByExternalId.json"
           }
         }
@@ -963,7 +903,7 @@
           }
         },
         "x-ms-examples": {
-          "Look up a device by UUID": {
+          "Look up a device by its UUID": {
             "$ref": "./examples/Devices_GetDeviceByUuid.json"
           }
         }
@@ -986,6 +926,14 @@
             "description": "The unique identifier of the namespace.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProvisionDevicesRequest"
+            }
           }
         ],
         "responses": {
@@ -1097,7 +1045,7 @@
           }
         },
         "x-ms-examples": {
-          "Look up a group by UUID": {
+          "Look up a group by its UUID": {
             "$ref": "./examples/Groups_GetGroupByUuid.json"
           }
         }
@@ -1287,33 +1235,87 @@
     },
     "DataPlaneResourceBase": {
       "type": "object",
-      "description": "Common properties shared by all data plane resources.",
+      "description": "Resource metadata properties (etag and systemData).",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "name",
+        "uuid",
+        "type"
+      ]
     },
     "Device": {
       "type": "object",
       "description": "A device resource.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
-        },
-        "deviceName": {
-          "type": "string",
-          "description": "The name of the device.",
+          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "properties": {
@@ -1322,7 +1324,9 @@
         }
       },
       "required": [
-        "deviceName"
+        "name",
+        "uuid",
+        "type"
       ]
     },
     "DeviceAcceptedStatus": {
@@ -1353,28 +1357,12 @@
       "type": "object",
       "description": "A device capability resource.",
       "properties": {
-        "etag": {
+        "name": {
           "type": "string",
-          "description": "The entity tag for the resource."
-        },
-        "capabilityName": {
-          "type": "string",
-          "description": "The unique identifier of the capability.",
-          "readOnly": true
-        },
-        "namespaceUuid": {
-          "type": "string",
-          "description": "The UUID of the namespace the device for this capability belongs to.",
+          "description": "The name of the resource.",
           "x-ms-mutability": [
             "read",
-            "create"
-          ]
-        },
-        "deviceUuid": {
-          "type": "string",
-          "description": "The UUID of the device this capability extends.",
-          "x-ms-mutability": [
-            "read",
+            "update",
             "create"
           ]
         },
@@ -1386,18 +1374,17 @@
             "create"
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "The name of the capability resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
           "readOnly": true
         },
         "systemData": {
@@ -1411,36 +1398,21 @@
         }
       },
       "required": [
-        "capabilityName",
-        "namespaceUuid",
-        "deviceUuid",
-        "uuid",
         "name",
-        "type",
-        "systemData"
+        "uuid",
+        "type"
       ]
     },
     "DeviceCapabilityCreateOrUpdate": {
       "type": "object",
       "description": "A device capability resource.",
       "properties": {
-        "etag": {
+        "name": {
           "type": "string",
-          "description": "The entity tag for the resource."
-        },
-        "namespaceUuid": {
-          "type": "string",
-          "description": "The UUID of the namespace the device for this capability belongs to.",
+          "description": "The name of the resource.",
           "x-ms-mutability": [
             "read",
-            "create"
-          ]
-        },
-        "deviceUuid": {
-          "type": "string",
-          "description": "The UUID of the device this capability extends.",
-          "x-ms-mutability": [
-            "read",
+            "update",
             "create"
           ]
         },
@@ -1452,12 +1424,11 @@
             "create"
           ]
         },
-        "name": {
+        "type": {
           "type": "string",
-          "description": "The name of the capability resource.",
+          "description": "The type of the resource.",
           "x-ms-mutability": [
             "read",
-            "update",
             "create"
           ]
         },
@@ -1603,11 +1574,6 @@
       "type": "object",
       "description": "Properties of a device resource.",
       "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "Globally unique, immutable, non-reusable ID.",
-          "readOnly": true
-        },
         "origin": {
           "$ref": "#/definitions/DeviceOrigin",
           "description": "Contains metadata about how this device was discovered or provisioned.",
@@ -1653,39 +1619,148 @@
         }
       }
     },
+    "DeviceProvisioningAuthentication": {
+      "type": "object",
+      "description": "Authentication configuration for device provisioning.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DeviceProvisioningAuthenticationType",
+          "description": "The operational authentication type."
+        },
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentials",
+          "description": "Symmetric key credentials. Required when type is SymmetricKey."
+        },
+        "certificateAuthority": {
+          "type": "string",
+          "description": "The certificate authority identifier. Required when type is X509Certificate."
+        },
+        "selfSignedThumbprints": {
+          "$ref": "#/definitions/SelfSignedThumbprints",
+          "description": "Self-signed certificate thumbprints. Required when type is SelfSignedX509Certificate."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DeviceProvisioningAuthenticationType": {
+      "type": "string",
+      "description": "The authentication type for device provisioning.",
+      "enum": [
+        "SymmetricKey",
+        "X509Certificate",
+        "SelfSignedX509Certificate"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceProvisioningAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SymmetricKey",
+            "value": "SymmetricKey",
+            "description": "Symmetric key authentication."
+          },
+          {
+            "name": "X509Certificate",
+            "value": "X509Certificate",
+            "description": "X.509 certificate authentication."
+          },
+          {
+            "name": "SelfSignedX509Certificate",
+            "value": "SelfSignedX509Certificate",
+            "description": "Self-signed X.509 certificate authentication."
+          }
+        ]
+      }
+    },
     "DeviceResponse": {
       "type": "object",
       "description": "Response model for device lookup POST actions (excludes deviceName key).",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/DeviceProperties",
           "description": "The resource-specific properties for this device."
         }
-      }
+      },
+      "required": [
+        "name",
+        "uuid",
+        "type"
+      ]
     },
     "DeviceState": {
       "type": "object",
       "description": "A device state resource.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
-        },
-        "stateName": {
-          "$ref": "#/definitions/DeviceStateName",
-          "description": "The name of the state. Must be a well-known value (\"default\" or \"update\").",
+          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "properties": {
@@ -1694,20 +1769,39 @@
         }
       },
       "required": [
-        "stateName"
+        "name",
+        "uuid",
+        "type"
       ]
     },
     "DeviceStateCreateOrUpdate": {
       "type": "object",
       "description": "A device state resource.",
       "properties": {
-        "etag": {
+        "name": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/DeviceStateProperties",
@@ -1759,6 +1853,36 @@
         }
       }
     },
+    "DeviceTwin": {
+      "type": "object",
+      "description": "Initial device twin configuration for provisioning.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Tags to set on the device twin.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceTwinDesiredProperties",
+          "description": "The device twin properties."
+        }
+      }
+    },
+    "DeviceTwinDesiredProperties": {
+      "type": "object",
+      "description": "Desired properties for the device twin.",
+      "properties": {
+        "desired": {
+          "type": "object",
+          "description": "The desired properties to set on the device twin.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ExecuteActionRequest": {
       "type": "object",
       "description": "Request body for executing a direct method action on a device."
@@ -1767,15 +1891,47 @@
       "type": "object",
       "description": "Result of executing a direct method action on a device.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "name",
+        "uuid",
+        "type"
+      ]
     },
     "GetCapabilityByUuidRequest": {
       "type": "object",
@@ -1833,13 +1989,40 @@
       "type": "object",
       "description": "Result of querying group memberships for a device.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         },
         "groups": {
           "type": "array",
@@ -1850,6 +2033,9 @@
         }
       },
       "required": [
+        "name",
+        "uuid",
+        "type",
         "groups"
       ]
     },
@@ -1857,17 +2043,39 @@
       "type": "object",
       "description": "A group resource.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
-        },
-        "groupUuid": {
-          "type": "string",
-          "description": "The unique identifier of the group.",
+          "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
         "properties": {
@@ -1876,7 +2084,9 @@
         }
       },
       "required": [
-        "groupUuid"
+        "name",
+        "uuid",
+        "type"
       ]
     },
     "GroupMembershipState": {
@@ -1913,11 +2123,6 @@
       "type": "object",
       "description": "Properties of a group resource.",
       "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "Globally unique, immutable, non-reusable ID.",
-          "readOnly": true
-        },
         "description": {
           "type": "string",
           "description": "Human-readable description of the group."
@@ -2071,21 +2276,76 @@
     },
     "ProvisionDevicesRequest": {
       "type": "object",
-      "description": "Request body for provisioning devices in a namespace."
+      "description": "Request body for provisioning devices in a namespace.",
+      "properties": {
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The ID to use as the IoT Hub device identity. This must be the External Device ID."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "The service endpoint identifier as returned by the GetNamespace API."
+        },
+        "authentication": {
+          "$ref": "#/definitions/DeviceProvisioningAuthentication",
+          "description": "The authentication configuration for the device."
+        },
+        "deviceTwin": {
+          "$ref": "#/definitions/DeviceTwin",
+          "description": "Optional initial device twin properties to set during provisioning."
+        }
+      },
+      "required": [
+        "externalDeviceId",
+        "serviceEndpoint",
+        "authentication"
+      ]
     },
     "ProvisionDevicesResult": {
       "type": "object",
       "description": "Result of a device provisioning operation.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The entity tag for the resource.",
+          "readOnly": true
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "name",
+        "uuid",
+        "type"
+      ]
     },
     "ProvisioningError": {
       "type": "object",
@@ -2105,19 +2365,41 @@
         }
       }
     },
-    "ResourceMetadata": {
+    "SelfSignedThumbprints": {
       "type": "object",
-      "description": "Resource metadata properties (etag and systemData).",
+      "description": "Self-signed certificate thumbprints for device provisioning.",
       "properties": {
-        "etag": {
+        "primaryThumbprint": {
           "type": "string",
-          "description": "The entity tag for the resource."
+          "description": "The primary self-signed certificate thumbprint."
         },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information."
+        "secondaryThumbprint": {
+          "type": "string",
+          "description": "The secondary self-signed certificate thumbprint."
         }
-      }
+      },
+      "required": [
+        "primaryThumbprint",
+        "secondaryThumbprint"
+      ]
+    },
+    "SymmetricKeyCredentials": {
+      "type": "object",
+      "description": "Symmetric key credentials for device provisioning.",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "The primary symmetric key."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The secondary symmetric key."
+        }
+      },
+      "required": [
+        "primaryKey",
+        "secondaryKey"
+      ]
     },
     "SystemData": {
       "type": "object",

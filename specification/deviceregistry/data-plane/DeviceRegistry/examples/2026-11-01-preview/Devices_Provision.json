@@ -5,7 +5,29 @@
     "endpoint": "https://westus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-01-preview",
     "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
-    "body": {}
+    "body": {
+      "externalDeviceId": "dps-enrollment-device-abc-123",
+      "serviceEndpoint": "my-iothub",
+      "authentication": {
+        "type": "SymmetricKey",
+        "symmetricKey": {
+          "primaryKey": "dGhpcyBpcyBhIHByaW1hcnkga2V5",
+          "secondaryKey": "dGhpcyBpcyBhIHNlY29uZGFyeSBrZXk="
+        }
+      },
+      "deviceTwin": {
+        "tags": {
+          "environment": "production",
+          "site": "factory-floor-1"
+        },
+        "properties": {
+          "desired": {
+            "telemetryInterval": "30",
+            "firmwareVersion": "2.0.1"
+          }
+        }
+      }
+    }
   },
   "responses": {
     "202": {
