@@ -204,20 +204,21 @@ model Resources {
 @doc("The resources needed for the user request with the correlationId")
 model ResourceWithContext {
   @doc("The resource ids used for the request")
-  id: armResourceIdentifier<[
+  resourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Compute/vm";
     }
   ]>;
 
   @doc("The operational context of the resourceId")
-  context: string;
+  operationContext: string;
 }
 
 @doc("The resources needed for the user request with the context for tracking purposes")
 model ResourcesWithContext {
   @doc("The resource ids used for the request")
-  ids: Array<ResourceWithContext>;
+  @identifiers(#["resourceId"])
+  resources: Array<ResourceWithContext>;
 }
 
 @added(Versions.`2026-02-10-preview`)
