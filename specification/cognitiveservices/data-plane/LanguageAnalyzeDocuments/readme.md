@@ -15,12 +15,6 @@ tag: release_2024-11-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
-directive:
-  - suppress: LongRunningResponseStatusCode
-    reason: The validation tools do not properly recognize 202 as a supported response code.
-  - suppress: R3016
-    where: $.definitions.CurrencyResolution.properties.ISO4217
-    reason: ISO should be upper case.
 ```
 
 ### Release 2024-11-15-preview
