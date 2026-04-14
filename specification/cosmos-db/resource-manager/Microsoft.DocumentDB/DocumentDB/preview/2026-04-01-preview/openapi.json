@@ -1155,7 +1155,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -19788,7 +19788,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -19833,7 +19833,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -19882,7 +19882,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -19934,7 +19934,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -19951,7 +19951,8 @@
             "in": "path",
             "description": "Cosmos DB SQL database name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           }
         ],
         "responses": {
@@ -19990,7 +19991,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -20007,7 +20008,8 @@
             "in": "path",
             "description": "Cosmos DB SQL database name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           }
         ],
         "responses": {
@@ -20049,7 +20051,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -20066,14 +20068,16 @@
             "in": "path",
             "description": "Cosmos DB SQL database name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           },
           {
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB SQL container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           }
         ],
         "responses": {
@@ -20669,7 +20673,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -20735,6 +20739,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountRestore": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountRestore.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -20755,7 +20764,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -20821,6 +20830,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountPurge": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountPurge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -20841,7 +20855,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -20858,7 +20872,8 @@
             "in": "path",
             "description": "Cosmos DB SQL database name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -20914,6 +20929,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlDatabaseRestore": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlDatabaseRestore.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -20934,7 +20954,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -20951,7 +20971,8 @@
             "in": "path",
             "description": "Cosmos DB SQL database name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -21007,6 +21028,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlDatabasePurge": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlDatabasePurge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -21027,7 +21053,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -21044,14 +21070,16 @@
             "in": "path",
             "description": "Cosmos DB SQL database name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           },
           {
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB SQL container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -21107,6 +21135,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlContainerRestore": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlContainerRestore.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -21127,7 +21160,7 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "accountName",
@@ -21144,14 +21177,16 @@
             "in": "path",
             "description": "Cosmos DB SQL database name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           },
           {
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB SQL container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -21207,6 +21242,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlContainerPurge": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlContainerPurge.json"
           }
         },
         "x-ms-long-running-operation-options": {
