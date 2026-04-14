@@ -152,129 +152,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations__deleted": {
-      "get": {
-        "operationId": "Workspaces_ListNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Gets a list of NSP configurations for specified workspace.",
-        "parameters": [
-          {
-            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List NSP configs by Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}__deleted": {
-      "get": {
-        "operationId": "Workspaces_GetNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Gets a network security perimeter configuration.",
-        "parameters": [
-          {
-            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "networkSecurityPerimeterConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 512,
-            "pattern": "^.*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get NSP config by name for Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile__deleted": {
-      "post": {
-        "operationId": "Workspaces_ReconcileNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Reconcile network security perimeter configuration for Workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "networkSecurityPerimeterConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 512,
-            "pattern": "^.*$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reconcile NSP config for Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_Reconcile.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}__deleted": {
       "get": {
         "operationId": "WorkspacePurge_GetPurgeStatus",
@@ -942,120 +819,6 @@
             "$ref": "./examples/TablesMigrate.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations__added": {
-      "get": {
-        "operationId": "Workspaces_ListNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Gets a list of NSP configurations for specified workspace.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List NSP configs by Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}__added": {
-      "get": {
-        "operationId": "Workspaces_GetNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Gets a network security perimeter configuration.",
-        "parameters": [
-          {
-            "name": "networkSecurityPerimeterConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 512,
-            "pattern": "^.*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get NSP config by name for Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile__added": {
-      "post": {
-        "operationId": "Workspaces_ReconcileNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Reconcile network security perimeter configuration for Workspace resource.",
-        "parameters": [
-          {
-            "name": "networkSecurityPerimeterConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 512,
-            "pattern": "^.*$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reconcile NSP config for Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_Reconcile.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/search__added": {
@@ -2004,11 +1767,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/workspaces": {
       "get": {
-        "x-ms-examples__deleted": {
-          "WorkspacesSubscriptionList": {
-            "$ref": "./examples/WorkspacesSubscriptionList.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -2016,6 +1774,14 @@
                 "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
                 "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
               }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacesSubscriptionList": {
+            "$ref": {
+              "__old": "./examples/WorkspacesSubscriptionList.json",
+              "__new": "./examples/WorkspacesSubscriptionListForWorkSpace.json"
             }
           }
         }
@@ -2067,6 +1833,11 @@
             "headers": {
               "azure-asyncoperation__deleted": {
                 "type": "string"
+              },
+              "Azure-AsyncOperation__added": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
               },
               "Location": {
                 "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3384,6 +3155,132 @@
             "description": "ignore",
             "schema": {
               "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "parameters": [
+          [
+            "~",
+            {
+              "$ref__deleted": "../../common/v1/types.json#/parameters/WorkspaceNameParameter",
+              "name__added": "workspaceName",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 4,
+              "maxLength__added": 63,
+              "pattern__added": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult",
+                "__new": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration",
+                "__new": "../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "parameters": [
+          [
+            "-",
+            {
+              "$ref": "../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "workspaceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 63,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              }
             }
           }
         }

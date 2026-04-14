@@ -42,9 +42,8 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

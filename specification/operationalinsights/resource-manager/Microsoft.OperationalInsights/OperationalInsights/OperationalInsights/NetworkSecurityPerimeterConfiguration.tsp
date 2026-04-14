@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./Workspace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -23,33 +24,71 @@ model NetworkSecurityPerimeterConfiguration
   >;
 }
 
+alias NSPOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * The name for a network security perimeter configuration
+     */
+    @path
+    @segment("networkSecurityPerimeterConfigurations")
+    @key("networkSecurityPerimeterConfigurationName")
+    @minLength(1)
+    @maxLength(512)
+    @pattern("^.*$")
+    networkSecurityPerimeterConfigurationName: string;
+  }
+>;
+
 @armResourceOperations
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a network security perimeter configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Workspaces_GetNSP")
-  getNSP is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
+  @tag("NetworkSecurityPerimeterConfigurations")
+  getNSP is NSPOps.Read<
+    NetworkSecurityPerimeterConfiguration,
+    Response = ArmResponse<CommonTypes.NetworkSecurityPerimeterConfiguration>
+  >;
 
   /**
    * Gets a list of NSP configurations for specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Workspaces_ListNSP")
-  listNSP is ArmResourceListByParent<NetworkSecurityPerimeterConfiguration>;
+  @tag("NetworkSecurityPerimeterConfigurations")
+  listNSP is NSPOps.List<NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Reconcile network security perimeter configuration for Workspace resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Workspaces_ReconcileNSP")
   @action("reconcile")
-  reconcileNSP is ArmResourceActionAsyncBase<
+  @tag("NetworkSecurityPerimeterConfigurations")
+  reconcileNSP is NSPOps.ActionAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkSecurityPerimeterConfiguration>
+    void,
+    Response = ArmAcceptedLroResponse
   >;
 }
 

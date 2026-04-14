@@ -1,14 +1,5 @@
 ## Changed Paths
 
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}
-Change Type: added
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile
-Change Type: added
-
 Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/search
 Change Type: deleted
 
@@ -61,15 +52,6 @@ Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provide
 Change Type: deleted
 
 Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/enable
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}
-Change Type: deleted
-
-Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile
 Change Type: deleted
 
 Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}
@@ -127,24 +109,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/enable__deleted']` | deleted | `{"post":{"operationId":"IntelligencePacks_Enable","tags":["Workspaces","IntelligencePacks"],"descrip...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations__deleted']` | deleted | `{"get":{"operationId":"Workspaces_ListNSP","tags":["NetworkSecurityPerimeterConfigurations"],"descri...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}__deleted']` | deleted | `{"get":{"operationId":"Workspaces_GetNSP","tags":["NetworkSecurityPerimeterConfigurations"],"descrip...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile__deleted']` | deleted | `{"post":{"operationId":"Workspaces_ReconcileNSP","tags":["NetworkSecurityPerimeterConfigurations"],"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}`
 
@@ -205,24 +169,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}/migrate__deleted']` | deleted | `{"post":{"operationId":"Tables_Migrate","tags":["Tables"],"description":"Migrate a Log Analytics tab...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations__added']` | added | `{"get":{"operationId":"Workspaces_ListNSP","tags":["NetworkSecurityPerimeterConfigurations"],"descri...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}__added']` | added | `{"get":{"operationId":"Workspaces_GetNSP","tags":["NetworkSecurityPerimeterConfigurations"],"descrip...` |
-
-### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile__added']` | added | `{"post":{"operationId":"Workspaces_ReconcileNSP","tags":["NetworkSecurityPerimeterConfigurations"],"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/search`
 
@@ -348,6 +294,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].name__added` | added | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].name__added` | added | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].name__added` | added | `workspaceName` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].name__added` | added | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].name__added` | added | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].name__added` | added | `workspaceName` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].name__added` | added | `workspaceName` |
@@ -376,6 +323,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].in__added` | added | `path` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].in__added` | added | `path` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].in__added` | added | `path` |
@@ -407,6 +355,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].required__added` | added | `true` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].required__added` | added | `true` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].required__added` | added | `true` |
@@ -439,6 +388,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].type__added` | added | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].type__added` | added | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].type__added` | added | `string` |
@@ -469,6 +419,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].$ref__deleted` | deleted | `../../common/v1/types.json#/parameters/WorkspaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].$ref__deleted` | deleted | `../../common/v1/types.json#/parameters/WorkspaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].$ref__deleted` | deleted | `../../common/v1/types.json#/parameters/WorkspaceNameParameter` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].$ref__deleted` | deleted | `../../common/v1/types.json#/parameters/WorkspaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].$ref__deleted` | deleted | `../../common/v1/types.json#/parameters/WorkspaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].$ref__deleted` | deleted | `../../common/v1/types.json#/parameters/WorkspaceNameParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].$ref__deleted` | deleted | `../../common/v1/types.json#/parameters/WorkspaceNameParameter` |
@@ -517,13 +468,6 @@ Change Type: deleted
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/queryPacks'].get['x-ms-examples'].WorkspacesSubscriptionList__added` | added | `{"$ref":"./examples/WorkspacesSubscriptionListForQueryPacks.json"}` |
 
-### Changes for `x-ms-examples`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/workspaces'].get['x-ms-examples__deleted']` | deleted | `{"WorkspacesSubscriptionList":{"$ref":"./examples/WorkspacesSubscriptionList.json"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces'].get['x-ms-examples__deleted']` | deleted | `{"WorkspacesGet":{"$ref":"./examples/WorkspacesListByResourceGroup.json"}}` |
-
 ### Changes for `minLength`
 
 | Path | Change Type | Value |
@@ -544,6 +488,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].minLength__added` | added | `4` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].minLength__added` | added | `4` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].minLength__added` | added | `4` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].minLength__added` | added | `4` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].minLength__added` | added | `4` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].minLength__added` | added | `4` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].minLength__added` | added | `4` |
@@ -572,6 +517,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].maxLength__added` | added | `63` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].maxLength__added` | added | `63` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].maxLength__added` | added | `63` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].maxLength__added` | added | `63` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].maxLength__added` | added | `63` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].maxLength__added` | added | `63` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].maxLength__added` | added | `63` |
@@ -600,6 +546,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].get.parameters[0].pattern__added` | added | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}'].put.parameters[0].pattern__added` | added | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups'].get.parameters[0].pattern__added` | added | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.parameters[0].pattern__added` | added | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.parameters[0].pattern__added` | added | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey'].post.parameters[0].pattern__added` | added | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches'].get.parameters[0].pattern__added` | added | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
@@ -617,6 +564,14 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.202.headers['azure-asyncoperation__deleted']` | deleted | `{"type":"string"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/failback'].post.responses.202.headers['azure-asyncoperation__deleted']` | deleted | `{"type":"string"}` |
 
+### Changes for `Azure-AsyncOperation`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].patch.responses.202.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].put.responses.202.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.202.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
+
 ### Changes for `description`
 
 | Path | Change Type | Value |
@@ -625,13 +580,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].put.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/failback'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
-
-### Changes for `Azure-AsyncOperation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].patch.responses.202.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.202.headers['Azure-AsyncOperation__added']` | added | `{"type":"string","format":"uri","description":"A link to the status monitor"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
 
 ### Changes for `headers`
 
@@ -657,6 +606,12 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks'].put.responses.204__added` | added | `{"description":"ignore"}` |
+
+### Changes for `x-ms-examples`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces'].get['x-ms-examples__deleted']` | deleted | `{"WorkspacesGet":{"$ref":"./examples/WorkspacesListByResourceGroup.json"}}` |
 
 ### Changes for `x-ms-pageable`
 
@@ -871,6 +826,7 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/deletedWorkspaces'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/queryPacks'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/workspaces'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/workspaces'].get['x-ms-examples'].WorkspacesSubscriptionList.$ref` | `./examples/WorkspacesSubscriptionList.json` | `./examples/WorkspacesSubscriptionListForWorkSpace.json` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
@@ -903,4 +859,9 @@ Change Type: deleted
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports/{dataExportName}'].put.parameters[1].pattern` | `^[A-Za-z][A-Za-z0-9-]+[A-Za-z0-9]$` | `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports/{dataExportName}'].put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/failback'].post.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.responses.200.schema.$ref` | `../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult` | `#/definitions/NetworkSecurityPerimeterConfigurationListResult` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}'].get.responses.200.schema.$ref` | `../../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration` | `../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile'].post.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 

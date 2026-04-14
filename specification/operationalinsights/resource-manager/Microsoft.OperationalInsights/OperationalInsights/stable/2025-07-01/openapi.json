@@ -308,6 +308,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "WorkspacesSubscriptionList": {
+            "$ref": "./examples/WorkspacesSubscriptionListForWorkSpace.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -443,6 +448,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -467,7 +477,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Cluster"
         },
         "x-ms-long-running-operation": true
       },
@@ -713,158 +724,6 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20%7B%20azureAsyncOperation%3A%20TypeSpec.Rest.ResourceLocation%2C%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/networkSecurityPerimeterConfigurations": {
-      "get": {
-        "operationId": "Workspaces_ListNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Gets a list of NSP configurations for specified workspace.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List NSP configs by Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
-      "get": {
-        "operationId": "Workspaces_GetNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Gets a network security perimeter configuration.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "networkSecurityPerimeterConfigurationName",
-            "in": "path",
-            "description": "The name for a network security perimeter configuration",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 512,
-            "pattern": "^.*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get NSP config by name for Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
-      "post": {
-        "operationId": "Workspaces_ReconcileNSP",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "description": "Reconcile network security perimeter configuration for Workspace resource.",
-        "parameters": [
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "networkSecurityPerimeterConfigurationName",
-            "in": "path",
-            "description": "The name for a network security perimeter configuration",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 512,
-            "pattern": "^.*$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reconcile NSP config for Scheduled Query Rule": {
-            "$ref": "./examples/NSPForWorkspaces_Reconcile.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4016,6 +3875,188 @@
             "$ref": "./examples/WorkspacesListManagementGroups.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "Workspaces_ListNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a list of NSP configurations for specified workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List NSP configs by Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "operationId": "Workspaces_GetNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a network security perimeter configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "description": "The name for a network security perimeter configuration",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^.*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NSP config by name for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "operationId": "Workspaces_ReconcileNSP",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconcile network security perimeter configuration for Workspace resource.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "networkSecurityPerimeterConfigurationName",
+            "in": "path",
+            "description": "The name for a network security perimeter configuration",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^.*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reconcile NSP config for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Reconcile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
