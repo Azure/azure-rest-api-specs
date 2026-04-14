@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceBus;
 
@@ -87,6 +89,32 @@ union PublicNetworkAccess {
   Disabled: "Disabled",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SecuredByPerimeter: "SecuredByPerimeter",
+}
+
+/**
+ * DNS Name Policy for namespace. Defines the DNS naming behavior for the namespace.
+ */
+@added(Versions.v2026_01_01)
+union DnsNamePolicy {
+  string,
+
+  /** No DNS Name Label, Legacy DNS Zone */
+  StandardNonPartitionedZone: "StandardNonPartitionedZone",
+
+  /** No DNS Name Label, Partitioned DNS Zone */
+  StandardPartitionedZone: "StandardPartitionedZone",
+
+  /** DNS Name Label with secure tenant reuse policy */
+  SecureTenantReuse: "SecureTenantReuse",
+
+  /** DNS Name Label with secure subscription reuse policy */
+  SecureSubscriptionReuse: "SecureSubscriptionReuse",
+
+  /** DNS Name Label with secure resource group reuse policy */
+  SecureResourceGroupReuse: "SecureResourceGroupReuse",
+
+  /** DNS Name Label with no reuse policy */
+  SecureNoReuse: "SecureNoReuse",
 }
 
 /**
@@ -508,6 +536,19 @@ model SBNamespaceProperties {
    * Geo Data Replication settings for the namespace
    */
   geoDataReplication?: GeoDataReplicationProperties;
+
+  /**
+   * Value that indicates whether IPv6 is enabled for public network access.
+   */
+  @added(Versions.v2026_01_01)
+  ipV6Enabled?: boolean;
+
+  /**
+   * DNS Name Policy for the namespace.
+   */
+  @added(Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  dnsNamePolicy?: DnsNamePolicy;
 }
 
 /**
