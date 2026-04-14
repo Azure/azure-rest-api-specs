@@ -271,6 +271,7 @@ enum BlobDeleteTypeGo {
   None: "None",
 }
 /** Represents a blob prefix. */
+@Xml.name("BlobPrefix")
 @clientName("BlobPrefix", "go")
 model BlobPrefixGo {
   /** The blob name. */

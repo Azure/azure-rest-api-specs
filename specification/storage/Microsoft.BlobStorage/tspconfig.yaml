@@ -13,12 +13,11 @@ options:
     output-file: "{azure-resource-provider-folder}/Microsoft.BlobStorage/{version-status}/{version}/generated_blob.json"
   # Commented to avoid running emitter check on unconverted languages, uncomment when ready to use
   "@azure-tools/typespec-python":
-    flavor: azure
-    "package-name": "azure-storage-blob"
-    "package-pprint-name": "Azure Storage Blob"
-    "namespace": "azure.storage.blob._generated"
-    package-mode: dataplane
     emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob"
+    generation-subdir: "_generated"
+    namespace: "azure.storage.blob"
+    package-mode: dataplane
+    flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Storage.Blobs"
