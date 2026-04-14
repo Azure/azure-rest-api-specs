@@ -1327,11 +1327,9 @@ model GetDataAnnotationsResponse {
 
   @doc("List of data annotations")
   @identifiers(#["annotationId"])
-  @pageItems
   annotations: DataAnnotation[];
 
   @doc("Link to the next page of results")
-  @nextLink
   nextLink?: url;
 }
 
