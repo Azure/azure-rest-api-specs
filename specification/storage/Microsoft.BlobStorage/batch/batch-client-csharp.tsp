@@ -12,11 +12,10 @@ namespace BatchCustomizations;
 @client(
   {
     name: "BlobBatchClient",
-    service: Storage.Blob
+    service: Storage.Blob,
   },
   "csharp"
 )
-
 namespace BlobBatchClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @operationGroup("csharp")
@@ -134,6 +133,7 @@ op deleteCsharp is StorageOperationNoBody<
 
     /** The container name */
     @path containerName: string;
+
     /** The blob name */
     @path blob: string;
   },
@@ -163,9 +163,11 @@ op setTierCsharp is StorageOperationNoBody<
     ...RehydratePriorityHeader;
     ...LeaseIdOptionalParameter;
     ...IfTagsParameter;
-        /** The container name */
+
+    /** The container name */
     @path containerName: string;
-        /** The blob name */
+
+    /** The blob name */
     @path blob: string;
   },
   {
@@ -175,9 +177,12 @@ op setTierCsharp is StorageOperationNoBody<
 >;
 
 @@clientName(BlobBatchClient.BatchServiceClient, "ServiceRestClient", "csharp");
-@@clientName(BlobBatchClient.BatchContainerClient, "ContainerRestClient", "csharp");
+@@clientName(BlobBatchClient.BatchContainerClient,
+  "ContainerRestClient",
+  "csharp"
+);
 @@clientName(BlobBatchClient.BatchBlobClient, "BlobRestClient", "csharp");
 @@clientName(AccessTier, "BatchAccessTier", "csharp");
 @@clientName(RehydratePriority, "BatchRehydratePriority", "csharp");
 
-@@access(DeleteSnapshotsOptionType, Access.`internal`, "csharp");
+@@access(DeleteSnapshotsOptionType, Access.internal, "csharp");
