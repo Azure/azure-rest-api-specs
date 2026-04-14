@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -14,14 +15,19 @@ namespace Microsoft.ContainerInstance;
  * A container group profile object
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model ContainerGroupProfile
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ContainerGroupProfileProperties> {
+model ContainerGroupProfile is ProxyResource<ContainerGroupProfileProperties> {
   ...ResourceNameParameter<
     Resource = ContainerGroupProfile,
     KeyName = "containerGroupProfileName",
     SegmentName = "containerGroupProfiles",
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: azureLocation;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: Record<string>;
+
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
 
@@ -131,7 +137,8 @@ alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     revisionNumber: string;
   },
-  CloudError
+  CloudError,
+  "ContainerGroupProfileRevision"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"

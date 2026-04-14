@@ -82,7 +82,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "CGProfiles_ListBySubscription",
+        "operationId": "ContainerGroupProfiles_ListBySubscription",
         "summary": "List container group profiles in a subscription.",
         "description": "Gets a list of all container group profiles under a subscription.",
         "parameters": [
@@ -105,11 +105,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ContainerGroupProfilesList": {
-            "$ref": "./examples/ContainerGroupProfilesList.json"
           }
         },
         "x-ms-pageable": {
@@ -307,7 +302,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles": {
       "get": {
-        "operationId": "CGProfiles_ListByResourceGroup",
+        "operationId": "ContainerGroupProfiles_ListByResourceGroup",
         "summary": "List container group profiles in a resource group.",
         "description": "Gets a list of all container group profiles under a resource group.",
         "parameters": [
@@ -335,11 +330,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ContainerGroupProfilesListByResourceGroup": {
-            "$ref": "./examples/ContainerGroupProfilesListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -347,7 +337,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}": {
       "get": {
-        "operationId": "CGProfile_Get",
+        "operationId": "ContainerGroupProfiles_Get",
         "summary": "Display information about a specified ContainerGroupProfile.",
         "description": "Get the properties of the specified container group profile.",
         "parameters": [
@@ -384,18 +374,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-examples": {
-          "ContainerGroupProfilesGetWithPriority": {
-            "$ref": "./examples/ContainerGroupProfilesGetPriority.json"
-          },
-          "ContainerGroupProfilesGet_Succeeded": {
-            "$ref": "./examples/ContainerGroupProfilesGet.json"
-          }
         }
       },
       "put": {
-        "operationId": "CGProfile_CreateOrUpdate",
+        "operationId": "ContainerGroupProfiles_CreateOrUpdate",
         "summary": "Create or Update a ContainerGroupProfile",
         "description": "Create a CGProfile if it doesn't exist or update an existing CGProfile.",
         "parameters": [
@@ -457,24 +439,10 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ConfidentialContainerGroupProfile": {
-            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_CreateConfidential.json"
-          },
-          "ContainerGroupProfileCreateWithExtensions": {
-            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_Extensions.json"
-          },
-          "ContainerGroupProfileWithEncryptionProperties": {
-            "$ref": "./examples/ContainerGroupProfileCreateOrUpdate_EncryptionProperties.json"
-          },
-          "ContainerGroupProfilesCreateOrUpdate": {
-            "$ref": "./examples/ContainerGroupProfilesCreateOrUpdate.json"
-          }
         }
       },
       "patch": {
-        "operationId": "CGProfile_Update",
+        "operationId": "ContainerGroupProfiles_Update",
         "summary": "Container group profile PATCH REST API.",
         "description": "Update a specified container group profile.",
         "parameters": [
@@ -525,15 +493,10 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ContainerGroupProfilesPatch": {
-            "$ref": "./examples/ContainerGroupProfilesPatch.json"
-          }
         }
       },
       "delete": {
-        "operationId": "CGProfile_Delete",
+        "operationId": "ContainerGroupProfiles_Delete",
         "summary": "Container group profile DELETE REST API.",
         "description": "Deletes a container group profile.",
         "parameters": [
@@ -569,11 +532,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ContainerGroupProfilesDelete": {
-            "$ref": "./examples/ContainerGroupProfilesDelete.json"
           }
         }
       }
@@ -1901,6 +1859,10 @@
         }
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "AzureFileShareAccessType": {
       "type": "string",
       "description": "Specifies how Container Groups can access the Azure file share i.e. all CG will share same Azure file share or going to have exclusive file share.",
@@ -2414,32 +2376,26 @@
           "description": "The container group profile properties",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "zones": {
           "type": "array",
           "description": "The availability zones.",
           "items": {
             "type": "string"
           }
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4171,20 +4127,14 @@
           "description": "Describes the properties of the NGroups resource.",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation"
+        },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         },
         "zones": {
           "type": "array",
@@ -4200,7 +4150,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
