@@ -15620,7 +15620,7 @@
         "type": "object",
         "required": [
           "type",
-          "server_label"
+          "fabric_iq_preview"
         ],
         "properties": {
           "type": {
@@ -15628,12 +15628,12 @@
             "enum": [
               "fabric_iq_preview"
             ],
-            "description": "The object type, which is always `fabric_iq_preview`."
+            "description": "The object type, which is always 'fabric_iq_preview'."
           },
           "fabric_iq_preview": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/FabricIQToolParameters"
+                "$ref": "#/components/schemas/FabricIQPreviewToolParameters"
               }
             ],
             "description": "The FabricIQ tool parameters."
@@ -15644,6 +15644,46 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ]
+      },
+      "FabricIQPreviewToolParameters": {
+        "type": "object",
+        "required": [
+          "project_connection_id"
+        ],
+        "properties": {
+          "project_connection_id": {
+            "type": "string",
+            "description": "The ID of the FabricIQ project connection."
+          },
+          "server_label": {
+            "type": "string",
+            "description": "(Optional) The label of the FabricIQ MCP server to connect to."
+          },
+          "server_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "(Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used."
+          },
+          "require_approval": {
+            "anyOf": [
+              {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
+                  }
+                ],
+                "nullable": true
+              },
+              {
+                "type": "string",
+                "nullable": true
+              }
+            ],
+            "description": "(Optional) Whether the agent requires approval before executing actions. Default is always.",
+            "default": "always"
+          }
+        }
       },
       "FabricIQToolCall": {
         "type": "object",
@@ -15682,7 +15722,7 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
-        "description": "A FabricIQ tool call."
+        "description": "A Fabric IQ tool call."
       },
       "FabricIQToolCallOutput": {
         "type": "object",
@@ -15708,7 +15748,7 @@
                 "$ref": "#/components/schemas/ToolCallOutputContent"
               }
             ],
-            "description": "The output from the FabricIQ tool call."
+            "description": "The output from the Fabric IQ tool call."
           },
           "status": {
             "allOf": [
@@ -15724,48 +15764,7 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
-        "description": "The output of a FabricIQ tool call."
-      },
-      "FabricIQToolParameters": {
-        "type": "object",
-        "properties": {
-          "server_label": {
-            "type": "string",
-            "description": "A label for this FabricIQ MCP server, used to identify it in tool calls."
-          },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL for the FabricIQ MCP server. One of `server_url` or `project_connection_id` must be provided."
-          },
-          "require_approval": {
-            "anyOf": [
-              {
-                "type": "object",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
-                  }
-                ],
-                "nullable": true
-              },
-              {
-                "type": "string",
-                "enum": [
-                  "always",
-                  "never"
-                ],
-                "nullable": true
-              }
-            ],
-            "default": "always"
-          },
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the FabricIQ project connection."
-          }
-        },
-        "description": "The FabricIQ tool parameters."
+        "description": "The output of a Fabric IQ tool call."
       },
       "FileDatasetVersion": {
         "type": "object",
@@ -31330,6 +31329,8 @@
             "browser_automation_preview_call_output": "#/components/schemas/BrowserAutomationToolCallOutput",
             "fabric_dataagent_preview_call": "#/components/schemas/FabricDataAgentToolCall",
             "fabric_dataagent_preview_call_output": "#/components/schemas/FabricDataAgentToolCallOutput",
+            "fabric_iq_preview_call": "#/components/schemas/FabricIQToolCall",
+            "fabric_iq_preview_call_output": "#/components/schemas/FabricIQToolCallOutput",
             "azure_function_call": "#/components/schemas/AzureFunctionToolCall",
             "azure_function_call_output": "#/components/schemas/AzureFunctionToolCallOutput",
             "a2a_preview_call": "#/components/schemas/A2AToolCall",
@@ -31351,9 +31352,7 @@
             "mcp_call": "#/components/schemas/OpenAI.OutputItemMcpToolCall",
             "mcp_list_tools": "#/components/schemas/OpenAI.OutputItemMcpListTools",
             "mcp_approval_request": "#/components/schemas/OpenAI.OutputItemMcpApprovalRequest",
-            "custom_tool_call": "#/components/schemas/OpenAI.OutputItemCustomToolCall",
-            "fabric_iq_preview_call": "#/components/schemas/FabricIQToolCall",
-            "fabric_iq_preview_call_output": "#/components/schemas/FabricIQToolCallOutput"
+            "custom_tool_call": "#/components/schemas/OpenAI.OutputItemCustomToolCall"
           }
         }
       },
@@ -36199,6 +36198,7 @@
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
+            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
@@ -36211,8 +36211,7 @@
             "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
             "custom": "#/components/schemas/OpenAI.CustomToolParam",
             "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
-            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam",
-            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool"
+            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam"
           }
         },
         "description": "A tool that can be used to generate a response."
@@ -36556,12 +36555,12 @@
               "sharepoint_grounding_preview",
               "memory_search_preview",
               "work_iq_preview",
+              "fabric_iq_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
               "capture_structured_outputs",
-              "openapi",
-              "fabric_iq_preview"
+              "openapi"
             ]
           }
         ]

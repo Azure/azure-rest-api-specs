@@ -169,6 +169,8 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
     azure_function_call: "azure_function_call",
     azure_function_call_output: "azure_function_call_output",
+    fabric_iq_preview_call: "fabric_iq_preview_call",
+    fabric_iq_preview_call_output: "fabric_iq_preview_call_output",
   }
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
