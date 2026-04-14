@@ -905,7 +905,7 @@ union HighAvailabilityState {
 
   /** Standby server is being recreated. */
   RecreatingStandby: "RecreatingStandby",
-  
+
   /** Compute is being updated due to a failover. */
   ComputeUpdatingByFailover: "ComputeUpdatingByFailover",
 }
