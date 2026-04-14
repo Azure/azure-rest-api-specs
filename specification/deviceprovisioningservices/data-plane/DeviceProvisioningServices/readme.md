@@ -123,6 +123,11 @@ suppressions:
     reason: >-
       Pre-existing DPS device API LRO response does not include standard LRO headers.
       Maintained for backward compatibility with existing DPS device clients.
+  - code: LroExtension
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API has LRO operations with 202 response that do not specify
+      x-ms-long-running-operation. Maintained for backward compatibility with existing DPS device clients.
   - code: ErrorResponse
     from: device.json
     reason: >-
