@@ -126,8 +126,8 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @removed(Versions.v1)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Start a new or get an existing pending upload of an evaluator for a specific version.")
   @post
   @route("/evaluators/{name}/versions/{version}/startPendingUpload")
@@ -153,9 +153,9 @@ interface Evaluators {
     PendingUploadResponse
   >;
 
+  @removed(Versions.v1)
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @removed(Versions.v1)
   @doc("Get the SAS credential to access the storage account associated with an Evaluator version.")
   @post
   @route("/evaluators/{name}/versions/{version}/credentials")
