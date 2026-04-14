@@ -1,4 +1,5 @@
 import "../common/models.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 
@@ -99,11 +100,25 @@ union EvaluatorGenerationJobSourceType {
   Dataset: "Dataset",
 }
 
+@doc("The role of a source in evaluator generation — helps the pipeline interpret inputs.")
+union EvaluatorGenerationJobSourceRole {
+  string,
+
+  @doc("Describes the agent's purpose, tools, and behaviors.")
+  agent_description: "agent_description",
+
+  @doc("Describes what the evaluator should measure — supplementary criteria context, business rules, policies.")
+  evaluator_description: "evaluator_description",
+}
+
 @doc("The base source model for an evaluator generation job.")
 @discriminator("type")
 model EvaluatorGenerationJobSource {
   @doc("The type of source.")
   type: EvaluatorGenerationJobSourceType;
+
+  @doc("The role of this source: 'agent_description' (what the agent does) or 'evaluator_description' (what to measure).")
+  role?: EvaluatorGenerationJobSourceRole;
 }
 
 @doc("Prompt source for evaluator generation — inline text, agent reference, or both. At least one of prompt or agent_name must be specified. When both are provided, agent instructions are merged with the supplementary prompt text as combined input for generation.")
@@ -193,6 +208,23 @@ model GenerateEvaluatorRequest {
 
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity. This avoids LLM capacity constraints, reduces 429 retries, and aligns with Foundry's deployment-less model selection.")
   model: string;
+}
+
+@doc("Result produced by a successful evaluator generation job.")
+model EvaluatorGenerationResult {
+  @doc("The generated evaluator version. When persist=true, this is a saved version. When persist=false, this is an unsaved preview.")
+  evaluator_version: EvaluatorVersion;
+}
+
+@doc("Evaluator generation job — long-running operation that generates rubric criteria from source materials.")
+model EvaluatorGenerationJob is JobLike<EvaluatorGenerationResult, GenerateEvaluatorRequest> {
+  @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
+  @visibility(Lifecycle.Read)
+  created_at: FoundryTimestamp;
+
+  @doc("The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).")
+  @visibility(Lifecycle.Read)
+  finished_at?: FoundryTimestamp;
 }
 
 @doc("Evaluator Definition")
