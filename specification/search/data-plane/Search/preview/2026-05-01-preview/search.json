@@ -11165,9 +11165,12 @@
       "type": "object",
       "description": "Represents a WorkIQ document reference.",
       "properties": {
-        "searchSensitivityLabelInfo": {
-          "$ref": "#/definitions/PurviewSensitivityLabelInfo",
-          "description": "The sensitivity label information for the reference."
+        "attributions": {
+          "type": "array",
+          "description": "The attributions for the reference.",
+          "items": {
+            "$ref": "#/definitions/WorkIQAttribution"
+          }
         }
       },
       "allOf": [
@@ -22712,6 +22715,17 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.WordDelimiterTokenFilter"
+    },
+    "WorkIQAttribution": {
+      "type": "object",
+      "description": "Attribution information for a WorkIQ reference.",
+      "properties": {
+        "seeMoreWebUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL for the attribution."
+        }
+      }
     },
     "WorkIQKnowledgeSource": {
       "type": "object",

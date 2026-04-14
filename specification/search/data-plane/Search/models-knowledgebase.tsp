@@ -863,8 +863,17 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.workIQ;
 
-  /** The sensitivity label information for the reference. */
-  searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+  /** The attributions for the reference. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  attributions?: WorkIQAttribution[];
+}
+
+/** Attribution information for a WorkIQ reference. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_05_01_preview)
+model WorkIQAttribution {
+  /** The URL for the attribution. */
+  seeMoreWebUrl?: url;
 }
 
 /** Represents a Fabric Data Agent document reference. */
