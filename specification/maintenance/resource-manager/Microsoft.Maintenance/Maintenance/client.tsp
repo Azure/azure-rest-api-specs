@@ -18,15 +18,15 @@ using Microsoft.Maintenance;
   "csharp"
 );
 @@alternateType(ConfigurationAssignmentFilterProperties.resourceTypes,
-  Azure.Core.armResourceType,
+  Azure.Core.armResourceType[],
   "csharp"
 );
 @@alternateType(ConfigurationAssignmentFilterProperties.locations,
-  Azure.Core.azureLocation,
+  Azure.Core.azureLocation[],
   "csharp"
 );
-@@clientName(TagOperators, "VmTagOperator", "csharp");
-@@clientName(TagSettingsProperties, "VmTagSettings", "csharp");
+@@clientName(TagOperators, "MaintenanceVmTagOperator", "csharp");
+@@clientName(TagSettingsProperties, "MaintenanceVmTagSettings", "csharp");
 @@alternateType(ApplyUpdateProperties.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -73,7 +73,16 @@ using Microsoft.Maintenance;
 );
 @@clientName(InputLinuxParameters, "MaintenanceLinuxPatchSettings", "csharp");
 @@clientName(ScheduledEventApproveResponse,
-  "ScheduledEventApproveResult",
+  "MaintenanceScheduledEventApproveResult",
+  "csharp"
+);
+@@clientName(RebootOptions, "MaintenanceRebootOption", "csharp");
+@@clientName(InputWindowsParameters.kbNumbersToExclude,
+  "KBNumbersToExclude",
+  "csharp"
+);
+@@clientName(InputWindowsParameters.kbNumbersToInclude,
+  "KBNumbersToInclude",
   "csharp"
 );
 @@clientName(ApplyUpdates.getParent, "GetApplyUpdatesByParent", "csharp");
