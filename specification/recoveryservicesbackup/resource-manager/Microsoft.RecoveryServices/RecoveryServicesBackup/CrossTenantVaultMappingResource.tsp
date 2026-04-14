@@ -86,7 +86,7 @@ interface CrossTenantVaultMappings {
 // ============================================================
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{allowStaticRoutes: true})
+@armResourceOperations(#{ allowStaticRoutes: true })
 @clientName("CrossTenantVaultMappingStatus", "autorest")
 interface CrossTenantOperations {
   /**
@@ -776,7 +776,7 @@ model CrossTenantJobResourceList {
 // ============================================================
 
 @added(Versions.v2026_03_31_preview)
-@armResourceOperations(#{allowStaticRoutes: true})
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface CrossTenantVaultCredentialOperations {
   /**
    * Generates a vault credential certificate for cross-tenant restore scenarios.

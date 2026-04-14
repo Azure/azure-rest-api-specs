@@ -1783,6 +1783,7 @@ model PrivateEndpointConnection {
    * Gets or sets provisioning state of the private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -8321,11 +8322,6 @@ model ClientDiscoveryResponse {
  */
 @added(Versions.v2026_03_31_preview)
 model CrossTenantVaultMapping {
-  /**
-   * Optional ETag.
-   */
-  etag?: string;
-
   /**
    * ARM resource ID of the source vault.
    */
