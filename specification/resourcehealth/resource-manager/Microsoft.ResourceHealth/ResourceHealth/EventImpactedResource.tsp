@@ -61,7 +61,10 @@ interface EventImpactedResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ImpactedResources_Get")
-  get is EventImpactedResourceOps.Read<EventImpactedResource>;
+  get is EventImpactedResourceOps.Read<
+    EventImpactedResource,
+    ErrorType = ErrorResponse
+  >;
 
   /**
    * Lists impacted resources in the subscription by an event.
@@ -76,7 +79,9 @@ interface EventImpactedResources {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = eventImpactedResourceListResult,
+    ErrorType = ErrorResponse
   >;
 }
 alias ImpactedResourceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -106,16 +111,21 @@ alias ImpactedResourceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ImpactedResources {
   /**
    * Gets the specific impacted resource in the tenant by an event.
    */
-  getByTenantId is ImpactedResourceOps.Read<EventImpactedResource>;
+  @tag("EventImpactedResources")
+  getByTenantId is ImpactedResourceOps.Read<
+    EventImpactedResource,
+    ErrorType = ErrorResponse
+  >;
 
   /**
    * Lists impacted resources in the tenant by an event.
    */
+  @tag("EventImpactedResources")
   listByTenantIdAndEventId is ImpactedResourceOps.List<
     EventImpactedResource,
     Parameters = {
@@ -124,7 +134,9 @@ interface ImpactedResources {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = eventImpactedResourceListResult,
+    ErrorType = ErrorResponse
   >;
 }
 

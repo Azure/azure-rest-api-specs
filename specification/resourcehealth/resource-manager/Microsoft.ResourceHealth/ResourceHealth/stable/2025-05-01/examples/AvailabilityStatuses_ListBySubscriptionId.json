@@ -1,32 +1,30 @@
 {
   "parameters": {
-    "subscriptionId": "subscriptionId",
+    "$expand": "recommendedactions",
     "api-version": "2025-05-01",
-    "$expand": "recommendedactions"
+    "subscriptionId": "subscriptionId"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}",
         "value": [
           {
-            "id": "<resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current",
             "name": "current",
             "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+            "id": "<resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current",
             "location": "eastus",
             "properties": {
               "availabilityState": "Available",
-              "title": "Available",
-              "summary": "Vm is available",
-              "reasonType": "Unplanned",
-              "reasonChronicity": "Persistent",
-              "context": "Platform Initiated",
               "category": "Unplanned",
+              "context": "Platform Initiated",
               "detailedStatus": "We have not seen any issues with your virtual machine",
               "occuredTime": "2016-03-29T09:12:00Z",
-              "reportedTime": "2016-05-04T14:11:29.7598931Z",
+              "reasonChronicity": "Persistent",
+              "reasonType": "Unplanned",
               "recentlyResolved": {
-                "unavailableOccuredTime": "2017-02-28T00:48:00Z",
                 "resolvedTime": "2017-02-28T00:49:00Z",
+                "unavailableOccuredTime": "2017-02-28T00:48:00Z",
                 "unavailableSummary": "We are sorry your SQL database is unavailable"
               },
               "recommendedActions": [
@@ -35,25 +33,23 @@
                   "actionUrl": "<#ResourceBlade>",
                   "actionUrlText": "resourceblade"
                 }
-              ]
+              ],
+              "reportedTime": "2016-05-04T14:11:29.7598931Z",
+              "summary": "Vm is available",
+              "title": "Available"
             }
           },
           {
-            "id": "<resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current",
             "name": "current",
             "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+            "id": "<resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current",
             "location": "eastus",
             "properties": {
               "availabilityState": "Unavailable",
-              "title": "Unavailable",
-              "summary": "We are sorry, we couldn't automatically recovery our virtualmachine",
-              "reasonType": "Unplanned",
-              "reasonChronicity": "Persistent",
               "detailedStatus": "Diskproblemsarepreventingusfromautomaticallyrecoveringyourvirtualmachine",
               "occuredTime": "2016-03-29T09:12:00Z",
-              "reportedTime": "2016-05-04T14:11:29.7598931Z",
-              "rootCauseAttributionTime": "2016-03-29T09:13:00Z",
-              "resolutionETA": "2016-03-29T09:37:00Z",
+              "reasonChronicity": "Persistent",
+              "reasonType": "Unplanned",
               "recommendedActions": [
                 {
                   "action": "To start this virtualmachine, open the resource blade",
@@ -65,12 +61,18 @@
                   "actionUrl": "<#SupportCase>",
                   "actionUrlText": "contactsupport"
                 }
-              ]
+              ],
+              "reportedTime": "2016-05-04T14:11:29.7598931Z",
+              "resolutionETA": "2016-03-29T09:37:00Z",
+              "rootCauseAttributionTime": "2016-03-29T09:13:00Z",
+              "summary": "We are sorry, we couldn't automatically recovery our virtualmachine",
+              "title": "Unavailable"
             }
           }
-        ],
-        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+        ]
       }
     }
-  }
+  },
+  "operationId": "AvailabilityStatuses_ListBySubscriptionId",
+  "title": "ListHealthBySubscriptionId"
 }

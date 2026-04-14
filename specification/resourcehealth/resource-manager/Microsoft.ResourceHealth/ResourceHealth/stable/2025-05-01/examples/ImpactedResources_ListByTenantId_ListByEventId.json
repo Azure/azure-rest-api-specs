@@ -1,36 +1,38 @@
 {
   "parameters": {
-    "eventTrackingId": "BC_1-FXZ",
+    "$filter": "targetRegion eq 'westus'",
     "api-version": "2025-05-01",
-    "$filter": "targetRegion eq 'westus'"
+    "eventTrackingId": "BC_1-FXZ"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}",
         "value": [
           {
-            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/abc-123-ghj-456",
             "name": "abc-123-ghj-456",
             "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/abc-123-ghj-456",
             "properties": {
-              "targetResourceType": "Microsoft.Compute/VirtualMachines",
+              "targetRegion": "westus",
               "targetResourceId": "{resourceId-1}",
-              "targetRegion": "westus"
+              "targetResourceType": "Microsoft.Compute/VirtualMachines"
             }
           },
           {
-            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/wer-345-tyu-789",
             "name": "wer-345-tyu-789",
             "type": "Microsoft.ResourceHealth/events/impactedResources",
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ/impactedResources/wer-345-tyu-789",
             "properties": {
-              "targetResourceType": "Microsoft.Compute/VirtualMachines",
+              "targetRegion": "westus",
               "targetResourceId": "{resourceId-2}",
-              "targetRegion": "westus"
+              "targetResourceType": "Microsoft.Compute/VirtualMachines"
             }
           }
-        ],
-        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+        ]
       }
     }
-  }
+  },
+  "operationId": "ImpactedResources_ListByTenantIdAndEventId",
+  "title": "ListEventsByTenantId"
 }

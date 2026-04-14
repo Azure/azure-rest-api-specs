@@ -3,8 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ResourceHealth;
 
-@@clientName(RecommendedAction.`_ActionUrl.Comment`, "ActionUrlComment");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ImpactedResourceStatus.properties);
 
@@ -37,15 +35,15 @@ using Microsoft.ResourceHealth;
 @@clientName(EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
   "fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId"
 );
-@@clientLocation(EventOperationGroup.getByTenantIdAndTrackingId, "Event");
-@@clientLocation(EventOperationGroup.listByTenantId, "Events");
-@@clientLocation(EventOperationGroup.listByTenantIdAndEventId,
+@@clientLocation(TenantEventOperationGroup.getByTenantIdAndTrackingId, "Event");
+@@clientLocation(TenantEventOperationGroup.listByTenantId, "Events");
+@@clientLocation(TenantEventOperationGroup.listByTenantIdAndEventId,
   "SecurityAdvisoryImpactedResources"
 );
-@@clientLocation(EventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
+@@clientLocation(TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
   "Event"
 );
-@@clientName(EventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
+@@clientName(TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
   "fetchDetailsByTenantIdAndTrackingId"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -59,3 +57,23 @@ using Microsoft.ResourceHealth;
 @@clientLocation(EventsOperationGroup.listBySingleResource, "Events");
 
 @@clientLocation(ChildResourcesOperationGroup.list, "ChildResources");
+@@clientName(AvailabilityStatus, "availabilityStatus");
+@@clientName(Events, "events");
+@@clientName(EmergingIssuesGetResult, "emergingIssuesGetResult");
+@@clientName(Event, "event");
+@@clientName(EventImpactedResource, "eventImpactedResource");
+@@clientName(AvailabilityStatus, "availabilityStatus");
+@@clientName(StatusBanner, "statusBanner");
+@@clientName(Microsoft.ResourceHealth.Update, "update");
+@@clientName(StatusActiveEvent, "statusActiveEvent");
+@@clientName(ServiceImpactingEvent, "serviceImpactingEvent");
+@@clientName(RecommendedAction, "recommendedAction");
+@@clientName(Operation, "operation");
+@@clientName(EmergingIssue, "emergingIssue");
+@@clientName(Faq, "faq");
+@@clientName(Impact, "impact");
+@@clientName(ImpactedRegion, "impactedRegion");
+@@clientName(ImpactedServiceRegion, "impactedServiceRegion");
+@@clientName(KeyValueItem, "keyValueItem");
+@@clientName(Link, "link");
+@@clientName(EmergingIssueImpact, "emergingIssueImpact");

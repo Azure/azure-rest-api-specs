@@ -44,13 +44,14 @@ alias EventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface EventOperationGroup {
   /**
    * Service health event in the subscription by event tracking id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Event_GetBySubscriptionIdAndTrackingId")
+  @tag("Event")
   getBySubscriptionIdAndTrackingId is EventOperationGroupOps.Read<
     Event,
     Parameters = {
@@ -65,7 +66,8 @@ interface EventOperationGroup {
        */
       @query("queryStartTime")
       queryStartTime?: string;
-    }
+    },
+    ErrorType = ErrorResponse
   >;
 
   /**
@@ -73,6 +75,7 @@ interface EventOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Events_ListBySubscriptionId")
+  @tag("Events")
   listBySubscriptionId is EventOperationGroupOps.List<
     Event,
     Parameters = {
@@ -88,7 +91,8 @@ interface EventOperationGroup {
       @query("queryStartTime")
       queryStartTime?: string;
     },
-    Response = ArmResponse<Events>
+    Response = ArmResponse<Events>,
+    ErrorType = ErrorResponse
   >;
 
   /**
@@ -98,17 +102,19 @@ interface EventOperationGroup {
   @operationId("SecurityAdvisoryImpactedResources_ListBySubscriptionIdAndEventId")
   @list
   @action("listSecurityAdvisoryImpactedResources")
+  @tag("SecurityAdvisoryImpactedResources")
   listBySubscriptionIdAndEventId is EventOperationGroupOps.ActionSync<
     Event,
     void,
-    ArmResponse<ResourceListResult<EventImpactedResource>>,
     Parameters = {
       /**
        * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = eventImpactedResourceListResult,
+    ErrorType = ErrorResponse
   >;
 
   /**
@@ -117,10 +123,12 @@ interface EventOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Event_fetchDetailsBySubscriptionIdAndTrackingId")
   @action("fetchEventDetails")
+  @tag("Event")
   fetchDetailsBySubscriptionIdAndTrackingId is EventOperationGroupOps.ActionSync<
     Event,
     void,
-    ArmResponse<Event>
+    ArmResponse<Event>,
+    ErrorType = ErrorResponse
   >;
 
   /**
@@ -129,13 +137,15 @@ interface EventOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Event_fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId")
   @action("fetchBillingCommunicationDetails")
+  @tag("Event")
   fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId is EventOperationGroupOps.ActionSync<
     Event,
     void,
-    ArmResponse<Event>
+    ArmResponse<Event>,
+    ErrorType = ErrorResponse
   >;
 }
-alias EventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias TenantEventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
@@ -155,36 +165,15 @@ alias EventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
-interface EventOperationGroup {
+@armResourceOperations(#{ omitTags: true })
+interface TenantEventOperationGroup {
   /**
    * Service health event in the tenant by event tracking id
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Event_GetByTenantIdAndTrackingId")
-  getByTenantIdAndTrackingId is EventOperationGroupOps.Read<
-    Event,
-    Parameters = {
-      /**
-       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
-       */
-      @query("queryStartTime")
-      queryStartTime?: string;
-    }
-  >;
-
-  /**
-   * Lists current service health events in the tenant.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Events_ListByTenantId")
-  listByTenantId is EventOperationGroupOps.List<
+  @tag("Event")
+  getByTenantIdAndTrackingId is TenantEventOperationGroupOps.Read<
     Event,
     Parameters = {
       /**
@@ -199,7 +188,32 @@ interface EventOperationGroup {
       @query("queryStartTime")
       queryStartTime?: string;
     },
-    Response = ArmResponse<Events>
+    ErrorType = ErrorResponse
+  >;
+
+  /**
+   * Lists current service health events in the tenant.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Events_ListByTenantId")
+  @tag("Events")
+  listByTenantId is TenantEventOperationGroupOps.List<
+    Event,
+    Parameters = {
+      /**
+       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020
+       */
+      @query("queryStartTime")
+      queryStartTime?: string;
+    },
+    Response = ArmResponse<Events>,
+    ErrorType = ErrorResponse
   >;
 
   /**
@@ -209,17 +223,19 @@ interface EventOperationGroup {
   @operationId("SecurityAdvisoryImpactedResources_ListByTenantIdAndEventId")
   @list
   @action("listSecurityAdvisoryImpactedResources")
-  listByTenantIdAndEventId is EventOperationGroupOps.ActionSync<
+  @tag("SecurityAdvisoryImpactedResources")
+  listByTenantIdAndEventId is TenantEventOperationGroupOps.ActionSync<
     Event,
     void,
-    ArmResponse<ResourceListResult<EventImpactedResource>>,
     Parameters = {
       /**
        * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = eventImpactedResourceListResult,
+    ErrorType = ErrorResponse
   >;
 
   /**
@@ -228,10 +244,12 @@ interface EventOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Event_fetchDetailsByTenantIdAndTrackingId")
   @action("fetchEventDetails")
-  fetchDetailsByTenantIdAndTrackingId is EventOperationGroupOps.ActionSync<
+  @tag("Event")
+  fetchDetailsByTenantIdAndTrackingId is TenantEventOperationGroupOps.ActionSync<
     Event,
     void,
-    ArmResponse<Event>
+    ArmResponse<Event>,
+    ErrorType = ErrorResponse
   >;
 }
 

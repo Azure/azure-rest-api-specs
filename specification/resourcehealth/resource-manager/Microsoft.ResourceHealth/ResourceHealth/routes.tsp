@@ -23,6 +23,8 @@ interface EventsOperationGroup {
   @autoRoute
   @get
   @action("events")
+  @tag("Events")
+  @list
   listBySingleResource is ArmProviderActionSync<
     Response = Events,
     Scope = ExtensionResourceActionScope,
@@ -32,7 +34,8 @@ interface EventsOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 }
 
@@ -46,8 +49,9 @@ interface ChildResourcesOperationGroup {
   @autoRoute
   @get
   @action("childResources")
+  @tag("ChildResources")
+  @list
   list is ArmProviderActionSync<
-    Response = ResourceListResult<AvailabilityStatus>,
     Scope = ExtensionResourceActionScope,
     Parameters = {
       /**
@@ -61,6 +65,8 @@ interface ChildResourcesOperationGroup {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = availabilityStatusListResult,
+    Error = ErrorResponse
   >;
 }

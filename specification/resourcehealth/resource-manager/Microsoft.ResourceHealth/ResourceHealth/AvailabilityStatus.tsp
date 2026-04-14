@@ -15,31 +15,18 @@ namespace Microsoft.ResourceHealth;
  */
 @singleton("current")
 @extensionResource
-model AvailabilityStatus
-  is Azure.ResourceManager.ExtensionResource<AvailabilityStatusProperties> {
-  ...ResourceNameParameter<
-    Resource = AvailabilityStatus,
-    KeyName = "availabilityStatus",
-    SegmentName = "availabilityStatuses",
-    NamePattern = ""
-  >;
-
+model AvailabilityStatus extends ProxyResource {
   /**
-   * Azure Resource Manager geo location of the resource.
+   * Properties of availability state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  location?: string;
+  properties?: AvailabilityStatusProperties;
 }
 
-alias AvailabilityStatusOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+alias AvailabilityStatusesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
-
-    /** undefined */
-    @path
-    @segment("")
-    @key
-    resourceUri: string;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
 
     /** the provider namespace */
     @path
@@ -47,13 +34,12 @@ alias AvailabilityStatusOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     providerNamespace: "Microsoft.ResourceHealth";
   },
-  {},
   {
     /** undefined */
     @path
     @segment("availabilityStatuses")
     @key
-    current: string;
+    current: "current";
   }
 >;
 
@@ -62,7 +48,7 @@ interface AvailabilityStatuses {
   /**
    * Gets current availability status for a single resource
    */
-  getByResource is AvailabilityStatusOps.Read<
+  getByResource is Extension.Read<
     Extension.ScopeParameter,
     AvailabilityStatus,
     Parameters = {
@@ -77,13 +63,46 @@ interface AvailabilityStatuses {
        */
       @query("$expand")
       $expand?: string;
-    }
+
+      /** undefined */
+      @path
+      @segment("availabilityStatuses")
+      @key
+      current: "current";
+    },
+    Error = ErrorResponse
   >;
 
   /**
    * Lists the current availability status for all the resources in the subscription.
    */
-  listBySubscriptionId is AvailabilityStatusOps.List<
+  @action("availabilityStatuses")
+  listBySubscriptionId is Extension.ListByTarget<
+    Extension.Subscription,
+    AvailabilityStatus,
+    Parameters = {
+      /**
+       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
+       */
+      @query("$expand")
+      $expand?: string;
+    },
+    Response = availabilityStatusListResult,
+    Error = ErrorResponse
+  >;
+
+  /**
+   * Lists all historical availability transitions and impacting events for a single resource.
+   */
+  @tag("AvailabilityStatuses")
+  @action("availabilityStatuses")
+  list is Extension.ListByTarget<
     Extension.ScopeParameter,
     AvailabilityStatus,
     Parameters = {
@@ -93,22 +112,46 @@ interface AvailabilityStatuses {
       @query("$filter")
       $filter?: string;
 
-      ...SubscriptionIdParameter;
+      /**
+       * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
+       */
+      @query("$expand")
+      $expand?: string;
+    },
+    Response = availabilityStatusListResult,
+    Error = ErrorResponse
+  >;
+
+  /**
+   * Lists the current availability status for all the resources in the resource group.
+   */
+  @tag("AvailabilityStatuses")
+  listByResourceGroup is AvailabilityStatusesOps.List<
+    AvailabilityStatus,
+    Parameters = {
+      /**
+       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
+       */
+      @query("$filter")
+      $filter?: string;
 
       /**
        * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = availabilityStatusListResult,
+    OverrideErrorType = ErrorResponse
   >;
 }
+
 alias ChildAvailabilityStatusOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
     /** undefined */
-    @path
+    @path(#{ allowReserved: true })
     @segment("")
     @key
     resourceUri: string;
@@ -125,7 +168,7 @@ alias ChildAvailabilityStatusOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @path
     @segment("childAvailabilityStatuses")
     @key
-    current: string;
+    current: "current";
   }
 >;
 
@@ -135,7 +178,6 @@ interface ChildAvailabilityStatuses {
    * Gets current availability status for a single resource
    */
   getByResource is ChildAvailabilityStatusOps.Read<
-    Extension.ScopeParameter,
     AvailabilityStatus,
     Parameters = {
       /**
@@ -149,14 +191,15 @@ interface ChildAvailabilityStatuses {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    ErrorType = ErrorResponse
   >;
 
   /**
    * Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status
    */
+  @segment("childAvailabilityStatuses")
   list is ChildAvailabilityStatusOps.List<
-    Extension.ScopeParameter,
     AvailabilityStatus,
     Parameters = {
       /**
@@ -170,9 +213,12 @@ interface ChildAvailabilityStatuses {
        */
       @query("$expand")
       $expand?: string;
-    }
+    },
+    Response = availabilityStatusListResult,
+    ErrorType = ErrorResponse
   >;
 }
 
 @@doc(AvailabilityStatus.name, "");
 @@doc(AvailabilityStatus.properties, "Properties of availability state.");
+@@key(Extension.ScopeParameter.scope, "resourceUri");

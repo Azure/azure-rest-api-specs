@@ -24,16 +24,18 @@ model MetadataEntity
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MetadataEntities {
   /**
    * Gets the list of metadata entities.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Metadata_GetEntity")
+  @tag("Metadata")
   getEntity is ArmResourceRead<
     MetadataEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
@@ -41,9 +43,12 @@ interface MetadataEntities {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Metadata_List")
+  @tag("Metadata")
   list is ArmResourceListByParent<
     MetadataEntity,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = MetadataEntityListResult,
+    Error = ErrorResponse
   >;
 }
 

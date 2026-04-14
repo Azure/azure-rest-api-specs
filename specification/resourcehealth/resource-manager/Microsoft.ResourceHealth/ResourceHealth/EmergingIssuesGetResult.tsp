@@ -25,16 +25,19 @@ model EmergingIssuesGetResult
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface EmergingIssuesGetResults {
   /**
    * Gets Azure services' emerging issues.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EmergingIssues_Get")
+  @tag("EmergingIssues")
   get is ArmResourceRead<
     EmergingIssuesGetResult,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = EmergingIssuesGetResult,
+    Error = ErrorResponse
   >;
 
   /**
@@ -42,9 +45,12 @@ interface EmergingIssuesGetResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EmergingIssues_List")
+  @tag("EmergingIssues")
   list is ArmResourceListByParent<
     EmergingIssuesGetResult,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Response = emergingIssueListResult,
+    Error = ErrorResponse
   >;
 }
 

@@ -1,24 +1,22 @@
 {
   "parameters": {
-    "resourceUri": "subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4",
+    "$expand": "recommendedactions",
     "api-version": "2025-05-01",
-    "$expand": "recommendedactions"
+    "resourceUri": "subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current",
         "name": "current",
         "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+        "id": "/subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current",
         "location": "southcentralus",
         "properties": {
           "availabilityState": "Available",
-          "summary": "There aren't any known Azure platform problems affecting this virtual machine",
           "detailedStatus": "",
-          "reasonType": "",
           "occuredTime": "2018-11-30T23:37:44Z",
           "reasonChronicity": "Persistent",
-          "reportedTime": "2018-12-04T01:19:11.955255Z",
+          "reasonType": "",
           "recommendedActions": [
             {
               "action": "To start this virtual machine, open the resource blade and click Start",
@@ -30,9 +28,13 @@
               "actionUrl": "<#SupportCase>",
               "actionUrlText": "contact support"
             }
-          ]
+          ],
+          "reportedTime": "2018-12-04T01:19:11.955255Z",
+          "summary": "There aren't any known Azure platform problems affecting this virtual machine"
         }
       }
     }
-  }
+  },
+  "operationId": "ChildAvailabilityStatuses_GetByResource",
+  "title": "GetChildCurrentHealthByResource"
 }

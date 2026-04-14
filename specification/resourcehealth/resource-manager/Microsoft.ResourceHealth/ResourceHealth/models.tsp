@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.ResourceHealth;
 
@@ -40,7 +41,7 @@ union AvailabilityStateValues {
 /**
  * Chronicity of the availability transition.
  */
-union ReasonChronicityTypes {
+union reasonChronicityTypes {
   string,
 
   /**
@@ -437,7 +438,7 @@ model AvailabilityStatusProperties {
   /**
    * Chronicity of the availability transition.
    */
-  reasonChronicity?: ReasonChronicityTypes;
+  reasonChronicity?: reasonChronicityTypes;
 
   /**
    * Timestamp for when the health was last checked.
@@ -1048,13 +1049,11 @@ model ImpactedServiceRegion {
   /**
    * List subscription impacted by the service health event.
    */
-  @identifiers(#[])
   impactedSubscriptions?: string[];
 
   /**
    * List tenant impacted by the service health event.
    */
-  @identifiers(#[])
   impactedTenants?: string[];
 
   /**
@@ -1344,4 +1343,113 @@ model ImpactedResourceStatusProperties {
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   occurredTime?: utcDateTime;
+}
+
+/**
+ * The List availabilityStatus operation response.
+ */
+model availabilityStatusListResult {
+  /**
+   * The list of availabilityStatuses.
+   */
+  @pageItems
+  value: AvailabilityStatus[];
+
+  /**
+   * The URI to fetch the next page of availabilityStatuses. Call ListNext() with this URI to fetch the next page of availabilityStatuses.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The list of emerging issues.
+ */
+model emergingIssueListResult {
+  /**
+   * The list of emerging issues.
+   */
+  @pageItems
+  value?: EmergingIssuesGetResult[];
+
+  /**
+   * The link used to get the next page of emerging issues.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The List of eventImpactedResources operation response.
+ */
+model eventImpactedResourceListResult {
+  /**
+   * The list of eventImpactedResources.
+   */
+  @pageItems
+  value: EventImpactedResource[];
+
+  /**
+   * The URI to fetch the next page of events. Call ListNext() with this URI to fetch the next page of impacted resource.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Lists the operations response.
+ */
+model operationListResult {
+  /**
+   * List of operations available in the Microsoft.ResourceHealth resource provider.
+   */
+  @pageItems
+  @identifiers(#["name"])
+  value: Operation[];
+}
+
+/**
+ * The list of metadata entities
+ */
+model MetadataEntityListResult {
+  /**
+   * The list of metadata entities.
+   */
+  @pageItems
+  value?: MetadataEntity[];
+
+  /**
+   * The link used to get the next page of metadata.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * ARM proxy resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource
+model ProxyResource {
+  /**
+   * Azure Resource Manager Identity for the availabilityStatuses resource.
+   */
+  id?: armResourceIdentifier;
+
+  /**
+   * current.
+   */
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  name?: string;
+
+  /**
+   * Microsoft.ResourceHealth/AvailabilityStatuses.
+   */
+  type?: armResourceType;
+
+  /**
+   * Azure Resource Manager geo location of the resource.
+   */
+  location?: string;
 }
