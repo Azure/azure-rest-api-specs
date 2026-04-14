@@ -5,42 +5,42 @@
       "benefits": [
         {
           "benefitType": "SavingsPlan",
-          "sku": {
-            "name": "Compute_Savings_Plan"
-          },
           "properties": {
-            "displayName": "ComputeSavingsPlan_2021-07-01",
-            "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
-            "term": "P1Y",
-            "appliedScopeType": "Single",
             "appliedScopeProperties": {
               "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
             },
+            "appliedScopeType": "Single",
+            "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
             "commitment": {
-              "currencyCode": "USD",
               "amount": 15.23,
+              "currencyCode": "USD",
               "grain": "Hourly"
-            }
+            },
+            "displayName": "ComputeSavingsPlan_2021-07-01",
+            "term": "P1Y"
+          },
+          "sku": {
+            "name": "Compute_Savings_Plan"
           }
         },
         {
           "benefitType": "SavingsPlan",
-          "sku": {
-            "name": "Compute_Savings_Plan"
-          },
           "properties": {
-            "displayName": "ComputeSavingsPlan_2021-07-01",
-            "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
-            "term": "P1Y",
-            "appliedScopeType": "Single",
             "appliedScopeProperties": {
               "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/RG"
             },
+            "appliedScopeType": "Single",
+            "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
             "commitment": {
-              "currencyCode": "USD",
               "amount": 20,
+              "currencyCode": "USD",
               "grain": "Hourly"
-            }
+            },
+            "displayName": "ComputeSavingsPlan_2021-07-01",
+            "term": "P1Y"
+          },
+          "sku": {
+            "name": "Compute_Savings_Plan"
           }
         }
       ]
@@ -51,9 +51,9 @@
       "body": {
         "benefits": [
           {
-            "valid": false,
             "reason": "Your provider has not enabled Savings Plan purchase on this subscription.",
-            "reasonCode": "CustomerCannotPurchaseSavingsPlan"
+            "reasonCode": "CustomerCannotPurchaseSavingsPlan",
+            "valid": false
           },
           {
             "valid": true
@@ -61,5 +61,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Benefit_Validate",
+  "title": "SavingsPlanValidatePurchase"
 }

@@ -32,7 +32,8 @@ model AddressResponse
   kind?: string;
 }
 
-@armResourceOperations
+@tag("AppServiceEnvironments")
+@armResourceOperations(#{ omitTags: true })
 interface AddressResponses {
   /**
    * Description for Get IP addresses assigned to an App Service Environment.

@@ -48,8 +48,8 @@ interface FirewallRules {
   @Azure.Core.useFinalStateVia("location")
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallRule,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = FirewallRule> &
-      ArmLroLocationHeader<FinalResult = FirewallRule>
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
