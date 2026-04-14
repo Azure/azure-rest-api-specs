@@ -4712,6 +4712,228 @@
         }
       }
     },
+    "/models/{name}/versions/{version}/createAsync": {
+      "post": {
+        "operationId": "Models_createAsync",
+        "description": "Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of the model.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Version of the model.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted response for asynchronous model version creation, with polling location.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for operation status.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelVersionCreate"
+              }
+            }
+          },
+          "description": "Model version to create."
+        }
+      }
+    },
+    "/models/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Models_fetchCredentials",
+        "description": "Fetch credentials for a model version asset.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of the model.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Version of the model.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelAssetCredentialResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelAssetCredentialRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models/{name}/versions/{version}/startPendingUpload": {
+      "post": {
+        "operationId": "Models_startPendingUpload",
+        "description": "Start or retrieve a pending upload for a model version.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of the model.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Version of the model.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTemporaryDataReference"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Models"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelPendingUploadRequest"
+              }
+            }
+          }
+        }
+      }
+    },
     "/openai/v1/conversations": {
       "post": {
         "operationId": "createConversation",
@@ -15638,6 +15860,59 @@
         ],
         "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent."
       },
+      "ModelAssetCredentialRequest": {
+        "type": "object",
+        "required": [
+          "blobUri"
+        ],
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "description": "Blob URI of the asset to fetch credentials for."
+          },
+          "generateBlobLevelReadSas": {
+            "type": "boolean",
+            "description": "If true, generates blob-level read SAS instead of container-level."
+          }
+        },
+        "description": "Request to fetch credentials for a model asset."
+      },
+      "ModelAssetCredentialResponse": {
+        "type": "object",
+        "properties": {
+          "blobReference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelBlobReferenceForConsumption"
+              }
+            ],
+            "description": "Blob reference with credentials."
+          }
+        },
+        "description": "Response containing credentials for a model asset."
+      },
+      "ModelBlobReferenceForConsumption": {
+        "type": "object",
+        "properties": {
+          "blobUri": {
+            "type": "string",
+            "description": "The blob URI."
+          },
+          "credential": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SasCredential"
+              }
+            ],
+            "description": "Credential for accessing the blob."
+          },
+          "storageAccountArmId": {
+            "type": "string",
+            "description": "ARM resource ID of the storage account."
+          }
+        },
+        "description": "A blob reference with temporary credentials for consumption."
+      },
       "ModelDeployment": {
         "type": "object",
         "required": [
@@ -15701,6 +15976,27 @@
         ],
         "description": "Model Deployment Definition"
       },
+      "ModelPendingUploadRequest": {
+        "type": "object",
+        "required": [
+          "pendingUploadType"
+        ],
+        "properties": {
+          "pendingUploadId": {
+            "type": "string",
+            "description": "Optional pending upload ID. If provided, retrieves the existing pending upload."
+          },
+          "pendingUploadType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PendingUploadType"
+              }
+            ],
+            "description": "Type of pending upload."
+          }
+        },
+        "description": "Request to start or retrieve a pending upload for a model version."
+      },
       "ModelSamplingParams": {
         "type": "object",
         "required": [
@@ -15759,6 +16055,35 @@
         },
         "description": "Represents a set of parameters used to control the sampling behavior of a language model during text generation."
       },
+      "ModelTemporaryDataReference": {
+        "type": "object",
+        "required": [
+          "pendingUploadType"
+        ],
+        "properties": {
+          "blobReferenceForConsumption": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModelBlobReferenceForConsumption"
+              }
+            ],
+            "description": "Blob reference for consumption with temporary credentials."
+          },
+          "pendingUploadId": {
+            "type": "string",
+            "description": "Pending upload ID."
+          },
+          "pendingUploadType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PendingUploadType"
+              }
+            ],
+            "description": "Type of pending upload."
+          }
+        },
+        "description": "Temporary data reference returned for a pending upload."
+      },
       "ModelVersion": {
         "type": "object",
         "required": [
@@ -15800,6 +16125,43 @@
             "type": "string",
             "description": "The version of the resource",
             "readOnly": true
+          }
+        },
+        "description": "Model Version Definition"
+      },
+      "ModelVersionCreate": {
+        "type": "object",
+        "properties": {
+          "systemData": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SystemDataV3"
+              }
+            ],
+            "description": "System related metadata"
+          },
+          "blobUri": {
+            "type": "string",
+            "description": "URI of the model artifact in blob storage"
+          },
+          "derivedModelInformation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DerivedModelInformation"
+              }
+            ],
+            "description": "Derived model information"
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
         "description": "Model Version Definition"
@@ -35971,6 +36333,21 @@
           }
         },
         "description": "Represents the response for a pending upload request"
+      },
+      "PendingUploadType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "None",
+              "BlobReference"
+            ]
+          }
+        ],
+        "description": "The type of pending upload."
       },
       "PromptAgentDefinition": {
         "type": "object",
