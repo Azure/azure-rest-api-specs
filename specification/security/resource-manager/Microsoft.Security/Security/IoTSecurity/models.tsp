@@ -292,8 +292,12 @@ model DeviceSecurityGroupProperties {
 /**
  * A custom alert rule that checks if a value (depends on the custom alert type) is within the given range.
  */
-@discriminator("ruleType")
 model ThresholdCustomAlertRule extends CustomAlertRule {
+  ...ThresholdCustomAlertRuleProperties;
+  ruleType: "ThresholdCustomAlertRule";
+}
+
+alias ThresholdCustomAlertRuleProperties = {
   /**
    * The minimum threshold.
    */
@@ -303,7 +307,7 @@ model ThresholdCustomAlertRule extends CustomAlertRule {
    * The maximum threshold.
    */
   maxThreshold: int32;
-}
+};
 
 /**
  * A custom alert rule.
@@ -336,14 +340,19 @@ model CustomAlertRule {
 /**
  * A custom alert rule that checks if the number of activities (depends on the custom alert type) in a time window is within the given range.
  */
-@discriminator("ruleType")
-model TimeWindowCustomAlertRule extends ThresholdCustomAlertRule {
+model TimeWindowCustomAlertRule extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+  ruleType: "TimeWindowCustomAlertRule";
+}
+
+alias TimeWindowCustomAlertRuleProperties = {
+  ...ThresholdCustomAlertRuleProperties;
+
   /**
    * The time window size in iso8601 format.
    */
   timeWindowSize: duration;
-}
-
+};
 /**
  * A custom alert rule that checks if a value (depends on the custom alert type) is allowed.
  */
@@ -913,7 +922,10 @@ model ProcessNotAllowed extends CustomAlertRule {
 /**
  * Number of active connections is not in allowed range.
  */
-model ActiveConnectionsNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model ActiveConnectionsNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -923,7 +935,10 @@ model ActiveConnectionsNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of cloud to device messages (AMQP protocol) is not in allowed range.
  */
-model AmqpC2DMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model AmqpC2DMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -933,7 +948,10 @@ model AmqpC2DMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of cloud to device messages (MQTT protocol) is not in allowed range.
  */
-model MqttC2DMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model MqttC2DMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -943,7 +961,10 @@ model MqttC2DMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of cloud to device messages (HTTP protocol) is not in allowed range.
  */
-model HttpC2DMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model HttpC2DMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -953,8 +974,10 @@ model HttpC2DMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of rejected cloud to device messages (AMQP protocol) is not in allowed range.
  */
-model AmqpC2DRejectedMessagesNotInAllowedRange
-  extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model AmqpC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -964,8 +987,10 @@ model AmqpC2DRejectedMessagesNotInAllowedRange
 /**
  * Number of rejected cloud to device messages (MQTT protocol) is not in allowed range.
  */
-model MqttC2DRejectedMessagesNotInAllowedRange
-  extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model MqttC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -975,8 +1000,10 @@ model MqttC2DRejectedMessagesNotInAllowedRange
 /**
  * Number of rejected cloud to device messages (HTTP protocol) is not in allowed range.
  */
-model HttpC2DRejectedMessagesNotInAllowedRange
-  extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model HttpC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -986,7 +1013,10 @@ model HttpC2DRejectedMessagesNotInAllowedRange
 /**
  * Number of device to cloud messages (AMQP protocol) is not in allowed range.
  */
-model AmqpD2CMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model AmqpD2CMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -996,7 +1026,10 @@ model AmqpD2CMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of device to cloud messages (MQTT protocol) is not in allowed range.
  */
-model MqttD2CMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model MqttD2CMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -1006,7 +1039,10 @@ model MqttD2CMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of device to cloud messages (HTTP protocol) is not in allowed range.
  */
-model HttpD2CMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model HttpD2CMessagesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -1016,7 +1052,10 @@ model HttpD2CMessagesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of direct method invokes is not in allowed range.
  */
-model DirectMethodInvokesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model DirectMethodInvokesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -1026,7 +1065,10 @@ model DirectMethodInvokesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of failed local logins is not in allowed range.
  */
-model FailedLocalLoginsNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model FailedLocalLoginsNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -1036,7 +1078,10 @@ model FailedLocalLoginsNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of file uploads is not in allowed range.
  */
-model FileUploadsNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model FileUploadsNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -1046,7 +1091,10 @@ model FileUploadsNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of device queue purges is not in allowed range.
  */
-model QueuePurgesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model QueuePurgesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -1056,7 +1104,10 @@ model QueuePurgesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of twin updates is not in allowed range.
  */
-model TwinUpdatesNotInAllowedRange extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model TwinUpdatesNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
@@ -1066,8 +1117,10 @@ model TwinUpdatesNotInAllowedRange extends TimeWindowCustomAlertRule {
 /**
  * Number of unauthorized operations is not in allowed range.
  */
-model UnauthorizedOperationsNotInAllowedRange
-  extends TimeWindowCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
+model UnauthorizedOperationsNotInAllowedRange extends CustomAlertRule {
+  ...TimeWindowCustomAlertRuleProperties;
+
   /**
    * The type of the custom alert rule.
    */
