@@ -2298,7 +2298,7 @@ union ResumeProtectionRequestObjectType {
   string,
 
   @doc("Resume Protection Request Type.")
-  ResumeProtectionRequest: "ResumeProtectionRequest"
+  ResumeProtectionRequest: "ResumeProtectionRequest",
 }
 
 /**
