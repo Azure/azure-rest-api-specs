@@ -49,8 +49,6 @@ interface EventOperationGroup {
   /**
    * Service health event in the subscription by event tracking id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Event_GetBySubscriptionIdAndTrackingId")
   @tag("Event")
   getBySubscriptionIdAndTrackingId is EventOperationGroupOps.Read<
     Event,
@@ -73,8 +71,6 @@ interface EventOperationGroup {
   /**
    * Lists service health events in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Events_ListBySubscriptionId")
   @tag("Events")
   listBySubscriptionId is EventOperationGroupOps.List<
     Event,
@@ -98,8 +94,6 @@ interface EventOperationGroup {
   /**
    * Lists impacted resources in the subscription by an event (Security Advisory).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SecurityAdvisoryImpactedResources_ListBySubscriptionIdAndEventId")
   @list
   @action("listSecurityAdvisoryImpactedResources")
   @tag("SecurityAdvisoryImpactedResources")
@@ -170,8 +164,6 @@ interface TenantEventOperationGroup {
   /**
    * Service health event in the tenant by event tracking id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Event_GetByTenantIdAndTrackingId")
   @tag("Event")
   getByTenantIdAndTrackingId is TenantEventOperationGroupOps.Read<
     Event,
@@ -194,8 +186,6 @@ interface TenantEventOperationGroup {
   /**
    * Lists current service health events in the tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Events_ListByTenantId")
   @tag("Events")
   listByTenantId is TenantEventOperationGroupOps.List<
     Event,
@@ -219,8 +209,6 @@ interface TenantEventOperationGroup {
   /**
    * Lists impacted resources in the tenant by an event (Security Advisory).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SecurityAdvisoryImpactedResources_ListByTenantIdAndEventId")
   @list
   @action("listSecurityAdvisoryImpactedResources")
   @tag("SecurityAdvisoryImpactedResources")

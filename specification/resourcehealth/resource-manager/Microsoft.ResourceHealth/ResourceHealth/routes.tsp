@@ -18,8 +18,6 @@ interface EventsOperationGroup {
   /**
    * Lists current service health events for given resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Events_ListBySingleResource")
   @autoRoute
   @get
   @action("events")
@@ -44,8 +42,6 @@ interface ChildResourcesOperationGroup {
   /**
    * Lists the all the children and its current health status for a parent resource. Use the nextLink property in the response to get the next page of children current health
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ChildResources_List")
   @autoRoute
   @get
   @action("childResources")

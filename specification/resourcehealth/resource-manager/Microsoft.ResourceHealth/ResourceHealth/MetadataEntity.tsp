@@ -29,8 +29,6 @@ interface MetadataEntities {
   /**
    * Gets the list of metadata entities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Metadata_GetEntity")
   @tag("Metadata")
   getEntity is ArmResourceRead<
     MetadataEntity,
@@ -41,8 +39,6 @@ interface MetadataEntities {
   /**
    * Gets the list of metadata entities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Metadata_List")
   @tag("Metadata")
   list is ArmResourceListByParent<
     MetadataEntity,
