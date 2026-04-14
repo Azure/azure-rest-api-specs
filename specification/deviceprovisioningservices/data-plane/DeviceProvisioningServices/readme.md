@@ -98,6 +98,21 @@ suppressions:
     from: device.json
     reason: >-
       Pre-existing DPS device API path parameter schema maintained for backward compatibility.
+  - code: GetInOperationName
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API GET operation IDs do not follow the List/Get naming
+      convention. Maintained for backward compatibility with existing DPS SDK clients.
+  - code: PutPath
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API PUT path does not follow ARM naming guidelines.
+      Maintained for backward compatibility with existing DPS device clients.
+  - code: PutRequestResponseScheme
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API PUT request/response scheme does not match ARM guidelines.
+      Maintained for backward compatibility with existing DPS device clients.
   - code: LroHeaders
     from: device.json
     reason: >-
@@ -113,6 +128,16 @@ suppressions:
     reason: >-
       DPS service API (TypeSpec-generated) uses a custom error response format matching
       the pre-existing DPS API contract. Maintained for backward compatibility.
+  - code: PathParameterSchema
+    from: service.json
+    reason: >-
+      TypeSpec-generated DPS service API path parameters do not include maxLength/pattern
+      constraints. Pre-existing API design maintained for backward compatibility.
+  - code: SummaryAndDescriptionMustNotBeSame
+    from: service.json
+    reason: >-
+      TypeSpec-generated DPS service API has operations where summary and description are
+      identical. Pre-existing API design maintained for backward compatibility.
   - code: OperationIdNounConflictingModelNames
     from: service.json
     reason: >-
