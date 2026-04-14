@@ -655,6 +655,15 @@ model GetOperationStatusResponse {
   results: Array<ResourceOperation>;
 }
 
+@doc("Static read response for the singleton bulk VM operations proxy endpoint")
+model BulkVmOperationsReadResponse {
+  @doc("Indicates the singleton proxy endpoint is reachable")
+  status: "Ready";
+
+  @doc("Echoes the singleton proxy resource name")
+  name: "bulkVmOperations";
+}
+
 // ----------- CancelOperations ---------
 @doc("This is the request to cancel running operations in scheduled actions using the operation ids")
 model CancelOperationsRequest {

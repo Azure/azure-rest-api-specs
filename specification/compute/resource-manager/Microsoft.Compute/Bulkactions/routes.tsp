@@ -243,15 +243,15 @@ interface VirtualMachineBulkOperations {
     @body
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
-
-  /** bulkvmoperations ping only endpoint */
-  @doc("Read-only endpoint that retrieves the bulkvmoperations")  @autoRoute
+  /** BulkVmOperations_Get: Gets the singleton bulk VM operations proxy resource status. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Singleton proxy read endpoint; not an ARM tracked resource read."
   @get
-  bulkvmoperations(
+  @autoRoute
+  bulkVmOperations(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.Subscription>,
     ...Extension.Subscription,
     ...ProviderNamespace<Extension.Subscription>,
     ...LocationParameter,
     ...DefaultVirtualMachines,
-  ): ArmNoContentResponse | ErrorResponse;
+  ): ArmResponse<BulkVmOperationsReadResponse> | ErrorResponse;
 }
