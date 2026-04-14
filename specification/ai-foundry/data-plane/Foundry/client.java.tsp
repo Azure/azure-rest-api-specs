@@ -21,6 +21,20 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
+// Add optional boolean "allow_preview" client initialization parameter
+// See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters
+model AIProjectClientOptions {
+  @doc("Whether to enable preview features. Must be specified and set to True to enable preview features.")
+  allow_preview?: boolean;
+}
+
+@@clientInitialization(Azure.AI.Projects,
+  {
+    parameters: AIProjectClientOptions,
+  },
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Renames - operations
 // --------------------------------------------------------------------------------
