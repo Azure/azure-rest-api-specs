@@ -58,6 +58,9 @@ using Microsoft.HDInsight;
 @@clientLocation(LocationsOperationGroup.getCapabilities, "Locations");
 @@clientLocation(LocationsOperationGroup.listUsages, "Locations");
 @@clientLocation(LocationsOperationGroup.listBillingSpecs, "Locations");
+@@clientLocation(LocationsOperationGroup.getAzureAsyncOperationStatus,
+  "Locations"
+);
 @@clientLocation(LocationsOperationGroup.checkNameAvailability, "Locations");
 @@clientLocation(LocationsOperationGroup.validateClusterCreateRequest,
   "Locations"
@@ -71,9 +74,9 @@ using Microsoft.HDInsight;
 @@clientName(LocationsOperationGroup.validateClusterCreateRequest::parameters.body,
   "parameters"
 );
-@@clientName(Extensions.create::parameters.parameters, "parameters");
+@@clientName(Extensions.create::parameters.resource, "parameters");
 @@visibility(ScriptActionExecutionHistoryList.value, Lifecycle.Read);
-@@clientName(Configurations.update::parameters.parameters, "parameters");
+@@clientName(Configurations.update::parameters.resource, "parameters");
 @@doc(Extensions.enableMonitoring::parameters.body,
   "The Operations Management Suite (OMS) workspace parameters."
 );
@@ -83,11 +86,11 @@ using Microsoft.HDInsight;
 @@doc(Extensions.enableAzureMonitorAgent::parameters.body,
   "The Log Analytics workspace parameters."
 );
-@@doc(Extensions.create::parameters.parameters,
+@@doc(Extensions.create::parameters.resource,
   "The cluster extensions create request."
 );
 
-@@doc(Configurations.update::parameters.parameters,
+@@doc(Configurations.update::parameters.resource,
   "The cluster configurations."
 );
 @@doc(VirtualMachines.restartHosts::parameters.body,

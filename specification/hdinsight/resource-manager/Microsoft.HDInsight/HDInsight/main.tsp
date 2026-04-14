@@ -32,8 +32,8 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "HDInsightManagementClient" })
 @versioned(Versions)
-// Updated to v5 for proper ResourceIdentifier type support
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+// FIXME: Common type version v2 is not supported for now. Set to v3.
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.HDInsight;
 
 /**

@@ -53,6 +53,23 @@ interface LocationsOperationGroup {
     Error = ErrorResponse
   >;
   /**
+   * Get the async operation status.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/azureasyncoperations/{operationId}")
+  @get
+  getAzureAsyncOperationStatus(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The long running operation id.
+     */
+    @path
+    operationId: string,
+  ): ArmResponse<AsyncOperationResult> | ErrorResponse;
+
+  /**
    * Check the cluster name is available or not.
    */
   @autoRoute
@@ -96,22 +113,39 @@ interface Configurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "This API is deprecated, please use UpdateGatewaySettings in cluster endpoint instead."
   @post
-  @route("configurations/{configurationName}")
-  update(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
-    @path configurationName: string,
-    @body parameters: ClusterConfiguration,
-  ): OkResponse | NoContentResponse | ArmAcceptedLroResponse | ErrorResponse;
+  update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    Cluster,
+    ClusterConfiguration,
+    Parameters = {
+      /**
+       * The name of the cluster configuration.
+       */
+      @path
+      @segment("configurations")
+      @key
+      configurationName: string;
+    },
+    Response = OkResponse | NoContentResponse | ArmAcceptedLroResponse,
+    Error = ErrorResponse
+  >;
 
   /**
    * The configuration object for the specified cluster. This API is not recommended and might be removed in the future. Please consider using List configurations API instead.
    */
-  @get
-  @route("configurations/{configurationName}")
-  get(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
-    @path configurationName: string,
-  ): ArmResponse<ClusterConfiguration> | ErrorResponse;
+  get is ArmResourceRead<
+    Cluster,
+    Response = ArmResponse<ClusterConfiguration>,
+    Parameters = {
+      /**
+       * The name of the cluster configuration.
+       */
+      @path
+      @segment("configurations")
+      @key
+      configurationName: string;
+    },
+    Error = ErrorResponse
+  >;
 }
 
 @armResourceOperations
@@ -241,35 +275,84 @@ interface Extensions {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @put
-  @route("extensions/{extensionName}")
-  create(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
-    @path extensionName: string,
-    @body parameters: Extension,
-  ): ArmAcceptedLroResponse | OkResponse | ErrorResponse;
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    Cluster,
+    Request = Extension,
+    Parameters = {
+      /**
+       * The name of the cluster extension.
+       */
+      @path
+      @segment("extensions")
+      @key
+      extensionName: string;
+    },
+    Response = ArmAcceptedLroResponse | OkResponse,
+    Error = ErrorResponse
+  >;
 
   /**
    * Gets the extension properties for the specified HDInsight cluster extension.
    */
-  @get
-  @route("extensions/{extensionName}")
-  get(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
-    @path extensionName: string,
-  ): ArmResponse<ClusterMonitoringResponse> | ErrorResponse;
+  get is ArmResourceRead<
+    Cluster,
+    Response = ArmResponse<ClusterMonitoringResponse>,
+    Parameters = {
+      /**
+       * The name of the cluster extension.
+       */
+      @path
+      @segment("extensions")
+      @key
+      extensionName: string;
+    },
+    Error = ErrorResponse
+  >;
 
   /**
    * Deletes the specified extension for HDInsight cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @delete
-  @route("extensions/{extensionName}")
-  delete(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
-    @path extensionName: string,
-  ): OkResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | ErrorResponse;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Cluster,
+    Response = OkResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Parameters = {
+      /**
+       * The name of the cluster extension.
+       */
+      @path
+      @segment("extensions")
+      @key
+      extensionName: string;
+    },
+    Error = ErrorResponse
+  >;
 
+  /**
+   * Gets the async operation status.
+   */
+  getAzureAsyncOperationStatus is ArmResourceRead<
+    Cluster,
+    Response = ArmResponse<AsyncOperationResult>,
+    Parameters = {
+      /**
+       * The name of the cluster extension.
+       */
+      @path
+      @segment("extensions")
+      @key
+      extensionName: string;
+
+      /**
+       * The long running operation id.
+       */
+      @path
+      @segment("azureAsyncOperations")
+      @key
+      operationId: string;
+    },
+    Error = ErrorResponse
+  >;
 }
 
 @armResourceOperations(#{ omitTags: true })
@@ -307,15 +390,42 @@ interface ScriptActions {
   >;
 
   /**
+   * Gets the async operation status of execution operation.
+   */
+  @tag("ScriptActions")
+  getExecutionAsyncOperationStatus is ArmResourceRead<
+    Cluster,
+    Response = ArmResponse<AsyncOperationResult>,
+    Parameters = {
+      /**
+       * The long running operation id.
+       */
+      @path
+      @segment("executeScriptActions/azureasyncoperations")
+      @key
+      operationId: string;
+    },
+    Error = ErrorResponse
+  >;
+
+  /**
    * Gets the script execution detail for the given script execution ID.
    */
-  @get
   @tag("ScriptExecutionHistory")
-  @route("scriptExecutionHistory/{scriptExecutionId}")
-  getExecutionDetail(
-    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
-    @path scriptExecutionId: string,
-  ): ArmResponse<RuntimeScriptActionDetail> | ErrorResponse;
+  getExecutionDetail is ArmResourceRead<
+    Cluster,
+    Response = ArmResponse<RuntimeScriptActionDetail>,
+    Parameters = {
+      /**
+       * The script execution Id
+       */
+      @path
+      @segment("scriptExecutionHistory")
+      @key
+      scriptExecutionId: string;
+    },
+    Error = ErrorResponse
+  >;
 }
 
 @armResourceOperations(#{ omitTags: true })
@@ -378,4 +488,22 @@ interface VirtualMachines {
     Error = ErrorResponse
   >;
 
+  /**
+   * Gets the async operation status.
+   */
+  @get
+  getAsyncOperationStatus is ArmResourceRead<
+    Cluster,
+    Response = ArmResponse<AsyncOperationResult>,
+    Parameters = {
+      /**
+       * The long running operation id.
+       */
+      @path
+      @segment("restartHosts/azureasyncoperations")
+      @key
+      operationId: string;
+    },
+    Error = ErrorResponse
+  >;
 }

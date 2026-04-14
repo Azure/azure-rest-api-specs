@@ -75,6 +75,23 @@ interface Applications {
    */
   listByCluster is ArmResourceListByParent<Application, Error = ErrorResponse>;
 
+  /**
+   * Gets the async operation status.
+   */
+  getAzureAsyncOperationStatus is ArmResourceRead<
+    Application,
+    Response = ArmResponse<AsyncOperationResult>,
+    Parameters = {
+      /**
+       * The long running operation id.
+       */
+      @path
+      @segment("azureasyncoperations")
+      @key
+      operationId: string;
+    },
+    Error = ErrorResponse
+  >;
 }
 
 @@doc(Application.name, "The constant value for the application name.");

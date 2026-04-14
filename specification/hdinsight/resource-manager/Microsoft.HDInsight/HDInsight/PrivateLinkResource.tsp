@@ -35,8 +35,9 @@ interface PrivateLinkResources {
   /**
    * Lists the private link resources in a HDInsight cluster.
    */
-  listByCluster is ArmResourceListByParent<
+  listByCluster is Azure.ResourceManager.Legacy.ArmListSinglePageByParent<
     PrivateLinkResource,
+    Response = ArmResponse<PrivateLinkResourceListResult>,
     Error = ErrorResponse
   >;
 }
