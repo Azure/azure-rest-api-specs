@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "kubeSelectorGroupName": "kubeSelectorGroup1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kubeSelectorGroup1",
+        "type": "Microsoft.Network/kubeSelectorGroups",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/kubeSelectorGroups/kubeSelectorGroup1",
+        "location": "West US",
+        "tags": {
+          "key1": "value1"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster2"
+          ],
+          "selector": {
+            "matchLabels": {
+              "app": "web",
+              "environment": "production"
+            },
+            "matchExpressions": [
+              {
+                "key": "tier",
+                "operator": "In",
+                "values": [
+                  "frontend",
+                  "backend"
+                ]
+              }
+            ],
+            "namespaceSelector": {
+              "matchLabels": {
+                "team": "platform"
+              },
+              "matchExpressions": [
+                {
+                  "key": "env",
+                  "operator": "NotIn",
+                  "values": [
+                    "dev"
+                  ]
+                }
+              ]
+            }
+          },
+          "firewallPolicyIds": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/policy1"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "title": "Get KubeSelectorGroup"
+}

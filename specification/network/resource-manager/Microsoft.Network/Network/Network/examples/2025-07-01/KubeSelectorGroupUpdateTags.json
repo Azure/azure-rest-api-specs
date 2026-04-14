@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "kubeSelectorGroupName": "kubeSelectorGroup1",
+    "properties": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kubeSelectorGroup1",
+        "type": "Microsoft.Network/kubeSelectorGroups",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/kubeSelectorGroups/kubeSelectorGroup1",
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterIds": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1"
+          ],
+          "selector": {
+            "matchLabels": {
+              "app": "web"
+            }
+          },
+          "firewallPolicyIds": []
+        }
+      }
+    }
+  },
+  "title": "Update KubeSelectorGroup Tags"
+}
