@@ -203,6 +203,10 @@ namespace Azure.AI.Projects {
   @@access(AgentVersionObject, Access.public);
   @@clientName(AgentVersionObject, "ProjectsAgentVersion");
 
+  @@usage(PatchAgentRequest, Usage.input | Usage.output);
+  @@access(PatchAgentRequest, Access.public);
+  @@clientName(PatchAgentRequest, "PatchAgentOptions");
+  @@access(Agents.patchAgentObject, Access.internal);
   // --------------------------------------------------------------------------------
   // Hide session opertaions, containing the foundry features
   // --------------------------------------------------------------------------------
