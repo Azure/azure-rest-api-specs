@@ -12724,7 +12724,7 @@
         },
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
-          "description": "Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset."
+          "description": "Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
         }
       }
     },
@@ -12792,7 +12792,7 @@
           "enum": [
             "cost",
             "balanced",
-            "accuracy"
+            "quality"
           ],
           "x-ms-enum": {
             "name": "RoutingMode",
@@ -12806,12 +12806,12 @@
               {
                 "name": "Balanced",
                 "value": "balanced",
-                "description": "Balance cost and accuracy when routing requests across models."
+                "description": "Balance cost and quality when routing requests across models."
               },
               {
-                "name": "Accuracy",
-                "value": "accuracy",
-                "description": "Route requests to maximize accuracy regardless of cost."
+                "name": "Quality",
+                "value": "quality",
+                "description": "Route requests to maximize quality regardless of cost."
               }
             ]
           }
@@ -16290,7 +16290,7 @@
       "enum": [
         "cost",
         "balanced",
-        "accuracy"
+        "quality"
       ],
       "x-ms-enum": {
         "name": "RoutingMode",
@@ -16304,12 +16304,12 @@
           {
             "name": "Balanced",
             "value": "balanced",
-            "description": "Balance cost and accuracy when routing requests across models."
+            "description": "Balance cost and quality when routing requests across models."
           },
           {
-            "name": "Accuracy",
-            "value": "accuracy",
-            "description": "Route requests to maximize accuracy regardless of cost."
+            "name": "Quality",
+            "value": "quality",
+            "description": "Route requests to maximize quality regardless of cost."
           }
         ]
       }
