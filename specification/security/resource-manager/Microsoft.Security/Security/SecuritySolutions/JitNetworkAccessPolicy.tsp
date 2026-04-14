@@ -148,6 +148,3 @@ enum JitNetworkAccessPolicyInitiateType {
 @@doc(JitNetworkAccessPolicy.properties, "");
 @@doc(JitNetworkAccessPolicies.createOrUpdate::parameters.resource, "");
 @@doc(JitNetworkAccessPolicies.initiate::parameters.body, "");
-
-
-

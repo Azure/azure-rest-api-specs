@@ -63,6 +63,3 @@ interface RegulatoryComplianceStandards {
 @@doc(RegulatoryComplianceStandard.properties,
   "Regulatory compliance standard data"
 );
-
-
-

@@ -15,6 +15,3 @@ using Common;
 @@Legacy.flattenProperty(SecurityTask.properties);
 
 @@clientLocation(TasksOperationGroup.list, Tasks);
-
-
-

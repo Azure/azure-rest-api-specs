@@ -80,4 +80,3 @@ interface GitHubOwners {
 
 @@doc(GitHubOwner.name, "The GitHub owner name.");
 @@doc(GitHubOwner.properties, "GitHub Owner properties.");
-

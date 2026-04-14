@@ -21,4 +21,3 @@ model AdvancedThreatProtectionProperties {
    */
   isEnabled?: boolean;
 }
-

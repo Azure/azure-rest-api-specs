@@ -73,4 +73,3 @@ interface HealthReports {
   "The health report Key - Unique key for the health report type"
 );
 @@doc(HealthReport.properties, "Properties of a health report");
-

@@ -68,4 +68,3 @@ interface CustomRecommendations {
 @@doc(CustomRecommendations.createOrUpdate::parameters.resource,
   "Custom Recommendation body"
 );
-

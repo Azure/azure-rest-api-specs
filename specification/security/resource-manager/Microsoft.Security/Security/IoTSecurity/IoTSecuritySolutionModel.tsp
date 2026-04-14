@@ -112,6 +112,3 @@ interface IoTSecuritySolutionModels {
 @@doc(IoTSecuritySolutionModels.update::parameters.properties,
   "The security solution data"
 );
-
-
-

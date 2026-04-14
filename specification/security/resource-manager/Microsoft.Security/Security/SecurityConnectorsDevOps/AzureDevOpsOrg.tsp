@@ -112,4 +112,3 @@ interface AzureDevOpsOrgs {
 @@doc(AzureDevOpsOrgs.update::parameters.properties,
   "The Azure DevOps organization resource payload."
 );
-

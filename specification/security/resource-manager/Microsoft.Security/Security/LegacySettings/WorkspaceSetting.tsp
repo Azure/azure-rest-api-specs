@@ -90,6 +90,3 @@ interface WorkspaceSettings {
 @@doc(WorkspaceSettings.update::parameters.properties,
   "Security data setting object"
 );
-
-
-

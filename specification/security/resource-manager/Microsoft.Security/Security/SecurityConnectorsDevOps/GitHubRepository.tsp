@@ -106,4 +106,3 @@ interface GitHubRepositories {
 @@doc(GitHubRepositories.create::parameters.body,
   "The request model containing details for creating the GitHub issue."
 );
-

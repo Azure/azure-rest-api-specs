@@ -1817,4 +1817,3 @@ model DefenderCspmJFrogOfferingMdcContainersImageAssessment {
    */
   enabled?: boolean;
 }
-

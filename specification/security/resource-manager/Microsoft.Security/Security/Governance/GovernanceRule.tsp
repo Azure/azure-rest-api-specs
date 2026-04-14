@@ -144,6 +144,3 @@ interface GovernanceRules {
 @@doc(GovernanceRules.execute::parameters.body,
   "Execute governance rule over a given scope"
 );
-
-
-

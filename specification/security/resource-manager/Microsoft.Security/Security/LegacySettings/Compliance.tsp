@@ -51,6 +51,3 @@ interface Compliances {
 
 @@doc(Compliance.name, "name of the Compliance");
 @@doc(Compliance.properties, "Compliance data");
-
-
-

@@ -68,6 +68,3 @@ interface AlertsOperationGroup {
     alertSimulatorRequestBody: AlertSimulatorRequestBody,
   ): ArmAcceptedLroResponse | CloudError;
 }
-
-
-

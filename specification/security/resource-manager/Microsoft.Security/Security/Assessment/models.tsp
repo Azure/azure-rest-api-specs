@@ -1311,7 +1311,8 @@ model EdgeIdentifiers {
  * Security assessment metadata
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model SecurityAssessmentMetadata extends Azure.ResourceManager.Foundations.Resource {
+model SecurityAssessmentMetadata
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Describes properties of an assessment metadata.
    */
@@ -1382,6 +1383,3 @@ model OnPremiseSqlResourceDetails extends OnPremiseResourceDetails {
    */
   source: "OnPremiseSql";
 }
-
-
-

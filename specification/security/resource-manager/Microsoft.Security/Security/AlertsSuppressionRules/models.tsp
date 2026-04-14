@@ -102,4 +102,3 @@ model ScopeElement {
    */
   field?: string;
 }
-

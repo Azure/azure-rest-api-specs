@@ -122,6 +122,3 @@ interface Automations {
   Lifecycle.Create,
   Lifecycle.Update
 );
-
-
-

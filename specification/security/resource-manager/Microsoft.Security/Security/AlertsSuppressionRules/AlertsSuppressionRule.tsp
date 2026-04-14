@@ -87,6 +87,3 @@ interface AlertsSuppressionRules {
 @@doc(AlertsSuppressionRules.update::parameters.resource,
   "Suppression rule object"
 );
-
-
-

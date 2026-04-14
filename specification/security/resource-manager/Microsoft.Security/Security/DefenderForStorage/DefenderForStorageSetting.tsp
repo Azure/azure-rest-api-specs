@@ -164,6 +164,3 @@ interface DefenderForStorageSettings {
 @@doc(DefenderForStorageSettings.create::parameters.resource,
   "Defender for Storage Settings"
 );
-
-
-

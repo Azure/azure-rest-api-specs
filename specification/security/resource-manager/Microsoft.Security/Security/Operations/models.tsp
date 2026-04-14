@@ -61,4 +61,3 @@ model OperationDisplay {
   @visibility(Lifecycle.Read)
   description?: string;
 }
-

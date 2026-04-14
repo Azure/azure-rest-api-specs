@@ -74,6 +74,3 @@ interface SecurityContacts {
 @@pattern(SecurityContact.name, "^(default)$");
 @@doc(SecurityContact.properties, "Security contact data");
 @@doc(SecurityContacts.create::parameters.resource, "Security contact object");
-
-
-

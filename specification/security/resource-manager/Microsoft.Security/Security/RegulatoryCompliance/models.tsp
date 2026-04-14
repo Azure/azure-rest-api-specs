@@ -152,4 +152,3 @@ model RegulatoryComplianceAssessmentProperties {
   @visibility(Lifecycle.Read)
   unsupportedResources?: int32;
 }
-

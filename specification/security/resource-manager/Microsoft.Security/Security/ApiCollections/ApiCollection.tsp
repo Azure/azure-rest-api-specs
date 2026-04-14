@@ -109,4 +109,3 @@ interface ApiCollections {
 @@doc(ApiCollection.properties,
   "Describes the properties of an API collection."
 );
-

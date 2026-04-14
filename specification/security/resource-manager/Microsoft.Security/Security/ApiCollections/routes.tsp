@@ -29,4 +29,3 @@ interface ApiCollectionsOperationGroup {
     Scope = Azure.ResourceManager.Extension.ResourceGroup
   >;
 }
-

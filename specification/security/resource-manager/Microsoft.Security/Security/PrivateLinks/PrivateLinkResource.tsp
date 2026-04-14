@@ -96,4 +96,3 @@ interface PrivateLinkResources {
 @@doc(PrivateLinkResources.update::parameters.properties,
   "private link update payload containing only the properties to be updated."
 );
-

@@ -39,4 +39,3 @@ model MdeOnboardingDataProperties {
    */
   onboardingPackageLinux?: bytes;
 }
-

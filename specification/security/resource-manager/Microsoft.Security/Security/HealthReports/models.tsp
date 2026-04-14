@@ -256,4 +256,3 @@ model issue {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issueAdditionalData?: Record<string>;
 }
-

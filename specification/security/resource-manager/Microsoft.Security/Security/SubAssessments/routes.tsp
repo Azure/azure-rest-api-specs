@@ -31,6 +31,3 @@ interface SubAssessmentsOperationGroup {
     Error = CloudError
   >;
 }
-
-
-

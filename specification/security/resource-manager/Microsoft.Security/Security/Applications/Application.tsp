@@ -147,6 +147,3 @@ interface SecurityConnectorApplication {
 @@doc(SecurityConnectorApplication.createOrUpdate::parameters.resource,
   "Application over a subscription scope"
 );
-
-
-

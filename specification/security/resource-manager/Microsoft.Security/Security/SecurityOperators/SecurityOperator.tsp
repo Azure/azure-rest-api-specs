@@ -99,6 +99,3 @@ interface SecurityOperators {
 @@maxLength(SecurityOperator.name, 63);
 @@minLength(SecurityOperator.name, 3);
 @@doc(SecurityOperator.name, "name of the securityOperator");
-
-
-

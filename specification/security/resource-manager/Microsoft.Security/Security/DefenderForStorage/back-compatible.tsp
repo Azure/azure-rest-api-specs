@@ -24,6 +24,3 @@ using Common;
   "DefenderForStorage"
 );
 @@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceId");
-
-
-

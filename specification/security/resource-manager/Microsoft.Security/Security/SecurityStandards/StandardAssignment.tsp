@@ -78,4 +78,3 @@ interface StandardAssignments {
 );
 
 @@key(ResourceIdScopeParameter.scope, "resourceId");
-

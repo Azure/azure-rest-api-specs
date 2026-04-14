@@ -14,6 +14,3 @@ using Common;
 @@Legacy.flattenProperty(SecuritySubAssessment.properties);
 
 @@clientLocation(SubAssessmentsOperationGroup.listAll, "SubAssessments");
-
-
-

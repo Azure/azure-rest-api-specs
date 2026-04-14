@@ -99,4 +99,3 @@ model ApiCollectionProperties {
   @visibility(Lifecycle.Read)
   sensitivityLabel?: string;
 }
-

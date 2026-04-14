@@ -92,6 +92,3 @@ interface SecurityAssessmentResponses {
   "Calculated assessment on a pre-defined assessment metadata"
 );
 @@key(SecurityAssessmentResponsesScopeParameter.scope, "resourceId");
-
-
-

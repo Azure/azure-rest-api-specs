@@ -65,6 +65,3 @@ interface AutoProvisioningSettings {
 @@doc(AutoProvisioningSettings.create::parameters.resource,
   "Auto provisioning setting key"
 );
-
-
-

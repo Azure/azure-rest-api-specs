@@ -69,4 +69,3 @@ interface SecurityStandards {
 @@doc(SecurityStandards.createOrUpdate::parameters.resource,
   "Custom security standard over a pre-defined scope"
 );
-

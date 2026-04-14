@@ -102,6 +102,3 @@ interface SecuritySubAssessments {
 @@doc(SecuritySubAssessment.properties,
   "Describes properties of an sub-assessment."
 );
-
-
-

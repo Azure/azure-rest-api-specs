@@ -65,6 +65,3 @@ interface RegulatoryComplianceAssessments {
 @@doc(RegulatoryComplianceAssessment.properties,
   "Regulatory compliance assessment data"
 );
-
-
-

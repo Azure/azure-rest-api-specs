@@ -63,6 +63,3 @@ interface AllowedConnectionsResources {
 @@doc(AllowedConnectionsResource.properties,
   "Describes the allowed traffic between Azure resources"
 );
-
-
-

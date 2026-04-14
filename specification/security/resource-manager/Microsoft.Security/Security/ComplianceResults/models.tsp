@@ -55,4 +55,3 @@ model ComplianceResultProperties {
   @visibility(Lifecycle.Read)
   resourceStatus?: ResourceStatus;
 }
-

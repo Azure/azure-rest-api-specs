@@ -94,4 +94,3 @@ interface GitLabGroups {
 
 @@doc(GitLabGroup.name, "The GitLab group fully-qualified name.");
 @@doc(GitLabGroup.properties, "GitLab Group properties.");
-

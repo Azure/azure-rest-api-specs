@@ -405,4 +405,3 @@ model Condition {
    */
   operator?: GovernanceRuleConditionOperator;
 }
-

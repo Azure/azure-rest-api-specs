@@ -20,4 +20,3 @@ using ApiCollectionsAPI;
 @@clientLocation(ApiCollectionsOperationGroup.listByResourceGroup,
   "APICollections"
 );
-

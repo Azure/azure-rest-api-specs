@@ -26,4 +26,3 @@ model AscLocationList {
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
-

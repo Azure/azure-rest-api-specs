@@ -202,4 +202,3 @@ interface DevOpsConfigurations {
 @@doc(DevOpsConfigurations.update::parameters.properties,
   "The DevOps configuration resource payload."
 );
-

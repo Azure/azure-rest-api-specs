@@ -15,6 +15,3 @@ using Common;
 @@Legacy.flattenProperty(AlertSyncSettings.properties);
 
 @@clientName(Settings.update::parameters.resource, "setting");
-
-
-

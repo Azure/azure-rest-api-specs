@@ -45,6 +45,3 @@ interface SecuritySolutions {
 
 @@doc(SecuritySolution.name, "Name of security solution.");
 @@doc(SecuritySolution.properties, "");
-
-
-

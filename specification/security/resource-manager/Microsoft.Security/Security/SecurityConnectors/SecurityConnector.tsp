@@ -104,6 +104,3 @@ interface SecurityConnectors {
 @@doc(SecurityConnectors.update::parameters.properties,
   "The security connector resource"
 );
-
-
-

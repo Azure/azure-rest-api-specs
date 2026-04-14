@@ -87,4 +87,3 @@ interface GitLabProjects {
 
 @@doc(GitLabProject.name, "The project name.");
 @@doc(GitLabProject.properties, "GitLab Project properties.");
-

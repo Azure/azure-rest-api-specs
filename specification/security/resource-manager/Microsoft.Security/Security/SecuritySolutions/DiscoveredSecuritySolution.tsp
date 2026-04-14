@@ -61,6 +61,3 @@ interface DiscoveredSecuritySolutions {
   "Name of a discovered security solution."
 );
 @@doc(DiscoveredSecuritySolution.properties, "");
-
-
-

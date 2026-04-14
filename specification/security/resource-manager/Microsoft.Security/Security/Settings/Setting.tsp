@@ -72,6 +72,3 @@ interface Settings {
 
 @@doc(Setting.name, "The name of the setting");
 @@doc(Settings.update::parameters.resource, "Setting object");
-
-
-

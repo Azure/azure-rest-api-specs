@@ -100,4 +100,3 @@ model AlertSyncSettingProperties {
    */
   enabled: boolean;
 }
-

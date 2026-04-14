@@ -23,4 +23,3 @@ model SecurityOperatorList {
   @pageItems
   value: SecurityOperator[];
 }
-

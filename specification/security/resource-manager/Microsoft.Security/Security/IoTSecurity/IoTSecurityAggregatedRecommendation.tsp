@@ -66,6 +66,3 @@ interface IoTSecurityAggregatedRecommendations {
   "Name of the recommendation aggregated for this query."
 );
 @@doc(IoTSecurityAggregatedRecommendation.properties, "Security Solution data");
-
-
-

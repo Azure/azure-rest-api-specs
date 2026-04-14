@@ -122,4 +122,3 @@ interface AzureDevOpsRepositories {
 @@doc(AzureDevOpsRepositories.update::parameters.properties,
   "The Azure DevOps repository resource payload."
 );
-

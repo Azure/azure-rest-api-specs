@@ -92,6 +92,3 @@ interface Assignments {
 @@doc(Assignments.createOrUpdate::parameters.resource,
   "Custom standard assignment over a pre-defined scope"
 );
-
-
-

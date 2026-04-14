@@ -38,6 +38,3 @@ interface TasksOperationGroup {
     Error = CloudError
   >;
 }
-
-
-

@@ -166,6 +166,3 @@ interface TopologyOperationGroup {
     Error = CloudError
   >;
 }
-
-
-

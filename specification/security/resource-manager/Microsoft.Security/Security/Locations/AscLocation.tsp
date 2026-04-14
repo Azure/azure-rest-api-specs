@@ -53,6 +53,3 @@ interface AscLocations {
   "The location where ASC stores the data of the subscription. can be retrieved from Get locations"
 );
 @@doc(AscLocation.properties, "An empty set of properties");
-
-
-

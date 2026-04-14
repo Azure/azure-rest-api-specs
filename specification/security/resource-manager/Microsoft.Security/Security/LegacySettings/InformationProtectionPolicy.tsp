@@ -69,6 +69,3 @@ interface InformationProtectionPolicies {
 @@doc(InformationProtectionPolicies.createOrUpdate::parameters.resource,
   "Information protection policy."
 );
-
-
-

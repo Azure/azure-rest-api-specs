@@ -552,4 +552,3 @@ model AlertSimulatorBundlesRequestProperties
    */
   kind: "Bundles";
 }
-

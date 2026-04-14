@@ -142,6 +142,3 @@ interface AssessmentsMetadata {
 @@doc(AssessmentsMetadata.createInSubscription::parameters.resource,
   "AssessmentMetadata object"
 );
-
-
-

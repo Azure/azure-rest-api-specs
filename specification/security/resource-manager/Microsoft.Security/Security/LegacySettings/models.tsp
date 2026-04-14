@@ -321,4 +321,3 @@ model WorkspaceSettingProperties {
    */
   scope: string;
 }
-

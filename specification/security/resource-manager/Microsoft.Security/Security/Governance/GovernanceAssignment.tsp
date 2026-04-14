@@ -121,6 +121,3 @@ interface GovernanceAssignments {
 @@doc(GovernanceAssignments.createOrUpdate::parameters.resource,
   "Governance assignment over a subscription scope"
 );
-
-
-

@@ -68,6 +68,3 @@ interface ExternalSecuritySolutions {
 }
 
 @@doc(ExternalSecuritySolution.name, "Name of an external security solution.");
-
-
-

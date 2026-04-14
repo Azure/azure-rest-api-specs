@@ -74,6 +74,3 @@ interface IoTSecurityAggregatedAlerts {
 @@doc(IoTSecurityAggregatedAlert.properties,
   "IoT Security solution aggregated alert details."
 );
-
-
-

@@ -358,4 +358,3 @@ model ServerVulnerabilityProperties extends AdditionalData {
    */
   assessedResourceType: "ServerVulnerabilityAssessment";
 }
-

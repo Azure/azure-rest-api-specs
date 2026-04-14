@@ -49,4 +49,3 @@ using SecurityConnectorsDevOpsAPI;
 
 @@clientLocation(GitLabGroups.gitLabSubgroupsList, "GitLabSubgroups");
 @@clientName(GitLabGroups.gitLabSubgroupsList, "List");
-

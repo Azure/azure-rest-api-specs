@@ -566,5 +566,3 @@ model NotificationsSourceAttackPath extends NotificationsSource {
    */
   sourceType: "AttackPath";
 }
-
-

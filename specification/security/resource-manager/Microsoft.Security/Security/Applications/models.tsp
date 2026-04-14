@@ -111,4 +111,3 @@ model ApplicationCondition {
    */
   operator?: ApplicationConditionOperator;
 }
-

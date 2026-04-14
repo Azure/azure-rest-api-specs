@@ -233,5 +233,3 @@ model AssignmentPropertiesAdditionalData {
    */
   exemptionCategory?: string;
 }
-
-

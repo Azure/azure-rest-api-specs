@@ -79,6 +79,3 @@ using Common;
 @@clientLocation(TopologyOperationGroup.list, "Topology");
 @@visibility(AllowedConnectionsResource.properties, Lifecycle.Read);
 @@visibility(TopologyResource.properties, Lifecycle.Read);
-
-
-

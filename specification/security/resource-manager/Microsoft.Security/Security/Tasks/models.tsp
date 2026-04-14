@@ -106,4 +106,3 @@ model SecurityTaskParameters {
   @visibility(Lifecycle.Read)
   name?: string;
 }
-

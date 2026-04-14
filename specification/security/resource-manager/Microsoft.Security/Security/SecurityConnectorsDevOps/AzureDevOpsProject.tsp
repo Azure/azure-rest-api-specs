@@ -117,4 +117,3 @@ interface AzureDevOpsProjects {
 @@doc(AzureDevOpsProjects.update::parameters.properties,
   "The Azure DevOps project resource payload."
 );
-

@@ -838,5 +838,3 @@ model AadSolutionProperties {
    */
   connectivityState?: AadConnectivityState;
 }
-
-

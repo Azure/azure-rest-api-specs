@@ -16,6 +16,3 @@ using Common;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RegulatoryComplianceAssessment.properties);
-
-
-

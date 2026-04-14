@@ -538,4 +538,3 @@ model CustomRecommendationProperties {
   @visibility(Lifecycle.Read)
   assessmentKey?: string;
 }
-

@@ -16,6 +16,3 @@ using Common;
   "sensitivitySettings"
 );
 @@clientLocation(GetSensitivitySettingsResponses.list, "SensitivitySettings");
-
-
-

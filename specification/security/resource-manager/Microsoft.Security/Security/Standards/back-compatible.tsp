@@ -15,6 +15,3 @@ using Common;
 @@clientName(Assignments.createOrUpdate::parameters.resource, "assignment");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Assignment.properties);
-
-
-

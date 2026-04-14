@@ -69,4 +69,3 @@ interface OperationStatusesOperationGroup {
     operationId: string,
   ): ArmResponse<Azure.ResourceManager.Foundations.OperationStatusResult> | ErrorResponse;
 }
-

@@ -65,6 +65,3 @@ interface RegulatoryComplianceControls {
 @@doc(RegulatoryComplianceControl.properties,
   "Regulatory compliance control data"
 );
-
-
-

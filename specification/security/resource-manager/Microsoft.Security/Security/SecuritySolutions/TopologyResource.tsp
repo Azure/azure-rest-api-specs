@@ -56,6 +56,3 @@ interface TopologyResources {
 
 @@doc(TopologyResource.name, "Name of a topology resources collection.");
 @@doc(TopologyResource.properties, "");
-
-
-

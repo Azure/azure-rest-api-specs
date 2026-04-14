@@ -74,6 +74,3 @@ interface DeviceSecurityGroups {
 @@doc(DeviceSecurityGroups.createOrUpdate::parameters.resource,
   "Security group object."
 );
-
-
-

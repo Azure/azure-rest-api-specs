@@ -28,6 +28,3 @@ using Common;
 @@clientLocation(AlertsOperationGroup.list, Alerts);
 @@clientLocation(AlertsOperationGroup.listByResourceGroup, Alerts);
 @@clientLocation(AlertsOperationGroup.simulate, Alerts);
-
-
-

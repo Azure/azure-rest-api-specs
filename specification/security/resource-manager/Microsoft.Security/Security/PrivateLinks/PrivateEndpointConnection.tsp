@@ -59,4 +59,3 @@ interface PrivateEndpointConnections {
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "The private endpoint connection resource."
 );
-

@@ -216,6 +216,3 @@ interface Tasks {
 
 @@doc(SecurityTask.name, "Name of the task object, will be a GUID");
 @@doc(SecurityTask.properties, "Describes properties of a task.");
-
-
-

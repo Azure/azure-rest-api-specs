@@ -89,6 +89,3 @@ interface AdvancedThreatProtectionSettings {
 @@doc(AdvancedThreatProtectionSettings.create::parameters.resource,
   "Advanced Threat Protection Settings"
 );
-
-
-
