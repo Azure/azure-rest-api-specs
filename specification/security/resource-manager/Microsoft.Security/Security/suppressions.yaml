@@ -172,3 +172,87 @@
 - tool: TypeSpecRequirement
   path: ./stable/2026-01-01/*.json
   reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - Alerts
+    - AlertsSuppressionRules
+    - ApiCollections
+    - Applications
+    - Assessment
+    - ATPSettings
+    - Automations
+    - Common
+    - ComplianceResults
+    - DefenderForStorage
+    - Governance
+    - HealthReports
+    - IoTSecurity
+    - LegacySettings
+    - Locations
+    - MdeOnboarding
+    - Operations
+    - Pricings
+    - PrivateLinks
+    - RegulatoryCompliance
+    - SecureScore
+    - SecurityConnectors
+    - SecurityConnectorsDevOps
+    - SecurityOperators
+    - SecuritySolutions
+    - SecurityStandards
+    - SensitivitySettings
+    - ServerVulnerabilityAssessmentsSettings
+    - Settings
+    - SqlVulnerabilityAssessments
+    - Standards
+    - SubAssessments
+    - Tasks
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths:
+    - Alerts/tspconfig.yaml
+    - AlertsSuppressionRules/tspconfig.yaml
+    - ApiCollections/tspconfig.yaml
+    - Applications/tspconfig.yaml
+    - Assessment/tspconfig.yaml
+    - ATPSettings/tspconfig.yaml
+    - Automations/tspconfig.yaml
+    - ComplianceResults/tspconfig.yaml
+    - DefenderForStorage/tspconfig.yaml
+    - Governance/tspconfig.yaml
+    - HealthReports/tspconfig.yaml
+    - IoTSecurity/tspconfig.yaml
+    - LegacySettings/tspconfig.yaml
+    - Locations/tspconfig.yaml
+    - MdeOnboarding/tspconfig.yaml
+    - Operations/tspconfig.yaml
+    - Pricings/tspconfig.yaml
+    - PrivateLinks/tspconfig.yaml
+    - RegulatoryCompliance/tspconfig.yaml
+    - SecureScore/tspconfig.yaml
+    - SecurityConnectors/tspconfig.yaml
+    - SecurityConnectorsDevOps/tspconfig.yaml
+    - SecurityOperators/tspconfig.yaml
+    - SecuritySolutions/tspconfig.yaml
+    - SecurityStandards/tspconfig.yaml
+    - SensitivitySettings/tspconfig.yaml
+    - ServerVulnerabilityAssessmentsSettings/tspconfig.yaml
+    - Settings/tspconfig.yaml
+    - SqlVulnerabilityAssessments/tspconfig.yaml
+    - Standards/tspconfig.yaml
+    - SubAssessments/tspconfig.yaml
+    - Tasks/tspconfig.yaml
+  
