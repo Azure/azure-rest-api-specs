@@ -37,14 +37,19 @@ jobs:
     name: ARM Auto SignOff - Set Status
 
     # workflow_run - already filtered by triggers above
-    # pull_request_target:labeled - trigger on any label change.
-    # Note: Bot-added labels don't trigger workflows, only human-added labels do.
-    # Filtering is done inside the JS code.
+    # pull_request_target:labeled - filter to only the input and output labels
     if: |
       github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request_target' &&
        (github.event.action == 'labeled' ||
-        github.event.action == 'unlabeled'))
+        github.event.action == 'unlabeled') &&
+       (github.event.label.name == 'Approved-Suppression' ||
+        github.event.label.name == 'ARMAutoSignedOff' ||
+        github.event.label.name == 'ARMAutoSignedOff-IncrementalTSP' ||
+        github.event.label.name == 'ARMAutoSignedOff-Trivial' ||
+        github.event.label.name == 'ARMReview' ||
+        github.event.label.name == 'ARMSignedOff' ||
+        github.event.label.name == 'SuppressionReviewRequired'))
 
     runs-on: ubuntu-slim
 
