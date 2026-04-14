@@ -303,3 +303,10 @@ part of the PR diff (i.e., listed in the changed files of the pull request).
 If the existing `hero-scenarios.md` already covers all the API surface in
 this PR, submit a `COMMENT` review with a one-sentence body confirming no
 new scenarios are needed.
+
+## Step 5 — Add Completion Label
+
+After successfully posting the hero scenarios (via `add-comment` or
+`create-pull-request-review-comment`), use `add-labels` to add the label
+`hero-scenarios-added` to the pull request. This signals to other
+workflows and reviewers that hero scenarios have been generated.
