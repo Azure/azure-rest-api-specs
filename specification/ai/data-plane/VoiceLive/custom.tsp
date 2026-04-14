@@ -316,6 +316,7 @@ union PersonalVoiceModels {
   "PhoenixV2Neural",
 
   /** Use the latest Dragon HD Omni model. */
+  @added(Versions.v2026_04_10)
   "DragonHDOmniLatestNeural",
 }
 
