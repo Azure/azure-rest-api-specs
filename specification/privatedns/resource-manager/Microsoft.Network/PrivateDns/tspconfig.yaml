@@ -19,10 +19,15 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-privatednslibrary"
-    namespace: "com.azure.resourcemanager.privatednslibrary"
-    service-name: "PrivateDns" # human-readable service name, whitespace allowed
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-privatedns"
+    namespace: "com.azure.resourcemanager.privatedns"
+    service-name: "PrivateDnsZone" # human-readable service name, whitespace allowed
     flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    customization-class: customization/src/main/java/PrivateDnsCustomization.java
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-privatedns"
     flavor: azure
