@@ -170,6 +170,10 @@ op calculateModelCapacityCustom(
 @@flattenProperty(Microsoft.CognitiveServices.PrivateEndpointConnection.properties,
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(Microsoft.CognitiveServices.PrivateEndpointConnection,
   "CognitiveServicesPrivateEndpointConnection",
   "csharp"
@@ -184,6 +188,10 @@ op calculateModelCapacityCustom(
 );
 @@clientName(Microsoft.CognitiveServices.PrivateEndpointConnectionProperties,
   "CognitiveServicesPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(Microsoft.CognitiveServices.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
   "csharp"
 );
 @@clientName(Microsoft.CognitiveServices.PrivateEndpointOutboundRule,
@@ -216,11 +224,11 @@ op calculateModelCapacityCustom(
   "csharp"
 );
 @@clientName(ProjectCapabilityHost,
-  "CognitiveServicesProjectCapabilityHost",
+  "CognitiveServicesProjectScopedCapabilityHost",
   "csharp"
 );
 @@clientName(ProjectCapabilityHostProperties,
-  "CognitiveServicesProjectCapabilityHostProperties",
+  "CognitiveServicesProjectScopedCapabilityHostProperties",
   "csharp"
 );
 
