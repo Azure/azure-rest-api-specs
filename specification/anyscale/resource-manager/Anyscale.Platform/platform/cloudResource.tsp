@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./cloud.tsp";
 
 using Rest;
 using Http;
+using Versioning;
 using Azure.ResourceManager;
 
 namespace Anyscale.Platform;
@@ -46,6 +48,10 @@ model CloudResourceProperties {
 
   /** The cloud storage bucket endpoint */
   cloudStorageBucketEndpoint: string;
+
+  /** The principal ID of the managed identity that will be used by the Anyscale operator */
+  @added(Versions.v2026_02_01_preview)
+  anyscaleOperatorIamIdentity?: string;
 
   /** The provisioning state of the cloud resource */
   @visibility(Lifecycle.Read)

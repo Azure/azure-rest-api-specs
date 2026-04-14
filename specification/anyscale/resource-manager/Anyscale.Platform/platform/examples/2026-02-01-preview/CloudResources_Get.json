@@ -1,0 +1,42 @@
+{
+  "title": "CloudResources_Get",
+  "operationId": "CloudResources_Get",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "14AB8053-986C-414E-96B3-11D82B8B478D",
+    "resourceGroupName": "rganyscale",
+    "cloudName": "AnyscaleCloud",
+    "cloudResourceName": "AnyscaleCloudResource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "cloudResourceId": "cloudrsrc_a1b2c3d4e5",
+          "provider": "Azure",
+          "computeStack": "K8S",
+          "cloudStorageBucketName": "abfss://anyscale-storage@mystorageaccount.dfs.core.windows.net",
+          "cloudStorageBucketEndpoint": "https://mystorageaccount.dfs.core.windows.net",
+          "anyscaleOperatorIamIdentity": "12345678-1234-1234-1234-123456789abc",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "production",
+          "team": "ml-platform"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/14AB8053-986C-414E-96B3-11D82B8B478D/resourceGroups/rganyscale/providers/Anyscale.Platform/clouds/AnyscaleCloud/cloudResources/AnyscaleCloudResource",
+        "name": "AnyscaleCloudResource",
+        "type": "Anyscale.Platform/clouds/cloudResources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-11-01T10:30:45.678Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-11-01T10:30:45.678Z"
+        }
+      }
+    }
+  }
+}
