@@ -2856,6 +2856,39 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "serviceTags": {
+          "type": "array",
+          "description": "Service tags associated with the resource type.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "readinessState": {
+          "type": "string",
+          "description": "The readiness state of the resource type for NSP support.",
+          "readOnly": true,
+          "enum": [
+            "Onboarding",
+            "Preview",
+            "GA",
+            "NotReady"
+          ],
+          "x-ms-enum": {
+            "name": "NspReadinessState",
+            "modelAsString": true
+          }
+        },
+        "outboundSupported": {
+          "type": "boolean",
+          "description": "Indicates whether the resource type supports outbound scenario.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the PaaS resource type.",
+          "readOnly": true
         }
       }
     },
