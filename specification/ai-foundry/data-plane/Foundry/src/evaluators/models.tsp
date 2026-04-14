@@ -173,7 +173,7 @@ model RubricCriterion {
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubrics;
 
-  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable general quality criterion (always_applicable: true); safety evaluators include a non-editable general policy compliance criterion. Both quality and safety use the same rubric structure.")
+  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include a non-editable residual criterion with rubric_id 'general_policy_compliance'. Both quality and safety use the same rubric structure.")
   rubric_criteria?: RubricCriterion[];
 }
 
