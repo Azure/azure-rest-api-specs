@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2026-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2026-01'
 input-file:
-- stable/2026-01-01/openapi.json
+- stable/2026-01-01/eventhub.json
 ```
 
 ### Tag: package-2017-04
@@ -263,7 +263,7 @@ These settings apply only when `--tag=package-2025-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2025-05-preview'
 input-file:
-- preview/2025-05-01-preview/openapi.json
+- preview/2025-05-01-preview/eventhub.json
 ```
 
 ## Suppression
@@ -335,7 +335,7 @@ directive:
     from: namespaces.json
     reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
   - suppress: LroErrorContent
-    from: openapi.json
+    from: eventhub.json
     reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
