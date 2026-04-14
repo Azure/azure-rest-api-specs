@@ -20,29 +20,40 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
+## Suppression
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.AgentPoolProperties.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.NamedAgentPoolProfile.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.KubernetesVersionProperties.properties.patchVersions
+    reason: "patchVersions is a map of patch version info, following AKS behavior."
+```
+
 ### Basic Information
 
 These are the global settings for the hybridaks.
 
+
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-02-01-preview
+tag: package-preview-2026-04
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
-```
+### Tag: package-preview-2026-04
 
-### Tag: package-preview-2025-02-01-preview
+These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2025-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-02-01-preview'
+```yaml $(tag) == 'package-preview-2026-04'
 input-file:
-  - Microsoft.HybridContainerService/preview/2025-02-01-preview/provisionedClusterInstances.json
-  - Microsoft.HybridContainerService/preview/2025-02-01-preview/virtualNetworks.json
+  - Microsoft.HybridContainerService/preview/2026-04-01-preview/openapi.json
 ```
 
 ### Tag: package-2024-01
@@ -74,28 +85,6 @@ suppressions:
     reason: Since provisionedClusters/default resource is defined as an extension resource to the connected cluster resource, we can't really list by subscription and this rule does not apply.
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: This is a false alarm for the /default APIs, as they return a singleton resource and not a collection of resources
-```
-
-### Tag: package-preview-2022-09
-
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-09'
-input-file:
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/provisionedClusters.json
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/storageSpaces.json
-  - Microsoft.HybridContainerService/preview/2022-09-01-preview/virtualNetworks.json
-```
-
-### Tag: package-2022-05-01-preview
-
-These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-05-01-preview'
-input-file:
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/provisionedClusters.json
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/virtualNetworks.json
-  - Microsoft.HybridContainerService/preview/2022-05-01-preview/storageSpaces.json
 ```
 
 ---

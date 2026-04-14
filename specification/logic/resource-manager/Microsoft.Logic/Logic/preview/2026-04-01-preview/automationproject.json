@@ -1,0 +1,571 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "LogicManagementClient",
+    "version": "2026-04-01-preview",
+    "description": "REST API for Azure Logic Apps — AutomationProject resource.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AutomationProjects"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Logic/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/automationProjects": {
+      "get": {
+        "operationId": "AutomationProjects_ListBySubscription",
+        "tags": [
+          "AutomationProjects"
+        ],
+        "description": "Gets a list of automation projects by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutomationProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Automation Projects by Subscription": {
+            "$ref": "./examples/AutomationProjects_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects": {
+      "get": {
+        "operationId": "AutomationProjects_ListByResourceGroup",
+        "tags": [
+          "AutomationProjects"
+        ],
+        "description": "Gets a list of automation projects by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutomationProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Automation Projects by Resource Group": {
+            "$ref": "./examples/AutomationProjects_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/automationProjects/{automationProjectName}": {
+      "get": {
+        "operationId": "AutomationProjects_Get",
+        "tags": [
+          "AutomationProjects"
+        ],
+        "description": "Gets an automation project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutomationProject"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Automation Project": {
+            "$ref": "./examples/AutomationProjects_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AutomationProjects_CreateOrUpdate",
+        "tags": [
+          "AutomationProjects"
+        ],
+        "description": "Creates or updates an automation project. When creating, the automation project provisions its\nmanaged auto apps (ContainerApps with kind 'workflowapp') and sets\nthe managedBy property on each to this automation project's resource ID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The automation project definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomationProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AutomationProject' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AutomationProject"
+            }
+          },
+          "201": {
+            "description": "Resource 'AutomationProject' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AutomationProject"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Automation Project": {
+            "$ref": "./examples/AutomationProjects_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AutomationProject"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AutomationProjects_Update",
+        "tags": [
+          "AutomationProjects"
+        ],
+        "description": "Updates an automation project using JSON Merge Patch.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutomationProjectUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutomationProject"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Automation Project": {
+            "$ref": "./examples/AutomationProjects_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AutomationProject"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AutomationProjects_Delete",
+        "tags": [
+          "AutomationProjects"
+        ],
+        "description": "Deletes an automation project and all of its managed auto apps.\nThis operation cascades — all ContainerApps with managedBy pointing\nto this automation project will be deleted.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "automationProjectName",
+            "in": "path",
+            "description": "The automation project name.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,30}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Automation Project": {
+            "$ref": "./examples/AutomationProjects_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AutomationProject": {
+      "type": "object",
+      "description": "The automation project resource. An automation project is a logical grouping that owns and manages\nmultiple ContainerApps of kind 'workflowapp' via the managedBy relationship.\nThe automation project is the single entry point for lifecycle management of its auto apps.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomationProjectProperties",
+          "description": "The automation project properties."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AutomationProjectListResult": {
+      "type": "object",
+      "description": "The response of a AutomationProject list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AutomationProject items on this page",
+          "items": {
+            "$ref": "#/definitions/AutomationProject"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutomationProjectProperties": {
+      "type": "object",
+      "description": "The properties of the automation project resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AutomationProjectProvisioningState",
+          "description": "Gets the provisioning state of the automation project.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the automation project.",
+          "maxLength": 1024
+        }
+      }
+    },
+    "AutomationProjectProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the automation project resource.",
+      "enum": [
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "AutomationProjectProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The automation project is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The automation project is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The automation project is being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The automation project has been successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The automation project provisioning has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The automation project provisioning was canceled."
+          }
+        ]
+      }
+    },
+    "AutomationProjectUpdate": {
+      "type": "object",
+      "description": "The automation project patch model for update operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AutomationProjectUpdateProperties",
+          "description": "The updatable properties of the automation project."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "AutomationProjectUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the automation project resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the automation project.",
+          "maxLength": 1024
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

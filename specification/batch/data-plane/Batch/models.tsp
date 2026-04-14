@@ -8,6 +8,7 @@ using Azure.Core.Foundations;
 namespace Azure.Batch;
 
 @doc("OSType enums")
+@clientName("OsType", "java")
 union OSType {
   string,
 
@@ -1000,7 +1001,7 @@ model BatchPoolUsageStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The aggregated wall-clock time of the dedicated Compute Node cores being part of the Pool.")
+  @doc("The aggregated wall-clock time of the dedicated Compute Node cores being part of the Pool. The time duration is specified in ISO 8601 format.")
   dedicatedCoreTime: duration;
 }
 
@@ -1064,15 +1065,15 @@ model BatchJobStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job. The time duration is specified in ISO 8601 format.")
   @clientName("userCpuTime")
   userCPUTime: duration;
 
-  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job. The time duration is specified in ISO 8601 format.")
   @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
-  @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
+  @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
@@ -1110,7 +1111,7 @@ model BatchJobStatistics {
   @clientName("taskRetriesCount")
   numTaskRetries: int64;
 
-  @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
+  @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics. The time duration is specified in ISO 8601 format.")
   waitTime: duration;
 }
 
@@ -1224,6 +1225,7 @@ model BatchJobSchedule {
   jobSpecification: BatchJobSpecification;
 
   @doc("Information about Jobs that have been and will be run under this schedule.")
+  @clientName("executionDetails", "java")
   @visibility(Lifecycle.Read)
   executionInfo: BatchJobScheduleExecutionInfo;
 
@@ -1281,10 +1283,10 @@ model BatchJobScheduleConfiguration {
   @doc("A time after which no Job will be created under this Job Schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active Job under this Job Schedule. If you do not specify a doNotRunAfter time, and you are creating a recurring Job Schedule, the Job Schedule will remain active until you explicitly terminate it.")
   doNotRunAfter?: utcDateTime;
 
-  @doc("The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval, starting from the time at which the schedule indicates a Job should be created, within which a Job must be created. If a Job is not created within the startWindow interval, then the 'opportunity' is lost; no Job will be created until the next recurrence of the schedule. If the schedule is recurring, and the startWindow is longer than the recurrence interval, then this is equivalent to an infinite startWindow, because the Job that is 'due' in one recurrenceInterval is not carried forward into the next recurrence interval. The default is infinite. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   startWindow?: duration;
 
-  @doc("The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval between the start times of two successive Jobs under the Job Schedule. A Job Schedule can have at most one active Job under it at any given time. Because a Job Schedule can have at most one active Job under it at any given time, if it is time to create a new Job under a Job Schedule, but the previous Job is still running, the Batch service will not create the new Job until the previous Job finishes. If the previous Job does not finish within the startWindow period of the new recurrenceInterval, then no new Job will be scheduled for that interval. For recurring Jobs, you should normally specify a jobManagerTask in the jobSpecification. If you do not use jobManagerTask, you will need an external process to monitor when Jobs are created, add Tasks to the Jobs and terminate the Jobs ready for the next recurrence. The default is that the schedule does not recur: one Job is created, within the startWindow after the doNotRunUntil time, and the schedule is complete as soon as that Job finishes. The minimum value is 1 minute. If you specify a lower value, the Batch service rejects the schedule with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   recurrenceInterval?: duration;
 }
 
@@ -1379,6 +1381,7 @@ model BatchJobSpecification {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Tasks of Jobs created under this schedule.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
@@ -1398,7 +1401,7 @@ model BatchJobNetworkConfiguration {
 
 @doc("The execution constraints for a Job.")
 model BatchJobConstraints {
-  @doc("The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run.")
+  @doc("The maximum elapsed time that the Job may run, measured from the time the Job is created. If the Job does not complete within the time limit, the Batch service terminates it and any Tasks that are still running. In this case, the termination reason will be MaxWallClockTimeExpiry. If this property is not specified, there is no time limit on how long the Job may run. The time duration is specified in ISO 8601 format.")
   maxWallClockTime?: duration;
 
   @doc("The maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries Tasks without limit. The default value is 0 (no retries).")
@@ -1626,10 +1629,10 @@ model EnvironmentSetting {
 
 @doc("Execution constraints to apply to a Task.")
 model BatchTaskConstraints {
-  @doc("The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run.")
+  @doc("The maximum elapsed time that the Task may run, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. If this is not specified, there is no time limit on how long the Task may run. The time duration is specified in ISO 8601 format.")
   maxWallClockTime?: duration;
 
-  @doc("The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted.")
+  @doc("The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. The time duration is specified in ISO 8601 format.")
   retentionTime?: duration;
 
   @doc("The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries).")
@@ -1775,10 +1778,10 @@ model BatchJobReleaseTask {
   @doc("A list of environment variable settings for the Job Release Task.")
   environmentSettings?: EnvironmentSetting[];
 
-  @doc("The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   maxWallClockTime?: duration;
 
-  @doc("The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted.")
+  @doc("The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. The time duration is specified in ISO 8601 format.")
   retentionTime?: duration;
 
   @doc("The user identity under which the Job Release Task runs. If omitted, the Task runs as a non-administrative user unique to the Task.")
@@ -1786,6 +1789,7 @@ model BatchJobReleaseTask {
 }
 
 @doc("Specifies how a Job should be assigned to a Pool.")
+@clientName("BatchPoolDetails", "java")
 model BatchPoolInfo {
   @doc("The ID of an existing Pool. All the Tasks of the Job will run on the specified Pool. You must ensure that the Pool referenced by this property exists. If the Pool does not exist at the time the Batch service tries to schedule a Job, no Tasks for the Job will run until you create a Pool with that id. Note that the Batch service will not reject the Job request; it will simply not run Tasks until the Pool exists. You must specify either the Pool ID or the auto Pool specification, but not both.")
   poolId?: string;
@@ -1829,7 +1833,7 @@ model BatchPoolSpecification {
   @doc("How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.")
   taskSchedulingPolicy?: BatchTaskSchedulingPolicy;
 
-  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
@@ -1844,7 +1848,7 @@ model BatchPoolSpecification {
   @doc("The formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information.")
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
@@ -2376,6 +2380,7 @@ model AzureFileShareConfiguration {
   Contains information about Jobs that have been and will be run under a Job
   Schedule.
   """)
+@clientName("BatchJobScheduleExecutionDetails", "java")
 model BatchJobScheduleExecutionInfo {
   @doc("The next time at which a Job will be created under this schedule. This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no Job will be created at nextRunTime unless the Job is enabled before then.")
   nextRunTime?: utcDateTime;
@@ -2408,15 +2413,15 @@ model BatchJobScheduleStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule. The time duration is specified in ISO 8601 format.")
   @clientName("userCpuTime", "!go")
   userCPUTime: duration;
 
-  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule. The time duration is specified in ISO 8601 format.")
   @clientName("kernelCpuTime", "!go")
   kernelCPUTime: duration;
 
-  @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
+  @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in all Jobs created under the schedule.")
@@ -2454,7 +2459,7 @@ model BatchJobScheduleStatistics {
   @clientName("taskRetriesCount")
   numTaskRetries: int64;
 
-  @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
+  @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics. The time duration is specified in ISO 8601 format.")
   waitTime: duration;
 }
 
@@ -2545,6 +2550,7 @@ model BatchJob {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool settings associated with the Job.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. The default is noaction.")
@@ -2609,6 +2615,7 @@ model BatchJobCreateOptions {
   commonEnvironmentSettings?: EnvironmentSetting[];
 
   @doc("The Pool on which the Batch service runs the Job's Tasks.")
+  @clientName("poolDetails", "java")
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
@@ -2655,6 +2662,7 @@ model BatchJobUpdateOptions {
 }
 
 @doc("Contains information about the execution of a Job in the Azure Batch service.")
+@clientName("BatchJobExecutionDetails", "java")
 model BatchJobExecutionInfo {
   @doc("The start time of the Job. This is the time at which the Job was created.")
   startTime: utcDateTime;
@@ -2750,6 +2758,7 @@ model BatchJobPreparationAndReleaseTaskStatus {
   Contains information about the execution of a Job Preparation Task on a Compute
   Node.
   """)
+@clientName("BatchJobPreparationTaskExecutionDetails", "java")
 model BatchJobPreparationTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2786,6 +2795,7 @@ model BatchJobPreparationTaskExecutionInfo {
 }
 
 @doc("Contains information about the container which a Task is executing.")
+@clientName("BatchTaskContainerExecutionDetails", "java")
 model BatchTaskContainerExecutionInfo {
   @doc("The ID of the container.")
   containerId?: string;
@@ -2798,6 +2808,7 @@ model BatchTaskContainerExecutionInfo {
 }
 
 @doc("Information about a Task failure.")
+@clientName("BatchTaskFailureDetails", "java")
 model BatchTaskFailureInfo {
   @doc("The category of the Task error.")
   category: BatchErrorSourceCategory;
@@ -2816,6 +2827,7 @@ model BatchTaskFailureInfo {
   Contains information about the execution of a Job Release Task on a Compute
   Node.
   """)
+@clientName("BatchJobReleaseTaskExecutionDetails", "java")
 model BatchJobReleaseTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2940,7 +2952,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes.")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   resizeTimeout?: duration;
 
@@ -2972,7 +2984,7 @@ model BatchPool {
   @visibility(Lifecycle.Read)
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true.")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. This property is set only if the Pool automatically scales, i.e. enableAutoScale is true. The time duration is specified in ISO 8601 format.")
   @visibility(Lifecycle.Read)
   autoScaleEvaluationInterval?: duration;
 
@@ -3042,7 +3054,7 @@ model BatchPoolCreateOptions {
   @doc("The virtual machine configuration for the Pool. This property must be specified.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
-  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both.")
@@ -3057,7 +3069,7 @@ model BatchPoolCreateOptions {
   @doc("A formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://learn.microsoft.com/azure/batch/batch-automatic-scaling).")
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 
   @doc("Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.")
@@ -3221,7 +3233,7 @@ model BatchPoolEnableAutoScaleOptions {
   @doc("The formula for the desired number of Compute Nodes in the Pool. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
   autoScaleFormula?: string;
 
-  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued.")
+  @doc("The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). If you specify a new interval, then the existing autoscale evaluation schedule will be stopped and a new autoscale evaluation schedule will be started, with its starting time being the time when this request was issued. The time duration is specified in ISO 8601 format.")
   autoScaleEvaluationInterval?: duration;
 }
 
@@ -3239,7 +3251,7 @@ model BatchPoolResizeOptions {
   @doc("The desired number of Spot/Low-priority Compute Nodes in the Pool.")
   targetLowPriorityNodes?: int32;
 
-  @doc("The timeout for allocation of Nodes to the Pool or removal of Compute Nodes from the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for allocation of Nodes to the Pool or removal of Compute Nodes from the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("Determines what to do with a Compute Node and its running task(s) if the Pool size is decreasing. The default value is requeue.")
@@ -3252,7 +3264,7 @@ model BatchNodeRemoveOptions {
   @clientName("nodeIds")
   nodeList: string[];
 
-  @doc("The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
   resizeTimeout?: duration;
 
   @doc("Determines what to do with a Compute Node and its running task(s) after it has been selected for deallocation. The default value is requeue.")
@@ -3504,12 +3516,14 @@ model ExitCodeRangeMapping {
   A locality hint that can be used by the Batch service to select a Compute Node
   on which to start a Task.
   """)
+@clientName("BatchAffinityDetails", "java")
 model BatchAffinityInfo {
   @doc("An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId: string;
 }
 
 @doc("Information about the execution of a Task.")
+@clientName("BatchTaskExecutionDetails", "java")
 model BatchTaskExecutionInfo {
   @doc("The time at which the Task started running. 'Running' corresponds to the running state, so if the Task specifies resource files or Packages, then the start time reflects the time at which the Task started downloading or deploying these. If the Task has been restarted or retried, this is the most recent time at which the Task started running. This property is present only for Tasks that are in the running or completed state.")
   startTime?: utcDateTime;
@@ -3543,6 +3557,7 @@ model BatchTaskExecutionInfo {
 }
 
 @doc("Information about the Compute Node on which a Task ran.")
+@clientName("BatchNodeDetails", "java")
 model BatchNodeInfo {
   @doc("An identifier for the Node on which the Task ran, which can be passed when adding a Task to request that the Task be scheduled on this Compute Node.")
   affinityId?: string;
@@ -3592,15 +3607,15 @@ model BatchTaskStatistics {
   @doc("The time at which the statistics were last updated. All statistics are limited to the range between startTime and lastUpdateTime.")
   lastUpdateTime: utcDateTime;
 
-  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
+  @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task. The time duration is specified in ISO 8601 format.")
   @clientName("userCpuTime")
   userCPUTime: duration;
 
-  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
+  @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task. The time duration is specified in ISO 8601 format.")
   @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
-  @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries.")
+  @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries. The time duration is specified in ISO 8601 format.")
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by the Task.")
@@ -3623,7 +3638,7 @@ model BatchTaskStatistics {
   @clientName("writeIoGib", "python")
   writeIOGiB: float32;
 
-  @doc("The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.).")
+  @doc("The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). The time duration is specified in ISO 8601 format.")
   waitTime: duration;
 }
 
@@ -3795,7 +3810,7 @@ model RollingUpgradePolicy {
   @doc("The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts. The value of this field should be between 0 and 100, inclusive.")
   maxUnhealthyUpgradedInstancePercent?: int32;
 
-  @doc("The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format..")
+  @doc("The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration is specified in ISO 8601 format.")
   pauseTimeBetweenBatches?: duration;
 
   @doc("Upgrade all unhealthy instances in a scale set before any healthy instances.")
@@ -3928,11 +3943,13 @@ model BatchNode {
   nodeAgentInfo?: BatchNodeAgentInfo;
 
   @doc("Info about the current state of the virtual machine.")
+  @clientName("virtualMachineDetails", "java")
   @visibility(Lifecycle.Read)
   virtualMachineInfo: VirtualMachineInfo;
 }
 
 @doc("Information about a Task running on a Compute Node.")
+@clientName("BatchTaskDetails", "java")
 model BatchTaskInfo {
   @doc("The URL of the Task.")
   taskUrl?: url;
@@ -3954,6 +3971,7 @@ model BatchTaskInfo {
 }
 
 @doc("Information about a StartTask running on a Compute Node.")
+@clientName("BatchStartTaskDetails", "java")
 model BatchStartTaskInfo {
   @doc("The state of the StartTask on the Compute Node.")
   state: BatchStartTaskState;
@@ -4028,6 +4046,7 @@ model InboundEndpoint {
   The Batch Compute Node agent is a program that runs on each Compute Node in the
   Pool and provides Batch capability on the Compute Node.
   """)
+@clientName("BatchNodeAgentDetails", "java")
 model BatchNodeAgentInfo {
   @doc("The version of the Batch Compute Node agent running on the Compute Node. This version number can be checked against the Compute Node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.")
   version: string;
@@ -4037,6 +4056,7 @@ model BatchNodeAgentInfo {
 }
 
 @doc("Info about the current state of the virtual machine.")
+@clientName("VirtualMachineDetails", "java")
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
   imageReference?: BatchVmImageReference;
