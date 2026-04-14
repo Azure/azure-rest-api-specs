@@ -28,16 +28,17 @@ interface SummaryLogsOperationGroup {
   /**
    * Gets Log Analytics workspace Summary rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SummaryLogs_Get")
-  get is ArmResourceRead<SummaryLogs>;
+  @tag("SummaryRules")
+  get is SummaryLogsOps.Read<SummaryLogs>;
 
   /**
    * Creates or updates Log Analytics workspace Summary rules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<SummaryLogs>;
+  createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<SummaryLogs>;
 
   /**
    * Deletes Log Analytics workspace Summary rules.
@@ -45,7 +46,7 @@ interface SummaryLogsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("SummaryLogs_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is SummaryLogsOps.DeleteWithoutOkAsync<
     SummaryLogs,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
@@ -56,19 +57,19 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_ListByWorkspace")
-  listByWorkspace is ArmResourceListByParent<SummaryLogs>;
+  listByWorkspace is SummaryLogsOps.List<SummaryLogs>;
 
   /**
    * Starts an inactive Summary rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_Start")
-  start is ArmResourceActionAsyncBase<
+  start is SummaryLogsOps.ActionAsync<
     SummaryLogs,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SummaryLogs> &
-      Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SummaryLogs>
+    void,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SummaryLogs> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -76,7 +77,7 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_Stop")
-  stop is ArmResourceActionSync<SummaryLogs, void, OkResponse>;
+  stop is SummaryLogsOps.ActionSync<SummaryLogs, void, OkResponse>;
 
   /**
    * Retries a failed Summary rule bin.
@@ -84,14 +85,44 @@ interface SummaryLogsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_RetryBin")
   @action("retrybin")
-  retryBin is ArmResourceActionAsyncBase<
+  retryBin is SummaryLogsOps.ActionAsync<
     SummaryLogs,
     SummaryLogsRetryBin,
-    ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SummaryLogs> &
-      Azure.Core.Foundations.RetryAfterHeader>,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SummaryLogs>
+    void,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SummaryLogs> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
+
+alias SummaryLogsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * The name of the summary logs. Must not contain '/'.
+     */
+    @path
+    @segment("summaryLogs")
+    @key("summaryLogsName")
+    @pattern("[^/]+")
+    summaryLogsName: string;
+  }
+>;
 
 @@doc(SummaryLogs.name, "The name of the summary logs. Must not contain '/'.");
 @@doc(SummaryLogs.properties, "Summary rule properties.");

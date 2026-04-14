@@ -75,7 +75,10 @@ interface NetworkSecurityPerimeterConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Workspaces_ListNSP")
   @tag("NetworkSecurityPerimeterConfigurations")
-  listNSP is NSPOps.List<NetworkSecurityPerimeterConfiguration>;
+  listNSP is NSPOps.List<
+    NetworkSecurityPerimeterConfiguration,
+    Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult
+  >;
 
   /**
    * Reconcile network security perimeter configuration for Workspace resource.
@@ -99,4 +102,7 @@ interface NetworkSecurityPerimeterConfigurations {
 );
 @@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Network security configuration properties."
+);
+@@pageItems(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.value);
+@@nextLink(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
 );

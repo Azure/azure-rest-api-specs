@@ -136,6 +136,9 @@ using Microsoft.OperationalInsights;
 @@clientName(SummaryLogsOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
+@@clientName(QueryPacksOperationGroup.createOrUpdateWithoutName::parameters.body,
+  "LogAnalyticsQueryPackPayload"
+);
 @@clientLocation(SummaryLogsOperationGroup.delete, "SummaryLogs");
 @@clientLocation(SummaryLogsOperationGroup.listByWorkspace, "SummaryLogs");
 @@clientLocation(SummaryLogsOperationGroup.start, "SummaryLogs");

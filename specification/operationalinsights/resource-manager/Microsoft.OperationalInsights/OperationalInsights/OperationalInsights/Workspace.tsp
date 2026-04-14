@@ -34,6 +34,64 @@ model Workspace is Azure.ResourceManager.TrackedResource<WorkspaceProperties> {
   etag?: string;
 }
 
+alias GatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * The Log Analytics gateway Id.
+     */
+    @path
+    @segment("gateways")
+    @key("gatewayId")
+    gatewayId: string;
+  }
+>;
+
+alias PurgeOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * In a purge status request, this is the Id of the operation the status of which is returned.
+     */
+    @path
+    @segment("operations")
+    @key("purgeId")
+    purgeId: string;
+  }
+>;
+
 @armResourceOperations
 interface Workspaces {
   /**
@@ -110,20 +168,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Gateways_Delete")
-  @delete
-  @action("{gatewayId}")
-  gatewaysDelete is ArmResourceActionSync<
-    Workspace,
-    void,
-    OkResponse,
-    Parameters = {
-      /**
-       * The Log Analytics gateway Id.
-       */
-      @path
-      gatewayId: string;
-    }
-  >;
+  gatewaysDelete is GatewayOps.DeleteSync<Workspace, Response = OkResponse>;
 
   /**
    * Disables an intelligence pack for a given workspace.
@@ -140,6 +185,7 @@ interface Workspaces {
        * The name of the intelligence pack to be disabled.
        */
       @path
+      @segment("intelligencePacks")
       intelligencePackName: string;
     }
   >;
@@ -159,6 +205,7 @@ interface Workspaces {
        * The name of the intelligence pack to be enabled.
        */
       @path
+      @segment("intelligencePacks")
       intelligencePackName: string;
     }
   >;
@@ -259,19 +306,9 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspacePurge_GetPurgeStatus")
-  @get
-  @action("{purgeId}")
-  getPurgeStatus is ArmResourceActionSync<
+  getPurgeStatus is PurgeOps.Read<
     Workspace,
-    void,
-    ArmResponse<WorkspacePurgeStatusResponse>,
-    Parameters = {
-      /**
-       * In a purge status request, this is the Id of the operation the status of which is returned.
-       */
-      @path
-      purgeId: string;
-    }
+    Response = ArmResponse<WorkspacePurgeStatusResponse>
   >;
 
   /**
@@ -282,7 +319,7 @@ interface Workspaces {
   failback is ArmResourceActionAsyncBase<
     Workspace,
     void,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Workspace>
   >;
 }

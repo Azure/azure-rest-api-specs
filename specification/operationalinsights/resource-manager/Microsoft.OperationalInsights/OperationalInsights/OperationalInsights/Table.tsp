@@ -22,18 +22,50 @@ model Table is Azure.ResourceManager.ProxyResource<TableProperties> {
   >;
 }
 
+alias TableOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * The name of the table.
+     */
+    @path
+    @segment("tables")
+    @key("tableName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9-_]+$")
+    tableName: string;
+  }
+>;
+
 @armResourceOperations
 interface Tables {
   /**
    * Gets a Log Analytics workspace table.
    */
-  get is ArmResourceRead<Table>;
+  get is TableOps.Read<Table>;
 
   /**
    * Update or Create a Log Analytics workspace table.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is TableOps.CreateOrUpdateAsync<
     Table,
     Response = ArmResourceUpdatedResponse<Table> | ArmAcceptedLroResponse
   >;
@@ -42,7 +74,7 @@ interface Tables {
    * Update a Log Analytics workspace table.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is TableOps.CustomPatchAsync<
     Table,
     PatchModel = Table,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = Table> &
@@ -54,7 +86,7 @@ interface Tables {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is TableOps.DeleteWithoutOkAsync<
     Table,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
@@ -63,7 +95,7 @@ interface Tables {
   /**
    * Gets all the tables for the specified Log Analytics workspace.
    */
-  listByWorkspace is ArmResourceListByParent<
+  listByWorkspace is TableOps.List<
     Table,
     Response = ArmResponse<TablesListResult>
   >;
@@ -71,12 +103,12 @@ interface Tables {
   /**
    * Migrate a Log Analytics table from support of the Data Collector API and Custom Fields features to support of Data Collection Rule-based Custom Logs.
    */
-  migrate is ArmResourceActionSync<Table, void, OkResponse>;
+  migrate is TableOps.ActionSync<Table, void, OkResponse>;
 
   /**
    * Cancel a log analytics workspace search results table query run.
    */
-  cancelSearch is ArmResourceActionSync<Table, void, OkResponse>;
+  cancelSearch is TableOps.ActionSync<Table, void, OkResponse>;
 }
 
 @@maxLength(Table.name, 63);

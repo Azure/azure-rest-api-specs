@@ -14,7 +14,6 @@ namespace Microsoft.OperationalInsights;
 /**
  * Linked storage accounts top level resource container.
  */
-@parentResource(Workspace)
 model LinkedStorageAccountsResource
   is Azure.ResourceManager.ProxyResource<
     LinkedStorageAccountsProperties,
@@ -28,6 +27,35 @@ model LinkedStorageAccountsResource
   >;
 }
 
+alias LinkedStorageAccountsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Legacy.Provider;
+
+    /**
+     * The name of the workspace.
+     */
+    @path
+    @segment("workspaces")
+    @key("workspaceName")
+    @minLength(4)
+    @maxLength(63)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    workspaceName: string;
+  },
+  {
+    /**
+     * Linked storage accounts type.
+     */
+    @path
+    @segment("linkedStorageAccounts")
+    @key("dataSourceType")
+    dataSourceType: DataSourceType;
+  }
+>;
+
 @armResourceOperations
 interface LinkedStorageAccountsResources {
   /**
@@ -35,7 +63,7 @@ interface LinkedStorageAccountsResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LinkedStorageAccounts_Get")
-  get is ArmResourceRead<LinkedStorageAccountsResource>;
+  get is LinkedStorageAccountsOps.Read<LinkedStorageAccountsResource>;
 
   /**
    * Create or Update a link relation between current workspace and a group of storage accounts of a specific data source type.
@@ -43,7 +71,7 @@ interface LinkedStorageAccountsResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("LinkedStorageAccounts_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is LinkedStorageAccountsOps.CreateOrUpdateSync<
     LinkedStorageAccountsResource,
     Response = ArmResourceUpdatedResponse<LinkedStorageAccountsResource>
   >;
@@ -54,7 +82,7 @@ interface LinkedStorageAccountsResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("LinkedStorageAccounts_Delete")
-  delete is ArmResourceDeleteSync<
+  delete is LinkedStorageAccountsOps.DeleteSync<
     LinkedStorageAccountsResource,
     Response = ArmDeletedResponse
   >;
@@ -64,7 +92,7 @@ interface LinkedStorageAccountsResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LinkedStorageAccounts_ListByWorkspace")
-  listByWorkspace is ArmResourceListByParent<
+  listByWorkspace is LinkedStorageAccountsOps.List<
     LinkedStorageAccountsResource,
     Response = ArmResponse<LinkedStorageAccountsListResult>
   >;

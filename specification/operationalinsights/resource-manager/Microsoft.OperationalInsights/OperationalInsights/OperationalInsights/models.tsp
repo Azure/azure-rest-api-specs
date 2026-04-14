@@ -1447,6 +1447,12 @@ model LinkedServiceListResult {
    */
   @pageItems
   value?: LinkedService[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -1475,6 +1481,12 @@ model LinkedStorageAccountsListResult {
    */
   @pageItems
   value?: LinkedStorageAccountsResource[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -1487,6 +1499,12 @@ model WorkspaceListManagementGroupsResult {
   @pageItems
   @identifiers(#["/properties/id"])
   value?: ManagementGroup[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**

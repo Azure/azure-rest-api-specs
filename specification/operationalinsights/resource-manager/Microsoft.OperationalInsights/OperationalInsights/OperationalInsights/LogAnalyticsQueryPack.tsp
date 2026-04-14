@@ -84,6 +84,7 @@ interface LogAnalyticsQueryPacks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Queries_Search")
   @list
+  @action("queries/search")
   search is ArmResourceActionSync<
     LogAnalyticsQueryPack,
     LogAnalyticsQueryPackQuerySearchProperties,
