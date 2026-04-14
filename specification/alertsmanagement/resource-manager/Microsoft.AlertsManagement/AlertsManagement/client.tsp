@@ -51,7 +51,7 @@ model AlertsClientOptions {
 
 @@clientName(Microsoft.AlertsManagement, "AlertsManagementClient", "java");
 
-@@clientName(TimeRange.`1h`, "OneH", "go");
-@@clientName(TimeRange.`1d`, "OneD", "go");
-@@clientName(TimeRange.`7d`, "SevenD", "go");
-@@clientName(TimeRange.`30d`, "ThirtyD", "go");
+@@clientName(TimeRange.`1h`, "OneH", "go,javascript");
+@@clientName(TimeRange.`1d`, "OneD", "go,javascript");
+@@clientName(TimeRange.`7d`, "SevenD", "go,javascript");
+@@clientName(TimeRange.`30d`, "ThirtyD", "go,javascript");
