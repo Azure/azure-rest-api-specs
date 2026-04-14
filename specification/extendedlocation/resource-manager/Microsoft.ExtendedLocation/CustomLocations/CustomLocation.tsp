@@ -13,8 +13,8 @@ namespace Microsoft.ExtendedLocation;
 /**
  * Custom Locations definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
-#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocation
   is Azure.ResourceManager.TrackedResource<customLocationProperties> {
   ...ResourceNameParameter<
@@ -27,7 +27,7 @@ model customLocation
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 }
 
@@ -61,7 +61,7 @@ interface CustomLocations {
   /**
    * Deletes the Custom Location with the specified Resource Name, Resource Group, and Subscription Id.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes a Custom Location.")
   @tag("customLocations")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -107,7 +107,7 @@ interface CustomLocations {
   /**
    * Returns the target resource group associated with the resource sync rules of the Custom Location that match the rules passed in with the Find Target Resource Group Request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets matching target resource group for resource sync.")
   @tag("customLocations")
   findTargetResourceGroup is ArmResourceActionSync<

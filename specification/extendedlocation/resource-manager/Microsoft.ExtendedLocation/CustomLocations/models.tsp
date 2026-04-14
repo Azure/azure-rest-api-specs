@@ -68,7 +68,7 @@ union CreatedByType {
 /**
  * Custom Locations operation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationOperation {
   /**
    * Describes the properties of a Custom Locations Operation Value Display.
@@ -97,7 +97,7 @@ model customLocationOperation {
 /**
  * Describes the properties of a Custom Locations Operation Value Display.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationOperationValueDisplay {
   /**
    * The description of the operation.
@@ -149,7 +149,7 @@ model Identity {
 /**
  * Properties for a custom location.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationProperties {
   /**
    * This is optional input that contains the authentication that should be used to generate the namespace.
@@ -184,14 +184,14 @@ model customLocationProperties {
   /**
    * Provisioning State for the Custom Location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: string;
 }
 
 /**
  * This is optional input that contains the authentication that should be used to generate the namespace.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationPropertiesAuthentication {
   /**
    * The type of the Custom Locations authentication
@@ -201,6 +201,7 @@ model customLocationPropertiesAuthentication {
   /**
    * The kubeconfig value.
    */
+  @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
   value?: string;
 }
@@ -208,7 +209,7 @@ model customLocationPropertiesAuthentication {
 /**
  * The List Custom Locations operation response.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationListResult {
   /**
    * The URL to use for getting the next set of results.
@@ -229,7 +230,7 @@ model customLocationListResult {
 /**
  * The List Resource Sync Rules operation response.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model resourceSyncRuleListResult {
   /**
    * The URL to use for getting the next set of results.
@@ -250,7 +251,7 @@ model resourceSyncRuleListResult {
 /**
  * The Custom Locations patchable resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model patchableCustomLocations {
   /**
    * Identity for the resource.
@@ -265,14 +266,14 @@ model patchableCustomLocations {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * EnabledResourceType definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EnabledResourceType
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -331,19 +332,19 @@ model EnabledResourceTypePropertiesTypesMetadataItem {
 /**
  * The Find Target Resource Group operation request.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationFindTargetResourceGroupProperties {
   /**
    * Labels of the custom resource, this is a map of {key,value} pairs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   labels?: Record<string>;
 }
 
 /**
  * The Find Target Resource Group operation response.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationFindTargetResourceGroupResult {
   /**
    * The matching resource sync rule is the particular resource sync rule that matched the match expressions and labels and had lowest priority. This is the rule responsible for mapping the target resource to the target resource group.
@@ -361,7 +362,7 @@ model customLocationFindTargetResourceGroupResult {
 /**
  * Properties for a resource sync rule. For an unmapped custom resource, its labels will be used to find out matching resource sync rules using the selector property of the resource sync rule. If this resource sync rule has highest priority among all matching rules, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model resourceSyncRuleProperties {
   /**
    * Priority represents a priority of the Resource Sync Rule
@@ -371,7 +372,7 @@ model resourceSyncRuleProperties {
   /**
    * Provisioning State for the Resource Sync Rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -399,19 +400,19 @@ model ResourceSyncRulePropertiesSelector {
   /**
    * MatchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchLabels?: Record<string>;
 }
 
 /**
  * Resource Sync Rules matchExpression property definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model matchExpressionsProperties {
   /**
    * Key is the label key that the selector applies to.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key?: string;
 
   /**
@@ -428,7 +429,7 @@ model matchExpressionsProperties {
 /**
  * The Resource Sync Rules patchable resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model patchableResourceSyncRule {
   /**
    * The Resource Sync Rules patchable properties.
@@ -438,14 +439,14 @@ model patchableResourceSyncRule {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Collection of CustomLocationOperation items
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model customLocationOperationsList {
   /**
    * The link to the next page of items

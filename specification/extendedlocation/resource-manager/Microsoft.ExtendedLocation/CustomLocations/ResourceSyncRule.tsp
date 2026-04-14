@@ -14,8 +14,8 @@ namespace Microsoft.ExtendedLocation;
 /**
  * Resource Sync Rules definition.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing swagger uses camelCase"
-#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "Existing swagger uses camelCase"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(customLocation)
 model resourceSyncRule
   is Azure.ResourceManager.TrackedResource<resourceSyncRuleProperties> {
@@ -69,7 +69,7 @@ interface ResourceSyncRules {
   /**
    * Gets a list of Resource Sync Rules in the specified subscription. The operation returns properties of each Resource Sync Rule
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Lists all Resource Sync Rules in a Custom Location.")
   @tag("resourceSyncRules")
   listByCustomLocationID is ArmResourceListByParent<
