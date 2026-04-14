@@ -1,4 +1,4 @@
-# Azure REST API Specification
+# Azure REST API Specifications
 
 ## Description
 
