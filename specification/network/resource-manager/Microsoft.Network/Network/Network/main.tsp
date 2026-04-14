@@ -67,6 +67,7 @@ import "./NetworkManagerRoutingConfiguration.tsp";
 import "./RoutingRuleCollection.tsp";
 import "./RoutingRule.tsp";
 import "./ScopeConnection.tsp";
+import "./Commit.tsp";
 import "./SecurityAdminConfiguration.tsp";
 import "./AdminRuleCollection.tsp";
 import "./BaseAdminRule.tsp";
@@ -134,6 +135,7 @@ import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -141,6 +143,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Common;
 /**
  * APIs to manage web application firewall rules.
  */
@@ -158,11 +161,13 @@ enum Versions {
   /**
    * The 2025-05-01 API version.
    */
+  @useDependency(Common.Versions.v2025_05_01)
   v2025_05_01: "2025-05-01",
 
   /**
    * The 2025-07-01 API version.
    */
+  @useDependency(Common.Versions.v2025_07_01)
   v2025_07_01: "2025-07-01",
 }
 
