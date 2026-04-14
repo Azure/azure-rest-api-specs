@@ -1318,9 +1318,6 @@ model GetDataAnnotationsRequest {
 
   @doc("End of UTC time range. Defaults to now if not specified.")
   endAt?: utcDateTime;
-
-  @doc("Continuation token from a previous response to retrieve the next page of results.")
-  continuationToken?: string;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1333,9 +1330,9 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
-  @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
+  @doc("Token to retrieve the next page of results. Null if there are no more results.")
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a pagination cursor, not a secret"
-  continuationToken?: string;
+  skipToken?: string;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1348,6 +1345,16 @@ alias TimestampQueryParam = {
   @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
   @query
   timestamp?: utcDateTime;
+};
+
+alias DataAnnotationsPaginationParams = {
+  @doc("Maximum number of annotations to return per page.")
+  @query("$top")
+  top?: int32;
+
+  @doc("Skip token from a previous response to retrieve the next page of results.")
+  @query("$skipToken")
+  skipToken?: string;
 };
 
 @armResourceOperations(HealthModel)
@@ -1495,7 +1502,10 @@ interface Entities {
   getDataAnnotations is ArmResourceActionSync<
     Entity,
     GetDataAnnotationsRequest,
-    GetDataAnnotationsResponse
+    GetDataAnnotationsResponse,
+    {
+      ...DataAnnotationsPaginationParams;
+    }
   >;
 }
 
