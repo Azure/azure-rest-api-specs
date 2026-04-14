@@ -15,16 +15,16 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * Cognitive Services account accelerator deployment, backed by managed compute (GPU) resources.
+ * Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.
  */
 @added(Versions.v2026_03_15_preview)
 @parentResource(Account)
-model AcceleratorDeployment
-  is Azure.ResourceManager.ProxyResource<AcceleratorDeploymentProperties> {
+model ManagedComputeDeployment
+  is Azure.ResourceManager.ProxyResource<ManagedComputeDeploymentProperties> {
   ...ResourceNameParameter<
-    Resource = AcceleratorDeployment,
+    Resource = ManagedComputeDeployment,
     KeyName = "deploymentName",
-    SegmentName = "acceleratorDeployments",
+    SegmentName = "managedComputeDeployments",
     NamePattern = ""
   >;
 
@@ -44,27 +44,27 @@ model AcceleratorDeployment
 
 @added(Versions.v2026_03_15_preview)
 @armResourceOperations
-interface AcceleratorDeployments {
+interface ManagedComputeDeployments {
   /**
-   * Gets the specified accelerator deployment associated with the Cognitive Services account.
+   * Gets the specified managed compute deployment associated with the Cognitive Services account.
    */
-  get is ArmResourceRead<AcceleratorDeployment>;
+  get is ArmResourceRead<ManagedComputeDeployment>;
 
   /**
-   * Creates or updates an accelerator deployment associated with the Cognitive Services account.
+   * Creates or updates a managed compute deployment associated with the Cognitive Services account.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AcceleratorDeployment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedComputeDeployment>;
 
   /**
-   * Updates the specified accelerator deployment associated with the Cognitive Services account.
+   * Updates the specified managed compute deployment associated with the Cognitive Services account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "PATCH for 'createOrUpdate' follows existing service implementation pattern"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
-    AcceleratorDeployment,
+    ManagedComputeDeployment,
     LroHeaders = ArmLroLocationHeader<
       Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-      AcceleratorDeployment,
+      ManagedComputeDeployment,
       string
     > &
       Azure.Core.Foundations.RetryAfterHeader &
@@ -73,34 +73,34 @@ interface AcceleratorDeployments {
   >;
 
   /**
-   * Deletes the specified accelerator deployment associated with the Cognitive Services account.
+   * Deletes the specified managed compute deployment associated with the Cognitive Services account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior"
   delete is ArmResourceDeleteWithoutOkAsync<
-    AcceleratorDeployment,
+    ManagedComputeDeployment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
-   * Gets the accelerator deployments associated with the Cognitive Services account.
+   * Gets the managed compute deployments associated with the Cognitive Services account.
    */
   list is ArmResourceListByParent<
-    AcceleratorDeployment,
-    Response = AcceleratorDeploymentListResult
+    ManagedComputeDeployment,
+    Response = ManagedComputeDeploymentListResult
   >;
 }
 
-@@doc(AcceleratorDeployment.name,
-  "The name of the accelerator deployment associated with the Cognitive Services Account"
+@@doc(ManagedComputeDeployment.name,
+  "The name of the managed compute deployment associated with the Cognitive Services Account"
 );
-@@encodedName(AcceleratorDeployment.etag, "application/json", "etag");
-@@doc(AcceleratorDeployment.properties,
-  "Properties of the Cognitive Services accelerator deployment."
+@@encodedName(ManagedComputeDeployment.etag, "application/json", "etag");
+@@doc(ManagedComputeDeployment.properties,
+  "Properties of the Cognitive Services managed compute deployment."
 );
-@@doc(AcceleratorDeployments.createOrUpdate::parameters.resource,
-  "The accelerator deployment properties."
+@@doc(ManagedComputeDeployments.createOrUpdate::parameters.resource,
+  "The managed compute deployment properties."
 );
-@@doc(AcceleratorDeployments.update::parameters.properties,
-  "The accelerator deployment patch properties."
+@@doc(ManagedComputeDeployments.update::parameters.properties,
+  "The managed compute deployment patch properties."
 );

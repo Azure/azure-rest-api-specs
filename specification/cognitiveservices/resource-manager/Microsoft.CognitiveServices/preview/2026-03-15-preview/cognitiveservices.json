@@ -121,7 +121,7 @@
       "name": "AgentDeployment"
     },
     {
-      "name": "AcceleratorDeployments"
+      "name": "ManagedComputeDeployments"
     },
     {
       "name": "ComputeOperations"
@@ -1884,362 +1884,6 @@
         "x-ms-examples": {
           "Delete Account": {
             "$ref": "./examples/DeleteAccount.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/acceleratorDeployments": {
-      "get": {
-        "operationId": "AcceleratorDeployments_List",
-        "tags": [
-          "AcceleratorDeployments"
-        ],
-        "description": "Gets the accelerator deployments associated with the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AcceleratorDeploymentListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListAcceleratorDeployments": {
-            "$ref": "./examples/ListAcceleratorDeployments.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/acceleratorDeployments/{deploymentName}": {
-      "get": {
-        "operationId": "AcceleratorDeployments_Get",
-        "tags": [
-          "AcceleratorDeployments"
-        ],
-        "description": "Gets the specified accelerator deployment associated with the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The name of the accelerator deployment associated with the Cognitive Services Account",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AcceleratorDeployment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetAcceleratorDeployment": {
-            "$ref": "./examples/GetAcceleratorDeployment.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "AcceleratorDeployments_CreateOrUpdate",
-        "tags": [
-          "AcceleratorDeployments"
-        ],
-        "description": "Creates or updates an accelerator deployment associated with the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The name of the accelerator deployment associated with the Cognitive Services Account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The accelerator deployment properties.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AcceleratorDeployment"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'AcceleratorDeployment' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AcceleratorDeployment"
-            }
-          },
-          "201": {
-            "description": "Resource 'AcceleratorDeployment' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AcceleratorDeployment"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdateAcceleratorDeployment": {
-            "$ref": "./examples/CreateOrUpdateAcceleratorDeployment.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/AcceleratorDeployment"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "AcceleratorDeployments_Update",
-        "tags": [
-          "AcceleratorDeployments"
-        ],
-        "description": "Updates the specified accelerator deployment associated with the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The name of the accelerator deployment associated with the Cognitive Services Account",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The accelerator deployment patch properties.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatchResourceSku"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AcceleratorDeployment"
-            }
-          },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateAcceleratorDeployment": {
-            "$ref": "./examples/UpdateAcceleratorDeployment.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/AcceleratorDeployment"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "AcceleratorDeployments_Delete",
-        "tags": [
-          "AcceleratorDeployments"
-        ],
-        "description": "Deletes the specified accelerator deployment associated with the Cognitive Services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The name of the accelerator deployment associated with the Cognitive Services Account",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteAcceleratorDeployment": {
-            "$ref": "./examples/DeleteAcceleratorDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4144,6 +3788,362 @@
             "$ref": "./examples/ListKeys.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments": {
+      "get": {
+        "operationId": "ManagedComputeDeployments_List",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Gets the managed compute deployments associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListManagedComputeDeployments": {
+            "$ref": "./examples/ListManagedComputeDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}": {
+      "get": {
+        "operationId": "ManagedComputeDeployments_Get",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Gets the specified managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetManagedComputeDeployment": {
+            "$ref": "./examples/GetManagedComputeDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedComputeDeployments_CreateOrUpdate",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Creates or updates a managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The managed compute deployment properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedComputeDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedComputeDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateManagedComputeDeployment": {
+            "$ref": "./examples/CreateOrUpdateManagedComputeDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ManagedComputeDeployment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedComputeDeployments_Update",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Updates the specified managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The managed compute deployment patch properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchResourceSku"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedComputeDeployment"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateManagedComputeDeployment": {
+            "$ref": "./examples/UpdateManagedComputeDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedComputeDeployment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedComputeDeployments_Delete",
+        "tags": [
+          "ManagedComputeDeployments"
+        ],
+        "description": "Deletes the specified managed compute deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the managed compute deployment associated with the Cognitive Services Account",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteManagedComputeDeployment": {
+            "$ref": "./examples/DeleteManagedComputeDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks": {
@@ -9917,151 +9917,6 @@
         ]
       }
     },
-    "AcceleratorDeployment": {
-      "type": "object",
-      "description": "Cognitive Services account accelerator deployment, backed by managed compute (GPU) resources.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AcceleratorDeploymentProperties",
-          "description": "Properties of the Cognitive Services accelerator deployment."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The resource model definition representing SKU"
-        },
-        "etag": {
-          "type": "string",
-          "description": "Resource Etag.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AcceleratorDeploymentListResult": {
-      "type": "object",
-      "description": "The list of accelerator deployments.",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "description": "The link used to get the next page of accelerator deployments."
-        },
-        "value": {
-          "type": "array",
-          "description": "Gets the list of accelerator deployments and their properties.",
-          "items": {
-            "$ref": "#/definitions/AcceleratorDeployment"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "AcceleratorDeploymentProperties": {
-      "type": "object",
-      "description": "Properties of a Cognitive Services accelerator deployment.",
-      "properties": {
-        "model": {
-          "type": "string",
-          "format": "uri",
-          "description": "AzureML Registry model asset URI. Required on creation; immutable after creation.\nExample: azureml://registries/{registry}/models/{model}/versions/{version}",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "deploymentTemplate": {
-          "type": "string",
-          "format": "uri",
-          "description": "AzureML Registry deployment template URI. Optional on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "acceleratorType": {
-          "type": "string",
-          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "versionUpgradeOption": {
-          "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
-          "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "acceleratorsPerInstance": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.",
-          "readOnly": true
-        },
-        "totalAccelerators": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Read-only. Total accelerators allocated: sku.capacity (instances) x acceleratorsPerInstance.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Read-only. Current provisioning state.",
-          "readOnly": true
-        },
-        "provisioningDetails": {
-          "$ref": "#/definitions/AcceleratorDeploymentProvisioningDetails",
-          "description": "Read-only. Status message and timestamp from the last provisioning operation.",
-          "readOnly": true
-        },
-        "routes": {
-          "$ref": "#/definitions/AcceleratorDeploymentRoutes",
-          "description": "Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "model"
-      ]
-    },
-    "AcceleratorDeploymentProvisioningDetails": {
-      "type": "object",
-      "description": "Provisioning status details for an accelerator deployment.",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "A human-readable status message from the last provisioning operation."
-        },
-        "lastOperationTimestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the last provisioning operation."
-        }
-      }
-    },
-    "AcceleratorDeploymentRoutes": {
-      "type": "object",
-      "description": "Inference route paths for an accelerator deployment, relative to the account endpoint.\nPopulated when provisioningState is Succeeded.",
-      "properties": {
-        "chatCompletionsScoringPath": {
-          "type": "string",
-          "description": "Relative path to the chat completions scoring endpoint."
-        },
-        "swagger": {
-          "type": "string",
-          "description": "Relative path to the Swagger/OpenAPI endpoint."
-        },
-        "messagesApiScoringPath": {
-          "type": "string",
-          "description": "Relative path to the messages API scoring endpoint."
-        }
-      }
-    },
     "AccessKeyAuthTypeConnectionProperties": {
       "type": "object",
       "properties": {
@@ -14289,6 +14144,151 @@
         }
       ],
       "x-ms-discriminator-value": "Managed"
+    },
+    "ManagedComputeDeployment": {
+      "type": "object",
+      "description": "Cognitive Services account managed compute deployment, backed by managed compute (GPU) resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedComputeDeploymentProperties",
+          "description": "Properties of the Cognitive Services managed compute deployment."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedComputeDeploymentListResult": {
+      "type": "object",
+      "description": "The list of managed compute deployments.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of managed compute deployments."
+        },
+        "value": {
+          "type": "array",
+          "description": "Gets the list of managed compute deployments and their properties.",
+          "items": {
+            "$ref": "#/definitions/ManagedComputeDeployment"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedComputeDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of a Cognitive Services managed compute deployment.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "format": "uri",
+          "description": "AzureML Registry model asset URI. Required on creation; immutable after creation.\nExample: azureml://registries/{registry}/models/{model}/versions/{version}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentTemplate": {
+          "type": "string",
+          "format": "uri",
+          "description": "AzureML Registry deployment template URI. Optional on creation.\nExample: azureml://registries/{registry}/deploymenttemplates/{template}/versions/{version}",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "acceleratorType": {
+          "type": "string",
+          "description": "Accelerator type (e.g., H100_80GB). Optional on creation; immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "versionUpgradeOption": {
+          "$ref": "#/definitions/DeploymentModelVersionUpgradeOption",
+          "description": "Template auto-upgrade policy. Defaults to OnceNewDefaultVersionAvailable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "acceleratorsPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Read-only. Number of accelerators (GPUs) consumed by each model instance, sourced from the deployment template.",
+          "readOnly": true
+        },
+        "totalAccelerators": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Read-only. Total accelerators allocated: sku.capacity (instances) x acceleratorsPerInstance.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Read-only. Current provisioning state.",
+          "readOnly": true
+        },
+        "provisioningDetails": {
+          "$ref": "#/definitions/ManagedComputeDeploymentProvisioningDetails",
+          "description": "Read-only. Status message and timestamp from the last provisioning operation.",
+          "readOnly": true
+        },
+        "routes": {
+          "$ref": "#/definitions/ManagedComputeDeploymentRoutes",
+          "description": "Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "model"
+      ]
+    },
+    "ManagedComputeDeploymentProvisioningDetails": {
+      "type": "object",
+      "description": "Provisioning status details for a managed compute deployment.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A human-readable status message from the last provisioning operation."
+        },
+        "lastOperationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last provisioning operation."
+        }
+      }
+    },
+    "ManagedComputeDeploymentRoutes": {
+      "type": "object",
+      "description": "Inference route paths for a managed compute deployment, relative to the account endpoint.\nPopulated when provisioningState is Succeeded.",
+      "properties": {
+        "chatCompletionsScoringPath": {
+          "type": "string",
+          "description": "Relative path to the chat completions scoring endpoint."
+        },
+        "swagger": {
+          "type": "string",
+          "description": "Relative path to the Swagger/OpenAPI endpoint."
+        },
+        "messagesApiScoringPath": {
+          "type": "string",
+          "description": "Relative path to the messages API scoring endpoint."
+        }
+      }
     },
     "ManagedIdentityAuthTypeConnectionProperties": {
       "type": "object",

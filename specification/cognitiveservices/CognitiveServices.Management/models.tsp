@@ -5716,10 +5716,10 @@ model RaiPolicyListResult {
 model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 
 /**
- * Properties of a Cognitive Services accelerator deployment.
+ * Properties of a Cognitive Services managed compute deployment.
  */
 @added(Versions.v2026_03_15_preview)
-model AcceleratorDeploymentProperties {
+model ManagedComputeDeploymentProperties {
   /**
    * AzureML Registry model asset URI. Required on creation; immutable after creation.
    * Example: azureml://registries/{registry}/models/{model}/versions/{version}
@@ -5768,20 +5768,20 @@ model AcceleratorDeploymentProperties {
    * Read-only. Status message and timestamp from the last provisioning operation.
    */
   @visibility(Lifecycle.Read)
-  provisioningDetails?: AcceleratorDeploymentProvisioningDetails;
+  provisioningDetails?: ManagedComputeDeploymentProvisioningDetails;
 
   /**
    * Read-only. Inference route paths relative to the account endpoint. Populated when provisioningState is Succeeded.
    */
   @visibility(Lifecycle.Read)
-  routes?: AcceleratorDeploymentRoutes;
+  routes?: ManagedComputeDeploymentRoutes;
 }
 
 /**
- * Provisioning status details for an accelerator deployment.
+ * Provisioning status details for a managed compute deployment.
  */
 @added(Versions.v2026_03_15_preview)
-model AcceleratorDeploymentProvisioningDetails {
+model ManagedComputeDeploymentProvisioningDetails {
   /**
    * A human-readable status message from the last provisioning operation.
    */
@@ -5794,11 +5794,11 @@ model AcceleratorDeploymentProvisioningDetails {
 }
 
 /**
- * Inference route paths for an accelerator deployment, relative to the account endpoint.
+ * Inference route paths for a managed compute deployment, relative to the account endpoint.
  * Populated when provisioningState is Succeeded.
  */
 @added(Versions.v2026_03_15_preview)
-model AcceleratorDeploymentRoutes {
+model ManagedComputeDeploymentRoutes {
   /**
    * Relative path to the chat completions scoring endpoint.
    */
@@ -5816,20 +5816,20 @@ model AcceleratorDeploymentRoutes {
 }
 
 /**
- * The list of accelerator deployments.
+ * The list of managed compute deployments.
  */
 @added(Versions.v2026_03_15_preview)
-model AcceleratorDeploymentListResult {
+model ManagedComputeDeploymentListResult {
   /**
-   * The link used to get the next page of accelerator deployments.
+   * The link used to get the next page of managed compute deployments.
    */
   @nextLink
   nextLink?: string;
 
   /**
-   * Gets the list of accelerator deployments and their properties.
+   * Gets the list of managed compute deployments and their properties.
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  value?: AcceleratorDeployment[];
+  value?: ManagedComputeDeployment[];
 }
