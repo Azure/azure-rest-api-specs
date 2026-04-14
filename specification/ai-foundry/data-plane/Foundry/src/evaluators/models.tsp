@@ -1,5 +1,4 @@
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 
@@ -208,23 +207,6 @@ model GenerateEvaluatorRequest {
 
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity. This avoids LLM capacity constraints, reduces 429 retries, and aligns with Foundry's deployment-less model selection.")
   model: string;
-}
-
-@doc("Result produced by a successful evaluator generation job.")
-model EvaluatorGenerationResult {
-  @doc("The generated evaluator version. When persist=true, this is a saved version. When persist=false, this is an unsaved preview.")
-  evaluator_version: EvaluatorVersion;
-}
-
-@doc("Evaluator generation job — long-running operation that generates rubric criteria from source materials.")
-model EvaluatorGenerationJob is JobLike<EvaluatorGenerationResult, GenerateEvaluatorRequest> {
-  @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
-  @visibility(Lifecycle.Read)
-  created_at: FoundryTimestamp;
-
-  @doc("The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).")
-  @visibility(Lifecycle.Read)
-  finished_at?: FoundryTimestamp;
 }
 
 @doc("Evaluator Definition")

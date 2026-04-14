@@ -122,11 +122,10 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  // POST /evaluators/{evaluatorName}/versions:generate — LRO
+  // POST /evaluators/{evaluatorName}/versions:generate
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling handled via Operation-Location"
-  @doc("Submit an evaluator generation job (LRO). Returns 201 Created with Operation-Location header for polling. The job generates rubric criteria from source materials. When persist=true (default), saves as a new evaluator version on completion.")
+  @doc("Generate a rubric-based evaluator from source materials (synchronous). By default (persist=true), saves as a new evaluator version and returns the saved EvaluatorVersion. Set persist=false to return an unsaved preview.")
   @Rest.action("versions:generate")
   @Rest.actionSeparator("/")
   @Http.post
@@ -138,6 +137,6 @@ interface Evaluators {
       @Http.bodyRoot
       body: GenerateEvaluatorRequest;
     },
-    JobCreatedResponse<EvaluatorGenerationJob>
+    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 }
