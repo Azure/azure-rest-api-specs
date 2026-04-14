@@ -251,6 +251,13 @@
             "type": "string"
           },
           {
+            "name": "createAfcControlPlane",
+            "in": "query",
+            "description": "When set to true, creates an AFC control plane for the Azure Firewall.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "Parameters supplied to the create or update Azure Firewall operation.",
@@ -258,13 +265,6 @@
             "schema": {
               "$ref": "#/definitions/AzureFirewall"
             }
-          },
-          {
-            "name": "createAfcControlPlane",
-            "in": "query",
-            "description": "When set to true, creates an AFC control plane for the Azure Firewall.",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
