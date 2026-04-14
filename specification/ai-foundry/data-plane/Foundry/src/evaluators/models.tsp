@@ -95,8 +95,8 @@ union EvaluatorGenerationJobSourceType {
   @doc("Traces source — conversation traces from Application Insights, specified by agent name and time window.")
   Traces: "Traces",
 
-  @doc("File source — reference to an uploaded file containing policies, rules, or supplementary context.")
-  File: "File",
+  @doc("Dataset source — reference to a dataset containing policies, rules, or supplementary context.")
+  Dataset: "Dataset",
 }
 
 @doc("The base source model for an evaluator generation job.")
@@ -142,13 +142,16 @@ model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   max_traces?: int32 = 100;
 }
 
-@doc("File source for evaluator generation — uploaded file containing policies, rules, or supplementary context.")
-model FileEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
-  @doc("The source type for this job, which is File.")
-  type: "File";
+@doc("Dataset source for evaluator generation — reference to a dataset containing policies, rules, or supplementary context.")
+model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+  @doc("The source type for this job, which is Dataset.")
+  type: "Dataset";
 
-  @doc("The ID of the uploaded file.")
-  id: string;
+  @doc("The name of the dataset.")
+  name: string;
+
+  @doc("The version of the dataset. If not specified, the latest version is used.")
+  version?: string;
 }
 
 @doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
