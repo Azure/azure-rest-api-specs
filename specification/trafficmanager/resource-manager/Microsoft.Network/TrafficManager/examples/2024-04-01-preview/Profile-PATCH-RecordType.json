@@ -1,28 +1,33 @@
 {
   "parameters": {
     "api-version": "2024-04-01-preview",
-    "profileName": "azuresdkfornetautoresttrafficmanager3880",
-    "resourceGroupName": "azuresdkfornetautoresttrafficmanager1323",
+    "parameters": {
+      "properties": {
+        "recordType": "CNAME"
+      }
+    },
+    "profileName": "azuresdkfornetautoresttrafficmanager6192",
+    "resourceGroupName": "azuresdkfornetautoresttrafficmanager2583",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "azuresdkfornetautoresttrafficmanager3880",
+        "name": "azuresdkfornetautoresttrafficmanager6192",
         "type": "Microsoft.Network/trafficManagerProfiles",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager1323/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3880",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192",
         "location": "global",
         "properties": {
           "dnsConfig": {
-            "fqdn": "azuresdkfornetautoresttrafficmanager3880.tmpreview.watmtest.azure-test.net",
-            "relativeName": "azuresdkfornetautoresttrafficmanager3880",
+            "fqdn": "azuresdkfornetautoresttrafficmanager6192.tmpreview.watmtest.azure-test.net",
+            "relativeName": "azuresdkfornetautoresttrafficmanager6192",
             "ttl": 35
           },
           "endpoints": [
             {
               "name": "My external endpoint",
               "type": "Microsoft.Network/trafficManagerProfiles/externalEndpoints",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager1323/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager3880/externalEndpoints/My external endpoint",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azuresdkfornetautoresttrafficmanager2583/providers/Microsoft.Network/trafficManagerProfiles/azuresdkfornetautoresttrafficmanager6192/externalEndpoints/My external endpoint",
               "properties": {
                 "endpointLocation": "North Europe",
                 "endpointMonitorStatus": "CheckingEndpoint",
@@ -43,12 +48,13 @@
             "protocol": "HTTP"
           },
           "profileStatus": "Enabled",
-          "trafficRoutingMethod": "Performance"
+          "trafficRoutingMethod": "Performance",
+          "recordType": "CNAME"
         },
         "tags": {}
       }
     }
   },
-  "operationId": "Profiles_Get",
-  "title": "Profile-GET-WithEndpoints"
+  "operationId": "Profiles_Update",
+  "title": "Profile-PATCH-RecordType"
 }
