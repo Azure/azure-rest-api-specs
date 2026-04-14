@@ -275,9 +275,12 @@ enum BlobDeleteTypeGo {
 model BlobPrefixGo {
   /** The blob name. */
   @Xml.name("Name") name: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Client library owners should add relevant documentation"
   properties: BlobProperties;
 }
 /** The properties of a blob. */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Client library owners should add relevant documentation"
 @Xml.name("Properties")
 @clientName("BlobProperties", "go")
 model BlobPropertiesGo {
@@ -432,7 +435,7 @@ model BlobPropertiesGo {
   /** Whether the blob is under legal hold. */
   @Xml.name("LegalHold") legalHold?: boolean;
 
-  @Xml.name("Acl") ACL?: string;
+  @Xml.name("Acl") acl?: string;
   @Xml.name("Group") group?: string;
   @Xml.name("Owner") owner?: string;
   @Xml.name("Permissions") permissions?: string;
@@ -543,7 +546,10 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(BlobServiceProperties.cors, "CORS", "go");
 @@clientName(CopyStatus, "CopyStatusType", "go");
 @@clientName(CorsRule, "CORSRule", "go");
-@@clientName(DenyEncryptionScopeOverrideResponseHeader.preventEncryptionScopeOverride, "DenyEncryptionScopeOverride", "go");
+@@clientName(DenyEncryptionScopeOverrideResponseHeader.preventEncryptionScopeOverride,
+  "DenyEncryptionScopeOverride",
+  "go"
+);
 @@clientName(Error, "StorageError", "go");
 @@clientName(EncryptionAlgorithmTypeGo, "EncryptionAlgorithmType", "go");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "go");
