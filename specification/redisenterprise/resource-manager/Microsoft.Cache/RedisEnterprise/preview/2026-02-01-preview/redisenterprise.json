@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RedisEnterpriseManagementClient",
-    "version": "2025-08-01-preview",
+    "version": "2026-02-01-preview",
     "description": "REST API for managing Redis Enterprise resources in Azure.",
     "x-typespec-generated": [
       {
@@ -3051,6 +3051,10 @@
         "accessKeysAuthentication": {
           "$ref": "#/definitions/AccessKeysAuthentication",
           "description": "This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created."
+        },
+        "notifyKeyspaceEvents": {
+          "type": "string",
+          "description": "Specifies which keyspace events should trigger notifications. Default is an empty string, meaning this feature is disabled. When enabled, at least 'K' (keyspace events) or 'E' (keyevent events) must be present. For example, 'AKE' enables all standard events. See https://redis.io/docs/latest/develop/use/keyspace-notifications/ for the complete list of event types."
         }
       }
     },
