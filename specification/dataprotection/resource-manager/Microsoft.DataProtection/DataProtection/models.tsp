@@ -2296,6 +2296,9 @@ model AzureBackupRehydrationRequest {
 @added(Versions.v2026_04_01_preview)
 union ResumeProtectionRequestObjectType {
   string,
+
+  @doc("Resume Protection Request Type.")
+  ResumeProtectionRequest: "ResumeProtectionRequest"
 }
 
 /**
