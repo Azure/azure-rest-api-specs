@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-2026-04-10` is specified on the co
 
 ```yaml $(tag) == 'package-2026-04-10'
 input-file:
-  - preview/2026-04-10/VoiceLive.json
+  - stable/2026-04-10/VoiceLive.json
 ```
 
 ### Tag: package-2026-01-01-preview
