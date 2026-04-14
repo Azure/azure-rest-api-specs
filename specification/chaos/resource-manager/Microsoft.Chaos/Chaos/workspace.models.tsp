@@ -58,7 +58,7 @@ model WorkspaceProperties {
   /**
    * The intended workspace-level resource scope to be used by child scenarios.
    */
-  scopes: string[];
+  scopes: Azure.Core.armResourceIdentifier[];
 }
 
 /**

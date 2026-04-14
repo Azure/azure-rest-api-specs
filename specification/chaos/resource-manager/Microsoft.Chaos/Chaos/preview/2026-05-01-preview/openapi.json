@@ -5086,7 +5086,9 @@
           "type": "array",
           "description": "Array of specific resource IDs to exclude from fault injection.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "tags": {
@@ -5989,6 +5991,26 @@
         "skipped"
       ]
     },
+    "PhysicalToLogicalZoneMapping": {
+      "type": "object",
+      "description": "Maps a physical zone to the resolved logical zone for a given subscription.",
+      "properties": {
+        "physicalZone": {
+          "type": "string",
+          "description": "The physical availability zone (e.g., `\"westus2-az1\"`).",
+          "readOnly": true
+        },
+        "logicalZone": {
+          "type": "string",
+          "description": "The logical availability zone resolved for this subscription\n(e.g., `\"1\"`, `\"2\"`, `\"3\"`).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "physicalZone",
+        "logicalZone"
+      ]
+    },
     "PrivateAccess": {
       "type": "object",
       "description": "PrivateAccesses tracked resource.",
@@ -6718,8 +6740,8 @@
       "properties": {
         "scenarioId": {
           "type": "string",
-          "description": "Resource ID of the scenario this configuration applies to.",
-          "pattern": "^/subscriptions/[^/]+/resourceGroups/[^/]+/providers/Microsoft.Chaos/workspaces/[^/]+/scenarios/[^/]+$"
+          "format": "arm-id",
+          "description": "Resource ID of the scenario this configuration applies to."
         },
         "parameters": {
           "type": "array",
@@ -7903,7 +7925,9 @@
           "type": "array",
           "description": "The intended workspace-level resource scope to be used by child scenarios.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
       },
@@ -7965,22 +7989,28 @@
     },
     "ZoneResolutionMapping": {
       "type": "object",
-      "description": "Maps a single subscription to its resolved logical zone.",
+      "description": "Maps a single subscription to its physical-to-logical zone resolutions.",
       "properties": {
         "subscriptionId": {
           "type": "string",
           "description": "The subscription ID (e.g., `\"6b052e15-03d3-4f17-b2e1-be7f07588291\"`).",
           "readOnly": true
         },
-        "logicalZone": {
-          "type": "string",
-          "description": "The logical availability zone resolved for this subscription\n(e.g., `\"1\"`, `\"2\"`, `\"3\"`).",
-          "readOnly": true
+        "zoneMappings": {
+          "type": "array",
+          "description": "The physical-to-logical zone mappings for this subscription.",
+          "items": {
+            "$ref": "#/definitions/PhysicalToLogicalZoneMapping"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "physicalZone"
+          ]
         }
       },
       "required": [
         "subscriptionId",
-        "logicalZone"
+        "zoneMappings"
       ]
     },
     "ZoneResolutionMode": {

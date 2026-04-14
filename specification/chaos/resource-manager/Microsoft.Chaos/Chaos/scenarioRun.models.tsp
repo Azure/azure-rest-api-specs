@@ -148,7 +148,7 @@ model ZoneResolutionInfo {
 }
 
 /**
- * Maps a single subscription to its resolved logical zone.
+ * Maps a single subscription to its physical-to-logical zone resolutions.
  */
 model ZoneResolutionMapping {
   /**
@@ -156,6 +156,24 @@ model ZoneResolutionMapping {
    */
   @visibility(Lifecycle.Read)
   subscriptionId: string;
+
+  /**
+   * The physical-to-logical zone mappings for this subscription.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["physicalZone"])
+  zoneMappings: PhysicalToLogicalZoneMapping[];
+}
+
+/**
+ * Maps a physical zone to the resolved logical zone for a given subscription.
+ */
+model PhysicalToLogicalZoneMapping {
+  /**
+   * The physical availability zone (e.g., `"westus2-az1"`).
+   */
+  @visibility(Lifecycle.Read)
+  physicalZone: string;
 
   /**
    * The logical availability zone resolved for this subscription

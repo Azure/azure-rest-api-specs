@@ -33,8 +33,7 @@ model ScenarioConfigurationProperties {
   /**
    * Resource ID of the scenario this configuration applies to.
    */
-  @pattern("^/subscriptions/[^/]+/resourceGroups/[^/]+/providers/Microsoft.Chaos/workspaces/[^/]+/scenarios/[^/]+$")
-  scenarioId: string;
+  scenarioId: Azure.Core.armResourceIdentifier;
 
   /**
    * Runtime parameter values for the scenario. Keys must match parameter names defined in the scenario.
@@ -67,7 +66,7 @@ model ConfigurationExclusions {
   /**
    * Array of specific resource IDs to exclude from fault injection.
    */
-  resources?: string[];
+  resources?: Azure.Core.armResourceIdentifier[];
 
   /**
    * Array of tag key-value pairs. Resources with matching tags are excluded.
