@@ -2204,10 +2204,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "vmProperties": {
-          "$ref": "#/definitions/BulkActionVMProfile",
-          "description": "Describes the properties of a Virtual Machine."
         }
       }
     },
@@ -2270,9 +2266,103 @@
       "type": "object",
       "description": "Specifies the configuration for a virtual machine operation",
       "properties": {
-        "vmProperties": {
-          "$ref": "#/definitions/BulkActionVMSpec",
-          "description": "Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure"
+        "name": {
+          "type": "string",
+          "description": "Identifier for created virtual machine. If not passed, it will be created from resource prefix."
+        },
+        "computeApiVersion": {
+          "type": "string",
+          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group name for the virtual machine."
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
+          "description": "The marketplace image plan used for the virtual machine."
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "The identity of the virtual machine, if configured."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location of the Virtual Machine."
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "Placement constraints for virtual machine hardware placement."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags to apply to the virtual machines created by this bulk action.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scheduledEventsPolicy": {
+          "$ref": "#/definitions/ScheduledEventsPolicy",
+          "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations."
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware profile for the virtual machine."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
+        },
+        "osProfile": {
+          "$ref": "#/definitions/OSProfile",
+          "description": "Specifies the operating system settings used while creating the virtual machine."
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Specifies the network interfaces of the virtual machine."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Specifies the Security related profile settings for the virtual machine."
+        },
+        "diagnosticsProfile": {
+          "$ref": "#/definitions/DiagnosticsProfile",
+          "description": "Specifies the boot diagnostic settings state."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Specifies that the image or disk that is being used was licensed on-premises."
+        },
+        "extensionsTimeBudget": {
+          "type": "string",
+          "description": "Specifies the time allotted for all extensions to start. Should be between 15 and 120 minutes in ISO 8601 format."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded."
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/CapacityReservationProfile",
+          "description": "Specifies information about the capacity reservation used to allocate the virtual machine."
+        },
+        "applicationProfile": {
+          "$ref": "#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should be made available to the VM."
         },
         "extensions": {
           "type": "array",
@@ -2280,14 +2370,6 @@
           "items": {
             "$ref": "#/definitions/BulkActionVMExtension"
           }
-        },
-        "computeApiVersion": {
-          "type": "string",
-          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines."
-        },
-        "name": {
-          "type": "string",
-          "description": "identifier for created virtual machine, if not passed it will create one from resource prefix."
         }
       }
     },
@@ -3267,6 +3349,20 @@
       "required": [
         "results"
       ]
+    },
+    "HardwareProfile": {
+      "type": "object",
+      "description": "Specifies the hardware profile for the virtual machine.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "Specifies the size of the virtual machine. The enum data type is currently deprecated and will be removed by December 23rd 2023. The recommended way to get the list of available sizes is using these APIs: [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes), [List all available virtual machine sizes in a region]( https://docs.microsoft.com/rest/api/compute/resourceskus/list), [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/sizes). The available VM sizes depend on region and availability set."
+        },
+        "vmSizeProperties": {
+          "$ref": "#/definitions/VmSizeProperties",
+          "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+        }
+      }
     },
     "HibernateResourceOperationResponse": {
       "type": "object",
@@ -6832,6 +6928,22 @@
         "name",
         "rank"
       ]
+    },
+    "VmSizeProperties": {
+      "type": "object",
+      "description": "Specifies VM Size Property settings on the virtual machine.",
+      "properties": {
+        "vCpusAvailable": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list)."
+        },
+        "vCpusPerCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list). **Setting this property to 1 also means that hyper-threading is disabled.**"
+        }
+      }
     },
     "WeekDay": {
       "type": "string",
