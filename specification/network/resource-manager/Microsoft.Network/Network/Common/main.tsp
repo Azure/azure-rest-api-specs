@@ -400,6 +400,7 @@ union NatGatewaySkuName {
 /**
  * Whether Nat64 is enabled for the NAT gateway resource.
  */
+@added(Versions.v2025_07_01)
 union Nat64State {
   string,
 
@@ -3237,6 +3238,7 @@ model NatGatewayPropertiesFormat {
   /**
    * Whether Nat64 is enabled for the NAT gateway resource.
    */
+  @added(Versions.v2025_07_01)
   nat64?: Nat64State;
 
   /**

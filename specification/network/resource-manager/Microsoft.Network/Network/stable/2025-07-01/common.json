@@ -2477,6 +2477,36 @@
         }
       }
     },
+    "Common.Nat64State": {
+      "type": "string",
+      "description": "Whether Nat64 is enabled for the NAT gateway resource.",
+      "enum": [
+        "None",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "Nat64State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
     "Common.NatGatewaySkuName": {
       "type": "string",
       "description": "Name of Nat Gateway SKU.",
@@ -6049,60 +6079,6 @@
           "description": "The client id of user assigned identity.",
           "readOnly": true
         }
-      }
-    },
-    "Nat64State": {
-      "type": "string",
-      "description": "Whether Nat64 is enabled for the NAT gateway resource.",
-      "enum": [
-        "None",
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "Nat64State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          }
-        ]
-      }
-    },
-    "NatGatewaySkuName": {
-      "type": "string",
-      "description": "Name of Nat Gateway SKU.",
-      "enum": [
-        "Standard",
-        "StandardV2"
-      ],
-      "x-ms-enum": {
-        "name": "NatGatewaySkuName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard"
-          },
-          {
-            "name": "StandardV2",
-            "value": "StandardV2",
-            "description": "StandardV2"
-          }
-        ]
       }
     },
     "NetworkIntentPolicyBasedService": {
