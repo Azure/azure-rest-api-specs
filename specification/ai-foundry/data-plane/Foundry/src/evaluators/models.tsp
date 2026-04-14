@@ -153,7 +153,7 @@ model FileEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 
 @doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
 model RubricCriterion {
-  @doc("Stable, human-readable slug generated once from the criterion description at creation time. Preserved across subsequent description edits. Service-generated.")
+  @doc("Stable, human-readable slug assigned by the service on first generation. When editing criteria and saving as a new version, clients must echo the existing rubric_id to preserve identity across versions. Service-generated.")
   @visibility(Lifecycle.Read)
   rubric_id?: string;
 
@@ -165,7 +165,7 @@ model RubricCriterion {
   @maxValue(10)
   weight: int32;
 
-  @doc("When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). Used for the general quality criterion — a catch-all that captures quality issues outside explicit criteria. Defaults to false.")
+  @doc("When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria. Defaults to false.")
   always_applicable?: boolean;
 }
 
@@ -173,7 +173,7 @@ model RubricCriterion {
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubrics;
 
-  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a general quality criterion (always_applicable: true); safety evaluators include a general policy compliance criterion. Both quality and safety use the same rubric structure.")
+  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable general quality criterion (always_applicable: true); safety evaluators include a non-editable general policy compliance criterion. Both quality and safety use the same rubric structure.")
   rubric_criteria?: RubricCriterion[];
 }
 
