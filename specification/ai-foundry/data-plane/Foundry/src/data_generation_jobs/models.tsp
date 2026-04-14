@@ -27,7 +27,7 @@ model DataGenerationModelOptions {
 }
 
 @doc("Caller-supplied inputs for a data generation job.")
-model DataGenerationInputs {
+model DataGenerationJobInputs {
   @doc("The display name of the data generation job.")
   name: string;
 
@@ -42,7 +42,7 @@ model DataGenerationInputs {
 }
 
 @doc("Result produced by a successful data generation job.")
-model DataGenerationResult {
+model DataGenerationJobResult {
   @doc("The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation.")
   outputs?: Array<DataGenerationJobOutput>;
 
@@ -54,7 +54,8 @@ model DataGenerationResult {
 }
 
 @doc("Data Generation Job resource.")
-model DataGenerationJob is JobLike<DataGenerationResult, DataGenerationInputs> {
+model DataGenerationJob
+  is JobLike<DataGenerationJobResult, DataGenerationJobInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
