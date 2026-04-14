@@ -64,6 +64,9 @@
     },
     {
       "name": "Toolboxes"
+    },
+    {
+      "name": "DataGenerationJobs"
     }
   ],
   "paths": {
@@ -1451,8 +1454,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2283,6 +2286,451 @@
         "tags": [
           "Connections"
         ]
+      }
+    },
+    "/data_generation/jobs": {
+      "get": {
+        "operationId": "DataGenerationJobs_list",
+        "summary": "Returns a list of data generation jobs",
+        "description": "Returns a list of data generation jobs.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "scenario",
+            "in": "query",
+            "required": false,
+            "description": "Filter data generation jobs by their scenario.",
+            "schema": {
+              "$ref": "#/components/schemas/DataGenerationJobScenario"
+            },
+            "explode": false
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Filter data generation jobs by their type.",
+            "schema": {
+              "$ref": "#/components/schemas/DataGenerationJobType"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DataGenerationJob"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
+      "post": {
+        "operationId": "DataGenerationJobs_create",
+        "summary": "Creates a data generation job.",
+        "description": "Creates a data generation job.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "required": true,
+                "description": "URL of the created job resource.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataGenerationJob"
+              }
+            }
+          },
+          "description": "The job to create."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      }
+    },
+    "/data_generation/jobs/{jobId}": {
+      "get": {
+        "operationId": "DataGenerationJobs_get",
+        "summary": "Get info about a data generation job.",
+        "description": "Gets the details of a data generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "DataGenerationJobs_delete",
+        "description": "Deletes a data generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
+      }
+    },
+    "/data_generation/jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "DataGenerationJobs_cancel",
+        "summary": "Cancels a data generation job.",
+        "description": "Cancels a data generation job by its ID.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The ID of the job to cancel.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataGenerationJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "DataGenerationJobs"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       }
     },
     "/datasets": {
@@ -13552,6 +14000,313 @@
         ],
         "description": "Daily recurrence schedule."
       },
+      "DataGenerationInputs": {
+        "type": "object",
+        "required": [
+          "name",
+          "sources",
+          "options",
+          "scenario"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The display name of the data generation job."
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobSource"
+            },
+            "description": "The sources used for the data generation job."
+          },
+          "options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobOptions"
+              }
+            ],
+            "description": "The options for the data generation job."
+          },
+          "scenario": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobScenario"
+              }
+            ],
+            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
+          }
+        },
+        "description": "Caller-supplied inputs for a data generation job."
+      },
+      "DataGenerationJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "inputs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationInputs"
+              }
+            ],
+            "description": "Caller-supplied inputs."
+          },
+          "result": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationResult"
+              }
+            ],
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobStatus"
+              }
+            ],
+            "description": "Current lifecycle status.",
+            "readOnly": true
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Error"
+              }
+            ],
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "created_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
+            "readOnly": true
+          },
+          "finished_at": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).",
+            "readOnly": true
+          }
+        },
+        "description": "Data Generation Job resource."
+      },
+      "DataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type",
+          "max_samples"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobType"
+              }
+            ],
+            "description": "The data generation job type."
+          },
+          "max_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of samples to generate."
+          },
+          "train_split": {
+            "type": "number",
+            "format": "float",
+            "description": "The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1."
+          },
+          "model_options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationModelOptions"
+              }
+            ],
+            "description": "The LLM model options."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "SimpleQnA": "#/components/schemas/SimpleQnADataGenerationJobOptions",
+            "SingleTurn": "#/components/schemas/SingleTurnDataGenerationJobOptions",
+            "ToolUse": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions",
+            "MultiTurn": "#/components/schemas/MultiTurnDataGenerationJobOptions"
+          }
+        },
+        "description": "Options for managing data generation jobs."
+      },
+      "DataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobOutputType"
+              }
+            ],
+            "description": "The type of the output."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "File": "#/components/schemas/FileDataGenerationJobOutput",
+            "Dataset": "#/components/schemas/DatasetDataGenerationJobOutput"
+          }
+        },
+        "description": "Output information for a data generation job."
+      },
+      "DataGenerationJobOutputType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "File",
+              "Dataset"
+            ]
+          }
+        ],
+        "description": "The supported output file types for a data generation job."
+      },
+      "DataGenerationJobScenario": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "SupervisedFineTuning",
+              "ReinforcementFineTuning",
+              "Evaluation"
+            ]
+          }
+        ],
+        "description": "The supported scenarios for a data generation job."
+      },
+      "DataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DataGenerationJobSourceType"
+              }
+            ],
+            "description": "The type of source."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Traces": "#/components/schemas/TracesDataGenerationJobSource",
+            "Prompt": "#/components/schemas/PromptDataGenerationJobSource",
+            "File": "#/components/schemas/FileDataGenerationJobSource",
+            "Dataset": "#/components/schemas/DatasetDataGenerationJobSource"
+          }
+        },
+        "description": "The base source model for a data generation job."
+      },
+      "DataGenerationJobSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Traces",
+              "Prompt",
+              "File",
+              "Dataset"
+            ]
+          }
+        ],
+        "description": "The supported source types for a data generation job."
+      },
+      "DataGenerationJobType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "SimpleQnA",
+              "SingleTurn",
+              "ToolUse",
+              "MultiTurn"
+            ]
+          }
+        ],
+        "description": "The supported data generation job types."
+      },
+      "DataGenerationModelOptions": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Base model name used to generate data."
+          }
+        },
+        "description": "LLM model options for data generation jobs."
+      },
+      "DataGenerationResult": {
+        "type": "object",
+        "properties": {
+          "outputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobOutput"
+            },
+            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
+          },
+          "generated_samples": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of samples actually generated."
+          },
+          "token_usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenUsage"
+              }
+            ],
+            "description": "The token usage information for the data generation job."
+          }
+        },
+        "description": "Result produced by a successful data generation job."
+      },
       "DataSourceConfig": {
         "type": "object",
         "required": [
@@ -13574,6 +14329,80 @@
           "mapping": {}
         },
         "description": "Base class for run data sources with discriminator support."
+      },
+      "DatasetDataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Dataset"
+            ],
+            "description": "Dataset output."
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the output dataset created.",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the output dataset and can be optionally set during job creation time."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the output dataset.",
+            "readOnly": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the output dataset and can be optionally set during job creation time."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary of the output dataset and can be optionally set during job creation time."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOutput"
+          }
+        ]
+      },
+      "DatasetDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Dataset"
+            ],
+            "description": "The source type for this job, which is Dataset."
+          },
+          "name": {
+            "type": "string",
+            "description": "Input dataset name used for data generation."
+          },
+          "version": {
+            "type": "string",
+            "description": "Input dataset version used for data generation. If not specified, the latest version of the dataset will be used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ]
       },
       "DatasetType": {
         "anyOf": [
@@ -15616,6 +16445,64 @@
         },
         "description": "The fabric data agent tool parameters."
       },
+      "FileDataGenerationJobOutput": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "filename"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "File"
+            ],
+            "description": "Azure OpenAI file output."
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the output Azure OpenAI file.",
+            "readOnly": true
+          },
+          "filename": {
+            "type": "string",
+            "description": "The filename of the output Azure OpenAI file.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOutput"
+          }
+        ]
+      },
+      "FileDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "File"
+            ],
+            "description": "The source type for this job, which is File."
+          },
+          "id": {
+            "type": "string",
+            "description": "Input Azure Open AI file id used for data generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "The options for a data generation job with File source, which includes the input files for data generation."
+      },
       "FileDatasetVersion": {
         "type": "object",
         "required": [
@@ -16461,6 +17348,24 @@
           }
         ],
         "description": "The types of parameters for red team item generation."
+      },
+      "JobStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "queued",
+              "in_progress",
+              "succeeded",
+              "failed",
+              "canceled"
+            ]
+          }
+        ],
+        "description": "Extensible status values shared by Foundry jobs."
       },
       "ManagedAgentIdentityBlueprintReference": {
         "type": "object",
@@ -17413,6 +18318,27 @@
           }
         ],
         "description": "Monthly recurrence schedule."
+      },
+      "MultiTurnDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "MultiTurn"
+            ],
+            "description": "The data generation job type, which is MultiTurn for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with MultiTurn type."
       },
       "NoAuthenticationCredentials": {
         "type": "object",
@@ -37644,6 +38570,40 @@
         ],
         "description": "Prompt-based evaluator"
       },
+      "PromptDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Prompt"
+            ],
+            "description": "The source type for this job, which is Prompt."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The prompt used for data generation. Required if agent name is not specified."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch the agent instructions for data generation. Required if prompt is not specified."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version to fetch the agent instructions for data generation. If not specified, the latest version of the agent will be used."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "The options for a data generation job with Prompt source used for Evaluation scenario, which includes the prompt or the agent name to fetch the prompt and other metadata for data generation."
+      },
       "ProtocolVersionRecord": {
         "type": "object",
         "required": [
@@ -38522,6 +39482,70 @@
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
       },
+      "SimpleQnADataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SimpleQnA"
+            ],
+            "description": "The data generation job type, which is SimpleQnA for this model."
+          },
+          "question_types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimpleQnAFineTuningQuestionType"
+            },
+            "description": "The question types to generate. Used only for fine-tuning scenarios."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with SimpleQnA type."
+      },
+      "SimpleQnAFineTuningQuestionType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ShortAnswer",
+              "LongAnswer"
+            ]
+          }
+        ],
+        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
+      },
+      "SingleTurnDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SingleTurn"
+            ],
+            "description": "The data generation job type, which is SingleTurn for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with SingleTurn type."
+      },
       "SkillObject": {
         "type": "object",
         "required": [
@@ -38998,6 +40022,30 @@
         },
         "title": "AzureAIEvaluatorGrader"
       },
+      "TokenUsage": {
+        "type": "object",
+        "properties": {
+          "prompt_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of prompt tokens used.",
+            "readOnly": true
+          },
+          "completion_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of completion tokens generated.",
+            "readOnly": true
+          },
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of tokens used.",
+            "readOnly": true
+          }
+        },
+        "description": "Token usage information for a data generation job."
+      },
       "ToolCallOutputContent": {
         "anyOf": [
           {
@@ -39050,6 +40098,27 @@
           }
         },
         "description": "A project connection resource."
+      },
+      "ToolUseFineTuningDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "ToolUse"
+            ],
+            "description": "The data generation job type, which is ToolUse for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios."
       },
       "ToolboxObject": {
         "type": "object",
@@ -39149,6 +40218,59 @@
           }
         },
         "description": "A specific version of a toolbox."
+      },
+      "TracesDataGenerationJobSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "agent_name",
+          "start_time"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "Traces"
+            ],
+            "description": "The source type for this job, which is Traces."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "The agent name to fetch the traces for data generation. The traces will be fetched based on the agent name from the project connected Application Insights within the specified time window."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "The agent version to fetch the traces for data generation. If not specified, the latest version of the agent will be used."
+          },
+          "start_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The start of the time window (in Unix timestamp in seconds) for fetching traces. This defines the beginning of the time range for which traces will be considered for data generation."
+          },
+          "end_time": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FoundryTimestamp"
+              }
+            ],
+            "description": "The end of the time window (in Unix timestamp in seconds) for fetching traces. This defines the end of the time range for which traces will be considered for data generation. If not specified, it will default to the current time, meaning that traces up until now will be considered for data generation."
+          },
+          "max_traces": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Sampling limit applied to traces retrieved for data generation.",
+            "default": 1000
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobSource"
+          }
+        ],
+        "description": "The options for a data generation job with Traces source used for Evaluation and Fine-tuning scenarios, which includes the agent name and the time window for fetching traces."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
