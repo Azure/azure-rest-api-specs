@@ -35,6 +35,3 @@ using Common;
   "SecureScoreControlDefinitions"
 );
 @@visibility(SecureScoreItem.properties, Lifecycle.Read);
-
-
-

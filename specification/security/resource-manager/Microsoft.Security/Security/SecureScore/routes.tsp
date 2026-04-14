@@ -66,6 +66,3 @@ interface SecureScoreControlDefinitionsOperationGroup {
     Error = CloudError
   >;
 }
-
-
-

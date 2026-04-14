@@ -76,6 +76,3 @@ interface SecureScoreItems {
   "The initiative name. For the ASC Default initiative, use 'ascScore' as in the sample request below."
 );
 @@doc(SecureScoreItem.properties, "Secure score item");
-
-
-
