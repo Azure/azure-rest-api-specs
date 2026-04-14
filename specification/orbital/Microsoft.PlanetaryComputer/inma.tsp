@@ -1003,12 +1003,12 @@ interface StacCollections {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
-  @doc("Create or replace a collection in the GeoCatalog instance")
-  @summary("Create or update Collection")
+  @doc("Replace an existing collection in the GeoCatalog instance")
+  @summary("Replace Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/collections")
   @put
-  createOrReplace(
+  replace(
     ...CollectionParameters,
 
     @doc("Request collection body")

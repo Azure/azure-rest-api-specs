@@ -127,7 +127,7 @@ interface Stac {
 
   // STAC Collections
   createCollection is StacCollections.create;
-  createOrReplaceCollection is StacCollections.createOrReplace;
+  replaceCollection is StacCollections.replace;
   deleteCollection is StacCollections.delete;
   getCollection is StacCollections.get;
 
@@ -279,7 +279,7 @@ interface Data {
   // Tiles
   #suppress "deprecated" "Preview-only operation, removed in stable version"
   @removed(Versions.v2026_04_15)
-  getTile is TilerTileMatrixSets.getZxyScaleByFormat;
+  getTilePreviewDeprecated is TilerTileMatrixSets.getZxyScaleByFormat;
   // getTile is TilerTiles.getZxyScaleByFormat;
 
   // WMTS Capabilities
@@ -335,7 +335,7 @@ interface Data {
 
   // Item Tile Variants (TileMatrixSetId as path)
   @added(Versions.v2026_04_15)
-  getTilePlain is MosaicItemsTileMatrixSetsPlain.getZxy;
+  getTile is MosaicItemsTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
   getTileByFormat is MosaicItemsTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
@@ -345,7 +345,7 @@ interface Data {
 
   // Item Tile Variants (without TileMatrixSetId in path)
   @added(Versions.v2026_04_15)
-  getTileNoTmsPlain is MosaicItemsTilesPlain.getZxy;
+  getTileNoTms is MosaicItemsTilesPlain.getZxy;
   @added(Versions.v2026_04_15)
   getTileNoTmsByFormat is MosaicItemsTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
@@ -425,9 +425,9 @@ interface Data {
 
   // Collection Tiles (TileMatrixSetId as path)
   @added(Versions.v2026_04_15)
-  getCollectionTile is MosaicCollectionsTileMatrixSets.getZxyScaleByFormat;
+  getCollectionTileByScaleAndFormat is MosaicCollectionsTileMatrixSets.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTilePlain is MosaicCollectionsTileMatrixSetsPlain.getZxy;
+  getCollectionTile is MosaicCollectionsTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
   getCollectionTileByFormat is MosaicCollectionsTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
@@ -435,9 +435,9 @@ interface Data {
 
   // Collection Tiles (without TileMatrixSetId in path)
   @added(Versions.v2026_04_15)
-  getCollectionTileNoTms is MosaicCollectionsTiles.getZxyScaleByFormat;
+  getCollectionTileNoTmsByScaleAndFormat is MosaicCollectionsTiles.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTileNoTmsPlain is MosaicCollectionsTilesPlain.getZxy;
+  getCollectionTileNoTms is MosaicCollectionsTilesPlain.getZxy;
   @added(Versions.v2026_04_15)
   getCollectionTileNoTmsByFormat is MosaicCollectionsTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
@@ -496,9 +496,9 @@ interface Data {
   getSearchesTilesetMetadata is MosaicSearchesTileSetMetadata.get;
   // #3 - Searches Tiles with TileMatrixSetId (4 variants)
   @added(Versions.v2026_04_15)
-  getSearchesTile is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
+  getSearchesTileByScaleAndFormat is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getSearchesTilePlain is MosaicSearchesTileMatrixSetsPlain.getZxy;
+  getSearchesTile is MosaicSearchesTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
   getSearchesTileByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
@@ -534,13 +534,13 @@ interface Data {
   @added(Versions.v2026_04_15)
   getSearchesTileJson is MosaicSearchesTileJson.get;
   @added(Versions.v2026_04_15)
-  getSearchesTileNoTmsPlain is MosaicSearchesTilesPlain.getZxy;
+  getSearchesTileNoTms is MosaicSearchesTilesPlain.getZxy;
   @added(Versions.v2026_04_15)
   getSearchesTileNoTmsByFormat is MosaicSearchesTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
   getSearchesTileNoTmsByScale is MosaicSearchesTilesScale.getZxyByScale;
   @added(Versions.v2026_04_15)
-  getSearchesTileNoTms is MosaicSearchesTiles.getZxyScaleByFormat;
+  getSearchesTileNoTmsByScaleAndFormat is MosaicSearchesTiles.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
   getSearchesAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
   // Searches Point
