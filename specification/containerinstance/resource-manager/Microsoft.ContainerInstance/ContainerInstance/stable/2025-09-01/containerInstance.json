@@ -2376,19 +2376,21 @@
           "description": "The container group profile properties",
           "x-ms-client-flatten": true
         },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "zones": {
           "type": "array",
           "description": "The availability zones.",
           "items": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
             "type": "string"
           }
         }
@@ -4128,10 +4130,12 @@
           "x-ms-client-flatten": true
         },
         "location": {
-          "$ref": "#/definitions/Azure.Core.azureLocation"
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives"
         },
         "tags": {
           "type": "object",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }

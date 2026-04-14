@@ -25,11 +25,11 @@ model NGroup
     NamePattern = "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
   >;
 
+  /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   location?: azureLocation;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 

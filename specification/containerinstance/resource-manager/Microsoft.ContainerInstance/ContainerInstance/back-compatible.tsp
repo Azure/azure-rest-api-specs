@@ -46,6 +46,14 @@ using Microsoft.ContainerInstance;
 @@clientName(ContainerGroupProfiles.createOrUpdate::parameters.resource,
   "ContainerGroupProfile"
 );
+// C# needs clientLocation to route ContainerGroupProfile CRUD ops to the correct resource.
+// Without these, the generator uses the CGProfile interface name instead of ContainerGroupProfile.
+@@clientLocation(ContainerGroupProfiles.get, CGProfile, "csharp");
+@@clientLocation(ContainerGroupProfiles.createOrUpdate, CGProfile, "csharp");
+@@clientLocation(ContainerGroupProfiles.update, CGProfile, "csharp");
+@@clientLocation(ContainerGroupProfiles.delete, CGProfile, "csharp");
+@@clientLocation(ContainerGroupProfiles.listBySubscription, "CGProfiles", "csharp");
+@@clientLocation(ContainerGroupProfiles.listByResourceGroup, "CGProfiles", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerGroupProfile.properties);
 
