@@ -1,0 +1,75 @@
+{
+  "title": "MosaicsRegisterSearch_Register",
+  "operationId": "MosaicsRegisterSearch_Register",
+  "parameters": {
+    "api-version": "2026-04-15",
+    "body": {
+      "filter": {
+        "op": "and",
+        "args": [
+          {
+            "op": "=",
+            "args": [
+              {
+                "property": "collection"
+              },
+              "naip-atl"
+            ]
+          },
+          {
+            "op": ">=",
+            "args": [
+              {
+                "property": "datetime"
+              },
+              "2021-01-01T00:00:00Z"
+            ]
+          },
+          {
+            "op": "<=",
+            "args": [
+              {
+                "property": "datetime"
+              },
+              "2022-12-31T23:59:59Z"
+            ]
+          }
+        ]
+      },
+      "filter-lang": "cql2-json",
+      "sortby": [
+        {
+          "direction": "desc",
+          "field": "datetime"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "searchid": "ba13fc7947b9b585690d84ee61aaa653",
+        "links": [
+          {
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/info",
+            "rel": "metadata",
+            "type": "application/json",
+            "title": "Mosaic metadata"
+          },
+          {
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/tilejson.json",
+            "rel": "tilejson",
+            "type": "application/json",
+            "title": "Link for TileJSON"
+          },
+          {
+            "href": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/data/mosaic/ba13fc7947b9b585690d84ee61aaa653/WMTSCapabilities.xml",
+            "rel": "wmts",
+            "type": "application/json",
+            "title": "Link for WMTS"
+          }
+        ]
+      }
+    }
+  }
+}

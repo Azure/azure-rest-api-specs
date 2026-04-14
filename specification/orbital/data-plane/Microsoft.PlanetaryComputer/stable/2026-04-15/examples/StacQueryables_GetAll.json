@@ -1,0 +1,43 @@
+{
+  "title": "StacQueryables_GetAll",
+  "operationId": "StacQueryables_GetAll",
+  "parameters": {
+    "api-version": "2026-04-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "$id": "https://Sanitized.sanitized_label.sanitized_location.geocatalog.spatio.azure.com/stac/queryables?api-version=2026-04-15",
+        "type": "object",
+        "title": "STAC Queryables.",
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "properties": {
+          "id": {
+            "title": "Item ID",
+            "description": "Item identifier"
+          },
+          "datetime": {
+            "type": "string",
+            "title": "Acquired",
+            "format": "date-time",
+            "pattern": "(\\+00:00|Z)$",
+            "description": "Datetime"
+          },
+          "geometry": {
+            "title": "Item Geometry",
+            "description": "Item Geometry"
+          },
+          "test:property": {
+            "data_type": "number",
+            "description": "Test property - updated"
+          },
+          "eo:cloud_cover": {
+            "data_type": "number",
+            "description": "Cloud cover percentage"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}
