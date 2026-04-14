@@ -98,8 +98,15 @@ op encrypt is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when encrypting so you can reliably decrypt using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for encryption, key rotation can make the data inaccessible.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -134,8 +141,15 @@ op decrypt is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when encrypting so you can reliably decrypt using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for encryption, key rotation can make the data inaccessible.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -170,8 +184,15 @@ op sign is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when signing so you can reliably verify using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for signing, key rotation can make the data unverifiable.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -206,8 +227,15 @@ op verify is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when signing so you can reliably verify using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for signing, key rotation can make the data unverifiable.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -242,8 +270,15 @@ op wrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -278,8 +313,15 @@ op unwrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -316,8 +358,15 @@ op secureWrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -355,8 +404,15 @@ op secureUnwrapKey is KeyVaultOperation<
     /**
      * The version of the key.
      */
+    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
     @path("key-version")
     @clientName("version", "go")
+    @clientDoc(
+      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
+      DocumentationMode.append,
+      "rust"
+    )
+    @clientOption("minLength", 0, "rust")
     keyVersion: string;
 
     /**
@@ -446,6 +502,8 @@ op getKeyAttestation is KeyVaultOperation<
 @@override(KeyVault.verify, verify);
 @@override(KeyVault.wrapKey, wrapKey);
 @@override(KeyVault.unwrapKey, unwrapKey);
+@@override(KeyVault.secureWrapKey, secureWrapKey);
+@@override(KeyVault.secureUnwrapKey, secureUnwrapKey);
 @@override(KeyVault.release, release, "!rust");
 @@override(KeyVault.getKeyAttestation, getKeyAttestation, "!rust");
 
