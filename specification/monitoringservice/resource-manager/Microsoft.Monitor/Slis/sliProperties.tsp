@@ -37,10 +37,10 @@ model SignalSource {
   signalSourceId: string;
 
   @doc("Managed identity for authenticating the signal source.")
-  sourceAmwAccountManagedIdentity: string;
+  sourceAmwAccountManagedIdentity: Azure.Core.armResourceIdentifier;
 
   @doc("Resource ID of the source AMW account.")
-  sourceAmwAccountResourceId: string;
+  sourceAmwAccountResourceId: Azure.Core.armResourceIdentifier;
 
   @doc("Namespace of the metric.")
   metricNamespace: string;

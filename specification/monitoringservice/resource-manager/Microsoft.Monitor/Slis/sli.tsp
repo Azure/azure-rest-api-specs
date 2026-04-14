@@ -13,7 +13,7 @@ namespace Microsoft.Monitor;
 @doc("Represents an SLI resource within the ProviderHub.")
 model Sli is ProxyResource<SliResource> {
   @doc("Name of the SLI that is given by the user.")
-  @pattern("^[a-zA-Z0-9_()~-]{3,64}$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_()~-]{2,63}$")
   @key("sliName")
   @segment("slis")
   @path
@@ -81,10 +81,10 @@ model ExecutionState {
 @doc("Represents an Azure Monitor Workspace (AMW) account used for emitting metrics.")
 model AmwAccount {
   @doc("The ARM resource ID of the account where metrics are emitted.")
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   @doc("The ARM resource ID of the managed identity with access to the source account.")
-  identity: string;
+  identity: Azure.Core.armResourceIdentifier;
 }
 
 @doc("Defines a metric in the destination AMW account.")

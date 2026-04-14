@@ -150,7 +150,7 @@
             "description": "Name of the SLI that is given by the user.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_()~-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_()~-]{2,63}$"
           }
         ],
         "responses": {
@@ -192,7 +192,7 @@
             "description": "Name of the SLI that is given by the user.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_()~-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_()~-]{2,63}$"
           },
           {
             "name": "resource",
@@ -249,7 +249,7 @@
             "description": "Name of the SLI that is given by the user.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9_()~-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_()~-]{2,63}$"
           }
         ],
         "responses": {
@@ -281,10 +281,12 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource ID of the account where metrics are emitted."
         },
         "identity": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource ID of the managed identity with access to the source account."
         }
       },
@@ -566,6 +568,7 @@
         },
         "documentationLink": {
           "type": "string",
+          "format": "uri",
           "description": "The message documentation link."
         },
         "statementContext": {
@@ -1062,10 +1065,12 @@
         },
         "sourceAmwAccountManagedIdentity": {
           "type": "string",
+          "format": "arm-id",
           "description": "Managed identity for authenticating the signal source."
         },
         "sourceAmwAccountResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Resource ID of the source AMW account."
         },
         "metricNamespace": {

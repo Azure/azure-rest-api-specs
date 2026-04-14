@@ -139,7 +139,7 @@ model ExecutionMessage {
   text: string;
 
   @doc("The message documentation link.")
-  documentationLink: string;
+  documentationLink: url;
 
   @doc("The message statement context.")
   statementContext: StatementContextInformation;
