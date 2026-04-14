@@ -229,4 +229,9 @@ namespace Azure.AI.Projects {
   @@access(AgentSessionFiles.downloadSessionFile, Access.internal);
   @@access(AgentSessionFiles.listSessionFiles, Access.internal);
   @@access(AgentSessionFiles.deleteSessionFile, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Skills sub‐client
+  // --------------------------------------------------------------------------------
+  @@clientName(SkillObject, "AgentsSkill");
 }
