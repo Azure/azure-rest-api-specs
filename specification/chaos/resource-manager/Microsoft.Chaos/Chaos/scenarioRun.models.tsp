@@ -131,14 +131,31 @@ model ZoneResolutionInfo {
   requestedPhysicalZones: string[];
 
   /**
-   * Per-subscription resolution map. Keys are subscription IDs, values
-   * are the logical zone identifier resolved for that subscription
-   * (e.g., `"1"`, `"2"`, `"3"`).
+   * Per-subscription zone resolution results. Each entry maps a subscription
+   * to the logical zone resolved from the requested physical zone.
    * Empty when `mode` is `logical`.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "subscriptionZoneMap is a dynamic map keyed by subscription ID; explicit typing is not feasible."
   @visibility(Lifecycle.Read)
-  subscriptionZoneMap: Record<string>;
+  @identifiers(#["subscriptionId"])
+  subscriptionZoneMappings: ZoneResolutionMapping[];
+}
+
+/**
+ * Maps a single subscription to its resolved logical zone.
+ */
+model ZoneResolutionMapping {
+  /**
+   * The subscription ID (e.g., `"6b052e15-03d3-4f17-b2e1-be7f07588291"`).
+   */
+  @visibility(Lifecycle.Read)
+  subscriptionId: string;
+
+  /**
+   * The logical availability zone resolved for this subscription
+   * (e.g., `"1"`, `"2"`, `"3"`).
+   */
+  @visibility(Lifecycle.Read)
+  logicalZone: string;
 }
 
 /**
