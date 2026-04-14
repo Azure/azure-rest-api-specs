@@ -347,34 +347,47 @@ model TimeWindowCustomAlertRule extends ThresholdCustomAlertRule {
 /**
  * A custom alert rule that checks if a value (depends on the custom alert type) is allowed.
  */
-model AllowlistCustomAlertRule extends ListCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ListCustomAlertRule)
+model AllowlistCustomAlertRule extends CustomAlertRule {
+  ...AllowlistCustomAlertRuleProperties;
+  ruleType: "AllowlistCustomAlertRule";
+}
+
+alias AllowlistCustomAlertRuleProperties = {
+  ...ListCustomAlertRuleProperties;
+
   /**
    * The values to allow. The format of the values depends on the rule type.
    */
   allowlistValues: string[];
-}
-
+};
 /**
  * A List custom alert rule.
  */
 model ListCustomAlertRule extends CustomAlertRule {
+  ...ListCustomAlertRuleProperties;
+  ruleType: "ListCustomAlertRule";
+}
+
+alias ListCustomAlertRuleProperties = {
   /**
    * The value type of the items in the list.
    */
   @visibility(Lifecycle.Read)
   valueType?: ValueType;
-
-  ruleType: "ListCustomAlertRule";
-}
-
+};
 /**
  * A custom alert rule that checks if a value (depends on the custom alert type) is denied.
  */
-model DenylistCustomAlertRule extends ListCustomAlertRule {
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ListCustomAlertRule)
+model DenylistCustomAlertRule extends CustomAlertRule {
   /**
    * The values to deny. The format of the values depends on the rule type.
    */
   denylistValues: string[];
+
+  ...ListCustomAlertRuleProperties;
+  ruleType: "DenylistCustomAlertRule";
 }
 
 /**
@@ -864,22 +877,38 @@ model UpdateIoTSecuritySolutionProperties {
 /**
  * Outbound connection to an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
-model ConnectionToIpNotAllowed extends AllowlistCustomAlertRule {}
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
+model ConnectionToIpNotAllowed extends CustomAlertRule {
+  ...AllowlistCustomAlertRuleProperties;
+  ruleType: "ConnectionToIpNotAllowed";
+}
 
 /**
  * Inbound connection from an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
-model ConnectionFromIpNotAllowed extends AllowlistCustomAlertRule {}
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
+model ConnectionFromIpNotAllowed extends CustomAlertRule {
+  ...AllowlistCustomAlertRuleProperties;
+  ruleType: "ConnectionFromIpNotAllowed";
+}
 
 /**
  * Login by a local user that isn't allowed. Allow list consists of login names to allow.
  */
-model LocalUserNotAllowed extends AllowlistCustomAlertRule {}
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
+model LocalUserNotAllowed extends CustomAlertRule {
+  ...AllowlistCustomAlertRuleProperties;
+  ruleType: "LocalUserNotAllowed";
+}
 
 /**
  * Execution of a process that isn't allowed. Allow list consists of process names to allow.
  */
-model ProcessNotAllowed extends AllowlistCustomAlertRule {}
+@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
+model ProcessNotAllowed extends CustomAlertRule {
+  ...AllowlistCustomAlertRuleProperties;
+  ruleType: "ProcessNotAllowed";
+}
 
 /**
  * Number of active connections is not in allowed range.
