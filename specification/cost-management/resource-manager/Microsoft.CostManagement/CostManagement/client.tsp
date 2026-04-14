@@ -384,7 +384,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 );
 @@alternateType(CostManagementProxyResource.eTag, Azure.Core.eTag, "csharp");
 
-// @@alternateType(CostManagementResource, Azure.ResourceManager.CommonTypes.Resource, "csharp");
 
 model ForecastResultReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
