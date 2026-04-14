@@ -1284,9 +1284,9 @@ model HealthReportRequest {
 @added(Versions.v2026_05_01_preview)
 @doc("Request body for adding a data annotation to an entity")
 model DataAnnotationRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for dynamic annotation properties"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation properties are user-defined key-value pairs with arbitrary keys that cannot be modeled with a fixed schema"
   @doc("Annotation properties as a dynamic key-value pair bag")
-  annotationDetails: Record<string>;
+  annotationDetails: Record<string4096>;
 
   @doc("Optional description of the annotation")
   description?: string4096;
@@ -1296,11 +1296,12 @@ model DataAnnotationRequest {
 @doc("A single data annotation on an entity")
 model DataAnnotation {
   @doc("Server-assigned unique identifier for the annotation")
+  @maxLength(36)
   annotationId: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for dynamic annotation properties"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation properties are user-defined key-value pairs with arbitrary keys that cannot be modeled with a fixed schema"
   @doc("Annotation properties as a dynamic key-value pair bag")
-  annotationDetails: Record<string>;
+  annotationDetails: Record<string4096>;
 
   @doc("Optional description of the annotation")
   description?: string4096;
@@ -1317,6 +1318,9 @@ model GetDataAnnotationsRequest {
 
   @doc("End of UTC time range. Defaults to now if not specified.")
   endAt?: utcDateTime;
+
+  @doc("Continuation token from a previous response to retrieve the next page of results.")
+  continuationToken?: string;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1329,8 +1333,9 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
-  @doc("Link to the next page of results")
-  nextLink?: url;
+  @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a pagination cursor, not a secret"
+  continuationToken?: string;
 }
 
 @added(Versions.v2026_01_01_preview)
