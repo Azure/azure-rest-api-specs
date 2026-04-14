@@ -4044,6 +4044,48 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebases",
   "java"
 );
+@@clientNamespace(Search.PurviewSensitivityLabelInfo,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.PurviewSensitivityLabelInfo,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.WorkIQKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.WorkIQKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseWorkIQActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseWorkIQActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseWorkIQActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseWorkIQActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeBaseWorkIQReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseWorkIQReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.WorkIQAttribution,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.WorkIQAttribution,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
 // Java sends the default value on `accept` header. User can override via `RequestOptions`.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
 @@clientOption(Search.acceptHeaderMinimal.accept,
