@@ -24,6 +24,7 @@ namespace Customizations;
 // );
 @@clientName(StacItemProperties.datetime, "date_time", "python");
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
+@@clientName(SharedAccessSignature, "Sas", "python");
 
 // Disable convenient API for JSON-Merge patch operations
 @@convenientAPI(Ingestions.update, false, "csharp,java");
