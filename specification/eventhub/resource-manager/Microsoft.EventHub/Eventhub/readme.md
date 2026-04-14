@@ -263,7 +263,7 @@ These settings apply only when `--tag=package-2025-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2025-05-preview'
 input-file:
-- preview/2025-05-01-preview/eventhub.json
+- preview/2025-05-01-preview/openapi.json
 ```
 
 ## Suppression
@@ -335,7 +335,7 @@ directive:
     from: namespaces.json
     reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
   - suppress: LroErrorContent
-    from: eventhub.json
+    from: openapi.json
     reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
