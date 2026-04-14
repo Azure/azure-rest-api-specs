@@ -3652,25 +3652,21 @@
       "type": "object",
       "description": "A compliance detail item for a resource in the sovereign view compliance details action.",
       "properties": {
-        "dimension": {
-          "$ref": "#/definitions/ComplianceDimension",
-          "description": "The compliance dimension for the compliance detail."
-        },
-        "policyInitiativeId": {
+        "policyAssignmentId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The fully qualified id of the policy initiative.",
+          "description": "The policy assignment for the compliance detail.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.Authorization/policySetDefinitions"
+                "type": "Microsoft.Authorization/policyAssignments"
               }
             ]
           }
         },
         "policyState": {
           "$ref": "#/definitions/PolicyComplianceState",
-          "description": "The compliance state of the resource for the policy initiative."
+          "description": "The compliance state of the resource for the policy assignment."
         },
         "evaluatedAt": {
           "type": "string",
@@ -3679,8 +3675,7 @@
         }
       },
       "required": [
-        "dimension",
-        "policyInitiativeId",
+        "policyAssignmentId",
         "policyState"
       ]
     },
@@ -3700,22 +3695,21 @@
           "type": "string",
           "description": "The location of the resource."
         },
-        "complianceDetails": {
+        "dimensionDetails": {
           "type": "array",
-          "description": "The compliance details for the resource.",
+          "description": "The compliance details for the resource across the dimensions.",
           "items": {
-            "$ref": "#/definitions/SovereignViewComplianceDetail"
+            "$ref": "#/definitions/SovereignViewDimensionDetail"
           },
           "x-ms-identifiers": [
-            "dimension",
-            "policyInitiativeId"
+            "dimension"
           ]
         }
       },
       "required": [
         "resourceId",
         "location",
-        "complianceDetails"
+        "dimensionDetails"
       ]
     },
     "SovereignViewComplianceDetailsDimensionFilter": {
@@ -4049,6 +4043,35 @@
         "lastEvaluated",
         "overallSummary",
         "dimensionSummaries"
+      ]
+    },
+    "SovereignViewDimensionDetail": {
+      "type": "object",
+      "description": "A compliance detail item for a resource in the sovereign view compliance details action.",
+      "properties": {
+        "dimension": {
+          "$ref": "#/definitions/ComplianceDimension",
+          "description": "The compliance dimension for the compliance detail."
+        },
+        "state": {
+          "$ref": "#/definitions/PolicyComplianceState",
+          "description": "The compliance state of the resource for the dimension."
+        },
+        "complianceDetails": {
+          "type": "array",
+          "description": "The compliance details for the given dimension.",
+          "items": {
+            "$ref": "#/definitions/SovereignViewComplianceDetail"
+          },
+          "x-ms-identifiers": [
+            "policyAssignmentId"
+          ]
+        }
+      },
+      "required": [
+        "dimension",
+        "state",
+        "complianceDetails"
       ]
     },
     "SovereignViewPolicyInitiativeDetail": {

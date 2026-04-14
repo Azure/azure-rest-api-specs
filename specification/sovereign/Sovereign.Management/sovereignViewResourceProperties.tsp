@@ -273,25 +273,36 @@ model SovereignViewComplianceDetailResource {
   @doc("The location of the resource.")
   location: string;
 
-  @doc("The compliance details for the resource.")
-  @identifiers(#["dimension", "policyInitiativeId"])
+  @doc("The compliance details for the resource across the dimensions.")
+  @identifiers(#["dimension"])
+  dimensionDetails: SovereignViewDimensionDetail[];
+}
+
+@added(Versions.Preview20260315)
+@doc("A compliance detail item for a resource in the sovereign view compliance details action.")
+model SovereignViewDimensionDetail {
+  @doc("The compliance dimension for the compliance detail.")
+  dimension: ComplianceDimension;
+
+  @doc("The compliance state of the resource for the dimension.")
+  state: PolicyComplianceState;
+
+  @doc("The compliance details for the given dimension.")
+  @identifiers(#["policyAssignmentId"])
   complianceDetails: SovereignViewComplianceDetail[];
 }
 
 @added(Versions.Preview20260315)
 @doc("A compliance detail item for a resource in the sovereign view compliance details action.")
 model SovereignViewComplianceDetail {
-  @doc("The compliance dimension for the compliance detail.")
-  dimension: ComplianceDimension;
-
-  @doc("The fully qualified id of the policy initiative.")
-  policyInitiativeId: armResourceIdentifier<[
+  @doc("The policy assignment for the compliance detail.")
+  policyAssignmentId: armResourceIdentifier<[
     {
-      type: "Microsoft.Authorization/policySetDefinitions";
+      type: "Microsoft.Authorization/policyAssignments";
     }
   ]>;
 
-  @doc("The compliance state of the resource for the policy initiative.")
+  @doc("The compliance state of the resource for the policy assignment.")
   policyState: PolicyComplianceState;
 
   @doc("The time when compliance was last evaluated by Azure Policy, in RFC3339 format.")
