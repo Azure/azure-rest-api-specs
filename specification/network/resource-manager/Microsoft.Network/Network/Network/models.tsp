@@ -25999,3 +25999,122 @@ model VirtualNetworkApplianceIpConfigurationProperties {
   #["addressLocation"]
 );
 @@identifiers(GetServiceGatewayServicesResult.value, #["name"]);
+
+/**
+ * Properties of the KubeSelectorGroup resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
+@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@added(Versions.v2025_07_01)
+model KubeSelectorGroupProperties {
+  /**
+   * The ARM resource IDs of the managedClusters associated with this KubeSelectorGroup.
+   */
+  clusterIds?: string[];
+
+  /**
+   * The label selector for matching Kubernetes pods.
+   */
+  selector?: KubeSelectorGroupSelector;
+
+  /**
+   * The firewall policy IDs referencing this KubeSelectorGroup. System-managed, read-only.
+   */
+  @visibility(Lifecycle.Read)
+  firewallPolicyIds?: SubResource[];
+
+  /**
+   * The provisioning state of the KubeSelectorGroup resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Label selector for matching Kubernetes pods.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
+@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@added(Versions.v2025_07_01)
+model KubeSelectorGroupSelector {
+  /**
+   * Pod label key-value pairs (AND semantics).
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "matchLabels is a free-form key-value map of Kubernetes labels"
+  matchLabels?: Record<string>;
+
+  /**
+   * Set-based label selector requirements (AND semantics with matchLabels).
+   */
+  @identifiers(#["key"])
+  matchExpressions?: KubeSelectorMatchExpression[];
+
+  /**
+   * The namespace selector for scoping by namespace labels.
+   */
+  namespaceSelector?: KubeSelectorGroupNamespaceSelector;
+}
+
+/**
+ * Namespace selector for scoping by namespace labels.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
+@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@added(Versions.v2025_07_01)
+model KubeSelectorGroupNamespaceSelector {
+  /**
+   * Namespace label key-value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "matchLabels is a free-form key-value map of Kubernetes labels"
+  matchLabels?: Record<string>;
+
+  /**
+   * Set-based namespace label selector requirements.
+   */
+  @identifiers(#["key"])
+  matchExpressions?: KubeSelectorMatchExpression[];
+}
+
+/**
+ * A set-based label selector requirement for matching Kubernetes labels.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
+@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
+@added(Versions.v2025_07_01)
+model KubeSelectorMatchExpression {
+  /**
+   * The label key that the selector applies to.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a Kubernetes label key, not a secret"
+  key?: string;
+
+  /**
+   * The operator representing the relationship between the label key and values. Supported values are In, NotIn, Exists, and DoesNotExist.
+   */
+  `operator`?: KubeSelectorMatchExpressionOperator;
+
+  /**
+   * The set of values. Required for In and NotIn operators, must be empty for Exists and DoesNotExist.
+   */
+  values?: string[];
+}
+
+/**
+ * The operator for a KubeSelectorMatchExpression.
+ */
+@added(Versions.v2025_07_01)
+union KubeSelectorMatchExpressionOperator {
+  string,
+
+  /** Matches when the label value is in the specified set. */
+  In: "In",
+
+  /** Matches when the label value is not in the specified set. */
+  NotIn: "NotIn",
+
+  /** Matches when the label key exists, regardless of value. */
+  Exists: "Exists",
+
+  /** Matches when the label key does not exist. */
+  DoesNotExist: "DoesNotExist",
+}

@@ -4970,6 +4970,42 @@
         ]
       }
     },
+    "KubeSelectorMatchExpressionOperator": {
+      "type": "string",
+      "description": "The operator for a KubeSelectorMatchExpression.",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "KubeSelectorMatchExpressionOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "Matches when the label value is in the specified set."
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "Matches when the label value is not in the specified set."
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "Matches when the label key exists, regardless of value."
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "Matches when the label key does not exist."
+          }
+        ]
+      }
+    },
     "LoadBalancerBackendAddressAdminState": {
       "type": "string",
       "description": "A list of administrative states which once set can override health probe so that Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections.",

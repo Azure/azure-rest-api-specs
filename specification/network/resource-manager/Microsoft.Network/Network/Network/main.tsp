@@ -47,6 +47,7 @@ import "./IpamPool.tsp";
 import "./StaticCidr.tsp";
 import "./IpAllocation.tsp";
 import "./IpGroup.tsp";
+import "./KubeSelectorGroup.tsp";
 import "./LoadBalancer.tsp";
 import "./BackendAddressPool.tsp";
 import "./FrontendIPConfiguration.tsp";
