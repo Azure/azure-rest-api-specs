@@ -182,7 +182,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 
 @doc("Request body for evaluator generation. If an evaluator with this name already exists, the service automatically retrieves the latest version's criteria as context for improvement.")
 model GenerateEvaluatorRequest {
-  @doc("Source materials for generation — agent prompts or uploaded files.")
+  @doc("Source materials for generation — agent prompts or datasets.")
   sources: EvaluatorGenerationJobSource[];
 
   @doc("Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure.")
@@ -191,8 +191,8 @@ model GenerateEvaluatorRequest {
   @doc("When true (default), the generated evaluator is saved as a new version immediately. When false, returns an unsaved preview for experimentation — call createVersion to persist.")
   persist?: boolean = true;
 
-  @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Defaults to service default.")
-  model?: string;
+  @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity. This avoids LLM capacity constraints, reduces 429 retries, and aligns with Foundry's deployment-less model selection.")
+  model: string;
 }
 
 @doc("Evaluator Definition")
