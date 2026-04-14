@@ -680,7 +680,7 @@ model MetadataSupportedValueDetail {
   id?: string;
 
   /**
-   * The previous value of the id field incase the data has changed.
+   * The previous value of the id field in case the data has changed.
    */
   previousId?: string;
 
