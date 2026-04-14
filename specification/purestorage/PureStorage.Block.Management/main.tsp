@@ -1195,10 +1195,16 @@ interface SaaSOperationGroup {
   @doc("Activate the SaaS resource")
   @autoRoute
   @action("activateSaaS")
+  @Azure.Core.useFinalStateVia("location")
   activateResource is ArmProviderActionAsync<
     Request = ActivateSaaSRequest,
-    Response = SaaSResourceDetailsResponse,
+    Response = ArmAcceptedLroResponse<
+      "SaaS resource activation accepted",
+      ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse>
+    >,
     Scope = SubscriptionActionScope,
-    Parameters = {}
+    Parameters = {},
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
