@@ -28,7 +28,19 @@ These are the global settings for the FrontDoor API.
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2025-11
+tag: package-2026-04
+```
+
+### Tag: package-2026-04
+
+These settings apply only when `--tag=package-2026-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04'
+input-file:
+  - stable/2026-04-01/network.json
+  - stable/2026-04-01/webapplicationfirewall.json
+  - stable/2021-06-01/frontdoor.json
+  - stable/2019-11-01/networkexperiment.json
 ```
 
 ### Tag: package-2025-11
