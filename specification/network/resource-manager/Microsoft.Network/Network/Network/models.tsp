@@ -26092,7 +26092,7 @@ model KubeSelectorMatchExpression {
   /**
    * The operator representing the relationship between the label key and values. Supported values are In, NotIn, Exists, and DoesNotExist.
    */
-  `operator`?: KubeSelectorMatchExpressionOperator;
+  operator?: KubeSelectorMatchExpressionOperator;
 
   /**
    * The set of values. Required for In and NotIn operators, must be empty for Exists and DoesNotExist.

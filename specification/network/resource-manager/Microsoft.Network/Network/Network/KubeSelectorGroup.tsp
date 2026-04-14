@@ -4,12 +4,14 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Common;
 
 namespace Microsoft.Network;
 
@@ -23,7 +25,7 @@ namespace Microsoft.Network;
 @Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2025_07_01)
-model KubeSelectorGroup extends Resource {
+model KubeSelectorGroup extends Common.Resource {
   properties?: KubeSelectorGroupProperties;
 
   @visibility(Lifecycle.Read)
@@ -85,9 +87,7 @@ interface KubeSelectorGroups {
   listAll is ArmListBySubscription<KubeSelectorGroup, Error = CloudError>;
 }
 
-@@doc(KubeSelectorGroup.name,
-  "The name of the KubeSelectorGroup."
-);
+@@doc(KubeSelectorGroup.name, "The name of the KubeSelectorGroup.");
 @@doc(KubeSelectorGroup.properties,
   "Properties of the KubeSelectorGroup resource."
 );
