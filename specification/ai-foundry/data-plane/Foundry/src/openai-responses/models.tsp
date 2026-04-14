@@ -29,12 +29,6 @@ namespace Azure.AI.Projects {
       @removed(Versions.v1)
       agent?: AgentReference,
 
-      /** The agent to use for generating the response. */
-      agent_reference?: AgentReference,
-
-      /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
-      structured_inputs?: Record<unknown>,
-
       /**
        * Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
        * When provided, the request is routed to the same sandbox. When omitted, auto-derived from
@@ -42,8 +36,20 @@ namespace Azure.AI.Projects {
        */
       @removed(Versions.v1)
       agent_session_id?: string,
+
+      ...AzureCreateResponseOptions,
     }
   );
+
+  // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
+  /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
+  model AzureCreateResponseOptions {
+    /** The agent to use for generating the response. */
+    agent_reference?: AgentReference;
+
+    /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
+    structured_inputs?: Record<unknown>;
+  }
 
   @@copyProperties(OpenAI.Response,
     {
@@ -54,9 +60,6 @@ namespace Azure.AI.Projects {
       @removed(Versions.v1)
       agent?: AgentId,
 
-      /** The agent used for this response */
-      agent_reference: AgentReference | null,
-
       /**
        * The session identifier for this response. Currently only relevant for hosted agents.
        * Always returned for hosted agents — either the caller-provided value, the auto-derived value,
@@ -65,8 +68,17 @@ namespace Azure.AI.Projects {
        */
       @removed(Versions.v1)
       agent_session_id?: string,
+
+      ...AzureCreateResponseDetails,
     }
   );
+
+  // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
+  /** Azure specific fields returned in a "Response" object */
+  model AzureCreateResponseDetails {
+    /** The agent used for this response */
+    agent_reference: AgentReference | null;
+  }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
   @@copyProperties(OpenAI.CodeInterpreterTool,

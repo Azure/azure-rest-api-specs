@@ -20,6 +20,9 @@ import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
+import "./src/toolboxes/routes.tsp";
+import "./src/skills/routes.tsp";
+import "./src/agents-session-files/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
@@ -60,11 +63,12 @@ using Azure.AI.Projects;
 @@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
 @@clientName(Agents.listAgentVersions, "listVersions", "javascript");
 
-// Suppress these operations from Python and JavaScript SDK public surface.
-@@access(Agents.createAgent, Access.internal);
-@@access(Agents.updateAgent, Access.internal);
-@@access(Agents.createAgentFromManifest, Access.internal);
-@@access(Agents.updateAgentFromManifest, Access.internal);
+// Exclude these operations entirely from the Python SDK.
+// Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
+@@scope(Agents.createAgent, "!(python)");
+@@scope(Agents.updateAgent, "!(python)");
+@@scope(Agents.createAgentFromManifest, "!(python)");
+@@scope(Agents.updateAgentFromManifest, "!(python)");
 
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
@@ -162,9 +166,21 @@ using Azure.AI.Projects;
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
+// Evaluation Taxonomies sub-client
+// --------------------------------------------------------------------------------
+
+// It indirectly consumes this from openai-evaluations, via TypeSpec model "Target"
+// In Python, like we do for a few other classes, we hand-code a TypedDict version
+// of this class add the "Pram" suffix to distinguish it from the original emitted classes from
+// the TypedDict one. Since we don't want a class named ModelSamplingParamsParm, we
+// rename the original one here.
+@@clientName(ModelSamplingParams, "ModelSamplingConfig", "python");
+
+// --------------------------------------------------------------------------------
 // Insights sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+@@clientName(InsightsGetParams.id, "insight_id");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
@@ -207,6 +223,31 @@ using Azure.AI.Projects;
 @@alternateType(ScheduleRun.triggerTime, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
+// Toolboxes sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Toolboxes.createToolboxVersion, "create_version");
+@@clientName(Toolboxes.updateToolbox, "update");
+@@clientName(Toolboxes.getToolbox, "get");
+@@clientName(Toolboxes.getToolboxVersion, "get_version");
+@@clientName(Toolboxes.listToolboxes, "list");
+@@clientName(Toolboxes.listToolboxVersions, "list_versions");
+@@clientName(Toolboxes.deleteToolbox, "delete");
+@@clientName(Toolboxes.deleteToolboxVersion, "delete_version");
+
+// --------------------------------------------------------------------------------
+// Skills sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(Skills.createSkill, "create");
+@@clientName(Skills.createSkillFromPackage, "create_from_package");
+@@clientName(Skills.getSkill, "get");
+@@clientName(Skills.downloadSkill, "download");
+@@clientName(Skills.listSkills, "list");
+@@clientName(Skills.updateSkill, "update");
+@@clientName(Skills.deleteSkill, "delete");
+
+// --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
 
@@ -223,20 +264,29 @@ using Azure.AI.Projects;
 @@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
+// Beta Agents sub-client
+// --------------------------------------------------------------------------------
+
+// Make this method internal, since it's patched with a new one that supports either binary or file-path input
+@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
+@@usage(SessionFileWriteResponse, Usage.output);
+@@access(SessionFileWriteResponse, Access.public);
+
+// --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
 // --------------------------------------------------------------------------------
 
-// Remove preview opt-in union types from the public PythonSDK surface.
-//
-// TODO: These do not work. Follow up with the Python emitter team.
-// What does work: Adding @scope("!python") to `CreateAgentVersionRequest` above any of the
-// proprties there. But it does not seem to work I add @scope("!python") above `foundry_features`?
-// in alias WithConditionalFoundryPreviewHeader.
-//
-//@@access(AgentDefinitionOptInKeys, Access.internal, "python");
-//@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
-//@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
-//@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+// Remove foundry_features input arguments from public methods, as they are set internally.
+@@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!python");
+@@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!python");
+
+// Force emitting these two, as patched code uses values from these enums to internally set Foundry-Features header.
+@@usage(AgentDefinitionOptInKeys, Usage.input, "python");
+@@access(AgentDefinitionOptInKeys, Access.internal, "python");
+@@clientName(AgentDefinitionOptInKeys, "_AgentDefinitionOptInKeys", "python");
+@@usage(FoundryFeaturesOptInKeys, Usage.input, "python");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "python");
+@@clientName(FoundryFeaturesOptInKeys, "_FoundryFeaturesOptInKeys", "python");
 
 // Add optional boolean "allow_preview" client initialization parameter
 // See: https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#adding-client-initialization-parameters

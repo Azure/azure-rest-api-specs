@@ -34,6 +34,8 @@ using Azure.AI.Projects;
 @@clientName(CreateAgentRequest.name, "agentName");
 @@clientName(CreateAgentFromManifestRequest.name, "agentName");
 
+@@clientName(OpenApiTool.openapi, "openApi");
+
 // Rename request models to avoid collision with synthetic body types generated
 // by the Java codegen. The codegen names synthetic bodies as {OperationName}Request,
 // which clashes with the identically-named TypeSpec models, causing a "1" suffix.
@@ -73,6 +75,13 @@ using Azure.AI.Projects;
   "cachedTokensCount"
 );
 
+//rename object types to avoid confusion with Java objects
+@@clientName(AgentObject.object, "objectType");
+@@clientName(AgentVersionObject.object, "objectType");
+@@clientName(DeleteMemoryStoreResponse.object, "objectType");
+@@clientName(MemoryStoreObject.object, "objectType");
+@@clientName(MemoryStoreDeleteScopeResponse.object, "objectType");
+
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
@@ -90,6 +99,43 @@ using Azure.AI.Projects;
   "CustomGrammarFormatParameter",
   "java"
 );
+@@clientName(OpenAI.AutoCodeInterpreterToolParam,
+  "AutoCodeInterpreterToolParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerAutoParam, "ContainerAutoParameter", "java");
+@@clientName(OpenAI.ContainerNetworkPolicyParam,
+  "ContainerNetworkPolicyParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyAllowlistParam,
+  "ContainerNetworkPolicyAllowlistParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDisabledParam,
+  "ContainerNetworkPolicyDisabledParameter",
+  "java"
+);
+@@clientName(OpenAI.ContainerNetworkPolicyDomainSecretParam,
+  "ContainerNetworkPolicyDomainSecretParameter",
+  "java"
+);
+@@clientName(OpenAI.CustomTextFormatParam, "CustomTextFormatParameter", "java");
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentContainerReferenceParam,
+  "FunctionShellToolParameterEnvironmentContainerReferenceParameter",
+  "java"
+);
+@@clientName(OpenAI.FunctionShellToolParamEnvironmentLocalEnvironmentParam,
+  "FunctionShellToolParameterEnvironmentLocalEnvironmentParameter",
+  "java"
+);
+@@clientName(OpenAI.InlineSkillParam, "InlineSkillParameter", "java");
+@@clientName(OpenAI.InlineSkillSourceParam,
+  "InlineSkillSourceParameter",
+  "java"
+);
+@@clientName(OpenAI.LocalSkillParam, "LocalSkillParameter", "java");
+@@clientName(OpenAI.SkillReferenceParam, "SkillReferenceParameter", "java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -106,8 +152,21 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
+// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
+@@convenientAPI(Agents.deleteAgent, false, "java");
+@@convenientAPI(Agents.deleteAgentVersion, false, "java");
+@@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
+@@convenientAPI(MemoryStores.deleteScope, false, "java");
+
+//making delete methods internal to add public shims that return void
+@@access(Agents.deleteAgentVersion, Access.internal);
 @@access(Agents.deleteAgent, Access.internal);
+@@access(MemoryStores.deleteMemoryStore, Access.internal);
+@@access(MemoryStores.deleteScope, Access.internal);
+@@clientName(Agents.deleteAgentVersion, "internalDeleteAgentVersion");
 @@clientName(Agents.deleteAgent, "internalDeleteAgent");
+@@clientName(MemoryStores.deleteMemoryStore, "internalDeleteMemoryStore");
+@@clientName(MemoryStores.deleteScope, "internalDeleteScope");
 
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
@@ -129,6 +188,12 @@ using Azure.AI.Projects;
 
 @@usage(MemoryStoreUpdateResponse, Usage.output);
 @@access(MemoryStoreUpdateResponse, Access.public);
+
+@@usage(AzureCreateResponseOptions, Usage.input);
+@@access(AzureCreateResponseOptions, Access.public);
+
+@@usage(AzureCreateResponseDetails, Usage.output);
+@@access(AzureCreateResponseDetails, Access.public);
 
 // --------------------------------------------------------------------------------
 // Type overrides
@@ -186,6 +251,229 @@ model TimeZoneType {}
   "java"
 );
 
+// ---- Expandable enum overrides ------------------------------------------------
+// Convert fixed OpenAI enums / inline literal unions to expandable string enums
+// by defining open unions (with `string` base) and mapping via @@alternateType.
+
+// ComputerEnvironment
+union ComputerEnvironmentExpandable {
+  string,
+  windows: "windows",
+  mac: "mac",
+  linux: "linux",
+  ubuntu: "ubuntu",
+  browser: "browser",
+}
+
+@@clientName(ComputerEnvironmentExpandable, "ComputerEnvironment", "java");
+@@alternateType(OpenAI.ComputerEnvironment,
+  ComputerEnvironmentExpandable,
+  "java"
+);
+
+// ContainerMemoryLimit
+union ContainerMemoryLimitExpandable {
+  string,
+  memory_1g: "1g",
+  memory_4g: "4g",
+  memory_16g: "16g",
+  memory_64g: "64g",
+}
+
+@@clientName(ContainerMemoryLimitExpandable, "ContainerMemoryLimit", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_1g, "MEMORY_1GB", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_4g, "MEMORY_4GB", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_16g, "MEMORY_16GB", "java");
+@@clientName(ContainerMemoryLimitExpandable.memory_64g, "MEMORY_64GB", "java");
+@@alternateType(OpenAI.ContainerMemoryLimit,
+  ContainerMemoryLimitExpandable,
+  "java"
+);
+
+// GrammarSyntax (TSP name: GrammarSyntax1)
+union GrammarSyntaxExpandable {
+  string,
+  lark: "lark",
+  regex: "regex",
+}
+
+@@clientName(GrammarSyntaxExpandable, "GrammarSyntax", "java");
+@@alternateType(OpenAI.GrammarSyntax1, GrammarSyntaxExpandable, "java");
+
+// ImageGenActionEnum
+union ImageGenActionEnumExpandable {
+  string,
+  generate: "generate",
+  edit: "edit",
+  auto: "auto",
+}
+
+@@clientName(ImageGenActionEnumExpandable, "ImageGenActionEnum", "java");
+@@alternateType(OpenAI.ImageGenActionEnum,
+  ImageGenActionEnumExpandable,
+  "java"
+);
+
+// ImageGenToolBackground (inline union on ImageGenTool.background)
+union ImageGenToolBackgroundExpandable {
+  string,
+  transparent: "transparent",
+  opaque: "opaque",
+  auto: "auto",
+}
+
+@@clientName(ImageGenToolBackgroundExpandable,
+  "ImageGenToolBackground",
+  "java"
+);
+@@alternateType(OpenAI.ImageGenTool.background,
+  ImageGenToolBackgroundExpandable,
+  "java"
+);
+
+// ImageGenToolModeration (inline union on ImageGenTool.moderation)
+union ImageGenToolModerationExpandable {
+  string,
+  auto: "auto",
+  low: "low",
+}
+
+@@clientName(ImageGenToolModerationExpandable,
+  "ImageGenToolModeration",
+  "java"
+);
+@@alternateType(OpenAI.ImageGenTool.moderation,
+  ImageGenToolModerationExpandable,
+  "java"
+);
+
+// ImageGenToolOutputFormat (inline union on ImageGenTool.output_format)
+union ImageGenToolOutputFormatExpandable {
+  string,
+  png: "png",
+  webp: "webp",
+  jpeg: "jpeg",
+}
+
+@@clientName(ImageGenToolOutputFormatExpandable,
+  "ImageGenToolOutputFormat",
+  "java"
+);
+@@alternateType(OpenAI.ImageGenTool.output_format,
+  ImageGenToolOutputFormatExpandable,
+  "java"
+);
+
+// ImageGenToolQuality (inline union on ImageGenTool.quality)
+union ImageGenToolQualityExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+  auto: "auto",
+}
+
+@@clientName(ImageGenToolQualityExpandable, "ImageGenToolQuality", "java");
+@@alternateType(OpenAI.ImageGenTool.quality,
+  ImageGenToolQualityExpandable,
+  "java"
+);
+
+// ImageGenToolSize (inline union on ImageGenTool.size)
+union ImageGenToolSizeExpandable {
+  string,
+  size_1024x1024: "1024x1024",
+  size_1024x1536: "1024x1536",
+  size_1536x1024: "1536x1024",
+  auto: "auto",
+}
+
+@@clientName(ImageGenToolSizeExpandable, "ImageGenToolSize", "java");
+@@clientName(ImageGenToolSizeExpandable.size_1024x1024,
+  "RESOLUTION_1024_X_1024",
+  "java"
+);
+@@clientName(ImageGenToolSizeExpandable.size_1024x1536,
+  "RESOLUTION_1024_X_1536",
+  "java"
+);
+@@clientName(ImageGenToolSizeExpandable.size_1536x1024,
+  "RESOLUTION_1536_X_1024",
+  "java"
+);
+@@alternateType(OpenAI.ImageGenTool.size, ImageGenToolSizeExpandable, "java");
+
+// InputFidelity
+union InputFidelityExpandable {
+  string,
+  high: "high",
+  low: "low",
+}
+
+@@clientName(InputFidelityExpandable, "InputFidelity", "java");
+@@alternateType(OpenAI.InputFidelity, InputFidelityExpandable, "java");
+
+// McpToolConnectorId (inline union on MCPTool.connector_id)
+union McpToolConnectorIdExpandable {
+  string,
+  connector_dropbox: "connector_dropbox",
+  connector_gmail: "connector_gmail",
+  connector_googlecalendar: "connector_googlecalendar",
+  connector_googledrive: "connector_googledrive",
+  connector_microsoftteams: "connector_microsoftteams",
+  connector_outlookcalendar: "connector_outlookcalendar",
+  connector_outlookemail: "connector_outlookemail",
+  connector_sharepoint: "connector_sharepoint",
+}
+
+@@clientName(McpToolConnectorIdExpandable, "McpToolConnectorId", "java");
+@@alternateType(OpenAI.MCPTool.connector_id,
+  McpToolConnectorIdExpandable,
+  "java"
+);
+
+// RankerVersionType
+union RankerVersionTypeExpandable {
+  string,
+  auto: "auto",
+  default_2024_11_15: "default-2024-11-15",
+}
+
+@@clientName(RankerVersionTypeExpandable, "RankerVersionType", "java");
+@@clientName(RankerVersionTypeExpandable.default_2024_11_15,
+  "DEFAULT_2024_11_15",
+  "java"
+);
+@@alternateType(OpenAI.RankerVersionType, RankerVersionTypeExpandable, "java");
+
+// SearchContextSize
+union SearchContextSizeExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+}
+
+@@clientName(SearchContextSizeExpandable, "SearchContextSize", "java");
+@@alternateType(OpenAI.SearchContextSize, SearchContextSizeExpandable, "java");
+
+// WebSearchToolSearchContextSize (inline union on WebSearchTool.search_context_size)
+union WebSearchToolSearchContextSizeExpandable {
+  string,
+  low: "low",
+  medium: "medium",
+  high: "high",
+}
+
+@@clientName(WebSearchToolSearchContextSizeExpandable,
+  "WebSearchToolSearchContextSize",
+  "java"
+);
+@@alternateType(OpenAI.WebSearchTool.search_context_size,
+  WebSearchToolSearchContextSizeExpandable,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
 // Conversations: only expose listConversations (Foundry-specific), suppress the rest
 // --------------------------------------------------------------------------------
@@ -199,7 +487,7 @@ model TimeZoneType {}
 @@scope(Conversations.deleteConversationItem, "!(java)");
 @@scope(Conversations.listConversationItems, "!(java)");
 
-// Rename and moving listAgentConversations to Agents subclient, so we prevent having a Conversation subclient 
+// Rename and moving listAgentConversations to Agents subclient, so we prevent having a Conversation subclient
 // of our own, to prevent confusion.
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
