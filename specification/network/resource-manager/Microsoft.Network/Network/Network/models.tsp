@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
@@ -10,6 +11,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using Common;
 
 namespace Microsoft.Network;
 
@@ -8232,12 +8234,12 @@ model ApplicationGatewayPrivateEndpointConnectionProperties {
    * The resource of private end point.
    */
   @visibility(Lifecycle.Read)
-  privateEndpoint?: PrivateEndpoint;
+  privateEndpoint?: Common.PrivateEndpoint;
 
   /**
    * A collection of information about the state of the connection between service consumer and provider.
    */
-  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
+  privateLinkServiceConnectionState?: Common.PrivateLinkServiceConnectionState;
 
   /**
    * The provisioning state of the application gateway private endpoint connection resource.
@@ -8711,7 +8713,7 @@ model ApplicationGatewayAvailableWafRuleSetsResult {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
-model ApplicationGatewayFirewallRuleSet extends Resource {
+model ApplicationGatewayFirewallRuleSet extends Common.Resource {
   /**
    * Properties of the application gateway firewall rule set.
    */
@@ -9766,7 +9768,7 @@ model AzureFirewallPacketCaptureResponse {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewall)
-model AzureFirewallFqdnTag extends Resource {
+model AzureFirewallFqdnTag extends Common.Resource {
   /**
    * Properties of the azure firewall FQDN tag.
    */
@@ -10043,7 +10045,7 @@ model BastionShareableLink {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model VM extends Resource {}
+model VM extends Common.Resource {}
 
 /**
  * Response for all the Bastion Shareable Link endpoints.
@@ -10339,7 +10341,16 @@ model DdosCustomPolicyPropertiesFormat {
   /**
    * The list of frontend IP configurations associated with the custom policy.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontEndIpConfiguration?: SubResource[];
+
+  /**
+   * The list of public IP addresses associated with the custom policy. This list is read-only.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_07_01)
+  @visibility(Lifecycle.Read)
+  publicIPAddresses?: SubResource[];
 }
 
 /**
@@ -11279,7 +11290,7 @@ model ExpressRouteCircuitRoutesTableSummary {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-model ExpressRouteServiceProvider extends Resource {
+model ExpressRouteServiceProvider extends Common.Resource {
   /**
    * Properties of the express route service provider.
    */
@@ -17028,7 +17039,7 @@ model FlowLogInformation {
   /**
    * FlowLog resource Managed Identity
    */
-  identity?: ManagedServiceIdentity;
+  identity?: Common.ManagedServiceIdentity;
 }
 
 /**
@@ -19066,7 +19077,7 @@ model SecurityPartnerProviderPropertiesFormat {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-model BgpServiceCommunity extends Resource {
+model BgpServiceCommunity extends Common.Resource {
   /**
    * Properties of the BGP service community.
    */
@@ -19353,7 +19364,7 @@ model NetworkIntentPolicyConfiguration {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model NetworkIntentPolicy extends Resource {
+model NetworkIntentPolicy extends Common.Resource {
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
@@ -20246,7 +20257,7 @@ model VirtualNetworkGatewayListConnectionsResult
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-model VirtualNetworkGatewayConnectionListEntity extends Resource {
+model VirtualNetworkGatewayConnectionListEntity extends Common.Resource {
   /**
    * Properties of the virtual network gateway connection.
    */

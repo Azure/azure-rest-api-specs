@@ -2,12 +2,16 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+using Common;
 
 namespace Microsoft.Network;
 /**
@@ -19,7 +23,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model DdosCustomPolicy extends Resource {
+model DdosCustomPolicy extends Common.Resource {
   properties?: DdosCustomPolicyPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -74,6 +78,20 @@ interface DdosCustomPolicies {
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
+
+  /**
+   * Gets all the DDoS custom policies in a resource group.
+   */
+  @added(Versions.v2025_07_01)
+  @tag("ddosCustomPolicies")
+  list is ArmResourceListByParent<DdosCustomPolicy, Error = CloudError>;
+
+  /**
+   * Gets all the DDoS custom policies in a subscription.
+   */
+  @added(Versions.v2025_07_01)
+  @tag("ddosCustomPolicies")
+  listAll is ArmListBySubscription<DdosCustomPolicy, Error = CloudError>;
 }
 
 @@doc(DdosCustomPolicy.name, "The name of the DDoS custom policy.");
