@@ -1192,20 +1192,13 @@ model LatestLinkedSaaSResponse {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the correct casing for Software as a Service"
 @added(Versions.v2026_03_01_preview)
 interface SaaSOperationGroup {
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Following Azure async operation pattern for long-running activation"
   @doc("Activate the SaaS resource")
   @autoRoute
   @action("activateSaaS")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   activateResource is ArmProviderActionAsync<
     Request = ActivateSaaSRequest,
-    Response = ArmAcceptedLroResponse<
-      "SaaS resource activation accepted",
-      ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse>
-    >,
+    Response = SaaSResourceDetailsResponse,
     Scope = SubscriptionActionScope,
-    Parameters = {},
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = SaaSResourceDetailsResponse> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Parameters = {}
   >;
 }
