@@ -399,6 +399,18 @@ union AudioInputTranscriptionModel {
 
   /** OpenAI Whisper model. */
   whisper_1: "whisper-1",
+  @added(Versions.v2026_04_10)
+  /** OpenAI gpt-4o-transcribe model. */
+  "gpt-4o-transcribe",
+  @added(Versions.v2026_04_10)
+  /** OpenAI gpt-4o-mini-transcribe model. */
+  "gpt-4o-mini-transcribe",
+  @added(Versions.v2026_04_10)
+  /** OpenAI gpt-4o-transcribe-diarize model. */
+  "gpt-4o-transcribe-diarize",
+  @added(Versions.v2026_04_10)
+  /** Azure Speech model. */
+  "azure-speech",
 }
 
 /** Configuration for input audio transcription. */
@@ -411,13 +423,8 @@ model AudioInputTranscriptionOptions {
    * 'azure-speech'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
-  `model`:
-    | string
-    | "whisper-1"
-    | "gpt-4o-transcribe"
-    | "gpt-4o-mini-transcribe"
-    | "gpt-4o-transcribe-diarize"
-    | "azure-speech";
+  @typeChangedFrom(Versions.v2026_04_10, string|"whisper-1"|"gpt-4o-transcribe"|"gpt-4o-mini-transcribe"|"azure-speech")
+  `model`: AudioInputTranscriptionModel;
 
   /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */
   language?: string;

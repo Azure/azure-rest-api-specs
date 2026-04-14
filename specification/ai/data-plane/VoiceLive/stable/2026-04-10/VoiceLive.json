@@ -244,7 +244,11 @@
       "type": "string",
       "description": "Supported audio input transcription models.",
       "enum": [
-        "whisper-1"
+        "whisper-1",
+        "gpt-4o-transcribe",
+        "gpt-4o-mini-transcribe",
+        "gpt-4o-transcribe-diarize",
+        "azure-speech"
       ],
       "x-ms-enum": {
         "name": "AudioInputTranscriptionModel",
@@ -254,6 +258,26 @@
             "name": "whisper_1",
             "value": "whisper-1",
             "description": "OpenAI Whisper model."
+          },
+          {
+            "name": "gpt-4o-transcribe",
+            "value": "gpt-4o-transcribe",
+            "description": "OpenAI gpt-4o-transcribe model."
+          },
+          {
+            "name": "gpt-4o-mini-transcribe",
+            "value": "gpt-4o-mini-transcribe",
+            "description": "OpenAI gpt-4o-mini-transcribe model."
+          },
+          {
+            "name": "gpt-4o-transcribe-diarize",
+            "value": "gpt-4o-transcribe-diarize",
+            "description": "OpenAI gpt-4o-transcribe-diarize model."
+          },
+          {
+            "name": "azure-speech",
+            "value": "azure-speech",
+            "description": "Azure Speech model."
           }
         ]
       }
@@ -263,18 +287,8 @@
       "description": "Configuration for input audio transcription.",
       "properties": {
         "model": {
-          "type": "string",
-          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'azure-speech'.",
-          "enum": [
-            "whisper-1",
-            "gpt-4o-transcribe",
-            "gpt-4o-mini-transcribe",
-            "gpt-4o-transcribe-diarize",
-            "azure-speech"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AudioInputTranscriptionModel",
+          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'azure-speech'."
         },
         "language": {
           "type": "string",

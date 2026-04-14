@@ -574,7 +574,13 @@ model ResponseFileSearchCallItem extends ResponseItem {
 
   /** The status of the file search tool call. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to match source."
-  status: "in_progress" | "searching" | "completed" | "incomplete" | "failed" | string;
+  status:
+    | "in_progress"
+    | "searching"
+    | "completed"
+    | "incomplete"
+    | "failed"
+    | string;
 
   /** The results of the file search. */
   results?: FileSearchResult[];
