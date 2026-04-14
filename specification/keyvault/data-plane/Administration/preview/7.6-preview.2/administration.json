@@ -1,0 +1,1798 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "version": "7.6-preview.2",
+    "description": "The Azure Key Vault Administration service client performs administrative operations\nincluding RBAC, BackupRestore, and settings management\nagainst the Azure Key Vault service.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "in": "path",
+        "description": "The base URL of the Key Vault instance (e.g. https://myvault.vault.azure.net/)",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://vault.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://vault.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "operationId": "RoleAssignments_ListForScope",
+        "description": "Gets role assignments for a scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role assignments.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get role assignments for a scope": {
+            "$ref": "./examples/ListRoleAssignments-example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
+      "get": {
+        "operationId": "RoleAssignments_Get",
+        "description": "Get the specified role assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role assignment.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "description": "The name of the role assignment to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the specified role assignment": {
+            "$ref": "./examples/GetRoleAssignments-example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleAssignments_Create",
+        "description": "Creates a role assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role assignment to create.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "description": "The name of the role assignment to create. It can be any valid GUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a role assignment": {
+            "$ref": "./examples/PutRoleAssignments-example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoleAssignments_Delete",
+        "description": "Deletes a role assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role assignment to delete.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "description": "The name of the role assignment to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a role assignment": {
+            "$ref": "./examples/DeleteRoleAssignments-example.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleDefinitions": {
+      "get": {
+        "operationId": "RoleDefinitions_List",
+        "description": "Get all role definitions that are applicable at scope and above.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role definition.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all role definitions that are applicable at scope and above": {
+            "$ref": "./examples/ListRoleDefinitions-example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}": {
+      "get": {
+        "operationId": "RoleDefinitions_Get",
+        "description": "Get the specified role definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role definition to get. Managed HSM only supports '/'.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionName",
+            "in": "path",
+            "description": "The name of the role definition to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the specified role definition": {
+            "$ref": "./examples/GetRoleDefinition-example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleDefinitions_CreateOrUpdate",
+        "description": "Creates or updates a custom role definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role definition to create or update. Managed HSM only supports '/'.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionName",
+            "in": "path",
+            "description": "The name of the role definition to create or update. It can be any valid GUID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the role definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a custom role definition": {
+            "$ref": "./examples/PutRoleDefinition-example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoleDefinitions_Delete",
+        "description": "Deletes a custom role definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the role definition to delete. Managed HSM only supports '/'.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleDefinitionName",
+            "in": "path",
+            "description": "The name (GUID) of the role definition to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a custom role definition": {
+            "$ref": "./examples/DeleteRoleDefinition-example.json"
+          }
+        }
+      }
+    },
+    "/backup": {
+      "post": {
+        "operationId": "FullBackup",
+        "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage container.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "azureStorageBlobContainerUri",
+            "in": "body",
+            "description": "Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SASTokenParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a full backup": {
+            "$ref": "./examples/FullBackup-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/backup/{jobId}/pending": {
+      "get": {
+        "operationId": "FullBackupStatus",
+        "description": "Returns the status of full backup operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The id returned as part of the backup request",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a full backup operation": {
+            "$ref": "./examples/FullBackup-pending-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{keyName}/restore": {
+      "put": {
+        "operationId": "SelectiveKeyRestoreOperation",
+        "description": "Restores all key versions of a given key using user supplied SAS token pointing to a previously stored Azure Blob storage backup folder",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the key to be restored from the user supplied backup",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restoreBlobDetails",
+            "in": "body",
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restores all key versions of a given key": {
+            "$ref": "./examples/SelectiveRestore-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/prebackup": {
+      "post": {
+        "operationId": "PreFullBackup",
+        "description": "Pre-backup operation for checking whether the customer can perform a full backup operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "preBackupOperationParameters",
+            "in": "body",
+            "description": "Optional parameters to validate prior to performing a full backup operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreBackupOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check whether the customer can perform a full backup operation": {
+            "$ref": "./examples/PreFullBackup-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/prerestore": {
+      "put": {
+        "operationId": "PreFullRestoreOperation",
+        "description": "Pre-restore operation for checking whether the customer can perform a full restore operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "preRestoreOperationParameters",
+            "in": "body",
+            "description": "Optional pre restore parameters to validate prior to performing a full restore operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreRestoreOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check whether the customer can perform a full restore operation": {
+            "$ref": "./examples/PreFullRestore-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/restore": {
+      "put": {
+        "operationId": "FullRestoreOperation",
+        "description": "Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "restoreBlobDetails",
+            "in": "body",
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreOperationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URI to poll for completion status."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restore all key materials from a previously stored Azure Blob Storage backup": {
+            "$ref": "./examples/FullRestore-example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/restore/{jobId}/pending": {
+      "get": {
+        "operationId": "RestoreStatus",
+        "description": "Returns the status of restore operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The Job Id returned part of the restore operation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of restore operation": {
+            "$ref": "./examples/Restore-pending-example.json"
+          }
+        }
+      }
+    },
+    "/settings": {
+      "get": {
+        "operationId": "GetSettings",
+        "summary": "List account settings.",
+        "description": "Retrieves a list of all the available account settings that can be configured.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SettingsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List account settings": {
+            "$ref": "./examples/ListSettings-example.json"
+          }
+        }
+      }
+    },
+    "/settings/{setting-name}": {
+      "get": {
+        "operationId": "GetSetting",
+        "summary": "Get specified account setting object.",
+        "description": "Retrieves the setting object of a specified setting name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SettingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get key vault account setting": {
+            "$ref": "./examples/GetSetting-example.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateSetting",
+        "summary": "Updates key vault account setting, stores it, then returns the setting name and value to the client.",
+        "description": "Description of the pool setting to be updated",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SettingNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters to update an account setting.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSettingRequest"
+            },
+            "x-ms-client-flatten": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update key vault account setting": {
+            "$ref": "./examples/UpdateSetting-example.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/restore/{jobId}/pending?_overload=selectiveKeyRestoreStatus": {
+      "get": {
+        "operationId": "SelectiveKeyRestoreStatus",
+        "description": "Returns the status of the selective key restore operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The Job Id returned part of the restore operation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SelectiveKeyRestoreOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a selective restore operation": {
+            "$ref": "./examples/SelectiveRestore-pending-example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataAction": {
+      "type": "string",
+      "description": "Supported permissions for data actions.",
+      "enum": [
+        "Microsoft.KeyVault/managedHsm/keys/read/action",
+        "Microsoft.KeyVault/managedHsm/keys/write/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
+        "Microsoft.KeyVault/managedHsm/keys/backup/action",
+        "Microsoft.KeyVault/managedHsm/keys/restore/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
+        "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
+        "Microsoft.KeyVault/managedHsm/roleDefinitions/write/action",
+        "Microsoft.KeyVault/managedHsm/roleDefinitions/delete/action",
+        "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
+        "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
+        "Microsoft.KeyVault/managedHsm/keys/wrap/action",
+        "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
+        "Microsoft.KeyVault/managedHsm/keys/sign/action",
+        "Microsoft.KeyVault/managedHsm/keys/verify/action",
+        "Microsoft.KeyVault/managedHsm/keys/create",
+        "Microsoft.KeyVault/managedHsm/keys/delete",
+        "Microsoft.KeyVault/managedHsm/keys/export/action",
+        "Microsoft.KeyVault/managedHsm/keys/release/action",
+        "Microsoft.KeyVault/managedHsm/keys/import/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
+        "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
+        "Microsoft.KeyVault/managedHsm/securitydomain/download/read",
+        "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
+        "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
+        "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
+        "Microsoft.KeyVault/managedHsm/backup/start/action",
+        "Microsoft.KeyVault/managedHsm/restore/start/action",
+        "Microsoft.KeyVault/managedHsm/backup/status/action",
+        "Microsoft.KeyVault/managedHsm/restore/status/action",
+        "Microsoft.KeyVault/managedHsm/rng/action"
+      ],
+      "x-ms-enum": {
+        "name": "DataAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/read/action",
+            "description": "Read HSM key metadata."
+          },
+          {
+            "name": "WriteHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/write/action",
+            "description": "Update an HSM key."
+          },
+          {
+            "name": "ReadDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
+            "description": "Read deleted HSM key."
+          },
+          {
+            "name": "RecoverDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
+            "description": "Recover deleted HSM key."
+          },
+          {
+            "name": "BackupHsmKeys",
+            "value": "Microsoft.KeyVault/managedHsm/keys/backup/action",
+            "description": "Backup HSM keys."
+          },
+          {
+            "name": "RestoreHsmKeys",
+            "value": "Microsoft.KeyVault/managedHsm/keys/restore/action",
+            "description": "Restore HSM keys."
+          },
+          {
+            "name": "DeleteRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
+            "description": "Delete role assignment."
+          },
+          {
+            "name": "GetRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
+            "description": "Get role assignment."
+          },
+          {
+            "name": "WriteRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
+            "description": "Create or update role assignment."
+          },
+          {
+            "name": "ReadRoleDefinition",
+            "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
+            "description": "Get role definition."
+          },
+          {
+            "name": "WriteRoleDefinition",
+            "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/write/action",
+            "description": "Create or update role definition."
+          },
+          {
+            "name": "DeleteRoleDefinition",
+            "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/delete/action",
+            "description": "Delete role definition."
+          },
+          {
+            "name": "EncryptHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
+            "description": "Encrypt using an HSM key."
+          },
+          {
+            "name": "DecryptHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
+            "description": "Decrypt using an HSM key."
+          },
+          {
+            "name": "WrapHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/wrap/action",
+            "description": "Wrap using an HSM key."
+          },
+          {
+            "name": "UnwrapHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
+            "description": "Unwrap using an HSM key."
+          },
+          {
+            "name": "SignHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/sign/action",
+            "description": "Sign using an HSM key."
+          },
+          {
+            "name": "VerifyHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/verify/action",
+            "description": "Verify using an HSM key."
+          },
+          {
+            "name": "CreateHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/create",
+            "description": "Create an HSM key."
+          },
+          {
+            "name": "DeleteHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/delete",
+            "description": "Delete an HSM key."
+          },
+          {
+            "name": "ExportHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/export/action",
+            "description": "Export an HSM key."
+          },
+          {
+            "name": "ReleaseKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/release/action",
+            "description": "Release an HSM key using Secure Key Release."
+          },
+          {
+            "name": "ImportHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/import/action",
+            "description": "Import an HSM key."
+          },
+          {
+            "name": "PurgeDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
+            "description": "Purge a deleted HSM key."
+          },
+          {
+            "name": "DownloadHsmSecurityDomain",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
+            "description": "Download an HSM security domain."
+          },
+          {
+            "name": "DownloadHsmSecurityDomainStatus",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/download/read",
+            "description": "Check status of HSM security domain download."
+          },
+          {
+            "name": "UploadHsmSecurityDomain",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
+            "description": "Upload an HSM security domain."
+          },
+          {
+            "name": "ReadHsmSecurityDomainStatus",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
+            "description": "Check the status of the HSM security domain exchange file."
+          },
+          {
+            "name": "ReadHsmSecurityDomainTransferKey",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
+            "description": "Download an HSM security domain transfer key."
+          },
+          {
+            "name": "StartHsmBackup",
+            "value": "Microsoft.KeyVault/managedHsm/backup/start/action",
+            "description": "Start an HSM backup."
+          },
+          {
+            "name": "StartHsmRestore",
+            "value": "Microsoft.KeyVault/managedHsm/restore/start/action",
+            "description": "Start an HSM restore."
+          },
+          {
+            "name": "ReadHsmBackupStatus",
+            "value": "Microsoft.KeyVault/managedHsm/backup/status/action",
+            "description": "Read an HSM backup status."
+          },
+          {
+            "name": "ReadHsmRestoreStatus",
+            "value": "Microsoft.KeyVault/managedHsm/restore/status/action",
+            "description": "Read an HSM restore status."
+          },
+          {
+            "name": "RandomNumbersGenerate",
+            "value": "Microsoft.KeyVault/managedHsm/rng/action",
+            "description": "Generate random numbers."
+          }
+        ]
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true,
+          "x-ms-client-name": "innerError"
+        }
+      },
+      "x-nullable": true
+    },
+    "FullBackupOperation": {
+      "type": "object",
+      "description": "Full backup operation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of the backup operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of backup operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error encountered, if any, during the full backup operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the backup operation in UTC"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the backup operation in UTC",
+          "x-nullable": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the full backup operation."
+        },
+        "azureStorageBlobContainerUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the full backup"
+        }
+      }
+    },
+    "KeyVaultError": {
+      "type": "object",
+      "description": "The key vault error exception.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The key vault server error.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "The status of a long-running operation.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation successfully completed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed."
+          }
+        ]
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "description": "Role definition permissions.",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "Action permissions that are granted.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notActions": {
+          "type": "array",
+          "description": "Action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataActions": {
+          "type": "array",
+          "description": "Data action permissions that are granted.",
+          "items": {
+            "$ref": "#/definitions/DataAction"
+          }
+        },
+        "notDataActions": {
+          "type": "array",
+          "description": "Data action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
+          "items": {
+            "$ref": "#/definitions/DataAction"
+          }
+        }
+      }
+    },
+    "PreBackupOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the backup operation.",
+      "properties": {
+        "storageResourceUri": {
+          "type": "string",
+          "description": "Azure Blob storage container Uri"
+        },
+        "token": {
+          "type": "string",
+          "description": "The SAS token pointing to an Azure Blob storage container"
+        },
+        "useManagedIdentity": {
+          "type": "boolean",
+          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.",
+          "default": false
+        }
+      }
+    },
+    "PreRestoreOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the restore operation.",
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter",
+          "description": "A user-provided SAS token to an Azure blob storage container."
+        },
+        "folderToRestore": {
+          "type": "string",
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
+        }
+      }
+    },
+    "RestoreOperation": {
+      "type": "object",
+      "description": "Restore operation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of the restore operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of restore operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error encountered, if any, during the restore operation."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the restore operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the restore operation"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the restore operation",
+          "x-nullable": true
+        }
+      }
+    },
+    "RestoreOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the restore operation.",
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter",
+          "description": "A user-provided SAS token to an Azure blob storage container."
+        },
+        "folderToRestore": {
+          "type": "string",
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
+        }
+      },
+      "required": [
+        "sasTokenParameters",
+        "folderToRestore"
+      ]
+    },
+    "RoleAssignment": {
+      "type": "object",
+      "description": "Role Assignments",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The role assignment ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The role assignment name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The role assignment type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
+          "description": "Role assignment properties."
+        }
+      }
+    },
+    "RoleAssignmentCreateParameters": {
+      "type": "object",
+      "description": "Role assignment create parameters.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleAssignmentProperties",
+          "description": "Role assignment properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RoleAssignmentFilter": {
+      "type": "object",
+      "description": "Role Assignments filter",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Returns role assignment of the specific principal."
+        }
+      }
+    },
+    "RoleAssignmentListResult": {
+      "type": "object",
+      "description": "Role assignment list operation result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Role assignment list.",
+          "items": {
+            "$ref": "#/definitions/RoleAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "RoleAssignmentProperties": {
+      "type": "object",
+      "description": "Role assignment properties.",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID used in the role assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group."
+        }
+      },
+      "required": [
+        "roleDefinitionId",
+        "principalId"
+      ]
+    },
+    "RoleAssignmentPropertiesWithScope": {
+      "type": "object",
+      "description": "Role assignment properties with scope.",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/RoleScope",
+          "description": "The role scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID."
+        }
+      }
+    },
+    "RoleDefinition": {
+      "type": "object",
+      "description": "Role definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The role definition ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The role definition name.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/RoleDefinitionType",
+          "description": "The role definition type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "Role definition properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RoleDefinitionCreateParameters": {
+      "type": "object",
+      "description": "Role definition create parameters.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleDefinitionProperties",
+          "description": "Role definition properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RoleDefinitionFilter": {
+      "type": "object",
+      "description": "Role Definitions filter",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Returns role definition with the specific name."
+        }
+      }
+    },
+    "RoleDefinitionListResult": {
+      "type": "object",
+      "description": "Role definition list operation result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Role definition list.",
+          "items": {
+            "$ref": "#/definitions/RoleDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "RoleDefinitionProperties": {
+      "type": "object",
+      "description": "Role definition properties.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The role name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The role definition description."
+        },
+        "type": {
+          "$ref": "#/definitions/RoleType",
+          "description": "The role type.",
+          "x-ms-client-name": "roleType"
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Role definition permissions.",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          }
+        },
+        "assignableScopes": {
+          "type": "array",
+          "description": "Role definition assignable scopes.",
+          "items": {
+            "$ref": "#/definitions/RoleScope"
+          }
+        }
+      }
+    },
+    "RoleDefinitionType": {
+      "type": "string",
+      "description": "The role definition type.",
+      "enum": [
+        "Microsoft.Authorization/roleDefinitions"
+      ],
+      "x-ms-enum": {
+        "name": "RoleDefinitionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.Authorization/roleDefinitions",
+            "value": "Microsoft.Authorization/roleDefinitions",
+            "description": "Microsoft-defined role definitions."
+          }
+        ]
+      }
+    },
+    "RoleScope": {
+      "type": "string",
+      "description": "The role scope.",
+      "enum": [
+        "/",
+        "/keys"
+      ],
+      "x-ms-enum": {
+        "name": "RoleScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Global",
+            "value": "/",
+            "description": "Global scope"
+          },
+          {
+            "name": "Keys",
+            "value": "/keys",
+            "description": "Keys scope"
+          }
+        ]
+      }
+    },
+    "RoleType": {
+      "type": "string",
+      "description": "The role type.",
+      "enum": [
+        "AKVBuiltInRole",
+        "CustomRole"
+      ],
+      "x-ms-enum": {
+        "name": "RoleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BuiltInRole",
+            "value": "AKVBuiltInRole",
+            "description": "Built in role."
+          },
+          {
+            "name": "CustomRole",
+            "value": "CustomRole",
+            "description": "Custom role."
+          }
+        ]
+      }
+    },
+    "SASTokenParameter": {
+      "type": "object",
+      "description": "An authentication method and location for the operation.",
+      "properties": {
+        "storageResourceUri": {
+          "type": "string",
+          "description": "Azure Blob storage container Uri"
+        },
+        "token": {
+          "type": "string",
+          "description": "The SAS token pointing to an Azure Blob storage container"
+        },
+        "useManagedIdentity": {
+          "type": "boolean",
+          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified.",
+          "default": false
+        }
+      },
+      "required": [
+        "storageResourceUri"
+      ]
+    },
+    "SelectiveKeyRestoreOperation": {
+      "type": "object",
+      "description": "Selective Key Restore operation",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Status of the restore operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of restore operation."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error encountered, if any, during the selective key restore operation."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the selective key restore operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the restore operation"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the restore operation",
+          "x-nullable": true
+        }
+      }
+    },
+    "SelectiveKeyRestoreOperationParameters": {
+      "type": "object",
+      "description": "The authentication method and location for the selective key restore operation.",
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter",
+          "description": "A user-provided SAS token to an Azure blob storage container."
+        },
+        "folder": {
+          "type": "string",
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
+        }
+      },
+      "required": [
+        "sasTokenParameters",
+        "folder"
+      ]
+    },
+    "Setting": {
+      "type": "object",
+      "description": "A Key Vault account setting.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The account setting to be updated"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the pool setting."
+        },
+        "type": {
+          "$ref": "#/definitions/SettingTypeEnum",
+          "description": "The type specifier of the value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "SettingTypeEnum": {
+      "type": "string",
+      "description": "The type specifier of the value.",
+      "enum": [
+        "boolean"
+      ],
+      "x-ms-enum": {
+        "name": "SettingTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "A boolean setting value."
+          }
+        ]
+      }
+    },
+    "SettingsListResult": {
+      "type": "object",
+      "description": "The settings list result.",
+      "properties": {
+        "settings": {
+          "type": "array",
+          "description": "A response message containing a list of account settings with their associated value.",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateSettingRequest": {
+      "type": "object",
+      "description": "The update settings request object.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value of the pool setting."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "SettingNameParameter": {
+      "name": "setting-name",
+      "in": "path",
+      "description": "The name of the account setting. Must be a valid settings option.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

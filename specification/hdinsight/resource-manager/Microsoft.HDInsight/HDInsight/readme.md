@@ -115,16 +115,7 @@ These settings apply only when `--tag=package-2025-01-preview` is specified on t
 
 ```yaml $(tag) == 'package-2025-01-preview'
 input-file:
-  - preview/2025-01-15-preview/applications.json
-  - preview/2025-01-15-preview/cluster.json
-  - preview/2025-01-15-preview/configurations.json
-  - preview/2025-01-15-preview/extensions.json
-  - preview/2025-01-15-preview/locations.json
-  - preview/2025-01-15-preview/operations.json
-  - preview/2025-01-15-preview/privateEndpointConnections.json
-  - preview/2025-01-15-preview/privateLinkResources.json
-  - preview/2025-01-15-preview/scriptActions.json
-  - preview/2025-01-15-preview/virtualMachines.json
+  - preview/2025-01-15-preview/openapi.json
 
 suppressions:
   - code: EvenSegmentedPathForPutOperation

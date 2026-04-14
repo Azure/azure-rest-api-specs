@@ -4,6 +4,8 @@
 
 Configuration for generating TextToSpeech SDK.
 
+> **Note:** Starting from version 2026-01-01, the specification has moved to a [TypeSpec-based project](../../TextToSpeech/readme.md).
+
 The current release for the TextToSpeech is `release_2024_02_01_preview`.
 
 ``` yaml
