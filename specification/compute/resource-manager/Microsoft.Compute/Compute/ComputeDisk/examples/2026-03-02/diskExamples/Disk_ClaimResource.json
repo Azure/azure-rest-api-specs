@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-03-02",
+    "diskName": "myManagedDisk"
+  },
+  "requestBody": {
+    "ownerResource": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "managedBy": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVmss",
+        "sku": {
+          "name": "Standard_LRS"
+        },
+        "properties": {
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
+          "purchasePlan": {
+            "name": "test_sku",
+            "publisher": "test_test_pmc2pc1",
+            "product": "marketplace_vm_test"
+          },
+          "supportedCapabilities": {
+            "acceleratedNetwork": true
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 10,
+          "encryptionSettingsCollection": {
+            "enabled": true,
+            "encryptionSettings": [
+              {
+                "diskEncryptionKey": {
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  },
+                  "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}"
+                },
+                "keyEncryptionKey": {
+                  "sourceVault": {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
+                  },
+                  "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+                }
+              }
+            ]
+          },
+          "encryption": {
+            "type": "EncryptionAtRestWithPlatformKey"
+          },
+          "diskState": "Claimed",
+          "qadIdentifier": "12345678-1234-5678-9012-123456789012",
+          "LastOwnershipUpdateTime": "2026-04-09T04:41:35.079872+00:00",
+          "timeCreated": "2016-12-28T04:41:35.079872+00:00",
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.Compute/disks",
+        "location": "westus",
+        "tags": {
+          "department": "Development", 
+          "project": "ManagedDisks"
+        },
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
+        "name": "myManagedDisk"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk/operations/{operation-id}",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk/operations/{operation-id}"
+      }
+    }
+  },
+  "operationId": "Disks_ClaimResource",
+  "title": "Claim a managed disk for an owner resource that is not a virtual machine."
+}

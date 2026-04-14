@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace ComputeDisk;
@@ -123,6 +125,30 @@ interface Disks {
     OkResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Claims a managed disk for an owner resource that is not a virtual machine.
+   */
+  @added(Versions.v2026_03_02)
+  @action("claimResource")
+  claimResource is ComputeResourceActionAsync<
+    Disk,
+    ClaimResourceRequest,
+    Disk,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Disk>
+  >;
+
+  /**
+   * Unclaims a disk from an existing owner resource.
+   */
+  @added(Versions.v2026_03_02)
+  @action("unclaimResource")
+  unclaimResource is ComputeResourceActionAsync<
+    Disk,
+    UnclaimResourceRequest,
+    Disk,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Disk>
+  >;
 }
 
 @@doc(Disk.name,
@@ -137,4 +163,10 @@ interface Disks {
 );
 @@doc(Disks.grantAccess::parameters.body,
   "Access data object supplied in the body of the get disk access operation."
+);
+@@doc(Disks.claimResource::parameters.body,
+  "Claim resource request data supplied in the body of the claim disk operation."
+);
+@@doc(Disks.unclaimResource::parameters.body,
+  "Unclaim resource request data supplied in the body of the unclaim disk operation."
 );
