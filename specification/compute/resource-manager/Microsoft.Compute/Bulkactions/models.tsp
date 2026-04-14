@@ -657,9 +657,6 @@ model GetOperationStatusResponse {
 
 @doc("Static read response for the singleton bulk VM operations proxy endpoint")
 model BulkVmOperationsReadResponse {
-  @doc("Indicates the singleton proxy endpoint is reachable")
-  status: "Ready";
-
   @doc("Echoes the singleton proxy resource name")
   name: "bulkVmOperations";
 }
