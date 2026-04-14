@@ -1663,8 +1663,7 @@ op webAppsGetInstanceProcessDumpCustomized(
 } | ArmNotFoundResponse;
 
 @@override(ProcessInfos.getInstanceProcessDump,
-  webAppsGetInstanceProcessDumpCustomized,
-  "!javascript"
+  webAppsGetInstanceProcessDumpCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1703,8 +1702,7 @@ op webAppsGetInstanceProcessDumpSlotCustomized(
 } | ArmNotFoundResponse;
 
 @@override(InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
-  webAppsGetInstanceProcessDumpSlotCustomized,
-  "!javascript"
+  webAppsGetInstanceProcessDumpSlotCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1996,8 +1994,7 @@ op webAppsGetProcessDumpSlotCustomized(
 } | ArmNotFoundResponse;
 
 @@override(ProcessSlotOperationGroup.getProcessDumpSlot,
-  webAppsGetProcessDumpSlotCustomized,
-  "!javascript"
+  webAppsGetProcessDumpSlotCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3106,10 +3103,11 @@ op regionalCheckNameAvailabilityCustomized(
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
+op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3137,14 +3135,15 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
 });
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
-  webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs,
+  webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS,
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
+op appServiceEnvironmentsDeletePrivateEndpointConnectionForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3168,14 +3167,15 @@ op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
 });
 
 @@override(RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
-  appServiceEnvironmentsDeletePrivateEndpointConnectionForJs,
+  appServiceEnvironmentsDeletePrivateEndpointConnectionForJS,
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op staticSitesDeletePrivateEndpointConnectionForJs(
+op staticSitesDeletePrivateEndpointConnectionForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3199,14 +3199,15 @@ op staticSitesDeletePrivateEndpointConnectionForJs(
 });
 
 @@override(StaticSites.deletePrivateEndpointConnection,
-  staticSitesDeletePrivateEndpointConnectionForJs,
+  staticSitesDeletePrivateEndpointConnectionForJS,
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeletePrivateEndpointConnectionForJs(
+op webAppsDeletePrivateEndpointConnectionForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3230,14 +3231,15 @@ op webAppsDeletePrivateEndpointConnectionForJs(
 });
 
 @@override(RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
-  webAppsDeletePrivateEndpointConnectionForJs,
+  webAppsDeletePrivateEndpointConnectionForJS,
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartNetworkTraceForJs(
+op webAppsStartNetworkTraceForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3264,14 +3266,15 @@ op webAppsStartNetworkTraceForJs(
 });
 
 @@override(Sites.startNetworkTrace,
-  webAppsStartNetworkTraceForJs,
+  webAppsStartNetworkTraceForJS,
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartNetworkTraceSlotForJs(
+op webAppsStartNetworkTraceSlotForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3302,14 +3305,15 @@ op webAppsStartNetworkTraceSlotForJs(
 });
 
 @@override(WebApps.startNetworkTraceSlot,
-  webAppsStartNetworkTraceSlotForJs,
+  webAppsStartNetworkTraceSlotForJS,
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartWebSiteNetworkTraceOperationForJs(
+op webAppsStartWebSiteNetworkTraceOperationForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3336,14 +3340,15 @@ op webAppsStartWebSiteNetworkTraceOperationForJs(
 });
 
 @@override(Sites.startWebSiteNetworkTraceOperation,
-  webAppsStartWebSiteNetworkTraceOperationForJs,
+  webAppsStartWebSiteNetworkTraceOperationForJS,
   "javascript"
 );
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
+op webAppsStartWebSiteNetworkTraceOperationSlotForJS(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3374,222 +3379,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 });
 
 @@override(WebApps.startWebSiteNetworkTraceOperationSlot,
-  webAppsStartWebSiteNetworkTraceOperationSlotForJs,
-  "javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessDumpForJs(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-
-  @body
-  body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  @encode("bytes")
-  body: bytes;
-} | ArmNotFoundResponse;
-
-@@override(ProcessInfos.getInstanceProcessDump,
-  webAppsGetInstanceProcessDumpForJs,
-  "javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessDumpSlotForJs(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-
-  @body
-  body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  @encode("bytes")
-  body: bytes;
-} | ArmNotFoundResponse;
-
-@@override(InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
-  webAppsGetInstanceProcessDumpSlotForJs,
-  "javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetProcessDumpForJs(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  @body
-  body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  @encode("bytes")
-  body: bytes;
-} | ArmNotFoundResponse;
-
-@@override(ProcessInfoOperationGroup.getProcessDump,
-  webAppsGetProcessDumpForJs,
-  "javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetProcessDumpSlotForJs(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): {
-  @header("Content-Type")
-  contentType: "*/*";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  @encode("bytes")
-  body: bytes;
-} | ArmNotFoundResponse;
-
-@@override(ProcessSlotOperationGroup.getProcessDumpSlot,
-  webAppsGetProcessDumpSlotForJs,
-  "javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListPublishingProfileXmlWithSecretsForJs(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  @body
-  publishingProfileOptions: CsmPublishingProfileOptions,
-): {
-  @header("Content-Type")
-  contentType: "application/xml";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  @encode("bytes")
-  body: bytes;
-};
-
-@@override(Sites.listPublishingProfileXmlWithSecrets,
-  webAppsListPublishingProfileXmlWithSecretsForJs,
-  "javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListPublishingProfileXmlWithSecretsSlotForJs(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  publishingProfileOptions: CsmPublishingProfileOptions,
-): {
-  @header("Content-Type")
-  contentType: "application/xml";
-
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
-  @doc("Receipt body in COSE format")
-  @bodyRoot
-  @encode("bytes")
-  body: bytes;
-};
-
-@@override(WebApps.listPublishingProfileXmlWithSecretsSlot,
-  webAppsListPublishingProfileXmlWithSecretsSlotForJs,
+  webAppsStartWebSiteNetworkTraceOperationSlotForJS,
   "javascript"
 );
