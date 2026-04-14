@@ -75,6 +75,11 @@ union WorkspaceDiscoveryStatus {
   Pending: "Pending",
 
   /**
+   * The discovery has been accepted and is queued for execution.
+   */
+  Queued: "Queued",
+
+  /**
    * The discovery is in progress.
    */
   InProgress: "InProgress",

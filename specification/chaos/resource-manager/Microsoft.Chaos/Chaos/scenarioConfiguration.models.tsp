@@ -158,6 +158,13 @@ model ValidationProperties {
   endTime?: utcDateTime;
 
   /**
+   * System or infrastructure errors encountered during validation.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  errors?: OperationError[];
+
+  /**
    * Business errors from validation — permission and resource state issues.
    */
   validationErrors?: ScenarioErrors;
