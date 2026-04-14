@@ -30,7 +30,7 @@ interface EmergingIssuesGetResults {
   /**
    * Gets Azure services' emerging issues.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EmergingIssues_Get")
   @tag("EmergingIssues")
   get is ArmResourceRead<
@@ -43,7 +43,7 @@ interface EmergingIssuesGetResults {
   /**
    * Lists Azure services' emerging issues.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("EmergingIssues_List")
   @tag("EmergingIssues")
   list is ArmResourceListByParent<

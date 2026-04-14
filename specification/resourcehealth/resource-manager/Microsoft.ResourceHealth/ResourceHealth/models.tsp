@@ -55,7 +55,7 @@ union reasonChronicityTypes {
   Persistent: "Persistent",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union Scenario {
   string,
 
@@ -320,7 +320,7 @@ union StageValues {
   Archived: "Archived",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union IssueNameParameter {
   string,
 
@@ -355,7 +355,7 @@ union ReasonTypeValues {
 /**
  * Properties of availability state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AvailabilityStatusProperties {
   /**
    * Availability status of the resource. When it is null, this availabilityStatus object represents an availability impacting event
@@ -427,6 +427,7 @@ model AvailabilityStatusProperties {
    * When the resource's availabilityState is Unavailable and the reasonType is not User Initiated, it provides the date and time for when the issue is expected to be resolved.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resolutionETA?: utcDateTime;
 
   /**
@@ -503,6 +504,7 @@ model RecommendedAction {
   /**
    * the comment for the Action
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `_ActionUrl.Comment`?: string;
 
   /**
@@ -645,7 +647,7 @@ model OperationDisplay {
 /**
  * The metadata entity properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MetadataEntityProperties {
   /**
    * The display name.
@@ -706,7 +708,7 @@ model MetadataSupportedValueDetail {
 /**
  * Properties of impacted resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventImpactedResourceProperties {
   /**
    * Resource type within Microsoft cloud.
@@ -758,7 +760,7 @@ model Events is Azure.Core.Page<Event>;
 /**
  * Properties of event.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EventProperties {
   /**
    * Type of event.
@@ -863,6 +865,7 @@ model EventProperties {
   /**
    * It provides information if the event is High incident rate event or not.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isHIR?: boolean;
 
   /**
@@ -963,6 +966,7 @@ model EventPropertiesArticle {
   /**
    * It provides a map of parameter name and value
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: unknown;
 }
 
@@ -993,6 +997,7 @@ model Link {
   /**
    * It provides a map of parameter name and value for portal extension blade to produce lik for given service health event.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: unknown;
 }
 
@@ -1163,7 +1168,7 @@ model EventPropertiesAdditionalInformation {
 /**
  * On-going emerging issue from azure status.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EmergingIssue {
   /**
    * Timestamp for when last time refreshed for ongoing emerging issue.
@@ -1305,7 +1310,7 @@ model ImpactedRegion {
 /**
  * impactedResource with health status
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ImpactedResourceStatus
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -1348,6 +1353,7 @@ model ImpactedResourceStatusProperties {
 /**
  * The List availabilityStatus operation response.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model availabilityStatusListResult {
   /**
    * The list of availabilityStatuses.
@@ -1365,6 +1371,7 @@ model availabilityStatusListResult {
 /**
  * The list of emerging issues.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model emergingIssueListResult {
   /**
    * The list of emerging issues.
@@ -1382,6 +1389,7 @@ model emergingIssueListResult {
 /**
  * The List of eventImpactedResources operation response.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model eventImpactedResourceListResult {
   /**
    * The list of eventImpactedResources.
@@ -1399,6 +1407,7 @@ model eventImpactedResourceListResult {
 /**
  * Lists the operations response.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model operationListResult {
   /**
    * List of operations available in the Microsoft.ResourceHealth resource provider.
@@ -1430,6 +1439,7 @@ model MetadataEntityListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource
 model ProxyResource {
   /**
@@ -1441,6 +1451,7 @@ model ProxyResource {
    * current.
    */
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**

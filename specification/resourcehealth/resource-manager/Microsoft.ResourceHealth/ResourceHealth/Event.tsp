@@ -49,7 +49,7 @@ interface EventOperationGroup {
   /**
    * Service health event in the subscription by event tracking id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Event_GetBySubscriptionIdAndTrackingId")
   @tag("Event")
   getBySubscriptionIdAndTrackingId is EventOperationGroupOps.Read<
@@ -73,7 +73,7 @@ interface EventOperationGroup {
   /**
    * Lists service health events in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Events_ListBySubscriptionId")
   @tag("Events")
   listBySubscriptionId is EventOperationGroupOps.List<
@@ -98,7 +98,7 @@ interface EventOperationGroup {
   /**
    * Lists impacted resources in the subscription by an event (Security Advisory).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SecurityAdvisoryImpactedResources_ListBySubscriptionIdAndEventId")
   @list
   @action("listSecurityAdvisoryImpactedResources")
@@ -120,7 +120,7 @@ interface EventOperationGroup {
   /**
    * Service health event details in the subscription by event tracking id. This can be used to fetch sensitive properties for Security Advisory events. Please see https://learn.microsoft.com/en-us/azure/service-health/security-advisories-elevated-access
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Event_fetchDetailsBySubscriptionIdAndTrackingId")
   @action("fetchEventDetails")
   @tag("Event")
@@ -134,7 +134,7 @@ interface EventOperationGroup {
   /**
    * Service health event details specific in the subscription by event tracking id. This can be used to fetch sensitive properties for Billing event type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Event_fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId")
   @action("fetchBillingCommunicationDetails")
   @tag("Event")
@@ -170,7 +170,7 @@ interface TenantEventOperationGroup {
   /**
    * Service health event in the tenant by event tracking id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Event_GetByTenantIdAndTrackingId")
   @tag("Event")
   getByTenantIdAndTrackingId is TenantEventOperationGroupOps.Read<
@@ -194,7 +194,7 @@ interface TenantEventOperationGroup {
   /**
    * Lists current service health events in the tenant.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Events_ListByTenantId")
   @tag("Events")
   listByTenantId is TenantEventOperationGroupOps.List<
@@ -219,7 +219,7 @@ interface TenantEventOperationGroup {
   /**
    * Lists impacted resources in the tenant by an event (Security Advisory).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SecurityAdvisoryImpactedResources_ListByTenantIdAndEventId")
   @list
   @action("listSecurityAdvisoryImpactedResources")
@@ -241,7 +241,7 @@ interface TenantEventOperationGroup {
   /**
    * Service health event details in the tenant by event tracking id. This can be used to fetch sensitive properties for Security Advisory events. Please see https://learn.microsoft.com/en-us/azure/service-health/security-advisories-elevated-access
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Event_fetchDetailsByTenantIdAndTrackingId")
   @action("fetchEventDetails")
   @tag("Event")

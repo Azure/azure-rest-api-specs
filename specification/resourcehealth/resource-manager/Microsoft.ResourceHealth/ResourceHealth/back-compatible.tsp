@@ -3,19 +3,19 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ResourceHealth;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImpactedResourceStatus.properties);
 
 @@clientLocation(MetadataEntities.getEntity, "Metadata");
 @@clientLocation(MetadataEntities.list, "Metadata");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MetadataEntity.properties);
 
 @@clientLocation(EventImpactedResources.get, ImpactedResources);
 @@clientLocation(EventImpactedResources.listBySubscriptionIdAndEventId,
   ImpactedResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EventImpactedResource.properties);
 
 @@clientLocation(EventOperationGroup.getBySubscriptionIdAndTrackingId, "Event");
@@ -46,12 +46,12 @@ using Microsoft.ResourceHealth;
 @@clientName(TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
   "fetchDetailsByTenantIdAndTrackingId"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Event.properties);
 
 @@clientLocation(EmergingIssuesGetResults.get, "EmergingIssues");
 @@clientLocation(EmergingIssuesGetResults.list, "EmergingIssues");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EmergingIssuesGetResult.properties);
 
 @@clientLocation(EventsOperationGroup.listBySingleResource, "Events");

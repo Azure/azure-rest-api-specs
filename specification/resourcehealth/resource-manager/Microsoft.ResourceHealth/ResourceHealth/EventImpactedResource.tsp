@@ -59,7 +59,7 @@ interface EventImpactedResources {
   /**
    * Gets the specific impacted resource in the subscription by an event.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ImpactedResources_Get")
   get is EventImpactedResourceOps.Read<
     EventImpactedResource,
@@ -69,7 +69,7 @@ interface EventImpactedResources {
   /**
    * Lists impacted resources in the subscription by an event.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ImpactedResources_ListBySubscriptionIdAndEventId")
   listBySubscriptionIdAndEventId is EventImpactedResourceOps.List<
     EventImpactedResource,
