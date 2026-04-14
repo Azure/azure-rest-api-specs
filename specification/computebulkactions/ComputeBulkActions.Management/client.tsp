@@ -291,3 +291,10 @@ namespace Microsoft.ComputeBulkActions;
   "ResourcesWithContextItems",
   "python"
 );
+
+// =====================================================================
+// Fix: NetworkApiVersion enum members with dashes cause Python SyntaxError
+// (ENUM_2020 - 11 - 01 instead of ENUM_2020_11_01)
+// =====================================================================
+@@clientName(NetworkApiVersion.`2020-11-01`, "V2020_11_01", "python");
+@@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");
