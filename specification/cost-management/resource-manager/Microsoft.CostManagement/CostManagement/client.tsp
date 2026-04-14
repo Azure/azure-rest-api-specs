@@ -418,3 +418,8 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@clientName(ExportRun, "ExportRunTemp", "csharp");
 @@clientName(ExportRunReplacement, "ExportRun", "csharp");
 //ExportRun
+
+// Flatten ExportDatasetConfiguration into ExportDataset for C# to match the baseline API
+// where Columns/DataVersion/Filters were directly on ExportDataset (not nested in Configuration).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is needed for C# backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportDataset.configuration, "csharp");
