@@ -569,7 +569,8 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomized(
 });
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
-  webAppsDeletePrivateEndpointConnectionSlotCustomized
+  webAppsDeletePrivateEndpointConnectionSlotCustomized,
+  "!javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3096,5 +3097,285 @@ op regionalCheckNameAvailabilityCustomized(
 );
 @@clientName(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferencesSlot,
   "listSiteConnectionStringKeyVaultReferencesSlot",
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+): ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown>> & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+}) | (ArmDeletedNoContentResponse & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+});
+
+@@override(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
+  webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op appServiceEnvironmentsDeletePrivateEndpointConnectionForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+): ArmResponse<unknown> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+}> | (ArmDeletedNoContentResponse & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+});
+
+@@override(RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
+  appServiceEnvironmentsDeletePrivateEndpointConnectionForJS,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op staticSitesDeletePrivateEndpointConnectionForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+): ArmResponse<unknown> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+}> | (ArmDeletedNoContentResponse & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+});
+
+@@override(StaticSites.deletePrivateEndpointConnection,
+  staticSitesDeletePrivateEndpointConnectionForJS,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsDeletePrivateEndpointConnectionForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  privateEndpointConnectionName: string,
+): ArmResponse<unknown> | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+}> | (ArmDeletedNoContentResponse & {
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @body
+  _: unknown;
+});
+
+@@override(RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
+  webAppsDeletePrivateEndpointConnectionForJS,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartNetworkTraceForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+): ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+  @bodyRoot
+  @identifiers(#[])
+  _?: NetworkTrace[];
+});
+
+@@override(Sites.startNetworkTrace,
+  webAppsStartNetworkTraceForJS,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartNetworkTraceSlotForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+): ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+  @bodyRoot
+  @identifiers(#[])
+  _?: NetworkTrace[];
+});
+
+@@override(WebApps.startNetworkTraceSlot,
+  webAppsStartNetworkTraceSlotForJS,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartWebSiteNetworkTraceOperationForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+): ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+  @bodyRoot
+  @identifiers(#[])
+  _?: NetworkTrace[];
+});
+
+@@override(Sites.startWebSiteNetworkTraceOperation,
+  webAppsStartWebSiteNetworkTraceOperationForJS,
+  "javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op webAppsStartWebSiteNetworkTraceOperationSlotForJS(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  slot: string,
+
+  @query("durationInSeconds")
+  durationInSeconds?: int32,
+
+  @query("maxFrameLength")
+  maxFrameLength?: int32,
+
+  @query("sasUrl")
+  sasUrl?: string,
+
+  @body body: void,
+): ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+  @bodyRoot
+  @identifiers(#[])
+  _?: NetworkTrace[];
+});
+
+@@override(WebApps.startWebSiteNetworkTraceOperationSlot,
+  webAppsStartWebSiteNetworkTraceOperationSlotForJS,
   "javascript"
 );
