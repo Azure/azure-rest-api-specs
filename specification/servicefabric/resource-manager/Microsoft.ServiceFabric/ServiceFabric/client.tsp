@@ -38,13 +38,46 @@ using Microsoft.ServiceFabric;
 @@clientName(Microsoft.ServiceFabric.ApplicationTypeResource, "ServiceFabricApplicationType", "csharp");
 @@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResource, "ServiceFabricApplicationTypeVersion", "csharp");
 @@clientName(Microsoft.ServiceFabric.ServiceResource, "ServiceFabricService", "csharp");
-// @@clientName(Microsoft.ServiceFabric.VMSizeResource, "ServiceFabricVmSizeResource", "csharp");
+@@clientName(Microsoft.ServiceFabric.VMSizeResource, "ServiceFabricVmSizeResource", "csharp");
+@@clientName(Microsoft.ServiceFabric.VMSize.size, "VmSize", "csharp");
 
-// Mark ClusterVersions list operations as pageable (old API had Pageable<ClusterCodeVersionsResult>)
+// Rename ClusterVersions operations to match GA SDK method names
+@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
+  "GetClusterVersions", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
+  "GetClusterVersionsByEnvironment", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list,
+  "GetClusterVersions", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment,
+  "GetClusterVersionsByEnvironment", "csharp");
+
+// Split get/getByEnvironment into a separate client group for C# to avoid
+// CollectionResultOfT name collision with list/listByEnvironment (generator bug #58138)
+@@clientLocation(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get,
+  "ClusterVersionDetails", "csharp");
+@@clientLocation(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment,
+  "ClusterVersionDetails", "csharp");
+
+// Mark ClusterVersions operations as pageable (old API had Pageable<ClusterCodeVersionsResult>)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.get, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.getByEnvironment, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark as pageable for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment, "csharp");
+
+// Override location parameter type from string to AzureLocation for list operations
+// (ArmProviderActionSync uses LocationParameter which has string, but old API used AzureLocation)
+@@alternateType(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(Microsoft.ServiceFabric.ClusterVersionsOperationGroup.listByEnvironment::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
 // Model type renames
 @@clientName(Microsoft.ServiceFabric.AzureActiveDirectory, "ClusterAadSetting", "csharp");
@@ -98,6 +131,8 @@ using Microsoft.ServiceFabric;
   "ClusterEndpoint", "csharp");
 @@clientName(Microsoft.ServiceFabric.ClusterProperties.managementEndpoint,
   "ManagementEndpoint", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterProperties.enableHttpGatewayExclusiveAuthMode,
+  "IsHttpGatewayExclusiveAuthModeEnabled", "csharp");
 
 // Same renames on ClusterPropertiesUpdateParameters
 @@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.eventStoreServiceEnabled,
@@ -110,6 +145,8 @@ using Microsoft.ServiceFabric;
   "UpgradePauseStartOn", "csharp");
 @@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.upgradePauseEndTimestampUtc,
   "UpgradePauseEndOn", "csharp");
+@@clientName(Microsoft.ServiceFabric.ClusterPropertiesUpdateParameters.enableHttpGatewayExclusiveAuthMode,
+  "IsHttpGatewayExclusiveAuthModeEnabled", "csharp");
 
 // Property renames on NodeTypeDescription
 @@clientName(Microsoft.ServiceFabric.NodeTypeDescription.multipleAvailabilityZones,
@@ -143,6 +180,34 @@ using Microsoft.ServiceFabric;
 @@alternateType(Microsoft.ServiceFabric.ClusterUpgradePolicy.upgradeReplicaSetCheckTimeout, duration, "csharp");
 @@alternateType(Microsoft.ServiceFabric.ApplicationUpgradePolicy.upgradeReplicaSetCheckTimeout, duration, "csharp");
 
+// Type overrides for ETag properties (old API used Azure.ETag)
+@@alternateType(Microsoft.ServiceFabric.Cluster.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ApplicationResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ApplicationTypeResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ApplicationTypeVersionResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.ServiceFabric.ServiceResource.etag, Azure.Core.eTag, "csharp");
+
+// Type override for Guid property (old API used System.Guid?)
+@@alternateType(Microsoft.ServiceFabric.ClusterProperties.clusterId, Azure.Core.uuid, "csharp");
+
+// Type override for Uri property (old API used System.Uri)
+@@alternateType(Microsoft.ServiceFabric.ApplicationTypeVersionResourceProperties.appPackageUrl, url, "csharp");
+@@clientName(Microsoft.ServiceFabric.ApplicationTypeVersionResourceProperties.appPackageUrl, "AppPackageUri", "csharp");
+
+// Override Resource.id type from string to armResourceIdentifier for C#
+// (common-types v3 has id as string; v4+ has armResourceIdentifier)
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Override custom ManagedIdentity to use common ManagedServiceIdentity for C#
+// (GA SDK uses Azure.ResourceManager.Models.ManagedServiceIdentity)
+@@alternateType(Microsoft.ServiceFabric.ApplicationResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
 // NOTE: @@hierarchyBuilding causes cascading base type changes on all Data classes
 // in the namespace. Skipping for now - ClusterCodeVersionsResult base type change
 // accepted as known breaking change.
@@ -171,4 +236,20 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 
+// Base type override for Patch models: old SDK had TrackedResourceData.
+// ETag property is lost since TrackedResource doesn't have it — restored via custom code.
+@@alternateType(PatchProxyResource, Azure.ResourceManager.Foundations.TrackedResource, "csharp");
 
+// Base type override for ClusterCodeVersionsResult: old SDK had ResourceData
+// Use wrapper model extending Resource so C# generator maps it to ResourceData base.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
+model ClusterCodeVersionsReplacement
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  /** The detail of the Service Fabric runtime version result */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "x-ms-client-flatten requires exact property name"
+  properties?: ClusterVersionDetails;
+}
+@@alternateType(ClusterCodeVersions, ClusterCodeVersionsReplacement, "csharp");
+@@clientName(ClusterCodeVersionsReplacement, "ClusterCodeVersionsResult", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterCodeVersionsReplacement.properties);
