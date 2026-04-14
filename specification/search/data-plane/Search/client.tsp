@@ -367,10 +367,9 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
-@@protocolAPI(SearchClient.Documents.count, false, "csharp");
-@@convenientAPI(SearchClient.Documents.get, false, "csharp");
-@@protocolAPI(SearchClient.Documents.get, false, "csharp");
-@@access(KnowledgeBaseRetrievalClientOptions, Access.internal, "csharp");
+@@protocolAPI(Search.Documents.count, false, "csharp");
+@@convenientAPI(Search.Documents.get, false, "csharp");
+@@protocolAPI(Search.Documents.get, false, "csharp");
 
 @@clientName(AIServicesAccountIdentity.subdomainUrl, "SubdomainUri", "csharp");
 @@alternateType(AIServicesAccountIdentity.subdomainUrl, url, "csharp");
