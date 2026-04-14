@@ -18,7 +18,7 @@ union ProfanityFilterMode {
   @doc("Remove profanity.")
   Removed: "Removed",
 
-  @doc("Add \"profanity\" XML tags</Profanity>")
+  @doc("Add \"profanity\" XML tags <Profanity></Profanity>")
   Tags: "Tags",
 
   @doc("Mask the profanity with * except of the first letter, e.g., f***")
