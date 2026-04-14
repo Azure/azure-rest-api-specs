@@ -1,0 +1,36 @@
+{
+  "operationId": "KnowledgeSources_List",
+  "title": "SearchServiceListKnowledgeSourcesFabricOntology",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2026-05-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "ks-fabricontology-test",
+            "kind": "fabricOntology",
+            "description": "Description of the Fabric Ontology knowledge source.",
+            "encryptionKey": {
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+              "keyVaultUri": "https://myKeyVault.vault.azure.net",
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
+              }
+            },
+            "fabricOntologyParameters": {
+              "workspaceId": "12345678-1234-1234-1234-123456789abc",
+              "ontologyId": "ontology-456"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
