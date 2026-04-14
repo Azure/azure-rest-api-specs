@@ -3107,7 +3107,7 @@ op regionalCheckNameAvailabilityCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS(
+op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3135,7 +3135,7 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS(
 });
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
-  webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS,
+  webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs,
   "javascript"
 );
 
@@ -3143,7 +3143,7 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJS(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op appServiceEnvironmentsDeletePrivateEndpointConnectionForJS(
+op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3167,7 +3167,7 @@ op appServiceEnvironmentsDeletePrivateEndpointConnectionForJS(
 });
 
 @@override(RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
-  appServiceEnvironmentsDeletePrivateEndpointConnectionForJS,
+  appServiceEnvironmentsDeletePrivateEndpointConnectionForJs,
   "javascript"
 );
 
@@ -3175,7 +3175,7 @@ op appServiceEnvironmentsDeletePrivateEndpointConnectionForJS(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op staticSitesDeletePrivateEndpointConnectionForJS(
+op staticSitesDeletePrivateEndpointConnectionForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3199,7 +3199,7 @@ op staticSitesDeletePrivateEndpointConnectionForJS(
 });
 
 @@override(StaticSites.deletePrivateEndpointConnection,
-  staticSitesDeletePrivateEndpointConnectionForJS,
+  staticSitesDeletePrivateEndpointConnectionForJs,
   "javascript"
 );
 
@@ -3207,7 +3207,7 @@ op staticSitesDeletePrivateEndpointConnectionForJS(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeletePrivateEndpointConnectionForJS(
+op webAppsDeletePrivateEndpointConnectionForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3231,7 +3231,7 @@ op webAppsDeletePrivateEndpointConnectionForJS(
 });
 
 @@override(RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
-  webAppsDeletePrivateEndpointConnectionForJS,
+  webAppsDeletePrivateEndpointConnectionForJs,
   "javascript"
 );
 
@@ -3239,7 +3239,7 @@ op webAppsDeletePrivateEndpointConnectionForJS(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartNetworkTraceForJS(
+op webAppsStartNetworkTraceForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3266,7 +3266,7 @@ op webAppsStartNetworkTraceForJS(
 });
 
 @@override(Sites.startNetworkTrace,
-  webAppsStartNetworkTraceForJS,
+  webAppsStartNetworkTraceForJs,
   "javascript"
 );
 
@@ -3274,7 +3274,7 @@ op webAppsStartNetworkTraceForJS(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartNetworkTraceSlotForJS(
+op webAppsStartNetworkTraceSlotForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3305,7 +3305,7 @@ op webAppsStartNetworkTraceSlotForJS(
 });
 
 @@override(WebApps.startNetworkTraceSlot,
-  webAppsStartNetworkTraceSlotForJS,
+  webAppsStartNetworkTraceSlotForJs,
   "javascript"
 );
 
@@ -3313,7 +3313,7 @@ op webAppsStartNetworkTraceSlotForJS(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartWebSiteNetworkTraceOperationForJS(
+op webAppsStartWebSiteNetworkTraceOperationForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3340,7 +3340,7 @@ op webAppsStartWebSiteNetworkTraceOperationForJS(
 });
 
 @@override(Sites.startWebSiteNetworkTraceOperation,
-  webAppsStartWebSiteNetworkTraceOperationForJS,
+  webAppsStartWebSiteNetworkTraceOperationForJs,
   "javascript"
 );
 
@@ -3348,7 +3348,7 @@ op webAppsStartWebSiteNetworkTraceOperationForJS(
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartWebSiteNetworkTraceOperationSlotForJS(
+op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -3379,6 +3379,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJS(
 });
 
 @@override(WebApps.startWebSiteNetworkTraceOperationSlot,
-  webAppsStartWebSiteNetworkTraceOperationSlotForJS,
+  webAppsStartWebSiteNetworkTraceOperationSlotForJs,
   "javascript"
 );
