@@ -26,7 +26,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "@types/semver": "^7.7.1",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/coverage-v8": "^4.1.0",
     "cross-env": "^10.1.0",
     "eslint": "^10.0.0",
     "fflate": "0.8.2",
@@ -35,12 +35,12 @@
     "prettier-plugin-organize-imports": "^4.2.0",
     "semver": "^7.7.1",
     "tinybench": "^6.0.0",
-    "typescript": "~5.9.2",
-    "typescript-eslint": "^8.56.0",
-    "vitest": "^4.0.15"
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^4.1.0"
   },
   "scripts": {
-    "check": "npm run lint && npm run format:check && npm run test:ci",
+    "check": "npm run test:ci && npm run lint && npm run format:check",
     "lint": "npm run lint:eslint && npm run lint:tsc",
     "lint:eslint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
     "lint:tsc": "tsc --build --verbose",
@@ -50,5 +50,8 @@
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose",
     "validate": "npm run lint && npm run format:check && npm run test:ci"
+  },
+  "overrides": {
+    "undici@^5.0.0": "^6.0.0"
   }
 }
