@@ -733,24 +733,6 @@
         }
       }
     },
-    "Condition": {
-      "type": "object",
-      "description": "Governance rule's condition",
-      "properties": {
-        "property": {
-          "type": "string",
-          "description": "The governance rule Condition's Property, e.g. Severity or AssessmentKey, see examples"
-        },
-        "value": {
-          "type": "string",
-          "description": "The governance rule Condition's Value like severity Low, High or assessments keys, see examples"
-        },
-        "operator": {
-          "$ref": "#/definitions/GovernanceRuleConditionOperator",
-          "description": "The governance rule Condition's Operator, for example Equals for severity or In for list of assessments, see examples"
-        }
-      }
-    },
     "ExecuteGovernanceRuleParams": {
       "type": "object",
       "description": "Governance rule execution parameters",
@@ -878,30 +860,6 @@
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "GovernanceRuleConditionOperator": {
-      "type": "string",
-      "description": "The governance rule Condition's Operator, for example Equals for severity or In for list of assessments, see examples",
-      "enum": [
-        "Equals",
-        "In"
-      ],
-      "x-ms-enum": {
-        "name": "GovernanceRuleConditionOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Equals",
-            "value": "Equals",
-            "description": "Checks that the string value of the data defined in Property equals the given value - exact fit"
-          },
-          {
-            "name": "In",
-            "value": "In",
-            "description": "Checks that the string value of the data defined in Property equals any of the given values (exact fit)"
-          }
-        ]
-      }
     },
     "GovernanceRuleEmailNotification": {
       "type": "object",
@@ -1056,15 +1014,7 @@
         "conditionSets": {
           "type": "array",
           "description": "The governance rule conditionSets - see examples",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Condition"
-              }
-            }
-          }
+          "items": {}
         },
         "includeMemberScopes": {
           "type": "boolean",

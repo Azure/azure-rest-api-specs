@@ -283,7 +283,7 @@ model GovernanceRuleProperties {
    * The governance rule conditionSets - see examples
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  conditionSets: Condition[][][];
+  conditionSets: unknown[];
 
   /**
    * Defines whether the rule is management scope rule (master connector as a single scope or management scope)
