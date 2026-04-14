@@ -582,10 +582,19 @@ interface Caches {
   /**
    * List all Caches within the Capacity Pool
    */
+  @removed(Versions.v2026_01_01)
+  @sharedRoute
   listByCapacityPools is ArmResourceListByParent<
     Cache,
     Response = ArmResponse<CacheList>
   >;
+
+  /**
+   * List all Caches within the Capacity Pool
+   */
+  @added(Versions.v2026_01_01)
+  @sharedRoute
+  list is ArmResourceListByParent<Cache, Response = ArmResponse<CacheList>>;
 
   /**
    * This operation will list the cluster peering command, cluster peering passphrase and the vserver peering command
