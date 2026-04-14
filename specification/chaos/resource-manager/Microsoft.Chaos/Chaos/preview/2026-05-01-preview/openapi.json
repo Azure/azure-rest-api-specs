@@ -7057,9 +7057,11 @@
       "type": "string",
       "description": "Enum of the scenario run state.",
       "enum": [
+        "Queued",
         "Resolving",
         "Generating",
         "Validating",
+        "ValidationSucceeded",
         "Starting",
         "Running",
         "Canceling",
@@ -7071,6 +7073,11 @@
         "name": "ScenarioRunState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The scenario run has been queued and is waiting to start."
+          },
           {
             "name": "Resolving",
             "value": "Resolving",
@@ -7085,6 +7092,11 @@
             "name": "Validating",
             "value": "Validating",
             "description": "The scenario run is in the process of being validated."
+          },
+          {
+            "name": "ValidationSucceeded",
+            "value": "ValidationSucceeded",
+            "description": "The scenario run validation has completed successfully."
           },
           {
             "name": "Starting",
@@ -7644,6 +7656,7 @@
       "description": "Enum of the workspace discovery status.",
       "enum": [
         "Pending",
+        "Queued",
         "InProgress",
         "Succeeded",
         "Failed",
@@ -7657,6 +7670,11 @@
             "name": "Pending",
             "value": "Pending",
             "description": "The discovery is pending and has not started."
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The discovery has been accepted and is queued for execution."
           },
           {
             "name": "InProgress",
@@ -7786,6 +7804,7 @@
         "Queued",
         "InProgress",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed",
         "Canceled"
       ],
@@ -7812,6 +7831,11 @@
             "name": "Succeeded",
             "value": "Succeeded",
             "description": "The evaluation completed successfully."
+          },
+          {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The evaluation partially succeeded — some scenarios succeeded while others failed."
           },
           {
             "name": "Failed",

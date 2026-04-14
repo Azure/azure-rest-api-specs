@@ -289,6 +289,11 @@ union ScenarioRunState {
   string,
 
   /**
+   * The scenario run has been queued and is waiting to start.
+   */
+  Queued: "Queued",
+
+  /**
    * The scenario run is in the process of being resolved.
    */
   Resolving: "Resolving",
@@ -302,6 +307,11 @@ union ScenarioRunState {
    * The scenario run is in the process of being validated.
    */
   Validating: "Validating",
+
+  /**
+   * The scenario run validation has completed successfully.
+   */
+  ValidationSucceeded: "ValidationSucceeded",
 
   /**
    * The scenario run is in the process of being started.

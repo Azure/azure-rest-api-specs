@@ -142,6 +142,11 @@ union WorkspaceEvaluationStatus {
   Succeeded: "Succeeded",
 
   /**
+   * The evaluation partially succeeded — some scenarios succeeded while others failed.
+   */
+  PartiallySucceeded: "PartiallySucceeded",
+
+  /**
    * The evaluation failed.
    */
   Failed: "Failed",
