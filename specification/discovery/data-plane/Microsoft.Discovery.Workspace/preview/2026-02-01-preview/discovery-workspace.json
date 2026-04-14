@@ -825,6 +825,114 @@
         }
       }
     },
+    "/projects/{projectName}/investigations/{investigationName}/discoveryEngine:start": {
+      "post": {
+        "operationId": "Investigations_StartDiscoveryEngine",
+        "description": "Start the discovery engine for an investigation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "investigationName",
+            "in": "path",
+            "description": "The investigation name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryEngine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Investigations_StartDiscoveryEngine_MaximumSet": {
+            "$ref": "./examples/Investigations_StartDiscoveryEngine_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/investigations/{investigationName}/discoveryEngine:stop": {
+      "post": {
+        "operationId": "Investigations_StopDiscoveryEngine",
+        "description": "Stop the discovery engine for an investigation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "investigationName",
+            "in": "path",
+            "description": "The investigation name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryEngine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Investigations_StopDiscoveryEngine_MaximumSet": {
+            "$ref": "./examples/Investigations_StopDiscoveryEngine_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/projects/{projectName}/investigations/{investigationName}/operations/{operationId}": {
       "get": {
         "operationId": "Investigations_GetOperationStatus",

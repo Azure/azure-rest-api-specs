@@ -313,7 +313,6 @@ interface Investigations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Start the discovery engine for an investigation.")
   @route("/projects/{projectName}/investigations/{investigationName}/discoveryEngine:start")
-  @removed(Versions.`2026-02-01-preview`)
   @post
   startDiscoveryEngine is Azure.Core.Foundations.Operation<
     {
@@ -335,7 +334,6 @@ interface Investigations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Stop the discovery engine for an investigation.")
   @route("/projects/{projectName}/investigations/{investigationName}/discoveryEngine:stop")
-  @removed(Versions.`2026-02-01-preview`)
   @post
   stopDiscoveryEngine is Azure.Core.Foundations.Operation<
     {
