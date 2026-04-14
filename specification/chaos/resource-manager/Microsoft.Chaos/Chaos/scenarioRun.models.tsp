@@ -69,7 +69,14 @@ model ScenarioRunProperties {
   resources: ScenarioRunResource[];
 
   /**
-   * The scenario run errors.
+   * System or infrastructure errors encountered during the scenario run.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  errors?: OperationError[];
+
+  /**
+   * Business errors from fault injection — permission and resource state issues.
    */
   @visibility(Lifecycle.Read)
   executionErrors?: ScenarioErrors;

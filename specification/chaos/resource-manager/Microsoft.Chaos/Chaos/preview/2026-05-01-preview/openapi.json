@@ -6990,9 +6990,18 @@
             "id"
           ]
         },
+        "errors": {
+          "type": "array",
+          "description": "System or infrastructure errors encountered during the scenario run.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "executionErrors": {
           "$ref": "#/definitions/ScenarioErrors",
-          "description": "The scenario run errors.",
+          "description": "Business errors from fault injection — permission and resource state issues.",
           "readOnly": true
         },
         "scenarioRunJson": {
@@ -7561,6 +7570,15 @@
           "format": "date-time",
           "description": "The scenario validation UTC end time.",
           "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "System or infrastructure errors encountered during validation.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "validationErrors": {
           "$ref": "#/definitions/ScenarioErrors",
