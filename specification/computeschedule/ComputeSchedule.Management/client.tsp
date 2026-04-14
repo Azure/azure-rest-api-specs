@@ -242,6 +242,32 @@ using TypeSpec.Versioning;
   "csharp"
 );
 
+@@clientName(UserInitiatedRedeploy.automaticallyApprove,
+  "AutomaticallyApproveRedeploy",
+  "csharp"
+);
+@@clientName(UserInitiatedReboot.automaticallyApprove,
+  "AutomaticallyApproveReboot",
+  "csharp"
+);
+@@clientName(AllInstancesDown.automaticallyApprove,
+  "AutomaticallyApproveAllInstancesDown",
+  "csharp"
+);
+
+@@clientName(DiskEncryptionSetParameters,
+  "ComputeScheduleDiskEncryptionSetConfig",
+  "csharp"
+);
+@@clientName(ManagedDiskParameters,
+  "ComputeScheduleManagedDiskConfig",
+  "csharp"
+);
+@@clientName(VirtualMachineReimageParameters,
+  "ComputeScheduleVirtualMachineReimageConfig",
+  "csharp"
+);
+
 @@clientName(OccurrenceExtension.listOccurrenceByVms,
   "GetAssociatedOccurrences",
   "csharp"
