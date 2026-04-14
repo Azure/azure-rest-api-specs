@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 /**
@@ -53,8 +55,20 @@ interface Profiles {
   /**
    * Update a Traffic Manager profile.
    */
+  @sharedRoute
+  @removed(Versions.v2024_04_01_preview)
   @patch(#{ implicitOptionality: false })
   update is ProfileOps.CustomPatchSync<Profile, PatchModel = Profile>;
+
+  /**
+   * Update a Traffic Manager profile.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId needed to match stable version"
+  @sharedRoute
+  @added(Versions.v2024_04_01_preview)
+  @operationId("Profiles_Update")
+  @patch(#{ implicitOptionality: false })
+  updateV2 is ProfileOps.CustomPatchSync<Profile, PatchModel = ProfileUpdate>;
 
   /**
    * Deletes a Traffic Manager profile.
@@ -97,5 +111,8 @@ interface Profiles {
   "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation."
 );
 @@doc(Profiles.update::parameters.properties,
+  "The Traffic Manager profile parameters supplied to the Update operation."
+);
+@@doc(Profiles.updateV2::parameters.properties,
   "The Traffic Manager profile parameters supplied to the Update operation."
 );
