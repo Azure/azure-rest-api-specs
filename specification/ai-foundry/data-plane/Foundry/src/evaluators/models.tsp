@@ -48,8 +48,8 @@ union EvaluatorDefinitionType {
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
 
-  @doc("Generated evaluator definition produced by the generate API. Stores rubric criteria with a general quality criterion (quality) or taxonomy reference (safety).")
-  generated: "generated",
+  @doc("Rubric-based evaluator definition produced by the generate API. Stores rubric criteria for both quality and safety evaluators.")
+  rubrics: "rubrics",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
@@ -169,30 +169,27 @@ model RubricCriterion {
   always_applicable?: boolean;
 }
 
-@doc("Generated evaluator definition — stores artifacts produced by the generate API. Call the generate action first, review the output, then save via createVersion.")
-model GeneratedEvaluatorDefinition extends EvaluatorDefinition {
-  type: EvaluatorDefinitionType.generated;
+@doc("Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators. By default, generate persists the evaluator immediately; set persist=false for preview mode.")
+model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.rubrics;
 
-  @doc("Generated rubric criteria — the scoring blueprint used by the LLM judge. Includes explicit criteria plus a general quality criterion (always_applicable: true) that catches quality issues outside the explicit criteria. Populated when category is 'quality'.")
+  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a general quality criterion (always_applicable: true); safety evaluators include a general policy compliance criterion. Both quality and safety use the same rubric structure.")
   rubric_criteria?: RubricCriterion[];
-
-  @doc("ID of the generated or linked taxonomy (populated when category is 'safety')")
-  taxonomy_id?: string;
-
-  @doc("Version of the linked taxonomy")
-  taxonomy_version?: string;
 }
 
-@doc("Request body for evaluator generation. If an evaluator with this name already exists, the service automatically retrieves the latest version's criteria and uses them as context for improvement.")
+@doc("Request body for evaluator generation. If an evaluator with this name already exists, the service automatically retrieves the latest version's criteria as context for improvement.")
 model GenerateEvaluatorRequest {
-  @doc("Source materials for generation — agent prompts, traces, or uploaded files.")
+  @doc("Source materials for generation — agent prompts or uploaded files.")
   sources: EvaluatorGenerationJobSource[];
 
-  @doc("Category determines generation pipeline: 'quality' (default) produces rubric criteria, 'safety' produces a taxonomy")
+  @doc("Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure.")
   category?: EvaluatorCategory = EvaluatorCategory.quality;
 
-  @doc("Optional: model deployment to use for generation (defaults to service default)")
-  model_deployment_name?: string;
+  @doc("When true (default), the generated evaluator is saved as a new version immediately. When false, returns an unsaved preview for experimentation — call createVersion to persist.")
+  persist?: boolean = true;
+
+  @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Defaults to service default.")
+  model?: string;
 }
 
 @doc("Evaluator Definition")

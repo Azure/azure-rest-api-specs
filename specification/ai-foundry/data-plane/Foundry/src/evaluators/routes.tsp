@@ -125,7 +125,7 @@ interface Evaluators {
   // POST /evaluators/{evaluatorName}/versions:generate
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Generate an evaluator from source materials. Returns a complete EvaluatorVersion with generated rubric criteria (quality) or taxonomy reference (safety) for review. Save via createVersion when satisfied.")
+  @doc("Generate a rubric-based evaluator from source materials. By default (persist=true), saves as a new evaluator version and returns the saved EvaluatorVersion. Set persist=false to return an unsaved preview for experimentation.")
   @Rest.action("versions:generate")
   @Rest.actionSeparator("/")
   @Http.post
