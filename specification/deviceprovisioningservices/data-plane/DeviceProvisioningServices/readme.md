@@ -113,6 +113,11 @@ suppressions:
     reason: >-
       Pre-existing DPS device API PUT request/response scheme does not match ARM guidelines.
       Maintained for backward compatibility with existing DPS device clients.
+  - code: SummaryAndDescriptionMustNotBeSame
+    from: device.json
+    reason: >-
+      Pre-existing DPS device API has operations where summary and description are
+      identical. Maintained for backward compatibility with existing DPS SDK clients.
   - code: LroHeaders
     from: device.json
     reason: >-
