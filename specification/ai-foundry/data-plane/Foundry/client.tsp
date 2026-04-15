@@ -166,17 +166,6 @@ using Azure.AI.Projects;
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 
 // --------------------------------------------------------------------------------
-// Evaluation Taxonomies sub-client
-// --------------------------------------------------------------------------------
-
-// It indirectly consumes this from openai-evaluations, via TypeSpec model "Target"
-// In Python, like we do for a few other classes, we hand-code a TypedDict version
-// of this class add the "Pram" suffix to distinguish it from the original emitted classes from
-// the TypedDict one. Since we don't want a class named ModelSamplingParamsParm, we
-// rename the original one here.
-@@clientName(ModelSamplingParams, "ModelSamplingConfig", "python");
-
-// --------------------------------------------------------------------------------
 // Insights sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Azure.AI.Projects.Insight.id, "insight_id");
