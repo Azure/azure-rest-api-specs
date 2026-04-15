@@ -2131,6 +2131,12 @@ model ProtectedItem {
    */
   @visibility(Lifecycle.Read)
   vaultId?: string;
+
+  /**
+   * Source side threat information
+   */
+  @added(Versions.v2026_03_31_preview)
+  sourceSideScanInfo?: SourceSideScanInfo;
 }
 
 /**
@@ -2156,6 +2162,13 @@ model RecoveryPoint {
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectType: string;
+
+  /**
+   * Recovery point threat information.
+   */
+  @added(Versions.v2026_03_31_preview)
+  @identifiers(#[])
+  threatInfo?: ThreatInfo[];
 }
 
 alias ResourceProperties = {
@@ -8310,6 +8323,190 @@ model ClientDiscoveryResponse {
    */
   @nextLink
   nextLink?: string;
+}
+
+// ============================================================
+// Preview-only models — added in v2026_03_31_preview
+// (carried forward from 2025-02-28-preview handcrafted swagger)
+// ============================================================
+
+/**
+ * Threat status of the container
+ */
+@added(Versions.v2026_03_31_preview)
+union SourceSideScanStatus {
+  string,
+
+  /** Configured */
+  Configured: "Configured",
+
+  /** Not configured */
+  NotConfigured: "NotConfigured",
+
+  /** Not applicable */
+  NotApplicable: "NotApplicable",
+}
+
+/**
+ * Threat summary for the container
+ */
+@added(Versions.v2026_03_31_preview)
+union SourceSideScanSummary {
+  string,
+
+  /** Unknown */
+  Unknown: "Unknown",
+
+  /** Not applicable */
+  NotApplicable: "NotApplicable",
+
+  /** Suspicious */
+  Suspicious: "Suspicious",
+
+  /** Healthy */
+  Healthy: "Healthy",
+}
+
+/**
+ * Source side threat information
+ */
+@added(Versions.v2026_03_31_preview)
+model SourceSideScanInfo {
+  /**
+   * Threat status of the container
+   */
+  sourceSideScanStatus?: SourceSideScanStatus;
+
+  /**
+   * Threat summary for the container
+   */
+  sourceSideScanSummary?: SourceSideScanSummary;
+}
+
+/**
+ * Threat Status Types
+ */
+@added(Versions.v2026_03_31_preview)
+union ThreatState {
+  string,
+
+  /** Active */
+  Active: "Active",
+
+  /** In progress */
+  InProgress: "InProgress",
+
+  /** Ignored */
+  Ignored: "Ignored",
+
+  /** Resolved */
+  Resolved: "Resolved",
+}
+
+/**
+ * Threat Severity Types
+ */
+@added(Versions.v2026_03_31_preview)
+union ThreatSeverity {
+  string,
+
+  /** Critical */
+  Critical: "Critical",
+
+  /** High */
+  High: "High",
+
+  /** Warning */
+  Warning: "Warning",
+
+  /** Informational */
+  Informational: "Informational",
+}
+
+/**
+ * Recovery Point Threat information
+ */
+@added(Versions.v2026_03_31_preview)
+model ThreatInfo {
+  /**
+   * Threat Subject
+   */
+  @visibility(Lifecycle.Read)
+  threatTitle?: string;
+
+  /**
+   * Threat Description
+   */
+  @visibility(Lifecycle.Read)
+  threatDescription?: string;
+
+  /**
+   * Timestamp when the last (latest) threat information was sent
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdatedTime?: utcDateTime;
+
+  /**
+   * Threat Status Types
+   */
+  threatState?: ThreatState;
+
+  /**
+   * Start timestamp of the threat
+   */
+  @visibility(Lifecycle.Read)
+  threatStartTime?: utcDateTime;
+
+  /**
+   * End timestamp of the threat
+   */
+  @visibility(Lifecycle.Read)
+  threatEndTime?: utcDateTime;
+
+  /**
+   * Threat details link
+   */
+  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches existing 2025-02-28-preview swagger field name"
+  threatURI?: url;
+
+  /**
+   * Threat Severity Types
+   */
+  threatSeverity?: ThreatSeverity;
+}
+
+/**
+ * Recovery Point Properties Contract for Update Recovery Point API.
+ */
+@added(Versions.v2026_03_31_preview)
+model PatchRecoveryPointPropertiesInput {
+  /**
+   * Expiry time of Recovery Point in UTC.
+   */
+  expiryTime?: utcDateTime;
+}
+
+/**
+ * Recovery Point Contract for Update Recovery Point API.
+ */
+@added(Versions.v2026_03_31_preview)
+model PatchRecoveryPointInput {
+  /**
+   * Properties of Recovery Point
+   */
+  recoveryPointProperties?: PatchRecoveryPointPropertiesInput;
+}
+
+/**
+ * Patch Request content to update recovery point for given RecoveryPointId
+ */
+@added(Versions.v2026_03_31_preview)
+model UpdateRecoveryPointRequest {
+  /**
+   * Resource properties.
+   */
+  properties?: PatchRecoveryPointInput;
 }
 
 // ============================================================
