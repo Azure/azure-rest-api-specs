@@ -23,6 +23,11 @@ model NetworkFabricController
 
   @doc("The NetworkFabricController Properties")
   properties: NetworkFabricControllerProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -44,10 +49,16 @@ interface NetworkFabricControllers {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkFabricController>;
 
   @doc("Lists all the NetworkFabricControllers thats available in the resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkFabricController>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkFabricController,
+    Response = NetworkFabricControllersListResult
+  >;
 
   @doc("Lists all the NetworkFabricControllers by subscription.")
-  listBySubscription is ArmListBySubscription<NetworkFabricController>;
+  listBySubscription is ArmListBySubscription<
+    NetworkFabricController,
+    Response = NetworkFabricControllersListResult
+  >;
 }
 
 @@doc(NetworkFabricControllers.create::parameters.resource, "Request payload.");
