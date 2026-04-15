@@ -90,5 +90,5 @@ using Microsoft.ResourceHealth;
 );
 @@clientName(EventPropertiesRecommendedActionsActionsItem,
   "EventPropertiesRecommendedActionsItem",
-  "go"
+  "go,javascript"
 );
