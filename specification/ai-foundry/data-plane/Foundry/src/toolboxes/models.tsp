@@ -4,6 +4,7 @@ import "../agents/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -63,6 +64,7 @@ alias CreateToolboxVersionRequest = {
   @doc("The name of the toolbox. If the toolbox does not exist, it will be created.")
   @path
   @maxLength(256)
+  @clientName("name")
   toolbox_name: string;
 
   @doc("A human-readable description of the toolbox.")
@@ -82,12 +84,14 @@ alias CreateToolboxVersionRequest = {
 alias GetToolboxRequest = {
   @doc("The name of the toolbox to retrieve.")
   @path
+  @clientName("name")
   toolbox_name: string;
 };
 
 alias GetToolboxVersionRequest = {
   @doc("The name of the toolbox.")
   @path
+  @clientName("name")
   toolbox_name: string;
 
   @doc("The version identifier to retrieve.")
@@ -102,6 +106,7 @@ alias ListToolboxesRequest = {
 alias ListToolboxVersionsRequest = {
   @doc("The name of the toolbox to list versions for.")
   @path
+  @clientName("name")
   toolbox_name: string;
 
   ...CommonPageQueryParameters;
@@ -110,12 +115,14 @@ alias ListToolboxVersionsRequest = {
 alias DeleteToolboxRequest = {
   @doc("The name of the toolbox to delete.")
   @path
+  @clientName("name")
   toolbox_name: string;
 };
 
 model UpdateToolboxRequest {
   @doc("The name of the toolbox to update.")
   @path
+  @clientName("name")
   toolbox_name: string;
 
   @doc("The version identifier that the toolbox should point to. When set, the toolbox's default version will resolve to this version instead of the latest.")
@@ -125,6 +132,7 @@ model UpdateToolboxRequest {
 alias DeleteToolboxVersionRequest = {
   @doc("The name of the toolbox.")
   @path
+  @clientName("name")
   toolbox_name: string;
 
   @doc("The version identifier to delete.")
