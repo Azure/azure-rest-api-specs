@@ -1,0 +1,75 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability               # capability | regression
+
+# Root-level environment (merged into all stimuli)
+environment:
+  skills:
+    - ../../SKILL.md
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
+      cwd: ./
+      timeout: 50000
+
+# Execution configuration
+config:
+  runs: 2                      # Trials per stimulus
+  timeout: 1800                # Seconds per trial
+  model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
+  executor: copilot-sdk        # Which executor to use
+
+# Test cases
+stimuli:
+- prompt: |
+    Add an additional POST action called "/notify" to the standard operations of Employee. Ensure the definition meets TypeSpec Azure design guidelines.
+  name: 002007-ARM-define-custom-action
+  constraints:
+    max_turns: 10
+    expect_tools:
+    - edit
+    - azsdk_run_typespec_validation
+    max_tokens: 5000
+  environment:
+    files:
+      - src: ../fixtures/002000-ARM-shared-base/employee.tsp
+        dest: employee.tsp
+      - src: ../fixtures/002000-ARM-shared-base/main.tsp
+        dest: main.tsp
+      - src: ../fixtures/002000-ARM-shared-base/package.json
+        dest: package.json
+      - src: ../fixtures/002000-ARM-shared-base/readme.md
+        dest: readme.md
+      - src: ../fixtures/002000-ARM-shared-base/shared.tsp
+        dest: shared.tsp
+      - src: ../fixtures/002000-ARM-shared-base/tspconfig.yaml
+        dest: tspconfig.yaml
+  graders:
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: notify is ArmResourceAction|move is ArmResourceAction|ArmResourceActionSync<
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: model .*Request
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: model .*Response
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 0.5
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+scoring:
+  weights:
+    prompt: 1
+    file-matches: 3
+  threshold: 0.7
+
+

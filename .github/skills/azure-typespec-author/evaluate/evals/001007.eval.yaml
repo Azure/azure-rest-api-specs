@@ -1,0 +1,136 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability               # capability | regression
+
+# Root-level environment (merged into all stimuli)
+environment:
+  skills:
+    - ../../SKILL.md
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
+      cwd: ./
+      timeout: 50000
+
+# Execution configuration
+config:
+  runs: 2                      # Trials per stimulus
+  timeout: 1800                # Seconds per trial
+  model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
+  executor: copilot-sdk        # Which executor to use
+
+# Test cases
+stimuli:
+- prompt: |
+    I want to add a new stable version `2025-01-01`. Exclude `workLocation` property and `WorkLocation` model. Carry other features.
+  name: 001007-version-add-stable-after-preview
+  constraints:
+    max_turns: 10
+    expect_tools:
+    - edit
+    - azsdk_run_typespec_validation
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/001007-version-add-stable-after-preview\employee.tsp
+      dest: employee.tsp
+    - src: ../fixtures/001007-version-add-stable-after-preview\main.tsp
+      dest: main.tsp
+    - src: ../fixtures/001007-version-add-stable-after-preview\shared.tsp
+      dest: shared.tsp
+    - src: ../fixtures/001007-version-add-stable-after-preview\tspconfig.yaml
+      dest: tspconfig.yaml
+    - src: ../fixtures/001007-version-add-stable-after-preview\package.json
+      dest: package.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\readme.md
+      dest: readme.md
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Operations_List_MaximumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2021-10-01\Operations_List_MinimumSet_Gen.json
+      dest: examples/2021-10-01/Operations_List_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_CreateOrUpdate_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_CreateOrUpdate_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Delete_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Delete_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Get_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListByResourceGroup_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListByResourceGroup_MinimumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListByResourceGroup_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListBySubscription_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_ListBySubscription_MinimumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_ListBySubscription_MinimumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Employees_Update_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Employees_Update_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Operations_List_MaximumSet_Gen.json
+      dest: examples/2024-10-01-preview/Operations_List_MaximumSet_Gen.json
+    - src: ../fixtures/001007-version-add-stable-after-preview\examples\2024-10-01-preview\Operations_List_MinimumSet_Gen.json
+      dest: examples/2024-10-01-preview/Operations_List_MinimumSet_Gen.json
+  graders:
+  - type: file-exists
+    config:
+      path: examples/2025-01-01/Employees_Get_MaximumSet_Gen.json
+  - type: file-not-exists
+    config:
+      path: examples/2024-10-01-preview/Employees_Get_MaximumSet_Gen.json
+  - type: file-matches
+    config:
+      path: main.tsp
+      pattern: 2025-01-01
+  - type: file-not-matches
+    config:
+      path: main.tsp
+      pattern: 2024-10-01-preview
+  - type: file-not-matches
+    config:
+      path: employee.tsp
+      pattern: 'workLocation\?: WorkLocation;'
+  - type: file-matches
+    config:
+      path: employee.tsp
+      pattern: '@added\(Versions\.v2025_01_01\)'
+  - type: file-not-matches
+    config:
+      path: employee.tsp
+      pattern: v2024_10_01_preview
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 0.5
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+scoring:
+  weights:
+    prompt: 1
+    file-matches: 2
+    file-not-matches: 3
+    file-exists: 1
+    file-not-exists: 1
+  threshold: 0.7
+  executor: copilot-sdk
+  runs: 1
+  model: claude-opus-4.6-1m
+  timeout: 1800
+
+

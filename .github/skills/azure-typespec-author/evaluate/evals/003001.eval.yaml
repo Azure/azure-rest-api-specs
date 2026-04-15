@@ -1,0 +1,63 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability               # capability | regression
+
+# Root-level environment (merged into all stimuli)
+environment:
+  skills:
+    - ../../SKILL.md
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
+      cwd: ./
+      timeout: 50000
+
+# Execution configuration
+config:
+  runs: 2                      # Trials per stimulus
+  timeout: 1800                # Seconds per trial
+  model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
+  executor: copilot-sdk        # Which executor to use
+
+# Test cases
+stimuli:
+- prompt: |
+    Add an async delete operation for StacItems
+  name: 003001-dataplane-async-delete-op
+  constraints:
+    max_turns: 10
+    expect_tools:
+    - edit
+    - azsdk_run_typespec_validation
+    max_tokens: 5000
+  environment:
+    files:
+    - src: ../fixtures/003001-dataplane-async-delete-op/inma.tsp
+      dest: inma.tsp
+    - src: ../fixtures/003001-dataplane-async-delete-op/package.json
+      dest: package.json
+  graders:
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: delete
+  - type: file-matches
+    config:
+      path: inma.tsp
+      pattern: '@pollingLocation|Lro|LongRunning'
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 0.5
+      prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
+      model: claude-opus-4.6-1m
+scoring:
+  weights:
+    prompt: 1
+    file-matches: 2
+  threshold: 0.7
+
+
