@@ -147,17 +147,3 @@ using ComputeDisk;
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
-
-// ── alternateType: ExtendedLocation → ARM common ExtendedLocation for C# ──
-@@alternateType(DiskAccess.extendedLocation,
-  Azure.ResourceManager.CommonTypes.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(Disk.extendedLocation,
-  Azure.ResourceManager.CommonTypes.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(Snapshot.extendedLocation,
-  Azure.ResourceManager.CommonTypes.ExtendedLocation,
-  "csharp"
-);

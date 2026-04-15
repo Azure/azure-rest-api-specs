@@ -758,17 +758,3 @@ using Compute;
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-
-// ── alternateType: ExtendedLocation → ARM common ExtendedLocation for C# ──
-@@alternateType(VirtualMachine.extendedLocation,
-  Azure.ResourceManager.CommonTypes.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSet.extendedLocation,
-  Azure.ResourceManager.CommonTypes.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(Image.extendedLocation,
-  Azure.ResourceManager.CommonTypes.ExtendedLocation,
-  "csharp"
-);
