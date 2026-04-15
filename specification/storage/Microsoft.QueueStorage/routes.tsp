@@ -89,7 +89,10 @@ op StorageOperationRequestBody<
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Service {
-  /** Sets properties for a storage account's Queue service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
+  /**
+   * Sets properties for a storage account's Queue service endpoint, including properties for Storage Analytics
+   * and CORS (Cross-Origin Resource Sharing) rules.
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @put
@@ -105,7 +108,10 @@ interface Service {
     AcceptedResponse
   >;
 
-  /** Retrieves properties of a storage account's Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
+  /**
+   * Retrieves properties of a storage account's Queue service, including properties for Storage Analytics and
+   * CORS (Cross-Origin Resource Sharing) rules.
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
@@ -115,7 +121,10 @@ interface Service {
     QueueServiceProperties
   >;
 
-  /** Retrieves statistics related to replication for the Queue service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. */
+  /**
+   * Retrieves statistics related to replication for the Queue service. It is only available on the secondary
+   * location endpoint when read-access geo-redundant replication is enabled for the storage account.
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
@@ -123,13 +132,16 @@ interface Service {
   getStatistics is StorageOperationResponseBody<
     TimeoutParameter,
     {
-      /** Storage service statistics */
+      /** Storage service statistics. */
       @bodyRoot
       body: QueueServiceStats;
     }
   >;
 
-  /** Retrieves a user delegation key for the Queue service. This is only a valid operation when using bearer token authentication. */
+  /**
+   * Retrieves a user delegation key for the Queue service. This is only a valid operation when using bearer
+   * token authentication.
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @post
@@ -138,19 +150,19 @@ interface Service {
     {
       ...TimeoutParameter;
 
-      /** Key information */
+      /** Key information. */
       @bodyRoot
       @Xml.name("KeyInfo")
       keyInfo: KeyInfo;
     },
     {
-      /** A user delegation key */
+      /** A user delegation key. */
       @bodyRoot
       body: UserDelegationKey;
     }
   >;
 
-  /** returns a list of the queues under the specified account */
+  /** Returns a list of queues. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -162,19 +174,27 @@ interface Service {
       /** Filters the results to return only queues whose name begins with the specified prefix. */
       @query prefix?: string;
 
-      /** A string value that identifies the portion of the list of queues to be returned with the next listing operation. The operation returns the NextMarker value within the response body if the listing operation did not return all queues remaining to be listed with the current page. The NextMarker value can be used as the value for the marker parameter in a subsequent call to request the next page of list items. The marker value is opaque to the client. */
+      /**
+       * Identifies the portion of the list of queues to be returned with the next listing operation. The operation
+       * returns the marker value if the listing operation did not return all queues remaining. The marker value can
+       * be used as the value for the marker parameter in a subsequent call to request the next page of list items.
+       * The marker value is opaque to the client.
+       */
       @continuationToken
       @query
       marker?: string;
 
-      /** Specifies the maximum number of queues to return. If the request does not specify maxresults, or specifies a value greater than 5000, the server will return up to 5000 items. */
+      /**
+       * Specifies the maximum number of queues to return. If the request does not specify maxresults, or specifies
+       * a value greater than 5000, the server will return up to 5000 items.
+       */
       @query
       @minValue(1)
       maxresults?: int32;
 
       ...TimeoutParameter;
 
-      /** Include this parameter to specify that the queue's metadata be returned as part of the response body. */
+      /** Specify to include additional, optional information. */
       @query include?: Array<ListQueuesIncludeType>;
     },
     {
@@ -185,7 +205,10 @@ interface Service {
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
 interface Queue {
-  /** Creates a new queue under the specified account. If a queue with the same name already exists, the operation succeeds when the metadata is identical and returns 204; if the metadata differs, the operation returns 409. */
+  /**
+   * Creates a new queue. If a queue with the same name already exists, the operation succeeds when the metadata
+   * is identical. If the metadata differs, the operation fails.
+   */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @put
@@ -200,7 +223,7 @@ interface Queue {
     }
   >;
 
-  /** returns all user-defined metadata and system properties for the specified queue. */
+  /** Returns all user-defined metadata and system properties for the specified queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
@@ -215,7 +238,7 @@ interface Queue {
     }
   >;
 
-  /** operation permanently deletes the specified queue */
+  /** Permanently deletes the specified queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @delete
@@ -228,7 +251,7 @@ interface Queue {
     }
   >;
 
-  /** operation sets one or more user-defined name-value pairs for the specified queue. */
+  /** Sets user-defined metadata for the specified queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @put
@@ -243,7 +266,7 @@ interface Queue {
     }
   >;
 
-  /** gets the permissions for the specified queue. The permissions indicate whether queue data may be accessed publicly. */
+  /** Gets the access policy for the specified queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @get
@@ -257,7 +280,7 @@ interface Queue {
     }
   >;
 
-  /** sets the permissions for the specified queue. */
+  /** Sets the permissions for the specified queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -265,13 +288,13 @@ interface Queue {
   @route("?comp=acl")
   setAccessPolicy is StorageOperationNoBody<
     {
-      /** The media type of the requestbody */
+      /** The media type of the request. */
       @header("Content-Type")
       contentType?: "application/xml";
 
       ...TimeoutParameter;
 
-      /** The access control list for the queue. */
+      /** The access control list. */
       #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
       @bodyRoot
       queueAcl?: SignedIdentifiers;
@@ -281,10 +304,7 @@ interface Queue {
     }
   >;
 
-  /**
-   * The Dequeue operation retrieves one or more messages from the front of the
-   * queue.
-   */
+  /** Retrieves one or more messages from the front of the queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -293,7 +313,7 @@ interface Queue {
   receiveMessages is StorageOperationResponseBody<
     {
       /**
-       * Optional. A nonzero integer value that specifies the number of messages to
+       * A nonzero integer value that specifies the number of messages to
        * retrieve from the queue, up to a maximum of 32. If fewer are visible, the
        * visible messages are returned. By default, a single message is retrieved from
        * the queue with this operation.
@@ -310,9 +330,7 @@ interface Queue {
     }
   >;
 
-  /**
-   * The Clear operation deletes all messages from the specified queue.
-   */
+  /** Deletes all messages from the specified queue. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -328,12 +346,9 @@ interface Queue {
   >;
 
   /**
-   * The Enqueue operation adds a new message to the back of the message queue. A
-   * visibility timeout can also be specified to make the message invisible until
-   * the visibility timeout expires. A message must be in a format that can be
-   * included in an XML request with UTF-8 encoding. The encoded message can be up
-   * to 64 KB in size for versions 2011-08-18 and newer, or 8 KB in size for
-   * previous versions.
+   * Adds a new message to the back of the message queue. A visibility timeout
+   * can also be specified to make the message invisible until the visibility timeout
+   * expires.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -344,7 +359,7 @@ interface Queue {
       ...VisibilityTimeoutParameter;
 
       /**
-       * Optional. Specifies the time-to-live interval for the message, in seconds.
+       * Specifies the time-to-live interval for the message, in seconds.
        * Prior to version 2017-07-29, the maximum time-to-live allowed is 7 days. For
        * version 2017-07-29 or later, the maximum time-to-live can be any positive
        * number, as well as -1 indicating that the message does not expire. If this
@@ -356,7 +371,10 @@ interface Queue {
 
       ...TimeoutParameter;
 
-      /** A Message object which can be stored in a Queue */
+      /**
+       * The queue message. The message must be in a format that can be included in an XML request with UTF-8
+       * encoding. The encoded message can be up to 64 KB in size.
+       */
       @bodyRoot
       queueMessage: QueueMessage;
     },
@@ -366,10 +384,7 @@ interface Queue {
     }
   >;
 
-  /**
-   * The Peek operation retrieves one or more messages from the front of the queue,
-   * but does not alter the visibility of the message.
-   */
+  /** Retrieves one or more messages from the front of the queue, but does not alter the visibility of the message. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
@@ -378,7 +393,7 @@ interface Queue {
   peekMessages is StorageOperationResponseBody<
     {
       /**
-       * Optional. A nonzero integer value that specifies the number of messages to
+       * A nonzero integer value that specifies the number of messages to
        * retrieve from the queue, up to a maximum of 32. If fewer are visible, the
        * visible messages are returned. By default, a single message is retrieved from
        * the queue with this operation.
@@ -394,24 +409,26 @@ interface Queue {
     }
   >;
 
-  /**
-   * The Update operation was introduced with version 2011-08-18 of the Queue
-   * service API. The Update Message operation updates the visibility timeout of a
-   * message. You can also use this operation to update the contents of a message. A
-   * message must be in a format that can be included in an XML request with UTF-8
-   * encoding, and the encoded message can be up to 64KB in size.
-   */
+  /** Updates the visibility timeout of a message. This operation can also be used to update the contents of a message. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @route("messages/{messageId}")
-  updateMessage is StorageOperationRequestBody<
+  updateMessage is StorageOperationNoBody<
     {
+      /** Content-Type header */
+      @header("Content-Type")
+      contentType?: "application/xml";
+
       ...MessageIdPathParameter;
       ...PopReceiptQueryParameter;
 
-      @doc("Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.")
+      /**
+       * Specifies the new visibility timeout value, in seconds, relative to server time. A specified value must be
+       * larger than or equal to 1 second, and cannot be larger than 7 days. The visibility timeout of a message
+       * can be set to a value later than the expiry time.
+       */
       @maxValue(604800)
       @query("visibilitytimeout")
       visibilityTimeout: int32;
@@ -426,9 +443,7 @@ interface Queue {
     }
   >;
 
-  /**
-   * The Delete operation deletes the specified message.
-   */
+  /** Deletes the specified message. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
   @delete

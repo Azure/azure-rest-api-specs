@@ -2,12 +2,15 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Profile.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 /**
@@ -67,8 +70,23 @@ interface Endpoints {
   /**
    * Update a Traffic Manager endpoint.
    */
+  @sharedRoute
+  @removed(Versions.v2024_04_01_preview)
   @patch(#{ implicitOptionality: false })
   update is EndpointsOps.CustomPatchSync<Endpoint, PatchModel = Endpoint>;
+
+  /**
+   * Update a Traffic Manager endpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId needed to match stable version"
+  @sharedRoute
+  @added(Versions.v2024_04_01_preview)
+  @operationId("Endpoints_Update")
+  @patch(#{ implicitOptionality: false })
+  updateV2 is EndpointsOps.CustomPatchSync<
+    Endpoint,
+    PatchModel = EndpointUpdate
+  >;
 
   /**
    * Deletes a Traffic Manager endpoint.
@@ -84,5 +102,8 @@ interface Endpoints {
   "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation."
 );
 @@doc(Endpoints.update::parameters.properties,
+  "The Traffic Manager endpoint parameters supplied to the Update operation."
+);
+@@doc(Endpoints.updateV2::parameters.properties,
   "The Traffic Manager endpoint parameters supplied to the Update operation."
 );
