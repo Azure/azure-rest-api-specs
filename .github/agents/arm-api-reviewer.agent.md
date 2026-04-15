@@ -89,6 +89,7 @@ Use these to verify claims, check the latest guidelines, or investigate edge cas
 
 - **[Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0)** - the authoritative contract for ARM control-plane APIs. When the RPC conflicts with the Azure REST API Guidelines or generic OpenAPI rules, the RPC takes precedence for control-plane resources.
 - [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) - primarily for data-plane APIs; some patterns also apply to control-plane. When it conflicts with the RPC for control-plane, the RPC takes precedence.
+- [ARM wiki / RP guidelines](https://armwiki.azurewebsites.net/api_contracts/guidelines/rpguidelines.html) - supplementary ARM guidance
 - [Repository documentation](https://github.com/Azure/azure-rest-api-specs/tree/main/documentation)
 - [OpenAPI authoring automated guidelines](../../documentation/openapi-authoring-automated-guidelines.md) - automated validation rule IDs and descriptions
 - [Breaking changes guidelines](../../documentation/Breaking%20changes%20guidelines.md) - what constitutes a breaking change
@@ -100,6 +101,16 @@ Use these to verify claims, check the latest guidelines, or investigate edge cas
 - [Getting started with TypeSpec](../../documentation/Getting-started-with-TypeSpec-specifications.md) - TypeSpec project checklist
 - [TypeSpec Azure docs](https://azure.github.io/typespec-azure/docs/intro/) - Azure TypeSpec library reference
 - [TypeSpec language docs](https://typespec.io/docs/) - TypeSpec language reference
+
+### Shared Review Skill
+
+The **azure-api-review** skill (`.github/skills/azure-api-review/`) contains cross-cutting review rules shared across all spec formats. Reference its files for detailed guidance on:
+- Secret detection (SEC-SECRET-DETECT)
+- Property mutability (OAPI027, OAPI020, OAPI029)
+- Provisioning state requirements
+- Naming conventions and Azure terminology
+- Enum best practices
+- Tracked resource lifecycle (required CRUD operations)
 
 ## Fetching Files from GitHub
 
@@ -154,55 +165,17 @@ For each file type, read the corresponding instruction file(s) listed in "Author
 
 ### Step 4: Systematic Review
 
-For each changed specification file, check **every item** in the review checklists from the instruction files. Do not skip sections. Work through the checklist methodically:
+For each changed specification file, load the applicable instruction file(s) and work through **every item** in their review checklists. Do not skip sections.
 
-#### For all OpenAPI JSON files:
+**Do not maintain separate checklists here.** The instruction files are the single source of truth for review rules. Read them and apply their full checklists:
 
-- Valid JSON, correct directory placement
-- API version format (`YYYY-MM-DD[-preview]`) and no version segments in URL paths
-- No breaking changes vs. previous version
-- Security definitions present and applied
-- Property names camelCase, model names PascalCase
-- `readOnly`, `required`, `x-ms-mutability` correctly applied
-- Common-types referenced (not redefined) for ARM standard types
-- All CRUD + List operations present for ARM resources
-- `x-ms-pageable` on list operations with correct `nextLinkName`
-- `x-ms-long-running-operation` on async operations with polling config
-- `x-ms-enum` with `modelAsString: true` on all enums
-- `x-ms-examples` on every operation with valid example files
-- `operationId` follows `{Resource}_{Verb}` pattern with exactly one underscore
-- Default error response references standard `ErrorResponse` schema
-- Every operation, parameter, property, and model has a clear description
-- Integer types have `format` specified; objects have `"type": "object"`
-- No anonymous body parameter types; no request body on DELETE
-- Consistent resource schema across PUT/GET/PATCH responses
-- No `null` values in response schemas; no secrets in GET responses
+- **OpenAPI JSON files** - apply the "Review Checklist Summary" at the end of `openapi-review.instructions.md`
+- **ARM resource-manager JSON files** - apply **both** the OpenAPI checklist AND the "ARM Review Checklist Summary" at the end of `armapi-review.instructions.md`
+- **TypeSpec `.tsp` files** - apply the "TypeSpec Review Checklist Summary" at the end of `typespec-review.instructions.md`
+- **`tspconfig.yaml`** - apply section 7.2 and section 12 from `typespec-review.instructions.md`
+- **Example files** - apply section 22 (EX-*) from `openapi-review.instructions.md`
 
-#### For ARM resource-manager files, additionally:
-
-- Tracked resource paths include `/subscriptions/` and `/resourceGroups/` segments
-- Top-level resource body properties from allowed set only; custom properties inside `properties`
-- PUT request and 200 response schemas are identical
-- PUT 200/201 response has `x-ms-azure-resource: true` in hierarchy
-- Tracked resources have all required operations (GET, PUT, PATCH, DELETE, ListByRG, ListBySub)
-- PATCH body has no required properties, no defaults, no create-only mutability
-- PATCH for tracked resources supports at least tag updates
-- DELETE defines 200, 204, and default responses (plus 202 if async)
-- No secrets in GET/PUT/PATCH responses; secrets annotated with `x-ms-secret: true`
-- Proactive secret detection (SEC-SECRET-DETECT): inspect every string property - flag if name, description, or examples suggest a secret but `x-ms-secret: true` is missing
-- `#suppress` directives silencing `secret-prop` lint rules treated as a strong signal of a missing secret annotation
-- Secret retrieval exposed via `list*` POST action, not GET
-- Resource references use fully qualified ARM resource IDs
-- No embedded child resources or child counts in parent GET response
-- No customer data in control plane properties
-- Properties not removed between API versions
-- Booleans reviewed - extensible enums preferred
-- Operations API endpoint exists for the resource provider
-- LRO 200/201 responses include schema definitions
-- Operation results modeled as root-level resources
-- Uniform API versioning across all resource types in the service
-- No writable circular dependencies between resources
-- POST actions used only for non-CRUD operations
+For cross-cutting rules that appear in multiple instruction files, the shared skill references in `.github/skills/azure-api-review/references/` contain the canonical definitions.
 
 #### For `readme.md` suppression files:
 
@@ -223,28 +196,7 @@ When a PR adds or modifies a `readme.md` file that contains `directive` / `suppr
 
 #### For TypeSpec files:
 
-- Correct directory placement (ARM under `resource-manager/<ResourceProviderNamespace>/<Service>`, data-plane under `data-plane/<Service>`)
-- Required files present: `main.tsp`, `tspconfig.yaml`, `readme.md`, `examples/`
-- No `package.json` in the TypeSpec project directory
-- `@service`, `@server`, `@useAuth` decorators present and correct
-- `@versioned` with proper `Versions` enum in `main.tsp`
-- All types declared under the main namespace
-- Model names PascalCase, property names camelCase, operation names camelCase
-- Every element has a `/** ... */` doc comment
-- `union` used instead of `enum` for extensible Azure enums
-- Visibility decorators use `Lifecycle` class values
-- ARM resources extend correct base types (`TrackedResource`, `ProxyResource`, etc.)
-- All CRUD operations present for ARM tracked resources using ARM operation templates
-- `Operations` interface defined for ARM resource providers
-- `@armProviderNamespace` applied correctly
-- Client customizations only in `client.tsp`
-- `tspconfig.yaml` references correct linter ruleset
-- No unexplained suppressions
-- Proactive secret detection (SEC-SECRET-DETECT): inspect every string property - flag if name, doc comment, or examples suggest a secret but `@secret` is missing
-- `#suppress` directives silencing `secret-prop` lint rules treated as a strong signal of a missing `@secret` annotation
-- No breaking changes between API versions (check `@added`, `@removed`, `@typeChangedFrom`)
-- Generated OpenAPI files consistent with TypeSpec source
-- Example files present for all operations
+Apply the full "TypeSpec Review Checklist Summary" from `typespec-review.instructions.md`. Key areas include project structure, decorators, versioning, ARM resource patterns, secret detection, suppressions, and anti-patterns.
 
 ### Step 4a: New vs. Existing Issue Classification
 

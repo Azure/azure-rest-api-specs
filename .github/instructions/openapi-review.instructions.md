@@ -135,11 +135,13 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 ### Field Mutability
 
+> **Full rule definitions:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, OAPI029 with format-specific examples.
+
 - Read-only properties **MUST** be marked `"readOnly": true` (e.g. `id`, `name`, `type`, `systemData`, computed properties).
-- If a property is `readOnly`, it **MUST** always be `readOnly`. Do not make the same property conditionally read-only or conditionally read/write depending on context. Use separate properties for each case (OAPI020).
-- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable. Do not make the same property conditionally immutable. Use separate properties for each case (OAPI029).
+- If a property is `readOnly`, it **MUST** always be `readOnly`. Do not make the same property conditionally read-only (OAPI020).
+- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable (OAPI029).
 - Use `x-ms-mutability` to specify `["create", "read"]`, `["read"]`, or `["create", "update", "read"]` behavior.
-- Write-only properties (`x-ms-mutability: ["create", "update"]` without `"read"`) are **NOT allowed** (OAPI027). Every non-secret property that can be set **MUST** also be readable via GET. Write-only properties cause noise in ARM Template What-If and ARM Change Analysis. The only exception is secret properties annotated with `x-ms-secret: true`.
+- Write-only properties (`x-ms-mutability: ["create", "update"]` without `"read"`) are **NOT allowed** (OAPI027). The only exception is secret properties annotated with `x-ms-secret: true`.
 - Required read-only properties **MUST NOT** be required in request bodies. Check that `"required"` arrays don't include read-only fields for request schemas.
 
 ### Schema Consistency
@@ -147,7 +149,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - **MUST** use the same JSON schema for PUT request/response, PATCH response, GET response, and POST request/response on a given URL path.
 - PATCH request schema **SHOULD** have all the same fields as the resource schema but with no required fields (to support partial update).
 - **DO NOT** return secret/sensitive fields in GET responses (e.g. `administratorPassword`). Secrets **MAY** only be returned via POST if absolutely necessary.
-- Proactively check every `"type": "string"` property for secret indicators — see **SEC-SECRET-DETECT** below.
+- Proactively check every `"type": "string"` property for secret indicators -- see [`.github/skills/azure-api-review/references/secret-detection.md`](../skills/azure-api-review/references/secret-detection.md) for the full **SEC-SECRET-DETECT** rule, detection signals, keyword list, and fix guidance.
 - **DO NOT** include fields whose values are trivially computable from other fields.
 - Properties with `default` values **MUST** use a static constant — the same default on every similar PUT request. Do not derive defaults from other properties in the resource. The `default` annotation in the swagger must specify the actual constant value.
 - Properties **MUST NOT** use comma-separated value (CSV) strings to represent collections. Use a JSON array instead. CSV-encoded strings prevent Azure Policy from evaluating individual values (PLCY004).
@@ -160,22 +162,17 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 ## 7. Enumerations
 
-**Reference: [Azure Guidelines — Enums & SDKs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#enums--sdks-client-libraries)**
+**Reference: [Azure Guidelines -- Enums & SDKs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#enums--sdks-client-libraries)**
 
-- Every enum **MUST** have the `x-ms-enum` extension with a `name` property:
-  ```json
-  "x-ms-enum": {
-    "name": "MyEnumName",
-    "modelAsString": true
-  }
-  ```
-- **YOU SHOULD** set `"modelAsString": true` (extensible enum) unless the set of values will provably never change. This allows new values to be added without breaking clients.
+> **Full rule definitions:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum and boolean-to-enum guidance.
+
+- Every enum **MUST** have the `x-ms-enum` extension with a `name` property and `"modelAsString": true` (extensible enum).
 - Enum `name` values **MUST** be unique across the entire specification.
-- Enum values **MUST NOT** be empty strings.
-- Enum values **SHOULD** use PascalCase.
-- Enum values replacing booleans **MUST** carry semantic meaning beyond `True`/`False`. Distribute meaning across both the property name and enum values (e.g., `addressOverlap: [Allowed, Disallowed]` rather than `allowAddressOverlap: [True, False]`). This makes the API more self-documenting and future-proof.
+- Enum values **MUST NOT** be empty strings; **SHOULD** use PascalCase.
+- Enum values **MUST** be semantically distinct (no overlapping synonyms like `InProgress` and `Running`).
+- Enum values replacing booleans **MUST** carry semantic meaning beyond `True`/`False`.
 - `default` values for enum properties **MUST** be one of the defined enum values.
-- **DO NOT** remove existing enum values — this is a breaking change.
+- **DO NOT** remove existing enum values -- this is a breaking change.
 - Document that customers should expect new enum values may appear in the future.
 
 ## 8. Polymorphic Types
@@ -259,6 +256,9 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - All ARM resources **MUST** include `systemData` as a read-only property.
 
 ## 13. ARM Resource Model Requirements
+
+> **See also:** [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements and operations API rules.
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for naming and terminology rules.
 
 - Resource model name **MUST** match the singular form of the resource type (e.g. `VirtualMachine` for `virtualMachines`).
 - Model definitions **MUST** use PascalCase.

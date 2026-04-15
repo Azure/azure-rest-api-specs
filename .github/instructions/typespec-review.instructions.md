@@ -135,6 +135,8 @@ A TypeSpec project **MUST NOT** contain:
 
 ### 4.3 Enums vs. Unions
 
+> **Full rule definitions:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum/union guidelines.
+
 - **DO** use `union` instead of `enum` to define Azure extensible enums. This follows the Azure convention for forward-compatible enum types:
   ```tsp
   /** The provisioning state of the resource. */
@@ -148,26 +150,21 @@ A TypeSpec project **MUST NOT** contain:
     Canceled: "Canceled",
   }
   ```
-- `provisioningState` **SHOULD** extend the built-in `Azure.ResourceManager.ResourceProvisioningState` for terminal states (Succeeded, Failed, Canceled) and add custom non-terminal states as needed:
-  ```tsp
-  union ProvisioningState {
-    ResourceProvisioningState,
-    @doc("The resource is being provisioned.") Provisioning: "Provisioning",
-    @doc("The resource is being updated.") Updating: "Updating",
-  }
-  ```
+- `provisioningState` **SHOULD** extend the built-in `Azure.ResourceManager.ResourceProvisioningState` for terminal states (Succeeded, Failed, Canceled) and add custom non-terminal states as needed. See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for the full provisioningState contract.
 - Every enum/union member **MUST** have a doc comment.
 - The `string` base type **SHOULD** be included in unions to make them extensible.
 
 ### 4.4 Visibility & Mutability
 
+> **Full rule definitions:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, OAPI029 with format-specific examples.
+
 - Read-only properties **MUST** be annotated with `@visibility(Lifecycle.Read)`.
 - Create-only properties (immutable after creation) **MUST** use `@visibility(Lifecycle.Create, Lifecycle.Read)`.
 - Properties used only in responses **MUST NOT** be marked as required in request contexts.
 - Use the `Lifecycle` class values for visibility decorators (`Lifecycle.Create`, `Lifecycle.Read`, `Lifecycle.Update`).
-- Write-only properties (`@visibility(Lifecycle.Create, Lifecycle.Update)` without `Lifecycle.Read`) are **NOT allowed** (OAPI027). Every non-secret property that can be set **MUST** also be readable via GET. The only exception is secret properties annotated with `@secret`.
-- If a property is read-only, it **MUST** always be read-only. Do not make the same property conditionally read-only or conditionally read/write depending on context. Use separate properties for each case (OAPI020).
-- If a property is immutable (create + read), it **MUST** always be immutable. Do not make the same property conditionally immutable. Use separate properties for each case (OAPI029).
+- Write-only properties (`@visibility(Lifecycle.Create, Lifecycle.Update)` without `Lifecycle.Read`) are **NOT allowed** (OAPI027). The only exception is secret properties annotated with `@secret`.
+- If a property is read-only, it **MUST** always be read-only. Do not make it conditionally read/write (OAPI020).
+- If a property is immutable (create + read), it **MUST** always be immutable (OAPI029).
 
 ### 4.5 Type Constraints
 
@@ -180,12 +177,6 @@ A TypeSpec project **MUST NOT** contain:
   - Prevention of leading special characters (e.g., `^(?![.-])`) — names should not start with `.` or `-`.
   - Allowed character set matching the service's actual validation.
   - Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
-- Properties representing UTC timestamps **SHOULD** include a `Utc` suffix in the name for clarity (e.g., `lastModifiedTimeUtc`, `createdAtUtc`). This helps customers understand the timezone context without reading the description.
-- Properties named `<something>Id` **MUST** be specific about what kind of ID they hold. The term "Id" is extremely ambiguous. Use the name, type, and description to remove ambiguity:
-  - If it is a UUID/GUID, use the `uuid` scalar type and explain in the description who creates/assigns it.
-  - If it is an ARM resource ID, include "ResourceId" in the property name and use `armResourceIdentifier` with type constraints.
-  - If it is a client-chosen name, use "Name" in the property name instead of "Id".
-  - At minimum, the description **MUST** explain the format, origin, and purpose of the ID.
 - Properties representing UTC timestamps **SHOULD** include a `Utc` suffix in the name for clarity (e.g., `lastModifiedTimeUtc`, `createdAtUtc`). This helps customers understand the timezone context without reading the description.
 - Properties named `<something>Id` **MUST** be specific about what kind of ID they hold. The term "Id" is extremely ambiguous. Use the name, type, and description to remove ambiguity:
   - If it is a UUID/GUID, use the `uuid` scalar type and explain in the description who creates/assigns it.
@@ -208,6 +199,8 @@ A TypeSpec project **MUST NOT** contain:
 - **DO NOT** use private/custom decorators or manual resource base types when standard ARM base types (`TrackedResource`, `ProxyResource`, `ExtensionResource`) exist for the resource pattern.
 
 ### 5.2 CRUD Operations
+
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements and operations API rules.
 
 - ARM tracked resources **MUST** define all standard operations using the ARM operation templates:
   - `get` — `ArmResourceRead<Resource>`
@@ -290,17 +283,11 @@ A TypeSpec project **MUST NOT** contain:
 
 ## 8. Secret Detection in TypeSpec (SEC-SECRET-DETECT)
 
-- Reviewers **MUST** inspect every `string` property to determine whether it could contain a secret, credential, or sensitive token.
-- Infer secret usage from **any** of the following signals:
-  1. **Property name** contains or matches (case-insensitive): `key`, `token`, `secret`, `password`, `credential`, `connectionString`, `accessKey`, `sharedKey`, `masterKey`, `apiKey`, `sas`, `signature`, `cert`, `certificate`, `privateKey`, `passphrase`, `accountKey`, `ingestionKey`, `instrumentationKey`, `encryptionKey`, `symmetricKey`, `primaryKey`, `secondaryKey`, `clientSecret`.
-  2. **Doc comment or description** mentions authentication, authorization, signing, bearer, opaque credential, API token, SaaS token, ingestion key, shared access signature, or connection string.
-  3. **Example values** resemble tokens, base64-encoded blobs, or long random strings.
-  4. **`#suppress` directives** referencing `secret-prop` or similar secret-related lint rules that are being silenced rather than addressed.
-- If any signal is present and the property lacks `@secret`, flag it as a **blocking security issue**:
-  - **Rule ID:** `SEC-SECRET-DETECT`
-  - **Severity:** Blocking
-  - **Fix:** Add `@secret` to the property and remove any `#suppress` directive for `secret-prop`.
-- When flagging, explain which signal(s) triggered the detection.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/secret-detection.md`](../skills/azure-api-review/references/secret-detection.md) for the complete detection signals, keyword list, and format-specific fix guidance.
+
+- Reviewers **MUST** inspect every `string` property for secret indicators.
+- Flag as **blocking** (`SEC-SECRET-DETECT`) if property name, doc comment, example values, or `#suppress` directives for `secret-prop` suggest a secret but `@secret` is missing.
+- **Fix:** Add `@secret` to the property and remove any `#suppress` directive for `secret-prop`.
 
 ---
 
@@ -328,9 +315,6 @@ Flag these issues when found:
 - **Resource with zero writable properties** -- a tracked ARM resource whose `properties` bag contains only `@visibility(Lifecycle.Read)` properties (no customer-configurable fields) is highly unusual. It means PUT creates an empty `properties: {}` and PATCH can only update `tags`. Flag this for design review: either the service is too early for a public API, or properties are missing from the spec. If intentional, require a doc comment on the Properties model explaining why.
 - **Default values flowing into PATCH** -- when a property has a TypeSpec default value (e.g., `ipAllocationMethod?: IPAllocationMethod = IPAllocationMethod.Static`), that default flows into the PATCH update model. ARM rule RPC-Patch-V1-10 prohibits defaults in PATCH bodies because with JSON Merge Patch, omitting a field should leave it unchanged, but a schema default resets it. Remove the TypeSpec default and apply it server-side instead.
 - **Namespace collision across TypeSpec projects** -- two separate TypeSpec projects under the same RP namespace (e.g., both use `Microsoft.Network`) will produce conflicting `/providers/Microsoft.Network/operations` endpoints. Resource types sharing an RP namespace **MUST** be in the same TypeSpec project, or use distinct RP namespaces.
-- **Resource with zero writable properties** -- a tracked ARM resource whose `properties` bag contains only `@visibility(Lifecycle.Read)` properties (no customer-configurable fields) is highly unusual. It means PUT creates an empty `properties: {}` and PATCH can only update `tags`. Flag this for design review and require a doc comment explaining why.
-- **Default values flowing into PATCH** -- when a property has a TypeSpec default value (e.g., `ipAllocationMethod?: IPAllocationMethod = IPAllocationMethod.Static`), that default flows into the PATCH update model. ARM rule RPC-Patch-V1-10 prohibits defaults in PATCH bodies. Remove the TypeSpec default and apply it server-side instead.
-- **Namespace collision across TypeSpec projects** -- two separate TypeSpec projects under the same RP namespace (e.g., both use `Microsoft.Network`) will produce conflicting `/providers/Microsoft.Network/operations` endpoints. Resource types sharing an RP namespace **MUST** be in the same TypeSpec project.
 - **`| null` on new properties** -- new properties added in this PR **MUST NOT** use `| null` (nullable union) for backward compatibility, because backward compatibility does not apply to new additions. Only existing properties that were previously non-nullable may need `| null` when the service must return null for them in certain scenarios.
 - **Bearer tokens in request bodies** -- passing OAuth access tokens, bearer tokens, or refresh tokens in ARM request bodies is not an acceptable pattern, even with `@secret`. Use managed identity, Key Vault references, or RBAC-controlled mechanisms instead.
 - **Duplicate namespace declarations** across multiple `.tsp` files without proper imports.

@@ -333,18 +333,12 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 7.3 Proactive Secret Detection (SEC-SECRET-DETECT)
 
-- Reviewers **MUST** proactively inspect every `"type": "string"` property to determine whether it could contain a secret, credential, or sensitive token — even when `"x-ms-secret": true` is not present.
-- Infer secret usage from **any** of the following signals:
-  1. **Property name** contains or matches (case-insensitive): `key`, `token`, `secret`, `password`, `credential`, `connectionString`, `accessKey`, `sharedKey`, `masterKey`, `apiKey`, `sas`, `signature`, `cert`, `certificate`, `privateKey`, `passphrase`, `accountKey`, `ingestionKey`, `instrumentationKey`, `encryptionKey`, `symmetricKey`, `primaryKey`, `secondaryKey`, `clientSecret`.
-  2. **Description** mentions concepts such as: authentication, authorization, signing, bearer, opaque credential, API token, SaaS token, ingestion key, shared access signature, or connection string.
-  3. **Example values** in `x-ms-examples` or inline `example`/`default` contain patterns resembling tokens, base64-encoded blobs, or long random strings.
-  4. **Suppress directives** referencing `secret-prop` or similar secret-related lint rules that are being silenced rather than addressed.
-- If **any** of these signals are present and the property lacks `"x-ms-secret": true`, flag it as a **blocking security issue**:
-  - **Rule ID:** `SEC-SECRET-DETECT`
-  - **Severity:** Blocking
-  - **Fix (OpenAPI JSON):** Add `"x-ms-secret": true` to the property definition.
-  - **Fix (TypeSpec):** Add the `@secret` decorator to the property and remove any `#suppress` directive for `secret-prop`.
-- When flagging, explain which signal(s) triggered the detection (name match, description content, example pattern, or suppression).
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/secret-detection.md`](../skills/azure-api-review/references/secret-detection.md) for the complete detection signals, keyword list, and format-specific fix guidance.
+
+- Reviewers **MUST** proactively inspect every `"type": "string"` property for secret indicators -- even when `"x-ms-secret": true` is not present.
+- Flag as **blocking** (`SEC-SECRET-DETECT`) if property name, description, example values, or `#suppress` directives for `secret-prop` suggest a secret but the annotation is missing.
+- **Fix (OpenAPI JSON):** Add `"x-ms-secret": true` to the property definition.
+- **Fix (TypeSpec):** Add the `@secret` decorator and remove any `#suppress` directive for `secret-prop`.
 
 ---
 
@@ -354,11 +348,12 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.1 Prefer Enums Over Booleans
 
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum guidelines and boolean-to-enum conversion patterns.
+
 - **YOU SHOULD** use extensible string enums instead of boolean types.
-- Booleans do not version well — what starts as a two-state switch often needs additional states in the future, leading to breaking changes.
-- When converting a boolean concept to an enum, use meaningful state names (e.g. `"NetworkOperationStatus": ["InProgress", "Succeeded", "Failed"]`) not just `"True"` / `"False"`.
-- Boolean property names **SHOULD** indicate a state, not be bare nouns. For example, `backupsEnabled` or `isEncryptionEnabled` are better than `backups` or `encryption`, which suggest a collection or object rather than a toggle.
-- When multiple related two-state properties exist on the same resource (e.g., `enabled` and `appendMode`), consider combining them into a single multi-state enum (e.g., `usageMode: [Disabled, Rewrite, Append]`). This reduces the risk of invalid state combinations and makes the API easier to understand.
+- Booleans do not version well -- what starts as a two-state switch often needs additional states, leading to breaking changes.
+- Use meaningful state names (e.g., `"NetworkOperationStatus": ["InProgress", "Succeeded", "Failed"]`) not `"True"` / `"False"`.
+- Boolean property names **SHOULD** indicate a state (`backupsEnabled`, `isEncryptionEnabled`), not bare nouns (`backups`, `encryption`).
 
 ### 8.2 Use Objects Instead of Strings for Structured Values
 
@@ -368,10 +363,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.3 Use Enums for Finite Value Sets (ACTIVELY REVIEW)
 
-- **Actively examine every `string` property** in the `properties` bag. If the property name or description suggests it takes values from a limited or well-known set (e.g. "status", "mode", "tier", "kind", "protocol", "algorithm", "action", "state", "type", "category", "level"), **flag it** and recommend modeling it as an extensible enum with `x-ms-enum`.
-- If a string property's description lists its valid values (e.g. "Possible values are: Enabled, Disabled"), it **MUST** be declared as an enum, not a plain string.
-- Use `"x-ms-enum": { "name": "<EnumName>", "modelAsString": true }` to keep the enum extensible and avoid breaking changes when new values are added.
-- The **first member** of an enum **SHOULD** be the default or initial state value. This convention helps consumers and tooling identify the default behavior when no explicit value is set.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for the complete enum review checklist.
+
+- **Actively examine every `string` property** in the `properties` bag for enum candidates (e.g., "status", "mode", "tier", "kind", "protocol", "state", "type", "category").
+- If a string property's description lists valid values, it **MUST** be declared as an enum.
+- Use `"x-ms-enum": { "name": "<EnumName>", "modelAsString": true }` for extensibility.
 
 
 ### 8.3a Array Property Names Must Be Plural
@@ -414,10 +410,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.9 `provisioningState` Correctness
 
-- `provisioningState` **MUST** include at minimum the terminal states: `Succeeded`, `Failed`, and `Canceled` (with a single 'l' — NOT "Cancelled").
-- Non-terminal operational states like `Stopped` or `Running` **MUST NOT** be included in `provisioningState`. These represent the runtime state of the resource, not the state of a provisioning operation. Use a separate property (e.g. `status` or `powerState`) for operational state.
-- If `provisioningState` is missing required terminal states or includes invalid values, flag it.
-- `provisioningState` **MUST NOT** include values like `Deleted` or `NotSpecified`. `Deleted` is meaningless in the API (a deleted resource returns 404, not a provisioningState). `NotSpecified` is an internal sentinel with no customer-facing purpose.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState requirements including transition rules and format-specific guidance.
+
+- `provisioningState` **MUST** include terminal states: `Succeeded`, `Failed`, and `Canceled` (single 'l' -- NOT "Cancelled").
+- Operational states like `Stopped`, `Running` **MUST NOT** be in `provisioningState` -- use a separate property.
+- Invalid values: `Deleted`, `NotSpecified`.
 
 ### 8.10 `x-ms-nullable`
 
@@ -426,16 +423,16 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.11 Write-Only Properties Are Forbidden (OAPI027)
 
-- Properties **MUST NOT** be write-only. A property annotated with `x-ms-mutability: ["create", "update"]` (without `"read"`) is a write-only property and is **not allowed**.
-- Every property that can be set on a resource **MUST** also be readable via GET. If a property is accepted on PUT/PATCH but not returned on GET, ARM Template What-If will show the property as a diff (noise), and ARM Change Analysis will flag false changes.
-- **Exception**: Secret properties that are accepted on write but returned as `null` on read are acceptable — these should use `"x-ms-secret": true` and `x-ms-mutability: ["create", "update"]`.
-- If a non-secret write-only property is found, flag it as a blocking issue and instruct the author to make the property readable.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, and OAPI029 with format-specific examples.
+
+- Properties **MUST NOT** be write-only (`x-ms-mutability: ["create", "update"]` without `"read"`).
+- Every non-secret property that can be set **MUST** also be readable via GET.
+- **Exception**: Secret properties with `"x-ms-secret": true`.
 
 ### 8.12 No Conditional Read-Only or Conditional Immutable Properties (OAPI020, OAPI029)
 
-- If a property is `readOnly`, it **MUST** always be `readOnly`. Do not make the same property conditionally read-only in some scenarios and read/write in others. Use separate properties for each case.
-- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable. Do not make the same property conditionally immutable based on resource state or other conditions. Use separate properties for each case.
-- Conditional behavior on the same property creates inconsistent API behavior and confusion for CLI tools, SDKs, and Azure Policy.
+- If a property is `readOnly`, it **MUST** always be `readOnly`. Use separate properties for conditionally mutable cases (OAPI020).
+- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable. Use separate properties for conditionally immutable cases (OAPI029).
 
 ### 8.13 Avoid CSV-Encoded Values in Properties (PLCY004)
 
