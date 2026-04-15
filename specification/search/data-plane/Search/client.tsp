@@ -2883,6 +2883,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(WebApiVectorizer.customWebApiParameters, "parameters", "csharp");
 @@clientName(WebApiVectorizerParameters.uri, "url", "python");
 @@clientName(WebApiVectorizerParameters.uri, "url", "java");
+@@clientName(AIServicesVisionParameters.resourceUri, "resourceUrl", "java");
 @@clientName(AzureOpenAIModelName.Gpt5Mini, "GPT_5_MINI", "python");
 @@clientName(AzureOpenAIModelName.Gpt5Nano, "GPT_5_NANO", "python");
 @@clientName(AzureOpenAIModelName.Gpt54Mini, "GPT_5_4_MINI", "python");
@@ -2916,11 +2917,14 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AMLParameters.uri, "scoringUri");
 @@clientName(AMLParameters.uri, "scoringUrl", "java");
 @@clientName(AMLParameters.key, "authenticationKey");
-@@clientName(AMLVectorizer.amlParameters, "AMLParameters");
+@@clientName(AMLVectorizer.amlParameters, "parameters");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUri");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUrl", "java");
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
 @@clientName(ChatCompletionSkill.uri, "url", "java");
+@@clientName(WebApiSkill.uri, "url", "java");
+@@clientName(AIServices.uri, "url", "java");
+@@clientName(CustomEntityLookupSkill.entitiesDefinitionUri, "entitiesDefinitionUrl", "java");
 @@clientName(SkillNames.skillNames, "skillNameList", "csharp");
 @@clientName(AMLParameters, "AzureMachineLearningParameters");
 @@clientName(AMLVectorizer, "AzureMachineLearningVectorizer");
@@ -3260,6 +3264,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@alternateType(Search.SuggestRequest.searchFields, string, "javascript");
 
 // Knowledge Base types
+@@clientName(AzureOpenAiParameters.resourceUri, "resourceUrl", "java");
 @@clientNamespace(Search.AIServices, "Azure.Search.Documents.KnowledgeBases");
 @@clientNamespace(Search.AIServices,
   "com.azure.search.documents.knowledgebases",
@@ -3421,6 +3426,10 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.KnowledgeSourceIngestionParameters,
   "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientName(Search.KnowledgeSourceIngestionParameters.aiServices,
+  "AIServices",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceStatistics,
