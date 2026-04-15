@@ -93,10 +93,6 @@ interface Chat {
 
   // --- Rooms ---
 
-  /** Create a new room with a service-generated ID. */
-  @summary("Create a new room.")
-  createRoom is Operations.ResourceCreateWithServiceProvidedName<ChatRoom>;
-
   /** Create or replace a room with a client-specified ID. */
   @summary("Create or replace a room.")
   createOrReplaceRoom is ConditionalOperations.ResourceCreateOrReplace<ChatRoom>;

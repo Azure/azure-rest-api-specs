@@ -668,69 +668,6 @@
         }
       }
     },
-    "/api/hubs/{hub}/chat/rooms": {
-      "post": {
-        "operationId": "Chat_CreateRoom",
-        "tags": [
-          "chat"
-        ],
-        "summary": "Create a new room.",
-        "description": "Create a new room with a service-generated ID.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "hub",
-            "in": "path",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatRoom"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of ChatRoom"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Chat_CreateRoom": {
-            "$ref": "./examples/Chat_CreateRoom.json"
-          }
-        }
-      }
-    },
     "/api/hubs/{hub}/chat/rooms/{roomId}": {
       "get": {
         "operationId": "Chat_GetRoom",
