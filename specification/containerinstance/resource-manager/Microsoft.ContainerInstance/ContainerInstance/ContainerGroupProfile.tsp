@@ -50,7 +50,7 @@ alias ContainerGroupProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     containerGroupProfileName: string;
   },
   CloudError,
-  "ContainerGroupProfile"
+  ResourceName = "ContainerGroupProfile"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -141,7 +141,7 @@ alias CGProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     revisionNumber: string;
   },
   CloudError,
-  "ContainerGroupProfileRevision"
+  ResourceName = "ContainerGroupProfileRevision"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
