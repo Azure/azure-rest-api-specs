@@ -119,6 +119,12 @@
     },
     {
       "name": "NetworkBootstrapInterfaces"
+    },
+    {
+      "name": "EdgeConnectors"
+    },
+    {
+      "name": "Fabrics"
     }
   ],
   "paths": {
@@ -190,6 +196,84 @@
         "x-ms-examples": {
           "AccessControlLists_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/AccessControlLists_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/edgeConnectors": {
+      "get": {
+        "operationId": "EdgeConnectors_ListBySubscription",
+        "tags": [
+          "EdgeConnectors"
+        ],
+        "description": "Lists EdgeConnectors by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeConnectors_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeConnectors_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/fabrics": {
+      "get": {
+        "operationId": "Fabrics_ListBySubscription",
+        "tags": [
+          "Fabrics"
+        ],
+        "description": "Lists Fabrics by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fabrics_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Fabrics_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1560,6 +1644,601 @@
         "x-ms-examples": {
           "AccessControlLists_ValidateConfiguration_MaximumSet_Gen": {
             "$ref": "./examples/AccessControlLists_ValidateConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/edgeConnectors": {
+      "get": {
+        "operationId": "EdgeConnectors_ListByResourceGroup",
+        "tags": [
+          "EdgeConnectors"
+        ],
+        "description": "Lists EdgeConnectors by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeConnectors_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeConnectors_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/edgeConnectors/{edgeConnectorName}": {
+      "get": {
+        "operationId": "EdgeConnectors_Get",
+        "tags": [
+          "EdgeConnectors"
+        ],
+        "description": "Gets the specified EdgeConnector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeConnectorName",
+            "in": "path",
+            "description": "Name of the EdgeConnector.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeConnectors_Get_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeConnectors_Create",
+        "tags": [
+          "EdgeConnectors"
+        ],
+        "description": "Creates an EdgeConnector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeConnectorName",
+            "in": "path",
+            "description": "Name of the EdgeConnector.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeConnector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeConnectors_Create_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeConnectors_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EdgeConnectors_Update",
+        "tags": [
+          "EdgeConnectors"
+        ],
+        "description": "Updates an EdgeConnector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeConnectorName",
+            "in": "path",
+            "description": "Name of the EdgeConnector.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "EdgeConnector properties to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeConnectorPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeConnector"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeConnectors_Update_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeConnectors_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeConnectors_Delete",
+        "tags": [
+          "EdgeConnectors"
+        ],
+        "description": "Deletes the specified EdgeConnector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeConnectorName",
+            "in": "path",
+            "description": "Name of the EdgeConnector.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeConnectors_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeConnectors_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/fabrics": {
+      "get": {
+        "operationId": "Fabrics_ListByResourceGroup",
+        "tags": [
+          "Fabrics"
+        ],
+        "description": "Lists Fabrics by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FabricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fabrics_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Fabrics_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/fabrics/{fabricName}": {
+      "get": {
+        "operationId": "Fabrics_Get",
+        "tags": [
+          "Fabrics"
+        ],
+        "description": "Gets the specified Fabric.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fabrics_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Fabrics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Fabrics_Create",
+        "tags": [
+          "Fabrics"
+        ],
+        "description": "Creates a Fabric.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Fabric' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          },
+          "201": {
+            "description": "Resource 'Fabric' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fabrics_Create_Managed_MaximumSet_Gen": {
+            "$ref": "./examples/Fabrics_Create_Managed.json"
+          },
+          "Fabrics_Create_MaximumSet_Gen": {
+            "$ref": "./examples/Fabrics_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Fabrics_Update",
+        "tags": [
+          "Fabrics"
+        ],
+        "description": "Updates a Fabric.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Fabric properties to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FabricPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Fabric"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fabrics_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Fabrics_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Fabrics_Delete",
+        "tags": [
+          "Fabrics"
+        ],
+        "description": "Deletes the specified Fabric.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Name of the Fabric.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fabrics_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Fabrics_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15508,6 +16187,42 @@
         }
       }
     },
+    "ConnectivityModel": {
+      "type": "string",
+      "description": "Connectivity model for EdgeConnector.",
+      "enum": [
+        "none",
+        "direct",
+        "arcProxy",
+        "expressRoute"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectivityModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "No connectivity."
+          },
+          {
+            "name": "direct",
+            "value": "direct",
+            "description": "Direct IP reachability."
+          },
+          {
+            "name": "arcProxy",
+            "value": "arcProxy",
+            "description": "Arc Proxy tunnel."
+          },
+          {
+            "name": "expressRoute",
+            "value": "expressRoute",
+            "description": "ExpressRoute private peering."
+          }
+        ]
+      }
+    },
     "ControlPlanAclIpMatchCondition": {
       "type": "object",
       "description": "Control Plane Access Control List (ACL) IP condition properties",
@@ -15919,6 +16634,36 @@
         }
       }
     },
+    "ControllerType": {
+      "type": "string",
+      "description": "Controller type for device interaction.",
+      "enum": [
+        "ciscoAci",
+        "aristaCloudVision",
+        "direct"
+      ],
+      "x-ms-enum": {
+        "name": "ControllerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ciscoAci",
+            "value": "ciscoAci",
+            "description": "Cisco ACI APIC REST API."
+          },
+          {
+            "name": "aristaCloudVision",
+            "value": "aristaCloudVision",
+            "description": "Arista CloudVision API."
+          },
+          {
+            "name": "direct",
+            "value": "direct",
+            "description": "Direct gNMI/SSH."
+          }
+        ]
+      }
+    },
     "DestinationPatchProperties": {
       "type": "object",
       "description": "The network tap destination properties.",
@@ -16274,6 +17019,112 @@
         "commitBatchId": {
           "type": "string",
           "description": "Commit Batch Identifier."
+        }
+      }
+    },
+    "EdgeConnector": {
+      "type": "object",
+      "description": "EdgeConnector represents the mechanism by which a collection of on-prem infrastructure (Fabric) is connected to Azure.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeConnectorProperties",
+          "description": "EdgeConnector properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EdgeConnectorListResult": {
+      "type": "object",
+      "description": "The response of a EdgeConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeConnectorPatch": {
+      "type": "object",
+      "description": "EdgeConnector patch body.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/EdgeConnectorPatchableProperties",
+          "description": "Resource properties."
+        }
+      }
+    },
+    "EdgeConnectorPatchableProperties": {
+      "type": "object",
+      "description": "EdgeConnector patchable properties.",
+      "properties": {
+        "connectivityModel": {
+          "$ref": "#/definitions/ConnectivityModel",
+          "description": "How the EdgeConnector establishes connectivity to on-prem infrastructure."
+        },
+        "version": {
+          "type": "string",
+          "description": "Software version of the control plane."
+        }
+      }
+    },
+    "EdgeConnectorProperties": {
+      "type": "object",
+      "description": "EdgeConnectorProperties defines the resource properties.",
+      "properties": {
+        "connectivityModel": {
+          "$ref": "#/definitions/ConnectivityModel",
+          "description": "How the EdgeConnector establishes connectivity to on-prem infrastructure."
+        },
+        "version": {
+          "type": "string",
+          "description": "Software version of the control plane."
+        },
+        "managedFabricIds": {
+          "type": "array",
+          "description": "ARM resource IDs of Fabric resources managed by this EdgeConnector.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ManagedNetworkFabric/fabrics"
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
         }
       }
     },
@@ -17177,6 +18028,45 @@
         "value"
       ]
     },
+    "Fabric": {
+      "type": "object",
+      "description": "Represents a physical network deployment hosting infrastructure network configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FabricProperties",
+          "description": "Fabric properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FabricListResult": {
+      "type": "object",
+      "description": "The response of a Fabric list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Fabric items on this page",
+          "items": {
+            "$ref": "#/definitions/Fabric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "FabricLockProperties": {
       "type": "object",
       "description": "Network Fabric Lock Configuration.",
@@ -17190,6 +18080,160 @@
           "description": "NetworkFabric Lock Type."
         }
       }
+    },
+    "FabricPatch": {
+      "type": "object",
+      "description": "Fabric patch body.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FabricPatchableProperties",
+          "description": "Resource properties."
+        }
+      }
+    },
+    "FabricPatchableProperties": {
+      "type": "object",
+      "description": "Fabric patchable properties.",
+      "properties": {
+        "infrastructureNetworks": {
+          "$ref": "#/definitions/PatchInfrastructureNetworks",
+          "description": "Infrastructure network definitions."
+        },
+        "infrastructureServices": {
+          "$ref": "#/definitions/PatchInfrastructureServices",
+          "description": "Infrastructure service endpoints."
+        },
+        "operationPolicy": {
+          "$ref": "#/definitions/OperationPolicy",
+          "description": "Operation policy for device interaction."
+        },
+        "controllerEndpoint": {
+          "type": "string",
+          "description": "URL of the SDN controller API endpoint."
+        },
+        "controllerCredentialRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the Key Vault secret for controller credentials.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults/secrets"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "FabricProperties": {
+      "type": "object",
+      "description": "FabricProperties defines the resource properties.",
+      "properties": {
+        "infrastructureNetworks": {
+          "$ref": "#/definitions/InfrastructureNetworks",
+          "description": "Infrastructure network definitions."
+        },
+        "infrastructureServices": {
+          "$ref": "#/definitions/InfrastructureServices",
+          "description": "Infrastructure service endpoints."
+        },
+        "operationPolicy": {
+          "$ref": "#/definitions/OperationPolicy",
+          "description": "Operation policy for device interaction."
+        },
+        "controllerEndpoint": {
+          "type": "string",
+          "description": "URL of the SDN controller API endpoint."
+        },
+        "controllerCredentialRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the Key Vault secret for controller credentials.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults/secrets"
+              }
+            ]
+          }
+        },
+        "edgeConnectorId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the EdgeConnector.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/edgeConnectors"
+              }
+            ]
+          }
+        },
+        "managementMode": {
+          "$ref": "#/definitions/ManagementMode",
+          "description": "Management mode.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "controllerType": {
+          "$ref": "#/definitions/ControllerType",
+          "description": "Controller type for device interaction."
+        },
+        "rackCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of physical racks."
+        },
+        "fabricSku": {
+          "type": "string",
+          "description": "Predefined topology identifier."
+        },
+        "customerVnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM ID of the customer's Azure VNet.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          }
+        },
+        "customerSubnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM ID of the customer's subnet.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "managementMode"
+      ]
     },
     "FabricSkuType": {
       "type": "string",
@@ -17675,6 +18719,151 @@
           }
         }
       }
+    },
+    "InfraNetwork": {
+      "type": "object",
+      "description": "Infrastructure network definition.",
+      "properties": {
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "802.1Q VLAN ID.",
+          "minimum": 1,
+          "maximum": 4094
+        },
+        "ipv4Subnet": {
+          "type": "string",
+          "description": "IPv4 subnet in CIDR notation."
+        },
+        "ipv4Gateway": {
+          "type": "string",
+          "description": "Default gateway IP."
+        },
+        "ipv4StartAddr": {
+          "type": "string",
+          "description": "Start of allocatable IP range."
+        },
+        "ipv4EndAddr": {
+          "type": "string",
+          "description": "End of allocatable IP range."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Transmission Unit."
+        }
+      },
+      "required": [
+        "vlanId",
+        "ipv4Subnet",
+        "ipv4Gateway",
+        "ipv4StartAddr",
+        "ipv4EndAddr"
+      ]
+    },
+    "InfraNetworkOptionalIp": {
+      "type": "object",
+      "description": "Infrastructure network with optional IP fields.",
+      "properties": {
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "802.1Q VLAN ID.",
+          "minimum": 1,
+          "maximum": 4094
+        },
+        "ipv4Subnet": {
+          "type": "string",
+          "description": "IPv4 subnet in CIDR notation."
+        },
+        "ipv4Gateway": {
+          "type": "string",
+          "description": "Default gateway IP."
+        },
+        "ipv4StartAddr": {
+          "type": "string",
+          "description": "Start of allocatable IP range."
+        },
+        "ipv4EndAddr": {
+          "type": "string",
+          "description": "End of allocatable IP range."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Transmission Unit."
+        }
+      },
+      "required": [
+        "vlanId"
+      ]
+    },
+    "InfrastructureNetworks": {
+      "type": "object",
+      "description": "Named infrastructure network definitions.",
+      "properties": {
+        "management": {
+          "$ref": "#/definitions/InfraNetwork",
+          "description": "OAM management network. Typical VLAN: 39."
+        },
+        "pxe": {
+          "$ref": "#/definitions/InfraNetwork",
+          "description": "PXE boot network. Typical VLAN: 40."
+        },
+        "bmc": {
+          "$ref": "#/definitions/InfraNetwork",
+          "description": "BMC/iDRAC network. Typical VLAN: 41."
+        },
+        "storage": {
+          "$ref": "#/definitions/InfraNetwork",
+          "description": "Storage data plane network. Typical VLAN: 42."
+        },
+        "storageMgmt": {
+          "$ref": "#/definitions/InfraNetworkOptionalIp",
+          "description": "Storage management plane network. Typical VLAN: 37."
+        },
+        "pdu": {
+          "$ref": "#/definitions/InfraNetwork",
+          "description": "PDU management network. Typical VLAN: 43."
+        }
+      },
+      "required": [
+        "management",
+        "pxe",
+        "bmc",
+        "storage"
+      ]
+    },
+    "InfrastructureServices": {
+      "type": "object",
+      "description": "Infrastructure service endpoints.",
+      "properties": {
+        "platformProxy": {
+          "$ref": "#/definitions/PlatformProxy",
+          "description": "Platform proxy configuration."
+        },
+        "ntpServers": {
+          "type": "array",
+          "description": "NTP server IPs or hostnames.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS server IPs.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "platformProxy",
+        "ntpServers",
+        "dnsServers"
+      ]
     },
     "InterfaceType": {
       "type": "string",
@@ -19956,6 +21145,30 @@
             "name": "UserAssignedIdentity",
             "value": "UserAssignedIdentity",
             "description": "User Assigned Identity."
+          }
+        ]
+      }
+    },
+    "ManagementMode": {
+      "type": "string",
+      "description": "Management mode for the Fabric.",
+      "enum": [
+        "unmanaged",
+        "managed"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unmanaged",
+            "value": "unmanaged",
+            "description": "Customer manages devices."
+          },
+          {
+            "name": "managed",
+            "value": "managed",
+            "description": "RP manages devices."
           }
         ]
       }
@@ -24799,6 +26012,30 @@
         }
       }
     },
+    "OperationPolicy": {
+      "type": "string",
+      "description": "Operation policy for device interaction.",
+      "enum": [
+        "validateOnly",
+        "fullControl"
+      ],
+      "x-ms-enum": {
+        "name": "OperationPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "validateOnly",
+            "value": "validateOnly",
+            "description": "Read device state and report drift."
+          },
+          {
+            "name": "fullControl",
+            "value": "fullControl",
+            "description": "Read, write, and remediate drift."
+          }
+        ]
+      }
+    },
     "OperationalState": {
       "type": "string",
       "description": "Operational State represents the current runtime condition of a networking resource. It reflects the actual health, reachability, and availability of the resource at a given point in time.",
@@ -24962,6 +26199,115 @@
         }
       }
     },
+    "PatchInfraNetwork": {
+      "type": "object",
+      "description": "Infrastructure network definition for PATCH. All fields optional.",
+      "properties": {
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "802.1Q VLAN ID.",
+          "minimum": 1,
+          "maximum": 4094
+        },
+        "ipv4Subnet": {
+          "type": "string",
+          "description": "IPv4 subnet in CIDR notation."
+        },
+        "ipv4Gateway": {
+          "type": "string",
+          "description": "Default gateway IP."
+        },
+        "ipv4StartAddr": {
+          "type": "string",
+          "description": "Start of allocatable IP range."
+        },
+        "ipv4EndAddr": {
+          "type": "string",
+          "description": "End of allocatable IP range."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Transmission Unit."
+        }
+      }
+    },
+    "PatchInfrastructureNetworks": {
+      "type": "object",
+      "description": "Infrastructure network definitions for PATCH. No networks required.",
+      "properties": {
+        "management": {
+          "$ref": "#/definitions/PatchInfraNetwork",
+          "description": "OAM management network."
+        },
+        "pxe": {
+          "$ref": "#/definitions/PatchInfraNetwork",
+          "description": "PXE boot network."
+        },
+        "bmc": {
+          "$ref": "#/definitions/PatchInfraNetwork",
+          "description": "BMC/iDRAC network."
+        },
+        "storage": {
+          "$ref": "#/definitions/PatchInfraNetwork",
+          "description": "Storage data plane network."
+        },
+        "storageMgmt": {
+          "$ref": "#/definitions/PatchInfraNetwork",
+          "description": "Storage management plane network."
+        },
+        "pdu": {
+          "$ref": "#/definitions/PatchInfraNetwork",
+          "description": "PDU management network."
+        }
+      }
+    },
+    "PatchInfrastructureServices": {
+      "type": "object",
+      "description": "Infrastructure service endpoints for PATCH. All fields optional.",
+      "properties": {
+        "platformProxy": {
+          "$ref": "#/definitions/PatchPlatformProxy",
+          "description": "Platform proxy configuration."
+        },
+        "ntpServers": {
+          "type": "array",
+          "description": "NTP server IPs or hostnames.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS server IPs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchPlatformProxy": {
+      "type": "object",
+      "description": "Platform proxy configuration for PATCH. All fields optional.",
+      "properties": {
+        "httpProxy": {
+          "type": "string",
+          "description": "HTTP proxy endpoint URL."
+        },
+        "httpsProxy": {
+          "type": "string",
+          "description": "HTTPS proxy endpoint URL."
+        },
+        "noProxy": {
+          "type": "array",
+          "description": "CIDRs, hostnames, and domain suffixes that bypass the proxy.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "PeeringOption": {
       "type": "string",
       "description": "Peering option list.",
@@ -24985,6 +26331,32 @@
           }
         ]
       }
+    },
+    "PlatformProxy": {
+      "type": "object",
+      "description": "Platform proxy configuration.",
+      "properties": {
+        "httpProxy": {
+          "type": "string",
+          "description": "HTTP proxy endpoint URL."
+        },
+        "httpsProxy": {
+          "type": "string",
+          "description": "HTTPS proxy endpoint URL."
+        },
+        "noProxy": {
+          "type": "array",
+          "description": "CIDRs, hostnames, and domain suffixes that bypass the proxy.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "httpProxy",
+        "httpsProxy",
+        "noProxy"
+      ]
     },
     "PoliceRateConfigurationProperties": {
       "type": "object",
