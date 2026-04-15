@@ -338,6 +338,9 @@ using Microsoft.NetApp;
 @@alternateType(Microsoft.NetApp.VolumeProperties.fileSystemId, uuid, "csharp");
 @@alternateType(Microsoft.NetApp.VolumeProperties.networkSiblingSetId, uuid, "csharp");
 
+// C# ETag and Guid property type overrides
+@@alternateType(Microsoft.NetApp.PoolProperties.poolId, uuid, "csharp");
+
 // C# ARM resource renames (restore NetApp prefix on resource types)
 // Note: Volume is handled via [CodeGenType] in Custom code because @@clientName
 // on Volume causes generator crashes with [CodeGenSerialization] in Custom code.
