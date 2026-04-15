@@ -15,103 +15,105 @@
       }
     },
     "200": {
-      "body": [
-        {
-          "startTime": "2026-01-06T09:23:21Z",
-          "endTime": "2026-01-06T09:29:20Z",
-          "status": "Completed",
-          "wasSimulationSuccessful": true,
-          "linkType": "Primary",
-          "circuitTestCategory": "BgpDisconnect",
-          "isSimulationVerified": false,
-          "redundantRoutes": {
-            "beforeSimulation": [
+      "body": {
+        "value": [
+          {
+            "startTime": "2026-01-06T09:23:21Z",
+            "endTime": "2026-01-06T09:29:20Z",
+            "status": "Completed",
+            "wasSimulationSuccessful": true,
+            "linkType": "Primary",
+            "circuitTestCategory": "BgpDisconnect",
+            "isSimulationVerified": false,
+            "redundantRoutes": {
+              "beforeSimulation": [
+                {
+                  "route": "Route1",
+                  "nextHop": "NextHop1",
+                  "primaryASPath": "PrimaryASPath1",
+                  "secondaryASPath": "SecondaryASPath1"
+                },
+                {
+                  "route": "Route2",
+                  "nextHop": "NextHop2",
+                  "primaryASPath": "PrimaryASPath2",
+                  "secondaryASPath": "SecondaryASPath2"
+                }
+              ],
+              "duringSimulation": [
+                {
+                  "route": "Route3",
+                  "nextHop": "NextHop3",
+                  "primaryASPath": "PrimaryASPath3",
+                  "secondaryASPath": "SecondaryASPath3"
+                },
+                {
+                  "route": "Route4",
+                  "nextHop": "NextHop4",
+                  "primaryASPath": "PrimaryASPath4",
+                  "secondaryASPath": "SecondaryASPath4"
+                }
+              ]
+            },
+            "nonRedundantRoutes": {
+              "beforeSimulation": [
+                {
+                  "route": "Route5",
+                  "nextHop": "NextHop5",
+                  "primaryASPath": "PrimaryASPath5",
+                  "secondaryASPath": "SecondaryASPath5"
+                },
+                {
+                  "route": "Route6",
+                  "nextHop": "NextHop6",
+                  "primaryASPath": "PrimaryASPath6",
+                  "secondaryASPath": "SecondaryASPath6"
+                }
+              ],
+              "duringSimulation": [
+                {
+                  "route": "Route7",
+                  "nextHop": "NextHop7",
+                  "primaryASPath": "PrimaryASPath7",
+                  "secondaryASPath": "SecondaryASPath7"
+                },
+                {
+                  "route": "Route8",
+                  "nextHop": "NextHop8",
+                  "primaryASPath": "PrimaryASPath8",
+                  "secondaryASPath": "SecondaryASPath8"
+                }
+              ]
+            },
+            "bgpStatus": [
               {
-                "route": "Route1",
-                "nextHop": "NextHop1",
-                "primaryASPath": "PrimaryASPath1",
-                "secondaryASPath": "SecondaryASPath1"
+                "bgpStatusType": "IPv4",
+                "link": "Primary",
+                "status": "Connected",
+                "checkTime": "2026-01-06T09:29:27Z"
               },
               {
-                "route": "Route2",
-                "nextHop": "NextHop2",
-                "primaryASPath": "PrimaryASPath2",
-                "secondaryASPath": "SecondaryASPath2"
-              }
-            ],
-            "duringSimulation": [
-              {
-                "route": "Route3",
-                "nextHop": "NextHop3",
-                "primaryASPath": "PrimaryASPath3",
-                "secondaryASPath": "SecondaryASPath3"
+                "bgpStatusType": "IPv4",
+                "link": "Secondary",
+                "status": "Connected",
+                "checkTime": "2026-01-06T09:29:27Z"
               },
               {
-                "route": "Route4",
-                "nextHop": "NextHop4",
-                "primaryASPath": "PrimaryASPath4",
-                "secondaryASPath": "SecondaryASPath4"
+                "bgpStatusType": "IPv6",
+                "link": "Primary",
+                "status": "Undefined",
+                "checkTime": "2026-01-06T09:29:27Z"
+              },
+              {
+                "bgpStatusType": "IPv6",
+                "link": "Secondary",
+                "status": "Undefined",
+                "checkTime": "2026-01-06T09:29:27Z"
               }
             ]
-          },
-          "nonRedundantRoutes": {
-            "beforeSimulation": [
-              {
-                "route": "Route5",
-                "nextHop": "NextHop5",
-                "primaryASPath": "PrimaryASPath5",
-                "secondaryASPath": "SecondaryASPath5"
-              },
-              {
-                "route": "Route6",
-                "nextHop": "NextHop6",
-                "primaryASPath": "PrimaryASPath6",
-                "secondaryASPath": "SecondaryASPath6"
-              }
-            ],
-            "duringSimulation": [
-              {
-                "route": "Route7",
-                "nextHop": "NextHop7",
-                "primaryASPath": "PrimaryASPath7",
-                "secondaryASPath": "SecondaryASPath7"
-              },
-              {
-                "route": "Route8",
-                "nextHop": "NextHop8",
-                "primaryASPath": "PrimaryASPath8",
-                "secondaryASPath": "SecondaryASPath8"
-              }
-            ]
-          },
-          "bgpStatus": [
-            {
-              "bgpStatusType": "IPv4",
-              "link": "Primary",
-              "status": "Connected",
-              "checkTime": "2026-01-06T09:29:27Z"
-            },
-            {
-              "bgpStatusType": "IPv4",
-              "link": "Secondary",
-              "status": "Connected",
-              "checkTime": "2026-01-06T09:29:27Z"
-            },
-            {
-              "bgpStatusType": "IPv6",
-              "link": "Primary",
-              "status": "Undefined",
-              "checkTime": "2026-01-06T09:29:27Z"
-            },
-            {
-              "bgpStatusType": "IPv6",
-              "link": "Secondary",
-              "status": "Undefined",
-              "checkTime": "2026-01-06T09:29:27Z"
-            }
-          ]
-        }
-      ]
+          }
+        ]
+      }
     }
   }
 }
