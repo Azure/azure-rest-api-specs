@@ -1,36 +1,23 @@
 # Validation
 
-After applying changes (Step 4), run through all sub-steps below in order.
+Run all sub-steps in order after applying changes.
 
-| Sub-step | Action                             | When                       |
-| -------- | ---------------------------------- | -------------------------- |
-| 5.1      | TypeSpec Validation (error checks) | Always                     |
-| 5.2      | `tsp compile .` (generate swagger) | Always                     |
-| 5.3      | Example Verification               | API Version Evolution only |
+| Sub-step | Action | When |
+| -------- | ------ | ---- |
+| 5.1 | `azsdk_run_typespec_validation` | Always |
+| 5.2 | `tsp compile .` | Always |
+| 5.3 | Example verification | API version evolution only |
 
-> Steps 5.1 and 5.2 serve different purposes. Step 5.1 validates for errors/warnings. Step 5.2 compiles and generates the OpenAPI `.json` output files. Both must be executed.
+### 5.1: TypeSpec Validation
 
-### Step 5.1: TypeSpec Validation
+Invoke `azsdk_run_typespec_validation` with the project root. On failure → fix → re-run until resolved.
 
-Invoke `azure-sdk-mcp:azsdk_run_typespec_validation` with the TypeSpec project root path.
+### 5.2: Compile
 
-- **Pass** → proceed to Step 5.2.
-- **Fail** → fix with minimal, scoped changes, then re-run. Repeat until resolved.
+Run `tsp compile .` from the project root. Verify `.json` output under `{project-root}/{version-status}/{target-version}/`. Fix compile errors if any.
 
-> Never skip this step, even for trivial changes.
+> 5.1 checks for errors/warnings; 5.2 generates the OpenAPI output. Both are required.
 
-### Step 5.2: Compile successfully
+### 5.3: Example Verification
 
-> This step is separate from Step 5.1. Validation alone does not produce output files — you must also run `tsp compile .` to generate the OpenAPI swagger.
-
-Run `tsp compile .` from the TypeSpec project root path. After compilation succeeds, verify that the swagger `.json` file has been generated under `{TypeSpec project root}/{version-status}/{target-version}/` (e.g. `preview/2025-01-01-preview/widget.json`). Fix any compile errors if they occur.
-
-### Step 5.3: Example Verification
-
-> Applies only for API Version Evolution tasks
-
-Verify that the example folder set up in Step 3 (copied from the latest version's `examples/` into `{TypeSpec project root}/{version-status}/{target-version}/examples/`) exists and contains example files.
-
-1. **Folder exists** — confirm `{TypeSpec project root}/{version-status}/{target-version}/examples/` was created. If missing, copy all `.json` files from the latest version's `examples/` folder.
-2. **Files exist** — confirm the folder contains at least one `.json` example file. If empty, copy examples from the latest version's `examples/` folder.
-3. **api-version updated** — each example file must use the correct `api-version` value matching the target version (e.g. `2024-02-01-preview`, not the source version).
+Verify `{project-root}/{version-status}/{target-version}/examples/` exists with `.json` files using the correct `api-version`. If missing, copy from the previous version's examples and update `api-version`.
