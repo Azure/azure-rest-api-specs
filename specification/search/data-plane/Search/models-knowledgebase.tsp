@@ -14,6 +14,7 @@ namespace Search;
 /** The input contract for the retrieval request. */
 model KnowledgeBaseRetrievalRequest {
   /** A list of chat message style input. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   messages?: KnowledgeBaseMessage[];
 
@@ -24,14 +25,17 @@ model KnowledgeBaseRetrievalRequest {
   maxRuntimeInSeconds?: int32;
 
   /** Limits the maximum size of the content in the output. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   maxOutputSize?: int32;
 
   /** Limits the maximum size of the content in the output. */
+  @added(Versions.v2026_07_01_preview)
   @added(Versions.v2026_04_01)
   maxOutputSizeInTokens?: int32;
 
   /** The retrieval reasoning effort configuration. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
 
@@ -39,6 +43,7 @@ model KnowledgeBaseRetrievalRequest {
   includeActivity?: boolean;
 
   /** The output configuration for this retrieval. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   outputMode?: KnowledgeRetrievalOutputMode;
 
@@ -73,6 +78,7 @@ model KnowledgeRetrievalMinimalReasoningEffort
 }
 
 /** Run knowledge retrieval with low reasoning effort. */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeRetrievalLowReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
@@ -81,6 +87,7 @@ model KnowledgeRetrievalLowReasoningEffort
 }
 
 /** Run knowledge retrieval with medium reasoning effort. */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeRetrievalMediumReasoningEffort
   extends KnowledgeRetrievalReasoningEffort {
@@ -96,15 +103,18 @@ union KnowledgeRetrievalReasoningEffortKind {
   minimal: "minimal",
 
   /** Use low reasoning during retrieval. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   low: "low",
 
   /** Use a moderate amount of reasoning during retrieval. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   medium: "medium",
 }
 
 /** The output configuration for this retrieval. */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 union KnowledgeRetrievalOutputMode {
   string,
@@ -129,6 +139,7 @@ model KnowledgeSourceParams {
   includeReferenceSourceData?: boolean;
 
   /** Indicates that this knowledge source should bypass source selection and always be queried at retrieval time. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   alwaysQuerySource?: boolean;
 
@@ -169,6 +180,7 @@ union IndexedSharePointContainerName {
 }
 
 /** Specifies runtime parameters for a indexed SharePoint knowledge source */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model IndexedSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
@@ -200,6 +212,7 @@ model WebKnowledgeSourceParams extends KnowledgeSourceParams {
 }
 
 /** Specifies runtime parameters for a remote SharePoint knowledge source */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model RemoteSharePointKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
@@ -295,6 +308,7 @@ union KnowledgeBaseActivityRecordType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint retrieval activity. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
@@ -305,14 +319,17 @@ union KnowledgeBaseActivityRecordType {
   web: "web",
 
   /** Remote SharePoint retrieval activity. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
 
   /** LLM query planning activity. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   modelQueryPlanning: "modelQueryPlanning",
 
   /** LLM answer synthesis activity. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   modelAnswerSynthesis: "modelAnswerSynthesis",
 
@@ -402,6 +419,7 @@ model KnowledgeBaseAzureBlobActivityArguments {
 /** Represents a indexed SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -413,6 +431,7 @@ model KnowledgeBaseIndexedSharePointActivityRecord
 }
 
 /** Represents the arguments the indexed SharePoint retrieval activity was run with. */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointActivityArguments {
   /** The search string used to query indexed SharePoint contents. */
@@ -470,6 +489,7 @@ model KnowledgeBaseWebActivityArguments {
 /** Represents a remote SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
@@ -481,6 +501,7 @@ model KnowledgeBaseRemoteSharePointActivityRecord
 }
 
 /** Represents the arguments the remote SharePoint retrieval activity was run with. */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointActivityArguments {
   /** The search string used to query the remote SharePoint knowledge source. */
@@ -492,6 +513,7 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
 
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseModelQueryPlanningActivityRecord
   extends KnowledgeBaseActivityRecord {
@@ -507,6 +529,7 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 
 /** Represents an LLM answer synthesis activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseModelAnswerSynthesisActivityRecord
   extends KnowledgeBaseActivityRecord {
@@ -545,6 +568,7 @@ union KnowledgeBaseReferenceType {
   azureBlob: "azureBlob",
 
   /** Indexed SharePoint document reference. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   indexedSharePoint: "indexedSharePoint",
 
@@ -555,6 +579,7 @@ union KnowledgeBaseReferenceType {
   web: "web",
 
   /** Remote SharePoint document reference. */
+  @added(Versions.v2026_07_01_preview)
   @removed(Versions.v2026_04_01)
   remoteSharePoint: "remoteSharePoint",
 }
@@ -601,6 +626,7 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
 
 /** Represents an indexed SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
@@ -635,6 +661,7 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
 
 /** Represents a remote SharePoint document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
@@ -648,6 +675,7 @@ model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
+@added(Versions.v2026_07_01_preview)
 @removed(Versions.v2026_04_01)
 model SharePointSensitivityLabelInfo {
   /** The display name for the sensitivity label. */

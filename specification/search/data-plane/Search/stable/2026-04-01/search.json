@@ -7613,6 +7613,41 @@
         "vectorIndexSize"
       ]
     },
+    "IndexUsageMetrics": {
+      "type": "object",
+      "description": "Per-index usage metrics.",
+      "properties": {
+        "indexName": {
+          "type": "string",
+          "description": "The name of the index.",
+          "readOnly": true
+        },
+        "queryCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of queries targeting this index.",
+          "readOnly": true
+        },
+        "averageLatencyMs": {
+          "type": "number",
+          "format": "double",
+          "description": "The average latency in milliseconds for queries targeting this index.",
+          "readOnly": true
+        },
+        "documentsProcessed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of documents indexed in the current billing period.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "indexName",
+        "queryCount",
+        "averageLatencyMs",
+        "documentsProcessed"
+      ]
+    },
     "IndexedOneLakeKnowledgeSource": {
       "type": "object",
       "description": "Configuration for OneLake knowledge source.",
@@ -13971,7 +14006,7 @@
             "$ref": "#/definitions/ScoringFunction"
           }
         },
-        "functionAggregation": {
+        "scoreFunctionAggregation": {
           "$ref": "#/definitions/ScoringFunctionAggregation",
           "description": "A value indicating how the results of individual scoring functions should be combined. Defaults to \"Sum\". Ignored if there are no scoring functions."
         }
@@ -15672,6 +15707,57 @@
       "required": [
         "counters",
         "limits"
+      ]
+    },
+    "SearchServiceUsageMetrics": {
+      "type": "object",
+      "description": "Response from a usage metrics request for the search service.",
+      "properties": {
+        "totalQueries": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of queries processed in the current billing period.",
+          "readOnly": true
+        },
+        "throttledQueries": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of throttled queries in the current billing period.",
+          "readOnly": true
+        },
+        "averageLatencyMs": {
+          "type": "number",
+          "format": "double",
+          "description": "The average query latency in milliseconds over the current billing period.",
+          "readOnly": true
+        },
+        "p95LatencyMs": {
+          "type": "number",
+          "format": "double",
+          "description": "The 95th percentile query latency in milliseconds.",
+          "readOnly": true
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the most recent metrics aggregation.",
+          "readOnly": true
+        },
+        "indexMetrics": {
+          "type": "array",
+          "description": "Per-index usage breakdown.",
+          "items": {
+            "$ref": "#/definitions/IndexUsageMetrics"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "totalQueries",
+        "throttledQueries",
+        "averageLatencyMs",
+        "p95LatencyMs",
+        "lastUpdated"
       ]
     },
     "SearchSuggester": {
