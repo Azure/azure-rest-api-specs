@@ -8,6 +8,10 @@ This file contains **ARM control plane–specific** review rules that supplement
 
 **Authoritative source for ARM control-plane rules:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0). The RPC defines the contract between ARM and resource providers for PUT, PATCH, DELETE, GET, POST, and async operations. All rules in this file are derived from or aligned with the RPC. When in doubt, consult the RPC contract directly.
 
+**Supplementary references:**
+- [ARM API Best Practices & Design Choices](https://eng.ms/docs/products/arm/api_contracts/guidelines/api_best_practices_and_design_choices)
+- [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
+
 Flag every violation clearly with the file path, JSON path or line number, the specific rule ID, and a concrete suggestion for how to fix it. Respond in markdown format.
 
 ---
@@ -67,10 +71,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 1.7 Client-Facing Text Must Not Use Internal Terminology
 
-- Property names, descriptions, and enum values **MUST NOT** use "ARM" as a standalone term. Use "Azure" or "Azure Resource Manager" instead. For example, use `monitorAccountResourceId` not `armResourceId`.
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for comprehensive Azure terminology and naming rules.
+
+- Property names, descriptions, and enum values **MUST NOT** use "ARM" as a standalone term. Use "Azure" or "Azure Resource Manager" instead.
 - Descriptions **MUST NOT** use "AAD". Use "Microsoft Entra ID" instead.
-- These terms propagate into SDKs and customer-facing documentation and must use official product names.
-- Descriptions **MUST** expand acronyms on first use. Do not use unexpanded abbreviations like "IAM", "SRA", "WORM", "LRS", "GRS" in descriptions. Write the full term followed by the acronym in parentheses on first use (e.g., "Locally Redundant Storage (LRS)").
+- Descriptions **MUST** expand acronyms on first use (e.g., "Locally Redundant Storage (LRS)").
 
 ---
 
@@ -85,20 +90,12 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 2.2 Tracked Resource Requirements
 
-- A **tracked resource** (has `location` as required property) **MUST** implement all of:
-  - **GET** — return the resource; must only return `200` and must not be an LRO (RPC-Get-V1-01, RPC-Get-V1-14)
-  - **PUT** — create or replace the resource (RPC-Put-V1-22)
-  - **PATCH** — update the resource; at minimum must support updating `tags` (RPC-Patch-V1-03)
-  - **DELETE** — remove the resource (RPC-Delete-V1-03)
-  - **List by Resource Group** — collection GET under resource group (RPC-Get-V1-05)
-  - **List by Subscription** — collection GET under subscription (RPC-Get-V1-05)
-- If any of these operations are missing for a tracked resource, flag it as an ARM Error.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements, required operations matrix with rule IDs, and collection GET contract.
+
+- A **tracked resource** (has `location` as required property) **MUST** implement GET, PUT, PATCH, DELETE, List by Resource Group, and List by Subscription. If any are missing, flag it as an ARM Error.
 - Point GET operations **MUST NOT** have query parameters other than `api-version` (RPC-Get-V1-08).
-- Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties (RPC-Get-V1-09).
+- Collection GET responses **MUST** only have `value` and `nextLink` as top-level properties; `nextLink` **MUST** use `"format": "uri"` (RPC-Get-V1-09, RPC-Get-V1-13).
 - The model in the `value` array of a collection GET **MUST** be the same model as the point GET response (RPC-Get-V1-10).
-- Collection GET operations **MUST** specify `x-ms-pageable` (RPC-Get-V1-13).
-- The `nextLink` property **MUST** use `"format": "uri"` in its schema definition.
-- The `value` array **MUST** contain the resource objects directly — do not wrap resources in additional envelopes.
 
 ### 2.3 Nested Resources
 
@@ -177,19 +174,15 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 4.1 PATCH Body Must Not Have Required Properties (RPC-Patch-V1-10)
 
-- PATCH request body parameters **MUST NOT** have any properties marked as `required`.
-- PATCH request body properties **MUST NOT** have `default` values.
-- PATCH request body properties **MUST NOT** have `x-ms-mutability` set to only `["create"]`.
-- A PATCH operation updates only the fields the customer provides — forced defaults or required fields break this contract.
-- PATCH **MUST NOT** update `id`, `name`, `type`, `location`, or `properties.provisioningState` — these are readOnly or immutable (RPC-Patch-V1-02).
-- PATCH **MUST** follow JSON Merge Patch semantics ([RFC 7396](https://tools.ietf.org/html/rfc7396)) for fields inside the `properties` envelope (RPC-Patch-V1-05).
-- **Recommendation**: Define a separate "Update" or "PatchBody" model containing only the patchable properties, rather than reusing the full resource model.
+> **Reference:** [RPC -- PATCH Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/patch-resource.md) for complete PATCH contract details.
+
+- PATCH request body parameters **MUST NOT** have any properties marked as `required`, **MUST NOT** have `default` values, and **MUST NOT** have `x-ms-mutability` set to only `["create"]`.
+- PATCH **MUST NOT** update `id`, `name`, `type`, `location`, or `properties.provisioningState` (RPC-Patch-V1-02).
+- PATCH **MUST** follow JSON Merge Patch semantics ([RFC 7396](https://tools.ietf.org/html/rfc7396)) (RPC-Patch-V1-05).
 
 ### 4.2 PATCH Response Codes (RPC-Patch-V1-06)
 
-- Synchronous PATCH **MUST** return `200` (OK).
-- Asynchronous PATCH **MUST** return `202` (Accepted). Additionally, `200` **MUST** also be specified in the swagger for async PATCH operations so SDKs can discover the final response schema.
-- If the resource or resource group does not exist, PATCH **MUST** return `404` (NotFound) (RPC-Patch-V1-07).
+- Synchronous PATCH **MUST** return `200`; async PATCH **MUST** return `202` (plus `200` in swagger for SDK discovery). PATCH **MUST** return `404` if resource does not exist (RPC-Patch-V1-07).
 
 ### 4.3 Tracked Resource PATCH Must Support Tags (RPC-Patch-V1-03)
 
@@ -198,22 +191,17 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 4.4 PATCH Must Not Expose Secrets in Response
 
-- Same rule as PUT — the PATCH response **MUST NOT** return secret values.
+- Same rule as PUT -- PATCH response **MUST NOT** return secret values (see Section 7).
 
-### 4.5 PATCH Must Have a Request Body (RPC-Patch-V1-12)
+### 4.5 PATCH Request Body and Query Parameters (RPC-Patch-V1-12)
 
-- Every PATCH request **MUST** have a request body containing at least one property.
+- PATCH **MUST** have a request body. PATCH **MUST NOT** have query parameters other than `api-version`.
 
 ### 4.6 PATCH Does NOT Need to Be Long-Running (CRITICAL)
 
 - **PATCH operations are NOT required to be long-running.** Do NOT flag a PATCH operation as an error or warning solely because it is synchronous (i.e., it does not use `x-ms-long-running-operation: true`).
 - A PATCH MAY be long-running if the service genuinely requires it (in which case it MUST return `200` for completion and `202 Accepted` for async acceptance), but this is NOT a requirement.
 - **Never recommend or mandate that a PATCH be made long-running as a blanket rule.** Only flag if the PATCH returns `202` without the required `x-ms-long-running-operation` annotation.
-
-### 4.7 No Query Parameters on PATCH Operations
-
-- PATCH operations **MUST NOT** have query parameters other than `api-version`.
-- If additional filtering is needed, use OData `$filter` — do not add individual query parameters.
 
 ---
 
@@ -278,13 +266,10 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 6.5 `provisioningState` Requirements (RPC-Async-V1-02, RPC-Async-V1-03, RPC-Async-V1-16)
 
-- A resource that supports at least one asynchronous verb (PUT or PATCH) **MUST** contain a `provisioningState` property in its model.
-- `provisioningState` **MUST** include the terminal states: `Succeeded`, `Failed`, and `Canceled` (with a single 'l' — NOT "Cancelled"). If no `provisioningState` is returned, ARM assumes `Succeeded`.
-- `provisioningState` **MUST** be marked `readOnly` in the swagger.
-- `provisioningState` represents the status of the **latest long-running PUT, PATCH, or DELETE** operation — it does **NOT** represent the overall health or functional state of the resource. POST actions do **not** affect `provisioningState`.
-- RP-defined non-terminal states are allowed (e.g., `"Creating"`, `"Updating"`, `"Deleting"`, `"PreparingVMDisk"`, `"MountingDrives"`, `"Accepted"`). Any state other than the three terminal states is considered non-terminal.
-- `provisioningState` transitions are constrained: it can only move from **non-terminal → non-terminal** or **non-terminal → terminal**. It **MUST NOT** transition directly from one terminal state to another without an intervening non-terminal state (which would be set by a new operation).
-- If a user includes `provisioningState` in a PUT request body (e.g., after a GET), the RP **MUST** treat it as a readOnly property. If the provided value matches the current value on the service, ignore it. If it does not match, the RP **MUST** reject the request with `400 Bad Request`.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState requirements including terminal states, transition rules, invalid values, and format-specific guidance.
+
+- A resource with async PUT or PATCH **MUST** have a `provisioningState` property (readOnly) with terminal states `Succeeded`, `Failed`, and `Canceled` (single 'l'). It represents only the latest LRO status, not resource health. POST actions do **not** affect it.
+- If a user includes `provisioningState` in a PUT request body, the RP **MUST** ignore it if the value matches, or reject with `400 Bad Request` if it does not.
 
 ### 6.6 `202` Response and Polling Headers (RPC-Async-V1-07, RPC-Async-V1-06, RPC-Async-V1-14)
 
@@ -335,10 +320,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/secret-detection.md`](../skills/azure-api-review/references/secret-detection.md) for the complete detection signals, keyword list, and format-specific fix guidance.
 
-- Reviewers **MUST** proactively inspect every `"type": "string"` property for secret indicators -- even when `"x-ms-secret": true` is not present.
-- Flag as **blocking** (`SEC-SECRET-DETECT`) if property name, description, example values, or `#suppress` directives for `secret-prop` suggest a secret but the annotation is missing.
-- **Fix (OpenAPI JSON):** Add `"x-ms-secret": true` to the property definition.
-- **Fix (TypeSpec):** Add the `@secret` decorator and remove any `#suppress` directive for `secret-prop`.
+- Reviewers **MUST** proactively inspect every `"type": "string"` property for secret indicators. Flag as **blocking** (`SEC-SECRET-DETECT`) if indicators suggest a secret but the annotation is missing. **Fix:** Add `"x-ms-secret": true` (OpenAPI) or `@secret` (TypeSpec).
 
 ---
 
@@ -350,10 +332,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum guidelines and boolean-to-enum conversion patterns.
 
-- **YOU SHOULD** use extensible string enums instead of boolean types.
-- Booleans do not version well -- what starts as a two-state switch often needs additional states, leading to breaking changes.
-- Use meaningful state names (e.g., `"NetworkOperationStatus": ["InProgress", "Succeeded", "Failed"]`) not `"True"` / `"False"`.
-- Boolean property names **SHOULD** indicate a state (`backupsEnabled`, `isEncryptionEnabled`), not bare nouns (`backups`, `encryption`).
+- **YOU SHOULD** use extensible string enums instead of boolean types. Booleans do not version well. Boolean property names **SHOULD** indicate a state (`backupsEnabled`), not bare nouns (`backups`).
 
 ### 8.2 Use Objects Instead of Strings for Structured Values
 
@@ -365,9 +344,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for the complete enum review checklist.
 
-- **Actively examine every `string` property** in the `properties` bag for enum candidates (e.g., "status", "mode", "tier", "kind", "protocol", "state", "type", "category").
-- If a string property's description lists valid values, it **MUST** be declared as an enum.
-- Use `"x-ms-enum": { "name": "<EnumName>", "modelAsString": true }` for extensibility.
+- **Actively examine every `string` property** for enum candidates (e.g., "status", "mode", "tier"). If a property's description lists valid values, it **MUST** be an enum with `"x-ms-enum": { "name": "<EnumName>", "modelAsString": true }`.
 
 
 ### 8.3a Array Property Names Must Be Plural
@@ -394,9 +371,9 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.6 Visibility and Mutability
 
-- Properties that can be set on creation but **not** subsequently updated **MUST** be annotated with `x-ms-mutability: ["create", "read"]` (or `@visibility("create", "read")` in TypeSpec).
-- Properties that are only returned in responses **MUST** be annotated with `"readOnly": true` or `x-ms-mutability: ["read"]`.
-- Properties that are fully mutable (create + update + read) do **not** need an `x-ms-mutability` annotation.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, OAPI029 with format-specific examples and mutability guidelines.
+
+- Create-only properties **MUST** use `x-ms-mutability: ["create", "read"]`. Response-only properties **MUST** use `"readOnly": true` or `x-ms-mutability: ["read"]`. Fully mutable properties do not need annotation.
 
 ### 8.7 Avoid Writable Circular Dependencies
 
@@ -410,11 +387,9 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 ### 8.9 `provisioningState` Correctness
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState requirements including transition rules and format-specific guidance.
+> See Section 6.5 above and [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState requirements.
 
-- `provisioningState` **MUST** include terminal states: `Succeeded`, `Failed`, and `Canceled` (single 'l' -- NOT "Cancelled").
-- Operational states like `Stopped`, `Running` **MUST NOT** be in `provisioningState` -- use a separate property.
-- Invalid values: `Deleted`, `NotSpecified`.
+- `provisioningState` **MUST** include terminal states `Succeeded`, `Failed`, `Canceled` (single 'l'). Operational states (`Stopped`, `Running`) and values like `Deleted`, `NotSpecified` are invalid -- use a separate property for runtime state.
 
 ### 8.10 `x-ms-nullable`
 
@@ -425,14 +400,11 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, and OAPI029 with format-specific examples.
 
-- Properties **MUST NOT** be write-only (`x-ms-mutability: ["create", "update"]` without `"read"`).
-- Every non-secret property that can be set **MUST** also be readable via GET.
-- **Exception**: Secret properties with `"x-ms-secret": true`.
+- Properties **MUST NOT** be write-only (no `"read"` in mutability). Exception: secrets with `"x-ms-secret": true`.
 
 ### 8.12 No Conditional Read-Only or Conditional Immutable Properties (OAPI020, OAPI029)
 
-- If a property is `readOnly`, it **MUST** always be `readOnly`. Use separate properties for conditionally mutable cases (OAPI020).
-- If a property is immutable (`x-ms-mutability: ["create", "read"]`), it **MUST** always be immutable. Use separate properties for conditionally immutable cases (OAPI029).
+- `readOnly` and immutable properties **MUST** always retain that status. Use separate properties for conditionally mutable cases.
 
 ### 8.13 Avoid CSV-Encoded Values in Properties (PLCY004)
 

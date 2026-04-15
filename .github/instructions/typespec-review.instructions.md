@@ -117,6 +117,8 @@ it. Respond in markdown format.
 
 ### 2.8 Client Customizations (Review Enforcement)
 
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for comprehensive naming and Azure terminology rules.
+
 - `@@clientName` target values **MUST** follow TypeSpec conventions:
   PascalCase for interfaces/classes, camelCase for
   operations/properties.

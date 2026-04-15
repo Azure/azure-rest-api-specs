@@ -99,7 +99,7 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 
 - Long-running operations **MUST** return `202-Accepted` and include `x-ms-long-running-operation: true`.
 - **DO** return the resource body on PUT, PATCH, POST, and GET operations with `200` or `201`.
-- The `ProvisioningState` async pattern (returning 200/201 with a `provisioningState` field that transitions from `Creating`/`Updating` to `Succeeded`/`Failed`) **MUST NOT** be combined with `202` responses. If the operation returns `202`, it **MUST** use `Location` or `Azure-AsyncOperation` header-based polling — not `ProvisioningState`. Mixing `202` with `ProvisioningState` is an incorrect async pattern.
+- The `ProvisioningState` async pattern (returning 200/201 with a `provisioningState` field that transitions from `Creating`/`Updating` to `Succeeded`/`Failed`) **MUST NOT** be combined with `202` responses. If the operation returns `202`, it **MUST** use `Location` or `Azure-AsyncOperation` header-based polling -- not `ProvisioningState`. Mixing `202` with `ProvisioningState` is an incorrect async pattern. See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for complete provisioningState rules.
 - DELETE operations **MUST** return `204-No Content` with no response body. Do not return `404` for missing resources on DELETE.
 - POST action operations **MUST** return `200` with a response body (even if empty, to allow future extension).
 - POST actions that intentionally return no content **SHOULD** use `204 No Content` instead of `200` with an empty body. An empty `200` response is ambiguous — `204` explicitly signals no content.
@@ -111,6 +111,8 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 **Reference: [Azure Guidelines — JSON](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json)**
 
 ### Naming
+
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for comprehensive naming and Azure terminology rules.
 
 - All JSON property names **MUST** use camelCase. Do not upper-case acronyms (use `resourceId`, not `ResourceID` or `resourceID`).
 - Property names **MUST** be treated as case-sensitive.
@@ -244,6 +246,8 @@ Flag every violation clearly with the file path, the JSON path or line number, t
 - **YOU SHOULD NOT** document specific error status codes in the spec unless the response schema differs from the default error.
 
 ## 12. Common-Types Usage (ARM Specs)
+
+> **Reference:** [Azure Resource Provider Contract (RPC)](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/tree/master/v1.0) -- ARM common-types are defined by the RPC contract.
 
 - ARM specs **MUST** reference the appropriate `common-types` version (v3, v4, v5, or v6) for standard definitions:
   - Resource types: `Resource`, `TrackedResource`, `ProxyResource`, `ExtensionResource`

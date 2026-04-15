@@ -153,6 +153,8 @@ using TypeSpec.Versioning;
 
 ### 4.1 Naming Conventions
 
+> **See also:** [`.github/skills/azure-api-review/references/naming-conventions.md`](../skills/azure-api-review/references/naming-conventions.md) for comprehensive naming and Azure terminology rules.
+
 - Model names **MUST** use PascalCase (e.g., `VirtualMachine`).
 - Property names **MUST** use camelCase (e.g., `resourceId`).
 - Operation names **MUST** use camelCase (e.g., `createOrUpdate`).
@@ -202,6 +204,8 @@ model Widget {
 
 ### 4.3 Enums vs. Unions
 
+> **See also:** [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum guidelines and [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for provisioningState requirements.
+
 - **DO** use `union` instead of `enum` to define Azure extensible
   enums. See [Defining enums for Azure services][no-enum]. Include the
   `string` base type to make unions extensible. Every member **MUST**
@@ -211,6 +215,8 @@ model Widget {
   and add custom non-terminal states.
 
 ### 4.4 Visibility & Mutability
+
+> **See also:** [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, OAPI029 rules and [`.github/skills/azure-api-review/references/secret-detection.md`](../skills/azure-api-review/references/secret-detection.md) for secret detection guidance.
 
 - **DO** define visibility decorators with the appropriate `Lifecycle`
   class values (`Lifecycle.Create`, `Lifecycle.Read`,
@@ -242,6 +248,8 @@ model Widget {
 ---
 
 ## 5. ARM Resource Requirements
+
+> **See also:** [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements matrix and operations API rules.
 
 - ARM tracked resources **MUST** extend `TrackedResource<TProperties>`
   from `@azure-tools/typespec-azure-resource-manager`. Proxy resources
