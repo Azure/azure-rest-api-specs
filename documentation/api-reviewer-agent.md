@@ -4,18 +4,20 @@ The **ARM API Reviewer** is a Visual Studio Code Copilot agent that reviews Azur
 specification PRs for conformance to the [Azure REST API Guidelines][api-guidelines],
 ARM Resource Provider Contract ([RPC][rpc-contract]) rules, and repository conventions.
 
-> **New to the agent?** See the [Getting Started Guide](arm-api-reviewer-getting-started.md)
-> for step-by-step setup instructions -- from installing VS Code to running your first review.
-
 ## Prerequisites
 
 - **VS Code** with [GitHub Copilot][copilot-ext] and
   [GitHub Copilot Chat][copilot-chat-ext] extensions installed.
-- **This repository** (`azure-rest-api-specs` or `azure-rest-api-specs-pr`)
-  cloned and open as a workspace in VS Code.
+- **The public repository** ([Azure/azure-rest-api-specs][public-repo])
+  cloned and open as a workspace in VS Code. The agent definition,
+  instructions, skills, and prompts all live in this repository.
+  Stay on the **`main` branch** -- you do not need to check out the PR
+  branch. The agent fetches PR files directly from GitHub.
 - **GitHub authentication** -- the agent uses the GitHub MCP
   server which authenticates via OAuth. If prompted, authorize the GitHub
-  connection when the consent dialog appears.
+  connection when the consent dialog appears. This authentication also
+  enables the agent to review PRs in the private repository
+  (`azure-rest-api-specs-pr`).
 
 ## How to Open the Agent
 
@@ -29,8 +31,8 @@ The repository includes a pre-built prompt that launches the agent with a guided
 To use it, open the Copilot Chat panel, click the **prompt picker** (the `/` icon or the
 attachment button), and select the prompt below:
 
-| Prompt        | File                                  | What it does                                                                                                                                |
-| ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Prompt        | File                                  | What it does                                                                                                                                    |
+| ------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Review PR** | `.github/prompts/review-pr.prompt.md` | Asks for a PR number, URL, or shorthand, then runs a full read-only review of the PR's specification changes against Azure REST API Guidelines. |
 
 You can also invoke the same functionality by typing directly in the agent chat:
@@ -123,13 +125,13 @@ The agent builds an inventory of **all** existing review comment threads --
 including resolved, outdated, and collapsed ones -- and handles each finding
 according to these scenarios:
 
-| Scenario                                  | Condition                                                                                                   | What happens                                                                                                                                                                                                                                                                                                                |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **A -- Already covered**                  | Same rule, same file, same line                                                                             | Finding is skipped. No new comment posted.                                                                                                                                                                                                                                                                                  |
-| **B -- Line shifted (same author)**       | Same rule, but the code moved to a different line. The old comment was from the agent or the same engineer. | The outdated comment is **resolved** and a new comment is posted at the correct line, with a link back to the old thread.                                                                                                                                                                                                   |
-| **C -- Line shifted (different reviewer)**| Same rule, code moved, but the old comment was from a different human reviewer.                             | The agent **does not** resolve the other reviewer's comment or post a duplicate. Instead, it **adds a reply** to the existing thread noting the new line number, so the author and reviewer can find the right code.                                                                                                        |
-| **D -- No new findings**                  | Every finding is already covered by existing comments.                                                      | No new comments are posted. The agent reports: _"All findings are already covered by existing comments on the PR."_ It lists each matching existing thread with its **clickable comment URL** so the reviewer can navigate directly to verify.                                                                              |
-| **E -- Violation fixed**                  | An existing unresolved comment flags a violation that no longer exists in the latest code.                  | The agent reports which comments have been addressed -- each with its **clickable comment URL** so the reviewer can navigate and verify the fix -- and **proposes resolving** them, but only with your explicit consent. If the comment was from a different reviewer, the agent replies noting the fix instead of resolving. |
+| Scenario                                   | Condition                                                                                                   | What happens                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **A -- Already covered**                   | Same rule, same file, same line                                                                             | Finding is skipped. No new comment posted.                                                                                                                                                                                                                                                                                    |
+| **B -- Line shifted (same author)**        | Same rule, but the code moved to a different line. The old comment was from the agent or the same engineer. | The outdated comment is **resolved** and a new comment is posted at the correct line, with a link back to the old thread.                                                                                                                                                                                                     |
+| **C -- Line shifted (different reviewer)** | Same rule, code moved, but the old comment was from a different human reviewer.                             | The agent **does not** resolve the other reviewer's comment or post a duplicate. Instead, it **adds a reply** to the existing thread noting the new line number, so the author and reviewer can find the right code.                                                                                                          |
+| **D -- No new findings**                   | Every finding is already covered by existing comments.                                                      | No new comments are posted. The agent reports: _"All findings are already covered by existing comments on the PR."_ It lists each matching existing thread with its **clickable comment URL** so the reviewer can navigate directly to verify.                                                                                |
+| **E -- Violation fixed**                   | An existing unresolved comment flags a violation that no longer exists in the latest code.                  | The agent reports which comments have been addressed -- each with its **clickable comment URL** so the reviewer can navigate and verify the fix -- and **proposes resolving** them, but only with your explicit consent. If the comment was from a different reviewer, the agent replies noting the fix instead of resolving. |
 
 Before executing any actions, the agent presents a **reconciliation summary**:
 
@@ -162,25 +164,26 @@ When a PR adds or modifies a `readme.md` containing `directive` / `suppress`
 entries, the agent performs a **suppression continuity analysis** by comparing
 the new version's suppressions against the previous API version's `readme.md`:
 
-| Scenario                                                                | What the agent does                                                                                                                                                                                                                                |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Carried-over suppression** -- same rule ID exists in both versions    | Acceptable. No action needed.                                                                                                                                                                                                                      |
-| **Dropped suppression** -- exists in previous version but missing in new| Investigates whether the PR's spec changes fix the underlying violation. If yes, notes it as a positive finding. If not, flags a **warning** that the author may have accidentally dropped a required suppression (which would cause CI failures). |
-| **New suppression** -- exists in new version but not previous           | Checks for a clear, specific `reason`. Flags suppressions with missing/vague reasons, security-related rule suppressions (`secret-prop`, `security-definition-missing`), or suppressions that mask issues the spec should fix.                     |
-| **First version** -- no previous `readme.md` exists                     | All suppressions are treated as new and validated per the rules above.                                                                                                                                                                             |
+| Scenario                                                                 | What the agent does                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Carried-over suppression** -- same rule ID exists in both versions     | Acceptable. No action needed.                                                                                                                                                                                                                      |
+| **Dropped suppression** -- exists in previous version but missing in new | Investigates whether the PR's spec changes fix the underlying violation. If yes, notes it as a positive finding. If not, flags a **warning** that the author may have accidentally dropped a required suppression (which would cause CI failures). |
+| **New suppression** -- exists in new version but not previous            | Checks for a clear, specific `reason`. Flags suppressions with missing/vague reasons, security-related rule suppressions (`secret-prop`, `security-definition-missing`), or suppressions that mask issues the spec should fix.                     |
+| **First version** -- no previous `readme.md` exists                      | All suppressions are treated as new and validated per the rules above.                                                                                                                                                                             |
 
 This analysis helps catch accidentally dropped suppressions that would break CI,
 as well as unjustified new suppressions that mask real compliance issues.
 
 ## What Gets Reviewed
 
-| File pattern                                  | Rules applied                                                                |
-| --------------------------------------------- | ---------------------------------------------------------------------------- |
-| `specification/**/resource-manager/**/*.json` | Generic OpenAPI + ARM-specific rules                                         |
-| `specification/**/data-plane/**/*.json`       | Generic OpenAPI + data-plane checks                                          |
-| `specification/**/*.tsp`                      | TypeSpec rules                                                               |
-| `specification/**/tspconfig.yaml`             | TypeSpec config rules                                                        |
-| `specification/**/examples/*.json`            | Validated against the spec they reference                                    |
+| File pattern                                  | Rules applied                                                                 |
+| --------------------------------------------- | ----------------------------------------------------------------------------- |
+| `specification/**/resource-manager/**/*.json` | Generic OpenAPI + ARM-specific rules                                          |
+| `specification/**/data-plane/**/*.json`       | Generic OpenAPI + data-plane checks                                           |
+| `specification/**/*.tsp`                      | TypeSpec rules                                                                |
+| `specification/**/tspconfig.yaml`             | TypeSpec config rules                                                         |
+| `specification/**/examples/*.json`            | Validated against the spec they reference                                     |
+| `specification/**/*.json`                     | Any other OpenAPI JSON -- generic rules                                       |
 | `specification/**/readme.md`                  | AutoRest config -- tag configurations, input file lists, and **suppressions** |
 
 ### Key Rule Areas
@@ -199,7 +202,7 @@ as well as unjustified new suppressions that mask real compliance issues.
   faster, higher-quality results.
 - **Breaking change reviews.** Ask the agent to compare two specific
   versions: `"Compare the 2024-03-01 and 2024-07-01 versions of this
-  spec for breaking changes"`.
+spec for breaking changes"`.
 - **Re-review after updates.** After the PR author addresses feedback,
   re-run the review to confirm all issues are resolved. The agent's
   comment reconciliation will handle de-duplication automatically.
@@ -237,5 +240,6 @@ The agent **does not**:
 
 [api-guidelines]: https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md
 [rpc-contract]: https://github.com/cloud-and-ai-microsoft/resource-provider-contract
+[public-repo]: https://github.com/Azure/azure-rest-api-specs
 [copilot-ext]: https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
 [copilot-chat-ext]: https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
