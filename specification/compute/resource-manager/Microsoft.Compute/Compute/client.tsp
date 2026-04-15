@@ -3,6 +3,7 @@ import "./Compute/client.tsp";
 import "./ComputeDisk/client.tsp";
 import "./ComputeGallery/client.tsp";
 import "./ComputeSku/main.tsp";
+import "./alternate-type-stubs.tsp";
 
 using Azure.ClientGenerator.Core;
 using Common;
@@ -70,30 +71,7 @@ namespace ComputeCombine;
 @@clientName(Common.SubResourceReadOnly, "ComputeWriteableSubResourceData", "csharp");
 
 // ExtendedLocation → Azure.ResourceManager.Resources.Models.ExtendedLocation for C#
-@@alternateType(Compute.VirtualMachine.extendedLocation,
-  Azure.ResourceManager.Resources.Models.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(Compute.VirtualMachineScaleSet.extendedLocation,
-  Azure.ResourceManager.Resources.Models.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(Compute.Image.extendedLocation,
-  Azure.ResourceManager.Resources.Models.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(ComputeDisk.Disk.extendedLocation,
-  Azure.ResourceManager.Resources.Models.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(ComputeDisk.DiskAccess.extendedLocation,
-  Azure.ResourceManager.Resources.Models.ExtendedLocation,
-  "csharp"
-);
-@@alternateType(ComputeDisk.Snapshot.extendedLocation,
-  Azure.ResourceManager.Resources.Models.ExtendedLocation,
-  "csharp"
-);
+// TODO: ExtendedLocation alternateType needs a solution — can't define stub due to name collision with Common.ExtendedLocation
 
 // ComputeSku namespace types
 @@clientName(ComputeSku.ResourceSku, "ComputeResourceSku", "csharp");
