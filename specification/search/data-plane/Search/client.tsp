@@ -2782,6 +2782,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
 @@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
 @@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUrl", "java");
 @@clientName(SearchIndexer.disabled, "isDisabled");
 @@clientName(ListIndexersResult.value, "indexers");
 @@clientName(IndexerExecutionResult.itemsProcessed, "itemCount");
@@ -2917,7 +2918,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AMLParameters.uri, "scoringUri");
 @@clientName(AMLParameters.uri, "scoringUrl", "java");
 @@clientName(AMLParameters.key, "authenticationKey");
-@@clientName(AMLVectorizer.amlParameters, "parameters");
+@@clientName(AMLVectorizer.amlParameters, "parameters","java");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUri");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUrl", "java");
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
