@@ -33,7 +33,7 @@ using Microsoft.ResourceHealth;
   "Event"
 );
 @@clientName(EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
-  "fetchBillingCommunicationDetailsBySubscriptionIdAndTrackingId"
+  "fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId"
 );
 @@clientLocation(TenantEventOperationGroup.getByTenantIdAndTrackingId, "Event");
 @@clientLocation(TenantEventOperationGroup.listByTenantId, "Events");
