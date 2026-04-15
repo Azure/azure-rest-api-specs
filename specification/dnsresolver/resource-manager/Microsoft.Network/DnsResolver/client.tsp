@@ -89,6 +89,7 @@ using Microsoft.Network;
   "csharp"
 );
 @@alternateType(TargetDnsServer.ipAddress, Azure.Core.ipV4Address, "csharp");
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(VirtualNetworkDnsForwardingRuleset.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
