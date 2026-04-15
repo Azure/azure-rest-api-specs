@@ -162,7 +162,11 @@ interface Stac {
 
   // STAC Items
   createItem is StacItems.create;
+  @removed(Versions.v2026_04_15)
   createOrReplaceItem is StacItems.createOrReplace;
+
+  @added(Versions.v2026_04_15)
+  replaceItem is StacItems.replace;
   deleteItem is StacItems.delete;
   getItem is StacItems.get;
 

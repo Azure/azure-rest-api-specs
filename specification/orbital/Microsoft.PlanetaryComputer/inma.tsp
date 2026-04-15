@@ -456,11 +456,49 @@ interface StacItems {
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @removed(Versions.v2026_04_15)
   @doc("Create or replace a STAC item in a collection")
+  @sharedRoute
   @route("/stac/collections/{collectionId}/items/{itemId}")
   @put
   @pollingOperation(IngestionOperations.get)
   createOrReplace(
+    ...CollectionParameters,
+
+    @doc("STAC Item id")
+    @path
+    @maxLength(500)
+    @pattern(".*")
+    itemId: string,
+
+    @doc("STAC Item")
+    @body
+    body: StacItem,
+  ): {
+    @pollingLocation
+    @doc("Url used to monitor the background operation")
+    @header
+    location: url;
+
+    @doc("Url used to monitor the background operation")
+    @header("operation-location")
+    operationLocation: url;
+
+    @statusCode statusCode: 202;
+
+    @doc("Operation")
+    @body
+    _: Operation;
+  } | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @doc("Replace a STAC item in a collection")
+  @sharedRoute
+  @route("/stac/collections/{collectionId}/items/{itemId}")
+  @put
+  @pollingOperation(IngestionOperations.get)
+  replace(
     ...CollectionParameters,
 
     @doc("STAC Item id")
