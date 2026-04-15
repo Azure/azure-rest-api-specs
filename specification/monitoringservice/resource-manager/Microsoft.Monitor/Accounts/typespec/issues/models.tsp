@@ -7,6 +7,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is defined in a separate spec for Microsoft.Monitor namespace (specification/monitor/resource-manager/Microsoft.Monitor/Operations)"
@@ -197,6 +198,67 @@ model BackgroundDetails {
 }
 
 @added(Versions.v2025_10_03)
+@doc("The type of update that triggers a notification")
+union UpdateType {
+  @doc("Notification sent when an issue is created")
+  IssueCreation: "IssueCreation",
+
+  @doc("Notification sent based on time intervals")
+  TimeBased: "TimeBased",
+
+  @doc("Notification sent when the issue changes")
+  OnChange: "OnChange",
+
+  string,
+}
+
+@added(Versions.v2025_10_03)
+@doc("Base properties for an issue notification type")
+@discriminator("updateType")
+model IssueNotificationType {
+  @doc("The type of update that triggers the notification")
+  updateType: UpdateType;
+}
+
+@added(Versions.v2025_10_03)
+@doc("Notification type for issue creation events")
+model IssueCreationNotificationType extends IssueNotificationType {
+  @doc("The type of update that triggers the notification")
+  updateType: UpdateType.IssueCreation;
+}
+
+@added(Versions.v2025_10_03)
+@doc("Notification type for on-change events")
+model OnChangeNotificationType extends IssueNotificationType {
+  @doc("The type of update that triggers the notification")
+  updateType: UpdateType.OnChange;
+}
+
+@added(Versions.v2025_10_03)
+@doc("Notification type for time-based updates")
+model TimeBasedUpdatesNotificationType extends IssueNotificationType {
+  @doc("The type of update that triggers the notification")
+  updateType: UpdateType.TimeBased;
+
+  @doc("The interval between time-based updates")
+  updateInterval: string;
+}
+
+@added(Versions.v2025_10_03)
+@doc("Issue notification settings")
+model Notifications {
+  @doc("The types of updates that trigger notifications")
+  @identifiers(#["updateType"])
+  updateTypes?: IssueNotificationType[];
+
+  @doc("The action group IDs to notify")
+  actionGroupIds?: string[];
+
+  @doc("Whether to exclude default action groups from notifications")
+  excludeDefaultActionGroups?: boolean;
+}
+
+@added(Versions.v2025_10_03)
 @doc("The issue background information")
 model Background {
   @doc("The background type")
@@ -245,6 +307,10 @@ model IssuePayload {
   @added(Versions.v2025_10_03)
   @doc("The issue background information")
   background?: Background;
+
+  @added(Versions.v2025_10_03)
+  @doc("The issue notification settings")
+  notifications?: Notifications;
 }
 
 @doc("Properties of an alert which is related to the issue")
