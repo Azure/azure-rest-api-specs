@@ -94,6 +94,7 @@ A TypeSpec project **MUST NOT** contain:
 - The `@versioned` decorator **MUST** be applied to the namespace and reference the versions enum.
 - Every enum member **MUST** have a doc comment.
 - Version string values **MUST** follow the `YYYY-MM-DD` or `YYYY-MM-DD-preview` format.
+- Preview API versions in the Versions enum **MUST** be annotated with the `@Azure.Core.previewVersion` decorator so tooling can correctly identify them.
 
 ### 3.2 Versioning Decorators
 
@@ -129,6 +130,8 @@ A TypeSpec project **MUST NOT** contain:
 - Doc comments **SHOULD** start with a capital letter and end with a period.
 - PUT operation doc comments **MUST NOT** imply non-idempotent behavior (e.g., "Creates a new..." or "This will create a new version"). Use idempotent language: "Creates or updates..." or "Creates or replaces...".
 - Specify units for quantifiable properties (e.g., `"The timeout in seconds."`).
+- **DO NOT** use "ARM" in client-facing text (property names or descriptions). Use "Azure" or "Azure Resource Manager" instead. For example, use `monitorAccountResourceId` not `armResourceId`.
+- **DO NOT** use "AAD" in descriptions. Use "Microsoft Entra ID" instead.
 
 ### 4.3 Enums vs. Unions
 
@@ -143,6 +146,14 @@ A TypeSpec project **MUST NOT** contain:
     Failed: "Failed",
     /** Resource creation was canceled. */
     Canceled: "Canceled",
+  }
+  ```
+- `provisioningState` **SHOULD** extend the built-in `Azure.ResourceManager.ResourceProvisioningState` for terminal states (Succeeded, Failed, Canceled) and add custom non-terminal states as needed:
+  ```tsp
+  union ProvisioningState {
+    ResourceProvisioningState,
+    @doc("The resource is being provisioned.") Provisioning: "Provisioning",
+    @doc("The resource is being updated.") Updating: "Updating",
   }
   ```
 - Every enum/union member **MUST** have a doc comment.
@@ -169,6 +180,18 @@ A TypeSpec project **MUST NOT** contain:
   - Prevention of leading special characters (e.g., `^(?![.-])`) — names should not start with `.` or `-`.
   - Allowed character set matching the service's actual validation.
   - Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
+- Properties representing UTC timestamps **SHOULD** include a `Utc` suffix in the name for clarity (e.g., `lastModifiedTimeUtc`, `createdAtUtc`). This helps customers understand the timezone context without reading the description.
+- Properties named `<something>Id` **MUST** be specific about what kind of ID they hold. The term "Id" is extremely ambiguous. Use the name, type, and description to remove ambiguity:
+  - If it is a UUID/GUID, use the `uuid` scalar type and explain in the description who creates/assigns it.
+  - If it is an ARM resource ID, include "ResourceId" in the property name and use `armResourceIdentifier` with type constraints.
+  - If it is a client-chosen name, use "Name" in the property name instead of "Id".
+  - At minimum, the description **MUST** explain the format, origin, and purpose of the ID.
+- Properties representing UTC timestamps **SHOULD** include a `Utc` suffix in the name for clarity (e.g., `lastModifiedTimeUtc`, `createdAtUtc`). This helps customers understand the timezone context without reading the description.
+- Properties named `<something>Id` **MUST** be specific about what kind of ID they hold. The term "Id" is extremely ambiguous. Use the name, type, and description to remove ambiguity:
+  - If it is a UUID/GUID, use the `uuid` scalar type and explain in the description who creates/assigns it.
+  - If it is an ARM resource ID, include "ResourceId" in the property name and use `armResourceIdentifier` with type constraints.
+  - If it is a client-chosen name, use "Name" in the property name instead of "Id".
+  - At minimum, the description **MUST** explain the format, origin, and purpose of the ID.
 - Array properties **MUST** have their element type defined.
 - **AVOID** using `unknown` type — use a concrete type or a well-defined model.
 
@@ -212,6 +235,21 @@ A TypeSpec project **MUST NOT** contain:
 - ARM TypeSpec projects **MUST** have `@armProviderNamespace` applied to the main namespace.
 - The namespace value **MUST** match the resource provider path (e.g., `Microsoft.Compute`).
 
+
+### 5.6 ARM POST Actions (Resource Actions)
+
+- ARM resource POST actions **MUST** use ArmResourceActionAsync or ArmResourceActionSync templates.
+- When a POST action does **not** require a request body, use `void` as the request body type parameter -- do **not** use an empty model literal `{}`.
+- Using `{}` triggers the `@azure-tools/typespec-azure-resource-manager/no-empty-model` lint warning. The correct fix is to replace `{}` with `void`, not to suppress the warning.
+- **Bad:**
+  ```tsp
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Body is empty."
+  downloadUrl is ArmResourceActionAsync<MyResource, {}, DownloadUrl>;
+  ```
+- **Good:**
+  ```tsp
+  downloadUrl is ArmResourceActionAsync<MyResource, void, DownloadUrl>;
+  ```
 ---
 
 ## 6. Data-Plane Operations (TypeSpec)
@@ -287,6 +325,14 @@ A TypeSpec project **MUST NOT** contain:
 
 Flag these issues when found:
 
+- **Resource with zero writable properties** -- a tracked ARM resource whose `properties` bag contains only `@visibility(Lifecycle.Read)` properties (no customer-configurable fields) is highly unusual. It means PUT creates an empty `properties: {}` and PATCH can only update `tags`. Flag this for design review: either the service is too early for a public API, or properties are missing from the spec. If intentional, require a doc comment on the Properties model explaining why.
+- **Default values flowing into PATCH** -- when a property has a TypeSpec default value (e.g., `ipAllocationMethod?: IPAllocationMethod = IPAllocationMethod.Static`), that default flows into the PATCH update model. ARM rule RPC-Patch-V1-10 prohibits defaults in PATCH bodies because with JSON Merge Patch, omitting a field should leave it unchanged, but a schema default resets it. Remove the TypeSpec default and apply it server-side instead.
+- **Namespace collision across TypeSpec projects** -- two separate TypeSpec projects under the same RP namespace (e.g., both use `Microsoft.Network`) will produce conflicting `/providers/Microsoft.Network/operations` endpoints. Resource types sharing an RP namespace **MUST** be in the same TypeSpec project, or use distinct RP namespaces.
+- **Resource with zero writable properties** -- a tracked ARM resource whose `properties` bag contains only `@visibility(Lifecycle.Read)` properties (no customer-configurable fields) is highly unusual. It means PUT creates an empty `properties: {}` and PATCH can only update `tags`. Flag this for design review and require a doc comment explaining why.
+- **Default values flowing into PATCH** -- when a property has a TypeSpec default value (e.g., `ipAllocationMethod?: IPAllocationMethod = IPAllocationMethod.Static`), that default flows into the PATCH update model. ARM rule RPC-Patch-V1-10 prohibits defaults in PATCH bodies. Remove the TypeSpec default and apply it server-side instead.
+- **Namespace collision across TypeSpec projects** -- two separate TypeSpec projects under the same RP namespace (e.g., both use `Microsoft.Network`) will produce conflicting `/providers/Microsoft.Network/operations` endpoints. Resource types sharing an RP namespace **MUST** be in the same TypeSpec project.
+- **`| null` on new properties** -- new properties added in this PR **MUST NOT** use `| null` (nullable union) for backward compatibility, because backward compatibility does not apply to new additions. Only existing properties that were previously non-nullable may need `| null` when the service must return null for them in certain scenarios.
+- **Bearer tokens in request bodies** -- passing OAuth access tokens, bearer tokens, or refresh tokens in ARM request bodies is not an acceptable pattern, even with `@secret`. Use managed identity, Key Vault references, or RBAC-controlled mechanisms instead.
 - **Duplicate namespace declarations** across multiple `.tsp` files without proper imports.
 - **Missing `using` statements** — if decorators from a library are used, the library must be imported and `using` must be declared.
 - **Inline anonymous models** — prefer named model definitions for reusability and clarity.
@@ -301,10 +347,14 @@ Flag these issues when found:
 - **`Record<unknown>` / `Record<string>` for typed data** — avoid using `Record<>` (which generates `additionalProperties`) when the shape of the data is known. Define a dedicated model with typed properties instead.
 - **Doc comment copy-paste errors** — verify that doc comments accurately describe the element they annotate (e.g., a `WorkspaceUpdate` model should not be documented as "Describes an experiment update").
 - **Spelling/typo errors in doc comments and descriptions** — flag common misspellings (e.g., `payed` → `paid`, `consoto` → `contoso`) as they propagate into generated SDKs and documentation.
+- **Deprecated operations missing description text** -- the TypeSpec `#deprecated` directive does not always surface in generated swagger JSON. For deprecated operations, also include deprecation notice in the `@doc` description (e.g., "This operation is deprecated and will be removed in a future version. Use resetSmbPassword instead.") so it appears in generated SDKs and documentation.
+- **Key Vault URI properties** -- properties referencing an Azure Key Vault should use ``armResourceIdentifier`` with type ``Microsoft.KeyVault/vaults`` (generating ``format: arm-id``), not a ``url``/``string`` with a vault URI. ARM resource IDs are the standard way to reference Azure resources, enabling linked access checks and RBAC integration.
+- **Enum values with underscores or ALL_CAPS** -- union/enum member values **MUST** use PascalCase (e.g., ``InProgress``, not ``In_Progress`` or ``IN_PROGRESS``). Underscores and all-caps violate Azure naming conventions and look inconsistent in generated SDKs.
 - **Polymorphic-format properties** — a single property that accepts multiple formats (e.g., both an integer `5` and a percentage string `"20%"`) creates ambiguity and error-prone client code. Model these as separate properties (e.g., `maxConcurrency: int32` and `maxConcurrencyPercent: string`) or use a discriminated union model.
 - **`@added` version misalignment** — when using `@added(Versions.vXXXX)` to gate a new feature, verify that the feature does not inadvertently alter descriptions or schemas of earlier API versions. If the feature is for version `2025-08-01`, it must not affect the generated OpenAPI for `2025-06-01`.
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
 - **Spread-only model types as full models** — a model type used only for spreading (`...`) into other types **SHOULD** be declared as an `alias` instead. Using `model` for types that are only spread generates unnecessary types in the output. See [TypeSpec alias documentation](https://typespec.io/docs/language-basics/alias) (TypeSpec-BestPractice-01).
+- **Empty model literal `{}` as POST action body** -- when an `ArmResourceActionAsync` or `ArmResourceActionSync` POST action does not need a request body, use `void` instead of `{}`. An empty model literal triggers the `no-empty-model` lint rule, and suppressing it is the wrong fix. Use `void` and remove the suppression.
 
 ---
 
@@ -371,6 +421,7 @@ When reviewing TypeSpec files, verify:
 - ✅ Visibility decorators use `Lifecycle` class values
 - ✅ ARM resources extend correct base types (`TrackedResource`, `ProxyResource`, etc.)
 - ✅ All CRUD operations present for ARM tracked resources
+- ✅ ARM POST actions use `void` (not `{}`) when no request body is needed -- no `no-empty-model` suppressions
 - ✅ `Operations` interface defined for ARM resource providers
 - ✅ `@armProviderNamespace` applied correctly
 - ✅ `@segment` values use camelCase for resource type path segments (TSP-SEGMENT-CASE)
@@ -394,6 +445,14 @@ When reviewing TypeSpec files, verify:
 - ✅ No `#suppress` directives silencing `secret-prop` lint rules — apply `@secret` instead
 - ✅ Integer properties have `@minValue`/`@maxValue` when range is known
 - ✅ Datetime properties use `utcDateTime` scalar, not `string`
-- ✅ No breaking changes between API versions
+- ✅ Preview versions annotated with `@Azure.Core.previewVersion` decorator
+- ✅ `provisioningState` extends `ResourceProvisioningState` for terminal states
+- ✅ UTC timestamp properties have `Utc` suffix in name
+- ✅ `<something>Id` properties specify what kind of ID (uuid, armResourceIdentifier, or documented format)
+- ✅ No "ARM" in client-facing property names or descriptions -- use "Azure" instead
+- ✅ No "AAD" in descriptions -- use "Microsoft Entra ID"
+- ✅ No `| null` on newly added properties (backward compatibility does not apply to new additions)
+- ✅ No default values on properties that flow into PATCH models (RPC-Patch-V1-10)
+- ✅ No bearer/OAuth tokens passed in ARM request bodies -- use managed identity or Key Vault
 - ✅ Generated OpenAPI files match `tsp compile .` output
 - ✅ Example files present for all operations

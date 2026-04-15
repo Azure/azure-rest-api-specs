@@ -396,6 +396,7 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
 - Header names in examples **MUST** use correct PascalCase: `Azure-AsyncOperation` (not `azure-AsyncOperation`), `Location` (not `location`), `Retry-After` (not `retry-after`).
 - The `api-version` in LRO polling URLs **MUST** match the example's own `api-version`. Do not carry over stale versions from previous API versions (e.g., `api-version=2022-09-01` in a `2026-01-07-preview` example is wrong). Ensure the `-preview` suffix is included if the API version is a preview (e.g., `api-version=2025-02-01-preview` not `api-version=2025-02-01`).
 - LRO polling URLs and `nextLink` URLs **MUST** use `https://management.azure.com/...` — not the legacy `https://management.windowsazure.com/...` endpoint.
+- LRO polling URLs in examples **MUST NOT** use placeholder domains (e.g., `https://contoso.com/operationstatus`). They must use realistic `https://management.azure.com/subscriptions/{subId}/providers/{namespace}/locations/{location}/operationStatuses/{operationId}?api-version={version}` URLs.
 - For LRO POST operations that return a result body (e.g., export actions), examples **SHOULD** include both the `202` (Accepted with polling headers) and `200` (final response with result body) to show the complete LRO lifecycle. Omitting the `200` final response leaves consumers guessing about the result shape.
 
 ### 22.6 Timestamp & Format Consistency (EX-FORMAT)

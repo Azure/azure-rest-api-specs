@@ -61,6 +61,16 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   - **Plural** (e.g. `virtualMachines`, not `virtualMachine`) and must match the corresponding collection GET API path segment.
   - **Specific** — avoid generic names like `resourceName` or `childResourceName`. Use a meaningful, domain-specific name.
 - Flag any resource type name that is PascalCase, singular-only (when a collection GET exists), or overly generic.
+- Resource type names **MUST NOT** collide with well-known Azure concepts. For example, `Microsoft.AzureCis/subscriptions` is confusing because "subscriptions" is an ARM first-class concept. Use a more specific name like `cisSubscriptions` or `managedSubscriptions`.
+- Resource type names **MUST NOT** repeat the resource provider namespace. For example, if the namespace is `Microsoft.Moxy`, the resource type should be `httpsServices` not `moxyHttpsServices`. The namespace already provides the context.
+- Resource provider namespace names **MUST NOT** be code names, product abbreviations, or temporary names. RP names are permanent and visible to all customers in resource IDs, SDKs, and documentation. Choose a descriptive name that conveys what the RP does.
+
+### 1.7 Client-Facing Text Must Not Use Internal Terminology
+
+- Property names, descriptions, and enum values **MUST NOT** use "ARM" as a standalone term. Use "Azure" or "Azure Resource Manager" instead. For example, use `monitorAccountResourceId` not `armResourceId`.
+- Descriptions **MUST NOT** use "AAD". Use "Microsoft Entra ID" instead.
+- These terms propagate into SDKs and customer-facing documentation and must use official product names.
+- Descriptions **MUST** expand acronyms on first use. Do not use unexpanded abbreviations like "IAM", "SRA", "WORM", "LRS", "GRS" in descriptions. Write the full term followed by the acronym in parentheses on first use (e.g., "Locally Redundant Storage (LRS)").
 
 ---
 
@@ -107,6 +117,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - The ARM envelope properties `id`, `name`, `type`, and `systemData` are defined at the **top level** of a resource model and **MUST NOT** be redeclared inside the `properties` bag.
 - If any of these names appear as properties inside the `properties` object, flag it as an ARM Error and instruct the author to rename the inner property to something domain-specific.
 - **Example violation**: A resource whose `properties` object contains a field called `name` or `type`. These shadow the top-level ARM properties and cause confusion for clients and tooling.
+- Additionally, `managedBy` is a reserved ARM envelope property and **MUST NOT** be used as a property name inside the `properties` bag.
+- Timestamp properties like `creationTime` or `createdDate` **MUST NOT** be added inside the `properties` bag if they duplicate the ARM envelope `systemData.createdAt` field. Use the top-level `systemData` instead of reinventing these timestamps.
 
 ### 2.6 Certain Properties Must Be Top-Level, Not Inside the Properties Bag
 
@@ -345,6 +357,8 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - **YOU SHOULD** use extensible string enums instead of boolean types.
 - Booleans do not version well — what starts as a two-state switch often needs additional states in the future, leading to breaking changes.
 - When converting a boolean concept to an enum, use meaningful state names (e.g. `"NetworkOperationStatus": ["InProgress", "Succeeded", "Failed"]`) not just `"True"` / `"False"`.
+- Boolean property names **SHOULD** indicate a state, not be bare nouns. For example, `backupsEnabled` or `isEncryptionEnabled` are better than `backups` or `encryption`, which suggest a collection or object rather than a toggle.
+- When multiple related two-state properties exist on the same resource (e.g., `enabled` and `appendMode`), consider combining them into a single multi-state enum (e.g., `usageMode: [Disabled, Rewrite, Append]`). This reduces the risk of invalid state combinations and makes the API easier to understand.
 
 ### 8.2 Use Objects Instead of Strings for Structured Values
 
@@ -357,7 +371,12 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - **Actively examine every `string` property** in the `properties` bag. If the property name or description suggests it takes values from a limited or well-known set (e.g. "status", "mode", "tier", "kind", "protocol", "algorithm", "action", "state", "type", "category", "level"), **flag it** and recommend modeling it as an extensible enum with `x-ms-enum`.
 - If a string property's description lists its valid values (e.g. "Possible values are: Enabled, Disabled"), it **MUST** be declared as an enum, not a plain string.
 - Use `"x-ms-enum": { "name": "<EnumName>", "modelAsString": true }` to keep the enum extensible and avoid breaking changes when new values are added.
+- The **first member** of an enum **SHOULD** be the default or initial state value. This convention helps consumers and tooling identify the default behavior when no explicit value is set.
 
+
+### 8.3a Array Property Names Must Be Plural
+
+- Properties that are arrays **MUST** have plural names (e.g., `scopes`, `rules`, `addresses`) -- not singular (e.g., `scope`, `rule`, `address`). Singular names suggest a single value, not a collection.
 ### 8.4 Use Specific Types Instead of Generic Strings (ACTIVELY REVIEW)
 
 - **Actively examine every `string` property** for opportunities to use a more precise type:
@@ -398,6 +417,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - `provisioningState` **MUST** include at minimum the terminal states: `Succeeded`, `Failed`, and `Canceled` (with a single 'l' — NOT "Cancelled").
 - Non-terminal operational states like `Stopped` or `Running` **MUST NOT** be included in `provisioningState`. These represent the runtime state of the resource, not the state of a provisioning operation. Use a separate property (e.g. `status` or `powerState`) for operational state.
 - If `provisioningState` is missing required terminal states or includes invalid values, flag it.
+- `provisioningState` **MUST NOT** include values like `Deleted` or `NotSpecified`. `Deleted` is meaningless in the API (a deleted resource returns 404, not a provisioningState). `NotSpecified` is an internal sentinel with no customer-facing purpose.
 
 ### 8.10 `x-ms-nullable`
 
@@ -521,6 +541,12 @@ Flag every violation clearly with the file path, JSON path or line number, the s
 - When a PR adds a new swagger file to a **new** package tag, verify any carried-over suppressions are duplicated/moved to the new tag's `suppressions` list — or they will not take effect and CI will fail.
 - Suppressions **MUST** include specific `from` and `where` clauses to target the exact file and JSON path of the violation. Blanket suppressions that suppress an entire file without specifying the path are not allowed — they mask other violations that may be introduced later.
 
+
+### 10A.3 Do Not Suppress Warnings in readme.md (RPC-SUPPRESS-WARN)
+
+- Warnings (e.g., `EnumInsteadOfBoolean`, `AvoidAdditionalProperties`) **SHOULD NOT** be suppressed in `readme.md`. Only errors require suppression to unblock CI.
+- If a warning is being suppressed in `readme.md`, flag it -- the author should either fix the underlying issue or leave the warning unsuppressed. Warnings do not block the pipeline.
+- When a suppression for a warning is justified (rare), use `where` clauses instead of blanket suppression to avoid masking future valid warnings in the same file.
 ### 10A.2 Operations API Must Be in Package Tag (RPC-Operations-V1-TAG)
 
 - For ARM RPs, the `operations.json` (or equivalent operations API spec) **MUST** be included in every published package tag's input-file list.
