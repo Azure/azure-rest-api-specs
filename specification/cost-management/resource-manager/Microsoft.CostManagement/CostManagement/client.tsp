@@ -396,6 +396,11 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@alternateType(CostManagementProxyResource.eTag, Azure.Core.eTag, "csharp");
 
 
+/** Result of forecast. It contains all columns listed under groupings and aggregation. */
+// @@hierarchyBuilding cannot be used here because `ForecastResult` extends `CostManagementResource`
+// (a plain TypeSpec model, not an ARM Foundation type), so the augment decorator form (@@) does not
+// dispatch in the TypeSpec compiler. The replacement model pattern is required to change the C# base
+// type to ResourceData for backward compatibility.
 model ForecastResultReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<ForecastResult, "id" | "name" | "type">;
@@ -404,6 +409,11 @@ model ForecastResultReplacement
 @@clientName(ForecastResult, "ForecastResultTemp", "csharp");
 @@clientName(ForecastResultReplacement, "ForecastResult", "csharp");
 
+/** List of Dimension. */
+// @@hierarchyBuilding cannot be used here because `Dimension` extends `CostManagementResource`
+// (a plain TypeSpec model, not an ARM Foundation type), so the augment decorator form (@@) does not
+// dispatch in the TypeSpec compiler. The replacement model pattern is required to change the C# base
+// type to ResourceData for backward compatibility.
 model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<Dimension, "id" | "name" | "type">;
 }
@@ -411,6 +421,11 @@ model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@clientName(Dimension, "DimensionTemp", "csharp");
 @@clientName(DimensionReplacement, "CostManagementDimension", "csharp");
 
+/** Result of query. It contains all columns listed under groupings and aggregation. */
+// @@hierarchyBuilding cannot be used here because `QueryResult` extends `CostManagementResource`
+// (a plain TypeSpec model, not an ARM Foundation type), so the augment decorator form (@@) does not
+// dispatch in the TypeSpec compiler. The replacement model pattern is required to change the C# base
+// type to ResourceData for backward compatibility.
 model QueryResultReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<QueryResult, "id" | "name" | "type">;
@@ -419,6 +434,11 @@ model QueryResultReplacement
 @@clientName(QueryResult, "QueryResultTemp", "csharp");
 @@clientName(QueryResultReplacement, "QueryResult", "csharp");
 
+/** An export run. */
+// @@hierarchyBuilding cannot be used here because `ExportRun` extends `CostManagementProxyResource`
+// (a plain TypeSpec model, not an ARM Foundation type), so the augment decorator form (@@) does not
+// dispatch in the TypeSpec compiler. The replacement model pattern is required to change the C# base
+// type to ResourceData for backward compatibility.
 model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<ExportRun, "id" | "name" | "type">;
 }
