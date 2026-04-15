@@ -37,7 +37,8 @@ interface Workspaces {
   /**
    * Delete a Workspace resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Workspace>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "ARM reviewer requires 200 response on delete per RPC-Delete-V1-03"
+  delete is ArmResourceDeleteAsync<Workspace>;
 
   /**
    * Get a list of Workspace resources in a resource group.
