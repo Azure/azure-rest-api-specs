@@ -5688,6 +5688,12 @@
           },
           {
             "$ref": "#/parameters/SupportRename"
+          },
+          {
+            "$ref": "#/parameters/Marker"
+          },
+          {
+            "$ref": "#/parameters/MaxResults"
           }
         ],
         "responses": {
@@ -5741,6 +5747,9 @@
               "$ref": "#/definitions/StorageError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "NextMarker"
         }
       },
       "parameters": [
