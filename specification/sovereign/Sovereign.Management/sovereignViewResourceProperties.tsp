@@ -295,6 +295,13 @@ model SovereignViewDimensionDetail {
 @added(Versions.Preview20260315)
 @doc("A compliance detail item for a resource in the sovereign view compliance details action.")
 model SovereignViewComplianceDetail {
+  @doc("The fully qualified id of the policy initiative associated with the compliance detail.")
+  policyInitiativeId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Authorization/policySetDefinitions";
+    }
+  ]>;
+
   @doc("The policy assignment for the compliance detail.")
   policyAssignmentId: armResourceIdentifier<[
     {

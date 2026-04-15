@@ -3652,6 +3652,18 @@
       "type": "object",
       "description": "A compliance detail item for a resource in the sovereign view compliance details action.",
       "properties": {
+        "policyInitiativeId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified id of the policy initiative associated with the compliance detail.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Authorization/policySetDefinitions"
+              }
+            ]
+          }
+        },
         "policyAssignmentId": {
           "type": "string",
           "format": "arm-id",
@@ -3675,6 +3687,7 @@
         }
       },
       "required": [
+        "policyInitiativeId",
         "policyAssignmentId",
         "policyState"
       ]
