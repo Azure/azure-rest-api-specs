@@ -648,6 +648,10 @@ using Compute;
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
+@@alternateType(VirtualMachineScaleSetVM.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
 @@alternateType(VirtualMachine.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
@@ -662,63 +666,59 @@ using Compute;
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
-@@alternateType(AvailabilitySetUpdateProperties.virtualMachines,
-  Azure.ResourceManager.Models.WritableSubResource[],
-  "csharp"
-);
-@@alternateType(VirtualMachineScaleSetNetworkConfiguration.networkSecurityGroup,
+@@alternateType(VirtualMachineScaleSetNetworkConfigurationProperties.networkSecurityGroup,
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetIPConfiguration.applicationGatewayBackendAddressPools,
+@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.applicationGatewayBackendAddressPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetIPConfiguration.applicationSecurityGroups,
+@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.applicationSecurityGroups,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetIPConfiguration.loadBalancerBackendAddressPools,
+@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerBackendAddressPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetIPConfiguration.loadBalancerInboundNatPools,
+@@alternateType(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerInboundNatPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetUpdateNetworkConfiguration.networkSecurityGroup,
+@@alternateType(VirtualMachineScaleSetUpdateNetworkConfigurationProperties.networkSecurityGroup,
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetUpdateIPConfiguration.applicationGatewayBackendAddressPools,
+@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationGatewayBackendAddressPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetUpdateIPConfiguration.applicationSecurityGroups,
+@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationSecurityGroups,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetUpdateIPConfiguration.loadBalancerBackendAddressPools,
+@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerBackendAddressPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineScaleSetUpdateIPConfiguration.loadBalancerInboundNatPools,
+@@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerInboundNatPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineNetworkInterfaceConfiguration.networkSecurityGroup,
+@@alternateType(VirtualMachineNetworkInterfaceConfigurationProperties.networkSecurityGroup,
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );
-@@alternateType(VirtualMachineNetworkInterfaceIPConfiguration.applicationSecurityGroups,
+@@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationSecurityGroups,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineNetworkInterfaceIPConfiguration.applicationGatewayBackendAddressPools,
+@@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationGatewayBackendAddressPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
-@@alternateType(VirtualMachineNetworkInterfaceIPConfiguration.loadBalancerBackendAddressPools,
+@@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.loadBalancerBackendAddressPools,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
@@ -746,7 +746,29 @@ using Compute;
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
+@@alternateType(ResourceSharingProfile.subscriptionIds,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+@@alternateType(CapacityReservationGroupInstanceView.sharedSubscriptionIds,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
 @@alternateType(RestorePointProperties.excludeDisks,
   Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
+);
+
+// ── alternateType: ExtendedLocation → ARM common ExtendedLocation for C# ──
+@@alternateType(VirtualMachine.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(VirtualMachineScaleSet.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(Image.extendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
