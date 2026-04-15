@@ -32,7 +32,7 @@ Consistent naming across Azure APIs ensures a uniform developer experience in SD
 - **MUST** be plural (e.g., `virtualMachines`, not `virtualMachine`)
 - **MUST** be specific -- avoid generic names like `resourceName` or `childResourceName`
 - **MUST NOT** collide with well-known Azure concepts (e.g., `subscriptions`, `resourceGroups`)
-- **MUST NOT** repeat the resource provider namespace (e.g., `moxyHttpsServices` is redundant under `Microsoft.Moxy`)
+- **MUST NOT** repeat the resource provider namespace (e.g., `contosoHttpsServices` is redundant under `Microsoft.Contoso`)
 
 ### Path Parameter Names
 
