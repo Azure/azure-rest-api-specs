@@ -10,9 +10,10 @@ using Azure.ResourceManager;
   "javascript"
 );
 @@clientName(Microsoft.ExtendedLocation, "CustomLocationsMgmtClient", "python");
-@@override(CustomLocations.update, CustomLocationsUpdate, "javascript");
-
-op CustomLocationsUpdate(
+@@override(CustomLocations.update, customLocationsUpdate, "javascript");
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op customLocationsUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -66,9 +67,11 @@ op CustomLocationsUpdate(
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>,
 ): Azure.ResourceManager.ArmResponse<Microsoft.ExtendedLocation.customLocation> | Azure.ResourceManager.CommonTypes.ErrorResponse;
-@@override(ResourceSyncRules.update, ResourceSyncRulesUpdate, "javascript");
+@@override(ResourceSyncRules.update, resourceSyncRulesUpdate, "javascript");
 
-op ResourceSyncRulesUpdate(
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op resourceSyncRulesUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
