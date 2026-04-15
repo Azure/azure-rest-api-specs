@@ -91,8 +91,7 @@ namespace ComputeCombine;
   "csharp"
 );
 
-// ── Common type renames (C# backward compat) ──
-@@clientName(Common.Architecture, "ArchitectureType", "csharp");
+// NOTE: Common.Architecture → ArchitectureType is handled by auto-rename of Compute.ArchitectureTypes → ArchitectureType
 
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(Common.OperatingSystemTypes, "OperatingSystemType", "csharp");
