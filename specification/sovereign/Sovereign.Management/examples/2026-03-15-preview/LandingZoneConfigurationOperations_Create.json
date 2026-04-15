@@ -1,0 +1,265 @@
+{
+  "title": "LandingZoneConfigurationOperations_Create",
+  "operationId": "LandingZoneConfigurationOperations_Create",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "22b62f96-c8d5-4131-97f8-f820a5a3c55f",
+    "resourceGroupName": "ExampleResourceGroup",
+    "landingZoneAccountName": "ExampleLZA",
+    "landingZoneConfigurationName": "ExampleLZC",
+    "resource": {
+      "properties": {
+        "ddosProtectionCreationOption": "Yes",
+        "logAnalyticsWorkspaceCreationOption": "No",
+        "firewallCreationOption": "Standard",
+        "logRetentionInDays": 540,
+        "hubNetworkCidrBlock": "10.20.255.0/24",
+        "azureBastionCreationOption": "Yes",
+        "existingDdosProtectionId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Network/ddosProtectionPlans/default-ddos",
+        "existingLogAnalyticsWorkspaceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.OperationalInsights/workspaces/default-law-cid",
+        "tags": [
+          {
+            "name": "tag1",
+            "value": "do"
+          },
+          {
+            "name": "tag2",
+            "value": "do"
+          }
+        ],
+        "firewallSubnetCidrBlock": "10.20.255.0/24",
+        "gatewaySubnetCidrBlock": "10.20.255.0/24",
+        "existingAzureBastionId": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Network/bastions/myBastion",
+        "azureBastionSubnetCidrBlock": "10.20.255.0/24",
+        "landingZonesMgChildren": [
+          {
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "c138fd1a-e08f-4318-9490-d11ef2c2f9c1",
+                "assignmentParameters": {}
+              }
+            ],
+            "name": "Corp"
+          }
+        ],
+        "topLevelMgMetadata": {
+          "policyInitiativesAssignmentProperties": [
+            {
+              "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/0a2ebd47-3fb9-4735-a006-b7f31ddadd9f",
+              "assignmentParameters": {
+                "Effect": "Audit"
+              }
+            }
+          ]
+        },
+        "landingZonesMgMetadata": {
+          "policyInitiativesAssignmentProperties": []
+        },
+        "platformMgMetadata": {
+          "policyInitiativesAssignmentProperties": []
+        },
+        "platformManagementMgMetadata": {
+          "policyInitiativesAssignmentProperties": []
+        },
+        "platformConnectivityMgMetadata": {
+          "policyInitiativesAssignmentProperties": []
+        },
+        "platformIdentityMgMetadata": {
+          "policyInitiativesAssignmentProperties": []
+        },
+        "decommissionedMgMetadata": {
+          "policyInitiativesAssignmentProperties": [],
+          "create": false
+        },
+        "sandboxMgMetadata": {
+          "policyInitiativesAssignmentProperties": [],
+          "create": true
+        },
+        "managedIdentity": {
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authoringStatus": "Authoring",
+          "ddosProtectionCreationOption": "Yes",
+          "logAnalyticsWorkspaceCreationOption": "No",
+          "firewallCreationOption": "Standard",
+          "logRetentionInDays": 540,
+          "hubNetworkCidrBlock": "10.20.255.0/24",
+          "azureBastionCreationOption": "Yes",
+          "existingDdosProtectionId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Network/ddosProtectionPlans/default-ddos",
+          "existingLogAnalyticsWorkspaceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.OperationalInsights/workspaces/default-law-cid",
+          "tags": [
+            {
+              "name": "tag1",
+              "value": "do"
+            },
+            {
+              "name": "tag2",
+              "value": "do"
+            }
+          ],
+          "firewallSubnetCidrBlock": "10.20.255.0/24",
+          "gatewaySubnetCidrBlock": "10.20.255.0/24",
+          "existingAzureBastionId": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Network/bastions/myBastion",
+          "azureBastionSubnetCidrBlock": "10.20.255.0/24",
+          "landingZonesMgChildren": [
+            {
+              "policyInitiativesAssignmentProperties": [
+                {
+                  "policyInitiativeId": "c138fd1a-e08f-4318-9490-d11ef2c2f9c1",
+                  "assignmentParameters": {}
+                }
+              ],
+              "name": "Corp"
+            }
+          ],
+          "topLevelMgMetadata": {
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/0a2ebd47-3fb9-4735-a006-b7f31ddadd9f",
+                "assignmentParameters": {
+                  "Effect": "Audit"
+                }
+              }
+            ]
+          },
+          "landingZonesMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformManagementMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformConnectivityMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformIdentityMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "decommissionedMgMetadata": {
+            "policyInitiativesAssignmentProperties": [],
+            "create": false
+          },
+          "sandboxMgMetadata": {
+            "policyInitiativesAssignmentProperties": [],
+            "create": true
+          },
+          "managedIdentity": {
+            "type": "SystemAssigned"
+          }
+        },
+        "id": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/LZAtestSI37/landingZoneConfigurations/lzctest",
+        "name": "lzctest",
+        "type": "Microsoft.Sovereign/landingZoneAccounts/landingZoneConfigurations",
+        "systemData": {
+          "createdBy": "example@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-09-25T20:19:04.5255905Z",
+          "lastModifiedBy": "example@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-09-25T20:19:04.5255905Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authoringStatus": "Authoring",
+          "ddosProtectionCreationOption": "Yes",
+          "logAnalyticsWorkspaceCreationOption": "No",
+          "firewallCreationOption": "Standard",
+          "logRetentionInDays": 540,
+          "hubNetworkCidrBlock": "10.20.255.0/24",
+          "azureBastionCreationOption": "Yes",
+          "existingDdosProtectionId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Network/ddosProtectionPlans/default-ddos",
+          "existingLogAnalyticsWorkspaceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.OperationalInsights/workspaces/default-law-cid",
+          "tags": [
+            {
+              "name": "tag1",
+              "value": "do"
+            },
+            {
+              "name": "tag2",
+              "value": "do"
+            }
+          ],
+          "firewallSubnetCidrBlock": "10.20.255.0/24",
+          "gatewaySubnetCidrBlock": "10.20.255.0/24",
+          "existingAzureBastionId": "/subscriptions/12345678-abcd-1234-abcd-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Network/bastions/myBastion",
+          "azureBastionSubnetCidrBlock": "10.20.255.0/24",
+          "landingZonesMgChildren": [
+            {
+              "policyInitiativesAssignmentProperties": [
+                {
+                  "policyInitiativeId": "c138fd1a-e08f-4318-9490-d11ef2c2f9c1",
+                  "assignmentParameters": {}
+                }
+              ],
+              "name": "Corp"
+            }
+          ],
+          "topLevelMgMetadata": {
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/0a2ebd47-3fb9-4735-a006-b7f31ddadd9f",
+                "assignmentParameters": {
+                  "Effect": "Audit"
+                }
+              }
+            ]
+          },
+          "landingZonesMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformManagementMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformConnectivityMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "platformIdentityMgMetadata": {
+            "policyInitiativesAssignmentProperties": []
+          },
+          "decommissionedMgMetadata": {
+            "policyInitiativesAssignmentProperties": [],
+            "create": false
+          },
+          "sandboxMgMetadata": {
+            "policyInitiativesAssignmentProperties": [],
+            "create": true
+          },
+          "managedIdentity": {
+            "type": "SystemAssigned"
+          }
+        },
+        "id": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/LZAtestSI37/landingZoneConfigurations/lzctest",
+        "name": "lzctest",
+        "type": "Microsoft.Sovereign/landingZoneAccounts/landingZoneConfigurations",
+        "systemData": {
+          "createdBy": "example@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-09-25T20:19:04.5255905Z",
+          "lastModifiedBy": "example@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-09-25T20:19:04.5255905Z"
+        }
+      }
+    }
+  }
+}
