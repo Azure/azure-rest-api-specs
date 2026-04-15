@@ -14,7 +14,7 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'Project' to maintain SDK backward compatibility"
 @parentResource(Account)
 model Project
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProjectProperties> {
@@ -28,14 +28,14 @@ model Project
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'identity' on the resource envelope for backward compatibility"
   identity?: Identity;
 }
 @armResourceOperations(#{ omitTags: true })
@@ -49,8 +49,8 @@ interface Projects {
   /**
    * Create Cognitive Services Account's Project. Project is a sub-resource of an account which give AI developer it's individual container to work on.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'get' match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'get' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesProjects")
   create is ArmResourceCreateOrReplaceAsync<
     Project,
@@ -64,7 +64,7 @@ interface Projects {
   /**
    * Updates a Cognitive Services Project
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'create' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesProjects")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

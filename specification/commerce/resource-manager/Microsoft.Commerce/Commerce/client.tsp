@@ -9,5 +9,5 @@ using Microsoft.Commerce;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(UsageAggregatesOperationGroupListParameters.aggregationGranularity,
   "Daily",
-  "javascript"
+  "javascript,python"
 );
