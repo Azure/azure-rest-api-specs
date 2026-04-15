@@ -3159,7 +3159,7 @@ model SecurityProfile {
   encryptionAtHost?: boolean;
 
   /**
-   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. By default the value in response will be Standard starting 2025-11-01 api version.
+   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. If not specified, Standard will be returned starting api version 2025-11-01.
    */
   securityType?: SecurityTypes;
 
