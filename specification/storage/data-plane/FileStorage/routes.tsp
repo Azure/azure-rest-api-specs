@@ -189,7 +189,7 @@ interface Share {
       ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
       ...ShareProvisionedIopsRequestHeader;
-      ...ShareProvisionedBandwidthRequestHeader;
+      ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
     },
     {
@@ -198,14 +198,12 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The share quota. */
-      @header("x-ms-share-quota") quota?: int32;
+      @header("x-ms-share-quota") quota?: int64;
 
       /** The provisioned IOPS. */
-      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
+      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int64;
 
-      /** The provisioned bandwidth. */
-      @header("x-ms-share-provisioned-bandwidth-mibps")
-      shareProvisionedBandwidthMibps?: int32;
+      ...ShareProvisionedBandwidthOptionalHeader;
 
       /** The included burst IOPS. */
       @header("x-ms-share-included-burst-iops") shareIncludedBurstIops?: int64;
@@ -234,20 +232,20 @@ interface Share {
       ...LastModifiedResponseHeader;
 
       /** The maximum quota for the share. */
-      @header("x-ms-share-quota") quota: int32;
+      @header("x-ms-share-quota") quota: int64;
 
       /** The provisioned IOPS for the share. */
-      @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
+      @header("x-ms-share-provisioned-iops") provisionedIops?: int64;
 
       /** The provisioned ingress for the share. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-ingress-mbps")
-      provisionedIngressMBps?: int32;
+      provisionedIngressMBps?: int64;
 
       /** The provisioned egress for the share. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-egress-mbps")
-      provisionedEgressMBps?: int32;
+      provisionedEgressMBps?: int64;
 
       /** The next allowed quota downgrade time. */
       @encode("rfc7231")
@@ -257,7 +255,7 @@ interface Share {
       /** The provisioned bandwidth for the share. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
       @clientName("ProvisionedBandwidthMiBps", "go")
-      provisionedBandwidthMibps?: int32;
+      provisionedBandwidthMibps?: int64;
 
       ...LeaseResponseHeaders;
 
@@ -946,16 +944,12 @@ interface File {
     {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Specifying supported status codes for download operation."
       @statusCode statusCode: 200 | 206;
-    
-      @header("Last-Modified") 
-      @alternateType(utcDateTime, "go")
-      lastModified: string;
-    
+      ...LastModifiedResponseHeader;
       ...MetadataHeaders;
       @header("Content-Length") contentLength: int64;
       @header("Content-Range") contentRange?: string;
-  
-      @header("ETag") 
+
+      @header("ETag")
       @clientName("ETag", "go")
       etag: Azure.Core.eTag;
 
@@ -987,10 +981,7 @@ interface File {
       ...FileRequestIntentParameter;
     },
     {
-      @header("Last-Modified") 
-      @alternateType(utcDateTime, "go")
-      lastModified: string;
-
+      ...LastModifiedResponseHeader;
       ...MetadataHeaders;
 
       /** Dummy type header, must be "file". */
@@ -1000,7 +991,7 @@ interface File {
       #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation"
       @header("Content-Type") contentType?: string;
 
-      @header("ETag") 
+      @header("ETag")
       @clientName("ETag", "go")
       etag: Azure.Core.eTag;
 
@@ -1256,18 +1247,15 @@ interface File {
 
       /** Specify the CRC64 hash of the source content. */
       @header("x-ms-source-content-crc64")
-      @alternateType(bytes, "go")
-      sourceContentCrc64?: string;
+      sourceContentCrc64?: bytes;
 
       /** Specify the CRC64 hash value to check for source content integrity. */
-      @header("x-ms-source-if-match-crc64") 
-      @alternateType(bytes, "go")
-      sourceIfMatchCrc64?: string;
+      @header("x-ms-source-if-match-crc64")
+      sourceIfMatchCrc64?: bytes;
 
       /** Specify the CRC64 hash value to check for source content mismatch. */
       @header("x-ms-source-if-none-match-crc64")
-      @alternateType(bytes, "go")
-      sourceIfNoneMatchCrc64?: string;
+      sourceIfNoneMatchCrc64?: bytes;
 
       ...LeaseIdOptionalParameter;
       ...CopySourceAuthorizationHeader;

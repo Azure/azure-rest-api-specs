@@ -200,7 +200,9 @@
                 "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
               },
               "Last-Modified": {
-                "type": "string"
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Returns the date and time the resource was last modified."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -432,7 +434,9 @@
                 "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
               },
               "Last-Modified": {
-                "type": "string"
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Returns the date and time the resource was last modified."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -1392,7 +1396,9 @@
                 "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
               },
               "Last-Modified": {
-                "type": "string"
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "Returns the date and time the resource was last modified."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -1793,7 +1799,7 @@
             "description": "Optional. Specifies the provisioned IOPS of the share.",
             "required": false,
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "x-ms-client-name": "shareProvisionedIops"
           },
           {
@@ -1802,7 +1808,7 @@
             "description": "Optional. Specifies the provisioned bandwidth of the share, in MiBps.",
             "required": false,
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "x-ms-client-name": "shareProvisionedBandwidthMibps"
           },
           {
@@ -3606,7 +3612,7 @@
             "description": "Optional. Specifies the provisioned IOPS of the share.",
             "required": false,
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "x-ms-client-name": "shareProvisionedIops"
           },
           {
@@ -3615,7 +3621,7 @@
             "description": "Optional. Specifies the provisioned bandwidth of the share, in MiBps.",
             "required": false,
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "x-ms-client-name": "shareProvisionedBandwidthMibps"
           },
           {
@@ -7640,6 +7646,7 @@
             "description": "Specify the CRC64 hash of the source content.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "sourceContentCrc64"
           },
           {
@@ -7648,6 +7655,7 @@
             "description": "Specify the CRC64 hash value to check for source content integrity.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "sourceIfMatchCrc64"
           },
           {
@@ -7656,6 +7664,7 @@
             "description": "Specify the CRC64 hash value to check for source content mismatch.",
             "required": false,
             "type": "string",
+            "format": "byte",
             "x-ms-client-name": "sourceIfNoneMatchCrc64"
           },
           {

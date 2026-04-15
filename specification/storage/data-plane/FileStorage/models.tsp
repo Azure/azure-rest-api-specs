@@ -1080,21 +1080,21 @@ model SharePropertiesInternal {
   @Xml.name("Etag") eTag: Azure.Core.eTag;
 
   /** The share quota. */
-  @Xml.name("Quota") quota: int32;
+  @Xml.name("Quota") quota: int64;
 
   /** The provisioned IOPS. */
-  @Xml.name("ProvisionedIops") provisionedIops?: int32;
+  @Xml.name("ProvisionedIops") provisionedIops?: int64;
 
   /** The provisioned ingress in MBps. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
-  @Xml.name("ProvisionedIngressMBps") provisionedIngressMBps?: int32;
+  @Xml.name("ProvisionedIngressMBps") provisionedIngressMBps?: int64;
 
   /** The provisioned egress in MBps. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
-  @Xml.name("ProvisionedEgressMBps") provisionedEgressMBps?: int32;
+  @Xml.name("ProvisionedEgressMBps") provisionedEgressMBps?: int64;
 
   /** The provisioned bandwidth in MiBps. */
-  @Xml.name("ProvisionedBandwidthMiBps") provisionedBandwidthMiBps?: int32;
+  @Xml.name("ProvisionedBandwidthMiBps") provisionedBandwidthMiBps?: int64;
 
   /** The next allowed quota downgrade time. */
   @encode("rfc7231")
@@ -1682,7 +1682,7 @@ alias LeaseIdRequiredParameter = {
 /** Share quota optional header. */
 alias ShareQuotaOptionalHeader = {
   /** Specifies the maximum size of the share, in gigabytes. */
-  @header("x-ms-share-quota") quota?: int32;
+  @header("x-ms-share-quota") quota?: int64;
 };
 
 /** Recursive parameter (header). */
@@ -2092,16 +2092,14 @@ alias ShareRootSquashRequestHeader = {
 alias ShareProvisionedIopsRequestHeader = {
   /** Optional. Specifies the provisioned IOPS of the share. */
   @header("x-ms-share-provisioned-iops")
-  @alternateType(int64, "csharp,go")
-  shareProvisionedIops?: int32;
+  shareProvisionedIops?: int64;
 };
 
 /** Share provisioned bandwidth request header. */
-alias ShareProvisionedBandwidthRequestHeader = {
+alias ShareProvisionedBandwidthOptionalHeader = {
   /** Optional. Specifies the provisioned bandwidth of the share, in MiBps. */
   @header("x-ms-share-provisioned-bandwidth-mibps")
-  @alternateType(int64, "csharp,go")
-  shareProvisionedBandwidthMibps?: int32;
+  shareProvisionedBandwidthMibps?: int64;
 };
 
 /** Enable snapshot virtual directory access header. */
@@ -2167,7 +2165,7 @@ alias FileLastWriteTimeResponseHeader = {
 /** Content CRC64 response header. */
 alias ContentCrc64ResponseHeader = {
   /** CRC64 hash of the range content. */
-  @header("x-ms-content-crc64") contentCrc64?: string;
+  @header("x-ms-content-crc64") contentCrc64?: bytes;
 };
 
 // ================================================================
@@ -2349,17 +2347,17 @@ alias NfsTimestampResponseHeaders = {
 /** Share provisioning response headers (quota, IOPS, bandwidth, burst). Used in setProperties and restore responses. */
 alias ShareProvisioningResponseHeaders = {
   /** The current share quota. */
-  @header("x-ms-share-quota") quota?: int32;
+  @header("x-ms-share-quota") quota?: int64;
 
   /** The share provisioned IOPS. */
-  @header("x-ms-share-provisioned-iops") provisionedIops?: int32;
+  @header("x-ms-share-provisioned-iops") provisionedIops?: int64;
 
   /** The share provisioned bandwidth in mebibytes per second. */
   @header("x-ms-share-provisioned-bandwidth-mibps")
-  provisionedBandwidthMibps?: int32;
+  provisionedBandwidthMibps?: int64;
 
   /** The share included burst IOPS. */
-  @header("x-ms-share-included-burst-iops") includedBurstIops?: int32;
+  @header("x-ms-share-included-burst-iops") includedBurstIops?: int64;
 
   /** The share max burst credits for IOPS. */
   @header("x-ms-share-max-burst-credits-for-iops")
