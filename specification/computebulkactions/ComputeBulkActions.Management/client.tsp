@@ -279,18 +279,7 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 // Fix: ResourcesWithContext.resources collides with Resources property after flattening
 // =====================================================================
-@@clientName(ResourcesWithContext.resources,
-  "ResourcesWithContextItems",
-  "csharp"
-);
-@@clientName(ResourcesWithContext.resources,
-  "ResourcesWithContextItems",
-  "java"
-);
-@@clientName(ResourcesWithContext.resources,
-  "ResourcesWithContextItems",
-  "python"
-);
+@@clientName(ResourcesWithContext.resources, "ResourcesWithContextItems");
 
 // =====================================================================
 // Fix: NetworkApiVersion enum members with dashes cause Python SyntaxError
