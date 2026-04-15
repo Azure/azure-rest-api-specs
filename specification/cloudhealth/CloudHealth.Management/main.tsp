@@ -1284,8 +1284,8 @@ model HealthReportRequest {
 @added(Versions.v2026_05_01_preview)
 @doc("Request body for adding a data annotation to an entity")
 model DataAnnotationRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation properties are user-defined key-value pairs with arbitrary keys that cannot be modeled with a fixed schema"
-  @doc("Annotation properties as a dynamic key-value pair bag")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation details are user-defined key-value pairs with arbitrary keys that cannot be modelled with a fixed schema"
+  @doc("Annotation details as a dynamic key-value pair bag")
   annotationDetails: Record<string4096>;
 
   @doc("Optional description of the annotation")
@@ -1294,17 +1294,10 @@ model DataAnnotationRequest {
 
 @added(Versions.v2026_05_01_preview)
 @doc("A single data annotation on an entity")
-model DataAnnotation {
-  @doc("Server-assigned unique identifier for the annotation")
+model DataAnnotation extends DataAnnotationRequest {
+  @doc("Server-assigned identifier for the annotation")
   @maxLength(36)
   annotationId: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Annotation properties are user-defined key-value pairs with arbitrary keys that cannot be modeled with a fixed schema"
-  @doc("Annotation properties as a dynamic key-value pair bag")
-  annotationDetails: Record<string4096>;
-
-  @doc("Optional description of the annotation")
-  description?: string4096;
 
   @doc("Timestamp when the annotation was created")
   createdAt: utcDateTime;
@@ -1313,10 +1306,10 @@ model DataAnnotation {
 @added(Versions.v2026_05_01_preview)
 @doc("Request body for querying data annotations")
 model GetDataAnnotationsRequest {
-  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified.")
+  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when $skipToken is specified.")
   startAt?: utcDateTime;
 
-  @doc("End of UTC time range. Defaults to now if not specified.")
+  @doc("End of UTC time range. Defaults to now if not specified. Must be omitted when $skipToken is specified.")
   endAt?: utcDateTime;
 }
 
