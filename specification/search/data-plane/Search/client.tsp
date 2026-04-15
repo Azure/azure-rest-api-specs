@@ -2924,7 +2924,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(ChatCompletionSkill.uri, "url", "java");
 @@clientName(WebApiSkill.uri, "url", "java");
 @@clientName(AIServices.uri, "url", "java");
-@@clientName(CustomEntityLookupSkill.entitiesDefinitionUri, "entitiesDefinitionUrl", "java");
+@@clientName(CustomEntityLookupSkill.entitiesDefinitionUri,
+  "entitiesDefinitionUrl",
+  "java"
+);
 @@clientName(SkillNames.skillNames, "skillNameList", "csharp");
 @@clientName(AMLParameters, "AzureMachineLearningParameters");
 @@clientName(AMLVectorizer, "AzureMachineLearningVectorizer");
