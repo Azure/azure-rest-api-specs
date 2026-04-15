@@ -27,20 +27,28 @@ directive:
     where:
       - $.definitions.ExecutionProperties.properties.specification
       - $.definitions.ExecutionPropertiesUpdate.properties.specification
+      - $.definitions.ExecutionV2Properties.properties.specification
       - $.definitions.SolutionTemplateVersionProperties.properties.specification
       - $.definitions.SolutionTemplateVersionPropertiesUpdate.properties.specification
       - $.definitions.SolutionVersionProperties.properties.specification
       - $.definitions.SolutionVersionPropertiesUpdate.properties.specification
       - $.definitions.SolutionVersionSnapshot.properties.specification
       - $.definitions.StageSpec.properties.specification
+      - $.definitions.StageSpecTemplate.properties.specification
       - $.definitions.StageStatus.properties.inputs
       - $.definitions.StageStatus.properties.outputs
       - $.definitions.TargetProperties.properties.targetSpecification
       - $.definitions.TargetSnapshot.properties.targetSpecification
+      - $.definitions.TargetTemplateProperties.properties.targetSpec
+      - $.definitions.TargetTemplatePropertiesUpdate.properties.targetSpec
       - $.definitions.TargetUpdateProperties.properties.targetSpecification
       - $.definitions.TaskSpec.properties.specification
+      - $.definitions.WorkflowExecuteParameter.properties.inputs
+      - $.definitions.WorkflowTemplateReviewParameter.properties.stageTargetMap
       - $.definitions.WorkflowVersionProperties.properties.specification
       - $.definitions.WorkflowVersionPropertiesUpdate.properties.specification
+      - $.definitions.WorkflowVersionV2Properties.properties.specification
+      - $.definitions.WorkflowVersionV2PropertiesUpdate.properties.specification
     reason: RP depends on another service called k8s bridge which is facing issues during serialization of data. The changes required in that service will not be implemented before our public preview, so we need to go ahead with using Record which adds this. Check https://msazure.visualstudio.com/One/_workitems/edit/31068512
 ```
 
