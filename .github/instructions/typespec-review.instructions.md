@@ -4,284 +4,129 @@ applyTo: "specification/**/*.tsp"
 
 # TypeSpec Specification Review Instructions
 
-This file contains review rules for TypeSpec (`.tsp`) API specification files in the azure-rest-api-specs repository. Apply these rules when reviewing PRs that add or modify TypeSpec projects.
+This file contains **review-specific** rules for TypeSpec (`.tsp`) API
+specification files. It supplements the foundational TypeSpec project
+rules in
+[typespec-project.instructions.md](typespec-project.instructions.md),
+which is the source of truth for project structure, naming, versioning,
+documentation, and ARM resource patterns. Apply **both** files when
+reviewing PRs that add or modify TypeSpec projects.
 
-Flag every violation clearly with the file path, line number or code reference, the specific rule, and a concrete suggestion for how to fix it. Respond in markdown format.
+Flag every violation clearly with the file path, line number or code
+reference, the specific rule, and a concrete suggestion for how to fix
+it. Respond in markdown format.
 
 ---
 
 ## 1. Project Structure & File Organization
 
-### 1.1 Directory Placement
-
-- ARM TypeSpec projects **MUST** be placed under:
-  ```
-  specification/<organization>/resource-manager/<resource-provider-namespace>/<ServiceName>/
-  ```
-- Data-plane TypeSpec projects **MUST** be placed under:
-  ```
-  specification/<organization>/data-plane/<ServiceName>/
-  ```
-- ARM TypeSpec folder names **SHOULD** end with `.Management` (e.g., `Contoso.Management`).
-- **DO NOT** place TypeSpec projects directly under `resource-manager/` without the `<resource-provider-namespace>/<ServiceName>` nesting.
-
-### 1.2 Required Files
-
-Every TypeSpec project **MUST** contain:
-- `main.tsp` — main entry point
-- `tspconfig.yaml` — TypeSpec compilation configuration
-- `readme.md` — AutoRest readme with YAML blocks for SDK generation
-- `examples/` directory — with example JSON files organized by `<api-version>` subdirectories
-
-A TypeSpec project **MUST NOT** contain:
-- `package.json` or `package-lock.json` (use the repo-root one)
-- Multiple `tspconfig.yaml` files for the same service
-
-### 1.3 Generated Files
-
-- Generated OpenAPI files under `stable/` and `preview/` **MUST NOT** be hand-edited. They are produced by `tsp compile .`.
-- If a PR modifies both `.tsp` files and generated `.json` files, verify the generated files match what `tsp compile .` would produce.
-- Stable API versions go under `stable/<YYYY-MM-DD>/`.
-- Preview API versions go under `preview/<YYYY-MM-DD-preview>/`.
+> See [typespec-project.instructions.md](typespec-project.instructions.md)
+> for the canonical directory layout, required files, and ARM resource
+> requirements.
 
 ---
 
-## 2. Namespace & Service Declarations
+## 2. Namespace, Service, Versioning & Model Rules
 
-### 2.1 `@service` Decorator
+> **Source of truth:**
+> [typespec-project.instructions.md](typespec-project.instructions.md)
+> §2-§5 defines the rules for namespace/service declarations,
+> versioning, model/type definitions (naming, documentation, enums,
+> visibility), and ARM resource patterns.
+>
+> The review-specific additions below cover enforcement details not in
+> the project instructions.
 
-- Every TypeSpec project **MUST** have a `@service` decorator in `main.tsp` defining the service title.
-- The service title **MUST** be descriptive and match the Azure service name.
+### 2.1 Breaking Changes Across Versions
 
-### 2.2 `@server` Decorator
+- **DO NOT** remove properties, operations, or models between API
+  versions without using `@removed` with the correct version reference.
+- **DO NOT** change property types between versions without using
+  `@typeChangedFrom`.
+- Adding `required` to a previously optional property is a breaking
+  change -- flag it.
 
-- Data-plane services **MUST** define a `@server` decorator with the correct endpoint pattern.
-- **DO** use the built-in `url` type for endpoint parameters:
-  ```tsp
-  @server("{endpoint}/widget", "Contoso Widget APIs", { endpoint: url })
-  ```
+### 2.2 Type Constraints (Review Enforcement)
 
-### 2.3 Namespace Conventions
-
-- All models, enums, unions, and operations **MUST** be declared under the main namespace in `main.tsp`.
-- **DO NOT** declare types outside of a namespace.
-- **AVOID** adding new namespaces beyond the main service namespace.
-- The namespace **MUST** follow the pattern: `<Organization>.<ServiceName>` (e.g., `Azure.Compute`, `Microsoft.Storage`).
-
-### 2.4 `@useAuth` Security Decorator
-
-- Every service **MUST** have a security definition via `@useAuth`.
-- `@useAuth` **MUST** be defined exactly ONCE in the specification, above the `@server` definition.
-- ARM services use Azure AD OAuth2. Data-plane services may use OAuth2, API keys, or both.
-
----
-
-## 3. Versioning
-
-### 3.1 Version Enum
-
-- API versions **MUST** be declared as a `Versions` enum under the main namespace in `main.tsp`:
-  ```tsp
-  @versioned(Versions)
-  namespace Contoso.WidgetManager;
-
-  /** Service API versions */
-  enum Versions {
-    /** The 2024-01-01 API version */
-    v2024_01_01: "2024-01-01",
-  }
-  ```
-- The `@versioned` decorator **MUST** be applied to the namespace and reference the versions enum.
-- Every enum member **MUST** have a doc comment.
-- Version string values **MUST** follow the `YYYY-MM-DD` or `YYYY-MM-DD-preview` format.
-- Preview API versions in the Versions enum **MUST** be annotated with the `@Azure.Core.previewVersion` decorator so tooling can correctly identify them.
-
-### 3.2 Versioning Decorators
-
-- When using `@added`, `@removed`, or `@typeChangedFrom`, the file **MUST** import `@typespec/versioning`:
-  ```tsp
-  import "@typespec/versioning";
-  using TypeSpec.Versioning;
-  ```
-- `@useDependency` **MUST** be applied to each API version entry when referencing types from versioned namespaces (e.g., `Azure.Core`, `Azure.ResourceManager`).
-
-### 3.3 Breaking Changes Across Versions
-
-- **DO NOT** remove properties, operations, or models between API versions without using `@removed` with the correct version reference.
-- **DO NOT** change property types between versions without using `@typeChangedFrom`.
-- Adding `required` to a previously optional property is a breaking change — flag it.
-
----
-
-## 4. Model & Type Definitions
-
-### 4.1 Naming Conventions
-
-- Model names **MUST** use PascalCase (e.g., `VirtualMachine`, `StorageAccount`).
-- Property names **MUST** use camelCase (e.g., `resourceId`, `provisioningState`).
-- Operation names **MUST** use camelCase (e.g., `createOrUpdate`, `listByResourceGroup`).
-- Enum/union member names **SHOULD** use PascalCase for values (e.g., `Succeeded`, `Failed`).
-- **DO NOT** uppercase acronyms in property names — use `resourceId` not `resourceID`.
-
-### 4.2 Documentation
-
-- Every model, property, operation, parameter, enum, union, and alias **MUST** have a doc comment using `/** ... */` format.
-- Doc comments **MUST NOT** simply repeat the element name.
-- Doc comments **SHOULD** start with a capital letter and end with a period.
-- PUT operation doc comments **MUST NOT** imply non-idempotent behavior (e.g., "Creates a new..." or "This will create a new version"). Use idempotent language: "Creates or updates..." or "Creates or replaces...".
-- Specify units for quantifiable properties (e.g., `"The timeout in seconds."`).
-- **DO NOT** use "ARM" in client-facing text (property names or descriptions). Use "Azure" or "Azure Resource Manager" instead. For example, use `monitorAccountResourceId` not `armResourceId`.
-- **DO NOT** use "AAD" in descriptions. Use "Microsoft Entra ID" instead.
-
-### 4.3 Enums vs. Unions
-
-> **Full rule definitions:** See [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md) for comprehensive enum/union guidelines.
-
-- **DO** use `union` instead of `enum` to define Azure extensible enums. This follows the Azure convention for forward-compatible enum types:
-  ```tsp
-  /** The provisioning state of the resource. */
-  union ProvisioningState {
-    string,
-    /** Resource has been created. */
-    Succeeded: "Succeeded",
-    /** Resource creation failed. */
-    Failed: "Failed",
-    /** Resource creation was canceled. */
-    Canceled: "Canceled",
-  }
-  ```
-- `provisioningState` **SHOULD** extend the built-in `Azure.ResourceManager.ResourceProvisioningState` for terminal states (Succeeded, Failed, Canceled) and add custom non-terminal states as needed. See [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md) for the full provisioningState contract.
-- Every enum/union member **MUST** have a doc comment.
-- The `string` base type **SHOULD** be included in unions to make them extensible.
-
-### 4.4 Visibility & Mutability
-
-> **Full rule definitions:** See [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md) for OAPI027, OAPI020, OAPI029 with format-specific examples.
-
-- Read-only properties **MUST** be annotated with `@visibility(Lifecycle.Read)`.
-- Create-only properties (immutable after creation) **MUST** use `@visibility(Lifecycle.Create, Lifecycle.Read)`.
-- Properties used only in responses **MUST NOT** be marked as required in request contexts.
-- Use the `Lifecycle` class values for visibility decorators (`Lifecycle.Create`, `Lifecycle.Read`, `Lifecycle.Update`).
-- Write-only properties (`@visibility(Lifecycle.Create, Lifecycle.Update)` without `Lifecycle.Read`) are **NOT allowed** (OAPI027). The only exception is secret properties annotated with `@secret`.
-- If a property is read-only, it **MUST** always be read-only. Do not make it conditionally read/write (OAPI020).
-- If a property is immutable (create + read), it **MUST** always be immutable (OAPI029).
-
-### 4.5 Type Constraints
-
-- String properties with well-known formats **SHOULD** use appropriate scalar types: `url`, `utcDateTime`, `duration`, `uuid`.
-- Datetime properties **MUST** use `utcDateTime` (not `string`) to generate proper `format: date-time` in swagger and enable SDK datetime type generation.
+- String properties with well-known formats **SHOULD** use appropriate
+  scalar types: `url`, `utcDateTime`, `duration`, `uuid`.
+- Datetime properties **MUST** use `utcDateTime` (not `string`).
 - Integer properties **SHOULD** specify bit width: `int32`, `int64`.
-- Integer properties with known valid ranges **SHOULD** use `@minValue` and `@maxValue` decorators (e.g., percentages: `@minValue(0) @maxValue(100)`, port numbers: `@minValue(1) @maxValue(65535)`).
-- String properties used as resource name path parameters **SHOULD** include a `@pattern` decorator with:
-  - A maximum length limit (e.g., `{1,128}`) to prevent excessively long names.
-  - Prevention of leading special characters (e.g., `^(?![.-])`) — names should not start with `.` or `-`.
-  - Allowed character set matching the service's actual validation.
-  - Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
-- Properties representing UTC timestamps **SHOULD** include a `Utc` suffix in the name for clarity (e.g., `lastModifiedTimeUtc`, `createdAtUtc`). This helps customers understand the timezone context without reading the description.
-- Properties named `<something>Id` **MUST** be specific about what kind of ID they hold. The term "Id" is extremely ambiguous. Use the name, type, and description to remove ambiguity:
-  - If it is a UUID/GUID, use the `uuid` scalar type and explain in the description who creates/assigns it.
-  - If it is an ARM resource ID, include "ResourceId" in the property name and use `armResourceIdentifier` with type constraints.
-  - If it is a client-chosen name, use "Name" in the property name instead of "Id".
-  - At minimum, the description **MUST** explain the format, origin, and purpose of the ID.
+- Integer properties with known valid ranges **SHOULD** use `@minValue`
+  and `@maxValue` decorators.
+- String properties used as resource name path parameters **SHOULD**
+  include a `@pattern` decorator with a maximum length limit, character
+  set, and prevention of leading special characters.
+  Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
+- Properties representing UTC timestamps **SHOULD** include a `Utc`
+  suffix in the name (e.g., `lastModifiedTimeUtc`).
+- Properties named `<something>Id` **MUST** be specific about what kind
+  of ID they hold (uuid, armResourceIdentifier, or documented format).
 - Array properties **MUST** have their element type defined.
-- **AVOID** using `unknown` type — use a concrete type or a well-defined model.
+- **AVOID** using `unknown` type.
 
----
+### 2.3 Visibility & Mutability (Review Enforcement)
 
-## 5. ARM Resource Definitions (TypeSpec)
+> **Full rule definitions:** See
+> [`.github/skills/azure-api-review/references/property-mutability.md`](../skills/azure-api-review/references/property-mutability.md)
+> for OAPI027, OAPI020, OAPI029 with format-specific examples.
 
-### 5.1 Resource Base Types
+- Properties used only in responses **MUST NOT** be marked as required
+  in request contexts.
+- If a property is read-only, it **MUST** always be read-only (OAPI020).
+- If a property is immutable, it **MUST** always be immutable (OAPI029).
 
-- ARM tracked resources **MUST** extend `TrackedResource<TProperties>` from `@azure-tools/typespec-azure-resource-manager`.
-- ARM proxy resources **MUST** extend `ProxyResource<TProperties>`.
-- Extension resources **MUST** extend `ExtensionResource<TProperties>`.
-- **DO NOT** manually define `id`, `name`, `type`, `location`, `tags`, or `systemData` — these come from the base types.
-- **DO NOT** use private/custom decorators or manual resource base types when standard ARM base types (`TrackedResource`, `ProxyResource`, `ExtensionResource`) exist for the resource pattern.
+### 2.4 Enums & Provisioning State (Review Enforcement)
 
-### 5.2 CRUD Operations
+> **Full rule definitions:** See
+> [`.github/skills/azure-api-review/references/enum-best-practices.md`](../skills/azure-api-review/references/enum-best-practices.md)
+> and
+> [`.github/skills/azure-api-review/references/provisioning-state.md`](../skills/azure-api-review/references/provisioning-state.md).
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md) for the complete tracked resource CRUD requirements and operations API rules.
+- The `string` base type **SHOULD** be included in unions to make them
+  extensible.
+- `provisioningState` **SHOULD** extend
+  `Azure.ResourceManager.ResourceProvisioningState` for terminal states.
 
-- ARM tracked resources **MUST** define all standard operations using the ARM operation templates:
-  - `get` — `ArmResourceRead<Resource>`
-  - `createOrUpdate` — `ArmResourceCreateOrReplaceAsync<Resource>` (or sync variant)
-  - `update` — `ArmResourcePatchAsync<Resource, ResourceProperties>` (or `ArmTagsPatchAsync`)
-  - `delete` — `ArmResourceDeleteAsync<Resource>` (or sync variant)
-  - `listByResourceGroup` — `ArmResourceListByParent<Resource>`
-  - `listBySubscription` — `ArmListBySubscription<Resource>`
-- If any of these operations are missing for a tracked resource, flag it.
+### 2.5 ARM Resource Definitions (Review Enforcement)
 
-### 5.3 Nested Resources
+> **Full rule definition:** See
+> [`.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`](../skills/azure-api-review/references/tracked-resource-lifecycle.md).
 
+- **DO NOT** use private/custom decorators or manual resource base types
+  when standard ARM base types exist.
 - Nested resources **MUST** define a list operation under their parent.
-- **DO NOT** embed nested resource data inline in the parent resource model — use resource ID references.
+- **DO NOT** embed nested resource data inline in the parent resource
+  model.
 
-### 5.4 Operations Interface
+### 2.6 ARM POST Actions
 
-- Every ARM resource provider **MUST** expose an `Operations` interface:
-  ```tsp
-  interface Operations extends Azure.ResourceManager.Operations {}
-  ```
+- ARM resource POST actions **MUST** use `ArmResourceActionAsync` or
+  `ArmResourceActionSync` templates.
+- When a POST action does **not** require a request body, use `void` --
+  not `{}`. Using `{}` triggers the `no-empty-model` lint warning.
 
-### 5.5 `@armProviderNamespace` Decorator
+### 2.7 Data-Plane Operations
 
-- ARM TypeSpec projects **MUST** have `@armProviderNamespace` applied to the main namespace.
-- The namespace value **MUST** match the resource provider path (e.g., `Microsoft.Compute`).
+- Data-plane services **SHOULD** use `Azure.Core` operation templates
+  (`ResourceRead`, `ResourceCreateOrReplace`, `ResourceDelete`,
+  `ResourceList`).
+- Long-running operations **MUST** use LRO templates from `Azure.Core`.
+- All operations **MUST** include error responses using
+  `Azure.Core.Foundations.ErrorResponse` or the ARM error equivalents.
 
+### 2.8 Client Customizations (Review Enforcement)
 
-### 5.6 ARM POST Actions (Resource Actions)
-
-- ARM resource POST actions **MUST** use ArmResourceActionAsync or ArmResourceActionSync templates.
-- When a POST action does **not** require a request body, use `void` as the request body type parameter -- do **not** use an empty model literal `{}`.
-- Using `{}` triggers the `@azure-tools/typespec-azure-resource-manager/no-empty-model` lint warning. The correct fix is to replace `{}` with `void`, not to suppress the warning.
-- **Bad:**
-  ```tsp
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Body is empty."
-  downloadUrl is ArmResourceActionAsync<MyResource, {}, DownloadUrl>;
-  ```
-- **Good:**
-  ```tsp
-  downloadUrl is ArmResourceActionAsync<MyResource, void, DownloadUrl>;
-  ```
----
-
-## 6. Data-Plane Operations (TypeSpec)
-
-### 6.1 Operation Templates
-
-- Data-plane services **SHOULD** use `Azure.Core` operation templates:
-  - `ResourceRead<Resource>`
-  - `ResourceCreateOrReplace<Resource>`
-  - `ResourceDelete<Resource>`
-  - `ResourceList<Resource>`
-- Long-running operations **MUST** use the appropriate LRO templates from `Azure.Core`.
-
-### 6.2 Error Handling
-
-- All operations **MUST** include error responses using `Azure.Core.Foundations.ErrorResponse` or the ARM error equivalents.
-- **DO NOT** define custom error types when standard Azure error types exist.
+- `@@clientName` target values **MUST** follow TypeSpec conventions:
+  PascalCase for interfaces/classes, camelCase for
+  operations/properties.
+- Language emitter configurations (Go, Python, JavaScript, C#)
+  **SHOULD** be present in `tspconfig.yaml` if SDK generation is
+  expected.
 
 ---
 
-## 7. Client Customizations
-
-### 7.1 `client.tsp` File
-
-- Client-level customizations (renames, access changes, client structure) **MUST** be placed in a `client.tsp` file.
-- **DO NOT** import or use `@azure-tools/typespec-client-generator-core` in files other than `client.tsp`.
-- `@@clientName` target values **MUST** follow TypeSpec conventions: PascalCase for interfaces/classes, camelCase for operations/properties.
-
-### 7.2 `tspconfig.yaml` Validation
-
-- The `tspconfig.yaml` **MUST** reference the correct linter ruleset:
-  - ARM: `@azure-tools/typespec-azure-rulesets/resource-manager`
-  - Data-plane: `@azure-tools/typespec-azure-rulesets/data-plane`
-- Language emitter configurations (Go, Python, JavaScript, C#) **SHOULD** be present if SDK generation is expected.
-- **DO NOT** add custom `package.json` files — use the repo-root dependencies.
-
----
-
-## 8. Secret Detection in TypeSpec (SEC-SECRET-DETECT)
+## 3. Secret Detection in TypeSpec (SEC-SECRET-DETECT)
 
 > **Full rule definition:** See [`.github/skills/azure-api-review/references/secret-detection.md`](../skills/azure-api-review/references/secret-detection.md) for the complete detection signals, keyword list, and format-specific fix guidance.
 
@@ -291,9 +136,9 @@ A TypeSpec project **MUST NOT** contain:
 
 ---
 
-## 9. Suppressions
+## 4. Suppressions (Review Enforcement)
 
-### 9.1 Warning Suppression Policy
+### 4.1 Warning Suppression Policy
 
 - **AVOID** suppressing warnings. Every suppression needs justification.
 - If a suppression is present, verify it has a clear reason documented:
@@ -308,7 +153,7 @@ A TypeSpec project **MUST NOT** contain:
 
 ---
 
-## 10. Common Anti-Patterns
+## 5. Common Anti-Patterns
 
 Flag these issues when found:
 
@@ -342,20 +187,20 @@ Flag these issues when found:
 
 ---
 
-## 11. ARM TypeSpec Additional Rules
+## 6. ARM TypeSpec Additional Rules
 
-### 11.1 `@segment` Casing for Resource Types (TSP-SEGMENT-CASE)
+### 6.1 `@segment` Casing for Resource Types (TSP-SEGMENT-CASE)
 
 - The `@segment` decorator value for ARM resource types **MUST** use camelCase (e.g., `@segment("connectorGateways")`, `@segment("virtualMachines")`).
 - All-lowercase segment values (e.g., `@segment("connectorgateways")`) violate ARM path naming conventions and produce incorrect permanent resource type paths.
 - Once a resource type path is published (even in preview), changing it is a breaking change — catch casing issues before first publication.
 
-### 11.2 PATCH Operation Naming (TSP-PATCH-NAME)
+### 6.2 PATCH Operation Naming (TSP-PATCH-NAME)
 
 - ARM PATCH operations **SHOULD** be named `update` (not `patch`) so the generated `operationId` follows the ARM convention `{ResourceType}_Update` rather than `{ResourceType}_Patch`.
 - Example: `update is ArmTagsPatchSync<MyResource>;` instead of `patch is ArmTagsPatchSync<MyResource>;`.
 
-### 11.3 Use `armResourceIdentifier` for Resource References (TSP-ARM-RESOURCE-ID)
+### 6.3 Use `armResourceIdentifier` for Resource References (TSP-ARM-RESOURCE-ID)
 
 - When a TypeSpec property references another ARM resource, use the `armResourceIdentifier` scalar type with a type constraint:
   ```tsp
@@ -363,26 +208,26 @@ Flag these issues when found:
   ```
 - Do not use plain `string` for ARM resource ID properties — `armResourceIdentifier` enables ARM validation and rich SDK typing.
 
-### 11.4 Numeric Properties Must Use Numeric Types (TSP-NUMERIC-TYPE)
+### 6.4 Numeric Properties Must Use Numeric Types (TSP-NUMERIC-TYPE)
 
 - Properties whose names or doc comments clearly indicate numeric values (e.g., `numberOfCores`, `ram`, `vCpu`, `diskSizeGB`) **SHOULD** use `int32`, `int64`, or `float64` — not `string`.
 - If backward compatibility forces a string type for a numeric value, the doc comment **MUST** document the expected format and units.
 
 ---
 
-## 12. `tspconfig.yaml` Additional Validation
+## 7. `tspconfig.yaml` Additional Validation
 
-### 12.1 `emit` List Consistency (TSP-CONFIG-EMIT)
+### 7.1 `emit` List Consistency (TSP-CONFIG-EMIT)
 
 - If emitter-specific options are configured under `options:` (e.g., for `@azure-tools/typespec-python`, `@azure-tools/typespec-java`), the corresponding emitters **SHOULD** also be listed under `emit:`.
 - Options configured for emitters not in the `emit` list create confusion about what the config actually drives.
 
-### 12.2 `service-dir` Correctness (TSP-CONFIG-SERVICE-DIR)
+### 7.2 `service-dir` Correctness (TSP-CONFIG-SERVICE-DIR)
 
 - Each language emitter's `service-dir` override (if present) **MUST** point to the correct SDK directory for this service.
 - A `service-dir` copied from another service (e.g., `sdk/machinelearning` when the project is for `guestconfiguration`) will cause SDK generation to write to the wrong location.
 
-### 12.3 Duplicate Example Directories (TSP-CONFIG-EXAMPLES)
+### 7.3 Duplicate Example Directories (TSP-CONFIG-EXAMPLES)
 
 - With TypeSpec, examples may exist in both `{project-root}/examples/` (source) and `{version}/examples/` (generated output). Verify these are not independently maintained duplicates that can drift — there should be a single source of truth.
 
