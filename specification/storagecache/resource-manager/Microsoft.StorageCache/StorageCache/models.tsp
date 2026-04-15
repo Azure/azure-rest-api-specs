@@ -1195,6 +1195,7 @@ model SkuName {
   /**
    * SKU name for this resource.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   name?: string;
 }
 
@@ -2970,6 +2971,7 @@ model CacheProperties {
   /**
    * Specifies the space allocation percentage for each storage target in the cache.
    */
+  @visibility(Lifecycle.Read)
   spaceAllocation?: StorageTargetSpaceAllocation[];
 }
 
@@ -3260,6 +3262,7 @@ model CacheActiveDirectorySettingsCredentials {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @secret
   password?: string;
 }
 
