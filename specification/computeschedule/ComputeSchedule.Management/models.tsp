@@ -190,41 +190,6 @@ model Resources {
   ids: Array<armResourceIdentifier>;
 }
 
-@doc("Specifies the properties of a Virtual Machine")
-@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-model BulkActionVMSpec {
-  /**
-   * The marketplace image plan used for the virtual machine.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  plan?: Plan;
-
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
-
-  /**
-   * The identity of the virtual machine, if configured.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-  identity?: VirtualMachineIdentity;
-
-  /**
-   * The extended location of the Virtual Machine.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  extendedLocation?: ExtendedLocation;
-
-  @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
-  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
-  placement?: Placement;
-
-  /**
-   * Resource tags to apply to the virtual machines created by this bulk action.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-}
-
 @doc("Specifies the configuration for a virtual machine operation")
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 model BulkVMConfiguration {
@@ -239,77 +204,30 @@ model BulkVMConfiguration {
 
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 
-  /**
-   * The marketplace image plan used for the virtual machine.
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The marketplace image plan used for the virtual machine.")
   plan?: Plan;
 
-  /**
-   * The identity of the virtual machine, if configured.
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The identity of the virtual machine, if configured.")
   identity?: VirtualMachineIdentity;
 
-  /**
-   * The extended location of the Virtual Machine.
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @doc("The extended location of the Virtual Machine.")
   extendedLocation?: ExtendedLocation;
 
   @doc("Placement constraints for virtual machine hardware placement.")
   placement?: Placement;
 
-  /**
-   * Resource tags to apply to the virtual machines created by this bulk action.
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @doc("Resource tags to apply to the virtual machines created by this bulk action.")
   tags?: Record<string>;
 
-  @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")
-  scheduledEventsPolicy?: ScheduledEventsPolicy;
-
-  @doc("Specifies the hardware profile for the virtual machine.")
-  hardwareProfile?: HardwareProfile;
-
-  @doc("Specifies the storage settings for the virtual machine disks.")
-  storageProfile?: StorageProfile;
-
-  @doc("Specifies additional capabilities enabled or disabled on the virtual machine.")
-  additionalCapabilities?: AdditionalCapabilities;
-
-  @doc("Specifies the operating system settings used while creating the virtual machine.")
-  osProfile?: OSProfile;
-
-  @doc("Specifies the network interfaces of the virtual machine.")
-  networkProfile?: NetworkProfile;
-
-  @doc("Specifies the Security related profile settings for the virtual machine.")
-  securityProfile?: SecurityProfile;
-
-  @doc("Specifies the boot diagnostic settings state.")
-  diagnosticsProfile?: DiagnosticsProfile;
-
-  @doc("Specifies that the image or disk that is being used was licensed on-premises.")
-  licenseType?: string;
-
-  @doc("Specifies the time allotted for all extensions to start. Should be between 15 and 120 minutes in ISO 8601 format.")
-  extensionsTimeBudget?: string;
-
-  @doc("Specifies Scheduled Event related configurations.")
-  scheduledEventsProfile?: ScheduledEventsProfile;
-
-  @doc("UserData for the VM, which must be base-64 encoded.")
-  userData?: string;
-
-  @doc("Specifies information about the capacity reservation used to allocate the virtual machine.")
-  capacityReservation?: CapacityReservationProfile;
-
-  @doc("Specifies the gallery applications that should be made available to the VM.")
-  applicationProfile?: ApplicationProfile;
+  @doc("Specifies the properties of the virtual machine to be created.")
+  properties?: BulkActionVMProperties;
 
   @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  extensions?: BulkActionVMExtension[];
+  vmExtensions?: BulkActionVMExtension[];
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)

@@ -11,7 +11,7 @@ namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
 @doc("Describes the properties of a Virtual Machine for create.")
-model BulkActionVMProfile {
+model BulkActionVMProperties {
   @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.")
   scheduledEventsPolicy?: ScheduledEventsPolicy;
 
@@ -26,6 +26,9 @@ model BulkActionVMProfile {
 
   @doc("Specifies the network interfaces of the virtual machine.")
   networkProfile?: NetworkProfile;
+
+  @doc("Specifies the hardware profile for the virtual machine.")
+  hardwareProfile?: HardwareProfile;
 
   @doc("Specifies the Security related profile settings for the virtual machine.")
   securityProfile?: SecurityProfile;

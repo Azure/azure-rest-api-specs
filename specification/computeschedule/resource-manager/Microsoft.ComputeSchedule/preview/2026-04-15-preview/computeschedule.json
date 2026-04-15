@@ -2113,7 +2113,7 @@
         "properties"
       ]
     },
-    "BulkActionVMProfile": {
+    "BulkActionVMProperties": {
       "type": "object",
       "description": "Describes the properties of a Virtual Machine for create.",
       "properties": {
@@ -2136,6 +2136,10 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "Specifies the network interfaces of the virtual machine."
+        },
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile",
+          "description": "Specifies the hardware profile for the virtual machine."
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
@@ -2168,42 +2172,6 @@
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
           "description": "Specifies the gallery applications that should be made available to the VM."
-        }
-      }
-    },
-    "BulkActionVMSpec": {
-      "type": "object",
-      "description": "Specifies the properties of a Virtual Machine",
-      "properties": {
-        "plan": {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
-          "description": "The marketplace image plan used for the virtual machine."
-        },
-        "zones": {
-          "type": "array",
-          "description": "The availability zones.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/VirtualMachineIdentity",
-          "description": "The identity of the virtual machine, if configured."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
-          "description": "The extended location of the Virtual Machine."
-        },
-        "placement": {
-          "$ref": "#/definitions/Placement",
-          "description": "Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags to apply to the virtual machines created by this bulk action.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -2308,63 +2276,11 @@
             "type": "string"
           }
         },
-        "scheduledEventsPolicy": {
-          "$ref": "#/definitions/ScheduledEventsPolicy",
-          "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations."
+        "properties": {
+          "$ref": "#/definitions/BulkActionVMProperties",
+          "description": "Specifies the properties of the virtual machine to be created."
         },
-        "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware profile for the virtual machine."
-        },
-        "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
-          "description": "Specifies the storage settings for the virtual machine disks."
-        },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
-        },
-        "osProfile": {
-          "$ref": "#/definitions/OSProfile",
-          "description": "Specifies the operating system settings used while creating the virtual machine."
-        },
-        "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
-          "description": "Specifies the network interfaces of the virtual machine."
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Specifies the Security related profile settings for the virtual machine."
-        },
-        "diagnosticsProfile": {
-          "$ref": "#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state."
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "Specifies that the image or disk that is being used was licensed on-premises."
-        },
-        "extensionsTimeBudget": {
-          "type": "string",
-          "description": "Specifies the time allotted for all extensions to start. Should be between 15 and 120 minutes in ISO 8601 format."
-        },
-        "scheduledEventsProfile": {
-          "$ref": "#/definitions/ScheduledEventsProfile",
-          "description": "Specifies Scheduled Event related configurations."
-        },
-        "userData": {
-          "type": "string",
-          "description": "UserData for the VM, which must be base-64 encoded."
-        },
-        "capacityReservation": {
-          "$ref": "#/definitions/CapacityReservationProfile",
-          "description": "Specifies information about the capacity reservation used to allocate the virtual machine."
-        },
-        "applicationProfile": {
-          "$ref": "#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM."
-        },
-        "extensions": {
+        "vmExtensions": {
           "type": "array",
           "description": "Virtual Machine Extensions Array to be applied to the Virtual Machines.",
           "items": {
