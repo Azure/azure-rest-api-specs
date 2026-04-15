@@ -61,6 +61,78 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getDataAnnotations": {
+      "post": {
+        "operationId": "Entities_GetDataAnnotations",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Retrieve data annotations for an entity",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of annotations to return per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "top"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Skip token from a previous response to retrieve the next page of results.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "skipToken"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetDataAnnotationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetDataAnnotationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_GetDataAnnotations": {
+            "$ref": "./examples/Entities_GetDataAnnotations.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CloudHealth/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -1280,70 +1352,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getDataAnnotations": {
-      "post": {
-        "operationId": "Entities_GetDataAnnotations",
-        "tags": [
-          "Entities"
-        ],
-        "description": "Retrieve data annotations for an entity",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "healthModelName",
-            "in": "path",
-            "description": "Name of health model resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "entityName",
-            "in": "path",
-            "description": "Name of the entity. Must be unique within a health model.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetDataAnnotationsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GetDataAnnotationsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Entities_GetDataAnnotations": {
-            "$ref": "./examples/Entities_GetDataAnnotations.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getHistory": {
       "post": {
         "operationId": "Entities_GetHistory",
@@ -1529,6 +1537,62 @@
         "x-ms-examples": {
           "Entities_IngestHealthReport": {
             "$ref": "./examples/Entities_IngestHealthReport.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/getRecommendedSignals": {
+      "post": {
+        "operationId": "HealthModels_GetRecommendedSignals",
+        "tags": [
+          "HealthModels"
+        ],
+        "description": "Get recommended signal configurations for a given Azure resource type",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetRecommendedSignalsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetRecommendedSignalsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HealthModels_GetRecommendedSignals": {
+            "$ref": "./examples/HealthModels_GetRecommendedSignals.json"
           }
         }
       }
@@ -2438,13 +2502,14 @@
       "properties": {
         "annotationId": {
           "type": "string",
-          "description": "Server-assigned unique identifier for the annotation"
+          "description": "Server-assigned unique identifier for the annotation",
+          "maxLength": 36
         },
         "annotationDetails": {
           "type": "object",
           "description": "Annotation properties as a dynamic key-value pair bag",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/string4096"
           }
         },
         "description": {
@@ -2471,7 +2536,7 @@
           "type": "object",
           "description": "Annotation properties as a dynamic key-value pair bag",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/string4096"
           }
         },
         "description": {
@@ -3074,15 +3139,48 @@
             "annotationId"
           ]
         },
-        "nextLink": {
+        "skipToken": {
           "type": "string",
-          "format": "uri",
-          "description": "Link to the next page of results"
+          "description": "Token to retrieve the next page of results. Null if there are no more results."
         }
       },
       "required": [
         "entityName",
         "annotations"
+      ]
+    },
+    "GetRecommendedSignalsRequest": {
+      "type": "object",
+      "description": "Request body for getting recommended signals for a given Azure resource type",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Azure resource type to get recommended signals for (e.g. 'microsoft.compute/virtualMachines').",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "resourceType"
+      ]
+    },
+    "GetRecommendedSignalsResponse": {
+      "type": "object",
+      "description": "Response containing recommended signal configurations for a given Azure resource type",
+      "properties": {
+        "signals": {
+          "type": "array",
+          "description": "List of recommended signal configurations for the specified resource type.",
+          "items": {
+            "$ref": "#/definitions/RecommendedSignal"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "signals"
       ]
     },
     "HealthModel": {
@@ -3688,6 +3786,67 @@
         }
       ],
       "x-ms-discriminator-value": "PrometheusMetricsQuery"
+    },
+    "RecommendedSignal": {
+      "type": "object",
+      "description": "A recommended signal configuration for an Azure resource type",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the recommended signal."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Metric namespace (e.g. 'microsoft.compute/virtualmachines').",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric (e.g. 'Percentage CPU').",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "aggregationType": {
+          "$ref": "#/definitions/MetricAggregationType",
+          "description": "Type of aggregation to apply to the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the metric (e.g. Percent, Bytes, Count).",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "timeGrain": {
+          "type": "string",
+          "description": "Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "dimensionFilter": {
+          "type": "string",
+          "description": "Optional dimension filter to apply to the metric.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules with recommended thresholds."
+        },
+        "recommended": {
+          "type": "boolean",
+          "description": "Whether this signal is recommended to be enabled by default."
+        }
+      },
+      "required": [
+        "id",
+        "metricNamespace",
+        "metricName",
+        "aggregationType",
+        "timeGrain",
+        "evaluationRules",
+        "recommended"
+      ]
     },
     "Relationship": {
       "type": "object",

@@ -1341,6 +1341,64 @@ model HealthReportEvaluationRule {
   ...EvaluationRule;
 }
 
+@added(Versions.v2026_05_01_preview)
+@doc("Request body for getting recommended signals for a given Azure resource type")
+model GetRecommendedSignalsRequest {
+  @doc("Azure resource type to get recommended signals for (e.g. 'microsoft.compute/virtualMachines').")
+  @minLength(1)
+  @maxLength(256)
+  resourceType: string;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Response containing recommended signal configurations for a given Azure resource type")
+model GetRecommendedSignalsResponse {
+  @doc("List of recommended signal configurations for the specified resource type.")
+  @identifiers(#["id"])
+  signals: RecommendedSignal[];
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("A recommended signal configuration for an Azure resource type")
+model RecommendedSignal {
+  @doc("Unique identifier of the recommended signal.")
+  id: string;
+
+  @doc("Metric namespace (e.g. 'microsoft.compute/virtualmachines').")
+  @minLength(1)
+  @maxLength(256)
+  metricNamespace: string;
+
+  @doc("Name of the metric (e.g. 'Percentage CPU').")
+  @minLength(1)
+  @maxLength(256)
+  metricName: string;
+
+  @doc("Type of aggregation to apply to the metric.")
+  aggregationType: MetricAggregationType;
+
+  @doc("Unit of the metric (e.g. Percent, Bytes, Count).")
+  @minLength(1)
+  @maxLength(100)
+  unit?: string;
+
+  @doc("Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain: string;
+
+  @doc("Optional dimension filter to apply to the metric.")
+  @minLength(1)
+  @maxLength(256)
+  dimensionFilter?: string;
+
+  @doc("Evaluation rules with recommended thresholds.")
+  evaluationRules: EvaluationRule;
+
+  @doc("Whether this signal is recommended to be enabled by default.")
+  recommended: boolean;
+}
+
 alias TimestampQueryParam = {
   @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
   @query
@@ -1372,6 +1430,16 @@ interface HealthModels {
   delete is ArmResourceDeleteWithoutOkAsync<HealthModel>;
   listByResourceGroup is ArmResourceListByParent<HealthModel>;
   listBySubscription is ArmListBySubscription<HealthModel>;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Get recommended signal configurations for a given Azure resource type")
+  @post
+  @action("getRecommendedSignals")
+  getRecommendedSignals is ArmResourceActionSync<
+    HealthModel,
+    GetRecommendedSignalsRequest,
+    GetRecommendedSignalsResponse
+  >;
 }
 
 @armResourceOperations(SignalDefinition)
