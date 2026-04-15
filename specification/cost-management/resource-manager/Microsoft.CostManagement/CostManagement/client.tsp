@@ -395,7 +395,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 );
 @@alternateType(CostManagementProxyResource.eTag, Azure.Core.eTag, "csharp");
 
-
 // @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
 /** Result of forecast. It contains all columns listed under groupings and aggregation. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
@@ -439,4 +438,6 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@clientName(ExportRunReplacement, "ExportRun", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is needed for C# backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportDataset.configuration, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportDataset.configuration,
+  "csharp"
+);
