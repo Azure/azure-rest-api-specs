@@ -125,7 +125,7 @@ interface IndividualEnrollmentOperationGroup {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-max-item-count is a standard Azure header"
       @header
-      `x-ms-max-item-count`?: int32;
+      `x-ms-max-item-count`?: int64;
 
       /**
        * Continuation token
@@ -299,7 +299,7 @@ interface EnrollmentGroupOperationGroup {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-max-item-count is a standard Azure header"
       @header
-      `x-ms-max-item-count`?: int32;
+      `x-ms-max-item-count`?: int64;
 
       /**
        * Continuation token
@@ -440,7 +440,7 @@ interface DeviceRegistrationStateOperationGroup {
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Migration from Swagger: x-ms-max-item-count is a standard Azure header"
       @header
-      `x-ms-max-item-count`?: int32;
+      `x-ms-max-item-count`?: int64;
 
       /**
        * continuation token
