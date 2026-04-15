@@ -398,8 +398,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 
 model ForecastResultReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
-  // This model is used to replace the existing ForecastResult model in C# with a new one that has the same properties but a different name to avoid breaking changes.
-  // The existing ForecastResult model will be marked as deprecated and eventually removed in a future release.
   ...OmitProperties<ForecastResult, "id" | "name" | "type">;
 }
 @@alternateType(ForecastResult, ForecastResultReplacement, "csharp");
@@ -427,9 +425,6 @@ model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 @@alternateType(ExportRun, ExportRunReplacement, "csharp");
 @@clientName(ExportRun, "ExportRunTemp", "csharp");
 @@clientName(ExportRunReplacement, "ExportRun", "csharp");
-//ExportRun
 
-// Flatten ExportDatasetConfiguration into ExportDataset for C# to match the baseline API
-// where Columns/DataVersion/Filters were directly on ExportDataset (not nested in Configuration).
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is needed for C# backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportDataset.configuration, "csharp");
