@@ -23042,6 +23042,12 @@ model HubVirtualNetworkConnectionProperties {
   allowRemoteVnetToUseHubVnetGateways?: boolean;
 
   /**
+   * The resource id of the ConnectionPolicy associated with this HubVirtualNetworkConnection.
+   */
+  @added(Versions.v2025_07_01)
+  connectionPolicy?: SubResource;
+
+  /**
    * Enable internet security.
    */
   enableInternetSecurity?: boolean;
@@ -24313,6 +24319,44 @@ model RoutingPolicy {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ListRoutingIntentResult is Azure.Core.Page<RoutingIntent>;
+
+/**
+ * Properties of the ConnectionPolicy resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP VirtualWAN feature gating, consistent with all other VirtualWAN model definitions"
+@added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+model ConnectionPolicyProperties {
+  /**
+   * Enable internet security.
+   */
+  enableInternetSecurity?: boolean;
+
+  /**
+   * The Routing Configuration indicating the associated and propagated route tables on this connection.
+   */
+  routingConfiguration?: RoutingConfiguration;
+
+  /**
+   * The provisioning state of the ConnectionPolicy resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * List of connection names (e.g. VpnConnection, HubVirtualNetworkConnection) associated with this ConnectionPolicy. These are resource names, not Azure resource IDs, consistent with the established VirtualWAN pattern used by HubRouteTable.associatedConnections.
+   */
+  @visibility(Lifecycle.Read)
+  associatedConnections?: string[];
+}
+
+/**
+ * List of ConnectionPolicies and a URL nextLink to get the next set of results.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP VirtualWAN feature gating, consistent with all other VirtualWAN list result model definitions"
+@added(Versions.v2025_07_01)
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+model ListConnectionPoliciesResult is Azure.Core.Page<ConnectionPolicy>;
 
 /**
  * Defines web application firewall policy properties.
