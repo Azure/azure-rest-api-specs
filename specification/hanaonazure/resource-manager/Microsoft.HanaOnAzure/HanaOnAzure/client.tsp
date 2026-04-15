@@ -3,4 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.HanaOnAzure, "HanaManagementClient", "javascript");
+@@clientName(Microsoft.HanaOnAzure,
+  "HanaManagementClient",
+  "javascript,python"
+);
