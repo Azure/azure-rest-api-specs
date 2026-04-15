@@ -22,6 +22,7 @@ Detect SDK breaking changes across all languages (Go, Java, .NET, JavaScript, Py
 
 | Tool                                            | Purpose                                              |
 | ----------------------------------------------- | ---------------------------------------------------- |
+| `azure-sdk-mcp:azsdk_verify_setup`              | Verify and install required environment for a language |
 | `azure-sdk-mcp:azsdk_package_generate_code`     | Generate SDK code for a given language                |
 | `azure-sdk-mcp:azsdk_package_update_changelog_content` | Update changelog with detected changes         |
 
@@ -38,18 +39,18 @@ Detect SDK breaking changes across all languages (Go, Java, .NET, JavaScript, Py
 
 ## Workflow
 
-> Intake → Per-Language Loop (Generate → Update Changelog → Analyze) → Cross-Language Analysis → Summary
+> Intake → Per-Language Loop (Verify Environment → Generate → Update Changelog → Analyze) → Cross-Language Analysis → Summary
 
 ### Progress Checklist
 
 Copy and update as you progress:
 
 - [ ] Step 1: Collected inputs
-- [ ] Step 2: Go — Generate → Changelog → Analyze
-- [ ] Step 3: Java — Generate → Changelog → Analyze
-- [ ] Step 4: .NET — Generate → Changelog → Analyze
-- [ ] Step 5: JavaScript — Generate → Changelog → Analyze
-- [ ] Step 6: Python — Generate → Changelog → Analyze
+- [ ] Step 2: Go — Verify Env → Generate → Changelog → Analyze
+- [ ] Step 3: Java — Verify Env → Generate → Changelog → Analyze
+- [ ] Step 4: .NET — Verify Env → Generate → Changelog → Analyze
+- [ ] Step 5: JavaScript — Verify Env → Generate → Changelog → Analyze
+- [ ] Step 6: Python — Verify Env → Generate → Changelog → Analyze
 - [ ] Step 7: Cross-language breaking change analysis
 - [ ] Step 8: Presented consolidated summary
 
@@ -87,14 +88,21 @@ If these are already provided by the user (or collected earlier in the conversat
 
 ---
 
+Prompt user to selected languages which will detect breaking changes.
+
 ### Steps 2–6: Per-Language Breaking Change Detection
 
-Repeat the following three sub-steps **for each selected language**, in order: Go → Java → .NET → JavaScript → Python.
+Repeat the following sub-steps **for each selected language**, processing one language at a time **in sequence**: Go → Java → .NET → JavaScript → Python. **Do not start the next language until the current language's sub-steps are fully complete.**
 
 If a language is not selected or the user does not have the SDK repo cloned, skip it and note it as **skipped** in the final summary.
 
-**Prerequisite:**
-Call `azsdk_verify_setup` for the Language. If environment is not valid, install required environment.
+#### Sub-step 0: Verify & Install Environment
+
+**Action:** Call `azsdk_verify_setup` with the current language (e.g., `langs: ["Go"]`) and the `localSdkRepoPath` as `packagePath`.
+
+- If the environment check passes, proceed to Sub-step A.
+- If the environment check reports missing requirements, call `azsdk_verify_setup` again with `requirementsToInstall` set to the names of the missing requirements to auto-install them.
+- If installation fails, record the error for this language, inform the user, and continue to the next language.
 
 #### Sub-step A: Generate SDK
 
@@ -111,15 +119,17 @@ If generation fails, record the error for this language, inform the user, and co
 
 This produces an up-to-date `CHANGELOG.md` with breaking changes and new features.
 
-If the changelog update fails, ask the user to manually provide the changelog content for this language, then continue.
+If the changelog update fails, ask the user to manually provide the changelog content for this language, then continue to next language.
 
 #### Sub-step C: Analyze Breaking Changes
 
 **Action:** Read the **first** `## <version>` entry from the generated `CHANGELOG.md` in the SDK project directory.
 
 Extract and record:
-- **Breaking Changes** — the full list under `### Breaking Changes`
+- **Breaking Changes** — the **complete, verbatim list** of every bullet under `### Breaking Changes`. Do not summarize, merge, or omit any entry.
 - **Features Added** — the full list under `### Features Added`
+
+**Cross-referencing renames:** For each item in `### Breaking Changes` that says a struct/type/field was "removed", check `### Features Added` for a corresponding new struct/type/field with a similar name. If one exists, classify the pair as a **rename** (e.g., `ResourceInfoList` removed + `ResourceList` added = rename `ResourceInfoList → ResourceList`). Record it as a rename, not just a removal.
 
 If the `### Breaking Changes` section is absent or empty, record: **No breaking changes detected**.
 
@@ -131,18 +141,21 @@ If the `### Breaking Changes` section is absent or empty, record: **No breaking 
 
 **Actions:**
 
-1. Collect all breaking change entries from every language processed in Steps 2–6.
+1. Collect **every individual** breaking change entry from every language processed in Steps 2–6. Do not drop, merge, or skip any entry at this stage.
 2. For each breaking change entry, identify the **underlying API change** — the TypeSpec-level or REST API–level change that caused it. Common categories include:
    - **Removed operation** — an operation/method was deleted from the API surface
    - **Removed model/type** — a model, struct, class, or interface was deleted
    - **Removed property/field** — a property was removed from an existing model
-   - **Renamed operation/model/property** — a symbol was renamed
+   - **Renamed operation/model/property** — a symbol was renamed (correlate "removed X" with "added Y" in Features Added to detect renames)
    - **Changed type** — a property or parameter type was changed
    - **Changed required/optional** — a property's optionality was changed
    - **Changed signature** — operation parameters were added, removed, or reordered
    - **Other** — any change that does not fit the above categories
-3. Group entries that correspond to the **same underlying API change** across languages. Two entries are considered the same if they refer to the same operation, model, or property — even though the language-specific symbol names differ (e.g., Go uses `BeginCreate`, JavaScript uses `beginCreate`, Python uses `begin_create`).
-4. Record any breaking changes that are **unique to a single language** (e.g., caused by language-specific SDK conventions rather than an API-level change).
+3. **Rename detection rule:** For every "removed" model, struct, type, or field, check the `### Features Added` section for a new symbol with a semantically equivalent name. If found, record the pair as a **rename** with both the old and new name explicitly stated (e.g., `ResourceInfoList → ResourceList`). Each rename is a distinct breaking change entry — do not fold multiple renames into a single entry.
+4. **Cascading changes rule:** If a rename causes downstream breakage (e.g., response struct fields replaced), list each cascade as a separate entry, clearly linking it to the root rename.
+5. Group entries that correspond to the **same underlying API change** across languages.
+6. Record any breaking changes that are **unique to a single language** (e.g., caused by language-specific SDK conventions rather than an API-level change).
+7. **Verify completeness:** After grouping, count the total entries in your analysis and confirm it matches the raw count from the changelogs. If the counts differ, find and add the missing entries.
 
 ---
 
@@ -174,6 +187,7 @@ These breaking changes stem from the same underlying API change and affect multi
 1. Model `ResourceInfo` renamed to `WebPubSubResource`, which breaks **Go**, **Java**, and **JavaScript** SDK.
 2. Operation `BeginCreate` removed from `FooClient`, which breaks **Go**, **Java**, and **JavaScript** SDK.
 3. Property `endpoint` removed from model `ConnectionInfo`, which breaks **Go** and **Python** SDK.
+4. Operation `PrivateEndpointConnectionsClient.Get` parameter order change from ( hubName, resourceGroupName, hubName) to ( resourceGroupName, resourceName, hubName), which breaks **Go**
 
 ### Language-Specific Breaking Changes
 
