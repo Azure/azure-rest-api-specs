@@ -1737,6 +1737,30 @@
         "result"
       ]
     },
+    "IssueCreationNotificationType": {
+      "type": "object",
+      "description": "Notification type for issue creation events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IssueNotificationType"
+        }
+      ],
+      "x-ms-discriminator-value": "IssueCreation"
+    },
+    "IssueNotificationType": {
+      "type": "object",
+      "description": "Base properties for an issue notification type",
+      "properties": {
+        "updateType": {
+          "$ref": "#/definitions/UpdateType",
+          "description": "The type of update that triggers the notification"
+        }
+      },
+      "discriminator": "updateType",
+      "required": [
+        "updateType"
+      ]
+    },
     "IssueProperties": {
       "type": "object",
       "description": "The issue properties",
@@ -1775,6 +1799,10 @@
         "background": {
           "$ref": "#/definitions/Background",
           "description": "The issue background information"
+        },
+        "notifications": {
+          "$ref": "#/definitions/Notifications",
+          "description": "The issue notification settings"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1815,6 +1843,10 @@
         "background": {
           "$ref": "#/definitions/Background",
           "description": "The issue background information"
+        },
+        "notifications": {
+          "$ref": "#/definitions/Notifications",
+          "description": "The issue notification settings"
         }
       }
     },
@@ -1929,6 +1961,43 @@
       "required": [
         "value"
       ]
+    },
+    "Notifications": {
+      "type": "object",
+      "description": "Issue notification settings",
+      "properties": {
+        "updateTypes": {
+          "type": "array",
+          "description": "The types of updates that trigger notifications",
+          "items": {
+            "$ref": "#/definitions/IssueNotificationType"
+          },
+          "x-ms-identifiers": [
+            "updateType"
+          ]
+        },
+        "actionGroupIds": {
+          "type": "array",
+          "description": "The action group IDs to notify",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeDefaultActionGroups": {
+          "type": "boolean",
+          "description": "Whether to exclude default action groups from notifications"
+        }
+      }
+    },
+    "OnChangeNotificationType": {
+      "type": "object",
+      "description": "Notification type for on-change events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IssueNotificationType"
+        }
+      ],
+      "x-ms-discriminator-value": "OnChange"
     },
     "Origin": {
       "type": "object",
@@ -2192,6 +2261,55 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "The issue is canceled"
+          }
+        ]
+      }
+    },
+    "TimeBasedUpdatesNotificationType": {
+      "type": "object",
+      "description": "Notification type for time-based updates",
+      "properties": {
+        "updateInterval": {
+          "type": "string",
+          "description": "The interval between time-based updates"
+        }
+      },
+      "required": [
+        "updateInterval"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IssueNotificationType"
+        }
+      ],
+      "x-ms-discriminator-value": "TimeBased"
+    },
+    "UpdateType": {
+      "type": "string",
+      "description": "The type of update that triggers a notification",
+      "enum": [
+        "IssueCreation",
+        "TimeBased",
+        "OnChange"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IssueCreation",
+            "value": "IssueCreation",
+            "description": "Notification sent when an issue is created"
+          },
+          {
+            "name": "TimeBased",
+            "value": "TimeBased",
+            "description": "Notification sent based on time intervals"
+          },
+          {
+            "name": "OnChange",
+            "value": "OnChange",
+            "description": "Notification sent when the issue changes"
           }
         ]
       }

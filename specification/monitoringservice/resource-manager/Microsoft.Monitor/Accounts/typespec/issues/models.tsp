@@ -197,7 +197,7 @@ model BackgroundDetails {
   value: string;
 }
 
-@added(Versions.v2025_10_03)
+@added(Versions.v2025_10_03_stable)
 @doc("The type of update that triggers a notification")
 union UpdateType {
   @doc("Notification sent when an issue is created")
@@ -212,7 +212,7 @@ union UpdateType {
   string,
 }
 
-@added(Versions.v2025_10_03)
+@added(Versions.v2025_10_03_stable)
 @doc("Base properties for an issue notification type")
 @discriminator("updateType")
 model IssueNotificationType {
@@ -220,21 +220,21 @@ model IssueNotificationType {
   updateType: UpdateType;
 }
 
-@added(Versions.v2025_10_03)
+@added(Versions.v2025_10_03_stable)
 @doc("Notification type for issue creation events")
 model IssueCreationNotificationType extends IssueNotificationType {
   @doc("The type of update that triggers the notification")
   updateType: UpdateType.IssueCreation;
 }
 
-@added(Versions.v2025_10_03)
+@added(Versions.v2025_10_03_stable)
 @doc("Notification type for on-change events")
 model OnChangeNotificationType extends IssueNotificationType {
   @doc("The type of update that triggers the notification")
   updateType: UpdateType.OnChange;
 }
 
-@added(Versions.v2025_10_03)
+@added(Versions.v2025_10_03_stable)
 @doc("Notification type for time-based updates")
 model TimeBasedUpdatesNotificationType extends IssueNotificationType {
   @doc("The type of update that triggers the notification")
@@ -244,7 +244,7 @@ model TimeBasedUpdatesNotificationType extends IssueNotificationType {
   updateInterval: string;
 }
 
-@added(Versions.v2025_10_03)
+@added(Versions.v2025_10_03_stable)
 @doc("Issue notification settings")
 model Notifications {
   @doc("The types of updates that trigger notifications")
@@ -308,7 +308,7 @@ model IssuePayload {
   @doc("The issue background information")
   background?: Background;
 
-  @added(Versions.v2025_10_03)
+  @added(Versions.v2025_10_03_stable)
   @doc("The issue notification settings")
   notifications?: Notifications;
 }
