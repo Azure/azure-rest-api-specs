@@ -2890,7 +2890,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MaintenanceEventResource"
+              "$ref": "#/definitions/MaintenanceEventActionResponse"
             }
           },
           "202": {
@@ -2926,7 +2926,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/MaintenanceEventResource"
+          "final-state-schema": "#/definitions/MaintenanceEventActionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -2980,7 +2980,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MaintenanceEventResource"
+              "$ref": "#/definitions/MaintenanceEventActionResponse"
             }
           },
           "202": {
@@ -3016,7 +3016,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/MaintenanceEventResource"
+          "final-state-schema": "#/definitions/MaintenanceEventActionResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -7048,6 +7048,43 @@
       "required": [
         "value"
       ]
+    },
+    "MaintenanceEventActionResponse": {
+      "type": "object",
+      "description": "Response model for maintenance event reschedule and apply-now actions.",
+      "properties": {
+        "maintenanceEventId": {
+          "type": "string",
+          "description": "The maintenance event name (maintenance ID)."
+        },
+        "serverId": {
+          "type": "string",
+          "description": "The full ARM resource ID of the server."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status (e.g. 'Accepted', 'Succeeded')."
+        },
+        "plannedStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The planned start time of the maintenance event (UTC)."
+        },
+        "plannedEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The planned end time of the maintenance event (UTC)."
+        },
+        "appliedNow": {
+          "type": "boolean",
+          "description": "A value indicating whether this was an apply-now (immediate) action. True for ApplyNow; false for Reschedule."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time this maintenance event record was last updated (UTC)."
+        }
+      }
     },
     "MaintenanceEventRescheduleRequest": {
       "type": "object",
