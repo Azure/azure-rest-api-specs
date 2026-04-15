@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./NetworkInterface.tsp";
 import "./NetworkInterfaceIPConfiguration.tsp";
@@ -33,11 +34,28 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.Network;
+@TypeSpec.Versioning.versioned(Versions)
+namespace Common;
+
+/**
+ * The available API versions.
+ */
+enum Versions {
+  /**
+   * The 2025-05-01 API version.
+   */
+  v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2025-07-01 API version.
+   */
+  v2025_07_01: "2025-07-01",
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -377,6 +395,29 @@ union NatGatewaySkuName {
    * StandardV2
    */
   StandardV2: "StandardV2",
+}
+
+/**
+ * Whether Nat64 is enabled for the NAT gateway resource.
+ */
+@added(Versions.v2025_07_01)
+union Nat64State {
+  string,
+
+  /**
+   * Nat64 Property is not set.
+   */
+  None: "None",
+
+  /**
+   * Nat64 is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Nat64 is disabled.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -1377,6 +1418,11 @@ model DdosSettings {
   protectionMode?: DdosSettingsProtectionMode;
 
   /**
+   * The DDoS custom policy associated with the public IP.
+   */
+  ddosCustomPolicy?: SubResource;
+
+  /**
    * The DDoS protection plan associated with the public IP. Can only be set if ProtectionMode is Enabled
    */
   ddosProtectionPlan?: SubResource;
@@ -1908,6 +1954,19 @@ model FrontendIPConfigurationPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * The DDoS protection settings associated with the frontend IP configuration.
+   */
+  @added(Versions.v2025_07_01)
+  ddosSettings?: DdosFrontendIpConfigurationSettings;
+}
+
+/** DDoS protection settings for a frontend IP configuration. */
+@added(Versions.v2025_07_01)
+model DdosFrontendIpConfigurationSettings {
+  /** The reference to the DDoS Custom Policy resource. */
+  ddosCustomPolicy?: SubResource;
 }
 
 /**
@@ -3177,6 +3236,12 @@ model NatGatewayPropertiesFormat {
   serviceGateway?: SubResource;
 
   /**
+   * Whether Nat64 is enabled for the NAT gateway resource.
+   */
+  @added(Versions.v2025_07_01)
+  nat64?: Nat64State;
+
+  /**
    * The resource GUID property of the NAT gateway resource.
    */
   @visibility(Lifecycle.Read)
@@ -3962,6 +4027,12 @@ model VirtualNetworkPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   defaultPublicNatGateway?: SubResource;
+
+  /**
+   * A configurable list of summarized gateway prefixes advertised for the virtual network.
+   */
+  @added(Versions.v2025_07_01)
+  summarizedGatewayPrefixes?: AddressSpace;
 }
 
 /**
