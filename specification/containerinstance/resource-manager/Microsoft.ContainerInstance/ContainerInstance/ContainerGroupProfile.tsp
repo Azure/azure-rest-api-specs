@@ -48,7 +48,9 @@ alias ContainerGroupProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @minLength(1)
     @maxLength(63)
     containerGroupProfileName: string;
-  }
+  },
+  CloudError,
+  "ContainerGroupProfile"
 >;
 
 @armResourceOperations(#{ omitTags: true })
