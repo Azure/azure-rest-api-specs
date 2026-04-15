@@ -563,12 +563,10 @@ using Compute;
 // ── Plural→singular enum renames (C# backward compat) ──
 @@clientName(CapacityReservationGroupInstanceViewTypes, "CapacityReservationGroupInstanceViewType", "csharp");
 @@clientName(CapacityReservationInstanceViewTypes, "CapacityReservationInstanceViewType", "csharp");
-@@clientName(ComponentNames, "ComponentName", "csharp");
 @@clientName(DiffDiskOptions, "DiffDiskOption", "csharp");
 @@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
 @@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
 @@clientName(ExpandTypesForListVMs, "ExpandTypesForListVm", "csharp");
-@@clientName(PassNames, "PassName", "csharp");
 @@clientName(ResourceIdOptionsForGetCapacityReservationGroups, "ResourceIdOptionsForGetCapacityReservationGroup", "csharp");
 @@clientName(ScriptShellTypes, "ScriptShellType", "csharp");
 @@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
@@ -794,3 +792,28 @@ using Compute;
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
+
+// ── Extensible enum wrappers for closed unions/enums (C# backward compat) ──
+// The old SDK had these as extensible enums (readonly struct). The TypeSpec spec defines them
+// as closed unions/enums, which generate as fixed enums in C#. We define extensible wrappers
+// and use @@alternateType on the type to replace all usages automatically.
+
+/**
+ * The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.
+ */
+union ComponentName {
+  ComponentNames,
+  string,
+}
+
+/**
+ * The pass name. Currently, the only allowable value is OobeSystem.
+ */
+union PassName {
+  PassNames,
+  string,
+}
+
+@@alternateType(ComponentNames, ComponentName, "csharp");
+@@alternateType(PassNames, PassName, "csharp");
+// TODO: OperatingSystemTypes → extensible enum blocked by name collision with Compute.OperatingSystemType
