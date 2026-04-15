@@ -1,0 +1,42 @@
+{
+  "title": "ManifestOperations GetConnectorManifest",
+  "operationId": "ManifestOperations_GetConnectorManifest",
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "location": "Central US EUAP",
+    "body": {
+      "connectorType": "Sqlserver"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "connectorManifest": {
+          "isDataPreviewSupported": true,
+          "configKeysInformations": [
+            {
+              "name": "hostname",
+              "type": "STRING",
+              "required": false,
+              "defaultValue": "",
+              "importance": "HIGH",
+              "documentation": "host name of sql server",
+              "group": "",
+              "orderInGroup": null,
+              "width": null,
+              "displayName": "Host Name",
+              "dependents": null
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.MessagingConnectors/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "retry-after": "15"
+      }
+    }
+  }
+}

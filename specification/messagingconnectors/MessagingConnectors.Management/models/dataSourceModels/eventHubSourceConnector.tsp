@@ -42,4 +42,7 @@ model EventHubSourceConnectorProperties extends DataSourceProperties {
 
   @doc("OffsetStartTime in utcDateTime zone.")
   offsetStartTime?: utcDateTime;
+
+  @doc("Enable system metadata.")
+  enableSystemMetadata?: boolean;
 }

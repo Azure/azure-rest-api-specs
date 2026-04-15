@@ -85,4 +85,7 @@ model ConfluentSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Configuration for ssl.")
   sslConfiguration?: Models.Auth.SslConfiguration;
+
+  @doc("Enable system metadata.")
+  enableSystemMetadata?: boolean;
 }

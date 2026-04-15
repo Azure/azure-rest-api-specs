@@ -42,4 +42,7 @@ model SolacePubsubSourceConnectorProperties extends DataSourceProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "not a secret"
   @doc("When using SolaceSampleKeyedMessageProcessor, defines which part of a PubSub+ message shall be converted to a Kafka record key")
   kafkaMessageKey?: string;
+
+  @doc("Enable system metadata.")
+  enableSystemMetadata?: boolean;
 }
