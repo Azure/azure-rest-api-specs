@@ -2137,12 +2137,14 @@ model FileShareLimits {
    * The IO scalar used for guardrail calculations for a file share in the storage account.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   guardrailIOScalar?: float64;
 
   /**
    * The bandwidth scalar used for guardrail calculations for a file share in the storage account.
    */
+  @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   guardrailBandwidthScalar?: float64;
 }
