@@ -10,43 +10,17 @@ using Microsoft.Maintenance;
 
 // csharp configurations
 @@clientName(ConfigurationAssignment,
-  "MaintenanceConfigurationAssignmentData",
+  "MaintenanceConfigurationAssignment",
   "csharp"
 );
 @@clientName(ConfigurationAssignmentFilterProperties,
   "MaintenanceConfigurationAssignmentFilter",
   "csharp"
 );
-@@alternateType(ConfigurationAssignmentFilterProperties.resourceTypes,
-  Azure.Core.armResourceType[],
-  "csharp"
-);
-@@alternateType(ConfigurationAssignmentFilterProperties.locations,
-  Azure.Core.azureLocation[],
-  "csharp"
-);
 @@clientName(TagOperators, "MaintenanceVmTagOperator", "csharp");
 @@clientName(TagSettingsProperties, "MaintenanceVmTagSettings", "csharp");
-@@alternateType(ApplyUpdateProperties.resourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(ConfigurationAssignmentProperties.resourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(UpdateProperties.resourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(ConfigurationAssignmentProperties.maintenanceConfigurationId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
 @@clientName(MaintenanceWindow.expirationDateTime, "ExpireOn", "csharp");
-@@alternateType(MaintenanceWindow.expirationDateTime, utcDateTime, "csharp");
 @@clientName(MaintenanceWindow.startDateTime, "StartOn", "csharp");
-@@alternateType(MaintenanceWindow.startDateTime, utcDateTime, "csharp");
 @@clientName(ListApplyUpdate, "MaintenanceApplyUpdateListResult", "csharp");
 @@clientName(ListUpdatesResult, "MaintenanceUpdateListResult", "csharp");
 @@clientName(ListMaintenanceConfigurationsResult,
@@ -151,11 +125,6 @@ using Microsoft.Maintenance;
   "MaintenanceConfiguration",
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MaintenanceConfiguration,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
 @@clientName(ApplyUpdates, "MaintenanceApplyUpdate", "csharp");
 @@clientName(ApplyUpdate, "MaintenanceApplyUpdate", "csharp");
 @@clientName(ImpactType, "MaintenanceImpactType", "csharp");
@@ -169,5 +138,37 @@ using Microsoft.Maintenance;
 @@alternateType(MaintenanceWindow.duration, duration, "csharp");
 @@alternateType(ConfigurationAssignment.location,
   Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ConfigurationAssignmentFilterProperties.resourceTypes,
+  Azure.Core.armResourceType[],
+  "csharp"
+);
+@@alternateType(ConfigurationAssignmentFilterProperties.locations,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(ApplyUpdateProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ConfigurationAssignmentProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(UpdateProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ConfigurationAssignmentProperties.maintenanceConfigurationId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(MaintenanceWindow.expirationDateTime, utcDateTime, "csharp");
+@@alternateType(MaintenanceWindow.startDateTime, utcDateTime, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MaintenanceConfiguration,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
