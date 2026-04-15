@@ -14,13 +14,12 @@ namespace Microsoft.HybridCompute;
 /**
  * The name of the license profile.
  */
-union LicenseProfileName {
-  string,
-
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum LicenseProfileName {
   /**
    * Default
    */
-  Default: "Default",
+  default: "default",
 }
 
 /**
@@ -202,7 +201,7 @@ union CreatedByType {
 /**
  * Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.
  */
-union AgentConfigurationMode {
+union `Agent configuration mode` {
   string,
 
   /**
@@ -1462,7 +1461,7 @@ model AgentConfiguration {
    * Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.
    */
   @visibility(Lifecycle.Read)
-  configMode?: AgentConfigurationMode;
+  configMode?: `Agent configuration mode`;
 }
 
 /**
