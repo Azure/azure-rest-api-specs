@@ -4068,6 +4068,7 @@ model PolicyDetail {
 @doc("Major version upgrade precheck resource with validation results.")
 @added(Versions.v2026_04_01)
 model MajorVersionUpgradePrecheckResourceProperties {
+  #suppress "azure-core/no-guid-usage" "SubscriptionId is a GUID by design in Azure Resource Manager."
   ...SubscriptionIdParameter;
 
   @doc("The time when the precheck was created.")
