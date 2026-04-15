@@ -62,7 +62,7 @@ Flag every violation clearly with the file path, JSON path or line number, the s
   - **Specific** — avoid generic names like `resourceName` or `childResourceName`. Use a meaningful, domain-specific name.
 - Flag any resource type name that is PascalCase, singular-only (when a collection GET exists), or overly generic.
 - Resource type names **MUST NOT** collide with well-known Azure concepts. For example, `Microsoft.AzureCis/subscriptions` is confusing because "subscriptions" is an ARM first-class concept. Use a more specific name like `cisSubscriptions` or `managedSubscriptions`.
-- Resource type names **MUST NOT** repeat the resource provider namespace. For example, if the namespace is `Microsoft.Moxy`, the resource type should be `httpsServices` not `moxyHttpsServices`. The namespace already provides the context.
+- Resource type names **MUST NOT** repeat the resource provider namespace. For example, if the namespace is `Microsoft.Contoso`, the resource type should be `httpsServices` not `contosoHttpsServices`. The namespace already provides the context.
 - Resource provider namespace names **MUST NOT** be code names, product abbreviations, or temporary names. RP names are permanent and visible to all customers in resource IDs, SDKs, and documentation. Choose a descriptive name that conveys what the RP does.
 
 ### 1.7 Client-Facing Text Must Not Use Internal Terminology
