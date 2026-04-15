@@ -321,7 +321,6 @@ model MachineStatus {
    * Specifies the time at which the machine was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTimestamp?: utcDateTime;
 
   /**

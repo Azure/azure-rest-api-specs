@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "jobAgentName": "agent1",
+    "jobName": "job1",
+    "parameters": {
+      "properties": {
+        "action": {
+          "value": "select 1"
+        },
+        "targetGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/targetGroups/targetGroup0"
+      }
+    },
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "stepName": "step1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "step1",
+        "type": "Microsoft.Sql/servers/jobAgents/jobs/steps",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job1/steps/step1",
+        "properties": {
+          "action": {
+            "type": "TSql",
+            "source": "Inline",
+            "value": "select 1"
+          },
+          "executionOptions": {
+            "initialRetryIntervalSeconds": 1,
+            "maximumRetryIntervalSeconds": 120,
+            "retryAttempts": 10,
+            "retryIntervalBackoffMultiplier": 2,
+            "timeoutSeconds": 43200
+          },
+          "stepId": 1,
+          "targetGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/targetGroups/targetGroup0"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "step1",
+        "type": "Microsoft.Sql/servers/jobAgents/jobs/steps",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job1/steps/step1",
+        "properties": {
+          "action": {
+            "type": "TSql",
+            "source": "Inline",
+            "value": "select 1"
+          },
+          "credential": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/credentials/cred0",
+          "executionOptions": {
+            "initialRetryIntervalSeconds": 1,
+            "maximumRetryIntervalSeconds": 120,
+            "retryAttempts": 10,
+            "retryIntervalBackoffMultiplier": 2,
+            "timeoutSeconds": 43200
+          },
+          "stepId": 1,
+          "targetGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/targetGroups/targetGroup0"
+        }
+      }
+    }
+  },
+  "operationId": "JobSteps_CreateOrUpdate",
+  "title": "Create or update a job step with minimal properties specified."
+}

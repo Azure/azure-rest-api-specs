@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
 using NewRelic.Observability;
@@ -22,13 +23,22 @@ using NewRelic.Observability;
 );
 
 // ===== C# operation renames =====
-@@clientName(NewRelicMonitorResources.billingInfoGet, "GetBillingInfo", "csharp");
+@@clientName(NewRelicMonitorResources.billingInfoGet,
+  "GetBillingInfo",
+  "csharp"
+);
 @@clientName(AccountsOperationGroup.list, "GetNewRelicAccounts", "csharp");
-@@clientName(OrganizationsOperationGroup.list, "GetNewRelicOrganizations", "csharp");
+@@clientName(OrganizationsOperationGroup.list,
+  "GetNewRelicOrganizations",
+  "csharp"
+);
 @@clientName(PlansOperationGroup.list, "GetNewRelicPlans", "csharp");
 
 // ===== C# resource type renames =====
-@@clientName(MonitoredSubscriptionProperties, "NewRelicMonitoredSubscription", "csharp");
+@@clientName(MonitoredSubscriptionProperties,
+  "NewRelicMonitoredSubscription",
+  "csharp"
+);
 @@clientName(TagRule, "NewRelicObservabilityTagRule", "csharp");
 
 // ===== C# model renames (RP prefix) =====
@@ -37,23 +47,59 @@ using NewRelic.Observability;
 @@clientName(FilteringTag, "NewRelicObservabilityFilteringTag", "csharp");
 @@clientName(LogRules, "NewRelicObservabilityLogRules", "csharp");
 @@clientName(MetricRules, "NewRelicObservabilityMetricRules", "csharp");
-@@clientName(OrganizationInfo, "NewRelicObservabilityOrganizationInfo", "csharp");
+@@clientName(OrganizationInfo,
+  "NewRelicObservabilityOrganizationInfo",
+  "csharp"
+);
 @@clientName(UserInfo, "NewRelicObservabilityUserInfo", "csharp");
-@@clientName(VMExtensionPayload, "NewRelicObservabilityVmExtensionPayload", "csharp");
+@@clientName(VMExtensionPayload,
+  "NewRelicObservabilityVmExtensionPayload",
+  "csharp"
+);
 @@clientName(VMInfo, "NewRelicObservabilityVmInfo", "csharp");
 
 // ===== C# enum/union renames (RP prefix) =====
-@@clientName(AccountCreationSource, "NewRelicObservabilityAccountCreationSource", "csharp");
+@@clientName(AccountCreationSource,
+  "NewRelicObservabilityAccountCreationSource",
+  "csharp"
+);
 @@clientName(BillingSource, "NewRelicObservabilityBillingSource", "csharp");
-@@clientName(MarketplaceSubscriptionStatus, "NewRelicObservabilityMarketplaceSubscriptionStatus", "csharp");
-@@clientName(MonitoringStatus, "NewRelicObservabilityMonitoringStatus", "csharp");
-@@clientName(OrgCreationSource, "NewRelicObservabilityOrgCreationSource", "csharp");
-@@clientName(SendAadLogsStatus, "NewRelicObservabilitySendAadLogsStatus", "csharp");
-@@clientName(SendActivityLogsStatus, "NewRelicObservabilitySendActivityLogsStatus", "csharp");
-@@clientName(SendingLogsStatus, "NewRelicObservabilitySendingLogsStatus", "csharp");
-@@clientName(SendingMetricsStatus, "NewRelicObservabilitySendingMetricsStatus", "csharp");
-@@clientName(SendMetricsStatus, "NewRelicObservabilitySendMetricsStatus", "csharp");
-@@clientName(SendSubscriptionLogsStatus, "NewRelicObservabilitySendSubscriptionLogsStatus", "csharp");
+@@clientName(MarketplaceSubscriptionStatus,
+  "NewRelicObservabilityMarketplaceSubscriptionStatus",
+  "csharp"
+);
+@@clientName(MonitoringStatus,
+  "NewRelicObservabilityMonitoringStatus",
+  "csharp"
+);
+@@clientName(OrgCreationSource,
+  "NewRelicObservabilityOrgCreationSource",
+  "csharp"
+);
+@@clientName(SendAadLogsStatus,
+  "NewRelicObservabilitySendAadLogsStatus",
+  "csharp"
+);
+@@clientName(SendActivityLogsStatus,
+  "NewRelicObservabilitySendActivityLogsStatus",
+  "csharp"
+);
+@@clientName(SendingLogsStatus,
+  "NewRelicObservabilitySendingLogsStatus",
+  "csharp"
+);
+@@clientName(SendingMetricsStatus,
+  "NewRelicObservabilitySendingMetricsStatus",
+  "csharp"
+);
+@@clientName(SendMetricsStatus,
+  "NewRelicObservabilitySendMetricsStatus",
+  "csharp"
+);
+@@clientName(SendSubscriptionLogsStatus,
+  "NewRelicObservabilitySendSubscriptionLogsStatus",
+  "csharp"
+);
 @@clientName(TagAction, "NewRelicObservabilityTagAction", "csharp");
 @@clientName(UsageType, "NewRelicObservabilityUsageType", "csharp");
 
@@ -72,31 +118,64 @@ using NewRelic.Observability;
 @@clientName(SendSubscriptionLogsStatus.Disabled, "IsDisabled", "csharp");
 
 // ===== C# model renames (rename-mapping equivalents) =====
-@@clientName(ActivateSaaSParameterRequest, "ActivateSaaSParameterContent", "csharp");
+@@clientName(ActivateSaaSParameterRequest,
+  "ActivateSaaSParameterContent",
+  "csharp"
+);
 @@clientName(AppServicesGetRequest, "NewRelicAppServicesGetContent", "csharp");
 @@clientName(BillingInfoResponse, "NewRelicBillingInfoResult", "csharp");
-@@clientName(ConnectedPartnerResourcesListFormat, "NewRelicConnectedPartnerResourceInfo", "csharp");
-@@clientName(ConnectedPartnerResourceProperties, "NewRelicConnectedPartnerResourceProperties", "csharp");
+@@clientName(ConnectedPartnerResourcesListFormat,
+  "NewRelicConnectedPartnerResourceInfo",
+  "csharp"
+);
+@@clientName(ConnectedPartnerResourceProperties,
+  "NewRelicConnectedPartnerResourceProperties",
+  "csharp"
+);
 @@clientName(HostsGetRequest, "NewRelicHostsGetContent", "csharp");
-@@clientName(LatestLinkedSaaSResponse, "NewRelicObservabilityLatestLinkedSaaSResult", "csharp");
-@@clientName(LiftrResourceCategories, "NewRelicLiftrResourceCategory", "csharp");
+@@clientName(LatestLinkedSaaSResponse,
+  "NewRelicObservabilityLatestLinkedSaaSResult",
+  "csharp"
+);
+@@clientName(LiftrResourceCategories,
+  "NewRelicLiftrResourceCategory",
+  "csharp"
+);
 @@clientName(MetricsRequest, "NewRelicMetricsContent", "csharp");
 @@clientName(MetricsStatusRequest, "NewRelicMetricsStatusContent", "csharp");
 @@clientName(MetricsStatusResponse, "NewRelicMetricsStatusResult", "csharp");
 @@clientName(MonitoredResource, "NewRelicResourceMonitorResult", "csharp");
-@@clientName(MonitoredSubscription, "NewRelicMonitoredSubscriptionInfo", "csharp");
-@@clientName(MonitoringTagRulesProperties, "NewRelicMonitoringTagRules", "csharp");
+@@clientName(MonitoredSubscription,
+  "NewRelicMonitoredSubscriptionInfo",
+  "csharp"
+);
+@@clientName(MonitoringTagRulesProperties,
+  "NewRelicMonitoringTagRules",
+  "csharp"
+);
 @@clientName(ProvisioningState, "NewRelicProvisioningState", "csharp");
 @@clientName(SingleSignOnStates, "NewRelicSingleSignOnState", "csharp");
 @@clientName(Status, "NewRelicMonitoringStatus", "csharp");
 @@clientName(SwitchBillingRequest, "NewRelicSwitchBillingContent", "csharp");
-@@clientName(ConfigurationName, "MonitoredSubscriptionConfigurationName", "csharp");
+@@clientName(ConfigurationName,
+  "MonitoredSubscriptionConfigurationName",
+  "csharp"
+);
 @@clientName(PatchOperation, "MonitoredSubscriptionPatchOperation", "csharp");
-@@clientName(SubscriptionList, "NewRelicMonitoredSubscriptionProperties", "csharp");
-@@clientName(SaaSResourceDetailsResponse, "NewRelicObservabilitySaaSResourceDetailsResult", "csharp");
+@@clientName(SubscriptionList,
+  "NewRelicMonitoredSubscriptionProperties",
+  "csharp"
+);
+@@clientName(SaaSResourceDetailsResponse,
+  "NewRelicObservabilitySaaSResourceDetailsResult",
+  "csharp"
+);
 @@clientName(SaaSData, "NewRelicObservabilitySaaSInfo", "csharp");
 @@clientName(AccountResource, "NewRelicAccountResourceData", "csharp");
-@@clientName(OrganizationResource, "NewRelicOrganizationResourceData", "csharp");
+@@clientName(OrganizationResource,
+  "NewRelicOrganizationResourceData",
+  "csharp"
+);
 @@clientName(PlanDataResource, "NewRelicPlanData", "csharp");
 @@clientName(PlanData, "NewRelicPlanDetails", "csharp");
 @@clientName(PlanData.billingCycle, "NewRelicPlanBillingCycle", "csharp");
@@ -183,9 +262,19 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 
-// ===== C# usage decorators for read-only models that need setters =====
-// These models were previously read-write in the old AutoRest SDK.
-// Adding input usage generates setters on the flattened properties.
+// ===== C# flatten properties for backward compatibility =====
+// These models were previously flattened in the old AutoRest SDK.
+// Using @flattenProperty to preserve top-level property access.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for C# SDK backward compatibility"
+@@flattenProperty(AccountResource.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for C# SDK backward compatibility"
+@@flattenProperty(OrganizationResource.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for C# SDK backward compatibility"
+@@flattenProperty(PlanDataResource.properties, "csharp");
+
+// ===== C# usage decorators for property types that need setters =====
+// The flattened properties need setters for backward compatibility.
+// Adding input usage generates setters on the inner property types.
 @@usage(AccountProperties, Usage.input | Usage.output, "csharp");
 @@usage(OrganizationProperties, Usage.input | Usage.output, "csharp");
 @@usage(PlanDataProperties, Usage.input | Usage.output, "csharp");

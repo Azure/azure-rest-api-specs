@@ -1,0 +1,1977 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "version": "2015-05-01",
+    "description": "Composite Swagger for Application Insights Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/APIKeys/{keyId}": {
+      "get": {
+        "operationId": "APIKeys_Get",
+        "description": "Get the API Key for this key id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyId",
+            "in": "path",
+            "description": "The API Key ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAPIKey"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "APIKeysGet": {
+            "$ref": "./examples/APIKeysGet.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "APIKeys_Delete",
+        "description": "Delete an API Key of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "keyId",
+            "in": "path",
+            "description": "The API Key ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAPIKey"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "APIKeyDelete": {
+            "$ref": "./examples/APIKeysDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations": {
+      "get": {
+        "operationId": "Annotations_List",
+        "description": "Gets the list of annotations for a component for given time range",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "The start time to query from for annotations, cannot be older than 90 days from current date.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "The end time to query for annotations.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AnnotationsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AnnotationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnnotationsList": {
+            "$ref": "./examples/AnnotationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "operationId": "Annotations_Create",
+        "description": "Create an Annotation of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "AnnotationProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to create an annotation of a Application Insights component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Annotation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Annotation"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AnnotationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnnotationsCreate": {
+            "$ref": "./examples/AnnotationsCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations/{annotationId}": {
+      "get": {
+        "operationId": "Annotations_Get",
+        "description": "Get the annotation for given id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "annotationId",
+            "in": "path",
+            "description": "The unique annotation ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Annotation"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AnnotationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnnotationsGet": {
+            "$ref": "./examples/AnnotationsGet.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Annotations_Delete",
+        "description": "Delete an Annotation of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "annotationId",
+            "in": "path",
+            "description": "The unique annotation ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          }
+        },
+        "x-ms-examples": {
+          "AnnotationsDelete": {
+            "$ref": "./examples/AnnotationsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ApiKeys": {
+      "get": {
+        "operationId": "APIKeys_List",
+        "description": "Gets a list of API keys of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAPIKeyListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "APIKeysList": {
+            "$ref": "./examples/APIKeysList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "APIKeys_Create",
+        "description": "Create an API Key of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "APIKeyProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to create an API Key of an Application Insights component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/APIKeyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAPIKey"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "APIKeyCreate": {
+            "$ref": "./examples/APIKeysCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/DefaultWorkItemConfig": {
+      "get": {
+        "operationId": "WorkItemConfigurations_GetDefault",
+        "description": "Gets default work item configurations that exist for the application",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkItemConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkItemConfigurationsGetDefault": {
+            "$ref": "./examples/WorkItemConfigDefaultGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs": {
+      "get": {
+        "operationId": "ProactiveDetectionConfigurations_List",
+        "description": "Gets a list of ProactiveDetection configurations of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProactiveDetectionConfigurationsList": {
+            "$ref": "./examples/ProactiveDetectionConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}": {
+      "get": {
+        "operationId": "ProactiveDetectionConfigurations_Get",
+        "description": "Get the ProactiveDetection configuration for this configuration id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ConfigurationId",
+            "in": "path",
+            "description": "The ProactiveDetection configuration ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProactiveDetectionConfigurationGet": {
+            "$ref": "./examples/ProactiveDetectionConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProactiveDetectionConfigurations_Update",
+        "description": "Update the ProactiveDetection configuration for this configuration id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ConfigurationId",
+            "in": "path",
+            "description": "The ProactiveDetection configuration ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ProactiveDetectionProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to update the ProactiveDetection configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProactiveDetectionConfigurationUpdate": {
+            "$ref": "./examples/ProactiveDetectionConfigurationUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs": {
+      "get": {
+        "operationId": "WorkItemConfigurations_List",
+        "description": "Gets the list work item configurations that exist for the application",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkItemConfigurationsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/WorkItemConfigurationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkItemConfigurationsList": {
+            "$ref": "./examples/WorkItemConfigsGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "WorkItemConfigurations_Create",
+        "description": "Create a work item configuration for an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "WorkItemConfigurationProperties",
+            "in": "body",
+            "description": "Work item configuration creation payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkItemCreateConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkItemConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkItemConfigurationsCreate": {
+            "$ref": "./examples/WorkItemConfigCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}": {
+      "get": {
+        "operationId": "WorkItemConfigurations_GetItem",
+        "description": "Gets specified work item configuration for an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workItemConfigId",
+            "in": "path",
+            "description": "The unique work item configuration Id. This can be either friendly name of connector as defined in connector configuration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkItemConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkItemConfigurationsGetDefault": {
+            "$ref": "./examples/WorkItemConfigGet.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "WorkItemConfigurations_UpdateItem",
+        "description": "Update a work item configuration for an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workItemConfigId",
+            "in": "path",
+            "description": "The unique work item configuration Id. This can be either friendly name of connector as defined in connector configuration",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "WorkItemConfigurationProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to update a work item configuration for this Application Insights component.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkItemCreateConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkItemConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkItemConfigurationsCreate": {
+            "$ref": "./examples/WorkItemConfigUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkItemConfigurations_Delete",
+        "description": "Delete a work item configuration of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workItemConfigId",
+            "in": "path",
+            "description": "The unique work item configuration Id. This can be either friendly name of connector as defined in connector configuration",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          }
+        },
+        "x-ms-examples": {
+          "WorkItemConfigurationDelete": {
+            "$ref": "./examples/WorkItemConfigDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/currentbillingfeatures": {
+      "get": {
+        "operationId": "ComponentCurrentBillingFeatures_Get",
+        "description": "Returns current billing features for an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentBillingFeatures"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/CurrentBillingFeaturesGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ComponentCurrentBillingFeatures_Update",
+        "description": "Update current billing features for an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "BillingFeaturesProperties",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentBillingFeatures"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentBillingFeatures"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesUpdate": {
+            "$ref": "./examples/CurrentBillingFeaturesUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration": {
+      "get": {
+        "operationId": "ExportConfigurations_List",
+        "description": "Gets a list of Continuous Export configuration of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationInsightsComponentExportConfiguration"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportConfigurationsList": {
+            "$ref": "./examples/ExportConfigurationsList.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "ExportConfigurations_Create",
+        "description": "Create a Continuous Export configuration of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ExportProperties",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentExportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationInsightsComponentExportConfiguration"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportConfigurationPost": {
+            "$ref": "./examples/ExportConfigurationsPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}": {
+      "get": {
+        "operationId": "ExportConfigurations_Get",
+        "description": "Get the Continuous Export configuration for this export id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportId",
+            "in": "path",
+            "description": "The Continuous Export configuration ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentExportConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportConfigurationGet": {
+            "$ref": "./examples/ExportConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExportConfigurations_Update",
+        "description": "Update the Continuous Export configuration for this export id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportId",
+            "in": "path",
+            "description": "The Continuous Export configuration ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ExportProperties",
+            "in": "body",
+            "description": "Properties that need to be specified to update the Continuous Export configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentExportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentExportConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportConfigurationUpdate": {
+            "$ref": "./examples/ExportConfigurationUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ExportConfigurations_Delete",
+        "description": "Delete a Continuous Export configuration of an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportId",
+            "in": "path",
+            "description": "The Continuous Export configuration ID. This is unique within a Application Insights component.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentExportConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportConfigurationDelete": {
+            "$ref": "./examples/ExportConfigurationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/featurecapabilities": {
+      "get": {
+        "operationId": "ComponentFeatureCapabilities_Get",
+        "description": "Returns feature capabilities of the application insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentFeatureCapabilities"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/FeatureCapabilitiesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/getavailablebillingfeatures": {
+      "get": {
+        "operationId": "ComponentAvailableFeatures_Get",
+        "description": "Returns all available features of the application insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentAvailableFeatures"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/AvailableBillingFeaturesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/quotastatus": {
+      "get": {
+        "operationId": "ComponentQuotaStatus_Get",
+        "description": "Returns daily data volume cap (quota) status for an Application Insights component.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the Application Insights component resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponentQuotaStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ComponentCurrentBillingFeaturesGet": {
+            "$ref": "./examples/QuotaStatusGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "APIKeyRequest": {
+      "type": "object",
+      "description": "An Application Insights component API Key creation request definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the API Key."
+        },
+        "linkedReadProperties": {
+          "type": "array",
+          "description": "The read access rights of this API Key.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "linkedWriteProperties": {
+          "type": "array",
+          "description": "The write access rights of this API Key.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Annotation": {
+      "type": "object",
+      "description": "Annotation associated with an application insights resource.",
+      "properties": {
+        "AnnotationName": {
+          "type": "string",
+          "description": "Name of annotation"
+        },
+        "Category": {
+          "type": "string",
+          "description": "Category of annotation, free form"
+        },
+        "EventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when event occurred"
+        },
+        "Id": {
+          "type": "string",
+          "description": "Unique Id for annotation"
+        },
+        "Properties": {
+          "type": "string",
+          "description": "Serialized JSON object for detailed properties"
+        },
+        "RelatedAnnotation": {
+          "type": "string",
+          "description": "Related parent annotation if any",
+          "default": "null"
+        }
+      }
+    },
+    "AnnotationError": {
+      "type": "object",
+      "description": "Error associated with trying to create annotation with Id that already exist",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error detail code and explanation"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "Inner error"
+        }
+      }
+    },
+    "AnnotationsListResult": {
+      "type": "object",
+      "description": "Annotations list result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of annotations.",
+          "items": {
+            "$ref": "#/definitions/Annotation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "Id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The url to the next page of results."
+        }
+      }
+    },
+    "ApplicationInsightsComponentAPIKey": {
+      "type": "object",
+      "description": "Properties that define an API key of an Application Insights Component.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the API key inside an Application Insights component. It is auto generated when the API key is created.",
+          "readOnly": true
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key value. It will be only return once when the API Key was created.",
+          "readOnly": true
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The create date of this API key."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the API key."
+        },
+        "linkedReadProperties": {
+          "type": "array",
+          "description": "The read access rights of this API Key.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "linkedWriteProperties": {
+          "type": "array",
+          "description": "The write access rights of this API Key.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationInsightsComponentAPIKeyListResult": {
+      "type": "object",
+      "description": "Describes the list of API Keys of an Application Insights Component.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of API Key definitions.",
+          "items": {
+            "$ref": "#/definitions/ApplicationInsightsComponentAPIKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The url to the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationInsightsComponentAvailableFeatures": {
+      "type": "object",
+      "description": "An Application Insights component available features.",
+      "properties": {
+        "Result": {
+          "type": "array",
+          "description": "A list of Application Insights component feature.",
+          "items": {
+            "$ref": "#/definitions/ApplicationInsightsComponentFeature"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "FeatureName"
+          ]
+        }
+      }
+    },
+    "ApplicationInsightsComponentBillingFeatures": {
+      "type": "object",
+      "description": "An Application Insights component billing features",
+      "properties": {
+        "DataVolumeCap": {
+          "$ref": "#/definitions/ApplicationInsightsComponentDataVolumeCap",
+          "description": "An Application Insights component daily data volume cap"
+        },
+        "CurrentBillingFeatures": {
+          "type": "array",
+          "description": "Current enabled pricing plan. When the component is in the Enterprise plan, this will list both 'Basic' and 'Application Insights Enterprise'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationInsightsComponentDataVolumeCap": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap",
+      "properties": {
+        "Cap": {
+          "type": "number",
+          "format": "float",
+          "description": "Daily data volume cap in GB."
+        },
+        "ResetTime": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Daily data volume cap UTC reset hour.",
+          "readOnly": true
+        },
+        "WarningThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Reserved, not used for now."
+        },
+        "StopSendNotificationWhenHitThreshold": {
+          "type": "boolean",
+          "description": "Reserved, not used for now."
+        },
+        "StopSendNotificationWhenHitCap": {
+          "type": "boolean",
+          "description": "Do not send a notification email when the daily data volume cap is met."
+        },
+        "MaxHistoryCap": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum daily data volume cap that the user can set for this component.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationInsightsComponentExportConfiguration": {
+      "type": "object",
+      "description": "Properties that define a Continuous Export configuration.",
+      "properties": {
+        "ExportId": {
+          "type": "string",
+          "description": "The unique ID of the export configuration inside an Application Insights component. It is auto generated when the Continuous Export configuration is created.",
+          "readOnly": true
+        },
+        "InstrumentationKey": {
+          "type": "string",
+          "description": "The instrumentation key of the Application Insights component.",
+          "readOnly": true
+        },
+        "RecordTypes": {
+          "type": "string",
+          "description": "This comma separated list of document types that will be exported. The possible values include 'Requests', 'Event', 'Exceptions', 'Metrics', 'PageViews', 'PageViewPerformance', 'Rdd', 'PerformanceCounters', 'Availability', 'Messages'."
+        },
+        "ApplicationName": {
+          "type": "string",
+          "description": "The name of the Application Insights component.",
+          "readOnly": true
+        },
+        "SubscriptionId": {
+          "type": "string",
+          "description": "The subscription of the Application Insights component.",
+          "readOnly": true
+        },
+        "ResourceGroup": {
+          "type": "string",
+          "description": "The resource group of the Application Insights component.",
+          "readOnly": true
+        },
+        "DestinationStorageSubscriptionId": {
+          "type": "string",
+          "description": "The destination storage account subscription ID.",
+          "readOnly": true
+        },
+        "DestinationStorageLocationId": {
+          "type": "string",
+          "description": "The destination account location ID.",
+          "readOnly": true
+        },
+        "DestinationAccountId": {
+          "type": "string",
+          "description": "The name of destination account.",
+          "readOnly": true
+        },
+        "DestinationType": {
+          "type": "string",
+          "description": "The destination type.",
+          "readOnly": true
+        },
+        "IsUserEnabled": {
+          "type": "string",
+          "description": "This will be 'true' if the Continuous Export configuration is enabled, otherwise it will be 'false'.",
+          "readOnly": true
+        },
+        "LastUserUpdate": {
+          "type": "string",
+          "description": "Last time the Continuous Export configuration was updated.",
+          "readOnly": true
+        },
+        "NotificationQueueEnabled": {
+          "type": "string",
+          "description": "Deprecated"
+        },
+        "ExportStatus": {
+          "type": "string",
+          "description": "This indicates current Continuous Export configuration status. The possible values are 'Preparing', 'Success', 'Failure'.",
+          "readOnly": true
+        },
+        "LastSuccessTime": {
+          "type": "string",
+          "description": "The last time data was successfully delivered to the destination storage container for this Continuous Export configuration.",
+          "readOnly": true
+        },
+        "LastGapTime": {
+          "type": "string",
+          "description": "The last time the Continuous Export configuration started failing.",
+          "readOnly": true
+        },
+        "PermanentErrorReason": {
+          "type": "string",
+          "description": "This is the reason the Continuous Export configuration started failing. It can be 'AzureStorageNotFound' or 'AzureStorageAccessDenied'.",
+          "readOnly": true
+        },
+        "StorageName": {
+          "type": "string",
+          "description": "The name of the destination storage account.",
+          "readOnly": true
+        },
+        "ContainerName": {
+          "type": "string",
+          "description": "The name of the destination storage container.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationInsightsComponentExportRequest": {
+      "type": "object",
+      "description": "An Application Insights component Continuous Export configuration request definition.",
+      "properties": {
+        "RecordTypes": {
+          "type": "string",
+          "description": "The document types to be exported, as comma separated values. Allowed values include 'Requests', 'Event', 'Exceptions', 'Metrics', 'PageViews', 'PageViewPerformance', 'Rdd', 'PerformanceCounters', 'Availability', 'Messages'."
+        },
+        "DestinationType": {
+          "type": "string",
+          "description": "The Continuous Export destination type. This has to be 'Blob'."
+        },
+        "DestinationAddress": {
+          "type": "string",
+          "description": "The SAS URL for the destination storage container. It must grant write permission."
+        },
+        "IsEnabled": {
+          "type": "string",
+          "description": "Set to 'true' to create a Continuous Export configuration as enabled, otherwise set it to 'false'."
+        },
+        "NotificationQueueEnabled": {
+          "type": "string",
+          "description": "Deprecated"
+        },
+        "NotificationQueueUri": {
+          "type": "string",
+          "description": "Deprecated"
+        },
+        "DestinationStorageSubscriptionId": {
+          "type": "string",
+          "description": "The subscription ID of the destination storage container."
+        },
+        "DestinationStorageLocationId": {
+          "type": "string",
+          "description": "The location ID of the destination storage container."
+        },
+        "DestinationAccountId": {
+          "type": "string",
+          "description": "The name of destination storage account."
+        }
+      }
+    },
+    "ApplicationInsightsComponentFeature": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap status",
+      "properties": {
+        "FeatureName": {
+          "type": "string",
+          "description": "The pricing feature name.",
+          "readOnly": true
+        },
+        "MeterId": {
+          "type": "string",
+          "description": "The meter id used for the feature.",
+          "readOnly": true
+        },
+        "MeterRateFrequency": {
+          "type": "string",
+          "description": "The meter rate for the feature's meter.",
+          "readOnly": true
+        },
+        "ResouceId": {
+          "type": "string",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "IsHidden": {
+          "type": "boolean",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "Capabilities": {
+          "type": "array",
+          "description": "A list of Application Insights component feature capability.",
+          "items": {
+            "$ref": "#/definitions/ApplicationInsightsComponentFeatureCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "Name"
+          ]
+        },
+        "Title": {
+          "type": "string",
+          "description": "Display name of the feature.",
+          "readOnly": true
+        },
+        "IsMainFeature": {
+          "type": "boolean",
+          "description": "Whether can apply addon feature on to it.",
+          "readOnly": true
+        },
+        "SupportedAddonFeatures": {
+          "type": "string",
+          "description": "The add on features on main feature.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationInsightsComponentFeatureCapabilities": {
+      "type": "object",
+      "description": "An Application Insights component feature capabilities",
+      "properties": {
+        "SupportExportData": {
+          "type": "boolean",
+          "description": "Whether allow to use continuous export feature.",
+          "readOnly": true
+        },
+        "BurstThrottlePolicy": {
+          "type": "string",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "MetadataClass": {
+          "type": "string",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "LiveStreamMetrics": {
+          "type": "boolean",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "ApplicationMap": {
+          "type": "boolean",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "WorkItemIntegration": {
+          "type": "boolean",
+          "description": "Whether allow to use work item integration feature.",
+          "readOnly": true
+        },
+        "PowerBIIntegration": {
+          "type": "boolean",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "OpenSchema": {
+          "type": "boolean",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "ProactiveDetection": {
+          "type": "boolean",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "AnalyticsIntegration": {
+          "type": "boolean",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "MultipleStepWebTest": {
+          "type": "boolean",
+          "description": "Whether allow to use multiple steps web test feature.",
+          "readOnly": true
+        },
+        "ApiAccessLevel": {
+          "type": "string",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        },
+        "TrackingType": {
+          "type": "string",
+          "description": "The application insights component used tracking type.",
+          "readOnly": true
+        },
+        "DailyCap": {
+          "type": "number",
+          "format": "float",
+          "description": "Daily data volume cap in GB.",
+          "readOnly": true
+        },
+        "DailyCapResetTime": {
+          "type": "number",
+          "format": "float",
+          "description": "Daily data volume cap UTC reset hour.",
+          "readOnly": true
+        },
+        "ThrottleRate": {
+          "type": "number",
+          "format": "float",
+          "description": "Reserved, not used now.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationInsightsComponentFeatureCapability": {
+      "type": "object",
+      "description": "An Application Insights component feature capability",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the capability.",
+          "readOnly": true
+        },
+        "Description": {
+          "type": "string",
+          "description": "The description of the capability.",
+          "readOnly": true
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the capability.",
+          "readOnly": true
+        },
+        "Unit": {
+          "type": "string",
+          "description": "The unit of the capability.",
+          "readOnly": true
+        },
+        "MeterId": {
+          "type": "string",
+          "description": "The meter used for the capability.",
+          "readOnly": true
+        },
+        "MeterRateFrequency": {
+          "type": "string",
+          "description": "The meter rate of the meter.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationInsightsComponentProactiveDetectionConfiguration": {
+      "type": "object",
+      "description": "Properties that define a ProactiveDetection configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The rule name"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "A flag that indicates whether this rule is enabled by the user"
+        },
+        "sendEmailsToSubscriptionOwners": {
+          "type": "boolean",
+          "description": "A flag that indicated whether notifications on this rule should be sent to subscription owners"
+        },
+        "customEmails": {
+          "type": "array",
+          "description": "Custom email addresses for this rule notifications",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "The last time this rule was updated"
+        },
+        "ruleDefinitions": {
+          "$ref": "#/definitions/ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions",
+          "description": "Static definitions of the ProactiveDetection configuration rule (same values for all components)."
+        }
+      }
+    },
+    "ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions": {
+      "type": "object",
+      "description": "Static definitions of the ProactiveDetection configuration rule (same values for all components).",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The rule name"
+        },
+        "DisplayName": {
+          "type": "string",
+          "description": "The rule name as it is displayed in UI"
+        },
+        "Description": {
+          "type": "string",
+          "description": "The rule description"
+        },
+        "HelpUrl": {
+          "type": "string",
+          "description": "URL which displays additional info about the proactive detection rule"
+        },
+        "IsHidden": {
+          "type": "boolean",
+          "description": "A flag indicating whether the rule is hidden (from the UI)"
+        },
+        "IsEnabledByDefault": {
+          "type": "boolean",
+          "description": "A flag indicating whether the rule is enabled by default"
+        },
+        "IsInPreview": {
+          "type": "boolean",
+          "description": "A flag indicating whether the rule is in preview"
+        },
+        "SupportsEmailNotifications": {
+          "type": "boolean",
+          "description": "A flag indicating whether email notifications are supported for detections for this rule"
+        }
+      }
+    },
+    "ApplicationInsightsComponentQuotaStatus": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap status",
+      "properties": {
+        "AppId": {
+          "type": "string",
+          "description": "The Application ID for the Application Insights component.",
+          "readOnly": true
+        },
+        "ShouldBeThrottled": {
+          "type": "boolean",
+          "description": "The daily data volume cap is met, and data ingestion will be stopped.",
+          "readOnly": true
+        },
+        "ExpirationTime": {
+          "type": "string",
+          "description": "Date and time when the daily data volume cap will be reset, and data ingestion will resume.",
+          "readOnly": true
+        }
+      }
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "Inner error",
+      "properties": {
+        "diagnosticcontext": {
+          "type": "string",
+          "description": "Provides correlation for request"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Request time"
+        }
+      }
+    },
+    "WorkItemConfiguration": {
+      "type": "object",
+      "description": "Work item configuration associated with an application insights resource.",
+      "properties": {
+        "ConnectorId": {
+          "type": "string",
+          "description": "Connector identifier where work item is created"
+        },
+        "ConfigDisplayName": {
+          "type": "string",
+          "description": "Configuration friendly name"
+        },
+        "IsDefault": {
+          "type": "boolean",
+          "description": "Boolean value indicating whether configuration is default"
+        },
+        "Id": {
+          "type": "string",
+          "description": "Unique Id for work item"
+        },
+        "ConfigProperties": {
+          "type": "string",
+          "description": "Serialized JSON object for detailed properties"
+        }
+      }
+    },
+    "WorkItemConfigurationError": {
+      "type": "object",
+      "description": "Error associated with trying to get work item configuration or configurations",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error detail code and explanation"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "Inner error"
+        }
+      }
+    },
+    "WorkItemConfigurationsListResult": {
+      "type": "object",
+      "description": "Work item configuration list result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of work item configurations.",
+          "items": {
+            "$ref": "#/definitions/WorkItemConfiguration"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "Id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The url to the next page of results."
+        }
+      }
+    },
+    "WorkItemCreateConfiguration": {
+      "type": "object",
+      "description": "Work item configuration creation payload",
+      "properties": {
+        "ConnectorId": {
+          "type": "string",
+          "description": "Unique connector id"
+        },
+        "ConnectorDataConfiguration": {
+          "type": "string",
+          "description": "Serialized JSON object for detailed properties"
+        },
+        "ValidateOnly": {
+          "type": "boolean",
+          "description": "Boolean indicating validate only"
+        },
+        "WorkItemProperties": {
+          "type": "object",
+          "description": "Custom work item properties",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
