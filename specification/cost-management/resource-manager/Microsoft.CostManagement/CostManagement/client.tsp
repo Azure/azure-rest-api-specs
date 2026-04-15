@@ -398,6 +398,7 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 
 /** Result of forecast. It contains all columns listed under groupings and aggregation. */
 // @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model ForecastResultReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<ForecastResult, "id" | "name" | "type">;
@@ -408,6 +409,7 @@ model ForecastResultReplacement
 
 /** List of Dimension. */
 // @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<Dimension, "id" | "name" | "type">;
 }
@@ -417,6 +419,7 @@ model DimensionReplacement extends Azure.ResourceManager.CommonTypes.Resource {
 
 /** Result of query. It contains all columns listed under groupings and aggregation. */
 // @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model QueryResultReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<QueryResult, "id" | "name" | "type">;
@@ -427,6 +430,7 @@ model QueryResultReplacement
 
 /** An export run. */
 // @@hierarchyBuilding cannot be used here, fall back to the model replacement approach.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model ExportRunReplacement extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<ExportRun, "id" | "name" | "type">;
 }
