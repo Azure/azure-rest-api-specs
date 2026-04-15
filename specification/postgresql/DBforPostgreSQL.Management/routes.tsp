@@ -157,7 +157,7 @@ interface MaintenanceEvents {
   reschedule is ArmResourceActionAsyncBase<
     MaintenanceEventResource,
     MaintenanceEventRescheduleRequest,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    ArmResponse<MaintenanceEventResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventResource> &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
@@ -167,7 +167,7 @@ interface MaintenanceEvents {
   applyNow is ArmResourceActionAsyncBase<
     MaintenanceEventResource,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    ArmResponse<MaintenanceEventResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MaintenanceEventResource> &
       Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<MaintenanceEventResource>
   >;
