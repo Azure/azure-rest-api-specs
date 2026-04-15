@@ -241,6 +241,17 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
   "csharp"
 );
 @@clientName(Status, "ReportOperationStatus", "csharp");
+
+// Rename to remove banned 'Definition' suffix (comment #21, #25, #26)
+@@clientName(CostAllocationRuleDefinition, "CostAllocationRule", "csharp");
+@@clientName(GenerateCostDetailsReportRequestDefinition,
+  "GenerateCostDetailsReportContent",
+  "csharp"
+);
+@@clientName(GenerateDetailedCostReportDefinition,
+  "GenerateDetailedCostReportContent",
+  "csharp"
+);
 @@clientName(Status.status, "StatusValue", "csharp");
 @@clientName(ScheduledActionOperationGroup.listByScope,
   "GetAllByScope",
