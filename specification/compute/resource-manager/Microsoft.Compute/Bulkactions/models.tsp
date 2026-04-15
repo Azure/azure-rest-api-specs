@@ -221,7 +221,7 @@ model FlexProperties {
  * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
  */
 model BulkVMConfiguration {
-    /**
+  /**
    * The marketplace image plan used for the virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
