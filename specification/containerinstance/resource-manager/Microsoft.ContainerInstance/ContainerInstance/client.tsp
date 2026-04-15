@@ -250,3 +250,14 @@ using Microsoft.ContainerInstance;
 
 // Category 5: ContainerGroupProfileStub.resource → ResourceId
 @@clientName(ApiEntityReference.id, "ResourceId", "csharp");
+
+// Category B: Extension/Mocking method renames for backward compat
+@@clientName(LocationOperationGroup.listCachedImages, "GetCachedImagesWithLocation", "csharp");
+@@clientName(LocationOperationGroup.listCapabilities, "GetCapabilitiesWithLocation", "csharp");
+@@clientName(LocationOperationGroup.listUsage, "GetUsagesWithLocation", "csharp");
+@@clientName(SubnetServiceAssociationLinkOperationGroup.delete, "DeleteSubnetServiceAssociationLink", "csharp");
+
+// Category B: Fix location parameter type (string → AzureLocation) for backward compat
+@@alternateType(LocationOperationGroup.listCachedImages::parameters.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(LocationOperationGroup.listCapabilities::parameters.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(LocationOperationGroup.listUsage::parameters.location, Azure.Core.azureLocation, "csharp");
