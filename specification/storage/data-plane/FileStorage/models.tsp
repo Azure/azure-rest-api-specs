@@ -1708,13 +1708,19 @@ alias FileSmtPropertyRequestHeaders = {
   @header("x-ms-file-attributes") fileAttributes?: string;
 
   /** Creation time for the file/directory. Default value: Now. */
-  @header("x-ms-file-creation-time") fileCreationTime?: string;
+  @encode("rfc7231")
+  @header("x-ms-file-creation-time")
+  fileCreationTime?: utcDateTime;
 
   /** Last write time for the file/directory. Default value: Now. */
-  @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+  @encode("rfc7231")
+  @header("x-ms-file-last-write-time")
+  fileLastWriteTime?: utcDateTime;
 
   /** Change time for the file/directory. Default value: Now. */
-  @header("x-ms-file-change-time") fileChangeTime?: string;
+  @encode("rfc7231")
+  @header("x-ms-file-change-time")
+  fileChangeTime?: utcDateTime;
 };
 
 /** File permission format parameter. */
@@ -1735,23 +1741,19 @@ alias FileSmtPropertyResponseHeaders = {
   /** Creation time for the file/directory. */
   @header("x-ms-file-creation-time")
   @encode("rfc7231")
-  @encode("iso8601")
   @alternateType(string, "python")
-  @alternateType(utcDateTime, "go")
   fileCreationTime?: utcDateTime;
 
   /** Last write time for the file/directory. */
   @header("x-ms-file-last-write-time")
   @encode("rfc7231")
   @alternateType(string, "python")
-  @alternateType(utcDateTime, "go")
   fileLastWriteTime?: utcDateTime;
 
   /** Change time for the file/directory. */
   @header("x-ms-file-change-time")
   @encode("rfc7231")
   @alternateType(string, "python")
-  @alternateType(utcDateTime, "go")
   fileChangeTime?: utcDateTime;
 
   /** The fileId of the directory/file. */
@@ -1874,7 +1876,9 @@ enum CopyStatus {
 /** Copy status response headers. */
 alias CopyStatusResponseHeaders = {
   /** Conclusion time of the last attempted Copy File operation. */
-  @header("x-ms-copy-completion-time") copyCompletionTime?: string;
+  @encode("rfc7231")
+  @header("x-ms-copy-completion-time")
+  copyCompletionTime?: utcDateTime;
 
   /** Only appears when x-ms-copy-status is failed or pending. */
   @header("x-ms-copy-status-description") copyStatusDescription?: string;
@@ -2319,19 +2323,25 @@ alias FileContentMD5ResponseHeader = {
 /** NFS timestamp response headers for symbolic link and hard link operations. */
 alias NfsTimestampResponseHeaders = {
   /** The file creation time. */
-  @header("x-ms-file-creation-time") fileCreationTime?: string;
+  @encode("rfc7231")
+  @header("x-ms-file-creation-time")
+  fileCreationTime?: utcDateTime;
 
   /** The file last write time. */
-  @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+  @encode("rfc7231")
+  @header("x-ms-file-last-write-time")
+  fileLastWriteTime?: utcDateTime;
 
   /** The file change time. */
-  @header("x-ms-file-change-time") fileChangeTime?: string;
+  @encode("rfc7231")
+  @header("x-ms-file-change-time")
+  fileChangeTime?: utcDateTime;
 
   /** The fileId of the file. */
   @header("x-ms-file-id") fileId?: string;
 
   /** The parent fileId of the file. */
-  @header("x-ms-file-parent-id") 
+  @header("x-ms-file-parent-id")
   @clientName("ParentID", "go")
   fileParentId?: string;
 };
