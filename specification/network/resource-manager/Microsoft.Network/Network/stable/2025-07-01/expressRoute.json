@@ -7072,48 +7072,6 @@
         "value"
       ]
     },
-    "ServiceEndpointPolicyPropertiesFormat": {
-      "type": "object",
-      "description": "Service Endpoint Policy resource.",
-      "properties": {
-        "serviceEndpointPolicyDefinitions": {
-          "type": "array",
-          "description": "A collection of service endpoint policy definitions of the service endpoint policy.",
-          "items": {
-            "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
-          }
-        },
-        "subnets": {
-          "type": "array",
-          "description": "A collection of references to subnets.",
-          "items": {
-            "$ref": "./virtualNetwork.json#/definitions/Subnet"
-          },
-          "readOnly": true
-        },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the service endpoint policy resource.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the service endpoint policy resource.",
-          "readOnly": true
-        },
-        "serviceAlias": {
-          "type": "string",
-          "description": "The alias indicating if the policy belongs to a service"
-        },
-        "contextualServiceEndpointPolicies": {
-          "type": "array",
-          "description": "A collection of contextual service endpoint policy.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
       "type": "object",
       "properties": {
