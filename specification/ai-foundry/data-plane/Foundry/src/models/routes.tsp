@@ -10,7 +10,6 @@ namespace Azure.AI.Projects;
 alias ListModelVersionsParameters = {};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
-@added(Versions.v1)
 @tag("Models")
 interface Models
   extends VersionedOperations<
@@ -20,7 +19,6 @@ interface Models
       ListModelVersionsParameters
     > {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom async creation action"
-  @added(Versions.v1)
   @doc("Creates a model version asynchronously with blob content validation. Returns 202 Accepted with a Location header for polling.")
   @route("/models/{name}/versions/{version}/createAsync")
   @post
@@ -42,7 +40,6 @@ interface Models
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom pending upload action"
-  @added(Versions.v1)
   @doc("Start or retrieve a pending upload for a model version.")
   @route("/models/{name}/versions/{version}/startPendingUpload")
   @post
@@ -63,7 +60,6 @@ interface Models
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom credential fetch action"
-  @added(Versions.v1)
   @doc("Fetch credentials for a model version asset.")
   @route("/models/{name}/versions/{version}/credentials")
   @post

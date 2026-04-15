@@ -7,12 +7,11 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@added(Versions.v1)
 @doc("Model Version Definition")
 @Rest.resource("models")
 model ModelVersion {
   @doc("System related metadata")
-  systemData?: SystemDataV3;
+  system_data?: SystemDataV3;
 
   @doc("URI of the model artifact in blob storage")
   blobUri?: string;
@@ -23,7 +22,6 @@ model ModelVersion {
   ...AssetBase;
 }
 
-@added(Versions.v1)
 @doc("System metadata for a resource")
 model SystemDataV3 {
   @doc("Timestamp of resource creation")
@@ -39,14 +37,12 @@ model SystemDataV3 {
   lastModifiedAt?: utcDateTime;
 }
 
-@added(Versions.v1)
 @doc("Derived model information")
 model DerivedModelInformation {
   @doc("Base model asset ID")
   baseModel: string;
 }
 
-@added(Versions.v1)
 @doc("Request to start or retrieve a pending upload for a model version.")
 model ModelPendingUploadRequest {
   @doc("Optional pending upload ID. If provided, retrieves the existing pending upload.")
@@ -56,7 +52,6 @@ model ModelPendingUploadRequest {
   pendingUploadType: PendingUploadType;
 }
 
-@added(Versions.v1)
 @doc("A blob reference with temporary credentials for consumption.")
 model ModelBlobReferenceForConsumption {
   @doc("The blob URI.")
@@ -69,7 +64,6 @@ model ModelBlobReferenceForConsumption {
   storageAccountArmId?: string;
 }
 
-@added(Versions.v1)
 @doc("Temporary data reference returned for a pending upload.")
 model ModelTemporaryDataReference {
   @doc("Blob reference for consumption with temporary credentials.")
@@ -82,7 +76,6 @@ model ModelTemporaryDataReference {
   pendingUploadType: PendingUploadType;
 }
 
-@added(Versions.v1)
 @doc("Request to fetch credentials for a model asset.")
 model ModelAssetCredentialRequest {
   @doc("Blob URI of the asset to fetch credentials for.")
@@ -92,14 +85,12 @@ model ModelAssetCredentialRequest {
   generateBlobLevelReadSas?: boolean;
 }
 
-@added(Versions.v1)
 @doc("Response containing credentials for a model asset.")
 model ModelAssetCredentialResponse {
   @doc("Blob reference with credentials.")
   blobReference?: ModelBlobReferenceForConsumption;
 }
 
-@added(Versions.v1)
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;
