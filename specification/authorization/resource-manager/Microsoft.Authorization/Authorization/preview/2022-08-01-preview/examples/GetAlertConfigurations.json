@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DuplicateRoleCreated",
+            "type": "Microsoft.Authorization/roleManagementAlertConfigurations",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlertConfigurations/DuplicateRoleCreated",
+            "properties": {
+              "alertConfigurationType": "DuplicateRoleCreatedAlertConfiguration",
+              "alertDefinitionId": "DuplicateRoleCreated",
+              "isEnabled": true,
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f"
+            }
+          },
+          {
+            "name": "TooManyOwnersAssignedToResource",
+            "type": "Microsoft.Authorization/roleManagementAlertConfigurations",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlertConfigurations/TooManyOwnersAssignedToResource",
+            "properties": {
+              "alertConfigurationType": "TooManyOwnersAssignedToResourceAlertConfiguration",
+              "alertDefinitionId": "TooManyOwnersAssignedToResource",
+              "isEnabled": true,
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+              "thresholdNumberOfOwners": 2,
+              "thresholdPercentageOfOwnersOutOfAllRoleMembers": 3
+            }
+          },
+          {
+            "name": "TooManyPermanentOwnersAssignedToResource",
+            "type": "Microsoft.Authorization/roleManagementAlertConfigurations",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlertConfigurations/TooManyPermanentOwnersAssignedToResource",
+            "properties": {
+              "alertConfigurationType": "TooManyPermanentOwnersAssignedToResourceAlertConfiguration",
+              "alertDefinitionId": "TooManyPermanentOwnersAssignedToResource",
+              "isEnabled": true,
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+              "thresholdNumberOfPermanentOwners": 10,
+              "thresholdPercentageOfPermanentOwnersOutOfAllOwners": 10
+            }
+          },
+          {
+            "name": "AzureRolesAssignedOutsidePimAlert",
+            "type": "Microsoft.Authorization/roleManagementAlertConfigurations",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlertConfigurations/AzureRolesAssignedOutsidePimAlert",
+            "properties": {
+              "alertConfigurationType": "AzureRolesAssignedOutsidePimAlertConfiguration",
+              "alertDefinitionId": "AzureRolesAssignedOutsidePimAlert",
+              "isEnabled": true,
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AlertConfigurations_ListForScope",
+  "title": "GetAlertConfigurations"
+}

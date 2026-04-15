@@ -1,0 +1,105 @@
+- tool: TypeSpecRequirement
+  path: ./preview/2018-05-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2018-06-17-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2019-10-17-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-02-02-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-02-10-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-03-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-06-02-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-10-05-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2021-03-03-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2024-02-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2015-05-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2017-10-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2020-02-02/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2020-10-20/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2020-11-20/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-03-08/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-08-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-10-14/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2022-04-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2022-06-15/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2023-06-01/*.json
+  reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - AnalyticsItems
+    - ComponentAPIs
+    - ComponentLinkedStorageAccounts
+    - Components
+    - DeletedWorkbooks
+    - Favorites
+    - Livetoken
+    - WebTestLocation
+    - WebTests
+    - WorkbookOperations
+    - Workbooks
+    - WorkbookTemplates
+    
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths: 
+    - AnalyticsItems/tspconfig.yaml
+    - ComponentAPIs/tspconfig.yaml
+    - ComponentLinkedStorageAccounts/tspconfig.yaml
+    - Components/tspconfig.yaml
+    - DeletedWorkbooks/tspconfig.yaml
+    - Favorites/tspconfig.yaml
+    - Livetoken/tspconfig.yaml
+    - WebTestLocation/tspconfig.yaml
+    - WebTests/tspconfig.yaml
+    - WorkbookOperations/tspconfig.yaml
+    - Workbooks/tspconfig.yaml
+    - WorkbookTemplates/tspconfig.yaml

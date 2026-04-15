@@ -1,0 +1,59 @@
+{
+  "operationId": "Connectors_Update",
+  "title": "UpdateConnector",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "accountName": "teststorageaccount",
+    "api-version": "2025-08-01",
+    "connectorName": "testconnector",
+    "properties": {
+      "properties": {
+        "source": {
+          "type": "DataShare",
+          "authProperties": {
+            "type": "ManagedIdentity",
+            "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/newTestIdentity"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/testconnector",
+        "name": "testconnector",
+        "type": "Microsoft.Storage/storageAccounts/connectors",
+        "location": "eastus",
+        "properties": {
+          "uniqueId": "12345678-1234-1234-1234-12345678912",
+          "state": "Active",
+          "creationTime": "2023-04-01T00:00:00Z",
+          "description": "Example connector",
+          "dataSourceType": "Azure_DataShare",
+          "source": {
+            "type": "DataShare",
+            "connection": {
+              "type": "DataShare",
+              "dataShareUri": "azds://eastus:datashare1:12345678-1234-1234-1234-123456789123"
+            },
+            "authProperties": {
+              "type": "ManagedIdentity",
+              "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/newTestIdentity"
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "status": "Accepted",
+      "message": "The resource operation has been received and is being processed.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/xxxx/resourceGroups/rg-name/providers/Microsoft.Storage/operations/operation-98765",
+        "Retry-After": 30
+      }
+    }
+  }
+}

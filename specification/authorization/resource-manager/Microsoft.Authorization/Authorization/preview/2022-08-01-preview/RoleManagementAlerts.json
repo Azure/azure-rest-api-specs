@@ -1,0 +1,1369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2022-08-01-preview",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Alerts"
+    },
+    {
+      "name": "AlertConfigurations"
+    },
+    {
+      "name": "AlertDefinitions"
+    },
+    {
+      "name": "AlertIncidents"
+    },
+    {
+      "name": "AlertOperations"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertConfigurations": {
+      "get": {
+        "operationId": "AlertConfigurations_ListForScope",
+        "tags": [
+          "AlertConfigurations"
+        ],
+        "description": "Gets alert configurations for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertConfigurations": {
+            "$ref": "./examples/GetAlertConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertConfigurations/{alertId}": {
+      "get": {
+        "operationId": "AlertConfigurations_Get",
+        "tags": [
+          "AlertConfigurations"
+        ],
+        "description": "Get the specified alert configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert configuration to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertConfigurationById": {
+            "$ref": "./examples/GetAlertConfigurationById.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "AlertConfigurations_Update",
+        "tags": [
+          "AlertConfigurations"
+        ],
+        "description": "Update an alert configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert configuration to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the alert configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateAlertConfiguration": {
+            "$ref": "./examples/UpdateAlertConfiguration.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertDefinitions": {
+      "get": {
+        "operationId": "AlertDefinitions_ListForScope",
+        "tags": [
+          "AlertDefinitions"
+        ],
+        "description": "Gets alert definitions for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertDefinitions": {
+            "$ref": "./examples/GetAlertDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertDefinitions/{alertDefinitionId}": {
+      "get": {
+        "operationId": "AlertDefinitions_Get",
+        "tags": [
+          "AlertDefinitions"
+        ],
+        "description": "Get the specified alert definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertDefinitionId",
+            "in": "path",
+            "description": "The name of the alert definition to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertDefinitionById": {
+            "$ref": "./examples/GetAlertDefinitionById.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertOperations/{operationId}": {
+      "get": {
+        "operationId": "AlertOperation_Get",
+        "tags": [
+          "AlertOperations"
+        ],
+        "description": "Get the specified alert operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the alert operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The id of the alert operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertOperation": {
+            "$ref": "./examples/GetAlertOperationById.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts": {
+      "get": {
+        "operationId": "Alerts_ListForScope",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Gets alerts for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlerts": {
+            "$ref": "./examples/GetAlerts.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}": {
+      "get": {
+        "operationId": "Alerts_Get",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Get the specified alert.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertById": {
+            "$ref": "./examples/GetAlertById.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Alerts_Update",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update an alert.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the alert.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeactivateAlert": {
+            "$ref": "./examples/UpdateAlert.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/alertIncidents": {
+      "get": {
+        "operationId": "AlertIncidents_ListForScope",
+        "tags": [
+          "AlertIncidents"
+        ],
+        "description": "Gets alert incidents for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertIncidentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertIncidents": {
+            "$ref": "./examples/GetAlertIncidents.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/alertIncidents/{alertIncidentId}": {
+      "get": {
+        "operationId": "AlertIncidents_Get",
+        "tags": [
+          "AlertIncidents"
+        ],
+        "description": "Get the specified alert incident.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertIncidentId",
+            "in": "path",
+            "description": "The name of the alert incident to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AlertIncident"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAlertIncidentById": {
+            "$ref": "./examples/GetAlertIncidentById.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/alertIncidents/{alertIncidentId}/remediate": {
+      "post": {
+        "operationId": "AlertIncidents_Remediate",
+        "tags": [
+          "AlertIncidents"
+        ],
+        "description": "Remediate an alert incident.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertIncidentId",
+            "in": "path",
+            "description": "The name of the alert incident to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RemediateAlertIncident": {
+            "$ref": "./examples/RemediateAlertIncident.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/refresh": {
+      "post": {
+        "operationId": "Alerts_Refresh",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Refresh an alert.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "alertId",
+            "in": "path",
+            "description": "The name of the alert to get.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/AlertOperationResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RefreshAlert": {
+            "$ref": "./examples/RefreshAlert.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AlertOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/refresh": {
+      "post": {
+        "operationId": "Alerts_RefreshAll",
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Refresh all alerts for a resource scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "schema": {
+              "$ref": "#/definitions/AlertOperationResult"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RefreshAllAlerts": {
+            "$ref": "./examples/RefreshAllAlerts.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AlertOperationResult"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Alert": {
+      "type": "object",
+      "description": "The alert.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertProperties",
+          "description": "Alert properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertConfiguration": {
+      "type": "object",
+      "description": "Alert configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertConfigurationProperties",
+          "description": "Alert configuration properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a AlertConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertConfigurationProperties": {
+      "type": "object",
+      "description": "Alert configuration properties.",
+      "properties": {
+        "alertDefinitionId": {
+          "type": "string",
+          "description": "The alert definition ID.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "description": "The alert scope.",
+          "readOnly": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "True if the alert is enabled, false will disable the scanning for the specific alert."
+        },
+        "alertConfigurationType": {
+          "type": "string",
+          "description": "The alert configuration type."
+        },
+        "alertDefinition": {
+          "$ref": "#/definitions/AlertDefinition",
+          "description": "The alert definition.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "alertConfigurationType",
+      "required": [
+        "alertConfigurationType"
+      ]
+    },
+    "AlertDefinition": {
+      "type": "object",
+      "description": "Alert definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertDefinitionProperties",
+          "description": "Alert definition properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a AlertDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertDefinitionProperties": {
+      "type": "object",
+      "description": "Alert definition properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The alert display name.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "description": "The alert scope.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The alert description.",
+          "readOnly": true
+        },
+        "severityLevel": {
+          "$ref": "#/definitions/SeverityLevel",
+          "description": "Severity level of the alert.",
+          "readOnly": true
+        },
+        "securityImpact": {
+          "type": "string",
+          "description": "Security impact of the alert.",
+          "readOnly": true
+        },
+        "mitigationSteps": {
+          "type": "string",
+          "description": "The methods to mitigate the alert.",
+          "readOnly": true
+        },
+        "howToPrevent": {
+          "type": "string",
+          "description": "The ways to prevent the alert.",
+          "readOnly": true
+        },
+        "isRemediatable": {
+          "type": "boolean",
+          "description": "True if the alert can be remediated; false, otherwise.",
+          "readOnly": true
+        },
+        "isConfigurable": {
+          "type": "boolean",
+          "description": "True if the alert configuration can be configured; false, otherwise.",
+          "readOnly": true
+        }
+      }
+    },
+    "AlertIncident": {
+      "type": "object",
+      "description": "Alert incident",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertIncidentProperties",
+          "description": "Alert incident properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AlertIncidentListResult": {
+      "type": "object",
+      "description": "The response of a AlertIncident list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AlertIncident items on this page",
+          "items": {
+            "$ref": "#/definitions/AlertIncident"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertIncidentProperties": {
+      "type": "object",
+      "description": "Alert incident properties",
+      "properties": {
+        "alertIncidentType": {
+          "type": "string",
+          "description": "The alert incident type."
+        }
+      },
+      "discriminator": "alertIncidentType",
+      "required": [
+        "alertIncidentType"
+      ]
+    },
+    "AlertListResult": {
+      "type": "object",
+      "description": "The response of a Alert list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Alert items on this page",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertOperationResult": {
+      "type": "object",
+      "description": "Alert operation result",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the alert operation.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the alert operation.",
+          "readOnly": true
+        },
+        "statusDetail": {
+          "type": "string",
+          "description": "The status detail of the alert operation.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created date of the alert operation.",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last action date of the alert operation.",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The location of the alert associated with the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AlertProperties": {
+      "type": "object",
+      "description": "Alert properties.",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The alert scope.",
+          "readOnly": true
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "False by default; true if the alert is active."
+        },
+        "incidentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of generated incidents of the alert.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time when the alert configuration was updated or new incidents were generated.",
+          "readOnly": true
+        },
+        "lastScannedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time when the alert was last scanned.",
+          "readOnly": true
+        },
+        "alertDefinition": {
+          "$ref": "#/definitions/AlertDefinition",
+          "description": "The alert definition.",
+          "readOnly": true
+        },
+        "alertIncidents": {
+          "type": "array",
+          "description": "The alert incidents.",
+          "items": {
+            "$ref": "#/definitions/AlertIncident"
+          },
+          "readOnly": true
+        },
+        "alertConfiguration": {
+          "$ref": "#/definitions/AlertConfiguration",
+          "description": "The alert configuration.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureRolesAssignedOutsidePimAlertConfigurationProperties": {
+      "type": "object",
+      "description": "The Azure roles assigned outside PIM alert configuration properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertConfigurationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureRolesAssignedOutsidePimAlertConfiguration"
+    },
+    "AzureRolesAssignedOutsidePimAlertIncidentProperties": {
+      "type": "object",
+      "description": "Azure roles assigned outside PIM alert incident properties.",
+      "properties": {
+        "assigneeDisplayName": {
+          "type": "string",
+          "description": "The assignee display name.",
+          "readOnly": true
+        },
+        "assigneeUserPrincipalName": {
+          "type": "string",
+          "description": "The assignee user principal name.",
+          "readOnly": true
+        },
+        "assigneeId": {
+          "type": "string",
+          "description": "The assignee ID.",
+          "readOnly": true
+        },
+        "roleDisplayName": {
+          "type": "string",
+          "description": "The role display name.",
+          "readOnly": true
+        },
+        "roleTemplateId": {
+          "type": "string",
+          "description": "The role template ID.",
+          "readOnly": true
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition ID.",
+          "readOnly": true
+        },
+        "assignmentActivatedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the assignment was activated.",
+          "readOnly": true
+        },
+        "requestorId": {
+          "type": "string",
+          "description": "The requestor ID.",
+          "readOnly": true
+        },
+        "requestorDisplayName": {
+          "type": "string",
+          "description": "The requestor display name.",
+          "readOnly": true
+        },
+        "requestorUserPrincipalName": {
+          "type": "string",
+          "description": "The requestor user principal name.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertIncidentProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureRolesAssignedOutsidePimAlertIncident"
+    },
+    "DuplicateRoleCreatedAlertConfigurationProperties": {
+      "type": "object",
+      "description": "The duplicate role created alert configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertConfigurationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DuplicateRoleCreatedAlertConfiguration"
+    },
+    "DuplicateRoleCreatedAlertIncidentProperties": {
+      "type": "object",
+      "description": "Duplicate role created alert incident properties.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "The role name.",
+          "readOnly": true
+        },
+        "duplicateRoles": {
+          "type": "string",
+          "description": "The duplicate roles.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the incident.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertIncidentProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DuplicateRoleCreatedAlertIncident"
+    },
+    "Microsoft.Common.CloudError": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Microsoft.Common.CloudErrorBody",
+          "description": "An error response from the service."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Microsoft.Common.CloudErrorBody": {
+      "type": "object",
+      "description": "An error response from the service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "x-ms-external": true
+    },
+    "SeverityLevel": {
+      "type": "string",
+      "description": "Severity level of the alert.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "SeverityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High"
+          }
+        ]
+      }
+    },
+    "TooManyOwnersAssignedToResourceAlertConfigurationProperties": {
+      "type": "object",
+      "description": "Too many owners assigned to resource alert configuration properties.",
+      "properties": {
+        "thresholdNumberOfOwners": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold number of owners."
+        },
+        "thresholdPercentageOfOwnersOutOfAllRoleMembers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold percentage of owners out of all role members."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertConfigurationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "TooManyOwnersAssignedToResourceAlertConfiguration"
+    },
+    "TooManyOwnersAssignedToResourceAlertIncidentProperties": {
+      "type": "object",
+      "description": "Too many owners assigned to resource alert incident properties.",
+      "properties": {
+        "assigneeName": {
+          "type": "string",
+          "description": "The assignee name.",
+          "readOnly": true
+        },
+        "assigneeType": {
+          "type": "string",
+          "description": "The assignee type.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertIncidentProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "TooManyOwnersAssignedToResourceAlertIncident"
+    },
+    "TooManyPermanentOwnersAssignedToResourceAlertConfigurationProperties": {
+      "type": "object",
+      "description": "Too many permanent owners assigned to resource alert configuration properties.",
+      "properties": {
+        "thresholdNumberOfPermanentOwners": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold number of permanent owners."
+        },
+        "thresholdPercentageOfPermanentOwnersOutOfAllOwners": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The threshold percentage of permanent owners out of all owners."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertConfigurationProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "TooManyPermanentOwnersAssignedToResourceAlertConfiguration"
+    },
+    "TooManyPermanentOwnersAssignedToResourceAlertIncidentProperties": {
+      "type": "object",
+      "description": "Too many permanent owners assigned to resource alert incident properties.",
+      "properties": {
+        "assigneeName": {
+          "type": "string",
+          "description": "The assignee name.",
+          "readOnly": true
+        },
+        "assigneeType": {
+          "type": "string",
+          "description": "The assignee type.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertIncidentProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "TooManyPermanentOwnersAssignedToResourceAlertIncident"
+    }
+  },
+  "parameters": {}
+}

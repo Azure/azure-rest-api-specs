@@ -5,9 +5,9 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "."
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-file: "{version-status}/{version}/servicebus.json"
     examples-dir: "{project-root}/examples"
@@ -23,6 +23,7 @@ options:
     namespace: "com.azure.resourcemanager.servicebus"
     service-name: "Service Bus"
     premium: true
+    generate-tests: false
     enable-sync-stack: false
     rename-model:
       EncryptionKeySource: KeySource
@@ -46,6 +47,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ServiceBus"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

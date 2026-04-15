@@ -3,11 +3,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./virtualMachineProfile.tsp";
+import "./virtualMachineExtension.tsp";
+import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager;
 
 namespace Microsoft.ComputeSchedule;
@@ -55,6 +59,14 @@ union ResourceOperationType {
   @doc("Hibernate operations on the resources")
   Hibernate: "Hibernate",
 
+  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+  @doc("Create operations on the resources")
+  Create: "Create",
+
+  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+  @doc("Delete operations on the resources")
+  Delete: "Delete",
+
   string,
 }
 
@@ -90,6 +102,63 @@ union OperationState {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The supported operating system types for flex VM creation")
+union OsType {
+  @doc("Windows operating system")
+  Windows: "Windows",
+
+  @doc("Linux operating system")
+  Linux: "Linux",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The priority type for VM allocation")
+union PriorityType {
+  @doc("Regular priority VMs")
+  Regular: "Regular",
+
+  @doc("Spot priority VMs")
+  Spot: "Spot",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The allocation strategy for VM size selection")
+union AllocationStrategy {
+  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
+  LowestPrice: "LowestPrice",
+
+  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
+  Prioritized: "Prioritized",
+
+  @doc("Platform prioritizes VM sizes with the highest available capacity first")
+  CapacityOptimized: "CapacityOptimized",
+
+  string,
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The distribution strategy for zone allocation")
+union DistributionStrategy {
+  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  @doc("Platform uses customer-provided zone rankings to allocate VMs")
+  Prioritized: "Prioritized",
+
+  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  @doc("Platform must evenly distribute VMs across zones, request is rejected if exact balance cannot be achieved")
+  StrictBalanced: "StrictBalanced",
+
+  string,
+}
+
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {
@@ -121,16 +190,72 @@ model Resources {
   ids: Array<armResourceIdentifier>;
 }
 
+@doc("Specifies the properties of a Virtual Machine")
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+model BulkActionVMSpec {
+  /**
+   * The marketplace image plan used for the virtual machine.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  plan?: Plan;
+
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
+
+  /**
+   * The identity of the virtual machine, if configured.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+  identity?: VirtualMachineIdentity;
+
+  /**
+   * The extended location of the Virtual Machine.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  extendedLocation?: ExtendedLocation;
+
+  @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
+  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+  placement?: Placement;
+
+  /**
+   * Resource tags to apply to the virtual machines created by this bulk action.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  @doc("Describes the properties of a Virtual Machine.")
+  @added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+  vmProperties?: BulkActionVMProfile;
+}
+
+@doc("Specifies the configuration for a virtual machine operation")
+@added(Microsoft.ComputeSchedule.Versions.`2026-04-15-preview`)
+model BulkVMConfiguration {
+  @doc("Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
+  vmProperties?: BulkActionVMSpec;
+
+  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
+  extensions?: BulkActionVMExtension[];
+
+  @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
+  computeApiVersion?: string;
+
+  @doc("identifier for created virtual machine, if not passed it will create one from resource prefix.")
+  name?: string;
+}
+
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("JSON object that contains VM properties that are common across all VMs in this batch (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
-  baseProfile?: Record<unknown>;
+  @doc("Virtual machine profile object that contains VM properties that are common across all VMs in this batch  (if you want to create 100 VMs in this request, and they all have same vmSize, then include vmSize in baseProfile)")
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
+  baseProfile?: BulkVMConfiguration;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
-  @doc("JSON array, that contains VM properties that should to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
-  resourceOverrides?: Record<unknown>[];
+  @doc("Virtual machine profile array that contains VM properties that needs to be overridden for each VM in the batch (if you want to create 100 VMs, they all need a distinct computerName property, you pass computerNames for each VM in batch in this array), service will merge baseProfile with VM specific overrides and create a merged VMProfile.")
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
+  @renamedFrom(Versions.`2026-04-15-preview`, "resourceOverrides")
+  virtualMachineOverrides?: BulkVMConfiguration[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
@@ -479,6 +604,121 @@ model DeleteResourceOperationResponse {
 
   @identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+// ----------- ExecuteCreateFlex ---------
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("A VM size profile with a name and rank for flex VM creation")
+model VmSizeProfile {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  @minLength(1)
+  name: string;
+
+  @doc("The rank of this VM size in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The priority profile for flex VM creation")
+model PriorityProfile {
+  @doc("The priority type for VM allocation")
+  type?: PriorityType;
+
+  @doc("The allocation strategy for VM size selection")
+  allocationStrategy?: AllocationStrategy;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("A zone preference with a zone identifier and rank")
+model ZonePreference {
+  @doc("The zone identifier")
+  zone: string;
+
+  @doc("The rank of this zone in the priority order")
+  rank: int32;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The zone allocation policy for distributing VMs across availability zones")
+model ZoneAllocationPolicy {
+  @doc("The distribution strategy for zone allocation")
+  distributionStrategy?: DistributionStrategy;
+
+  @identifiers(#[])
+  @doc("The zone preferences for allocation priority")
+  zonePreferences?: Array<ZonePreference>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The flex properties for flexible VM creation")
+model FlexProperties {
+  @identifiers(#[])
+  @doc("The list of VM size profiles to use for flex creation")
+  @minItems(1)
+  @maxItems(5)
+  vmSizeProfiles: Array<VmSizeProfile>;
+
+  @doc("The operating system type for the VMs")
+  osType: OsType;
+
+  @doc("The priority profile for VM allocation")
+  priorityProfile: PriorityProfile;
+
+  @doc("The zone allocation policy for distributing VMs across availability zones")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("Resource creation data model for flex VM provisioning")
+model ResourceProvisionFlexPayload {
+  @doc("JSON object that contains VM properties that are common across all VMs in this batch")
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>)
+  baseProfile?: BulkVMConfiguration;
+
+  @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
+  @typeChangedFrom(Versions.`2026-04-15-preview`, Record<unknown>[])
+  @renamedFrom(Versions.`2026-04-15-preview`, "resourceOverrides")
+  virtualMachineOverrides?: BulkVMConfiguration[];
+
+  @doc("Number of VMs to be created")
+  resourceCount: int32;
+
+  @doc("If resourceOverrides doesn't contain name, service will create name based on prefix and resourceCount")
+  resourcePrefix?: string;
+
+  @doc("The flex properties for flexible VM creation")
+  flexProperties: FlexProperties;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The ExecuteCreateFlexRequest request for executeCreateFlex operations")
+model ExecuteCreateFlexRequest {
+  @doc("Resource creation payload with flex properties")
+  resourceConfigParameters: ResourceProvisionFlexPayload;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("Correlationid item")
+  correlationid?: string;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+@doc("The response from a create flex request")
+model CreateFlexResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the create flex request eg virtual machines")
+  type: string;
+
+  @doc("The location of the create flex request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: azureLocation;
+
+  @Azure.ResourceManager.identifiers(#["resourceId"])
+  @doc("The results from the create flex request if no errors exist")
   results?: Array<ResourceOperation>;
 }
 

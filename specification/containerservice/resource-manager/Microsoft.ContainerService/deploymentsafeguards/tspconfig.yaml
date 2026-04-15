@@ -10,7 +10,6 @@ linter:
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
     emitter-output-dir: "{project-root}"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
@@ -47,8 +46,3 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicesafeguards"
     package-details:
       name: "@azure/arm-containerservicesafeguards"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.ContainerServiceSafeguards"

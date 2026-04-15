@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DBforPostgreSQL;
 
@@ -17,7 +18,7 @@ union PrincipalType {
   string,
 
   /**
-   * The principal type is not known or not specified.
+   * Principal type is not known or not specified.
    */
   Unknown: "Unknown",
 
@@ -32,13 +33,13 @@ union PrincipalType {
   Group: "Group",
 
   /**
-   * A Microsoft Entra service principal, typically representing an application or service identity
+   * A Microsoft Entra service principal, typically representing an application or service identity.
    */
   ServicePrincipal: "ServicePrincipal",
 }
 
 /**
- * The type of identity that created the resource.
+ * Type of identity that created the resource.
  */
 union CreatedByType {
   string,
@@ -55,7 +56,8 @@ union CreatedByType {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ThreatProtectionName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Default advanced threat protection settings. */
   Default: "Default",
 }
 
@@ -64,33 +66,40 @@ union ThreatProtectionName {
  */
 union BackupType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** A full backup taken automatically by the service. These backups are retained for a period of time as defined by the backup retention policy, and they cannot be deleted by the customer. */
   Full: "Full",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** A full backup triggered by the customer. These backups are retained for a period of time as defined by the backup retention policy, and they can also be deleted by the customer. */
   `Customer On-Demand`: "Customer On-Demand",
 }
 
 /**
- * Modes of high availability supported for this compute.
+ * Mode of high availability supported for this compute.
  */
 union HighAvailabilityMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability is supported for this compute, with standby server in a different availability zone than that of the primary. */
   ZoneRedundant: "ZoneRedundant",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability is supported for this compute, with standby server in the same availability zone as the primary. */
   SameZone: "SameZone",
 }
 
 /**
- * Modes of high availability supported for this compute.
+ * Mode of high availability supported for this compute.
  */
 union PostgreSqlFlexibleServerHighAvailabilityMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability is disabled for the server. */
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability is enabled for the server, with standby server in a different availability zone than that of the primary. */
   ZoneRedundant: "ZoneRedundant",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability is enabled for the server, with standby server in the same availability zone as the primary. */
   SameZone: "SameZone",
 }
 
@@ -99,9 +108,11 @@ union PostgreSqlFlexibleServerHighAvailabilityMode {
  */
 union FeatureStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Feature is enabled. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Feature is disabled. */
   Disabled: "Disabled",
 }
 
@@ -110,75 +121,89 @@ union FeatureStatus {
  */
 union FastProvisioningSupport {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Fast provisioning is supported. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Fast provisioning is not supported. */
   Disabled: "Disabled",
 }
 
 /**
- * Indicates if geographically redundant backups are supported in this location. 'Enabled' means geographically redundant backups are supported. 'Disabled' stands for geographically redundant backup is not supported. Will be deprecated in the future. Look to Supported Features for 'GeoBackup'.
+ * Indicates if geographically redundant backups are supported in this location. Will be deprecated in the future. Look to Supported Features for 'GeoBackup'.
  */
 union GeographicallyRedundantBackupSupport {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Geographically redundant backups are supported in this location. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Geographically redundant backups are not supported in this location. */
   Disabled: "Disabled",
 }
 
 /**
- * Indicates if high availability with zone redundancy is supported in this location. 'Enabled' means high availability with zone redundancy is supported. 'Disabled' stands for high availability with zone redundancy is not supported. Will be deprecated in the future. Look to Supported Features for  'ZoneRedundantHa'.
+ * Indicates if high availability with zone redundancy is supported in this location. Will be deprecated in the future. Look to Supported Features for  'ZoneRedundantHa'.
  */
 union ZoneRedundantHighAvailabilitySupport {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability with zone redundancy is supported. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability with zone redundancy is not supported. */
   Disabled: "Disabled",
 }
 
 /**
- * Indicates if high availability with zone redundancy is supported in conjunction with geographically redundant backups in this location. 'Enabled' means high availability with zone redundancy is supported in conjunction with geographically redundant backups is supported. 'Disabled' stands for high availability with zone redundancy is supported in conjunction with geographically redundant backups is not supported. Will be deprecated in the future. Look to Supported Features for 'ZoneRedundantHaAndGeoBackup'.
+ * Indicates if high availability with zone redundancy is supported in conjunction with geographically redundant backups in this location. Will be deprecated in the future. Look to Supported Features for 'ZoneRedundantHaAndGeoBackup'.
  */
 union ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability with zone redundancy is supported in conjunction with geographically redundant backups. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability with zone redundancy is not supported in conjunction with geographically redundant backups. */
   Disabled: "Disabled",
 }
 
 /**
- * Indicates if storage autogrow is supported in this location. 'Enabled' means storage autogrow is supported. 'Disabled' stands for storage autogrow is not supported. Will be deprecated in the future. Look to Supported Features for 'StorageAutoGrowth'.
+ * Indicates if storage autogrow is supported in this location. Will be deprecated in the future. Look to Supported Features for 'StorageAutoGrowth'.
  */
 union StorageAutoGrowthSupport {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Storage autogrow is supported. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Storage autogrow is not supported. */
   Disabled: "Disabled",
 }
 
 /**
- * Indicates if resizing the storage, without interrupting the operation of the database engine, is supported in this location for the given subscription. 'Enabled' means resizing the storage without interrupting the operation of the database engine is supported. 'Disabled' means resizing the storage without interrupting the operation of the database engine is not supported. Will be deprecated in the future. Look to Supported Features for 'OnlineResize'.
+ * Indicates if resizing the storage, without interrupting the operation of the database engine, is supported in this location for the given subscription. Will be deprecated in the future. Look to Supported Features for 'OnlineResize'.
  */
 union OnlineStorageResizeSupport {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Resizing the storage without interrupting the operation of the database engine is supported. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Resizing the storage without interrupting the operation of the database engine is not supported. */
   Disabled: "Disabled",
 }
 
 /**
- * Indicates if this location is restricted. 'Enabled' means location is restricted. 'Disabled' stands for location is not restricted. Will be deprecated in the future. Look to Supported Features for 'Restricted'.
+ * Indicates if this location is restricted. Will be deprecated in the future. Look to Supported Features for 'Restricted'.
  */
 union LocationRestricted {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Location is restricted. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Location is not restricted. */
   Disabled: "Disabled",
 }
 
@@ -187,32 +212,42 @@ union LocationRestricted {
  */
 union ConfigurationDataType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** A boolean value. */
   Boolean: "Boolean",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** A numeric value. */
   Numeric: "Numeric",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** An integer value. */
   Integer: "Integer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** An enumeration value. */
   Enumeration: "Enumeration",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** A string value. */
   String: "String",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** A set of values. */
   Set: "Set",
 }
 
 /**
- * Service-set extensible enum indicating the status of operation
+ * Service-set extensible enumeration indicating the status of operation.
  */
 union ExecutionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation is currently running. */
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation has been cancelled. */
   Cancelled: "Cancelled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation has failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation has succeeded. */
   Succeeded: "Succeeded",
 }
 
@@ -221,19 +256,26 @@ union ExecutionStatus {
  */
 union MigrationState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration is in progress. */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration is waiting for user action. */
   WaitingForUserAction: "WaitingForUserAction",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration has been canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration has failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration has succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Validation for migration has failed. */
   ValidationFailed: "ValidationFailed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration is cleaning up resources. */
   CleaningUp: "CleaningUp",
 }
 
@@ -242,29 +284,41 @@ union MigrationState {
  */
 union MigrationSubstate {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Performing pre-requisite steps for migration. */
   PerformingPreRequisiteSteps: "PerformingPreRequisiteSteps",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Waiting for logical replication setup request on source database. */
   WaitingForLogicalReplicationSetupRequestOnSourceDB: "WaitingForLogicalReplicationSetupRequestOnSourceDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Waiting for databases to migrate specification. */
   WaitingForDBsToMigrateSpecification: "WaitingForDBsToMigrateSpecification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Waiting for target database overwrite confirmation. */
   WaitingForTargetDBOverwriteConfirmation: "WaitingForTargetDBOverwriteConfirmation",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Waiting for data migration scheduling. */
   WaitingForDataMigrationScheduling: "WaitingForDataMigrationScheduling",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Waiting for data migration window. */
   WaitingForDataMigrationWindow: "WaitingForDataMigrationWindow",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migrating data. */
   MigratingData: "MigratingData",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Waiting for cutover trigger. */
   WaitingForCutoverTrigger: "WaitingForCutoverTrigger",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Completing migration. */
   CompletingMigration: "CompletingMigration",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration completed. */
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Canceling requested database migrations. */
   CancelingRequestedDBMigrations: "CancelingRequestedDBMigrations",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Validation in progress. */
   ValidationInProgress: "ValidationInProgress",
 }
 
@@ -273,109 +327,147 @@ union MigrationSubstate {
  */
 union MigrationDatabaseState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration is in progress for the database. */
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration is waiting for cutover trigger for the database. */
   WaitingForCutoverTrigger: "WaitingForCutoverTrigger",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration has failed for the database. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration has been canceled for the database. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration has succeeded for the database. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration is being canceled for the database. */
   Canceling: "Canceling",
 }
 
 /**
- * Validation status for migration.
+ * Validation state for migration.
  */
 union ValidationState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Validation has failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Validation has succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Validation has succeeded with warnings. */
   Warning: "Warning",
 }
 
 /**
- * Mode used to perform the migration: Online or Offline.
+ * Mode used to perform the migration.
  */
 union MigrationMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Offline migration mode. */
   Offline: "Offline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Online migration mode. */
   Online: "Online",
 }
 
 /**
- * Supported option for a migration
+ * Supported option for a migration.
  */
 union MigrationOption {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Validate the migration without performing it. */
   Validate: "Validate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Perform the migration. */
   Migrate: "Migrate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Validate and perform the migration. */
   ValidateAndMigrate: "ValidateAndMigrate",
 }
 
 /**
- * Source server type used for the migration: ApsaraDB_RDS, AWS, AWS_AURORA, AWS_EC2, AWS_RDS, AzureVM, Crunchy_PostgreSQL, Digital_Ocean_Droplets, Digital_Ocean_PostgreSQL, EDB, EDB_Oracle_Server, EDB_PostgreSQL, GCP, GCP_AlloyDB, GCP_CloudSQL, GCP_Compute, Heroku_PostgreSQL, Huawei_Compute, Huawei_RDS, OnPremises, PostgreSQLCosmosDB, PostgreSQLFlexibleServer, PostgreSQLSingleServer, or Supabase_PostgreSQL
+ * Source server type used for the migration.
  */
 union SourceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** On-premises PostgreSQL server. */
   OnPremises: "OnPremises",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Amazon Web Services PostgreSQL server. */
   AWS: "AWS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Google Cloud Platform PostgreSQL server. */
   GCP: "GCP",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Azure Virtual Machine PostgreSQL server. */
   AzureVM: "AzureVM",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Azure Database for PostgreSQL single server. */
   PostgreSQLSingleServer: "PostgreSQLSingleServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Amazon RDS for PostgreSQL. */
   AWS_RDS: "AWS_RDS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Amazon Aurora for PostgreSQL. */
   AWS_AURORA: "AWS_AURORA",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Amazon EC2 for PostgreSQL. */
   AWS_EC2: "AWS_EC2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Google Cloud SQL for PostgreSQL. */
   GCP_CloudSQL: "GCP_CloudSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Google Cloud AlloyDB for PostgreSQL. */
   GCP_AlloyDB: "GCP_AlloyDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Google Compute Engine for PostgreSQL. */
   GCP_Compute: "GCP_Compute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** EnterpriseDB PostgreSQL server. */
   EDB: "EDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** EnterpriseDB Oracle Server. */
   EDB_Oracle_Server: "EDB_Oracle_Server",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** EnterpriseDB PostgreSQL server. */
   EDB_PostgreSQL: "EDB_PostgreSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Azure Database for PostgreSQL flexible server. */
   PostgreSQLFlexibleServer: "PostgreSQLFlexibleServer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** .NET Cosmos DB for PostgreSQL */
   PostgreSQLCosmosDB: "PostgreSQLCosmosDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Huawei RDS for PostgreSQL */
   Huawei_RDS: "Huawei_RDS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Huawei Compute for PostgreSQL */
   Huawei_Compute: "Huawei_Compute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Heroku PostgreSQL */
   Heroku_PostgreSQL: "Heroku_PostgreSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Crunchy PostgreSQL */
   Crunchy_PostgreSQL: "Crunchy_PostgreSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** ApsaraDB RDS for PostgreSQL */
   ApsaraDB_RDS: "ApsaraDB_RDS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Digital Ocean Droplets for PostgreSQL */
   Digital_Ocean_Droplets: "Digital_Ocean_Droplets",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Digital Ocean PostgreSQL */
   Digital_Ocean_PostgreSQL: "Digital_Ocean_PostgreSQL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Supabase PostgreSQL */
   Supabase_PostgreSQL: "Supabase_PostgreSQL",
 }
 
@@ -384,13 +476,17 @@ union SourceType {
  */
 union SslMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Prefer SSL connection. If the server does not support SSL, the connection will be established without SSL. */
   Prefer: "Prefer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Require SSL connection. If the server does not support SSL, the connection will fail. */
   Require: "Require",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Require SSL connection and verify the server certificate against the CA certificate. */
   VerifyCA: "VerifyCA",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Require SSL connection, verify the server certificate against the CA certificate, and verify that the server hostname matches the certificate. */
   VerifyFull: "VerifyFull",
 }
 
@@ -399,11 +495,14 @@ union SslMode {
  */
 union SkuTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Cost-effective tier for infrequent CPU usage, ideal for development and testing workloads with low performance requirements. */
   Burstable: "Burstable",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Balanced compute and memory for most workloads, offering scalable performance and I/O throughput. */
   GeneralPurpose: "GeneralPurpose",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High memory-to-core ratio for demanding workloads needing fast in-memory processing and high concurrency. */
   MemoryOptimized: "MemoryOptimized",
 }
 
@@ -412,20 +511,24 @@ union SkuTier {
  */
 union LogicalReplicationOnSourceServer {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Logical replication will be set up on the source server. */
   True: "True",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Logical replication will not be set up on the source server. */
   False: "False",
 }
 
 /**
- * Indicates if databases on the target server can be overwritten when already present. If set to 'False', when the migration workflow detects that the database already exists on the target server, it will wait for a confirmation.
+ * Indicates if databases on the target server can be overwritten when already present.
  */
 union OverwriteDatabasesOnTargetServer {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Databases on the target server can be overwritten when already present. */
   True: "True",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Databases on the target server cannot be overwritten when already present. When the migration workflow detects that the database already exists on the target server, it will wait for a confirmation. */
   False: "False",
 }
 
@@ -434,9 +537,11 @@ union OverwriteDatabasesOnTargetServer {
  */
 union MigrateRolesAndPermissions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Roles and permissions will be migrated. */
   True: "True",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Roles and permissions will not be migrated. */
   False: "False",
 }
 
@@ -445,9 +550,11 @@ union MigrateRolesAndPermissions {
  */
 union StartDataMigration {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Data migration must start right away. */
   True: "True",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Data migration must not start right away. */
   False: "False",
 }
 
@@ -456,9 +563,11 @@ union StartDataMigration {
  */
 union TriggerCutover {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Cutover must be triggered for the entire migration. */
   True: "True",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Cutover must not be triggered for the entire migration. */
   False: "False",
 }
 
@@ -467,18 +576,24 @@ union TriggerCutover {
  */
 union Cancel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Cancel must be triggered for the entire migration. */
   True: "True",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Cancel must not be triggered for the entire migration. */
   False: "False",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * Indicates the filter to apply when listing migrations.
+ */
 union MigrationListFilter {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Only active (in-progress) migrations. */
   Active: "Active",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** All migrations. */
   All: "All",
 }
 
@@ -487,20 +602,24 @@ union MigrationListFilter {
  */
 union MigrationNameAvailabilityReason {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration name is invalid. */
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration name already exists. */
   AlreadyExists: "AlreadyExists",
 }
 
 /**
- * The reason why the given name is not available.
+ * Reason why the given name is not available.
  */
 union CheckNameAvailabilityReason {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration name is invalid. */
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Migration name already exists. */
   AlreadyExists: "AlreadyExists",
 }
 
@@ -522,13 +641,17 @@ union OperationOrigin {
  */
 union IdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** No managed identity is assigned to the server. */
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** One or more managed identities provided by the user are assigned to the server. */
   UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Azure automatically creates and manages the identity associated to the lifecycle of the server. */
   SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Both system-assigned and user-assigned identities are assigned to the server. */
   `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
@@ -537,59 +660,79 @@ union IdentityType {
  */
 union PostgresMajorVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 18. */
   `18`: "18",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 17. */
   `17`: "17",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 16. */
   `16`: "16",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 15. */
   `15`: "15",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 14. */
   `14`: "14",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 13. */
   `13`: "13",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 12. */
   `12`: "12",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL 11. */
   `11`: "11",
 }
 
 /**
- * Possible states of a server.
+ * State of a server.
  */
 union ServerState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server is healthy and not undergoing any operations at the management or control plane level. This doesn't mean that the server is fully operational at the data plane level. */
   Ready: "Ready",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server is being deleted. */
   Dropping: "Dropping",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server is disabled. Typical reasons include: the subscription on which the server is deployed is explicitly disabled or canceled by the administrator, the spending limit has been reached, or the bill is past due. May also happen when the server is being moved to another resource group or subscription. */
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL database engine is being restarted. */
   Starting: "Starting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Compute resources associated with the server are being stopped and deallocated. If the server has high availability enabled, the compute resources of the standby server are also stopped and deallocated. */
   Stopping: "Stopping",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Compute resources associated with the server are being stopped and deallocated. */
   Stopped: "Stopped",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server is undergoing some changes which may or may not impact the availability of the PostgreSQL database engine. For example, the compute resources of the server are being scaled up or down, which may cause temporary unavailability of the database engine. Or, for example, a firewall rule is being added or removed, which doesn't cause any unavailability of the database engine. */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** PostgreSQL database engine is being restarted. */
   Restarting: "Restarting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server isn't accessible, because the key provided to encrypt and decrypt the data is in invalid state. */
   Inaccessible: "Inaccessible",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server is in the process of being created. */
   Provisioning: "Provisioning",
 }
 
 /**
- * Flag to enable or disable the automatic growth of storage size of a server when available space is nearing zero and conditions allow for automatically growing storage size.
+ * Indicates if the server is configured to automatically grow storage size when available space is nearing zero and conditions allow for automatic growing storage size.
  */
 union StorageAutoGrow {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server should automatically grow storage size when available space is nearing zero and conditions allow for automatically growing storage size. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server should not automatically grow storage size when available space is nearing zero. */
   Disabled: "Disabled",
 }
 
@@ -598,46 +741,63 @@ union StorageAutoGrow {
  */
 union AzureManagedDiskPerformanceTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Entry-level SSD for minimal IOPS, ideal for light development or testing workloads. */
   P1: "P1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Slightly higher IOPS for small-scale applications needing consistent low latency. */
   P2: "P2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Balanced performance for basic production workloads with moderate throughput. */
   P3: "P3",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Enhanced IOPS for growing apps with predictable performance needs. */
   P4: "P4",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Mid-tier SSD for steady workloads requiring reliable throughput and latency. */
   P6: "P6",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Popular choice for general-purpose production workloads with scalable performance. */
   P10: "P10",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High IOPS tier for demanding apps with frequent read/write operations. */
   P15: "P15",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Entry point for high-performance Solid State Disks (SSDs), suitable for small-scale I/O-intensive workloads. */
   P20: "P20",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Balanced tier for moderate throughput and latency-sensitive applications. */
   P30: "P30",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Enhanced performance for growing production workloads with consistent IOPS demands. */
   P40: "P40",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Optimized for enterprise-grade applications needing sustained high throughput. */
   P50: "P50",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High-capacity tier for large databases and analytics workloads with elevated IOPS. */
   P60: "P60",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Designed for mission-critical systems requiring ultra-low latency and high concurrency. */
   P70: "P70",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Top-tier SSD for maximum IOPS and throughput, ideal for the most demanding workloads. */
   P80: "P80",
 }
 
 /**
- * Type of storage assigned to a server. Allowed values are Premium_LRS, PremiumV2_LRS, or UltraSSD_LRS. If not specified, it defaults to Premium_LRS.
+ * Type of storage assigned to a server. If not specified, it defaults to Premium_LRS.
  */
 union StorageType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Standard Solid State Disk (SSD) backed storage offering consistent performance for general purpose workloads. */
   Premium_LRS: "Premium_LRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Next generation Solid State Disk (SSD) storage with improved scalability and performance for demanding enterprise workloads. */
   PremiumV2_LRS: "PremiumV2_LRS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High-end Solid State Disk (SSD) storage designed for extreme IOPS and latency-sensitive applications. */
   UltraSSD_LRS: "UltraSSD_LRS",
 }
 
@@ -646,9 +806,11 @@ union StorageType {
  */
 union MicrosoftEntraAuth {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server supports Microsoft Entra authentication. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server does not support Microsoft Entra authentication. */
   Disabled: "Disabled",
 }
 
@@ -657,9 +819,11 @@ union MicrosoftEntraAuth {
  */
 union PasswordBasedAuth {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server supports password based authentication. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server does not support password based authentication. */
   Disabled: "Disabled",
 }
 
@@ -668,9 +832,11 @@ union PasswordBasedAuth {
  */
 union DataEncryptionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Encryption managed by Azure using platform managed keys for simplicity and compliance. */
   SystemManaged: "SystemManaged",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Encryption using customer managed keys stored in Azure Key Vault for enhanced control and security. */
   AzureKeyVault: "AzureKeyVault",
 }
 
@@ -679,9 +845,11 @@ union DataEncryptionType {
  */
 union EncryptionKeyStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Key is valid and can be used for encryption. */
   Valid: "Valid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Key is invalid and cannot be used for encryption. Possible causes include key deletion, permission changes, key being disabled, key type not supported, or current date being outside of validity period associated to the key. */
   Invalid: "Invalid",
 }
 
@@ -690,9 +858,11 @@ union EncryptionKeyStatus {
  */
 union GeographicallyRedundantBackup {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server is configured to create geographically redundant backups. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Server is not configured to create geographically redundant backups. */
   Disabled: "Disabled",
 }
 
@@ -701,9 +871,11 @@ union GeographicallyRedundantBackup {
  */
 union ServerPublicNetworkAccessState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Public network access is enabled. This allows the server to be accessed from the public internet, provided the necessary firewall rule that allows incoming traffic originating from the connecting client is in place. This is compatible with the use of private endpoints to connect to this server. */
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Public network access is disabled. This means the server cannot be accessed from the public internet, but only via private endpoints. */
   Disabled: "Disabled",
 }
 
@@ -712,17 +884,23 @@ union ServerPublicNetworkAccessState {
  */
 union HighAvailabilityState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** High availability is not enabled for the server. */
   NotEnabled: "NotEnabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Standby server is being created. */
   CreatingStandby: "CreatingStandby",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Data is being replicated to the standby server. */
   ReplicatingData: "ReplicatingData",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Failover operation to the standby server is in progress. */
   FailingOver: "FailingOver",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Standby server is healthy and ready to take over in case of a failover. */
   Healthy: "Healthy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Standby server is being removed. */
   RemovingStandby: "RemovingStandby",
 }
 
@@ -731,39 +909,43 @@ union HighAvailabilityState {
  */
 union ReplicationRole {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** No replication role assigned; the server operates independently. */
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Acts as the source server for replication to one or more replicas. */
   Primary: "Primary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Receives data asynchronously from a primary server within the same region. */
   AsyncReplica: "AsyncReplica",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Receives data asynchronously from a primary server in a different region for geographical redundancy. */
   GeoAsyncReplica: "GeoAsyncReplica",
 }
 
 /**
- * Indicates the replication state of a read replica. This property is returned only when the target server is a read replica. Possible  values are Active, Broken, Catchup, Provisioning, Reconfiguring, and Updating
+ * Indicates the replication state of a read replica. This property is returned only when the target server is a read replica.
  */
 union ReplicationState {
   string,
 
   /**
-   * The read replica server is fully synchronized and actively replicating data from the primary server.
+   * Read replica server is fully synchronized and actively replicating data from the primary server.
    */
   Active: "Active",
 
   /**
-   * The read replica server is behind the primary server and is currently catching up with pending changes.
+   * Read replica server is behind the primary server and is currently catching up with pending changes.
    */
   Catchup: "Catchup",
 
   /**
-   * The read replica server is being created and is in process of getting initialized.
+   * Read replica server is being created and is in process of getting initialized.
    */
   Provisioning: "Provisioning",
 
   /**
-   * The read replica server is undergoing some changes it can be changing compute size of promoting it to primary server.
+   * Read replica server is undergoing some changes it can be changing compute size of promoting it to primary server.
    */
   Updating: "Updating",
 
@@ -773,19 +955,19 @@ union ReplicationState {
   Broken: "Broken",
 
   /**
-   * The read replica server is being reconfigured, possibly due to changes in source or settings.
+   * Read replica server is being reconfigured, possibly due to changes in source or settings.
    */
   Reconfiguring: "Reconfiguring",
 }
 
 /**
- * Type of operation to apply on the read replica. This property is write only. Standalone means that the read replica will be promoted to a standalone server, and will become a completely independent entity from the replication set. Switchover means that the read replica will roles with the primary server.
+ * Type of operation to apply on the read replica. This property is write only.
  */
 union ReadReplicaPromoteMode {
   string,
 
   /**
-   * Read replica will become an independent server.
+   * Read replica will become an independent server, and a completely independent entity from the replication set.
    */
   Standalone: "Standalone",
 
@@ -802,12 +984,12 @@ union ReadReplicaPromoteOption {
   string,
 
   /**
-   * The operation will wait for data in the read replica to be fully synchronized with its source server, before it initiates the operation.
+   * Wait for data in the read replica to be fully synchronized with its source server before it initiates the operation.
    */
   Planned: "Planned",
 
   /**
-   * The operation will not wait for data in the read replica to be synchronized with its source server, before it initiates the operation.
+   * Initiate the operation immediately, without waiting for data in the read replica to be synchronized with its source server.
    */
   Forced: "Forced",
 }
@@ -817,19 +999,26 @@ union ReadReplicaPromoteOption {
  */
 union CreateMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** If the operation is triggered on a non-existing server, it's equivalent to 'Create'. If the operation is triggered on an existing server, it's equivalent to 'Update'. */
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation creates a new server. */
   Create: "Create",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation updates an existing server. */
   Update: "Update",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation restores an existing backup of an existing server. This operation creates a new server, and then restores on it the backup of an existing server at a specific point in time. */
   PointInTimeRestore: "PointInTimeRestore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation restores an existing backup of an existing server, on the paired region of the existing server. This operation creates a new server on the paired region of the existing server, and then restores on it the backup of an existing server at a specific point in time, in a different region. This operation is only supported on existing servers that were created with geographically redundant backups enabled. */
   GeoRestore: "GeoRestore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation creates a replica of an existing server. This operation creates a new server, restores a base backup of the existing server (referred to as primary), and configures physical replication to asynchronously stream all changes which are recorded in the transaction log of the primary. */
   Replica: "Replica",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation creates a new server, initialized with the backup of a server that was recently deleted. */
   ReviveDropped: "ReviveDropped",
 }
 
@@ -838,9 +1027,11 @@ union CreateMode {
  */
 union CreateModeForPatch {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** It's equivalent to 'Update'. */
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Operation updates an existing server. */
   Update: "Update",
 }
 
@@ -849,24 +1040,30 @@ union CreateModeForPatch {
  */
 union FailoverMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Trigger a failover from primary to standby without killing the primary database process first. This is a graceful failover that attempts to preserve data consistency. */
   PlannedFailover: "PlannedFailover",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Terminate the primary database process first, then triggers the failover. This is more aggressive and used when the primary is unresponsive or in an unhealthy state. */
   ForcedFailover: "ForcedFailover",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Similar to 'PlannedFailover' but prefers a switch over operation where roles are swapped between primary and standby. */
   PlannedSwitchover: "PlannedSwitchover",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Terminate the primary database process first, and then triggers a switch over with role swapping. */
   ForcedSwitchover: "ForcedSwitchover",
 }
 
 /**
- * The name of the tuning option.
+ * Name of the tuning option.
  */
 union TuningOptionParameterEnum {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Index related recommendations. */
   index: "index",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Table related recommendations. */
   table: "table",
 }
 
@@ -875,14 +1072,22 @@ union TuningOptionParameterEnum {
  */
 union RecommendationTypeEnum {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to create an index to improve query performance. */
   CreateIndex: "CreateIndex",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to drop an existing index because it's duplicate or unused. */
   DropIndex: "DropIndex",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to reindex an existing invalid index. */
   ReIndex: "ReIndex",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to analyze a table to update statistics for the query optimizer. */
   AnalyzeTable: "AnalyzeTable",
+
+  /** Recommendation to vacuum a table to reclaim storage and optimize performance. */
+  @added(Versions.v2026_01_01)
+  VacuumTable: "VacuumTable",
 }
 
 /**
@@ -890,14 +1095,22 @@ union RecommendationTypeEnum {
  */
 union RecommendationTypeParameterEnum {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to create an index to improve query performance. */
   CreateIndex: "CreateIndex",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to drop an existing index because it's duplicate or unused. */
   DropIndex: "DropIndex",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to reindex an existing invalid index. */
   ReIndex: "ReIndex",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Recommendation to analyze a table to update statistics for the query optimizer. */
   AnalyzeTable: "AnalyzeTable",
+
+  /** Recommendation to vacuum a table to reclaim storage and optimize performance. */
+  @added(Versions.v2026_01_01)
+  VacuumTable: "VacuumTable",
 }
 
 /**
@@ -905,7 +1118,8 @@ union RecommendationTypeParameterEnum {
  */
 union VirtualEndpointType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Read-write endpoint. */
   ReadWrite: "ReadWrite",
 }
 
@@ -932,7 +1146,7 @@ enum ThreatProtectionState {
 }
 
 /**
- * The status of the capability.
+ * Status of the capability.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CapabilityStatus {
@@ -1285,13 +1499,13 @@ model StorageTierCapability extends CapabilityBase {
  */
 model CapabilityBase {
   /**
-   * The status of the capability.
+   * Status of the capability.
    */
   @visibility(Lifecycle.Read)
   status?: CapabilityStatus;
 
   /**
-   * The reason for the capability not being available.
+   * Reason for the capability not being available.
    */
   @visibility(Lifecycle.Read)
   reason?: string;
@@ -1584,6 +1798,18 @@ model DatabaseProperties {
 }
 
 /**
+ * Properties of a tuning option.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model TuningOptionsProperties {
+  /**
+   * State of the tuning option.
+   */
+  @visibility(Lifecycle.Read)
+  state?: string;
+}
+
+/**
  * List of all databases in a server.
  */
 model DatabaseList is Azure.Core.Page<Database>;
@@ -1629,7 +1855,7 @@ model BackupRequestBase {
 }
 
 /**
- * The settings for the long term backup.
+ * Settings for the long term backup.
  */
 model BackupSettings {
   /**
@@ -1639,7 +1865,7 @@ model BackupSettings {
 }
 
 /**
- * Response for the LTR pre-backup API call
+ * Response for the LTR pre-backup API call.
  */
 model LtrPreBackupResponse {
   /**
@@ -1660,12 +1886,12 @@ model BackupsLongTermRetentionResponseProperties {
 }
 
 /**
- * The request that is made for a long term retention backup.
+ * Request made for a long term retention backup.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackupsLongTermRetentionRequest extends BackupRequestBase {
   /**
-   * Backup store detail for target server
+   * Backup store detail for target server.
    */
   targetDetails: BackupStoreDetails;
 }
@@ -1697,27 +1923,27 @@ model BackupsLongTermRetentionResponse {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LtrBackupOperationResponseProperties {
   /**
-   * Size of datasource in bytes
+   * Size of datasource in bytes.
    */
   datasourceSizeInBytes?: int64;
 
   /**
-   * Data transferred in bytes
+   * Data transferred in bytes.
    */
   dataTransferredInBytes?: int64;
 
   /**
-   * Name of Backup operation
+   * Name of Backup operation.
    */
   backupName?: string;
 
   /**
-   * Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc
+   * Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc.
    */
   backupMetadata?: string;
 
   /**
-   * Service-set extensible enum indicating the status of operation
+   * Service-set extensible enum indicating the status of operation.
    */
   status: ExecutionStatus;
 
@@ -1734,20 +1960,20 @@ model LtrBackupOperationResponseProperties {
   endTime?: utcDateTime;
 
   /**
-   * PercentageCompleted
+   * Percentage completed.
    */
   @minValue(0)
   @maxValue(100)
   percentComplete?: float64;
 
   /**
-   * The error code.
+   * Error code.
    */
   @visibility(Lifecycle.Read)
   errorCode?: string;
 
   /**
-   * The error message.
+   * Error message.
    */
   @visibility(Lifecycle.Read)
   errorMessage?: string;
@@ -2413,6 +2639,100 @@ model NameAvailabilityModel
 }
 
 /**
+ * Metric specification for an operation.
+ */
+model MetricSpecification {
+  /**
+   * Name of the metric.
+   */
+  name?: string;
+
+  /**
+   * Display name of the metric.
+   */
+  displayName?: string;
+
+  /**
+   * Display description of the metric.
+   */
+  displayDescription?: string;
+
+  /**
+   * Unit of the metric.
+   */
+  unit?: string;
+
+  /**
+   * Aggregation type of the metric.
+   */
+  aggregationType?: string;
+
+  /**
+   * Supported aggregation types for the metric.
+   */
+  supportedAggregationTypes?: string[];
+
+  /**
+   * Supported time grain types for the metric.
+   */
+  supportedTimeGrainTypes?: string[];
+
+  /**
+   * Category of the metric.
+   */
+  category?: string;
+}
+
+/**
+ * Log specification for an operation.
+ */
+model LogSpecification {
+  /**
+   * Name of the log.
+   */
+  name?: string;
+
+  /**
+   * Display name of the log.
+   */
+  displayName?: string;
+
+  /**
+   * Blob duration for the log.
+   */
+  blobDuration?: string;
+}
+
+/**
+ * Service specification for an operation.
+ */
+model ServiceSpecification {
+  /**
+   * Metric specifications for the operation.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  metricSpecifications?: MetricSpecification[];
+
+  /**
+   * Log specifications for the operation.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  logSpecifications?: LogSpecification[];
+}
+
+/**
+ * Additional properties for operation metadata.
+ */
+model OperationProperties {
+  /**
+   * Service specification for the operation.
+   */
+  serviceSpecification?: ServiceSpecification;
+}
+
+/**
  * REST API operation definition.
  */
 model Operation {
@@ -2442,9 +2762,8 @@ model Operation {
   /**
    * Additional descriptions for the operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  properties?: Record<unknown>;
+  properties?: OperationProperties;
 }
 
 /**
@@ -3529,63 +3848,63 @@ scalar secretString extends string;
 model OperationList is Azure.Core.Page<Operation>;
 
 /**
- * The state of the network migration operation.
+ * State of the network migration operation.
  */
 union NetworkMigrationState {
   string,
 
   /**
-   * The network migration is pending.
+   * Network migration is pending.
    */
   Pending: "Pending",
 
   /**
-   * The network migration is in progress.
+   * Network migration is in progress.
    */
   InProgress: "InProgress",
 
   /**
-   * The network migration succeeded.
+   * Network migration succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * The network migration failed.
+   * Network migration failed.
    */
   Failed: "Failed",
 
   /**
-   * The network migration cancellation is in progress.
+   * Network migration cancellation is in progress.
    */
   CancelInProgress: "CancelInProgress",
 
   /**
-   * The network migration was cancelled.
+   * Network migration was cancelled.
    */
   Cancelled: "Cancelled",
 }
 
 /**
- * The status of a network migration operation.
+ * Status of a network migration operation.
  */
 model MigrateNetworkStatus {
   /**
-   * The ID of the subscription.
+   * Identifier of the subscription.
    */
   subscriptionId?: string;
 
   /**
-   * The name of the resource group.
+   * Name of the resource group.
    */
   resourceGroupName?: string;
 
   /**
-   * The name of the server.
+   * Name of the server.
    */
   serverName?: string;
 
   /**
-   * The state of the network migration operation.
+   * State of the network migration operation.
    */
   @visibility(Lifecycle.Read)
   state?: NetworkMigrationState;

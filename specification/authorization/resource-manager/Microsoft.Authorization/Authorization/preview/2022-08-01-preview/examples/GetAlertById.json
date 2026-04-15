@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "alertId": "TooManyOwnersAssignedToResource",
+    "api-version": "2022-08-01-preview",
+    "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TooManyOwnersAssignedToResource",
+        "type": "Microsoft.Authorization/roleManagementAlerts",
+        "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlerts/TooManyOwnersAssignedToResource",
+        "properties": {
+          "alertConfiguration": {
+            "name": "TooManyOwnersAssignedToResource",
+            "type": "Microsoft.Authorization/roleManagementAlertConfigurations",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlertConfigurations/TooManyOwnersAssignedToResource",
+            "properties": {
+              "alertConfigurationType": "TooManyOwnersAssignedToResourceAlertConfiguration",
+              "alertDefinitionId": "TooManyOwnersAssignedToResource",
+              "isEnabled": true,
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+              "thresholdNumberOfOwners": 2,
+              "thresholdPercentageOfOwnersOutOfAllRoleMembers": 3
+            }
+          },
+          "alertDefinition": {
+            "name": "TooManyOwnersAssignedToResource",
+            "type": "Microsoft.Authorization/roleManagementAlertDefinitions",
+            "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlertDefinitions/TooManyOwnersAssignedToResource",
+            "properties": {
+              "description": "The number of users with the Owner role is too high. We recommend assigning these individuals to less privileged roles or roles more suitable to their daily needs. Take a moment to review the current assignments, and suggested changes here.",
+              "displayName": "Too many owners assigned to a resource",
+              "howToPrevent": "Choose a role that provides the fewest privileges necessary for a user or group to complete their tasks.",
+              "isConfigurable": true,
+              "isRemediatable": true,
+              "mitigationSteps": "To mitigate this issue, reduce the number of users in the Owner role. Review the list of users in the list, and reassign them to a less privileged role such as Contributor.",
+              "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f",
+              "securityImpact": "As the number of users with the owner role increases, so does the potential for malicious or mistaken actions affecting your resource.",
+              "severityLevel": "Medium"
+            }
+          },
+          "alertIncidents": [
+            {
+              "name": "a9f38501-74ec-43ea-8663-6c538602150d",
+              "type": "Microsoft.Authorization/roleManagementAlerts/alertIncidents",
+              "id": "/subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleManagementAlerts/TooManyOwnersAssignedToResource/alertIncidents/a9f38501-74ec-43ea-8663-6c538602150d",
+              "properties": {
+                "alertIncidentType": "TooManyOwnersAssignedToResourceAlertIncident",
+                "assigneeName": "testUser",
+                "assigneeType": "User"
+              }
+            }
+          ],
+          "incidentCount": 1,
+          "isActive": true,
+          "lastModifiedDateTime": "2022-04-05T03:04:06.467+00:00",
+          "lastScannedDateTime": "2022-04-06T18:25:00.38+00:00",
+          "scope": "subscriptions/afa2a084-766f-4003-8ae1-c4aeb893a99f"
+        }
+      }
+    }
+  },
+  "operationId": "Alerts_Get",
+  "title": "GetAlertById"
+}

@@ -11,8 +11,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
-import "./back-compatible.tsp";
+import "./CommonModels.tsp";
+import "./AgentPoolModels.tsp";
+import "./BackCompatible.tsp";
 import "./ManagedClusterUpgradeProfile.tsp";
 import "./ManagedCluster.tsp";
 import "./GuardrailsAvailableVersion.tsp";
@@ -32,7 +33,8 @@ import "./LoadBalancer.tsp";
 import "./IdentityBinding.tsp";
 import "./JWTAuthenticator.tsp";
 import "./MeshMembership.tsp";
-import "./routes.tsp";
+import "./Operations.tsp";
+import "./LocationRoutes.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -57,8 +59,13 @@ enum Versions {
   v2025_10_01: "2025-10-01",
 
   /**
-   * The 2025-10-02-preview API version.
+   * The 2026-01-01 API version.
+   */
+  v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-01-02-preview API version.
    */
   @previewVersion
-  v2025_10_02_preview: "2025-10-02-preview",
+  v2026_01_02_preview: "2026-01-02-preview",
 }

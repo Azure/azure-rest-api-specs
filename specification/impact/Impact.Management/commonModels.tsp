@@ -12,6 +12,7 @@ using OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 @doc("Details about impacted performance metrics. Applicable for performance related impact")
 model Performance {
@@ -233,9 +234,61 @@ union Protocol {
   Other: "Other",
 }
 
+@added(Versions.v2025_01_01_preview)
+@doc("List of detection types")
+union DetectionType {
+  string,
+
+  /** Use this when impact is alert based. */
+  BusinessAlert: "BusinessAlert",
+
+  /** Use this when impact is metrics or expectations based. */
+  MetricsThreshold: "MetricsThreshold",
+
+  /** Use this when impact is outlier based. */
+  MetricsAnomaly: "MetricsAnomaly",
+}
+
+@added(Versions.v2025_01_01_preview)
+@doc("List of severity of an impact.")
+union Severity {
+  string,
+
+  /** Use this when the issue is critical. Consider this to be similar to severity 1 incidents. */
+  Critical: "Critical",
+
+  /** Use this when the issue is high impact similar to severity 2 incidents. */
+  High: "High",
+
+  /** Use this when the issue is medium impact similar to severity 3 incidents. */
+  Medium: "Medium",
+
+  /** Use this for issues that are low impact similar to severity 4 and 5 incidents. */
+  Low: "Low",
+}
+
 @doc("Resource details")
 model SourceOrTarget {
   @doc("Azure resource id, example /subscription/{subscription}/resourceGroup/{rg}/Microsoft.compute/virtualMachine/{vmName}")
   @pattern("(\\/[0-9a-zA-Z]+)*")
   azureResourceId?: string;
+}
+
+@doc("Group of insights for a category")
+model InsightCategoryGroup {
+  @doc("Category name")
+  category: string;
+
+  @doc("Status of the insights in this category")
+  status?: string;
+
+  @doc("List of insight references in this category")
+  @Azure.ResourceManager.identifiers(#["id"])
+  insights?: InsightReference[];
+}
+
+@doc("Reference to an Insight resource")
+model InsightReference {
+  @doc("Azure resource ID of the insight")
+  id: string;
 }

@@ -1,0 +1,268 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2022-04-01",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These calls handle provider operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ProviderOperationsMetadata"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Authorization/providerOperations": {
+      "get": {
+        "operationId": "ProviderOperationsMetadata_List",
+        "tags": [
+          "ProviderOperationsMetadata"
+        ],
+        "description": "Gets provider operations metadata for all resource providers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specifies whether to expand the values.",
+            "required": false,
+            "type": "string",
+            "default": "resourceTypes"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderOperationsMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List provider operations metadata for all resource providers": {
+            "$ref": "./examples/GetAllProviderOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}": {
+      "get": {
+        "operationId": "ProviderOperationsMetadata_Get",
+        "tags": [
+          "ProviderOperationsMetadata"
+        ],
+        "description": "Gets provider operations metadata for the specified resource provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The namespace of the resource provider.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Specifies whether to expand the values.",
+            "required": false,
+            "type": "string",
+            "default": "resourceTypes"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProviderOperationsMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List provider operations metadata for resource provider": {
+            "$ref": "./examples/GetProviderOperationsRP.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProviderOperation": {
+      "type": "object",
+      "description": "Operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The operation display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The operation description."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The operation origin."
+        },
+        "properties": {
+          "description": "The operation properties.",
+          "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "The dataAction flag to specify the operation type."
+        }
+      }
+    },
+    "ProviderOperationsMetadata": {
+      "type": "object",
+      "description": "Provider Operations metadata",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The provider display name."
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "The provider resource types",
+          "items": {
+            "$ref": "#/definitions/ResourceType"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "operations": {
+          "type": "array",
+          "description": "The provider operations.",
+          "items": {
+            "$ref": "#/definitions/ProviderOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SettableResource"
+        }
+      ]
+    },
+    "ProviderOperationsMetadataListResult": {
+      "type": "object",
+      "description": "The response of a ProviderOperationsMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProviderOperationsMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/ProviderOperationsMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResourceType": {
+      "type": "object",
+      "description": "Resource Type",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource type name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The resource type display name."
+        },
+        "operations": {
+          "type": "array",
+          "description": "The resource type operations.",
+          "items": {
+            "$ref": "#/definitions/ProviderOperation"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SettableResource": {
+      "type": "object",
+      "description": "The resource model definition for resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The provider ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The provider name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The provider type."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
