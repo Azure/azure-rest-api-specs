@@ -1294,7 +1294,7 @@ model DataAnnotationRequest {
 
 @added(Versions.v2026_05_01_preview)
 @doc("A single data annotation on an entity")
-model DataAnnotation is DataAnnotationRequest {
+model DataAnnotation extends DataAnnotationRequest {
   @doc("Server-assigned identifier for the annotation")
   @maxLength(36)
   annotationId: string;
@@ -1306,17 +1306,11 @@ model DataAnnotation is DataAnnotationRequest {
 @added(Versions.v2026_05_01_preview)
 @doc("Request body for querying data annotations")
 model GetDataAnnotationsRequest {
-  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when skipToken is specified.")
+  @doc("Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when $skipToken is specified.")
   startAt?: utcDateTime;
 
-  @doc("End of UTC time range. Defaults to now if not specified. Must be omitted when skipToken is specified.")
+  @doc("End of UTC time range. Defaults to now if not specified. Must be omitted when $skipToken is specified.")
   endAt?: utcDateTime;
-
-  @doc("Maximum number of annotations to return per page.")
-  top?: int32;
-
-  @doc("Continuation value from a previous response to retrieve the next page of results.")
-  nextLink?: string;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -1329,8 +1323,9 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
-  @doc("Link to retrieve the next page of results. Null if there are no more results.")
-  nextLink?: string;
+  @doc("Token to retrieve the next page of results. Null if there are no more results.")
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a pagination cursor, not a secret"
+  skipToken?: string;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1403,7 +1398,15 @@ alias TimestampQueryParam = {
   timestamp?: utcDateTime;
 };
 
+alias DataAnnotationsPaginationParams = {
+  @doc("Maximum number of annotations to return per page.")
+  @query("$top")
+  top?: int32;
 
+  @doc("Skip token from a previous response to retrieve the next page of results.")
+  @query("$skipToken")
+  skipToken?: string;
+};
 
 @armResourceOperations(HealthModel)
 interface HealthModels {
@@ -1560,7 +1563,10 @@ interface Entities {
   getDataAnnotations is ArmResourceActionSync<
     Entity,
     GetDataAnnotationsRequest,
-    GetDataAnnotationsResponse
+    GetDataAnnotationsResponse,
+    {
+      ...DataAnnotationsPaginationParams;
+    }
   >;
 }
 
