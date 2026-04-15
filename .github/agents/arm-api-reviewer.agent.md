@@ -105,6 +105,7 @@ Use these to verify claims, check the latest guidelines, or investigate edge cas
 ### Shared Review Skill
 
 The **azure-api-review** skill (`.github/skills/azure-api-review/`) contains cross-cutting review rules shared across all spec formats. Reference its files for detailed guidance on:
+
 - Secret detection (SEC-SECRET-DETECT)
 - Property mutability (OAPI027, OAPI020, OAPI029)
 - Provisioning state requirements
@@ -173,7 +174,7 @@ For each changed specification file, load the applicable instruction file(s) and
 - **ARM resource-manager JSON files** - apply **both** the OpenAPI checklist AND the "ARM Review Checklist Summary" at the end of `armapi-review.instructions.md`
 - **TypeSpec `.tsp` files** - apply the "TypeSpec Review Checklist Summary" at the end of `typespec-review.instructions.md`
 - **`tspconfig.yaml`** - apply section 7.2 and section 12 from `typespec-review.instructions.md`
-- **Example files** - apply section 22 (EX-*) from `openapi-review.instructions.md`
+- **Example files** - apply section 22 (EX-\*) from `openapi-review.instructions.md`
 
 For cross-cutting rules that appear in multiple instruction files, the shared skill references in `.github/skills/azure-api-review/references/` contain the canonical definitions.
 

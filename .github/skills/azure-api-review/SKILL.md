@@ -19,19 +19,20 @@ This skill contains **cross-cutting API review rules** that apply regardless of 
 ## Reference Files
 
 Each reference file covers one cross-cutting rule area with:
+
 - The canonical rule definition
 - Links to authoritative external sources (RPC contract, Azure REST API Guidelines, TypeSpec docs)
 - Format-specific guidance for OpenAPI JSON and TypeSpec
 - Rule IDs for citation in review findings
 
-| Reference | Rule Area | Key Rule IDs |
-|-----------|-----------|-------------|
-| [secret-detection.md](references/secret-detection.md) | Proactive secret detection in API properties | SEC-SECRET-DETECT |
-| [property-mutability.md](references/property-mutability.md) | Write-only, conditional read-only, and immutability rules | OAPI027, OAPI020, OAPI029 |
-| [provisioning-state.md](references/provisioning-state.md) | `provisioningState` requirements for ARM resources | RPC-Async-V1-02, RPC-Async-V1-03 |
-| [naming-conventions.md](references/naming-conventions.md) | Naming, casing, and Azure terminology | -- |
-| [enum-best-practices.md](references/enum-best-practices.md) | Enum extensibility and boolean alternatives | -- |
-| [tracked-resource-lifecycle.md](references/tracked-resource-lifecycle.md) | Required CRUD operations for tracked ARM resources | RPC-Put-V1-22, RPC-Get-V1-05 |
+| Reference                                                                 | Rule Area                                                 | Key Rule IDs                     |
+| ------------------------------------------------------------------------- | --------------------------------------------------------- | -------------------------------- |
+| [secret-detection.md](references/secret-detection.md)                     | Proactive secret detection in API properties              | SEC-SECRET-DETECT                |
+| [property-mutability.md](references/property-mutability.md)               | Write-only, conditional read-only, and immutability rules | OAPI027, OAPI020, OAPI029        |
+| [provisioning-state.md](references/provisioning-state.md)                 | `provisioningState` requirements for ARM resources        | RPC-Async-V1-02, RPC-Async-V1-03 |
+| [naming-conventions.md](references/naming-conventions.md)                 | Naming, casing, and Azure terminology                     | --                               |
+| [enum-best-practices.md](references/enum-best-practices.md)               | Enum extensibility and boolean alternatives               | --                               |
+| [tracked-resource-lifecycle.md](references/tracked-resource-lifecycle.md) | Required CRUD operations for tracked ARM resources        | RPC-Put-V1-22, RPC-Get-V1-05     |
 
 ## Authoritative External Sources
 
@@ -58,8 +59,8 @@ These documents in this repo provide additional context:
 
 The format-specific instruction files reference these shared rules:
 
-| Instruction File | Applies To | Relationship |
-|-----------------|------------|-------------|
-| `armapi-review.instructions.md` | `specification/**/resource-manager/**/*.json` | References shared rules + adds ARM-specific rules (path structure, PUT/PATCH/DELETE contracts, LRO, ARG compatibility) |
-| `openapi-review.instructions.md` | `specification/**/*.json` | References shared rules + adds generic OpenAPI rules (file structure, x-ms extensions, examples, security definitions) |
-| `typespec-review.instructions.md` | `specification/**/*.tsp` | References shared rules + adds TypeSpec-specific rules (decorators, project structure, anti-patterns) |
+| Instruction File                  | Applies To                                    | Relationship                                                                                                           |
+| --------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `armapi-review.instructions.md`   | `specification/**/resource-manager/**/*.json` | References shared rules + adds ARM-specific rules (path structure, PUT/PATCH/DELETE contracts, LRO, ARG compatibility) |
+| `openapi-review.instructions.md`  | `specification/**/*.json`                     | References shared rules + adds generic OpenAPI rules (file structure, x-ms extensions, examples, security definitions) |
+| `typespec-review.instructions.md` | `specification/**/*.tsp`                      | References shared rules + adds TypeSpec-specific rules (decorators, project structure, anti-patterns)                  |

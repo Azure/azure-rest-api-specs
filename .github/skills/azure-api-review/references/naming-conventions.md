@@ -3,6 +3,7 @@
 Consistent naming across Azure APIs ensures a uniform developer experience in SDKs, documentation, and tooling.
 
 **Authoritative references:**
+
 - [Azure REST API Guidelines -- JSON](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json)
 - [Azure REST API Guidelines -- URLs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#uniform-resource-locators-urls)
 - [Azure Resource Provider Contract -- Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
@@ -11,13 +12,13 @@ Consistent naming across Azure APIs ensures a uniform developer experience in SD
 
 ## Property and Model Naming
 
-| Element | Casing | Examples |
-|---------|--------|----------|
-| JSON property names | camelCase | `resourceId`, `provisioningState`, `virtualMachines` |
-| Model / definition names | PascalCase | `VirtualMachine`, `StorageAccount`, `ErrorResponse` |
-| Enum / union member values | PascalCase | `Succeeded`, `Failed`, `InProgress` |
-| Operation names (TypeSpec) | camelCase | `createOrUpdate`, `listByResourceGroup` |
-| Operation IDs (OpenAPI) | `{ResourceType}_{Action}` | `VirtualMachines_Get`, `StorageAccounts_CreateOrUpdate` |
+| Element                    | Casing                    | Examples                                                |
+| -------------------------- | ------------------------- | ------------------------------------------------------- |
+| JSON property names        | camelCase                 | `resourceId`, `provisioningState`, `virtualMachines`    |
+| Model / definition names   | PascalCase                | `VirtualMachine`, `StorageAccount`, `ErrorResponse`     |
+| Enum / union member values | PascalCase                | `Succeeded`, `Failed`, `InProgress`                     |
+| Operation names (TypeSpec) | camelCase                 | `createOrUpdate`, `listByResourceGroup`                 |
+| Operation IDs (OpenAPI)    | `{ResourceType}_{Action}` | `VirtualMachines_Get`, `StorageAccounts_CreateOrUpdate` |
 
 ### Acronym Handling
 
@@ -42,14 +43,16 @@ Consistent naming across Azure APIs ensures a uniform developer experience in SD
 
 ## Azure Terminology in Client-Facing Text
 
-These rules apply to property names, descriptions, enum values, and doc comments -- anything that propagates into SDKs and customer-facing documentation.
+These rules apply to property names, descriptions, enum values, and
+doc comments -- anything that propagates into SDKs and customer-facing
+documentation.
 
-| Incorrect | Correct | Rule |
-|-----------|---------|------|
-| "ARM" (standalone) | "Azure" or "Azure Resource Manager" | Use official product names |
-| `armResourceId` | `monitorAccountResourceId` | No "ARM" prefix in property names |
-| "AAD" | "Microsoft Entra ID" | Use current product name |
-| Unexpanded acronyms (IAM, SRA, WORM, LRS, GRS) | Full term + acronym on first use | "Locally Redundant Storage (LRS)" |
+| Incorrect                                      | Correct                             | Rule                              |
+| ---------------------------------------------- | ----------------------------------- | --------------------------------- |
+| "ARM" (standalone)                             | "Azure" or "Azure Resource Manager" | Use official product names        |
+| `armResourceId`                                | `monitorAccountResourceId`          | No "ARM" prefix in property names |
+| "AAD"                                          | "Microsoft Entra ID"                | Use current product name          |
+| Unexpanded acronyms (IAM, SRA, WORM, LRS, GRS) | Full term + acronym on first use    | "Locally Redundant Storage (LRS)" |
 
 ### RP Namespace Names
 
@@ -69,7 +72,8 @@ These rules apply to property names, descriptions, enum values, and doc comments
 
 ## Description Quality
 
-- Every operation, parameter, property, model, enum value, and union member **MUST** have a non-empty description or doc comment.
+- Every operation, parameter, property, model, enum value, and union
+  member **MUST** have a non-empty description or doc comment.
 - Descriptions **MUST NOT** simply repeat the element name (e.g., `"name": { "description": "name" }` is not acceptable).
 - Descriptions **SHOULD** start with a capital letter and end with a period.
 - Specify units for quantifiable properties (e.g., "The timeout in seconds.", "The size in megabytes.").
