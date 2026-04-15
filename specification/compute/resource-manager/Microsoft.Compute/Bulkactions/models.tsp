@@ -129,7 +129,7 @@ model BulkactionVMSpec {
   tags?: Record<string>;
 
   @doc("Describes the properties of a Virtual Machine.")
-  vmProperties?: BulkactionVMProfile;
+  properties?: BulkactionVMProperties;
 }
 
 /**
@@ -259,16 +259,16 @@ model FlexProperties {
  */
 model BulkVMConfiguration {
   @doc("Bulk Actions Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
-  vmProperties?: BulkactionVMSpec;
-
-  @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  extensions?: BulkactionVMExtension[];
+  profile?: BulkactionVMSpec;
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;
 
   @doc("Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix.")
   name?: string;
+
+  @doc("Resource group name for the virtual machine.")
+  resourceGroupName?: string;
 }
 
 @doc("Resource creation data model")
