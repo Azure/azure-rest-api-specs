@@ -25905,13 +25905,21 @@ model VirtualNetworkAppliancePropertiesFormat {
   /**
    * Bandwidth of the VirtualNetworkAppliance resource in Gbps.
    */
-  bandwidthInGbps?: string;
+  @typeChangedFrom(Versions.v2025_07_01, string)
+  bandwidthInGbps?: float64;
 
   /**
    * A list of IPConfigurations of the virtual network appliance.
    */
   @visibility(Lifecycle.Read)
   ipConfigurations?: VirtualNetworkApplianceIpConfiguration[];
+
+  /**
+   * Whether the specific virtual network appliance is IPv4 or Dual Stack. Default is IPv4.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Consistent with existing Azure Network naming convention using 'IP' for IP-related properties"
+  @added(Versions.v2025_07_01)
+  privateIPAddressVersion?: VirtualNetworkApplianceIpVersionType;
 
   /**
    * The provisioning state of the virtual network appliance resource.
@@ -25929,6 +25937,20 @@ model VirtualNetworkAppliancePropertiesFormat {
    * The reference to the subnet resource.
    */
   subnet?: Subnet;
+}
+
+/**
+ * IP address version.
+ */
+@added(Versions.v2025_07_01)
+union VirtualNetworkApplianceIpVersionType {
+  string,
+
+  /** IPv4 version */
+  IPv4: "IPv4",
+
+  /** Dual Stack version */
+  DualStack: "DualStack",
 }
 
 /**
