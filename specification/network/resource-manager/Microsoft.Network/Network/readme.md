@@ -4352,6 +4352,12 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: ResourceNameRestriction
+    from: virtualWan.json
+    reason: virtualHubName is an existing parent resource path parameter established in prior API versions. Adding a pattern constraint would be a breaking change to 2025-05-01 and earlier versions.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: virtualWan.json
+    reason: The Common.ProvisioningState type is marked readOnly in TypeSpec via @visibility(Lifecycle.Read), but the autorest emitter places readOnly as a sibling of $ref rather than in the type definition itself. The linter does not follow $ref siblings per OpenAPI 2.0 spec. Known issue https://github.com/Azure/azure-openapi-validator/issues/637
   - suppress: PutRequestResponseSchemeArm
     from: virtualNetworkAppliance.json
     reason: Known issue. Github link https://github.com/Azure/azure-openapi-validator/issues/752
