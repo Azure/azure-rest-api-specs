@@ -88,6 +88,9 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
+// Rename listSessionFiles to getSessionFiles for better accuracy, since it's a GET operation and returns the list of files in the response.
+@@clientName(AgentSessionFiles.listSessionFiles, "getSessionFiles");
+
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
