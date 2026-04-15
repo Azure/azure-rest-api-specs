@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.NetApp;
 
@@ -360,6 +361,33 @@ using Microsoft.NetApp;
 // Make types public for C# SDK backward compatibility
 @@access(Microsoft.NetApp.VolumePropertiesExportPolicy,
   Access.public,
+  "csharp"
+);
+
+// C# hierarchy building (restore base types for backward compat)
+// First, align property types with TrackedResource expectations
+@@alternateType(Microsoft.NetApp.CapacityPoolPatch.id, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.CapacityPoolPatch.location, azureLocation, "csharp");
+
+@@alternateType(Microsoft.NetApp.NetAppAccountPatch.id, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.NetAppAccountPatch.location, azureLocation, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
+@@hierarchyBuilding(Microsoft.NetApp.NetAppAccountPatch,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+@@alternateType(Microsoft.NetApp.SnapshotPolicyPatch.id, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.SnapshotPolicyPatch.location, azureLocation, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
+@@hierarchyBuilding(Microsoft.NetApp.SnapshotPolicyPatch,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for backward compat"
+@@hierarchyBuilding(Microsoft.NetApp.SubvolumeModel,
+  Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 @@access(Microsoft.NetApp.VolumeBackupRelationshipStatus,
