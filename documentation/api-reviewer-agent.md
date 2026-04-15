@@ -25,26 +25,9 @@ ARM Resource Provider Contract ([RPC][rpc-contract]) rules, and repository conve
 2. In the agent picker at the top of the chat, select **ARM API Reviewer**.
 3. Type your request in the chat input.
 
-## Quick-Start Prompt
-
-The repository includes a pre-built prompt that launches the agent with a guided workflow.
-To use it, open the Copilot Chat panel, click the **prompt picker** (the `/` icon or the
-attachment button), and select the prompt below:
-
-| Prompt        | File                                  | What it does                                                                                                                                    |
-| ------------- | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Review PR** | `.github/prompts/review-pr.prompt.md` | Asks for a PR number, URL, or shorthand, then runs a full read-only review of the PR's specification changes against Azure REST API Guidelines. |
-
-You can also invoke the same functionality by typing directly in the agent chat:
-
-```text
-Review PR #41405
-```
-
-The prompt is a convenience for guided input -- the agent handles the same
-requests as free-form chat messages.
-
 ## Reviewing a PR
+
+In the agent chat, type your request directly:
 
 Provide a PR number, URL, or shorthand:
 
