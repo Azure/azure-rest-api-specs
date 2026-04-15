@@ -1,0 +1,3352 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PurviewDataAccess",
+    "version": "2023-10-01-preview",
+    "description": "Creates a data plane client for Purview Data Access.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/datagovernance/access",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint of the Purview Data Access service. Example: https://api.purview-service.microsoft.com/",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "https://api.purview-service.microsoft.com/"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://purview.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://purview.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DataSubscriptions"
+    },
+    {
+      "name": "Workflows"
+    },
+    {
+      "name": "WorkflowRunStatus"
+    },
+    {
+      "name": "PolicySets"
+    }
+  ],
+  "paths": {
+    "/approvals": {
+      "get": {
+        "operationId": "Workflows_GetApprovals",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Gets pending approvals for the current user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "approvalStatus",
+            "in": "query",
+            "description": "Filter by approval status.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "businessConcept",
+            "in": "query",
+            "description": "Filter by business concept.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "businessConceptType",
+            "in": "query",
+            "description": "Filter by business concept type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workflowType",
+            "in": "query",
+            "description": "Filter by workflow type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "governanceDomain",
+            "in": "query",
+            "description": "Filter by governance domain.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalWorkflowListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_GetApprovals": {
+            "$ref": "./examples/Workflows_GetApprovals_Gen.json"
+          }
+        }
+      }
+    },
+    "/businessDomains/{domainId}/policySets/applied": {
+      "get": {
+        "operationId": "DomainPolicySets_GetApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets the applied policy set for a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The business domain identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DomainPolicySets_GetApplied": {
+            "$ref": "./examples/DomainPolicySets_GetApplied_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DomainPolicySets_CreateOrUpdateApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Creates or updates the applied policy set for a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The business domain identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "policySet",
+            "in": "body",
+            "description": "The policy set payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DomainPolicySets_CreateOrUpdateApplied": {
+            "$ref": "./examples/DomainPolicySets_CreateOrUpdateApplied_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DomainPolicySets_DeleteApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Deletes the applied policy set for a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "domainId",
+            "in": "path",
+            "description": "The business domain identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DomainPolicySets_DeleteApplied": {
+            "$ref": "./examples/DomainPolicySets_DeleteApplied_Gen.json"
+          }
+        }
+      }
+    },
+    "/criticalDataElements/{criticalDataElementId}/policySets/applied": {
+      "get": {
+        "operationId": "CriticalDataElementPolicySets_GetApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets the applied policy set for a critical data element.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "criticalDataElementId",
+            "in": "path",
+            "description": "The critical data element identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CriticalDataElementPolicySets_GetApplied": {
+            "$ref": "./examples/CriticalDataElementPolicySets_GetApplied_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CriticalDataElementPolicySets_CreateOrUpdateApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Creates or updates the applied policy set for a critical data element.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "criticalDataElementId",
+            "in": "path",
+            "description": "The critical data element identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "policySet",
+            "in": "body",
+            "description": "The policy set payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CriticalDataElementPolicySets_CreateOrUpdateApplied": {
+            "$ref": "./examples/CriticalDataElementPolicySets_CreateOrUpdateApplied_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/activeSubscribers": {
+      "get": {
+        "operationId": "DataProductPolicySets_GetActiveSubscribers",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets the count of active subscribers for a data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSubscribersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_GetActiveSubscribers": {
+            "$ref": "./examples/DataProductPolicySets_GetActiveSubscribers_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/policySet": {
+      "get": {
+        "operationId": "DataProductPolicySets_GetWorkflowSettings",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets workflow settings for a data product policy set.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataProductWorkflowSettingsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_GetWorkflowSettings": {
+            "$ref": "./examples/DataProductPolicySets_GetWorkflowSettings_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/policySets/applied": {
+      "get": {
+        "operationId": "DataProductPolicySets_GetApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets the applied policy set for a data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_GetApplied": {
+            "$ref": "./examples/DataProductPolicySets_GetApplied_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataProductPolicySets_CreateOrUpdateApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Creates or updates the applied policy set for a data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "policySet",
+            "in": "body",
+            "description": "The policy set payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_CreateOrUpdateApplied": {
+            "$ref": "./examples/DataProductPolicySets_CreateOrUpdateApplied_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataProductPolicySets_DeleteApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Deletes the applied policy set for a data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_DeleteApplied": {
+            "$ref": "./examples/DataProductPolicySets_DeleteApplied_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/policySets/criticalDataElements": {
+      "get": {
+        "operationId": "DataProductPolicySets_GetCriticalDataElementPolicies",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets critical data element policy sets associated with a data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_GetCriticalDataElementPolicies": {
+            "$ref": "./examples/DataProductPolicySets_GetCriticalDataElementPolicies_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/policySets/effective": {
+      "get": {
+        "operationId": "DataProductPolicySets_GetEffective",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets the effective policy set for a data product, combining applied and inherited policies.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_GetEffective": {
+            "$ref": "./examples/DataProductPolicySets_GetEffective_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/policySets/terms": {
+      "get": {
+        "operationId": "DataProductPolicySets_GetTermPolicies",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets term policy sets associated with a data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataProductPolicySets_GetTermPolicies": {
+            "$ref": "./examples/DataProductPolicySets_GetTermPolicies_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/publishWorkflowEnabled": {
+      "get": {
+        "operationId": "WorkflowRunStatus_HasEnabledPublishWorkflowForDataProduct",
+        "tags": [
+          "WorkflowRunStatus"
+        ],
+        "description": "Checks if an enabled publish workflow exists for the specified data product's domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PublishWorkflowEnabledResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkflowRunStatus_HasEnabledPublishWorkflowForDataProduct": {
+            "$ref": "./examples/WorkflowRunStatus_HasEnabledPublishWorkflowForDataProduct_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataProducts/{dataProductId}/workflowRunInProgress": {
+      "get": {
+        "operationId": "WorkflowRunStatus_GetDataProductWorkflowRunInProgress",
+        "tags": [
+          "WorkflowRunStatus"
+        ],
+        "description": "Checks if a DataProductPublish workflow run is in progress for the specified data product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "The data product identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunInProgressResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkflowRunStatus_GetDataProductWorkflowRunInProgress": {
+            "$ref": "./examples/WorkflowRunStatus_GetDataProductWorkflowRunInProgress_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataSubscriptions": {
+      "get": {
+        "operationId": "DataSubscriptions_List",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Lists data subscriptions with optional filtering.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workflowSubscriptions",
+            "in": "query",
+            "description": "Filter for subscriptions using workflows.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "legacySubscriptions",
+            "in": "query",
+            "description": "Filter for legacy subscriptions not using workflows.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "accessProvidersOnly",
+            "in": "query",
+            "description": "Filter for access provider subscriptions.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "powerAutomate",
+            "in": "query",
+            "description": "Filter by Power Automate usage.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Return only count of matching subscriptions.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Filter by data product identifier.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "dataProductName",
+            "in": "query",
+            "description": "Filter by data product name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "governanceDomain",
+            "in": "query",
+            "description": "Filter by governance domain.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workflowType",
+            "in": "query",
+            "description": "Filter by workflow type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "businessConceptType",
+            "in": "query",
+            "description": "Filter by business concept type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ignoreActionStatuses",
+            "in": "query",
+            "description": "Whether to ignore action statuses in filtering.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_List": {
+            "$ref": "./examples/DataSubscriptions_List_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/dataSubscriptions/{dataSubscriptionId}": {
+      "get": {
+        "operationId": "DataSubscriptions_Get",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Gets a data subscription by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataSubscriptionId",
+            "in": "path",
+            "description": "The unique identifier of the data subscription.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_Get": {
+            "$ref": "./examples/DataSubscriptions_Get_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataSubscriptions_CreateOrUpdate",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Creates or updates a data subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataSubscriptionId",
+            "in": "path",
+            "description": "The data subscription identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "dataSubscription",
+            "in": "body",
+            "description": "The data subscription payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_CreateOrUpdate": {
+            "$ref": "./examples/DataSubscriptions_CreateOrUpdate_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataSubscriptions_Delete",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Deletes a data subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataSubscriptionId",
+            "in": "path",
+            "description": "The unique identifier of the data subscription.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_Delete": {
+            "$ref": "./examples/DataSubscriptions_Delete_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataSubscriptions/{dataSubscriptionId}:save": {
+      "put": {
+        "operationId": "DataSubscriptions_Save",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Saves a data subscription as a draft.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataSubscriptionId",
+            "in": "path",
+            "description": "The data subscription identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "dataSubscription",
+            "in": "body",
+            "description": "The data subscription payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_Save": {
+            "$ref": "./examples/DataSubscriptions_Save_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataSubscriptions/{dataSubscriptionId}:approve": {
+      "post": {
+        "operationId": "DataSubscriptions_Approve",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Approves a data subscription request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataSubscriptionId",
+            "in": "path",
+            "description": "The data subscription identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "decision",
+            "in": "body",
+            "description": "The approver's decision.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApproverDecision"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_Approve": {
+            "$ref": "./examples/DataSubscriptions_Approve_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataSubscriptions/{dataSubscriptionId}:decline": {
+      "post": {
+        "operationId": "DataSubscriptions_Decline",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Declines a data subscription request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataSubscriptionId",
+            "in": "path",
+            "description": "The data subscription identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "decision",
+            "in": "body",
+            "description": "The approver's decision.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApproverDecision"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_Decline": {
+            "$ref": "./examples/DataSubscriptions_Decline_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataSubscriptions/{dataSubscriptionId}:complete": {
+      "post": {
+        "operationId": "DataSubscriptions_Complete",
+        "tags": [
+          "DataSubscriptions"
+        ],
+        "description": "Completes a data subscription after access has been granted.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataSubscriptionId",
+            "in": "path",
+            "description": "The data subscription identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSubscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSubscriptions_Complete": {
+            "$ref": "./examples/DataSubscriptions_Complete_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/{termId}/policySets/applied": {
+      "get": {
+        "operationId": "TermPolicySets_GetApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Gets the applied policy set for a term.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The term identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TermPolicySets_GetApplied": {
+            "$ref": "./examples/TermPolicySets_GetApplied_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TermPolicySets_CreateOrUpdateApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Creates or updates the applied policy set for a term.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The term identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "policySet",
+            "in": "body",
+            "description": "The policy set payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicySet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TermPolicySets_CreateOrUpdateApplied": {
+            "$ref": "./examples/TermPolicySets_CreateOrUpdateApplied_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TermPolicySets_DeleteApplied",
+        "tags": [
+          "PolicySets"
+        ],
+        "description": "Deletes the applied policy set for a term.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The term identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TermPolicySets_DeleteApplied": {
+            "$ref": "./examples/TermPolicySets_DeleteApplied_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/{termId}/publishWorkflowEnabled": {
+      "get": {
+        "operationId": "WorkflowRunStatus_HasEnabledPublishWorkflowForTerm",
+        "tags": [
+          "WorkflowRunStatus"
+        ],
+        "description": "Checks if an enabled publish workflow exists for the specified term's domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The term identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PublishWorkflowEnabledResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkflowRunStatus_HasEnabledPublishWorkflowForTerm": {
+            "$ref": "./examples/WorkflowRunStatus_HasEnabledPublishWorkflowForTerm_Gen.json"
+          }
+        }
+      }
+    },
+    "/terms/{termId}/workflowRunInProgress": {
+      "get": {
+        "operationId": "WorkflowRunStatus_GetTermWorkflowRunInProgress",
+        "tags": [
+          "WorkflowRunStatus"
+        ],
+        "description": "Checks if a TermPublish workflow run is in progress for the specified term.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "termId",
+            "in": "path",
+            "description": "The term identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunInProgressResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkflowRunStatus_GetTermWorkflowRunInProgress": {
+            "$ref": "./examples/WorkflowRunStatus_GetTermWorkflowRunInProgress_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflowRuns": {
+      "get": {
+        "operationId": "Workflows_ListRuns",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Lists workflow runs with optional filtering.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "underGlossaryHierarchy",
+            "in": "query",
+            "description": "Filter by glossary hierarchy path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workflowType",
+            "in": "query",
+            "description": "Filter by workflow type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "appliedConceptId",
+            "in": "query",
+            "description": "Filter by applied concept identifier.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "businessConcept",
+            "in": "query",
+            "description": "Filter by business concept.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "businessDomainName",
+            "in": "query",
+            "description": "Filter by business domain name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "businessConceptType",
+            "in": "query",
+            "description": "Filter by business concept type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ignoreActionStatuses",
+            "in": "query",
+            "description": "Whether to ignore action statuses in filtering.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_ListRuns": {
+            "$ref": "./examples/Workflows_ListRuns_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflowRuns/{workflowRunId}": {
+      "get": {
+        "operationId": "Workflows_GetRun",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Gets a specific workflow run by identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "The workflow run identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_GetRun": {
+            "$ref": "./examples/Workflows_GetRun_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workflows_UpdateRun",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Updates a workflow run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "The workflow run identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "workflowRun",
+            "in": "body",
+            "description": "The workflow run payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkflowRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_UpdateRun": {
+            "$ref": "./examples/Workflows_UpdateRun_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Workflows_DeleteRun",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Deletes a workflow run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "The workflow run identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_DeleteRun": {
+            "$ref": "./examples/Workflows_DeleteRun_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflowRuns/{workflowRunId}/approvals": {
+      "get": {
+        "operationId": "Workflows_GetRunApprovals",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Gets approvals for a specific workflow run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "The workflow run identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunApprovalListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_GetRunApprovals": {
+            "$ref": "./examples/Workflows_GetRunApprovals_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflows": {
+      "get": {
+        "operationId": "Workflows_List",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Lists workflows with optional filtering.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isEnabled",
+            "in": "query",
+            "description": "Filter by enabled status.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "triggerType",
+            "in": "query",
+            "description": "Filter by trigger type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "underGlossaryHierarchy",
+            "in": "query",
+            "description": "Filter by glossary hierarchy path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "businessConcept",
+            "in": "query",
+            "description": "Filter by business concept.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "workflowType",
+            "in": "query",
+            "description": "Filter by workflow type.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedWorkflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_List": {
+            "$ref": "./examples/Workflows_List_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/workflows/{workflowId}": {
+      "get": {
+        "operationId": "Workflows_Get",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Gets a workflow by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "The unique identifier of the workflow.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_Get": {
+            "$ref": "./examples/Workflows_Get_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workflows_CreateOrUpdate",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Creates or updates a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "The workflow identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "workflow",
+            "in": "body",
+            "description": "The workflow payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_CreateOrUpdate": {
+            "$ref": "./examples/Workflows_CreateOrUpdate_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Workflows_Delete",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Deletes a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "The unique identifier of the workflow.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_Delete": {
+            "$ref": "./examples/Workflows_Delete_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflows/{workflowId}/trigger": {
+      "put": {
+        "operationId": "Workflows_Trigger",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Triggers a workflow.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "The workflow identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_Trigger": {
+            "$ref": "./examples/Workflows_Trigger_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflows/{workflowId}/workflowRunId/{workflowRunId}:approve": {
+      "post": {
+        "operationId": "Workflows_ApproveRun",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Approves a workflow run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "The workflow identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "The workflow run identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "decision",
+            "in": "body",
+            "description": "The approver's decision.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApproverDecision"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_ApproveRun": {
+            "$ref": "./examples/Workflows_ApproveRun_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflows/{workflowId}/workflowRunId/{workflowRunId}:reject": {
+      "post": {
+        "operationId": "Workflows_RejectRun",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Rejects a workflow run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "The workflow identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "workflowRunId",
+            "in": "path",
+            "description": "The workflow run identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "decision",
+            "in": "body",
+            "description": "The approver's decision.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApproverDecision"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_RejectRun": {
+            "$ref": "./examples/Workflows_RejectRun_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflows/templates/dataAccessRequestTemplate": {
+      "get": {
+        "operationId": "Workflows_GetTemplate",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Gets the data access request template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_GetTemplate": {
+            "$ref": "./examples/Workflows_GetTemplate_Gen.json"
+          }
+        }
+      }
+    },
+    "/workflows/templates/dataAccessRequestTemplate/{triggerType}": {
+      "get": {
+        "operationId": "Workflows_GetTemplateByTriggerType",
+        "tags": [
+          "Workflows"
+        ],
+        "description": "Gets the data access request template for a specific trigger type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "triggerType",
+            "in": "path",
+            "description": "The trigger type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workflows_GetTemplateByTriggerType": {
+            "$ref": "./examples/Workflows_GetTemplateByTriggerType_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Action": {
+      "type": "object",
+      "description": "An action step in a workflow.",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "The unique identifier of the action."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "The type of action."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameters for the action.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ActionListResponse": {
+      "type": "object",
+      "description": "List of workflow actions (template).",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of actions.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ActiveSubscribersResponse": {
+      "type": "object",
+      "description": "Response with active subscriber count.",
+      "properties": {
+        "activeSubscribers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of active subscribers."
+        }
+      },
+      "required": [
+        "activeSubscribers"
+      ]
+    },
+    "ApprovalWorkflow": {
+      "type": "object",
+      "description": "Represents a workflow approval.",
+      "properties": {
+        "workflowRunId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The workflow run identifier."
+        },
+        "workflowId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The workflow identifier."
+        },
+        "subscriber": {
+          "$ref": "#/definitions/Identity",
+          "description": "The subscriber identity."
+        },
+        "requestor": {
+          "$ref": "#/definitions/Identity",
+          "description": "The requestor identity."
+        },
+        "approvalStatus": {
+          "type": "string",
+          "description": "The approval status."
+        },
+        "workflowType": {
+          "type": "string",
+          "description": "The workflow type."
+        },
+        "workflowName": {
+          "type": "string",
+          "description": "The workflow name."
+        },
+        "dataProductName": {
+          "type": "string",
+          "description": "The data product name."
+        },
+        "governanceDomain": {
+          "type": "string",
+          "description": "The governance domain."
+        }
+      }
+    },
+    "ApprovalWorkflowListResponse": {
+      "type": "object",
+      "description": "List of approval workflows.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of approval workflows.",
+          "items": {
+            "$ref": "#/definitions/ApprovalWorkflow"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApproverDecision": {
+      "type": "object",
+      "description": "Approver decision on a workflow run.",
+      "properties": {
+        "approver": {
+          "$ref": "#/definitions/Identity",
+          "description": "The approver identity."
+        },
+        "decision": {
+          "$ref": "#/definitions/ApproverDecisionStatus",
+          "description": "The decision made."
+        },
+        "approverDecisionType": {
+          "type": "string",
+          "description": "The type of approver decision."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments from the approver."
+        },
+        "dataAssets": {
+          "type": "array",
+          "description": "Data assets included in the decision.",
+          "items": {
+            "$ref": "#/definitions/DataAssetValues"
+          }
+        }
+      }
+    },
+    "ApproverDecisionStatus": {
+      "type": "string",
+      "description": "The status of an approver's decision.",
+      "enum": [
+        "Approved",
+        "Rejected",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "ApproverDecisionStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "Approved the request."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "Rejected the request."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Decision is pending."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "DataAssetValues": {
+      "type": "object",
+      "description": "Data asset values included in a subscription.",
+      "properties": {
+        "dataAssetId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data asset identifier."
+        },
+        "dataAssetName": {
+          "type": "string",
+          "description": "The data asset name."
+        },
+        "dataAssetType": {
+          "type": "string",
+          "description": "The data asset type."
+        }
+      }
+    },
+    "DataProductPolicies": {
+      "type": "object",
+      "description": "Data product access policies.",
+      "properties": {
+        "approvalTimeline": {
+          "type": "string",
+          "description": "The approval timeline duration."
+        },
+        "permittedUseCases": {
+          "type": "array",
+          "description": "Permitted use cases.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "permittedSubscribers": {
+          "type": "array",
+          "description": "Permitted subscriber identity types.",
+          "items": {
+            "$ref": "#/definitions/IdentityType"
+          }
+        },
+        "approvers": {
+          "type": "array",
+          "description": "The list of approvers.",
+          "items": {
+            "$ref": "#/definitions/Identity"
+          }
+        },
+        "dataAccessGrantors": {
+          "type": "array",
+          "description": "The list of data access grantors.",
+          "items": {
+            "$ref": "#/definitions/Identity"
+          }
+        },
+        "sensitiveMarkers": {
+          "type": "array",
+          "description": "Sensitive markers applied to the data product.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "termsOfUseRequired": {
+          "type": "boolean",
+          "description": "Whether terms of use acceptance is required."
+        },
+        "partnerSharingPermitted": {
+          "type": "boolean",
+          "description": "Whether sharing with partners is permitted."
+        },
+        "customerSharingPermitted": {
+          "type": "boolean",
+          "description": "Whether sharing with customers is permitted."
+        },
+        "maximumAccessDuration": {
+          "type": "string",
+          "description": "The maximum access duration."
+        },
+        "privacyComplianceApprovalRequired": {
+          "type": "boolean",
+          "description": "Whether privacy compliance approval is required."
+        },
+        "skipWorkflow": {
+          "type": "boolean",
+          "description": "Whether the workflow can be skipped."
+        },
+        "usePowerAutomate": {
+          "type": "boolean",
+          "description": "Whether Power Automate is used."
+        }
+      }
+    },
+    "DataProductWorkflowSettingsResponse": {
+      "type": "object",
+      "description": "Response with workflow settings for a data product.",
+      "properties": {
+        "skipWorkflowEnabled": {
+          "type": "boolean",
+          "description": "Whether the skip workflow option is enabled."
+        },
+        "usePowerAutomate": {
+          "type": "boolean",
+          "description": "Whether Power Automate is used."
+        }
+      },
+      "required": [
+        "skipWorkflowEnabled",
+        "usePowerAutomate"
+      ]
+    },
+    "DataSubscription": {
+      "type": "object",
+      "description": "Represents a data access subscription request.",
+      "properties": {
+        "dataSubscriptionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the data subscription.",
+          "readOnly": true
+        },
+        "useWorkflow": {
+          "type": "boolean",
+          "description": "Whether this subscription uses a workflow."
+        },
+        "workflowId": {
+          "type": "string",
+          "description": "The workflow identifier associated with this subscription."
+        },
+        "workflowType": {
+          "type": "string",
+          "description": "The type of workflow."
+        },
+        "workflowName": {
+          "type": "string",
+          "description": "The name of the workflow."
+        },
+        "governanceDomain": {
+          "type": "string",
+          "description": "The governance domain path."
+        },
+        "writeAccess": {
+          "type": "boolean",
+          "description": "Whether write access is requested."
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/DataSubscriptionStatus",
+          "description": "The status of the subscription."
+        },
+        "subscriberIdentity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the subscriber."
+        },
+        "requestorIdentity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the requestor."
+        },
+        "domainId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The domain identifier."
+        },
+        "dataProductId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data product identifier."
+        },
+        "dataProductName": {
+          "type": "string",
+          "description": "The name of the data product."
+        },
+        "businessDomainName": {
+          "type": "string",
+          "description": "The name of the business domain."
+        },
+        "globalComment": {
+          "type": "string",
+          "description": "A general comment for the subscription."
+        },
+        "policySetValues": {
+          "$ref": "#/definitions/DataSubscriptionPolicySetValues",
+          "description": "Policy set values for the subscription."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation timestamp.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the subscription.",
+          "readOnly": true
+        },
+        "accessExpirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The access expiration date."
+        },
+        "accessDecisionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date when the access decision was made.",
+          "readOnly": true
+        },
+        "dataAssets": {
+          "type": "array",
+          "description": "The data assets included in the subscription.",
+          "items": {
+            "$ref": "#/definitions/DataAssetValues"
+          }
+        },
+        "accessProviders": {
+          "type": "array",
+          "description": "The list of access provider identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "usePowerAutomate": {
+          "type": "boolean",
+          "description": "Whether Power Automate is used."
+        }
+      },
+      "required": [
+        "dataSubscriptionId"
+      ]
+    },
+    "DataSubscriptionPolicySetValues": {
+      "type": "object",
+      "description": "Policy set values associated with a data subscription.",
+      "properties": {
+        "useCases": {
+          "type": "array",
+          "description": "The use cases for the subscription.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "termsOfUseAccepted": {
+          "type": "boolean",
+          "description": "The terms of use acceptance."
+        },
+        "requestorComments": {
+          "type": "string",
+          "description": "Comments from the requestor."
+        }
+      }
+    },
+    "DataSubscriptionStatus": {
+      "type": "string",
+      "description": "The status of a data subscription.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Granted",
+        "Declined",
+        "Revoked",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "DataSubscriptionStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Subscription is pending approval."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "Subscription has been approved."
+          },
+          {
+            "name": "Granted",
+            "value": "Granted",
+            "description": "Access has been granted."
+          },
+          {
+            "name": "Declined",
+            "value": "Declined",
+            "description": "Subscription has been declined."
+          },
+          {
+            "name": "Revoked",
+            "value": "Revoked",
+            "description": "Access has been revoked."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Subscription process is complete."
+          }
+        ]
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity information for a user or group.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity."
+        },
+        "objectId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The object ID of the identity."
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The tenant ID of the identity."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the identity."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the identity."
+        }
+      }
+    },
+    "IdentityType": {
+      "type": "string",
+      "description": "The type of identity.",
+      "enum": [
+        "User",
+        "Group",
+        "ServicePrincipal"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A user identity."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "A group identity."
+          },
+          {
+            "name": "ServicePrincipal",
+            "value": "ServicePrincipal",
+            "description": "A service principal identity."
+          }
+        ]
+      }
+    },
+    "PagedDataSubscription": {
+      "type": "object",
+      "description": "Paged collection of DataSubscription items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataSubscription items on this page",
+          "items": {
+            "$ref": "#/definitions/DataSubscription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedWorkflow": {
+      "type": "object",
+      "description": "Paged collection of Workflow items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Workflow items on this page",
+          "items": {
+            "$ref": "#/definitions/Workflow"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicySet": {
+      "type": "object",
+      "description": "Represents an access policy set applied to a resource.",
+      "properties": {
+        "policySetId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the policy set.",
+          "readOnly": true
+        },
+        "targetResource": {
+          "$ref": "#/definitions/TargetResource",
+          "description": "The target resource for the policy set."
+        },
+        "policySetKind": {
+          "$ref": "#/definitions/PolicySetKind",
+          "description": "The kind of policy set."
+        },
+        "dataProductPolicies": {
+          "$ref": "#/definitions/DataProductPolicies",
+          "description": "The data product policies."
+        }
+      }
+    },
+    "PolicySetKind": {
+      "type": "string",
+      "description": "The kind of policy set.",
+      "enum": [
+        "Applied",
+        "Effective"
+      ],
+      "x-ms-enum": {
+        "name": "PolicySetKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Applied",
+            "value": "Applied",
+            "description": "Applied policy set."
+          },
+          {
+            "name": "Effective",
+            "value": "Effective",
+            "description": "Effective policy set."
+          }
+        ]
+      }
+    },
+    "PolicySetListResponse": {
+      "type": "object",
+      "description": "List of policy sets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of policy sets.",
+          "items": {
+            "$ref": "#/definitions/PolicySet"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublishWorkflowEnabledResponse": {
+      "type": "object",
+      "description": "Response indicating whether a publish workflow is enabled.",
+      "properties": {
+        "exists": {
+          "type": "boolean",
+          "description": "Whether an enabled publish workflow exists."
+        }
+      },
+      "required": [
+        "exists"
+      ]
+    },
+    "TargetResource": {
+      "type": "object",
+      "description": "The target resource for a policy set.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The resource identifier."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      }
+    },
+    "Trigger": {
+      "type": "object",
+      "description": "A trigger that activates a workflow.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TriggerType",
+          "description": "The type of trigger."
+        },
+        "underGlossaryHierarchy": {
+          "type": "string",
+          "description": "The scope of the trigger."
+        }
+      }
+    },
+    "TriggerType": {
+      "type": "string",
+      "description": "The type of trigger that activates a workflow.",
+      "enum": [
+        "DataAccessRequestSubmitted",
+        "DataProductPublish",
+        "TermPublish"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "DataAccessRequestSubmitted",
+            "value": "DataAccessRequestSubmitted",
+            "description": "Triggered when a data access request is submitted."
+          },
+          {
+            "name": "DataProductPublish",
+            "value": "DataProductPublish",
+            "description": "Triggered when a data product is published."
+          },
+          {
+            "name": "TermPublish",
+            "value": "TermPublish",
+            "description": "Triggered when a term is published."
+          }
+        ]
+      }
+    },
+    "Workflow": {
+      "type": "object",
+      "description": "Represents a data access workflow definition.",
+      "properties": {
+        "workflowId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the workflow."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of workflow."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the workflow."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether the workflow is enabled."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the workflow."
+        },
+        "triggers": {
+          "type": "array",
+          "description": "The triggers that activate this workflow.",
+          "items": {
+            "$ref": "#/definitions/Trigger"
+          }
+        },
+        "actionDag": {
+          "type": "array",
+          "description": "The action DAG (directed acyclic graph) defining the workflow steps.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the workflow.",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The user who last modified the workflow.",
+          "readOnly": true
+        },
+        "accessProviders": {
+          "type": "array",
+          "description": "The list of access provider identifiers.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "workflowId"
+      ]
+    },
+    "WorkflowRun": {
+      "type": "object",
+      "description": "Represents a workflow run instance.",
+      "properties": {
+        "workflowRunId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the workflow run.",
+          "readOnly": true
+        },
+        "workflowId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The workflow identifier."
+        },
+        "subscriber": {
+          "$ref": "#/definitions/Identity",
+          "description": "The subscriber identity."
+        },
+        "requestor": {
+          "$ref": "#/definitions/Identity",
+          "description": "The requestor identity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the workflow run."
+        },
+        "workflowType": {
+          "type": "string",
+          "description": "The type of workflow."
+        },
+        "workflowName": {
+          "type": "string",
+          "description": "The name of the workflow."
+        },
+        "workflowRunName": {
+          "type": "string",
+          "description": "The name of the workflow run."
+        },
+        "workflowDescription": {
+          "type": "string",
+          "description": "The description of the workflow."
+        },
+        "triggers": {
+          "type": "array",
+          "description": "The triggers for this run.",
+          "items": {
+            "$ref": "#/definitions/Trigger"
+          }
+        },
+        "actionDag": {
+          "type": "array",
+          "description": "The action DAG for this run.",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation timestamp.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the run.",
+          "readOnly": true
+        },
+        "modifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modification timestamp.",
+          "readOnly": true
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "The user who last modified the run.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "workflowRunId"
+      ]
+    },
+    "WorkflowRunApproval": {
+      "type": "object",
+      "description": "Represents an approval record for a workflow run.",
+      "properties": {
+        "approvalId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the approval."
+        },
+        "workflowRunId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The workflow run identifier."
+        },
+        "approver": {
+          "$ref": "#/definitions/Identity",
+          "description": "The approver identity."
+        },
+        "decision": {
+          "$ref": "#/definitions/ApproverDecisionStatus",
+          "description": "The decision made on this approval."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments from the approver."
+        },
+        "decisionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the approval decision was made."
+        }
+      }
+    },
+    "WorkflowRunApprovalListResponse": {
+      "type": "object",
+      "description": "List of workflow run approvals.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of workflow run approvals.",
+          "items": {
+            "$ref": "#/definitions/WorkflowRunApproval"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkflowRunInProgressResponse": {
+      "type": "object",
+      "description": "Response indicating whether a workflow run is in progress.",
+      "properties": {
+        "inProgress": {
+          "type": "boolean",
+          "description": "Whether a workflow run is currently in progress."
+        }
+      },
+      "required": [
+        "inProgress"
+      ]
+    },
+    "WorkflowRunListResponse": {
+      "type": "object",
+      "description": "List of workflow runs.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of workflow runs.",
+          "items": {
+            "$ref": "#/definitions/WorkflowRun"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
