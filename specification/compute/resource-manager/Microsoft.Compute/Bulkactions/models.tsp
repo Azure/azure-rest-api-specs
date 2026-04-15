@@ -96,43 +96,6 @@ model Resources {
 }
 
 /**
- * The virtual machine specification for bulk create.
- */
-model BulkactionVMSpec {
-  /**
-   * The marketplace image plan used for the virtual machine.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  plan?: Plan;
-
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
-
-  /**
-   * The identity of the virtual machine, if configured.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  identity?: VirtualMachineIdentity;
-
-  /**
-   * The extended location of the Virtual Machine.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  extendedLocation?: ExtendedLocation;
-
-  @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
-  placement?: Placement;
-
-  /**
-   * Resource tags to apply to the virtual machines created by this bulk action.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-
-  @doc("Describes the properties of a Virtual Machine.")
-  properties?: BulkactionVMProperties;
-}
-
-/**
  * The flex properties for flexible VM creation.
  */
 // ----------- ExecuteCreateFlex ---------
@@ -258,8 +221,37 @@ model FlexProperties {
  * Per-VM configuration overrides that can be applied within a bulk virtual machine operation.
  */
 model BulkVMConfiguration {
-  @doc("Bulk Actions Virtual Machine Profile to configure Virtual Machines - mirrors Microsoft.Compute VirtualMachine structure")
-  profile?: BulkactionVMSpec;
+    /**
+   * The marketplace image plan used for the virtual machine.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  plan?: Plan;
+
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
+
+  /**
+   * The identity of the virtual machine, if configured.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: VirtualMachineIdentity;
+
+  /**
+   * The extended location of the Virtual Machine.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  extendedLocation?: ExtendedLocation;
+
+  @doc("Placement constraints for virtual machine hardware placement - see specification/compute/Compute.Management/models.tsp#Placement")
+  placement?: Placement;
+
+  /**
+   * Resource tags to apply to the virtual machines created by this bulk action.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  @doc("Describes the properties of a Virtual Machine.")
+  properties?: BulkactionVMProperties;
 
   @doc("Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.")
   computeApiVersion?: string;

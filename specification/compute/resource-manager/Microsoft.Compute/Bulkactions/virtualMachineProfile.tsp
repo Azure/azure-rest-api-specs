@@ -51,7 +51,7 @@ model BulkactionVMProperties {
   applicationProfile?: ApplicationProfile;
 
   @doc("Virtual Machine Extensions Array to be applied to the Virtual Machines.")
-  extensions?: BulkactionVMExtension[];
+  vmExtensions?: BulkactionVMExtension[];
 }
 
 @doc("Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations.")

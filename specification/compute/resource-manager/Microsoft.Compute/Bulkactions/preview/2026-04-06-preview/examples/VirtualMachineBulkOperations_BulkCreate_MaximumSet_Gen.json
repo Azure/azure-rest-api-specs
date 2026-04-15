@@ -11,8 +11,8 @@
         "baseProfile": {
           "computeApiVersion": "2024-11-01",
           "name": "demoCreate-0",
-          "profile": {
-            "plan": {
+          "resourceGroupName": "demoRG",
+          "plan": {
               "name": "windows2016",
               "publisher": "microsoft-ads",
               "product": "windows-data-science-vm",
@@ -161,10 +161,10 @@
                 "hibernationEnabled": true
               },
               "osProfile": {
-                "computerName": "demo-vm-0",
-                "adminUsername": "azureuser",
-                "adminPassword": "<admin-password>",
-                "customData": "RXhwb3J0ZWQgY3VzdG9tIGRhdGE=",
+                "computerName": "democomputer",
+                "adminUsername": "demouser",
+                "adminPassword": "DemoPassword@1234",
+                "customData": "RXhhbXBsZSBjdXN0b20gZGF0YQ==",
                 "windowsConfiguration": {
                   "provisionVMAgent": true,
                   "enableAutomaticUpdates": true,
@@ -190,7 +190,7 @@
                     "listeners": [
                       {
                         "protocol": "Http",
-                        "certificateUrl": "https://demoVault.vault.azure.net/secrets/demoCertificate/1234567890abcdef"
+                        "certificateUrl": "https://demoVault.vault.azure.net/certificates/demoCertificate/1234567890abcdef"
                       }
                     ]
                   }
@@ -392,10 +392,10 @@
                 ]
               },
               "hardwareProfile": {
-                "vmSize": "Standard_D2s_v3",
+                "vmSize": "Standard_D4s_v5",
                 "vmSizeProperties": {
-                  "vCpusAvailable": 2,
-                  "vCpusPerCore": 1
+                  "vCpusAvailable": 4,
+                  "vCpusPerCore": 2
                 }
               },
               "extensions": [
@@ -431,249 +431,256 @@
           {
             "computeApiVersion": "2024-11-01",
             "name": "demoCreate-1",
-            "profile": {
-              "plan": {
+            "resourceGroupName": "demoRG",
+            "plan": {
                 "name": "windows2016",
                 "publisher": "microsoft-ads",
                 "product": "windows-data-science-vm",
                 "promotionCode": "samplePromoCode",
                 "version": "latest"
               },
-              "zones": [
-                "1"
+            "zones": [
+              "2"
+            ],
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {}
+            },
+            "extendedLocation": {
+              "name": "westus",
+              "type": "EdgeZone"
+            },
+            "placement": {
+              "zonePlacementPolicy": "Any",
+              "includeZones": [
+                "2",
+                "3"
               ],
-              "identity": {
-                "type": "SystemAssigned",
-                "userAssignedIdentities": {}
-              },
-              "extendedLocation": {
-                "name": "useast",
-                "type": "EdgeZone"
-              },
-              "placement": {
-                "zonePlacementPolicy": "Any",
-                "includeZones": [
-                  "1",
-                  "3"
-                ],
-                "excludeZones": [
-                  "2"
-                ]
-              },
-              "tags": {
-                "environment": "demo",
-                "workload": "sample"
-              },
-              "properties": {
-                "scheduledEventsPolicy": {
-                  "userInitiatedRedeploy": {
-                    "automaticallyApprove": true
-                  },
-                  "userInitiatedReboot": {
-                    "automaticallyApprove": true
-                  },
-                  "scheduledEventsAdditionalPublishingTargets": {
-                    "eventGridAndResourceGraph": {
-                      "enable": true,
-                      "scheduledEventsApiVersion": "2024-11-01"
-                    }
-                  },
-                  "allInstancesDown": {
-                    "automaticallyApprove": true
+              "excludeZones": [
+                "1"
+              ]
+            },
+            "tags": {
+              "environment": "testing",
+              "version": "v2"
+            },
+            "properties": {
+              "scheduledEventsPolicy": {
+                "userInitiatedRedeploy": {
+                  "automaticallyApprove": true
+                },
+                "userInitiatedReboot": {
+                  "automaticallyApprove": true
+                },
+                "scheduledEventsAdditionalPublishingTargets": {
+                  "eventGridAndResourceGraph": {
+                    "enable": true,
+                    "scheduledEventsApiVersion": "2024-11-01"
                   }
                 },
-                "storageProfile": {
-                  "imageReference": {
-                    "publisher": "microsoftwindowsserver",
-                    "offer": "windowsserver",
-                    "sku": "2022-datacenter-azure-edition",
-                    "version": "latest",
-                    "sharedGalleryImageId": "/SharedGalleries/demoGallery/Images/demoImage/Versions/1.0.0",
-                    "communityGalleryImageId": "/CommunityGalleries/demoCommunityGallery/Images/demoImage/Versions/1.0.0",
-                    "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoGalleryRG/providers/Microsoft.Compute/galleries/demoGallery/images/demoImage/versions/1.0.0"
-                  },
-                  "osDisk": {
-                    "osType": "Windows",
-                    "encryptionSettings": {
-                      "diskEncryptionKey": {
-                        "secretUrl": "https://demoVault.vault.azure.net/secrets/demoSecret/1234567890abcdef",
-                        "sourceVault": {
-                          "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.KeyVault/vaults/demoVault"
-                        }
-                      },
-                      "keyEncryptionKey": {
-                        "keyUrl": "https://demoVault.vault.azure.net/keys/demoKey/1234567890abcdef",
-                        "sourceVault": {
-                          "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.KeyVault/vaults/demoVault"
-                        }
-                      },
-                      "enabled": true
+                "allInstancesDown": {
+                  "automaticallyApprove": true
+                }
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "microsoftwindowsserver",
+                  "offer": "windowsserver",
+                  "sku": "2022-datacenter-azure-edition",
+                  "version": "latest",
+                  "sharedGalleryImageId": "/SharedGalleries/demoGallery/Images/demoImage/Versions/1.0.0",
+                  "communityGalleryImageId": "/CommunityGalleries/demoCommunityGallery/Images/demoImage/Versions/1.0.0",
+                  "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoGalleryRG/providers/Microsoft.Compute/galleries/demoGallery/images/demoImage/versions/1.0.0"
+                },
+                "osDisk": {
+                  "osType": "Windows",
+                  "encryptionSettings": {
+                    "diskEncryptionKey": {
+                      "secretUrl": "https://demoVault.vault.azure.net/secrets/demoSecret/1234567890abcdef",
+                      "sourceVault": {
+                        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.KeyVault/vaults/demoVault"
+                      }
                     },
-                    "name": "demoOsDisk",
+                    "keyEncryptionKey": {
+                      "keyUrl": "https://demoVault.vault.azure.net/keys/demoKey/1234567890abcdef",
+                      "sourceVault": {
+                        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.KeyVault/vaults/demoVault"
+                      }
+                    },
+                    "enabled": true
+                  },
+                  "name": "demoOsDisk-override",
+                  "vhd": {
+                    "uri": "https://demostorage.blob.core.windows.net/vhds/demo-osdisk-override.vhd"
+                  },
+                  "image": {
+                    "uri": "https://demostorage.blob.core.windows.net/images/demo-image-override.vhd"
+                  },
+                  "caching": "ReadOnly",
+                  "writeAcceleratorEnabled": false,
+                  "diffDiskSettings": {
+                    "option": "Local",
+                    "placement": "CacheDisk"
+                  },
+                  "createOption": "FromImage",
+                  "diskSizeGB": 256,
+                  "managedDisk": {
+                    "storageAccountType": "Premium_LRS",
+                    "diskEncryptionSet": {
+                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.Compute/diskEncryptionSets/demoDiskEncryptionSet"
+                    },
+                    "securityProfile": {
+                      "securityEncryptionType": "DiskWithVMGuestState",
+                      "diskEncryptionSet": {
+                        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.Compute/diskEncryptionSets/demoDiskEncryptionSet"
+                      }
+                    },
+                    "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoRG/providers/Microsoft.Compute/disks/demoManagedDiskOverride"
+                  },
+                  "deleteOption": "Delete"
+                },
+                "dataDisks": [
+                  {
+                    "lun": 1,
+                    "name": "demoDataDisk2",
                     "vhd": {
-                      "uri": "https://demostorage.blob.core.windows.net/vhds/demo-osdisk.vhd"
+                      "uri": "https://demostorage.blob.core.windows.net/vhds/demo-datadisk2.vhd"
                     },
                     "image": {
-                      "uri": "https://demostorage.blob.core.windows.net/images/demo-image.vhd"
+                      "uri": "https://demostorage.blob.core.windows.net/images/demo-datadisk2.vhd"
                     },
-                    "caching": "None",
-                    "writeAcceleratorEnabled": true,
-                    "diffDiskSettings": {
-                      "option": "Local",
-                      "placement": "CacheDisk"
-                    },
+                    "caching": "ReadWrite",
+                    "writeAcceleratorEnabled": false,
                     "createOption": "FromImage",
-                    "diskSizeGB": 128,
+                    "diskSizeGB": 512,
                     "managedDisk": {
-                      "storageAccountType": "Standard_LRS",
+                      "storageAccountType": "Premium_LRS",
                       "diskEncryptionSet": {
                         "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.Compute/diskEncryptionSets/demoDiskEncryptionSet"
                       },
                       "securityProfile": {
-                        "securityEncryptionType": "VMGuestStateOnly",
+                        "securityEncryptionType": "DiskWithVMGuestState",
                         "diskEncryptionSet": {
                           "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.Compute/diskEncryptionSets/demoDiskEncryptionSet"
                         }
                       },
-                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoRG/providers/Microsoft.Compute/disks/demoManagedDisk"
+                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoRG/providers/Microsoft.Compute/disks/demoDataDisk2"
                     },
+                    "sourceResource": {
+                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoRG/providers/Microsoft.Compute/disks/demoDataDisk2Source"
+                    },
+                    "toBeDetached": false,
+                    "detachOption": "Detach",
                     "deleteOption": "Delete"
-                  },
-                  "dataDisks": [
+                  }
+                ],
+                "diskControllerType": "SCSI"
+              },
+              "hardwareProfile": {
+                "vmSize": "Standard_D8s_v5",
+                "vmSizeProperties": {
+                  "vCpusAvailable": 8,
+                  "vCpusPerCore": 2
+                }
+              },
+              "additionalCapabilities": {
+                "ultraSSDEnabled": true,
+                "hibernationEnabled": true
+              },
+              "osProfile": {
+                "computerName": "democomputer2",
+                "adminUsername": "adminuser",
+                "adminPassword": "SecurePassword@2024",
+                "customData": "W2RlZmF1bHRdDQpEaXNhYmxlZCA9IFRydWU=",
+                "windowsConfiguration": {
+                  "provisionVMAgent": true,
+                  "enableAutomaticUpdates": false,
+                  "timeZone": "Eastern Standard Time",
+                  "additionalUnattendContent": [
                     {
-                      "lun": 8,
-                      "name": "demoDataDisk1",
-                      "vhd": {
-                        "uri": "https://demostorage.blob.core.windows.net/vhds/demo-datadisk1.vhd"
-                      },
-                      "image": {
-                        "uri": "https://demostorage.blob.core.windows.net/images/demo-dataimage1.vhd"
-                      },
-                      "caching": "None",
-                      "writeAcceleratorEnabled": true,
-                      "createOption": "FromImage",
-                      "diskSizeGB": 256,
-                      "managedDisk": {
-                        "storageAccountType": "Standard_LRS",
-                        "diskEncryptionSet": {
-                          "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.Compute/diskEncryptionSets/demoDiskEncryptionSet"
-                        },
-                        "securityProfile": {
-                          "securityEncryptionType": "VMGuestStateOnly",
-                          "diskEncryptionSet": {
-                            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.Compute/diskEncryptionSets/demoDiskEncryptionSet"
-                          }
-                        },
-                        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoRG/providers/Microsoft.Compute/disks/demoDataDisk1"
-                      },
-                      "sourceResource": {
-                        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoRG/providers/Microsoft.Compute/snapshots/demoSnapshot"
-                      },
-                      "toBeDetached": true,
-                      "detachOption": "ForceDetach",
-                      "deleteOption": "Delete"
+                      "passName": "OobeSystem",
+                      "componentName": "Microsoft-Windows-Shell-Setup",
+                      "settingName": "AutoLogon",
+                      "content": "zalcrieaszmbzrycij"
                     }
                   ],
-                  "diskControllerType": "SCSI"
-                },
-                "additionalCapabilities": {
-                  "ultraSSDEnabled": true,
-                  "hibernationEnabled": true
-                },
-                "osProfile": {
-                  "computerName": "demo-vm-1",
-                  "adminUsername": "azureuser",
-                  "adminPassword": "<admin-password>",
-                  "customData": "RXhwb3J0ZWQgY3VzdG9tIGRhdGE=",
-                  "windowsConfiguration": {
-                    "provisionVMAgent": true,
-                    "enableAutomaticUpdates": true,
-                    "timeZone": "UTC",
-                    "additionalUnattendContent": [
+                  "patchSettings": {
+                    "patchMode": "Manual",
+                    "enableHotpatching": true,
+                    "assessmentMode": "ImageDefault",
+                    "automaticByPlatformSettings": {
+                      "rebootSetting": "Unknown",
+                      "bypassPlatformSafetyChecksOnUserSchedule": true
+                    }
+                  },
+                  "winRM": {
+                    "listeners": [
                       {
-                        "passName": "OobeSystem",
-                        "componentName": "Microsoft-Windows-Shell-Setup",
-                        "settingName": "AutoLogon",
-                        "content": "<AutoLogonConfiguration />"
+                        "protocol": "Http",
+                        "certificateUrl": "ceufojlzzigtpupdizsb"
                       }
-                    ],
-                    "patchSettings": {
-                      "patchMode": "Manual",
-                      "enableHotpatching": true,
-                      "assessmentMode": "ImageDefault",
-                      "automaticByPlatformSettings": {
-                        "rebootSetting": "Unknown",
-                        "bypassPlatformSafetyChecksOnUserSchedule": true
-                      }
-                    },
-                    "winRM": {
-                      "listeners": [
-                        {
-                          "protocol": "Http",
-                          "certificateUrl": "https://demoVault.vault.azure.net/secrets/demoCertificate/1234567890abcdef"
-                        }
-                      ]
-                    }
-                  },
-                  "linuxConfiguration": {
-                    "disablePasswordAuthentication": true,
-                    "ssh": {
-                      "publicKeys": [
-                        {
-                          "path": "/home/azureuser/.ssh/authorized_keys",
-                          "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcDemoKeyForDocsOnly1234567890 azureuser@demo"
-                        }
-                      ]
-                    },
-                    "provisionVMAgent": true,
-                    "patchSettings": {
-                      "patchMode": "ImageDefault",
-                      "assessmentMode": "ImageDefault",
-                      "automaticByPlatformSettings": {
-                        "rebootSetting": "Unknown",
-                        "bypassPlatformSafetyChecksOnUserSchedule": true
-                      }
-                    },
-                    "enableVMAgentPlatformUpdates": true
-                  },
-                  "secrets": [
-                    {
-                      "sourceVault": {
-                        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.KeyVault/vaults/demoVault"
-                      },
-                      "vaultCertificates": [
-                        {
-                          "certificateUrl": "https://demoVault.vault.azure.net/secrets/demoCertificate/1234567890abcdef",
-                          "certificateStore": "My"
-                        }
-                      ]
-                    }
-                  ],
-                  "allowExtensionOperations": true,
-                  "requireGuestProvisionSignal": true
+                    ]
+                  }
                 },
-                "networkProfile": {
-                  "networkInterfaces": [
-                    {
-                      "properties": {
-                        "primary": true,
-                        "deleteOption": "Delete"
-                      },
-                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoRG/providers/Microsoft.Network/networkInterfaces/demoNic01"
+                "linuxConfiguration": {
+                  "disablePasswordAuthentication": true,
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "/home/demouser/.ssh/authorized_keys",
+                        "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC..."
+                      }
+                    ]
+                  },
+                  "provisionVMAgent": true,
+                  "patchSettings": {
+                    "patchMode": "ImageDefault",
+                    "assessmentMode": "ImageDefault",
+                    "automaticByPlatformSettings": {
+                      "rebootSetting": "Unknown",
+                      "bypassPlatformSafetyChecksOnUserSchedule": true
                     }
-                  ],
-                  "networkApiVersion": "2020-11-01",
-                  "networkInterfaceConfigurations": [
-                    {
-                      "name": "demoNic01",
-                      "properties": {
-                        "primary": true,
-                        "deleteOption": "Delete",
-                        "enableAcceleratedNetworking": true,
-                        "disableTcpStateTracking": true,
-                        "enableFpga": true,
-                        "enableIPForwarding": true,
-                        "networkSecurityGroup": {
+                  },
+                  "enableVMAgentPlatformUpdates": true
+                },
+                "secrets": [
+                  {
+                    "sourceVault": {
+                      "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoSecurityRG/providers/Microsoft.KeyVault/vaults/demoVault"
+                    },
+                    "vaultCertificates": [
+                      {
+                        "certificateUrl": "https://demoVault.vault.azure.net/certificates/demoCertificate/1234567890abcdef",
+                        "certificateStore": "My"
+                      }
+                    ]
+                  }
+                ],
+                "allowExtensionOperations": true,
+                "requireGuestProvisionSignal": true
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "properties": {
+                      "primary": true,
+                      "deleteOption": "Delete"
+                    },
+                    "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoNetworkRG/providers/Microsoft.Network/networkInterfaces/demoNetworkInterface"
+                  }
+                ],
+                "networkApiVersion": "2020-11-01",
+                "networkInterfaceConfigurations": [
+                  {
+                  "name": "demoNetworkInterface1",
+                  "properties": {
+                    "primary": true,
+                    "deleteOption": "Delete",
+                    "enableAcceleratedNetworking": false,
+                    "disableTcpStateTracking": false,
+                    "enableFpga": false,
+                    "enableIPForwarding": false,
+                    "networkSecurityGroup": {
                           "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/demoNetworkRG/providers/Microsoft.Network/networkSecurityGroups/demoNsg"
                         },
                         "dnsSettings": {
@@ -748,10 +755,10 @@
                         "network": "demo"
                       }
                     }
-                  ]
-                },
-                "securityProfile": {
-                  "uefiSettings": {
+                ]
+              },
+              "securityProfile": {
+                "uefiSettings": {
                     "secureBootEnabled": true,
                     "vTpmEnabled": true
                   },
@@ -842,7 +849,7 @@
                       ]
                     }
                   }
-                ]
+              ]
               }
             },
             "resourceGroupName": "demoRG"
