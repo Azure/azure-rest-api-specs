@@ -1143,6 +1143,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts": {
+      "get": {
+        "operationId": "SoftDeletedDatabaseAccounts_ListByLocation",
+        "description": "Lists all the soft-deleted Azure Cosmos DB database accounts available under the subscription and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountListByLocation": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/restorableDatabaseAccounts": {
       "get": {
         "operationId": "RestorableDatabaseAccounts_List",
@@ -19737,6 +19776,331 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts": {
+      "get": {
+        "operationId": "SoftDeletedDatabaseAccounts_ListByResourceGroupAndLocation",
+        "description": "Lists all the soft-deleted Azure Cosmos DB database accounts available under the given resource group and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountListByResourceGroupAndLocation": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountListByResourceGroupAndLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}": {
+      "get": {
+        "operationId": "SoftDeletedDatabaseAccounts_Get",
+        "description": "Retrieves the properties of a soft-deleted Azure Cosmos DB database account by location and accountName. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountGetResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountGet": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases": {
+      "get": {
+        "operationId": "SoftDeletedSqlDatabases_List",
+        "description": "Lists all the soft-deleted Azure Cosmos DB SQL databases under a soft-deleted database account. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedSqlDatabasesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlDatabaseList": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlDatabaseList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}": {
+      "get": {
+        "operationId": "SoftDeletedSqlDatabases_Get",
+        "description": "Retrieves the properties of a soft-deleted Azure Cosmos DB SQL database. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB SQL database name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedSqlDatabaseGetResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlDatabaseGet": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlDatabaseGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers": {
+      "get": {
+        "operationId": "SoftDeletedSqlContainers_List",
+        "description": "Lists all the soft-deleted Azure Cosmos DB SQL containers under a soft-deleted SQL database. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB SQL database name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedSqlContainersListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlContainerList": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlContainerList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}": {
+      "get": {
+        "operationId": "SoftDeletedSqlContainers_Get",
+        "description": "Retrieves the properties of a soft-deleted Azure Cosmos DB SQL container. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB SQL database name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Cosmos DB SQL container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedSqlContainerGetResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlContainerGet": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlContainerGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools": {
       "get": {
         "operationId": "ThroughputPools_ListByResourceGroup",
@@ -20287,6 +20651,602 @@
         "x-ms-examples": {
           "CosmosDB ThroughputPool Account Delete": {
             "$ref": "./examples/throughputPool/CosmosDBThroughputPoolAccountDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}?softDeleteActionKind=RestoreSoftDeletedResource": {
+      "delete": {
+        "operationId": "SoftDeletedDatabaseAccounts_Restore",
+        "description": "Restores a soft-deleted Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "softDeleteActionKind",
+            "in": "query",
+            "description": "The kind of soft delete action to perform.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RestoreSoftDeletedResource",
+              "PermanentDeleteResource"
+            ],
+            "x-ms-enum": {
+              "name": "SoftDeleteActionKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "RestoreSoftDeletedResource",
+                  "value": "RestoreSoftDeletedResource",
+                  "description": "Restores the soft-deleted resource to active/online state."
+                },
+                {
+                  "name": "PermanentDeleteResource",
+                  "value": "PermanentDeleteResource",
+                  "description": "Permanently deletes the soft-deleted resource."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountRestore": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}?softDeleteActionKind=PermanentDeleteResource": {
+      "delete": {
+        "operationId": "SoftDeletedDatabaseAccounts_Purge",
+        "description": "Permanently deletes (purges) a soft-deleted Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "softDeleteActionKind",
+            "in": "query",
+            "description": "The kind of soft delete action to perform.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RestoreSoftDeletedResource",
+              "PermanentDeleteResource"
+            ],
+            "x-ms-enum": {
+              "name": "SoftDeleteActionKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "RestoreSoftDeletedResource",
+                  "value": "RestoreSoftDeletedResource",
+                  "description": "Restores the soft-deleted resource to active/online state."
+                },
+                {
+                  "name": "PermanentDeleteResource",
+                  "value": "PermanentDeleteResource",
+                  "description": "Permanently deletes the soft-deleted resource."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountPurge": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountPurge.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}?softDeleteActionKind=RestoreSoftDeletedResource": {
+      "delete": {
+        "operationId": "SoftDeletedSqlDatabases_Restore",
+        "description": "Restores a soft-deleted Azure Cosmos DB SQL database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB SQL database name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "softDeleteActionKind",
+            "in": "query",
+            "description": "The kind of soft delete action to perform.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RestoreSoftDeletedResource",
+              "PermanentDeleteResource"
+            ],
+            "x-ms-enum": {
+              "name": "SoftDeleteActionKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "RestoreSoftDeletedResource",
+                  "value": "RestoreSoftDeletedResource",
+                  "description": "Restores the soft-deleted resource to active/online state."
+                },
+                {
+                  "name": "PermanentDeleteResource",
+                  "value": "PermanentDeleteResource",
+                  "description": "Permanently deletes the soft-deleted resource."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlDatabaseRestore": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlDatabaseRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}?softDeleteActionKind=PermanentDeleteResource": {
+      "delete": {
+        "operationId": "SoftDeletedSqlDatabases_Purge",
+        "description": "Permanently deletes a soft-deleted Azure Cosmos DB SQL database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB SQL database name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "softDeleteActionKind",
+            "in": "query",
+            "description": "The kind of soft delete action to perform.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RestoreSoftDeletedResource",
+              "PermanentDeleteResource"
+            ],
+            "x-ms-enum": {
+              "name": "SoftDeleteActionKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "RestoreSoftDeletedResource",
+                  "value": "RestoreSoftDeletedResource",
+                  "description": "Restores the soft-deleted resource to active/online state."
+                },
+                {
+                  "name": "PermanentDeleteResource",
+                  "value": "PermanentDeleteResource",
+                  "description": "Permanently deletes the soft-deleted resource."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlDatabasePurge": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlDatabasePurge.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}?softDeleteActionKind=RestoreSoftDeletedResource": {
+      "delete": {
+        "operationId": "SoftDeletedSqlContainers_Restore",
+        "description": "Restores a soft-deleted Azure Cosmos DB SQL container to active state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB SQL database name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Cosmos DB SQL container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "softDeleteActionKind",
+            "in": "query",
+            "description": "The kind of soft delete action to perform.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RestoreSoftDeletedResource",
+              "PermanentDeleteResource"
+            ],
+            "x-ms-enum": {
+              "name": "SoftDeleteActionKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "RestoreSoftDeletedResource",
+                  "value": "RestoreSoftDeletedResource",
+                  "description": "Restores the soft-deleted resource to active/online state."
+                },
+                {
+                  "name": "PermanentDeleteResource",
+                  "value": "PermanentDeleteResource",
+                  "description": "Permanently deletes the soft-deleted resource."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlContainerRestore": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlContainerRestore.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}?softDeleteActionKind=PermanentDeleteResource": {
+      "delete": {
+        "operationId": "SoftDeletedSqlContainers_Purge",
+        "description": "Permanently deletes a soft-deleted Azure Cosmos DB SQL container.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB SQL database name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Cosmos DB SQL container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^/\\\\#?]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "softDeleteActionKind",
+            "in": "query",
+            "description": "The kind of soft delete action to perform.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "RestoreSoftDeletedResource",
+              "PermanentDeleteResource"
+            ],
+            "x-ms-enum": {
+              "name": "SoftDeleteActionKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "RestoreSoftDeletedResource",
+                  "value": "RestoreSoftDeletedResource",
+                  "description": "Restores the soft-deleted resource to active/online state."
+                },
+                {
+                  "name": "PermanentDeleteResource",
+                  "value": "PermanentDeleteResource",
+                  "description": "Permanently deletes the soft-deleted resource."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedSqlContainerPurge": {
+            "$ref": "./examples/CosmosDBSoftDeletedSqlContainerPurge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -24059,6 +25019,10 @@
           "type": "boolean",
           "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
         },
+        "softDeleteConfiguration": {
+          "$ref": "#/definitions/SoftDeleteConfiguration",
+          "description": "The configuration for soft delete on the Cosmos DB account."
+        },
         "enforceHierarchicalPartitionKeyIdLastLevel": {
           "type": "boolean",
           "description": "Flag to indicate enabling/disabling of hierarchical partition key ID last level enforcement on the account."
@@ -24334,6 +25298,10 @@
         "enableAllVersionsAndDeletesChangeFeed": {
           "type": "boolean",
           "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
+        },
+        "softDeleteConfiguration": {
+          "$ref": "#/definitions/SoftDeleteConfiguration",
+          "description": "The configuration for soft delete on the Cosmos DB account."
         },
         "throughputPoolDedicatedRUs": {
           "type": "integer",
@@ -24703,6 +25671,10 @@
         "enableAllVersionsAndDeletesChangeFeed": {
           "type": "boolean",
           "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
+        },
+        "softDeleteConfiguration": {
+          "$ref": "#/definitions/SoftDeleteConfiguration",
+          "description": "The configuration for soft delete on the Cosmos DB account."
         },
         "enforceHierarchicalPartitionKeyIdLastLevel": {
           "type": "boolean",
@@ -30512,6 +31484,327 @@
             "value": "MaterializedViewsBuilder"
           }
         ]
+      }
+    },
+    "SoftDeleteConfiguration": {
+      "type": "object",
+      "description": "Configuration for soft delete on the Cosmos DB account.",
+      "properties": {
+        "softDeletionEnabled": {
+          "type": "boolean",
+          "description": "Flag to indicate whether soft delete is enabled on the account."
+        },
+        "minMinutesBeforePermanentDeletionAllowed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of minutes before a soft deleted resource can be permanently deleted."
+        },
+        "softDeleteRetentionPeriodInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Soft delete retention period in minutes for resources."
+        }
+      }
+    },
+    "SoftDeletedDatabaseAccountGetResult": {
+      "type": "object",
+      "description": "A Azure Cosmos DB soft-deleted database account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftDeletedDatabaseAccountProperties",
+          "description": "The properties of a soft-deleted database account.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the ARM resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of Azure resource.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "SoftDeletedDatabaseAccountProperties": {
+      "type": "object",
+      "description": "The properties of a soft-deleted database account.",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the database account."
+        },
+        "softDeletionMetadata": {
+          "$ref": "#/definitions/SoftDeletionMetadata",
+          "description": "Metadata related to the soft deletion of the database account."
+        },
+        "softDeleteConfiguration": {
+          "$ref": "#/definitions/SoftDeleteConfiguration",
+          "description": "The soft delete configuration for the database account."
+        },
+        "resource": {
+          "$ref": "#/definitions/SoftDeletedDatabaseAccountResource",
+          "description": "A subset of properties of the underlying database account resource."
+        }
+      }
+    },
+    "SoftDeletedDatabaseAccountResource": {
+      "type": "object",
+      "description": "The database account resource information for a soft-deleted account.",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "description": "An array that contains all of the locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "x-ms-identifiers": []
+        },
+        "writeLocations": {
+          "type": "array",
+          "description": "An array that contains the write location(s) for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "x-ms-identifiers": []
+        },
+        "readLocations": {
+          "type": "array",
+          "description": "An array that contains the read locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SoftDeletedDatabaseAccountsListResult": {
+      "type": "object",
+      "description": "The List operation response, that contains the soft-deleted database accounts and their properties.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of soft-deleted database accounts and their properties.",
+          "items": {
+            "$ref": "#/definitions/SoftDeletedDatabaseAccountGetResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "SoftDeletedSqlContainerGetResult": {
+      "type": "object",
+      "description": "An Azure Cosmos DB soft-deleted SQL container.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftDeletedSqlContainerProperties",
+          "description": "The properties of a soft-deleted SQL container.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the ARM resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of Azure resource.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "SoftDeletedSqlContainerProperties": {
+      "type": "object",
+      "description": "The properties of a soft-deleted SQL container.",
+      "properties": {
+        "softDeletionMetadata": {
+          "$ref": "#/definitions/SoftDeletionMetadata",
+          "description": "Metadata related to the soft deletion of the SQL container."
+        },
+        "resource": {
+          "$ref": "#/definitions/SoftDeletedSqlContainerResource",
+          "description": "The resource information for the soft-deleted SQL container."
+        }
+      }
+    },
+    "SoftDeletedSqlContainerResource": {
+      "type": "object",
+      "description": "Cosmos DB SQL container resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB SQL container"
+        },
+        "_rid": {
+          "type": "string",
+          "description": "A system generated property. A unique identifier.",
+          "readOnly": true
+        },
+        "partitionKey": {
+          "$ref": "#/definitions/ContainerPartitionKey",
+          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Default time to live"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SoftDeletedSqlContainersListResult": {
+      "type": "object",
+      "description": "The List operation response, that contains the soft-deleted SQL containers and their properties.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of soft-deleted SQL containers and their properties.",
+          "items": {
+            "$ref": "#/definitions/SoftDeletedSqlContainerGetResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "SoftDeletedSqlDatabaseGetResult": {
+      "type": "object",
+      "description": "An Azure Cosmos DB soft-deleted SQL database.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftDeletedSqlDatabaseProperties",
+          "description": "The properties of a soft-deleted SQL database.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the ARM resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of Azure resource.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "SoftDeletedSqlDatabaseProperties": {
+      "type": "object",
+      "description": "The properties of a soft-deleted SQL database.",
+      "properties": {
+        "softDeletionMetadata": {
+          "$ref": "#/definitions/SoftDeletionMetadata",
+          "description": "Metadata related to the soft deletion of the SQL database."
+        },
+        "resource": {
+          "$ref": "#/definitions/SoftDeletedSqlDatabaseResource",
+          "description": "The resource information for the soft-deleted SQL database."
+        }
+      }
+    },
+    "SoftDeletedSqlDatabaseResource": {
+      "type": "object",
+      "description": "Cosmos DB SQL database resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB SQL database"
+        },
+        "_rid": {
+          "type": "string",
+          "description": "A system generated property. A unique identifier.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SoftDeletedSqlDatabasesListResult": {
+      "type": "object",
+      "description": "The List operation response, that contains the soft-deleted SQL databases and their properties.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of soft-deleted SQL databases and their properties.",
+          "items": {
+            "$ref": "#/definitions/SoftDeletedSqlDatabaseGetResult"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "SoftDeletionMetadata": {
+      "type": "object",
+      "description": "Metadata about the soft deletion of a resource.",
+      "properties": {
+        "isSoftDeleted": {
+          "type": "boolean",
+          "description": "Indicates whether the resource is soft deleted."
+        },
+        "softDeletionStartTimestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The timestamp when the soft deletion started."
+        },
+        "softDeletionResourceExpirationTimestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The timestamp when the soft-deleted resource will expire and be permanently deleted."
+        }
       }
     },
     "SpatialSpec": {
