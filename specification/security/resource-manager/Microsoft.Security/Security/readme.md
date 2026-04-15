@@ -1086,17 +1086,11 @@ These settings apply only when `--tag=package-2020-01-python-only` is specified 
 
 ``` yaml $(tag) == 'package-2020-01-python-only'
 input-file:
-- stable/2020-01-01/allowedConnections.json
 - stable/2020-01-01/assessmentMetadata.json
 - stable/2020-01-01/assessments.json
-- stable/2020-01-01/discoveredSecuritySolutions.json
-- stable/2020-01-01/externalSecuritySolutions.json
-- stable/2020-01-01/jitNetworkAccessPolicies.json
 - stable/2020-01-01/secureScore.json
-- stable/2020-01-01/SecuritySolutions.json
-- stable/2020-01-01/securitySolutionsReferenceData.json
-- stable/2020-01-01/serverVulnerabilityAssessments.json
-- stable/2020-01-01/topologies.json
+- stable/2020-01-01/openapi.json
+
 
 # Needed when there is more than one input file
 override-info:
