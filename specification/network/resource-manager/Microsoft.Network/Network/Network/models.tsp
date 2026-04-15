@@ -26125,6 +26125,8 @@ model KubeSelectorMatchExpression {
 /**
  * The operator for a KubeSelectorMatchExpression.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature for consistency with existing Network resources"
+@Azure.ResourceManager.Legacy.feature(Features.kubeSelectorGroup)
 @added(Versions.v2025_07_01)
 union KubeSelectorMatchExpressionOperator {
   string,
