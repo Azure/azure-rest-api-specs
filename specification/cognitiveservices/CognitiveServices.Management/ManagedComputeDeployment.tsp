@@ -25,7 +25,7 @@ model ManagedComputeDeployment
     Resource = ManagedComputeDeployment,
     KeyName = "deploymentName",
     SegmentName = "managedComputeDeployments",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
   >;
 
   /**
@@ -75,7 +75,7 @@ interface ManagedComputeDeployments {
   /**
    * Deletes the specified managed compute deployment associated with the Cognitive Services account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "ManagedComputeDeployment can have dependent resources, deleting it will be a LRO, result code will be 202. If the dependent resource is not provisioned, the result code will be 200."
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedComputeDeployment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
