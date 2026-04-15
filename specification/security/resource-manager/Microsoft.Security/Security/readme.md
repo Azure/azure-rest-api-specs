@@ -599,8 +599,7 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-08'
 input-file:
-  - preview/2021-08-01-preview/assignments.json
-  - preview/2021-08-01-preview/standards.json
+  - preview/2021-08-01-preview/openapi.json
 
 override-info:
   title: SecurityCenter
