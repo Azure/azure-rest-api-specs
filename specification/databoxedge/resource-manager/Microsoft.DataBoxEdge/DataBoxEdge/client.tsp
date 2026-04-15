@@ -1933,9 +1933,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "ImageRepositoryUri",
   "csharp"
 );
-@@clientName(GenerateCertResponse, "GenerateCertResult", "csharp");
-@@clientName(GenerateCertResponse.expiryTimeInUTC, "ExpireOn", "csharp");
-
 // Round 1: SkuName member casing (22 members — generated ALL-CAPS → baseline PascalCase)
 @@clientName(SkuName.TEA_1Node, "Tea1Node", "csharp");
 @@clientName(SkuName.TEA_1Node_UPS, "Tea1NodeUps", "csharp");
@@ -1949,25 +1946,25 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(SkuName.GPU, "Gpu", "csharp");
 @@clientName(SkuName.TCA_Large, "TcaLarge", "csharp");
 @@clientName(SkuName.EdgePR_Base_UPS, "EdgePRBaseUps", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
 @@clientName(SkuName.EP2_64_1VPU_W, "EP2_64_1VpuW", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
 @@clientName(SkuName.EP2_128_1T4_Mx1_W, "EP2_128_1T4Mx1W", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
 @@clientName(SkuName.EP2_256_2T4_W, "EP2_256_2T4W", "csharp");
 @@clientName(SkuName.RCA_Small, "RcaSmall", "csharp");
 @@clientName(SkuName.RCA_Large, "RcaLarge", "csharp");
 @@clientName(SkuName.RDC, "Rdc", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
 @@clientName(SkuName.EP2_64_Mx1_W, "EP2_64_Mx1W", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
 @@clientName(SkuName.EP2_128_GPU1_Mx1_W, "EP2_128Gpu1Mx1W", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
 @@clientName(SkuName.EP2_256_GPU2_Mx1, "EP2_256Gpu2Mx1", "csharp");
 @@clientName(SkuName.EdgeMR_TCP, "EdgeMRTcp", "csharp");
 
 @@clientName(EncryptionAlgorithm.AES256, "Aes256", "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/invalid-name" ""
+#suppress "@azure-tools/typespec-client-generator-core/invalid-name" "Underscores required in C# client name to match existing SDK enum member for backward compatibility."
 @@clientName(EncryptionAlgorithm.RSAES_PKCS1_v_1_5, "RsaesPkcs1V1_5", "csharp");
 
 @@usage(Alert, Usage.input | Usage.output, "csharp");
