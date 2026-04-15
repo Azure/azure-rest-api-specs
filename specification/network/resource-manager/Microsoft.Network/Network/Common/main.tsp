@@ -405,17 +405,17 @@ union Nat64State {
   string,
 
   /**
-   * None
+   * Nat64 Property is not set.
    */
   None: "None",
 
   /**
-   * Enabled
+   * Nat64 is enabled.
    */
   Enabled: "Enabled",
 
   /**
-   * Disabled
+   * Nat64 is disabled.
    */
   Disabled: "Disabled",
 }
