@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.NetApp;
 
 @@clientName(Microsoft.NetApp,
@@ -254,8 +255,12 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.EncryptionKeySource, "NetAppEncryptionKeySource", "csharp");
 @@clientName(Microsoft.NetApp.KeySource, "NetAppKeySource", "csharp");
 @@clientName(Microsoft.NetApp.KeyVaultPrivateEndpoint, "NetAppKeyVaultPrivateEndpoint", "csharp");
+@@clientName(Microsoft.NetApp.KeyVaultProperties, "NetAppKeyVaultProperties", "csharp");
 @@clientName(Microsoft.NetApp.RegionInfo, "NetAppRegionInfo", "csharp");
+@@clientName(Microsoft.NetApp.ReplicationObject, "NetAppReplicationObject", "csharp");
+@@clientName(Microsoft.NetApp.ReplicationStatus, "NetAppVolumeReplicationStatus", "csharp");
 @@clientName(Microsoft.NetApp.ReplicationType, "NetAppReplicationType", "csharp");
+@@clientName(Microsoft.NetApp.VolumePatch, "NetAppVolumePatch", "csharp");
 
 // C# rename-mapping renames (backward compat with old autorest SDK names)
 @@clientName(Microsoft.NetApp.EnableSubvolumes, "EnableNetAppSubvolume", "csharp");
@@ -271,7 +276,7 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.VolumeGroup, "NetAppVolumeGroupResult", "csharp");
 @@clientName(Microsoft.NetApp.MountTargetProperties, "NetAppVolumeMountTarget", "csharp");
 @@clientName(Microsoft.NetApp.VolumePatchPropertiesDataProtection, "NetAppVolumePatchDataProtection", "csharp");
-@@clientName(Microsoft.NetApp.Type, "NetAppVolumeQuotaType", "csharp");
+@@clientName(Microsoft.NetApp.QuotaType, "NetAppVolumeQuotaType", "csharp");
 @@clientName(Microsoft.NetApp.VolumeRevert, "NetAppVolumeRevertContent", "csharp");
 @@clientName(Microsoft.NetApp.SecurityStyle, "NetAppVolumeSecurityStyle", "csharp");
 @@clientName(Microsoft.NetApp.SnapshotRestoreFiles, "NetAppVolumeSnapshotRestoreFilesContent", "csharp");
@@ -280,6 +285,8 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.UsageName, "NetAppUsageName", "csharp");
 @@clientName(Microsoft.NetApp.UsageResult, "NetAppUsageResult", "csharp");
 @@clientName(Microsoft.NetApp.VolumeRelocationProperties, "NetAppVolumeRelocationProperties", "csharp");
+@@clientName(Microsoft.NetApp.BackupRestoreFiles, "NetAppVolumeBackupBackupRestoreFilesContent", "csharp");
+@@clientName(Microsoft.NetApp.VolumeGroupVolumeProperties, "NetAppVolumeGroupVolume", "csharp");
 
 // C# ARM resource renames (restore NetApp prefix on resource types)
 // Note: Volume is handled via [CodeGenType] in Custom code because @@clientName
@@ -310,3 +317,29 @@ using Microsoft.NetApp;
   Access.public,
   "csharp"
 );
+
+// C# property type overrides (backward compat with old autorest SDK types)
+@@alternateType(Microsoft.NetApp.ReplicationObject.remoteVolumeResourceId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeSnapshotProperties.snapshotPolicyId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.ActiveDirectory.kdcIP, Azure.Core.ipV4Address, "csharp");
+@@alternateType(Microsoft.NetApp.BackupPolicyProperties.backupPolicyId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.FilePathAvailabilityRequest.subnetId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.AuthorizeRequest.remoteVolumeResourceId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.BackupRestoreFiles.destinationVolumeId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeProperties.keyVaultPrivateEndpointResourceId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeProperties.originatingResourceId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeProperties.proximityPlacementGroup, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeProperties.subnetId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeGroupVolumeProperties.id, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.PoolChangeRequest.newPoolResourceId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.ReestablishReplicationRequest.sourceVolumeId, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.Replication.remoteVolumeResourceId, armResourceIdentifier, "csharp");
+
+// C# property name renames
+@@clientName(Microsoft.NetApp.KeyVaultProperties.keyVaultResourceId, "KeyVaultArmResourceId", "csharp");
+
+// C# property name casing fixes
+@@clientName(Microsoft.NetApp.AccountProperties.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
+@@clientName(Microsoft.NetApp.AccountPropertiesPatch.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
+@@clientName(Microsoft.NetApp.QuotaReport, "NetAppVolumeQuotaReport", "csharp");
+@@clientName(Microsoft.NetApp.QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
