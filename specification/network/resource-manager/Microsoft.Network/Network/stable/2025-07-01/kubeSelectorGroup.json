@@ -69,13 +69,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List KubeSelectorGroups by Subscription": {
-            "$ref": "./examples/KubeSelectorGroupListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -111,13 +106,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List KubeSelectorGroups by Resource Group": {
-            "$ref": "./examples/KubeSelectorGroupListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -160,13 +150,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get KubeSelectorGroup": {
-            "$ref": "./examples/KubeSelectorGroupGet.json"
           }
         }
       },
@@ -230,13 +215,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create or Update KubeSelectorGroup": {
-            "$ref": "./examples/KubeSelectorGroupPut.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -288,13 +268,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Update KubeSelectorGroup Tags": {
-            "$ref": "./examples/KubeSelectorGroupUpdateTags.json"
           }
         }
       },
@@ -343,13 +318,8 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/Common.CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete KubeSelectorGroup": {
-            "$ref": "./examples/KubeSelectorGroupDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -376,7 +346,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/Resource"
+          "$ref": "./common.json#/definitions/Common.Resource"
         }
       ]
     },
@@ -443,12 +413,12 @@
           "type": "array",
           "description": "The firewall policy IDs referencing this KubeSelectorGroup. System-managed, read-only.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json#/definitions/Common.SubResource"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
+          "$ref": "./common.json#/definitions/Common.ProvisioningState",
           "description": "The provisioning state of the KubeSelectorGroup resource.",
           "readOnly": true
         }
