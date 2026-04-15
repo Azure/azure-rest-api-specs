@@ -319,6 +319,25 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.ExportPolicyRule.hasRootAccess, "HasRootAccess", "csharp");
 @@alternateType(Microsoft.NetApp.BackupsMigrationRequest.backupVaultId, armResourceIdentifier, "csharp");
 
+// C# property renames for backward compat
+@@clientName(Microsoft.NetApp.VolumeRelocationProperties.relocationRequested, "IsRelocationRequested", "csharp");
+@@clientName(Microsoft.NetApp.VolumeRelocationProperties.readyToBeFinalized, "IsReadyToBeFinalized", "csharp");
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.accessedTimeStamp, "AccessedOn", "csharp");
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.modifiedTimeStamp, "ModifiedOn", "csharp");
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.changedTimeStamp, "ChangedOn", "csharp");
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.creationTimeStamp, "CreatedOn", "csharp");
+@@clientName(Microsoft.NetApp.SnapshotPolicyProperties.enabled, "IsEnabled", "csharp");
+@@clientName(Microsoft.NetApp.VolumeProperties.proximityPlacementGroup, "ProximityPlacementGroupId", "csharp");
+
+// C# property type overrides for MountTargetProperties
+@@alternateType(Microsoft.NetApp.MountTargetProperties.mountTargetId, uuid, "csharp");
+@@alternateType(Microsoft.NetApp.MountTargetProperties.fileSystemId, uuid, "csharp");
+@@alternateType(Microsoft.NetApp.MountTargetProperties.ipAddress, Azure.Core.ipV4Address, "csharp");
+
+// C# property type overrides for VolumeProperties
+@@alternateType(Microsoft.NetApp.VolumeProperties.fileSystemId, uuid, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeProperties.networkSiblingSetId, uuid, "csharp");
+
 // C# ARM resource renames (restore NetApp prefix on resource types)
 // Note: Volume is handled via [CodeGenType] in Custom code because @@clientName
 // on Volume causes generator crashes with [CodeGenSerialization] in Custom code.
