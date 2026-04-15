@@ -25,24 +25,40 @@
               "ipAddressType": "IPv4",
               "matchConditions": [
                 {
-                  "protocolTypes": ["TCP"],
+                  "protocolTypes": [
+                    "TCP"
+                  ],
                   "vlanMatchCondition": {
-                    "vlans": ["20-30"],
-                    "innerVlans": ["30"],
-                    "vlanGroupNames": ["example-vlanGroup"]
+                    "vlans": [
+                      "20-30"
+                    ],
+                    "innerVlans": [
+                      "30"
+                    ],
+                    "vlanGroupNames": [
+                      "example-vlanGroup"
+                    ]
                   },
                   "ipCondition": {
                     "type": "SourceIP",
                     "prefixType": "Prefix",
-                    "ipPrefixValues": ["10.20.20.20/12"],
-                    "ipGroupNames": ["example-ipGroup"]
+                    "ipPrefixValues": [
+                      "10.20.20.20/12"
+                    ],
+                    "ipGroupNames": [
+                      "example-ipGroup"
+                    ]
                   },
                   "encapsulationType": "None",
                   "portCondition": {
                     "portType": "SourcePort",
                     "layer4Protocol": "TCP",
-                    "ports": ["100"],
-                    "portGroupNames": ["example-portGroup1"]
+                    "ports": [
+                      "100"
+                    ],
+                    "portGroupNames": [
+                      "example-portGroup1"
+                    ]
                   }
                 }
               ],
@@ -63,19 +79,25 @@
                 {
                   "name": "example-ipGroup",
                   "ipAddressType": "IPv4",
-                  "ipPrefixes": ["10.20.3.1/20"]
+                  "ipPrefixes": [
+                    "10.20.3.1/20"
+                  ]
                 }
               ],
               "vlanGroups": [
                 {
                   "name": "example-vlanGroup",
-                  "vlans": ["20-30"]
+                  "vlans": [
+                    "20-30"
+                  ]
                 }
               ],
               "portGroups": [
                 {
                   "name": "example-portGroup",
-                  "ports": ["100-200"]
+                  "ports": [
+                    "100-200"
+                  ]
                 }
               ]
             }
