@@ -261,3 +261,8 @@ using Microsoft.ContainerInstance;
 @@alternateType(LocationOperationGroup.listCachedImages::parameters.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(LocationOperationGroup.listCapabilities::parameters.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(LocationOperationGroup.listUsage::parameters.location, Azure.Core.azureLocation, "csharp");
+
+// Category C: Resource method renames for backward compat
+@@clientName(ContainerGroups.attach, "AttachContainer", "csharp");
+@@clientName(ContainerGroups.executeCommand, "ExecuteContainerCommand", "csharp");
+@@clientName(ContainerGroups.listLogs, "GetContainerLogs", "csharp");
