@@ -91,12 +91,13 @@ interface RuntimeRegistration {
   /**
    * Registers the devices.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving operationId and x-ms-long-running-operation extension for compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Migration from Swagger: preserving x-ms-long-running-operation extension for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Migration from Swagger: operation name preserved for compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Migration from Swagger: using Foundations.Operation for compatibility"
   @removed(Versions.v2025_07_01_preview)
   @sharedRoute
   @extension("x-ms-long-running-operation", true)
+  @pollingOperation(RuntimeRegistration.operationStatusLookup)
   @summary("Registers the devices.")
   @route("/{idScope}/registrations/{registrationId}/register")
   @put
@@ -118,7 +119,20 @@ interface RuntimeRegistration {
       @bodyRoot
       body: DeviceRegistration;
     },
-    RegistrationOperationStatus200 | RegistrationOperationStatus202,
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
+
+      @header("retry-after")
+      retryAfter?: int32;
+
+      @header("Location")
+      location?: string;
+
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;

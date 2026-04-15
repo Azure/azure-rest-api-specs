@@ -44,7 +44,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "bulkOperation",
+            "name": "body",
             "in": "body",
             "description": "The bulk enrollment group operation.",
             "required": true,
@@ -153,7 +153,7 @@
             "x-ms-client-name": "If-Match"
           },
           {
-            "name": "enrollmentGroup",
+            "name": "body",
             "in": "body",
             "description": "The device enrollment group.",
             "required": true,
@@ -314,7 +314,7 @@
             "type": "string"
           },
           {
-            "name": "querySpecification",
+            "name": "body",
             "in": "body",
             "description": "The query specification.",
             "required": true,
@@ -343,7 +343,7 @@
               },
               "x-ms-max-item-count": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The maximum number of items returned in a page."
               }
             }
@@ -381,7 +381,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "bulkOperation",
+            "name": "body",
             "in": "body",
             "description": "The bulk enrollment operation.",
             "required": true,
@@ -490,7 +490,7 @@
             "x-ms-client-name": "If-Match"
           },
           {
-            "name": "enrollment",
+            "name": "body",
             "in": "body",
             "description": "The device enrollment record.",
             "required": true,
@@ -651,7 +651,7 @@
             "type": "string"
           },
           {
-            "name": "querySpecification",
+            "name": "body",
             "in": "body",
             "description": "The query specification.",
             "required": true,
@@ -680,7 +680,7 @@
               },
               "x-ms-max-item-count": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The maximum number of items returned in a page."
               }
             }
@@ -857,7 +857,7 @@
               },
               "x-ms-max-item-count": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The maximum number of items returned in a page."
               }
             }
@@ -1032,7 +1032,7 @@
           }
         },
         "mode": {
-          "$ref": "#/definitions/OperationMode",
+          "$ref": "#/definitions/BulkEnrollmentMode",
           "description": "Operation mode."
         }
       },
@@ -1085,6 +1085,42 @@
         "isSuccessful"
       ]
     },
+    "BulkEnrollmentMode": {
+      "type": "string",
+      "description": "Operation mode.",
+      "enum": [
+        "create",
+        "update",
+        "updateIfMatchETag",
+        "delete"
+      ],
+      "x-ms-enum": {
+        "name": "BulkEnrollmentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "create",
+            "value": "create",
+            "description": "create"
+          },
+          {
+            "name": "update",
+            "value": "update",
+            "description": "update"
+          },
+          {
+            "name": "updateIfMatchETag",
+            "value": "updateIfMatchETag",
+            "description": "updateIfMatchETag"
+          },
+          {
+            "name": "delete",
+            "value": "delete",
+            "description": "delete"
+          }
+        ]
+      }
+    },
     "BulkEnrollmentOperation": {
       "type": "object",
       "description": "Bulk enrollment operation.",
@@ -1097,7 +1133,7 @@
           }
         },
         "mode": {
-          "$ref": "#/definitions/OperationMode",
+          "$ref": "#/definitions/BulkEnrollmentMode",
           "description": "Operation mode."
         }
       },
@@ -1520,42 +1556,6 @@
           "format": "int32",
           "description": "This is null for reported properties metadata and is not null for desired\nproperties metadata."
         }
-      }
-    },
-    "OperationMode": {
-      "type": "string",
-      "description": "Operation mode.",
-      "enum": [
-        "create",
-        "update",
-        "updateIfMatchETag",
-        "delete"
-      ],
-      "x-ms-enum": {
-        "name": "OperationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "create",
-            "value": "create",
-            "description": "create"
-          },
-          {
-            "name": "update",
-            "value": "update",
-            "description": "update"
-          },
-          {
-            "name": "updateIfMatchETag",
-            "value": "updateIfMatchETag",
-            "description": "updateIfMatchETag"
-          },
-          {
-            "name": "delete",
-            "value": "delete",
-            "description": "delete"
-          }
-        ]
       }
     },
     "ProvisioningServiceErrorDetails": {

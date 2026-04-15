@@ -68,7 +68,7 @@ interface IndividualEnrollmentOperationGroup {
        * The device enrollment record.
        */
       @bodyRoot
-      enrollment: IndividualEnrollment;
+      body: IndividualEnrollment;
     },
     IndividualEnrollment,
     {},
@@ -138,7 +138,7 @@ interface IndividualEnrollmentOperationGroup {
        * The query specification.
        */
       @bodyRoot
-      querySpecification: QuerySpecification;
+      body: QuerySpecification;
     },
     QueryResponse<IndividualEnrollment>,
     {},
@@ -184,7 +184,7 @@ interface IndividualEnrollmentOperationGroup {
   runBulkOperation is Azure.Core.Foundations.Operation<
     {
       /** The bulk enrollment operation. */
-      @bodyRoot bulkOperation: BulkEnrollmentOperation;
+      @bodyRoot body: BulkEnrollmentOperation;
     },
     BulkEnrollmentOperationResult,
     {},
@@ -245,7 +245,7 @@ interface EnrollmentGroupOperationGroup {
        * The device enrollment group.
        */
       @bodyRoot
-      enrollmentGroup: EnrollmentGroup;
+      body: EnrollmentGroup;
     },
     EnrollmentGroup,
     {},
@@ -312,7 +312,7 @@ interface EnrollmentGroupOperationGroup {
        * The query specification.
        */
       @bodyRoot
-      querySpecification: QuerySpecification;
+      body: QuerySpecification;
     },
     QueryResponse<EnrollmentGroup>,
     {},
@@ -355,7 +355,7 @@ interface EnrollmentGroupOperationGroup {
   runBulkOperation is Azure.Core.Foundations.Operation<
     {
       /** The bulk enrollment group operation. */
-      @bodyRoot bulkOperation: BulkEnrollmentGroupOperation;
+      @bodyRoot body: BulkEnrollmentGroupOperation;
     },
     BulkEnrollmentGroupOperationResult,
     {},
