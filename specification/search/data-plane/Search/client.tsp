@@ -2918,7 +2918,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(AMLParameters.uri, "scoringUri");
 @@clientName(AMLParameters.uri, "scoringUrl", "java");
 @@clientName(AMLParameters.key, "authenticationKey");
-@@clientName(AMLVectorizer.amlParameters, "parameters","java");
+@@clientName(AMLVectorizer.amlParameters, "parameters", "java");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUri");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUrl", "java");
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
