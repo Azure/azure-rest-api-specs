@@ -368,7 +368,7 @@ model ErrorContract {
   /**
    * The error object.
    */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
+  error?: MetricsErrorResponse;
 }
 
 /**
@@ -753,4 +753,42 @@ model ErrorResponse {
    * Error message indicating why the operation failed.
    */
   message?: string;
+}
+
+/**
+ * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
+ */
+@error
+model MetricsErrorResponse {
+  /**
+   * Error code
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * Error message indicating why the operation failed.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error target.
+   */
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["message", "target"])
+  details?: MetricsErrorResponse[];
+
+  /**
+   * The error additional info.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  additionalInfo?: ErrorAdditionalInfo[];
 }

@@ -82,7 +82,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MetricsErrorResponse"
             }
           }
         },
@@ -232,7 +232,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MetricsErrorResponse"
             }
           }
         },
@@ -720,7 +720,7 @@
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
       "properties": {
         "error": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse",
+          "$ref": "#/definitions/MetricsErrorResponse",
           "description": "The error object."
         }
       }
@@ -1226,6 +1226,48 @@
       "required": [
         "timeStamp"
       ]
+    },
+    "MetricsErrorResponse": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/MetricsErrorResponse"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
     },
     "NamespaceClassification": {
       "type": "string",

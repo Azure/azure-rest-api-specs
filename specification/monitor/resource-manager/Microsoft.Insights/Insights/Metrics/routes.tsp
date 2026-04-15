@@ -58,7 +58,8 @@ interface MetricDefinitionsOperationGroup {
        */
       @query("metricnamespace")
       metricnamespace?: string;
-    }
+    },
+    Error = MetricsErrorResponse
   >;
 }
 
@@ -381,6 +382,7 @@ interface MetricsOperationGroup {
        */
       @query("rollupby")
       rollupby?: string;
-    }
+    },
+    Error = MetricsErrorResponse
   >;
 }
