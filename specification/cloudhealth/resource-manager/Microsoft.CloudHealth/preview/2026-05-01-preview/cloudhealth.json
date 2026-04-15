@@ -61,78 +61,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getDataAnnotations": {
-      "post": {
-        "operationId": "Entities_GetDataAnnotations",
-        "tags": [
-          "Entities"
-        ],
-        "description": "Retrieve data annotations for an entity",
-        "parameters": [
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Maximum number of annotations to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "top"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Skip token from a previous response to retrieve the next page of results.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
-          },
-          {
-            "name": "healthModelName",
-            "in": "path",
-            "description": "Name of health model resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "entityName",
-            "in": "path",
-            "description": "Name of the entity. Must be unique within a health model.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetDataAnnotationsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GetDataAnnotationsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Entities_GetDataAnnotations": {
-            "$ref": "./examples/Entities_GetDataAnnotations.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.CloudHealth/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -1352,6 +1280,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getDataAnnotations": {
+      "post": {
+        "operationId": "Entities_GetDataAnnotations",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Retrieve data annotations for an entity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetDataAnnotationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetDataAnnotationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_GetDataAnnotations": {
+            "$ref": "./examples/Entities_GetDataAnnotations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/getHistory": {
       "post": {
         "operationId": "Entities_GetHistory",
@@ -2500,14 +2492,9 @@
       "type": "object",
       "description": "A single data annotation on an entity",
       "properties": {
-        "annotationId": {
-          "type": "string",
-          "description": "Server-assigned unique identifier for the annotation",
-          "maxLength": 36
-        },
         "annotationDetails": {
           "type": "object",
-          "description": "Annotation properties as a dynamic key-value pair bag",
+          "description": "Annotation details as a dynamic key-value pair bag",
           "additionalProperties": {
             "$ref": "#/definitions/string4096"
           }
@@ -2516,6 +2503,11 @@
           "$ref": "#/definitions/string4096",
           "description": "Optional description of the annotation"
         },
+        "annotationId": {
+          "type": "string",
+          "description": "Server-assigned identifier for the annotation",
+          "maxLength": 36
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -2523,8 +2515,8 @@
         }
       },
       "required": [
-        "annotationId",
         "annotationDetails",
+        "annotationId",
         "createdAt"
       ]
     },
@@ -2534,7 +2526,7 @@
       "properties": {
         "annotationDetails": {
           "type": "object",
-          "description": "Annotation properties as a dynamic key-value pair bag",
+          "description": "Annotation details as a dynamic key-value pair bag",
           "additionalProperties": {
             "$ref": "#/definitions/string4096"
           }
@@ -3112,12 +3104,21 @@
         "startAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Start of UTC time range. Defaults to 24 hours ago if not specified."
+          "description": "Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when skipToken is specified."
         },
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "description": "End of UTC time range. Defaults to now if not specified."
+          "description": "End of UTC time range. Defaults to now if not specified. Must be omitted when skipToken is specified."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of annotations to return per page."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation value from a previous response to retrieve the next page of results."
         }
       }
     },
@@ -3139,9 +3140,9 @@
             "annotationId"
           ]
         },
-        "skipToken": {
+        "nextLink": {
           "type": "string",
-          "description": "Token to retrieve the next page of results. Null if there are no more results."
+          "description": "Link to retrieve the next page of results. Null if there are no more results."
         }
       },
       "required": [
