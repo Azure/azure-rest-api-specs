@@ -912,13 +912,13 @@
         "description": "List accelerator quota usages for a subscription and location.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -931,7 +931,7 @@
           "default": {
             "description": "Error response",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -939,6 +939,9 @@
           "List Accelerator Usages": {
             "$ref": "./examples/ListAcceleratorUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -17484,12 +17487,19 @@
       "type": "object",
       "description": "List of accelerator quota entries.",
       "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of accelerator usages."
+        },
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcceleratorUsage"
           },
-          "description": "Per-SKU accelerator quota usage entries."
+          "description": "Per-SKU accelerator quota usage entries.",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -17502,6 +17512,21 @@
         }
       ],
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the accelerator usage.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/MetricName",
+          "description": "The name information for the metric.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
         "offerScope": {
           "type": "string",
           "description": "Offer scope (e.g., 'Global', 'Datazone-US')."
@@ -17511,7 +17536,10 @@
           "items": {
             "$ref": "#/definitions/AcceleratorDeploymentInfo"
           },
-          "description": "Deployments consuming this accelerator quota."
+          "description": "Deployments consuming this accelerator quota.",
+          "x-ms-identifiers": [
+            "deploymentId"
+          ]
         }
       }
     },
