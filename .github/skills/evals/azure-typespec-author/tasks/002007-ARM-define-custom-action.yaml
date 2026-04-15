@@ -1,0 +1,18 @@
+id: 002007-ARM-define-custom-action
+name: "ARM: Define a custom POST action"
+description: |
+  Test adding a custom POST action to a resource's operations.
+  Based on benchmark case 002007-ARM-define-custom-action.
+tags:
+  - arm
+  - operations
+inputs:
+  prompt: 'Add an additional POST action called "/notify" to the standard operations of Employee. Ensure the definition meets TypeSpec Azure design guidelines.'
+  files:
+    - path: Microsoft.Widget/Widget/employee.tsp
+    - path: Microsoft.Widget/Widget/main.tsp
+    - path: Microsoft.Widget/Widget/tspconfig.yaml
+expected:
+  output_contains:
+    - "Task Type"
+    - "General Authoring"

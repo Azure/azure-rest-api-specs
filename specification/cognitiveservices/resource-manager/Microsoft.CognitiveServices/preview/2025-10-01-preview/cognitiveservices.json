@@ -52,9 +52,6 @@
       "name": "TestRaiExternalSafetyProvider"
     },
     {
-      "name": "ManagedNetwork"
-    },
-    {
       "name": "PrivateEndpointConnections"
     },
     {
@@ -113,6 +110,9 @@
     },
     {
       "name": "QuotaTier"
+    },
+    {
+      "name": "ManagedNetwork"
     },
     {
       "name": "AgentApplication"
@@ -3873,11 +3873,8 @@
               "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
             }
           },
-          "201": {
-            "description": "Resource 'ManagedNetworkSettingsPropertiesBasicResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
-            },
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -4265,11 +4262,8 @@
               "$ref": "#/definitions/OutboundRuleBasicResource"
             }
           },
-          "201": {
-            "description": "Resource 'OutboundRuleBasicResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/OutboundRuleBasicResource"
-            },
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
               "Retry-After": {
                 "type": "integer",
@@ -4376,6 +4370,92 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/provision": {
+      "post": {
+        "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Provisions the managed network of a cognitive services account.",
+        "description": "Provisions the managed network of a cognitive services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "managedNetworkName",
+            "in": "path",
+            "description": "Name of the managedNetwork associated with the cognitive services account. Only 'default' is supported.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Managed Network Provisioning Options for a cognitive services account.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Provision ManagedNetwork": {
+            "$ref": "./examples/ManagedNetwork/provisionManagedNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedNetworkProvisionStatus"
         },
         "x-ms-long-running-operation": true
       }
@@ -7064,79 +7144,6 @@
             "$ref": "./examples/ProjectConnection/delete.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/provisionManagedNetwork": {
-      "post": {
-        "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
-        "tags": [
-          "ManagedNetwork"
-        ],
-        "summary": "Provisions the managed network of a cognitive services account.",
-        "description": "Provisions the managed network of a cognitive services account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Managed Network Provisioning Options for a cognitive services account.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ManagedNetworkProvisionOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Provision ManagedNetwork": {
-            "$ref": "./examples/ManagedNetwork/provisionManagedNetwork.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ManagedNetworkProvisionStatus"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists": {
@@ -12408,21 +12415,6 @@
       ],
       "x-ms-discriminator-value": "CustomKeys"
     },
-    "CustomTopicConfig": {
-      "type": "object",
-      "description": "Gets or sets the source to which filter applies.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/RaiPolicyContentSource",
-          "description": "Content source to apply the Content Filters."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RaiTopicConfig"
-        }
-      ]
-    },
     "DefenderForAISetting": {
       "type": "object",
       "description": "The Defender for AI resource.",
@@ -12729,6 +12721,10 @@
           "$ref": "#/definitions/DeploymentState",
           "description": "The state of the deployment. Controls whether the deployment is accepting inference requests. Use 'Running' for active deployments that process requests, or 'Paused' to temporarily stop inference while preserving the deployment configuration.",
           "x-nullable": true
+        },
+        "routing": {
+          "$ref": "#/definitions/DeploymentRouting",
+          "description": "Routing configuration for the deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, accuracy, cost) for routing across all supported models or the model subset."
         }
       }
     },
@@ -12784,6 +12780,54 @@
         ]
       },
       "readOnly": true
+    },
+    "DeploymentRouting": {
+      "type": "object",
+      "description": "Routing configuration for the deployment. Specifies how requests are routed across multiple models.",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "The routing mode that determines how requests are distributed across models.",
+          "default": "balanced",
+          "enum": [
+            "cost",
+            "balanced",
+            "accuracy"
+          ],
+          "x-ms-enum": {
+            "name": "RoutingMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Cost",
+                "value": "cost",
+                "description": "Route requests to minimize cost while meeting performance requirements."
+              },
+              {
+                "name": "Balanced",
+                "value": "balanced",
+                "description": "Balance cost and accuracy when routing requests across models."
+              },
+              {
+                "name": "Accuracy",
+                "value": "accuracy",
+                "description": "Route requests to maximize accuracy regardless of cost."
+              }
+            ]
+          }
+        },
+        "models": {
+          "type": "array",
+          "description": "Optional. The list of models that the model router can use to route requests across. If not specified, the model router will route to all available models specified in the model-router version.",
+          "items": {
+            "$ref": "#/definitions/DeploymentModel"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "version"
+          ]
+        }
+      }
     },
     "DeploymentScaleSettings": {
       "type": "object",
@@ -13583,10 +13627,15 @@
           "$ref": "#/definitions/ManagedNetworkKind",
           "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled."
         },
-        "egressIpAddress": {
+        "firewallPublicIpAddress": {
           "type": "string",
           "description": "Public IP address assigned to the Azure Firewall.",
           "x-nullable": true,
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ManagedNetworkProvisioningState",
+          "description": "The provisioning state of the managed network settings.",
           "readOnly": true
         }
       }
@@ -14541,6 +14590,43 @@
       "required": [
         "privateLinkServiceConnectionState"
       ]
+    },
+    "PrivateEndpointOutboundRule": {
+      "type": "object",
+      "description": "Private Endpoint outbound rule for the managed network of a cognitive services account.",
+      "properties": {
+        "destination": {
+          "$ref": "#/definitions/PrivateEndpointOutboundRuleDestination",
+          "description": "Private Endpoint destination."
+        },
+        "fqdns": {
+          "type": "array",
+          "description": "List of FQDNs associated with the private endpoint outbound rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutboundRule"
+        }
+      ],
+      "x-ms-discriminator-value": "PrivateEndpoint"
+    },
+    "PrivateEndpointOutboundRuleDestination": {
+      "type": "object",
+      "description": "Private Endpoint destination for an outbound rule.",
+      "properties": {
+        "serviceResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target private endpoint service."
+        },
+        "subresourceTarget": {
+          "type": "string",
+          "description": "The subresource of the target service to connect to."
+        }
+      }
     },
     "PrivateLinkResource": {
       "type": "object",
@@ -15675,14 +15761,6 @@
           },
           "x-ms-identifiers": []
         },
-        "customTopics": {
-          "type": "array",
-          "description": "The list of custom rai topics.",
-          "items": {
-            "$ref": "#/definitions/CustomTopicConfig"
-          },
-          "x-ms-identifiers": []
-        },
         "safetyProviders": {
           "type": "array",
           "description": "The list of Safety Providers.",
@@ -15868,20 +15946,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "RaiTopicConfig": {
-      "type": "object",
-      "description": "Azure OpenAI RAI topic config.",
-      "properties": {
-        "topicName": {
-          "type": "string",
-          "description": "Name of RAI topic."
-        },
-        "blocking": {
-          "type": "boolean",
-          "description": "If blocking would occur."
-        }
-      }
     },
     "RaiTopicProperties": {
       "type": "object",
@@ -16220,6 +16284,58 @@
         ]
       }
     },
+    "RoutingMode": {
+      "type": "string",
+      "description": "The routing mode that determines how requests are distributed across models.",
+      "enum": [
+        "cost",
+        "balanced",
+        "accuracy"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cost",
+            "value": "cost",
+            "description": "Route requests to minimize cost while meeting performance requirements."
+          },
+          {
+            "name": "Balanced",
+            "value": "balanced",
+            "description": "Balance cost and accuracy when routing requests across models."
+          },
+          {
+            "name": "Accuracy",
+            "value": "accuracy",
+            "description": "Route requests to maximize accuracy regardless of cost."
+          }
+        ]
+      }
+    },
+    "RuleAction": {
+      "type": "string",
+      "description": "The action enum for a managed network outbound rule.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "RuleAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny"
+          }
+        ]
+      }
+    },
     "RuleCategory": {
       "type": "string",
       "description": "Category of a managed network Outbound Rule of a cognitive services account.",
@@ -16380,6 +16496,51 @@
         }
       ],
       "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ServiceTagOutboundRule": {
+      "type": "object",
+      "description": "Service Tag outbound rule for the managed network of a cognitive services account.",
+      "properties": {
+        "destination": {
+          "$ref": "#/definitions/ServiceTagOutboundRuleDestination",
+          "description": "Service Tag destination."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutboundRule"
+        }
+      ],
+      "x-ms-discriminator-value": "ServiceTag"
+    },
+    "ServiceTagOutboundRuleDestination": {
+      "type": "object",
+      "description": "Service Tag destination for an outbound rule.",
+      "properties": {
+        "serviceTag": {
+          "type": "string",
+          "description": "Name of the Azure service tag to target."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol used by the service tag rule."
+        },
+        "portRanges": {
+          "type": "string",
+          "description": "Destination port ranges."
+        },
+        "action": {
+          "$ref": "#/definitions/RuleAction",
+          "description": "The action for the service tag outbound rule."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "Optional address prefixes. If provided, the serviceTag property will be ignored.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ServiceTier": {
       "type": "string",

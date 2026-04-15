@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "version": "2026-03-01-preview",
-    "description": "Service Fabric Management Client",
+    "description": "Azure Service Fabric Resource Provider API Client",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,22 +43,28 @@
       "name": "Operations"
     },
     {
-      "name": "Clusters"
+      "name": "Cluster"
+    },
+    {
+      "name": "ListUpgradableVersions"
     },
     {
       "name": "VMSizes"
     },
     {
-      "name": "ApplicationTypeResources"
+      "name": "ApplicationType"
     },
     {
-      "name": "ApplicationTypeVersionResources"
+      "name": "ApplicationTypeVersion"
     },
     {
-      "name": "ApplicationResources"
+      "name": "Application"
     },
     {
-      "name": "ServiceResources"
+      "name": "Service"
+    },
+    {
+      "name": "ClusterVersion"
     }
   ],
   "paths": {
@@ -68,7 +74,8 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "summary": "Lists all of the available Service Fabric resource provider API operations.",
+        "description": "Get the list of available Service Fabric resource provider API operations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -78,13 +85,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -102,8 +109,9 @@
       "get": {
         "operationId": "Clusters_List",
         "tags": [
-          "Clusters"
+          "Cluster"
         ],
+        "summary": "Gets the list of Service Fabric cluster resources created in the specified subscription.",
         "description": "Gets all Service Fabric cluster resources created or in the process of being created in the subscription.",
         "parameters": [
           {
@@ -123,7 +131,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -140,6 +148,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions": {
       "get": {
         "operationId": "ClusterVersions_List",
+        "tags": [
+          "ClusterVersion"
+        ],
         "summary": "Gets the list of Service Fabric cluster code versions available for the specified location.",
         "description": "Gets all available code versions for Service Fabric cluster resources by location.",
         "parameters": [
@@ -163,7 +174,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -177,6 +188,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}": {
       "get": {
         "operationId": "ClusterVersions_Get",
+        "tags": [
+          "ClusterVersion"
+        ],
         "summary": "Gets information about a Service Fabric cluster code version available in the specified location.",
         "description": "Gets information about an available Service Fabric cluster code version.",
         "parameters": [
@@ -184,10 +198,10 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "clusterVersion",
@@ -207,7 +221,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -221,6 +235,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions": {
       "get": {
         "operationId": "ClusterVersions_ListByEnvironment",
+        "tags": [
+          "ClusterVersion"
+        ],
         "summary": "Gets the list of Service Fabric cluster code versions available for the specified environment.",
         "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
         "parameters": [
@@ -271,7 +288,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -285,11 +302,17 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}": {
       "get": {
         "operationId": "ClusterVersions_GetByEnvironment",
+        "tags": [
+          "ClusterVersion"
+        ],
         "summary": "Gets information about a Service Fabric cluster code version available for the specified environment.",
         "description": "Gets information about an available Service Fabric cluster code version by environment.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
@@ -322,9 +345,6 @@
             }
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "clusterVersion",
             "in": "path",
             "description": "The cluster code version.",
@@ -342,7 +362,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -359,6 +379,7 @@
         "tags": [
           "VMSizes"
         ],
+        "summary": "Get the lists of unsupported vm sizes for Service Fabric Clusters.",
         "description": "Get the lists of unsupported vm sizes for Service Fabric Clusters.",
         "parameters": [
           {
@@ -368,12 +389,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The location for the unsupported VM size(s). This is different from cluster location.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -386,7 +402,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -406,6 +422,7 @@
         "tags": [
           "VMSizes"
         ],
+        "summary": "Get unsupported vm size for Service Fabric Clusters.",
         "description": "Get unsupported vm size for Service Fabric Clusters.",
         "parameters": [
           {
@@ -422,8 +439,7 @@
             "in": "path",
             "description": "VM Size name.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -436,7 +452,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -451,8 +467,9 @@
       "get": {
         "operationId": "Clusters_ListByResourceGroup",
         "tags": [
-          "Clusters"
+          "Cluster"
         ],
+        "summary": "Gets the list of Service Fabric cluster resources created in the specified resource group.",
         "description": "Gets all Service Fabric cluster resources created or in the process of being created in the resource group.",
         "parameters": [
           {
@@ -475,7 +492,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -493,8 +510,9 @@
       "get": {
         "operationId": "Clusters_Get",
         "tags": [
-          "Clusters"
+          "Cluster"
         ],
+        "summary": "Gets a Service Fabric cluster resource.",
         "description": "Get a Service Fabric cluster resource created or in the process of being created in the specified resource group.",
         "parameters": [
           {
@@ -524,7 +542,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -537,8 +555,9 @@
       "put": {
         "operationId": "Clusters_CreateOrUpdate",
         "tags": [
-          "Clusters"
+          "Cluster"
         ],
+        "summary": "Creates or updates a Service Fabric cluster resource.",
         "description": "Create or update a Service Fabric cluster resource with the specified name.",
         "parameters": [
           {
@@ -594,7 +613,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -615,8 +634,9 @@
       "patch": {
         "operationId": "Clusters_Update",
         "tags": [
-          "Clusters"
+          "Cluster"
         ],
+        "summary": "Updates the configuration of a Service Fabric cluster resource.",
         "description": "Update the configuration of a Service Fabric cluster resource with the specified name.",
         "parameters": [
           {
@@ -661,18 +681,13 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -682,15 +697,17 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Cluster"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Clusters_Delete",
         "tags": [
-          "Clusters"
+          "Cluster"
         ],
+        "summary": "Deletes a Service Fabric cluster resource.",
         "description": "Delete a Service Fabric cluster resource with the specified name.",
         "parameters": [
           {
@@ -720,7 +737,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -735,8 +752,9 @@
       "get": {
         "operationId": "ApplicationTypes_List",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationType"
         ],
+        "summary": "Gets the list of application type name resources created in the specified Service Fabric cluster resource.",
         "description": "Gets all application type name resources created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
           {
@@ -766,7 +784,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -784,8 +802,9 @@
       "get": {
         "operationId": "ApplicationTypes_Get",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationType"
         ],
+        "summary": "Gets a Service Fabric application type name resource.",
         "description": "Get a Service Fabric application type name resource created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
           {
@@ -822,7 +841,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -835,8 +854,9 @@
       "put": {
         "operationId": "ApplicationTypes_CreateOrUpdate",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationType"
         ],
+        "summary": "Creates or updates a Service Fabric application type name resource.",
         "description": "Create or update a Service Fabric application type name resource with the specified name.",
         "parameters": [
           {
@@ -882,7 +902,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -895,8 +915,9 @@
       "delete": {
         "operationId": "ApplicationTypes_Delete",
         "tags": [
-          "ApplicationTypeResources"
+          "ApplicationType"
         ],
+        "summary": "Deletes a Service Fabric application type name resource.",
         "description": "Delete a Service Fabric application type name resource with the specified name.",
         "parameters": [
           {
@@ -944,7 +965,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -963,8 +984,9 @@
       "get": {
         "operationId": "ApplicationTypeVersions_List",
         "tags": [
-          "ApplicationTypeVersionResources"
+          "ApplicationTypeVersion"
         ],
+        "summary": "Gets the list of application type version resources created in the specified Service Fabric application type name resource.",
         "description": "Gets all application type version resources created or in the process of being created in the Service Fabric application type name resource.",
         "parameters": [
           {
@@ -1001,7 +1023,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1019,8 +1041,9 @@
       "get": {
         "operationId": "ApplicationTypeVersions_Get",
         "tags": [
-          "ApplicationTypeVersionResources"
+          "ApplicationTypeVersion"
         ],
+        "summary": "Gets a Service Fabric application type version resource.",
         "description": "Get a Service Fabric application type version resource created or in the process of being created in the Service Fabric application type name resource.",
         "parameters": [
           {
@@ -1064,7 +1087,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1077,8 +1100,9 @@
       "put": {
         "operationId": "ApplicationTypeVersions_CreateOrUpdate",
         "tags": [
-          "ApplicationTypeVersionResources"
+          "ApplicationTypeVersion"
         ],
+        "summary": "Creates or updates a Service Fabric application type version resource.",
         "description": "Create or update a Service Fabric application type version resource with the specified name.",
         "parameters": [
           {
@@ -1142,7 +1166,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1160,8 +1184,9 @@
       "delete": {
         "operationId": "ApplicationTypeVersions_Delete",
         "tags": [
-          "ApplicationTypeVersionResources"
+          "ApplicationTypeVersion"
         ],
+        "summary": "Deletes a Service Fabric application type version resource.",
         "description": "Delete a Service Fabric application type version resource with the specified name.",
         "parameters": [
           {
@@ -1216,7 +1241,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1235,8 +1260,9 @@
       "get": {
         "operationId": "Applications_List",
         "tags": [
-          "ApplicationResources"
+          "Application"
         ],
+        "summary": "Gets the list of application resources created in the specified Service Fabric cluster resource.",
         "description": "Gets all application resources created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
           {
@@ -1266,7 +1292,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1284,8 +1310,9 @@
       "get": {
         "operationId": "Applications_Get",
         "tags": [
-          "ApplicationResources"
+          "Application"
         ],
+        "summary": "Gets a Service Fabric application resource.",
         "description": "Get a Service Fabric application resource created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
           {
@@ -1322,7 +1349,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1335,8 +1362,9 @@
       "put": {
         "operationId": "Applications_CreateOrUpdate",
         "tags": [
-          "ApplicationResources"
+          "Application"
         ],
+        "summary": "Creates or updates a Service Fabric application resource.",
         "description": "Create or update a Service Fabric application resource with the specified name.",
         "parameters": [
           {
@@ -1393,7 +1421,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1417,8 +1445,9 @@
       "patch": {
         "operationId": "Applications_Update",
         "tags": [
-          "ApplicationResources"
+          "Application"
         ],
+        "summary": "Updates a Service Fabric application resource.",
         "description": "Update a Service Fabric application resource with the specified name.",
         "parameters": [
           {
@@ -1475,7 +1504,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1485,15 +1514,17 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ApplicationResource"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Applications_Delete",
         "tags": [
-          "ApplicationResources"
+          "Application"
         ],
+        "summary": "Deletes a Service Fabric application resource.",
         "description": "Delete a Service Fabric application resource with the specified name.",
         "parameters": [
           {
@@ -1541,7 +1572,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1560,8 +1591,9 @@
       "get": {
         "operationId": "Services_List",
         "tags": [
-          "ServiceResources"
+          "Service"
         ],
+        "summary": "Gets the list of service resources created in the specified Service Fabric application resource.",
         "description": "Gets all service resources created or in the process of being created in the Service Fabric application resource.",
         "parameters": [
           {
@@ -1598,7 +1630,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1616,8 +1648,9 @@
       "get": {
         "operationId": "Services_Get",
         "tags": [
-          "ServiceResources"
+          "Service"
         ],
+        "summary": "Gets a Service Fabric service resource.",
         "description": "Get a Service Fabric service resource created or in the process of being created in the Service Fabric application resource.",
         "parameters": [
           {
@@ -1661,7 +1694,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1674,8 +1707,9 @@
       "put": {
         "operationId": "Services_CreateOrUpdate",
         "tags": [
-          "ServiceResources"
+          "Service"
         ],
+        "summary": "Creates or updates a Service Fabric service resource.",
         "description": "Create or update a Service Fabric service resource with the specified name.",
         "parameters": [
           {
@@ -1739,7 +1773,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1760,8 +1794,9 @@
       "patch": {
         "operationId": "Services_Update",
         "tags": [
-          "ServiceResources"
+          "Service"
         ],
+        "summary": "Updates a Service Fabric service resource.",
         "description": "Update a Service Fabric service resource with the specified name.",
         "parameters": [
           {
@@ -1825,7 +1860,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1835,15 +1870,17 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServiceResource"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Services_Delete",
         "tags": [
-          "ServiceResources"
+          "Service"
         ],
+        "summary": "Deletes a Service Fabric service resource.",
         "description": "Delete a Service Fabric service resource with the specified name.",
         "parameters": [
           {
@@ -1898,7 +1935,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -1917,8 +1954,9 @@
       "post": {
         "operationId": "Clusters_ListUpgradableVersions",
         "tags": [
-          "Clusters"
+          "ListUpgradableVersions"
         ],
+        "summary": "Operation to get the minimum and maximum upgradable version from the current cluster version, or the required path to get to the an specific target version.",
         "description": "If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.",
         "parameters": [
           {
@@ -1957,7 +1995,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         },
@@ -2077,16 +2115,20 @@
           "description": "The application resource properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "It will be deprecated in New API, resource location depends on the parent resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -2094,17 +2136,17 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "Azure resource etag.",
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/ManagedIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2153,13 +2195,6 @@
       "type": "object",
       "description": "The application resource for patch operations.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/ApplicationResourceUpdateProperties",
           "description": "The application resource properties for patch operations.",
@@ -2168,19 +2203,7 @@
       },
       "allOf": [
         {
-          "type": "object",
-          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/ApplicationResourceUpdateProperties",
-              "description": "The resource-specific properties for this resource."
-            }
-          },
-          "allOf": [
-            {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-            }
-          ]
+          "$ref": "#/definitions/PatchProxyResource"
         }
       ]
     },
@@ -2245,16 +2268,20 @@
           "description": "The application type name properties",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "It will be deprecated in New API, resource location depends on the parent resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -2262,13 +2289,13 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "Azure resource etag.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2313,16 +2340,20 @@
           "description": "The properties of the application type version resource.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "It will be deprecated in New API, resource location depends on the parent resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -2330,13 +2361,13 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "Azure resource etag.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2625,6 +2656,28 @@
         ]
       }
     },
+    "AvailableOperationDisplay": {
+      "type": "object",
+      "description": "Operation supported by the Service Fabric resource provider",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      }
+    },
     "AzureActiveDirectory": {
       "type": "object",
       "description": "The settings to enable AAD authentication on the cluster.",
@@ -2716,7 +2769,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "Azure resource etag.",
           "readOnly": true
         }
       },
@@ -2751,17 +2804,24 @@
       "type": "object",
       "description": "The result of the Service Fabric runtime versions",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identification of the result"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the result"
+        },
+        "type": {
+          "type": "string",
+          "description": "The result resource type"
+        },
         "properties": {
           "$ref": "#/definitions/ClusterVersionDetails",
-          "description": "The resource-specific properties for this resource.",
+          "description": "The detail of the Service Fabric runtime version result",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ClusterEnvironment": {
       "type": "string",
@@ -3509,6 +3569,93 @@
         "endPort"
       ]
     },
+    "ErrorModel": {
+      "type": "object",
+      "description": "The structure of the error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorModelError": {
+      "type": "object",
+      "description": "The error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "Describes the managed identities for an Azure resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of the managed identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the managed identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "The type of managed identity for the resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for the resource.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "Indicates that system assigned identity is associated with the resource."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "Indicates that user assigned identity is associated with the resource."
+          },
+          {
+            "name": "SystemAssignedUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Indicates that both system assigned and user assigned identity are associated with the resource."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Indicates that no identity is associated with the resource."
+          }
+        ]
+      }
+    },
     "MoveCost": {
       "type": "string",
       "description": "Specifies the move cost for the service.",
@@ -3774,6 +3921,49 @@
         "receivers"
       ]
     },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Describes the result of the request to list Service Fabric resource provider operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations supported by the Service Fabric resource provider.",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "description": "Available operation list result",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin result"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
     "PartitionScheme": {
       "type": "string",
       "description": "Enumerates the ways that a service can be partitioned.",
@@ -3823,6 +4013,55 @@
       "required": [
         "partitionScheme"
       ]
+    },
+    "PatchProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for proxy-only resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "It will be deprecated in New API, resource location depends on the parent resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Azure resource etag.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -3951,7 +4190,7 @@
         },
         "serviceName": {
           "type": "string",
-          "description": "The name of the service that the correlation relationship is established with."
+          "description": "The full name of the service with 'fabric:' URI scheme."
         }
       },
       "required": [
@@ -4163,30 +4402,34 @@
           "$ref": "#/definitions/ServiceResourceProperties",
           "description": "The service resource properties."
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
+          "description": "It will be deprecated in New API, resource location depends on the parent resource.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "eTag": {
+        "tags": {
+          "type": "object",
+          "description": "Azure resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "description": "Azure resource etag.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4295,31 +4538,11 @@
         "properties": {
           "$ref": "#/definitions/ServiceResourceUpdateProperties",
           "description": "The RP-specific properties for this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/PatchProxyResource"
         }
       ]
     },
@@ -4350,6 +4573,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of services health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.",
+          "default": 0,
           "minimum": 0,
           "maximum": 100
         }
@@ -4363,6 +4587,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.",
+          "default": 0,
           "minimum": 0,
           "maximum": 100
         }
@@ -4693,6 +4918,22 @@
         "targetVersion"
       ]
     },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "Describes a user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
+      }
+    },
     "VMSize": {
       "type": "object",
       "description": "VM Sizes properties.",
@@ -4710,7 +4951,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VMSize",
-          "description": "VM Size properties."
+          "description": "VM Size properties.",
+          "readOnly": true
         }
       },
       "allOf": [

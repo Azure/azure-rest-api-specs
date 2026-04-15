@@ -180,11 +180,11 @@ These settings apply only when `--tag=package-7.1-preview` is specified on the c
 
 ``` yaml $(tag) == 'package-7.1-preview'
 input-file:
-- preview/7.1/certificates.json
-- preview/7.1/common.json
-- preview/7.1/keys.json
-- preview/7.1/secrets.json
-- preview/7.1/storage.json
+- preview/7.1-preview/certificates.json
+- preview/7.1-preview/common.json
+- preview/7.1-preview/keys.json
+- preview/7.1-preview/secrets.json
+- preview/7.1-preview/storage.json
 ```
 
 ### Tag: package-7.0
@@ -202,7 +202,7 @@ These settings apply only when `--tag=package-7.0-preview` is specified on the c
 
 ``` yaml $(tag) == 'package-7.0-preview'
 input-file:
-- preview/7.0/keyvault.json
+- preview/7.0-preview/keyvault.json
 ```
 
 ### Tag: package-2016-10
@@ -311,13 +311,13 @@ input-file:
   - $(this-folder)/stable/7.1/keys.json
   - $(this-folder)/stable/7.1/secrets.json
   - $(this-folder)/stable/7.1/storage.json
-  - $(this-folder)/preview/7.1/certificates.json
-  - $(this-folder)/preview/7.1/common.json
-  - $(this-folder)/preview/7.1/keys.json
-  - $(this-folder)/preview/7.1/secrets.json
-  - $(this-folder)/preview/7.1/storage.json
+  - $(this-folder)/preview/7.1-preview/certificates.json
+  - $(this-folder)/preview/7.1-preview/common.json
+  - $(this-folder)/preview/7.1-preview/keys.json
+  - $(this-folder)/preview/7.1-preview/secrets.json
+  - $(this-folder)/preview/7.1-preview/storage.json
   - $(this-folder)/stable/7.0/keyvault.json
-  - $(this-folder)/preview/7.0/keyvault.json
+  - $(this-folder)/preview/7.0-preview/keyvault.json
   - $(this-folder)/stable/2016-10-01/keyvault.json
   - $(this-folder)/stable/2015-06-01/keyvault.json
 
@@ -533,4 +533,24 @@ directive:
     from: rbac.json
     where: $..parameters[?(@.name=='scope')]
     reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.CertificateInfoObject
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.TransferKey
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainObject
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainJsonWebKey
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
 ```
