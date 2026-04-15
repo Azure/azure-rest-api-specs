@@ -4,6 +4,18 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using ComputeGallery;
 
+// ── Os→OS property casing renames (C# backward compat) ──
+@@clientName(GalleryImageProperties.osType, "OSType", "csharp");
+@@clientName(GalleryImageProperties.osState, "OSState", "csharp");
+@@clientName(EncryptionImages.osDiskImage, "OSDiskImage", "csharp");
+@@clientName(GalleryImageVersionStorageProfile.osDiskImage, "OSDiskImage", "csharp");
+@@clientName(GalleryInVMAccessControlProfileProperties.osType, "OSType", "csharp");
+@@clientName(SharedGalleryImageProperties.osType, "OSType", "csharp");
+@@clientName(SharedGalleryImageProperties.osState, "OSState", "csharp");
+@@clientName(SharedGalleryImageVersionStorageProfile.osDiskImage, "OSDiskImage", "csharp");
+@@clientName(CommunityGalleryImageProperties.osType, "OSType", "csharp");
+@@clientName(CommunityGalleryImageProperties.osState, "OSState", "csharp");
+
 // C# enum singular←plural rename
 @@clientName(SharedToValues, "SharedToValue", "csharp");
 
@@ -151,6 +163,17 @@ using ComputeGallery;
 @@clientName(GalleryExpandParams, "GalleryExpand", "csharp");
 @@clientName(PolicyViolationCategory, "GalleryImageVersionPolicyViolationCategory", "csharp");
 @@clientName(ReplicationState, "RegionalReplicationState", "csharp");
+
+// ── alternateType: string → Uri for C# (migration from AutoRest) ──
+@@alternateType(GalleryImageProperties.privacyStatementUri, url, "csharp");
+@@alternateType(GalleryImageProperties.releaseNoteUri, url, "csharp");
+@@alternateType(GalleryApplicationProperties.privacyStatementUri, url, "csharp");
+@@alternateType(GalleryApplicationProperties.releaseNoteUri, url, "csharp");
+@@alternateType(GalleryScriptProperties.privacyStatementUri, url, "csharp");
+@@alternateType(GalleryScriptProperties.releaseNoteUri, url, "csharp");
+@@alternateType(SharedGalleryImageProperties.privacyStatementUri, url, "csharp");
+@@alternateType(CommunityGalleryMetadata.privacyStatementUri, url, "csharp");
+@@alternateType(CommunityGalleryImageProperties.privacyStatementUri, url, "csharp");
 
 // ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
 

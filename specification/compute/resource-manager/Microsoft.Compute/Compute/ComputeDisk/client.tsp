@@ -32,6 +32,13 @@ using ComputeDisk;
   "java"
 );
 
+// ── Os→OS property casing renames (C# backward compat) ──
+@@clientName(DiskProperties.osType, "OSType", "csharp");
+@@clientName(DiskUpdateProperties.osType, "OSType", "csharp");
+@@clientName(DiskRestorePointProperties.osType, "OSType", "csharp");
+@@clientName(SnapshotProperties.osType, "OSType", "csharp");
+@@clientName(SnapshotUpdateProperties.osType, "OSType", "csharp");
+
 // C# renames for backward compatibility (migration from AutoRest)
 @@clientName(CreationData, "DiskCreationData", "csharp");
 @@clientName(FileFormat, "DiskImageFileFormat", "csharp");

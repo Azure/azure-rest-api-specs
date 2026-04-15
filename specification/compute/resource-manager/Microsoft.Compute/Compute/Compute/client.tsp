@@ -609,6 +609,33 @@ using Compute;
 @@clientName(RebalanceStrategy, "VmssRebalanceStrategy", "csharp");
 @@clientName(VmDiskTypes, "VirtualMachineDiskType", "csharp");
 
+// ── Os→OS property casing renames (C# backward compat) ──
+@@clientName(VirtualMachineSize.osDiskSizeInMB, "OSDiskSizeInMB", "csharp");
+@@clientName(AutomaticOSUpgradePolicy.osRollingUpgradeDeferral, "OSRollingUpgradeDeferral", "csharp");
+@@clientName(VirtualMachineScaleSetVMProfile.osProfile, "OSProfile", "csharp");
+@@clientName(VirtualMachineScaleSetStorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(VirtualMachineScaleSetOSDisk.osType, "OSType", "csharp");
+@@clientName(ScheduledEventsProfile.osImageNotificationProfile, "OSImageNotificationProfile", "csharp");
+@@clientName(VirtualMachineScaleSetUpdateVMProfile.osProfile, "OSProfile", "csharp");
+@@clientName(VirtualMachineScaleSetUpdateStorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(VirtualMachineReimageParameters.osProfile, "OSProfile", "csharp");
+@@clientName(VirtualMachineScaleSetVMProperties.osProfile, "OSProfile", "csharp");
+@@clientName(VirtualMachineScaleSetVMInstanceView.osName, "OSName", "csharp");
+@@clientName(VirtualMachineScaleSetVMInstanceView.osVersion, "OSVersion", "csharp");
+@@clientName(StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(OSDisk.osType, "OSType", "csharp");
+@@clientName(VirtualMachineProperties.osProfile, "OSProfile", "csharp");
+@@clientName(VirtualMachineInstanceView.osName, "OSName", "csharp");
+@@clientName(VirtualMachineInstanceView.osVersion, "OSVersion", "csharp");
+@@clientName(VirtualMachineImageProperties.osDiskImage, "OSDiskImage", "csharp");
+@@clientName(ImageStorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(ImageOSDisk.osType, "OSType", "csharp");
+@@clientName(ImageOSDisk.osState, "OSState", "csharp");
+@@clientName(RestorePointSourceMetadata.osProfile, "OSProfile", "csharp");
+@@clientName(RestorePointSourceVMStorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(RestorePointSourceVMOSDisk.osType, "OSType", "csharp");
+@@clientName(RunCommandDocumentBase.osType, "OSType", "csharp");
+
 // ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
 
 // Wrapper model id properties → ResourceIdentifier
@@ -638,6 +665,15 @@ using Compute;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// ── alternateType: string → Uri for C# (migration from AutoRest) ──
+@@alternateType(BootDiagnosticsInstanceView.consoleScreenshotBlobUri, url, "csharp");
+@@alternateType(BootDiagnosticsInstanceView.serialConsoleLogBlobUri, url, "csharp");
+@@alternateType(RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri, url, "csharp");
+@@alternateType(RetrieveBootDiagnosticsDataResult.serialConsoleLogBlobUri, url, "csharp");
+@@alternateType(VirtualMachineRunCommandProperties.outputBlobUri, url, "csharp");
+@@alternateType(VirtualMachineRunCommandProperties.errorBlobUri, url, "csharp");
+@@alternateType(VirtualMachineRunCommandScriptSource.scriptUri, url, "csharp");
 
 // ── alternateType: Identity types → ManagedServiceIdentity for C# ──
 @@alternateType(VirtualMachineScaleSet.identity,
