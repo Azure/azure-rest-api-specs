@@ -843,6 +843,14 @@ using TypeSpec.OpenAPI;
   "GetManagedRuleSets",
   "csharp"
 );
+@@clientName(DeploymentVersions.compare::parameters.body,
+  "CompareDeploymentVersionsContent",
+  "csharp"
+);
+@@clientName(CompareDeploymentVersionsResponse,
+  "CompareDeploymentVersionsResult",
+  "csharp"
+);
 @@access(RuleSet, Access.public, "csharp");
 @@access(Sku, Access.public, "csharp");
 @@usage(Sku,
@@ -865,6 +873,7 @@ using TypeSpec.OpenAPI;
   "csharp"
 );
 @@access(ManagedRuleDefinition, Access.public, "csharp");
+@@access(DeepCreatedCustomDomainProperties, Access.public, "csharp");
 @@usage(ManagedRuleDefinition,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
