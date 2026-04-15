@@ -1,10 +1,12 @@
 import "@typespec/rest";
+import "@typespec/http";
 import "@typespec/versioning";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./devices.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
@@ -99,9 +101,10 @@ model ProvisioningError {
 // DeviceCapabilities operation models
 // ──────────────────────────────────────────────
 
-/** Request body for looking up a capability by its UUID. */
+/** Request for looking up a capability by its UUID. */
 model GetCapabilityByUuidRequest {
   /** The unique identifier of the capability. */
+  @query
   capabilityUuid: string;
 }
 

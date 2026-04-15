@@ -65,59 +65,6 @@
     }
   ],
   "paths": {
-    "/namespaces/{namespaceUuid}/devices/{deviceName}:getGroupMemberships": {
-      "post": {
-        "operationId": "Devices_GetGroupMemberships",
-        "tags": [
-          "Devices"
-        ],
-        "description": "Returns the groups that this device belongs to.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The name of the resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/GetGroupMembershipsResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get group memberships for a device": {
-            "$ref": "./examples/Devices_GetGroupMemberships.json"
-          }
-        }
-      }
-    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}:executeAction": {
       "post": {
         "operationId": "Devices_ExecuteAction",
@@ -551,12 +498,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetCapabilityByUuidRequest"
-            }
+            "$ref": "#/parameters/GetCapabilityByUuidRequest"
           }
         ],
         "responses": {
@@ -614,9 +556,29 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the resource.",
+            "description": "The name of the device state.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "default",
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceStateName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The default state of a device."
+                },
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update state of a device."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -672,9 +634,29 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the resource.",
+            "description": "The name of the device state.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "default",
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceStateName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The default state of a device."
+                },
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update state of a device."
+                }
+              ]
+            }
           },
           {
             "name": "resource",
@@ -748,9 +730,29 @@
           {
             "name": "stateName",
             "in": "path",
-            "description": "The name of the resource.",
+            "description": "The name of the device state.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "default",
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceStateName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The default state of a device."
+                },
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update state of a device."
+                }
+              ]
+            }
           },
           {
             "name": "resource",
@@ -814,15 +816,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/GetDeviceByExternalIdRequest.expandInfo"
+            "$ref": "#/parameters/GetDeviceByExternalIdRequest.externalDeviceId"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetDeviceByExternalIdRequest"
-            }
+            "$ref": "#/parameters/GetDeviceByExternalIdRequest.expandInfo"
           }
         ],
         "responses": {
@@ -871,15 +868,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/GetDeviceByUuidRequest.expandInfo"
+            "$ref": "#/parameters/GetDeviceByUuidRequest.deviceUuid"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetDeviceByUuidRequest"
-            }
+            "$ref": "#/parameters/GetDeviceByUuidRequest.expandInfo"
           }
         ],
         "responses": {
@@ -1016,12 +1008,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetGroupByUuidRequest"
-            }
+            "$ref": "#/parameters/GetGroupByUuidRequest"
           }
         ],
         "responses": {
@@ -1047,6 +1034,55 @@
         "x-ms-examples": {
           "Look up a group by its UUID": {
             "$ref": "./examples/Groups_GetGroupByUuid.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/groups:getGroupMemberships": {
+      "post": {
+        "operationId": "Groups_GetGroupMemberships",
+        "tags": [
+          "Groups"
+        ],
+        "description": "Returns the groups that a device belongs to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetGroupByUuidRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetGroupMembershipsResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get group memberships for a device": {
+            "$ref": "./examples/Groups_GetGroupMemberships.json"
           }
         }
       }
@@ -1528,7 +1564,7 @@
     },
     "DeviceOrigin": {
       "type": "object",
-      "description": "Contains metadata about how this device was discovered or provisioned.",
+      "description": "Contains metadata about how a device was discovered or provisioned.",
       "properties": {
         "type": {
           "$ref": "#/definitions/DeviceOriginType",
@@ -1542,11 +1578,12 @@
     },
     "DeviceOriginType": {
       "type": "string",
-      "description": "The origin type of a device.",
+      "description": "The type of origin for a device.",
       "enum": [
         "AIO",
         "DPS",
-        "ARM"
+        "ARM",
+        "IoTHub"
       ],
       "x-ms-enum": {
         "name": "DeviceOriginType",
@@ -1566,6 +1603,11 @@
             "name": "ARM",
             "value": "ARM",
             "description": "Device originated from ARM."
+          },
+          {
+            "name": "IoTHub",
+            "value": "IoTHub",
+            "description": "Device originated from IoTHub."
           }
         ]
       }
@@ -1601,8 +1643,7 @@
         },
         "model": {
           "type": "string",
-          "description": "Device model.",
-          "x-ms-client-name": "deviceModel"
+          "description": "Device model."
         },
         "operatingSystem": {
           "type": "string",
@@ -1616,6 +1657,54 @@
           "type": "string",
           "description": "The provisioning state of the resource.",
           "readOnly": true
+        }
+      }
+    },
+    "DevicePropertiesBase": {
+      "type": "object",
+      "description": "Common device properties shared across data-plane and control-plane.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "origin": {
+          "$ref": "#/definitions/DeviceOrigin",
+          "description": "Contains metadata about how this device was discovered or provisioned.",
+          "readOnly": true
+        },
+        "accepted": {
+          "$ref": "#/definitions/DeviceAcceptedStatus",
+          "description": "Whether a discovered or created device has been accepted for use."
+        },
+        "enabled": {
+          "$ref": "#/definitions/DeviceEnabledStatus",
+          "description": "Indicates if the device is enabled or not."
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer."
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model."
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system."
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
         }
       }
     },
@@ -1728,15 +1817,6 @@
       "type": "object",
       "description": "A device state resource.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
@@ -1763,30 +1843,30 @@
           "description": "Metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         },
-        "properties": {
-          "$ref": "#/definitions/DeviceStateProperties",
-          "description": "The resource-specific properties for this state."
-        }
-      },
-      "required": [
-        "name",
-        "uuid",
-        "type"
-      ]
-    },
-    "DeviceStateCreateOrUpdate": {
-      "type": "object",
-      "description": "A device state resource.",
-      "properties": {
         "name": {
-          "type": "string",
-          "description": "The name of the resource.",
+          "$ref": "#/definitions/DeviceStateName",
+          "description": "The name of the device state.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
+        "properties": {
+          "$ref": "#/definitions/DeviceStateProperties",
+          "description": "The resource-specific properties for this state."
+        }
+      },
+      "required": [
+        "uuid",
+        "type",
+        "name"
+      ]
+    },
+    "DeviceStateCreateOrUpdate": {
+      "type": "object",
+      "description": "A device state resource.",
+      "properties": {
         "uuid": {
           "type": "string",
           "description": "The UUID of this capability resource.",
@@ -1800,6 +1880,15 @@
           "description": "The type of the resource.",
           "x-ms-mutability": [
             "read",
+            "create"
+          ]
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceStateName",
+          "description": "The name of the device state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         },
@@ -1931,58 +2020,6 @@
         "name",
         "uuid",
         "type"
-      ]
-    },
-    "GetCapabilityByUuidRequest": {
-      "type": "object",
-      "description": "Request body for looking up a capability by its UUID.",
-      "properties": {
-        "capabilityUuid": {
-          "type": "string",
-          "description": "The unique identifier of the capability."
-        }
-      },
-      "required": [
-        "capabilityUuid"
-      ]
-    },
-    "GetDeviceByExternalIdRequest": {
-      "type": "object",
-      "description": "Request body for looking up a device by its external identifier.",
-      "properties": {
-        "externalId": {
-          "type": "string",
-          "description": "The external identifier of the device."
-        }
-      },
-      "required": [
-        "externalId"
-      ]
-    },
-    "GetDeviceByUuidRequest": {
-      "type": "object",
-      "description": "Request body for looking up a device by its UUID.",
-      "properties": {
-        "deviceUuid": {
-          "type": "string",
-          "description": "The unique identifier of the device."
-        }
-      },
-      "required": [
-        "deviceUuid"
-      ]
-    },
-    "GetGroupByUuidRequest": {
-      "type": "object",
-      "description": "Request body for looking up a group by its UUID.",
-      "properties": {
-        "groupUuid": {
-          "type": "string",
-          "description": "The unique identifier of the group."
-        }
-      },
-      "required": [
-        "groupUuid"
       ]
     },
     "GetGroupMembershipsResult": {
@@ -2170,6 +2207,65 @@
           "type": "string",
           "description": "The provisioning state of the resource.",
           "readOnly": true
+        }
+      },
+      "required": [
+        "refreshMode",
+        "groupType",
+        "query"
+      ]
+    },
+    "GroupPropertiesBase": {
+      "type": "object",
+      "description": "Common group properties shared across data-plane and control-plane.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name for the group."
+        },
+        "refreshMode": {
+          "$ref": "#/definitions/GroupRefreshMode",
+          "description": "The refresh mode that determines how group membership is maintained.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "groupType": {
+          "$ref": "#/definitions/GroupType",
+          "description": "The type of group that determines what kind of resources can be members.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lastMembershipRefreshTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp indicating the last time the group membership was refreshed.",
+          "readOnly": true
+        },
+        "membershipState": {
+          "$ref": "#/definitions/GroupMembershipState",
+          "description": "The membership state of the group.",
+          "readOnly": true
+        },
+        "query": {
+          "type": "string",
+          "description": "The query string used to determine group membership.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2445,6 +2541,14 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
+    "GetCapabilityByUuidRequest": {
+      "name": "capabilityUuid",
+      "in": "query",
+      "description": "The unique identifier of the capability.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "GetDeviceByExternalIdRequest.expandInfo": {
       "name": "expandInfo",
       "in": "query",
@@ -2453,12 +2557,36 @@
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
+    "GetDeviceByExternalIdRequest.externalDeviceId": {
+      "name": "externalDeviceId",
+      "in": "query",
+      "description": "The external identifier of the device.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDeviceByUuidRequest.deviceUuid": {
+      "name": "deviceUuid",
+      "in": "query",
+      "description": "The unique identifier of the device.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "GetDeviceByUuidRequest.expandInfo": {
       "name": "expandInfo",
       "in": "query",
       "description": "Whether to include extended device information in the response.",
       "required": false,
       "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "GetGroupByUuidRequest": {
+      "name": "groupUuid",
+      "in": "query",
+      "description": "The unique identifier of the group.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

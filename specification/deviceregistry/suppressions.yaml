@@ -20,3 +20,10 @@
   reason: RPSaaS v1 folder structure, not yet converted to v2
   paths:
     - DeviceRegistry.Management
+
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  reason: Shared types in specification/deviceregistry/common/ are imported by both data-plane and control-plane projects to avoid duplication
+  paths:
+    - data-plane/DeviceRegistry
+    - DeviceRegistry.Management

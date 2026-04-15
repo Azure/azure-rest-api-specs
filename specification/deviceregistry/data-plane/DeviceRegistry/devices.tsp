@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "../../common/deviceTypes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -15,9 +16,8 @@ namespace Microsoft.DeviceRegistry;
 
 // ──────────────────────────────────────────────
 // Device resource
-// NOTE: DeviceProperties is aligned with the control plane NewDeviceProperties model
-// in specification/deviceregistry/DeviceRegistry.Management/newDevices.tsp.
-// Keep in sync when making changes.
+// Shared types (DeviceOriginType, DeviceAcceptedStatus, DeviceEnabledStatus) are defined
+// in specification/deviceregistry/common/deviceTypes.tsp.
 // ──────────────────────────────────────────────
 
 /** A device resource. */
@@ -34,81 +34,11 @@ model Device {
 
 /** Properties of a device resource. */
 model DeviceProperties {
-  /** Contains metadata about how this device was discovered or provisioned. */
-  @visibility(Lifecycle.Read)
-  origin?: DeviceOrigin;
-
-  /** Whether a discovered or created device has been accepted for use. */
-  accepted?: DeviceAcceptedStatus;
-
-  /** Indicates if the device is enabled or not. */
-  enabled?: DeviceEnabledStatus;
-
-  /** The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  externalDeviceId?: string;
-
-  /** Device manufacturer. */
-  manufacturer?: string;
-
-  /** Device model. */
-  @encodedName("application/json", "model")
-  deviceModel?: string;
-
-  /** Device operating system. */
-  operatingSystem?: string;
-
-  /** Device operating system version. */
-  operatingSystemVersion?: string;
+  ...OmitProperties<DevicePropertiesBase, "uuid">;
 
   /** The provisioning state of the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: string;
-}
-
-/** Contains metadata about how this device was discovered or provisioned. */
-model DeviceOrigin {
-  /** The type of origin. */
-  type?: DeviceOriginType;
-
-  /** The source identifier for the origin. */
-  sourceId?: string;
-}
-
-/** The origin type of a device. */
-union DeviceOriginType {
-  string,
-
-  /** Device originated from Azure IoT Operations. */
-  AIO: "AIO",
-
-  /** Device originated from Device Provisioning Service. */
-  DPS: "DPS",
-
-  /** Device originated from ARM. */
-  ARM: "ARM",
-}
-
-/** Whether a device has been accepted for use. */
-union DeviceAcceptedStatus {
-  string,
-
-  /** The device has been accepted. */
-  Accepted: "Accepted",
-
-  /** The device has not been accepted. */
-  NotAccepted: "NotAccepted",
-}
-
-/** Whether a device is enabled or disabled. */
-union DeviceEnabledStatus {
-  string,
-
-  /** The device is enabled. */
-  Enabled: "Enabled",
-
-  /** The device is disabled. */
-  Disabled: "Disabled",
 }
 
 /** Response model for device lookup POST actions (excludes deviceName key). */
@@ -123,9 +53,10 @@ model DeviceResponse {
 // Device operation models
 // ──────────────────────────────────────────────
 
-/** Request body for looking up a device by its UUID. */
+/** Request for looking up a device by its UUID. */
 model GetDeviceByUuidRequest {
   /** The unique identifier of the device. */
+  @query
   deviceUuid: string;
 
   /** Whether to include extended device information in the response. */
@@ -133,28 +64,15 @@ model GetDeviceByUuidRequest {
   expandInfo?: boolean;
 }
 
-/** Request body for looking up a device by its external identifier. */
+/** Request for looking up a device by its external identifier. */
 model GetDeviceByExternalIdRequest {
   /** The external identifier of the device. */
-  externalId: string;
+  @query
+  externalDeviceId: string;
 
   /** Whether to include extended device information in the response. */
   @query
   expandInfo?: boolean;
-}
-
-/** A reference to a group that a device belongs to. */
-model GroupReference {
-  /** The unique identifier of the group. */
-  groupUuid: string;
-}
-
-/** Result of querying group memberships for a device. */
-model GetGroupMembershipsResult {
-  ...DataPlaneResourceBase;
-
-  /** The groups that this device belongs to. */
-  groups: GroupReference[];
 }
 
 /** The authentication type for device provisioning. */
@@ -268,13 +186,6 @@ interface Devices {
     Device,
     GetDeviceByExternalIdRequest,
     DeviceResponse
-  >;
-
-  /** Returns the groups that this device belongs to. */
-  getGroupMemberships is ResourceOperations.ResourceAction<
-    Device,
-    {},
-    GetGroupMembershipsResult
   >;
 
   /** Provision devices in a namespace. */

@@ -1,10 +1,13 @@
 import "@typespec/rest";
+import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
+import "../../common/groupTypes.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -13,9 +16,8 @@ namespace Microsoft.DeviceRegistry;
 
 // ──────────────────────────────────────────────
 // Group resource
-// NOTE: GroupProperties is aligned with the control plane GroupProperties model
-// in specification/deviceregistry/DeviceRegistry.Management/groups.tsp.
-// Keep in sync when making changes.
+// Shared types (GroupRefreshMode, GroupType, GroupMembershipState) are defined
+// in specification/deviceregistry/common/groupTypes.tsp.
 // ──────────────────────────────────────────────
 
 /** A group resource. */
@@ -32,81 +34,36 @@ model Group {
 
 /** Properties of a group resource. */
 model GroupProperties {
-  /** Human-readable description of the group. */
-  description?: string;
-
-  /** Human-readable display name for the group. */
-  displayName?: string;
-
-  /** The refresh mode that determines how group membership is maintained. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  refreshMode: GroupRefreshMode;
-
-  /** The type of group that determines what kind of resources can be members. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  groupType: GroupType;
-
-  /** A timestamp indicating the last time the group membership was refreshed. */
-  @visibility(Lifecycle.Read)
-  lastMembershipRefreshTime?: utcDateTime;
-
-  /** The membership state of the group. */
-  @visibility(Lifecycle.Read)
-  membershipState?: GroupMembershipState;
-
-  /** The query string used to determine group membership. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  query: string;
+  ...OmitProperties<GroupPropertiesBase, "uuid">;
 
   /** The provisioning state of the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
 
-/** The refresh mode for group membership. */
-union GroupRefreshMode {
-  string,
-
-  /** Group membership is refreshed continuously. */
-  Continuous: "Continuous",
-
-  /** Group membership is refreshed manually. */
-  Manual: "Manual",
-}
-
-/** The type of group. */
-union GroupType {
-  string,
-
-  /** A group of devices. */
-  Device: "Device",
-
-  /** A group of assets. */
-  Asset: "Asset",
-}
-
-/** The membership state of a group. */
-union GroupMembershipState {
-  string,
-
-  /** The group is being created. */
-  Creating: "Creating",
-
-  /** The group is refreshing its members. */
-  RefreshingMembers: "RefreshingMembers",
-
-  /** The group is ready. */
-  Ready: "Ready",
-}
-
 // ──────────────────────────────────────────────
 // Group operation models
 // ──────────────────────────────────────────────
 
-/** Request body for looking up a group by its UUID. */
+/** Request for looking up a group by its UUID. */
 model GetGroupByUuidRequest {
   /** The unique identifier of the group. */
+  @query
   groupUuid: string;
+}
+
+/** A reference to a group that a device belongs to. */
+model GroupReference {
+  /** The unique identifier of the group. */
+  groupUuid: string;
+}
+
+/** Result of querying group memberships for a device. */
+model GetGroupMembershipsResult {
+  ...DataPlaneResourceBase;
+
+  /** The groups that this device belongs to. */
+  groups: GroupReference[];
 }
 
 // ──────────────────────────────────────────────
@@ -121,5 +78,12 @@ interface Groups {
     Group,
     GetGroupByUuidRequest,
     Group
+  >;
+
+  /** Returns the groups that a device belongs to. */
+  getGroupMemberships is ResourceOperations.ResourceCollectionAction<
+    Group,
+    GetGroupByUuidRequest,
+    GetGroupMembershipsResult
   >;
 }

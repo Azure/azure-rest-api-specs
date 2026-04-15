@@ -7344,6 +7344,30 @@
       ],
       "x-ms-discriminator-value": "Storage"
     },
+    "DeviceAcceptedStatus": {
+      "type": "string",
+      "description": "Whether a device has been accepted for use.",
+      "enum": [
+        "Accepted",
+        "NotAccepted"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceAcceptedStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The device has been accepted."
+          },
+          {
+            "name": "NotAccepted",
+            "value": "NotAccepted",
+            "description": "The device has not been accepted."
+          }
+        ]
+      }
+    },
     "DeviceBaseProperties": {
       "type": "object",
       "description": "Defines the device properties.",
@@ -7419,6 +7443,30 @@
         }
       }
     },
+    "DeviceEnabledStatus": {
+      "type": "string",
+      "description": "Whether a device is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceEnabledStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The device is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The device is disabled."
+          }
+        ]
+      }
+    },
     "DeviceMessagingEndpoint": {
       "type": "object",
       "description": "Device messaging endpoint model.",
@@ -7447,6 +7495,104 @@
         "address": {
           "type": "string",
           "description": "The endpoint address to connect to."
+        }
+      }
+    },
+    "DeviceOrigin": {
+      "type": "object",
+      "description": "Contains metadata about how a device was discovered or provisioned.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DeviceOriginType",
+          "description": "The type of origin."
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "The source identifier for the origin."
+        }
+      }
+    },
+    "DeviceOriginType": {
+      "type": "string",
+      "description": "The type of origin for a device.",
+      "enum": [
+        "AIO",
+        "DPS",
+        "ARM",
+        "IoTHub"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceOriginType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AIO",
+            "value": "AIO",
+            "description": "Device originated from Azure IoT Operations."
+          },
+          {
+            "name": "DPS",
+            "value": "DPS",
+            "description": "Device originated from Device Provisioning Service."
+          },
+          {
+            "name": "ARM",
+            "value": "ARM",
+            "description": "Device originated from ARM."
+          },
+          {
+            "name": "IoTHub",
+            "value": "IoTHub",
+            "description": "Device originated from IoTHub."
+          }
+        ]
+      }
+    },
+    "DevicePropertiesBase": {
+      "type": "object",
+      "description": "Common device properties shared across data-plane and control-plane.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "origin": {
+          "$ref": "#/definitions/DeviceOrigin",
+          "description": "Contains metadata about how this device was discovered or provisioned.",
+          "readOnly": true
+        },
+        "accepted": {
+          "$ref": "#/definitions/DeviceAcceptedStatus",
+          "description": "Whether a discovered or created device has been accepted for use."
+        },
+        "enabled": {
+          "$ref": "#/definitions/DeviceEnabledStatus",
+          "description": "Indicates if the device is enabled or not."
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer."
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model."
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system."
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
         }
       }
     },
@@ -7989,12 +8135,12 @@
           {
             "name": "RefreshingMembers",
             "value": "RefreshingMembers",
-            "description": "The group membership is being refreshed."
+            "description": "The group is refreshing its members."
           },
           {
             "name": "Ready",
             "value": "Ready",
-            "description": "The group membership is ready."
+            "description": "The group is ready."
           }
         ]
       }
@@ -8035,7 +8181,7 @@
         "lastMembershipRefreshTime": {
           "type": "string",
           "format": "date-time",
-          "description": "A timestamp (in UTC) indicating the last time the group membership was refreshed by resolving the query.",
+          "description": "A timestamp indicating the last time the group membership was refreshed.",
           "readOnly": true
         },
         "membershipState": {
@@ -8045,7 +8191,7 @@
         },
         "query": {
           "type": "string",
-          "description": "The query string used to determine group membership. Defines the membership criteria and cannot be updated after creation.",
+          "description": "The query string used to determine group membership.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -8055,6 +8201,65 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        }
+      },
+      "required": [
+        "refreshMode",
+        "groupType",
+        "query"
+      ]
+    },
+    "GroupPropertiesBase": {
+      "type": "object",
+      "description": "Common group properties shared across data-plane and control-plane.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name for the group."
+        },
+        "refreshMode": {
+          "$ref": "#/definitions/GroupRefreshMode",
+          "description": "The refresh mode that determines how group membership is maintained.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "groupType": {
+          "$ref": "#/definitions/GroupType",
+          "description": "The type of group that determines what kind of resources can be members.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lastMembershipRefreshTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp indicating the last time the group membership was refreshed.",
+          "readOnly": true
+        },
+        "membershipState": {
+          "$ref": "#/definitions/GroupMembershipState",
+          "description": "The membership state of the group.",
+          "readOnly": true
+        },
+        "query": {
+          "type": "string",
+          "description": "The query string used to determine group membership.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -8079,7 +8284,7 @@
     },
     "GroupRefreshMode": {
       "type": "string",
-      "description": "The refresh mode for a group.",
+      "description": "The refresh mode for group membership.",
       "enum": [
         "Continuous",
         "Manual"
@@ -8091,12 +8296,12 @@
           {
             "name": "Continuous",
             "value": "Continuous",
-            "description": "Group membership is continuously refreshed."
+            "description": "Group membership is refreshed continuously."
           },
           {
             "name": "Manual",
             "value": "Manual",
-            "description": "Group membership is manually refreshed."
+            "description": "Group membership is refreshed manually."
           }
         ]
       }
@@ -8116,7 +8321,7 @@
     },
     "GroupType": {
       "type": "string",
-      "description": "The type of resources that can be members of a group.",
+      "description": "The type of group.",
       "enum": [
         "Device",
         "Asset"
@@ -8128,12 +8333,12 @@
           {
             "name": "Device",
             "value": "Device",
-            "description": "The group contains device resources."
+            "description": "A group of devices."
           },
           {
             "name": "Asset",
             "value": "Asset",
-            "description": "The group contains asset resources."
+            "description": "A group of assets."
           }
         ]
       }
@@ -9110,10 +9315,6 @@
         "resourceId": {
           "type": "string",
           "description": "The messaging endpoint Azure resource Id."
-        },
-        "provisioning": {
-          "$ref": "#/definitions/MessagingEndpointProvisioning",
-          "description": "The provisioning configuration for this messaging endpoint."
         }
       },
       "required": [
@@ -11485,54 +11686,6 @@
         }
       ]
     },
-    "NewDeviceAcceptedStatus": {
-      "type": "string",
-      "description": "Indicates whether a device has been accepted for use.",
-      "enum": [
-        "Accepted",
-        "NotAccepted"
-      ],
-      "x-ms-enum": {
-        "name": "NewDeviceAcceptedStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The device has been accepted."
-          },
-          {
-            "name": "NotAccepted",
-            "value": "NotAccepted",
-            "description": "The device has not been accepted."
-          }
-        ]
-      }
-    },
-    "NewDeviceEnabledStatus": {
-      "type": "string",
-      "description": "Indicates if the resource is enabled or disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "NewDeviceEnabledStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The resource is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The resource is disabled."
-          }
-        ]
-      }
-    },
     "NewDeviceListResult": {
       "type": "object",
       "description": "The response of a NewDevice list operation.",
@@ -11554,75 +11707,31 @@
         "value"
       ]
     },
-    "NewDeviceOrigin": {
-      "type": "object",
-      "description": "Contains metadata about how this device resource was discovered or provisioned.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/NewDeviceOriginType",
-          "description": "The origin type."
-        },
-        "sourceId": {
-          "type": "string",
-          "description": "The source identifier for the origin."
-        }
-      }
-    },
-    "NewDeviceOriginType": {
-      "type": "string",
-      "description": "The type of origin for a device.",
-      "enum": [
-        "AIO",
-        "DPS",
-        "ARM"
-      ],
-      "x-ms-enum": {
-        "name": "NewDeviceOriginType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AIO",
-            "value": "AIO",
-            "description": "The device was discovered or provisioned through Azure IoT Operations."
-          },
-          {
-            "name": "DPS",
-            "value": "DPS",
-            "description": "The device was provisioned through Device Provisioning Service."
-          },
-          {
-            "name": "ARM",
-            "value": "ARM",
-            "description": "The device was created through Azure Resource Manager."
-          }
-        ]
-      }
-    },
     "NewDeviceProperties": {
       "type": "object",
       "description": "Defines the new device properties.",
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "A unique identifier for the device.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "origin": {
-          "$ref": "#/definitions/NewDeviceOrigin",
-          "description": "Contains metadata about how this device resource was discovered or provisioned.",
+          "$ref": "#/definitions/DeviceOrigin",
+          "description": "Contains metadata about how this device was discovered or provisioned.",
           "readOnly": true
         },
         "accepted": {
-          "$ref": "#/definitions/NewDeviceAcceptedStatus",
+          "$ref": "#/definitions/DeviceAcceptedStatus",
           "description": "Whether a discovered or created device has been accepted for use."
         },
         "enabled": {
-          "$ref": "#/definitions/NewDeviceEnabledStatus",
-          "description": "Indicates if the resource is enabled or not."
+          "$ref": "#/definitions/DeviceEnabledStatus",
+          "description": "Indicates if the device is enabled or not."
         },
         "externalDeviceId": {
           "type": "string",
-          "description": "The Device ID provided by the customer. This is also used by IoT Hub to hold the IoT Hub device ID.",
+          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
           "x-ms-mutability": [
             "read",
             "create"

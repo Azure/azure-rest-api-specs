@@ -30,7 +30,11 @@ union DeviceStateName {
 @resource("states")
 @parentResource(Device)
 model DeviceState {
-  ...DataPlaneResourceBase;
+  ...OmitProperties<DataPlaneResourceBase, "name">;
+
+  /** The name of the device state. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  name: DeviceStateName;
 
   /** The resource-specific properties for this state. */
   properties?: DeviceStateProperties;

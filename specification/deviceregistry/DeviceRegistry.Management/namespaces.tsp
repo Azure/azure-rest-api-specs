@@ -92,10 +92,6 @@ model MessagingEndpoint {
 
   @doc("The messaging endpoint Azure resource Id.")
   resourceId?: string;
-
-  @added(Versions.v2026_11_01_preview)
-  @doc("The provisioning configuration for this messaging endpoint.")
-  provisioning?: MessagingEndpointProvisioning;
 }
 
 @added(Versions.v2026_02_01_preview)
