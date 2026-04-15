@@ -1332,23 +1332,6 @@ op getWafLogAnalyticsRankingsCustomization(
   "csharp"
 );
 
-@@clientName(CompareDeploymentVersionsParameter,
-  "CompareDeploymentVersionsContent",
-  "csharp"
-);
-@@clientName(CompareDeploymentVersionsResponse,
-  "CompareDeploymentVersionsResult",
-  "csharp"
-);
-@@clientName(DeploymentVersionAFDOriginChange,
-  "DeploymentVersionAfdOriginChange",
-  "csharp"
-);
-@@clientName(DeploymentVersionAFDOriginGroupChange,
-  "DeploymentVersionAfdOriginGroupChange",
-  "csharp"
-);
-
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
   /** represents a reference to an existing resource by its id */
