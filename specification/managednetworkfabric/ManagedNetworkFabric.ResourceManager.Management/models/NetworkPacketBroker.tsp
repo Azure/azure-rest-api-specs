@@ -45,6 +45,15 @@ model NetworkPacketBrokerProperties {
     }
   ]>[];
 
+  @doc("ARM resource ID of the source Network Tap Rule.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  sourceNetworkTapRuleId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkTapRules";
+    }
+  ]>;
+
   @doc("Details of the last operation performed on the resource")
   @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
@@ -60,9 +69,24 @@ model NetworkPacketBrokerProperties {
   configurationState?: ConfigurationState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending instead of spread to avoid breaking changes"
+@doc("The NetworkPacketBroker patch properties.")
+model NetworkPacketBrokerPatchProperties {
+  @doc("ARM resource ID of the source Network Tap Rule.")
+  @added(Versions.v2026_01_15_preview)
+  sourceNetworkTapRuleId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkTapRules";
+    }
+  ]>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("The NetworkPacketBroker patch resource definition.")
 model NetworkPacketBrokerPatch extends TagsUpdate {
+  @doc("NetworkPacketBroker patch properties.")
+  @added(Versions.v2026_01_15_preview)
+  properties?: NetworkPacketBrokerPatchProperties;
+
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: ManagedServiceIdentityPatch;
