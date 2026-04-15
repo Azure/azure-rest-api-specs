@@ -104,7 +104,7 @@ model SovereignViewComplianceSummaryResponse {
 }
 
 @added(Versions.Preview20260315)
-@doc("The response for the sovereign view compliance summary action.")
+@doc("The overall compliance summary in the sovereign view compliance summary action.")
 model SovereignViewComplianceOverallSummary {
   @doc("Total number of management groups for the sovereign view.")
   totalManagementGroups: int32;
@@ -178,7 +178,7 @@ model SovereignViewComplianceDetailsDimensionFilter {
   dimension: ComplianceDimension;
 
   @doc("The compliance states to optionally filter on.")
-  states?: PolicyComplianceState[];
+  states: PolicyComplianceState[];
 }
 
 @added(Versions.Preview20260315)
