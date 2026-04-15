@@ -288,6 +288,12 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.BackupRestoreFiles, "NetAppVolumeBackupBackupRestoreFilesContent", "csharp");
 @@clientName(Microsoft.NetApp.VolumeGroupVolumeProperties, "NetAppVolumeGroupVolume", "csharp");
 @@clientName(Microsoft.NetApp.VolumeBackupProperties, "NetAppVolumeBackupConfiguration", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule, "NetAppVolumeExportPolicyRule", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.unixReadOnly, "IsUnixReadOnly", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.unixReadWrite, "IsUnixReadWrite", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.cifs, "AllowCifsProtocol", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.nfsv3, "AllowNfsV3Protocol", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.nfsv41, "AllowNfsV41Protocol", "csharp");
 
 // C# boolean property renames (restore Is*/Has* prefix from old SDK)
 @@clientName(Microsoft.NetApp.VolumeProperties.snapshotDirectoryVisible, "IsSnapshotDirectoryVisible", "csharp");
