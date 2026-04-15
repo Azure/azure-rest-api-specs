@@ -287,3 +287,12 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 @@clientName(NetworkApiVersion.`2020-11-01`, "V2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "V2022_11_01", "python");
+
+// =====================================================================
+// Fix: JS emitter includes location as required on interface but omits
+// it from deserialization (it's a @path-only property, not in response body)
+// =====================================================================
+@@access(LocationBasedLaunchBulkInstancesOperation.location,
+  Access.internal,
+  "javascript"
+);
