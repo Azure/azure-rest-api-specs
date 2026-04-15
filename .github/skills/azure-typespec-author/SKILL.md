@@ -90,7 +90,14 @@ Check your classification from Step 1, then branch:
 Confirm uncertainties with the user, then make minimal `.tsp` edits.
 
 - **API Version Evolution** → Apply the plan from Step 3.
-- **General Authoring** → Apply the authoring plan from Step 3.
+- **General Authoring** →
+  1. Apply the authoring plan from Step 3.
+  2. **SDK breaking change mitigation:** If the authoring plan's `has_sdk_breaking_changes` field is `true`, apply every mitigation listed in the `sdk_breaking_changes` section of the plan. Mitigations are typically `client.tsp` customizations using `@azure-tools/typespec-client-generator-core` decorators (e.g. `@@clientName`, `@@access`, `@@scope`). Follow the rules below:
+     - Create `client.tsp` if it does not exist, using the template from [TypeSpec Client Customizations Reference](../../../eng/common/knowledge/customizing-client-tsp.md#2-basic-clienttsp-template).
+     - Add a file-level `namespace ClientCustomizations;` if any new types are defined.
+     - Apply each mitigation entry exactly as specified in `sdk_breaking_changes` — do not skip, merge, or reorder entries.
+     - Use scope parameters (e.g. `"python"`, `"!csharp"`) when a mitigation targets specific languages.
+     - Do not import `@azure-tools/typespec-client-generator-core` in files other than `client.tsp`.
 
 ---
 
