@@ -2132,6 +2132,19 @@ model FileShareLimits {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   maxProvisionedBandwidthMiBPerSec?: int32;
+
+  /**
+   * The IO scalar used for guardrail calculations for a file share in the storage account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  guardrailIOScalar?: float64;
+
+  /**
+   * The bandwidth scalar used for guardrail calculations for a file share in the storage account.
+   */
+  @visibility(Lifecycle.Read)
+  guardrailBandwidthScalar?: float64;
 }
 
 /**
