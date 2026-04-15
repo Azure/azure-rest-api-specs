@@ -30,9 +30,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/deletedWorkspaces": {
       "get": {
-        "tags__deleted": [
-          "DeletedWorkspaces"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -47,9 +44,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}": {
       "get": {
-        "tags__deleted": [
-          "asyncOperations"
-        ],
         "parameters": [
           [
             "~",
@@ -77,9 +71,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/queryPacks": {
       "get": {
-        "tags__added": [
-          "LogAnalyticsQueryPacks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -88,11 +79,6 @@
                 "__new": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "WorkspacesSubscriptionList__added": {
-            "$ref": "./examples/WorkspacesSubscriptionListForQueryPacks.json"
           }
         }
       }
@@ -236,9 +222,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/deletedWorkspaces": {
       "get": {
-        "tags__deleted": [
-          "DeletedWorkspaces"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -248,14 +231,19 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "WorkspacesGet": {
+            "$ref": {
+              "__old": "./examples/WorkspacesListByResourceGroup.json",
+              "__new": "./examples/WorkspacesListByResourceGroupForDeleted.json"
+            }
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover": {
       "post": {
-        "tags__deleted": [
-          "Workspaces"
-        ],
         "parameters": [
           [
             "~",
@@ -309,9 +297,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks": {
       "get": {
-        "tags__added": [
-          "LogAnalyticsQueryPacks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -338,9 +323,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}": {
       "get": {
-        "tags__added": [
-          "LogAnalyticsQueryPacks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -353,9 +335,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "LogAnalyticsQueryPacks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -368,9 +347,6 @@
         }
       },
       "patch": {
-        "tags__added": [
-          "LogAnalyticsQueryPacks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -383,9 +359,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "LogAnalyticsQueryPacks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -400,9 +373,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries": {
       "get": {
-        "tags__added": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -417,9 +387,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}": {
       "get": {
-        "tags__added": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -432,9 +399,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -447,9 +411,6 @@
         }
       },
       "patch": {
-        "tags__added": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -462,9 +423,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -479,9 +437,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/search": {
       "post": {
-        "tags__added": [
-          "LogAnalyticsQueryPacks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -496,11 +451,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces": {
       "get": {
-        "x-ms-examples__deleted": {
-          "WorkspacesGet": {
-            "$ref": "./examples/WorkspacesListByResourceGroup.json"
-          }
-        },
         "responses": {
           "default": {
             "schema": {
@@ -658,16 +608,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/availableServiceTiers": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "AvailableServiceTiers"
-          ],
-          [
-            "+",
-            "Workspaces"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -698,16 +638,6 @@
         "x-ms-pageable__deleted": {
           "nextLinkName": "nextLink"
         },
-        "tags": [
-          [
-            "-",
-            "DataExport"
-          ],
-          [
-            "+",
-            "DataExports"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -737,16 +667,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports/{dataExportName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "DataExport"
-          ],
-          [
-            "+",
-            "DataExports"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -782,16 +702,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "DataExport"
-          ],
-          [
-            "+",
-            "DataExports"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -837,16 +747,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "DataExport"
-          ],
-          [
-            "+",
-            "DataExports"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -1109,15 +1009,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks": {
       "get": {
-        "tags": [
-          [
-            " "
-          ],
-          [
-            "-",
-            "IntelligencePacks"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -1145,15 +1036,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/disable": {
       "post": {
-        "tags": [
-          [
-            " "
-          ],
-          [
-            "-",
-            "IntelligencePacks"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -1189,15 +1071,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/enable": {
       "post": {
-        "tags": [
-          [
-            " "
-          ],
-          [
-            "-",
-            "IntelligencePacks"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -1388,16 +1261,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LinkedStorageAccounts"
-          ],
-          [
-            "+",
-            "LinkedStorageAccountsResources"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -1425,16 +1288,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LinkedStorageAccounts"
-          ],
-          [
-            "+",
-            "LinkedStorageAccountsResources"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -1463,16 +1316,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "LinkedStorageAccounts"
-          ],
-          [
-            "+",
-            "LinkedStorageAccountsResources"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -1504,16 +1347,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "LinkedStorageAccounts"
-          ],
-          [
-            "+",
-            "LinkedStorageAccountsResources"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -2113,16 +1946,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "SummaryRules"
-          ],
-          [
-            "+",
-            "SummaryLogsOperationGroup"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -2152,15 +1975,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}": {
       "get": {
-        "tags": [
-          [
-            "+",
-            "SummaryLogsOperationGroup"
-          ],
-          [
-            " "
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -2196,16 +2010,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "SummaryRules"
-          ],
-          [
-            "+",
-            "SummaryLogsOperationGroup"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -2278,16 +2082,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "SummaryRules"
-          ],
-          [
-            "+",
-            "SummaryLogsOperationGroup"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -2342,16 +2136,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SummaryRules"
-          ],
-          [
-            "+",
-            "SummaryLogsOperationGroup"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -2412,16 +2196,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SummaryRules"
-          ],
-          [
-            "+",
-            "SummaryLogsOperationGroup"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -2479,16 +2253,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/stop": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "SummaryRules"
-          ],
-          [
-            "+",
-            "SummaryLogsOperationGroup"
-          ]
-        ],
         "parameters": [
           [
             "-",

@@ -92,17 +92,19 @@ alias PurgeOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface Workspaces {
   /**
    * Gets a workspace instance.
    */
+  @tag("Workspaces")
   get is ArmResourceRead<Workspace>;
 
   /**
    * Create or update a workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("Workspaces")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmResourceCreatedResponse<
@@ -115,6 +117,7 @@ interface Workspaces {
   /**
    * Updates a workspace.
    */
+  @tag("Workspaces")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Workspace, PatchModel = WorkspacePatch>;
 
@@ -122,6 +125,7 @@ interface Workspaces {
    * Deletes a workspace resource. To recover the workspace, create it again with the same name, in the same subscription, resource group and location. The name is kept for 14 days and cannot be used for another workspace. To remove the workspace completely and release the name, use the force flag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("Workspaces")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
@@ -137,6 +141,7 @@ interface Workspaces {
   /**
    * Gets workspaces in a resource group.
    */
+  @tag("Workspaces")
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     Response = ArmResponse<WorkspaceListResult>
@@ -145,6 +150,7 @@ interface Workspaces {
   /**
    * Gets the workspaces in a subscription.
    */
+  @tag("Workspaces")
   list is ArmListBySubscription<
     Workspace,
     Response = ArmResponse<WorkspaceListResult>
@@ -155,6 +161,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AvailableServiceTiers_ListByWorkspace")
+  @tag("AvailableServiceTiers")
   @get
   @action("availableServiceTiers")
   listByWorkspace is ArmResourceActionSync<
@@ -168,6 +175,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Gateways_Delete")
+  @tag("Workspaces")
   gatewaysDelete is GatewayOps.DeleteSync<Workspace, Response = OkResponse>;
 
   /**
@@ -175,6 +183,8 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntelligencePacks_Disable")
+  @tag("Workspaces")
+  @tag("IntelligencePacks")
   @action("Disable")
   disable is ArmResourceActionSync<
     Workspace,
@@ -195,6 +205,8 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntelligencePacks_Enable")
+  @tag("Workspaces")
+  @tag("IntelligencePacks")
   @action("Enable")
   enable is ArmResourceActionSync<
     Workspace,
@@ -215,6 +227,8 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("IntelligencePacks_List")
+  @tag("Workspaces")
+  @tag("IntelligencePacks")
   @get
   @action("intelligencePacks")
   intelligencePacksList is ArmResourceActionSync<
@@ -228,6 +242,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagementGroups_List")
+  @tag("Workspaces")
   @list
   @get
   @action("managementGroups")
@@ -242,6 +257,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Schema_Get")
+  @tag("Workspaces")
   @list
   @action("schema")
   schemaGet is ArmResourceActionSync<
@@ -255,6 +271,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SharedKeys_GetSharedKeys")
+  @tag("Workspaces")
   @action("sharedKeys")
   getSharedKeys is ArmResourceActionSync<
     Workspace,
@@ -267,6 +284,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SharedKeys_Regenerate")
+  @tag("Workspaces")
   @action("regenerateSharedKey")
   regenerate is ArmResourceActionSync<Workspace, void, ArmResponse<SharedKeys>>;
 
@@ -275,6 +293,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_List")
+  @tag("Workspaces")
   @list
   @get
   @action("usages")
@@ -292,6 +311,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspacePurge_Purge")
+  @tag("Workspaces")
   purge is ArmResourceActionSync<
     Workspace,
     WorkspacePurgeBody,
@@ -306,6 +326,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("WorkspacePurge_GetPurgeStatus")
+  @tag("Workspaces")
   getPurgeStatus is PurgeOps.Read<
     Workspace,
     Response = ArmResponse<WorkspacePurgeStatusResponse>
@@ -316,6 +337,7 @@ interface Workspaces {
    *
    * The failback operation is asynchronous and can take up to 30 minutes to complete. The status of the operation can be checked using the operationId returned in the response.
    */
+  @tag("Workspaces")
   failback is ArmResourceActionAsyncBase<
     Workspace,
     void,

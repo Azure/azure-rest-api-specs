@@ -46,10 +46,16 @@
       "name": "Clusters"
     },
     {
-      "name": "DataExports"
+      "name": "DataExport"
     },
     {
       "name": "Workspaces"
+    },
+    {
+      "name": "AvailableServiceTiers"
+    },
+    {
+      "name": "IntelligencePacks"
     },
     {
       "name": "DataSources"
@@ -58,13 +64,7 @@
       "name": "LinkedServices"
     },
     {
-      "name": "LinkedStorageAccountsResources"
-    },
-    {
-      "name": "LogAnalyticsQueryPackQueries"
-    },
-    {
-      "name": "LogAnalyticsQueryPacks"
+      "name": "LinkedStorageAccounts"
     },
     {
       "name": "SavedSearches"
@@ -79,10 +79,13 @@
       "name": "NetworkSecurityPerimeterConfigurations"
     },
     {
-      "name": "SummaryLogsOperationGroup"
+      "name": "SummaryRules"
     },
     {
-      "name": "SummaryRules"
+      "name": "asyncOperations"
+    },
+    {
+      "name": "DeletedWorkspaces"
     }
   ],
   "paths": {
@@ -164,6 +167,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/deletedWorkspaces": {
       "get": {
         "operationId": "DeletedWorkspaces_List",
+        "tags": [
+          "DeletedWorkspaces"
+        ],
         "description": "Gets recently deleted workspaces in a subscription, available for recovery.",
         "parameters": [
           {
@@ -200,6 +206,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}": {
       "get": {
         "operationId": "OperationStatuses_Get",
+        "tags": [
+          "asyncOperations"
+        ],
         "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {
@@ -243,9 +252,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/queryPacks": {
       "get": {
         "operationId": "QueryPacks_List",
-        "tags": [
-          "LogAnalyticsQueryPacks"
-        ],
         "description": "Gets a list of all Log Analytics QueryPacks within a subscription.",
         "parameters": [
           {
@@ -272,9 +278,6 @@
         "x-ms-examples": {
           "QueryPacksList": {
             "$ref": "./examples/QueryPacksList.json"
-          },
-          "WorkspacesSubscriptionList": {
-            "$ref": "./examples/WorkspacesSubscriptionListForQueryPacks.json"
           }
         },
         "x-ms-pageable": {
@@ -628,6 +631,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/deletedWorkspaces": {
       "get": {
         "operationId": "DeletedWorkspaces_ListByResourceGroup",
+        "tags": [
+          "DeletedWorkspaces"
+        ],
         "description": "Gets recently deleted workspaces in a resource group, available for recovery.",
         "parameters": [
           {
@@ -656,7 +662,7 @@
         },
         "x-ms-examples": {
           "WorkspacesGet": {
-            "$ref": "./examples/WorkspacesListByResourceGroup.json"
+            "$ref": "./examples/WorkspacesListByResourceGroupForDeleted.json"
           }
         },
         "x-ms-pageable": {
@@ -667,6 +673,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover": {
       "post": {
         "operationId": "Workspaces_Failover",
+        "tags": [
+          "Workspaces"
+        ],
         "description": "Activates failover for the specified workspace.\n\nThe specified replication location must match the location of the enabled replication for this workspace. The failover operation is asynchronous and can take up to 30 minutes to complete. The status of the operation can be checked using the operationId returned in the response.",
         "parameters": [
           {
@@ -734,9 +743,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks": {
       "get": {
         "operationId": "QueryPacks_ListByResourceGroup",
-        "tags": [
-          "LogAnalyticsQueryPacks"
-        ],
         "description": "Gets a list of Log Analytics QueryPacks within a resource group.",
         "parameters": [
           {
@@ -829,9 +835,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}": {
       "get": {
         "operationId": "QueryPacks_Get",
-        "tags": [
-          "LogAnalyticsQueryPacks"
-        ],
         "description": "Returns a Log Analytics QueryPack.",
         "parameters": [
           {
@@ -873,9 +876,6 @@
       },
       "put": {
         "operationId": "QueryPacks_CreateOrUpdate",
-        "tags": [
-          "LogAnalyticsQueryPacks"
-        ],
         "description": "Creates (or updates) a Log Analytics QueryPack. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
         "parameters": [
           {
@@ -929,9 +929,6 @@
       },
       "patch": {
         "operationId": "QueryPacks_UpdateTags",
-        "tags": [
-          "LogAnalyticsQueryPacks"
-        ],
         "description": "Updates an existing QueryPack's tags. To update other fields use the CreateOrUpdate method.",
         "parameters": [
           {
@@ -982,9 +979,6 @@
       },
       "delete": {
         "operationId": "QueryPacks_Delete",
-        "tags": [
-          "LogAnalyticsQueryPacks"
-        ],
         "description": "Deletes a Log Analytics QueryPack.",
         "parameters": [
           {
@@ -1028,9 +1022,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}/queries": {
       "get": {
         "operationId": "Queries_List",
-        "tags": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "description": "Gets a list of Queries defined within a Log Analytics QueryPack.",
         "parameters": [
           {
@@ -1099,9 +1090,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}": {
       "get": {
         "operationId": "Queries_Get",
-        "tags": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "description": "Gets a specific Log Analytics Query defined within a Log Analytics QueryPack.",
         "parameters": [
           {
@@ -1150,9 +1138,6 @@
       },
       "put": {
         "operationId": "Queries_Put",
-        "tags": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "description": "Adds or Updates a specific Query within a Log Analytics QueryPack.",
         "parameters": [
           {
@@ -1210,9 +1195,6 @@
       },
       "patch": {
         "operationId": "Queries_Update",
-        "tags": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "description": "Adds or Updates a specific Query within a Log Analytics QueryPack.",
         "parameters": [
           {
@@ -1270,9 +1252,6 @@
       },
       "delete": {
         "operationId": "Queries_Delete",
-        "tags": [
-          "LogAnalyticsQueryPackQueries"
-        ],
         "description": "Deletes a specific Query defined within an Log Analytics QueryPack.",
         "parameters": [
           {
@@ -1323,9 +1302,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/search": {
       "post": {
         "operationId": "Queries_Search",
-        "tags": [
-          "LogAnalyticsQueryPacks"
-        ],
         "description": "Search a list of Queries defined within a Log Analytics QueryPack according to given search properties.",
         "parameters": [
           {
@@ -1430,6 +1406,11 @@
             "schema": {
               "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacesGet": {
+            "$ref": "./examples/WorkspacesListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1710,7 +1691,7 @@
       "get": {
         "operationId": "AvailableServiceTiers_ListByWorkspace",
         "tags": [
-          "Workspaces"
+          "AvailableServiceTiers"
         ],
         "description": "Gets the available service tiers for the workspace.",
         "parameters": [
@@ -1762,7 +1743,7 @@
       "get": {
         "operationId": "DataExports_ListByWorkspace",
         "tags": [
-          "DataExports"
+          "DataExport"
         ],
         "description": "Lists the data export instances within a workspace.",
         "parameters": [
@@ -1811,7 +1792,7 @@
       "get": {
         "operationId": "DataExports_Get",
         "tags": [
-          "DataExports"
+          "DataExport"
         ],
         "description": "Gets a data export instance.",
         "parameters": [
@@ -1865,7 +1846,7 @@
       "put": {
         "operationId": "DataExports_CreateOrUpdate",
         "tags": [
-          "DataExports"
+          "DataExport"
         ],
         "description": "Create or update a data export.",
         "parameters": [
@@ -1934,7 +1915,7 @@
       "delete": {
         "operationId": "DataExports_Delete",
         "tags": [
-          "DataExports"
+          "DataExport"
         ],
         "description": "Deletes the specified data export in a given workspace..",
         "parameters": [
@@ -2346,7 +2327,8 @@
       "get": {
         "operationId": "IntelligencePacks_List",
         "tags": [
-          "Workspaces"
+          "Workspaces",
+          "IntelligencePacks"
         ],
         "description": "Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.",
         "parameters": [
@@ -2398,7 +2380,8 @@
       "post": {
         "operationId": "IntelligencePacks_Disable",
         "tags": [
-          "Workspaces"
+          "Workspaces",
+          "IntelligencePacks"
         ],
         "description": "Disables an intelligence pack for a given workspace.",
         "parameters": [
@@ -2451,7 +2434,8 @@
       "post": {
         "operationId": "IntelligencePacks_Enable",
         "tags": [
-          "Workspaces"
+          "Workspaces",
+          "IntelligencePacks"
         ],
         "description": "Enables an intelligence pack for a given workspace.",
         "parameters": [
@@ -2786,7 +2770,7 @@
       "get": {
         "operationId": "LinkedStorageAccounts_ListByWorkspace",
         "tags": [
-          "LinkedStorageAccountsResources"
+          "LinkedStorageAccounts"
         ],
         "description": "Gets all linked storage accounts associated with the specified workspace, storage accounts will be sorted by their data source type.",
         "parameters": [
@@ -2838,7 +2822,7 @@
       "get": {
         "operationId": "LinkedStorageAccounts_Get",
         "tags": [
-          "LinkedStorageAccountsResources"
+          "LinkedStorageAccounts"
         ],
         "description": "Gets all linked storage account of a specific data source type associated with the specified workspace.",
         "parameters": [
@@ -2930,7 +2914,7 @@
       "put": {
         "operationId": "LinkedStorageAccounts_CreateOrUpdate",
         "tags": [
-          "LinkedStorageAccountsResources"
+          "LinkedStorageAccounts"
         ],
         "description": "Create or Update a link relation between current workspace and a group of storage accounts of a specific data source type.",
         "parameters": [
@@ -3031,7 +3015,7 @@
       "delete": {
         "operationId": "LinkedStorageAccounts_Delete",
         "tags": [
-          "LinkedStorageAccountsResources"
+          "LinkedStorageAccounts"
         ],
         "description": "Deletes all linked storage accounts of a specific data source type associated with the specified workspace.",
         "parameters": [
@@ -4070,7 +4054,7 @@
       "get": {
         "operationId": "SummaryLogs_ListByWorkspace",
         "tags": [
-          "SummaryLogsOperationGroup"
+          "SummaryRules"
         ],
         "description": "Gets all summary rules for the specified Log Analytics workspace.",
         "parameters": [
@@ -4122,7 +4106,6 @@
       "get": {
         "operationId": "SummaryLogs_Get",
         "tags": [
-          "SummaryLogsOperationGroup",
           "SummaryRules"
         ],
         "description": "Gets Log Analytics workspace Summary rules.",
@@ -4178,7 +4161,7 @@
       "put": {
         "operationId": "SummaryLogs_CreateOrUpdate",
         "tags": [
-          "SummaryLogsOperationGroup"
+          "SummaryRules"
         ],
         "description": "Creates or updates Log Analytics workspace Summary rules.",
         "parameters": [
@@ -4284,7 +4267,7 @@
       "delete": {
         "operationId": "SummaryLogs_Delete",
         "tags": [
-          "SummaryLogsOperationGroup"
+          "SummaryRules"
         ],
         "description": "Deletes Log Analytics workspace Summary rules.",
         "parameters": [
@@ -4361,7 +4344,7 @@
       "post": {
         "operationId": "SummaryLogs_RetryBin",
         "tags": [
-          "SummaryLogsOperationGroup"
+          "SummaryRules"
         ],
         "description": "Retries a failed Summary rule bin.",
         "parameters": [
@@ -4445,7 +4428,7 @@
       "post": {
         "operationId": "SummaryLogs_Start",
         "tags": [
-          "SummaryLogsOperationGroup"
+          "SummaryRules"
         ],
         "description": "Starts an inactive Summary rule.",
         "parameters": [
@@ -4520,7 +4503,7 @@
       "post": {
         "operationId": "SummaryLogs_Stop",
         "tags": [
-          "SummaryLogsOperationGroup"
+          "SummaryRules"
         ],
         "description": "Stops an active Summary rule.",
         "parameters": [

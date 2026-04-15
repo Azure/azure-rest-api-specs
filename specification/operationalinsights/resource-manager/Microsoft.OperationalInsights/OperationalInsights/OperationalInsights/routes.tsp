@@ -20,6 +20,7 @@ interface OperationStatusesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OperationStatuses_Get")
+  @tag("asyncOperations")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}")
   @get
   get(
@@ -62,6 +63,7 @@ interface WorkspacesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Workspaces_Failover")
+  @tag("Workspaces")
   @autoRoute
   failover is ArmProviderActionAsync<
     Scope = Extension.ResourceGroup,
@@ -90,6 +92,7 @@ interface DeletedWorkspacesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedWorkspaces_List")
+  @tag("DeletedWorkspaces")
   @autoRoute
   @list
   @get
@@ -103,6 +106,7 @@ interface DeletedWorkspacesOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DeletedWorkspaces_ListByResourceGroup")
+  @tag("DeletedWorkspaces")
   @autoRoute
   @list
   @get

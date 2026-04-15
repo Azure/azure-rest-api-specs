@@ -1,26 +1,5 @@
 ## Swagger Changes
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/deletedWorkspaces'].get.tags__deleted` | deleted | `["DeletedWorkspaces"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}'].get.tags__deleted` | deleted | `["asyncOperations"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/queryPacks'].get.tags__added` | added | `["LogAnalyticsQueryPacks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/deletedWorkspaces'].get.tags__deleted` | deleted | `["DeletedWorkspaces"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.tags__deleted` | deleted | `["Workspaces"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks'].get.tags__added` | added | `["LogAnalyticsQueryPacks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}'].delete.tags__added` | added | `["LogAnalyticsQueryPacks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}'].get.tags__added` | added | `["LogAnalyticsQueryPacks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}'].patch.tags__added` | added | `["LogAnalyticsQueryPacks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}'].put.tags__added` | added | `["LogAnalyticsQueryPacks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries'].get.tags__added` | added | `["LogAnalyticsQueryPackQueries"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}'].delete.tags__added` | added | `["LogAnalyticsQueryPackQueries"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}'].get.tags__added` | added | `["LogAnalyticsQueryPackQueries"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}'].patch.tags__added` | added | `["LogAnalyticsQueryPackQueries"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}'].put.tags__added` | added | `["LogAnalyticsQueryPackQueries"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/search'].post.tags__added` | added | `["LogAnalyticsQueryPacks"]` |
-
 ### Changes for `name`
 
 | Path | Change Type | Value |
@@ -286,12 +265,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/storageInsightConfigs/{storageInsightName}'].put.responses.default__added` | added | `{"description":"ignore","schema":{"$ref":"../../../common-types/resource-management/v5/types.json#/d...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/usages'].get.responses.default__added` | added | `{"description":"ignore","schema":{"$ref":"../../../common-types/resource-management/v5/types.json#/d...` |
 
-### Changes for `WorkspacesSubscriptionList`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.OperationalInsights/queryPacks'].get['x-ms-examples'].WorkspacesSubscriptionList__added` | added | `{"$ref":"./examples/WorkspacesSubscriptionListForQueryPacks.json"}` |
-
 ### Changes for `minLength`
 
 | Path | Change Type | Value |
@@ -466,12 +439,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.responses.202.headers__deleted` | deleted | `{"x-ms-status-location":{"type":"string","description":"The location from which to request the opera...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].put.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-
-### Changes for `x-ms-examples`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces'].get['x-ms-examples__deleted']` | deleted | `{"WorkspacesGet":{"$ref":"./examples/WorkspacesListByResourceGroup.json"}}` |
 
 ### Changes for `x-ms-pageable`
 
@@ -650,6 +617,7 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].patch.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/clusters/{clusterName}'].put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/deletedWorkspaces'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/deletedWorkspaces'].get['x-ms-examples'].WorkspacesGet.$ref` | `./examples/WorkspacesListByResourceGroup.json` | `./examples/WorkspacesListByResourceGroupForDeleted.json` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.parameters[0].$ref` | `../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter` | `../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/locations/{location}/workspaces/{workspaceName}/failover'].post.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/queryPacks'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |

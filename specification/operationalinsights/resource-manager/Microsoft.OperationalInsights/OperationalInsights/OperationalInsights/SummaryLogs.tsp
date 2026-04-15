@@ -23,7 +23,7 @@ model SummaryLogs
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface SummaryLogsOperationGroup {
   /**
    * Gets Log Analytics workspace Summary rules.
@@ -38,6 +38,7 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_CreateOrUpdate")
+  @tag("SummaryRules")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<
     SummaryLogs,
@@ -56,6 +57,7 @@ interface SummaryLogsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("SummaryLogs_Delete")
+  @tag("SummaryRules")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is SummaryLogsOps.DeleteWithoutOkAsync<
     SummaryLogs,
@@ -67,6 +69,7 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_ListByWorkspace")
+  @tag("SummaryRules")
   listByWorkspace is SummaryLogsOps.List<SummaryLogs>;
 
   /**
@@ -74,6 +77,7 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_Start")
+  @tag("SummaryRules")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   start is SummaryLogsOps.ActionAsync<
     SummaryLogs,
@@ -88,6 +92,7 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_Stop")
+  @tag("SummaryRules")
   stop is SummaryLogsOps.ActionSync<SummaryLogs, void, OkResponse>;
 
   /**
@@ -95,6 +100,7 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_RetryBin")
+  @tag("SummaryRules")
   @action("retrybin")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   retryBin is SummaryLogsOps.ActionAsync<
