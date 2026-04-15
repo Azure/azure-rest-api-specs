@@ -841,7 +841,7 @@ interface IngestionOperations {
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @doc("Cancel all running operations of a geo-catalog collection")
+  @doc("Cancel all pending and running operations across the entire GeoCatalog instance. This is a catalog-wide operation and is not scoped to a specific collection.")
   @route("/inma/operations")
   @delete
   deleteAll(...ApiVersionParameter): {
