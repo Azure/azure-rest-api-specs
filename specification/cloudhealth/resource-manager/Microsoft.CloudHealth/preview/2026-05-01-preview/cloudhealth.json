@@ -70,21 +70,7 @@
         "description": "Retrieve data annotations for an entity",
         "parameters": [
           {
-            "name": "$top",
-            "in": "query",
-            "description": "Maximum number of annotations to return per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "x-ms-client-name": "top"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Skip token from a previous response to retrieve the next page of results.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "skipToken"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "healthModelName",
@@ -3109,6 +3095,15 @@
       "type": "object",
       "description": "Request body for querying data annotations",
       "properties": {
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of annotations to return per page."
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Skip token from a previous response to retrieve the next page of results."
+        },
         "startAt": {
           "type": "string",
           "format": "date-time",
@@ -3141,7 +3136,8 @@
         },
         "skipToken": {
           "type": "string",
-          "description": "Token to retrieve the next page of results. Null if there are no more results."
+          "description": "Token to retrieve the next page of results. Null if there are no more results.",
+          "x-ms-secret": true
         }
       },
       "required": [
