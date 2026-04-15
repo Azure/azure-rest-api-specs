@@ -26,6 +26,7 @@ using TypeSpec.Versioning;
 /**
  * API specification for Microsoft.Security (Microsoft Defender for Cloud) private links resource provider. This API enables customers to create and manage private endpoint connections to Defender for Cloud services, providing secure connectivity without exposing traffic to the public internet. private links support private connectivity to Defender APIs and regional data endpoints.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace("Microsoft.Security")
 @service(#{ title: "Microsoft Defender for Cloud - private links" })
