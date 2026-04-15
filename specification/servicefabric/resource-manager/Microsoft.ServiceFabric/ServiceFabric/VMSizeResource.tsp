@@ -35,6 +35,7 @@ model VMSizesResult is Azure.Core.Page<VMSizeResource>;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Brownfield resource that cannot be created/updated, no provisioning state"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation. Backwards compatibility with existing API."
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Renamed via @@clientName in client.tsp for C#"
 model VMSize {
   /**
    * VM Size name.

@@ -456,6 +456,8 @@ using Microsoft.ServiceFabric;
 // Base type override for ClusterCodeVersionsResult: old SDK had ResourceData
 // Use wrapper model extending Resource so C# generator maps it to ResourceData base.
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Wrapper model for C# back-compat"
+/** The result of the Service Fabric runtime versions */
 model ClusterCodeVersionsReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   /** The detail of the Service Fabric runtime version result */
