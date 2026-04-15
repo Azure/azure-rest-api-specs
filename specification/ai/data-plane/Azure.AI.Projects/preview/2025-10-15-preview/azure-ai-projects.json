@@ -903,6 +903,42 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "operationId": "EvaluationSuites_CreateEvaluationSuiteVersion",
+        "description": "Create a new EvaluationSuiteVersion with auto incremented version id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationSuiteVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
       }
     },
     "/evaluationSuites/{name}/versions/{version}": {

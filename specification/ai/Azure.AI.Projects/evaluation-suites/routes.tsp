@@ -32,4 +32,15 @@ interface EvaluationSuites
       EvaluationSuiteFilterQueryParams,
       ListEvaluationSuiteVersionsParameters
     > {
+
+  // POST /evaluationSuites/{name}/versions
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Create a new {name} with auto incremented version id", EvaluationSuiteVersion)
+  @Rest.segment("versions")
+  @Http.post
+  createEvaluationSuiteVersion is Azure.Core.Foundations.ResourceOperation<
+    EvaluationSuiteVersion,
+    ListEvaluationSuiteVersionsParameters,
+    Azure.Core.Foundations.ResourceCreatedResponse<EvaluationSuiteVersion>
+  >;
 }
