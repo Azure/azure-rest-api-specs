@@ -472,8 +472,8 @@ model DocumentLocation {
   /** The kind of the document location. */
   kind: DocumentLocationKind;
 
-  @added(Versions.v2026_05_01)
   /** The location of the document. */
+  @added(Versions.v2026_05_01)
   location: string;
 }
 
@@ -484,12 +484,12 @@ union DocumentLocationKind {
   /** The document is a URL. */
   AzureBlob: "AzureBlob",
 
-  @added(Versions.v2026_05_01)
   /** The document location is an Azure Blob Storage container. */
+  @added(Versions.v2026_05_01)
   AzureContainer: "AzureContainer",
 
-  @added(Versions.v2026_05_01)
   /** The document location is a folder within an Azure Blob Storage container. */
+  @added(Versions.v2026_05_01)
   AzureContainerFolder: "AzureContainerFolder",
 }
 

@@ -581,7 +581,4 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsCancelOperation",
   "csharp"
 );
-@@clientName(redactionCharacter.equals,
-  "EqualSign",
-  "csharp"
-);
+@@clientName(redactionCharacter.equals, "EqualSign", "csharp");
