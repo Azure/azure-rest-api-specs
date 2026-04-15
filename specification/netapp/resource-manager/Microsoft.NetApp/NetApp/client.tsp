@@ -287,6 +287,31 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.VolumeRelocationProperties, "NetAppVolumeRelocationProperties", "csharp");
 @@clientName(Microsoft.NetApp.BackupRestoreFiles, "NetAppVolumeBackupBackupRestoreFilesContent", "csharp");
 @@clientName(Microsoft.NetApp.VolumeGroupVolumeProperties, "NetAppVolumeGroupVolume", "csharp");
+@@clientName(Microsoft.NetApp.VolumeBackupProperties, "NetAppVolumeBackupConfiguration", "csharp");
+
+// C# boolean property renames (restore Is*/Has* prefix from old SDK)
+@@clientName(Microsoft.NetApp.VolumeProperties.snapshotDirectoryVisible, "IsSnapshotDirectoryVisible", "csharp");
+@@clientName(Microsoft.NetApp.VolumeProperties.kerberosEnabled, "IsKerberosEnabled", "csharp");
+@@clientName(Microsoft.NetApp.VolumeProperties.smbEncryption, "IsSmbEncryptionEnabled", "csharp");
+@@clientName(Microsoft.NetApp.VolumeProperties.smbContinuouslyAvailable, "IsSmbContinuouslyAvailable", "csharp");
+@@clientName(Microsoft.NetApp.VolumeProperties.ldapEnabled, "IsLdapEnabled", "csharp");
+@@clientName(Microsoft.NetApp.VolumeProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
+@@clientName(Microsoft.NetApp.VolumeProperties.encrypted, "IsEncrypted", "csharp");
+@@clientName(Microsoft.NetApp.ActiveDirectory.aesEncryption, "IsAesEncryptionEnabled", "csharp");
+@@clientName(Microsoft.NetApp.ActiveDirectory.ldapSigning, "IsLdapSigningEnabled", "csharp");
+@@clientName(Microsoft.NetApp.ActiveDirectory.ldapOverTLS, "IsLdapOverTlsEnabled", "csharp");
+@@clientName(Microsoft.NetApp.PoolProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
+@@clientName(Microsoft.NetApp.PoolPatchProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
+@@clientName(Microsoft.NetApp.VolumeBackupProperties.policyEnforced, "IsPolicyEnforced", "csharp");
+@@clientName(Microsoft.NetApp.BackupPolicyProperties.enabled, "IsEnabled", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5ReadOnly, "IsKerberos5ReadOnly", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5ReadWrite, "IsKerberos5ReadWrite", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5iReadOnly, "IsKerberos5iReadOnly", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5iReadWrite, "IsKerberos5iReadWrite", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5pReadOnly, "IsKerberos5pReadOnly", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.kerberos5pReadWrite, "IsKerberos5pReadWrite", "csharp");
+@@clientName(Microsoft.NetApp.ExportPolicyRule.hasRootAccess, "HasRootAccess", "csharp");
+@@alternateType(Microsoft.NetApp.BackupsMigrationRequest.backupVaultId, armResourceIdentifier, "csharp");
 
 // C# ARM resource renames (restore NetApp prefix on resource types)
 // Note: Volume is handled via [CodeGenType] in Custom code because @@clientName
