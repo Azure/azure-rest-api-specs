@@ -1,0 +1,70 @@
+{
+  "title": "HealthModels_GetRecommendedSignals",
+  "operationId": "HealthModels_GetRecommendedSignals",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "myHealthModel",
+    "body": {
+      "resourceType": "microsoft.compute/virtualMachines"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "signals": [
+          {
+            "id": "aa2a796a-d4b3-4fbc-952c-23798e0d8e3c",
+            "metricNamespace": "microsoft.compute/virtualmachines",
+            "metricName": "Percentage CPU",
+            "aggregationType": "Average",
+            "unit": "Percent",
+            "timeGrain": "PT5M",
+            "evaluationRules": {
+              "degradedRule": {
+                "operator": "GreaterThan",
+                "threshold": 85.0
+              },
+              "unhealthyRule": {
+                "operator": "GreaterThan",
+                "threshold": 90.0
+              }
+            },
+            "recommended": true
+          },
+          {
+            "id": "c6b62f3d-426d-4239-90d7-081d8fb6852b",
+            "metricNamespace": "microsoft.compute/virtualmachines",
+            "metricName": "Available Memory Bytes",
+            "aggregationType": "Average",
+            "unit": "Bytes",
+            "timeGrain": "PT5M",
+            "evaluationRules": {
+              "unhealthyRule": {
+                "operator": "LessThan",
+                "threshold": 1000000000
+              }
+            },
+            "recommended": true
+          },
+          {
+            "id": "52bdf074-69b3-41d2-a9de-f4359562ed7d",
+            "metricNamespace": "microsoft.compute/virtualmachines",
+            "metricName": "Data Disk Queue Depth",
+            "aggregationType": "Average",
+            "unit": "Count",
+            "timeGrain": "PT5M",
+            "evaluationRules": {
+              "unhealthyRule": {
+                "operator": "Dynamic",
+                "sensitivity": "Medium"
+              }
+            },
+            "recommended": false
+          }
+        ]
+      }
+    }
+  }
+}

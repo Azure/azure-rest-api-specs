@@ -28,6 +28,46 @@ These are the global settings for the computeschedule.
 openapi-subtype: rpaas
 openapi-type: arm
 tag: package-2025-05-01
+
+```
+
+### Tag: package-2026-04-15-preview
+
+These settings apply only when `--tag=package-2026-04-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-15-preview'
+input-file:
+  - Microsoft.ComputeSchedule/preview/2026-04-15-preview/computeschedule.json
+suppressions:  
+  - code: RemovedAdditionalProperties
+    reason: Changing from Record<unknown> to strongly-typed BulkVMConfiguration to follow ARM compliance and perform validation for these properties.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: RemovedAdditionalProperties
+    reason: Changing from Record<unknown> to strongly-typed BulkVMConfiguration to follow ARM compliance and perform validation for these properties.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  - code: PostResponseCodes
+    reason: ScheduledActions Disable and Enable endpoints are synchronous POST returning 200 with no body (OkResponse). These LRO rules do not apply. Keeping 200 for backward compatibility with existing API versions.
+    from: computeschedule.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/disable"].post
+  - code: PostResponseCodes
+    reason: ScheduledActions Disable and Enable endpoints are synchronous POST returning 200 with no body (OkResponse). These LRO rules do not apply. Keeping 200 for backward compatibility with existing API versions.
+    from: computeschedule.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/enable"].post
+  - code: AvoidAdditionalProperties
+    reason: This field is using the existing compute context for settings where this field is a free-form JSON object.
+    from: computeschedule.json
+    where: $.definitions.BulkActionVmExtensionProperties.properties.settings
+  - code: AvoidAdditionalProperties
+    reason: This field is using the existing compute context for protectedSettings where this field is a free-form JSON object.
+    from: computeschedule.json
+    where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: The property ultraSSDEnabled follows the established Azure Compute API naming convention where SSD is an abbreviation and cannot be renamed without a breaking change.
+    from: computeschedule.json
+    where: $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
+
 ```
 
 ### Tag: package-2026-03-01-preview
@@ -119,7 +159,6 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computeschedule.json
     where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
-  
 
 ```
 
