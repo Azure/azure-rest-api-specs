@@ -460,7 +460,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}'].put.responses.201.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/purge'].post.responses.202.headers__deleted` | deleted | `{"x-ms-status-location":{"type":"string","description":"The location from which to request the opera...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.200.headers__deleted` | deleted | `{"Azure-AsyncOperation":{"type":"string","description":"Operation Status Location URI"},"Location":{...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].patch.responses.202.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].put.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 
@@ -491,24 +490,31 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources'].get['x-ms-odata__deleted']` | deleted | `#/definitions/DataSourceFilter` |
 
-### Changes for `Location`
+### Changes for `format`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"Operation Status Location URI"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.201.headers.Location__deleted` | deleted | `{"type":"string","description":"Operation Status Location URI"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin'].post.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"Operation Status Location URI"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start'].post.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"Operation Status Location URI"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string"}` |
+| `definitions.ResultStatistics.properties.progress.format__added` | added | `float` |
+| `definitions.ResultStatistics.properties.scannedGb.format__added` | added | `float` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.200.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.201.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin'].post.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 
 ### Changes for `final-state-schema`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/SummaryLogs` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin'].post['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/SummaryLogs` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start'].post['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/SummaryLogs` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].patch['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Table` |
+
+### Changes for `Location`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start'].post.responses.202.headers.Location__deleted` | deleted | `{"type":"string","description":"Operation Status Location URI"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables/{tableName}'].delete.responses.202.headers.Location__deleted` | deleted | `{"type":"string"}` |
 
 ### Changes for `x-ms-long-running-operation-options`
 
@@ -624,13 +630,6 @@
 | `definitions.ResultStatistics.properties.progress.multipleOf__deleted` | deleted | `0.01` |
 | `definitions.ResultStatistics.properties.scannedGb.multipleOf__deleted` | deleted | `0.01` |
 
-### Changes for `format`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ResultStatistics.properties.progress.format__added` | added | `float` |
-| `definitions.ResultStatistics.properties.scannedGb.format__added` | added | `float` |
-
 ### Changes for `x-ms-client-name`
 
 | Path | Change Type | Value |
@@ -727,11 +726,16 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile'].post.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].delete.responses.202.headers.Location.description` | `Operation Status Location URI` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `Operation Status Location URI` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].delete.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].get.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.200.headers.Location.description` | `Operation Status Location URI` | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.200.headers['Azure-AsyncOperation'].description` | `Operation Status Location URI` | `A link to the status monitor` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.201.headers.Location.description` | `Operation Status Location URI` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.201.headers['Azure-AsyncOperation'].description` | `Operation Status Location URI` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}'].put.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin'].post.responses.202.headers.Location.description` | `Operation Status Location URI` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin'].post.responses.202.headers['Azure-AsyncOperation'].description` | `Operation Status Location URI` | `A link to the status monitor` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin'].post.responses.default.schema.$ref` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` | `../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start'].post.responses.202.headers['Azure-AsyncOperation'].description` | `Operation Status Location URI` | `A link to the status monitor` |

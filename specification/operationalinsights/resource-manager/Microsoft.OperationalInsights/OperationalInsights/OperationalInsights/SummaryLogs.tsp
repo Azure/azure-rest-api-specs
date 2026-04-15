@@ -38,7 +38,17 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_CreateOrUpdate")
-  createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<SummaryLogs>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is SummaryLogsOps.CreateOrUpdateAsync<
+    SummaryLogs,
+    Response = (ArmResourceUpdatedResponse<SummaryLogs> &
+      ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader) | ArmResourceCreatedResponse<
+      SummaryLogs,
+      LroHeaders = ArmCombinedLroHeaders &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   /**
    * Deletes Log Analytics workspace Summary rules.
@@ -46,10 +56,10 @@ interface SummaryLogsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("SummaryLogs_Delete")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is SummaryLogsOps.DeleteWithoutOkAsync<
     SummaryLogs,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -64,11 +74,12 @@ interface SummaryLogsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_Start")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   start is SummaryLogsOps.ActionAsync<
     SummaryLogs,
     void,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SummaryLogs> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -85,11 +96,12 @@ interface SummaryLogsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SummaryLogs_RetryBin")
   @action("retrybin")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   retryBin is SummaryLogsOps.ActionAsync<
     SummaryLogs,
     SummaryLogsRetryBin,
     void,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SummaryLogs> &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SummaryLogs> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 }

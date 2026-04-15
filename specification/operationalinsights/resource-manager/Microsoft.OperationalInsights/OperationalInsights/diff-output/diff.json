@@ -2242,27 +2242,35 @@
         ],
         "responses": {
           "200": {
-            "headers__deleted": {
+            "headers": {
               "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "Operation Status Location URI"
+                "format__added": "uri",
+                "description": {
+                  "__old": "Operation Status Location URI",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
-                "type": "string",
-                "description": "Operation Status Location URI"
+                "description": {
+                  "__old": "Operation Status Location URI",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
               }
             }
           },
           "201": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "Operation Status Location URI",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "Operation Status Location URI",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
@@ -2275,9 +2283,6 @@
               }
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/SummaryLogs"
         }
       },
       "delete": {
@@ -2317,14 +2322,17 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "Operation Status Location URI",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "Operation Status Location URI",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
@@ -2381,14 +2389,17 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "Operation Status Location URI",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "Operation Status Location URI",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
