@@ -6,9 +6,9 @@ This document describes the TypeSpec migration of the Azure IoT Hub Device Provi
 
 The migration covers:
 
-| API | Stable | Preview |
-|-----|--------|---------|
-| Device (runtime registration) | `stable/2021-10-01/device.json` | `preview/2025-07-01-preview/device.json` |
+| API                             | Stable                           | Preview                                   |
+| ------------------------------- | -------------------------------- | ----------------------------------------- |
+| Device (runtime registration)   | `stable/2021-10-01/device.json`  | `preview/2025-07-01-preview/device.json`  |
 | Service (enrollment management) | `stable/2021-10-01/service.json` | `preview/2025-07-01-preview/service.json` |
 
 **The service itself has NOT changed.** No service-side modifications were made. The migration is a spec-only change. Old SDKs generated from the original Swagger and new SDKs generated from the TypeSpec-emitted Swagger are both fully compatible with the unchanged service.
@@ -63,8 +63,8 @@ The initial conversion was performed using the official Azure SDK converter:
 npx @autorest/openapi-to-typespec --swagger-readme <path-to-readme>
 ```
 
-- **Package:** `@autorest/openapi-to-typespec` v0.11.13  
-- **Parameters:** `isFullCompatible: false`, `guessResourceKey: false`  
+- **Package:** `@autorest/openapi-to-typespec` v0.11.13
+- **Parameters:** `isFullCompatible: false`, `guessResourceKey: false`
 - **Date:** 2026-03-25
 
 The converter metadata is preserved in the comment header of each `main.tsp`:
@@ -86,6 +86,7 @@ The converter metadata is preserved in the comment header of each `main.tsp`:
 The following behavioral corrections were made after the automated conversion to ensure full backward compatibility:
 
 #### 1. LRO 202 Responses Restored (Device API)
+
 The converter did not emit the `202 Accepted` response on the device registration LRO operations. Explicit response models were added:
 
 ```typespec
@@ -100,6 +101,7 @@ model RegistrationOperationStatus202 {
 Both `registerDevice` and `registerDeviceAndIssueCertificate` return `RegistrationOperationStatus200 | RegistrationOperationStatus202`.
 
 #### 2. Error Type: `ProvisioningServiceErrorDetails`
+
 All operations use the DPS-specific error model (not the generic Azure Core error model), with the `x-ms-error-code` header included:
 
 ```typespec
@@ -115,6 +117,7 @@ model ProvisioningServiceErrorDetails {
 ```
 
 #### 3. Query Response Headers
+
 The three service query operations (`enrollments/query`, `enrollmentGroups/query`, `registrations/{id}/query`) were updated to return typed response headers via `QueryResponse<T>`:
 
 ```typespec
@@ -128,6 +131,7 @@ model QueryResponse<T> {
 ```
 
 #### 4. `TwinCollection` Free-form Dictionary
+
 Changed from `Record<string>` (which emits `additionalProperties: {type:"string"}`) to `Record<{}>` (which emits `additionalProperties: {type:"object"}`), matching the original `additionalProperties: {type:"object"}` semantics exactly:
 
 ```typespec
@@ -140,18 +144,21 @@ model TwinCollection {
 ```
 
 #### 5. `payload` Fields
+
 Three `payload` fields (on `DeviceRegistration`, `DeviceRegistrationResult`, `DeviceRegistrationState`) use `Record<unknown>` for the same reason — free-form JSON objects.
 
 #### 6. Default Values Restored
-| Field | Default |
-|-------|---------|
-| `DeviceCapabilities.iotEdge` | `false` |
+
+| Field                                     | Default     |
+| ----------------------------------------- | ----------- |
+| `DeviceCapabilities.iotEdge`              | `false`     |
 | `IndividualEnrollment.provisioningStatus` | `"enabled"` |
-| `EnrollmentGroup.provisioningStatus` | `"enabled"` |
-| `ReprovisionPolicy.migrateDeviceData` | `true` |
-| `ReprovisionPolicy.updateHubAssignment` | `true` |
+| `EnrollmentGroup.provisioningStatus`      | `"enabled"` |
+| `ReprovisionPolicy.migrateDeviceData`     | `true`      |
+| `ReprovisionPolicy.updateHubAssignment`   | `true`      |
 
 #### 7. Preview-Only Field: `credentialPolicyName`
+
 Added with the `@added` versioning decorator so it only appears in the preview swagger:
 
 ```typespec
@@ -162,6 +169,7 @@ credentialPolicyName?: string;
 Applied to both `IndividualEnrollment` and `EnrollmentGroup`.
 
 #### 8. `@sharedRoute` for Overlapping Device Paths
+
 `registerDevice` (stable only) and `registerDeviceAndIssueCertificate` (preview only) share the same PUT path. TypeSpec requires explicit `@sharedRoute` on both:
 
 ```typespec
@@ -190,6 +198,7 @@ preview/2025-07-01-preview/examples/  ← Auto-generated copy (do not edit)
 ```
 
 This is controlled by `tspconfig.yaml`:
+
 ```yaml
 options:
   "@azure-tools/typespec-autorest":
@@ -219,28 +228,28 @@ The 30 service preview examples were migrated from the original `preview/2025-07
 
 #### Preview Examples (`2025-07-01-preview`) — Device API
 
-| File | How created |
-|------|-------------|
-| `RuntimeRegistration_RegisterDeviceAndIssueCertificate_MaximumSet_Gen.json` | Migrated from original `preview/2025-07-01-preview/examples/`; includes preview-only `issuedCertificateChain` and `csr` response fields |
-| `RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen.json` | Migrated from original `preview/2025-07-01-preview/examples/` |
-| `RuntimeRegistration_DeviceRegistrationStatusLookup_MaximumSet_Gen.json` | **Created new** — original preview swagger was missing x-ms-examples for this operation; MaximumSet includes `issuedCertificateChain` and `csr` |
-| `RuntimeRegistration_DeviceRegistrationStatusLookup_MinimumSet_Gen.json` | **Created new** — same gap; MinimumSet with only required fields |
-| `RuntimeRegistration_OperationStatusLookup_MaximumSet_Gen.json` | **Created new** — original preview swagger was missing x-ms-examples for this operation; MaximumSet includes `issuedCertificateChain` and `csr` in `registrationState` |
-| `RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen.json` | **Created new** — same gap; MinimumSet with only required fields |
+| File                                                                        | How created                                                                                                                                                            |
+| --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RuntimeRegistration_RegisterDeviceAndIssueCertificate_MaximumSet_Gen.json` | Migrated from original `preview/2025-07-01-preview/examples/`; includes preview-only `issuedCertificateChain` and `csr` response fields                                |
+| `RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen.json` | Migrated from original `preview/2025-07-01-preview/examples/`                                                                                                          |
+| `RuntimeRegistration_DeviceRegistrationStatusLookup_MaximumSet_Gen.json`    | **Created new** — original preview swagger was missing x-ms-examples for this operation; MaximumSet includes `issuedCertificateChain` and `csr`                        |
+| `RuntimeRegistration_DeviceRegistrationStatusLookup_MinimumSet_Gen.json`    | **Created new** — same gap; MinimumSet with only required fields                                                                                                       |
+| `RuntimeRegistration_OperationStatusLookup_MaximumSet_Gen.json`             | **Created new** — original preview swagger was missing x-ms-examples for this operation; MaximumSet includes `issuedCertificateChain` and `csr` in `registrationState` |
+| `RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen.json`             | **Created new** — same gap; MinimumSet with only required fields                                                                                                       |
 
 The four new preview device examples were authored to match the TypeSpec model definitions exactly, using `api-version: 2025-07-01-preview` and representative sample values consistent with the existing stable examples.
 
 ### Example Count Summary
 
-| Location | Files | Source |
-|----------|-------|--------|
-| `device/examples/2021-10-01/` | 6 | Migrated from `stable/2021-10-01/examples/` |
-| `device/examples/2025-07-01-preview/` | 6 | 2 migrated + 4 newly authored |
-| `service/examples/2021-10-01/` | 30 | Migrated from `stable/2021-10-01/examples/` |
-| `service/examples/2025-07-01-preview/` | 30 | Migrated from `preview/2025-07-01-preview/examples/` |
-| **Total TypeSpec source** | **72** | |
-| Emitted to `stable/2021-10-01/examples/` | 36 | Auto-generated by compiler |
-| Emitted to `preview/2025-07-01-preview/examples/` | 36 | Auto-generated by compiler |
+| Location                                          | Files  | Source                                               |
+| ------------------------------------------------- | ------ | ---------------------------------------------------- |
+| `device/examples/2021-10-01/`                     | 6      | Migrated from `stable/2021-10-01/examples/`          |
+| `device/examples/2025-07-01-preview/`             | 6      | 2 migrated + 4 newly authored                        |
+| `service/examples/2021-10-01/`                    | 30     | Migrated from `stable/2021-10-01/examples/`          |
+| `service/examples/2025-07-01-preview/`            | 30     | Migrated from `preview/2025-07-01-preview/examples/` |
+| **Total TypeSpec source**                         | **72** |                                                      |
+| Emitted to `stable/2021-10-01/examples/`          | 36     | Auto-generated by compiler                           |
+| Emitted to `preview/2025-07-01-preview/examples/` | 36     | Auto-generated by compiler                           |
 
 ---
 
@@ -253,12 +262,14 @@ npm ci
 ```
 
 To compile the device API:
+
 ```bash
 cd specification/deviceprovisioningservices/data-plane/DeviceProvisioningServices/device
 npx tsp compile .
 ```
 
 To compile the service API:
+
 ```bash
 cd specification/deviceprovisioningservices/data-plane/DeviceProvisioningServices/service
 npx tsp compile .
@@ -276,14 +287,14 @@ All behavioral checks pass: operations, HTTP paths, response codes, required fie
 
 TypeSpec promotes inline enums to top-level named definitions. The enum **values are identical** — only the location changes. SDK generators produce equivalent code in both cases.
 
-| New definition | Extracted from (original inline location) | Values |
-|---|---|---|
-| `AllocationPolicy` | `IndividualEnrollment.allocationPolicy`, `EnrollmentGroup.allocationPolicy` | `hashed`, `geoLatency`, `static`, `custom` |
-| `AttestationType` | `AttestationMechanism.type` | `none`, `tpm`, `x509`, `symmetricKey` |
-| `EnrollmentStatus` | `DeviceRegistrationState.status` (service); `DeviceRegistrationResult.status` (device) | `assigned`, `assigning`, `disabled`, `failed`, `unassigned` |
+| New definition            | Extracted from (original inline location)                                                    | Values                                                                                           |
+| ------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `AllocationPolicy`        | `IndividualEnrollment.allocationPolicy`, `EnrollmentGroup.allocationPolicy`                  | `hashed`, `geoLatency`, `static`, `custom`                                                       |
+| `AttestationType`         | `AttestationMechanism.type`                                                                  | `none`, `tpm`, `x509`, `symmetricKey`                                                            |
+| `EnrollmentStatus`        | `DeviceRegistrationState.status` (service); `DeviceRegistrationResult.status` (device)       | `assigned`, `assigning`, `disabled`, `failed`, `unassigned`                                      |
 | `AssignedDeviceSubstatus` | `DeviceRegistrationState.substatus` (service); `DeviceRegistrationResult.substatus` (device) | `initialAssignment`, `deviceDataMigrated`, `deviceDataReset`, `reprovisionedToInitialAssignment` |
-| `OperationMode` | `BulkEnrollmentOperation.mode`, `BulkEnrollmentGroupOperation.mode` | `create`, `update`, `updateIfMatchETag`, `delete` |
-| `ProvisioningStatus` | `IndividualEnrollment.provisioningStatus`, `EnrollmentGroup.provisioningStatus` | `enabled`, `disabled` |
+| `OperationMode`           | `BulkEnrollmentOperation.mode`, `BulkEnrollmentGroupOperation.mode`                          | `create`, `update`, `updateIfMatchETag`, `delete`                                                |
+| `ProvisioningStatus`      | `IndividualEnrollment.provisioningStatus`, `EnrollmentGroup.provisioningStatus`              | `enabled`, `disabled`                                                                            |
 
 > **Note (service only):** In the original preview Swagger, the inline enum was named `BulkEnrollmentMode`. The TypeSpec migration aligns it with the stable name `OperationMode`. Values are identical; only the SDK type name changes (acceptable for preview).
 
@@ -295,18 +306,18 @@ TypeSpec promotes inline enums to top-level named definitions. The enum **values
 
 These headers were missing from the original Swagger but were already sent by the service:
 
-| Header | Added to | Purpose |
-|--------|----------|---------|
-| `x-ms-error-code` | All `default` error responses (both APIs) | Error code for programmatic error inspection |
-| `x-ms-continuation` | Query operation `200` responses (service API) | Pagination continuation token |
-| `x-ms-item-type` | Query operation `200` responses (service API) | Type of items returned |
-| `x-ms-max-item-count` | Query operation `200` responses (service API) | Max page size hint |
+| Header                | Added to                                      | Purpose                                      |
+| --------------------- | --------------------------------------------- | -------------------------------------------- |
+| `x-ms-error-code`     | All `default` error responses (both APIs)     | Error code for programmatic error inspection |
+| `x-ms-continuation`   | Query operation `200` responses (service API) | Pagination continuation token                |
+| `x-ms-item-type`      | Query operation `200` responses (service API) | Type of items returned                       |
+| `x-ms-max-item-count` | Query operation `200` responses (service API) | Max page size hint                           |
 
 ### `additionalProperties` on Free-form JSON Fields
 
-| Field | Original | New | SDK impact |
-|-------|----------|-----|-----------|
-| `TwinCollection` | `additionalProperties: {type:"object"}` | `additionalProperties: {type:"object"}` | None — identical |
+| Field                | Original                                    | New                                        | SDK impact                     |
+| -------------------- | ------------------------------------------- | ------------------------------------------ | ------------------------------ |
+| `TwinCollection`     | `additionalProperties: {type:"object"}`     | `additionalProperties: {type:"object"}`    | None — identical               |
 | `payload` (3 fields) | `{type:"object"}` (no additionalProperties) | `{type:"object", additionalProperties:{}}` | None — semantically equivalent |
 
 ### Preview Bug Fix: `registrationState.readOnly`
@@ -315,8 +326,8 @@ In the original preview Swagger, `IndividualEnrollment.registrationState` was mi
 
 ### Accepted Non-Breaking Difference
 
-| Property | Original | New | Reason |
-|----------|----------|-----|--------|
+| Property                                | Original   | New        | Reason                                                                                                                                                                                 |
+| --------------------------------------- | ---------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `api-version` `x-ms-parameter-location` | `"client"` | `"method"` | Hardcoded by `typespec-autorest` emitter; cannot override. No wire impact — `api-version` is still sent on every request. SDK ergonomic only (constructor param vs. per-method param). |
 
 ### Detailed Per-File Analysis (Verified Programmatically)
@@ -325,21 +336,21 @@ The following was verified by comparing every field of the original `main`-branc
 
 #### Paths, Operations, Response Codes — Identical Across All Four Files
 
-| File | Paths | Operations | Response codes changed? | Response headers changed? |
-|------|-------|------------|------------------------|--------------------------|
-| `stable/2021-10-01/device.json` | 3 | 3 | ❌ No | ❌ No |
-| `stable/2021-10-01/service.json` | 10 | 10 | ❌ No | ❌ No |
-| `preview/2025-07-01-preview/device.json` | 3 | 3 | ❌ No | ❌ No |
-| `preview/2025-07-01-preview/service.json` | 10 | 10 | ❌ No | ❌ No |
+| File                                      | Paths | Operations | Response codes changed? | Response headers changed? |
+| ----------------------------------------- | ----- | ---------- | ----------------------- | ------------------------- |
+| `stable/2021-10-01/device.json`           | 3     | 3          | ❌ No                   | ❌ No                     |
+| `stable/2021-10-01/service.json`          | 10    | 10         | ❌ No                   | ❌ No                     |
+| `preview/2025-07-01-preview/device.json`  | 3     | 3          | ❌ No                   | ❌ No                     |
+| `preview/2025-07-01-preview/service.json` | 10    | 10         | ❌ No                   | ❌ No                     |
 
 #### Definition Count Changes
 
-| File | Original definitions | New definitions | Net added |
-|------|---------------------|-----------------|-----------|
-| `stable/2021-10-01/device.json` | 9 | 13 | +4 |
-| `stable/2021-10-01/service.json` | 26 | 32 | +6 |
-| `preview/2025-07-01-preview/device.json` | 9 | 13 | +4 |
-| `preview/2025-07-01-preview/service.json` | 26 | 32 | +6 |
+| File                                      | Original definitions | New definitions | Net added |
+| ----------------------------------------- | -------------------- | --------------- | --------- |
+| `stable/2021-10-01/device.json`           | 9                    | 13              | +4        |
+| `stable/2021-10-01/service.json`          | 26                   | 32              | +6        |
+| `preview/2025-07-01-preview/device.json`  | 9                    | 13              | +4        |
+| `preview/2025-07-01-preview/service.json` | 26                   | 32              | +6        |
 
 All additions are **promoted inline enums** or **TypeSpec response envelope types**. Zero definitions removed.
 
@@ -347,60 +358,60 @@ All additions are **promoted inline enums** or **TypeSpec response envelope type
 
 **`stable/2021-10-01/device.json` and `preview/2025-07-01-preview/device.json`**
 
-| Definition | Property | Change | Breaking? |
-|------------|----------|--------|-----------|
-| `DeviceRegistrationResult` | `status` | Inline enum → `$ref: EnrollmentStatus` | ❌ No — values identical |
-| `DeviceRegistrationResult` | `substatus` | Inline enum → `$ref: AssignedDeviceSubstatus` | ❌ No — values identical |
-| `DeviceRegistrationResult` | `payload` | Added `additionalProperties: {}` | ❌ No — semantically equivalent |
-| `DeviceRegistration` | `payload` | Added `additionalProperties: {}` | ❌ No — semantically equivalent |
-| `RegistrationOperationStatus` | `status` | Inline enum → `$ref: EnrollmentStatus` | ❌ No — values identical |
+| Definition                    | Property    | Change                                        | Breaking?                       |
+| ----------------------------- | ----------- | --------------------------------------------- | ------------------------------- |
+| `DeviceRegistrationResult`    | `status`    | Inline enum → `$ref: EnrollmentStatus`        | ❌ No — values identical        |
+| `DeviceRegistrationResult`    | `substatus` | Inline enum → `$ref: AssignedDeviceSubstatus` | ❌ No — values identical        |
+| `DeviceRegistrationResult`    | `payload`   | Added `additionalProperties: {}`              | ❌ No — semantically equivalent |
+| `DeviceRegistration`          | `payload`   | Added `additionalProperties: {}`              | ❌ No — semantically equivalent |
+| `RegistrationOperationStatus` | `status`    | Inline enum → `$ref: EnrollmentStatus`        | ❌ No — values identical        |
 
 **`stable/2021-10-01/service.json` and `preview/2025-07-01-preview/service.json`**
 
-| Definition | Property | Change | Breaking? |
-|------------|----------|--------|-----------|
-| `IndividualEnrollment` | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy` | ❌ No — values identical |
-| `EnrollmentGroup` | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy` | ❌ No — values identical |
-| `AttestationMechanism` | `type` | Inline enum → `$ref: AttestationType` | ❌ No — values identical |
-| `BulkEnrollmentOperation` | `mode` | Inline enum → `$ref: OperationMode` | ❌ No — values identical |
-| `BulkEnrollmentGroupOperation` | `mode` | Inline enum → `$ref: OperationMode` | ❌ No — values identical |
-| `DeviceRegistrationState` | `status` | Inline enum → `$ref: EnrollmentStatus` | ❌ No — values identical |
-| `DeviceRegistrationState` | `substatus` | Inline enum → `$ref: AssignedDeviceSubstatus` | ❌ No — values identical |
-| `DeviceRegistrationState` | `payload` | Added `additionalProperties: {}` | ❌ No — semantically equivalent |
+| Definition                     | Property           | Change                                        | Breaking?                       |
+| ------------------------------ | ------------------ | --------------------------------------------- | ------------------------------- |
+| `IndividualEnrollment`         | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy`        | ❌ No — values identical        |
+| `EnrollmentGroup`              | `allocationPolicy` | Inline enum → `$ref: AllocationPolicy`        | ❌ No — values identical        |
+| `AttestationMechanism`         | `type`             | Inline enum → `$ref: AttestationType`         | ❌ No — values identical        |
+| `BulkEnrollmentOperation`      | `mode`             | Inline enum → `$ref: OperationMode`           | ❌ No — values identical        |
+| `BulkEnrollmentGroupOperation` | `mode`             | Inline enum → `$ref: OperationMode`           | ❌ No — values identical        |
+| `DeviceRegistrationState`      | `status`           | Inline enum → `$ref: EnrollmentStatus`        | ❌ No — values identical        |
+| `DeviceRegistrationState`      | `substatus`        | Inline enum → `$ref: AssignedDeviceSubstatus` | ❌ No — values identical        |
+| `DeviceRegistrationState`      | `payload`          | Added `additionalProperties: {}`              | ❌ No — semantically equivalent |
 
 **`preview/2025-07-01-preview/service.json` only**
 
-| Definition | Property | Change | Breaking? |
-|------------|----------|--------|-----------|
+| Definition             | Property            | Change                                                   | Breaking?                                             |
+| ---------------------- | ------------------- | -------------------------------------------------------- | ----------------------------------------------------- |
 | `IndividualEnrollment` | `registrationState` | Added `readOnly: true` (was missing in original preview) | ❌ No — corrects a bug; service never accepted writes |
 
 #### `ProvisioningServiceErrorDetails` — Identical Structure
 
 The error model is **structurally identical** between original and new (minor property key reordering only, which has no impact on parsing):
 
-| Property | Original | New |
-|----------|----------|-----|
-| `errorCode` | `{type:integer, format:int32}` | `{type:integer, format:int32}` |
-| `trackingId` | `{type:string}` | `{type:string}` |
-| `message` | `{type:string}` | `{type:string}` |
-| `info` | `{type:object, additionalProperties:{type:string}}` | `{type:object, additionalProperties:{type:string}}` |
-| `timestampUtc` | `{type:string, format:date-time}` | `{type:string, format:date-time}` |
+| Property       | Original                                            | New                                                 |
+| -------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `errorCode`    | `{type:integer, format:int32}`                      | `{type:integer, format:int32}`                      |
+| `trackingId`   | `{type:string}`                                     | `{type:string}`                                     |
+| `message`      | `{type:string}`                                     | `{type:string}`                                     |
+| `info`         | `{type:object, additionalProperties:{type:string}}` | `{type:object, additionalProperties:{type:string}}` |
+| `timestampUtc` | `{type:string, format:date-time}`                   | `{type:string, format:date-time}`                   |
 
 ---
 
 ## Behavioral Compatibility Matrix
 
-| Scenario | Works? | Notes |
-|----------|--------|-------|
-| Old SDK (from original Swagger) + unchanged service | ✅ | No service changes |
-| New SDK (from TypeSpec Swagger) + unchanged service | ✅ | All wire contracts preserved |
-| Old SDK + new SDK mixed (different clients, same service) | ✅ | Service behavior unchanged |
-| Old SDK `api-version` handling | ✅ | Still a query param on every call |
-| Old SDK enum values | ✅ | All values identical |
-| Old SDK required fields | ✅ | All required arrays identical |
-| Old SDK default values | ✅ | All defaults restored |
-| Old SDK LRO polling (202 + Location + retry-after) | ✅ | All headers preserved |
-| Old SDK error handling (errorCode, message, trackingId) | ✅ | ProvisioningServiceErrorDetails identical |
+| Scenario                                                  | Works? | Notes                                     |
+| --------------------------------------------------------- | ------ | ----------------------------------------- |
+| Old SDK (from original Swagger) + unchanged service       | ✅     | No service changes                        |
+| New SDK (from TypeSpec Swagger) + unchanged service       | ✅     | All wire contracts preserved              |
+| Old SDK + new SDK mixed (different clients, same service) | ✅     | Service behavior unchanged                |
+| Old SDK `api-version` handling                            | ✅     | Still a query param on every call         |
+| Old SDK enum values                                       | ✅     | All values identical                      |
+| Old SDK required fields                                   | ✅     | All required arrays identical             |
+| Old SDK default values                                    | ✅     | All defaults restored                     |
+| Old SDK LRO polling (202 + Location + retry-after)        | ✅     | All headers preserved                     |
+| Old SDK error handling (errorCode, message, trackingId)   | ✅     | ProvisioningServiceErrorDetails identical |
 
 ### Minor Stable-vs-Preview Alignment
 

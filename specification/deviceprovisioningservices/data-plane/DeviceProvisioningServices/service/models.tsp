@@ -160,7 +160,7 @@ union AllocationPolicy {
 /**
  * Operation mode.
  */
-union BulkEnrollmentMode {
+union OperationMode {
   string,
 
   /**
@@ -703,7 +703,7 @@ model QueryResponse<T extends {}> {
 
   @header("x-ms-max-item-count")
   @doc("The maximum number of items returned in a page.")
-  xMsMaxItemCount?: int64;
+  xMsMaxItemCount?: int32;
 
   @header("x-ms-item-type")
   @doc("The list of values returned from the query.")
@@ -830,7 +830,7 @@ model BulkEnrollmentOperation {
   /**
    * Operation mode.
    */
-  mode: BulkEnrollmentMode;
+  mode: OperationMode;
 }
 
 /**
@@ -906,7 +906,7 @@ model BulkEnrollmentGroupOperation {
   /**
    * Operation mode.
    */
-  mode: BulkEnrollmentMode;
+  mode: OperationMode;
 }
 
 /**

@@ -304,7 +304,7 @@
             "description": "Page size",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           {
             "name": "x-ms-continuation",
@@ -343,7 +343,7 @@
               },
               "x-ms-max-item-count": {
                 "type": "integer",
-                "format": "int64",
+                "format": "int32",
                 "description": "The maximum number of items returned in a page."
               }
             }
@@ -641,7 +641,7 @@
             "description": "Page size",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           {
             "name": "x-ms-continuation",
@@ -680,7 +680,7 @@
               },
               "x-ms-max-item-count": {
                 "type": "integer",
-                "format": "int64",
+                "format": "int32",
                 "description": "The maximum number of items returned in a page."
               }
             }
@@ -827,7 +827,7 @@
             "description": "pageSize",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           {
             "name": "x-ms-continuation",
@@ -857,7 +857,7 @@
               },
               "x-ms-max-item-count": {
                 "type": "integer",
-                "format": "int64",
+                "format": "int32",
                 "description": "The maximum number of items returned in a page."
               }
             }
@@ -1032,7 +1032,7 @@
           }
         },
         "mode": {
-          "$ref": "#/definitions/BulkEnrollmentMode",
+          "$ref": "#/definitions/OperationMode",
           "description": "Operation mode."
         }
       },
@@ -1085,42 +1085,6 @@
         "isSuccessful"
       ]
     },
-    "BulkEnrollmentMode": {
-      "type": "string",
-      "description": "Operation mode.",
-      "enum": [
-        "create",
-        "update",
-        "updateIfMatchETag",
-        "delete"
-      ],
-      "x-ms-enum": {
-        "name": "BulkEnrollmentMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "create",
-            "value": "create",
-            "description": "create"
-          },
-          {
-            "name": "update",
-            "value": "update",
-            "description": "update"
-          },
-          {
-            "name": "updateIfMatchETag",
-            "value": "updateIfMatchETag",
-            "description": "updateIfMatchETag"
-          },
-          {
-            "name": "delete",
-            "value": "delete",
-            "description": "delete"
-          }
-        ]
-      }
-    },
     "BulkEnrollmentOperation": {
       "type": "object",
       "description": "Bulk enrollment operation.",
@@ -1133,7 +1097,7 @@
           }
         },
         "mode": {
-          "$ref": "#/definitions/BulkEnrollmentMode",
+          "$ref": "#/definitions/OperationMode",
           "description": "Operation mode."
         }
       },
@@ -1556,6 +1520,42 @@
           "format": "int32",
           "description": "This is null for reported properties metadata and is not null for desired\nproperties metadata."
         }
+      }
+    },
+    "OperationMode": {
+      "type": "string",
+      "description": "Operation mode.",
+      "enum": [
+        "create",
+        "update",
+        "updateIfMatchETag",
+        "delete"
+      ],
+      "x-ms-enum": {
+        "name": "OperationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "create",
+            "value": "create",
+            "description": "create"
+          },
+          {
+            "name": "update",
+            "value": "update",
+            "description": "update"
+          },
+          {
+            "name": "updateIfMatchETag",
+            "value": "updateIfMatchETag",
+            "description": "updateIfMatchETag"
+          },
+          {
+            "name": "delete",
+            "value": "delete",
+            "description": "delete"
+          }
+        ]
       }
     },
     "ProvisioningServiceErrorDetails": {

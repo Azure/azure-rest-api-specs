@@ -7,6 +7,7 @@ This is the AutoRest configuration file for Device Provisioning Service.
 > **TypeSpec Migration**: The stable `2021-10-01` and preview `2025-07-01-preview` device and service APIs have been migrated to TypeSpec.
 > The OpenAPI files in `stable/2021-10-01/` and `preview/2025-07-01-preview/` are now generated from TypeSpec source.
 > TypeSpec source files (versioned — emit both stable and preview):
+>
 > - Device API: [device/main.tsp](device/main.tsp)
 > - Service API: [service/main.tsp](service/main.tsp)
 
@@ -30,7 +31,7 @@ To see additional help and options, run:
 
 These are the global settings for the API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2021-10-01-device
 ```
@@ -74,11 +75,12 @@ input-file:
   - stable/2021-10-01/device.json
 title: ProvisioningDeviceClient
 ```
+
 ---
 
 ## Suppression
 
-``` yaml
+```yaml
 suppressions:
   - code: OperationId
     from: device.json
