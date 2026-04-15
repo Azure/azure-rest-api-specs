@@ -93,6 +93,7 @@ interface SessionHosts {
       /**
        * The path to the VM.
        */
+      @added(Versions.vLatestPreview)
       @query("vmPath")
       @maxLength(1092)
       @minLength(3)
@@ -105,12 +106,13 @@ interface SessionHosts {
   /**
    * create or update a sessionHost.
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.vLatestPreview)
   create is ArmResourceCreateOrReplaceSync<SessionHost>;
 
   /**
    * Retry provisioning on a SessionHost.
    */
+  @added(Versions.vLatestPreview)
   retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
 
   /**
@@ -118,7 +120,7 @@ interface SessionHosts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SessionHosts_ListSingleRegistrationTokens")
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.vLatestPreview)
   listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,
     ScopedRegistrationTokenProperties,

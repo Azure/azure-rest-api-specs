@@ -136,6 +136,7 @@ using Microsoft.DesktopVirtualization;
 
 @@clientName(AppAttachPackageProperties.keyVaultURL, "KeyVaultUri", "csharp");
 
+
 @@clientName(ApplicationGroupProperties.cloudPcResource,
   "IsCloudPCResource",
   "csharp"

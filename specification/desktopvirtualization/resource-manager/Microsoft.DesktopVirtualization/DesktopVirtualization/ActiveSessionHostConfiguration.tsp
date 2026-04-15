@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./HostPool.tsp";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -27,6 +29,7 @@ model ActiveSessionHostConfiguration
   >;
 }
 
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ActiveSessionHostConfigurations {
   /**
