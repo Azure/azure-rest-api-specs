@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Lionrock",
-    "version": "2025-12-04-preview",
+    "version": "2026-04-14-preview",
     "description": "Microsoft.Lionrock resource providers API.",
     "x-typespec-generated": [
       {
@@ -236,6 +236,50 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PlannedQuota_Delete",
+        "tags": [
+          "PlannedQuota"
+        ],
+        "description": "Delete a PlannedQuotaResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete PlannedQuota": {
+            "$ref": "./examples/PlannedQuota_Delete.json"
+          }
+        }
       }
     }
   },

@@ -77,7 +77,7 @@ model PropertyBinding {
 @subscriptionResource
 model PlannedQuotaResource
   is ProxyResource<PlannedQuotaResourceProperties> { // this can be TrackedResource based on resourcetype
-  @doc("The name of resource.")
+  @doc("The name of the resource.")
   @pattern("^[a-zA-Z0-9-]*$")
   @minLength(3)
   @maxLength(80)
@@ -88,7 +88,6 @@ model PlannedQuotaResource
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Delete operation is currently not supported by FRP."
 @armResourceOperations
 interface PlannedQuota {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
@@ -99,6 +98,8 @@ interface PlannedQuota {
   >;
   listBySubscription is ArmListBySubscription<PlannedQuotaResource>;
   get is ArmResourceRead<PlannedQuotaResource>;
+  @added(Versions.v2026_04_14_preview)
+  delete is ArmResourceDeleteSync<PlannedQuotaResource>;
 }
 
 @@visibility(PlannedQuotaResource.properties, Lifecycle.Read, Lifecycle.Create);
