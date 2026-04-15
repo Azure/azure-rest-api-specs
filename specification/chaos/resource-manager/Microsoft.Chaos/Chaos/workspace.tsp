@@ -37,10 +37,10 @@ interface Workspaces {
   /**
    * Delete a Workspace resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "ARM reviewer requires 200 response on delete per RPC-Delete-V1-03"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Custom 204 description to replace incorrect 'Resource does not exist' wording"
   delete is ArmResourceDeleteAsyncBase<
     Workspace,
-    ArmDeletedResponse | ArmDeleteAcceptedLroResponse | WorkspaceDeleteNoContentResponse
+    ArmDeleteAcceptedLroResponse | WorkspaceDeleteNoContentResponse
   >;
 
   /**
