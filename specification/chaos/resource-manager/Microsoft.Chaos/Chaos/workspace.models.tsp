@@ -13,6 +13,11 @@ using Azure.Core.Traits;
 
 namespace Microsoft.Chaos;
 /**
+ * No Content
+ */
+model WorkspaceDeleteNoContentResponse is ArmNoContentResponse<"No Content">;
+
+/**
  * Model that represents a Workspace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
