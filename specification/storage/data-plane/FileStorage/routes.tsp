@@ -513,7 +513,7 @@ interface Share {
       ...PaidBurstingRequestHeaders;
       ...FileRequestIntentParameter;
       ...ShareProvisionedIopsRequestHeader;
-      ...ShareProvisionedBandwidthRequestHeader;
+      ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
     },
     {

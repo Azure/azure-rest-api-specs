@@ -1652,7 +1652,7 @@
             "description": "Specifies the maximum size of the share, in gigabytes.",
             "required": false,
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "x-ms-client-name": "quota"
           },
           {
@@ -1858,17 +1858,17 @@
               },
               "x-ms-share-provisioned-bandwidth-mibps": {
                 "type": "integer",
-                "format": "int32",
-                "description": "The provisioned bandwidth."
+                "format": "int64",
+                "description": "Optional. Specifies the provisioned bandwidth of the share, in MiBps."
               },
               "x-ms-share-provisioned-iops": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The provisioned IOPS."
               },
               "x-ms-share-quota": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The share quota."
               },
               "x-ms-version": {
@@ -2083,27 +2083,27 @@
               },
               "x-ms-share-provisioned-bandwidth-mibps": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The provisioned bandwidth for the share."
               },
               "x-ms-share-provisioned-egress-mbps": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The provisioned egress for the share."
               },
               "x-ms-share-provisioned-ingress-mbps": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The provisioned ingress for the share."
               },
               "x-ms-share-provisioned-iops": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The provisioned IOPS for the share."
               },
               "x-ms-share-quota": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The maximum quota for the share."
               },
               "x-ms-version": {
@@ -3465,7 +3465,7 @@
             "description": "Specifies the maximum size of the share, in gigabytes.",
             "required": false,
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "x-ms-client-name": "quota"
           },
           {
@@ -3661,7 +3661,7 @@
               },
               "x-ms-share-included-burst-iops": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The share included burst IOPS."
               },
               "x-ms-share-max-burst-credits-for-iops": {
@@ -3686,17 +3686,17 @@
               },
               "x-ms-share-provisioned-bandwidth-mibps": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The share provisioned bandwidth in mebibytes per second."
               },
               "x-ms-share-provisioned-iops": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The share provisioned IOPS."
               },
               "x-ms-share-quota": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The current share quota."
               },
               "x-ms-version": {
@@ -4335,7 +4335,7 @@
               },
               "x-ms-share-included-burst-iops": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The share included burst IOPS."
               },
               "x-ms-share-max-burst-credits-for-iops": {
@@ -4345,17 +4345,17 @@
               },
               "x-ms-share-provisioned-bandwidth-mibps": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The share provisioned bandwidth in mebibytes per second."
               },
               "x-ms-share-provisioned-iops": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The share provisioned IOPS."
               },
               "x-ms-share-quota": {
                 "type": "integer",
-                "format": "int32",
+                "format": "int64",
                 "description": "The current share quota."
               },
               "x-ms-version": {
@@ -7774,6 +7774,7 @@
               },
               "x-ms-content-crc64": {
                 "type": "string",
+                "format": "byte",
                 "description": "CRC64 hash of the range content."
               },
               "x-ms-file-last-write-time": {
@@ -11553,7 +11554,7 @@
         },
         "quota": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The share quota.",
           "xml": {
             "name": "Quota"
@@ -11561,7 +11562,7 @@
         },
         "provisionedIops": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The provisioned IOPS.",
           "xml": {
             "name": "ProvisionedIops"
@@ -11569,7 +11570,7 @@
         },
         "provisionedIngressMBps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The provisioned ingress in MBps.",
           "xml": {
             "name": "ProvisionedIngressMBps"
@@ -11577,7 +11578,7 @@
         },
         "provisionedEgressMBps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The provisioned egress in MBps.",
           "xml": {
             "name": "ProvisionedEgressMBps"
@@ -11585,7 +11586,7 @@
         },
         "provisionedBandwidthMiBps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The provisioned bandwidth in MiBps.",
           "xml": {
             "name": "ProvisionedBandwidthMiBps"
