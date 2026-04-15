@@ -33,7 +33,7 @@ using Microsoft.ResourceHealth;
   "Event"
 );
 @@clientName(EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
-  "fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId"
+  "fetchBillingCommunicationDetailsBySubscriptionIdAndTrackingId"
 );
 @@clientLocation(TenantEventOperationGroup.getByTenantIdAndTrackingId, "Event");
 @@clientLocation(TenantEventOperationGroup.listByTenantId, "Events");
@@ -77,3 +77,18 @@ using Microsoft.ResourceHealth;
 @@clientName(KeyValueItem, "keyValueItem");
 @@clientName(Link, "link");
 @@clientName(EmergingIssueImpact, "emergingIssueImpact");
+
+// Keep pre-migration Go names for typo'd wire names introduced by conversion.
+@@clientName(AvailabilityStatusProperties.occuredTime, "OccurredTime", "go");
+@@clientName(AvailabilityStatusPropertiesRecentlyResolved.unavailableOccuredTime,
+  "UnavailableOccurredTime",
+  "go"
+);
+@@clientName(AvailabilityStatusPropertiesRecentlyResolved.unavailableSummary,
+  "UnavailabilitySummary",
+  "go"
+);
+@@clientName(EventPropertiesRecommendedActionsActionsItem,
+  "EventPropertiesRecommendedActionsItem",
+  "go"
+);
