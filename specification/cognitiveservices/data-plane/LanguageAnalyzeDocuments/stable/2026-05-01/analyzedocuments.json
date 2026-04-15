@@ -524,6 +524,52 @@
       ],
       "x-ms-discriminator-value": "AzureBlob"
     },
+    "AzureContainerDocumentLocation": {
+      "type": "object",
+      "description": "Document location for azure blob storage containers.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the document."
+        },
+        "managedIdentityClientId": {
+          "type": "string",
+          "description": "The user managed identity client Id to use to authenticate with the storage account"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentLocation"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureContainer"
+    },
+    "AzureContainerFolderDocumentLocation": {
+      "type": "object",
+      "description": "Document location for folders within azure blob storage containers.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the document."
+        },
+        "managedIdentityClientId": {
+          "type": "string",
+          "description": "The user managed identity client Id to use to authenticate with the storage account"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentLocation"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureContainerFolder"
+    },
     "BaseRedactionPolicy": {
       "type": "object",
       "description": "The abstract base class for RedactionPolicy.",

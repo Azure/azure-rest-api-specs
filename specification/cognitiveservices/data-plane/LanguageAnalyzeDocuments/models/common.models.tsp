@@ -505,6 +505,32 @@ model AzureBlobDocumentLocation extends DocumentLocation {
   managedIdentityClientId?: string;
 }
 
+/** Document location for azure blob storage containers. */
+@added(Versions.v2026_05_01)
+model AzureContainerDocumentLocation extends DocumentLocation {
+  /** The kind of the document location. */
+  kind: DocumentLocationKind.AzureContainer;
+
+  /** The location of the document. */
+  location: string;
+
+  /** The user managed identity client Id to use to authenticate with the storage account */
+  managedIdentityClientId?: string;
+}
+
+/** Document location for folders within azure blob storage containers. */
+@added(Versions.v2026_05_01)
+model AzureContainerFolderDocumentLocation extends DocumentLocation {
+  /** The kind of the document location. */
+  kind: DocumentLocationKind.AzureContainerFolder;
+
+  /** The location of the document. */
+  location: string;
+
+  /** The user managed identity client Id to use to authenticate with the storage account */
+  managedIdentityClientId?: string;
+}
+
 /** Error response. */
 @error
 model ErrorResponse is Azure.Core.Foundations.ErrorResponseBase<Error>;
