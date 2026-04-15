@@ -46,15 +46,39 @@ using Azure.ClientGenerator.Core;
 );
 
 // C# client name decorators for backward compatibility
+// Rename local ErrorResponse to avoid TCGC duplicate-client-name with common-types ErrorResponse,
+// and mark it internal so C# SDK uses Azure.ResourceManager common-types ErrorResponse instead.
+@@clientName(ErrorResponse, "HDInsightErrorDetail", "csharp");
+@@access(ErrorResponse, Access.internal, "csharp");
 @@clientName(Application, "HDInsightApplication", "csharp");
 @@clientName(Cluster, "HDInsightCluster", "csharp");
+@@clientName(Clusters, "HDInsightCluster", "csharp");
 @@clientName(ApplicationProperties, "HDInsightApplicationProperties", "csharp");
+@@clientName(ApplicationProperties.createdDate, "CreatedOn", "csharp");
 @@clientName(ApplicationGetEndpoint, "HDInsightApplicationEndpoint", "csharp");
+@@clientName(ApplicationGetEndpoint.location, "EndpointLocation", "csharp");
+@@clientName(ApplicationGetEndpoint.privateIPAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
 @@clientName(ApplicationGetHttpsEndpoint,
   "HDInsightApplicationHttpsEndpoint",
   "csharp"
 );
+@@clientName(ApplicationGetHttpsEndpoint.location,
+  "EndpointLocation",
+  "csharp"
+);
+@@clientName(ApplicationGetHttpsEndpoint.privateIPAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
 @@clientName(AaddsResourceDetails, "HDInsightClusterAaddsDetail", "csharp");
+@@clientName(AaddsResourceDetails.initialSyncComplete,
+  "IsInitialSyncComplete",
+  "csharp"
+);
+@@clientName(AaddsResourceDetails.ldapsEnabled, "IsLdapsEnabled", "csharp");
 @@clientName(AsyncOperationResult, "HDInsightAsyncOperationResult", "csharp");
 @@clientName(AsyncOperationState, "HDInsightAsyncOperationState", "csharp");
 @@clientName(Autoscale, "HDInsightAutoScaleConfiguration", "csharp");
@@ -69,12 +93,20 @@ using Azure.ClientGenerator.Core;
   "HDInsightAutoScaleConfigurationUpdateContent",
   "csharp"
 );
+@@clientName(AutoscaleConfigurationUpdateParameter.autoscale,
+  "AutoScale",
+  "csharp"
+);
 @@clientName(AzureMonitorRequest,
   "HDInsightAzureMonitorExtensionEnableContent",
   "csharp"
 );
 @@clientName(AzureMonitorResponse,
   "HDInsightAzureMonitorExtensionStatus",
+  "csharp"
+);
+@@clientName(AzureMonitorResponse.clusterMonitoringEnabled,
+  "IsClusterMonitoringEnabled",
   "csharp"
 );
 @@clientName(AzureMonitorSelectedConfigurations,
@@ -97,7 +129,11 @@ using Azure.ClientGenerator.Core;
   "HDInsightClusterCreateOrUpdateProperties",
   "csharp"
 );
+@@clientName(ClusterCreateProperties.osType, "OSType", "csharp");
+@@clientName(StorageProfile.storageaccounts, "Accounts ", "csharp");
 @@clientName(ClusterGetProperties, "HDInsightClusterProperties", "csharp");
+@@clientName(ClusterGetProperties.osType, "OSType", "csharp");
+@@clientName(ClusterGetProperties.createdDate, "CreatedOn", "csharp");
 @@clientName(ClusterDefinition, "HDInsightClusterDefinition", "csharp");
 @@clientName(ClusterDiskEncryptionParameters,
   "HDInsightClusterDiskEncryptionContent",
@@ -115,10 +151,19 @@ using Azure.ClientGenerator.Core;
   "HDInsightClusterExtensionStatus",
   "csharp"
 );
+@@clientName(ClusterMonitoringResponse.clusterMonitoringEnabled,
+  "IsClusterMonitoringEnabled",
+  "csharp"
+);
 @@clientName(DataDisksGroups, "HDInsightClusterDataDiskGroup", "csharp");
+@@clientName(DataDisksGroups.diskSizeGB, "DiskSizeInGB", "csharp");
 @@clientName(DiskBillingMeters, "HDInsightDiskBillingMeters", "csharp");
 @@clientName(DiskEncryptionProperties,
   "HDInsightDiskEncryptionProperties",
+  "csharp"
+);
+@@clientName(DiskEncryptionProperties.encryptionAtHost,
+  "IsEncryptionAtHostEnabled",
   "csharp"
 );
 @@clientName(ComputeIsolationProperties,
@@ -129,18 +174,33 @@ using Azure.ClientGenerator.Core;
 @@clientName(GatewaySettings, "HDInsightClusterGatewaySettings", "csharp");
 @@clientName(HostInfo, "HDInsightClusterHostInfo", "csharp");
 @@clientName(IpTag, "HDInsightClusterIPTag", "csharp");
+@@clientName(IpTag.ipTagType, "IPTagType", "csharp");
 @@clientName(LinuxOperatingSystemProfile, "HDInsightLinuxOSProfile", "csharp");
 @@clientName(NameAvailabilityCheckRequestParameters,
   "HDInsightNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(NameAvailabilityCheckRequestParameters.type,
+  "ResourceType",
   "csharp"
 );
 @@clientName(NameAvailabilityCheckResult,
   "HDInsightNameAvailabilityResult",
   "csharp"
 );
+@@clientName(NameAvailabilityCheckResult.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
 @@clientName(NetworkProperties, "HDInsightClusterNetworkProperties", "csharp");
+@@clientName(NetworkProperties.publicIpTag, "PublicIPTag", "csharp");
 @@clientName(Role, "HDInsightClusterRole", "csharp");
+@@clientName(Role.autoscale, "AutoScaleConfiguration", "csharp");
+@@clientName(Role.VMGroupName, "VmGroupName", "csharp");
+@@clientName(Role.osProfile, "OSProfile", "csharp");
+@@clientName(OsProfile.linuxOperatingSystemProfile, "LinuxProfile", "csharp");
 @@clientName(StorageAccount, "HDInsightStorageAccountInfo", "csharp");
+@@clientName(StorageAccount.saskey, "SasKey", "csharp");
 @@clientName(UpdateGatewaySettingsParameters,
   "HDInsightClusterUpdateGatewaySettingsContent",
   "csharp"
@@ -162,12 +222,19 @@ using Azure.ClientGenerator.Core;
   "HDInsightClusterCreationValidateContent",
   "csharp"
 );
+@@clientName(ClusterCreateRequestValidationParameters.type,
+  "ClusterCreateRequestValidationParametersType ",
+  "csharp"
+);
 @@clientName(DaysOfWeek, "HDInsightDayOfWeek", "csharp");
 @@clientName(DirectoryType, "AuthenticationDirectoryType", "csharp");
 @@clientName(PrivateLink, "HDInsightPrivateLinkState", "csharp");
+@@clientName(PrivateLinkResource, "HDInsightPrivateLinkResource", "csharp");
 @@clientName(Tier, "HDInsightTier", "csharp");
 @@clientName(FilterMode, "HDInsightFilterMode", "csharp");
 @@clientName(IPConfiguration, "HDInsightIPConfiguration", "csharp");
+@@clientName(IPConfiguration.type, "ResourceType", "csharp");
+@@clientName(IPConfigurationProperties.primary, "IsPrimary", "csharp");
 @@clientName(LocalizedName, "HDInsightLocalizedName", "csharp");
 @@clientName(OSType, "HDInsightOSType", "csharp");
 @@clientName(PrivateIPAllocationMethod,
@@ -176,6 +243,11 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(PrivateLinkConfiguration,
   "HDInsightPrivateLinkConfiguration",
+  "csharp"
+);
+@@clientName(PrivateLinkConfiguration.type, "ResourceType", "csharp");
+@@clientName(PrivateLinkConfigurationProperties.ipConfigurations,
+  "IPConfigurations",
   "csharp"
 );
 @@clientName(PrivateLinkConfigurationProvisioningState,
@@ -192,6 +264,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(RoleName, "HDInsightRoleName", "csharp");
 @@clientName(SecurityProfile, "HDInsightSecurityProfile", "csharp");
+@@clientName(SecurityProfile.ldapsUrls, "LdapUris ", "csharp");
 @@clientName(SshPublicKey, "HDInsightSshPublicKey", "csharp");
 @@clientName(VersionSpec, "HDInsightVersionSpec", "csharp");
 @@clientName(VersionsCapability, "HDInsightVersionsCapability", "csharp");
@@ -199,44 +272,209 @@ using Azure.ClientGenerator.Core;
   "HDInsightVmSizeCompatibilityFilterV2",
   "csharp"
 );
-@@clientName(VmSizeProperty, "HDInsightVmSizeProperty", "csharp");
-@@clientName(ConnectivityEndpoint.location, "EndpointLocation", "csharp");
-@@clientName(ApplicationGetEndpoint.location, "EndpointLocation", "csharp");
-@@clientName(ApplicationGetHttpsEndpoint.location,
-  "EndpointLocation",
+@@clientName(VmSizeCompatibilityFilterV2.computeIsolationSupported,
+  "IsComputeIsolationSupported",
   "csharp"
 );
-
-// C# operation name decorators for disambiguation
+@@clientName(VmSizeCompatibilityFilterV2.osType, "OSType", "csharp");
+@@clientName(VmSizeProperty, "HDInsightVmSizeProperty", "csharp");
+@@clientName(VmSizeProperty.supportedByVirtualMachines,
+  "IsSupportedByVirtualMachines",
+  "csharp"
+);
+@@clientName(VmSizeProperty.supportedByWebWorkerRoles,
+  "IsSupportedByWebWorkerRoles",
+  "csharp"
+);
+@@clientName(VmSizeProperty.memoryInMb, "MemoryInMB", "csharp");
+@@clientName(VmSizeProperty.virtualMachineResourceDiskSizeInMb,
+  "VirtualMachineResourceDiskSizeInMB",
+  "csharp"
+);
+@@clientName(VmSizeProperty.webWorkerResourceDiskSizeInMb,
+  "WebWorkerResourceDiskSizeInMB",
+  "csharp"
+);
+@@clientName(ConnectivityEndpoint.location, "EndpointLocation", "csharp");
+@@clientName(ConnectivityEndpoint.privateIPAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
 @@clientName(Configurations.get, "GetConfiguration", "csharp");
-@@clientName(Extensions.get, "GetExtension", "csharp");
 @@clientName(ScriptExecutionHistory.listByCluster,
   "GetScriptExecutionHistory",
   "csharp"
 );
+@@clientName(ScriptExecutionHistory.promote,
+  "PromoteScriptExecutionHistory",
+  "csharp"
+);
+@@clientName(ScriptActions.delete, "DeleteScriptAction", "csharp");
+@@clientName(ScriptActions.getExecutionDetail,
+  "GetScriptActionExecutionDetail",
+  "csharp"
+);
+@@clientName(UserAssignedIdentity,
+  "HDInsightClusterUserAssignedIdentity",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "HDInsightPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(PrivateLinkResources, "HDInsightPrivateLinkResources", "csharp");
+@@clientName(ExecuteScriptActionParameters,
+  "ExecuteScriptActionContent",
+  "csharp"
+);
+@@clientName(ClusterCreateParametersExtended,
+  "HDInsightClusterCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(RegionalQuotaCapability.regionName, "Region", "csharp");
+@@clientName(RuntimeScriptActionDetail.startTime, "StartOn", "csharp");
+@@clientName(RuntimeScriptActionDetail.endTime, "EndOn", "csharp");
+@@clientName(JsonWebKeyEncryptionAlgorithm.`RSA-OAEP`, "RsaOaep", "csharp");
+@@clientName(JsonWebKeyEncryptionAlgorithm.`RSA-OAEP-256`,
+  "RsaOaep256",
+  "csharp"
+);
+@@clientName(JsonWebKeyEncryptionAlgorithm.RSA1_5, "Rsa15", "csharp");
 
 // Suppress async polling operations to prevent phantom ARM resources and duplicate methods in C#
 @@scope(Applications.getAzureAsyncOperationStatus, "!csharp");
 @@scope(Clusters.getAzureAsyncOperationStatus, "!csharp");
 @@scope(Extensions.getAzureAsyncOperationStatus, "!csharp");
 @@scope(ScriptActions.getExecutionAsyncOperationStatus, "!csharp");
-@@scope(ScriptActions.getExecutionDetail, "!csharp");
+// @@scope(ScriptActions.getExecutionDetail, "!csharp");
 @@scope(VirtualMachines.getAsyncOperationStatus, "!csharp");
 
 // Suppress operations that use ArmResourceRead<Cluster> with extra path segments,
-// which cause phantom ConfigurationResource and ExtensionResource generation
+// which cause phantom ConfigurationResource and ExtensionResource generation.
+// Extensions.create (PUT) is kept so the Extension model generates as HDInsightClusterCreateExtensionContent.
 @@scope(Configurations.get, "!csharp");
 @@scope(Configurations.update, "!csharp");
 @@scope(Extensions.get, "!csharp");
-@@scope(Extensions.create, "!csharp");
 @@scope(Extensions.delete, "!csharp");
+@@scope(VirtualMachines.restartHosts, "!csharp");
 
-// Fix string→ResourceIdentifier: armCommonTypesVersion v3 uses string for id,
-// but the SDK base classes expect ResourceIdentifier
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(Application.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(Cluster.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(BillingResources.region, Azure.Core.azureLocation, "csharp");
+@@alternateType(RegionalQuotaCapability.regionName,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ClusterCreateParametersExtended.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ClusterCreateRequestValidationParameters.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(AaddsResourceDetails.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(AaddsResourceDetails.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AaddsResourceDetails.subnetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IPConfiguration.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(VirtualNetworkProfile.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(StorageAccount.msiResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(StorageAccount.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SecurityProfile.aaddsResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SecurityProfile.msiResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DiskEncryptionProperties.msiResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ResourceId.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(ScriptAction.uri, url, "csharp");
+@@alternateType(RuntimeScriptAction.uri, url, "csharp");
+@@alternateType(DiskEncryptionProperties.vaultUri, url, "csharp");
+@@alternateType(ClusterDiskEncryptionParameters.vaultUri, url, "csharp");
+@@alternateType(HostInfo.effectiveDiskEncryptionKeyUrl, url, "csharp");
+@@alternateType(SecurityProfile.ldapsUrls, url[], "csharp");
+@@alternateType(RuntimeScriptActionDetail.startTime, utcDateTime, "csharp");
+@@alternateType(RuntimeScriptActionDetail.endTime, utcDateTime, "csharp");
+@@alternateType(ClusterGetProperties.createdDate, utcDateTime, "csharp");
+@@alternateType(ApplicationProperties.createdDate, utcDateTime, "csharp");
+@@alternateType(PrivateLinkConfiguration.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(NameAvailabilityCheckRequestParameters.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(IPConfiguration.type, Azure.Core.armResourceType, "csharp");
+@@alternateType(IPConfigurationProperties.privateIPAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(ConnectivityEndpoint.privateIPAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(ApplicationGetEndpoint.privateIPAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(ApplicationGetHttpsEndpoint.privateIPAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(ClusterPatchParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ClusterCreateParametersExtended.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Cluster.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(GatewaySettings.`restAuthCredential.isEnabled`,
+  TypeSpec.boolean,
+  "csharp"
+);
+@@alternateType(AsyncOperationResult.error,
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "csharp"
+);
+
+@@usage(Cluster, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(ClusterGetProperties, Azure.ClientGenerator.Core.Usage.input, "csharp");
 
 // Fix PrivateLinkResource list operation: Legacy.ArmListSinglePageByParent returns
 // Response<ListResult> which the collection cannot enumerate. Mark as pageable.
@@ -244,14 +482,3 @@ using Azure.ClientGenerator.Core;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(PrivateLinkResources.listByCluster,
   "csharp"
 );
-
-// Rename local UserAssignedIdentity to avoid conflict with common-types
-@@clientName(UserAssignedIdentity,
-  "HDInsightClusterUserAssignedIdentity",
-  "csharp"
-);
-
-// Suppress VirtualMachines.restartHosts for C# — the generator produces invalid
-// IEnumerable<string>.ToRequestContent() calls for string[] body parameters.
-// This operation will be re-added via custom code.
-@@scope(VirtualMachines.restartHosts, "!csharp");
