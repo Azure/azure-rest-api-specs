@@ -67,7 +67,8 @@ interface Tables {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   createOrUpdate is TableOps.CreateOrUpdateAsync<
     Table,
-    Response = ArmResourceUpdatedResponse<Table> | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<Table> | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Table> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -86,9 +87,10 @@ interface Tables {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is TableOps.DeleteWithoutOkAsync<
     Table,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

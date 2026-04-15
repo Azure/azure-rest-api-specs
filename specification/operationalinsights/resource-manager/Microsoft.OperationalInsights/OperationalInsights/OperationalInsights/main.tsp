@@ -53,7 +53,8 @@ enum Versions {
   v2025_07_01: "2025-07-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<OperationListResult> {}
 
 @@doc(Operations.list,
   "Lists all of the available OperationalInsights Rest API operations."

@@ -3,14 +3,6 @@
     "/providers/microsoft.OperationalInsights/operations": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OperationListResult",
-                "__new": "../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -2456,14 +2448,17 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string",
-                "description": "Operation Status Location URI"
-              },
               "Azure-AsyncOperation": {
+                "format__added": "uri",
                 "description": {
                   "__old": "Operation Status Location URI",
                   "__new": "A link to the status monitor"
+                }
+              },
+              "Location": {
+                "description": {
+                  "__old": "Operation Status Location URI",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
                 }
               }
             }
@@ -2531,9 +2526,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/tables": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -2603,14 +2595,6 @@
         }
       },
       "put": {
-        "x-ms-examples__deleted": {
-          "TablesUpsert": {
-            "$ref": "./examples/TablesUpsert.json"
-          }
-        },
-        "x-ms-long-running-operation-options__deleted": {
-          "final-state-via": "azure-async-operation"
-        },
         "parameters": [
           [
             "~",
@@ -2645,9 +2629,9 @@
         "responses": {
           "202": {
             "headers__added": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -2659,6 +2643,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "TablesUpsert": {
+            "$ref": {
+              "__old": "./examples/TablesUpsert.json",
+              "__new": "./examples/TablesUpsertForTable.json"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/Table"
         }
       },
       "patch": {
@@ -2747,15 +2742,16 @@
         "responses": {
           "202": {
             "headers": {
-              "Location__deleted": {
-                "type": "string"
-              },
               "azure-asyncoperation__deleted": {
                 "type": "string"
               },
               "Azure-AsyncOperation__added": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "description__added": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2856,9 +2852,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.OperationalInsights/workspaces/{workspaceName}/usages": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -2940,59 +2933,6 @@
       "description": "JSON object",
       "properties": {}
     },
-    "Operation__deleted": {
-      "type": "object",
-      "description": "Supported operation of OperationalInsights resource provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Operation name: {provider}/{resource}/{operation}"
-        },
-        "display": {
-          "type": "object",
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Service provider: Microsoft OperationsManagement."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource on which the operation is performed etc."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Type of operation: get, read, delete, etc."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of operation"
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "WorkspaceReplicationPatProperties__deleted": {
       "type": "object",
       "description": "Workspace replication properties.",
@@ -3043,55 +2983,9 @@
         }
       }
     },
-    "keyVaultProperties__deleted": {
-      "type": "object",
-      "description": "The key vault properties.",
-      "properties": {
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
-        },
-        "keyName": {
-          "type": "string",
-          "description": "The name of the key associated with the Log Analytics cluster."
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The version of the key associated with the Log Analytics cluster."
-        },
-        "keyRsaSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Selected key minimum required size."
-        }
-      }
-    },
     "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", { azureAsyncOperation: TypeSpec.Rest.ResourceLocation, location: string, retryAfter: int32 }>__added": {
       "type": "object",
       "description": "Resource operation accepted."
-    },
-    "KeyVaultProperties__added": {
-      "type": "object",
-      "description": "The key vault properties.",
-      "properties": {
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
-        },
-        "keyName": {
-          "type": "string",
-          "description": "The name of the key associated with the Log Analytics cluster."
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The version of the key associated with the Log Analytics cluster."
-        },
-        "keyRsaSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Selected key minimum required size."
-        }
-      }
     },
     "LogAnalyticsQueryPackQueryPropertiesRelated__added": {
       "type": "object",
@@ -3147,6 +3041,28 @@
         }
       }
     },
+    "OperationDisplay__added": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft OperationsManagement."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of operation"
+        }
+      }
+    },
     "Cluster": {
       "properties": {
         "identity": {
@@ -3189,12 +3105,6 @@
     },
     "ClusterPatchProperties": {
       "properties": {
-        "keyVaultProperties": {
-          "$ref": {
-            "__old": "#/definitions/keyVaultProperties",
-            "__new": "#/definitions/KeyVaultProperties"
-          }
-        },
         "billingType": {
           "readOnly__deleted": false
         }
@@ -3204,19 +3114,6 @@
       "properties": {
         "billingType": {
           "readOnly__deleted": false
-        },
-        "keyVaultProperties": {
-          "$ref": {
-            "__old": "#/definitions/keyVaultProperties",
-            "__new": "#/definitions/KeyVaultProperties"
-          }
-        }
-      }
-    },
-    "ClusterSku": {
-      "properties": {
-        "capacity": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -3430,6 +3327,37 @@
         }
       }
     },
+    "Operation": {
+      "properties": {
+        "display": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft OperationsManagement."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed etc."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of operation"
+            }
+          },
+          "$ref__added": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "OperationStatus": {
       "properties": {
         "error": {
@@ -3472,23 +3400,6 @@
           "description": {
             "__old": "The category of the saved search. This helps the user to find a saved search faster. ",
             "__new": "The category of the saved search. This helps the user to find a saved search faster."
-          }
-        }
-      }
-    },
-    "SearchGetSchemaResponse": {
-      "properties": {
-        "metadata": {
-          "x-ms-client-name__deleted": "Metadata"
-        }
-      }
-    },
-    "SearchMetadata": {
-      "properties": {
-        "requestId": {
-          "x-ms-client-name": {
-            "__old": "SearchId",
-            "__new": "searchId"
           }
         }
       }
@@ -3536,30 +3447,7 @@
           "description": {
             "__old": "Summary rule is in provisioning state. If set to 'updating' or 'deleting', indicates a resource lock due to an ongoing operation, preventing any update to the Summary rule until the operation is complete.",
             "__new": "Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded."
-          },
-          "enum": [
-            [
-              " "
-            ],
-            [
-              "+",
-              "InProgress"
-            ],
-            [
-              " "
-            ],
-            [
-              " "
-            ],
-            [
-              "-",
-              "Failed"
-            ],
-            [
-              "-",
-              "Canceled"
-            ]
-          ]
+          }
         }
       }
     },
@@ -3582,6 +3470,37 @@
         ]
       ]
     },
+    "TableProperties": {
+      "properties": {
+        "provisioningState": {
+          "x-ms-enum": {
+            "name": {
+              "__old": "ProvisioningStateEnum",
+              "__new": "OperationalInsightsTableProvisioningState"
+            }
+          }
+        }
+      }
+    },
+    "TablesListResult": {
+      "description": {
+        "__old": "The list tables operation response.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "A list of data tables.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    },
     "Workspace": {
       "properties": {
         "systemData__deleted": {
@@ -3602,26 +3521,6 @@
       ]
     },
     "WorkspaceFeatures": {
-      "properties": {
-        "enableDataExport": {
-          "x-nullable__deleted": true
-        },
-        "immediatePurgeDataOn30Days": {
-          "x-nullable__deleted": true
-        },
-        "enableLogAccessUsingOnlyResourcePermissions": {
-          "x-nullable__deleted": true
-        },
-        "clusterResourceId": {
-          "x-nullable__deleted": true
-        },
-        "disableLocalAuth": {
-          "x-nullable__deleted": true
-        },
-        "unifiedSentinelBillingOnly": {
-          "x-nullable__deleted": true
-        }
-      },
       "additionalProperties": {
         "__old": true,
         "__new": {}
@@ -3665,6 +3564,25 @@
         }
       }
     },
+    "WorkspaceListUsagesResult": {
+      "description": {
+        "__old": "The list workspace usages operation response.",
+        "__new": "[Placeholder] Discription for page model"
+      },
+      "properties": {
+        "nextLink__added": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        },
+        "value": {
+          "description": {
+            "__old": "Gets or sets a list of usage metrics for a workspace.",
+            "__new": "[Placeholder] Discription for value property"
+          }
+        }
+      }
+    },
     "WorkspacePatch": {
       "allOf": [
         [
@@ -3680,9 +3598,6 @@
     },
     "WorkspaceProperties": {
       "properties": {
-        "retentionInDays": {
-          "x-nullable__deleted": true
-        },
         "publicNetworkAccessForIngestion": {
           "description": {
             "__old": "The network access type for operating on the Log Analytics Workspace. By default it is Enabled",
@@ -3694,13 +3609,6 @@
             "__old": "The network access type for operating on the Log Analytics Workspace. By default it is Enabled",
             "__new": "The network access type for accessing Log Analytics query."
           }
-        }
-      }
-    },
-    "WorkspaceSku": {
-      "properties": {
-        "capacityReservationLevel": {
-          "x-nullable__deleted": true
         }
       }
     }

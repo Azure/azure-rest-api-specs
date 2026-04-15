@@ -15,7 +15,7 @@ using Microsoft.OperationalInsights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ManagementGroup.properties);
 
-@@clientName(SearchMetadata.requestId, "searchId");
+@@clientName(SearchMetadata.requestId, "SearchId");
 
 @@clientName(StorageInsightListResult.`@odata.nextLink`, "odataNextLink");
 
@@ -160,3 +160,5 @@ using Microsoft.OperationalInsights;
 @@clientLocation(DeletedWorkspacesOperationGroup.listByResourceGroup,
   "DeletedWorkspaces"
 );
+@@clientName(KeyVaultProperties, "keyVaultProperties");
+@@clientName(SearchGetSchemaResponse.metadata, "Metadata");

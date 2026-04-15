@@ -618,7 +618,7 @@ union TableSubTypeEnum {
  * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-union ProvisioningStateEnum {
+union OperationalInsightsTableProvisioningState {
   string,
 
   /**
@@ -640,6 +640,39 @@ union ProvisioningStateEnum {
    * Table state is deleting.
    */
   Deleting: "Deleting",
+}
+
+/**
+ * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+union ProvisioningStateEnum {
+  string,
+
+  /**
+   * Table schema is still being built and updated, table is currently locked for any changes till the procedure is done.
+   */
+  Updating: "Updating",
+
+  /**
+   * Table state is stable and without changes, table is unlocked and open for new updates.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Table state is deleting.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Table state is failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * Table state is canceled.
+   */
+  Canceled: "Canceled",
 }
 
 /**
@@ -1082,7 +1115,7 @@ model ClusterSku {
   /**
    * The capacity reservation level in Gigabytes for this cluster.
    */
-  capacity?: int64;
+  capacity?: int64 | null;
 
   /**
    * The SKU (tier) of a cluster.
@@ -1563,6 +1596,8 @@ model ManagementGroupProperties {
    */
   sku?: string;
 }
+
+model OperationListResult is Azure.Core.Page<Operation>;
 
 /**
  * Supported operation of OperationalInsights resource provider.
@@ -2163,6 +2198,12 @@ model TablesListResult {
    */
   @pageItems
   value?: Table[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2225,7 +2266,7 @@ model TableProperties {
    * Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: OperationalInsightsTableProvisioningState;
 
   /**
    * True - Value originates from workspace retention in days, False - Customer specific.
@@ -2456,6 +2497,12 @@ model WorkspaceListUsagesResult {
   @pageItems
   @identifiers(#["name"])
   value?: UsageMetric[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2611,7 +2658,7 @@ model WorkspaceProperties {
   /**
    * The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details.
    */
-  retentionInDays?: int32;
+  retentionInDays?: int32 | null;
 
   /**
    * The daily volume cap for ingestion.
@@ -2687,7 +2734,7 @@ model WorkspaceSku {
   /**
    * The capacity reservation level in GB for this workspace, when CapacityReservation sku is selected.
    */
-  capacityReservationLevel?: int32;
+  capacityReservationLevel?: int32 | null;
 
   /**
    * The last time when the sku was updated.
@@ -2743,33 +2790,33 @@ model WorkspaceFeatures {
   /**
    * Flag that indicate if data should be exported.
    */
-  enableDataExport?: boolean;
+  enableDataExport?: boolean | null;
 
   /**
    * Flag that describes if we want to remove the data after 30 days.
    */
-  immediatePurgeDataOn30Days?: boolean;
+  immediatePurgeDataOn30Days?: boolean | null;
 
   /**
    * Flag that indicate which permission to use - resource or workspace or both.
    */
-  enableLogAccessUsingOnlyResourcePermissions?: boolean;
+  enableLogAccessUsingOnlyResourcePermissions?: boolean | null;
 
   /**
    * Dedicated LA cluster resourceId that is linked to the workspaces.
    */
-  clusterResourceId?: string;
+  clusterResourceId?: string | null;
 
   /**
    * Disable Non-AAD based Auth.
    */
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean | null;
 
   /**
    * An indication if the specify workspace is limited to sentinel's unified billing model only.
    */
   @visibility(Lifecycle.Read)
-  unifiedSentinelBillingOnly?: boolean;
+  unifiedSentinelBillingOnly?: boolean | null;
 
   /**
    * List of associations for the workspace. Indicates if the workspace is associated with any of the following experiences: MDC, Sentinel, SentinelGraph, etc.
@@ -3055,3 +3102,5 @@ model WorkspaceReplicationPatProperties {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedDate?: utcDateTime;
 }
+
+@@identifiers(OperationListResult.value, #["name"]);

@@ -100,9 +100,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -4483,7 +4483,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -4611,6 +4616,9 @@
           "TablesListByWorkspace": {
             "$ref": "./examples/TablesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4728,9 +4736,9 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
@@ -4746,8 +4754,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsertForTable.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Table"
         },
         "x-ms-long-running-operation": true
       },
@@ -4882,7 +4896,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -5070,6 +5089,9 @@
           "UsagesList": {
             "$ref": "./examples/WorkspacesListUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -5337,7 +5359,7 @@
       "description": "Log Analytics cluster patch properties.",
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
         },
         "billingType": {
@@ -5377,7 +5399,7 @@
           "description": "The cluster's billing type."
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
         },
         "lastModifiedDate": {
@@ -5524,7 +5546,8 @@
         "capacity": {
           "type": "integer",
           "format": "int64",
-          "description": "The capacity reservation level in Gigabytes for this cluster."
+          "description": "The capacity reservation level in Gigabytes for this cluster.",
+          "x-nullable": true
         },
         "name": {
           "$ref": "#/definitions/ClusterSkuNameEnum",
@@ -6232,29 +6255,6 @@
         }
       }
     },
-    "KeyVaultProperties": {
-      "type": "object",
-      "description": "The key vault properties.",
-      "properties": {
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
-        },
-        "keyName": {
-          "type": "string",
-          "description": "The name of the key associated with the Log Analytics cluster."
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The version of the key associated with the Log Analytics cluster."
-        },
-        "keyRsaSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Selected key minimum required size."
-        }
-      }
-    },
     "LinkedService": {
       "type": "object",
       "description": "The top level Linked service resource container.",
@@ -6717,6 +6717,66 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "Supported operation of OperationalInsights resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft OperationsManagement."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of operation"
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "OperationStatus": {
       "type": "object",
       "description": "The status of operation.",
@@ -6747,21 +6807,7 @@
         }
       }
     },
-    "PrivateLinkScopedResource": {
-      "type": "object",
-      "description": "The private link scope resource reference.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The full resource Id of the private link scope resource."
-        },
-        "scopeId": {
-          "type": "string",
-          "description": "The private link scope unique Identifier."
-        }
-      }
-    },
-    "ProvisioningStateEnum": {
+    "OperationalInsightsTableProvisioningState": {
       "type": "string",
       "description": "Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.",
       "enum": [
@@ -6771,7 +6817,7 @@
         "Deleting"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningStateEnum",
+        "name": "OperationalInsightsTableProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -6793,6 +6839,62 @@
             "name": "Deleting",
             "value": "Deleting",
             "description": "Table state is deleting."
+          }
+        ]
+      }
+    },
+    "PrivateLinkScopedResource": {
+      "type": "object",
+      "description": "The private link scope resource reference.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The full resource Id of the private link scope resource."
+        },
+        "scopeId": {
+          "type": "string",
+          "description": "The private link scope unique Identifier."
+        }
+      }
+    },
+    "ProvisioningStateEnum": {
+      "type": "string",
+      "description": "Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.",
+      "enum": [
+        "Updating",
+        "Succeeded",
+        "Deleting",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningStateEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Table schema is still being built and updated, table is currently locked for any changes till the procedure is done."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Table state is stable and without changes, table is unlocked and open for new updates."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Table state is deleting."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Table state is failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Table state is canceled."
           }
         ]
       }
@@ -7087,7 +7189,8 @@
       "properties": {
         "metadata": {
           "$ref": "#/definitions/SearchMetadata",
-          "description": "The metadata from search results."
+          "description": "The metadata from search results.",
+          "x-ms-client-name": "Metadata"
         },
         "value": {
           "type": "array",
@@ -7108,7 +7211,7 @@
         "requestId": {
           "type": "string",
           "description": "The request id of the search.",
-          "x-ms-client-name": "searchId"
+          "x-ms-client-name": "SearchId"
         },
         "resultType": {
           "type": "string",
@@ -7779,7 +7882,7 @@
           "description": "Table schema."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningStateEnum",
+          "$ref": "#/definitions/OperationalInsightsTableProvisioningState",
           "description": "Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.",
           "readOnly": true
         },
@@ -7871,6 +7974,10 @@
           "items": {
             "$ref": "#/definitions/Table"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },
@@ -8160,27 +8267,33 @@
       "properties": {
         "enableDataExport": {
           "type": "boolean",
-          "description": "Flag that indicate if data should be exported."
+          "description": "Flag that indicate if data should be exported.",
+          "x-nullable": true
         },
         "immediatePurgeDataOn30Days": {
           "type": "boolean",
-          "description": "Flag that describes if we want to remove the data after 30 days."
+          "description": "Flag that describes if we want to remove the data after 30 days.",
+          "x-nullable": true
         },
         "enableLogAccessUsingOnlyResourcePermissions": {
           "type": "boolean",
-          "description": "Flag that indicate which permission to use - resource or workspace or both."
+          "description": "Flag that indicate which permission to use - resource or workspace or both.",
+          "x-nullable": true
         },
         "clusterResourceId": {
           "type": "string",
-          "description": "Dedicated LA cluster resourceId that is linked to the workspaces."
+          "description": "Dedicated LA cluster resourceId that is linked to the workspaces.",
+          "x-nullable": true
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Disable Non-AAD based Auth."
+          "description": "Disable Non-AAD based Auth.",
+          "x-nullable": true
         },
         "unifiedSentinelBillingOnly": {
           "type": "boolean",
           "description": "An indication if the specify workspace is limited to sentinel's unified billing model only.",
+          "x-nullable": true,
           "readOnly": true
         },
         "associations": {
@@ -8244,6 +8357,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       }
     },
@@ -8300,7 +8417,8 @@
         "retentionInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details."
+          "description": "The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details.",
+          "x-nullable": true
         },
         "workspaceCapping": {
           "$ref": "#/definitions/WorkspaceCapping",
@@ -8594,7 +8712,8 @@
         "capacityReservationLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "The capacity reservation level in GB for this workspace, when CapacityReservation sku is selected."
+          "description": "The capacity reservation level in GB for this workspace, when CapacityReservation sku is selected.",
+          "x-nullable": true
         },
         "lastSkuUpdate": {
           "type": "string",
@@ -8665,6 +8784,29 @@
             "description": "LACluster"
           }
         ]
+      }
+    },
+    "keyVaultProperties": {
+      "type": "object",
+      "description": "The key vault properties.",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key associated with the Log Analytics cluster."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key associated with the Log Analytics cluster."
+        },
+        "keyRsaSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Selected key minimum required size."
+        }
       }
     }
   },

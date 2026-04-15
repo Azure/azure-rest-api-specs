@@ -24,7 +24,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -3414,7 +3414,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3516,6 +3521,9 @@
           "TablesListByWorkspace": {
             "$ref": "./examples/TablesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3610,9 +3618,9 @@
           "202": {
             "description": "ignore",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -3622,6 +3630,15 @@
               "$ref": "../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TablesUpsert": {
+            "$ref": "./examples/TablesUpsertForTable.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Table"
         },
         "x-ms-long-running-operation": true
       },
@@ -3728,7 +3745,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3879,6 +3901,9 @@
           "UsagesList": {
             "$ref": "./examples/WorkspacesListUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -4081,7 +4106,7 @@
       "description": "Log Analytics cluster patch properties.",
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
         },
         "billingType": {
@@ -4150,7 +4175,7 @@
           }
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
         },
         "lastModifiedDate": {
@@ -4246,7 +4271,8 @@
         "capacity": {
           "type": "integer",
           "format": "int64",
-          "description": "The capacity reservation level in Gigabytes for this cluster."
+          "description": "The capacity reservation level in Gigabytes for this cluster.",
+          "x-nullable": true
         },
         "name": {
           "type": "string",
@@ -4594,29 +4620,6 @@
         "displayName": {
           "type": "string",
           "description": "The display name of the intelligence pack."
-        }
-      }
-    },
-    "KeyVaultProperties": {
-      "type": "object",
-      "description": "The key vault properties.",
-      "properties": {
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
-        },
-        "keyName": {
-          "type": "string",
-          "description": "The name of the key associated with the Log Analytics cluster."
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The version of the key associated with the Log Analytics cluster."
-        },
-        "keyRsaSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Selected key minimum required size."
         }
       }
     },
@@ -5069,6 +5072,66 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "Supported operation of OperationalInsights resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft OperationsManagement."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed etc."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of operation"
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "OperationStatus": {
       "type": "object",
       "description": "The status of operation.",
@@ -5395,7 +5458,8 @@
       "properties": {
         "metadata": {
           "$ref": "#/definitions/SearchMetadata",
-          "description": "The metadata from search results."
+          "description": "The metadata from search results.",
+          "x-ms-client-name": "Metadata"
         },
         "value": {
           "type": "array",
@@ -5416,7 +5480,7 @@
         "requestId": {
           "type": "string",
           "description": "The request id of the search.",
-          "x-ms-client-name": "searchId"
+          "x-ms-client-name": "SearchId"
         },
         "resultType": {
           "type": "string",
@@ -5840,9 +5904,10 @@
           "description": "Table's current provisioning state. If set to 'updating', indicates a resource lock due to ongoing operation, forbidding any update to the table until the ongoing operation is concluded.",
           "enum": [
             "Updating",
-            "InProgress",
             "Succeeded",
-            "Deleting"
+            "Deleting",
+            "Failed",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "ProvisioningStateEnum",
@@ -5965,7 +6030,7 @@
             "Deleting"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningStateEnum",
+            "name": "OperationalInsightsTableProvisioningState",
             "modelAsString": true
           },
           "readOnly": true
@@ -5984,14 +6049,19 @@
     },
     "TablesListResult": {
       "type": "object",
-      "description": "The list tables operation response.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "A list of data tables.",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Table"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -6166,27 +6236,33 @@
       "properties": {
         "enableDataExport": {
           "type": "boolean",
-          "description": "Flag that indicate if data should be exported."
+          "description": "Flag that indicate if data should be exported.",
+          "x-nullable": true
         },
         "immediatePurgeDataOn30Days": {
           "type": "boolean",
-          "description": "Flag that describes if we want to remove the data after 30 days."
+          "description": "Flag that describes if we want to remove the data after 30 days.",
+          "x-nullable": true
         },
         "enableLogAccessUsingOnlyResourcePermissions": {
           "type": "boolean",
-          "description": "Flag that indicate which permission to use - resource or workspace or both."
+          "description": "Flag that indicate which permission to use - resource or workspace or both.",
+          "x-nullable": true
         },
         "clusterResourceId": {
           "type": "string",
-          "description": "Dedicated LA cluster resourceId that is linked to the workspaces."
+          "description": "Dedicated LA cluster resourceId that is linked to the workspaces.",
+          "x-nullable": true
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Disable Non-AAD based Auth."
+          "description": "Disable Non-AAD based Auth.",
+          "x-nullable": true
         },
         "unifiedSentinelBillingOnly": {
           "type": "boolean",
           "description": "An indication if the specify workspace is limited to sentinel's unified billing model only.",
+          "x-nullable": true,
           "readOnly": true
         },
         "associations": {
@@ -6241,17 +6317,22 @@
     },
     "WorkspaceListUsagesResult": {
       "type": "object",
-      "description": "The list workspace usages operation response.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Gets or sets a list of usage metrics for a workspace.",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/UsageMetric"
           },
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -6321,7 +6402,8 @@
         "retentionInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details."
+          "description": "The workspace data retention in days. Allowed values are per pricing plan. See pricing tiers documentation for details.",
+          "x-nullable": true
         },
         "workspaceCapping": {
           "$ref": "#/definitions/WorkspaceCapping",
@@ -6551,7 +6633,8 @@
         "capacityReservationLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "The capacity reservation level in GB for this workspace, when CapacityReservation sku is selected."
+          "description": "The capacity reservation level in GB for this workspace, when CapacityReservation sku is selected.",
+          "x-nullable": true
         },
         "lastSkuUpdate": {
           "type": "string",
@@ -6563,6 +6646,29 @@
       "required": [
         "name"
       ]
+    },
+    "keyVaultProperties": {
+      "type": "object",
+      "description": "The key vault properties.",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key associated with the Log Analytics cluster."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key associated with the Log Analytics cluster."
+        },
+        "keyRsaSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Selected key minimum required size."
+        }
+      }
     }
   },
   "parameters": {}
