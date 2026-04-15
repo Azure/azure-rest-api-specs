@@ -326,7 +326,7 @@ union NetworkApiVersion {
 }
 
 /**
- * Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a non-null value starting API version 2025-11-01.
+ * Specifies the VM securityType; UefiSettings are enabled only when set to TrustedLaunch or ConfidentialVM, and returns a Standard value starting API version 2025-11-01.
  */
 union SecurityTypes {
   string,
