@@ -26,9 +26,9 @@ namespace PolicyInsightsManagementClient;
 );
 
 // Section: Explicit subscriptionId parameter
-// @@clientLocation(PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam.subscriptionId,
-//   PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition
-// );
+@@clientLocation(PolicyEventsListQueryResultsForPolicySetDefinitionBaseParam.subscriptionId,
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition
+);
 @@clientLocation(policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
   policyEventsListQueryResultsForPolicySetDefinition
 );
@@ -78,63 +78,241 @@ namespace PolicyInsightsManagementClient;
 /**
  * Parameter group for OData query options.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
 model QueryOptions {
   /** Maximum number of records to return. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$top")
   @minValue(0)
   Top?: int32;
 
   /** Ordering expression using OData notation. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$orderby")
   OrderBy?: string;
 
   /** Select expression using OData notation. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$select")
   Select?: string;
 
   /** ISO 8601 formatted timestamp specifying the start time of the interval to query. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$from")
   From?: utcDateTime;
 
   /** ISO 8601 formatted timestamp specifying the end time of the interval to query. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$to")
   To?: utcDateTime;
 
   /** OData filter expression. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$filter")
   Filter?: string;
 
   /** OData apply expression for aggregations. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$apply")
   Apply?: string;
 
   /**
    * The $expand query parameter. For example, to expand components use $expand=components
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$expand")
   Expand?: string;
 
   /** Skiptoken provided if a previous response returned a partial result. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
   @query("$skiptoken")
   SkipToken?: string;
+}
+
+/**
+ * Group C: Query options for Summarize operations.
+ * Params: all except $expand
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+model QueryOptionsB {
+  /** Maximum number of records to return. */
+  @query("$top")
+  @minValue(0)
+  Top?: int32;
+
+  /** Ordering expression using OData notation. */
+  @query("$orderby")
+  OrderBy?: string;
+
+  /** Select expression using OData notation. */
+  @query("$select")
+  Select?: string;
+
+  /** ISO 8601 formatted timestamp specifying the start time of the interval to query. */
+  @query("$from")
+  From?: utcDateTime;
+
+  /** ISO 8601 formatted timestamp specifying the end time of the interval to query. */
+  @query("$to")
+  To?: utcDateTime;
+
+  /** OData filter expression. */
+  @query("$filter")
+  Filter?: string;
+
+  /** OData apply expression for aggregations. */
+  @query("$apply")
+  Apply?: string;
+
+  /** Skiptoken provided if a previous response returned a partial result. */
+  @query("$skiptoken")
+  SkipToken?: string;
+}
+
+@@alternateType(QueryOptionsB, QueryOptions);
+@@alternateType(QueryOptionsC, QueryOptions);
+@@alternateType(QueryOptionsD, QueryOptions);
+@@alternateType(QueryOptionsE, QueryOptions);
+@@alternateType(QueryOptionsF, QueryOptions);
+@@alternateType(QueryOptionsG, QueryOptions);
+@@alternateType(QueryOptionsH, QueryOptions);
+
+/**
+ * Group C: Query options for Summarize operations.
+ * Params: $top, $from, $to, $filter
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+model QueryOptionsC {
+  /** Maximum number of records to return. */
+  @query("$top")
+  @minValue(0)
+  Top?: int32;
+
+  /** ISO 8601 formatted timestamp specifying the start time of the interval to query. */
+  @query("$from")
+  From?: utcDateTime;
+
+  /** ISO 8601 formatted timestamp specifying the end time of the interval to query. */
+  @query("$to")
+  To?: utcDateTime;
+
+  /** OData filter expression. */
+  @query("$filter")
+  Filter?: string;
+}
+
+/**
+ * Group D: Query options for ComponentPolicyStates (non-resource scoped).
+ * Params: $top, $orderby, $select, $from, $to, $filter, $apply
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+model QueryOptionsD {
+  /** Maximum number of records to return. */
+  @query("$top")
+  @minValue(0)
+  Top?: int32;
+
+  /** Ordering expression using OData notation. */
+  @query("$orderby")
+  OrderBy?: string;
+
+  /** Select expression using OData notation. */
+  @query("$select")
+  Select?: string;
+
+  /** ISO 8601 formatted timestamp specifying the start time of the interval to query. */
+  @query("$from")
+  From?: utcDateTime;
+
+  /** ISO 8601 formatted timestamp specifying the end time of the interval to query. */
+  @query("$to")
+  To?: utcDateTime;
+
+  /** OData filter expression. */
+  @query("$filter")
+  Filter?: string;
+
+  /** OData apply expression for aggregations. */
+  @query("$apply")
+  Apply?: string;
+}
+
+/**
+ * Group E: Query options for ComponentPolicyStates ForResource.
+ * Params: $top, $orderby, $select, $from, $to, $filter, $apply, $expand
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+model QueryOptionsE {
+  /** Maximum number of records to return. */
+  @query("$top")
+  @minValue(0)
+  Top?: int32;
+
+  /** Ordering expression using OData notation. */
+  @query("$orderby")
+  OrderBy?: string;
+
+  /** Select expression using OData notation. */
+  @query("$select")
+  Select?: string;
+
+  /** ISO 8601 formatted timestamp specifying the start time of the interval to query. */
+  @query("$from")
+  From?: utcDateTime;
+
+  /** ISO 8601 formatted timestamp specifying the end time of the interval to query. */
+  @query("$to")
+  To?: utcDateTime;
+
+  /** OData filter expression. */
+  @query("$filter")
+  Filter?: string;
+
+  /** OData apply expression for aggregations. */
+  @query("$apply")
+  Apply?: string;
+
+  /**
+   * The $expand query parameter. For example, to expand components use $expand=components
+   */
+  @query("$expand")
+  Expand?: string;
+}
+
+/**
+ * Group F: Query options for NextLink operations.
+ * Params: $skiptoken
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+model QueryOptionsF {
+  /** Skiptoken provided if a previous response returned a partial result. */
+  @query("$skiptoken")
+  SkipToken?: string;
+}
+
+/**
+ * Group G: Query options for ListDeployments and PolicyMetadata_List.
+ * Params: $top
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+model QueryOptionsG {
+  /** Maximum number of records to return. */
+  @query("$top")
+  @minValue(0)
+  Top?: int32;
+}
+
+/**
+ * Group H: Query options for Remediations ListFor* and Attestations ListFor*.
+ * Params: $top, $filter
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Matching OData convention"
+model QueryOptionsH {
+  /** Maximum number of records to return. */
+  @query("$top")
+  @minValue(0)
+  Top?: int32;
+
+  /** OData filter expression. */
+  @query("$filter")
+  Filter?: string;
 }
 
 // PolicyTrackedResources overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  PolicyTrackedResourcesOperationGroup.listQueryResultsForManagementGroup
-)
 op policyTrackedResourcesListQueryResultsForManagementGroup(
   ...ApiVersionParameter,
 
@@ -147,12 +325,14 @@ op policyTrackedResourcesListQueryResultsForManagementGroup(
   @path
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsH,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
+@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForManagementGroup,
+  policyTrackedResourcesListQueryResultsForManagementGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription)
 op policyTrackedResourcesListQueryResultsForSubscription(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -169,12 +349,14 @@ op policyTrackedResourcesListQueryResultsForSubscription(
   @segment("policyTrackedResources")
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsH,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
+@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
+  policyTrackedResourcesListQueryResultsForSubscription
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResourceGroup)
 op policyTrackedResourcesListQueryResultsForResourceGroup(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -186,12 +368,14 @@ op policyTrackedResourcesListQueryResultsForResourceGroup(
   @segment("policyTrackedResources")
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsH,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
+@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResourceGroup,
+  policyTrackedResourcesListQueryResultsForResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResource)
 op policyTrackedResourcesListQueryResultsForResource(
   ...ApiVersionParameter,
 
@@ -201,14 +385,16 @@ op policyTrackedResourcesListQueryResultsForResource(
   @path
   policyTrackedResourcesResource: PolicyTrackedResourcesResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsH,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
+@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResource,
+  policyTrackedResourcesListQueryResultsForResource
+);
 
 // PolicyEvents overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyEventsOperationGroup.listQueryResultsForManagementGroup)
 op policyEventsListQueryResultsForManagementGroup(
   ...ApiVersionParameter,
 
@@ -221,12 +407,14 @@ op policyEventsListQueryResultsForManagementGroup(
   @path
   managementGroupName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
+  policyEventsListQueryResultsForManagementGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyEventsOperationGroup.listQueryResultsForSubscription)
 op policyEventsListQueryResultsForSubscription(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -243,12 +431,14 @@ op policyEventsListQueryResultsForSubscription(
   @segment("policyEvents")
   policyEventsResource: PolicyEventsResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForSubscription,
+  policyEventsListQueryResultsForSubscription
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroup)
 op policyEventsListQueryResultsForResourceGroup(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -260,12 +450,14 @@ op policyEventsListQueryResultsForResourceGroup(
   @segment("policyEvents")
   policyEventsResource: PolicyEventsResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
+  policyEventsListQueryResultsForResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyEventsOperationGroup.listQueryResultsForResource)
 op policyEventsListQueryResultsForResource(
   ...ApiVersionParameter,
 
@@ -277,11 +469,12 @@ op policyEventsListQueryResultsForResource(
 
   queryOptions?: QueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForResource,
+  policyEventsListQueryResultsForResource
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@list
-@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition)
 op policyEventsListQueryResultsForPolicySetDefinition(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -295,14 +488,14 @@ op policyEventsListQueryResultsForPolicySetDefinition(
   @path
   policySetDefinitionName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+  policyEventsListQueryResultsForPolicySetDefinition
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@list
-@post
-@override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition)
 op policyEventsListQueryResultsForPolicyDefinition(
   ...PolicyEventsListQueryResultsForPolicyDefinitionBaseParam,
 
@@ -315,14 +508,14 @@ op policyEventsListQueryResultsForPolicyDefinition(
   @path
   policyDefinitionName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+  policyEventsListQueryResultsForPolicyDefinition
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
-)
 op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
   ...PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
@@ -335,14 +528,14 @@ op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
-)
 op policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment(
   ...PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
@@ -358,14 +551,16 @@ op policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyEventsQueryResults | QueryFailure;
+@@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment
+);
 
 // PolicyStates overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.listQueryResultsForManagementGroup)
 op policyStatesListQueryResultsForManagementGroup(
   ...ApiVersionParameter,
 
@@ -378,12 +573,14 @@ op policyStatesListQueryResultsForManagementGroup(
   @path
   managementGroupName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
+  policyStatesListQueryResultsForManagementGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.summarizeForManagementGroup)
 op policyStatesSummarizeForManagementGroup(
   ...ApiVersionParameter,
 
@@ -396,12 +593,14 @@ op policyStatesSummarizeForManagementGroup(
   @path
   managementGroupName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForManagementGroup,
+  policyStatesSummarizeForManagementGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.listQueryResultsForSubscription)
 op policyStatesListQueryResultsForSubscription(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -418,12 +617,14 @@ op policyStatesListQueryResultsForSubscription(
   @segment("policyStates")
   policyStatesResource: PolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForSubscription,
+  policyStatesListQueryResultsForSubscription
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.summarizeForSubscription)
 op policyStatesSummarizeForSubscription(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -440,12 +641,14 @@ op policyStatesSummarizeForSubscription(
   @segment("policyStates")
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForSubscription,
+  policyStatesSummarizeForSubscription
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroup)
 op policyStatesListQueryResultsForResourceGroup(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -457,12 +660,14 @@ op policyStatesListQueryResultsForResourceGroup(
   @segment("policyStates")
   policyStatesResource: PolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  policyStatesListQueryResultsForResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.summarizeForResourceGroup)
 op policyStatesSummarizeForResourceGroup(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -474,12 +679,14 @@ op policyStatesSummarizeForResourceGroup(
   @segment("policyStates")
   policyStatesSummaryResource: PolicyStatesSummaryResourceType,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForResourceGroup,
+  policyStatesSummarizeForResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.listQueryResultsForResource)
 op policyStatesListQueryResultsForResource(
   ...ApiVersionParameter,
 
@@ -491,10 +698,12 @@ op policyStatesListQueryResultsForResource(
 
   queryOptions?: QueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForResource,
+  policyStatesListQueryResultsForResource
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.summarizeForResource)
 op policyStatesSummarizeForResource(
   ...ApiVersionParameter,
 
@@ -504,12 +713,14 @@ op policyStatesSummarizeForResource(
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForResource,
+  policyStatesSummarizeForResource
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition)
 op policyStatesListQueryResultsForPolicySetDefinition(
   ...PolicyStatesListQueryResultsForPolicySetDefinitionBaseParam,
 
@@ -522,12 +733,14 @@ op policyStatesListQueryResultsForPolicySetDefinition(
   @path
   policySetDefinitionName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+  policyStatesListQueryResultsForPolicySetDefinition
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition)
 op policyStatesSummarizeForPolicySetDefinition(
   ...PolicyStatesSummarizeForPolicySetDefinitionBaseParam,
 
@@ -540,12 +753,14 @@ op policyStatesSummarizeForPolicySetDefinition(
   @path
   policySetDefinitionName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  policyStatesSummarizeForPolicySetDefinition
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition)
 op policyStatesListQueryResultsForPolicyDefinition(
   ...PolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
 
@@ -558,12 +773,14 @@ op policyStatesListQueryResultsForPolicyDefinition(
   @path
   policyDefinitionName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  policyStatesListQueryResultsForPolicyDefinition
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyStatesOperationGroup.summarizeForPolicyDefinition)
 op policyStatesSummarizeForPolicyDefinition(
   ...PolicyStatesSummarizeForPolicyDefinitionBaseParam,
 
@@ -576,14 +793,14 @@ op policyStatesSummarizeForPolicyDefinition(
   @path
   policyDefinitionName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  policyStatesSummarizeForPolicyDefinition
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
-)
 op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   ...PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
@@ -596,14 +813,14 @@ op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment
-)
 op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
   ...PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentBaseParam,
 
@@ -616,14 +833,14 @@ op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
-)
 op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   ...PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
@@ -639,14 +856,14 @@ op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsB,
 ): PolicyStatesQueryResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment
-)
 op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
   ...PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentBaseParam,
 
@@ -662,24 +879,29 @@ op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
   @path
   policyAssignmentName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsC,
 ): SummarizeResults | QueryFailure;
+@@override(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment
+);
 
 // PolicyMetadata overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(PolicyMetadataNonResourceOperationGroup.list)
 op policyMetadataList(
-  ...ApiVersionParameter,
-  queryOptions?: QueryOptions,
+  ...Azure.ResourceManager.Foundations.DefaultBaseParameters<TenantActionScope>,
+  ...TenantActionScope,
+  ...ProviderNamespace<TenantActionScope>,
+  body: void,
+  queryOptions?: QueryOptionsG,
 ): PolicyMetadataCollection | PolicyInsightsApi.ErrorResponse;
+@@override(PolicyMetadataNonResourceOperationGroup.list, policyMetadataList);
 
 // ComponentPolicyStates overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription)
 op componentPolicyStatesListQueryResultsForSubscription(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -696,12 +918,14 @@ op componentPolicyStatesListQueryResultsForSubscription(
   @segment("componentPolicyStates")
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsD,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
+@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  componentPolicyStatesListQueryResultsForSubscription
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup)
 op componentPolicyStatesListQueryResultsForResourceGroup(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -713,12 +937,14 @@ op componentPolicyStatesListQueryResultsForResourceGroup(
   @segment("componentPolicyStates")
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsD,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
+@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  componentPolicyStatesListQueryResultsForResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource)
 op componentPolicyStatesListQueryResultsForResource(
   ...ApiVersionParameter,
 
@@ -728,14 +954,14 @@ op componentPolicyStatesListQueryResultsForResource(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsE,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
+@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+  componentPolicyStatesListQueryResultsForResource
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition
-)
 op componentPolicyStatesListQueryResultsForPolicyDefinition(
   ...ComponentPolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
 
@@ -751,14 +977,14 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsD,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
+@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  componentPolicyStatesListQueryResultsForPolicyDefinition
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment
-)
 op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   ...ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
 
@@ -774,14 +1000,14 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsD,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
+@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(
-  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment
-)
 op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   ...ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
 
@@ -800,14 +1026,16 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
   @path
   componentPolicyStatesResource: ComponentPolicyStatesResource,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsD,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
+@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
+);
 
 // Remediations overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup)
 op remediationsListDeploymentsAtManagementGroup(
   ...ApiVersionParameter,
 
@@ -820,12 +1048,14 @@ op remediationsListDeploymentsAtManagementGroup(
   @path
   remediationName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsG,
 ): RemediationDeploymentsListResult | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
+  remediationsListDeploymentsAtManagementGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(Remediations.listForManagementGroup)
 op remediationsListForManagementGroup(
   ...ApiVersionParameter,
 
@@ -835,44 +1065,87 @@ op remediationsListForManagementGroup(
   @path
   managementGroupId: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsH,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(Remediations.listForManagementGroup,
+  remediationsListForManagementGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(RemediationSubscriptionOperations.listDeploymentsAtSubscription)
 op remediationsListDeploymentsAtSubscription(
   ...ApiVersionParameter,
-  queryOptions?: QueryOptions,
+  ...SubscriptionIdParameter,
+
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.PolicyInsights",
+
+  @path
+  @segment("remediations")
+  @key
+  remediationName: string,
+
+  queryOptions?: QueryOptionsG,
+  body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationSubscriptionOperations.listDeploymentsAtSubscription,
+  remediationsListDeploymentsAtSubscription
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(RemediationSubscriptionOperations.listForSubscription)
 op remediationsListForSubscription(
   ...ApiVersionParameter,
-  queryOptions?: QueryOptions,
+  ...SubscriptionIdParameter,
+
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.PolicyInsights",
+
+  queryOptions?: QueryOptionsH,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationSubscriptionOperations.listForSubscription,
+  remediationsListForSubscription
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup)
 op remediationsListDeploymentsAtResourceGroup(
   ...ApiVersionParameter,
-  queryOptions?: QueryOptions,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @path
+  @segment("remediations")
+  @key
+  remediationName: string,
+
+  queryOptions?: QueryOptionsG,
+  body: void,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
+  remediationsListDeploymentsAtResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(RemediationResourceGroupOperations.listForResourceGroup)
 op remediationsListForResourceGroup(
   ...ApiVersionParameter,
-  queryOptions?: QueryOptions,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  queryOptions?: QueryOptionsH,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationResourceGroupOperations.listForResourceGroup,
+  remediationsListForResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(RemediationResourceOperations.listDeploymentsAtResource)
 op remediationsListDeploymentsAtResource(
   ...ApiVersionParameter,
 
@@ -882,47 +1155,66 @@ op remediationsListDeploymentsAtResource(
   @path
   remediationName: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsG,
 ): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationResourceOperations.listDeploymentsAtResource,
+  remediationsListDeploymentsAtResource
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(RemediationResourceOperations.listForResource)
 op remediationsListForResource(
   ...ApiVersionParameter,
 
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsH,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(RemediationResourceOperations.listForResource,
+  remediationsListForResource
+);
 
 // Attestations overrides
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(Attestations.listForSubscription)
 op attestationsListForSubscription(
   ...ApiVersionParameter,
-  queryOptions?: QueryOptions,
+  ...SubscriptionIdParameter,
+
+  @path
+  @segment("providers")
+  @key
+  providerNamespace: "Microsoft.PolicyInsights",
+
+  queryOptions?: QueryOptionsH,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(Attestations.listForSubscription, attestationsListForSubscription);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(AttestationResourceGroupOperations.listForResourceGroup)
 op attestationsListForResourceGroup(
   ...ApiVersionParameter,
-  queryOptions?: QueryOptions,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  queryOptions?: QueryOptionsH,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(AttestationResourceGroupOperations.listForResourceGroup,
+  attestationsListForResourceGroup
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@override(AttestationOperationGroup.listForResource)
 op attestationsListForResource(
   ...ApiVersionParameter,
 
   @path
   resourceId: string,
 
-  queryOptions?: QueryOptions,
+  queryOptions?: QueryOptionsH,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
+@@override(AttestationOperationGroup.listForResource,
+  attestationsListForResource
+);
