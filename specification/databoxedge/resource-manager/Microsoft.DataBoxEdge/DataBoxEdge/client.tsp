@@ -1984,6 +1984,11 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@usage(TriggerSupportPackageRequest, Usage.input | Usage.output, "csharp");
 @@usage(UploadCertificateRequest, Usage.input | Usage.output, "csharp");
 @@usage(SecuritySettings, Usage.input | Usage.output, "csharp");
+// Input usage so generator produces public ctors + real setters on non-read-only properties,
+// matching the ApiCompat baseline for these output-only sub-resource models.
+@@usage(DeviceCapacityInfo, Usage.input | Usage.output, "csharp");
+@@usage(NetworkSettings, Usage.input | Usage.output, "csharp");
+@@usage(UpdateSummary, Usage.input | Usage.output, "csharp");
 
 @@access(RoleSinkInfo, Access.public, "csharp");
 @@access(FileSourceInfo, Access.public, "csharp");
@@ -2046,5 +2051,9 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TriggerSupportPackageRequest,
   Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceCapacityInfo.properties,
   "csharp"
 );
