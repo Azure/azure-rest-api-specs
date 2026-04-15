@@ -18,9 +18,9 @@ interface ClusterVersionsOperationGroup {
   /**
    * Gets information about an available Service Fabric cluster code version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
   @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available in the specified location.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
   @get
   get(
     ...ApiVersionParameter,
@@ -39,9 +39,9 @@ interface ClusterVersionsOperationGroup {
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
   @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Plain operation to avoid LegacyOperations.Read creating duplicate ARM resource types"
   @get
   getByEnvironment(
     ...ApiVersionParameter,
