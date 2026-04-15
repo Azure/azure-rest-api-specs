@@ -375,7 +375,7 @@ union VirtualMachinePriorityTypes {
   @doc("""
       SpotPlus priority for a standalone virtual machine or the virtual machines in the scale set.
       This is an enum value that will be used to deploy Azure Spot Plus VM/VMSS, which is the next
-      generation of Azure Spot VM/VMSS with more availability and longer running time compared to Azure Spot VM/VMSS.
+      generation of Azure Spot VM/VMSS with more reliability and longer running time.
     """)
   @added(Versions.v2026_04_01)
   SpotPlus: "SpotPlus",
