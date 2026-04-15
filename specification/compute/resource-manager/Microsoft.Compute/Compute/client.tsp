@@ -69,6 +69,32 @@ namespace ComputeCombine;
 @@clientName(Common.SubResource, "ComputeSubResourceData", "csharp");
 @@clientName(Common.SubResourceReadOnly, "ComputeWriteableSubResourceData", "csharp");
 
+// ExtendedLocation → Azure.ResourceManager.Resources.Models.ExtendedLocation for C#
+@@alternateType(Compute.VirtualMachine.extendedLocation,
+  Azure.ResourceManager.Resources.Models.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(Compute.VirtualMachineScaleSet.extendedLocation,
+  Azure.ResourceManager.Resources.Models.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(Compute.Image.extendedLocation,
+  Azure.ResourceManager.Resources.Models.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(ComputeDisk.Disk.extendedLocation,
+  Azure.ResourceManager.Resources.Models.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(ComputeDisk.DiskAccess.extendedLocation,
+  Azure.ResourceManager.Resources.Models.ExtendedLocation,
+  "csharp"
+);
+@@alternateType(ComputeDisk.Snapshot.extendedLocation,
+  Azure.ResourceManager.Resources.Models.ExtendedLocation,
+  "csharp"
+);
+
 // ComputeSku namespace types
 @@clientName(ComputeSku.ResourceSku, "ComputeResourceSku", "csharp");
 @@clientName(ComputeSku.ResourceSkuCapabilities, "ComputeResourceSkuCapabilities", "csharp");

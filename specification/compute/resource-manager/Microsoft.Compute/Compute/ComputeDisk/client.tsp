@@ -137,3 +137,13 @@ using ComputeDisk;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// ── alternateType: Identity → ManagedServiceIdentity for C# ──
+@@alternateType(DiskEncryptionSet.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(DiskEncryptionSetUpdate.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);

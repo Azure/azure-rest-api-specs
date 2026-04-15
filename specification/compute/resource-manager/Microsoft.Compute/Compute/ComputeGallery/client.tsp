@@ -173,3 +173,13 @@ using ComputeGallery;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+// ── alternateType: Identity → ManagedServiceIdentity for C# ──
+@@alternateType(Gallery.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(GalleryUpdate.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
