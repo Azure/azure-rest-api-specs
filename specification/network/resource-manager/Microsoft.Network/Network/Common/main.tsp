@@ -4000,6 +4000,12 @@ model VirtualNetworkPropertiesFormat {
    */
   @visibility(Lifecycle.Read)
   defaultPublicNatGateway?: SubResource;
+
+  /**
+   * A configurable list of summarized gateway prefixes advertised for the virtual network.
+   */
+  @added(Versions.v2025_07_01)
+  summarizedGatewayPrefixes?: AddressSpace;
 }
 
 /**
