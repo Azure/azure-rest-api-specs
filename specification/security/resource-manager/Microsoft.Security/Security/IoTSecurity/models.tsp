@@ -271,21 +271,25 @@ model DeviceSecurityGroupProperties {
   /**
    * The list of custom alert threshold rules.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   thresholdRules?: ThresholdCustomAlertRule[];
 
   /**
    * The list of custom alert time-window rules.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeWindowRules?: TimeWindowCustomAlertRule[];
 
   /**
    * The allow-list custom alert rules.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allowlistRules?: AllowlistCustomAlertRule[];
 
   /**
    * The deny-list custom alert rules.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   denylistRules?: DenylistCustomAlertRule[];
 }
 
@@ -334,6 +338,7 @@ model CustomAlertRule {
   /**
    * The type of the custom alert rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleType: string;
 }
 
@@ -356,6 +361,7 @@ alias TimeWindowCustomAlertRuleProperties = {
 /**
  * A custom alert rule that checks if a value (depends on the custom alert type) is allowed.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ListCustomAlertRule)
 model AllowlistCustomAlertRule extends CustomAlertRule {
   ...AllowlistCustomAlertRuleProperties;
@@ -388,6 +394,7 @@ alias ListCustomAlertRuleProperties = {
 /**
  * A custom alert rule that checks if a value (depends on the custom alert type) is denied.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ListCustomAlertRule)
 model DenylistCustomAlertRule extends CustomAlertRule {
   /**
@@ -402,6 +409,7 @@ model DenylistCustomAlertRule extends CustomAlertRule {
 /**
  * List of Security analytics of your IoT Security solution
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionAnalyticsModelList
   is Azure.Core.Page<IoTSecuritySolutionAnalyticsModel>;
 
@@ -409,6 +417,7 @@ model IoTSecuritySolutionAnalyticsModelList
  * Security analytics properties of your IoT Security solution
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionAnalyticsModelProperties {
   /**
    * Security analytics of your IoT Security solution.
@@ -425,28 +434,33 @@ model IoTSecuritySolutionAnalyticsModelProperties {
   /**
    * List of device metrics by the aggregation date.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   devicesMetrics?: IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem[];
 
   /**
    * List of the 3 devices with the most alerts.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   topAlertedDevices?: IoTSecurityAlertedDevice[];
 
   /**
    * List of the 3 most prevalent device alerts.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   mostPrevalentDeviceAlerts?: IoTSecurityDeviceAlert[];
 
   /**
    * List of the 3 most prevalent device recommendations.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   mostPrevalentDeviceRecommendations?: IoTSecurityDeviceRecommendation[];
 }
 
 /**
  * IoT Security solution analytics severity metrics.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSeverityMetrics {
   /**
    * Count of high severity alerts/recommendations.
@@ -465,6 +479,7 @@ model IoTSeverityMetrics {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem {
   /**
    * Aggregation of IoT Security solution device alert metrics by date.
@@ -481,6 +496,7 @@ model IoTSecuritySolutionAnalyticsModelPropertiesDevicesMetricsItem {
 /**
  * Statistical information about the number of alerts per device during last set number of days.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAlertedDevice {
   /**
    * Device identifier.
@@ -498,6 +514,7 @@ model IoTSecurityAlertedDevice {
 /**
  * Statistical information about the number of alerts per alert type during last set number of days
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityDeviceAlert {
   /**
    * Display name of the alert
@@ -521,6 +538,7 @@ model IoTSecurityDeviceAlert {
 /**
  * Statistical information about the number of recommendations per device, per recommendation type.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityDeviceRecommendation {
   /**
    * Display name of the recommendation.
@@ -544,6 +562,7 @@ model IoTSecurityDeviceRecommendation {
 /**
  * List of IoT Security solution aggregated alert data.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedAlertList
   is Azure.Core.Page<IoTSecurityAggregatedAlert>;
 
@@ -551,6 +570,7 @@ model IoTSecurityAggregatedAlertList
  * IoT Security solution aggregated alert details.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedAlertProperties {
   /**
    * Name of the alert type.
@@ -627,11 +647,13 @@ model IoTSecurityAggregatedAlertProperties {
   /**
    * 10 devices with the highest number of occurrences of this alert type, on this day.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   topDevicesList?: IoTSecurityAggregatedAlertPropertiesTopDevicesListItem[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedAlertPropertiesTopDevicesListItem {
   /**
    * Name of the device.
@@ -667,6 +689,7 @@ model TagsResource {
  * IoT Security solution aggregated recommendation information
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedRecommendationProperties {
   /**
    * Name of the recommendation.
@@ -731,18 +754,21 @@ model IoTSecurityAggregatedRecommendationProperties {
 /**
  * List of IoT Security solution aggregated recommendations.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecurityAggregatedRecommendationList
   is Azure.Core.Page<IoTSecurityAggregatedRecommendation>;
 
 /**
  * List of IoT Security solutions.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionsList is Azure.Core.Page<IoTSecuritySolutionModel>;
 
 /**
  * Security Solution setting data
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionProperties {
   /**
    * Workspace resource ID
@@ -798,6 +824,7 @@ model IoTSecuritySolutionProperties {
   /**
    * List of additional workspaces
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalWorkspaces?: AdditionalWorkspacesProperties[];
 }
 
@@ -871,6 +898,7 @@ model UpdateIotSecuritySolutionData extends TagsResource {
 /**
  * Update Security Solution setting data
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateIoTSecuritySolutionProperties {
   /**
    * Properties of the IoT Security solution's user defined resources.
@@ -886,6 +914,7 @@ model UpdateIoTSecuritySolutionProperties {
 /**
  * Outbound connection to an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
 model ConnectionToIpNotAllowed extends CustomAlertRule {
   ...AllowlistCustomAlertRuleProperties;
@@ -895,6 +924,7 @@ model ConnectionToIpNotAllowed extends CustomAlertRule {
 /**
  * Inbound connection from an ip that isn't allowed. Allow list consists of ipv4 or ipv6 range in CIDR notation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
 model ConnectionFromIpNotAllowed extends CustomAlertRule {
   ...AllowlistCustomAlertRuleProperties;
@@ -904,6 +934,7 @@ model ConnectionFromIpNotAllowed extends CustomAlertRule {
 /**
  * Login by a local user that isn't allowed. Allow list consists of login names to allow.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
 model LocalUserNotAllowed extends CustomAlertRule {
   ...AllowlistCustomAlertRuleProperties;
@@ -913,6 +944,7 @@ model LocalUserNotAllowed extends CustomAlertRule {
 /**
  * Execution of a process that isn't allowed. Allow list consists of process names to allow.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AllowlistCustomAlertRule)
 model ProcessNotAllowed extends CustomAlertRule {
   ...AllowlistCustomAlertRuleProperties;
@@ -922,6 +954,7 @@ model ProcessNotAllowed extends CustomAlertRule {
 /**
  * Number of active connections is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model ActiveConnectionsNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -935,6 +968,8 @@ model ActiveConnectionsNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of cloud to device messages (AMQP protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model AmqpC2DMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -948,6 +983,8 @@ model AmqpC2DMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of cloud to device messages (MQTT protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model MqttC2DMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -961,6 +998,8 @@ model MqttC2DMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of cloud to device messages (HTTP protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model HttpC2DMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -974,6 +1013,8 @@ model HttpC2DMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of rejected cloud to device messages (AMQP protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model AmqpC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -987,6 +1028,8 @@ model AmqpC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of rejected cloud to device messages (MQTT protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model MqttC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1000,6 +1043,8 @@ model MqttC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of rejected cloud to device messages (HTTP protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model HttpC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1013,6 +1058,8 @@ model HttpC2DRejectedMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of device to cloud messages (AMQP protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model AmqpD2CMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1026,6 +1073,8 @@ model AmqpD2CMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of device to cloud messages (MQTT protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model MqttD2CMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1039,6 +1088,8 @@ model MqttD2CMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of device to cloud messages (HTTP protocol) is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model HttpD2CMessagesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1052,6 +1103,7 @@ model HttpD2CMessagesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of direct method invokes is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model DirectMethodInvokesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1065,6 +1117,7 @@ model DirectMethodInvokesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of failed local logins is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model FailedLocalLoginsNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1078,6 +1131,7 @@ model FailedLocalLoginsNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of file uploads is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model FileUploadsNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1091,6 +1145,7 @@ model FileUploadsNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of device queue purges is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model QueuePurgesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1104,6 +1159,7 @@ model QueuePurgesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of twin updates is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model TwinUpdatesNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;
@@ -1117,6 +1173,7 @@ model TwinUpdatesNotInAllowedRange extends CustomAlertRule {
 /**
  * Number of unauthorized operations is not in allowed range.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(TimeWindowCustomAlertRule)
 model UnauthorizedOperationsNotInAllowedRange extends CustomAlertRule {
   ...TimeWindowCustomAlertRuleProperties;

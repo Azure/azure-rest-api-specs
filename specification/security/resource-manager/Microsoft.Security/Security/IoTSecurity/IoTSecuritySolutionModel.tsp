@@ -15,6 +15,7 @@ namespace IoTSecurityAPI;
 /**
  * IoT Security solution configuration and resource information.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IoTSecuritySolutionModel
   is Azure.ResourceManager.ProxyResource<IoTSecuritySolutionProperties> {
   ...ResourceNameParameter<
@@ -35,6 +36,7 @@ model IoTSecuritySolutionModel
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface IoTSecuritySolutionModels {
   /**
@@ -55,6 +57,7 @@ interface IoTSecuritySolutionModels {
   /**
    * Use this method to update existing IoT Security solution tags or user defined resources. To update other fields use the CreateOrUpdate method.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("IoT Security Solution")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<

@@ -16,6 +16,7 @@ namespace IoTSecurityAPI;
 /**
  * Security analytics of your IoT Security solution
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @parentResource(IoTSecuritySolutionModel)
 model IoTSecuritySolutionAnalyticsModel
@@ -28,6 +29,7 @@ model IoTSecuritySolutionAnalyticsModel
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface IoTSecuritySolutionAnalyticsModels {
   /**

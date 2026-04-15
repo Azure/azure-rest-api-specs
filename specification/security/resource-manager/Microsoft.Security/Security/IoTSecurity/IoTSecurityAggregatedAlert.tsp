@@ -16,6 +16,7 @@ namespace IoTSecurityAPI;
 /**
  * Security Solution Aggregated Alert information
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(IoTSecuritySolutionAnalyticsModel)
 model IoTSecurityAggregatedAlert
   is Azure.ResourceManager.ProxyResource<IoTSecurityAggregatedAlertProperties> {
@@ -30,9 +31,11 @@ model IoTSecurityAggregatedAlert
    * Resource tags
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface IoTSecurityAggregatedAlerts {
   /**
