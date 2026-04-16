@@ -13,40 +13,57 @@ namespace Microsoft.Widget;
 /** Employee resource */
 model Employee is TrackedResource<EmployeeProperties> {
   ...ResourceNameParameter<Employee>;
+  ...ManagedServiceIdentityProperty;
 }
 
 /** Employee properties */
 model EmployeeProperties {
-  /** Age of employee (before 2025-11-01) */
+  /** Age of employee */
   age?: int32;
 
   /** City of employee */
   city?: string;
 
-  /** Work location of employee */
-  @added(Versions.v2024_10_01_preview)
-  workLocation?: WorkLocation;
+  /** Email of employee */
+  email?: string;
+
+  /** Department of employee */
+  department?: string;
+
+  /** Status code of employee */
+  statusCode?: string;
 
   /** Profile of employee */
   @encode("base64url")
   profile?: bytes;
+
+  /** The assets belong to the employee. */
+  assets: string[];
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
-/** Work location details */
-@added(Versions.v2024_10_01_preview)
-model WorkLocation {
-  /** Country */
-  country?: string;
+/** Export result model */
+model ExportResult {
+  /** Exported data */
+  data?: string;
+}
 
-  /** Company */
-  company?: string;
+/** Employee move request */
+model MoveRequest {
+  /** The moving from location */
+  from: string;
 
-  /** Seat number */
-  seatNumber?: string;
+  /** The moving to location */
+  to: string;
+}
+
+/** Employee move response */
+model MoveResponse {
+  /** The status of the move */
+  movingStatus: string;
 }
 
 /** The resource provisioning state. */
@@ -76,4 +93,7 @@ interface Employees {
   delete is ArmResourceDeleteWithoutOkAsync<Employee>;
   listByResourceGroup is ArmResourceListByParent<Employee>;
   listBySubscription is ArmListBySubscription<Employee>;
+
+  /** Export employee data */
+  exportData is ArmResourceActionSync<Employee, void, ExportResult>;
 }

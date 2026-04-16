@@ -7,17 +7,19 @@ type: capability               # capability | regression
 environment:
   skills:
     - ../../SKILL.md
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
   mcpServers:
     azure-sdk-mcp:
       type: stdio
       command: pwsh
-      args: ["../../../../../eng/common/mcp/azure-sdk-mcp.ps1", "-Run"]
-      cwd: ./
-      timeout: 50000
+      args: ["./start-mcp.ps1"]
+      timeout: 60000
 
 # Execution configuration
 config:
-  runs: 2                      # Trials per stimulus
+  runs: 1                      # Trials per stimulus
   timeout: 1800                # Seconds per trial
   model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
   executor: copilot-sdk        # Which executor to use
@@ -35,17 +37,17 @@ stimuli:
     max_tokens: 5000
   environment:
     files:
-    - src: ../fixtures/003002-arm-action-lro/employee.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
       dest: employee.tsp
-    - src: ../fixtures/003002-arm-action-lro/main.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
       dest: main.tsp
-    - src: ../fixtures/003002-arm-action-lro/package.json
+    - src: ../fixtures/Microsoft.Widget/Widget/package.json
       dest: package.json
-    - src: ../fixtures/003002-arm-action-lro/readme.md
+    - src: ../fixtures/Microsoft.Widget/Widget/readme.md
       dest: readme.md
-    - src: ../fixtures/003002-arm-action-lro/shared.tsp
+    - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
       dest: shared.tsp
-    - src: ../fixtures/003002-arm-action-lro/tspconfig.yaml
+    - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
       dest: tspconfig.yaml
   graders:
   - type: file-matches
@@ -63,13 +65,13 @@ stimuli:
   - type: prompt
     config:
       scoring: scale_1_5
-      threshold: 0.5
+      threshold: 1.0
       prompt: 'Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent.'
       model: claude-opus-4.6-1m
 scoring:
   weights:
     prompt: 1
     file-matches: 3
-  threshold: 0.7
+  threshold: 1.0
 
 
