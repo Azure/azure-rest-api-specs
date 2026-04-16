@@ -39,6 +39,15 @@ model SolutionProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The updatable properties of the Solution.")
+model SolutionUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: SolutionUpdateProperties;
+}
+
+@doc("The updatable properties of the Solution.")
+model SolutionUpdateProperties is SolutionProperties;
+
 @doc("Solution Resource attached to a Target")
 @parentResource(Target)
 model Solution is Azure.ResourceManager.ProxyResource<SolutionProperties> {
@@ -64,7 +73,7 @@ interface Solutions {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Solution>;
 
   @doc("Update a Solution Resource")
-  update is ArmResourcePatchAsync<Solution, SolutionProperties>;
+  update is ArmCustomPatchAsync<Solution, PatchModel = SolutionUpdate>;
 
   @doc("Delete a Solution Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Solution>;

@@ -17,6 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 namespace Microsoft.Edge;
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @doc("Workflow Version Properties")
 model WorkflowVersionV2Properties {
   @doc("Revision number of resolved config for this workflow version")
@@ -50,6 +51,7 @@ model WorkflowVersionV2Properties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @doc("Workflow Version Resource")
 @parentResource(WorkflowV2)
 @resource("versions")
@@ -69,6 +71,7 @@ model WorkflowVersionV2
 }
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface WorkflowVersionV2s {
   @doc("Get a Workflow Version Resource")

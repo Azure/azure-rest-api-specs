@@ -17,6 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 namespace Microsoft.Edge;
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @doc("Workflow Properties")
 model WorkflowV2Properties {
   @doc("Workflow template Id")
@@ -29,6 +30,7 @@ model WorkflowV2Properties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @doc("WorkflowV2 Resource")
 @resource("workflows")
 model WorkflowV2
@@ -47,6 +49,7 @@ model WorkflowV2
 }
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface WorkflowV2s {
   @doc("Get a Workflow resource")

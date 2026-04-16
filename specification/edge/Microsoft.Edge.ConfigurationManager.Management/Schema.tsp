@@ -44,6 +44,19 @@ model SchemaVersionWithUpdateType {
   schemaVersion: SchemaVersion;
 }
 
+@doc("The updatable properties of the Schema.")
+model SchemaUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: SchemaUpdateProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("The updatable properties of the Schema.")
+model SchemaUpdateProperties is SchemaProperties;
+
 @doc("Schema Resource")
 @resource("schemas")
 model Schema is TrackedResource<SchemaProperties> {
@@ -66,7 +79,7 @@ interface Schemas {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Schema>;
 
   @doc("update a Schema Resource")
-  update is ArmResourcePatchSync<Schema, SchemaProperties>;
+  update is ArmCustomPatchSync<Schema, PatchModel = SchemaUpdate>;
 
   @doc("Delete a Schema Resource")
   delete is ArmResourceDeleteWithoutOkAsync<Schema>;
