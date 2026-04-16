@@ -3104,21 +3104,21 @@
         "startAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when skipToken is specified."
+          "description": "Start of UTC time range. Defaults to 24 hours ago if not specified. Must be omitted when continuationToken is specified."
         },
         "endAt": {
           "type": "string",
           "format": "date-time",
-          "description": "End of UTC time range. Defaults to now if not specified. Must be omitted when skipToken is specified."
+          "description": "End of UTC time range. Defaults to now if not specified. Must be omitted when continuationToken is specified."
         },
         "top": {
           "type": "integer",
           "format": "int32",
           "description": "Maximum number of annotations to return per page."
         },
-        "nextLink": {
+        "continuationToken": {
           "type": "string",
-          "description": "Continuation value from a previous response to retrieve the next page of results."
+          "description": "Continuation token from a previous response to retrieve the next page of results."
         }
       }
     },
@@ -3140,9 +3140,9 @@
             "annotationId"
           ]
         },
-        "nextLink": {
+        "continuationToken": {
           "type": "string",
-          "description": "Link to retrieve the next page of results. Null if there are no more results."
+          "description": "Continuation token to retrieve the next page of results. Null if there are no more results."
         }
       },
       "required": [

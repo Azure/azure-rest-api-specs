@@ -1315,6 +1315,7 @@ model GetDataAnnotationsRequest {
   @doc("Maximum number of annotations to return per page.")
   top?: int32;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "continuationToken is a pagination token, not a secret"
   @doc("Continuation token from a previous response to retrieve the next page of results.")
   continuationToken?: string;
 }
@@ -1329,6 +1330,7 @@ model GetDataAnnotationsResponse {
   @identifiers(#["annotationId"])
   annotations: DataAnnotation[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "continuationToken is a pagination token, not a secret"
   @doc("Continuation token to retrieve the next page of results. Null if there are no more results.")
   continuationToken?: string;
 }
