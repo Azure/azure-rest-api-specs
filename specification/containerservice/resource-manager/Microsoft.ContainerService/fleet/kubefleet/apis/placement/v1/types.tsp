@@ -21,7 +21,7 @@ model RolloutStrategy {
 @doc("A reference to an existing cluster staged update strategy.")
 model ClusterUpdateStrategyReference {
   @doc("The name of an existing cluster staged update strategy.")
-  name: string;
+  name?: string;
 }
 
 @doc("The possible rollout strategy types.")
