@@ -262,7 +262,6 @@ model AgentVersionObject {
   agent_guid?: string;
 }
 
-@removed(Versions.v1)
 @doc("The provisioning status of an agent version.")
 union AgentVersionStatus {
   @doc("The agent version is being provisioned.")

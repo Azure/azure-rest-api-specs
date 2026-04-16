@@ -1,5 +1,4 @@
 using TypeSpec.Http;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -36,8 +35,7 @@ alias CreateSkillFromPackageRequest = {
 alias UpdateSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  @clientName("name")
-  skill_name: string;
+  name: string;
 
   @doc("A human-readable description of the skill.")
   @maxLength(1024)
@@ -53,15 +51,13 @@ alias UpdateSkillRequest = {
 alias GetSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  @clientName("name")
-  skill_name: string;
+  name: string;
 };
 
 alias DownloadSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  @clientName("name")
-  skill_name: string;
+  name: string;
 };
 
 alias ListSkillsRequest = {
@@ -71,8 +67,7 @@ alias ListSkillsRequest = {
 alias DeleteSkillRequest = {
   @doc("The unique name of the skill.")
   @path
-  @clientName("name")
-  skill_name: string;
+  name: string;
 };
 
 @doc("A skill object.")
