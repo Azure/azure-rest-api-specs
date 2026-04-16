@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Monitor Pipelines Control Plane API",
+    "title": "Azure Monitor Control Plane API",
     "version": "2023-10-01-preview",
-    "description": "Provides operations for working with Azure Monitor Pipelines",
+    "description": "Provides operations for working with Azure Monitor",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,6 +43,9 @@
       "name": "Operations"
     },
     {
+      "name": "AzureMonitorWorkspaces"
+    },
+    {
       "name": "PipelineGroups"
     }
   ],
@@ -56,26 +59,65 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Lists the Microsoft.Monitor resource provider operations": {
             "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/accounts": {
+      "get": {
+        "operationId": "AzureMonitorWorkspaces_ListBySubscription",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Lists all workspaces in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Monitor Workspaces by subscription": {
+            "$ref": "./examples/AzureMonitorWorkspacesListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -92,10 +134,10 @@
         "description": "Lists all workspaces in the specified subscription",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -108,7 +150,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -122,6 +164,280 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts": {
+      "get": {
+        "operationId": "AzureMonitorWorkspaces_ListByResourceGroup",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Lists all workspaces in the specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Monitor Workspaces by resource group": {
+            "$ref": "./examples/AzureMonitorWorkspacesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}": {
+      "get": {
+        "operationId": "AzureMonitorWorkspaces_Get",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Returns the specific Azure Monitor workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureMonitorWorkspaces_CreateOrUpdate",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Create or update a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureMonitorWorkspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureMonitorWorkspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AzureMonitorWorkspaces_Update",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Updates part of a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AzureMonitorWorkspaces_Delete",
+        "tags": [
+          "AzureMonitorWorkspaces"
+        ],
+        "description": "Delete a workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureMonitorWorkspaceName",
+            "in": "path",
+            "description": "The name of the Azure Monitor workspace. The name is case insensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an Azure Monitor Workspace asynchronously": {
+            "$ref": "./examples/AzureMonitorWorkspaceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups": {
       "get": {
         "operationId": "PipelineGroups_ListByResourceGroup",
@@ -131,13 +447,13 @@
         "description": "Lists all workspaces in the specified resource group",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -150,7 +466,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -173,13 +489,13 @@
         "description": "Returns the specific pipeline group instance.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "pipelineGroupName",
@@ -187,7 +503,7 @@
             "description": "The name of pipeline group. The name is case insensitive.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,10}[^-]$"
           }
         ],
         "responses": {
@@ -200,7 +516,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -218,13 +534,13 @@
         "description": "Create or update a pipeline group instance.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "pipelineGroupName",
@@ -232,7 +548,7 @@
             "description": "The name of pipeline group. The name is case insensitive.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,10}[^-]$"
           },
           {
             "name": "resource",
@@ -257,10 +573,6 @@
               "$ref": "#/definitions/PipelineGroup"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -271,7 +583,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -302,13 +614,13 @@
         "description": "Updates a pipeline group instance",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "pipelineGroupName",
@@ -316,7 +628,7 @@
             "description": "The name of pipeline group. The name is case insensitive.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,10}[^-]$"
           },
           {
             "name": "properties",
@@ -352,7 +664,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -374,13 +686,13 @@
         "description": "Delete a pipeline group instance.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "pipelineGroupName",
@@ -388,7 +700,7 @@
             "description": "The name of pipeline group. The name is case insensitive.",
             "required": true,
             "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+            "pattern": "^(?!-)[a-zA-Z0-9-]{3,10}[^-]$"
           }
         ],
         "responses": {
@@ -412,7 +724,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -429,54 +741,6 @@
     }
   },
   "definitions": {
-    "AllowedFormats": {
-      "type": "string",
-      "description": "Supported literals for allowed syslog and CEF parsing formats.",
-      "enum": [
-        "all",
-        "syslogRfc3164",
-        "syslogRfc5424",
-        "cefRfc3164",
-        "cefRfc5424",
-        "rawCef"
-      ],
-      "x-ms-enum": {
-        "name": "AllowedFormats",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "all",
-            "value": "all",
-            "description": "Allow all supported syslog and CEF formats."
-          },
-          {
-            "name": "syslogRfc3164",
-            "value": "syslogRfc3164",
-            "description": "Allow RFC3164 syslog messages."
-          },
-          {
-            "name": "syslogRfc5424",
-            "value": "syslogRfc5424",
-            "description": "Allow RFC5424 syslog messages."
-          },
-          {
-            "name": "cefRfc3164",
-            "value": "cefRfc3164",
-            "description": "Allow CEF payloads embedded in RFC3164 syslog messages."
-          },
-          {
-            "name": "cefRfc5424",
-            "value": "cefRfc5424",
-            "description": "Allow CEF payloads embedded in RFC5424 syslog messages."
-          },
-          {
-            "name": "rawCef",
-            "value": "rawCef",
-            "description": "Allow raw CEF payloads without syslog encapsulation."
-          }
-        ]
-      }
-    },
     "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
       "type": "object",
       "description": "The complex type of the extended location.",
@@ -519,23 +783,46 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+    "AzureMonitorWorkspace": {
       "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "description": "An Azure Monitor Workspace definition.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "properties": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource entity tag (ETag)",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "AzureMonitorWorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a AzureMonitorWorkspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureMonitorWorkspace items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "AzureMonitorWorkspaceLogsApiConfig": {
@@ -577,14 +864,84 @@
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsApiConfig",
           "description": "API configurations for Azure Monitor workspace exporter."
         },
-        "persistence": {
-          "$ref": "#/definitions/ExporterPersistenceConfiguration",
-          "description": "Persistence options for the exporter."
+        "concurrency": {
+          "$ref": "#/definitions/ConcurrencyConfiguration",
+          "description": "Concurrency configuration for the exporter."
+        },
+        "cache": {
+          "$ref": "#/definitions/CacheConfiguration",
+          "description": "Cache configurations."
         }
       },
       "required": [
         "api"
       ]
+    },
+    "AzureMonitorWorkspaceProperties": {
+      "type": "object",
+      "description": "Properties that need to be specified to create a new workspace.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "The immutable ID of the Azure Monitor workspace. This property is read-only.",
+          "readOnly": true
+        },
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "Information about metrics for the Azure Monitor workspace"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
+          "readOnly": true
+        },
+        "defaultIngestionSettings": {
+          "$ref": "#/definitions/IngestionSettings",
+          "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Gets or sets allow or disallow public network access to workspace",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureMonitorWorkspaceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the AzureMonitorWorkspace.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AzureMonitorWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AzureMonitorWorkspace.",
+      "properties": {
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "Information about metrics for the Azure Monitor workspace"
+        }
+      }
     },
     "BatchProcessor": {
       "type": "object",
@@ -604,138 +961,41 @@
           "description": "Timeout in milliseconds.",
           "default": 200,
           "minimum": 10,
-          "maximum": 300000
+          "maximum": 60000
         }
       }
     },
-    "CapabilityOperator": {
-      "type": "string",
-      "description": "The match operator for placement constraints.",
-      "enum": [
-        "In",
-        "NotIn",
-        "Exists",
-        "DoesNotExist"
-      ],
-      "x-ms-enum": {
-        "name": "CapabilityOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "In",
-            "value": "In",
-            "description": "The capability value must be one of the specified values."
-          },
-          {
-            "name": "NotIn",
-            "value": "NotIn",
-            "description": "The capability value must not be one of the specified values."
-          },
-          {
-            "name": "Exists",
-            "value": "Exists",
-            "description": "The capability key must exist (value is ignored)."
-          },
-          {
-            "name": "DoesNotExist",
-            "value": "DoesNotExist",
-            "description": "The capability key must not exist."
-          }
-        ]
-      }
-    },
-    "CertificateSource": {
+    "CacheConfiguration": {
       "type": "object",
-      "description": "Configuration for certificate source location.",
+      "description": "Cache configurations.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/CertificateSourceType",
-          "description": "The type of certificate source."
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the certificate source."
-        },
-        "subLocation": {
-          "type": "string",
-          "description": "Sub-location within the certificate source."
-        }
-      },
-      "required": [
-        "type",
-        "location",
-        "subLocation"
-      ]
-    },
-    "CertificateSourceType": {
-      "type": "string",
-      "description": "The type of certificate source.",
-      "enum": [
-        "kubernetesSecret",
-        "kubernetesConfigMap"
-      ],
-      "x-ms-enum": {
-        "name": "CertificateSourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "KubernetesSecret",
-            "value": "kubernetesSecret",
-            "description": "Certificate stored in a Kubernetes secret."
-          },
-          {
-            "name": "KubernetesConfigMap",
-            "value": "kubernetesConfigMap",
-            "description": "Certificate stored in a Kubernetes configmap."
-          }
-        ]
-      }
-    },
-    "CertificateWithKey": {
-      "type": "object",
-      "description": "TLS certificate and private key pair.",
-      "properties": {
-        "certificate": {
-          "$ref": "#/definitions/CertificateSource",
-          "description": "Source configuration for the TLS certificate."
-        },
-        "privateKey": {
-          "$ref": "#/definitions/PrivateKeySource",
-          "description": "Source configuration for the private key. Private keys must be stored in Kubernetes secrets for security reasons."
-        }
-      },
-      "required": [
-        "certificate",
-        "privateKey"
-      ]
-    },
-    "DistributionPolicy": {
-      "type": "object",
-      "description": "Distribution policy for spreading instances across compute units.",
-      "properties": {
-        "maxInstancesPerHost": {
+        "maxStorageUsage": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of instances allowed per compute unit (node/VM). If not specified, default scheduling applies.",
-          "minimum": 1
+          "description": "Max storage usage in megabytes."
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in minutes."
         }
       }
     },
-    "ExecutionPlacement": {
+    "ConcurrencyConfiguration": {
       "type": "object",
-      "description": "Constraints for guiding the execution environment of the pipeline group.",
+      "description": "Concurrent publishing configuration.",
       "properties": {
-        "constraints": {
-          "type": "array",
-          "description": "A list of placement constraints to guide where pipelineGroup instances should run.",
-          "items": {
-            "$ref": "#/definitions/PlacementConstraint"
-          },
-          "x-ms-identifiers": []
+        "workerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of parallel workers processing the log queues.",
+          "default": 4
         },
-        "distribution": {
-          "$ref": "#/definitions/DistributionPolicy",
-          "description": "Distribution policy for spreading instances across compute units (nodes/VMs)."
+        "batchQueueSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the queue for log batches.",
+          "default": 100
         }
       }
     },
@@ -755,6 +1015,10 @@
         "azureMonitorWorkspaceLogs": {
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsExporter",
           "description": "Azure Monitor Workspace Logs specific configurations."
+        },
+        "tcp": {
+          "$ref": "#/definitions/TcpExporter",
+          "description": "TCP based exporter. Used for pipelineGroup exporter."
         }
       },
       "required": [
@@ -762,29 +1026,12 @@
         "name"
       ]
     },
-    "ExporterPersistenceConfiguration": {
-      "type": "object",
-      "description": "Persistence options for this exporter.",
-      "properties": {
-        "maxStorageUsage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage usage in gigabytes.",
-          "minimum": 1
-        },
-        "retentionPeriod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention period in minutes.",
-          "minimum": 1
-        }
-      }
-    },
     "ExporterType": {
       "type": "string",
       "description": "The exporter type.",
       "enum": [
-        "AzureMonitorWorkspaceLogs"
+        "AzureMonitorWorkspaceLogs",
+        "PipelineGroup"
       ],
       "x-ms-enum": {
         "name": "ExporterType",
@@ -794,9 +1041,122 @@
             "name": "AzureMonitorWorkspaceLogs",
             "value": "AzureMonitorWorkspaceLogs",
             "description": "Export logs to Azure Monitor Workspace."
+          },
+          {
+            "name": "PipelineGroup",
+            "value": "PipelineGroup",
+            "description": "Export data to another pipeline group instance."
           }
         ]
       }
+    },
+    "ExternalNetworkingMode": {
+      "type": "string",
+      "description": "The mode of the external networking.",
+      "enum": [
+        "LoadBalancerOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalNetworkingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LoadBalancerOnly",
+            "value": "LoadBalancerOnly",
+            "description": "Load balancer only."
+          }
+        ]
+      }
+    },
+    "IngestionSettings": {
+      "type": "object",
+      "description": "Settings for data ingestion",
+      "properties": {
+        "dataCollectionRuleResourceId": {
+          "type": "string",
+          "description": "The Azure resource Id of the default data collection rule for this workspace.",
+          "readOnly": true
+        },
+        "dataCollectionEndpointResourceId": {
+          "type": "string",
+          "description": "The Azure resource Id of the default data collection endpoint for this workspace.",
+          "readOnly": true
+        }
+      }
+    },
+    "Metrics": {
+      "type": "object",
+      "description": "Information about metrics for the workspace",
+      "properties": {
+        "prometheusQueryEndpoint": {
+          "type": "string",
+          "description": "The Prometheus query endpoint for the workspace",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "An internal identifier for the metrics container. Only to be used by the system",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkingConfiguration": {
+      "type": "object",
+      "description": "Networking configuration for the pipeline group instance.",
+      "properties": {
+        "externalNetworkingMode": {
+          "$ref": "#/definitions/ExternalNetworkingMode",
+          "description": "External networking mode."
+        },
+        "host": {
+          "type": "string",
+          "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        },
+        "routes": {
+          "type": "array",
+          "description": "Networking routes configuration.",
+          "items": {
+            "$ref": "#/definitions/NetworkingRoute"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "externalNetworkingMode",
+        "routes"
+      ]
+    },
+    "NetworkingRoute": {
+      "type": "object",
+      "description": "Networking route configuration.",
+      "properties": {
+        "receiver": {
+          "type": "string",
+          "description": "The name of the previously defined receiver.",
+          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port that will be configured externally. If not specified, it will use the port from the receiver definition.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "path": {
+          "type": "string",
+          "description": "Route path.",
+          "pattern": "^[a-zA-Z0-9-/\\.]+$"
+        },
+        "subdomain": {
+          "type": "string",
+          "description": "Route subdomain.",
+          "pattern": "^[a-zA-Z0-9-\\.]+$"
+        }
+      },
+      "required": [
+        "receiver"
+      ]
     },
     "OtlpReceiver": {
       "type": "object",
@@ -824,16 +1184,6 @@
       "required": [
         "persistentVolumeName"
       ]
-    },
-    "PersistenceConfigurationsUpdate": {
-      "type": "object",
-      "description": "Persistence options to all pipelines in the instance.",
-      "properties": {
-        "persistentVolumeName": {
-          "type": "string",
-          "description": "The name of the mounted persistent volume."
-        }
-      }
     },
     "Pipeline": {
       "type": "object",
@@ -883,10 +1233,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PipelineGroupProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ExtendedLocation",
+          "description": "The extended location for given pipeline group.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -895,7 +1247,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -927,8 +1279,7 @@
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Defines the amount of replicas of the pipeline group instance.",
-          "minimum": 1
+          "description": "Defines the amount of replicas of the pipeline group instance."
         },
         "receivers": {
           "type": "array",
@@ -958,15 +1309,11 @@
           "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
-        "executionPlacement": {
-          "$ref": "#/definitions/ExecutionPlacement",
-          "description": "Constraints for guiding the execution environment of the pipeline group."
-        },
-        "tlsConfigurations": {
+        "networkingConfigurations": {
           "type": "array",
-          "description": "TLS configurations for the pipeline group instance.",
+          "description": "Networking configurations for the pipeline group instance.",
           "items": {
-            "$ref": "#/definitions/TlsConfiguration"
+            "$ref": "#/definitions/NetworkingConfiguration"
           },
           "x-ms-identifiers": []
         },
@@ -983,15 +1330,32 @@
         "service"
       ]
     },
-    "PipelineGroupPropertiesUpdate": {
+    "PipelineGroupUpdate": {
       "type": "object",
-      "description": "Properties that need to be specified to create a new pipeline group instance.",
+      "description": "The type used for update operations of the PipelineGroup.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PipelineGroupUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineGroupUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the PipelineGroup.",
       "properties": {
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Defines the amount of replicas of the pipeline group instance.",
-          "minimum": 1
+          "description": "Defines the amount of replicas of the pipeline group instance."
         },
         "receivers": {
           "type": "array",
@@ -1018,43 +1382,24 @@
           "x-ms-identifiers": []
         },
         "service": {
-          "$ref": "#/definitions/ServiceUpdate",
+          "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
-        "executionPlacement": {
-          "$ref": "#/definitions/ExecutionPlacement",
-          "description": "Constraints for guiding the execution environment of the pipeline group."
-        },
-        "tlsConfigurations": {
+        "networkingConfigurations": {
           "type": "array",
-          "description": "TLS configurations for the pipeline group instance.",
+          "description": "Networking configurations for the pipeline group instance.",
           "items": {
-            "$ref": "#/definitions/TlsConfiguration"
+            "$ref": "#/definitions/NetworkingConfiguration"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "PipelineGroupUpdate": {
-      "type": "object",
-      "description": "A pipeline group definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PipelineGroupPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
     "PipelineType": {
       "type": "string",
       "description": "The pipeline type.",
       "enum": [
-        "Logs"
+        "logs"
       ],
       "x-ms-enum": {
         "name": "PipelineType",
@@ -1062,74 +1407,8 @@
         "values": [
           {
             "name": "Logs",
-            "value": "Logs",
+            "value": "logs",
             "description": "Pipeline for logs telemetry."
-          }
-        ]
-      }
-    },
-    "PlacementConstraint": {
-      "type": "object",
-      "description": "A placement constraint defines requirements for where pipeline group instances can be scheduled.",
-      "properties": {
-        "capability": {
-          "type": "string",
-          "description": "The capability or attribute key used to match compute unit properties."
-        },
-        "operator": {
-          "$ref": "#/definitions/CapabilityOperator",
-          "description": "The match operator, e.g., In, NotIn, Exists, DoesNotExist."
-        },
-        "values": {
-          "type": "array",
-          "description": "The values to match against. Not required for Exists/DoesNotExist.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "capability",
-        "operator"
-      ]
-    },
-    "PrivateKeySource": {
-      "type": "object",
-      "description": "Configuration for private key source location.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/PrivateKeySourceType",
-          "description": "The type of private key source. Only kubernetesSecret is supported for security reasons."
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the private key source."
-        },
-        "subLocation": {
-          "type": "string",
-          "description": "Sub-location within the private key source."
-        }
-      },
-      "required": [
-        "type",
-        "location",
-        "subLocation"
-      ]
-    },
-    "PrivateKeySourceType": {
-      "type": "string",
-      "description": "The type of private key source.",
-      "enum": [
-        "kubernetesSecret"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateKeySourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "KubernetesSecret",
-            "value": "kubernetesSecret",
-            "description": "Private key stored in a Kubernetes secret. This is the only supported type for security reasons."
           }
         ]
       }
@@ -1150,10 +1429,6 @@
         "batch": {
           "$ref": "#/definitions/BatchProcessor",
           "description": "Batch processor configurations."
-        },
-        "transformLanguage": {
-          "$ref": "#/definitions/TransformLanguageProcessor",
-          "description": "Transform language processor configurations."
         }
       },
       "required": [
@@ -1165,10 +1440,7 @@
       "type": "string",
       "description": "The processor type.",
       "enum": [
-        "Batch",
-        "TransformLanguage",
-        "MicrosoftSyslog",
-        "MicrosoftCommonSecurityLog"
+        "Batch"
       ],
       "x-ms-enum": {
         "name": "ProcessorType",
@@ -1178,21 +1450,6 @@
             "name": "Batch",
             "value": "Batch",
             "description": "Batch processor."
-          },
-          {
-            "name": "TransformLanguage",
-            "value": "TransformLanguage",
-            "description": "Transform language processor."
-          },
-          {
-            "name": "MicrosoftSyslog",
-            "value": "MicrosoftSyslog",
-            "description": "Microsoft Syslog processor."
-          },
-          {
-            "name": "MicrosoftCommonSecurityLog",
-            "value": "MicrosoftCommonSecurityLog",
-            "description": "Microsoft CEF/Common Security Log processor."
           }
         ]
       }
@@ -1240,6 +1497,30 @@
       },
       "readOnly": true
     },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "State of the public network access.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The public network access is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The public network access is disabled"
+          }
+        ]
+      }
+    },
     "Receiver": {
       "type": "object",
       "description": "Receiver Info.",
@@ -1253,17 +1534,17 @@
           "description": "The name of receiver.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
         },
-        "tlsConfiguration": {
-          "type": "string",
-          "description": "Reference to a named TLS configuration. If not specified, default TLS configuration is used."
-        },
         "syslog": {
           "$ref": "#/definitions/SyslogReceiver",
           "description": "Syslog configurations. This field is mandatory for syslog type receivers."
         },
         "otlp": {
           "$ref": "#/definitions/OtlpReceiver",
-          "description": "OTLP receiver configurations. This field is mandatory for OTLP receivers."
+          "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+        },
+        "udp": {
+          "$ref": "#/definitions/UdpReceiver",
+          "description": "UDP receiver configurations. This field is mandatory for UDP receivers."
         }
       },
       "required": [
@@ -1276,7 +1557,10 @@
       "description": "The receiver type.",
       "enum": [
         "Syslog",
-        "OTLP"
+        "Ama",
+        "PipelineGroup",
+        "OTLP",
+        "UDP"
       ],
       "x-ms-enum": {
         "name": "ReceiverType",
@@ -1288,9 +1572,24 @@
             "description": "Linux syslog."
           },
           {
+            "name": "Ama",
+            "value": "Ama",
+            "description": "Receives data from azure monitor agent receiver."
+          },
+          {
+            "name": "PipelineGroup",
+            "value": "PipelineGroup",
+            "description": "Receives data from another pipeline group."
+          },
+          {
             "name": "OTLP",
             "value": "OTLP",
             "description": "Receives data from a OTLP collector."
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "Receives data from an UDP collector."
           }
         ]
       }
@@ -1403,24 +1702,6 @@
         "pipelines"
       ]
     },
-    "ServiceUpdate": {
-      "type": "object",
-      "description": "Service Info.",
-      "properties": {
-        "pipelines": {
-          "type": "array",
-          "description": "Pipelines belonging to a given pipeline group.",
-          "items": {
-            "$ref": "#/definitions/Pipeline"
-          },
-          "x-ms-identifiers": []
-        },
-        "persistence": {
-          "$ref": "#/definitions/PersistenceConfigurationsUpdate",
-          "description": "Persistence options to all pipelines in the instance."
-        }
-      }
-    },
     "SyslogReceiver": {
       "type": "object",
       "description": "Base receiver using TCP as transport protocol.",
@@ -1430,117 +1711,119 @@
           "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
-        "allowedFormats": {
-          "type": "array",
-          "description": "List of allowed message formats for syslog/CEF ingestion. Default 'all'.",
-          "default": [
-            "all"
-          ],
-          "items": {
-            "$ref": "#/definitions/AllowedFormats"
-          }
-        },
-        "transportProtocol": {
+        "protocol": {
           "type": "string",
-          "description": "Transport protocol. Default tcp.",
-          "default": "tcp",
+          "description": "Protocol to parse syslog messages. Default rfc3164",
+          "default": "rfc3164",
           "enum": [
-            "tcp",
-            "udp"
+            "rfc3164",
+            "rfc5424"
           ],
           "x-ms-enum": {
-            "name": "TransportProtocol",
+            "name": "SyslogProtocol",
             "modelAsString": true,
             "values": [
               {
-                "name": "tcp",
-                "value": "tcp",
-                "description": "tcp protocol."
+                "name": "rfc3164",
+                "value": "rfc3164",
+                "description": "rfc3164 protocol."
               },
               {
-                "name": "udp",
-                "value": "udp",
-                "description": "udp protocol."
+                "name": "rfc5424",
+                "value": "rfc5424",
+                "description": "rfc5424 protocol."
               }
             ]
           }
-        },
-        "allowSkipPriHeader": {
-          "type": "boolean",
-          "description": "Configure the receiver to allow parsing of messages without the PRI header. Default false.",
-          "default": false
         }
       },
       "required": [
         "endpoint"
       ]
     },
-    "TlsConfiguration": {
+    "TcpExporter": {
       "type": "object",
-      "description": "TLS configuration that can be referenced by receivers.",
+      "description": "Base exporter using TCP as transport protocol.",
       "properties": {
-        "name": {
+        "url": {
           "type": "string",
-          "description": "The name of the TLS configuration.",
-          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
+          "description": "TCP url to export.",
+          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "UdpReceiver": {
+      "type": "object",
+      "description": "Receiver using UDP as transport protocol.",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
+          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
-        "mode": {
+        "encoding": {
           "type": "string",
-          "description": "The TLS security mode for receivers using this configuration. Default is 'mutualTls'.",
-          "default": "mutualTls",
+          "description": "The encoding of the stream being received.",
+          "default": "nop",
           "enum": [
-            "disabled",
-            "serverOnly",
-            "mutualTls"
+            "nop",
+            "utf-8",
+            "utf-16le",
+            "utf-16be",
+            "ascii",
+            "big5"
           ],
           "x-ms-enum": {
-            "name": "TlsMode",
+            "name": "StreamEncodingType",
             "modelAsString": true,
             "values": [
               {
-                "name": "Disabled",
-                "value": "disabled",
-                "description": "No TLS encryption - plain text communication."
+                "name": "nop",
+                "value": "nop",
+                "description": "No encoding validation. Treats the file as a stream of raw bytes."
               },
               {
-                "name": "ServerOnly",
-                "value": "serverOnly",
-                "description": "Server-side TLS only - encrypts communication but doesn't validate client certificates."
+                "name": "utf_8",
+                "value": "utf-8",
+                "description": "UTF-8 encoding."
               },
               {
-                "name": "MutualTls",
-                "value": "mutualTls",
-                "description": "Mutual TLS - encrypts communication and validates both server and client certificates."
+                "name": "utf_16le",
+                "value": "utf-16le",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "utf_16be",
+                "value": "utf-16be",
+                "description": "UTF-16 encoding with little-endian byte order."
+              },
+              {
+                "name": "ascii",
+                "value": "ascii",
+                "description": "ASCII encoding."
+              },
+              {
+                "name": "big5",
+                "value": "big5",
+                "description": "The Big5 Chinese character encoding."
               }
             ]
           }
         },
-        "tlsCertificate": {
-          "$ref": "#/definitions/CertificateWithKey",
-          "description": "TLS certificate and its private key. If not specified, default TLS certificate is used."
-        },
-        "clientCa": {
-          "$ref": "#/definitions/CertificateSource",
-          "description": "Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used."
+        "readQueueLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max read queue length.",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 100000
         }
       },
       "required": [
-        "name"
-      ]
-    },
-    "TransformLanguageProcessor": {
-      "type": "object",
-      "description": "Transform language processor.",
-      "properties": {
-        "transformStatement": {
-          "type": "string",
-          "description": "Transform statement to execute over the data passing through the processor.",
-          "minLength": 1,
-          "maxLength": 10000
-        }
-      },
-      "required": [
-        "transformStatement"
+        "endpoint"
       ]
     }
   },
