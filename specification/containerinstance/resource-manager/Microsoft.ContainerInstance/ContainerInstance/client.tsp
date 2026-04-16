@@ -226,6 +226,7 @@ using Microsoft.ContainerInstance;
 @@alternateType(EncryptionProperties.vaultBaseUrl, url, "csharp");
 @@alternateType(ImageRegistryCredential.identityUrl, url, "csharp");
 @@alternateType(ApiEntityReference.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(IpAddress.ip, Azure.Core.ipV4Address, "csharp");
 
 // Category 5: Property renames
 @@clientName(IpAddress.type, "AddressType", "csharp");
