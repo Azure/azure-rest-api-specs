@@ -18,6 +18,7 @@ namespace Azure.AI.Projects {
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
+    tool_search_preview: "tool_search_preview",
   }
 
   // General availability tools:
@@ -43,12 +44,31 @@ namespace Azure.AI.Projects {
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(OpenAI.Tool,
+    {
+      /**
+       * Whether this tool's sub-tools should be deferred from tools/list when tool search is enabled.
+       * When true, the tool's sub-tools are only discoverable via tool_search.
+       * Default: true when a ToolSearchTool is present in the toolbox.
+       */
+      deferred_tools?: boolean,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(OpenAI.MCPTool,
     {
       /**
        * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
        */
       project_connection_id?: string,
+
+      /**
+       * Per-tool overrides for defer behavior. Each entry maps a tool name to a boolean.
+       * false = always visible in tools/list (not deferred).
+       * true = deferred (only discoverable via tool_search).
+       */
+      deferred_tools_overrides?: Record<boolean>[],
     }
   );
 
@@ -130,6 +150,17 @@ namespace Azure.AI.Projects {
      */
     description?: string;
   };
+
+  /**
+   * Built-in tool that enables search over tools in a toolbox. When present, deferred tools are
+   * discoverable via tool_search queries instead of being listed in tools/list.
+   */
+  model ToolSearchTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'tool_search_preview'.
+     */
+    type: "tool_search_preview";
+  }
 
   /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
