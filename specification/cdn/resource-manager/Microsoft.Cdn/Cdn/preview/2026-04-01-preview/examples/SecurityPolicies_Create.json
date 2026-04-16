@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "securityPolicy": {
+      "properties": {
+        "parameters": {
+          "type": "WebApplicationFirewall",
+          "wafPolicy": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafTest"
+          },
+          "isProfileLevel": false,
+          "associations": [
+            {
+              "domains": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+                }
+              ],
+              "routes": [
+                {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdEndpoints/EndpointName2/routes/RouteName2"
+                }
+              ],
+              "patternsToMatch": [
+                "/*"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "securityPolicyName": "securityPolicy1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "securityPolicy1",
+        "type": "Microsoft.Cdn/profiles/securitypolicies",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/securitypolicies/securityPolicy1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "parameters": {
+            "type": "WebApplicationFirewall",
+            "wafPolicy": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafTest"
+            },
+            "associations": [
+              {
+                "domains": [
+                  {
+                    "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+                  }
+                ],
+                "patternsToMatch": [
+                  "/*"
+                ]
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "securityPolicy1",
+        "type": "Microsoft.Cdn/profiles/securitypolicies",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/securitypolicies/securityPolicy1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "parameters": {
+            "type": "WebApplicationFirewall",
+            "wafPolicy": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafTest"
+            },
+            "isProfileLevel": false,
+            "associations": [
+              {
+                "domains": [
+                  {
+                    "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+                  }
+                ],
+                "routes": [
+                  {
+                    "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdEndpoints/EndpointName2/routes/RouteName2"
+                  }
+                ],
+                "patternsToMatch": [
+                  "/*"
+                ]
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "securityPolicy1",
+        "type": "Microsoft.Cdn/profiles/securitypolicies",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/securitypolicies/securityPolicy1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "parameters": {
+            "type": "WebApplicationFirewall",
+            "wafPolicy": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafTest"
+            },
+            "associations": [
+              {
+                "domains": [
+                  {
+                    "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+                  }
+                ],
+                "patternsToMatch": [
+                  "/*"
+                ]
+              }
+            ]
+          },
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2026-04-01-preview"
+      }
+    }
+  },
+  "operationId": "SecurityPolicies_Create",
+  "title": "SecurityPolicies_Create"
+}
