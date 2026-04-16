@@ -684,6 +684,10 @@ op calculateModelCapacityCustom(
   "CognitiveServicesVersionedAgentReference",
   "csharp"
 );
+@@alternateType(CommitmentPlanAssociation.commitmentPlanId,
+  armResourceIdentifier,
+  "csharp"
+);
 
 @@usage(NetworkSecurityPerimeterConfiguration,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
