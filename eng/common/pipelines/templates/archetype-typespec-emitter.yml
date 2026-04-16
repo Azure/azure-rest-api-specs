@@ -542,6 +542,7 @@ extends:
               arguments: > 
                 -BuildArtifactsPath '$(buildArtifactsPath)/lock-files'
                 -EmitterPackagePath: ${{ parameters.EmitterPackagePath }}
+                -UseTypeSpecNext:$${{ parameters.UseTypeSpecNext }}
 
           - task: PowerShell@2
             displayName: 'Run test script'
