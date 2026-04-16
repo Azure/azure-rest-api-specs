@@ -366,8 +366,18 @@ using Microsoft.NetApp;
 
 // C# hierarchy building (restore base types for backward compat)
 // First, align property types with TrackedResource expectations
+// CapacityPoolPatch: @@hierarchyBuilding blocked by ModelFactory arg-order bug (#58197)
 @@alternateType(Microsoft.NetApp.CapacityPoolPatch.id, armResourceIdentifier, "csharp");
 @@alternateType(Microsoft.NetApp.CapacityPoolPatch.location, azureLocation, "csharp");
+
+// BackupPolicyPatch: restore TrackedResourceData base
+@@alternateType(Microsoft.NetApp.BackupPolicyPatch.id, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.BackupPolicyPatch.location, azureLocation, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
+@@hierarchyBuilding(Microsoft.NetApp.BackupPolicyPatch,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 
 @@alternateType(Microsoft.NetApp.NetAppAccountPatch.id, armResourceIdentifier, "csharp");
 @@alternateType(Microsoft.NetApp.NetAppAccountPatch.location, azureLocation, "csharp");
