@@ -8,27 +8,6 @@ using OpenAPI;
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
-// Enums
-// ---------------------------------------------------------------------------
-
-@doc("The kind of evaluation suite, determining its composition.")
-union EvaluationSuiteKind {
-  string,
-
-  @doc("""
-    Evaluation suite backed by a dataset.
-    Evaluators run against dataset rows. Used for batch, scheduled, or CI/CD evals.
-    """)
-  DatasetBacked: "dataset_backed",
-
-  @doc("""
-    Evaluation suite with evaluators only, no dataset.
-    Evaluators run against live production traces.
-    """)
-  EvaluatorOnly: "evaluator_only",
-}
-
-// ---------------------------------------------------------------------------
 // Child models
 // ---------------------------------------------------------------------------
 
@@ -59,6 +38,18 @@ model EvaluationSuiteEvaluator {
     without gating the evaluation suite result.
     """)
   threshold?: float64;
+
+  @doc("""
+    Initialization parameters for the evaluator.
+    For example, deployment_name for LLM-judge evaluators.
+    """)
+  initializationParameters?: Record<string>;
+
+  @doc("""
+    Maps dataset columns to evaluator inputs.
+    For example, {"query": "{{item.query}}", "response": "{{item.response}}"}.
+    """)
+  dataMapping?: Record<string>;
 }
 
 // ---------------------------------------------------------------------------
@@ -79,15 +70,9 @@ model EvaluationSuiteVersion {
   displayName?: string;
 
   @doc("""
-    Evaluation suite kind.
-    Batch: requires a dataset reference; evaluators run against dataset rows.
-    Continuous: evaluators only; data comes from live production traces.
-    """)
-  kind: EvaluationSuiteKind;
-
-  @doc("""
-    Dataset reference for offline evaluation.
-    Required when kind is batch. Must be null when kind is continuous.
+    Dataset reference for evaluation.
+    Optional — omit for evaluator-only suites where data comes from
+    live production traces or is provided at run time.
     The referenced dataset must exist in the project's dataset registry.
     """)
   dataset?: DatasetReference;

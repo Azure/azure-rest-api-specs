@@ -14,10 +14,6 @@ alias EvaluationSuiteFilterQueryParams = {
   @query("agentName")
   @doc("Filter by associated agent name.")
   agentName?: string;
-
-  @query("kind")
-  @doc("Filter by evaluation suite kind (dataset_backed or evaluator_only).")
-  kind?: EvaluationSuiteKind;
 };
 
 interface EvaluationSuites
