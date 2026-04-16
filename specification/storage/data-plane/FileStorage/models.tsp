@@ -2305,7 +2305,6 @@ alias NfsTimestampResponseHeaders = {
 
   /** The parent fileId of the file. */
   @header("x-ms-file-parent-id")
-  @clientName("ParentID", "go")
   fileParentId?: string;
 };
 

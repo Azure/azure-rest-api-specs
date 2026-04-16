@@ -79,6 +79,8 @@ interface ShareClient extends Storage.File.Share {}
 /** Represents an array of signed identifiers */
 @clientName("SignedIdentifiers", "go")
 model SignedIdentifiersGo is Array<SignedIdentifier>;
+
+@@clientName(NfsTimestampResponseHeaders.fileParentId, "ParentID", "go");
 @@alternateType(AccessPolicy.start, utcDateTime, "go");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(ContentCrc64ResponseHeader.contentCrc64, bytes, "go");
