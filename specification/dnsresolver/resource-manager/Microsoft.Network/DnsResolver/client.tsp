@@ -56,7 +56,6 @@ using Microsoft.Network;
   "csharp"
 );
 
-
 @@alternateType(Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   Azure.Core.eTag,
   "csharp"
