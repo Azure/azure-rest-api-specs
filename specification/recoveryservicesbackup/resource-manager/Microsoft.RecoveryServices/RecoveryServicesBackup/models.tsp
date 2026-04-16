@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.RecoveryServices;
 
@@ -3165,6 +3167,28 @@ model RecoveryPointProperties {
    * Bool to indicate whether RP is in soft delete state or not
    */
   isSoftDeleted?: boolean;
+
+  /**
+   * Immutability properties of the recovery point.
+   */
+  @added(Versions.v2026_05_01)
+  immutabilityProperties?: RecoveryPointImmutabilityProperties;
+}
+
+/**
+ * Immutability properties of a recovery point.
+ */
+@added(Versions.v2026_05_01)
+model RecoveryPointImmutabilityProperties {
+  /**
+   * Whether the recovery point is immutable.
+   */
+  isImmutable: boolean;
+
+  /**
+   * Expiry time of immutability in UTC. Omitted when immutability is as per policy.
+   */
+  expiryTime?: utcDateTime;
 }
 
 /**
