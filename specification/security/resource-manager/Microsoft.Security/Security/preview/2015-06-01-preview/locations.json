@@ -131,11 +131,18 @@
     "AscLocation": {
       "type": "object",
       "description": "The ASC location of the subscription is in the \"name\" field",
+      "properties": {
+        "properties": {
+          "description": "An empty set of properties",
+          "x-ms-client-flatten": true
+        }
+      },
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "AscLocationList": {
       "type": "object",
