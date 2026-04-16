@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/healthcareapis"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/healthcare-apis.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-healthcareapis"
+    namespace: "azure.mgmt.healthcareapis"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-healthcareapis"
+    namespace: "com.azure.resourcemanager.healthcareapis"
+    service-name: "HealthcareApis"
+    flavor: azure
+    use-object-for-unknown: true
+    resource-collection-associations:
+      - resource: PrivateEndpointConnectionDescription
+        collection: WorkspacePrivateEndpointConnections
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-healthcareapis"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-healthcareapis"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/healthcareapis"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhealthcareapis"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhealthcareapis"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

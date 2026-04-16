@@ -1,23 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./models.common.colormaps.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
-
-/**
- * Type identifying Feature Polygon objects containing rio-tiler model information
- */
-union FeaturePolygonDictStrRioTilerModelsInfoType {
-  string,
-
-  /**
-   * Standard GeoJSON Feature type identifier
-   */
-  Feature: "Feature",
-}
 
 /**
  * Resampling algorithm to use when reading source raster data at different resolutions
@@ -72,9 +63,59 @@ union Resampling {
 }
 
 /**
+ * WarpKernel resampling algorithm used when doing re-projection. Defaults to `nearest`.
+ */
+@added(Versions.v2026_04_15)
+union WarpKernelResampling {
+  string,
+
+  /** Nearest neighbor */
+  nearest: "nearest",
+
+  /** Bilinear interpolation */
+  bilinear: "bilinear",
+
+  /** Cubic interpolation */
+  cubic: "cubic",
+
+  /** Cubic spline interpolation */
+  cubic_spline: "cubic_spline",
+
+  /** Lanczos windowed sinc resampling */
+  lanczos: "lanczos",
+
+  /** Average resampling */
+  average: "average",
+
+  /** Mode resampling */
+  mode: "mode",
+
+  /** Maximum value resampling */
+  max: "max",
+
+  /** Minimum value resampling */
+  min: "min",
+
+  /** Median value resampling */
+  med: "med",
+
+  /** First quartile resampling */
+  q1: "q1",
+
+  /** Third quartile resampling */
+  q3: "q3",
+
+  /** Sum resampling */
+  sum: "sum",
+
+  /** Root mean square resampling */
+  rms: "rms",
+}
+
+/**
  * Image format specifier for tile and image requests
  */
-union ImageType {
+union TilerImageFormat {
   string,
 
   /**
@@ -121,11 +162,10 @@ union ImageType {
 /**
  * Identifier selecting one of the TileMatrixSetId supported (default:
  * 'WebMercatorQuad')
- */
-/**
+ *
  * Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles
  */
-union Tilematrixsetid {
+union TileMatrixSetId {
   string,
 
   /**
@@ -187,7 +227,7 @@ union Tilematrixsetid {
 /**
  * Scheme for tile addressing in TileJSON specification
  */
-union TileJsonScheme {
+union TileAddressingScheme {
   string,
 
   /**
@@ -204,7 +244,7 @@ union TileJsonScheme {
 /**
  * Type of metadata resource in the system
  */
-union MetadataType {
+union MosaicMetadataType {
   string,
 
   /**
@@ -220,14 +260,10 @@ union MetadataType {
 
 /**
  * Identifier selecting one of the TileMatrixSetId supported (default:
- * 'WebMercatorQuad')
- */
-/**
- * Identifier selecting one of the TileMatrixSetId supported (default:
- * 'WebMercatorQuad')
- */
-/**
- * Method used to select or compute pixels when creating composites from multiple sources
+ *  'WebMercatorQuad')
+ *
+ * Represents the method used to select or compute pixels when creating
+ *  composites from multiple sources
  */
 union PixelSelection {
   string,
@@ -260,60 +296,49 @@ union PixelSelection {
   /**
    * Calculate standard deviation of available pixels
    */
-  stdev: "stdev",
+  standardDeviation: "stdev",
 
   /**
    * Select image with lowest value in the last band
    */
-  lastbandlow: "lastbandlow",
+  lastBandLow: "lastbandlow",
 
   /**
    * Select image with highest value in the last band
    */
-  lastbandhight: "lastbandhight",
-}
-
-/**
- * Format specification for image request outputs
- */
-union ImageRequestFormat {
-  string,
+  lastBandHigh: "lastbandhigh",
 
   /**
-   * Portable Network Graphics format
+   * Count available pixels across sources
    */
-  png: "png",
-
-  /**
-   * Cloud Optimized GeoTIFF format
-   */
-  cog: "cog",
+  @added(Versions.v2026_04_15)
+  count: "count",
 }
 
 /**
  * Geographic extent of a dataset expressed as a bounding box
  */
-model BoundsResponse {
+model StacItemBounds {
   /**
    * Array of coordinates defining the bounding box [west, south, east, north]
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  bounds: float64[];
+  bounds: float32[];
 }
 
 /**
  * GeoJSON Feature object containing rio-tiler model information
  */
-model FeaturePolygonDictStrRioTilerModelsInfo {
+model TilerInfoGeoJsonFeature {
   /**
    * GeoJSON type identifier
    */
-  type: FeaturePolygonDictStrRioTilerModelsInfoType;
+  type: FeatureType;
 
   /**
    * Geometry object defining the feature's shape
    */
-  geometry: GeoJson;
+  geometry: Geometry;
 
   /**
    * Properties
@@ -328,23 +353,48 @@ model FeaturePolygonDictStrRioTilerModelsInfo {
   /**
    * Bounding box coordinates for the feature
    */
-  bbox?: float64;
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32[];
 }
 
 /**
- * TileJSON model.
+ * Represents GeoJSON with feature with an asset property
+ */
+model TilerAssetGeoJson {
+  /**
+   * Unique identifier for the feature
+   */
+  id: string;
+
+  /**
+   * ID of the STAC collection this item belongs to.
+   */
+  collection?: string;
+
+  /**
+   * Bounding box coordinates for the feature
+   */
+  @encodedName("application/json", "bbox")
+  boundingBox: float32[];
+
+  /**
+   * Assets
+   */
+  assets: Record<StacAsset>;
+}
+
+/**
+ * TileJSON metadata describing a tile set according to the TileJSON specification
  *
  * Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0
  */
-/**
- * TileJSON metadata describing a tile set according to the TileJSON specification
- */
-model TileJsonResponse {
+model TileJsonMetadata {
   /**
-   * Tilejson
+   * TileJson
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  tilejson?: string = "2.2.0";
+  @encodedName("application/json", "tilejson")
+  tileJson?: string = "2.2.0";
 
   /**
    * Human-readable name of the tile set
@@ -379,7 +429,7 @@ model TileJsonResponse {
   /**
    * Tile addressing scheme (xyz or tms)
    */
-  scheme?: TileJsonScheme = TileJsonScheme.xyz;
+  scheme?: TileAddressingScheme = TileAddressingScheme.xyz;
 
   /**
    * Array of tile URL templates
@@ -400,13 +450,15 @@ model TileJsonResponse {
    * Minimum zoom level available in the tile set
    */
   @maxValue(30)
-  minzoom?: int32;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int32;
 
   /**
    * Maximum zoom level available in the tile set
    */
   @maxValue(30)
-  maxzoom?: int32 = 30;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int32 = 30;
 
   /**
    * Bounds
@@ -431,7 +483,7 @@ model WmtsCapabilitiesXmlResponse {
   /**
    * body for WMTSCapabilitiesXmlResponse
    */
-  @bodyRoot body: string;
+  @body body: bytes;
 
   /**
    * content type for WMTSCapabilitiesXmlResponse
@@ -443,6 +495,14 @@ model WmtsCapabilitiesXmlResponse {
  * Parameters for selecting and manipulating assets (raster data) from STAC items
  */
 model AssetQueryParameters {
+  /**
+   * Dataset band indexes
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  bidx?: int32[];
+
   /**
    * Asset's names.
    */
@@ -457,12 +517,12 @@ model AssetQueryParameters {
   expression?: string;
 
   /**
-   * Per asset band indexes (coma separated indexes)
+   * Per asset band indexes (coma separated indexes, e.g. "image|1,2,3" means use the bands 1, 2, and 3 from the asset named "image")
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
-  @query(#{ explode: true })
   @query("asset_bidx")
-  assetBidx?: string[];
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  assetBandIndices?: string[];
 
   /**
    * Asset as Band
@@ -474,27 +534,35 @@ model AssetQueryParameters {
    * Overwrite internal Nodata value
    */
   @query("nodata")
-  nodata?: float32;
+  @typeChangedFrom(Versions.v2026_04_15, float32)
+  noData?: string;
 
   /**
    * Apply internal Scale or Offset
    */
   @query("unscale")
   unscale?: boolean;
+
+  /**
+   * WarpKernel resampling algorithm (only used when doing re-projection). Defaults to `nearest`.
+   */
+  @added(Versions.v2026_04_15)
+  @query("reproject")
+  reproject?: WarpKernelResampling;
 }
 
 /**
  * Parameters for specifying which algorithm to apply to raster data and its configuration
  */
-model AlgorithmQueryParameters {
+model TerrainAlgorithmQueryParameters {
   /**
-   * Algorithm name
+   * Terrain algorithm name
    */
   @query("algorithm")
-  algorithm?: Algorithm;
+  algorithm?: TerrainAlgorithm;
 
   /**
-   * Algorithm parameter
+   * Terrain algorithm parameters
    */
   @query("algorithm_params")
   algorithmParams?: string;
@@ -515,19 +583,34 @@ model MiscTileQueryParameters {
    * Colormap name
    */
   @query("colormap_name")
-  colormapName?: ColorMapNames;
+  colorMapName?: ColorMapNames;
 
   /**
    * JSON encoded custom Colormap
    */
   @query("colormap")
-  colormap?: string;
+  colorMap?: string;
 
   /**
    * Add mask to the output data.
    */
   @query("return_mask")
   returnMask?: boolean = true;
+}
+
+/**
+ * Padding parameter for tile rendering endpoints only.
+ * Separated from MiscTileQueryParameters because padding applies to tiles/tilejson but not to bbox/feature/preview/WMTS.
+ */
+@added(Versions.v2026_04_15)
+model TilePaddingQueryParameters {
+  /**
+   * Padding to apply to each tile edge. Helps reduce resampling artefacts along edges. Defaults to `0`.
+   */
+  @added(Versions.v2026_04_15)
+  @query
+  @minValueExclusive(0)
+  padding?: int32;
 }
 
 /**
@@ -564,13 +647,39 @@ model ZoomQueryParameters {
    * Overwrite default minzoom.
    */
   @query("minzoom")
-  minzoom?: int32;
+  minZoom?: int32;
 
   /**
    * Overwrite default maxzoom.
    */
   @query("maxzoom")
-  maxzoom?: int32;
+  maxZoom?: int32;
+}
+
+/**
+ * STAC Collection Identifier as a query parameter
+ */
+@added(Versions.v2026_04_15)
+model CollectionQueryParameter {
+  /**
+   * STAC Collection Identifier
+   */
+  @added(Versions.v2026_04_15)
+  @query("collection")
+  collection?: string;
+}
+
+/**
+ * Output Coordinate Reference System query parameter
+ */
+@added(Versions.v2026_04_15)
+model DstCrsQueryParameter {
+  /**
+   * Output Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("dst_crs")
+  destinationCrs?: string;
 }
 
 alias TileResponse =
@@ -581,3 +690,169 @@ alias TileResponse =
   | ImageJp2Response
   | ImageTiffResponse
   | ApplicationXbinaryResponse;
+
+/**
+ * A link object used in OGC tile resources
+ */
+@added(Versions.v2026_04_15)
+model TileSetLink {
+  /**
+   * The URL target of the link
+   */
+  href: string;
+
+  /**
+   * The relationship type of the link
+   */
+  rel: string;
+
+  /**
+   * The media type of the linked resource
+   */
+  type?: string;
+
+  /**
+   * Human-readable title of the link
+   */
+  title?: string;
+}
+
+/**
+ * Bounding box for a tile set
+ */
+@added(Versions.v2026_04_15)
+model TileSetBoundingBox {
+  /**
+   * Lower-left corner coordinates [x, y]
+   */
+  lowerLeft: float64[];
+
+  /**
+   * Upper-right corner coordinates [x, y]
+   */
+  upperRight: float64[];
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+}
+
+/**
+ * Summary information about a single tileset within a list of available tilesets
+ */
+@added(Versions.v2026_04_15)
+model TileSetEntry {
+  /**
+   * Human-readable title of the tileset
+   */
+  title?: string;
+
+  /**
+   * Type of data in the tiles (e.g., 'map', 'vector')
+   */
+  dataType?: string;
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+
+  /**
+   * Links related to this tileset
+   */
+  links?: TileSetLink[];
+
+  /**
+   * Bounding box of the tileset
+   */
+  boundingBox?: TileSetBoundingBox;
+
+  /**
+   * Access constraints for the tileset
+   */
+  accessConstraints?: string;
+}
+
+/**
+ * Response containing a list of available tilesets
+ */
+@added(Versions.v2026_04_15)
+model TileSetList {
+  /**
+   * Array of available tilesets
+   */
+  tilesets: TileSetEntry[];
+}
+
+/**
+ * Limits for a specific tile matrix within a tileset, defining the valid row/column range
+ */
+@added(Versions.v2026_04_15)
+model TileMatrixSetLimitsEntry {
+  /**
+   * Identifier of the tile matrix level
+   */
+  tileMatrix: string;
+
+  /**
+   * Minimum tile row index at this zoom level
+   */
+  minTileRow: int32;
+
+  /**
+   * Maximum tile row index at this zoom level
+   */
+  maxTileRow: int32;
+
+  /**
+   * Minimum tile column index at this zoom level
+   */
+  minTileCol: int32;
+
+  /**
+   * Maximum tile column index at this zoom level
+   */
+  maxTileCol: int32;
+}
+
+/**
+ * Detailed metadata about a specific tileset, including tile matrix set limits
+ */
+@added(Versions.v2026_04_15)
+model TileSetMetadata {
+  /**
+   * Human-readable title of the tileset
+   */
+  title?: string;
+
+  /**
+   * Type of data in the tiles
+   */
+  dataType?: string;
+
+  /**
+   * Coordinate reference system identifier
+   */
+  crs?: string;
+
+  /**
+   * Links related to this tileset
+   */
+  links?: TileSetLink[];
+
+  /**
+   * Bounding box of the tileset
+   */
+  boundingBox?: TileSetBoundingBox;
+
+  /**
+   * Access constraints for the tileset
+   */
+  accessConstraints?: string;
+
+  /**
+   * Limits for each tile matrix level in the tileset
+   */
+  tileMatrixSetLimits?: TileMatrixSetLimitsEntry[];
+}

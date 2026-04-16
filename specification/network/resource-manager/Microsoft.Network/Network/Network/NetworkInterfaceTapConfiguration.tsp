@@ -1,0 +1,65 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./NetworkInterface.tsp";
+import "../Common/NetworkInterfaceTapConfiguration.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using Common;
+
+namespace Microsoft.Network;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@armResourceOperations(#{ omitTags: true })
+interface NetworkInterfaceTapConfigurations {
+  /**
+   * Get the specified tap configuration on a network interface.
+   */
+  @tag("NetworkInterfaces")
+  get is ArmResourceRead<NetworkInterfaceTapConfiguration, Error = CloudError>;
+
+  /**
+   * Creates or updates a Tap configuration in the specified NetworkInterface.
+   */
+  @tag("Network Interfaces")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkInterfaceTapConfiguration,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes the specified tap configuration from the NetworkInterface.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Network Interfaces")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    NetworkInterfaceTapConfiguration,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Get all Tap configurations in a network interface.
+   */
+  @tag("NetworkInterfaces")
+  list is ArmResourceListByParent<
+    NetworkInterfaceTapConfiguration,
+    Error = CloudError
+  >;
+}
+
+@@doc(NetworkInterfaceTapConfiguration.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
+@@doc(NetworkInterfaceTapConfiguration.properties,
+  "Properties of the Virtual Network Tap configuration."
+);
+@@doc(NetworkInterfaceTapConfigurations.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update tap configuration operation."
+);

@@ -16,6 +16,32 @@ using Versioning;
 namespace Microsoft.ContainerService;
 
 /**
+ * Provides both Azure-AsyncOperation and Location headers with
+ * final-state-via set to azure-async-operation.
+ * Unlike ArmCombinedLroHeaders which places @finalLocation on Location
+ * (resulting in final-state-via: location), this model places @finalLocation
+ * on Azure-AsyncOperation so the emitter outputs final-state-via: azure-async-operation.
+ */
+model ArmAsyncOperationHeaderWithLocation<
+  StatusMonitor extends {} = ArmOperationStatus,
+  FinalResult extends {} | void = never,
+  PollingUrlValue extends string = ResourceLocation<StatusMonitor>,
+  FinalUrlValue extends string = string
+> {
+  /** A link to the status monitor */
+  @Azure.Core.pollingLocation(
+    Azure.Core.StatusMonitorPollingOptions<StatusMonitor>
+  )
+  @Azure.Core.finalLocation(FinalResult)
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: PollingUrlValue;
+
+  /** The Location header contains the URL where the status of the long running operation can be checked. */
+  @header("Location")
+  location?: FinalUrlValue;
+}
+
+/**
  * Different support tiers for AKS managed clusters
  */
 union KubernetesSupportPlan {
@@ -151,7 +177,7 @@ union WorkloadRuntime {
   /**
    * Nodes can use (Kata + Cloud Hypervisor + Hyper-V) to enable Nested VM-based pods (Preview). Due to the use Hyper-V, AKS node OS itself is a nested VM (the root OS) of Hyper-V. Thus it can only be used with VM series that support Nested Virtualization such as Dv3 series. This naming convention will be deprecated in future releases in favor of KataVmIsolation.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   KataMshvVmIsolation: "KataMshvVmIsolation",
 
   /**
@@ -218,13 +244,13 @@ union OSSKU {
   /**
    * Deprecated OSSKU. Microsoft recommends that new deployments choose 'AzureLinux' instead.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   Mariner: "Mariner",
 
   /**
    * Use Flatcar Container Linux as the OS for node images. Flatcar is a container-optimized, security-focused Linux OS, with an immutable filesystem and part of the Cloud Native Computing Foundation (CNCF). For more information about Flatcar Container Linux for AKS, see aka.ms/aks/flatcar-container-linux-for-aks
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   Flatcar: "Flatcar",
 
   /**
@@ -250,13 +276,13 @@ union OSSKU {
   /**
    * Use Windows2025 as the OS for node images. Unsupported for system node pools. Windows2025 supports Windows2022 and Windows 2025 containers; it cannot run Windows2019 containers and vice versa.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   Windows2025: "Windows2025",
 
   /**
    * Use Windows Annual Channel version as the OS for node images. Unsupported for system node pools. Details about supported container images and kubernetes versions under different AKS Annual Channel versions could be seen in https://aka.ms/aks/windows-annual-channel-details.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   WindowsAnnual: "WindowsAnnual",
 
   /**
@@ -328,20 +354,20 @@ union AgentPoolMode {
   /**
    * ManagedSystem is a system pool managed by AKS. The pool scales dynamically according to cluster usage, and has additional automated monitoring and healing capabilities. There can only be one ManagedSystem pool, and it is recommended to delete all other system pools for the best experience.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   ManagedSystem: "ManagedSystem",
 
   /**
    * Machines agent pools are dedicated to hosting machines. Only limited operations, such as creation and deletion, are allowed at the pool level. Please use the machine APIs to manage the full machine lifecycle.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   Machines: "Machines",
 }
 
 /**
  * Defines the upgrade strategy for the agent pool. The default is Rolling.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union UpgradeStrategy {
   string,
 
@@ -410,7 +436,7 @@ union ScaleSetEvictionPolicy {
 /**
  * Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union SeccompDefault {
   string,
 
@@ -483,7 +509,7 @@ union AgentPoolSSHAccess {
   /**
    * SSH to node with EntraId integration. More information can be found under https://aka.ms/aks/ssh/aad
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   EntraId: "EntraId",
 }
 
@@ -507,7 +533,7 @@ union GPUDriver {
 /**
  * Specify the type of GPU driver to install when creating Windows agent pools. If not provided, AKS selects the driver based on system compatibility. This cannot be changed once the AgentPool has been created. This cannot be set on Linux AgentPools. For Linux AgentPools, the driver is selected based on system compatibility.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union DriverType {
   string,
 
@@ -520,6 +546,47 @@ union DriverType {
    * Install the CUDA driver for the GPU, optimized for computational tasks in scientific computing and data-intensive applications.
    */
   CUDA: "CUDA",
+}
+
+/**
+ * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
+ */
+@added(Versions.v2026_01_02_preview)
+union ManagementMode {
+  string,
+
+  /**
+   * Managed GPU experience is disabled for NVIDIA GPUs.
+   */
+  Unmanaged: "Unmanaged",
+
+  /**
+   * Managed GPU experience is enabled for NVIDIA GPUs.
+   */
+  Managed: "Managed",
+}
+
+/**
+ * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
+ */
+@added(Versions.v2026_01_02_preview)
+union MigStrategy {
+  string,
+
+  /**
+   * Don't set a MIG strategy. If you previously had one set, this will override it and set remove the set MIG strategy.
+   */
+  None: "None",
+
+  /**
+   * Set the MIG strategy for managed MIG as single.
+   */
+  Single: "Single",
+
+  /**
+   * Set the MIG strategy for managed MIG as mixed.
+   */
+  Mixed: "Mixed",
 }
 
 /**
@@ -676,6 +743,7 @@ union LicenseType {
 /**
  * The current provisioning state of the pod identity.
  */
+@lroStatus
 union ManagedClusterPodIdentityProvisioningState {
   string,
 
@@ -852,6 +920,12 @@ union OutboundType {
   managedNATGateway: "managedNATGateway",
 
   /**
+   * The AKS-managed NAT gateway V2 is used for egress.
+   */
+  @added(Versions.v2026_01_02_preview)
+  managedNATGatewayV2: "managedNATGatewayV2",
+
+  /**
    * The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration.
    */
   userAssignedNATGateway: "userAssignedNATGateway",
@@ -916,7 +990,7 @@ union IPFamily {
 /**
  * The health probing behavior for External Traffic Policy Cluster services.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union ClusterServiceLoadBalancerHealthProbeMode {
   string,
 
@@ -934,7 +1008,7 @@ union ClusterServiceLoadBalancerHealthProbeMode {
 /**
  * Defines access to special link local addresses (Azure Instance Metadata Service, aka IMDS) for pods with hostNetwork=false. If not specified, the default is 'IMDS'.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union PodLinkLocalAccess {
   string,
 
@@ -952,7 +1026,7 @@ union PodLinkLocalAccess {
 /**
  * Specify which proxy mode to use ('IPTABLES', 'IPVS' or 'NFTABLES')
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union Mode {
   string,
 
@@ -975,7 +1049,7 @@ union Mode {
 /**
  * IPVS scheduler, for more information please see http://www.linuxvirtualserver.org/docs/scheduling.html.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union IpvsScheduler {
   string,
 
@@ -993,7 +1067,7 @@ union IpvsScheduler {
 /**
  * Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_01)
 union TransitEncryptionType {
   string,
 
@@ -1001,6 +1075,12 @@ union TransitEncryptionType {
    * Enable WireGuard encryption. Refer to https://docs.cilium.io/en/latest/security/network/encryption-wireguard/ on use cases and implementation details
    */
   WireGuard: "WireGuard",
+
+  /**
+   * Enables mTLS authentication and encryption for pod-to-pod traffic within the cluster. Refer to https://aka.ms/acnsciliummtls for relevant documentation.
+   */
+  @added(Versions.v2026_01_02_preview)
+  mTLS: "mTLS",
 
   /**
    * Disable Transit encryption
@@ -1011,7 +1091,7 @@ union TransitEncryptionType {
 /**
  * Enable advanced network acceleration options. This allows users to configure acceleration using BPF host routing. This can be enabled only with Cilium dataplane. If not specified, the default value is None (no acceleration). The acceleration mode can be changed on a pre-existing cluster. See https://aka.ms/acnsperformance for a detailed explanation
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_01)
 union AccelerationMode {
   string,
 
@@ -1128,7 +1208,7 @@ union KeyVaultNetworkAccessTypes {
 /**
  * Whether to enable encryption at rest of Kubernetes resource objects using service-managed keys. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union InfrastructureEncryption {
   string,
 
@@ -1158,6 +1238,24 @@ union ManagedGatewayType {
    * The latest Gateway CRD bundle from the standard channel that is compatible with your Kubernetes version will be reconciled onto your cluster. See https://gateway-api.sigs.k8s.io/concepts/versioning/ for more details.
    */
   Standard: "Standard",
+}
+
+/**
+ * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
+ */
+@added(Versions.v2026_01_02_preview)
+union GatewayAPIIstioEnabled {
+  string,
+
+  /**
+   * Enables managed ingress via the Gateway API using a sidecar-less Istio controlplane.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Disables the sidecar-less istio control plane for managed ingress via the Gateway API.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -1206,14 +1304,14 @@ union PublicNetworkAccess {
   /**
    * Inbound/Outbound traffic is managed by Microsoft.Network/NetworkSecurityPerimeters.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
  * Whether VPA add-on is enabled and configured to scale AKS-managed add-ons.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union AddonAutoscaling {
   string,
 
@@ -1265,7 +1363,7 @@ union IstioIngressGatewayMode {
 /**
  * Mode of traffic redirection.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_01)
 union ProxyRedirectionMechanism {
   string,
 
@@ -1334,7 +1432,7 @@ union ArtifactSource {
 /**
  * The config customization mode for this scheduler instance.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 union SchedulerConfigMode {
   string,
 
@@ -1397,29 +1495,30 @@ union SnapshotType {
   /**
    * The snapshot is a snapshot of a managed cluster.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   ManagedCluster: "ManagedCluster",
 }
 
 /**
  * The type of identity used for the managed cluster. For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ResourceIdentityType {
+union ResourceIdentityType {
+  string,
+
   /**
    * Use an implicitly created system assigned managed identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the system assigned managed identity to manipulate Azure resources.
    */
-  SystemAssigned,
+  SystemAssigned: "SystemAssigned",
 
   /**
    * Use a user-specified identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the specified user assigned managed identity to manipulate Azure resources.
    */
-  UserAssigned,
+  UserAssigned: "UserAssigned",
 
   /**
    * Do not use a managed identity for the Managed Cluster, service principal will be used instead.
    */
-  None,
+  None: "None",
 }
 
 /**
@@ -1513,7 +1612,7 @@ model KubernetesVersion {
   /**
    * Patch versions of Kubernetes release
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   patchVersions?: Record<KubernetesPatchVersion>;
 }
 
@@ -1538,13 +1637,13 @@ model KubernetesPatchVersion {
 /**
  * Holds an array NodeImageVersions
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model NodeImageVersionsListResult is Azure.Core.Page<NodeImageVersion>;
 
 /**
  * node image version profile for given major.minor.patch release.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model NodeImageVersion {
   /**
    * The operating system of the node image. Example: AKSUbuntu
@@ -1570,7 +1669,7 @@ model NodeImageVersion {
 /**
  * The SKU of a Managed Cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterSKU {
   /**
    * The name of a managed cluster SKU.
@@ -1622,13 +1721,13 @@ model ManagedClusterIdentity {
   /**
    * The delegated identity resources assigned to this managed cluster. This can only be set by another Azure Resource Provider, and managed cluster only accept one delegated identity resource. Internal use only.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   delegatedResources?: Record<CommonTypes.DelegatedResource>;
 
   /**
    * The user identity associated with the managed cluster. This identity will be used in control plane. Only one user assigned identity is allowed. The keys must be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   userAssignedIdentities?: Record<ManagedServiceIdentityUserAssignedIdentitiesValue>;
 }
 
@@ -1654,7 +1753,7 @@ model ManagedClusterProperties {
   /**
    * The current provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1667,7 +1766,7 @@ model ManagedClusterProperties {
   /**
    * CreationData to be used to specify the source Snapshot ID if the cluster will be created/upgraded using a snapshot.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   creationData?: CreationData;
 
   /**
@@ -1706,14 +1805,14 @@ model ManagedClusterProperties {
   /**
    * The FQDN of private cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   privateFQDN?: string;
 
   /**
    * The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients. The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   azurePortalFQDN?: string;
 
@@ -1741,7 +1840,7 @@ model ManagedClusterProperties {
   /**
    * The profile of managed cluster add-on.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   addonProfiles?: Record<ManagedClusterAddonProfile>;
 
   /**
@@ -1767,7 +1866,7 @@ model ManagedClusterProperties {
   /**
    * Whether to enable Kubernetes Role-Based Access Control.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableRBAC?: boolean;
 
   /**
@@ -1778,7 +1877,7 @@ model ManagedClusterProperties {
   /**
    * Enable namespace as Azure resource. The default value is false. It can be enabled/disabled on creation and updating of the managed cluster. See [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource) for more details on Namespace as a ARM Resource.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   enableNamespaceResources?: boolean;
 
   /**
@@ -1814,7 +1913,7 @@ model ManagedClusterProperties {
   /**
    * The Resource ID of the disk encryption set to use for enabling encryption at rest. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{encryptionSetName}'
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   diskEncryptionSetID?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Compute/diskEncryptionSets";
@@ -1824,7 +1923,7 @@ model ManagedClusterProperties {
   /**
    * The user identity associated with the managed cluster. This identity will be used by the kubelet. Only one user assigned identity is allowed. The only accepted key is "kubeletidentity", with value of "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}".
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   identityProfile?: Record<UserAssignedIdentity>;
 
   /**
@@ -1880,7 +1979,7 @@ model ManagedClusterProperties {
   /**
    * The resourceUID uniquely identifies ManagedClusters that reuse ARM ResourceIds (i.e: create, delete, create sequence)
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   resourceUID?: string;
 
@@ -1907,14 +2006,20 @@ model ManagedClusterProperties {
   /**
    * Profile of the pod scheduler configuration.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   schedulerProfile?: SchedulerProfile;
 
   /**
    * Settings for hosted system addons. For more information, see https://aka.ms/aks/automatic/systemcomponents.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   hostedSystemProfile?: ManagedClusterHostedSystemProfile;
+
+  /**
+   * Health monitor profile for the managed cluster.
+   */
+  @added(Versions.v2026_01_02_preview)
+  healthMonitorProfile?: ManagedClusterHealthMonitorProfile;
 
   /**
    * Contains read-only information about the Managed Cluster.
@@ -1968,7 +2073,7 @@ model ManagedClusterWindowsProfile {
    */
   adminUsername: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\"")
   adminPassword?: string;
 
@@ -1980,7 +2085,7 @@ model ManagedClusterWindowsProfile {
   /**
    * Whether to enable CSI proxy. For more details on CSI proxy, see the [CSI proxy GitHub repo](https://github.com/kubernetes-csi/csi-proxy).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableCSIProxy?: boolean;
 
   /**
@@ -2021,7 +2126,7 @@ model ManagedClusterServicePrincipalProfile {
   /**
    * The secret password associated with the service principal in plain text.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   secret?: string;
 }
 
@@ -2037,7 +2142,7 @@ model ManagedClusterAddonProfile {
   /**
    * Key-value pairs for configuring an add-on.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   config?: Record<string>;
 
   /**
@@ -2050,8 +2155,8 @@ model ManagedClusterAddonProfile {
 /**
  * Information of user assigned identity used by this add-on.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model is intentional for extensibility and matches existing API structure."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance pattern matches existing API structure and cannot be changed without breaking changes."
 model ManagedClusterAddonProfileIdentity extends UserAssignedIdentity {}
 
 /**
@@ -2201,19 +2306,19 @@ model ManagedClusterPodIdentityException {
   /**
    * The pod labels to match.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   podLabels: Record<string>;
 }
 
 /**
  * The OIDC issuer profile of the Managed Cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterOIDCIssuerProfile {
   /**
    * The OIDC issuer url of the Managed Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   issuerURL?: string;
 
@@ -2282,7 +2387,7 @@ model ContainerServiceNetworkProfile {
   /**
    * An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   dnsServiceIP?: string = "10.0.0.10";
 
@@ -2329,13 +2434,13 @@ model ContainerServiceNetworkProfile {
   /**
    * Defines access to special link local addresses (Azure Instance Metadata Service, aka IMDS) for pods with hostNetwork=false. if not specified, the default is 'IMDS'.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   podLinkLocalAccess?: PodLinkLocalAccess;
 
   /**
    * Holds configuration customizations for kube-proxy. Any values not defined will use the kube-proxy defaulting behavior. See https://v<version>.docs.kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/ where <version> is represented by a <major version>-<minor version> string. Kubernetes version 1.23 would be '1-23'.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   kubeProxyConfig?: ContainerServiceNetworkProfileKubeProxyConfig;
 }
 
@@ -2361,7 +2466,7 @@ model AdvancedNetworking {
   /**
    * Profile to enable performance-enhancing features on clusters that use Azure CNI powered by Cilium.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_01)
   performance?: AdvancedNetworkingPerformance;
 }
 
@@ -2392,7 +2497,7 @@ model AdvancedNetworkingSecurity {
   /**
    * Encryption configuration for Cilium-based clusters. Once enabled all traffic between Cilium managed pods will be encrypted when it leaves the node boundary.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_01)
   transitEncryption?: AdvancedNetworkingSecurityTransitEncryption;
 }
 
@@ -2403,25 +2508,25 @@ model ManagedClusterLoadBalancerProfile {
   /**
    * Desired managed outbound IPs for the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   managedOutboundIPs?: ManagedClusterLoadBalancerProfileManagedOutboundIPs;
 
   /**
    * Desired outbound IP Prefix resources for the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   outboundIPPrefixes?: ManagedClusterLoadBalancerProfileOutboundIPPrefixes;
 
   /**
    * Desired outbound IP resources for the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   outboundIPs?: ManagedClusterLoadBalancerProfileOutboundIPs;
 
   /**
    * The effective outbound IP resources of the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   effectiveOutboundIPs?: ResourceReference[];
 
@@ -2452,14 +2557,14 @@ model ManagedClusterLoadBalancerProfile {
   /**
    * The health probing behavior for External Traffic Policy Cluster services.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   clusterServiceLoadBalancerHealthProbeMode?: ClusterServiceLoadBalancerHealthProbeMode = ClusterServiceLoadBalancerHealthProbeMode.ServiceNodePort;
 }
 
 /**
  * Desired managed outbound IPs for the cluster load balancer.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterLoadBalancerProfileManagedOutboundIPs {
   /**
    * The desired number of IPv4 outbound IPs created/managed by Azure for the cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1.
@@ -2471,7 +2576,7 @@ model ManagedClusterLoadBalancerProfileManagedOutboundIPs {
   /**
    * The desired number of IPv6 outbound IPs created/managed by Azure for the cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 0 for single-stack and 1 for dual-stack.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @maxValue(100)
   @minValue(0)
   countIPv6?: int32 = 0;
@@ -2484,7 +2589,7 @@ model ManagedClusterLoadBalancerProfileOutboundIPPrefixes {
   /**
    * A list of public IP prefix resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   publicIPPrefixes?: ResourceReference[];
 }
 
@@ -2501,32 +2606,66 @@ model ResourceReference {
 /**
  * Desired outbound IP resources for the cluster load balancer.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterLoadBalancerProfileOutboundIPs {
   /**
    * A list of public IP resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   publicIPs?: ResourceReference[];
 }
 
 /**
  * Profile of the managed cluster NAT gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterNATGatewayProfile {
   /**
    * Profile of the managed outbound IP resources of the cluster NAT gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   managedOutboundIPProfile?: ManagedClusterManagedOutboundIPProfile;
 
   /**
    * The effective outbound IP resources of the cluster NAT gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   effectiveOutboundIPs?: ResourceReference[];
+
+  /**
+   * Desired outbound IP Prefix resources for the managed NAT Gateway. Only compatible with NAT Gateway V2.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_01_02_preview)
+  outboundIPPrefixes?: {
+    /**
+     * A list of public IP prefix resources.
+     */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+    publicIPPrefixes?: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.Network/publicIPPrefixes";
+      }
+    ]>[];
+  };
+
+  /**
+   * Desired outbound IP resources for the managed NAT Gateway.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_01_02_preview)
+  outboundIPs?: {
+    /**
+     * A list of public IP resources.
+     */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+    publicIPs?: Azure.Core.armResourceIdentifier<[
+      {
+        type: "Microsoft.Network/publicIPAddresses";
+      }
+    ]>[];
+  };
 
   /**
    * Desired outbound flow idle timeout in minutes. Allowed values are in the range of 4 to 120 (inclusive). The default value is 4 minutes.
@@ -2546,6 +2685,15 @@ model ManagedClusterManagedOutboundIPProfile {
   @maxValue(16)
   @minValue(1)
   count?: int32 = 1;
+
+  /**
+   * The desired number of IPv6 outbound IPs created/managed by Azure. Allowed values must be in the range of 1 to 16 (inclusive).
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_01_02_preview)
+  @maxValue(16)
+  @minValue(1)
+  countIPv6?: int32;
 }
 
 /**
@@ -2561,7 +2709,7 @@ model ManagedClusterStaticEgressGatewayProfile {
 /**
  * Holds configuration customizations for kube-proxy. Any values not defined will use the kube-proxy defaulting behavior. See https://v<version>.docs.kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/ where <version> is represented by a <major version>-<minor version> string. Kubernetes version 1.23 would be '1-23'.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ContainerServiceNetworkProfileKubeProxyConfig {
   /**
    * Whether to enable on kube-proxy on the cluster (if no 'kubeProxyConfig' exists, kube-proxy is enabled in AKS by default without these customizations).
@@ -2582,7 +2730,7 @@ model ContainerServiceNetworkProfileKubeProxyConfig {
 /**
  * Holds configuration customizations for IPVS. May only be specified if 'mode' is set to 'IPVS'.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig {
   /**
    * IPVS scheduler, for more information please see http://www.linuxvirtualserver.org/docs/scheduling.html.
@@ -2608,7 +2756,7 @@ model ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig {
 /**
  * Encryption configuration for Cilium-based clusters. Once enabled all traffic between Cilium managed pods will be encrypted when it leaves the node boundary.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_01)
 model AdvancedNetworkingSecurityTransitEncryption {
   /**
    * Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None.
@@ -2619,7 +2767,7 @@ model AdvancedNetworkingSecurityTransitEncryption {
 /**
  * Profile to enable performance-enhancing features on clusters that use Azure CNI powered by Cilium.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_01)
 model AdvancedNetworkingPerformance {
   /**
    * Enable advanced network acceleration options. This allows users to configure acceleration using BPF host routing. This can be enabled only with Cilium dataplane. If not specified, the default value is None (no acceleration). The acceleration mode can be changed on a pre-existing cluster. See https://aka.ms/acnsperformance for a detailed explanation
@@ -2630,7 +2778,7 @@ model AdvancedNetworkingPerformance {
 /**
  * AADProfile specifies attributes for Azure Active Directory integration. For more details see [managed AAD on AKS](https://docs.microsoft.com/azure/aks/managed-aad).
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterAADProfile {
   /**
    * Whether to enable managed AAD.
@@ -2640,37 +2788,37 @@ model ManagedClusterAADProfile {
   /**
    * Whether to enable Azure RBAC for Kubernetes authorization.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableAzureRBAC?: boolean;
 
   /**
    * The list of AAD group object IDs that will have admin role of the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   adminGroupObjectIDs?: string[];
 
   /**
    * (DEPRECATED) The client AAD application ID. Learn more at https://aka.ms/aks/aad-legacy.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   clientAppID?: string;
 
   /**
    * (DEPRECATED) The server AAD application ID. Learn more at https://aka.ms/aks/aad-legacy.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   serverAppID?: string;
 
   /**
    * (DEPRECATED) The server AAD application secret. Learn more at https://aka.ms/aks/aad-legacy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   serverAppSecret?: string;
 
   /**
    * The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   tenantID?: string;
 }
 
@@ -2686,7 +2834,7 @@ model ManagedClusterAutoUpgradeProfile {
   /**
    * Node OS Upgrade Channel. Manner in which the OS on your nodes is updated. The default is NodeImage.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   nodeOSUpgradeChannel?: NodeOSUpgradeChannel;
 }
 
@@ -2723,28 +2871,28 @@ model ManagedClusterPropertiesAutoScalerProfile {
   /**
    * Detects similar node pools and balances the number of nodes between them. Valid values are 'true' and 'false'
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("balanceSimilarNodeGroups")
   `balance-similar-node-groups`?: string;
 
   /**
    * DaemonSet pods will be gracefully terminated from empty nodes. If set to true, all daemonset pods on empty nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("daemonsetEvictionForEmptyNodes")
   `daemonset-eviction-for-empty-nodes`?: boolean;
 
   /**
    * DaemonSet pods will be gracefully terminated from non-empty nodes. If set to true, all daemonset pods on occupied nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("daemonsetEvictionForOccupiedNodes")
   `daemonset-eviction-for-occupied-nodes`?: boolean;
 
   /**
    * Should CA ignore DaemonSet pods when calculating resource utilization for scaling down. If set to true, the resources used by daemonset will be taken into account when making scaling down decisions.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("ignoreDaemonsetsUtilization")
   `ignore-daemonsets-utilization`?: boolean;
 
@@ -2756,105 +2904,105 @@ model ManagedClusterPropertiesAutoScalerProfile {
   /**
    * The maximum number of empty nodes that can be deleted at the same time. This must be a positive integer. The default is 10.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxEmptyBulkDelete")
   `max-empty-bulk-delete`?: string;
 
   /**
    * The maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node. The default is 600.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxGracefulTerminationSec")
   `max-graceful-termination-sec`?: string;
 
   /**
    * The maximum time the autoscaler waits for a node to be provisioned. The default is '15m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxNodeProvisionTime")
   `max-node-provision-time`?: string;
 
   /**
    * The maximum percentage of unready nodes in the cluster. After this percentage is exceeded, cluster autoscaler halts operations. The default is 45. The maximum is 100 and the minimum is 0.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxTotalUnreadyPercentage")
   `max-total-unready-percentage`?: string;
 
   /**
    * Ignore unscheduled pods before they're a certain age. For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. The default is '0s'. Values must be an integer followed by a unit ('s' for seconds, 'm' for minutes, 'h' for hours, etc).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("newPodScaleUpDelay")
   `new-pod-scale-up-delay`?: string;
 
   /**
    * The number of allowed unready nodes, irrespective of max-total-unready-percentage. This must be an integer. The default is 3.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("okTotalUnreadyCount")
   `ok-total-unready-count`?: string;
 
   /**
    * How often cluster is reevaluated for scale up or down. The default is '10'. Values must be an integer number of seconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scanInterval")
   `scan-interval`?: string;
 
   /**
    * How long after scale up that scale down evaluation resumes. The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownDelayAfterAdd")
   `scale-down-delay-after-add`?: string;
 
   /**
    * How long after node deletion that scale down evaluation resumes. The default is the scan-interval. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownDelayAfterDelete")
   `scale-down-delay-after-delete`?: string;
 
   /**
    * How long after scale down failure that scale down evaluation resumes. The default is '3m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownDelayAfterFailure")
   `scale-down-delay-after-failure`?: string;
 
   /**
    * How long a node should be unneeded before it is eligible for scale down. The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownUnneededTime")
   `scale-down-unneeded-time`?: string;
 
   /**
    * How long an unready node should be unneeded before it is eligible for scale down. The default is '20m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownUnreadyTime")
   `scale-down-unready-time`?: string;
 
   /**
    * Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down. The default is '0.5'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownUtilizationThreshold")
   `scale-down-utilization-threshold`?: string;
 
   /**
    * If cluster autoscaler will skip deleting nodes with pods with local storage, for example, EmptyDir or HostPath. The default is true.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("skipNodesWithLocalStorage")
   `skip-nodes-with-local-storage`?: string;
 
   /**
    * If cluster autoscaler will skip deleting nodes with pods from kube-system (except for DaemonSet or mirror pods). The default is true.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("skipNodesWithSystemPods")
   `skip-nodes-with-system-pods`?: string;
 }
@@ -2862,12 +3010,12 @@ model ManagedClusterPropertiesAutoScalerProfile {
 /**
  * Access profile for managed cluster API server.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterAPIServerAccessProfile {
   /**
    * The IP ranges authorized to access the Kubernetes API server. IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with clusters that use Public IP Per Node, or clusters that are using a Basic Load Balancer. For more information see [API server authorized IP ranges](https://docs.microsoft.com/azure/aks/api-server-authorized-ip-ranges).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   authorizedIPRanges?: string[];
 
   /**
@@ -2878,13 +3026,13 @@ model ManagedClusterAPIServerAccessProfile {
   /**
    * The private DNS zone mode for the cluster. The default is System. For more details see [configure private DNS zone](https://docs.microsoft.com/azure/aks/private-clusters#configure-private-dns-zone). Allowed values are 'system' and 'none'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   privateDNSZone?: string;
 
   /**
    * Whether to create additional public FQDN for private cluster or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enablePrivateClusterPublicFQDN?: boolean;
 
   /**
@@ -2917,10 +3065,8 @@ model PrivateLinkResource {
   id?: string;
 
   /**
-   * The name of the private link resource.
+   * The name of the private link resource. See [naming rules](https://aka.ms/search-naming-rules) for more details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.externalDocs("https://aka.ms/search-naming-rules")
   name?: string;
 
   /**
@@ -2941,7 +3087,7 @@ model PrivateLinkResource {
   /**
    * The private link service ID of the resource, this field is exposed only to NRP internally.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   privateLinkServiceID?: Azure.Core.armResourceIdentifier;
 }
@@ -2949,7 +3095,7 @@ model PrivateLinkResource {
 /**
  * Cluster HTTP proxy configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterHTTPProxyConfig {
   /**
    * The HTTP proxy server endpoint to use.
@@ -2969,7 +3115,7 @@ model ManagedClusterHTTPProxyConfig {
   /**
    * A read-only list of all endpoints for which traffic should not be sent to the proxy. This list is a superset of noProxy and values injected by AKS.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   @visibility(Lifecycle.Read)
   effectiveNoProxy?: string[];
 
@@ -2979,9 +3125,9 @@ model ManagedClusterHTTPProxyConfig {
   trustedCa?: string;
 
   /**
-   * Whether to enable HTTP proxy. When disabled, the specified proxy configuration will be not be set on pods and nodes.
+   * Whether to enable HTTP proxy. If disabled, the specified proxy configuration will be not be set on pods and nodes. If not specified, the default is true.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_01)
   enabled?: boolean;
 }
 
@@ -3002,7 +3148,7 @@ model ManagedClusterSecurityProfile {
   /**
    * Encryption at rest of Kubernetes resource objects. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   kubernetesResourceObjectEncryptionProfile?: KubernetesResourceObjectEncryptionProfile;
 
   /**
@@ -3018,22 +3164,28 @@ model ManagedClusterSecurityProfile {
   /**
    * Image integrity is a feature that works with Azure Policy to verify image integrity by signature. This will not have any effect unless Azure Policy is applied to enforce image signatures. See https://aka.ms/aks/image-integrity for how to use this feature via policy.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   imageIntegrity?: ManagedClusterSecurityProfileImageIntegrity;
 
   /**
    * [Node Restriction](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#noderestriction) settings for the security profile.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   nodeRestriction?: ManagedClusterSecurityProfileNodeRestriction;
 
   /**
    * A list of up to 10 base64 encoded CAs that will be added to the trust store on all nodes in the cluster. For more information see [Custom CA Trust Certificates](https://learn.microsoft.com/en-us/azure/aks/custom-certificate-authority).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @maxItems(10)
   @minItems(0)
   customCATrustCertificates?: bytes[];
+
+  /**
+   * Defines service account based image pull settings.
+   */
+  @added(Versions.v2026_01_02_preview)
+  serviceAccountImagePullProfile?: ServiceAccountImagePullProfile;
 }
 
 /**
@@ -3057,7 +3209,7 @@ model ManagedClusterSecurityProfileDefender {
   /**
    * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   securityGating?: ManagedClusterSecurityProfileDefenderSecurityGating;
 }
 
@@ -3074,7 +3226,7 @@ model ManagedClusterSecurityProfileDefenderSecurityMonitoring {
 /**
  * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterSecurityProfileDefenderSecurityGating {
   /**
    * Whether to enable Defender security gating. When enabled, the gating feature will scan container images and audit or block the deployment of images that do not meet security standards according to the configured security rules.
@@ -3094,7 +3246,7 @@ model ManagedClusterSecurityProfileDefenderSecurityGating {
 }
 
 /** Identity information used by Defender security gating to access container registries. */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem {
   /**
    * The container registry for which the identity will be used; the identity specified here should have a federated identity credential attached to it.
@@ -3139,7 +3291,7 @@ model AzureKeyVaultKms {
 /**
  * Encryption at rest of Kubernetes resource objects using service-managed keys. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model KubernetesResourceObjectEncryptionProfile {
   /**
    * Whether to enable encryption at rest of Kubernetes resource objects using service-managed keys. More information on this can be found under https://aka.ms/aks/kubernetesResourceObjectEncryption.
@@ -3175,7 +3327,7 @@ model ManagedClusterSecurityProfileImageCleaner {
 /**
  * Image integrity related settings for the security profile.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterSecurityProfileImageIntegrity {
   /**
    * Whether to enable image integrity. The default value is false.
@@ -3186,12 +3338,27 @@ model ManagedClusterSecurityProfileImageIntegrity {
 /**
  * Node Restriction settings for the security profile.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterSecurityProfileNodeRestriction {
   /**
    * Whether to enable Node Restriction
    */
   enabled?: boolean;
+}
+
+/**
+ * Profile for configuring image pull authentication to use service account scoped managed identities for authentication instead of node scoped managed identity (kubelet identity) for authentication to Azure Container Registry. For more information, refer to https://aka.ms/aks/identity-binding/acr-image-pull/docs
+ */
+model ServiceAccountImagePullProfile {
+  /**
+   * Indicates whether service account based image pull is enabled, for which identity bindings are required for the managed identity to be used for authentication. For more information, refer to https://aka.ms/aks/identity-binding-docs.
+   */
+  enabled?: boolean;
+
+  /**
+   * Optional. The default managed identity resource ID used for image pulls at the cluster level. When configured, this identity is used if a Pod’s service account does not explicitly specify an identity for pulling images. If not configured and no identity is specified at service account level, image will be pulled via anonymous authentication.
+   */
+  defaultManagedIdentityId?: string;
 }
 
 /**
@@ -3201,13 +3368,13 @@ model ManagedClusterStorageProfile {
   /**
    * AzureDisk CSI Driver settings for the storage profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   diskCSIDriver?: ManagedClusterStorageProfileDiskCSIDriver;
 
   /**
    * AzureFile CSI Driver settings for the storage profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   fileCSIDriver?: ManagedClusterStorageProfileFileCSIDriver;
 
   /**
@@ -3218,14 +3385,14 @@ model ManagedClusterStorageProfile {
   /**
    * AzureBlob CSI Driver settings for the storage profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   blobCSIDriver?: ManagedClusterStorageProfileBlobCSIDriver;
 }
 
 /**
  * AzureDisk CSI Driver settings for the storage profile.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterStorageProfileDiskCSIDriver {
   /**
    * Whether to enable AzureDisk CSI Driver. The default value is true.
@@ -3235,14 +3402,14 @@ model ManagedClusterStorageProfileDiskCSIDriver {
   /**
    * The version of AzureDisk CSI Driver. The default value is v1.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   version?: string;
 }
 
 /**
  * AzureFile CSI Driver settings for the storage profile.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterStorageProfileFileCSIDriver {
   /**
    * Whether to enable AzureFile CSI Driver. The default value is true.
@@ -3263,7 +3430,7 @@ model ManagedClusterStorageProfileSnapshotController {
 /**
  * AzureBlob CSI Driver settings for the storage profile.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterStorageProfileBlobCSIDriver {
   /**
    * Whether to enable AzureBlob CSI Driver. The default value is false.
@@ -3283,19 +3450,19 @@ model ManagedClusterIngressProfile {
   /**
    * Settings for the managed Gateway API installation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2025_10_02_preview)
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_01_02_preview)
   gatewayAPI?: ManagedClusterIngressProfileGatewayConfiguration;
 
   /**
    * Settings for the managed Application Load Balancer installation
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   applicationLoadBalancer?: ManagedClusterIngressProfileApplicationLoadBalancer;
 }
 
 /** Configuration for the ingress managed gateway. See https://aka.ms/k8s-gateway-api for more details. */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterIngressProfileGatewayConfiguration {
   /**
    * Configuration for the managed Gateway API installation. If not specified, the default is 'Disabled'. See https://aka.ms/k8s-gateway-api for more details.
@@ -3311,6 +3478,13 @@ model ManagedClusterIngressProfileWebAppRouting {
    * Whether to enable the Application Routing add-on.
    */
   enabled?: boolean;
+
+  /**
+   * Configurations for Gateway API providers to be used for managed ingress with App Routing. See https://aka.ms/k8s-gateway-api for more information on the Gateway API.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
+  @added(Versions.v2026_01_02_preview)
+  gatewayAPIImplementations?: ManagedClusterWebAppRoutingGatewayAPIImplementations;
 
   /**
    * Resource IDs of the DNS zones to be associated with the Application Routing add-on. Used only when Application Routing add-on is enabled. Public and private DNS zones can be in different resource groups, but all public DNS zones must be in the same resource group and all private DNS zones must be in the same resource group.
@@ -3339,8 +3513,27 @@ model ManagedClusterIngressProfileWebAppRouting {
   /**
    * Configuration for the Default Domain. This is a unique, autogenerated domain that comes with a signed TLS Certificate allowing for secure HTTPS. See [the Default Domain documentation](https://aka.ms/aks/defaultdomain) for more instructions.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   defaultDomain?: ManagedClusterIngressDefaultDomainProfile;
+}
+
+/** Configurations for Gateway API providers to be used for managed ingress with App Routing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
+@added(Versions.v2026_01_02_preview)
+model ManagedClusterWebAppRoutingGatewayAPIImplementations {
+  /**
+   * Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API.
+   */
+  appRoutingIstio?: ManagedClusterAppRoutingIstio;
+}
+
+/** Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API. */
+@added(Versions.v2026_01_02_preview)
+model ManagedClusterAppRoutingIstio {
+  /**
+   * Whether to enable Istio as a Gateway API implementation for managed ingress with App Routing.
+   */
+  mode?: GatewayAPIIstioEnabled;
 }
 
 /** Nginx ingress controller configuration for the managed cluster ingress profile. */
@@ -3352,7 +3545,7 @@ model ManagedClusterIngressProfileNginx {
 }
 
 /** Default domain profile for the managed cluster ingress profile. */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterIngressDefaultDomainProfile {
   /**
    * Whether to enable Default Domain.
@@ -3369,7 +3562,7 @@ model ManagedClusterIngressDefaultDomainProfile {
 /**
  * Application Load Balancer settings for the ingress profile.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterIngressProfileApplicationLoadBalancer {
   /**
    * Whether to enable Application Load Balancer.
@@ -3420,7 +3613,7 @@ model ManagedClusterWorkloadAutoScalerProfileVerticalPodAutoscaler {
   /**
    * Whether VPA add-on is enabled and configured to scale AKS-managed add-ons.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   addonAutoscaling?: AddonAutoscaling = AddonAutoscaling.Disabled;
 }
 
@@ -3436,13 +3629,13 @@ model ManagedClusterAzureMonitorProfile {
   /**
    * Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   containerInsights?: ManagedClusterAzureMonitorProfileContainerInsights;
 
   /**
    * Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   appMonitoring?: ManagedClusterAzureMonitorProfileAppMonitoring;
 }
 
@@ -3479,7 +3672,7 @@ model ManagedClusterAzureMonitorProfileKubeStateMetrics {
 /**
  * Azure Monitor Container Insights Profile for Kubernetes Events, Inventory and Container stdout & stderr logs etc. See aka.ms/AzureMonitorContainerInsights for an overview.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterAzureMonitorProfileContainerInsights {
   /**
    * Indicates if Azure Monitor Container Insights Logs Addon is enabled or not.
@@ -3509,12 +3702,36 @@ model ManagedClusterAzureMonitorProfileContainerInsights {
    * Indicates whether prometheus metrics scraping is disabled or not. If not specified the default is false. No prometheus metrics will be emitted if this field is false but the container insights enabled field is false
    */
   disablePrometheusMetricsScraping?: boolean;
+
+  /**
+   * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+   */
+  @added(Versions.v2026_01_02_preview)
+  containerNetworkLogs?: ContainerNetworkLogs;
+}
+
+/**
+ * Configures container network logs ingestion with Azure Monitor. Which network logs to ingest is controlled by the CRD found in the following links. No network logs are ingested by default. More information on container network logs can be found at https://aka.ms/ContainerNetworkLogsDoc. More information on configuring container network log can be found at https://aka.ms/acns/howtoenablecnl. If not specified, the default is Disabled.
+ */
+@added(Versions.v2026_01_02_preview)
+union ContainerNetworkLogs {
+  string,
+
+  /**
+   * Azure monitor ingestion of container network logs is disabled
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Azure monitor ingestion of container network logs is enabled
+   */
+  Enabled: "Enabled",
 }
 
 /**
  * Application Monitoring Profile for Kubernetes Application Container. Collects application logs, metrics and traces through auto-instrumentation of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterAzureMonitorProfileAppMonitoring {
   /**
    * Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
@@ -3535,7 +3752,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoring {
 /**
  * Application Monitoring Auto Instrumentation for Kubernetes Application Container. Deploys web hook to auto-instrument Azure Monitor OpenTelemetry based SDKs to collect OpenTelemetry metrics, logs and traces of the application. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
   /**
    * Indicates if Application Monitoring Auto Instrumentation is enabled or not.
@@ -3546,7 +3763,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringAutoInstrumentation {
 /**
  * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Metrics. Collects OpenTelemetry metrics of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
   /**
    * Indicates if Application Monitoring Open Telemetry Metrics is enabled or not.
@@ -3562,7 +3779,7 @@ model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryMetrics {
 /**
  * Application Monitoring Open Telemetry Metrics Profile for Kubernetes Application Container Logs and Traces. Collects OpenTelemetry logs and traces of the application using Azure Monitor OpenTelemetry based SDKs. See aka.ms/AzureMonitorApplicationMonitoring for an overview.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterAzureMonitorProfileAppMonitoringOpenTelemetryLogs {
   /**
    * Indicates if Application Monitoring Open Telemetry Logs and traces is enabled or not.
@@ -3631,7 +3848,7 @@ model IstioComponents {
   /**
    * Mode of traffic redirection.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_01)
   proxyRedirectionMechanism?: ProxyRedirectionMechanism;
 }
 
@@ -3775,7 +3992,7 @@ model ManagedClusterBootstrapProfile {
 /**
  * When enabling the operator, a set of AKS managed CRDs and controllers will be installed in the cluster. The operator automates the deployment of OSS models for inference and/or training purposes. It provides a set of preset models and enables distributed inference against them.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterAIToolchainOperatorProfile {
   /**
    * Whether to enable AI toolchain operator to the cluster. Indicates if AI toolchain operator  enabled or not.
@@ -3786,7 +4003,7 @@ model ManagedClusterAIToolchainOperatorProfile {
 /**
  * The pod scheduler profile for the cluster.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model SchedulerProfile {
   /**
    * Mapping of each scheduler instance to its profile.
@@ -3797,7 +4014,7 @@ model SchedulerProfile {
 /**
  * Mapping of each scheduler instance to its profile.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model SchedulerProfileSchedulerInstanceProfiles {
   /**
    * The scheduler profile for the upstream scheduler instance.
@@ -3808,7 +4025,7 @@ model SchedulerProfileSchedulerInstanceProfiles {
 /**
  * The scheduler profile for a single scheduler instance.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model SchedulerInstanceProfile {
   /**
    * The config customization mode for this scheduler instance.
@@ -3819,7 +4036,7 @@ model SchedulerInstanceProfile {
 /**
  * Settings for hosted system addons.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ManagedClusterHostedSystemProfile {
   /**
    * Whether to enable hosted system addons for the cluster.
@@ -3841,7 +4058,7 @@ model ManagedClusterStatus {
 /**
  * components of given Kubernetes version.
  */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model ComponentsByRelease {
   /**
    * The Kubernetes version (major.minor).
@@ -3856,7 +4073,7 @@ model ComponentsByRelease {
 }
 
 /** Component information for a Kubernetes version. */
-@added(Versions.v2025_10_02_preview)
+@added(Versions.v2026_01_02_preview)
 model Component {
   /**
    * Component name.
@@ -3877,7 +4094,7 @@ model Component {
 /**
  * Managed cluster Access Profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance pattern matches existing API structure and cannot be changed without breaking changes."
 model ManagedClusterAccessProfile
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
@@ -3928,12 +4145,12 @@ model CredentialResult {
 /**
  * Tags object for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "AKS RP only supports updating tags via PATCH; envelope properties like identity and sku are not yet supported in the PATCH endpoint."
 model TagsObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   tags?: Record<string>;
 }
 
@@ -4025,4 +4242,20 @@ model OperationListResult {
    */
   @nextLink
   nextLink?: url;
+}
+
+/**
+ * Health monitor profile for the managed cluster.
+ */
+@added(Versions.v2026_01_02_preview)
+model ManagedClusterHealthMonitorProfile {
+  /**
+   * Whether to enable continuous control plane and addon monitor.
+   */
+  enableContinuousControlPlaneAndAddonMonitor?: boolean;
+
+  /**
+   * Whether to enable on-demand monitor.
+   */
+  enableOnDemandMonitor?: boolean;
 }

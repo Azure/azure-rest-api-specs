@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "encryptionProtectorName": "current",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "serverName": "sqlcrudtest-4645",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.Sql/servers/encryptionProtector",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/encryptionProtector/current",
+        "kind": "azurekeyvault",
+        "location": "Japan East",
+        "properties": {
+          "autoRotationEnabled": false,
+          "keyVersion": "01234567890123456789012345678901",
+          "serverKeyName": "someVault_someKey",
+          "serverKeyType": "AzureKeyVault",
+          "uri": "https://someVault.vault.azure.net/keys/someKey"
+        }
+      }
+    }
+  },
+  "operationId": "EncryptionProtectors_Get",
+  "title": "Get the encryption protector with versionless key"
+}

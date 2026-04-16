@@ -4,9 +4,13 @@ import "./main.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2025_11_01_preview)
+@TypeSpec.Versioning.useDependency(
+  Search.Versions.v2026_04_01,
+  Search.Versions.v2025_11_01_preview
+)
 namespace Customizations;
 
 @client({
@@ -17,43 +21,41 @@ namespace Customizations;
 @clientNamespace("Azure.Search.Documents")
 @clientNamespace("com.azure.search.documents", "java")
 namespace SearchClient {
-  interface Documents {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    count is Search.Documents.count;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op count is Search.Documents.count;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    searchGet is Search.Documents.searchGet;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op searchGet is Search.Documents.searchGet;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    searchPost is Search.Documents.searchPost;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op searchPost is Search.Documents.searchPost;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.Documents.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op get is Search.Documents.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    suggestGet is Search.Documents.suggestGet;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op suggestGet is Search.Documents.suggestGet;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    suggestPost is Search.Documents.suggestPost;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op suggestPost is Search.Documents.suggestPost;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    index is Search.Documents.index;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op index is Search.Documents.index;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    autocompleteGet is Search.Documents.autocompleteGet;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op autocompleteGet is Search.Documents.autocompleteGet;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    autocompletePost is Search.Documents.autocompletePost;
-  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op autocompletePost is Search.Documents.autocompletePost;
 }
 
 @client({
@@ -63,135 +65,129 @@ namespace SearchClient {
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
 namespace SearchIndexClient {
-  interface SynonymMaps {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.SynonymMaps.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateSynonymMap is Search.SynonymMaps.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.SynonymMaps.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteSynonymMap is Search.SynonymMaps.delete;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.SynonymMaps.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getSynonymMap is Search.SynonymMaps.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.SynonymMaps.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listSynonymMaps is Search.SynonymMaps.list;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.SynonymMaps.create;
-  }
-  interface Indexes {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.Indexes.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createSynonymMap is Search.SynonymMaps.create;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.Indexes.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateIndex is Search.Indexes.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.Indexes.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteIndex is Search.Indexes.delete;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.Indexes.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getIndex is Search.Indexes.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.Indexes.create;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listIndexes is Search.Indexes.list;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    getStatistics is Search.Indexes.getStatistics;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listIndexesWithSelectedProperties is Search.Indexes.listWithSelectedProperties;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    analyze is Search.Indexes.analyze;
-  }
-  interface Aliases {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.Aliases.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createIndex is Search.Indexes.create;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.Aliases.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getStatistics is Search.Indexes.getStatistics;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.Aliases.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op analyze is Search.Indexes.analyze;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.Aliases.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateAlias is Search.Aliases.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.Aliases.create;
-  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteAlias is Search.Aliases.delete;
 
-  interface KnowledgeBases {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.KnowledgeBases.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getAlias is Search.Aliases.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.KnowledgeBases.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listAliases is Search.Aliases.list;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.KnowledgeBases.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createAlias is Search.Aliases.create;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.KnowledgeBases.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateKnowledgeBase is Search.KnowledgeBases.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.KnowledgeBases.create;
-  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteKnowledgeBase is Search.KnowledgeBases.delete;
 
-  interface Sources {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.KnowledgeSources.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getKnowledgeBase is Search.KnowledgeBases.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.KnowledgeSources.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listKnowledgeBases is Search.KnowledgeBases.list;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.KnowledgeSources.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createKnowledgeBase is Search.KnowledgeBases.create;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.KnowledgeSources.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateKnowledgeSource is Search.KnowledgeSources.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.KnowledgeSources.create;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteKnowledgeSource is Search.KnowledgeSources.delete;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    getStatus is Search.KnowledgeSources.getStatus;
-  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getKnowledgeSource is Search.KnowledgeSources.get;
 
-  interface Root {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    getServiceStatistics is Search.getServiceStatistics;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listKnowledgeSources is Search.KnowledgeSources.list;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    getIndexStatsSummary is Search.getIndexStatsSummary;
-  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createKnowledgeSource is Search.KnowledgeSources.create;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getKnowledgeSourceStatus is Search.KnowledgeSources.getStatus;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getServiceStatistics is Search.getServiceStatistics;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getIndexStatsSummary is Search.getIndexStatsSummary;
 }
 
 @client({
@@ -201,108 +197,114 @@ namespace SearchIndexClient {
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
 namespace SearchIndexerClient {
-  interface DataSources {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.DataSources.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateDataSource is Search.DataSources.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.DataSources.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteDataSource is Search.DataSources.delete;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.DataSources.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getDataSource is Search.DataSources.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.DataSources.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listDataSources is Search.DataSources.list;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.DataSources.create;
-  }
-  interface Indexers {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    reset is Search.Indexers.reset;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createDataSource is Search.DataSources.create;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    resync is Search.Indexers.resync;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op resetIndexer is Search.Indexers.reset;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    resetDocs is Search.Indexers.resetDocs;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op resync is Search.Indexers.resync;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    run is Search.Indexers.run;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op resetDocs is Search.Indexers.resetDocs;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.Indexers.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op runIndexer is Search.Indexers.run;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.Indexers.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateIndexer is Search.Indexers.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.Indexers.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteIndexer is Search.Indexers.delete;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.Indexers.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getIndexer is Search.Indexers.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.Indexers.create;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listIndexers is Search.Indexers.list;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    getStatus is Search.Indexers.getStatus;
-  }
-  interface Skillsets {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    createOrUpdate is Search.Skillsets.createOrUpdate;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createIndexer is Search.Indexers.create;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    delete is Search.Skillsets.delete;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getIndexerStatus is Search.Indexers.getStatus;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    get is Search.Skillsets.get;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createOrUpdateSkillset is Search.Skillsets.createOrUpdate;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    list is Search.Skillsets.list;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op deleteSkillset is Search.Skillsets.delete;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    create is Search.Skillsets.create;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op getSkillset is Search.Skillsets.get;
 
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    resetSkills is Search.Skillsets.resetSkills;
-  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op listSkillsets is Search.Skillsets.list;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op createSkillset is Search.Skillsets.create;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op resetSkills is Search.Skillsets.resetSkills;
+}
+
+/** Client initialization options for KnowledgeBaseRetrievalClient. */
+model KnowledgeBaseRetrievalClientOptions {
+  /** The name of the knowledge base. */
+  @paramAlias("knowledgeBaseName")
+  knowledgeBaseName: string;
 }
 
 @client({
   name: "KnowledgeBaseRetrievalClient",
   service: Search,
 })
-@clientNamespace("Azure.Search.Documents.KnowledgeBase")
-@clientNamespace("com.azure.search.documents.knowledgebase", "java")
+@clientNamespace("Azure.Search.Documents.KnowledgeBases")
+@clientNamespace("com.azure.search.documents.knowledgebases", "java")
 namespace KnowledgeBaseRetrievalClient {
-  interface KnowledgeRetrieval {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-    retrieve is Search.KnowledgeRetrieval.retrieve;
-  }
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op retrieve is Search.KnowledgeRetrieval.retrieve;
 }
+@@clientInitialization(KnowledgeBaseRetrievalClient,
+  {
+    parameters: KnowledgeBaseRetrievalClientOptions,
+  }
+);
 
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
@@ -327,11 +329,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SynonymMap, Access.public);
 @@usage(SynonymMap, Usage.input);
 @@access(AutocompleteItem, Access.public);
-@@usage(AutocompleteItem, Usage.input);
+@@usage(AutocompleteItem, Usage.input, "!csharp");
 @@access(SuggestResult, Access.public);
 @@usage(SuggestResult, Usage.input);
 @@access(IndexingResult, Access.public);
-@@usage(IndexingResult, Usage.input);
+@@usage(IndexingResult, Usage.input, "!csharp");
 @@access(FacetResult, Access.public);
 @@usage(FacetResult, Usage.input);
 @@access(QueryAnswerResult, Access.public);
@@ -362,39 +364,223 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(WebKnowledgeSource, Usage.input);
 @@access(RemoteSharePointKnowledgeSource, Access.public);
 @@usage(RemoteSharePointKnowledgeSource, Usage.input);
+@@usage(SearchRequest, Usage.input | Usage.output, "java");
 
-@@access(SearchClient.Documents.searchGet, Access.internal);
-@@access(SearchClient.Documents.searchPost, Access.internal);
-@@access(SearchClient.Documents.autocompleteGet, Access.internal);
-@@access(SearchClient.Documents.autocompletePost, Access.internal);
-@@access(SearchClient.Documents.suggestGet, Access.internal);
-@@access(SearchClient.Documents.suggestPost, Access.internal);
-@@access(SearchClient.Documents.index, Access.internal);
-@@access(SearchIndexerClient.DataSources.list, Access.internal);
-@@access(SearchIndexerClient.DataSources.createOrUpdate, Access.internal);
-@@access(SearchIndexerClient.DataSources.delete, Access.internal, "python");
-@@access(SearchIndexerClient.Indexers.list, Access.internal);
-@@access(SearchIndexerClient.Indexers.createOrUpdate, Access.internal);
-@@access(SearchIndexerClient.Indexers.resetDocs, Access.internal, "python");
-@@access(SearchIndexerClient.Indexers.delete, Access.internal, "python");
-@@access(SearchIndexerClient.Indexers.resync, Access.internal, "python");
-@@access(SearchIndexerClient.Skillsets.list, Access.internal);
-@@access(SearchIndexerClient.Skillsets.createOrUpdate, Access.internal);
-@@access(SearchIndexerClient.Skillsets.delete, Access.internal, "python");
-@@access(SearchIndexerClient.Skillsets.resetSkills, Access.internal, "python");
-@@access(SearchIndexClient.SynonymMaps.list, Access.internal);
-@@access(SearchIndexClient.SynonymMaps.createOrUpdate, Access.internal);
-@@access(SearchIndexClient.SynonymMaps.delete, Access.internal, "python");
-@@access(SearchIndexClient.Indexes.createOrUpdate, Access.internal);
-@@access(SearchIndexClient.Indexes.delete, Access.internal, "python");
-@@access(SearchIndexClient.Indexes.analyze, Access.internal, "python");
-@@access(SearchIndexClient.Indexes.getStatistics, Access.internal, "python");
-@@access(SearchIndexClient.Aliases.createOrUpdate, Access.internal);
-@@access(SearchIndexClient.Aliases.delete, Access.internal, "python");
-@@access(SearchIndexClient.KnowledgeBases.createOrUpdate, Access.internal);
-@@access(SearchIndexClient.KnowledgeBases.delete, Access.internal, "python");
-@@access(SearchIndexClient.Sources.createOrUpdate, Access.internal);
-@@access(SearchIndexClient.Sources.delete, Access.internal, "python");
+// .NET specific customizations
+@@protocolAPI(Search.Documents.count, false, "csharp");
+@@convenientAPI(Search.Documents.get, false, "csharp");
+@@protocolAPI(Search.Documents.get, false, "csharp");
+
+@@clientName(AIServicesAccountIdentity.subdomainUrl, "SubdomainUri", "csharp");
+@@alternateType(AIServicesAccountIdentity.subdomainUrl, url, "csharp");
+@@access(AnalyzeResult, Access.internal, "csharp");
+@@access(AzureActiveDirectoryApplicationCredentials, Access.internal, "csharp");
+@@alternateType(AzureMachineLearningSkill.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
+@@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@clientName(ChatCompletionSchemaProperties.strict, "IsStrict", "csharp");
+@@alternateType(ChatCompletionSkill.uri, url, "csharp");
+@@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
+@@access(DataSourceCredentials, Access.internal, "csharp");
+@@alternateType(Search.DocumentExtractionSkill.dataToExtract,
+  BlobIndexerDataToExtract,
+  "csharp"
+);
+@@alternateType(Search.DocumentExtractionSkill.parsingMode,
+  BlobIndexerParsingMode,
+  "csharp"
+);
+@@access(EdgeNGramTokenFilterV2, Access.internal, "csharp");
+@@clientName(EdgeNGramTokenFilterV2,
+  "InternalEdgeNGramTokenFilterV2",
+  "csharp"
+);
+@@access(EdgeNGramTokenFilter, Access.internal, "csharp");
+@@clientName(EdgeNGramTokenFilter, "InternalEdgeNGramTokenFilter", "csharp");
+@@clientName(EntityRecognitionSkillV3, "EntityRecognitionSkill", "csharp");
+@@clientName(GetIndexStatisticsResult, "SearchIndexStatistics", "csharp");
+@@clientName(IndexerCurrentState, "IndexerState", "csharp");
+@@clientName(IndexerCurrentState.resetDatasourceDocumentIds,
+  "ResetDataSourceDocumentIds",
+  "csharp"
+);
+@@clientName(IndexingMode.IndexingAllDocs, "AllDocuments", "csharp");
+@@clientName(IndexingMode.IndexingResetDocs, "ResetDocuments", "csharp");
+@@access(KeyPhraseExtractionSkill.modelVersion, Access.internal, "csharp");
+@@alternateType(KnowledgeBase.eTag, eTag, "csharp");
+@@alternateType(KnowledgeSource.eTag, eTag, "csharp");
+@@alternateType(KnowledgeSourceSynchronizationError.documentationLink,
+  url,
+  "csharp"
+);
+@@alternateType(KnowledgeBaseAzureBlobReference.blobUrl, url, "csharp");
+@@alternateType(KnowledgeBaseIndexedOneLakeReference.docUrl, url, "csharp");
+@@access(LanguageDetectionSkill.modelVersion, Access.internal, "csharp");
+@@clientName(LengthTokenFilter.min, "MinLength", "csharp");
+@@clientName(LengthTokenFilter.max, "MaxLength", "csharp");
+@@access(ListDataSourcesResult, Access.internal, "csharp");
+@@access(ListIndexersResult, Access.internal, "csharp");
+@@access(ListIndexesResult, Access.internal, "csharp");
+@@access(ListIndexStatsSummary, Access.internal, "csharp");
+@@access(ListSkillsetsResult, Access.internal, "csharp");
+@@access(ListSynonymMapsResult, Access.internal, "csharp");
+@@access(LuceneStandardTokenizer, Access.internal, "csharp");
+@@clientName(LuceneStandardTokenizer,
+  "DeprecatedLuceneStandardTokenizer",
+  "csharp"
+);
+@@clientName(LuceneStandardTokenizerV2, "LuceneStandardTokenizer", "csharp");
+@@clientName(PIIDetectionSkill, "PiiDetectionSkill", "csharp");
+@@clientName(RegexFlags, "RegexFlag", "csharp");
+@@clientName(SkillNames, "ResetSkillsOptions", "csharp");
+@@alternateType(SearchIndexResponse.eTag, eTag, "csharp");
+@@alternateType(SearchIndexer.eTag, eTag, "csharp");
+@@alternateType(SearchIndexerSkillset.eTag, eTag, "csharp");
+@@clientName(SearchIndexerKnowledgeStore, "KnowledgeStore", "csharp");
+@@clientName(SearchIndexerKnowledgeStoreBlobProjectionSelector,
+  "KnowledgeStoreStorageProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreProjection,
+  "KnowledgeStoreProjection",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreFileProjectionSelector,
+  "KnowledgeStoreFileProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreObjectProjectionSelector,
+  "KnowledgeStoreObjectProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreProjectionSelector,
+  "KnowledgeStoreProjectionSelector",
+  "csharp"
+);
+@@clientName(SearchIndexerKnowledgeStoreTableProjectionSelector,
+  "KnowledgeStoreTableProjectionSelector",
+  "csharp"
+);
+@@clientName(ResourceCounter, "SearchResourceCounter", "csharp");
+@@clientName(SemanticPrioritizedFields.prioritizedContentFields,
+  "ContentFields",
+  "csharp"
+);
+@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
+  "KeywordsFields",
+  "csharp"
+);
+@@alternateType(WebApiSkill.authResourceId, armResourceIdentifier, "csharp");
+@@alternateType(WebApiVectorizerParameters.authResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(WebApiVectorizerParameters.uri, url, "csharp");
+@@alternateType(VectorizableImageUrlQuery.url, url, "csharp");
+@@clientName(AutocompleteResult, "AutocompleteResults", "csharp");
+@@access(IndexAction, Access.internal, "csharp");
+@@access(IndexAction, Access.internal, "csharp");
+@@access(IndexBatch, Access.internal, "csharp");
+@@clientName(IndexBatch, "IndexBatch", "csharp");
+@@clientName(IndexingResult.statusCode, "Status", "csharp");
+@@clientName(DocumentKeysOrIds, "ResetDocumentOptions", "csharp");
+@@clientName(DocumentKeysOrIds.datasourceDocumentIds,
+  "DataSourceDocumentIds",
+  "csharp"
+);
+@@access(SearchDocumentsResult, Access.internal, "csharp");
+@@access(SearchDocumentsResult, Access.internal, "python");
+@@access(Search.SearchDocumentsResult.nextLink, Access.internal, "java");
+@@access(Search.SearchDocumentsResult.nextPageParameters,
+  Access.internal,
+  "java"
+);
+@@access(DebugInfo, Access.internal, "python");
+@@access(DebugInfo, Access.internal, "java");
+@@access(AutocompleteMode, Access.public, "python");
+@@access(IndexActionType, Access.public, "python");
+@@access(QueryAnswerType, Access.public, "python");
+@@access(QueryCaptionType, Access.public, "python");
+@@access(QueryDebugMode, Access.public, "python");
+@@access(QueryType, Access.public, "python");
+@@access(ScoringStatistics, Access.public, "python");
+@@access(SearchMode, Access.public, "python");
+@@access(SemanticErrorMode, Access.public, "python");
+@@access(SemanticSearchResultsType, Access.public, "python");
+@@access(VectorFilterMode, Access.public, "python");
+@@access(VectorQuery, Access.public, "python");
+@@access(VectorizedQuery, Access.public, "python");
+@@access(VectorizableImageBinaryQuery, Access.public, "python");
+@@access(VectorizableImageUrlQuery, Access.public, "python");
+@@access(VectorizableTextQuery, Access.public, "python");
+@@access(VectorQueryKind, Access.public, "python");
+@@access(SearchResult, Access.internal, "csharp");
+@@access(SuggestDocumentsResult, Access.internal, "csharp");
+@@access(SuggestResult, Access.internal, "csharp");
+
+// Name Path customizations
+@@clientName(indexNamePath.indexName, "indexName", "csharp");
+@@clientName(indexerNamePath.indexerName, "indexerName", "csharp");
+@@clientName(dataSourceNamePath.dataSourceName,
+  "dataSourceConnectionName",
+  "csharp"
+);
+@@clientName(skillsetNamePath.skillsetName, "skillsetName", "csharp");
+@@clientName(synonymMapNamePath.synonymMapName, "synonymMapName", "csharp");
+@@clientName(aliasNamePath.aliasName, "aliasName", "csharp");
+@@clientName(sourceNamePath.sourceName, "sourceName", "csharp");
+@@clientName(knowledgeBaseNamePath.knowledgeBaseName,
+  "knowledgeBaseName",
+  "csharp"
+);
+// end of .NET specific customizations
+
+@@access(SearchClient.searchGet, Access.internal);
+@@access(SearchClient.searchPost, Access.internal);
+@@clientName(SearchClient.searchPost, "search", "java");
+@@access(SearchClient.searchPost, Access.public, "java");
+@@access(SearchClient.autocompleteGet, Access.internal);
+@@access(SearchClient.autocompletePost, Access.internal);
+@@access(SearchClient.autocompletePost, Access.public, "java");
+@@clientName(SearchClient.autocompletePost, "autocomplete", "java");
+@@access(SearchClient.suggestGet, Access.internal);
+@@access(SearchClient.suggestPost, Access.internal);
+@@access(SearchClient.suggestPost, Access.public, "java");
+@@clientName(SearchClient.suggestPost, "suggest", "java");
+@@access(SearchClient.index, Access.internal);
+@@access(SearchIndexerClient.listDataSources, Access.internal);
+@@access(SearchIndexerClient.createOrUpdateDataSource, Access.internal);
+@@access(SearchIndexerClient.deleteDataSource, Access.internal, "python");
+@@access(SearchIndexerClient.listIndexers, Access.internal);
+@@access(SearchIndexerClient.createOrUpdateIndexer, Access.internal);
+@@access(SearchIndexerClient.resetDocs, Access.internal, "python");
+@@access(SearchIndexerClient.deleteIndexer, Access.internal, "python");
+@@access(SearchIndexerClient.resync, Access.internal, "python");
+@@access(SearchIndexerClient.listSkillsets, Access.internal);
+@@access(SearchIndexerClient.createOrUpdateSkillset, Access.internal);
+@@access(SearchIndexerClient.deleteSkillset, Access.internal, "python");
+@@access(SearchIndexerClient.resetSkills, Access.internal, "python");
+@@access(SearchIndexClient.listSynonymMaps, Access.internal);
+@@access(SearchIndexClient.createOrUpdateSynonymMap, Access.internal);
+@@access(SearchIndexClient.deleteSynonymMap, Access.internal, "python");
+@@access(SearchIndexClient.createOrUpdateIndex, Access.internal);
+@@access(SearchIndexClient.deleteIndex, Access.internal, "python");
+@@access(SearchIndexClient.analyze, Access.internal, "python");
+@@access(SearchIndexClient.getStatistics, Access.internal, "python");
+@@access(SearchIndexClient.listIndexes, Access.internal, "python");
+@@access(SearchIndexClient.listIndexesWithSelectedProperties,
+  Access.internal,
+  "python"
+);
+@@access(SearchIndexClient.createOrUpdateAlias, Access.internal);
+@@access(SearchIndexClient.deleteAlias, Access.internal, "python");
+@@access(SearchIndexClient.createOrUpdateKnowledgeBase, Access.internal);
+@@access(SearchIndexClient.deleteKnowledgeBase, Access.internal, "python");
+@@access(SearchIndexClient.createOrUpdateKnowledgeSource, Access.internal);
+@@access(SearchIndexClient.deleteKnowledgeSource, Access.internal, "python");
 
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorResponse, "com.azure.search.documents", "java");
@@ -593,6 +779,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents",
   "java"
 );
+@@access(Search.IndexDocumentsResult, Access.public, "java");
 @@clientNamespace(Search.IndexingResult, "Azure.Search.Documents");
 @@clientNamespace(Search.IndexingResult, "com.azure.search.documents", "java");
 @@clientNamespace(Search.AutocompleteResult, "Azure.Search.Documents");
@@ -692,6 +879,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.BlobIndexerPDFTextRotationAlgorithm,
   "com.azure.search.documents.indexes",
   "java"
+);
+@@clientName(Search.BlobIndexerPDFTextRotationAlgorithm,
+  "BlobIndexerPdfTextRotationAlgorithm",
+  "csharp"
 );
 @@clientNamespace(Search.IndexerExecutionEnvironment,
   "Azure.Search.Documents.Indexes"
@@ -862,6 +1053,20 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(Search.PIIDetectionSkillMaskingMode,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.SentimentSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SentimentSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -1059,6 +1264,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListDataSourcesResult, Access.public, "java");
 @@clientNamespace(Search.DocumentKeysOrIds, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.DocumentKeysOrIds,
   "com.azure.search.documents.indexes",
@@ -1108,6 +1314,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListIndexersResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndexerStatus, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndexerStatus,
   "com.azure.search.documents.indexes",
@@ -1250,6 +1457,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListSkillsetsResult, Access.public, "java");
 @@clientNamespace(Search.SkillNames, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SkillNames,
   "com.azure.search.documents.indexes",
@@ -1267,8 +1475,14 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@access(Search.ListSynonymMapsResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndex, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndex,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.SearchIndexResponse, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexResponse,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -1401,6 +1615,12 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+
+@@clientName(Search.AzureBlobKnowledgeSourceParameters.isADLSGen2,
+  "adlsGen2",
+  "java"
+);
+
 @@clientNamespace(Search.IndexedOneLakeKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
@@ -2467,77 +2687,81 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 
-@@clientName(SearchClient.Documents.count, "getDocumentCount");
-@@clientName(SearchClient.Documents.get, "getDocument");
-@@clientName(SearchIndexClient.Indexes.list, "listIndexes");
-@@clientName(SearchIndexClient.Indexes.get, "getIndex");
-@@clientName(SearchIndexClient.Indexes.getStatistics, "getIndexStatistics");
-@@clientName(SearchIndexClient.Indexes.delete, "deleteIndex");
-@@clientName(SearchIndexClient.Indexes.create, "createIndex");
-@@clientName(SearchIndexClient.Indexes.createOrUpdate, "createOrUpdateIndex");
-@@clientName(SearchIndexClient.Indexes.analyze, "analyzeText");
-@@clientName(SearchIndexClient.SynonymMaps.list, "getSynonymMaps");
-@@clientName(SearchIndexClient.SynonymMaps.get, "getSynonymMap");
-@@clientName(SearchIndexClient.SynonymMaps.delete, "deleteSynonymMap");
-@@clientName(SearchIndexClient.SynonymMaps.create, "createSynonymMap");
-@@clientName(SearchIndexClient.SynonymMaps.createOrUpdate,
+@@clientName(SearchClient.count, "getDocumentCount");
+@@clientName(SearchClient.get, "getDocument");
+@@clientName(SearchIndexClient.listIndexes, "listIndexes");
+@@clientName(SearchIndexClient.listIndexesWithSelectedProperties,
+  "listIndexesWithSelectedProperties"
+);
+@@clientName(SearchIndexClient.getIndex, "getIndex");
+@@clientName(SearchIndexClient.getStatistics, "getIndexStatistics");
+@@clientName(SearchIndexClient.deleteIndex, "deleteIndex");
+@@clientName(SearchIndexClient.createIndex, "createIndex");
+@@clientName(SearchIndexClient.createOrUpdateIndex, "createOrUpdateIndex");
+@@clientName(SearchIndexClient.analyze, "analyzeText");
+@@clientName(SearchIndexClient.listSynonymMaps, "getSynonymMaps");
+@@clientName(SearchIndexClient.getSynonymMap, "getSynonymMap");
+@@clientName(SearchIndexClient.deleteSynonymMap, "deleteSynonymMap");
+@@clientName(SearchIndexClient.createSynonymMap, "createSynonymMap");
+@@clientName(SearchIndexClient.createOrUpdateSynonymMap,
   "createOrUpdateSynonymMap"
 );
-@@clientName(SearchIndexClient.Root.getIndexStatsSummary,
-  "listIndexStatsSummary"
-);
-@@clientName(SearchIndexClient.Aliases.list, "listAliases");
-@@clientName(SearchIndexClient.Aliases.get, "getAlias");
-@@clientName(SearchIndexClient.Aliases.delete, "deleteAlias");
-@@clientName(SearchIndexClient.Aliases.create, "createAlias");
-@@clientName(SearchIndexClient.Aliases.createOrUpdate, "createOrUpdateAlias");
-@@clientName(SearchIndexClient.KnowledgeBases.delete, "deleteKnowledgeBase");
-@@clientName(SearchIndexClient.KnowledgeBases.create, "createKnowledgeBase");
-@@clientName(SearchIndexClient.KnowledgeBases.createOrUpdate,
+@@clientName(SearchIndexClient.getIndexStatsSummary, "listIndexStatsSummary");
+@@clientName(SearchIndexClient.listAliases, "listAliases");
+@@clientName(SearchIndexClient.getAlias, "getAlias");
+@@clientName(SearchIndexClient.deleteAlias, "deleteAlias");
+@@clientName(SearchIndexClient.createAlias, "createAlias");
+@@clientName(SearchIndexClient.createOrUpdateAlias, "createOrUpdateAlias");
+@@clientName(SearchIndexClient.deleteKnowledgeBase, "deleteKnowledgeBase");
+@@clientName(SearchIndexClient.createKnowledgeBase, "createKnowledgeBase");
+@@clientName(SearchIndexClient.createOrUpdateKnowledgeBase,
   "createOrUpdateKnowledgeBase"
 );
-@@clientName(SearchIndexClient.KnowledgeBases.get, "getKnowledgeBase");
-@@clientName(SearchIndexClient.KnowledgeBases.list, "listKnowledgeBases");
-@@clientName(SearchIndexClient.Sources.delete, "deleteKnowledgeSource");
-@@clientName(SearchIndexClient.Sources.create, "createKnowledgeSource");
-@@clientName(SearchIndexClient.Sources.createOrUpdate,
+@@clientName(SearchIndexClient.getKnowledgeBase, "getKnowledgeBase");
+@@clientName(SearchIndexClient.listKnowledgeBases, "listKnowledgeBases");
+@@clientName(SearchIndexClient.deleteKnowledgeSource, "deleteKnowledgeSource");
+@@clientName(SearchIndexClient.createKnowledgeSource, "createKnowledgeSource");
+@@clientName(SearchIndexClient.createOrUpdateKnowledgeSource,
   "createOrUpdateKnowledgeSource"
 );
-@@clientName(SearchIndexClient.Sources.get, "getKnowledgeSource");
-@@clientName(SearchIndexClient.Sources.list, "listKnowledgeSources");
-@@clientName(SearchIndexClient.Sources.getStatus, "getKnowledgeSourceStatus");
-@@clientName(SearchIndexerClient.Indexers.create, "createIndexer");
-@@clientName(SearchIndexerClient.Indexers.createOrUpdate,
+@@clientName(SearchIndexClient.getKnowledgeSource, "getKnowledgeSource");
+@@clientName(SearchIndexClient.listKnowledgeSources, "listKnowledgeSources");
+@@clientName(SearchIndexClient.getKnowledgeSourceStatus,
+  "getKnowledgeSourceStatus"
+);
+@@clientName(SearchIndexerClient.createIndexer, "createIndexer");
+@@clientName(SearchIndexerClient.createOrUpdateIndexer,
   "createOrUpdateIndexer"
 );
-@@clientName(SearchIndexerClient.Indexers.delete, "deleteIndexer");
-@@clientName(SearchIndexerClient.Indexers.get, "getIndexer");
-@@clientName(SearchIndexerClient.Indexers.list, "getIndexers");
-@@clientName(SearchIndexerClient.Indexers.run, "runIndexer");
-@@clientName(SearchIndexerClient.Indexers.reset, "resetIndexer");
-@@clientName(SearchIndexerClient.Indexers.resetDocs, "resetDocuments");
-@@clientName(SearchIndexerClient.Indexers.resync, "resync");
-@@clientName(SearchIndexerClient.Indexers.getStatus, "getIndexerStatus");
-@@clientName(SearchIndexerClient.DataSources.create,
+@@clientName(SearchIndexerClient.deleteIndexer, "deleteIndexer");
+@@clientName(SearchIndexerClient.getIndexer, "getIndexer");
+@@clientName(SearchIndexerClient.listIndexers, "getIndexers");
+@@clientName(SearchIndexerClient.runIndexer, "runIndexer");
+@@clientName(SearchIndexerClient.resetIndexer, "resetIndexer");
+@@clientName(SearchIndexerClient.resetDocs, "resetDocuments");
+@@clientName(SearchIndexerClient.resync, "resync");
+@@clientName(SearchIndexerClient.getIndexerStatus, "getIndexerStatus");
+@@clientName(SearchIndexerClient.createDataSource,
   "createDataSourceConnection"
 );
-@@clientName(SearchIndexerClient.DataSources.createOrUpdate,
+@@clientName(SearchIndexerClient.createOrUpdateDataSource,
   "createOrUpdateDataSourceConnection"
 );
-@@clientName(SearchIndexerClient.DataSources.get, "getDataSourceConnection");
-@@clientName(SearchIndexerClient.DataSources.list, "getDataSourceConnections");
-@@clientName(SearchIndexerClient.DataSources.delete,
+@@clientName(SearchIndexerClient.getDataSource, "getDataSourceConnection");
+@@clientName(SearchIndexerClient.listDataSources, "getDataSourceConnections");
+@@clientName(SearchIndexerClient.deleteDataSource,
   "deleteDataSourceConnection"
 );
-@@clientName(SearchIndexerClient.Skillsets.create, "createSkillset");
-@@clientName(SearchIndexerClient.Skillsets.createOrUpdate,
+@@clientName(SearchIndexerClient.createSkillset, "createSkillset");
+@@clientName(SearchIndexerClient.createOrUpdateSkillset,
   "createOrUpdateSkillset"
 );
-@@clientName(SearchIndexerClient.Skillsets.get, "getSkillset");
-@@clientName(SearchIndexerClient.Skillsets.list, "getSkillsets");
-@@clientName(SearchIndexerClient.Skillsets.delete, "deleteSkillset");
+@@clientName(SearchIndexerClient.getSkillset, "getSkillset");
+@@clientName(SearchIndexerClient.listSkillsets, "getSkillsets");
+@@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset");
 
 @@clientName(VectorQuery.k, "kNearestNeighbors");
+@@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
 @@clientName(SearchDocumentsResult.value, "results");
 @@clientName(SearchRequest.count, "includeTotalCount");
 @@clientName(SearchRequest.highlight, "highlightFields");
@@ -2558,6 +2782,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
 @@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
 @@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUrl", "java");
 @@clientName(SearchIndexer.disabled, "isDisabled");
 @@clientName(ListIndexersResult.value, "indexers");
 @@clientName(IndexerExecutionResult.itemsProcessed, "itemCount");
@@ -2576,6 +2801,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchRequest.speller, "querySpeller");
 @@clientName(SearchRequest.semanticConfiguration, "semanticConfigurationName");
 @@clientName(SearchIndex.semantic, "semanticSearch");
+@@clientName(SearchIndexResponse.semantic, "semanticSearch");
 @@clientName(SearchField.analyzer, "analyzerName");
 @@clientName(SearchField.searchAnalyzer, "searchAnalyzerName");
 @@clientName(SearchField.indexAnalyzer, "indexAnalyzerName");
@@ -2607,9 +2833,19 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchServiceCounters.synonymMaps, "synonymMapCounter");
 @@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter");
 @@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter");
+@@clientName(SearchServiceCounters.vectorIndexSize,
+  "vectorIndexSizeInBytes",
+  "java"
+);
+@@clientName(GetIndexStatisticsResult.vectorIndexSize,
+  "vectorIndexSizeInBytes",
+  "java"
+);
 @@clientName(SearchServiceLimits.maxStoragePerIndex,
   "maxStoragePerIndexInBytes"
 );
+@@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "csharp");
+@@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "python");
 @@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
 @@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
 @@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip");
@@ -2628,9 +2864,43 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(AzureOpenAIVectorizer.azureOpenAIParameters, "parameters");
 @@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl");
-@@clientName(AzureOpenAIVectorizerParameters.deploymentId, "deploymentName");
+@@clientName(AzureOpenAIVectorizerParameters.resourceUri,
+  "resourceUri",
+  "csharp"
+);
+@@clientName(AzureOpenAIVectorizerParameters.deploymentId,
+  "deploymentName",
+  "!javascript"
+);
+@@clientName(AzureOpenAIVectorizerParameters.authIdentity,
+  "authenticationIdentity",
+  "csharp"
+);
+@@clientName(AzureOpenAIVectorizerParameters.deploymentId,
+  "deploymentName",
+  "csharp"
+);
 @@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters");
-@@clientName(WebApiVectorizerParameters.uri, "url");
+@@clientName(WebApiVectorizer.customWebApiParameters, "parameters", "csharp");
+@@clientName(WebApiVectorizerParameters.uri, "url", "python");
+@@clientName(WebApiVectorizerParameters.uri, "url", "java");
+@@clientName(AIServicesVisionParameters.resourceUri, "resourceUrl", "java");
+@@clientName(AzureOpenAIModelName.Gpt5Mini, "GPT_5_MINI", "python");
+@@clientName(AzureOpenAIModelName.Gpt5Nano, "GPT_5_NANO", "python");
+@@clientName(AzureOpenAIModelName.Gpt54Mini, "GPT_5_4_MINI", "python");
+@@clientName(AzureOpenAIModelName.Gpt54Nano, "GPT_5_4_NANO", "python");
+@@clientName(SearchIndexerDataSourceType.MySql, "MYSQL", "python");
+@@clientName(SearchIndexerDataSourceType.OneLake, "ONELAKE", "python");
+@@clientName(SearchIndexerDataSourceType.SharePoint, "SHAREPOINT", "python");
+@@clientName(KnowledgeSourceKind.IndexedOneLake, "INDEXED_ONELAKE", "python");
+@@clientName(KnowledgeBaseActivityRecordType.indexedOneLake,
+  "INDEXED_ONELAKE",
+  "python"
+);
+@@clientName(KnowledgeBaseReferenceType.indexedOneLake,
+  "INDEXED_ONELAKE",
+  "python"
+);
 @@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
   "resourceId"
 );
@@ -2642,13 +2912,23 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(TagScoringFunction.tag, "parameters");
 @@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation");
+@@clientName(PIIDetectionSkill.minimumPrecision, "minPrecision", "csharp");
 @@clientName(PIIDetectionSkill.maskingCharacter, "mask");
 @@clientName(ListAliasesResult.value, "aliases");
 @@clientName(AMLParameters.uri, "scoringUri");
+@@clientName(AMLParameters.uri, "scoringUrl", "java");
 @@clientName(AMLParameters.key, "authenticationKey");
-@@clientName(AMLVectorizer.amlParameters, "AMLParameters");
+@@clientName(AMLVectorizer.amlParameters, "parameters", "java");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUri");
+@@clientName(AzureMachineLearningSkill.uri, "scoringUrl", "java");
 @@clientName(AzureMachineLearningSkill.key, "authenticationKey");
+@@clientName(ChatCompletionSkill.uri, "url", "java");
+@@clientName(WebApiSkill.uri, "url", "java");
+@@clientName(AIServices.uri, "url", "java");
+@@clientName(CustomEntityLookupSkill.entitiesDefinitionUri,
+  "entitiesDefinitionUrl",
+  "java"
+);
 @@clientName(SkillNames.skillNames, "skillNameList", "csharp");
 @@clientName(AMLParameters, "AzureMachineLearningParameters");
 @@clientName(AMLVectorizer, "AzureMachineLearningVectorizer");
@@ -2664,6 +2944,10 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexerSkill.`@odata.type`, "odataType");
 @@clientName(SearchIndexerSkill.`@odata.type`, "odatatype", "javascript");
+@@clientName(ContentUnderstandingSkill.`@odata.type`,
+  "odatatype",
+  "javascript"
+);
 @@clientName(CognitiveServicesAccount.`@odata.type`, "odataType");
 @@clientName(CognitiveServicesAccount.`@odata.type`, "odatatype", "javascript");
 @@clientName(LexicalAnalyzer.`@odata.type`, "odataType");
@@ -2721,6 +3005,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odatatype", "javascript");
+@@clientName(Search.ChatCompletionSkill.`@odata.type`,
+  "odatatype",
+  "javascript"
+);
 @@clientName(CjkBigramTokenFilter.`@odata.type`, "odataType");
 @@clientName(CjkBigramTokenFilter.`@odata.type`, "odatatype", "javascript");
 @@clientName(CommonGramTokenFilter.`@odata.type`, "odataType");
@@ -2900,7 +3188,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
+@@clientName(ListIndexStatsSummary.value, "indexesStatistics", "javascript"); //TODO: verify casing
+@@clientName(RankingOrder.RerankerScore, "reRankerScore", "csharp");
+@@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "csharp");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "javascript");
+@@clientName(Search.ClassicSimilarityAlgorithm, "ClassicSimilarity", "csharp");
 @@clientName(Search.ClassicSimilarityAlgorithm,
   "ClassicSimilarity",
   "javascript"
@@ -2909,432 +3201,547 @@ namespace KnowledgeBaseRetrievalClient {
   "CommonModelParameters",
   "javascript"
 );
+@@clientName(Search.ChatCompletionCommonModelParameters.modelName,
+  "model",
+  "javascript"
+);
 @@clientName(Search.SearchServiceCounters, "ServiceCounters", "javascript");
 @@clientName(Search.SearchServiceLimits, "ServiceLimits", "javascript");
+@@clientName(Search.SearchAlias.eTag, "etag", "javascript");
+@@clientName(Search.KnowledgeBase.eTag, "etag", "javascript");
+@@clientName(Search.RankingOrder.RerankerScore, "RerankerScore", "javascript");
+@@clientName(Search.ChatCompletionResponseFormat.jsonSchemaProperties,
+  "chatCompletionSchemaProperties",
+  "javascript"
+);
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsVitBasePatch32,
+  "OpenAIClipImageTextEmbeddingsVitBasePatch32",
+  "javascript"
+);
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+  "OpenAIClipImageTextEmbeddingsViTLargePatch14336",
+  "javascript"
+);
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+  "OpenAiClipImageTextEmbeddingsVitLargePatch14_336",
+  "python"
+);
+@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+  "OPEN_AI_CLIP_IMAGE_TEXT_EMBEDDINGS_VIT_LARGE_PATCH14_336",
+  "java"
+);
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
+  "FacebookDinoV2ImageEmbeddingsVitBase",
+  "python"
+);
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
+  "FACEBOOK_DINO_V2_IMAGE_EMBEDDINGS_VIT_BASE",
+  "java"
+);
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
+  "FacebookDinoV2ImageEmbeddingsVitGiant",
+  "python"
+);
+@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
+  "FACEBOOK_DINO_V2_IMAGE_EMBEDDINGS_VIT_GIANT",
+  "java"
+);
+@@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3English,
+  "COHERE_EMBED_V3_ENGLISH",
+  "java"
+);
+@@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3Multilingual,
+  "COHERE_EMBED_V3_MULTILINGUAL",
+  "java"
+);
+@@alternateType(Search.SearchOptions.select, string, "javascript");
+@@alternateType(Search.SearchOptions.orderBy, string, "javascript");
+@@alternateType(Search.SearchOptions.searchFields, string, "javascript");
+@@alternateType(Search.SearchRequest.select, string, "javascript");
+@@alternateType(Search.SearchRequest.orderby, string, "javascript");
+@@alternateType(Search.SearchRequest.searchFields, string, "javascript");
+@@alternateType(Search.SuggestOptions.select, string, "javascript");
+@@alternateType(Search.SuggestOptions.orderBy, string, "javascript");
+@@alternateType(Search.SuggestOptions.searchFields, string, "javascript");
+@@alternateType(Search.SuggestRequest.select, string, "javascript");
+@@alternateType(Search.SuggestRequest.orderby, string, "javascript");
+@@alternateType(Search.SuggestRequest.searchFields, string, "javascript");
 
 // Knowledge Base types
-@@clientNamespace(Search.AIServices, "Azure.Search.Documents.KnowledgeBase");
+@@clientName(AzureOpenAiParameters.resourceUri, "resourceUrl", "java");
+@@clientNamespace(Search.AIServices, "Azure.Search.Documents.KnowledgeBases");
 @@clientNamespace(Search.AIServices,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.SynchronizationState,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.SynchronizationState,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.CompletedSynchronizationState,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.CompletedSynchronizationState,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
+);
+
+@@clientName(Search.KnowledgeBaseRetrievalRequest,
+  "KnowledgeBaseRetrievalOptions",
+  "java"
 );
 @@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
+
+@@clientName(Search.KnowledgeBaseRetrievalResponse,
+  "KnowledgeBaseRetrievalResult",
+  "java"
+);
+
 @@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalReasoningEffort,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalReasoningEffort,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalMinimalReasoningEffort,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalMinimalReasoningEffort,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalLowReasoningEffort,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalLowReasoningEffort,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalMediumReasoningEffort,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalMediumReasoningEffort,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalReasoningEffortKind,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalReasoningEffortKind,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalOutputMode,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalOutputMode,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.SearchIndexKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.SearchIndexKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.AzureBlobKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.AzureBlobKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.IndexedSharePointKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.IndexedSharePointKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.WebKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.WebKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.RemoteSharePointKnowledgeSourceParams,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.RemoteSharePointKnowledgeSourceParams,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceVectorizer,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeSourceVectorizer,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceIngestionParameters,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeSourceIngestionParameters,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientName(Search.KnowledgeSourceIngestionParameters.aiServices,
+  "AIServices",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceStatistics,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeSourceStatistics,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@alternateType(Search.KnowledgeSourceStatistics.averageSynchronizationDuration,
+  duration,
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceStatus,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeSourceStatus,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@alternateType(Search.KnowledgeSourceStatus.synchronizationInterval,
+  duration,
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalIntent,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalIntent,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalIntentType,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalIntentType,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeRetrievalSemanticIntent,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeRetrievalSemanticIntent,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseMessage,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseMessage,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageContent,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageContent,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageContentType,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageContentType,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageTextContent,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageTextContent,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageImageContent,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseMessageImageContent,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseImageContent,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseImageContent,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseActivityRecordType,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseActivityRecordType,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseRetrievalActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseRetrievalActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseSearchIndexActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseSearchIndexActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseSearchIndexActivityArguments,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseSearchIndexActivityArguments,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseAzureBlobActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseAzureBlobActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseAzureBlobActivityArguments,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseAzureBlobActivityArguments,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityArguments,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityArguments,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityArguments,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityArguments,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseWebActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseWebActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseWebActivityArguments,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseWebActivityArguments,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityArguments,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityArguments,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseModelQueryPlanningActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseModelQueryPlanningActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseModelAnswerSynthesisActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseModelAnswerSynthesisActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseAgenticReasoningActivityRecord,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseAgenticReasoningActivityRecord,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseReference,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseReference,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseReferenceType,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseReferenceType,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseSearchIndexReference,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseSearchIndexReference,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseAzureBlobReference,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseAzureBlobReference,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedSharePointReference,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseIndexedSharePointReference,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
-  "Azure.Search.Documents.KnowledgeBase"
-);
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
-  "com.azure.search.documents.knowledgebase",
+
+@@clientName(Search.KnowledgeBaseIndexedSharePointReference.docUrl,
+  "documentUrl",
   "java"
 );
+
+@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+
+@@clientName(Search.KnowledgeBaseIndexedOneLakeReference.docUrl,
+  "documentUrl",
+  "java"
+);
+
 @@clientNamespace(Search.KnowledgeBaseWebReference,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseWebReference,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseRemoteSharePointReference,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseRemoteSharePointReference,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.SharePointSensitivityLabelInfo,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.SharePointSensitivityLabelInfo,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseErrorDetail,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseErrorDetail,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
-  "Azure.Search.Documents.KnowledgeBase"
+  "Azure.Search.Documents.KnowledgeBases"
 );
 @@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
-  "com.azure.search.documents.knowledgebase",
+  "com.azure.search.documents.knowledgebases",
   "java"
 );
+// Java sends the default value on `accept` header. User can override via `RequestOptions`.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
+@@clientOption(Search.acceptHeaderMinimal.accept,
+  "clientRequired",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
+@@clientOption(Search.acceptHeaderNone.accept, "clientRequired", true, "java");

@@ -54,7 +54,7 @@ interface ManagedClusterUpgradeProfiles {
 /**
  * Control plane and agent pool upgrade profiles.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
 model ManagedClusterUpgradeProfileProperties {
   /**
    * The list of available upgrade versions for the control plane.
@@ -96,7 +96,7 @@ model ManagedClusterPoolUpgradeProfile {
   /**
    * List of components grouped by kubernetes major.minor version.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   @identifiers(#[])
   componentsByReleases?: ComponentsByRelease[];
 }
@@ -116,6 +116,6 @@ model ManagedClusterPoolUpgradeProfileUpgradesItem {
   /**
    * Whether the Kubernetes version is out of support.
    */
-  @added(Versions.v2025_10_02_preview)
+  @added(Versions.v2026_01_02_preview)
   isOutOfSupport?: boolean;
 }

@@ -8,7 +8,6 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/ManagedIdentity.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
@@ -25,7 +24,10 @@ options:
     service-name: "Msi"
     flavor: azure
     premium: true
+    generate-tests: false
+    client-side-validations: true
     enable-sync-stack: false
+    uuid-as-string: false
     service-dir: "sdk/msi"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-msi"

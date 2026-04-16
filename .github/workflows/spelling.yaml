@@ -16,13 +16,19 @@ permissions:
 jobs:
   spellcheck:
     name: SpellCheck
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 2
+
+      # workaround streetsidesoftware/cspell#8778
+      - name: Setup Node 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
 
       - name: Run spelling check
         run: |
