@@ -1,0 +1,36 @@
+{
+  "title": "MosaicCollectionsPointAssets_GetPointAssets",
+  "operationId": "MosaicCollectionsPointAssets_GetPointAssets",
+  "parameters": {
+    "collectionId": "naip-atl",
+    "longitude": -122.4194,
+    "latitude": 37.7749,
+    "api-version": "2026-04-15",
+    "ids": "item-id-1,item-id-2",
+    "bbox": "-180,-90,180,90",
+    "query": "{}",
+    "sortby": "-datetime"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "id": "item-001",
+          "bbox": [
+            -122.5,
+            37.7,
+            -122.3,
+            37.8
+          ],
+          "assets": {
+            "image": {
+              "href": "https://example.blob.core.windows.net/data/item-001/image.tif",
+              "type": "image/tiff; application=geotiff"
+            }
+          },
+          "collection": "naip-atl"
+        }
+      ]
+    }
+  }
+}
