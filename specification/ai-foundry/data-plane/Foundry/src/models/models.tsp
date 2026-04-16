@@ -14,7 +14,7 @@ model ModelVersion {
   system_data?: SystemDataV3;
 
   @doc("URI of the model artifact in blob storage")
-  blobUri?: string;
+  blobUri?: url;
 
   @doc("Derived model information")
   derivedModelInformation?: DerivedModelInformation;
@@ -55,13 +55,13 @@ model ModelPendingUploadRequest {
 @doc("A blob reference with temporary credentials for consumption.")
 model ModelBlobReferenceForConsumption {
   @doc("The blob URI.")
-  blobUri?: string;
+  blobUri?: url;
 
   @doc("Credential for accessing the blob.")
   credential?: SasCredential;
 
   @doc("ARM resource ID of the storage account.")
-  storageAccountArmId?: string;
+  storageAccountArmId?: Azure.Core.armResourceIdentifier<[{ type: "Microsoft.Storage/storageAccounts" }]>;
 }
 
 @doc("Temporary data reference returned for a pending upload.")
@@ -79,7 +79,7 @@ model ModelTemporaryDataReference {
 @doc("Request to fetch credentials for a model asset.")
 model ModelAssetCredentialRequest {
   @doc("Blob URI of the asset to fetch credentials for.")
-  blobUri: string;
+  blobUri: url;
 
   @doc("If true, generates blob-level read SAS instead of container-level.")
   generateBlobLevelReadSas?: boolean;
