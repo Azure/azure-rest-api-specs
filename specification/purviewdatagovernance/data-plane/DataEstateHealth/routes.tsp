@@ -25,6 +25,7 @@ model Created201Response<T> {
 
 model Accepted202Response<T> {
   @statusCode statusCode: 202;
+  @header("Operation-Location") operationLocation: string;
   @body body: T;
 }
 
@@ -466,6 +467,7 @@ interface Settings {
   ): ManagedPrivateEndpointExistsResponse | Created201Response<ManagedPrivateEndpointExistsResponse> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom LRO operation requires x-ms-long-running-operation extension."
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the service client, not via a standard polling operation."
   @doc("Create a managed private endpoint.")
   @route("/settings/mpe")
   @post
