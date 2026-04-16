@@ -63,11 +63,14 @@ union ClusterMeshState {
   @doc("The mesh is not connected.")
   NotConnected: "NotConnected",
 
-  @doc("The mesh is connecting.")
-  Connecting: "Connecting",
+  @doc("The mesh is applying.")
+  Connecting: "Applying",
 
   @doc("The mesh is connected.")
   Connected: "Connected",
+
+  @doc("The mesh is degraded.")
+  Degraded: "Degraded",
 
   @doc("The mesh failed to connect.")
   Failed: "Failed",
