@@ -1340,8 +1340,8 @@ model HealthReportEvaluationRule {
 }
 
 @added(Versions.v2026_05_01_preview)
-@doc("Request body for getting recommended signals for a given Azure resource type")
-model GetRecommendedSignalsRequest {
+@doc("Request body for getting suggested signals for a given Azure resource type")
+model GetSuggestedSignalsRequest {
   @doc("Azure resource type to get recommended signals for (e.g. 'microsoft.compute/virtualMachines').")
   @minLength(1)
   @maxLength(256)
@@ -1349,17 +1349,17 @@ model GetRecommendedSignalsRequest {
 }
 
 @added(Versions.v2026_05_01_preview)
-@doc("Response containing recommended signal configurations for a given Azure resource type")
-model GetRecommendedSignalsResponse {
-  @doc("List of recommended signal configurations for the specified resource type.")
+@doc("Response containing suggested signal configurations for a given Azure resource type")
+model GetSuggestedSignalsResponse {
+  @doc("List of suggested signal configurations for the specified resource type.")
   @identifiers(#["id"])
-  signals: RecommendedSignal[];
+  signals: SuggestedSignal[];
 }
 
 @added(Versions.v2026_05_01_preview)
-@doc("A recommended signal configuration for an Azure resource type")
-model RecommendedSignal {
-  @doc("Unique identifier of the recommended signal.")
+@doc("A suggested signal configuration for an Azure resource type")
+model SuggestedSignal {
+  @doc("Unique identifier of the suggested signal.")
   id: string;
 
   @doc("Metric namespace (e.g. 'microsoft.compute/virtualmachines').")
@@ -1390,10 +1390,10 @@ model RecommendedSignal {
   @maxLength(256)
   dimensionFilter?: string;
 
-  @doc("Evaluation rules with recommended thresholds.")
+  @doc("Evaluation rules with suggested thresholds.")
   evaluationRules: EvaluationRule;
 
-  @doc("Whether this signal is recommended to be enabled by default.")
+  @doc("Whether this signal is recommended to be enabled by default. If false, this means that there are thresholds for this signal, but they are not recommended to be enabled by default for every health model.")
   recommended: boolean;
 }
 
@@ -1402,8 +1402,6 @@ alias TimestampQueryParam = {
   @query
   timestamp?: utcDateTime;
 };
-
-
 
 @armResourceOperations(HealthModel)
 interface HealthModels {
@@ -1422,13 +1420,13 @@ interface HealthModels {
   listBySubscription is ArmListBySubscription<HealthModel>;
 
   @added(Versions.v2026_05_01_preview)
-  @doc("Get recommended signal configurations for a given Azure resource type")
+  @doc("Get suggested signal configurations for a given Azure resource type")
   @post
-  @action("getRecommendedSignals")
-  getRecommendedSignals is ArmResourceActionSync<
+  @action("getSuggestedSignals")
+  getSuggestedSignals is ArmResourceActionSync<
     HealthModel,
-    GetRecommendedSignalsRequest,
-    GetRecommendedSignalsResponse
+    GetSuggestedSignalsRequest,
+    GetSuggestedSignalsResponse
   >;
 }
 
