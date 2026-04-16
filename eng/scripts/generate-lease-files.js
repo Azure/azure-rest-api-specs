@@ -11,9 +11,9 @@ const LEASE_BASE_PATH = '.github/arm-leases';
 function parseArgs() {
     const args = {
         input: null,
-        service: null,
-        resourceProvider: null,
-        serviceGroups: [],
+        orgName: null,
+        rpNamespace: null,
+        serviceNames: [],
         reviewer: null,
         startdate: null,
         duration: DEFAULT_DURATION,
@@ -32,16 +32,19 @@ function parseArgs() {
             case '--input':
                 args.input = process.argv[++i];
                 break;
+            case '--orgName':
             case '--service':
-                args.service = process.argv[++i];
+                args.orgName = process.argv[++i];
                 break;
+            case '--rpNamespace':
             case '--resource-provider':
             case '--rp':
-                args.resourceProvider = process.argv[++i];
+                args.rpNamespace = process.argv[++i];
                 break;
+            case '--serviceName':
             case '--service-groups':
             case '--sg':
-                args.serviceGroups = process.argv[++i].split(',').map(s => s.trim()).filter(Boolean);
+                args.serviceNames = process.argv[++i].split(',').map(s => s.trim()).filter(Boolean);
                 break;
             case '--reviewer':
                 args.reviewer = process.argv[++i];
@@ -77,7 +80,7 @@ Generate lease.yaml files for Azure Resource Providers
 
 Usage:
   Single RP:
-    node generate-lease-files.js --service <name> --resource-provider <name> --reviewer <name> [options]
+    node generate-lease-files.js --orgName <name> --rpNamespace <name> --reviewer <name> [options]
 
   From input file:
     node generate-lease-files.js --input <file> --reviewer <name> [options]
@@ -86,9 +89,9 @@ Usage:
     node generate-lease-files.js --interactive
 
 Options:
-  --service <name>                Service name (lowercase alphanumeric)
-  --resource-provider, --rp <name> Resource provider name (e.g., Microsoft.Test)
-  --service-groups, --sg <list>   Comma-separated service groups (e.g., DiskRP,ComputeRP)
+  --orgName <name>                Organization/service name (lowercase alphanumeric)
+  --rpNamespace <name>            Resource provider namespace (e.g., Microsoft.Storage)
+  --serviceName <list>            Comma-separated service groups (e.g., DiskRP,ComputeRP)
   --reviewer <name>               Reviewer GitHub alias starting with @ (e.g., @githubUser)
   --startdate <YYYY-MM-DD>        Lease start date (default: today)
   --duration <P#D>                Lease duration (default: P180D, max: P180D)
@@ -99,8 +102,8 @@ Options:
 
 Input File Format:
   The input file should contain one entry per line in CSV format:
-  - Without service groups: service, resource_provider
-  - With service groups: service, resource_provider, [group1, group2, ...]
+  - Without service groups: orgName, rpNamespace
+  - With service groups: orgName, rpNamespace, [serviceName1, serviceName2, ...]
 
   Example:
     storage, Microsoft.Storage
@@ -108,11 +111,11 @@ Input File Format:
 
 Examples:
   # Single RP without service groups
-  node generate-lease-files.js --service storage --rp Microsoft.Storage --reviewer "@johnDoe"
+  node generate-lease-files.js --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johnDoe"
 
   # Single RP with service groups
-  node generate-lease-files.js --service compute --rp Microsoft.Compute \\
-    --sg "ComputeRP,DiskRP" --reviewer "@janeSmith"
+  node generate-lease-files.js --orgName compute --rpNamespace Microsoft.Compute \\
+    --serviceName "ComputeRP,DiskRP" --reviewer "@janeSmith"
 
   # From fetch-resource-providers.js output
   node fetch-resource-providers.js > rps.txt
@@ -130,11 +133,11 @@ Examples:
 
 Output:
   Creates lease.yaml files at:
-  .github/arm-leases/<service>/<resource-provider>/[<service-group>/]lease.yaml
+  .github/arm-leases/<orgName>/<rpNamespace>/[<serviceName>/]lease.yaml
 
   Each file contains:
     lease:
-      resource-provider: <RP-name>
+      resource-provider: <rpNamespace>
       startdate: <YYYY-MM-DD>
       duration: <P#D>
       reviewer: <@githubAlias>
@@ -187,21 +190,21 @@ function validateDuration(duration) {
     return duration.toUpperCase();
 }
 
-function validateResourceProvider(rp) {
-    const parts = rp.split('.');
+function validateRpNamespace(rpNamespace) {
+    const parts = rpNamespace.split('.');
     for (const part of parts) {
         if (!/^[A-Z]/.test(part)) {
-            throw new Error(`Resource provider parts must start with capital letter: ${rp}`);
+            throw new Error(`rpNamespace parts must start with capital letter: ${rpNamespace}`);
         }
     }
-    return rp;
+    return rpNamespace;
 }
 
-function validateServiceName(service) {
-    if (!/^[a-z0-9]+$/.test(service)) {
-        throw new Error(`Service name must be lowercase alphanumeric: ${service}`);
+function validateOrgName(orgName) {
+    if (!/^[a-z0-9]+$/.test(orgName)) {
+        throw new Error(`orgName must be lowercase alphanumeric: ${orgName}`);
     }
-    return service;
+    return orgName;
 }
 
 function validateReviewer(reviewer) {
@@ -227,29 +230,29 @@ function parseInputLine(line) {
         return null;
     }
 
-    const service = match[1].trim();
-    const resourceProvider = match[2].trim();
-    const serviceGroupsStr = match[3];
-    const serviceGroups = serviceGroupsStr
-        ? serviceGroupsStr.split(',').map(s => s.trim()).filter(Boolean)
+    const orgName = match[1].trim();
+    const rpNamespace = match[2].trim();
+    const serviceNamesStr = match[3];
+    const serviceNames = serviceNamesStr
+        ? serviceNamesStr.split(',').map(s => s.trim()).filter(Boolean)
         : [];
 
-    return { service, resourceProvider, serviceGroups };
+    return { orgName, rpNamespace, serviceNames };
 }
 
-function generateLeaseYaml(resourceProvider, startdate, duration, reviewer) {
+function generateLeaseYaml(rpNamespace, startdate, duration, reviewer) {
     return `lease:
-  resource-provider: ${resourceProvider}
+  resource-provider: ${rpNamespace}
   startdate: ${startdate}
   duration: ${duration}
   reviewer: ${reviewer}
 `;
 }
 
-function getLeasePath(repoRoot, service, resourceProvider, serviceGroup = null) {
-    const basePath = path.join(repoRoot, LEASE_BASE_PATH, service, resourceProvider);
-    if (serviceGroup) {
-        return path.join(basePath, serviceGroup, 'lease.yaml');
+function getLeasePath(repoRoot, orgName, rpNamespace, serviceName = null) {
+    const basePath = path.join(repoRoot, LEASE_BASE_PATH, orgName, rpNamespace);
+    if (serviceName) {
+        return path.join(basePath, serviceName, 'lease.yaml');
     }
     return path.join(basePath, 'lease.yaml');
 }
@@ -277,26 +280,26 @@ function createLeaseFile(filePath, content, dryRun = false) {
 }
 
 function processEntry(entry, args, repoRoot) {
-    const { service, resourceProvider, serviceGroups } = entry;
+    const { orgName, rpNamespace, serviceNames } = entry;
     const { startdate, duration, reviewer, dryRun } = args;
 
     try {
-        validateServiceName(service);
-        validateResourceProvider(resourceProvider);
+        validateOrgName(orgName);
+        validateRpNamespace(rpNamespace);
 
-        const content = generateLeaseYaml(resourceProvider, startdate, duration, reviewer);
+        const content = generateLeaseYaml(rpNamespace, startdate, duration, reviewer);
 
-        if (serviceGroups.length === 0) {
-            const leasePath = getLeasePath(repoRoot, service, resourceProvider);
+        if (serviceNames.length === 0) {
+            const leasePath = getLeasePath(repoRoot, orgName, rpNamespace);
             createLeaseFile(leasePath, content, dryRun);
         } else {
-            for (const group of serviceGroups) {
-                const leasePath = getLeasePath(repoRoot, service, resourceProvider, group);
+            for (const serviceName of serviceNames) {
+                const leasePath = getLeasePath(repoRoot, orgName, rpNamespace, serviceName);
                 createLeaseFile(leasePath, content, dryRun);
             }
         }
     } catch (error) {
-        console.error(`Error processing ${service}/${resourceProvider}: ${error.message}`);
+        console.error(`Error processing ${orgName}/${rpNamespace}: ${error.message}`);
     }
 }
 
@@ -327,7 +330,7 @@ async function promptInteractive() {
     const duration = durationInput.trim() || DEFAULT_DURATION;
 
     console.log('\nEnter resource provider entries (one per line, empty line to finish):');
-    console.log('Format: service, resource_provider, [optional_groups]');
+    console.log('Format: orgName, rpNamespace, [optional serviceNames]');
     console.log('Example: storage, Microsoft.Storage');
     console.log('Example: compute, Microsoft.Compute, [ComputeRP, DiskRP]\n');
 
@@ -438,14 +441,14 @@ async function main() {
                 console.warn('Warning: No valid entries found in input file');
                 return 0;
             }
-        } else if (args.service && args.resourceProvider) {
+        } else if (args.orgName && args.rpNamespace) {
             entries.push({
-                service: args.service,
-                resourceProvider: args.resourceProvider,
-                serviceGroups: args.serviceGroups,
+                orgName: args.orgName,
+                rpNamespace: args.rpNamespace,
+                serviceNames: args.serviceNames,
             });
         } else {
-            console.error('Error: Either --input or both --service and --resource-provider are required');
+            console.error('Error: Either --input or both --orgName and --rpNamespace are required');
             console.error('Use --help for usage information');
             return 1;
         }
@@ -473,8 +476,8 @@ module.exports = {
     getLeasePath,
     validateStartDate,
     validateDuration,
-    validateResourceProvider,
-    validateServiceName,
+    validateRpNamespace,
+    validateOrgName,
     validateReviewer,
     getTodayDate,
 };
