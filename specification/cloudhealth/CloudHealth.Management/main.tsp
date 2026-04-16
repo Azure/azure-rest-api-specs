@@ -1403,8 +1403,6 @@ alias TimestampQueryParam = {
   timestamp?: utcDateTime;
 };
 
-
-
 @armResourceOperations(HealthModel)
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
