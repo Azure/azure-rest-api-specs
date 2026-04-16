@@ -266,3 +266,8 @@ using Microsoft.ContainerInstance;
 @@clientName(ContainerGroups.attach, "AttachContainer", "csharp");
 @@clientName(ContainerGroups.executeCommand, "ExecuteContainerCommand", "csharp");
 @@clientName(ContainerGroups.listLogs, "GetContainerLogs", "csharp");
+
+// Category D: Property renames for backward compat
+@@clientName(AzureFileVolume.readOnly, "IsReadOnly", "csharp");
+@@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
+@@clientName(SecurityContextDefinition.privileged, "IsPrivileged", "csharp");
