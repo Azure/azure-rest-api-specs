@@ -1542,7 +1542,7 @@
             "$ref": "./examples/RedisEnterpriseDatabasesForceLink.json"
           }
         },
-        "description": "Forcibly recreates an existing database on the specified cluster, and rejoins it to an existing replication group. **IMPORTANT NOTE:** All data in this database will be discarded, and the database will temporarily be unavailable while rejoining the replication group.",
+        "description": "Forcibly recreates an existing database on the specified cluster, and rejoins it to an existing replication group. **IMPORTANT NOTE:** All data in this database will be discarded, and the database will temporarily be unavailable while rejoining the replication group. This operation applies only to the resource on which it is invoked. All other resources should already belong to the replication group; only the targeted resource will be forcibly linked.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
