@@ -85,6 +85,11 @@ namespace ComputeCombine;
 @@clientName(ComputeSku.ResourceSkuRestrictionsType, "ComputeResourceSkuRestrictionsType", "csharp");
 @@clientName(ComputeSku.ResourceSkuZoneDetails, "ComputeResourceSkuZoneDetails", "csharp");
 
+// ComputeSku property renames (C# backward compat)
+@@clientName(ComputeSku.ResourceSkuCosts.meterID, "MeterId", "csharp");
+@@clientName(ComputeSku.ResourceSkuRestrictions.type, "RestrictionsType", "csharp");
+@@clientName(ComputeSku.ResourceSkuLocationInfo.type, "ExtendedLocationType", "csharp");
+
 // ── alternateType: SubResource.id → ResourceIdentifier for C# (migration from AutoRest) ──
 @@alternateType(Common.SubResource.id,
   Azure.Core.armResourceIdentifier,

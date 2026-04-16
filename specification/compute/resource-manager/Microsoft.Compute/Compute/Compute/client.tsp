@@ -634,6 +634,61 @@ using Compute;
 @@clientName(RestorePointSourceVMOSDisk.osType, "OSType", "csharp");
 @@clientName(RunCommandDocumentBase.osType, "OSType", "csharp");
 
+// ── Property casing renames: acronym case normalization (C# backward compat) ──
+@@clientName(AdditionalCapabilities.ultraSSDEnabled, "UltraSsdEnabled", "csharp");
+@@clientName(DedicatedHostGroupPropertiesAdditionalCapabilities.ultraSSDEnabled, "UltraSsdEnabled", "csharp");
+@@clientName(DedicatedHostGroupProperties.hosts, "DedicatedHosts", "csharp");
+@@clientName(HostEndpointSettings.inVMAccessControlProfileReferenceId, "InVmAccessControlProfileReferenceId", "csharp");
+@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates, "EnableVmAgentPlatformUpdates", "csharp");
+@@clientName(LinuxConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(WindowsConfiguration.provisionVMAgent, "ProvisionVmAgent", "csharp");
+@@clientName(ScaleInPolicy.prioritizeUnhealthyVMs, "PrioritizeUnhealthyVms", "csharp");
+@@clientName(DataDisk.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+@@clientName(VirtualMachineInstanceView.isVMInStandbyPool, "IsVmInStandbyPool", "csharp");
+@@clientName(VirtualMachineScaleSetDataDisk.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+@@clientName(VirtualMachineScaleSetUpdateProperties.doNotRunExtensionsOnOverprovisionedVMs, "DoNotRunExtensionsOnOverprovisionedVms", "csharp");
+@@clientName(VirtualMachineScaleSetProperties.doNotRunExtensionsOnOverprovisionedVMs, "DoNotRunExtensionsOnOverprovisionedVms", "csharp");
+@@clientName(VirtualMachineScaleSetVMProperties.resilientVMDeletionStatus, "ResilientVmDeletionStatus", "csharp");
+@@clientName(VMSizeProperties.vCPUsAvailable, "VCpusAvailable", "csharp");
+@@clientName(VMSizeProperties.vCPUsPerCore, "VCpusPerCore", "csharp");
+@@clientName(StorageProfile.alignRegionalDisksToVMZone, "AlignRegionalDisksToVmZone", "csharp");
+@@clientName(MigrateVMToVirtualMachineScaleSetInput.targetVMSize, "TargetVmSize", "csharp");
+@@clientName(VirtualMachineExtensionImageProperties.vmScaleSetEnabled, "VirtualMachineScaleSetEnabled", "csharp");
+
+// ── IP→Ip property casing renames (C# backward compat) ──
+@@clientName(VirtualMachineIpTag.ipTagType, "IPTagType", "csharp");
+@@clientName(VirtualMachineScaleSetIpTag.ipTagType, "IPTagType", "csharp");
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.ipConfigurations, "IPConfigurations", "csharp");
+@@clientName(VirtualMachinePublicIPAddressConfigurationProperties.ipTags, "IPTags", "csharp");
+@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.ipConfigurations, "IPConfigurations", "csharp");
+@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties.ipTags, "IPTags", "csharp");
+@@clientName(VirtualMachineScaleSetUpdateNetworkConfigurationProperties.ipConfigurations, "IPConfigurations", "csharp");
+
+// ── Is* prefix / verb prefix property renames (C# backward compat) ──
+@@clientName(EventGridAndResourceGraph.enable, "IsEnabled", "csharp");
+@@clientName(RollingUpgradePolicy.maxSurge, "IsMaxSurgeEnabled", "csharp");
+@@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
+@@clientName(UefiSettings.vTpmEnabled, "IsVirtualTpmEnabled", "csharp");
+@@clientName(VirtualMachineScaleSetProperties.constrainedMaximumCapacity, "IsMaximumCapacityConstrained", "csharp");
+@@clientName(WindowsConfiguration.enableVMAgentPlatformUpdates, "IsVmAgentPlatformUpdatesEnabled", "csharp");
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking, "IsTcpStateTrackingDisabled", "csharp");
+@@clientName(VirtualMachineScaleSetNetworkConfigurationProperties.disableTcpStateTracking, "IsTcpStateTrackingDisabled", "csharp");
+@@clientName(VirtualMachineScaleSetUpdateNetworkConfigurationProperties.disableTcpStateTracking, "IsTcpStateTrackingDisabled", "csharp");
+
+// ── Qualified property name renames (C# backward compat) ──
+@@clientName(AlternativeOption.type, "AlternativeType", "csharp");
+@@clientName(RestorePointEncryption.type, "EncryptionType", "csharp");
+@@clientName(RunCommandParameterDefinition.type, "RunCommandParameterDefinitionType", "csharp");
+@@clientName(UpgradeOperationHistoricalStatusInfo.type, "UpgradeOperationHistoricalStatusInfoType", "csharp");
+@@clientName(VirtualMachineExtensionHandlerInstanceView.type, "VirtualMachineExtensionHandlerInstanceViewType", "csharp");
+@@clientName(VirtualMachineExtensionInstanceView.type, "VirtualMachineExtensionInstanceViewType", "csharp");
+
+// ── Other property renames (C# backward compat) ──
+@@clientName(ImageReference.sharedGalleryImageId, "SharedGalleryImageUniqueId", "csharp");
+@@clientName(OrchestrationServiceSummary.lastStatusChangeTime, "LastStatusChangedOn", "csharp");
+@@clientName(RestorePointCollectionProperties.restorePointCollectionId, "RestorePointGroupId", "csharp");
+@@clientName(VMScaleSetScaleOutInputProperties.zone, "VmScaleSetScaleOutInputZone", "csharp");
+
 // ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
 
 // Wrapper model id properties → ResourceIdentifier

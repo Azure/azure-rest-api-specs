@@ -164,6 +164,30 @@ using ComputeGallery;
 @@clientName(PolicyViolationCategory, "GalleryImageVersionPolicyViolationCategory", "csharp");
 @@clientName(ReplicationState, "RegionalReplicationState", "csharp");
 
+// ── Property casing renames: acronym case normalization (C# backward compat) ──
+@@clientName(OSDiskImageSecurityProfile.confidentialVMEncryptionType, "ConfidentialVmEncryptionType", "csharp");
+@@clientName(OSDiskImageSecurityProfile.secureVMDiskEncryptionSetId, "SecureVmDiskEncryptionSetId", "csharp");
+@@clientName(RecommendedMachineConfiguration.vCPUs, "VCpus", "csharp");
+
+// ── Is* prefix property renames (C# backward compat) ──
+@@clientName(GalleryApplicationCustomActionParameter.required, "IsRequired", "csharp");
+@@clientName(GalleryImageVersionSafetyProfile.blockDeletionBeforeEndOfLife, "IsBlockedDeletionBeforeEndOfLife", "csharp");
+@@clientName(GalleryImageVersionSafetyProfile.reportedForPolicyViolation, "IsReportedForPolicyViolation", "csharp");
+@@clientName(TargetRegion.excludeFromLatest, "IsExcludedFromLatest", "csharp");
+@@clientName(GalleryImageVersionProperties.restore, "IsRestoreEnabled", "csharp");
+
+// ── Qualified property name renames (C# backward compat) ──
+@@clientName(GalleryApplicationCustomActionParameter.type, "ParameterType", "csharp");
+@@clientName(GalleryExtendedLocation.type, "ExtendedLocationType", "csharp");
+@@clientName(ExecutedValidation.type, "ExecutedValidationType", "csharp");
+@@clientName(GalleryScriptParameter.type, "ParameterType", "csharp");
+@@clientName(SharingProfileGroup.type, "GroupType", "csharp");
+@@clientName(UefiKey.type, "KeyType", "csharp");
+
+// ── Other property renames (C# backward compat) ──
+@@clientName(ValidationsProfile.validationEtag, "ValidationETag", "csharp");
+@@clientName(SharingProfile.permissions, "Permission", "csharp");
+
 // ── alternateType: string → Uri for C# (migration from AutoRest) ──
 @@alternateType(GalleryImageProperties.privacyStatementUri, url, "csharp");
 @@alternateType(GalleryImageProperties.releaseNoteUri, url, "csharp");

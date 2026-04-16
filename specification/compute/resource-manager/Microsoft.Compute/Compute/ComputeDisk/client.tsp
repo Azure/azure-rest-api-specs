@@ -67,6 +67,32 @@ using ComputeDisk;
 // ── RP-prefix renames (C# backward compat) ──
 @@clientName(EncryptionType, "ComputeEncryptionType", "csharp");
 
+// ── Property casing renames: acronym case normalization (C# backward compat) ──
+@@clientName(AccessUri.accessSAS, "AccessSas", "csharp");
+@@clientName(AccessUri.securityDataAccessSAS, "SecurityDataAccessSas", "csharp");
+@@clientName(AccessUri.securityMetadataAccessSAS, "SecurityMetadataAccessSas", "csharp");
+@@clientName(DiskSecurityProfile.secureVMDiskEncryptionSetId, "SecureVmDiskEncryptionSetId", "csharp");
+@@clientName(GrantAccessData.getSecureVMGuestStateSAS, "GetSecureVmGuestStateSas", "csharp");
+@@clientName(DiskProperties.diskIOPSReadOnly, "DiskIopsReadOnly", "csharp");
+@@clientName(DiskProperties.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+@@clientName(DiskUpdateProperties.diskIOPSReadOnly, "DiskIopsReadOnly", "csharp");
+@@clientName(DiskUpdateProperties.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
+
+// ── Is* prefix property renames (C# backward compat) ──
+@@clientName(CreationData.performancePlus, "IsPerformancePlusEnabled", "csharp");
+@@clientName(DiskProperties.optimizedForFrequentAttach, "IsOptimizedForFrequentAttach", "csharp");
+@@clientName(DiskUpdateProperties.optimizedForFrequentAttach, "IsOptimizedForFrequentAttach", "csharp");
+
+// ── Qualified property name renames (C# backward compat) ──
+@@clientName(Encryption.type, "EncryptionType", "csharp");
+
+// ── Other property renames (C# backward compat) ──
+@@clientName(DiskProperties.encryptionSettingsCollection, "EncryptionSettingsGroup", "csharp");
+@@clientName(DiskUpdateProperties.encryptionSettingsCollection, "EncryptionSettingsGroup", "csharp");
+@@clientName(SnapshotProperties.encryptionSettingsCollection, "EncryptionSettingsGroup", "csharp");
+@@clientName(SnapshotUpdateProperties.encryptionSettingsCollection, "EncryptionSettingsGroup", "csharp");
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState, "ConnectionState", "csharp");
+
 // ── alternateType overrides: string → armResourceIdentifier (C# backward compat) ──
 
 // Wrapper model id properties → ResourceIdentifier
