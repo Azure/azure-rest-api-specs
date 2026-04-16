@@ -63,7 +63,7 @@ union ClusterMeshState {
   @doc("The mesh is not connected.")
   NotConnected: "NotConnected",
 
-  @doc("The mesh is connecting.")
+  @doc("The mesh is applying.")
   Applying: "Applying",
 
   @doc("The mesh is connected.")
