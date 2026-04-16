@@ -366,14 +366,20 @@ using Microsoft.NetApp;
 
 // C# hierarchy building (restore base types for backward compat)
 // First, align property types with TrackedResource expectations
-// CapacityPoolPatch: restore TrackedResourceData base
-@@alternateType(Microsoft.NetApp.CapacityPoolPatch.id, armResourceIdentifier, "csharp");
-@@alternateType(Microsoft.NetApp.CapacityPoolPatch.location, azureLocation, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
-@@hierarchyBuilding(Microsoft.NetApp.CapacityPoolPatch,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
+// CapacityPoolPatch: wrapper model to restore TrackedResourceData base type.
+// Cannot use @@hierarchyBuilding due to microsoft/typespec#10397 (ModelFactory arg-order bug).
+// TODO: Replace with @@hierarchyBuilding after the bug is fixed.
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat: restore TrackedResourceData base"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Wrapper model for C# back-compat"
+model CapacityPoolPatchReplacement
+  extends Azure.ResourceManager.CommonTypes.TrackedResource {
+  /** Capacity pool properties */
+  properties?: Microsoft.NetApp.PoolPatchProperties;
+}
+@@alternateType(Microsoft.NetApp.CapacityPoolPatch, CapacityPoolPatchReplacement, "csharp");
+@@clientName(CapacityPoolPatchReplacement, "CapacityPoolPatch", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapacityPoolPatchReplacement.properties);
 @@alternateType(Microsoft.NetApp.CapacityPoolPatch.id, armResourceIdentifier, "csharp");
 @@alternateType(Microsoft.NetApp.CapacityPoolPatch.location, azureLocation, "csharp");
 
