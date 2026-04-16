@@ -945,7 +945,7 @@ model VolumeGroupProperties {
 
   @doc("Azure resource ID of the source volume group for cloning")
   @visibility(Lifecycle.Create)
-  sourceVolumeGroupResourceId?: string;
+  sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Performance parameters for the volume group")
   performanceParameters?: PerformanceParameters;
@@ -972,10 +972,10 @@ model PerformanceParameters {
 @doc("Protection parameters for volume group")
 model ProtectionParameters {
   @doc("Retention period for snapshots in ISO 8601 duration format")
-  retention?: string;
+  retention?: duration;
 
   @doc("Snapshot frequency in ISO 8601 duration format")
-  frequency?: string;
+  frequency?: duration;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1086,15 +1086,15 @@ model AzureVolumeProperties {
 
   @doc("Volume creation date, as an RFC 3339 timestamp")
   @visibility(Lifecycle.Read)
-  createdAt?: string;
+  createdAt?: utcDateTime;
 
   @doc("Azure resource ID of the source volume for cloning")
   @visibility(Lifecycle.Create)
-  sourceVolumeResourceId?: string;
+  sourceVolumeResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Azure Resource ID of the source volume group to clone from.")
   @visibility(Lifecycle.Create)
-  sourceVolumeGroupResourceId?: string;
+  sourceVolumeGroupResourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
