@@ -18,3 +18,8 @@ using Microsoft.ManagedIdentity;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SystemAssignedIdentity.properties,
   "java"
 );
+
+@@clientName(Identity, "UserAssignedIdentity", "csharp");
+@@clientName(FederatedIdentityCredentialProperties.issuer, "IssuerUri", "csharp");
+@@alternateType(SystemAssignedIdentityProperties.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(UserAssignedIdentityProperties.tenantId, Azure.Core.uuid, "csharp");
