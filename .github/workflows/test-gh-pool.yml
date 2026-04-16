@@ -13,13 +13,3 @@ jobs:
     steps:
       - name: hello
         run: echo hello
-  test-gh-pool-2:
-    runs-on:
-      [
-        "self-hosted",
-        "1ES.Pool=azsdk-pool-github-runners",
-        "JobId=azsdk-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}",
-      ]
-    steps:
-      - name: hello
-        run: echo hello
