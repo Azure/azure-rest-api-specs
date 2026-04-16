@@ -1782,7 +1782,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
   "csharp"
 );
 
-
 @@alternateType(JobProperties.refreshedEntityId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -1853,7 +1852,6 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 );
 
 @@alternateType(DataBoxEdgeDevice.etag, Azure.Core.eTag, "csharp");
-
 
 @@clientName(MECRole, "MecRole", "csharp");
 @@clientName(UploadCertificateRequest, "UploadCertificateContent", "csharp");
