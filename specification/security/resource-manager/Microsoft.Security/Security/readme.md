@@ -623,7 +623,7 @@ input-file:
 - preview/2017-08-01-preview/advancedThreatProtectionSettings.json
 - preview/2017-08-01-preview/deviceSecurityGroups.json
 - preview/2017-08-01-preview/settings.json
-- preview/2017-08-01-preview/openapi.json
+- preview/2017-08-01-preview/security-LegacySettings.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/automations.json
 - preview/2019-01-01-preview/regulatoryCompliance.json
@@ -660,7 +660,7 @@ input-file:
 - preview/2017-08-01-preview/deviceSecurityGroups.json
 - preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
 - preview/2017-08-01-preview/iotSecuritySolutions.json
-- preview/2017-08-01-preview/openapi.json
+- preview/2017-08-01-preview/security-LegacySettings.json
 - preview/2017-08-01-preview/settings.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/automations.json
@@ -690,7 +690,7 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 input-file:
 - preview/2015-06-01-preview/locations.json
 - preview/2015-06-01-preview/tasks.json
-- preview/2017-08-01-preview/openapi.json
+- preview/2017-08-01-preview/security-LegacySettings.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/regulatoryCompliance.json
 - preview/2019-01-01-preview/subAssessments.json
@@ -790,7 +790,7 @@ input-file:
 - preview/2015-06-01-preview/locations.json
 - preview/2015-06-01-preview/operations.json
 - preview/2015-06-01-preview/tasks.json
-- preview/2017-08-01-preview/openapi.json
+- preview/2017-08-01-preview/security-LegacySettings.json
 - preview/2019-01-01-preview/alertsSuppressionRules.json
 - preview/2019-01-01-preview/automations.json
 - preview/2019-01-01-preview/regulatoryCompliance.json
@@ -910,7 +910,7 @@ These settings apply only when `--tag=package-2017-08-preview-python-only` is sp
 
 ``` yaml $(tag) == 'package-2017-08-preview-python-only'
 input-file:
-- preview/2017-08-01-preview/openapi.json
+- preview/2017-08-01-preview/security-LegacySettings.json
 - preview/2017-08-01-preview/securityContacts.json
 
 # Needed when there is more than one input file
@@ -928,7 +928,7 @@ input-file:
 - preview/2017-08-01-preview/deviceSecurityGroups.json
 - preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
 - preview/2017-08-01-preview/iotSecuritySolutions.json
-- preview/2017-08-01-preview/openapi.json
+- preview/2017-08-01-preview/security-LegacySettings.json
 - preview/2017-08-01-preview/securityContacts.json
 - preview/2017-08-01-preview/settings.json
 
