@@ -719,6 +719,19 @@ using Compute;
   "csharp"
 );
 
+// RestorePoint disk restore point references — flatten to ResourceIdentifier for backward compat
+// Old SDK had flat DiskRestorePointId (ResourceIdentifier); new TypeSpec has nested DiskRestorePointAttributes object.
+@@clientName(RestorePointSourceVMDataDisk.diskRestorePoint, "DiskRestorePointId", "csharp");
+@@alternateType(RestorePointSourceVMDataDisk.diskRestorePoint,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(RestorePointSourceVMOSDisk.diskRestorePoint, "DiskRestorePointId", "csharp");
+@@alternateType(RestorePointSourceVMOSDisk.diskRestorePoint,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 // ── alternateType: string → Uri for C# (migration from AutoRest) ──
 @@alternateType(BootDiagnostics.storageUri, url, "csharp");
 @@alternateType(BootDiagnosticsInstanceView.consoleScreenshotBlobUri, url, "csharp");
