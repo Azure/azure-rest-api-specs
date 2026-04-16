@@ -61,6 +61,7 @@ model ScoreRecord {
 }
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible MI token properties."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "MI is a well-known abbreviation for Managed Identity."
 @doc("A managed identity token response.")
 model MITokenInfo {
   @doc("The managed identity token.")

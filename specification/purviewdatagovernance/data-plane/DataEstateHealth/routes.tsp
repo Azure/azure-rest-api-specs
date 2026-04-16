@@ -2,8 +2,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/http";
+import "@typespec/openapi";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
@@ -463,9 +465,11 @@ interface Settings {
     @body body: ManagedPrivateEndpointRequest,
   ): ManagedPrivateEndpointExistsResponse | Created201Response<ManagedPrivateEndpointExistsResponse> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom LRO operation requires x-ms-long-running-operation extension."
   @doc("Create a managed private endpoint.")
   @route("/settings/mpe")
   @post
+  @extension("x-ms-long-running-operation", true)
   createManagedPrivateEndpoint(
     ...ApiVersionParameter,
     @body body: ManagedPrivateEndpointRequest,
@@ -577,28 +581,68 @@ interface Tips {
 }
 
 // ============================================================================
-// Response Type Aliases
+// Response Type Models (named to avoid anonymous types in swagger)
 // ============================================================================
 
-alias ActionQueryResponse = PagedResults<Record<unknown>>;
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for actions."
+@doc("Paged collection of action results.")
+model ActionQueryResponse {
+  ...PagedResults<Action>;
+}
+
 alias GroupedActionsResponse = GroupedActions[];
 alias ActionResponse = Action;
-alias AlertListResponse = PagedResults<Record<unknown>>;
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for alerts."
+@doc("Paged collection of alert results.")
+model AlertListResponse {
+  ...PagedResults<Alert>;
+}
+
 alias AlertResponse = Alert;
 alias AnalyticsScheduleResponse = DHAnalyticsScheduleRequest;
 alias AnalyticsJobLogsResponse = DEHAnalyticsJobLogs[];
-alias AssessmentListResponse = PagedResults<Record<unknown>>;
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for assessments."
+@doc("Paged collection of assessment results.")
+model AssessmentListResponse {
+  ...PagedResults<Assessment>;
+}
+
 alias AssessmentResponse = Assessment;
-alias ControlListResponse = PagedResults<Record<unknown>>;
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for controls."
+@doc("Paged collection of control results.")
+model ControlListResponse {
+  ...PagedResults<Control>;
+}
+
 alias ControlResponse = Control;
-alias MonitoringQueryResponse = PagedResults<DHComputingJobWrapper>;
+
+@doc("Paged collection of monitoring job results.")
+model MonitoringQueryResponse {
+  ...PagedResults<DHComputingJobWrapper>;
+}
+
 alias ScheduleResponse = Schedule;
 alias ScheduleTriggerResponse = TriggerScheduleResponse;
-alias ScoreListResponse = PagedResults<Record<unknown>>;
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for scores."
+@doc("Paged collection of score results.")
+model ScoreListResponse {
+  ...PagedResults<ScoreRecord>;
+}
+
 alias ScoreQueryResponse = ScoreRecord[];
 alias StorageConfigResponse = StorageConfig;
 alias MITokenResponse = MITokenInfo;
 alias StorageConfigConnectivityResponse = StorageConfigConnectivityResult;
-alias StatusPaletteListResponse = PagedResults<Record<unknown>>;
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended paged results for status palettes."
+@doc("Paged collection of status palette results.")
+model StatusPaletteListResponse {
+  ...PagedResults<StatusPalette>;
+}
+
 alias StatusPaletteResponse = StatusPalette;
 alias TipEntitiesResponse = TipEntity[];
