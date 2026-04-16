@@ -33,3 +33,13 @@ These settings apply only when `--tag=2025-12-04-preview` is specified on the co
 input-file:
   - Microsoft.Lionrock/preview/2025-12-04-preview/lionrock.json
 ```
+
+
+### Tag: 2026-04-14-preview
+
+These settings apply only when `--tag=2026-04-14-preview` is specified on the command line.
+
+```yaml $(tag) == '2026-04-14-preview'
+input-file:
+  - Microsoft.Lionrock/preview/2026-04-14-preview/lionrock.json
+```

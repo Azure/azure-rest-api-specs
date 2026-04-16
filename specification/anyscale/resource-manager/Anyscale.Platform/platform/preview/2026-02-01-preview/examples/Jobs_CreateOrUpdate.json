@@ -1,0 +1,340 @@
+{
+  "title": "Jobs_CreateOrUpdate",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "14AB8053-986C-414E-96B3-11D82B8B478D",
+    "resourceGroupName": "rganyscale",
+    "cloudName": "testcloud",
+    "projectName": "testproject",
+    "jobName": "testjob",
+    "resource": {
+      "properties": {
+        "config": {
+          "imageUri": "anyscale/ray:2.44.0-py312-cu124",
+          "computeConfig": {
+            "spec": {
+              "options": [
+                {
+                  "cloudResourceNames": [
+                    "eastus-cloud-resource"
+                  ],
+                  "headNode": {
+                    "name": "head-node",
+                    "instanceType": "Standard_D8s_v5",
+                    "resources": {
+                      "cpu": 8,
+                      "gpu": 0,
+                      "memory": 32,
+                      "objectStoreMemory": 8,
+                      "customResources": {}
+                    },
+                    "requiredResources": {
+                      "cpu": 8,
+                      "gpu": 0,
+                      "memory": 32,
+                      "tpu": 0,
+                      "accelerator": "",
+                      "cpuArchitecture": "x86_64"
+                    },
+                    "labels": {
+                      "ray.io/node-type": "head"
+                    },
+                    "requiredLabels": {
+                      "node-pool": "default"
+                    },
+                    "advancedInstanceConfig": "{}",
+                    "flags": {}
+                  },
+                  "workerNodes": [
+                    {
+                      "minNodes": 1,
+                      "maxNodes": 10,
+                      "marketType": "ON_DEMAND",
+                      "name": "gpu-worker",
+                      "instanceType": "Standard_NC24ads_A100_v4",
+                      "resources": {
+                        "cpu": 24,
+                        "gpu": 1,
+                        "memory": 220,
+                        "objectStoreMemory": 50,
+                        "customResources": {}
+                      },
+                      "requiredResources": {
+                        "cpu": 24,
+                        "gpu": 1,
+                        "memory": 220,
+                        "tpu": 0,
+                        "accelerator": "A100",
+                        "cpuArchitecture": "x86_64"
+                      },
+                      "labels": {
+                        "ray.io/node-type": "worker"
+                      },
+                      "requiredLabels": {
+                        "node-pool": "gpu-pool"
+                      },
+                      "advancedInstanceConfig": "{}",
+                      "flags": {}
+                    }
+                  ],
+                  "zones": [
+                    "eastus-1"
+                  ],
+                  "advancedInstanceConfig": "{}",
+                  "flags": {}
+                }
+              ]
+            },
+            "computeConfigName": "my-compute-config"
+          },
+          "entrypoint": "python train.py --epochs 10 --batch-size 32",
+          "workingDir": "https://myaccount.blob.core.windows.net/my-container/my-project",
+          "pyModules": [
+            "https://myaccount.blob.core.windows.net/my-container/my_module-0.1.0-py3-none-any.whl"
+          ],
+          "pipRequirements": [
+            "torch==2.1.0",
+            "transformers==4.36.0"
+          ],
+          "envVars": {
+            "WANDB_API_KEY": "my-api-key"
+          },
+          "maxRetries": 3,
+          "timeout": 1380
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "config": {
+            "imageUri": "anyscale/ray:2.44.0-py312-cu124",
+            "computeConfig": {
+              "spec": {
+                "options": [
+                  {
+                    "cloudResourceNames": [
+                      "eastus-cloud-resource"
+                    ],
+                    "headNode": {
+                      "name": "head-node",
+                      "instanceType": "Standard_D8s_v5",
+                      "resources": {
+                        "cpu": 8,
+                        "gpu": 0,
+                        "memory": 32,
+                        "objectStoreMemory": 8,
+                        "customResources": {}
+                      },
+                      "requiredResources": {
+                        "cpu": 8,
+                        "gpu": 0,
+                        "memory": 32,
+                        "tpu": 0,
+                        "accelerator": "",
+                        "cpuArchitecture": "x86_64"
+                      },
+                      "labels": {
+                        "ray.io/node-type": "head"
+                      },
+                      "requiredLabels": {
+                        "node-pool": "default"
+                      },
+                      "advancedInstanceConfig": "{}",
+                      "flags": {}
+                    },
+                    "workerNodes": [
+                      {
+                        "minNodes": 1,
+                        "maxNodes": 10,
+                        "marketType": "ON_DEMAND",
+                        "name": "gpu-worker",
+                        "instanceType": "Standard_NC24ads_A100_v4",
+                        "resources": {
+                          "cpu": 24,
+                          "gpu": 1,
+                          "memory": 220,
+                          "objectStoreMemory": 50,
+                          "customResources": {}
+                        },
+                        "requiredResources": {
+                          "cpu": 24,
+                          "gpu": 1,
+                          "memory": 220,
+                          "tpu": 0,
+                          "accelerator": "A100",
+                          "cpuArchitecture": "x86_64"
+                        },
+                        "labels": {
+                          "ray.io/node-type": "worker"
+                        },
+                        "requiredLabels": {
+                          "node-pool": "gpu-pool"
+                        },
+                        "advancedInstanceConfig": "{}",
+                        "flags": {}
+                      }
+                    ],
+                    "zones": [
+                      "eastus-1"
+                    ],
+                    "advancedInstanceConfig": "{}",
+                    "flags": {}
+                  }
+                ]
+              },
+              "computeConfigName": "my-compute-config"
+            },
+            "entrypoint": "python train.py --epochs 10 --batch-size 32",
+            "workingDir": "https://myaccount.blob.core.windows.net/my-container/my-project",
+            "pyModules": [
+              "https://myaccount.blob.core.windows.net/my-container/my_module-0.1.0-py3-none-any.whl"
+            ],
+            "pipRequirements": [
+              "torch==2.1.0",
+              "transformers==4.36.0"
+            ],
+            "envVars": {
+              "WANDB_API_KEY": "my-api-key"
+            },
+            "maxRetries": 3,
+            "timeout": 1380
+          },
+          "state": "Starting",
+          "url": "https://console.anyscale.com/projects/testproject/jobs/testjob",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/14AB8053-986C-414E-96B3-11D82B8B478D/resourceGroups/rganyscale/providers/Anyscale.Platform/clouds/testcloud/projects/testproject/jobs/testjob",
+        "name": "testjob",
+        "type": "Anyscale.Platform/clouds/projects/jobs",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-03T18:23:16.540Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-03T18:23:16.540Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "config": {
+            "imageUri": "anyscale/ray:2.44.0-py312-cu124",
+            "computeConfig": {
+              "spec": {
+                "options": [
+                  {
+                    "cloudResourceNames": [
+                      "eastus-cloud-resource"
+                    ],
+                    "headNode": {
+                      "name": "head-node",
+                      "instanceType": "Standard_D8s_v5",
+                      "resources": {
+                        "cpu": 8,
+                        "gpu": 0,
+                        "memory": 32,
+                        "objectStoreMemory": 8,
+                        "customResources": {}
+                      },
+                      "requiredResources": {
+                        "cpu": 8,
+                        "gpu": 0,
+                        "memory": 32,
+                        "tpu": 0,
+                        "accelerator": "",
+                        "cpuArchitecture": "x86_64"
+                      },
+                      "labels": {
+                        "ray.io/node-type": "head"
+                      },
+                      "requiredLabels": {
+                        "node-pool": "default"
+                      },
+                      "advancedInstanceConfig": "{}",
+                      "flags": {}
+                    },
+                    "workerNodes": [
+                      {
+                        "minNodes": 1,
+                        "maxNodes": 10,
+                        "marketType": "ON_DEMAND",
+                        "name": "gpu-worker",
+                        "instanceType": "Standard_NC24ads_A100_v4",
+                        "resources": {
+                          "cpu": 24,
+                          "gpu": 1,
+                          "memory": 220,
+                          "objectStoreMemory": 50,
+                          "customResources": {}
+                        },
+                        "requiredResources": {
+                          "cpu": 24,
+                          "gpu": 1,
+                          "memory": 220,
+                          "tpu": 0,
+                          "accelerator": "A100",
+                          "cpuArchitecture": "x86_64"
+                        },
+                        "labels": {
+                          "ray.io/node-type": "worker"
+                        },
+                        "requiredLabels": {
+                          "node-pool": "gpu-pool"
+                        },
+                        "advancedInstanceConfig": "{}",
+                        "flags": {}
+                      }
+                    ],
+                    "zones": [
+                      "eastus-1"
+                    ],
+                    "advancedInstanceConfig": "{}",
+                    "flags": {}
+                  }
+                ]
+              },
+              "computeConfigName": "my-compute-config"
+            },
+            "entrypoint": "python train.py --epochs 10 --batch-size 32",
+            "workingDir": "https://myaccount.blob.core.windows.net/my-container/my-project",
+            "pyModules": [
+              "https://myaccount.blob.core.windows.net/my-container/my_module-0.1.0-py3-none-any.whl"
+            ],
+            "pipRequirements": [
+              "torch==2.1.0",
+              "transformers==4.36.0"
+            ],
+            "envVars": {
+              "WANDB_API_KEY": "my-api-key"
+            },
+            "maxRetries": 3,
+            "timeout": 1380
+          },
+          "state": "Starting",
+          "url": "https://console.anyscale.com/projects/testproject/jobs/testjob",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/14AB8053-986C-414E-96B3-11D82B8B478D/resourceGroups/rganyscale/providers/Anyscale.Platform/clouds/testcloud/projects/testproject/jobs/testjob",
+        "name": "testjob",
+        "type": "Anyscale.Platform/clouds/projects/jobs",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-03T18:23:16.540Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-03T18:23:16.540Z"
+        }
+      }
+    }
+  }
+}

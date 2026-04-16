@@ -1,0 +1,190 @@
+{
+  "title": "Services_ListBySubscription",
+  "operationId": "Services_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "14AB8053-986C-414E-96B3-11D82B8B478D",
+    "cloudName": "testcloud",
+    "projectName": "testproject"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "deploymentConfig": {
+                "description": "Production model serving endpoint",
+                "computeConfig": {
+                  "spec": {
+                    "options": [
+                      {
+                        "cloudResourceNames": [
+                          "eastus-cloud-resource"
+                        ],
+                        "headNode": {
+                          "name": "head-node",
+                          "instanceType": "Standard_D8s_v5",
+                          "resources": {
+                            "cpu": 8,
+                            "gpu": 0,
+                            "memory": 32,
+                            "objectStoreMemory": 8,
+                            "customResources": {}
+                          },
+                          "requiredResources": {
+                            "cpu": 8,
+                            "gpu": 0,
+                            "memory": 32,
+                            "tpu": 0,
+                            "accelerator": "",
+                            "cpuArchitecture": "x86_64"
+                          },
+                          "labels": {
+                            "ray.io/node-type": "head"
+                          },
+                          "requiredLabels": {
+                            "node-pool": "default"
+                          },
+                          "advancedInstanceConfig": "{}",
+                          "flags": {}
+                        },
+                        "workerNodes": [
+                          {
+                            "minNodes": 1,
+                            "maxNodes": 10,
+                            "marketType": "ON_DEMAND",
+                            "name": "gpu-worker",
+                            "instanceType": "Standard_NC24ads_A100_v4",
+                            "resources": {
+                              "cpu": 24,
+                              "gpu": 1,
+                              "memory": 220,
+                              "objectStoreMemory": 50,
+                              "customResources": {}
+                            },
+                            "requiredResources": {
+                              "cpu": 24,
+                              "gpu": 1,
+                              "memory": 220,
+                              "tpu": 0,
+                              "accelerator": "A100",
+                              "cpuArchitecture": "x86_64"
+                            },
+                            "labels": {
+                              "ray.io/node-type": "worker"
+                            },
+                            "requiredLabels": {
+                              "node-pool": "gpu-pool"
+                            },
+                            "advancedInstanceConfig": "{}",
+                            "flags": {}
+                          }
+                        ],
+                        "zones": [
+                          "eastus-1"
+                        ],
+                        "advancedInstanceConfig": "{}",
+                        "flags": {}
+                      }
+                    ]
+                  },
+                  "computeConfigName": "my-compute-config"
+                },
+                "imageUri": "anyscale/ray:2.44.0-py312-cu124",
+                "applications": [
+                  {
+                    "importPath": "serve_app:app",
+                    "name": "my-serve-app"
+                  }
+                ],
+                "rolloutStrategy": "Rollout",
+                "version": "v1",
+                "canaryPercent": 0,
+                "maxSurgePercent": 25,
+                "autoCompleteRollout": true,
+                "trafficPercent": 100,
+                "httpConfig": {},
+                "grpcConfig": {},
+                "maxUptimeTimeoutSec": 0,
+                "envVars": {
+                  "MODEL_NAME": "my-model"
+                },
+                "tracingConfig": {
+                  "enabled": true,
+                  "samplingRatio": 1.0
+                },
+                "rayGcsExternalStorageConfig": {
+                  "address": "redis://my-redis-host:6379"
+                },
+                "connectionIds": [
+                  "connection-01"
+                ]
+              },
+              "currentState": "Running",
+              "hostname": "testservice.eastus.anyscale.com",
+              "baseUrl": "https://testservice.eastus.anyscale.com",
+              "autoRolloutEnabled": true,
+              "primaryVersion": {
+                "version": "v1",
+                "weight": 100,
+                "currentWeight": 100,
+                "currentState": "Running",
+                "imageUri": "anyscale/ray:2.44.0-py312-cu124",
+                "computeConfig": {
+                  "computeConfigName": "my-compute-config"
+                },
+                "applications": [
+                  {
+                    "importPath": "serve_app:app",
+                    "name": "my-serve-app"
+                  }
+                ],
+                "tracingConfig": {
+                  "enabled": true,
+                  "samplingRatio": 1.0
+                },
+                "createdAt": "2026-04-03T18:23:17.140Z"
+              },
+              "canaryVersion": {
+                "version": "v2",
+                "weight": 0,
+                "currentWeight": 0,
+                "currentState": "Starting",
+                "imageUri": "anyscale/ray:2.44.0-py312-cu124",
+                "computeConfig": {
+                  "computeConfigName": "my-compute-config"
+                },
+                "applications": [
+                  {
+                    "importPath": "serve_app:app",
+                    "name": "my-serve-app"
+                  }
+                ],
+                "tracingConfig": {
+                  "enabled": true,
+                  "samplingRatio": 1.0
+                },
+                "createdAt": "2026-04-03T18:23:17.140Z"
+              },
+              "url": "https://console.anyscale.com/services/testservice",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/14AB8053-986C-414E-96B3-11D82B8B478D/resourceGroups/rganyscale/providers/Anyscale.Platform/clouds/testcloud/projects/testproject/services/testservice",
+            "name": "testservice",
+            "type": "Anyscale.Platform/clouds/projects/services",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-03T18:23:16.540Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-03T18:23:16.540Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

@@ -63,6 +63,10 @@ union ConnectivityStatusEnum {
   @added(Versions.v2026_04_01_preview)
   @doc("The device is pending initial setup completion")
   FinishSetup: "FinishSetup",
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("The device is in NotSupported state")
+  NotSupported: "NotSupported",
 }
 
 @doc("Update status enum")

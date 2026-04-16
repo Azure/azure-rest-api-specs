@@ -43,4 +43,7 @@ model MqttSourceConnectorProperties extends DataSourceProperties {
 
   @doc("Client certificate for Confluent.")
   clientCertAuthentication?: Models.Auth.CertificateAuthentication;
+
+  @doc("Enable system metadata.")
+  enableSystemMetadata?: boolean;
 }

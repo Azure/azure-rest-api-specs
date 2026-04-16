@@ -1,0 +1,42 @@
+{
+  "title": "ContainerImages_Update",
+  "operationId": "ContainerImages_Update",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "14AB8053-986C-414E-96B3-11D82B8B478D",
+    "resourceGroupName": "rganyscale",
+    "cloudName": "testcloud",
+    "containerImageName": "testcontainerimage",
+    "properties": {
+      "properties": {
+        "containerfile": "FROM anyscale/ray:2.44.0-py312-cu124\nRUN pip install torch==2.1.0 transformers==4.36.0",
+        "containerImageUri": "myacr.azurecr.io/anyscale/my-ray-image:latest"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "containerfile": "FROM anyscale/ray:2.44.0-py312-cu124\nRUN pip install torch==2.1.0 transformers==4.36.0",
+          "containerImageUri": "myacr.azurecr.io/anyscale/my-ray-image:latest",
+          "url": "https://console.anyscale.com/container-images/testcontainerimage",
+          "revision": 1,
+          "buildState": "BuildSucceeded",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/14AB8053-986C-414E-96B3-11D82B8B478D/resourceGroups/rganyscale/providers/Anyscale.Platform/clouds/testcloud/containerImages/testcontainerimage",
+        "name": "testcontainerimage",
+        "type": "Anyscale.Platform/clouds/containerImages",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-03T18:23:16.540Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-03T18:23:16.540Z"
+        }
+      }
+    }
+  }
+}

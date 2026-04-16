@@ -1,0 +1,109 @@
+{
+  "title": "ComputeConfigs_ListBySubscription",
+  "operationId": "ComputeConfigs_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "14AB8053-986C-414E-96B3-11D82B8B478D",
+    "cloudName": "testcloud"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "spec": {
+                "options": [
+                  {
+                    "cloudResourceNames": [
+                      "eastus-cloud-resource"
+                    ],
+                    "headNode": {
+                      "name": "head-node",
+                      "instanceType": "Standard_D8s_v5",
+                      "resources": {
+                        "cpu": 8,
+                        "gpu": 0,
+                        "memory": 32,
+                        "objectStoreMemory": 8,
+                        "customResources": {}
+                      },
+                      "requiredResources": {
+                        "cpu": 8,
+                        "gpu": 0,
+                        "memory": 32,
+                        "tpu": 0,
+                        "accelerator": "",
+                        "cpuArchitecture": "x86_64"
+                      },
+                      "labels": {
+                        "ray.io/node-type": "head"
+                      },
+                      "requiredLabels": {
+                        "node-pool": "default"
+                      },
+                      "advancedInstanceConfig": "{}",
+                      "flags": {}
+                    },
+                    "workerNodes": [
+                      {
+                        "minNodes": 1,
+                        "maxNodes": 10,
+                        "marketType": "ON_DEMAND",
+                        "name": "gpu-worker",
+                        "instanceType": "Standard_NC24ads_A100_v4",
+                        "resources": {
+                          "cpu": 24,
+                          "gpu": 1,
+                          "memory": 220,
+                          "objectStoreMemory": 50,
+                          "customResources": {}
+                        },
+                        "requiredResources": {
+                          "cpu": 24,
+                          "gpu": 1,
+                          "memory": 220,
+                          "tpu": 0,
+                          "accelerator": "A100",
+                          "cpuArchitecture": "x86_64"
+                        },
+                        "labels": {
+                          "ray.io/node-type": "worker"
+                        },
+                        "requiredLabels": {
+                          "node-pool": "gpu-pool"
+                        },
+                        "advancedInstanceConfig": "{}",
+                        "flags": {}
+                      }
+                    ],
+                    "zones": [
+                      "eastus-1"
+                    ],
+                    "advancedInstanceConfig": "{}",
+                    "flags": {}
+                  }
+                ]
+              },
+              "url": "https://console.anyscale.com/compute-configs/testcomputeconfig",
+              "revision": 1,
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/14AB8053-986C-414E-96B3-11D82B8B478D/resourceGroups/rganyscale/providers/Anyscale.Platform/clouds/testcloud/computeConfigs/testcomputeconfig",
+            "name": "testcomputeconfig",
+            "type": "Anyscale.Platform/clouds/computeConfigs",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-03T18:23:16.540Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-03T18:23:16.540Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Rest;
 using Http;
+using Versioning;
 using Azure.ResourceManager;
 
 namespace Anyscale.Platform;
@@ -22,6 +24,11 @@ model Cloud is TrackedResource<CloudProperties> {
 
 /** Properties of the cloud resource */
 model CloudProperties {
+  /** Optional ACR resource ID for image builds. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{acrName} */
+  @added(Versions.v2026_02_01_preview)
+  @pattern("^/subscriptions/[a-fA-F0-9\\-]{36}/resourceGroups/[a-zA-Z0-9_\\-\\.()]+/providers/Microsoft\\.ContainerRegistry/registries/[a-zA-Z0-9]{5,50}$")
+  acrResourceId?: string;
+
   /** The SSO URL for the cloud */
   @visibility(Lifecycle.Read)
   ssoUrl?: string;

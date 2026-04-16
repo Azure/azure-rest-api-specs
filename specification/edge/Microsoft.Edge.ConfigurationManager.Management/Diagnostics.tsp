@@ -19,6 +19,20 @@ model DiagnosticProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("The updatable properties of the Diagnostic.")
+model DiagnosticUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: DiagnosticUpdateProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@doc("The updatable properties of the Diagnostic.")
+model DiagnosticUpdateProperties is DiagnosticProperties;
+
 @doc("A Diagnostic resource.")
 @resource("diagnostics")
 model Diagnostic
@@ -43,7 +57,7 @@ interface Diagnostics {
   @doc("Creates new or updates existing Diagnostic resource.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceAsync<Diagnostic>;
   @doc("Updates existing Diagnostic resource.")
-  update is ArmResourcePatchAsync<Diagnostic, DiagnosticProperties>;
+  update is ArmCustomPatchAsync<Diagnostic, PatchModel = DiagnosticUpdate>;
   @doc("Deletes specified Diagnostic resource.")
   delete is ArmResourceDeleteWithoutOkAsync<Diagnostic>;
   @doc("Returns a collection of Diagnostic resources within the resource group.")

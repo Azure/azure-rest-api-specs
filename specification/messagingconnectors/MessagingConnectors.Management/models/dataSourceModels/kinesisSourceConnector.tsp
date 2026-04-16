@@ -52,4 +52,7 @@ model KinesisSourceConnectorProperties extends DataSourceProperties {
 
   @doc("startTime for startPosition.")
   startTime?: utcDateTime;
+
+  @doc("Enable system metadata.")
+  enableSystemMetadata?: boolean;
 }

@@ -20,4 +20,7 @@ model GooglePubSubSourceConnectorProperties extends DataSourceProperties {
   @doc("Google Cloud account key, assigned by GCP.")
   @secret
   accountKey: string;
+
+  @doc("Enable system metadata.")
+  enableSystemMetadata?: boolean;
 }

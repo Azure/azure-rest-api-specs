@@ -17,6 +17,7 @@ using Azure.ResourceManager.CommonTypes;
 namespace Microsoft.Edge;
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @doc("ExecutionV2 Status")
 model ExecutionV2Status {
   @doc("The lastModified timestamp of the Status")
@@ -34,6 +35,7 @@ model ExecutionV2Status {
 }
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @doc("ExecutionV2 Properties")
 model ExecutionV2Properties {
   @doc("Workflow version of ExecutionV2")
@@ -54,6 +56,7 @@ model ExecutionV2Properties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @doc("ExecutionV2 Resource")
 @resource("executions")
 @parentResource(WorkflowVersionV2)
@@ -73,6 +76,7 @@ model ExecutionV2
 }
 
 @added(Versions.v2025_08_15_preview)
+@removed(Versions.v2026_03_01)
 @armResourceOperations
 interface ExecutionV2s {
   @doc("Get ExecutionV2 Resource")

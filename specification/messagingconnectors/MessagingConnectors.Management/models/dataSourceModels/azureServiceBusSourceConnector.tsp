@@ -34,4 +34,7 @@ model AzureServiceBusSourceConnectorProperties extends DataSourceProperties {
 
   @doc("AzureServiceBusSource type.")
   serviceBusType: AzureServiceBusType;
+
+  @doc("Enable system metadata.")
+  enableSystemMetadata?: boolean;
 }

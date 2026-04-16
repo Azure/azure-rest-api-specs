@@ -74,7 +74,7 @@ model HttpSourceConnectorProperties extends DataSourceProperties {
   connectorType: Models.Connector.ConnectorType.HttpSource;
 
   @doc("HTTP URL to fetch from.")
-  url: url;
+  url: string;
 
   @doc("HTTP request method. GET or POST.")
   method: HttpMethod;

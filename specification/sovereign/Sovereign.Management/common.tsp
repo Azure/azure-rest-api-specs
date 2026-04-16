@@ -18,6 +18,10 @@ enum Versions {
 
   @doc("Public preview version.")
   Preview20241031: "2024-10-31-preview",
+
+  @doc("SCC Private Preview version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  Preview20260315: "2026-03-15-preview",
 }
 
 @added(Versions.Preview20241031)

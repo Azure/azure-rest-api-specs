@@ -11,6 +11,7 @@ import "./common.tsp";
 import "./landingZoneAccountResourceProperties.tsp";
 import "./landingZoneConfigurationResourceProperties.tsp";
 import "./landingZoneRegistrationResourceProperties.tsp";
+import "./sovereignViewResourceProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -139,6 +140,57 @@ interface LandingZoneAccountOperations {
   listByResourceGroup is ArmResourceListByParent<LandingZoneAccountResource>;
   @doc("Lists the landing zone accounts within a subscription.")
   listBySubscription is ArmListBySubscription<LandingZoneAccountResource>;
+}
+
+@added(Versions.Preview20260315)
+@resource("sovereignViews")
+@doc("The Sovereign View resource type.")
+model SovereignViewResource
+  is TrackedResource<SovereignViewResourceProperties> {
+  @doc("The name of the Sovereign View resource.")
+  @segment("sovereignViews")
+  @key("sovereignViewName")
+  @pattern("^[a-zA-Z0-9-]{3,64}$")
+  @visibility(Lifecycle.Read)
+  @path
+  name: string;
+}
+
+@added(Versions.Preview20260315)
+@armResourceOperations(SovereignViewResource)
+interface SovereignViewOperations {
+  @doc("Gets the Sovereign View resource.")
+  get is ArmResourceRead<SovereignViewResource>;
+  @doc("Creates the Sovereign View resource.")
+  create is ArmResourceCreateOrReplaceAsync<SovereignViewResource>;
+  @doc("Updates the Sovereign View resource.")
+  update is ArmTagsPatchSync<SovereignViewResource>;
+  @doc("Deletes the Sovereign View resource.")
+  delete is ArmResourceDeleteWithoutOkAsync<SovereignViewResource>;
+  @doc("Lists the Sovereign View resources within a resource group.")
+  listByResourceGroup is ArmResourceListByParent<SovereignViewResource>;
+  @doc("Lists the Sovereign View resources within a subscription.")
+  listBySubscription is ArmListBySubscription<SovereignViewResource>;
+
+  @action("complianceSummary")
+  @doc("Gets the compliance summary for the Sovereign View resource.")
+  @added(Versions.Preview20260315)
+  @armResourceAction(SovereignViewResource)
+  complianceSummary is ArmResourceActionSync<
+    SovereignViewResource,
+    void,
+    SovereignViewComplianceSummaryResponse
+  >;
+
+  @action("complianceDetails")
+  @doc("Gets compliance details for the Sovereign View resource.")
+  @added(Versions.Preview20260315)
+  @armResourceAction(SovereignViewResource)
+  complianceDetails is ArmResourceActionSync<
+    SovereignViewResource,
+    SovereignViewComplianceDetailsRequest,
+    SovereignViewComplianceDetailsResponse
+  >;
 }
 
 @parentResource(LandingZoneAccountResource)
