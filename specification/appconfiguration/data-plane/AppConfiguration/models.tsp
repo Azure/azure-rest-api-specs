@@ -213,6 +213,7 @@ model KeyValue {
   @doc("The key of the key-value.")
   key: string;
 
+  @visibility(Lifecycle.Read)
   @doc("The label the key-value belongs to.")
   label?: string;
 
@@ -265,6 +266,7 @@ model FeatureFlag {
   @doc("The enabled state of the feature flag.")
   enabled?: boolean;
 
+  @visibility(Lifecycle.Read)
   @doc("The label the feature flag belongs to.")
   label?: string;
 
