@@ -450,3 +450,33 @@ using Microsoft.NetApp;
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
+
+// --- Fix enum → extensible enum (NetAppProvisioningState) ---
+// TODO: Remove after microsoft/typespec#10397 area is resolved for enum handling
+union NetAppProvisioningStateReplacement {
+  Microsoft.NetApp.NetAppProvisioningState,
+  string,
+}
+@@alternateType(Microsoft.NetApp.NetAppProvisioningState, NetAppProvisioningStateReplacement, "csharp");
+@@clientName(NetAppProvisioningStateReplacement, "NetAppProvisioningState", "csharp");
+
+// --- Fix property type mismatches via @@alternateType ---
+// ETag: string → Azure.Core.eTag
+@@alternateType(Microsoft.NetApp.CapacityPool.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.NetApp.NetAppAccount.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.NetApp.BackupPolicy.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.NetApp.SnapshotPolicy.etag, Azure.Core.eTag, "csharp");
+
+// Snapshot location: string → azureLocation
+@@alternateType(Microsoft.NetApp.Snapshot.location, azureLocation, "csharp");
+
+// VolumeRevert.snapshotId: armResourceIdentifier → string (old API had string)
+@@clientName(Microsoft.NetApp.VolumeRevert.snapshotId, "SnapshotId", "csharp");
+
+// --- Fix missing setters via @@usage (Input | Output) ---
+@@usage(Microsoft.NetApp.RegionInfoAvailabilityZoneMappingsItem, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.NetApp.ReplicationObject, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.NetApp.VolumeRevert, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.NetApp.RansomwareReport, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.NetApp.RegionInfoResource, Usage.input | Usage.output, "csharp");
+@@usage(Microsoft.NetApp.Snapshot, Usage.input | Usage.output, "csharp");
