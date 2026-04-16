@@ -424,3 +424,12 @@ using Microsoft.NetApp;
 @@clientName(Microsoft.NetApp.AccountPropertiesPatch.nfsV4IDDomain, "NfsV4IdDomain", "csharp");
 @@clientName(Microsoft.NetApp.QuotaReport, "NetAppVolumeQuotaReport", "csharp");
 @@clientName(Microsoft.NetApp.QuotaReportFilterRequest, "QuotaReportFilterContent", "csharp");
+
+// TEMPORARY: reproduce DeserializeAzureLocation bug
+@@alternateType(Microsoft.NetApp.VolumeGroup.id, armResourceIdentifier, "csharp");
+@@alternateType(Microsoft.NetApp.VolumeGroup.location, azureLocation, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "test"
+@@hierarchyBuilding(Microsoft.NetApp.VolumeGroup,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
