@@ -1,6 +1,6 @@
 name: Test GH Pool
 
-on: [pull_request, workflow_dispatch]
+on: [pull_request]
 
 permissions: {}
 
@@ -8,7 +8,7 @@ jobs:
   test-gh-pool:
     strategy:
       matrix:
-        runs-on: [ubuntu-latest, azsdk-pool-github-test]
+        runs-on: [ubuntu-slim, ubuntu-latest, azsdk-pool-github-test, azsdk-pool-github-test-3]
     runs-on: ${{ matrix.runs-on }}
     steps:
       - name: hello
