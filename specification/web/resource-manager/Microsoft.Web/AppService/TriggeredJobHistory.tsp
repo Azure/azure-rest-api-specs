@@ -67,7 +67,8 @@ interface TriggeredJobHistoryOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface TriggeredJobHistories {
   /**
    * Description for Gets a triggered web job's history by its ID for an app, , or a deployment slot.
@@ -119,7 +120,8 @@ interface TriggeredJobHistoryOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface TriggeredJobHistoryOperationGroup {
   /**
    * Description for Gets a triggered web job's history by its ID for an app, , or a deployment slot.

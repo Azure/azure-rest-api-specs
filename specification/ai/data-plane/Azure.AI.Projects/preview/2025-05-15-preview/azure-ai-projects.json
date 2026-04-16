@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint. In the form \"https://your-ai-services-account-name.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://your-ai-services-account-name.services.ai.azure.com/api/projects/your-project-name\" if you want to explicitly\nspecify the Foundry Project name.",
+        "description": "Foundry Project endpoint in the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}\".\nIf you only have one Project in your Foundry Hub, or to target the default Project\nin your Hub, use the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project\"",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -2007,7 +2007,7 @@
       "properties": {
         "blobUri": {
           "type": "string",
-          "description": "Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path"
+          "description": "Blob URI path for client to upload data. Example: `https://blob.windows.core.net/Container/Path`"
         },
         "storageAccountArmId": {
           "type": "string",
@@ -2282,7 +2282,7 @@
       "properties": {
         "dataUri": {
           "type": "string",
-          "description": "URI of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
+          "description": "URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "x-ms-mutability": [
@@ -2981,24 +2981,6 @@
         "value"
       ]
     },
-    "PendingUploadCredentialType": {
-      "type": "string",
-      "description": "The type of credential used to access the storage account.",
-      "enum": [
-        "SAS"
-      ],
-      "x-ms-enum": {
-        "name": "PendingUploadCredentialType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "sas",
-            "value": "SAS",
-            "description": "SAS credential type."
-          }
-        ]
-      }
-    },
     "PendingUploadRequest": {
       "type": "object",
       "description": "Represents a request for a pending upload.",
@@ -3058,30 +3040,6 @@
         "pendingUploadId",
         "pendingUploadType"
       ]
-    },
-    "PendingUploadType": {
-      "type": "string",
-      "description": "The type of pending upload.",
-      "enum": [
-        "None",
-        "BlobReference"
-      ],
-      "x-ms-enum": {
-        "name": "PendingUploadType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "none",
-            "value": "None",
-            "description": "No pending upload."
-          },
-          {
-            "name": "BlobReference",
-            "value": "BlobReference",
-            "description": "Blob Reference is the only supported type."
-          }
-        ]
-      }
     },
     "RedTeam": {
       "type": "object",
