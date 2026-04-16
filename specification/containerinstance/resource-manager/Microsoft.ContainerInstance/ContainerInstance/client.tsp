@@ -165,6 +165,12 @@ using Microsoft.ContainerInstance;
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );
+// ContainerGroupPatch uses local Resource model as PatchModel — restore TrackedResourceData base
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@Legacy.hierarchyBuilding(Resource,
+  Azure.ResourceManager.CommonTypes.TrackedResource,
+  "csharp"
+);
 
 // C# property type overrides: restore old SDK types for backward compatibility
 @@alternateType(ContainerAttachResponse.webSocketUri, url, "csharp");
