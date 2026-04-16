@@ -4486,6 +4486,9 @@
           "Get nat gateway with StandardV2 Sku": {
             "$ref": "./examples/NatGatewayGetStandardV2Sku.json"
           },
+          "Get nat gateway with nat64": {
+            "$ref": "./examples/NatGatewayWithNat64Get.json"
+          },
           "Get nat gateway with service gateway": {
             "$ref": "./examples/NatGatewayWithServiceGatewayGet.json"
           }
@@ -4571,6 +4574,9 @@
           },
           "Create nat gateway with StandardV2 Sku": {
             "$ref": "./examples/NatGatewayCreateOrUpdateStandardV2Sku.json"
+          },
+          "Create nat gateway with nat64": {
+            "$ref": "./examples/NatGatewayWithNat64CreateOrUpdate.json"
           },
           "Create nat gateway with service gateway": {
             "$ref": "./examples/NatGatewayWithServiceGatewayCreateOrUpdate.json"
@@ -15104,6 +15110,10 @@
           "$ref": "./common.json#/definitions/Common.SubResource",
           "description": "Reference to an existing service gateway."
         },
+        "nat64": {
+          "$ref": "./common.json#/definitions/Common.Nat64State",
+          "description": "Whether Nat64 is enabled for the NAT gateway resource."
+        },
         "resourceGuid": {
           "type": "string",
           "description": "The resource GUID property of the NAT gateway resource.",
@@ -17047,6 +17057,10 @@
           "$ref": "./common.json#/definitions/Common.SubResource",
           "description": "A reference to the default public nat gateway being used by this virtual network resource.",
           "readOnly": true
+        },
+        "summarizedGatewayPrefixes": {
+          "$ref": "#/definitions/Common.AddressSpace",
+          "description": "A configurable list of summarized gateway prefixes advertised for the virtual network."
         }
       }
     },
