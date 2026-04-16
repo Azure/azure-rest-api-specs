@@ -742,7 +742,6 @@ interface Directory {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing storage API."
   @route("?restype=directory&comp=list")
   @get
-  @list
   listFilesAndDirectoriesSegment is StorageOperationResponseBody<
     {
       ...PrefixParameter;
@@ -819,17 +818,13 @@ interface Directory {
       ...TimeoutParameter;
       ...RenameRequestHeaders;
       ...DestinationLeaseIdParameter;
-
       ...FileAttributesStringHeader;
-      ...FileCreationTimeStringHeader<"Creation time for the directory.">;
-      ...FileLastWriteTimeStringHeader<"Last write time for the directory.">;
-      ...FileChangeTimeStringHeader<"Change time for the directory.">;
+      ...FileCreationTimeHeader<"Creation time for the directory.">;
+      ...FileLastWriteTimeHeader<"Last write time for the directory.">;
+      ...FileChangeTimeHeader<"Change time for the directory.">;
       ...FilePermissionOptionalHeader<"If specified the permission shall be set for the directory.">;
-
       ...FilePermissionFormatParameter;
-
       ...FilePermissionKeyOptionalStringHeader;
-
       ...MetadataHeaders;
       ...AllowTrailingDotParameter;
       ...SourceAllowTrailingDotParameter;
@@ -1177,7 +1172,6 @@ interface File {
       fileRangeWrite: FileRangeWriteType = FileRangeWriteType.update;
 
       ...UploadContentLengthHeader;
-
       ...TimeoutParameter;
       ...ContentMD5RequestHeader;
       ...LeaseIdOptionalParameter;
@@ -1193,7 +1187,7 @@ interface File {
       ...LastModifiedResponseHeader;
       ...ContentMD5ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
-      ...FileLastWriteTimeResponseHeader;
+      ...FileLastWriteTimeHeader<"The file last write time.">;
       ...StructuredBodyResponseHeader;
     }
   >;
@@ -1208,7 +1202,6 @@ interface File {
   uploadRangeFromUrl is StorageOperationNoBody<
     {
       ...RangeRequiredHeader;
-
       ...CopySourceHeader;
 
       /** Bytes of source data in the specified range. */
@@ -1219,7 +1212,6 @@ interface File {
       fileRangeWriteFromUrl: FileRangeWriteFromUrlType = FileRangeWriteFromUrlType.update;
 
       ...UploadContentLengthHeader;
-
       ...TimeoutParameter;
 
       /** Specify the CRC64 hash of the source content. */
@@ -1247,7 +1239,7 @@ interface File {
       ...LastModifiedResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
-      ...FileLastWriteTimeResponseHeader;
+      ...FileLastWriteTimeHeader<"The file last write time.">;
     }
   >;
 
@@ -1285,21 +1277,15 @@ interface File {
       ...CopySourceHeader;
       ...TimeoutParameter;
       ...MetadataHeaders;
-
       ...FilePermissionOptionalHeader<"If specified the permission shall be set for the file.">;
-
       ...FilePermissionFormatParameter;
-
       ...FilePermissionKeyOptionalStringHeader;
-
       ...FilePermissionCopyModeHeader;
       ...IgnoreReadOnlyHeader;
-
       ...FileAttributesStringHeader;
-      ...FileCreationTimeStringHeader<"Creation time for the file.">;
-      ...FileLastWriteTimeStringHeader<"Last write time for the file.">;
-      ...FileChangeTimeStringHeader<"Change time for the file.">;
-
+      ...FileCreationTimeHeader<"Creation time for the file.">;
+      ...FileLastWriteTimeHeader<"Last write time for the file.">;
+      ...FileChangeTimeHeader<"Change time for the file.">;
       ...SetArchiveAttributeHeader;
       ...LeaseIdOptionalParameter;
       ...AllowTrailingDotParameter;
@@ -1392,17 +1378,13 @@ interface File {
       ...TimeoutParameter;
       ...RenameRequestHeaders;
       ...DestinationLeaseIdParameter;
-
       ...FileAttributesStringHeader;
-      ...FileCreationTimeStringHeader<"Creation time for the file.">;
-      ...FileLastWriteTimeStringHeader<"Last write time for the file.">;
-      ...FileChangeTimeStringHeader<"Change time for the file.">;
+      ...FileCreationTimeHeader<"Creation time for the file.">;
+      ...FileLastWriteTimeHeader<"Last write time for the file.">;
+      ...FileChangeTimeHeader<"Change time for the file.">;
       ...FilePermissionOptionalHeader<"If specified the permission shall be set for the file.">;
-
       ...FilePermissionFormatParameter;
-
       ...FilePermissionKeyOptionalStringHeader;
-
       ...MetadataHeaders;
 
       /** Sets the MIME content type of the file. */
@@ -1429,14 +1411,10 @@ interface File {
     {
       ...TimeoutParameter;
       ...MetadataHeaders;
-
-      ...FileCreationTimeStringHeader<"Creation time for the file.">;
-      ...FileLastWriteTimeStringHeader<"Last write time for the file.">;
-
+      ...FileCreationTimeHeader<"Creation time for the file.">;
+      ...FileLastWriteTimeHeader<"Last write time for the file.">;
       ...LeaseIdOptionalParameter;
-
       ...NfsOwnerGroupHeaders;
-
       ...LinkTextHeader;
       ...FileRequestIntentParameter;
     },

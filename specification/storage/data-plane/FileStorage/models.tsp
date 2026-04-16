@@ -772,8 +772,6 @@ model CorsRule {
  */
 model FilesAndDirectoriesListSegment {
   /** The directory items. */
-  // FIXME: update this definition since paging is on the entries property
-  @pageItems
   @Xml.unwrapped
   @Xml.name("Directory")
   directoryItems: DirectoryItem[];
@@ -1707,20 +1705,9 @@ alias FileSmtPropertyRequestHeaders = {
   /** If specified, the provided file attributes shall be set. Default value: 'Archive' for file and 'Directory' for directory. 'None' can also be specified as default. */
   @header("x-ms-file-attributes") fileAttributes?: string;
 
-  /** Creation time for the file/directory. Default value: Now. */
-  @encode("rfc7231")
-  @header("x-ms-file-creation-time")
-  fileCreationTime?: utcDateTime;
-
-  /** Last write time for the file/directory. Default value: Now. */
-  @encode("rfc7231")
-  @header("x-ms-file-last-write-time")
-  fileLastWriteTime?: utcDateTime;
-
-  /** Change time for the file/directory. Default value: Now. */
-  @encode("rfc7231")
-  @header("x-ms-file-change-time")
-  fileChangeTime?: utcDateTime;
+  ...FileCreationTimeHeader<"Creation time for the file/directory. Default value: Now.">;
+  ...FileLastWriteTimeHeader<"Last write time for the file/directory. Default value: Now.">;
+  ...FileChangeTimeHeader<"Change time for the file/directory. Default value: Now.">;
 };
 
 /** File permission format parameter. */
@@ -1738,23 +1725,9 @@ alias FileSmtPropertyResponseHeaders = {
   /** Attributes set for the file/directory. */
   @header("x-ms-file-attributes") fileAttributes?: string;
 
-  /** Creation time for the file/directory. */
-  @header("x-ms-file-creation-time")
-  @encode("rfc7231")
-  @alternateType(string, "python")
-  fileCreationTime?: utcDateTime;
-
-  /** Last write time for the file/directory. */
-  @header("x-ms-file-last-write-time")
-  @encode("rfc7231")
-  @alternateType(string, "python")
-  fileLastWriteTime?: utcDateTime;
-
-  /** Change time for the file/directory. */
-  @header("x-ms-file-change-time")
-  @encode("rfc7231")
-  @alternateType(string, "python")
-  fileChangeTime?: utcDateTime;
+  ...FileCreationTimeHeader<"Creation time for the file/directory.">;
+  ...FileLastWriteTimeHeader<"Last write time for the file/directory.">;
+  ...FileChangeTimeHeader<"Change time for the file/directory.">;
 
   /** The fileId of the directory/file. */
   @header("x-ms-file-id") fileId?: string;
@@ -2165,15 +2138,6 @@ alias SupportRenameHeader = {
   @header("x-ms-file-support-rename") supportRename?: boolean;
 };
 
-/** File last write time response header (with encoding). */
-alias FileLastWriteTimeResponseHeader = {
-  /** The file last write time. */
-  @header("x-ms-file-last-write-time")
-  @encode("rfc7231")
-  @alternateType(string, "python")
-  fileLastWriteTime?: utcDateTime;
-};
-
 /** Content CRC64 response header. */
 alias ContentCrc64ResponseHeader = {
   /** CRC64 hash of the range content. */
@@ -2332,20 +2296,9 @@ alias FileContentMD5ResponseHeader = {
 
 /** NFS timestamp response headers for symbolic link and hard link operations. */
 alias NfsTimestampResponseHeaders = {
-  /** The file creation time. */
-  @encode("rfc7231")
-  @header("x-ms-file-creation-time")
-  fileCreationTime?: utcDateTime;
-
-  /** The file last write time. */
-  @encode("rfc7231")
-  @header("x-ms-file-last-write-time")
-  fileLastWriteTime?: utcDateTime;
-
-  /** The file change time. */
-  @encode("rfc7231")
-  @header("x-ms-file-change-time")
-  fileChangeTime?: utcDateTime;
+  ...FileCreationTimeHeader<"The file creation time.">;
+  ...FileLastWriteTimeHeader<"The file last write time.">;
+  ...FileChangeTimeHeader<"The file change time.">;
 
   /** The fileId of the file. */
   @header("x-ms-file-id") fileId?: string;
@@ -2415,24 +2368,36 @@ alias FileHttpContentResponseHeaders = {
 // --- Template aliases (doc-only differences across operations) ---
 
 /** File creation time header (string type, for rename/copy/symlink operations). */
-alias FileCreationTimeStringHeader<TDoc extends valueof string> = {
+alias FileCreationTimeHeader<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
+  @encode("rfc3999-fixed-width")
   @header("x-ms-file-creation-time")
-  fileCreationTime?: string;
+  @alternateType(string, "python,csharp,javascript")
+  fileCreationTime?: utcDateTime;
 };
 
 /** File last write time header (string type, for rename/copy/symlink operations). */
-alias FileLastWriteTimeStringHeader<TDoc extends valueof string> = {
+alias FileLastWriteTimeHeader<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
+  @encode("rfc3999-fixed-width")
   @header("x-ms-file-last-write-time")
-  fileLastWriteTime?: string;
+  @alternateType(string, "python,csharp,javascript")
+  fileLastWriteTime?: utcDateTime;
 };
 
 /** File change time header (string type, for rename/copy operations). */
-alias FileChangeTimeStringHeader<TDoc extends valueof string> = {
+alias FileChangeTimeHeader<TDoc extends valueof string> = {
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Storage supports 7 digit precision"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Storage supports 7 digit precision"
   @doc(TDoc)
+  @encode("rfc3999-fixed-width")
   @header("x-ms-file-change-time")
-  fileChangeTime?: string;
+  @alternateType(string, "python,csharp,javascript")
+  fileChangeTime?: utcDateTime;
 };
 
 /** File permission optional header (for rename/copy operations). */
