@@ -16,113 +16,115 @@ It is maintained for internal engineering reference and API Stewardship Board re
 **AddedRequiredProperty**: The following properties become required.
 
 [RE-INTRODUCED (preview-only)]
+
 - `SearchIndexerStatus.runtime` (`IndexerRuntime`): indexer cumulative runtime snapshot.
 - `SearchServiceStatistics.indexersRuntime` (`ServiceIndexersRuntime`): service-level indexer runtime.
 
 [NEW in this preview]
+
 - `SearchServiceCounters.knowledgeBasesCount` (`ResourceCounter`): total knowledge bases.
 - `SearchServiceCounters.knowledgeSourcesCount` (`ResourceCounter`): total knowledge sources.
 
-**ChangedParameterOrder**: The following operations had preview-only parameters re-inserted, shifting the position of subsequent parameters:
+**ChangedParameterOrder**: Preview-only parameters re-inserted, shifting subsequent parameter positions.
 
 [RE-INTRODUCED (preview-only)]
 
-- `DataSources_CreateOrUpdate` (PUT `/datasources('{dataSourceName}')`): `ignoreResetRequirements` re-inserted before `x-ms-client-request-id`, `dataSourceName`, `dataSource`.
-- `Indexers_CreateOrUpdate` (PUT `/indexers('{indexerName}')`): `ignoreResetRequirements`, `disableCacheReprocessingChangeDetection` re-inserted before `x-ms-client-request-id`, `indexerName`, `indexer`.
-- `Documents_SearchGet` (GET `/indexes('{indexName}')/docs`): `x-ms-query-source-authorization`, `x-ms-enable-elevated-read` re-inserted before `search`.
+- `DataSources_CreateOrUpdate`: `ignoreResetRequirements` re-inserted before `x-ms-client-request-id`, `dataSourceName`, `dataSource`.
+- `Indexers_CreateOrUpdate`: `ignoreResetRequirements`, `disableCacheReprocessingChangeDetection` re-inserted before `x-ms-client-request-id`, `indexerName`, `indexer`.
+- `Documents_SearchGet`: `x-ms-query-source-authorization`, `x-ms-enable-elevated-read` re-inserted before `search`.
 
 #### Non-Breaking Changes
 
 **New operations**:
 
 [NEW in this preview]
-- **KnowledgeSources file management**: `KnowledgeSources_UploadFile` (POST `.../files`), `KnowledgeSources_ListFiles` (GET `.../files`), `KnowledgeSources_DeleteFile` (DELETE `.../files('{fileId}')`) — direct file upload, listing, and deletion for File knowledge sources.
+
+- **KnowledgeSources file management**: `KnowledgeSources_UploadFile` (POST), `KnowledgeSources_ListFiles` (GET), `KnowledgeSources_DeleteFile` (DELETE) under `.../files`.
 
 [RE-INTRODUCED (preview-only)]
-- **GetIndexStatsSummary** (GET `/indexstats`): adds `$top`, `$skip`, `$count` pagination; returns `ListIndexStatsSummary`.
+
+- **GetIndexStatsSummary** (GET `/indexstats`): `$top`, `$skip`, `$count` pagination; returns `ListIndexStatsSummary`.
 - `Indexers_Resync`, `Indexers_ResetDocs`, `Skillsets_ResetSkills`.
 
 **New knowledge source types** (added to `KnowledgeSourceKind`):
 
 [NEW in this preview]
-- **`IndexedSql`**: Azure SQL Database / SQL Managed Instance — `IndexedSqlKnowledgeSource`, `IndexedSqlKnowledgeSourceParameters` (connection string, query, column mappings), `ContentColumnMapping`, `EmbeddingColumnMapping`.
-- **`WorkIQ`**: WorkIQ data — `WorkIQKnowledgeSource`, `WorkIQKnowledgeSourceParams`.
-- **`File`**: direct file upload — `FileKnowledgeSource`, `FileKnowledgeSourceParameters`, `KnowledgeSourceFile`, `ListKnowledgeSourceFilesResult`.
-- **`McpServer`**: Model Context Protocol server — `McpServerKnowledgeSource`, `McpServerKnowledgeSourceParameters`; authentication via `McpServerAuthentication` (`McpServerFoundryConnectionAuthentication` / `McpServerStoredHeadersAuthentication`); per-tool config via `McpServerTool`; output parsing via `McpServerOutputParsing` (`auto`, `json`, `split`, `none` kinds).
-- **`FabricDataAgent`**: Microsoft Fabric Data Agent — `FabricDataAgentKnowledgeSource`, `FabricDataAgentKnowledgeSourceParameters`; activity/reference types.
-- **`FabricOntology`**: Microsoft Fabric Ontology — `FabricOntologyKnowledgeSource`, `FabricOntologyKnowledgeSourceParameters`; activity/reference types.
+
+- **`IndexedSql`**: `IndexedSqlKnowledgeSource`, `IndexedSqlKnowledgeSourceParameters` (connection string, query, column mappings), `ContentColumnMapping`, `EmbeddingColumnMapping`.
+- **`WorkIQ`**: `WorkIQKnowledgeSource`, `WorkIQKnowledgeSourceParams`.
+- **`File`**: `FileKnowledgeSource`, `FileKnowledgeSourceParameters`, `KnowledgeSourceFile`, `ListKnowledgeSourceFilesResult`.
+- **`McpServer`**: `McpServerKnowledgeSource`, `McpServerKnowledgeSourceParameters`; auth via `McpServerAuthentication` (Foundry/StoredHeaders variants); tools via `McpServerTool`; output via `McpServerOutputParsing` (`auto`, `json`, `split`, `none`).
+- **`FabricDataAgent`**: `FabricDataAgentKnowledgeSource`, `FabricDataAgentKnowledgeSourceParameters`; activity/reference types.
+- **`FabricOntology`**: `FabricOntologyKnowledgeSource`, `FabricOntologyKnowledgeSourceParameters`; activity/reference types.
 
 [RE-INTRODUCED (preview-only)]
+
 - **`IndexedSharePoint`** and **`RemoteSharePoint`**: full model, parameter, runtime-params, activity, and reference trees.
 
 **New optional fields on existing models**:
 
 [NEW in this preview]
-- `KnowledgeBase`: `corsOptions`.
-- `KnowledgeSource` (all kinds): `enableImageServing`, `enableFreshness`.
-- `SearchIndexKnowledgeSource`: `baseFilter` (default OData filter, overridable at runtime).
-- `KnowledgeSourceParams`: `failOnError`, `maxOutputDocuments`, `enableImageServing`.
-- `KnowledgeBaseRetrievalRequest`: `maxOutputDocuments`.
-- `WebKnowledgeSourceParameters`: `language`, `market`, `count`, `freshness` (default web search parameters, each overridable at runtime).
-- `KnowledgeSourceIngestionParameters`: `assetStore` (`AssetStore`), `freshnessPolicy` (`FreshnessPolicy`); `SensitivityLabels` added to `KnowledgeSourceIngestionPermissionOption`.
-- `KnowledgeBaseRetrievalActivityRecord`: `imageServing` (`ImageServingStatistics`).
-- `SearchIndex` / `SearchIndexResponse`: `sharePointConnectorAppRegistration`.
-- `SearchField`: `sensitivityLabelId`, `sensitivityLabelName`, `sourceDocumentId`, `sharepointSiteUrl`.
-- `SearchResourceEncryptionKey`: `isServiceLevelKey`.
-- `SearchIndexerDataUserAssignedIdentity`: `federatedIdentityClientId` (multi-tenant federated identity for CMK).
-- `ContentUnderstandingSkillChunkingProperties`: `method` (`fixedSize` or `semantic`); `tokens` enum value added.
-- `ListIndexesResult`, `ListIndexesSelectedResult`, `ListKnowledgeSourcesResult`: `@odata.count`, `@odata.nextLink`.
-- `AzureOpenAIModelName`: `gpt-5.1`, `gpt-5.2`, `gpt-5.4`.
-- `Indexes_List` / `Indexes_ListWithSelectedProperties`: `$top`, `$skip`, `$count` pagination parameters.
+
+- `KnowledgeBase`: `corsOptions`; `KnowledgeSource` (all kinds): `enableImageServing`, `enableFreshness`; `SearchIndexKnowledgeSource`: `baseFilter`.
+- `KnowledgeSourceParams`: `failOnError`, `maxOutputDocuments`, `enableImageServing`; `KnowledgeBaseRetrievalRequest`: `maxOutputDocuments`.
+- `WebKnowledgeSourceParameters`: `language`, `market`, `count`, `freshness`; `KnowledgeSourceIngestionParameters`: `assetStore`, `freshnessPolicy`; `SensitivityLabels` → `KnowledgeSourceIngestionPermissionOption`.
+- `KnowledgeBaseRetrievalActivityRecord`: `imageServing`; `SearchIndex`/`SearchIndexResponse`: `sharePointConnectorAppRegistration`.
+- `SearchField`: `sensitivityLabelId`, `sensitivityLabelName`, `sourceDocumentId`, `sharepointSiteUrl`; `SearchResourceEncryptionKey`: `isServiceLevelKey`.
+- `SearchIndexerDataUserAssignedIdentity`: `federatedIdentityClientId` (federated identity for CMK); `ContentUnderstandingSkillChunkingProperties`: `method` (`fixedSize`/`semantic`), `tokens` enum value.
+- `ListIndexesResult`, `ListIndexesSelectedResult`, `ListKnowledgeSourcesResult`: `@odata.count`, `@odata.nextLink`; `AzureOpenAIModelName`: `gpt-5.1`, `gpt-5.2`, `gpt-5.4`.
+- `Indexes_List`/`Indexes_ListWithSelectedProperties`: `$top`, `$skip`, `$count`.
 
 [RE-INTRODUCED (preview-only)]
-- `KnowledgeBase`: `retrievalReasoningEffort`, `outputMode`, `retrievalInstructions`, `answerInstructions`.
-- `KnowledgeSourceParams`: `alwaysQuerySource`.
+
+- `KnowledgeBase`: `retrievalReasoningEffort`, `outputMode`, `retrievalInstructions`, `answerInstructions`; `KnowledgeSourceParams`: `alwaysQuerySource`.
 - `KnowledgeBaseRetrievalRequest`: `messages`, `maxOutputSize`, `retrievalReasoningEffort`, `outputMode`.
-- `SearchIndex` / `SearchIndexResponse`: `permissionFilterOption`, `purviewEnabled`.
-- `SearchField`: `permissionFilter`.
-- `SearchIndexerDataSource`: `subType` (read-only), `indexerPermissionOptions`.
-- `SearchIndexer`: `cache` (`SearchIndexerCache`).
-- `SearchIndexerStatus`: `currentState`.
-- `IndexerExecutionResult`: `statusDetail`, `mode`.
-- `SearchIndexerKnowledgeStore`: `parameters` (`SearchIndexerKnowledgeStoreParameters`).
-- `SemanticConfiguration`: `flightingOptIn`.
-- `AzureOpenAIModelName`: `gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `gpt-4.1-nano`, `gpt-5`.
+- `SearchIndex`/`SearchIndexResponse`: `permissionFilterOption`, `purviewEnabled`; `SearchField`: `permissionFilter`.
+- `SearchIndexerDataSource`: `subType` (read-only), `indexerPermissionOptions`; `SearchIndexer`: `cache` (`SearchIndexerCache`).
+- `SearchIndexerStatus`: `currentState`; `IndexerExecutionResult`: `statusDetail`, `mode`; `SearchIndexerKnowledgeStore`: `parameters`.
+- `SemanticConfiguration`: `flightingOptIn`; `AzureOpenAIModelName`: `gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `gpt-4.1-nano`, `gpt-5`.
 
 **Query features**:
 
 [RE-INTRODUCED (preview-only)]
+
 `QueryRewritesType`, `QueryLanguage`, `QuerySpellerType`, `SemanticQueryRewritesResultType`; `SearchRequest` fields `queryRewrites`, `queryLanguage`, `speller`, `semanticFields`, `hybridSearch`; `VectorizableTextQuery.queryRewrites`; `VectorQuery.threshold`, `filterOverride`, `perDocumentVectorLimit`; `FacetResult` aggregate metrics (`avg`, `min`, `max`, `sum`, `cardinality`, `@search.facets`); debug types `QueryRewritesDebugInfo`, `QueryRewritesValuesDebugInfo`, `SemanticDebugInfo`, `DocumentDebugInfo.innerHits`, `DocumentDebugInfo.semantic`, `SearchDocumentsResult.@search.semanticQueryRewritesResultType`; `HybridSearch` (`maxTextRecallSize`, `countAndFacetMode`).
 
 **Skills and vectorizers**:
 
 [RE-INTRODUCED (preview-only)]
+
 `AzureMachineLearningSkill`, `VisionVectorizeSkill`; `SplitSkill.unit`, `SplitSkill.azureOpenAITokenizerParameters`; `ChatCompletionSkill` WebApi-style properties (`authResourceId`, `batchSize`, `degreeOfParallelism`, `httpHeaders`, `httpMethod`, `timeout`).
 
 **Knowledge base retrieval and permission filtering types**:
 
 [RE-INTRODUCED (preview-only)]
+
 `KnowledgeRetrievalLowReasoningEffort`, `KnowledgeRetrievalMediumReasoningEffort`, `KnowledgeRetrievalOutputMode` (`extractiveData`, `answerSynthesis`); `KnowledgeBaseModelQueryPlanningActivityRecord`, `KnowledgeBaseModelAnswerSynthesisActivityRecord`; `SearchIndexPermissionFilterOption`, `PermissionFilter`.
 
 **Knowledge base activity and reference types**:
 
 [NEW in this preview]
-- WorkIQ: `KnowledgeBaseWorkIQActivityRecord`, `KnowledgeBaseWorkIQActivityArguments`, `KnowledgeBaseWorkIQReference` (`WorkIQAttribution[]`, `searchSensitivityLabelInfo`), `WorkIQAttribution` (`seeMoreWebUrl`).
-- LLM web summarization: `KnowledgeBaseModelWebSummarizationActivityRecord` (`inputTokens`, `outputTokens`, `modelName`).
-- New enum values: `modelWebSummarization`, `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseActivityRecordType`; `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseReferenceType`.
+
+- **WorkIQ**: `KnowledgeBaseWorkIQActivityRecord`, `KnowledgeBaseWorkIQActivityArguments`, `KnowledgeBaseWorkIQReference` (`WorkIQAttribution[]`, `searchSensitivityLabelInfo`), `WorkIQAttribution` (`seeMoreWebUrl`).
+- **LLM web summarization**: `KnowledgeBaseModelWebSummarizationActivityRecord` (`inputTokens`, `outputTokens`, `modelName`).
+- **New enum values**: `modelWebSummarization`, `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseActivityRecordType`; `workIQ`, `fabricDataAgent`, `fabricOntology` → `KnowledgeBaseReferenceType`.
 
 **Sensitivity label model**:
 
 [NEW in this preview]
-`PurviewSensitivityLabelInfo` (replaces `SharePointSensitivityLabelInfo`) with `displayName`, `sensitivityLabelId`, `toolTip`, `priority`, `color`, `isEncrypted`; added to `KnowledgeBaseSearchIndexReference`, `KnowledgeBaseAzureBlobReference`, `KnowledgeBaseIndexedOneLakeReference`, `KnowledgeBaseWorkIQReference`.
+- `PurviewSensitivityLabelInfo` (replaces `SharePointSensitivityLabelInfo`): `displayName`, `sensitivityLabelId`, `toolTip`, `priority`, `color`, `isEncrypted`; added to `KnowledgeBaseSearchIndexReference`, `KnowledgeBaseAzureBlobReference`, `KnowledgeBaseIndexedOneLakeReference`, `KnowledgeBaseWorkIQReference`.
 
 ### Preview-to-Preview Changes (2025-11-01-preview → 2026-05-01-preview)
 
 #### Non-Breaking Changes
 
-[RE-INTRODUCED (preview-only)] All items in the GA-to-Preview section under *Re-introduced (preview-only)* are non-breaking relative to this baseline (restored with identical contracts).
+[RE-INTRODUCED (preview-only)]
 
-[NEW in this preview] All net-new additions are additive and non-breaking:
+All items in the GA-to-Preview section under *Re-introduced (preview-only)* are non-breaking relative to this baseline (restored with identical contracts).
+
+[NEW in this preview]
+
+All net-new additions are additive and non-breaking:
 - `SearchServiceCounters.knowledgeBasesCount` and `SearchServiceCounters.knowledgeSourcesCount`: new required fields on a **response** model; additive from a client perspective.
 - `SearchIndexerStatus.runtime` and `SearchServiceStatistics.indexersRuntime`: already required in 2025-11-01-preview and restored with the same contract.
 
