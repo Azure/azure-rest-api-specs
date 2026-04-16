@@ -26393,9 +26393,9 @@
           "$ref": "#/definitions/GarnetAuthenticationType",
           "description": "The authentication method used for the Garnet cluster."
         },
-        "persistence": {
-          "type": "boolean",
-          "description": "Flag to indicate if persistence is enabled for the Garnet cluster."
+        "persistenceMode": {
+          "$ref": "#/definitions/PersistenceMode",
+          "description": "The persistence mode for the Garnet cluster."
         }
       }
     },
@@ -26454,9 +26454,9 @@
           "$ref": "#/definitions/GarnetAuthenticationType",
           "description": "The authentication method used for the Garnet cluster."
         },
-        "persistence": {
-          "type": "boolean",
-          "description": "Flag to indicate if persistence is enabled for the Garnet cluster."
+        "persistenceMode": {
+          "$ref": "#/definitions/PersistenceMode",
+          "description": "The persistence mode for the Garnet cluster."
         },
         "allocationState": {
           "$ref": "#/definitions/AllocationState",
@@ -29532,6 +29532,30 @@
             "type": "string"
           }
         }
+      }
+    },
+    "PersistenceMode": {
+      "type": "string",
+      "description": "The persistence mode for the Garnet cluster.",
+      "enum": [
+        "None",
+        "AofAndRdb"
+      ],
+      "x-ms-enum": {
+        "name": "PersistenceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No persistence. Data is stored in memory only."
+          },
+          {
+            "name": "AofAndRdb",
+            "value": "AofAndRdb",
+            "description": "Persist data using both AOF (Append Only File) and RDB snapshots."
+          }
+        ]
       }
     },
     "PhysicalPartitionId": {

@@ -92,9 +92,9 @@ model GarnetClusterResourceProperties {
   @added(Versions.v2026_04_01_preview)
   authenticationMethod?: GarnetAuthenticationType;
 
-  /** Flag to indicate if persistence is enabled for the Garnet cluster. */
+  /** The persistence mode for the Garnet cluster. */
   @added(Versions.v2026_04_01_preview)
-  persistence?: boolean;
+  persistenceMode?: PersistenceMode;
 
   /** Allocation state of the cluster and data center resources. Active implies the virtual machines of the cluster are allocated, deallocated implies virtual machines and resources are deallocated. */
   allocationState?: AllocationState;
@@ -136,6 +136,18 @@ union GarnetAuthenticationType {
 
   /** Microsoft Entra authentication. */
   Entra: "Entra",
+}
+
+/** The persistence mode for the Garnet cluster. */
+@added(Versions.v2026_04_01_preview)
+union PersistenceMode {
+  string,
+
+  /** No persistence. Data is stored in memory only. */
+  None: "None",
+
+  /** Persist data using both AOF (Append Only File) and RDB snapshots. */
+  AofAndRdb: "AofAndRdb",
 }
 
 /**
@@ -232,10 +244,10 @@ model GarnetClusterResourcePatchProperties {
   authenticationMethod?: GarnetAuthenticationType;
 
   /**
-   * Flag to indicate if persistence is enabled for the Garnet cluster.
+   * The persistence mode for the Garnet cluster.
    */
   @added(Versions.v2026_04_01_preview)
-  persistence?: boolean;
+  persistenceMode?: PersistenceMode;
 }
 
 /**
