@@ -270,10 +270,13 @@ union SoftDeleteFeatureState {
 @added(Versions.v2026_01_31_preview)
 union SourceSideScanStatus {
   string,
+
   /** Configured */
   Configured: "Configured",
+
   /** Not configured */
   NotConfigured: "NotConfigured",
+
   /** Not applicable */
   NotApplicable: "NotApplicable",
 }
@@ -284,12 +287,16 @@ union SourceSideScanStatus {
 @added(Versions.v2026_01_31_preview)
 union SourceSideScanSummary {
   string,
+
   /** Unknown */
   Unknown: "Unknown",
+
   /** Not applicable */
   NotApplicable: "NotApplicable",
+
   /** Suspicious */
   Suspicious: "Suspicious",
+
   /** Healthy */
   Healthy: "Healthy",
 }
@@ -316,14 +323,19 @@ model SourceSideScanInfo {
 @added(Versions.v2026_01_31_preview)
 union ThreatStatus {
   string,
+
   /** Unknown */
   Unknown: "Unknown",
+
   /** Healthy */
   Healthy: "Healthy",
+
   /** Unhealthy */
   UnHealthy: "UnHealthy",
+
   /** Warning */
   Warning: "Warning",
+
   /** Not available */
   NotAvailable: "NotAvailable",
 }
@@ -334,12 +346,16 @@ union ThreatStatus {
 @added(Versions.v2026_01_31_preview)
 union ThreatState {
   string,
+
   /** Active */
   Active: "Active",
+
   /** In progress */
   InProgress: "InProgress",
+
   /** Ignored */
   Ignored: "Ignored",
+
   /** Resolved */
   Resolved: "Resolved",
 }
@@ -350,12 +366,16 @@ union ThreatState {
 @added(Versions.v2026_01_31_preview)
 union ThreatSeverity {
   string,
+
   /** Critical */
   Critical: "Critical",
+
   /** High */
   High: "High",
+
   /** Warning */
   Warning: "Warning",
+
   /** Informational */
   Informational: "Informational",
 }
@@ -713,12 +733,16 @@ union PolicyType {
 @added(Versions.v2026_01_31_preview)
 union VMWorkloadPolicyType {
   string,
+
   /** Invalid */
   Invalid: "Invalid",
+
   /** Snapshot V1 */
   SnapshotV1: "SnapshotV1",
+
   /** Snapshot V2 */
   SnapshotV2: "SnapshotV2",
+
   /** Streaming */
   Streaming: "Streaming",
 }
@@ -818,8 +842,10 @@ union ProtectedItemState {
 @added(Versions.v2026_01_31_preview)
 union ProtectionLevel {
   string,
+
   /** Database */
   Database: "Database",
+
   /** Database under instance */
   DatabaseUnderInstance: "DatabaseUnderInstance",
 }
@@ -830,14 +856,19 @@ union ProtectionLevel {
 @added(Versions.v2026_01_31_preview)
 union InstanceProtectionReadiness {
   string,
+
   /** Unknown */
   Unknown: "Unknown",
+
   /** Ready */
   Ready: "Ready",
+
   /** Schedule disabled */
   ScheduleDisabled: "ScheduleDisabled",
+
   /** Partial protection */
   PartialProtection: "PartialProtection",
+
   /** Protection error */
   ProtectionError: "ProtectionError",
 }
