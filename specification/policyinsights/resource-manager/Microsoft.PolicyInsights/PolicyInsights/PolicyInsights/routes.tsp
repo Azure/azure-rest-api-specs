@@ -502,7 +502,8 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForPolicyDefinition(
-    ...PolicyEventsListQueryResultsForPolicyDefinitionBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The name of the virtual resource under PolicyEvents resource type; only "default" is allowed.
@@ -586,7 +587,8 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForSubscriptionLevelPolicyAssignment(
-    ...PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The name of the virtual resource under PolicyEvents resource type; only "default" is allowed.
@@ -670,7 +672,8 @@ interface PolicyEventsOperationGroup {
   @list
   @post
   listQueryResultsForResourceGroupLevelPolicyAssignment(
-    ...PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * Resource group name.
@@ -1355,7 +1358,8 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForPolicySetDefinition(
-    ...PolicyStatesListQueryResultsForPolicySetDefinitionBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
@@ -1439,7 +1443,8 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForPolicySetDefinition(
-    ...PolicyStatesSummarizeForPolicySetDefinitionBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The virtual resource under PolicyStates resource type for summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
@@ -1496,7 +1501,8 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForPolicyDefinition(
-    ...PolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
@@ -1580,7 +1586,8 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForPolicyDefinition(
-    ...PolicyStatesSummarizeForPolicyDefinitionBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The virtual resource under PolicyStates resource type for summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
@@ -1637,7 +1644,8 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForSubscriptionLevelPolicyAssignment(
-    ...PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The virtual resource under PolicyStates resource type. In a given time range, 'latest' represents the latest policy state(s), whereas 'default' represents all policy state(s).
@@ -1721,7 +1729,8 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForSubscriptionLevelPolicyAssignment(
-    ...PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The virtual resource under PolicyStates resource type for summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the only allowed value.
@@ -1778,7 +1787,8 @@ interface PolicyStatesOperationGroup {
   @list
   @post
   listQueryResultsForResourceGroupLevelPolicyAssignment(
-    ...PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * Resource group name.
@@ -1868,7 +1878,8 @@ interface PolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesSummaryResource}/summarize")
   @post
   summarizeForResourceGroupLevelPolicyAssignment(
-    ...PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * Resource group name.
@@ -2231,7 +2242,8 @@ interface ComponentPolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForPolicyDefinition(
-    ...ComponentPolicyStatesListQueryResultsForPolicyDefinitionBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The namespace for Microsoft Authorization resource provider; only "Microsoft.Authorization" is allowed.
@@ -2310,7 +2322,8 @@ interface ComponentPolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForSubscriptionLevelPolicyAssignment(
-    ...ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * The namespace for Microsoft Authorization resource provider; only "Microsoft.Authorization" is allowed.
@@ -2389,7 +2402,8 @@ interface ComponentPolicyStatesOperationGroup {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/componentPolicyStates/{componentPolicyStatesResource}/queryResults")
   @post
   listQueryResultsForResourceGroupLevelPolicyAssignment(
-    ...ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentBaseParam,
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
 
     /**
      * Resource group name.
