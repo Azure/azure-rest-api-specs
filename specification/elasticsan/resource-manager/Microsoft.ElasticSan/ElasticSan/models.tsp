@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ElasticSan;
 
@@ -53,7 +55,9 @@ union ProvisioningStates {
   Deleted: "Deleted",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Restoring: "Restoring",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_04_01_preview)
   SoftDeleting: "SoftDeleting",
 }
 
@@ -97,6 +101,7 @@ union AutoScalePolicyEnforcement {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 union `x-ms-access-soft-deleted-resources` {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -127,6 +132,12 @@ union StorageTargetType {
   Iscsi: "Iscsi",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
+
+  /**
+   * Http protocol type for SQL workloads.
+   */
+  @added(Versions.v2026_04_01_preview)
+  Http: "Http",
 }
 
 /**
@@ -223,6 +234,7 @@ union `x-ms-force-delete` {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 union DeleteType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -265,14 +277,14 @@ model SkuInformation {
    * Availability of the SKU for the location/zone
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locationInfo?: SkuLocationInfo[];
 
   /**
    * The capability information in the specified SKU.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: SKUCapability[];
 }
 
@@ -652,9 +664,22 @@ model VolumeGroupProperties {
   enforceDataIntegrityCheckForIscsi?: boolean;
 
   /**
+   * A boolean indicating whether or not Encryption in Transit is enabled, supported only for ISCSI protocol.
+   */
+  @added(Versions.v2026_04_01_preview)
+  encryptionInTransit?: boolean;
+
+  /**
    * The retention policy for the soft deleted volume group and its associated resources.
    */
+  @added(Versions.v2026_04_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
+
+  /**
+   * User-defined key-value metadata for the volume group.
+   */
+  @added(Versions.v2026_04_01_preview)
+  metadata?: string;
 }
 
 /**
@@ -750,6 +775,7 @@ model VirtualNetworkRule {
 /**
  * Response for Delete Retention Policy object
  */
+@added(Versions.v2026_04_01_preview)
 model DeleteRetentionPolicy {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   policyState?: PolicyState;
@@ -810,7 +836,14 @@ model VolumeGroupUpdateProperties {
   /**
    * The retention policy for the soft deleted volume group and its associated resources
    */
+  @added(Versions.v2026_04_01_preview)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
+
+  /**
+   * User-defined key-value metadata for the volume group.
+   */
+  @added(Versions.v2026_04_01_preview)
+  metadata?: string;
 }
 
 /**
@@ -849,6 +882,12 @@ model VolumeProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStates;
+
+  /**
+   * User-defined key-value metadata for the volume.
+   */
+  @added(Versions.v2026_04_01_preview)
+  metadata?: string;
 }
 
 /**
@@ -898,6 +937,13 @@ model IscsiTargetInfo {
    * Operational status of the iSCSI Target.
    */
   status?: OperationalStatus;
+
+  /**
+   * Http endpoint for the volume when protocol type is Http.
+   */
+  @added(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
+  httpEndpoint?: string;
 }
 
 /**
@@ -934,6 +980,12 @@ model VolumeUpdateProperties {
    * Parent resource information.
    */
   managedBy?: ManagedByInfo;
+
+  /**
+   * User-defined key-value metadata for the volume.
+   */
+  @added(Versions.v2026_04_01_preview)
+  metadata?: string;
 }
 
 /**
@@ -966,8 +1018,8 @@ model PrivateLinkResource extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateLinkResourceProperties;
 }
 
