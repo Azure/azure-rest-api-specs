@@ -6,6 +6,19 @@ using Storage.File;
 
 namespace Customizations;
 
+@@alternateType(FileCreationTimeHeader.fileCreationTime,
+  string,
+  "python,csharp,javascript"
+);
+@@alternateType(FileLastWriteTimeHeader.fileLastWriteTime,
+  string,
+  "python,csharp,javascript"
+);
+@@alternateType(FileChangeTimeHeader.fileChangeTime,
+  string,
+  "python,csharp,javascript"
+);
+
 @@clientNamespace(Storage.File,
   "Azure.Storage.Files.Shares",
   "!csharp,!python,!go"

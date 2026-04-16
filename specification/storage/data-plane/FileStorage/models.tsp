@@ -2374,7 +2374,6 @@ alias FileCreationTimeHeader<TDoc extends valueof string> = {
   @doc(TDoc)
   @encode("rfc3999-fixed-width")
   @header("x-ms-file-creation-time")
-  @alternateType(string, "python,csharp,javascript")
   fileCreationTime?: utcDateTime;
 };
 
@@ -2385,7 +2384,6 @@ alias FileLastWriteTimeHeader<TDoc extends valueof string> = {
   @doc(TDoc)
   @encode("rfc3999-fixed-width")
   @header("x-ms-file-last-write-time")
-  @alternateType(string, "python,csharp,javascript")
   fileLastWriteTime?: utcDateTime;
 };
 
@@ -2396,7 +2394,6 @@ alias FileChangeTimeHeader<TDoc extends valueof string> = {
   @doc(TDoc)
   @encode("rfc3999-fixed-width")
   @header("x-ms-file-change-time")
-  @alternateType(string, "python,csharp,javascript")
   fileChangeTime?: utcDateTime;
 };
 
