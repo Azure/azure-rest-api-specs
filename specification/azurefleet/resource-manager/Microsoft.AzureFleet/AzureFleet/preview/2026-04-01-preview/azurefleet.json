@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureFleet",
-    "version": "2025-07-01-preview",
+    "version": "2026-04-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -72,11 +72,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -109,11 +104,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Fleets_ListBySubscription": {
-            "$ref": "./examples/Fleets_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -151,11 +141,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Fleets_ListByResourceGroup": {
-            "$ref": "./examples/Fleets_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -201,11 +186,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Fleets_Get": {
-            "$ref": "./examples/Fleets_Get.json"
           }
         }
       },
@@ -268,11 +248,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Fleets_CreateOrUpdate": {
-            "$ref": "./examples/Fleets_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -342,11 +317,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Fleets_Update": {
-            "$ref": "./examples/Fleets_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -402,11 +372,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Fleets_Delete": {
-            "$ref": "./examples/Fleets_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -453,9 +418,63 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Fleets_ListVirtualMachineScaleSets": {
-            "$ref": "./examples/Fleets_ListVirtualMachineScaleSets.json"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachines": {
+      "get": {
+        "operationId": "Fleets_ListVirtualMachines",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "List VirtualMachine resources of a Launch mode Fleet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter expression to filter the virtual machines.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Skip token for pagination. Uses the token from a previous response to fetch the next page of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1243,6 +1262,30 @@
         "value"
       ]
     },
+    "FleetMode": {
+      "type": "string",
+      "description": "Modes for Compute Fleet.",
+      "enum": [
+        "Managed",
+        "Launch"
+      ],
+      "x-ms-enum": {
+        "name": "FleetMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "managed",
+            "value": "Managed",
+            "description": "Default. Managed is the default mode for Compute Fleet where VMs are provisioned via virtual machine scale sets."
+          },
+          {
+            "name": "launch",
+            "value": "Launch",
+            "description": "Launch mode for Compute Fleet will directly launch VM instances to be managed by the customer."
+          }
+        ]
+      }
+    },
     "FleetProperties": {
       "type": "object",
       "description": "Details of the Compute Fleet.",
@@ -1290,6 +1333,15 @@
           "type": "string",
           "description": "Specifies the ID which uniquely identifies a Compute Fleet.",
           "readOnly": true
+        },
+        "mode": {
+          "$ref": "#/definitions/FleetMode",
+          "description": "Mode of the Fleet."
+        },
+        "vmNamePrefix": {
+          "type": "string",
+          "description": "VirtualMachine prefix to be used for the virtual machines launched by Fleet. Can be used only with Launch mode.",
+          "pattern": "^[^_\\W][\\w\\-._]{0,64}(?<![-.])$"
         },
         "capacityType": {
           "$ref": "#/definitions/CapacityType",
@@ -2694,6 +2746,43 @@
         "packageReferenceId"
       ]
     },
+    "VMOperationStatus": {
+      "type": "string",
+      "description": "Virtual Machine operation status values.",
+      "enum": [
+        "Launching",
+        "Creating",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "VMOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Launching",
+            "value": "Launching",
+            "description": "Indicates that the virtual machine has not been accepted by Compute yet and is still scheduled to be created."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Indicates that the virtual machine is either in the process of being created or is scheduled to be created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Indicates that the virtual machine operation failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Indicates that the virtual machine operation completed successfully."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "VMSizeProperties": {
       "type": "object",
       "description": "Specifies VM Size Property settings on the virtual machine.",
@@ -2755,6 +2844,64 @@
           "description": "Specifies the virtual hard disk's uri."
         }
       }
+    },
+    "VirtualMachine": {
+      "type": "object",
+      "description": "A Launch mode Fleet's virtual machine.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the virtual machine.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The compute RP resource id of the virtual machine. subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the virtual machine",
+          "readOnly": true
+        },
+        "operationStatus": {
+          "$ref": "#/definitions/VMOperationStatus",
+          "description": "This represents the operationStatus of the virtual machine in response to the last operation that was performed on it by Azure Fleet resource.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "description": "Error information when `operationStatus` is `Failed`.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "operationStatus"
+      ]
+    },
+    "VirtualMachineListResult": {
+      "type": "object",
+      "description": "The response of a virtual machine list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Virtual Machine items on this page.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "VirtualMachineScaleSet": {
       "type": "object",
