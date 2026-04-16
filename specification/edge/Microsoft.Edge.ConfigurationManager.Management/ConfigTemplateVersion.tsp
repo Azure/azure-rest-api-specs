@@ -41,6 +41,21 @@ interface ConfigTemplateVersions {
   @doc("Get a Config Template Version Resource")
   get is ArmResourceRead<ConfigTemplateVersion>;
 
+  @added(Versions.v2026_03_01)
+  @doc("Create or update a Config Template Version Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConfigTemplateVersion>;
+
+  @added(Versions.v2026_03_01)
+  @doc("Update a Config Template Version Resource")
+  update is ArmResourcePatchSync<
+    ConfigTemplateVersion,
+    ConfigTemplateVersionProperties
+  >;
+
+  @added(Versions.v2026_03_01)
+  @doc("Delete a Config Template Version Resource")
+  delete is ArmResourceDeleteWithoutOkAsync<ConfigTemplateVersion>;
+
   @doc("List Config Template Version Resources")
   listByConfigTemplate is ArmResourceListByParent<ConfigTemplateVersion>;
 }

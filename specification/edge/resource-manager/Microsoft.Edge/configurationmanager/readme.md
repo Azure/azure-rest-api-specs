@@ -23,7 +23,32 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ``` yaml
 directive:
   - suppress: AvoidAdditionalProperties
-  - from: configurationmanager.json
+    from: configurationmanager.json
+    where:
+      - $.definitions.ExecutionProperties.properties.specification
+      - $.definitions.ExecutionPropertiesUpdate.properties.specification
+      - $.definitions.ExecutionV2Properties.properties.specification
+      - $.definitions.SolutionTemplateVersionProperties.properties.specification
+      - $.definitions.SolutionTemplateVersionPropertiesUpdate.properties.specification
+      - $.definitions.SolutionVersionProperties.properties.specification
+      - $.definitions.SolutionVersionPropertiesUpdate.properties.specification
+      - $.definitions.SolutionVersionSnapshot.properties.specification
+      - $.definitions.StageSpec.properties.specification
+      - $.definitions.StageSpecTemplate.properties.specification
+      - $.definitions.StageStatus.properties.inputs
+      - $.definitions.StageStatus.properties.outputs
+      - $.definitions.TargetProperties.properties.targetSpecification
+      - $.definitions.TargetSnapshot.properties.targetSpecification
+      - $.definitions.TargetTemplateProperties.properties.targetSpec
+      - $.definitions.TargetTemplatePropertiesUpdate.properties.targetSpec
+      - $.definitions.TargetUpdateProperties.properties.targetSpecification
+      - $.definitions.TaskSpec.properties.specification
+      - $.definitions.WorkflowExecuteParameter.properties.inputs
+      - $.definitions.WorkflowTemplateReviewParameter.properties.stageTargetMap
+      - $.definitions.WorkflowVersionProperties.properties.specification
+      - $.definitions.WorkflowVersionPropertiesUpdate.properties.specification
+      - $.definitions.WorkflowVersionV2Properties.properties.specification
+      - $.definitions.WorkflowVersionV2PropertiesUpdate.properties.specification
     reason: RP depends on another service called k8s bridge which is facing issues during serialization of data. The changes required in that service will not be implemented before our public preview, so we need to go ahead with using Record which adds this. Check https://msazure.visualstudio.com/One/_workitems/edit/31068512
 ```
 
@@ -38,7 +63,16 @@ These are the global settings for the configurationmanager.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-08-01
+tag: package-2026-03-01
+```
+
+### Tag: package-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01'
+input-file:
+  - stable/2026-03-01/configurationmanager.json
 ```
 
 ### Tag: package-2025-08-01
@@ -106,6 +140,11 @@ directive:
     reason: RP is in Public and PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
   - suppress: ProvisioningStateSpecifiedForLROPut
     from: configurationmanager.json
+    where:
+      - $.definitions.HierarchyConfigurationMetadataProperties
+      - $.definitions.HierarchyConfigurationMetadataVersionProperties
+      - $.definitions.SolutionMetadataProperties
+      - $.definitions.SolutionMetadataVersionProperties
     reason: Adding provisioning state will break polymorphism
 
 ```
