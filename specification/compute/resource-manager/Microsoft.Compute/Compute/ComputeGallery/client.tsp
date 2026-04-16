@@ -172,8 +172,10 @@ using ComputeGallery;
 @@alternateType(GalleryScriptProperties.privacyStatementUri, url, "csharp");
 @@alternateType(GalleryScriptProperties.releaseNoteUri, url, "csharp");
 @@alternateType(SharedGalleryImageProperties.privacyStatementUri, url, "csharp");
+@@alternateType(CommunityGalleryInfo.publisherUri, url, "csharp");
 @@alternateType(CommunityGalleryMetadata.privacyStatementUri, url, "csharp");
 @@alternateType(CommunityGalleryImageProperties.privacyStatementUri, url, "csharp");
+@@alternateType(GalleryDiskImageSource.uri, url, "csharp");
 
 // ── alternateType: string → ResourceIdentifier for C# (migration from AutoRest) ──
 

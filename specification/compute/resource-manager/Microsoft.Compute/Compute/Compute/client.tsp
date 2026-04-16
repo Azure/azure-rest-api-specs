@@ -665,13 +665,21 @@ using Compute;
 );
 
 // ── alternateType: string → Uri for C# (migration from AutoRest) ──
+@@alternateType(BootDiagnostics.storageUri, url, "csharp");
 @@alternateType(BootDiagnosticsInstanceView.consoleScreenshotBlobUri, url, "csharp");
 @@alternateType(BootDiagnosticsInstanceView.serialConsoleLogBlobUri, url, "csharp");
+@@alternateType(ImageDisk.blobUri, url, "csharp");
+@@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
+@@alternateType(KeyVaultSecretReference.secretUrl, url, "csharp");
+@@alternateType(LogAnalyticsInputBase.blobContainerSasUri, url, "csharp");
 @@alternateType(RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri, url, "csharp");
 @@alternateType(RetrieveBootDiagnosticsDataResult.serialConsoleLogBlobUri, url, "csharp");
+@@alternateType(VaultCertificate.certificateUrl, url, "csharp");
+@@alternateType(VirtualHardDisk.uri, url, "csharp");
 @@alternateType(VirtualMachineRunCommandProperties.outputBlobUri, url, "csharp");
 @@alternateType(VirtualMachineRunCommandProperties.errorBlobUri, url, "csharp");
 @@alternateType(VirtualMachineRunCommandScriptSource.scriptUri, url, "csharp");
+@@alternateType(WinRMListener.certificateUrl, url, "csharp");
 
 // ── alternateType: Identity types → ManagedServiceIdentity for C# ──
 @@alternateType(VirtualMachineScaleSet.identity,
@@ -705,19 +713,19 @@ using Compute;
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetIPConfigurationProperties.applicationGatewayBackendAddressPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetIPConfigurationProperties.applicationSecurityGroups,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerBackendAddressPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetIPConfigurationProperties.loadBalancerInboundNatPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetUpdateNetworkConfigurationProperties.networkSecurityGroup,
@@ -725,19 +733,19 @@ using Compute;
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationGatewayBackendAddressPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.applicationSecurityGroups,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerBackendAddressPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineScaleSetUpdateIPConfigurationProperties.loadBalancerInboundNatPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineNetworkInterfaceConfigurationProperties.networkSecurityGroup,
@@ -745,15 +753,15 @@ using Compute;
   "csharp"
 );
 @@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationSecurityGroups,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.applicationGatewayBackendAddressPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(VirtualMachineNetworkInterfaceIPConfigurationProperties.loadBalancerBackendAddressPools,
-  Azure.ResourceManager.Models.SubResource[],
+  Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(DedicatedHostGroupProperties.hosts,

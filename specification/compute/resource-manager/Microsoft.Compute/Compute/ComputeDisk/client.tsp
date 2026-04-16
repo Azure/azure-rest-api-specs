@@ -154,3 +154,11 @@ using ComputeDisk;
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
+
+// ── alternateType: string → Uri for C# (migration from AutoRest) ──
+@@alternateType(CreationData.sourceUri, url, "csharp");
+@@alternateType(CreationData.securityDataUri, url, "csharp");
+@@alternateType(KeyForDiskEncryptionSet.keyUrl, url, "csharp");
+@@alternateType(KeyVaultAndKeyReference.keyUrl, url, "csharp");
+@@alternateType(KeyVaultAndSecretReference.secretUrl, url, "csharp");
+@@alternateType(ShareInfoElement.vmUri, url, "csharp");
