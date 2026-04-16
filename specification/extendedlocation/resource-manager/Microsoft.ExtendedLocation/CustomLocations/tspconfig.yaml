@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/extendedlocation"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/customlocations.json"
+    emit-lro-options: "all"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-extendedlocation"
+    namespace: "azure.mgmt.extendedlocation"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-extendedlocation"
+    namespace: "com.azure.resourcemanager.extendedlocation"
+    service-name: "CustomLocations"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-extendedlocation"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-extendedlocation"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/extendedlocation"
+    emitter-output-dir: "{output-dir}/{service-dir}/armextendedlocation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armextendedlocation"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
