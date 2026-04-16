@@ -150,7 +150,9 @@ interface AnalyticsSchedules {
   @doc("Get the analytics global schedule.")
   @route("/analytics/schedule")
   @get
-  getAnalyticsSchedule(...ApiVersionParameter): AnalyticsScheduleResponse | ErrorResponse;
+  getAnalyticsSchedule(
+    ...ApiVersionParameter,
+  ): AnalyticsScheduleResponse | ErrorResponse;
 
   @doc("Create or update the analytics global schedule.")
   @route("/analytics/schedule")
@@ -163,7 +165,9 @@ interface AnalyticsSchedules {
   @doc("Get analytics job logs for the global schedule.")
   @route("/analytics/schedule/getjoblogs")
   @get
-  getAnalyticsJobLogs(...ApiVersionParameter): AnalyticsJobLogsResponse | ErrorResponse;
+  getAnalyticsJobLogs(
+    ...ApiVersionParameter,
+  ): AnalyticsJobLogsResponse | ErrorResponse;
 }
 
 // ============================================================================
@@ -175,7 +179,9 @@ interface Assessments {
   @doc("List all assessments.")
   @route("/controls/assessments")
   @get
-  listAssessments(...ApiVersionParameter): AssessmentListResponse | ErrorResponse;
+  listAssessments(
+    ...ApiVersionParameter,
+  ): AssessmentListResponse | ErrorResponse;
 
   @doc("Create a new assessment.")
   @route("/controls/assessments")
@@ -429,7 +435,9 @@ interface Settings {
   @doc("Get the current storage configuration.")
   @route("/settings/storageConfig")
   @get
-  getStorageConfig(...ApiVersionParameter): StorageConfigResponse | ErrorResponse;
+  getStorageConfig(
+    ...ApiVersionParameter,
+  ): StorageConfigResponse | ErrorResponse;
 
   @doc("Update the storage configuration.")
   @route("/settings/storageConfig")
@@ -479,7 +487,9 @@ interface StatusPalettes {
   @doc("List all status palettes.")
   @route("/controls/statusPalette")
   @get
-  listStatusPalettes(...ApiVersionParameter): StatusPaletteListResponse | ErrorResponse;
+  listStatusPalettes(
+    ...ApiVersionParameter,
+  ): StatusPaletteListResponse | ErrorResponse;
 
   @doc("Create a new status palette.")
   @route("/controls/statusPalette")
