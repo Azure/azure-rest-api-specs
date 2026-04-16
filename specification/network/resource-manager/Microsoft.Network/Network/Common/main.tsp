@@ -174,7 +174,7 @@ union RouteNextHopType {
   VirtualApplianceEcmp: "VirtualApplianceEcmp",
 
   /**
-   * None
+   * No next hop type.
    */
   None: "None",
 }

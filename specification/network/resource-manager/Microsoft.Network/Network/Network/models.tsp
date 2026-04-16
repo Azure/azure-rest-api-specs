@@ -2926,7 +2926,7 @@ union NextHopType {
   VirtualApplianceEcmp: "VirtualApplianceEcmp",
 
   /**
-   * None
+   * No next hop type.
    */
   None: "None",
 }
