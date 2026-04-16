@@ -113,24 +113,24 @@ op FleetArmResourceDeleteAsync<
 union DayOfWeek {
   string,
 
-  @doc("Monday")
+  @doc("The day Monday.")
   Monday: "Monday",
 
-  @doc("Tuesday")
+  @doc("The day Tuesday.")
   Tuesday: "Tuesday",
 
-  @doc("Wednesday")
+  @doc("The day Wednesday.")
   Wednesday: "Wednesday",
 
-  @doc("Thursday")
+  @doc("The day Thursday.")
   Thursday: "Thursday",
 
-  @doc("Friday")
+  @doc("The day Friday.")
   Friday: "Friday",
 
-  @doc("Saturday")
+  @doc("The day Saturday.")
   Saturday: "Saturday",
 
-  @doc("Sunday")
+  @doc("The day Sunday.")
   Sunday: "Sunday",
 }
