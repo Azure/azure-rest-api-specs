@@ -4641,30 +4641,6 @@
         }
       }
     },
-    "Agent configuration mode": {
-      "type": "string",
-      "description": "Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.",
-      "enum": [
-        "full",
-        "monitor"
-      ],
-      "x-ms-enum": {
-        "name": "Agent configuration mode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "full",
-            "value": "full",
-            "description": "full"
-          },
-          {
-            "name": "monitor",
-            "value": "monitor",
-            "description": "monitor"
-          }
-        ]
-      }
-    },
     "AgentConfiguration": {
       "type": "object",
       "description": "Configurable properties that the user can set locally via the azcmagent config command, or remotely via ARM.",
@@ -4719,10 +4695,34 @@
           "readOnly": true
         },
         "configMode": {
-          "$ref": "#/definitions/Agent%20configuration%20mode",
+          "$ref": "#/definitions/AgentConfigurationMode",
           "description": "Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.",
           "readOnly": true
         }
+      }
+    },
+    "AgentConfigurationMode": {
+      "type": "string",
+      "description": "Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.",
+      "enum": [
+        "full",
+        "monitor"
+      ],
+      "x-ms-enum": {
+        "name": "AgentConfigurationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "full",
+            "value": "full",
+            "description": "full"
+          },
+          {
+            "name": "monitor",
+            "value": "monitor",
+            "description": "monitor"
+          }
+        ]
       }
     },
     "AgentUpgrade": {

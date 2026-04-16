@@ -201,7 +201,7 @@ union CreatedByType {
 /**
  * Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.
  */
-union `Agent configuration mode` {
+union AgentConfigurationMode {
   string,
 
   /**
@@ -1461,7 +1461,7 @@ model AgentConfiguration {
    * Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.
    */
   @visibility(Lifecycle.Read)
-  configMode?: `Agent configuration mode`;
+  configMode?: AgentConfigurationMode;
 }
 
 /**
