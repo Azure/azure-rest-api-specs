@@ -250,11 +250,6 @@ using Microsoft.CognitiveServices;
 @@clientLocation(AgentDeploymentResources.start, "AgentDeployments", "!csharp");
 @@clientLocation(AgentDeploymentResources.stop, "AgentDeployments", "!csharp");
 
-@@clientLocation(DeletedAccountsOperationGroup.list,
-  DeletedAccounts,
-  "!csharp"
-);
-
 @@clientLocation(ResourceSkusOperationGroup.list, "ResourceSkus", "!csharp");
 
 @@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");

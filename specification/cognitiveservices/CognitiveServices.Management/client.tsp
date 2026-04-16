@@ -238,6 +238,10 @@ op calculateModelCapacityCustom(
 );
 @@clientName(AccountModel, "CognitiveServicesAccountModel", "csharp");
 @@clientName(AccountProperties, "CognitiveServicesAccountProperties", "csharp");
+@@clientName(AccountProperties.networkInjections,
+  "AIFoundryNetworkInjections",
+  "csharp"
+);
 @@clientName(AccountProperties.dateCreated, "CreatedOn", "csharp");
 @@alternateType(AccountProperties.dateCreated, utcDateTime, "csharp");
 @@clientName(AccountProperties.deletionDate, "DeletedOn", "csharp");
@@ -642,10 +646,7 @@ op calculateModelCapacityCustom(
   "GetModelCapacities",
   "csharp"
 );
-@@clientName(DeletedAccountsOperationGroup.list,
-  "GetDeletedAccounts",
-  "csharp"
-);
+@@clientName(DeletedAccounts.list, "GetDeletedAccounts", "csharp");
 @@clientName(ManagedNetworkSettingsPropertiesBasicResources.post,
   "UpdateOutboundRules",
   "csharp"

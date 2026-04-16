@@ -244,12 +244,12 @@ interface DeletedAccountOps
         @segment("providers")
         @key
         providerNamespace: "Microsoft.CognitiveServices",
-
-        ...LocationParameter,
-        ...ResourceGroupParameter,
       },
       {},
       {
+        ...LocationParameter,
+        ...ResourceGroupParameter,
+
         /** The name of Cognitive Services account. */
         @path
         @segment("deletedAccounts")
@@ -264,6 +264,13 @@ interface DeletedAccountOps
 
 @armResourceOperations(#{ omitTags: true })
 interface DeletedAccounts {
+  /**
+   * Returns all the resources of a particular type belonging to a subscription.
+   */
+  @tag("CognitiveServicesAccounts")
+  @segment("deletedAccounts")
+  list is DeletedAccountOps.List<Account, Response = AccountListResult>;
+
   /**
    * Returns a Cognitive Services account specified by the parameters.
    */
