@@ -254,6 +254,20 @@ union ImmutabilityState {
   Locked: "Locked",
 }
 
+/**
+ * Immutability config type.
+ */
+@added(Versions.v2026_05_01)
+union ImmutabilityType {
+  string,
+
+  /** Immutability is governed by policy. */
+  AsPerPolicy: "AsPerPolicy",
+
+  /** Immutability duration is time-based. */
+  TimeBased: "TimeBased",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SoftDeleteState {
   string,
@@ -1273,6 +1287,28 @@ model SecuritySettings {
 model ImmutabilitySettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   state?: ImmutabilityState;
+
+  /**
+   * Immutability configuration of vault.
+   */
+  @added(Versions.v2026_05_01)
+  configuration?: ImmutabilityConfiguration;
+}
+
+/**
+ * Immutability configuration of vault.
+ */
+@added(Versions.v2026_05_01)
+model ImmutabilityConfiguration {
+  /**
+   * AsPerPolicy or TimeBased.
+   */
+  type?: ImmutabilityType;
+
+  /**
+   * Duration in days. Required when type is TimeBased, omitted when AsPerPolicy.
+   */
+  durationInDays?: int32;
 }
 
 /**
