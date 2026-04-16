@@ -126,6 +126,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(StorageServiceProperties.cors, "CORS", "go");
 @@clientName(UserDelegationKey.signedOid, "SignedOID", "go");
 @@clientName(UserDelegationKey.signedTid, "SignedTID", "go");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(HandleItem, "omitSerdeMethods", "all", "go");
 
 @@alternateType(Storage.File.AccessPolicy.start, string, "javascript,python");
