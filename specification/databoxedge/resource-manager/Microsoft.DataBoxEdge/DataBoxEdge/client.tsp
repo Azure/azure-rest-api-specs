@@ -2056,9 +2056,18 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 );
 
 // Make roleStatus/hostPlatform nullable in C# to match baseline SDK API surface.
-@@alternateType(CloudEdgeManagementRoleProperties.roleStatus, RoleStatus | null, "csharp");
+@@alternateType(CloudEdgeManagementRoleProperties.roleStatus,
+  RoleStatus | null,
+  "csharp"
+);
 @@alternateType(IoTRoleProperties.roleStatus, RoleStatus | null, "csharp");
 @@alternateType(IoTRoleProperties.hostPlatform, PlatformType | null, "csharp");
-@@alternateType(KubernetesRoleProperties.roleStatus, RoleStatus | null, "csharp");
-@@alternateType(KubernetesRoleProperties.hostPlatform, PlatformType | null, "csharp");
+@@alternateType(KubernetesRoleProperties.roleStatus,
+  RoleStatus | null,
+  "csharp"
+);
+@@alternateType(KubernetesRoleProperties.hostPlatform,
+  PlatformType | null,
+  "csharp"
+);
 @@alternateType(MECRoleProperties.roleStatus, RoleStatus | null, "csharp");
