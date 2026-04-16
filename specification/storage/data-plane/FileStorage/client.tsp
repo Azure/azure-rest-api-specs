@@ -79,11 +79,17 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(ContentCrc64ResponseHeader.contentCrc64, "XMSContentCRC64", "go");
 @@clientName(DirectoryItem, "Directory", "go");
 @@clientName(DirectoryItem.fileId, "ID", "go");
-@@clientName(EnableSmbDirectoryLeaseHeader.enableSmbDirectoryLease, "EnableSMBDirectoryLease", "go");
+@@clientName(EnableSmbDirectoryLeaseHeader.enableSmbDirectoryLease,
+  "EnableSMBDirectoryLease",
+  "go"
+);
 @@clientName(EtagResponseHeader.etag, "ETag", "go");
 @@clientName(FileItem, "File", "go");
 @@clientName(FileItem.fileId, "ID", "go");
-@@clientName(FilesAndDirectoriesListSegment.directoryItems, "Directories", "go");
+@@clientName(FilesAndDirectoriesListSegment.directoryItems,
+  "Directories",
+  "go"
+);
 @@clientName(FilesAndDirectoriesListSegment.fileItems, "Files", "go");
 @@clientName(HandleItem, "Handle", "go");
 @@clientName(ListHandlesResponse.handleList, "Handles", "go");
@@ -91,15 +97,30 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(Metrics.includeApis, "includeAPIs", "go");
 @@clientName(NfsFileType, "NFSFileType", "go");
 @@clientName(NfsResponseHeaders.nfsFileType, "NFSFileType", "go");
-@@clientName(RequestServerEncryptedResponseHeader.requestServerEncrypted, "IsServerEncrypted", "go");
-@@clientName(ServerEncryptedResponseHeader.serverEncrypted, "IsServerEncrypted", "go");
+@@clientName(RequestServerEncryptedResponseHeader.requestServerEncrypted,
+  "IsServerEncrypted",
+  "go"
+);
+@@clientName(ServerEncryptedResponseHeader.serverEncrypted,
+  "IsServerEncrypted",
+  "go"
+);
 
 @@clientName(ShareItemInternal, "Share", "go");
 @@clientName(SharePropertiesInternal, "ShareProperties", "go");
-@@clientName(SharePropertiesInternal.enableSmbDirectoryLease, "EnableSMBDirectoryLease", "go");
+@@clientName(SharePropertiesInternal.enableSmbDirectoryLease,
+  "EnableSMBDirectoryLease",
+  "go"
+);
 @@clientName(ShareProtocolSettings, "ProtocolSettings", "go");
-@@clientName(ShareUsageResponseHeader.shareUsageBytes, "FileShareUsageBytes", "go");
-@@clientName(ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes, "FileShareSnapshotUsageBytes", "go");
+@@clientName(ShareUsageResponseHeader.shareUsageBytes,
+  "FileShareUsageBytes",
+  "go"
+);
+@@clientName(ShareSnapshotUsageResponseHeader.shareSnapshotUsageBytes,
+  "FileShareSnapshotUsageBytes",
+  "go"
+);
 @@clientName(ShareSmbSettings, "SMBSettings", "go");
 @@clientName(SmbMultichannel, "SMBMultichannel", "go");
 @@clientName(StorageServiceProperties.cors, "CORS", "go");
@@ -336,7 +357,8 @@ model StorageServicePropertiesCsharp {
   /**
    * A summary of request statistics grouped by API in minute aggregates for files.
    */
-  @Xml.name("MinuteMetrics") minuteMetrics?: StorageServiceProperties.minuteMetrics;
+  @Xml.name("MinuteMetrics")
+  minuteMetrics?: StorageServiceProperties.minuteMetrics;
 
   /**
    * Protocol settings
@@ -349,15 +371,20 @@ model StorageServicePropertiesCsharp {
   @Xml.name("Cors") cors?: CorsRule[];
 }
 
-
 @@alternateType(AccessPolicy.start, utcDateTime, "csharp");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "csharp");
 @@alternateType(MetadataHeaders.metadata, Record<string>, "csharp");
 @@alternateType(FileProperty.eTag, string, "csharp");
-@@alternateType(StorageServiceProperties, StorageServicePropertiesCsharp, "csharp");
+@@alternateType(StorageServiceProperties,
+  StorageServicePropertiesCsharp,
+  "csharp"
+);
 @@alternateType(ShareStats.shareUsageBytes, int64, "csharp");
 
-@@clientName(StorageServicePropertiesCsharp, "StorageServiceProperties", "csharp");
+@@clientName(StorageServicePropertiesCsharp,
+  "StorageServiceProperties",
+  "csharp"
+);
 @@clientName(Storage.File, "ShareClient", "csharp");
 @@clientName(AccessPolicy.start, "PolicyStartsOn", "csharp");
 @@clientName(AccessPolicy.expiry, "PolicyExpiresOn", "csharp");
