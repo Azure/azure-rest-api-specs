@@ -67,9 +67,6 @@
     },
     {
       "name": "Toolboxes"
-    },
-    {
-      "name": "DataGenerationJobs"
     }
   ],
   "paths": {
@@ -781,15 +778,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this invocation. Returns the session ID associated with the invocation.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "*/*": {
                 "schema": {}
@@ -866,15 +854,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this invocation. Returns the session ID associated with the invocation.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "*/*": {
                 "schema": {}
@@ -1134,370 +1113,6 @@
         }
       }
     },
-    "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files": {
-      "get": {
-        "operationId": "AgentSessionFiles_listSessionFiles",
-        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The directory path to list, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "AgentSessionFiles_deleteSessionFile",
-        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The file or directory path to delete, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "recursive",
-            "in": "query",
-            "required": false,
-            "description": "Whether to recursively delete directory contents. Defaults to false.",
-            "schema": {
-              "type": "boolean",
-              "default": false
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
-    "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content": {
-      "put": {
-        "operationId": "AgentSessionFiles_uploadSessionFile",
-        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The destination file path within the sandbox, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SessionFileWriteResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/octet-stream": {
-              "schema": {
-                "type": "string",
-                "format": "binary"
-              }
-            }
-          }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "get": {
-        "operationId": "AgentSessionFiles_downloadSessionFile",
-        "description": "Download a file from the session sandbox as a binary stream.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "agent_name",
-            "in": "path",
-            "required": true,
-            "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "agent_session_id",
-            "in": "path",
-            "required": true,
-            "description": "The session ID.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "required": true,
-            "description": "The file path to download from the sandbox, relative to the session home directory.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
     "/agents/{agent_name}/endpoint/sessions/{session_id}": {
       "get": {
         "operationId": "Agents_getSession",
@@ -1650,6 +1265,370 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{session_id}/files": {
+      "get": {
+        "operationId": "AgentSessionFiles_listSessionFiles",
+        "description": "List files and directories at a given path in the session sandbox.\nReturns only the immediate children of the specified directory (non-recursive).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The directory path to list, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDirectoryListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentSessionFiles_deleteSessionFile",
+        "description": "Delete a file or directory from the session sandbox.\nIf `recursive` is false (default) and the target is a non-empty directory, the API returns 409 Conflict.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file or directory path to delete, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "recursive",
+            "in": "query",
+            "required": false,
+            "description": "Whether to recursively delete directory contents. Defaults to false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/sessions/{session_id}/files/content": {
+      "put": {
+        "operationId": "AgentSessionFiles_uploadSessionFile",
+        "description": "Upload a file to the session sandbox via binary stream.\nMaximum file size is 50 MB. Uploads exceeding this limit return 413 Payload Too Large.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The destination file path within the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionFileWriteResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "AgentSessionFiles_downloadSessionFile",
+        "description": "Download a file from the session sandbox as a binary stream.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "HostedAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file path to download from the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Session Files"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "HostedAgents=V1Preview"
           ]
         }
       }
@@ -3397,464 +3376,6 @@
         ]
       }
     },
-    "/data_generation_jobs": {
-      "get": {
-        "operationId": "DataGenerationJobs_list",
-        "summary": "Returns a list of data generation jobs",
-        "description": "Returns a list of data generation jobs.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "DataGenerationJobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 20
-            },
-            "explode": false
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "required": false,
-            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
-            "schema": {
-              "$ref": "#/components/schemas/PageOrder"
-            },
-            "explode": false
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "required": false,
-            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "scenario",
-            "in": "query",
-            "required": false,
-            "description": "Filter data generation jobs by their scenario.",
-            "schema": {
-              "$ref": "#/components/schemas/DataGenerationJobScenario"
-            },
-            "explode": false
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "description": "Filter data generation jobs by their type.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/DataGenerationJobType"
-              }
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "has_more"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/DataGenerationJob"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "first_id": {
-                      "type": "string",
-                      "description": "The first ID represented in this list."
-                    },
-                    "last_id": {
-                      "type": "string",
-                      "description": "The last ID represented in this list."
-                    },
-                    "has_more": {
-                      "type": "boolean",
-                      "description": "A value indicating whether there are additional values available not captured in this list."
-                    }
-                  },
-                  "description": "The response data for a requested list of items."
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      },
-      "post": {
-        "operationId": "DataGenerationJobs_create",
-        "summary": "Creates a data generation job.",
-        "description": "Creates a data generation job.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "DataGenerationJobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Operation-Location": {
-                "required": true,
-                "description": "URL to poll for the job status.",
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "Location": {
-                "required": true,
-                "description": "URL of the created job resource.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataGenerationJob"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DataGenerationJob"
-              }
-            }
-          },
-          "description": "The job to create."
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      }
-    },
-    "/data_generation_jobs/{jobId}": {
-      "get": {
-        "operationId": "DataGenerationJobs_get",
-        "summary": "Get info about a data generation job.",
-        "description": "Gets the details of a data generation job by its ID.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "DataGenerationJobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the job.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Retry-After": {
-                "required": false,
-                "description": "Recommended number of seconds to wait before polling again.",
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataGenerationJob"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      },
-      "delete": {
-        "operationId": "DataGenerationJobs_delete",
-        "summary": "Deletes a data generation job.",
-        "description": "Deletes a data generation job by its ID.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "DataGenerationJobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the job to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      }
-    },
-    "/data_generation_jobs/{jobId}:cancel": {
-      "post": {
-        "operationId": "DataGenerationJobs_cancel",
-        "summary": "Cancels a data generation job.",
-        "description": "Cancels a data generation job by its ID.",
-        "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "DataGenerationJobs=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "description": "The ID of the job to cancel.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DataGenerationJob"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "DataGenerationJobs"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "DataGenerationJobs=V1Preview"
-          ]
-        }
-      }
-    },
     "/datasets": {
       "get": {
         "operationId": "Datasets_listLatest",
@@ -4441,6 +3962,358 @@
         "tags": [
           "Deployments"
         ]
+      }
+    },
+    "/evaluationSuites": {
+      "get": {
+        "operationId": "EvaluationSuites_listLatest",
+        "description": "List the latest version of each EvaluationSuiteVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "required": false,
+            "description": "Filter by associated agent name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "description": "Filter by evaluation suite kind (dataset_backed or evaluator_only).",
+            "schema": {
+              "$ref": "#/components/schemas/EvaluationSuiteKind"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEvaluationSuiteVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluationSuites/{name}/versions": {
+      "get": {
+        "operationId": "EvaluationSuites_listVersions",
+        "description": "List all versions of the given EvaluationSuiteVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEvaluationSuiteVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "EvaluationSuites_createEvaluationSuiteVersion",
+        "description": "Create a new EvaluationSuiteVersion with auto incremented version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluationSuites/{name}/versions/{version}": {
+      "get": {
+        "operationId": "EvaluationSuites_getVersion",
+        "description": "Get the specific version of the EvaluationSuiteVersion. The service returns 404 Not Found error if the EvaluationSuiteVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluationSuiteVersion to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationSuites_deleteVersion",
+        "description": "Delete the specific version of the EvaluationSuiteVersion. The service returns 204 No Content if the EvaluationSuiteVersion was deleted successfully or if the EvaluationSuiteVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the EvaluationSuiteVersion to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EvaluationSuites_createOrUpdateVersion",
+        "description": "Create a new or update an existing EvaluationSuiteVersion with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluationSuiteVersion to create or update.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteVersion"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluationSuiteVersion"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationSuiteVersionUpdate"
+              }
+            }
+          },
+          "description": "The EvaluationSuiteVersion to create or update."
+        }
       }
     },
     "/evaluationrules": {
@@ -9611,15 +9484,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": false,
-                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -10315,15 +10179,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": false,
-                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -10369,15 +10224,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": false,
-                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -10420,15 +10266,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": false,
-                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -10512,15 +10349,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": false,
-                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -11428,13 +11256,13 @@
         }
       }
     },
-    "/skills/{name}": {
+    "/skills/{skill_name}": {
       "get": {
         "operationId": "Skills_getSkill",
         "description": "Retrieves a skill.",
         "parameters": [
           {
-            "name": "name",
+            "name": "skill_name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -11501,7 +11329,7 @@
         "description": "Updates an existing skill.",
         "parameters": [
           {
-            "name": "name",
+            "name": "skill_name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -11598,7 +11426,7 @@
         "description": "Deletes a skill.",
         "parameters": [
           {
-            "name": "name",
+            "name": "skill_name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -11661,13 +11489,13 @@
         }
       }
     },
-    "/skills/{name}:download": {
+    "/skills/{skill_name}:download": {
       "get": {
         "operationId": "Skills_downloadSkill",
         "description": "Downloads a skill package.",
         "parameters": [
           {
-            "name": "name",
+            "name": "skill_name",
             "in": "path",
             "required": true,
             "description": "The unique name of the skill.",
@@ -11931,13 +11759,13 @@
         }
       }
     },
-    "/toolboxes/{name}": {
+    "/toolboxes/{toolbox_name}": {
       "get": {
         "operationId": "getToolbox",
         "description": "Retrieve a toolbox.",
         "parameters": [
           {
-            "name": "name",
+            "name": "toolbox_name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to retrieve.",
@@ -12004,7 +11832,7 @@
         "description": "Update a toolbox to point to a specific version.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/UpdateToolboxRequest.name"
+            "$ref": "#/components/parameters/UpdateToolboxRequest.toolbox_name"
           },
           {
             "name": "Foundry-Features",
@@ -12075,7 +11903,7 @@
         "description": "Delete a toolbox and all its versions.",
         "parameters": [
           {
-            "name": "name",
+            "name": "toolbox_name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to delete.",
@@ -12131,13 +11959,13 @@
         }
       }
     },
-    "/toolboxes/{name}/versions": {
+    "/toolboxes/{toolbox_name}/versions": {
       "post": {
         "operationId": "createToolboxVersion",
         "description": "Create a new version of a toolbox. If the toolbox does not exist, it will be created.",
         "parameters": [
           {
-            "name": "name",
+            "name": "toolbox_name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox. If the toolbox does not exist, it will be created.",
@@ -12247,7 +12075,7 @@
         "description": "List all versions of a toolbox.",
         "parameters": [
           {
-            "name": "name",
+            "name": "toolbox_name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox to list versions for.",
@@ -12378,13 +12206,13 @@
         }
       }
     },
-    "/toolboxes/{name}/versions/{version}": {
+    "/toolboxes/{toolbox_name}/versions/{version}": {
       "get": {
         "operationId": "getToolboxVersion",
         "description": "Retrieve a specific version of a toolbox.",
         "parameters": [
           {
-            "name": "name",
+            "name": "toolbox_name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox.",
@@ -12460,7 +12288,7 @@
         "description": "Delete a specific version of a toolbox.",
         "parameters": [
           {
-            "name": "name",
+            "name": "toolbox_name",
             "in": "path",
             "required": true,
             "description": "The name of the toolbox.",
@@ -12555,8 +12383,8 @@
         },
         "explode": false
       },
-      "UpdateToolboxRequest.name": {
-        "name": "name",
+      "UpdateToolboxRequest.toolbox_name": {
+        "name": "toolbox_name",
         "in": "path",
         "required": true,
         "description": "The name of the toolbox to update.",
@@ -12578,14 +12406,6 @@
               "a2a_preview"
             ],
             "description": "The type of the tool. Always `\"a2a_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "base_url": {
             "type": "string",
@@ -13159,40 +12979,6 @@
             "ContainerAgents=V1Preview"
           ]
         }
-      },
-      "AgentDataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent_name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "agent"
-            ],
-            "description": "The source type for this source, which is Agent."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch instructions from."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, the latest version is used."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
-        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from."
       },
       "AgentDefinition": {
         "type": "object",
@@ -13903,7 +13689,8 @@
           "name",
           "version",
           "created_at",
-          "definition"
+          "definition",
+          "status"
         ],
         "properties": {
           "metadata": {
@@ -13957,7 +13744,8 @@
                 "$ref": "#/components/schemas/AgentVersionStatus"
               }
             ],
-            "description": "The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness."
+            "description": "The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.",
+            "default": "active"
           },
           "error": {
             "allOf": [
@@ -14637,14 +14425,6 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -15076,14 +14856,6 @@
             ],
             "description": "The object type, which is always 'bing_custom_search_preview'."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "bing_custom_search_preview": {
             "allOf": [
               {
@@ -15258,14 +15030,6 @@
               "bing_grounding"
             ],
             "description": "The object type, which is always 'bing_grounding'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "bing_grounding": {
             "allOf": [
@@ -15453,14 +15217,6 @@
               "browser_automation_preview"
             ],
             "description": "The object type, which is always 'browser_automation_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "browser_automation_preview": {
             "allOf": [
@@ -15806,11 +15562,6 @@
               "type": "string"
             },
             "description": "The entry point command and arguments for the code execution."
-          },
-          "content_hash": {
-            "type": "string",
-            "description": "The SHA-256 hex digest of the uploaded code zip. Set by the service from the `x-ms-code-zip-sha256` request header; read-only in responses and never accepted in request payloads.",
-            "readOnly": true
           }
         },
         "description": "Code-based deployment configuration for a hosted agent.",
@@ -16755,348 +16506,6 @@
         ],
         "description": "Daily recurrence schedule."
       },
-      "DataGenerationJob": {
-        "type": "object",
-        "required": [
-          "id",
-          "status",
-          "created_at"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Server-assigned unique identifier.",
-            "readOnly": true
-          },
-          "inputs": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobInputs"
-              }
-            ],
-            "description": "Caller-supplied inputs."
-          },
-          "result": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobResult"
-              }
-            ],
-            "description": "Result produced on success.",
-            "readOnly": true
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobStatus"
-              }
-            ],
-            "description": "Current lifecycle status.",
-            "readOnly": true
-          },
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.Error"
-              }
-            ],
-            "description": "Error details — populated only on failure.",
-            "readOnly": true
-          },
-          "created_at": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
-            "description": "The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).",
-            "readOnly": true
-          },
-          "finished_at": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
-            "description": "The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).",
-            "readOnly": true
-          }
-        },
-        "description": "Data Generation Job resource."
-      },
-      "DataGenerationJobInputs": {
-        "type": "object",
-        "required": [
-          "name",
-          "sources",
-          "options",
-          "scenario"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The display name of the data generation job."
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataGenerationJobSource"
-            },
-            "description": "The sources used for the data generation job."
-          },
-          "options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobOptions"
-              }
-            ],
-            "description": "The options for the data generation job."
-          },
-          "scenario": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobScenario"
-              }
-            ],
-            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
-          }
-        },
-        "description": "Caller-supplied inputs for a data generation job."
-      },
-      "DataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type",
-          "max_samples"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobType"
-              }
-            ],
-            "description": "The data generation job type."
-          },
-          "max_samples": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of samples to generate."
-          },
-          "train_split": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "description": "The proportion of the generated data to be used for training when the data is used for fine-tuning. The rest will be used for validation. Value should be between 0 and 1."
-          },
-          "model_options": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationModelOptions"
-              }
-            ],
-            "description": "The LLM model options."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobOptions",
-            "traces": "#/components/schemas/TracesDataGenerationJobOptions",
-            "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions",
-            "task": "#/components/schemas/TaskDataGenerationJobOptions"
-          }
-        },
-        "description": "Options for managing data generation jobs."
-      },
-      "DataGenerationJobOutput": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobOutputType"
-              }
-            ],
-            "description": "The type of the output."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "file": "#/components/schemas/FileDataGenerationJobOutput",
-            "dataset": "#/components/schemas/DatasetDataGenerationJobOutput"
-          }
-        },
-        "description": "Output information for a data generation job."
-      },
-      "DataGenerationJobOutputType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "file",
-              "dataset"
-            ]
-          }
-        ],
-        "description": "The supported output file types for a data generation job."
-      },
-      "DataGenerationJobResult": {
-        "type": "object",
-        "required": [
-          "generated_samples"
-        ],
-        "properties": {
-          "outputs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataGenerationJobOutput"
-            },
-            "description": "The final job outputs: Azure OpenAI files for fine-tuning, or datasets for evaluation."
-          },
-          "generated_samples": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The number of samples actually generated."
-          },
-          "token_usage": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationTokenUsage"
-              }
-            ],
-            "description": "The token usage information for the data generation job."
-          }
-        },
-        "description": "Result produced by a successful data generation job."
-      },
-      "DataGenerationJobScenario": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "supervised_finetuning",
-              "reinforcement_finetuning",
-              "evaluation"
-            ]
-          }
-        ],
-        "description": "The supported scenarios for a data generation job."
-      },
-      "DataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DataGenerationJobSourceType"
-              }
-            ],
-            "description": "The type of source."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "prompt": "#/components/schemas/PromptDataGenerationJobSource",
-            "agent": "#/components/schemas/AgentDataGenerationJobSource",
-            "traces": "#/components/schemas/TracesDataGenerationJobSource",
-            "dataset": "#/components/schemas/DatasetDataGenerationJobSource",
-            "file": "#/components/schemas/FileDataGenerationJobSource"
-          }
-        },
-        "description": "The base source model for data generation jobs."
-      },
-      "DataGenerationJobSourceType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "prompt",
-              "agent",
-              "traces",
-              "dataset",
-              "file"
-            ]
-          }
-        ],
-        "description": "The supported source types for data generation jobs."
-      },
-      "DataGenerationJobType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "simple_qna",
-              "traces",
-              "tool_use",
-              "task"
-            ]
-          }
-        ],
-        "description": "The supported data generation job types."
-      },
-      "DataGenerationModelOptions": {
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "properties": {
-          "model": {
-            "type": "string",
-            "description": "Base model name used to generate data."
-          }
-        },
-        "description": "LLM model options for data generation jobs."
-      },
-      "DataGenerationTokenUsage": {
-        "type": "object",
-        "properties": {
-          "prompt_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of prompt tokens used.",
-            "readOnly": true
-          },
-          "completion_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "The number of completion tokens generated.",
-            "readOnly": true
-          },
-          "total_tokens": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Total number of tokens used.",
-            "readOnly": true
-          }
-        },
-        "description": "Token usage information for a data generation job."
-      },
       "DataSourceConfig": {
         "type": "object",
         "required": [
@@ -17120,85 +16529,22 @@
         },
         "description": "Base class for run data sources with discriminator support."
       },
-      "DatasetDataGenerationJobOutput": {
+      "DatasetReference": {
         "type": "object",
         "required": [
-          "type"
+          "datasetName"
         ],
         "properties": {
-          "type": {
+          "datasetName": {
             "type": "string",
-            "enum": [
-              "dataset"
-            ],
-            "description": "Dataset output."
+            "description": "Dataset name as registered in the Foundry project."
           },
-          "id": {
+          "datasetVersion": {
             "type": "string",
-            "description": "The id of the output dataset created.",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the output dataset and can be optionally set during job creation time."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the output dataset.",
-            "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the output dataset and can be optionally set during job creation time."
-          },
-          "tags": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tag dictionary of the output dataset and can be optionally set during job creation time."
+            "description": "Dataset version. Omit to use the latest version."
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOutput"
-          }
-        ],
-        "description": "Dataset output for a data generation job."
-      },
-      "DatasetDataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "dataset"
-            ],
-            "description": "The source type for this source, which is Dataset."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the dataset."
-          },
-          "version": {
-            "type": "string",
-            "description": "The version of the dataset. If not specified, the latest version is used."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
-        "description": "Dataset source for data generation jobs — reference to a dataset."
+        "description": "Reference to a dataset registered in the Foundry project.\nWhen datasetVersion is omitted the latest version is used."
       },
       "DatasetType": {
         "anyOf": [
@@ -18716,6 +18062,151 @@
         ],
         "description": "Evaluation task for the schedule."
       },
+      "EvaluationSuiteEvaluator": {
+        "type": "object",
+        "required": [
+          "evaluatorName"
+        ],
+        "properties": {
+          "evaluatorName": {
+            "type": "string",
+            "description": "Evaluator name from the project's evaluator catalog.\nSupports both built-in evaluators (e.g. coherence, fluency, task_adherence)\nand custom evaluators registered in the catalog."
+          },
+          "threshold": {
+            "type": "number",
+            "format": "double",
+            "description": "Pass/fail threshold. Scores >= threshold pass.\nOmit for informational-only evaluators that report a score\nwithout gating the evaluation suite result."
+          }
+        },
+        "description": "Configuration for an evaluator within an evaluation suite."
+      },
+      "EvaluationSuiteKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "dataset_backed",
+              "evaluator_only"
+            ]
+          }
+        ],
+        "description": "The kind of evaluation suite, determining its composition."
+      },
+      "EvaluationSuiteVersion": {
+        "type": "object",
+        "required": [
+          "kind",
+          "evaluators",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "Human-readable display name.\nDoes not need to be unique. Shown in portal list views and eval reports."
+          },
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteKind"
+              }
+            ],
+            "description": "Evaluation suite kind.\nBatch: requires a dataset reference; evaluators run against dataset rows.\nContinuous: evaluators only; data comes from live production traces."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetReference"
+              }
+            ],
+            "description": "Dataset reference for offline evaluation.\nRequired when kind is batch. Must be null when kind is continuous.\nThe referenced dataset must exist in the project's dataset registry."
+          },
+          "evaluators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationSuiteEvaluator"
+            },
+            "minItems": 1,
+            "description": "Evaluator configurations. At least one is required."
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Name of the agent this evaluation suite is associated with.\nOptional — allows evaluation suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks)."
+          },
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the asset",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the resource",
+            "readOnly": true
+          }
+        },
+        "description": "An evaluation suite bundles evaluation criteria — an optional dataset, one or more\nevaluators, and pass/fail thresholds — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+      },
+      "EvaluationSuiteVersionUpdate": {
+        "type": "object",
+        "required": [
+          "kind",
+          "evaluators"
+        ],
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "Human-readable display name.\nDoes not need to be unique. Shown in portal list views and eval reports."
+          },
+          "kind": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationSuiteKind"
+              }
+            ],
+            "description": "Evaluation suite kind.\nBatch: requires a dataset reference; evaluators run against dataset rows.\nContinuous: evaluators only; data comes from live production traces."
+          },
+          "dataset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetReference"
+              }
+            ],
+            "description": "Dataset reference for offline evaluation.\nRequired when kind is batch. Must be null when kind is continuous.\nThe referenced dataset must exist in the project's dataset registry."
+          },
+          "evaluators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationSuiteEvaluator"
+            },
+            "minItems": 1,
+            "description": "Evaluator configurations. At least one is required."
+          },
+          "agentName": {
+            "type": "string",
+            "description": "Name of the agent this evaluation suite is associated with.\nOptional — allows evaluation suites to exist before being linked to an agent,\nor to be used as shared baselines (e.g. safety checks)."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "description": "An evaluation suite bundles evaluation criteria — an optional dataset, one or more\nevaluators, and pass/fail thresholds — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+      },
       "EvaluationTarget": {
         "type": "object",
         "required": [
@@ -19416,215 +18907,6 @@
         },
         "description": "The fabric data agent tool parameters."
       },
-      "FabricIQPreviewTool": {
-        "type": "object",
-        "required": [
-          "type",
-          "fabric_iq_preview"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "fabric_iq_preview"
-            ],
-            "description": "The object type, which is always 'fabric_iq_preview'."
-          },
-          "fabric_iq_preview": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FabricIQPreviewToolParameters"
-              }
-            ],
-            "description": "The FabricIQ tool parameters."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ]
-      },
-      "FabricIQPreviewToolParameters": {
-        "type": "object",
-        "required": [
-          "project_connection_id"
-        ],
-        "properties": {
-          "project_connection_id": {
-            "type": "string",
-            "description": "The ID of the FabricIQ project connection."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "(Optional) The label of the FabricIQ MCP server to connect to."
-          },
-          "server_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "(Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used."
-          },
-          "require_approval": {
-            "anyOf": [
-              {
-                "type": "object",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
-                  }
-                ],
-                "nullable": true
-              },
-              {
-                "type": "string",
-                "nullable": true
-              }
-            ],
-            "description": "(Optional) Whether the agent requires approval before executing actions. Default is always.",
-            "default": "always"
-          }
-        }
-      },
-      "FabricIQToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "arguments",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "fabric_iq_preview_call"
-            ]
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the tool call generated by the model."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of the arguments to pass to the tool."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolCallStatus"
-              }
-            ],
-            "description": "The status of the tool call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.OutputItem"
-          }
-        ],
-        "description": "A Fabric IQ tool call."
-      },
-      "FabricIQToolCallOutput": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "fabric_iq_preview_call_output"
-            ]
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the tool call generated by the model."
-          },
-          "output": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolCallOutputContent"
-              }
-            ],
-            "description": "The output from the Fabric IQ tool call."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ToolCallStatus"
-              }
-            ],
-            "description": "The status of the tool call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.OutputItem"
-          }
-        ],
-        "description": "The output of a Fabric IQ tool call."
-      },
-      "FileDataGenerationJobOutput": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "filename"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "file"
-            ],
-            "description": "Azure OpenAI file output."
-          },
-          "id": {
-            "type": "string",
-            "description": "The id of the output Azure OpenAI file.",
-            "readOnly": true
-          },
-          "filename": {
-            "type": "string",
-            "description": "The filename of the output Azure OpenAI file.",
-            "readOnly": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOutput"
-          }
-        ],
-        "description": "Azure OpenAI file output for a data generation job."
-      },
-      "FileDataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "id"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "file"
-            ],
-            "description": "The source type for this job, which is File."
-          },
-          "id": {
-            "type": "string",
-            "description": "Input Azure Open AI file id used for data generation."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
-        "description": "File source for data generation jobs — Azure OpenAI file input."
-      },
       "FileDatasetVersion": {
         "type": "object",
         "required": [
@@ -19766,7 +19048,9 @@
       "HeaderIsolationKeySource": {
         "type": "object",
         "required": [
-          "kind"
+          "kind",
+          "user_isolation_key",
+          "chat_isolation_key"
         ],
         "properties": {
           "kind": {
@@ -19774,6 +19058,14 @@
             "enum": [
               "Header"
             ]
+          },
+          "user_isolation_key": {
+            "type": "string",
+            "description": "The user isolation key header value"
+          },
+          "chat_isolation_key": {
+            "type": "string",
+            "description": "The chat isolation key header value"
           }
         },
         "allOf": [
@@ -19784,50 +19076,6 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "AgentEndpoints=V1Preview"
-          ]
-        }
-      },
-      "HeaderTelemetryEndpointAuth": {
-        "type": "object",
-        "required": [
-          "type",
-          "header_name",
-          "secret_id",
-          "secret_key"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "header"
-            ],
-            "description": "The authentication type, always 'header' for header-based secret authentication."
-          },
-          "header_name": {
-            "type": "string",
-            "description": "The name of the HTTP header to inject the secret value into.",
-            "example": "X-Otlp-Api-Key"
-          },
-          "secret_id": {
-            "type": "string",
-            "description": "The identifier of the secret store or connection.",
-            "example": "my-secret-store"
-          },
-          "secret_key": {
-            "type": "string",
-            "description": "The key within the secret to retrieve the authentication value.",
-            "example": "OTLP_KEY"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TelemetryEndpointAuth"
-          }
-        ],
-        "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
           ]
         }
       },
@@ -19946,14 +19194,6 @@
                 "CodeAgents=V1Preview"
               ]
             }
-          },
-          "telemetry_config": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TelemetryConfig"
-              }
-            ],
-            "description": "Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
           }
         },
         "allOf": [
@@ -20586,24 +19826,6 @@
         ],
         "description": "The types of parameters for red team item generation."
       },
-      "JobStatus": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "queued",
-              "in_progress",
-              "succeeded",
-              "failed",
-              "cancelled"
-            ]
-          }
-        ],
-        "description": "Extensible status values shared by Foundry jobs."
-      },
       "ManagedAgentIdentityBlueprint": {
         "type": "object",
         "required": [
@@ -20865,14 +20087,6 @@
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "memory_store_name": {
             "type": "string",
             "description": "The name of the memory store to use."
@@ -20917,14 +20131,6 @@
               "memory_search"
             ],
             "description": "The type of the tool. Always `memory_search_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "memory_store_name": {
             "type": "string",
@@ -21496,14 +20702,6 @@
               "fabric_dataagent_preview"
             ],
             "description": "The object type, which is always 'fabric_dataagent_preview'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
           },
           "fabric_dataagent_preview": {
             "allOf": [
@@ -34207,9 +33405,7 @@
               "fabric_dataagent_preview_call",
               "fabric_dataagent_preview_call_output",
               "azure_function_call",
-              "azure_function_call_output",
-              "fabric_iq_preview_call",
-              "fabric_iq_preview_call_output"
+              "azure_function_call_output"
             ]
           }
         ]
@@ -34321,9 +33517,7 @@
               "fabric_dataagent_preview_call",
               "fabric_dataagent_preview_call_output",
               "azure_function_call",
-              "azure_function_call_output",
-              "fabric_iq_preview_call",
-              "fabric_iq_preview_call_output"
+              "azure_function_call_output"
             ]
           }
         ]
@@ -35448,8 +34642,6 @@
             "browser_automation_preview_call_output": "#/components/schemas/BrowserAutomationToolCallOutput",
             "fabric_dataagent_preview_call": "#/components/schemas/FabricDataAgentToolCall",
             "fabric_dataagent_preview_call_output": "#/components/schemas/FabricDataAgentToolCallOutput",
-            "fabric_iq_preview_call": "#/components/schemas/FabricIQToolCall",
-            "fabric_iq_preview_call_output": "#/components/schemas/FabricIQToolCallOutput",
             "azure_function_call": "#/components/schemas/AzureFunctionToolCall",
             "azure_function_call_output": "#/components/schemas/AzureFunctionToolCallOutput",
             "a2a_preview_call": "#/components/schemas/A2AToolCall",
@@ -36421,9 +35613,7 @@
               "fabric_dataagent_preview_call",
               "fabric_dataagent_preview_call_output",
               "azure_function_call",
-              "azure_function_call_output",
-              "fabric_iq_preview_call",
-              "fabric_iq_preview_call_output"
+              "azure_function_call_output"
             ]
           }
         ]
@@ -40329,10 +39519,8 @@
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewTool",
-            "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "memory_search": "#/components/schemas/MemorySearchTool",
-            "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -40688,8 +39876,6 @@
               "sharepoint_grounding_preview",
               "memory_search_preview",
               "work_iq_preview",
-              "fabric_iq_preview",
-              "toolbox_search_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -41493,48 +40679,6 @@
         ],
         "description": "The output of an OpenAPI tool call."
       },
-      "OtlpTelemetryEndpoint": {
-        "type": "object",
-        "required": [
-          "kind",
-          "endpoint",
-          "protocol"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "OTLP"
-            ],
-            "description": "The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints."
-          },
-          "endpoint": {
-            "type": "string",
-            "description": "The OTLP collector endpoint URL.",
-            "example": "https://my-collector.example.com/otlp"
-          },
-          "protocol": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TelemetryTransportProtocol"
-              }
-            ],
-            "description": "The transport protocol for the OTLP endpoint.",
-            "example": "Http"
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TelemetryEndpoint"
-          }
-        ],
-        "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
       "PageOrder": {
         "type": "string",
         "enum": [
@@ -41646,6 +40790,27 @@
           }
         },
         "description": "Paged collection of EvaluationRule items"
+      },
+      "PagedEvaluationSuiteVersion": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationSuiteVersion"
+            },
+            "description": "The EvaluationSuiteVersion items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of EvaluationSuiteVersion items"
       },
       "PagedEvaluationTaxonomy": {
         "type": "object",
@@ -42022,36 +41187,6 @@
           }
         ],
         "description": "Prompt-based evaluator"
-      },
-      "PromptDataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "prompt"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "prompt"
-            ],
-            "description": "The source type for this source, which is Prompt."
-          },
-          "prompt": {
-            "type": "string",
-            "description": "Inline prompt text (e.g., agent description, policy text, supplementary context)."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
-        "description": "Prompt source for data generation jobs — inline text provided by the user."
       },
       "ProtocolVersionRecord": {
         "type": "object",
@@ -42759,9 +41894,9 @@
             "description": "Whether this entry is a directory."
           },
           "modified_time": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The Unix timestamp (in seconds) when the file was last modified."
+            "type": "string",
+            "format": "date-time",
+            "description": "The last modification time in UTC (ISO 8601)."
           }
         },
         "description": "A single entry in a directory listing."
@@ -42963,14 +42098,6 @@
             ],
             "description": "The object type, which is always 'sharepoint_grounding_preview'."
           },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          },
           "sharepoint_grounding_preview": {
             "allOf": [
               {
@@ -42986,49 +42113,6 @@
           }
         ],
         "description": "The input definition information for a sharepoint tool as used to configure an agent."
-      },
-      "SimpleQnADataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "simple_qna"
-            ],
-            "description": "The data generation job type, which is SimpleQnA for this model."
-          },
-          "question_types": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SimpleQnAFineTuningQuestionType"
-            },
-            "description": "The question types to generate. Used only for fine-tuning scenarios."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a data generation job with SimpleQnA type."
-      },
-      "SimpleQnAFineTuningQuestionType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "short_answer",
-              "long_answer"
-            ]
-          }
-        ],
-        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
       },
       "SkillObject": {
         "type": "object",
@@ -43411,27 +42495,6 @@
         },
         "description": "Base class for targets with discriminator support."
       },
-      "TaskDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "task"
-            ],
-            "description": "The data generation job type, which is Task for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a data generation job with Task type."
-      },
       "TaxonomyCategory": {
         "type": "object",
         "required": [
@@ -43511,185 +42574,6 @@
           }
         },
         "description": "Taxonomy sub-category definition."
-      },
-      "TelemetryConfig": {
-        "type": "object",
-        "required": [
-          "endpoints"
-        ],
-        "properties": {
-          "endpoints": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TelemetryEndpoint"
-            },
-            "minItems": 1,
-            "maxItems": 3,
-            "description": "Customer-supplied telemetry export endpoint configurations."
-          }
-        },
-        "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "TelemetryDataKind": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "ContainerStdoutStderr",
-              "ContainerOtel",
-              "Metrics"
-            ]
-          }
-        ],
-        "description": "The type of telemetry data to export.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "TelemetryEndpoint": {
-        "type": "object",
-        "required": [
-          "kind",
-          "data"
-        ],
-        "properties": {
-          "kind": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TelemetryEndpointKind"
-              }
-            ],
-            "description": "The telemetry export endpoint kind."
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TelemetryDataKind"
-            },
-            "description": "Data types to export to this endpoint. Use an empty array to export no data.",
-            "example": [
-              "ContainerStdoutStderr",
-              "ContainerOtel",
-              "Metrics"
-            ]
-          },
-          "auth": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TelemetryEndpointAuth"
-              }
-            ],
-            "description": "Optional authentication configuration."
-          }
-        },
-        "discriminator": {
-          "propertyName": "kind",
-          "mapping": {
-            "OTLP": "#/components/schemas/OtlpTelemetryEndpoint"
-          }
-        },
-        "description": "A telemetry export endpoint configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "TelemetryEndpointAuth": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TelemetryEndpointAuthType"
-              }
-            ],
-            "description": "The authentication type."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "header": "#/components/schemas/HeaderTelemetryEndpointAuth"
-          }
-        },
-        "description": "Authentication configuration for a telemetry endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "TelemetryEndpointAuthType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "header"
-            ]
-          }
-        ],
-        "description": "The type of authentication for a telemetry endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "TelemetryEndpointKind": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "OTLP"
-            ]
-          }
-        ],
-        "description": "The kind of telemetry export endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      },
-      "TelemetryTransportProtocol": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "Http",
-              "Grpc"
-            ]
-          }
-        ],
-        "description": "The transport protocol for telemetry export.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
       },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",
@@ -43785,27 +42669,6 @@
         },
         "description": "A project connection resource."
       },
-      "ToolUseFineTuningDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "tool_use"
-            ],
-            "description": "The data generation job type, which is ToolUse for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios."
-      },
       "ToolboxObject": {
         "type": "object",
         "required": [
@@ -43843,35 +42706,6 @@
           }
         },
         "description": "Policy configuration for a toolbox, including content safety and other governance settings."
-      },
-      "ToolboxSearchPreviewTool": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "toolbox_search_preview"
-            ],
-            "description": "The type of the tool. Always `toolbox_search_preview`."
-          },
-          "name": {
-            "type": "string",
-            "description": "Optional user-defined name for this tool or configuration."
-          },
-          "description": {
-            "type": "string",
-            "description": "Optional user-defined description for this tool or configuration."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Tool"
-          }
-        ],
-        "description": "A tool for searching over the agent's toolbox.\nWhen present, deferred tools are hidden from `tools/list` and only\ndiscoverable via `search_tools` queries at runtime."
       },
       "ToolboxVersionObject": {
         "type": "object",
@@ -43933,82 +42767,6 @@
           }
         },
         "description": "A specific version of a toolbox."
-      },
-      "TracesDataGenerationJobOptions": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "traces"
-            ],
-            "description": "The data generation job type, which is Traces for this model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
-          }
-        ],
-        "description": "The options for a data generation job with Traces type."
-      },
-      "TracesDataGenerationJobSource": {
-        "type": "object",
-        "required": [
-          "type",
-          "agent_name"
-        ],
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities')."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "traces"
-            ],
-            "description": "The source type for this source, which is Traces."
-          },
-          "agent_name": {
-            "type": "string",
-            "description": "The agent name to fetch traces for."
-          },
-          "agent_version": {
-            "type": "string",
-            "description": "The agent version. If not specified, traces for ALL versions of the agent are included within the time window."
-          },
-          "start_time": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
-            "description": "Start of the time window (Unix timestamp in seconds) for fetching traces."
-          },
-          "end_time": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
-            "description": "End of the time window (Unix timestamp in seconds). Defaults to current time."
-          },
-          "max_traces": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of traces to retrieve."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DataGenerationJobSource"
-          }
-        ],
-        "description": "Traces source for data generation jobs — conversation traces from Application Insights."
       },
       "TracesPreviewEvalRunDataSource": {
         "type": "object",
