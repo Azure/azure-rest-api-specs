@@ -271,13 +271,13 @@ union SoftDeleteFeatureState {
 union SourceSideScanStatus {
   string,
 
-  /** Configured */
+  /** Source side scan is configured */
   Configured: "Configured",
 
-  /** Not configured */
+  /** Source side scan is not configured */
   NotConfigured: "NotConfigured",
 
-  /** Not applicable */
+  /** Source side scan is not applicable */
   NotApplicable: "NotApplicable",
 }
 
@@ -288,16 +288,16 @@ union SourceSideScanStatus {
 union SourceSideScanSummary {
   string,
 
-  /** Unknown */
+  /** Scan summary is unknown */
   Unknown: "Unknown",
 
-  /** Not applicable */
+  /** Scan summary is not applicable */
   NotApplicable: "NotApplicable",
 
-  /** Suspicious */
+  /** Scan summary is suspicious */
   Suspicious: "Suspicious",
 
-  /** Healthy */
+  /** Scan summary indicates healthy state */
   Healthy: "Healthy",
 }
 
@@ -324,19 +324,19 @@ model SourceSideScanInfo {
 union ThreatStatus {
   string,
 
-  /** Unknown */
+  /** Threat status is unknown */
   Unknown: "Unknown",
 
-  /** Healthy */
+  /** Recovery point is healthy */
   Healthy: "Healthy",
 
-  /** Unhealthy */
+  /** Recovery point is unhealthy */
   UnHealthy: "UnHealthy",
 
-  /** Warning */
+  /** Recovery point has warning-level threats */
   Warning: "Warning",
 
-  /** Not available */
+  /** Threat status is not available */
   NotAvailable: "NotAvailable",
 }
 
@@ -347,16 +347,16 @@ union ThreatStatus {
 union ThreatState {
   string,
 
-  /** Active */
+  /** Threat is active */
   Active: "Active",
 
-  /** In progress */
+  /** Threat remediation is in progress */
   InProgress: "InProgress",
 
-  /** Ignored */
+  /** Threat has been ignored */
   Ignored: "Ignored",
 
-  /** Resolved */
+  /** Threat has been resolved */
   Resolved: "Resolved",
 }
 
@@ -367,16 +367,16 @@ union ThreatState {
 union ThreatSeverity {
   string,
 
-  /** Critical */
+  /** Critical severity level */
   Critical: "Critical",
 
-  /** High */
+  /** High severity level */
   High: "High",
 
-  /** Warning */
+  /** Warning severity level */
   Warning: "Warning",
 
-  /** Informational */
+  /** Informational severity level */
   Informational: "Informational",
 }
 
@@ -734,16 +734,16 @@ union PolicyType {
 union VMWorkloadPolicyType {
   string,
 
-  /** Invalid */
+  /** Invalid policy type */
   Invalid: "Invalid",
 
-  /** Snapshot V1 */
+  /** Snapshot V1 policy type */
   SnapshotV1: "SnapshotV1",
 
-  /** Snapshot V2 */
+  /** Snapshot V2 policy type */
   SnapshotV2: "SnapshotV2",
 
-  /** Streaming */
+  /** Streaming policy type */
   Streaming: "Streaming",
 }
 
@@ -843,10 +843,10 @@ union ProtectedItemState {
 union ProtectionLevel {
   string,
 
-  /** Database */
+  /** Protected at database level */
   Database: "Database",
 
-  /** Database under instance */
+  /** Database protected under an instance */
   DatabaseUnderInstance: "DatabaseUnderInstance",
 }
 
@@ -857,19 +857,19 @@ union ProtectionLevel {
 union InstanceProtectionReadiness {
   string,
 
-  /** Unknown */
+  /** Instance protection readiness is unknown */
   Unknown: "Unknown",
 
-  /** Ready */
+  /** Instance is ready for protection */
   Ready: "Ready",
 
-  /** Schedule disabled */
+  /** Backup schedule is disabled for this instance */
   ScheduleDisabled: "ScheduleDisabled",
 
-  /** Partial protection */
+  /** Instance is partially protected */
   PartialProtection: "PartialProtection",
 
-  /** Protection error */
+  /** Instance protection encountered an error */
   ProtectionError: "ProtectionError",
 }
 
@@ -995,11 +995,11 @@ union RestorePointQueryType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SnapshotCopyOnlyFull: "SnapshotCopyOnlyFull",
 
-  /** Snapshot */
+  /** Snapshot restore point type */
   @added(Versions.v2026_01_31_preview)
   Snapshot: "Snapshot",
 
-  /** Full, differential, and snapshot */
+  /** Full, differential, and snapshot restore point types */
   @added(Versions.v2026_01_31_preview)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
@@ -1285,7 +1285,7 @@ union ContainerType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HanaHSRContainer: "HanaHSRContainer",
 
-  /** HANA scale-out container */
+  /** HANA scale-out container type */
   @added(Versions.v2026_01_31_preview)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
