@@ -111,7 +111,7 @@ union RedactionPolicyKind {
   /** Do not redact detected entities. */
   noMask: "noMask",
 
-  /** React detected entities with redaction character. */
+  /** Redact detected entities with redaction character. */
   characterMask: "characterMask",
 
   /** Redact detected entities with entity type. */
