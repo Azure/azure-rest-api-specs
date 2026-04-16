@@ -13,20 +13,26 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   domain?: PiiDomain = PiiDomain.none;
 
   /** Enumeration of PII categories to be returned in the response. */
-  piiCategories?: Array<PiiCategory>;
+  piiCategories?: Array<PiiCategoriesExtended>;
 
   /** StringIndexType to be used for analysis. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  excludePiiCategories?: Array<PiiCategoriesExclude>;
+  excludePiiCategories?: Array<PiiCategories>;
 
   /** Redaction policy to be used when redacting from documents */
   @added(Versions.v2024_11_15_preview)
+  @removed(Versions.v2026_05_01)
   redactionPolicy?: BaseRedactionPolicy;
+
+  /** List of RedactionPolicies to be used on the input. */
+  @added(Versions.v2026_05_01)
+  redactionPolicies?: BaseRedactionPolicy[];
 
   /** Boolean to indicate if entities should be excluded from the response json stored in the customer's storage. */
   @added(Versions.v2024_11_15_preview)
+  @removed(Versions.v2026_05_01)
   excludeExtractionData?: boolean;
 }
 
@@ -63,6 +69,18 @@ union PiiDomain {
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind;
+
+  /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
+  @added(Versions.v2026_05_01)
+  entityTypes?: PiiCategories[];
+
+  /** (Optional) name of the redaction policy for identification purposes. */
+  @added(Versions.v2026_05_01)
+  policyName?: string;
+
+  /** (Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default. */
+  @added(Versions.v2026_05_01)
+  isDefault?: boolean = false;
 }
 
 /** Represents the policy of redacting with a redaction character */
@@ -147,9 +165,10 @@ model EntityTag {
 }
 
 /** (Optional) describes the PII categories to return */
-union PiiCategory {
+@renamedFrom(Versions.v2026_05_01, "PiiCategory")
+union PiiCategoriesExtended {
   string,
-  PiiCategoriesExclude,
+  PiiCategories,
 
   /** All PII categories. */
   All: "All",
@@ -169,7 +188,8 @@ model PiiEntityRecognitionLROResult extends AnalyzeDocumentsLROResult {
 }
 
 /** (Optional) describes the PII categories to return */
-union PiiCategoriesExclude {
+@renamedFrom(Versions.v2026_05_01, "PiiCategoriesExclude")
+union PiiCategories {
   string,
 
   /** ABA Routing number */
