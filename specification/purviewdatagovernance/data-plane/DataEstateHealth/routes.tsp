@@ -35,7 +35,7 @@ interface Actions {
   @doc("Query actions with filters and pagination.")
   @route("/actions/query")
   @post
-  queryActions(
+  query(
     ...ApiVersionParameter,
     @body body: ActionQueryRequest,
   ): ActionQueryResponse | ErrorResponse;
@@ -43,7 +43,7 @@ interface Actions {
   @doc("Query actions grouped by a specified field.")
   @route("/actions/grouped")
   @post
-  queryGroupedActions(
+  queryGrouped(
     ...ApiVersionParameter,
     @body body: ActionGroupedRequest,
   ): GroupedActionsResponse | ErrorResponse;
@@ -51,7 +51,7 @@ interface Actions {
   @doc("Get an action by its unique identifier.")
   @route("/actions/{actionId}")
   @get
-  getAction(
+  get(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the action.")
@@ -63,7 +63,7 @@ interface Actions {
   @doc("Update an action by its unique identifier.")
   @route("/actions/{actionId}")
   @put
-  updateAction(
+  update(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the action.")
@@ -71,13 +71,13 @@ interface Actions {
     @maxLength(256)
     actionId: string,
 
-    @body body: Record<unknown>,
+    @body body: Action,
   ): ActionResponse | ErrorResponse;
 
   @doc("Get faceted aggregations for actions based on filters.")
   @route("/actions/facets")
   @post
-  getActionFacets(
+  getFacets(
     ...ApiVersionParameter,
     @body body: ActionFacetRequest,
   ): FacetResponse | ErrorResponse;
@@ -92,20 +92,20 @@ interface Alerts {
   @doc("List all alerts.")
   @route("/controls/alerts")
   @get
-  listAlerts(...ApiVersionParameter): AlertListResponse | ErrorResponse;
+  list(...ApiVersionParameter): AlertListResponse | ErrorResponse;
 
   @doc("Create a new alert.")
   @route("/controls/alerts")
   @post
-  createAlert(
+  create(
     ...ApiVersionParameter,
-    @body body: Record<unknown>,
-  ): Created201Response<Record<unknown>> | ErrorResponse;
+    @body body: Alert,
+  ): Created201Response<Alert> | ErrorResponse;
 
   @doc("Get an alert by its unique identifier.")
   @route("/controls/alerts/{id}")
   @get
-  getAlert(
+  get(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the alert.")
@@ -117,7 +117,7 @@ interface Alerts {
   @doc("Update an alert by its unique identifier.")
   @route("/controls/alerts/{id}")
   @put
-  updateAlert(
+  update(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the alert.")
@@ -125,13 +125,13 @@ interface Alerts {
     @maxLength(256)
     id: string,
 
-    @body body: Record<unknown>,
+    @body body: Alert,
   ): AlertResponse | ErrorResponse;
 
   @doc("Delete an alert by its unique identifier.")
   @route("/controls/alerts/{id}")
   @delete
-  deleteAlert(
+  delete(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the alert.")
@@ -150,14 +150,12 @@ interface AnalyticsSchedules {
   @doc("Get the analytics global schedule.")
   @route("/analytics/schedule")
   @get
-  getAnalyticsSchedule(
-    ...ApiVersionParameter,
-  ): AnalyticsScheduleResponse | ErrorResponse;
+  get(...ApiVersionParameter): AnalyticsScheduleResponse | ErrorResponse;
 
   @doc("Create or update the analytics global schedule.")
   @route("/analytics/schedule")
   @put
-  createOrUpdateAnalyticsSchedule(
+  createOrUpdate(
     ...ApiVersionParameter,
     @body body: DHAnalyticsScheduleRequest,
   ): AnalyticsScheduleResponse | ErrorResponse;
@@ -165,9 +163,7 @@ interface AnalyticsSchedules {
   @doc("Get analytics job logs for the global schedule.")
   @route("/analytics/schedule/getjoblogs")
   @get
-  getAnalyticsJobLogs(
-    ...ApiVersionParameter,
-  ): AnalyticsJobLogsResponse | ErrorResponse;
+  getJobLogs(...ApiVersionParameter): AnalyticsJobLogsResponse | ErrorResponse;
 }
 
 // ============================================================================
@@ -179,22 +175,20 @@ interface Assessments {
   @doc("List all assessments.")
   @route("/controls/assessments")
   @get
-  listAssessments(
-    ...ApiVersionParameter,
-  ): AssessmentListResponse | ErrorResponse;
+  list(...ApiVersionParameter): AssessmentListResponse | ErrorResponse;
 
   @doc("Create a new assessment.")
   @route("/controls/assessments")
   @post
-  createAssessment(
+  create(
     ...ApiVersionParameter,
-    @body body: Record<unknown>,
-  ): Created201Response<Record<unknown>> | ErrorResponse;
+    @body body: Assessment,
+  ): Created201Response<Assessment> | ErrorResponse;
 
   @doc("Get an assessment by its unique identifier.")
   @route("/controls/assessments/{id}")
   @get
-  getAssessment(
+  get(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the assessment.")
@@ -206,7 +200,7 @@ interface Assessments {
   @doc("Update an assessment by its unique identifier.")
   @route("/controls/assessments/{id}")
   @put
-  updateAssessment(
+  update(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the assessment.")
@@ -214,13 +208,13 @@ interface Assessments {
     @maxLength(256)
     id: string,
 
-    @body body: Record<unknown>,
+    @body body: Assessment,
   ): AssessmentResponse | ErrorResponse;
 
   @doc("Delete an assessment by its unique identifier.")
   @route("/controls/assessments/{id}")
   @delete
-  deleteAssessment(
+  delete(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the assessment.")
@@ -232,7 +226,7 @@ interface Assessments {
   @doc("Reset an assessment by its unique identifier.")
   @route("/controls/assessments/{id}/reset")
   @post
-  resetAssessment(
+  reset(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the assessment.")
@@ -251,25 +245,25 @@ interface Controls {
   @doc("List all governance controls.")
   @route("/controls")
   @get
-  listControls(...ApiVersionParameter): ControlListResponse | ErrorResponse;
+  list(...ApiVersionParameter): ControlListResponse | ErrorResponse;
 
   @doc("Create a new governance control.")
   @route("/controls")
   @post
-  createControl(
+  create(
     ...ApiVersionParameter,
 
     @doc("Whether to create a new assessment along with the control.")
     @query
     withNewAssessment?: boolean,
 
-    @body body: Record<unknown>,
-  ): Created201Response<Record<unknown>> | ErrorResponse;
+    @body body: Control,
+  ): Created201Response<Control> | ErrorResponse;
 
   @doc("Get a governance control by its unique identifier.")
   @route("/controls/{id}")
   @get
-  getControl(
+  get(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the control.")
@@ -281,7 +275,7 @@ interface Controls {
   @doc("Update a governance control by its unique identifier.")
   @route("/controls/{id}")
   @put
-  updateControl(
+  update(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the control.")
@@ -289,13 +283,13 @@ interface Controls {
     @maxLength(256)
     id: string,
 
-    @body body: Record<unknown>,
+    @body body: Control,
   ): ControlResponse | ErrorResponse;
 
   @doc("Delete a governance control by its unique identifier.")
   @route("/controls/{id}")
   @delete
-  deleteControl(
+  delete(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the control.")
@@ -311,7 +305,7 @@ interface Controls {
   @doc("Reset a governance control by its unique identifier.")
   @route("/controls/{id}/reset")
   @post
-  resetControl(
+  reset(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the control.")
@@ -323,7 +317,7 @@ interface Controls {
   @doc("Reset all governance controls.")
   @route("/controls/reset")
   @post
-  resetAllControls(...ApiVersionParameter): void | ErrorResponse;
+  resetAll(...ApiVersionParameter): void | ErrorResponse;
 }
 
 // ============================================================================
@@ -335,7 +329,7 @@ interface Monitoring {
   @doc("Query monitoring data for controls.")
   @route("/controls/monitoring/query")
   @post
-  queryMonitoring(
+  query(
     ...ApiVersionParameter,
     @body body: QueryMonitoringRequest,
   ): MonitoringQueryResponse | ErrorResponse;
@@ -350,12 +344,12 @@ interface Schedules {
   @doc("Get the global control schedule.")
   @route("/controls/schedule")
   @get
-  getSchedule(...ApiVersionParameter): ScheduleResponse | ErrorResponse;
+  get(...ApiVersionParameter): ScheduleResponse | ErrorResponse;
 
   @doc("Trigger a control schedule run.")
   @route("/controls/schedule/trigger")
   @post
-  triggerSchedule(
+  trigger(
     ...ApiVersionParameter,
     @body body: TriggerScheduleRequest,
   ): ScheduleTriggerResponse | ErrorResponse;
@@ -363,9 +357,9 @@ interface Schedules {
   @doc("Create or update the global control schedule.")
   @route("/controls/schedule")
   @put
-  createOrUpdateSchedule(
+  createOrUpdate(
     ...ApiVersionParameter,
-    @body body: Record<unknown>,
+    @body body: Schedule,
   ): ScheduleResponse | ErrorResponse;
 }
 
@@ -389,12 +383,12 @@ interface Scores {
   @doc("List all governance scores.")
   @route("/scores")
   @get
-  listScores(...ApiVersionParameter): ScoreListResponse | ErrorResponse;
+  list(...ApiVersionParameter): ScoreListResponse | ErrorResponse;
 
   @doc("Query scores aggregated by control or control group. Use 'type=ControlNode' with controlIds in body for individual controls, or 'type=ControlGroup' with controlGroupIds in body for control groups.")
   @route("/scores/query")
   @post
-  queryScores(
+  query(
     ...ApiVersionParameter,
 
     @doc("Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.")
@@ -410,12 +404,12 @@ interface ControlScores {
   @doc("List all governance scores (alias for /scores).")
   @route("/controls/scores")
   @get
-  listControlScores(...ApiVersionParameter): ScoreListResponse | ErrorResponse;
+  list(...ApiVersionParameter): ScoreListResponse | ErrorResponse;
 
   @doc("Query scores via /controls/scores/query (alias for /scores/query).")
   @route("/controls/scores/query")
   @post
-  queryControlScores(
+  query(
     ...ApiVersionParameter,
 
     @doc("Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.")
@@ -444,8 +438,8 @@ interface Settings {
   @post
   updateStorageConfig(
     ...ApiVersionParameter,
-    @body body: Record<unknown>,
-  ): Created201Response<Record<unknown>> | ErrorResponse;
+    @body body: StorageConfig,
+  ): Created201Response<StorageConfig> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MI is a well-known abbreviation for Managed Identity."
   @doc("Get a managed identity token for storage access.")
@@ -458,7 +452,7 @@ interface Settings {
   @post
   testStorageConfigConnectivity(
     ...ApiVersionParameter,
-    @body body: Record<unknown>,
+    @body body: StorageConfig,
   ): StorageConfigConnectivityResponse | ErrorResponse;
 
   @doc("Check if a managed private endpoint exists.")
@@ -487,22 +481,20 @@ interface StatusPalettes {
   @doc("List all status palettes.")
   @route("/controls/statusPalette")
   @get
-  listStatusPalettes(
-    ...ApiVersionParameter,
-  ): StatusPaletteListResponse | ErrorResponse;
+  list(...ApiVersionParameter): StatusPaletteListResponse | ErrorResponse;
 
   @doc("Create a new status palette.")
   @route("/controls/statusPalette")
   @post
-  createStatusPalette(
+  create(
     ...ApiVersionParameter,
-    @body body: Record<unknown>,
-  ): Created201Response<Record<unknown>> | ErrorResponse;
+    @body body: StatusPalette,
+  ): Created201Response<StatusPalette> | ErrorResponse;
 
   @doc("Get a status palette by its unique identifier.")
   @route("/controls/statusPalette/{id}")
   @get
-  getStatusPalette(
+  get(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the status palette.")
@@ -514,7 +506,7 @@ interface StatusPalettes {
   @doc("Update a status palette by its unique identifier.")
   @route("/controls/statusPalette/{id}")
   @put
-  updateStatusPalette(
+  update(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the status palette.")
@@ -522,13 +514,13 @@ interface StatusPalettes {
     @maxLength(256)
     id: string,
 
-    @body body: Record<unknown>,
+    @body body: StatusPalette,
   ): StatusPaletteResponse | ErrorResponse;
 
   @doc("Delete a status palette by its unique identifier.")
   @route("/controls/statusPalette/{id}")
   @delete
-  deleteStatusPalette(
+  delete(
     ...ApiVersionParameter,
 
     @doc("The unique identifier of the status palette.")
@@ -547,7 +539,7 @@ interface SynapseQuery {
   @doc("Execute an ad-hoc Synapse Serverless SQL query.")
   @route("/settings/executeSynapseQuery")
   @post
-  executeSynapseQuery(
+  execute(
     ...ApiVersionParameter,
     @body body: ExecuteSynapseQueryRequestPayload,
   ): SynapseQueryResultResponse | ErrorResponse;
@@ -562,7 +554,7 @@ interface Tips {
   @doc("Get tip entities from a container.")
   @route("/tips/{containerName}")
   @get
-  getTipEntities(
+  getEntities(
     ...ApiVersionParameter,
 
     @doc("The name of the tips container.")
@@ -590,23 +582,23 @@ interface Tips {
 
 alias ActionQueryResponse = PagedResults<Record<unknown>>;
 alias GroupedActionsResponse = GroupedActions[];
-alias ActionResponse = Record<unknown>;
+alias ActionResponse = Action;
 alias AlertListResponse = PagedResults<Record<unknown>>;
-alias AlertResponse = Record<unknown>;
-alias AnalyticsScheduleResponse = Record<unknown>;
+alias AlertResponse = Alert;
+alias AnalyticsScheduleResponse = DHAnalyticsScheduleRequest;
 alias AnalyticsJobLogsResponse = DEHAnalyticsJobLogs[];
 alias AssessmentListResponse = PagedResults<Record<unknown>>;
-alias AssessmentResponse = Record<unknown>;
+alias AssessmentResponse = Assessment;
 alias ControlListResponse = PagedResults<Record<unknown>>;
-alias ControlResponse = Record<unknown>;
+alias ControlResponse = Control;
 alias MonitoringQueryResponse = PagedResults<DHComputingJobWrapper>;
-alias ScheduleResponse = Record<unknown>;
+alias ScheduleResponse = Schedule;
 alias ScheduleTriggerResponse = TriggerScheduleResponse;
 alias ScoreListResponse = PagedResults<Record<unknown>>;
-alias ScoreQueryResponse = Record<unknown>[];
-alias StorageConfigResponse = Record<unknown>;
-alias MITokenResponse = Record<unknown>;
-alias StorageConfigConnectivityResponse = Record<unknown>;
+alias ScoreQueryResponse = ScoreRecord[];
+alias StorageConfigResponse = StorageConfig;
+alias MITokenResponse = MITokenInfo;
+alias StorageConfigConnectivityResponse = StorageConfigConnectivityResult;
 alias StatusPaletteListResponse = PagedResults<Record<unknown>>;
-alias StatusPaletteResponse = Record<unknown>;
-alias TipEntitiesResponse = Record<unknown>[];
+alias StatusPaletteResponse = StatusPalette;
+alias TipEntitiesResponse = TipEntity[];

@@ -59,7 +59,7 @@
   "paths": {
     "/actions/{actionId}": {
       "get": {
-        "operationId": "Actions_GetAction",
+        "operationId": "Actions_Get",
         "description": "Get an action by its unique identifier.",
         "parameters": [
           {
@@ -78,8 +78,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Action"
             }
           },
           "default": {
@@ -96,13 +95,13 @@
           }
         },
         "x-ms-examples": {
-          "Actions_GetAction": {
-            "$ref": "./examples/Actions_GetAction_Gen.json"
+          "Actions_Get": {
+            "$ref": "./examples/Actions_Get_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Actions_UpdateAction",
+        "operationId": "Actions_Update",
         "description": "Update an action by its unique identifier.",
         "parameters": [
           {
@@ -121,8 +120,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Action"
             }
           }
         ],
@@ -130,8 +128,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Action"
             }
           },
           "default": {
@@ -148,15 +145,15 @@
           }
         },
         "x-ms-examples": {
-          "Actions_UpdateAction": {
-            "$ref": "./examples/Actions_UpdateAction_Gen.json"
+          "Actions_Update": {
+            "$ref": "./examples/Actions_Update_Gen.json"
           }
         }
       }
     },
     "/actions/facets": {
       "post": {
-        "operationId": "Actions_GetActionFacets",
+        "operationId": "Actions_GetFacets",
         "description": "Get faceted aggregations for actions based on filters.",
         "parameters": [
           {
@@ -192,15 +189,15 @@
           }
         },
         "x-ms-examples": {
-          "Actions_GetActionFacets": {
-            "$ref": "./examples/Actions_GetActionFacets_Gen.json"
+          "Actions_GetFacets": {
+            "$ref": "./examples/Actions_GetFacets_Gen.json"
           }
         }
       }
     },
     "/actions/grouped": {
       "post": {
-        "operationId": "Actions_QueryGroupedActions",
+        "operationId": "Actions_QueryGrouped",
         "description": "Query actions grouped by a specified field.",
         "parameters": [
           {
@@ -239,15 +236,15 @@
           }
         },
         "x-ms-examples": {
-          "Actions_QueryGroupedActions": {
-            "$ref": "./examples/Actions_QueryGroupedActions_Gen.json"
+          "Actions_QueryGrouped": {
+            "$ref": "./examples/Actions_QueryGrouped_Gen.json"
           }
         }
       }
     },
     "/actions/query": {
       "post": {
-        "operationId": "Actions_QueryActions",
+        "operationId": "Actions_Query",
         "description": "Query actions with filters and pagination.",
         "parameters": [
           {
@@ -307,15 +304,15 @@
           }
         },
         "x-ms-examples": {
-          "Actions_QueryActions": {
-            "$ref": "./examples/Actions_QueryActions_Gen.json"
+          "Actions_Query": {
+            "$ref": "./examples/Actions_Query_Gen.json"
           }
         }
       }
     },
     "/analytics/schedule": {
       "get": {
-        "operationId": "AnalyticsSchedules_GetAnalyticsSchedule",
+        "operationId": "AnalyticsSchedules_Get",
         "description": "Get the analytics global schedule.",
         "parameters": [
           {
@@ -326,8 +323,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/DHAnalyticsScheduleRequest"
             }
           },
           "default": {
@@ -344,13 +340,13 @@
           }
         },
         "x-ms-examples": {
-          "AnalyticsSchedules_GetAnalyticsSchedule": {
-            "$ref": "./examples/AnalyticsSchedules_GetAnalyticsSchedule_Gen.json"
+          "AnalyticsSchedules_Get": {
+            "$ref": "./examples/AnalyticsSchedules_Get_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "AnalyticsSchedules_CreateOrUpdateAnalyticsSchedule",
+        "operationId": "AnalyticsSchedules_CreateOrUpdate",
         "description": "Create or update the analytics global schedule.",
         "parameters": [
           {
@@ -369,8 +365,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/DHAnalyticsScheduleRequest"
             }
           },
           "default": {
@@ -387,15 +382,15 @@
           }
         },
         "x-ms-examples": {
-          "AnalyticsSchedules_CreateOrUpdateAnalyticsSchedule": {
-            "$ref": "./examples/AnalyticsSchedules_CreateOrUpdateAnalyticsSchedule_Gen.json"
+          "AnalyticsSchedules_CreateOrUpdate": {
+            "$ref": "./examples/AnalyticsSchedules_CreateOrUpdate_Gen.json"
           }
         }
       }
     },
     "/analytics/schedule/getjoblogs": {
       "get": {
-        "operationId": "AnalyticsSchedules_GetAnalyticsJobLogs",
+        "operationId": "AnalyticsSchedules_GetJobLogs",
         "description": "Get analytics job logs for the global schedule.",
         "parameters": [
           {
@@ -426,15 +421,15 @@
           }
         },
         "x-ms-examples": {
-          "AnalyticsSchedules_GetAnalyticsJobLogs": {
-            "$ref": "./examples/AnalyticsSchedules_GetAnalyticsJobLogs_Gen.json"
+          "AnalyticsSchedules_GetJobLogs": {
+            "$ref": "./examples/AnalyticsSchedules_GetJobLogs_Gen.json"
           }
         }
       }
     },
     "/controls": {
       "get": {
-        "operationId": "Controls_ListControls",
+        "operationId": "Controls_List",
         "description": "List all governance controls.",
         "parameters": [
           {
@@ -486,13 +481,13 @@
           }
         },
         "x-ms-examples": {
-          "Controls_ListControls": {
-            "$ref": "./examples/Controls_ListControls_Gen.json"
+          "Controls_List": {
+            "$ref": "./examples/Controls_List_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "Controls_CreateControl",
+        "operationId": "Controls_Create",
         "description": "Create a new governance control.",
         "parameters": [
           {
@@ -510,8 +505,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Control"
             }
           }
         ],
@@ -519,8 +513,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Control"
             }
           },
           "default": {
@@ -537,15 +530,15 @@
           }
         },
         "x-ms-examples": {
-          "Controls_CreateControl": {
-            "$ref": "./examples/Controls_CreateControl_Gen.json"
+          "Controls_Create": {
+            "$ref": "./examples/Controls_Create_Gen.json"
           }
         }
       }
     },
     "/controls/{id}": {
       "get": {
-        "operationId": "Controls_GetControl",
+        "operationId": "Controls_Get",
         "description": "Get a governance control by its unique identifier.",
         "parameters": [
           {
@@ -564,8 +557,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Control"
             }
           },
           "default": {
@@ -582,13 +574,13 @@
           }
         },
         "x-ms-examples": {
-          "Controls_GetControl": {
-            "$ref": "./examples/Controls_GetControl_Gen.json"
+          "Controls_Get": {
+            "$ref": "./examples/Controls_Get_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Controls_UpdateControl",
+        "operationId": "Controls_Update",
         "description": "Update a governance control by its unique identifier.",
         "parameters": [
           {
@@ -607,8 +599,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Control"
             }
           }
         ],
@@ -616,8 +607,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Control"
             }
           },
           "default": {
@@ -634,13 +624,13 @@
           }
         },
         "x-ms-examples": {
-          "Controls_UpdateControl": {
-            "$ref": "./examples/Controls_UpdateControl_Gen.json"
+          "Controls_Update": {
+            "$ref": "./examples/Controls_Update_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "Controls_DeleteControl",
+        "operationId": "Controls_Delete",
         "description": "Delete a governance control by its unique identifier.",
         "parameters": [
           {
@@ -680,15 +670,15 @@
           }
         },
         "x-ms-examples": {
-          "Controls_DeleteControl": {
-            "$ref": "./examples/Controls_DeleteControl_Gen.json"
+          "Controls_Delete": {
+            "$ref": "./examples/Controls_Delete_Gen.json"
           }
         }
       }
     },
     "/controls/{id}/reset": {
       "post": {
-        "operationId": "Controls_ResetControl",
+        "operationId": "Controls_Reset",
         "description": "Reset a governance control by its unique identifier.",
         "parameters": [
           {
@@ -707,8 +697,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Control"
             }
           },
           "default": {
@@ -725,15 +714,15 @@
           }
         },
         "x-ms-examples": {
-          "Controls_ResetControl": {
-            "$ref": "./examples/Controls_ResetControl_Gen.json"
+          "Controls_Reset": {
+            "$ref": "./examples/Controls_Reset_Gen.json"
           }
         }
       }
     },
     "/controls/alerts": {
       "get": {
-        "operationId": "Alerts_ListAlerts",
+        "operationId": "Alerts_List",
         "description": "List all alerts.",
         "parameters": [
           {
@@ -785,13 +774,13 @@
           }
         },
         "x-ms-examples": {
-          "Alerts_ListAlerts": {
-            "$ref": "./examples/Alerts_ListAlerts_Gen.json"
+          "Alerts_List": {
+            "$ref": "./examples/Alerts_List_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "Alerts_CreateAlert",
+        "operationId": "Alerts_Create",
         "description": "Create a new alert.",
         "parameters": [
           {
@@ -802,8 +791,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Alert"
             }
           }
         ],
@@ -811,8 +799,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Alert"
             }
           },
           "default": {
@@ -829,15 +816,15 @@
           }
         },
         "x-ms-examples": {
-          "Alerts_CreateAlert": {
-            "$ref": "./examples/Alerts_CreateAlert_Gen.json"
+          "Alerts_Create": {
+            "$ref": "./examples/Alerts_Create_Gen.json"
           }
         }
       }
     },
     "/controls/alerts/{id}": {
       "get": {
-        "operationId": "Alerts_GetAlert",
+        "operationId": "Alerts_Get",
         "description": "Get an alert by its unique identifier.",
         "parameters": [
           {
@@ -856,8 +843,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Alert"
             }
           },
           "default": {
@@ -874,13 +860,13 @@
           }
         },
         "x-ms-examples": {
-          "Alerts_GetAlert": {
-            "$ref": "./examples/Alerts_GetAlert_Gen.json"
+          "Alerts_Get": {
+            "$ref": "./examples/Alerts_Get_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Alerts_UpdateAlert",
+        "operationId": "Alerts_Update",
         "description": "Update an alert by its unique identifier.",
         "parameters": [
           {
@@ -899,8 +885,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Alert"
             }
           }
         ],
@@ -908,8 +893,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Alert"
             }
           },
           "default": {
@@ -926,13 +910,13 @@
           }
         },
         "x-ms-examples": {
-          "Alerts_UpdateAlert": {
-            "$ref": "./examples/Alerts_UpdateAlert_Gen.json"
+          "Alerts_Update": {
+            "$ref": "./examples/Alerts_Update_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "Alerts_DeleteAlert",
+        "operationId": "Alerts_Delete",
         "description": "Delete an alert by its unique identifier.",
         "parameters": [
           {
@@ -965,15 +949,15 @@
           }
         },
         "x-ms-examples": {
-          "Alerts_DeleteAlert": {
-            "$ref": "./examples/Alerts_DeleteAlert_Gen.json"
+          "Alerts_Delete": {
+            "$ref": "./examples/Alerts_Delete_Gen.json"
           }
         }
       }
     },
     "/controls/assessments": {
       "get": {
-        "operationId": "Assessments_ListAssessments",
+        "operationId": "Assessments_List",
         "description": "List all assessments.",
         "parameters": [
           {
@@ -1025,13 +1009,13 @@
           }
         },
         "x-ms-examples": {
-          "Assessments_ListAssessments": {
-            "$ref": "./examples/Assessments_ListAssessments_Gen.json"
+          "Assessments_List": {
+            "$ref": "./examples/Assessments_List_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "Assessments_CreateAssessment",
+        "operationId": "Assessments_Create",
         "description": "Create a new assessment.",
         "parameters": [
           {
@@ -1042,8 +1026,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Assessment"
             }
           }
         ],
@@ -1051,8 +1034,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Assessment"
             }
           },
           "default": {
@@ -1069,15 +1051,15 @@
           }
         },
         "x-ms-examples": {
-          "Assessments_CreateAssessment": {
-            "$ref": "./examples/Assessments_CreateAssessment_Gen.json"
+          "Assessments_Create": {
+            "$ref": "./examples/Assessments_Create_Gen.json"
           }
         }
       }
     },
     "/controls/assessments/{id}": {
       "get": {
-        "operationId": "Assessments_GetAssessment",
+        "operationId": "Assessments_Get",
         "description": "Get an assessment by its unique identifier.",
         "parameters": [
           {
@@ -1096,8 +1078,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Assessment"
             }
           },
           "default": {
@@ -1114,13 +1095,13 @@
           }
         },
         "x-ms-examples": {
-          "Assessments_GetAssessment": {
-            "$ref": "./examples/Assessments_GetAssessment_Gen.json"
+          "Assessments_Get": {
+            "$ref": "./examples/Assessments_Get_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Assessments_UpdateAssessment",
+        "operationId": "Assessments_Update",
         "description": "Update an assessment by its unique identifier.",
         "parameters": [
           {
@@ -1139,8 +1120,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Assessment"
             }
           }
         ],
@@ -1148,8 +1128,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Assessment"
             }
           },
           "default": {
@@ -1166,13 +1145,13 @@
           }
         },
         "x-ms-examples": {
-          "Assessments_UpdateAssessment": {
-            "$ref": "./examples/Assessments_UpdateAssessment_Gen.json"
+          "Assessments_Update": {
+            "$ref": "./examples/Assessments_Update_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "Assessments_DeleteAssessment",
+        "operationId": "Assessments_Delete",
         "description": "Delete an assessment by its unique identifier.",
         "parameters": [
           {
@@ -1205,15 +1184,15 @@
           }
         },
         "x-ms-examples": {
-          "Assessments_DeleteAssessment": {
-            "$ref": "./examples/Assessments_DeleteAssessment_Gen.json"
+          "Assessments_Delete": {
+            "$ref": "./examples/Assessments_Delete_Gen.json"
           }
         }
       }
     },
     "/controls/assessments/{id}/reset": {
       "post": {
-        "operationId": "Assessments_ResetAssessment",
+        "operationId": "Assessments_Reset",
         "description": "Reset an assessment by its unique identifier.",
         "parameters": [
           {
@@ -1232,8 +1211,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Assessment"
             }
           },
           "default": {
@@ -1250,15 +1228,15 @@
           }
         },
         "x-ms-examples": {
-          "Assessments_ResetAssessment": {
-            "$ref": "./examples/Assessments_ResetAssessment_Gen.json"
+          "Assessments_Reset": {
+            "$ref": "./examples/Assessments_Reset_Gen.json"
           }
         }
       }
     },
     "/controls/monitoring/query": {
       "post": {
-        "operationId": "Monitoring_QueryMonitoring",
+        "operationId": "Monitoring_Query",
         "description": "Query monitoring data for controls.",
         "parameters": [
           {
@@ -1317,15 +1295,15 @@
           }
         },
         "x-ms-examples": {
-          "Monitoring_QueryMonitoring": {
-            "$ref": "./examples/Monitoring_QueryMonitoring_Gen.json"
+          "Monitoring_Query": {
+            "$ref": "./examples/Monitoring_Query_Gen.json"
           }
         }
       }
     },
     "/controls/reset": {
       "post": {
-        "operationId": "Controls_ResetAllControls",
+        "operationId": "Controls_ResetAll",
         "description": "Reset all governance controls.",
         "parameters": [
           {
@@ -1350,15 +1328,15 @@
           }
         },
         "x-ms-examples": {
-          "Controls_ResetAllControls": {
-            "$ref": "./examples/Controls_ResetAllControls_Gen.json"
+          "Controls_ResetAll": {
+            "$ref": "./examples/Controls_ResetAll_Gen.json"
           }
         }
       }
     },
     "/controls/schedule": {
       "get": {
-        "operationId": "Schedules_GetSchedule",
+        "operationId": "Schedules_Get",
         "description": "Get the global control schedule.",
         "parameters": [
           {
@@ -1369,8 +1347,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Schedule"
             }
           },
           "default": {
@@ -1387,13 +1364,13 @@
           }
         },
         "x-ms-examples": {
-          "Schedules_GetSchedule": {
-            "$ref": "./examples/Schedules_GetSchedule_Gen.json"
+          "Schedules_Get": {
+            "$ref": "./examples/Schedules_Get_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "Schedules_CreateOrUpdateSchedule",
+        "operationId": "Schedules_CreateOrUpdate",
         "description": "Create or update the global control schedule.",
         "parameters": [
           {
@@ -1404,8 +1381,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Schedule"
             }
           }
         ],
@@ -1413,8 +1389,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/Schedule"
             }
           },
           "default": {
@@ -1431,15 +1406,15 @@
           }
         },
         "x-ms-examples": {
-          "Schedules_CreateOrUpdateSchedule": {
-            "$ref": "./examples/Schedules_CreateOrUpdateSchedule_Gen.json"
+          "Schedules_CreateOrUpdate": {
+            "$ref": "./examples/Schedules_CreateOrUpdate_Gen.json"
           }
         }
       }
     },
     "/controls/schedule/trigger": {
       "post": {
-        "operationId": "Schedules_TriggerSchedule",
+        "operationId": "Schedules_Trigger",
         "description": "Trigger a control schedule run.",
         "parameters": [
           {
@@ -1475,15 +1450,15 @@
           }
         },
         "x-ms-examples": {
-          "Schedules_TriggerSchedule": {
-            "$ref": "./examples/Schedules_TriggerSchedule_Gen.json"
+          "Schedules_Trigger": {
+            "$ref": "./examples/Schedules_Trigger_Gen.json"
           }
         }
       }
     },
     "/controls/scores": {
       "get": {
-        "operationId": "ControlScores_ListControlScores",
+        "operationId": "ControlScores_List",
         "description": "List all governance scores (alias for /scores).",
         "parameters": [
           {
@@ -1535,15 +1510,15 @@
           }
         },
         "x-ms-examples": {
-          "ControlScores_ListControlScores": {
-            "$ref": "./examples/ControlScores_ListControlScores_Gen.json"
+          "ControlScores_List": {
+            "$ref": "./examples/ControlScores_List_Gen.json"
           }
         }
       }
     },
     "/controls/scores/query": {
       "post": {
-        "operationId": "ControlScores_QueryControlScores",
+        "operationId": "ControlScores_Query",
         "description": "Query scores via /controls/scores/query (alias for /scores/query).",
         "parameters": [
           {
@@ -1591,8 +1566,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "additionalProperties": {}
+                "$ref": "#/definitions/ScoreRecord"
               }
             }
           },
@@ -1610,15 +1584,15 @@
           }
         },
         "x-ms-examples": {
-          "ControlScores_QueryControlScores": {
-            "$ref": "./examples/ControlScores_QueryControlScores_Gen.json"
+          "ControlScores_Query": {
+            "$ref": "./examples/ControlScores_Query_Gen.json"
           }
         }
       }
     },
     "/controls/statusPalette": {
       "get": {
-        "operationId": "StatusPalettes_ListStatusPalettes",
+        "operationId": "StatusPalettes_List",
         "description": "List all status palettes.",
         "parameters": [
           {
@@ -1670,13 +1644,13 @@
           }
         },
         "x-ms-examples": {
-          "StatusPalettes_ListStatusPalettes": {
-            "$ref": "./examples/StatusPalettes_ListStatusPalettes_Gen.json"
+          "StatusPalettes_List": {
+            "$ref": "./examples/StatusPalettes_List_Gen.json"
           }
         }
       },
       "post": {
-        "operationId": "StatusPalettes_CreateStatusPalette",
+        "operationId": "StatusPalettes_Create",
         "description": "Create a new status palette.",
         "parameters": [
           {
@@ -1687,8 +1661,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StatusPalette"
             }
           }
         ],
@@ -1696,8 +1669,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StatusPalette"
             }
           },
           "default": {
@@ -1714,15 +1686,15 @@
           }
         },
         "x-ms-examples": {
-          "StatusPalettes_CreateStatusPalette": {
-            "$ref": "./examples/StatusPalettes_CreateStatusPalette_Gen.json"
+          "StatusPalettes_Create": {
+            "$ref": "./examples/StatusPalettes_Create_Gen.json"
           }
         }
       }
     },
     "/controls/statusPalette/{id}": {
       "get": {
-        "operationId": "StatusPalettes_GetStatusPalette",
+        "operationId": "StatusPalettes_Get",
         "description": "Get a status palette by its unique identifier.",
         "parameters": [
           {
@@ -1741,8 +1713,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StatusPalette"
             }
           },
           "default": {
@@ -1759,13 +1730,13 @@
           }
         },
         "x-ms-examples": {
-          "StatusPalettes_GetStatusPalette": {
-            "$ref": "./examples/StatusPalettes_GetStatusPalette_Gen.json"
+          "StatusPalettes_Get": {
+            "$ref": "./examples/StatusPalettes_Get_Gen.json"
           }
         }
       },
       "put": {
-        "operationId": "StatusPalettes_UpdateStatusPalette",
+        "operationId": "StatusPalettes_Update",
         "description": "Update a status palette by its unique identifier.",
         "parameters": [
           {
@@ -1784,8 +1755,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StatusPalette"
             }
           }
         ],
@@ -1793,8 +1763,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StatusPalette"
             }
           },
           "default": {
@@ -1811,13 +1780,13 @@
           }
         },
         "x-ms-examples": {
-          "StatusPalettes_UpdateStatusPalette": {
-            "$ref": "./examples/StatusPalettes_UpdateStatusPalette_Gen.json"
+          "StatusPalettes_Update": {
+            "$ref": "./examples/StatusPalettes_Update_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "StatusPalettes_DeleteStatusPalette",
+        "operationId": "StatusPalettes_Delete",
         "description": "Delete a status palette by its unique identifier.",
         "parameters": [
           {
@@ -1850,15 +1819,15 @@
           }
         },
         "x-ms-examples": {
-          "StatusPalettes_DeleteStatusPalette": {
-            "$ref": "./examples/StatusPalettes_DeleteStatusPalette_Gen.json"
+          "StatusPalettes_Delete": {
+            "$ref": "./examples/StatusPalettes_Delete_Gen.json"
           }
         }
       }
     },
     "/scores": {
       "get": {
-        "operationId": "Scores_ListScores",
+        "operationId": "Scores_List",
         "description": "List all governance scores.",
         "parameters": [
           {
@@ -1910,15 +1879,15 @@
           }
         },
         "x-ms-examples": {
-          "Scores_ListScores": {
-            "$ref": "./examples/Scores_ListScores_Gen.json"
+          "Scores_List": {
+            "$ref": "./examples/Scores_List_Gen.json"
           }
         }
       }
     },
     "/scores/query": {
       "post": {
-        "operationId": "Scores_QueryScores",
+        "operationId": "Scores_Query",
         "description": "Query scores aggregated by control or control group. Use 'type=ControlNode' with controlIds in body for individual controls, or 'type=ControlGroup' with controlGroupIds in body for control groups.",
         "parameters": [
           {
@@ -1966,8 +1935,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "additionalProperties": {}
+                "$ref": "#/definitions/ScoreRecord"
               }
             }
           },
@@ -1985,15 +1953,15 @@
           }
         },
         "x-ms-examples": {
-          "Scores_QueryScores": {
-            "$ref": "./examples/Scores_QueryScores_Gen.json"
+          "Scores_Query": {
+            "$ref": "./examples/Scores_Query_Gen.json"
           }
         }
       }
     },
     "/settings/executeSynapseQuery": {
       "post": {
-        "operationId": "SynapseQuery_ExecuteSynapseQuery",
+        "operationId": "SynapseQuery_Execute",
         "description": "Execute an ad-hoc Synapse Serverless SQL query.",
         "parameters": [
           {
@@ -2029,8 +1997,8 @@
           }
         },
         "x-ms-examples": {
-          "SynapseQuery_ExecuteSynapseQuery": {
-            "$ref": "./examples/SynapseQuery_ExecuteSynapseQuery_Gen.json"
+          "SynapseQuery_Execute": {
+            "$ref": "./examples/SynapseQuery_Execute_Gen.json"
           }
         }
       }
@@ -2142,8 +2110,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StorageConfig"
             }
           },
           "default": {
@@ -2177,8 +2144,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StorageConfig"
             }
           }
         ],
@@ -2186,8 +2152,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StorageConfig"
             }
           },
           "default": {
@@ -2223,8 +2188,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StorageConfig"
             }
           }
         ],
@@ -2232,8 +2196,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/StorageConfigConnectivityResult"
             }
           },
           "default": {
@@ -2269,8 +2232,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/MITokenInfo"
             }
           },
           "default": {
@@ -2295,7 +2257,7 @@
     },
     "/tips/{containerName}": {
       "get": {
-        "operationId": "Tips_GetTipEntities",
+        "operationId": "Tips_GetEntities",
         "description": "Get tip entities from a container.",
         "parameters": [
           {
@@ -2339,8 +2301,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "object",
-                "additionalProperties": {}
+                "$ref": "#/definitions/TipEntity"
               }
             }
           },
@@ -2358,14 +2319,25 @@
           }
         },
         "x-ms-examples": {
-          "Tips_GetTipEntities": {
-            "$ref": "./examples/Tips_GetTipEntities_Gen.json"
+          "Tips_GetEntities": {
+            "$ref": "./examples/Tips_GetEntities_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "Action": {
+      "type": "object",
+      "description": "An action resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the action."
+        }
+      },
+      "additionalProperties": {}
+    },
     "ActionFacetRequest": {
       "type": "object",
       "description": "Request to retrieve action facets.",
@@ -2498,6 +2470,28 @@
         }
       }
     },
+    "Alert": {
+      "type": "object",
+      "description": "An alert resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the alert."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "Assessment": {
+      "type": "object",
+      "description": "An assessment resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the assessment."
+        }
+      },
+      "additionalProperties": {}
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2562,6 +2556,17 @@
       "type": "string",
       "format": "uuid",
       "description": "Universally Unique Identifier"
+    },
+    "Control": {
+      "type": "object",
+      "description": "A governance control resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the control."
+        }
+      },
+      "additionalProperties": {}
     },
     "CreateTimeRangeFilter": {
       "type": "object",
@@ -2948,6 +2953,17 @@
         }
       }
     },
+    "MITokenInfo": {
+      "type": "object",
+      "description": "A managed identity token response.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The managed identity token."
+        }
+      },
+      "additionalProperties": {}
+    },
     "ManagedPrivateEndpointExistsResponse": {
       "type": "object",
       "description": "Response indicating whether a managed private endpoint exists.",
@@ -3117,6 +3133,43 @@
         "end"
       ]
     },
+    "Schedule": {
+      "type": "object",
+      "description": "A schedule resource.",
+      "additionalProperties": {}
+    },
+    "ScoreRecord": {
+      "type": "object",
+      "description": "A score record.",
+      "additionalProperties": {}
+    },
+    "StatusPalette": {
+      "type": "object",
+      "description": "A status palette resource for controls.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the status palette."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "StorageConfig": {
+      "type": "object",
+      "description": "A storage configuration resource.",
+      "additionalProperties": {}
+    },
+    "StorageConfigConnectivityResult": {
+      "type": "object",
+      "description": "Result of a storage configuration connectivity test.",
+      "properties": {
+        "isConnected": {
+          "type": "boolean",
+          "description": "Whether the connectivity test was successful."
+        }
+      },
+      "additionalProperties": {}
+    },
     "SynapseQueryResultResponse": {
       "type": "object",
       "description": "Response from a Synapse query execution.",
@@ -3167,6 +3220,11 @@
           "description": "The timestamp when the resource was created."
         }
       }
+    },
+    "TipEntity": {
+      "type": "object",
+      "description": "A tip entity.",
+      "additionalProperties": {}
     },
     "TriggerScheduleRequest": {
       "type": "object",

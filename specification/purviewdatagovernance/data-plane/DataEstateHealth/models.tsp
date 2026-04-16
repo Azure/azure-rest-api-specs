@@ -45,6 +45,39 @@ model QueryBaseRequest {
   orderBy?: OrderBy[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible action properties."
+@doc("An action resource.")
+model Action {
+  @doc("The unique identifier of the action.")
+  id?: string;
+
+  ...Record<unknown>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible score record properties."
+@doc("A score record.")
+model ScoreRecord {
+  ...Record<unknown>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible MI token properties."
+@doc("A managed identity token response.")
+model MITokenInfo {
+  @doc("The managed identity token.")
+  token?: string;
+
+  ...Record<unknown>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Open-ended model for extensible connectivity result properties."
+@doc("Result of a storage configuration connectivity test.")
+model StorageConfigConnectivityResult {
+  @doc("Whether the connectivity test was successful.")
+  isConnected?: boolean;
+
+  ...Record<unknown>;
+}
+
 // ============================================================================
 // Action Models
 // ============================================================================
