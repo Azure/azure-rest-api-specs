@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2025-08` is specified on the comma
 input-file:
   - stable/2024-03-11/dataCollection.json
   - preview/2023-06-01-preview/privateLinkScopes.json
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/activityLogs.json
   - stable/2016-09-01/serviceDiagnosticsSettings.json
   - stable/2016-03-01/alertRulesIncidents.json
@@ -135,7 +135,7 @@ input-file:
   - stable/2021-10-01/networkSecurityPerimeter.json
   - preview/2023-09-01-preview/actionGroups_API.json
   - stable/2024-02-01/metrics.json
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -164,7 +164,7 @@ input-file:
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2015-04-01/activityLogs.json
   - stable/2016-03-01/alertRulesIncidents.json
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2023-03-11/dataCollectionEndpoints_API.json
   - stable/2023-03-11/dataCollectionRuleAssociations_API.json
   - stable/2023-03-11/dataCollectionRules_API.json
@@ -186,7 +186,7 @@ input-file:
  - stable/2020-10-01/activityLogAlerts_API.json
  - stable/2015-04-01/activityLogs.json
  - stable/2016-03-01/alertRulesIncidents.json
- - stable/2022-10-01/autoscale.json
+ - stable/2022-10-01/autoScale.json
  - stable/2019-03-01/metricBaselines.json
  - preview/2021-05-01-preview/diagnosticsSettings_API.json
  - preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
@@ -214,7 +214,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 input-file:
   - preview/2023-09-01-preview/actionGroups_API.json
   - stable/2024-02-01/metrics.json
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -240,7 +240,7 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 ```yaml $(tag) == 'package-2024-03'
 input-file:
   - stable/2024-02-01/metrics.json
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -267,7 +267,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 ```yaml $(tag) == 'package-2024-02'
 input-file:
   - stable/2024-02-01/metrics.json
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -293,7 +293,7 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-10'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -340,7 +340,7 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-04'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -369,7 +369,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -445,7 +445,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -474,7 +474,7 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-08'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -502,7 +502,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -530,7 +530,7 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-01'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -558,7 +558,7 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-10'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
@@ -586,7 +586,7 @@ These settings apply only when `--tag=package-2022-10-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-10-01-only'
 input-file:
-  - stable/2022-10-01/autoscale.json
+  - stable/2022-10-01/autoScale.json
 ```
 
 ### Tag: package-2022-06
@@ -1510,7 +1510,7 @@ directive:
     where: $.paths
     reason: "The operations API is implemented however the tool is still firing due to the casing being different"
   - suppress: OperationsAPIImplementation
-    from: serviceDiagnosticsSettings_API.json
+    from: serviceDiagnosticsSettings.json
     where: $.paths
     reason: "Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/Insights/stable/2015-04-01/operations_API.json)"
   - suppress: OperationsAPIImplementation
