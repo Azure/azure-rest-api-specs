@@ -165,60 +165,61 @@ alias MetadataHeadersRequired = {
   metadata: string;
 };
 
-/** operation sets one or more user-defined name-value pairs for the specified container. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@sharedRoute
-@route("?restype=container&comp=metadata")
-op setMetadataRequiredMetadataContainer is StorageOperationNoBody<
-  {
-    ...TimeoutParameter;
-    ...LeaseIdOptionalParameter;
-    ...MetadataHeadersRequired;
-    ...IfModifiedSinceParameter;
-  },
-  {
-    ...EtagResponseHeaderPrivate;
-    ...LastModifiedResponseHeaderPrivate;
-  }
->;
+@@alternateType(MetadataHeaders.metadata, MetadataHeadersRequired, "rust");
+// /** operation sets one or more user-defined name-value pairs for the specified container. */
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+// @put
+// @sharedRoute
+// @route("?restype=container&comp=metadata")
+// op setMetadataRequiredMetadataContainer is StorageOperationNoBody<
+//   {
+//     ...TimeoutParameter;
+//     ...LeaseIdOptionalParameter;
+//     ...MetadataHeadersRequired;
+//     ...IfModifiedSinceParameter;
+//   },
+//   {
+//     ...EtagResponseHeaderPrivate;
+//     ...LastModifiedResponseHeaderPrivate;
+//   }
+// >;
 
-@@override(Container.setMetadata, setMetadataRequiredMetadataContainer, "rust");
+// @@override(Container.setMetadata, setMetadataRequiredMetadataContainer, "rust");
 
-/** The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@route("?comp=metadata")
-op setMetadataRequiredMetadataBlob is StorageOperationNoBody<
-  {
-    ...TimeoutParameter;
-    ...MetadataHeadersRequired;
-    ...LeaseIdOptionalParameter;
-    ...EncryptionKeyParameter;
-    ...EncryptionKeySha256Parameter;
-    ...EncryptionAlgorithmParameter;
-    ...EncryptionScopeParameter;
-    ...IfModifiedSinceParameter;
-    ...IfUnmodifiedSinceParameter;
-    ...IfNoneMatchParameter;
-    ...IfMatchParameter;
-    ...IfTagsParameter;
-  },
-  {
-    ...EtagResponseHeaderPrivate;
-    ...LastModifiedResponseHeaderPrivate;
-    ...VersionIdResponseHeaderPrivate;
-    ...RequestServerEncryptedResponseHeaderPrivate;
-    ...EncryptionKeySha256ResponseHeaderPrivate;
-    ...EncryptionScopeResponseHeaderPrivate;
-  }
->;
+// /** The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs. */
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+// @put
+// @route("?comp=metadata")
+// op setMetadataRequiredMetadataBlob is StorageOperationNoBody<
+//   {
+//     ...TimeoutParameter;
+//     ...MetadataHeadersRequired;
+//     ...LeaseIdOptionalParameter;
+//     ...EncryptionKeyParameter;
+//     ...EncryptionKeySha256Parameter;
+//     ...EncryptionAlgorithmParameter;
+//     ...EncryptionScopeParameter;
+//     ...IfModifiedSinceParameter;
+//     ...IfUnmodifiedSinceParameter;
+//     ...IfNoneMatchParameter;
+//     ...IfMatchParameter;
+//     ...IfTagsParameter;
+//   },
+//   {
+//     ...EtagResponseHeaderPrivate;
+//     ...LastModifiedResponseHeaderPrivate;
+//     ...VersionIdResponseHeaderPrivate;
+//     ...RequestServerEncryptedResponseHeaderPrivate;
+//     ...EncryptionKeySha256ResponseHeaderPrivate;
+//     ...EncryptionScopeResponseHeaderPrivate;
+//   }
+// >;
 
-@@override(Blob.setMetadata, setMetadataRequiredMetadataBlob, "rust");
+// @@override(Blob.setMetadata, setMetadataRequiredMetadataBlob, "rust");
 
 /** ----- This section overrides the setAccessPolicy operation for Rust to require the containerAcl body ----- */
 /** Sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly. */
