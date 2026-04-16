@@ -820,25 +820,15 @@ interface Directory {
       ...RenameRequestHeaders;
       ...DestinationLeaseIdParameter;
 
-      /** If specified, the provided file attributes shall be set. */
-      @header("x-ms-file-attributes") fileAttributes?: string;
-
-      /** Creation time for the directory. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-
-      /** Last write time for the directory. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-
-      /** Change time for the directory. */
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-
-      /** If specified the permission shall be set for the directory. */
-      @header("x-ms-file-permission") filePermission?: string;
+      ...FileAttributesStringHeader;
+      ...FileCreationTimeStringHeader<"Creation time for the directory.">;
+      ...FileLastWriteTimeStringHeader<"Last write time for the directory.">;
+      ...FileChangeTimeStringHeader<"Change time for the directory.">;
+      ...FilePermissionOptionalHeader<"If specified the permission shall be set for the directory.">;
 
       ...FilePermissionFormatParameter;
 
-      /** Key of the permission to be set. */
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      ...FilePermissionKeyOptionalStringHeader;
 
       ...MetadataHeaders;
       ...AllowTrailingDotParameter;
@@ -1180,15 +1170,13 @@ interface File {
       @header("Content-Type")
       contentType?: "application/octet-stream";
 
-      /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("Range") range: string;
+      ...RangeRequiredHeader;
 
       /** Specify one of the following options: - Update: Writes the bytes specified by the request body into the specified range. - Clear: Clears the specified range and releases the space used in storage for that range. */
       @header("x-ms-write")
       fileRangeWrite: FileRangeWriteType = FileRangeWriteType.update;
 
-      /** The number of bytes being transmitted in the request body. */
-      @header("Content-Length") contentLength: int64;
+      ...UploadContentLengthHeader;
 
       ...TimeoutParameter;
       ...ContentMD5RequestHeader;
@@ -1219,8 +1207,7 @@ interface File {
   @put
   uploadRangeFromUrl is StorageOperationNoBody<
     {
-      /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
-      @header("Range") range: string;
+      ...RangeRequiredHeader;
 
       ...CopySourceHeader;
 
@@ -1231,8 +1218,7 @@ interface File {
       @header("x-ms-write")
       fileRangeWriteFromUrl: FileRangeWriteFromUrlType = FileRangeWriteFromUrlType.update;
 
-      /** The number of bytes being transmitted in the request body. */
-      @header("Content-Length") contentLength: int64;
+      ...UploadContentLengthHeader;
 
       ...TimeoutParameter;
 
@@ -1300,28 +1286,19 @@ interface File {
       ...TimeoutParameter;
       ...MetadataHeaders;
 
-      /** If specified the permission shall be set for the file. */
-      @header("x-ms-file-permission") filePermission?: string;
+      ...FilePermissionOptionalHeader<"If specified the permission shall be set for the file.">;
 
       ...FilePermissionFormatParameter;
 
-      /** Key of the permission to be set. */
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      ...FilePermissionKeyOptionalStringHeader;
 
       ...FilePermissionCopyModeHeader;
       ...IgnoreReadOnlyHeader;
 
-      /** If specified, the provided file attributes shall be set. */
-      @header("x-ms-file-attributes") fileAttributes?: string;
-
-      /** Creation time for the file. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-
-      /** Last write time for the file. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-
-      /** Change time for the file. */
-      @header("x-ms-file-change-time") fileChangeTime?: string;
+      ...FileAttributesStringHeader;
+      ...FileCreationTimeStringHeader<"Creation time for the file.">;
+      ...FileLastWriteTimeStringHeader<"Last write time for the file.">;
+      ...FileChangeTimeStringHeader<"Change time for the file.">;
 
       ...SetArchiveAttributeHeader;
       ...LeaseIdOptionalParameter;
@@ -1416,25 +1393,15 @@ interface File {
       ...RenameRequestHeaders;
       ...DestinationLeaseIdParameter;
 
-      /** If specified, the provided file attributes shall be set. */
-      @header("x-ms-file-attributes") fileAttributes?: string;
-
-      /** Creation time for the file. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-
-      /** Last write time for the file. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-
-      /** Change time for the file. */
-      @header("x-ms-file-change-time") fileChangeTime?: string;
-
-      /** If specified the permission shall be set for the file. */
-      @header("x-ms-file-permission") filePermission?: string;
+      ...FileAttributesStringHeader;
+      ...FileCreationTimeStringHeader<"Creation time for the file.">;
+      ...FileLastWriteTimeStringHeader<"Last write time for the file.">;
+      ...FileChangeTimeStringHeader<"Change time for the file.">;
+      ...FilePermissionOptionalHeader<"If specified the permission shall be set for the file.">;
 
       ...FilePermissionFormatParameter;
 
-      /** Key of the permission to be set. */
-      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      ...FilePermissionKeyOptionalStringHeader;
 
       ...MetadataHeaders;
 
@@ -1463,19 +1430,12 @@ interface File {
       ...TimeoutParameter;
       ...MetadataHeaders;
 
-      /** Creation time for the file. */
-      @header("x-ms-file-creation-time") fileCreationTime?: string;
-
-      /** Last write time for the file. */
-      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      ...FileCreationTimeStringHeader<"Creation time for the file.">;
+      ...FileLastWriteTimeStringHeader<"Last write time for the file.">;
 
       ...LeaseIdOptionalParameter;
 
-      /** Optional, NFS only. The owner of the file or directory. */
-      @header("x-ms-owner") owner?: string;
-
-      /** Optional, NFS only. The owning group of the file or directory. */
-      @header("x-ms-group") group?: string;
+      ...NfsOwnerGroupHeaders;
 
       ...LinkTextHeader;
       ...FileRequestIntentParameter;

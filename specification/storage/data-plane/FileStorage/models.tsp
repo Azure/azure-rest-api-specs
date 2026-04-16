@@ -1763,13 +1763,18 @@ alias FileSmtPropertyResponseHeaders = {
   @header("x-ms-file-parent-id") fileParentId?: string;
 };
 
-/** NFS property request headers (owner, group, mode). */
-alias NfsRequestHeaders = {
+/** NFS owner and group request headers (subset without file mode). */
+alias NfsOwnerGroupHeaders = {
   /** Optional, NFS only. The owner of the file or directory. */
   @header("x-ms-owner") owner?: string;
 
   /** Optional, NFS only. The owning group of the file or directory. */
   @header("x-ms-group") group?: string;
+};
+
+/** NFS property request headers (owner, group, mode). */
+alias NfsRequestHeaders = {
+  ...NfsOwnerGroupHeaders;
 
   /** Optional, NFS only. The file mode of the file or directory. */
   @header("x-ms-mode") fileMode?: string;
@@ -2401,4 +2406,64 @@ alias FileHttpContentResponseHeaders = {
 
   /** The content language of the file. */
   @header("Content-Language") contentLanguage?: string;
+};
+
+// ================================================================
+// Tier 4 aliases — Consolidated from repeated inline definitions in routes.tsp
+// ================================================================
+
+// --- Template aliases (doc-only differences across operations) ---
+
+/** File creation time header (string type, for rename/copy/symlink operations). */
+alias FileCreationTimeStringHeader<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @header("x-ms-file-creation-time")
+  fileCreationTime?: string;
+};
+
+/** File last write time header (string type, for rename/copy/symlink operations). */
+alias FileLastWriteTimeStringHeader<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @header("x-ms-file-last-write-time")
+  fileLastWriteTime?: string;
+};
+
+/** File change time header (string type, for rename/copy operations). */
+alias FileChangeTimeStringHeader<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @header("x-ms-file-change-time")
+  fileChangeTime?: string;
+};
+
+/** File permission optional header (for rename/copy operations). */
+alias FilePermissionOptionalHeader<TDoc extends valueof string> = {
+  @doc(TDoc)
+  @header("x-ms-file-permission")
+  filePermission?: string;
+};
+
+// --- Simple aliases (identical definitions across operations) ---
+
+/** File attributes header (string type, for rename/copy operations). */
+alias FileAttributesStringHeader = {
+  /** If specified, the provided file attributes shall be set. */
+  @header("x-ms-file-attributes") fileAttributes?: string;
+};
+
+/** File permission key optional header (for rename/copy operations). */
+alias FilePermissionKeyOptionalStringHeader = {
+  /** Key of the permission to be set. */
+  @header("x-ms-file-permission-key") filePermissionKey?: string;
+};
+
+/** Range required header (for upload operations). */
+alias RangeRequiredHeader = {
+  /** Specifies the range of bytes to be written. Both the start and end of the range must be specified. */
+  @header("Range") range: string;
+};
+
+/** Upload content length header (for upload operations). */
+alias UploadContentLengthHeader = {
+  /** The number of bytes being transmitted in the request body. */
+  @header("Content-Length") contentLength: int64;
 };
