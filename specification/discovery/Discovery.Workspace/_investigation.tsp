@@ -48,9 +48,9 @@ model Investigation {
 
   ...DataPlaneResource;
   ...WithStatus<InvestigationStatus>;
-  ...WithDescription;
+  ...WithOptionalDescription;
   ...WithTags;
-  ...WithTitle;
+  ...WithOptionalTitle;
 }
 
 @doc("Collection of data assets linked to an investigation.")

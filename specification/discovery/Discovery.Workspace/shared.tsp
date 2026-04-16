@@ -299,3 +299,10 @@ alias WithDescription = {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   description: string;
 };
+
+/** For adding optional description. */
+alias WithOptionalDescription = {
+  @doc("The description")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  description?: string;
+};
