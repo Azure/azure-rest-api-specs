@@ -70,7 +70,8 @@
             "in": "path",
             "description": "The unique identifier of the action.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -79,6 +80,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -100,7 +113,8 @@
             "in": "path",
             "description": "The unique identifier of the action.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "body",
@@ -118,6 +132,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -150,6 +176,18 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FacetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -184,6 +222,18 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/GroupedActions"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -242,6 +292,18 @@
                 "count"
               ]
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -266,6 +328,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -298,6 +372,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -323,6 +409,18 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/DEHAnalyticsJobLogs"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -373,6 +471,18 @@
                 "count"
               ]
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -412,6 +522,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -434,7 +556,8 @@
             "in": "path",
             "description": "The unique identifier of the control.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -443,6 +566,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -464,7 +599,8 @@
             "in": "path",
             "description": "The unique identifier of the control.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "body",
@@ -482,6 +618,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -503,7 +651,8 @@
             "in": "path",
             "description": "The unique identifier of the control.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "deleteAssessment",
@@ -516,6 +665,18 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -538,7 +699,8 @@
             "in": "path",
             "description": "The unique identifier of the control.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -547,6 +709,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -596,6 +770,18 @@
                 "count"
               ]
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -628,6 +814,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -650,7 +848,8 @@
             "in": "path",
             "description": "The unique identifier of the alert.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -659,6 +858,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -680,7 +891,8 @@
             "in": "path",
             "description": "The unique identifier of the alert.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "body",
@@ -698,6 +910,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -719,12 +943,25 @@
             "in": "path",
             "description": "The unique identifier of the alert.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -773,6 +1010,18 @@
                 "count"
               ]
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -805,6 +1054,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -827,7 +1088,8 @@
             "in": "path",
             "description": "The unique identifier of the assessment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -836,6 +1098,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -857,7 +1131,8 @@
             "in": "path",
             "description": "The unique identifier of the assessment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "body",
@@ -875,6 +1150,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -896,12 +1183,25 @@
             "in": "path",
             "description": "The unique identifier of the assessment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -924,7 +1224,8 @@
             "in": "path",
             "description": "The unique identifier of the assessment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -933,6 +1234,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -989,6 +1302,18 @@
                 "count"
               ]
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1010,6 +1335,18 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1034,6 +1371,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1067,6 +1416,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1098,6 +1459,18 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/TriggerScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1146,6 +1519,18 @@
                 "value",
                 "count"
               ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1210,6 +1595,18 @@
                 "additionalProperties": {}
               }
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1258,6 +1655,18 @@
                 "count"
               ]
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1290,6 +1699,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1312,7 +1733,8 @@
             "in": "path",
             "description": "The unique identifier of the status palette.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -1321,6 +1743,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1342,7 +1776,8 @@
             "in": "path",
             "description": "The unique identifier of the status palette.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "body",
@@ -1360,6 +1795,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1381,12 +1828,25 @@
             "in": "path",
             "description": "The unique identifier of the status palette.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1434,6 +1894,18 @@
                 "value",
                 "count"
               ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1498,6 +1970,18 @@
                 "additionalProperties": {}
               }
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1530,6 +2014,18 @@
             "schema": {
               "$ref": "#/definitions/SynapseQueryResultResponse"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1561,6 +2057,18 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/NetworkProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1600,6 +2108,18 @@
             "schema": {
               "$ref": "#/definitions/ManagedPrivateEndpointExistsResponse"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1624,6 +2144,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1656,6 +2188,18 @@
             "schema": {
               "type": "object",
               "additionalProperties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1691,6 +2235,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1716,6 +2272,18 @@
               "type": "object",
               "additionalProperties": {}
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -1738,7 +2306,8 @@
             "in": "path",
             "description": "The name of the tips container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "entityId",
@@ -1772,6 +2341,18 @@
               "items": {
                 "type": "object",
                 "additionalProperties": {}
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1914,6 +2495,66 @@
         "filters": {
           "$ref": "#/definitions/ActionFiltersPayload",
           "description": "Filters to apply to the action query."
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
         }
       }
     },
