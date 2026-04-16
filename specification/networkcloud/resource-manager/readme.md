@@ -27,7 +27,7 @@ These are the global settings for NetworkCloud.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2026-05-01-preview
+tag: package-2025-09-01
 ```
 
 ---

@@ -201,6 +201,7 @@ union BareMetalMachineReadyState {
 /**
  * The safeguard mode to use for the reimage action, where None indicates to bypass safeguards and All indicates to utilize all safeguards.
  */
+@added(Versions.v2026_05_01_preview)
 union BareMetalMachineReimageSafeguardMode {
   string,
 
@@ -683,6 +684,7 @@ model BareMetalMachineMonitoringConfigurationStatus {
 /**
  * BareMetalMachineReimageParameters represents the body of the request to reimage a bare metal machine.
  */
+@added(Versions.v2026_05_01_preview)
 model BareMetalMachineReimageParameters {
   /**
    * The safeguard mode to use for the reimage action, where None indicates to bypass safeguards and All indicates to utilize all safeguards. If not specified, the default is All.
