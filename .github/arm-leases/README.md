@@ -103,6 +103,7 @@ Scripts are located in `eng/scripts/`. Run from the repository root.
 ### Single Resource Provider
 
 **Syntax:**
+
 ```bash
 # Without service groups
 node eng/scripts/generate-lease-files.js --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
@@ -112,6 +113,7 @@ node eng/scripts/generate-lease-files.js --orgName <orgName> --rpNamespace <rpNa
 ```
 
 **Examples:**
+
 ```bash
 # Without service groups
 node eng/scripts/generate-lease-files.js --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johndoe" --startdate 2026-05-01 --duration P90D
@@ -123,6 +125,7 @@ node eng/scripts/generate-lease-files.js --orgName compute --rpNamespace Microso
 ### Bulk Generation
 
 **Syntax:**
+
 ```bash
 # Generate resource provider list
 node eng/scripts/fetch-resource-providers.js --with-service-groups --output <filename>
@@ -132,6 +135,7 @@ node eng/scripts/generate-lease-files.js --input <filename> --reviewer "@yourali
 ```
 
 **Examples:**
+
 ```bash
 # Generate resource provider list
 node eng/scripts/fetch-resource-providers.js --with-service-groups --output rps-groups.txt
